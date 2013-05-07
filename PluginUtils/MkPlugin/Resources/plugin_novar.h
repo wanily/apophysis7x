@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+#define _USE_MATH_DEFINES
+
 #include <stdlib.h>
 #include <malloc.h>
 #include <math.h>
@@ -55,7 +57,10 @@ typedef struct
 
 double dummyFTz, dummyFPz, dummyColor;
 
-typedef struct {} Variables;
+#ifndef APO_VIRTUALVAR
+	typedef struct {} Variables;
+#endif
+
 typedef struct
 {
 	double vvar;
