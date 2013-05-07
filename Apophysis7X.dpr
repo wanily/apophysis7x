@@ -23,6 +23,11 @@ program Apophysis7X;
 {$R 'Resources\Apophysis7X.res'}
 {$SetPEFlags $20}
 
+{$ifdef VER240}
+  // we need to update TMS Scripter to the XE3 version...
+  {$Define DisableScripting}
+{$endif}
+
 uses
 
 {-- BASIC --}
@@ -205,7 +210,11 @@ begin
   {$endif}
 
   Application.UpdateFormatSettings := False;
-  DecimalSeparator := '.';
+  {$ifdef VER240}
+    FormatSettings.DecimalSeparator := '.';
+  {$else}
+    DecimalSeparator := '.';
+  {$endif}
   Application.Run;
 end.
 

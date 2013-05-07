@@ -27,6 +27,11 @@ unit Main;
 
 //{$define VAR_STR}
 
+{$ifdef VER240}
+  // we need to update TMS Scripter to the XE3 version...
+  {$Define DisableScripting}
+{$endif}
+
 interface
 
 uses
