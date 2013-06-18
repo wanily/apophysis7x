@@ -280,6 +280,8 @@ type
     procedure TriangleViewMouseLeave(Sender: TObject);
     procedure TriangleViewInvalidate(Sender: TObject);
 
+    procedure SetGraphZoom(gz: double);
+
     procedure FormShow(Sender: TObject);
     procedure mnuDeleteClick(Sender: TObject);
     procedure mnuAddClick(Sender: TObject);
@@ -4307,6 +4309,10 @@ begin
         chkCollapseVariablesClick(nil);
         chkCollapseVariationsClick(nil);
       end;
+    VK_MULTIPLY:
+      SetGraphZoom(GraphZoom * 1.25);
+    VK_DIVIDE:
+      SetGraphZoom(GraphZoom * 0.8);
     VK_SPACE:
       if not txtName.Focused then
         btnPivotModeClick(Sender);
@@ -4359,6 +4365,27 @@ begin
   SetCursorPos(MousePos.x, MousePos.y);
 end;
 
+procedure TEditForm.SetGraphZoom(gz: double);
+var
+  fx, fy, sc: double;
+  p: TPoint;
+begin
+  p := TriangleView.ScreenToClient(MousePos);
+  Scale(fx, fy, p.X, p.Y);
+
+  GraphZoom := gz;
+
+  EditForm.StatusBar.Panels[2].Text := Format(TextByKey('editor-status-zoomformat'), [GraphZoom]);
+
+  if viewDragMode then begin
+    sc := GraphZoom * 50;
+    gCenterX := 0 - (p.X - TriangleView.Width/2) / sc;
+    gCenterY := 0 + (p.Y - TriangleView.Height/2) / sc;
+  end;
+
+  TriangleView.Invalidate;
+end;
+
 procedure TEditForm.TriangleViewMouseWheel(Sender: TObject; Shift: TShiftState;
   WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
 var
@@ -4368,18 +4395,9 @@ begin
   p := TriangleView.ScreenToClient(MousePos);
   Scale(fx, fy, p.X, p.Y);
 
-  if WheelDelta > 0 then GraphZoom := GraphZoom * 1.25
-  else GraphZoom := GraphZoom * 0.8;
+  if WheelDelta > 0 then SetGraphZoom(GraphZoom * 1.25)
+  else SetGraphZoom(GraphZoom * 0.8);
 
-  EditForm.StatusBar.Panels[2].Text := Format(TextByKey('editor-status-zoomformat'), [GraphZoom]);
-
-  if viewDragMode then begin
-    sc := GraphZoom * 50;
-    gCenterX := fx - (p.X - TriangleView.Width/2) / sc;
-    gCenterY := fy + (p.Y - TriangleView.Height/2) / sc;
-  end;
-
-  TriangleView.Invalidate;
   Handled := true;
 end;
 
