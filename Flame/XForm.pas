@@ -80,6 +80,7 @@ type
     color: double;                       // color coord for this function. 0 - 1
     color2: double;                      // Second color coord for this function. 0 - 1
     vc: double;                          // Calculated color to be passed to the plugin
+    vo: double;                          // Calculated opacity to be passed to the plugin
     symmetry: double;
     c00, c01, c10, c11, c20, c21: double;// unnecessary duplicated variables
     p00, p01, p10, p11, p20, p21: double;// :-)
@@ -328,6 +329,7 @@ begin
     FRegVariations[i].e := c20;
     FRegVariations[i].f := c21;
     FRegVariations[i].color := @vc;
+    FRegVariations[i].opacity := @vo;
 
     FRegVariations[i].vvar := vars[i + NRLOCVAR];
     FRegVariations[i].Prepare;
@@ -1065,7 +1067,10 @@ begin
   // first compute the color coord
 //  CPpoint.c := (CPpoint.c + color) * 0.5 * (1 - symmetry) + symmetry * CPpoint.c;
   CPpoint.c := CPpoint.c * colorC1 + colorC2;
+  CPpoint.o := transOpacity;
+
   vc := CPpoint.c;
+  vo := CPpoint.o;
 
   FTx := c00 * CPpoint.x + c10 * CPpoint.y + c20;
   FTy := c01 * CPpoint.x + c11 * CPpoint.y + c21;
@@ -1078,6 +1083,11 @@ begin
   for i:= 0 to FNrFunctions-1 do
     FCalcFunctionList[i];
 
+  if (vo < 0) then vo := 0;
+  if (vo > 1) then vo := 1;
+
+
+  CPpoint.o := vo * CPpoint.o;
   CPpoint.c := CPpoint.c + pluginColor * (vc - CPpoint.c);
   CPpoint.x := FPx;
   CPpoint.y := FPy;
@@ -1089,7 +1099,10 @@ var
   i: Integer;
 begin
   ToPoint.c := CPpoint.c * colorC1 + colorC2;
+  ToPoint.o := transOpacity;
+
   vc := ToPoint.c;
+  vo := ToPoint.o;
 
   FTx := c00 * CPpoint.x + c10 * CPpoint.y + c20;
   FTy := c01 * CPpoint.x + c11 * CPpoint.y + c21;
@@ -1102,6 +1115,10 @@ begin
   for i:= 0 to FNrFunctions-1 do
     FCalcFunctionList[i];
 
+  if (vo < 0) then vo := 0;
+  if (vo > 1) then vo := 1;
+
+  ToPoint.o := vo * ToPoint.o;
   ToPoint.c := ToPoint.c + pluginColor * (vc - ToPoint.c);
   ToPoint.x := FPx;
   ToPoint.y := FPy;

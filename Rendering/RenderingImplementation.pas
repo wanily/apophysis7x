@@ -306,7 +306,7 @@ end;
       xf := xf.PropTable[Random(PROP_TABLE_SIZE)];
       xf.NextPoint(p);
 
-      if random >= xf.transOpacity then continue;
+      if random >= p.o then continue;
 
       q := p;
       fcp.ProjectionFunc(@q); // 3d hack
@@ -386,7 +386,7 @@ end;
       xf := xf.PropTable[Random(PROP_TABLE_SIZE)];
       xf.NextPoint(p);
 
-      if random >= xf.transOpacity then continue;
+      if random >= p.o then continue;
 
       q := p;
       fcp.ProjectionFunc(@q);
@@ -467,7 +467,7 @@ end;
       xf := xf.PropTable[Random(PROP_TABLE_SIZE)];
       xf.NextPoint(p);
 
-      if random >= xf.transOpacity then continue;
+      if random >= p.o then continue;
 
       finalXform.NextPointTo(p, q);
       fcp.ProjectionFunc(@q);
@@ -548,7 +548,7 @@ end;
       xf := xf.PropTable[Random(PROP_TABLE_SIZE)];
       xf.NextPoint(p);
 
-      if random >= xf.transOpacity then continue;
+      if random >= p.o then continue;
 
       finalXform.NextPointTo(p, q);
       fcp.ProjectionFunc(@q);

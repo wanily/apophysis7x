@@ -61,6 +61,7 @@ type
     PluginVarInit:         function(MyVariation, FPx, FPy, FTx, FTy: Pointer; vvar: double): LongBool; cdecl;
     PluginVarInit3D:       function(MyVariation, FPx, FPy, FPz, FTx, FTy, FTz: Pointer; vvar: double): LongBool; cdecl;
     PluginVarInitDC:       function(MyVariation, FPx, FPy, FPz, FTx, FTy, FTz, color: Pointer; vvar, a, b, c, d, e, f: double): LongBool; cdecl;
+    PluginVarInitDO:       function(MyVariation, FPx, FPy, FPz, FTx, FTy, FTz, color, opacity: Pointer; vvar, a, b, c, d, e, f: double): LongBool; cdecl;
     PluginVarPrepare:      function(MyVariation: Pointer): LongBool; cdecl;
     PluginVarCalc:         function(MyVariation: Pointer): LongBool; cdecl;
     PluginVarGetVariable:  function(MyVariation: Pointer; const Name: PAnsiChar; var value: double): LongBool; cdecl;
@@ -166,7 +167,9 @@ end;
 procedure TPluginVariation.Prepare;
 begin
   with PluginData do begin
-    if @PluginVarInitDC <> nil then
+    if @PluginVarInitDO <> nil then
+      PluginVarInitDO(MyVariation, Pointer(FPX), Pointer(FPy), Pointer(FPz), Pointer(FTx), Pointer(FTy), Pointer(FTz), Pointer(color), Pointer(opacity), vvar, a, b, c, d, e, f)
+    else if @PluginVarInitDC <> nil then
       PluginVarInitDC(MyVariation, Pointer(FPX), Pointer(FPy), Pointer(FPz), Pointer(FTx), Pointer(FTy), Pointer(FTz), Pointer(color), vvar, a, b, c, d, e, f)
     else if @PluginVarInit3D <> nil then
       PluginVarInit3D(MyVariation, Pointer(FPX), Pointer(FPy), Pointer(FPz), Pointer(FTx), Pointer(FTy), Pointer(FTz), vvar)
@@ -329,6 +332,7 @@ begin
             @PluginVarInit              := GetProcAddress(PluginHandle,'PluginVarInit');
             @PluginVarInit3D            := GetProcAddress(PluginHandle,'PluginVarInit3D');
             @PluginVarInitDC            := GetProcAddress(PluginHandle,'PluginVarInitDC');
+            @PluginVarInitDO            := GetProcAddress(PluginHandle,'PluginVarInitDO');
             @PluginVarPrepare           := GetProcAddress(PluginHandle,'PluginVarPrepare');
             @PluginVarCalc              := GetProcAddress(PluginHandle,'PluginVarCalc');
             @PluginVarGetVariable       := GetProcAddress(PluginHandle,'PluginVarGetVariable');

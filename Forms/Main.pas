@@ -246,6 +246,8 @@ type
     mnuCurves: TMenuItem;
     N17: TMenuItem;
     mnuTrace: TMenuItem;
+    ToolButton23: TToolButton;
+    ToolButton24: TToolButton;
     procedure mnuManualClick(Sender: TObject);
     procedure mnuReportFlameClick(Sender: TObject);
     procedure mnuTurnFlameToScriptClick(Sender: TObject);
@@ -366,6 +368,7 @@ type
     procedure tbGuidesClick(Sender: TObject);
     procedure ToolButton19Click(Sender: TObject);
     procedure mnuTraceClick(Sender: TObject);
+    procedure ToolButton23Click(Sender: TObject);
 
   private
     SubstSource: TStringList;
@@ -6380,6 +6383,11 @@ begin
   AdjustForm.UpdateDisplay;
   AdjustForm.PageControl.TabIndex:=4;
   AdjustForm.Show;
+end;
+
+procedure TMainForm.ToolButton23Click(Sender: TObject);
+begin
+  //
 end;
 
 procedure TMainForm.ToolButton7Click(Sender: TObject);

@@ -63,7 +63,7 @@ function GetEnvVarValue(const VarName: string): string;
 
 const
   APP_NAME: string = 'Apophysis 7x';
-  APP_VERSION: string = 'Version 15E';
+  APP_VERSION: string = 'Version 16';
   {$ifdef Apo7X64}
   APP_BUILD: string = ' - 64 bit';
   {$else}

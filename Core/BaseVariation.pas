@@ -41,7 +41,7 @@ type
     FTz, FPz: ^double;
 
     // more params :)
-    color : ^double;
+    color, opacity : ^double;
     a, b, c, d, e, f : double;
 
     class function GetName: string; virtual; abstract;
