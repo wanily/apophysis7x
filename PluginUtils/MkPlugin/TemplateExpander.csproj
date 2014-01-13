@@ -8,8 +8,8 @@
     <ProjectGuid>{E7AC1D9C-BB46-448B-BFC7-3FC6DB68B305}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Xyrus.PluginCodeGenerator</RootNamespace>
-    <AssemblyName>mkplugin</AssemblyName>
+    <RootNamespace>Xyrus.Tools.TemplateExpander</RootNamespace>
+    <AssemblyName>txpand</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <PublishUrl>publish\</PublishUrl>
@@ -65,28 +65,18 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="mkplugin.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
+    <Compile Include="Program.cs" />
+    <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
+    <EmbeddedResource Include="Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\__NAME__.vcxproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\plugin.h" />
-    <Content Include="Resources\plugin_var.h" />
-    <Content Include="Resources\plugin_novar.h" />
-    <Content Include="Resources\__NAME__.cpp" />
-    <Content Include="Resources\__NAME__.def" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -104,6 +94,9 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

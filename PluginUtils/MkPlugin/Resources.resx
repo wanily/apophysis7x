@@ -117,22 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="CppFile" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\__name__.cpp;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="DefFile" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\__name__.def;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="HeaderFile" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\plugin.h;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="ProjectFile" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\__name__.vcxproj;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="SuccessfulString" xml:space="preserve">
-    <value>Successful.</value>
-  </data>
   <data name="ErrorFormatString" xml:space="preserve">
     <value>ERROR: {0}</value>
   </data>
@@ -142,10 +126,16 @@
   <data name="PromptString" xml:space="preserve">
     <value>Enter the new project name: </value>
   </data>
-  <data name="HeaderFileNoVar" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\plugin_novar.h;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="ReadingString" xml:space="preserve">
+    <value>Reading "{0}"...</value>
   </data>
-  <data name="HeaderFileVar" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\plugin_var.h;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  <data name="SuccessfulString" xml:space="preserve">
+    <value>Successful.</value>
+  </data>
+  <data name="TemplateDirError" xml:space="preserve">
+    <value>Template directory "{0}"does not exist.</value>
+  </data>
+  <data name="WritingString" xml:space="preserve">
+    <value>Writing "{0}"...</value>
   </data>
 </root>
