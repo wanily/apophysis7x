@@ -1562,7 +1562,7 @@ object AboutForm: TAboutForm
     Top = 270
     Width = 178
     Height = 13
-    Caption = 'Copyright '#169' 1992-2012  Scott Draves'
+    Caption = 'Copyright '#169' 1992-2014  Scott Draves'
   end
   object lblFlamecom: TLabel
     Left = 16
@@ -1712,7 +1712,7 @@ object AboutForm: TAboutForm
     Top = 116
     Width = 110
     Height = 13
-    Caption = 'Copyright '#169' 2009-2012'
+    Caption = 'Copyright '#169' 2009-2014'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11

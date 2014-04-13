@@ -22,11 +22,7 @@ program Apophysis7X;
 {%ToDo 'Assets\Apophysis7X.todo'}
 {$R 'Resources\Apophysis7X.res'}
 {$SetPEFlags $20}
-
-{$ifdef VER240}
-  // we need to update TMS Scripter to the XE3 version...
-  {$Define DisableScripting}
-{$endif}
+{$Include 'delphiversion.pas'}
 
 uses
 
@@ -176,11 +172,12 @@ begin
   SplashWindow.Update;
 
   {$ifdef Apo7X64}
-  Application.Title := 'Apophysis 7x (32 bit)';
-  {$else}
   Application.Title := 'Apophysis 7x (64 bit)';
+  {$else}
+  Application.Title := 'Apophysis 7x (32 bit)';
   {$endif}
   Application.HelpFile := 'Apophysis7x.chm';
+
   Application.CreateForm(TMainForm, MainForm);
   Application.CreateForm(TTraceForm, TraceForm);
   Application.CreateForm(TAboutForm, AboutForm);
@@ -210,7 +207,7 @@ begin
   {$endif}
 
   Application.UpdateFormatSettings := False;
-  {$ifdef VER240}
+  {$ifdef UseFormatSettings}
     FormatSettings.DecimalSeparator := '.';
   {$else}
     DecimalSeparator := '.';

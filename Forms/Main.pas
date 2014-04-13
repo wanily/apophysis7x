@@ -25,12 +25,7 @@
 
 unit Main;
 
-//{$define VAR_STR}
-
-{$ifdef VER240}
-  // we need to update TMS Scripter to the XE3 version...
-  {$Define DisableScripting}
-{$endif}
+{$Include 'delphiversion.pas'}
 
 interface
 
@@ -246,7 +241,6 @@ type
     mnuCurves: TMenuItem;
     N17: TMenuItem;
     mnuTrace: TMenuItem;
-    ToolButton23: TToolButton;
     ToolButton24: TToolButton;
     procedure mnuManualClick(Sender: TObject);
     procedure mnuReportFlameClick(Sender: TObject);
@@ -833,7 +827,7 @@ begin
   RedrawTimer.Enabled := False;
   if Assigned(Renderer) then begin
     assert(Renderer.Suspended = false);
-    Renderer.Terminate;
+    Renderer.Suspend;
     Renderer.WaitFor;
   end;
 end;

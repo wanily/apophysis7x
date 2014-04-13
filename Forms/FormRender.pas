@@ -398,7 +398,12 @@ begin
   oldElapsed := Elapsed;
 
   prog := (Renderer.Slice + Prog) / Renderer.NrSlices;
-  if ShowProgress then ProgressBar2.Position := round(100 * prog);
+  if ShowProgress then begin
+    ProgressBar2.Position := round(100 * prog);
+    SetTaskbarProgressValue(
+      ProgressBar2.Position - ProgressBar2.Min,
+      ProgressBar2.Max - ProgressBar2.Min);
+  end;
 
   StatusBar.Panels[0].text := Format(TextByKey('render-status-elapsed') + ': %2.2d:%2.2d:%2.2d.%2.2d',
     [Trunc(Elapsed * 24),
@@ -468,6 +473,7 @@ begin
   MainForm.Buttons.GetBitmap(9, btnDeletePreset.Glyph);
   bRenderAll := false;
   ListPresets;
+  InitializeTaskbarAPI;
 end;
 
 procedure TRenderForm.FormDestroy(Sender: TObject);

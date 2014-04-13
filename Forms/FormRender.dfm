@@ -66,10 +66,6 @@ object RenderForm: TRenderForm
     object TabSettings: TTabSheet
       Caption = 'Settings'
       ImageIndex = 18
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       DesignSize = (
         473
         344)
@@ -664,10 +660,6 @@ object RenderForm: TRenderForm
     object TabOutput: TTabSheet
       Caption = 'Output'
       ImageIndex = 38
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Output: TMemo
         Left = 0
         Top = 0

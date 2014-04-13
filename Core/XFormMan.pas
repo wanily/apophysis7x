@@ -26,7 +26,7 @@ unit XFormMan;
 interface
 
 uses
-  BaseVariation, SysUtils, Forms, Windows;
+  BaseVariation, SysUtils, Forms, Windows, StrUtils;
 
 const
   NRLOCVAR = 29;
@@ -38,6 +38,16 @@ type
     FileName: string;
     VarName: string;
   end;
+
+  TVarProps = class
+    public
+      Index: integer;
+      VarName: string;
+      Priority: integer;
+      Order: integer;
+  end;
+
+  TVarPropsList = array of TVarProps;
 
 function NrVar: integer;
 function Varnames(const index: integer): String;
@@ -53,6 +63,7 @@ procedure InitializeXFormMan;
 procedure DestroyXFormMan;
 procedure RegisterVariationFile(filename, name: string);
 function GetFileNameOfVariation(name: string): string;
+function GetVarProps: TVarPropsList;
 
 implementation
 
@@ -210,23 +221,10 @@ const
     'swirl',
     'horseshoe',
     'polar',
-//    'handkerchief',
-//    'heart',
     'disc',
     'spiral',
     'hyperbolic',
     'diamond',
-//    'ex',
-//    'julia',
-//    'bent',
-//    'waves',
-//    'fisheye',
-//    'popcorn',
-//    'exponential',
-//    'power',
-//    'cosine',
-//    'rings',
-//    'fan',
     'eyefish',
     'bubble',
     'cylinder',
@@ -254,6 +252,37 @@ begin
     Result := cvarnames[Index]
   else
     Result := TVariationLoader(VariationList[Index - NRLOCVAR]).GetName;
+end;
+
+function GetVarProps: TVarPropsList;
+var
+  i: integer;
+  r: TVarPropsList;
+  x: TVarProps;
+begin
+  SetLength(r, NrVar);
+
+  for i := 0 to NrVar - 1 do
+  begin
+    x := TVarProps.Create;
+    x.Index := i;
+    x.VarName := VarNames(i);
+    x.Priority := 1;
+    x.Order := i + 1;
+
+    if LeftStr(x.VarName, 4) = 'pre_' then
+      x.Priority := 0;
+
+    if LeftStr(x.VarName, 4) = 'post_' then
+      x.Priority := 2;
+
+    if x.VarName = 'flatten' then
+      x.Priority := 3;
+
+    r[i] := x;
+  end;
+
+  result := r;
 end;
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -21,9 +21,7 @@
      Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 }
 
-// REMOVE COMMENT TO COMPILE T-500
-//{$define T500}
-//{$define Light}
+{$Include 'delphiversion.pas'}
 
 unit XForm;
 
@@ -73,54 +71,43 @@ type
 type
   TXForm = class
   public
-
     c: array[0..2, 0..1] of double;      // the coefs to the affine part of the function
     p: array[0..2, 0..1] of double;      // post-transform coefs!
+
     density: double;                     // prob is this function is chosen
     color: double;                       // color coord for this function. 0 - 1
     color2: double;                      // Second color coord for this function. 0 - 1
     vc: double;                          // Calculated color to be passed to the plugin
     vo: double;                          // Calculated opacity to be passed to the plugin
     symmetry: double;
-    c00, c01, c10, c11, c20, c21: double;// unnecessary duplicated variables
-    p00, p01, p10, p11, p20, p21: double;// :-)
     postXswap: boolean;
+
     TransformName : string;
 
-    autoZscale: boolean; // for 3d editing
+    autoZscale: boolean;
     transOpacity: double;
     pluginColor: double;
-
-//    nx,ny,x,y: double;
-//    script: TatPascalScripter;
-
     modWeights: array [0..NXFORMS] of double;
-    //modWeights: array of double;
     PropTable: array of TXForm;
 
     Orientationtype: integer;
   private
-    vars: array of double; // {normalized} interp coefs between variations
+    vars: array of double;
+    varprops: TVarPropsList;
+
     FNrFunctions: Integer;
     FFunctionList: array of TCalcFunction;
     FCalcFunctionList: array of TCalcFunction;
 
     FTx, FTy: double; // must remain in this order
     FPx, FPy: double; // some asm code relies on this
-
-    FTz, FPz: double; // 3d hack
+    FTz, FPz: double;
 
     FAngle: double;
     FSinA: double;
     FCosA: double;
     FLength: double;
     colorC1, colorC2: double;
-
-    // precalculated constants for some variations
-//    waves_f1, waves_f2,
-//    rings_dx,
-//    fan_dx, fan_dx2,
-//    cosine_var2,
     polar_vpi, disc_vpi: double;
 
     gauss_rnd: array [0..3] of double;
@@ -137,29 +124,16 @@ type
     procedure DoPostTransform;
     procedure DoInvalidOperation;
 
-    procedure Linear3D;            // var[0]
-    procedure Sinusoidal;          // var[1]
-    procedure Spherical;           // var[2]
-    procedure Swirl;               // var[3]
-    procedure Horseshoe;           // var[4]
-    procedure Polar;               // var[5]
-//    procedure FoldedHandkerchief;  // var[6]
-//    procedure Heart;               // var[7]
-    procedure Disc;                // var[6]
-    procedure Spiral;              // var[7]
-    procedure hyperbolic;          // var[8]
-    procedure Square;              // var[9]
-//    procedure Ex;                  // var[12]
-//    procedure Julia;               // var[13]
-//    procedure Bent;                // var[14]
-//    procedure Waves;               // var[15]
-//    procedure Fisheye;             // var[16]
-//    procedure Popcorn;             // var[17]
-//    procedure Exponential;         // var[11]
-//    procedure Power;               // var[19]
-//    procedure Cosine;              // var[20]
-//    procedure Rings;               // var[21]
-//    procedure Fan;                 // var[22]
+    procedure Linear3D;
+    procedure Sinusoidal;
+    procedure Spherical;
+    procedure Swirl;
+    procedure Horseshoe;
+    procedure Polar;
+    procedure Disc;
+    procedure Spiral;
+    procedure hyperbolic;
+    procedure Square;
     procedure Eyefish;
     procedure Bubble;
     procedure Cylinder;
@@ -258,6 +232,7 @@ begin
   AddRegVariations;
   BuildFunctionlist;
   SetLength(vars, NRLOCVAR + Length(FRegVariations));
+  varprops := GetVarProps;
 
   Clear;
 end;
@@ -293,6 +268,9 @@ begin
   for i := 0 to NXFORMS do
     modWeights[i] := 1;
 
+  SetLength(varprops, 0);
+  varprops := GetVarProps;
+
   transOpacity := 1;
   pluginColor := 1;
 end;
@@ -303,12 +281,12 @@ var
   i: integer;
   CalculateAngle, CalculateSinCos, CalculateLength: boolean;
 begin
-  c00 := c[0][0];
-  c01 := c[0][1];
-  c10 := c[1][0];
-  c11 := c[1][1];
-  c20 := c[2][0];
-  c21 := c[2][1];
+  c[0,0] := c[0][0];
+  c[0,1] := c[0][1];
+  c[1,0] := c[1][0];
+  c[1,1] := c[1][1];
+  c[2,0] := c[2][0];
+  c[2,1] := c[2][1];
 
   colorC1 := (1 + symmetry)/2;
   colorC2 := color*(1 - symmetry)/2;
@@ -322,12 +300,12 @@ begin
     FRegVariations[i].FTX := @FTX;
     FRegVariations[i].FTY := @FTY;
     FRegVariations[i].FTz := @FTz;
-    FRegVariations[i].a := c00;
-    FRegVariations[i].b := c01;
-    FRegVariations[i].c := c10;
-    FRegVariations[i].d := c11;
-    FRegVariations[i].e := c20;
-    FRegVariations[i].f := c21;
+    FRegVariations[i].a := c[0,0];
+    FRegVariations[i].b := c[0,1];
+    FRegVariations[i].c := c[1,0];
+    FRegVariations[i].d := c[1,1];
+    FRegVariations[i].e := c[2,0];
+    FRegVariations[i].f := c[2,1];
     FRegVariations[i].color := @vc;
     FRegVariations[i].opacity := @vo;
 
@@ -344,7 +322,7 @@ begin
 
   // Pre- variations
   for i := 0 to NrVar - 1 do begin
-    if (vars[i] <> 0.0) and (LeftStr(Varnames(i), 4) = 'pre_') then begin
+    if (vars[i] <> 0.0) and (varprops[i].Priority = 0) then begin
       FCalcFunctionList[FNrFunctions] := FFunctionList[i];
       Inc(FNrFunctions);
     end;
@@ -365,9 +343,7 @@ begin
   // Normal variations
   for i := 0 to NrVar - 1 do begin
     if (vars[i] <> 0.0) then begin
-      if (LeftStr(Varnames(i), 4) = 'pre_') or
-        (LeftStr(Varnames(i), 5) = 'post_') or
-        (Varnames(i) = 'flatten') then continue;
+      if (varprops[i].Priority <> 1) then continue;
 
       FCalcFunctionList[FNrFunctions] := FFunctionList[i];
       Inc(FNrFunctions);
@@ -376,22 +352,19 @@ begin
 
   // Post- variations
   for i := 0 to NrVar - 1 do begin
-    if (vars[i] <> 0.0) and (
-      (LeftStr(Varnames(i), 5) = 'post_') or
-      (Varnames(i) = 'flatten')) then begin
+    if (vars[i] <> 0.0) and (varprops[i].Priority = 2) then begin
       FCalcFunctionList[FNrFunctions] := FFunctionList[i];
       Inc(FNrFunctions);
     end;
   end;
 
-//  waves_f1 := 1 / (sqr(c20) + EPS);
-//  waves_f2 := 1 / (sqr(c21) + EPS);
-
-//  rings_dx := sqr(c20) + EPS;
-//  fan_dx := PI * (sqr(c20) + EPS);
-//  fan_dx2 := fan_dx/2;
-
-//  cosine_var2 := vars[20]/2;
+  // flatten ;-)
+  for i := 0 to NrVar - 1 do begin
+    if (vars[i] <> 0.0) and (varprops[i].Priority = 3) then begin
+      FCalcFunctionList[FNrFunctions] := FFunctionList[i];
+      Inc(FNrFunctions);
+    end;
+  end;
 
   polar_vpi := vars[6]/pi;
   disc_vpi := vars[7]/pi;
@@ -414,58 +387,26 @@ begin
 
   if (p[0,0]<>1) or (p[0,1]<>0) or(p[1,0]<>0) or (p[1,1]<>1) or (p[2,0]<>0) or (p[2,1]<>0) then
   begin
-    p00 := p[0][0];
-    p01 := p[0][1];
-    p10 := p[1][0];
-    p11 := p[1][1];
-    p20 := p[2][0];
-    p21 := p[2][1];
+    p[0,0] := p[0][0];
+    p[0,1] := p[0][1];
+    p[1,0] := p[1][0];
+    p[1,1] := p[1][1];
+    p[2,0] := p[2][0];
+    p[2,1] := p[2][1];
 
     FCalcFunctionList[FNrFunctions] := DoPostTransform;
     Inc(FNrFunctions);
   end;
-
-(*
-  if (vars[27] <> 0.0) then begin
-    FFunctionList[FNrFunctions] := TestScript;
-    Inc(FNrFunctions);
-
-    Script := TatPascalScripter.Create(nil);
-    Script.SourceCode.Text :=
-       'function test(x, y; var nx, ny);' + #10#13 +
-       'begin' +  #10#13 +
-         'nx := x;' +  #10#13 +
-         'ny := y;' +  #10#13 +
-       'end;' + #10#13 +
-       'function test2;' + #10#13 +
-       'begin' +  #10#13 +
-         'nx := x;' +  #10#13 +
-         'ny := y;' +  #10#13 +
-       'end;' + #10#13 +
-       'nx := x;' +  #10#13 +
-       'ny := y;' +  #10#13;
-    Script.AddVariable('x',x);
-    Script.AddVariable('y',y);
-    Script.AddVariable('nx',nx);
-    Script.AddVariable('ny',ny);
-    Script.Compile;
-  end;
-
-  if (vars[NRLOCVAR -1] <> 0.0) then begin
-    FFunctionList[FNrFunctions] := TestVar;
-    Inc(FNrFunctions);
-  end;
-*)
 end;
 
 procedure TXForm.PrepareInvalidXForm;
 begin
-  c00 := 1;
-  c01 := 0;
-  c10 := 0;
-  c11 := 1;
-  c20 := 0;
-  c21 := 0;
+  c[0,0] := 1;
+  c[0,1] := 0;
+  c[1,0] := 0;
+  c[1,1] := 1;
+  c[2,0] := 0;
+  c[2,1] := 0;
 
   colorC1 := 1;
   colorC2 := 0;
@@ -547,32 +488,12 @@ asm
 end;
 
 procedure TXForm.DoPostTransform;
-{$ifndef _ASM_}
 var
   tmp: double;
 begin
   tmp := FPx;
-  FPx := p00 * FPx + p10 * FPy + p20;
-  FPy := p01 * tmp + p11 * FPy + p21;
-{$else}
-asm
-    fld     qword ptr [eax + FPy]
-    fld     qword ptr [eax + FPx]
-    fld     st(1)
-    fmul    qword ptr [eax + p10]
-    fld     st(1)
-    fmul    qword ptr [eax + p00]
-    faddp
-    fadd    qword ptr [eax + p20]
-    fstp    qword ptr [eax + FPx]
-    fmul    qword ptr [eax + p01]
-    fld     qword ptr [eax + p11]
-    fmulp   st(2), st
-    faddp
-    fadd    qword ptr [eax + p21]
-    fstp    qword ptr [eax + FPy]
-    fwait
-{$endif}
+  FPx := p[0,0] * FPx + p[1,0] * FPy + p[2,0];
+  FPy := p[0,1] * tmp + p[1,1] * FPy + p[2,1];
 end;
 
 procedure TXForm.DoInvalidOperation;
@@ -1072,8 +993,8 @@ begin
   vc := CPpoint.c;
   vo := CPpoint.o;
 
-  FTx := c00 * CPpoint.x + c10 * CPpoint.y + c20;
-  FTy := c01 * CPpoint.x + c11 * CPpoint.y + c21;
+  FTx := c[0,0] * CPpoint.x + c[1,0] * CPpoint.y + c[2,0];
+  FTy := c[0,1] * CPpoint.x + c[1,1] * CPpoint.y + c[2,1];
   FTz := CPpoint.z;
 
   Fpx := 0;
@@ -1104,8 +1025,8 @@ begin
   vc := ToPoint.c;
   vo := ToPoint.o;
 
-  FTx := c00 * CPpoint.x + c10 * CPpoint.y + c20;
-  FTy := c01 * CPpoint.x + c11 * CPpoint.y + c21;
+  FTx := c[0,0] * CPpoint.x + c[1,0] * CPpoint.y + c[2,0];
+  FTy := c[0,1] * CPpoint.x + c[1,1] * CPpoint.y + c[2,1];
   FTz := CPpoint.z;
 
   Fpx := 0;
@@ -1136,8 +1057,8 @@ begin
   p.c1 := p.c1 * colorC1 + colorC2;
   p.c2 := p.c2 * colorC1 + colorC2;
 
-  FTx := c00 * p.x + c10 * p.y + c20;
-  FTy := c01 * p.x + c11 * p.y + c21;
+  FTx := c[0,0] * p.x + c[1,0] * p.y + c[2,0];
+  FTy := c[0,1] * p.x + c[1,1] * p.y + c[2,1];
 
   Fpx := 0;
   Fpy := 0;
@@ -1154,8 +1075,8 @@ procedure TXForm.NextPointXY(var px, py: double);
 var
   i: integer;
 begin
-  FTx := c00 * px + c10 * py + c20;
-  FTy := c01 * px + c11 * py + c21;
+  FTx := c[0,0] * px + c[1,0] * py + c[2,0];
+  FTy := c[0,1] * px + c[1,1] * py + c[2,1];
   FTz := 0;
 
   Fpx := 0;
