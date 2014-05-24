@@ -40,10 +40,6 @@ type
     PageCtrl: TPageControl;
     TabSettings: TTabSheet;
     TabOutput: TTabSheet;
-    GroupBox5: TGroupBox;
-    btnSavePreset: TSpeedButton;
-    btnDeletePreset: TSpeedButton;
-    cmbPreset: TComboBox;
     GroupBox2: TGroupBox;
     chkMaintain: TCheckBox;
     cbWidth: TComboBox;
@@ -55,7 +51,6 @@ type
     txtDensity: TComboBox;
     GroupBox4: TGroupBox;
     lblApproxMem: TLabel;
-    lblPhysical: TLabel;
     lblMaxbits: TLabel;
     Label9: TLabel;
     cbMaxMemory: TComboBox;
@@ -64,13 +59,6 @@ type
     lblMemory: TLabel;
     btnBrowse: TSpeedButton;
     txtFilename: TEdit;
-    GroupBox1: TGroupBox;
-    chkSave: TCheckBox;
-    GroupBox6: TGroupBox;
-    chkPostProcess: TCheckBox;
-    chkShutdown: TCheckBox;
-    Label6: TLabel;
-    Label7: TLabel;
     btnGoTo: TSpeedButton;
     pnlWidth: TPanel;
     pnlHeight: TPanel;
@@ -79,13 +67,12 @@ type
     pnlOversample: TPanel;
     pnlLimit: TPanel;
     pnlTarget: TPanel;
-    btnDonate: TButton;
-    btnSaveLog: TButton;
     chkBinary: TCheckBox;
     ProgressBar2: TProgressBar;
     PBMem: TProgressBar;
-    chkSaveIncompleteRenders: TCheckBox;
     lblCPUCores: TLabel;
+    chkSaveIncompleteRenders: TCheckBox;
+    chkSave: TCheckBox;
     procedure btnSaveLogClick(Sender: TObject);
     procedure btnDonateClick(Sender: TObject);
     procedure cbMaxMemoryChange(Sender: TObject);
@@ -103,10 +90,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnPauseClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
-    procedure btnSavePresetClick(Sender: TObject);
     procedure btnBrowseClick(Sender: TObject);
-    procedure btnDeletePresetClick(Sender: TObject);
-    procedure cmbPresetChange(Sender: TObject);
     procedure chkMaintainClick(Sender: TObject);
     procedure chkSaveIncompleteRendersClick(Sender: TObject);
     procedure btnGoToClick(Sender: TObject);
@@ -116,13 +100,10 @@ type
 
     ApproxSamples: int64;
 
-    procedure DoPostProcess;
-
     procedure HandleThreadCompletion(var Message: TMessage);
       message WM_THREAD_COMPLETE;
     procedure HandleThreadTermination(var Message: TMessage);
       message WM_THREAD_TERMINATE;
-    procedure ListPresets;
     function WindowsExit(RebootParam: Longword = EWX_POWEROFF or EWX_FORCE): Boolean;
     procedure Save(const str:string);
     function IsLimitingMemory():boolean;
@@ -152,7 +133,7 @@ var
 implementation
 
 uses
-  Main, Global, SavePreset, formPostProcess, PngImage, ImageMaker,Tracer;
+  Main, Global, PngImage, ImageMaker,Tracer;
 
 {$R *.DFM}
 
@@ -170,19 +151,10 @@ begin
   txtDensity.Enabled := true;
   txtFilterRadius.enabled := true;
   txtOversample.Enabled := true;
-  //chkLimitMem.Enabled := true;
   cbMaxMemory.enabled := true;
-  //cbBitsPerSample.Enabled := true;
-  chkPostProcess.Enabled := not IsLimitingMemory;
   chkSaveIncompleteRenders.Enabled := not IsLimitingMemory;
   btnRender.Enabled := true;
-  cmbPreset.enabled := true;
-  btnSaveLog.Enabled := false;
   chkSave.enabled := true;
-  chkPostProcess.enabled := true;
-  chkShutdown.enabled := true;
-  btnSavePreset.enabled := true;
-  btnDeletePreset.enabled := true;
   btnCancel.Caption := TextByKey('common-close');
   btnPause.enabled := false;
   ProgressBar2.Position := 0;
@@ -336,17 +308,9 @@ begin
 
   SetTaskbarProgressState(tbpsNone);
 
-  if not IsLimitingMemory and chkPostProcess.checked then
-    DoPostProcess;
-
   Renderer.Free;
   Renderer := nil;
   if not bRenderAll then ResetControls;
-
-  btnSaveLog.Enabled := true;
-
-  if chkShutdown.Checked and not bRenderAll then
-    WindowsExit;
 end;
 
 procedure TRenderForm.HandleThreadTermination(var Message: TMessage);
@@ -373,8 +337,6 @@ begin
   Renderer.Free;
   Renderer := nil;
   ResetControls;
-
-  btnSaveLog.Enabled := true;
 end;
 
 procedure TRenderForm.OnProgress(prog: double);
@@ -458,21 +420,14 @@ begin
 	pnlLimit.Caption := TextByKey('render-resourceusage-limit');
 	//pnlBufferDepth.Caption := TextByKey('render-resourceusage-bufferdepth');
 	chkSave.Caption := TextByKey('render-output-saveparams');
-	GroupBox6.Caption := TextByKey('render-completion-title');
-	chkPostProcess.Caption := TextByKey('render-completion-postprocess');
-	chkShutdown.Caption := TextByKey('render-completion-shutdown');
 	chkSaveIncompleteRenders.Caption := TextByKey('render-completion-saveincomplete');
   cbMaxMemory.Items[0] := TextByKey('render-resourceusage-nolimit') ;
-  Groupbox1.Caption := TextByKey('render-tab-output-title');
 
   cp := TControlPoint.Create;
   cbMaxMemory.ItemIndex := 0;
   //cbBitsPerSample.ItemIndex := 0;
   BitsPerSample := 0;
-  MainForm.Buttons.GetBitmap(2, btnSavePreset.Glyph);
-  MainForm.Buttons.GetBitmap(9, btnDeletePreset.Glyph);
   bRenderAll := false;
-  ListPresets;
   InitializeTaskbarAPI;
 end;
 
@@ -616,14 +571,8 @@ begin
   //chkLimitMem.Enabled := true;
   cbMaxMemory.Enabled := false;
   //cbBitsPerSample.Enabled := false;
-  cmbPreset.enabled := false;
   chkSave.enabled := false;
-  chkPostProcess.enabled := false;
-  chkShutdown.enabled := false;
-  btnSavePreset.enabled := false;
-  btnDeletePreset.enabled := false;
   btnRender.Enabled := false;
-  btnSaveLog.Enabled := false;
   btnPause.enabled := true;
   btnCancel.Caption := TextByKey('common-cancel');
   chkMaintain.Enabled := false;
@@ -1046,52 +995,6 @@ begin
     end;
 end;
 
-procedure TRenderForm.btnSavePresetClick(Sender: TObject);
-var
-  IFile: TextFile;
-  Title, Filename: string;
-begin
-  SavePresetForm.txtPresetName.Text := cmbPreset.Text;
-  if SavePresetForm.ShowModal = mrOK then
-  begin
-    Title := Trim(SavePresetForm.txtPresetName.Text);
-    Filename := AppPath + 'render presets';
-    try
-      AssignFile(IFile, FileName);
-      if FileExists(FileName) then
-      begin
-        if EntryExists(Title, FileName) then DeleteEntry(Title, FileName);
-        Append(IFile);
-      end
-      else
-        ReWrite(IFile);
-      WriteLn(IFile, Title + ' {');
-      WriteLn(IFile, Trim(cbWidth.text));
-      WriteLn(IFile, Trim(cbHeight.text));
-      WriteLn(IFile, Trim(txtDensity.text));
-      WriteLn(IFile, Trim(txtFilterRadius.text));
-      WriteLn(IFile, Trim(txtOversample.text));
-      WriteLn(IFile, ExtractFileExt(txtFileName.Text));
-      if (not IsLimitingMemory) then
-        WriteLn(IFile, 'true')
-      else
-        WriteLn(IFile, 'false');
-      WriteLn(IFile, IntToStr(cbMaxMemory.ItemIndex));
-      WriteLn(IFile, cbMaxMemory.Text);
-      WriteLn(IFile, '}');
-      WriteLn(IFile, '');
-      CloseFile(IFile);
-    except on EInOutError do
-      begin
-        Application.MessageBox('Cannot save preset.', 'Apophysis', 16);
-        Exit;
-      end;
-    end;
-    ListPresets;
-    cmbPreset.ItemIndex := cmbPreset.Items.count - 1;
-  end;
-end;
-
 procedure TRenderForm.btnBrowseClick(Sender: TObject);
 var
   fn:string;
@@ -1129,112 +1032,9 @@ begin
   end;
 end;
 
-procedure TRenderForm.ListPresets;
-{ List identifiers in file }
-var
-  i, p: integer;
-  Title: string;
-  FStrings: TStringList;
-  f: textfile;
-begin
-  FStrings := TStringList.Create;
-  try
-    if fileExists(AppPath + 'render presets') then begin
-      FStrings.LoadFromFile(AppPath + 'render presets');
-      cmbPreset.Clear;
-      if (Pos('{', FStrings.Text) <> 0) then begin
-        for i := 0 to FStrings.Count - 1 do begin
-          p := Pos('{', FStrings[i]);
-          if (p <> 0) then  begin
-            Title := Trim(Copy(FStrings[i], 1, p - 1));
-            if Title <> '' then begin
-              cmbPreset.Items.add(Copy(FStrings[i], 1, p - 1));
-            end;
-          end;
-        end;
-      end;
-    end;
-  finally
-    FStrings.Free;
-  end;
-end;
-
-procedure TRenderForm.btnDeletePresetClick(Sender: TObject);
-var
-  Title, Filename: string;
-begin
-  Title := Trim(cmbPreset.Text);
-  if Title = '' then exit;
-  Filename := AppPath + 'render presets';
-  if EntryExists(Title, FileName) then DeleteEntry(Title, FileName);
-  ListPresets;
-end;
-
-procedure TRenderForm.cmbPresetChange(Sender: TObject);
-var
-  chk: boolean;
-  i, j: integer;
-  FStrings: TStringList;
-  Title, Filename: string;
-begin
-  Title := Trim(cmbPreset.Text);
-  Filename := AppPath + 'render presets';
-  if Title = '' then exit;
-  if EntryExists(Title, FileName) then
-  begin
-  // Load preset
-    FStrings := TStringList.Create;
-    try
-      FStrings.LoadFromFile(Filename);
-      for i := 0 to FStrings.Count - 1 do
-        if Pos(LowerCase(Title) + ' {', Lowercase(FStrings[i])) <> 0 then
-        begin
-          chk := chkMaintain.checked;
-          chkMaintain.Checked := False;
-          j := i + 1;
-          cbWidth.Text := FStrings[j];
-          inc(j);
-          cbHeight.text := FStrings[j];
-          chkMaintain.Checked := chk;
-          inc(j);
-          txtDensity.text := FStrings[j];
-          inc(j);
-          txtFilterRadius.text := FStrings[j];
-          inc(j);
-          txtOversample.text := FStrings[j];
-          inc(j);
-          txtFileName.Text := ChangeFileExt(txtFileName.Text, FStrings[j]);
-          inc(j);
-          //if Fstrings[j] = 'true' then (not IsLimitingMemory) else chkLimitMem.checked := false;
-          inc(j);
-          cbMaxMemory.ItemIndex := StrToInt(Fstrings[j]);
-          //cbMaxMemory.enabled := chkLimitMem.checked;
-          inc(j);
-          cbMaxMemory.Text := Fstrings[j];
-          break;
-        end;
-    finally
-      FStrings.Free;
-    end
-  end;
-  ImageWidth := StrToInt(cbWidth.Text);
-  ImageHeight := StrToInt(cbHeight.Text);
-  Sample_Density := StrToFloat(txtDensity.Text);
-  ShowMemoryStatus;
-end;
-
 procedure TRenderForm.chkMaintainClick(Sender: TObject);
 begin
   Ratio := ImageWidth / ImageHeight;
-end;
-
-procedure TRenderForm.DoPostProcess;
-begin
-  frmPostProcess.cp := cp;
-  frmPostProcess.SetRenderer(Renderer.GetRenderer);
-  frmPostProcess.SetControlPoint(CP);
-  frmPostProcess.SetImageName(FileName);
-  frmPostProcess.Show;
 end;
 
 function TRenderForm.WindowsExit(RebootParam: Longword = EWX_POWEROFF or EWX_FORCE): Boolean;
@@ -1295,10 +1095,7 @@ end;
 
 procedure TRenderForm.cbMaxMemoryChange(Sender: TObject);
 begin
-  //cbMaxMemory.enabled := IsLimitingMemory;
-  chkPostProcess.Enabled := not IsLimitingMemory;
   chkSaveIncompleteRenders.Enabled := not IsLimitingMemory;
-  //btnRender.Enabled := (ApproxMemory <= PhysicalMemory) or (cbMaxMemory.ItemIndex > 0);
 end;
 
 procedure TRenderForm.btnDonateClick(Sender: TObject);

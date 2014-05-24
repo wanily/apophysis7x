@@ -4,7 +4,7 @@ object RenderForm: TRenderForm
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = 'Render to Disk'
-  ClientHeight = 469
+  ClientHeight = 409
   ClientWidth = 497
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -20,12 +20,12 @@ object RenderForm: TRenderForm
   OnShow = FormShow
   DesignSize = (
     497
-    469)
+    409)
   PixelsPerInch = 96
   TextHeight = 13
   object btnRender: TButton
     Left = 256
-    Top = 420
+    Top = 360
     Width = 75
     Height = 25
     Anchors = [akRight, akBottom]
@@ -33,42 +33,47 @@ object RenderForm: TRenderForm
     Default = True
     TabOrder = 0
     OnClick = btnRenderClick
+    ExplicitTop = 420
   end
   object btnCancel: TButton
     Left = 416
-    Top = 420
+    Top = 360
     Width = 75
     Height = 25
     Anchors = [akRight, akBottom]
     Caption = 'Close'
     TabOrder = 1
     OnClick = btnCancelClick
+    ExplicitTop = 420
   end
   object btnPause: TButton
     Left = 336
-    Top = 420
+    Top = 360
     Width = 75
     Height = 25
     Anchors = [akRight, akBottom]
     Caption = 'Pause'
     TabOrder = 2
     OnClick = btnPauseClick
+    ExplicitTop = 420
   end
   object PageCtrl: TPageControl
     Left = 8
     Top = 8
     Width = 481
-    Height = 373
+    Height = 313
     ActivePage = TabSettings
     Anchors = [akLeft, akTop, akRight, akBottom]
     Images = MainForm.Buttons
     TabOrder = 3
+    ExplicitHeight = 373
     object TabSettings: TTabSheet
       Caption = 'Settings'
       ImageIndex = 18
+      ExplicitHeight = 344
       DesignSize = (
         473
-        344)
+        284)
       object btnBrowse: TSpeedButton
         Left = 416
         Top = 11
@@ -159,91 +164,17 @@ object RenderForm: TRenderForm
         ShowHint = True
         OnClick = btnGoToClick
       end
-      object GroupBox5: TGroupBox
-        Left = 464
-        Top = 16
-        Width = 425
-        Height = 57
-        Caption = 'Preset'
-        TabOrder = 0
-        Visible = False
-        object btnSavePreset: TSpeedButton
-          Left = 368
-          Top = 18
-          Width = 24
-          Height = 24
-          Hint = 'Save Preset'
-          Flat = True
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          ParentFont = False
-          ParentShowHint = False
-          ShowHint = True
-          OnClick = btnSavePresetClick
-        end
-        object btnDeletePreset: TSpeedButton
-          Left = 392
-          Top = 18
-          Width = 24
-          Height = 24
-          Hint = 'Delete Preset'
-          Flat = True
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          ParentFont = False
-          ParentShowHint = False
-          ShowHint = True
-          OnClick = btnDeletePresetClick
-        end
-        object cmbPreset: TComboBox
-          Left = 10
-          Top = 20
-          Width = 351
-          Height = 21
-          Style = csDropDownList
-          TabOrder = 0
-          OnChange = cmbPresetChange
-        end
-      end
       object GroupBox2: TGroupBox
         Left = 8
-        Top = 42
+        Top = 69
         Width = 233
         Height = 95
         Anchors = [akLeft, akTop, akRight]
         Caption = 'Size'
-        TabOrder = 1
+        TabOrder = 0
         DesignSize = (
           233
           95)
-        object Label6: TLabel
-          Left = 144
-          Top = 22
-          Width = 15
-          Height = 36
-          Caption = '}'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -32
-          Font.Name = 'Times New Roman'
-          Font.Style = []
-          ParentFont = False
-          Visible = False
-        end
-        object Label7: TLabel
-          Left = 160
-          Top = 36
-          Width = 26
-          Height = 13
-          Caption = 'pixels'
-          Visible = False
-        end
         object chkMaintain: TCheckBox
           Left = 8
           Top = 70
@@ -325,12 +256,12 @@ object RenderForm: TRenderForm
       end
       object GroupBox3: TGroupBox
         Left = 248
-        Top = 42
+        Top = 69
         Width = 218
         Height = 95
         Anchors = [akTop, akRight]
         Caption = 'Quality settings'
-        TabOrder = 2
+        TabOrder = 1
         DesignSize = (
           218
           95)
@@ -422,12 +353,12 @@ object RenderForm: TRenderForm
       end
       object GroupBox4: TGroupBox
         Left = 8
-        Top = 142
+        Top = 172
         Width = 458
         Height = 99
         Anchors = [akLeft, akTop, akRight]
         Caption = 'Resource usage'
-        TabOrder = 3
+        TabOrder = 2
         DesignSize = (
           458
           99)
@@ -438,21 +369,6 @@ object RenderForm: TRenderForm
           Height = 13
           Alignment = taRightJustify
           Caption = '0000 Mb'
-          Visible = False
-        end
-        object lblPhysical: TLabel
-          Left = 439
-          Top = 96
-          Width = 42
-          Height = 13
-          Alignment = taRightJustify
-          Caption = '0000 Mb'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'MS Sans Serif'
-          Font.Style = []
-          ParentFont = False
           Visible = False
         end
         object lblMaxbits: TLabel
@@ -562,68 +478,6 @@ object RenderForm: TRenderForm
           TabOrder = 3
         end
       end
-      object GroupBox1: TGroupBox
-        Left = 8
-        Top = 253
-        Width = 217
-        Height = 81
-        Caption = 'Output options'
-        TabOrder = 5
-        DesignSize = (
-          217
-          81)
-        object chkSave: TCheckBox
-          Left = 8
-          Top = 24
-          Width = 201
-          Height = 17
-          Anchors = [akLeft, akTop, akRight]
-          Caption = 'Save parameters'
-          Checked = True
-          State = cbChecked
-          TabOrder = 0
-        end
-        object chkSaveIncompleteRenders: TCheckBox
-          Left = 8
-          Top = 48
-          Width = 201
-          Height = 17
-          Anchors = [akLeft, akTop, akRight]
-          Caption = 'Save incomplete renders'
-          TabOrder = 1
-          OnClick = chkSaveIncompleteRendersClick
-        end
-      end
-      object GroupBox6: TGroupBox
-        Left = 232
-        Top = 253
-        Width = 234
-        Height = 81
-        Anchors = [akLeft, akTop, akRight]
-        Caption = 'Completion options'
-        TabOrder = 6
-        DesignSize = (
-          234
-          81)
-        object chkPostProcess: TCheckBox
-          Left = 8
-          Top = 24
-          Width = 217
-          Height = 17
-          Anchors = [akLeft, akTop, akRight]
-          Caption = 'Post-process after completion'
-          TabOrder = 0
-        end
-        object chkShutdown: TCheckBox
-          Left = 8
-          Top = 48
-          Width = 217
-          Height = 17
-          Anchors = [akLeft, akTop, akRight]
-          Caption = 'Shut down computer when complete'
-          TabOrder = 1
-        end
-      end
       object pnlTarget: TPanel
         Left = 8
         Top = 12
@@ -632,7 +486,7 @@ object RenderForm: TRenderForm
         Cursor = crArrow
         BevelOuter = bvLowered
         Caption = 'Destination'
-        TabOrder = 7
+        TabOrder = 4
       end
       object txtFilename: TEdit
         Left = 128
@@ -640,7 +494,7 @@ object RenderForm: TRenderForm
         Width = 288
         Height = 21
         Anchors = [akLeft, akTop, akRight]
-        TabOrder = 4
+        TabOrder = 3
         OnChange = txtFilenameChange
       end
       object chkBinary: TCheckBox
@@ -653,18 +507,40 @@ object RenderForm: TRenderForm
           'Write raw data (WARNING: this is experimental and slows down the' +
           ' rendering!!!)'
         Enabled = False
-        TabOrder = 8
+        TabOrder = 5
         Visible = False
+      end
+      object chkSaveIncompleteRenders: TCheckBox
+        Left = 247
+        Top = 41
+        Width = 216
+        Height = 17
+        Anchors = [akLeft, akTop, akRight]
+        Caption = 'Save incomplete renders'
+        TabOrder = 6
+        OnClick = chkSaveIncompleteRendersClick
+      end
+      object chkSave: TCheckBox
+        Left = 8
+        Top = 41
+        Width = 233
+        Height = 17
+        Anchors = [akLeft, akTop, akRight]
+        Caption = 'Save parameters'
+        Checked = True
+        State = cbChecked
+        TabOrder = 7
       end
     end
     object TabOutput: TTabSheet
       Caption = 'Output'
       ImageIndex = 38
+      ExplicitHeight = 344
       object Output: TMemo
         Left = 0
         Top = 0
         Width = 473
-        Height = 344
+        Height = 284
         Align = alClient
         BorderStyle = bsNone
         Color = clBtnFace
@@ -677,12 +553,13 @@ object RenderForm: TRenderForm
         ReadOnly = True
         ScrollBars = ssVertical
         TabOrder = 0
+        ExplicitHeight = 344
       end
     end
   end
   object StatusBar: TStatusBar
     Left = 0
-    Top = 450
+    Top = 390
     Width = 497
     Height = 19
     Panels = <
@@ -695,36 +572,16 @@ object RenderForm: TRenderForm
       item
         Width = 50
       end>
-  end
-  object btnDonate: TButton
-    Left = 8
-    Top = 420
-    Width = 73
-    Height = 25
-    Anchors = [akLeft, akBottom]
-    Caption = 'Donate'
-    TabOrder = 6
-    OnClick = btnDonateClick
-  end
-  object btnSaveLog: TButton
-    Left = 88
-    Top = 420
-    Width = 73
-    Height = 25
-    Anchors = [akLeft, akBottom]
-    Caption = 'Save log'
-    Enabled = False
-    TabOrder = 5
-    Visible = False
-    OnClick = btnSaveLogClick
+    ExplicitTop = 450
   end
   object ProgressBar2: TProgressBar
     Left = 8
-    Top = 388
+    Top = 328
     Width = 481
     Height = 25
     Anchors = [akLeft, akRight, akBottom]
-    TabOrder = 7
+    TabOrder = 5
+    ExplicitTop = 388
   end
   object SaveDialog: TSaveDialog
     Left = 168

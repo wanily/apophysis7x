@@ -231,9 +231,6 @@
         <DCCReference Include="Forms\Editor.pas">
             <Form>EditForm</Form>
         </DCCReference>
-        <DCCReference Include="Forms\formPostProcess.pas">
-            <Form>frmPostProcess</Form>
-        </DCCReference>
         <DCCReference Include="Forms\FormRender.pas">
             <Form>RenderForm</Form>
         </DCCReference>
@@ -248,9 +245,6 @@
         </DCCReference>
         <DCCReference Include="Forms\Save.pas">
             <Form>SaveForm</Form>
-        </DCCReference>
-        <DCCReference Include="Forms\SavePreset.pas">
-            <Form>SavePresetForm</Form>
         </DCCReference>
         <DCCReference Include="Forms\SplashForm.pas">
             <Form>SplashWindow</Form>

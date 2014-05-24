@@ -138,13 +138,11 @@ uses
   Adjust in 'Forms\Adjust.pas' {AdjustForm},
   Browser in 'Forms\Browser.pas' {GradientBrowser},
   Editor in 'Forms\Editor.pas' {EditForm},
-  formPostProcess in 'Forms\formPostProcess.pas' {frmPostProcess},
   FormRender in 'Forms\FormRender.pas' {RenderForm},
   Fullscreen in 'Forms\Fullscreen.pas' {FullscreenForm},
   LoadTracker in 'Forms\LoadTracker.pas' {LoadForm},
   Options in 'Forms\Options.pas' {OptionsForm},
   Save in 'Forms\Save.pas' {SaveForm},
-  SavePreset in 'Forms\SavePreset.pas' {SavePresetForm},
   SplashForm in 'Forms\SplashForm.pas' {SplashWindow},
   Template in 'Forms\Template.pas' {TemplateForm},
   Curves in 'Forms\Curves.pas' {CurvesForm}
@@ -180,13 +178,11 @@ begin
   Application.CreateForm(TAdjustForm, AdjustForm);
   Application.CreateForm(TGradientBrowser, GradientBrowser);
   Application.CreateForm(TEditForm, EditForm);
-  Application.CreateForm(TfrmPostProcess, frmPostProcess);
   Application.CreateForm(TRenderForm, RenderForm);
   Application.CreateForm(TFullscreenForm, FullscreenForm);
   Application.CreateForm(TLoadForm, LoadForm);
   Application.CreateForm(TOptionsForm, OptionsForm);
   Application.CreateForm(TSaveForm, SaveForm);
-  Application.CreateForm(TSavePresetForm, SavePresetForm);
   Application.CreateForm(TTemplateForm, TemplateForm);
   Application.CreateForm(TCurvesForm, CurvesForm);
 
