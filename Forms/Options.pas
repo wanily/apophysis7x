@@ -133,61 +133,6 @@ type
     pnlExtension: TPanel;
     cbExtendPercent: TComboBox;
     chkUseSmallThumbs: TCheckBox;
-    RandomPage: TTabSheet;
-    gpNumberOfTransforms: TGroupBox;
-    udMinXforms: TUpDown;
-    udMaxXForms: TUpDown;
-    Panel15: TPanel;
-    Panel16: TPanel;
-    txtMaxXforms: TEdit;
-    txtMinXForms: TEdit;
-    gpForcedSymmetry: TGroupBox;
-    udSymOrder: TUpDown;
-    udSymNVars: TUpDown;
-    Panel17: TPanel;
-    Panel18: TPanel;
-    Panel19: TPanel;
-    txtSymNVars: TEdit;
-    txtSymOrder: TEdit;
-    cmbSymType: TComboBox;
-    VariationsPage: TTabSheet;
-    btnSetAll: TButton;
-    btnClearAll: TButton;
-    clbVarEnabled: TCheckListBox;
-    TabSheet1: TTabSheet;
-    GroupBox13: TGroupBox;
-    Panel28: TPanel;
-    Panel29: TPanel;
-    txtTryLength: TEdit;
-    txtNumtries: TEdit;
-    GroupBox17: TGroupBox;
-    udMinHue: TUpDown;
-    Panel20: TPanel;
-    Panel21: TPanel;
-    udMaxHue: TUpDown;
-    txtMaxHue: TEdit;
-    txtMinHue: TEdit;
-    GroupBox18: TGroupBox;
-    Panel22: TPanel;
-    Panel23: TPanel;
-    udMinSat: TUpDown;
-    txtMinSat: TEdit;
-    udmaxSat: TUpDown;
-    txtMaxSat: TEdit;
-    GroupBox22: TGroupBox;
-    Panel24: TPanel;
-    Panel25: TPanel;
-    udMinLum: TUpDown;
-    txtMinLum: TEdit;
-    udMaxLum: TUpDown;
-    txtMaxLum: TEdit;
-    GroupBox23: TGroupBox;
-    Panel26: TPanel;
-    Panel27: TPanel;
-    udMinNodes: TUpDown;
-    txtMinNodes: TEdit;
-    udMaxNodes: TUpDown;
-    txtMaxNodes: TEdit;
     PathsPage: TTabSheet;
     btnDefGradient: TSpeedButton;
     btnSmooth: TSpeedButton;
@@ -212,13 +157,6 @@ type
     btnPluginPath: TSpeedButton;
     Panel50: TPanel;
     txtPluginFolder: TEdit;
-    gpFlameTitlePrefix: TGroupBox;
-    udBatchSize: TUpDown;
-    chkKeepBackground: TCheckBox;
-    Panel11: TPanel;
-    Panel12: TPanel;
-    txtBatchSize: TEdit;
-    txtRandomPrefix: TEdit;
     procedure chkEnableEditorPreviewClick(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure btnCancelClick(Sender: TObject);
@@ -227,19 +165,6 @@ type
     procedure btnDefGradientClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnSmoothClick(Sender: TObject);
-    procedure cmbSymTypeChange(Sender: TObject);
-    procedure btnSetAllClick(Sender: TObject);
-    procedure btnClearAllClick(Sender: TObject);
-    procedure txtMinNodesChange(Sender: TObject);
-    procedure txtMaxNodesChange(Sender: TObject);
-    procedure txtMaxHueChange(Sender: TObject);
-    procedure txtMaxSatChange(Sender: TObject);
-    procedure txtMaxLumChange(Sender: TObject);
-    procedure txtMinHueChange(Sender: TObject);
-    procedure txtMinSatChange(Sender: TObject);
-    procedure txtMinLumChange(Sender: TObject);
-    procedure txtMinXFormsChange(Sender: TObject);
-    procedure txtMaxXformsChange(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure pnlBackColorClick(Sender: TObject);
@@ -332,9 +257,6 @@ begin
   { General tab }
   txtDefParameterFile.Text := DefFlameFile;
   txtDefSmoothFile.Text := defSmoothPaletteFile;
-  txtNumtries.text := IntToStr(Numtries);
-  txtTryLength.text := IntToStr(Trylength);
-  udBatchSize.Position := BatchSize;
 //  chkResize.checked := ResizeOnLoad;
   if NrTreads <= 1 then
     cbNrTheads.ItemIndex := 0
@@ -420,35 +342,6 @@ begin
 
   chkShowRenderStats.Checked := ShowRenderStats;
 
-  { Random tab }
-  udMinXforms.Position := randMinTransforms;
-  udMaxXforms.Position := randMaxTransforms;
-  txtRandomPrefix.text := RandomPrefix;
-  chkKeepbackground.Checked := KeepBackground;
-  cmbSymType.ItemIndex := SymmetryType;
-  if (SymmetryType = 0) or (SymmetryType = 1) then
-  begin
-    txtSymOrder.enabled := false;
-    txtSymNVars.enabled := false;
-  end;
-  udSymOrder.Position := SymmetryOrder;
-  udSymNVars.Position := SymmetryNVars;
-
-  { Variations tab }
-  //UnpackVariations(VariationOptions);
-  for i := 0 to NRVAR -1 do
-    clbVarEnabled.Checked[i] := Variations[i];
-
-  { Gradient tab }
-  udMinNodes.Position := MinNodes;
-  udMaxNodes.Position := MaxNodes;
-  udMinHue.Position := MinHue;
-  udMinSat.Position := MinSat;
-  udMinLum.Position := MinLum;
-  udMaxHue.Position := MaxHue;
-  udMaxSat.Position := MaxSat;
-  udMaxLum.Position := MaxLum;
-
   { Environment tab }
   txtHelp.Text := HelpPath;
   txtLibrary.text := defLibrary;
@@ -488,37 +381,17 @@ end;
 
 procedure TOptionsForm.btnOKClick(Sender: TObject);
 var
-  vars: boolean;
   i: integer;
   warn: boolean;
 begin
-
-  { Variations tab }
-  { Get option values from controls. Disallow bad values }
-  vars := false;
-  for i := 0 to NRVAR-1 do begin
-    Variations[i] := clbVarEnabled.Checked[i];
-    vars := vars or Variations[i];
-  end;
-
-  if vars = false then begin
-    //Application.MessageBox('You must select at least one variation.', 'Apophysis', 48);
-    //Tabs.ActivePage := VariationsPage;
-    //Exit;
-    Variations[0] := true;
-  end;
-
   warn := (LanguageFile <> AvailableLanguages[txtLanguageFile.ItemIndex]) or (UseSmallThumbnails <> chkUseSmallThumbs.Checked);
 
   { General tab }
   JPEGQuality := StrToInt(txtJPEGQuality.text);
-  Numtries := StrToInt(txtNumtries.text);
   if NumTries < 1 then Numtries := 1;
-  Trylength := StrToInt(txtTrylength.text);
   if Trylength < 100 then trylength := 100;
   if JPEGQuality > 100 then JPEGQuality := 100;
   if JPEGQuality < 1 then JPEGQuality := 100;
-  BatchSize := udBatchSize.Position;
   if BatchSize < 1 then BatchSize := 1;
   if BatchSize > 300 then BatchSize := 300;
 
@@ -594,25 +467,6 @@ begin
 
   ShowRenderStats := chkShowRenderStats.Checked;
 
-  { Random tab }
-  randMinTransforms := udMinXforms.Position;
-  randMaxTransforms := udMaxXforms.Position;
-  RandomPrefix := txtRandomPrefix.text;
-  SymmetryType := cmbSymType.ItemIndex;
-  SymmetryOrder := udSymOrder.Position;
-  SymmetryNVars := udSymNVars.Position;
-  KeepBackground := chkKeepbackground.Checked;
-
-  {Gradient tab }
-  MinNodes := udMinNodes.Position;
-  MaxNodes := udMaxNodes.Position;
-  MinHue := udMinHue.Position;
-  MinSat := udMinSat.Position;
-  MinLum := udMinLum.Position;
-  MaxHue := udMaxHue.Position;
-  MaxSat := udMaxSat.Position;
-  MaxLum := udMaxLum.Position;
-
   {Paths}
   defLibrary := txtLibrary.text;
   if (not RememberLastOpenFile) then defFlameFile := txtDefParameterFile.Text;
@@ -682,95 +536,6 @@ begin
   end;
 end;
 
-procedure TOptionsForm.cmbSymTypeChange(Sender: TObject);
-begin
-  if (cmbSymType.ItemIndex = 0) or (cmbSymType.ItemIndex = 1) then
-  begin
-    txtSymOrder.enabled := false;
-    txtSymNVars.enabled := false;
-  end else
-  begin
-    txtSymOrder.enabled := true;
-    txtSymNVars.enabled := true;
-  end;
-end;
-
-procedure TOptionsForm.btnSetAllClick(Sender: TObject);
-var
-  i: integer;
-begin
-  for i := 0 to NRVAR - 1 do
-    clbVarEnabled.Checked[i] := True;
-end;
-
-procedure TOptionsForm.btnClearAllClick(Sender: TObject);
-var
-  i: integer;
-begin
-  for i := 0 to NRVAR - 1 do
-    clbVarEnabled.Checked[i] := False;
-end;
-
-procedure TOptionsForm.txtMinNodesChange(Sender: TObject);
-begin
-  if StrToInt(txtMinNodes.Text) > udMaxNodes.position then
-    udMaxNodes.Position := StrToInt(txtMinNodes.Text);
-end;
-
-procedure TOptionsForm.txtMaxNodesChange(Sender: TObject);
-begin
-  if StrToInt(txtMaxNodes.Text) < udMinNodes.position then
-    udMinNodes.Position := StrToInt(txtMaxNodes.Text);
-end;
-
-procedure TOptionsForm.txtMaxHueChange(Sender: TObject);
-begin
-  if StrToInt(txtMaxHue.Text) < udMinHue.position then
-    udMinHue.Position := StrToInt(txtMaxHue.Text);
-end;
-
-procedure TOptionsForm.txtMaxSatChange(Sender: TObject);
-begin
-  if StrToInt(txtMaxSat.Text) < udMinSat.position then
-    udMinSat.Position := StrToInt(txtMaxSat.Text);
-end;
-
-procedure TOptionsForm.txtMaxLumChange(Sender: TObject);
-begin
-  if StrToInt(txtMaxLum.Text) < udMinLum.position then
-    udMinLum.Position := StrToInt(txtMaxLum.Text);
-end;
-
-procedure TOptionsForm.txtMinHueChange(Sender: TObject);
-begin
-  if StrToInt(txtMinHue.Text) > udMaxHue.position then
-    udMaxHue.Position := StrToInt(txtMinHue.Text);
-end;
-
-procedure TOptionsForm.txtMinSatChange(Sender: TObject);
-begin
-  if StrToInt(txtMinSat.Text) > udMaxSat.position then
-    udMaxSat.Position := StrToInt(txtMinSat.Text);
-end;
-
-procedure TOptionsForm.txtMinLumChange(Sender: TObject);
-begin
-  if StrToInt(txtMinLum.Text) > udMaxLum.position then
-    udMaxLum.Position := StrToInt(txtMinLum.Text);
-end;
-
-procedure TOptionsForm.txtMinXFormsChange(Sender: TObject);
-begin
-  if StrToInt(txtMinXForms.Text) > udMaxXForms.position then
-    udMaxXFOrms.Position := StrToInt(txtMinXForms.Text);
-end;
-
-procedure TOptionsForm.txtMaxXformsChange(Sender: TObject);
-begin
-  if StrToInt(txtMaxXForms.Text) < udMinXForms.position then
-    udMinXForms.Position := StrToInt(txtMaxXforms.Text);
-end;
-
 procedure TOptionsForm.SpeedButton2Click(Sender: TObject);
 var
   fn:string;
@@ -804,16 +569,6 @@ begin
 	Panel5.Caption := TextByKey('common-gammathreshold');
 	cbPNGTransparency.Items[1] := TextByKey('common-enabled');
 	cbPNGTransparency.Items[0] := TextByKey('common-disabled');
-	Panel15.Caption := TextByKey('common-minimum');
-	Panel21.Caption := TextByKey('common-minimum');
-	Panel22.Caption := TextByKey('common-minimum');
-	Panel25.Caption := TextByKey('common-minimum');
-	Panel26.Caption := TextByKey('common-minimum');
-	Panel16.Caption := TextByKey('common-maximum');
-	Panel20.Caption := TextByKey('common-maximum');
-	Panel23.Caption := TextByKey('common-maximum');
-	Panel24.Caption := TextByKey('common-maximum');
-	Panel27.Caption := TextByKey('common-maximum');
 	Label49.Caption := TextByKey('common-minutes');
   //Panel49.Caption := TextByKey('common-filename') + ' (x64)';
   Panel48.Caption := TextByKey('options-tab-editor-previewtransparency');
@@ -870,31 +625,6 @@ begin
 	pnlExtension.Caption := TextByKey('options-tab-display-extenspreviewbufferlabel');
 	chkShowTransparency.Caption := TextByKey('options-tab-display-showtransparency');
 	chkUseSmallThumbs.Caption := TextByKey('options-tab-display-usesmallthumbs');
-	RandomPage.Caption := TextByKey('options-tab-random-title');
-	gpNumberOfTransforms.Caption := TextByKey('options-tab-random-numberoftransforms');
-	gpFlameTitlePrefix.Caption := TextByKey('options-tab-random-randombatch');
-	gpForcedSymmetry.Caption := TextByKey('options-tab-random-forcedsymmetry');
-	Panel11.Caption := TextByKey('options-tab-random-batchsize');
-	Panel12.Caption := TextByKey('options-tab-random-titleprefix');
-	chkKeepBackground.Caption := TextByKey('options-tab-random-keepbackground');
-	Panel17.Caption := TextByKey('options-tab-random-symtype');
-	Panel18.Caption := TextByKey('options-tab-random-symorder');
-	Panel19.Caption := TextByKey('options-tab-random-symlimit');
-	cmbSymType.Items[0] := TextByKey('options-tab-random-type-none');
-	cmbSymType.Items[1] := TextByKey('options-tab-random-type-bilateral');
-	cmbSymType.Items[2] := TextByKey('options-tab-random-type-rotational');
-	cmbSymType.Items[3] := TextByKey('options-tab-random-type-dihedral');
-	VariationsPage.Caption := TextByKey('options-tab-variations-title');
-	btnSetAll.Caption := TextByKey('options-tab-variations-setall');
-	btnClearAll.Caption := TextByKey('options-tab-variations-clearall');
-	TabSheet1.Caption := TextByKey('options-tab-gradient-title');
-	GroupBox23.Caption := TextByKey('options-tab-gradient-numberofnodes');
-	GroupBox13.Caption := TextByKey('options-tab-gradient-smoothpalette');
-	GroupBox17.Caption := TextByKey('options-tab-gradient-huebetween');
-	GroupBox18.Caption := TextByKey('options-tab-gradient-satbetween');
-	GroupBox22.Caption := TextByKey('options-tab-gradient-lumbetween');
-	Panel28.Caption := TextByKey('options-tab-gradient-numtries');
-	Panel29.Caption := TextByKey('options-tab-gradient-trylength');
   PathsPage.Caption := TextByKey('options-tab-environment-title');
 	Panel39.Caption := TextByKey('options-tab-environment-defaultparams');
 	Panel40.Caption := TextByKey('options-tab-environment-smoothpalette');
@@ -905,19 +635,6 @@ begin
 	panel45.Caption := TextByKey('options-tab-environment-savefrequency');
   cbSinglePrecision.Caption := TextByKey('options-tab-general-singleprecision');
   grpEditorColors.Caption := TextByKey('editor-tab-color-title');
-
-  {$ifdef Apo7X64}
-  {Panel50.Enabled := false;
-  btnPluginPath.Enabled := false;
-  txtPluginFolder.Enabled := false;
-  Panel50.Font.Color := clGrayText;
-  cbc64.Enabled := false;
-  cbc64.Font.Color := clGrayText;  }
-  {$endif}
-
-  for i:= 0 to NRVAR - 1 do begin
-    clbVarEnabled.AddItem(varnames(i),nil);
-  end;
 end;
 
 procedure TOptionsForm.pnlCenterLineClick(Sender: TObject);

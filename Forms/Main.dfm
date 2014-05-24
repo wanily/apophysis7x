@@ -5472,15 +5472,6 @@ object MainForm: TMainForm
       object N18: TMenuItem
         Caption = '-'
       end
-      object mnuRandomBatch: TMenuItem
-        Caption = '&Random Batch'
-        Hint = 'Create and load a file containing random flame parameters'
-        ShortCut = 16450
-        OnClick = mnuRandomBatchClick
-      end
-      object FileExitSep: TMenuItem
-        Caption = '-'
-      end
       object mnuExit: TMenuItem
         Caption = 'E&xit'
         Hint = 'Quit Apophysis'

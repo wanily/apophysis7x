@@ -85,8 +85,6 @@ type
     SmallImages: TImageList;
     MainMenu: TMainMenu;
     MainFile: TMenuItem;
-    mnuRandomBatch: TMenuItem;
-    FileExitSep: TMenuItem;
     mnuExit: TMenuItem;
     MainEdit: TMenuItem;
     mnuEditor: TMenuItem;
@@ -222,7 +220,6 @@ type
       Change: TItemChange);
     procedure FormCreate(Sender: TObject);
     procedure mnuEditorClick(Sender: TObject);
-    procedure mnuRandomBatchClick(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure FormKeyUpDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -325,6 +322,7 @@ type
     procedure ToolButton19Click(Sender: TObject);
     procedure mnuTraceClick(Sender: TObject);
     procedure ToolButton23Click(Sender: TObject);
+    procedure mnuRandomBatchClick(Sender: TObject);
 
   private
     SubstSource: TStringList;
@@ -408,13 +406,13 @@ type
     procedure UpdateUndo;
     procedure LoadUndoFlame(index: integer; filename: string);
     procedure SmoothPalette;
-    procedure RandomizeCP(var cp1: TControlPoint; alg: integer = 0);
+    procedure ClearCp(var cp: TControlPoint);
     function SaveGradient(Gradient, Title, FileName: string): boolean;
     function GradientFromPalette(const pal: TColorMap; const title: string): string;
     procedure StopThread;
     procedure UpdateWindows;
     procedure ResetLocation;
-    procedure RandomBatch;
+    procedure EmptyBatch;
     procedure GetScripts;
     function ApplicationOnHelp(Command: Word; Data: Integer; var CallHelp: Boolean): Boolean;
     function SystemErrorMessage: string;
@@ -677,7 +675,6 @@ begin
 	mnuSaveAllAs.Caption := TextByKey('main-menu-file-saveallparams');
 	mnuSmoothGradient.Caption := TextByKey('main-menu-file-smoothpalette');
 	mnuOpenGradient.Caption := TextByKey('main-menu-file-gradientbrowser');
-	mnuRandomBatch.Caption := TextByKey('main-menu-file-randombatch');
 	mnuExit.Caption := TextByKey('main-menu-file-exit');
 	MainEdit.Caption := TextByKey('main-menu-edit-title');
 	mnuSaveUndo.Caption := TextByKey('main-menu-edit-saveundo');
@@ -836,182 +833,25 @@ begin
     end;
 end;
 
-procedure TMainForm.RandomizeCP(var cp1: TControlPoint; alg: integer = 0);
-(*
+procedure TMainForm.ClearCp(var cp: TControlPoint);
 var
-  vrnd, Min, Max, i, j, rnd: integer;
-  Triangles: TTriangles;
-  cmap: TColorMap;
-  r, s, theta, phi: double;
-  skip: boolean;
-*)
-var
-  sourceCP: TControlPoint;
+  i: integer;
 begin
   if assigned(MainCP) then
-    sourceCP := MainCP.Clone
+    cp := MainCP.Clone
   else
-    SourceCP := nil;
+    cp := TControlPoint.Create;
 
-  if assigned(cp1) then begin
-    cp1.Free;
-    cp1 := nil;
-  end;
-  cp1 := RandomFlame(sourceCP, alg);
+  for i := 0 to Transforms do cp.xform[i].Clear;
+  cp.xform[0].SetVariation(0, 1);
+  cp.xform[0].density := 0.5;
+  cp.xform[1].symmetry := 1;
 
-  if assigned(sourceCP) then
-    sourceCP.Free;
-
-(*
-  Min := randMinTransforms;
-  Max := randMaxTransforms;
-  case randGradient of
-    0:
-      begin
-        cp1.CmapIndex := Random(NRCMAPS);
-        GetCMap(cmap_index, 1, cp1.cmap);
-        cmap_index := cp1.cmapindex;
-      end;
-    1: cmap := DefaultPalette;
-    2: cmap := MainCp.cmap;
-    3: cmap := GradientForm.RandomGradient;
-  end;
-  inc(MainSeed);
-  RandSeed := MainSeed;
-  transforms := random(Max - (Min - 1)) + Min;
-  repeat
-    try
-      inc(MainSeed);
-      RandSeed := MainSeed;
-      cp1.clear;
-      cp1.RandomCP(transforms, transforms, false);
-      cp1.SetVariation(Variation);
-      inc(MainSeed);
-      RandSeed := MainSeed;
-
-      case alg of
-        1: rnd := 0;
-        2: rnd := 7;
-        3: rnd := 9;
-      else
-        if (Variation = vLinear) or (Variation = vRandom) then
-          rnd := random(10)
-        else
-          rnd := 9;
-      end;
-      case rnd of
-        0..6:
-          begin
-            for i := 0 to Transforms - 1 do
-            begin
-              if Random(10) < 9 then
-                cp1.xform[i].c[0, 0] := 1
-              else
-                cp1.xform[i].c[0, 0] := -1;
-              cp1.xform[i].c[0, 1] := 0;
-              cp1.xform[i].c[1, 0] := 0;
-              cp1.xform[i].c[1, 1] := 1;
-              cp1.xform[i].c[2, 0] := 0;
-              cp1.xform[i].c[2, 1] := 0;
-              cp1.xform[i].color := 0;
-              cp1.xform[i].symmetry := 0;
-              cp1.xform[i].vars[0] := 1;
-              for j := 1 to NVARS - 1 do
-                cp1.xform[i].vars[j] := 0;
-              Translate(cp1.xform[i], random * 2 - 1, random * 2 - 1);
-              Rotate(cp1.xform[i], random * 360);
-              if i > 0 then Scale(cp1.xform[i], random * 0.8 + 0.2)
-              else Scale(cp1.xform[i], random * 0.4 + 0.6);
-              if Random(2) = 0 then
-                Multiply(cp1.xform[i], 1, random - 0.5, random - 0.5, 1);
-            end;
-            SetVariation(cp1);
-          end;
-        7, 8:
-          begin
-          { From the source to Chaos: The Software }
-            for i := 0 to Transforms - 1 do
-            begin
-              r := random * 2 - 1;
-              if ((0 <= r) and (r < 0.2)) then
-                r := r + 0.2;
-              if ((r > -0.2) and (r <= 0)) then
-                r := r - 0.2;
-              s := random * 2 - 1;
-              if ((0 <= s) and (s < 0.2)) then
-                s := s + 0.2;
-              if ((s > -0.2) and (s <= 0)) then
-                s := s - -0.2;
-              theta := PI * random;
-              phi := (2 + random) * PI / 4;
-              cp1.xform[i].c[0][0] := r * cos(theta);
-              cp1.xform[i].c[1][0] := s * (cos(theta) * cos(phi) - sin(theta));
-              cp1.xform[i].c[0][1] := r * sin(theta);
-              cp1.xform[i].c[1][1] := s * (sin(theta) * cos(phi) + cos(theta));
-            { the next bit didn't translate so well, so I fudge it}
-              cp1.xform[i].c[2][0] := random * 2 - 1;
-              cp1.xform[i].c[2][1] := random * 2 - 1;
-            end;
-            for i := 0 to NXFORMS - 1 do
-              cp1.xform[i].density := 0;
-            for i := 0 to Transforms - 1 do
-              cp1.xform[i].density := 1 / Transforms;
-            SetVariation(cp1);
-          end;
-        9: begin
-            for i := 0 to NXFORMS - 1 do
-              cp1.xform[i].density := 0;
-            for i := 0 to Transforms - 1 do
-              cp1.xform[i].density := 1 / Transforms;
-          end;
-      end; // case
-      MainForm.TrianglesFromCp(cp1, Triangles);
-      vrnd := Random(2);
-      if vrnd > 0 then
-        ComputeWeights(cp1, Triangles, transforms)
-      else
-        EqualizeWeights(cp1);
-    except on E: EmathError do
-      begin
-        Continue;
-      end;
-    end;
-    for i := 0 to Transforms - 1 do
-      cp1.xform[i].color := i / (transforms - 1);
-    if cp1.xform[0].density = 1 then Continue;
-    case SymmetryType of
-      { Bilateral }
-      1: add_symmetry_to_control_point(cp1, -1);
-      { Rotational }
-      2: add_symmetry_to_control_point(cp1, SymmetryOrder);
-      { Rotational and Reflective }
-      3: add_symmetry_to_control_point(cp1, -SymmetryOrder);
-    end;
-    { elimate flames with transforms that aren't affine }
-    skip := false;
-    for i := 0 to Transforms - 1 do
-      if not transform_affine(Triangles[i], Triangles) then
-        skip := True;
-    if skip then continue;
-  until not cp1.BlowsUP(5000) and (cp1.xform[0].density <> 0);
-  cp1.brightness := defBrightness;
-  cp1.gamma := defGamma;
-  cp1.vibrancy := defVibrancy;
-  cp1.sample_density := defSampleDensity;
-  cp1.spatial_oversample := defOversample;
-  cp1.spatial_filter_radius := defFilterRadius;
-  cp1.cmapIndex := MainCp.cmapindex;
-  if not KeepBackground then begin
-    cp1.background[0] := 0;
-    cp1.background[1] := 0;
-    cp1.background[2] := 0;
-  end;
-  if randGradient = 0 then
-  else cp1.cmap := cmap;
-  cp1.zoom := 0;
-  cp1.Nick := SheepNick;
-  cp1.URl := SheepURL;
-*)
+  cp.center[0] := 0;
+  cp.center[1] := 0;
+  cp.zoom := 0;
+  cp.pixels_per_unit := cp.Width/4;
+  cp.FAngle := 0;
 end;
 
 function TMainForm.GradientFromPalette(const pal: TColorMap; const title: string): string;
@@ -2373,10 +2213,8 @@ begin
   end;
 end;
 
-procedure TMainForm.RandomBatch;
-{ Write a series of random ifs to a file }
+procedure TMainForm.EmptyBatch;
 var
-  i: integer;
   F: TextFile;
   b, RandFile: string;
 begin
@@ -2388,26 +2226,20 @@ begin
     OpenFile := GetEnvVarValue('APPDATA') + '\' + randFilename;
     ReWrite(F);
     WriteLn(F, '<random_batch>');
-    for i := 0 to BatchSize - 1 do
-    begin
-      inc(RandomIndex);
-      Statusbar.SimpleText := Format(TextByKey('main-status-batchgenerate'), [(i+1), b]);
-      RandSeed := MainSeed;
-      if randGradient = 0 then cmap_index := random(NRCMAPS);
-      inc(MainSeed);
-      RandSeed := MainSeed;
-      RandomizeCP(MainCp);
-      MainCp.CalcBoundbox;
 
-(*     Title := RandomPrefix + RandomDate + '-' +
-        IntToStr(RandomIndex);
-  *)
-      MainCp.name := RandomPrefix + RandomDate + '-' +
-        IntToStr(RandomIndex);
-      Write(F, FlameToXML(MainCp, False, false));
-//      Write(F, FlameToString(Title));
-//      WriteLn(F, ' ');
-    end;
+    inc(RandomIndex);
+    Statusbar.SimpleText := Format(TextByKey('main-status-batchgenerate'), [1, b]);
+    RandSeed := MainSeed;
+    if randGradient = 0 then cmap_index := random(NRCMAPS);
+    inc(MainSeed);
+    RandSeed := MainSeed;
+    ClearCp(MainCp);
+    MainCp.CalcBoundbox;
+
+    MainCp.name := RandomPrefix + RandomDate + '-' +
+      IntToStr(RandomIndex);
+    Write(F, FlameToXML(MainCp, False, false));
+
     Write(F, '</random_batch>');
     CloseFile(F);
   except
@@ -2690,23 +2522,6 @@ begin
 //  ComputeWeights(MainCp, MainTriangles, transforms);
   RedrawTimer.Enabled := True;
   UpdateWindows;
-end;
-
-procedure TMainForm.mnuRandomBatchClick(Sender: TObject);
-begin
-{$ifdef DisableScripting}
-{$else}
-  ScriptEditor.Stopped := True;
-{$endif}
-  inc(MainSeed);
-  RandSeed := MainSeed;
-  RandomBatch;
-  OpenFile := GetEnvVarValue('APPDATA') + '\' + randFilename;
-  OpenFileType := ftXML;
-  MainForm.Caption := AppVersionString + ' - ' + TextByKey('main-common-randombatch');
-  ListXML(OpenFile, 1);
-  //ListView.SetFocus;
-  if batchsize = 1 then DrawFlame;
 end;
 
 function GradientString(c: TColorMap): string;
@@ -3207,9 +3022,9 @@ begin
   begin
     MainCp.Width := Image.Width;
     MainCp.Height := Image.Height;
-    RandomBatch;
-    if APP_BUILD = '' then MainForm.Caption := AppVersionString + ' - ' + TextByKey('main-common-randombatch')
-    else MainForm.Caption := AppVersionString + ' ' + APP_BUILD + ' - ' + TextByKey('main-common-randombatch');
+    EmptyBatch;
+    if APP_BUILD = '' then MainForm.Caption := AppVersionString + ' - ' + TextByKey('main-common-untitled')
+    else MainForm.Caption := AppVersionString + ' ' + APP_BUILD + ' - ' + TextByKey('main-common-untitled');
     OpenFile := GetEnvVarValue('APPDATA') + '\' + randFilename;
     ListXML(OpenFile, 1);
     OpenFileType := ftXML;
@@ -3224,9 +3039,9 @@ begin
     end else*) if (LowerCase(ExtractFileExt(OpenFile)) = '.asc') or (LowerCase(ExtractFileExt(OpenFile)) = '.aposcript')  then
     begin
       openScript := OpenFile;
-      RandomBatch;
-      if APP_BUILD = '' then MainForm.Caption := AppVersionString + ' - ' + TextByKey('main-common-randombatch')
-      else MainForm.Caption := AppVersionString + ' ' + APP_BUILD + ' - ' + TextByKey('main-common-randombatch');
+      EmptyBatch;
+      if APP_BUILD = '' then MainForm.Caption := AppVersionString + ' - ' + TextByKey('main-common-untitled')
+      else MainForm.Caption := AppVersionString + ' ' + APP_BUILD + ' - ' + TextByKey('main-common-untitled');
       OpenFile := GetEnvVarValue('APPDATA') + '\' + randFilename;
       ListXML(OpenFile, 1);
       OpenFileType := ftXML;
@@ -4335,6 +4150,11 @@ begin
     maincp.xform[i].color := i / (transforms - 1);
   RedrawTimer.Enabled := True;
   UpdateWindows;
+end;
+
+procedure TMainForm.mnuRandomBatchClick(Sender: TObject);
+begin
+  EmptyBatch;
 end;
 
 procedure TMainForm.mnuRandomizeColorValuesClick(Sender: TObject);

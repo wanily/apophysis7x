@@ -181,7 +181,7 @@ begin
 	Add('splash-loadingplugins', 'Loading plugins...');
 	Add('splash-initrenderer', 'Initializing renderer...');
 	Add('splash-initcolormap', 'Initializing gradients...');
-	Add('splash-initbatch', 'Creating random batch...');
+	Add('splash-initbatch', 'Creating batch...');
 	Add('splash-execstartupscript', 'Executing "autoexec.asc"...');
 	Add('adjustment-title', 'Adjustment');
 	Add('adjustment-common-depthblur', 'Depth Blur');
@@ -557,6 +557,7 @@ begin
   Add('main-common-title-lite', 'Lite Version');
 	Add('main-common-title-t500', 'High-Memory Version');
 	Add('main-common-randombatch', 'Random Batch');
+	Add('main-common-untitled', 'Untitled Batch');
   Add('main-menu-file-title', 'File');
 	Add('main-menu-file-new', 'New');
 	Add('main-menu-file-open', 'Open...');
