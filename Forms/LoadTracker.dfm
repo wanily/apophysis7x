@@ -4,8 +4,8 @@ object LoadForm: TLoadForm
   ActiveControl = Button1
   Anchors = [akLeft, akTop, akRight, akBottom]
   Caption = 'Messages'
-  ClientHeight = 388
-  ClientWidth = 662
+  ClientHeight = 423
+  ClientWidth = 653
   Color = clBtnFace
   Constraints.MinHeight = 275
   Constraints.MinWidth = 550
@@ -56,54 +56,63 @@ object LoadForm: TLoadForm
   OnCreate = FormCreate
   OnResize = FormResize
   DesignSize = (
-    662
-    388)
+    653
+    423)
   PixelsPerInch = 96
   TextHeight = 13
   object Bevel1: TBevel
     Left = 7
     Top = 7
-    Width = 533
-    Height = 308
+    Width = 524
+    Height = 343
     Anchors = [akLeft, akTop, akRight, akBottom]
     Style = bsRaised
+    ExplicitWidth = 533
+    ExplicitHeight = 308
   end
   object Button1: TButton
-    Left = 527
-    Top = 359
+    Left = 533
+    Top = 390
     Width = 112
     Height = 25
     Anchors = [akRight, akBottom]
     Caption = 'Close'
     TabOrder = 0
     OnClick = Button1Click
+    ExplicitLeft = 523
+    ExplicitTop = 355
   end
   object CheckBox1: TCheckBox
     Left = 8
-    Top = 360
-    Width = 384
+    Top = 391
+    Width = 375
     Height = 24
     Anchors = [akLeft, akRight, akBottom]
     Caption = 'Automatically open this window when loading flame'
     TabOrder = 1
     WordWrap = True
     OnClick = CheckBox1Click
+    ExplicitTop = 356
+    ExplicitWidth = 365
   end
   object Button2: TButton
-    Left = 406
-    Top = 359
+    Left = 414
+    Top = 390
     Width = 113
     Height = 25
     Anchors = [akRight, akBottom]
     Caption = 'Clear'
     TabOrder = 2
     OnClick = Button2Click
+    ExplicitLeft = 404
+    ExplicitTop = 355
   end
   object Output: TMemo
     Left = 8
     Top = 8
-    Width = 528
-    Height = 303
+    Width = 641
+    Height = 372
+    Anchors = [akLeft, akTop, akRight, akBottom]
     BevelOuter = bvRaised
     BorderStyle = bsNone
     Color = clBtnFace
@@ -116,5 +125,7 @@ object LoadForm: TLoadForm
     ReadOnly = True
     ScrollBars = ssVertical
     TabOrder = 3
+    ExplicitWidth = 631
+    ExplicitHeight = 337
   end
 end

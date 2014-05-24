@@ -89,7 +89,6 @@ type
     FileExitSep: TMenuItem;
     mnuExit: TMenuItem;
     MainEdit: TMenuItem;
-    mnuCopyUPR: TMenuItem;
     mnuEditor: TMenuItem;
     mnuRandom: TMenuItem;
     mnuNormalWeights: TMenuItem;
@@ -156,7 +155,6 @@ type
     ApplicationEvents: TApplicationEvents;
     mnuPaste: TMenuItem;
     mnuCopy: TMenuItem;
-    N20: TMenuItem;
     mnuFlamepdf: TMenuItem;
     mnuimage: TMenuItem;
     mnuSaveAllAs: TMenuItem;
@@ -250,7 +248,6 @@ type
     procedure mnuRefreshClick(Sender: TObject);
     procedure mnuNormalWeightsClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure mnuCopyUPRClick(Sender: TObject);
     procedure mnuItemDeleteClick(Sender: TObject);
     procedure ListViewEdited(Sender: TObject; Item: TListItem;
       var S: string);
@@ -431,7 +428,6 @@ type
     procedure LoadUndoFlame(index: integer; filename: string);
     procedure SmoothPalette;
     procedure RandomizeCP(var cp1: TControlPoint; alg: integer = 0);
-    function UPRString(cp1: TControlPoint; Entry: string): string;
     function SaveGradient(Gradient, Title, FileName: string): boolean;
     function GradientFromPalette(const pal: TColorMap; const title: string): string;
     procedure StopThread;
@@ -704,7 +700,6 @@ begin
 	mnuExit.Caption := TextByKey('main-menu-file-exit');
 	MainEdit.Caption := TextByKey('main-menu-edit-title');
 	mnuSaveUndo.Caption := TextByKey('main-menu-edit-saveundo');
-	mnuCopyUPR.Caption := TextByKey('main-menu-edit-copyasupr');
 	View1.Caption := TextByKey('main-menu-view-title');
 	mnuFullScreen.Caption := TextByKey('main-menu-view-fullscreen');
 	mnuPopFullscreen.Caption := TextByKey('main-menu-view-fullscreen');
@@ -1266,31 +1261,6 @@ begin
     Strings.SaveToFile(FileName);
   finally
     Strings.Free;
-  end;
-end;
-
-function SaveUPR(Entry, FileName: string): boolean;
-{ Saves UF parameter to end of file }
-var
-  UPRFile: TextFile;
-begin
-  Result := True;
-  try
-    AssignFile(UPRFile, FileName);
-    if FileExists(FileName) then
-    begin
-      if EntryExists(Entry, FileName) then DeleteEntry(Entry, FileName);
-      Append(UPRFile);
-    end
-    else
-      ReWrite(UPRFile);
-    WriteLn(UPRFile, MainForm.UPRString(MainCp, Entry));
-    CloseFile(UPRFile);
-  except on E: EInOutError do
-    begin
-      Application.MessageBox(PChar(Format(TextByKey('common-genericsavefailure'), [FileName])), 'Apophysis', 16);
-      Result := False;
-    end;
   end;
 end;
 
@@ -2693,11 +2663,6 @@ begin
     ListView1.Items[ListView1.Selected.Index].EditCaption;
 end;
 
-procedure TMainForm.mnuCopyUPRClick(Sender: TObject);
-begin
-  Clipboard.SetTextBuf(PChar(UPRString(MainCp, Maincp.name)));
-end;
-
 procedure TMainForm.mnuItemDeleteClick(Sender: TObject);
 var
   c: boolean;
@@ -2798,107 +2763,6 @@ begin
   end;
   Result := Strings.Text;
   strings.Free;
-end;
-
-function TMainForm.UPRString(cp1: TControlPoint; Entry: string): string;
-{ Returns a string containing an Ultra Fractal parameter set for copying
-  or saving to file }
-var
-  IterDensity, m, i, j: integer;
-  scale, a, b, c, d, e, f, p, v: double;
-  GradStrings, Strings: TStringList;
-  rept, cby, smap, sol: string;
-  uprcenter: array[0..1] of double; // camera center
-  Backcolor: longint;
-  xf_str: string;
-begin
-  cp1.Prepare;
-  uprcenter[0] := cp1.Center[0];
-  uprcenter[1] := cp1.Center[1];
-  cp1.Width := UPRWidth;
-  cp1.Height := UPRHeight;
-  scale := power(2, cp1.zoom) * CalcUPRMagn(cp1);
-  cp1.center[0] := uprCenter[0];
-  cp1.center[1] := uprCenter[1];
-  smap := 'no';
-  sol := 'no';
-  rept := '';
-  cby := 'Hit Frequency';
-  Strings := TStringList.Create;
-  GradStrings := TStringList.Create;
-  try
-    Strings.Add(CleanEntry(Entry) + ' {');
-    Strings.Add('fractal:');
-    Strings.Add('  title="' + CleanUPRTitle(Entry) +
-      '" width=' + IntToStr(UPRWidth) + ' height=' + IntToStr(UPRHeight) + ' layers=1');
-    Strings.Add('layer:');
-    Strings.Add('  method=linear caption="Background" opacity=100 mergemode=normal');
-    Strings.Add('mapping:');
-    Strings.Add('  center=' + floatToStr(cp1.center[0]) + '/' + floatToStr(-cp1.center[1]) +
-      ' magn=' + FloatToStr(scale));
-    Strings.Add('formula:');
-    Strings.Add('  maxiter=1 filename="' + UPRFormulaFile + '" entry="' + UPRFormulaIdent + '"');
-    Strings.Add('inside:');
-    Strings.Add('  transfer=none');
-    Strings.Add('outside:');
-    Strings.Add('  transfer=linear repeat=no ' + 'filename="' + UPRColoringFile + '" entry="'
-      + UPRColoringIdent + '"');
-    if (UPRAdjustDensity) and (scale > 1) then
-      IterDensity := Trunc(UPRSampleDensity * scale * scale)
-    else
-      IterDensity := UPRSampleDensity;
-    Strings.Add('  p_iter_density=' + IntToStr(IterDensity) + ' p_spat_filt_rad=' +
-      Format('%.3g', [UPRFilterRadius]) + ' p_oversample=' + IntToStr(UPROversample));
-    backcolor := 255 shl 24 + cp1.background[0] shl 16 + cp1.background[1] shl 8 + cp1.background[2];
-    Strings.Add('  p_bk_color=' + IntToStr(Backcolor) + ' p_contrast=1' +
-      ' p_brightness=' + FloatToStr(cp1.Brightness) + ' p_gamma=' + FloatToStr(cp1.Gamma));
-    Strings.Add('  p_white_level=200 p_xforms=' + inttostr(Transforms));
-    for m := 0 to Transforms do
-    begin
-      a := cp1.xform[m].c[0][0];
-      c := cp1.xform[m].c[0][1];
-      b := cp1.xform[m].c[1][0];
-      d := cp1.xform[m].c[1][1];
-      e := cp1.xform[m].c[2][0];
-      f := cp1.xform[m].c[2][1];
-      p := cp1.xform[m].Density;
-      if m < Transforms then xf_str := 'p_xf' + inttostr(m)
-      else begin
-        if cp1.HasFinalXForm = false then break;
-        xf_str := 'p_finalxf';
-      end;
-      Strings.Add('  ' + xf_str + '_p=' + Format('%.6g ', [p]));
-      Strings.Add('  ' + xf_str + '_c=' + floatTostr(cp1.xform[m].color));
-      Strings.Add('  ' + xf_str + '_sym=' + floatTostr(cp1.xform[m].symmetry));
-      Strings.Add('  ' + xf_str + '_cfa=' + Format('%.6g ', [a]) +
-        xf_str + '_cfb=' + Format('%.6g ', [b]) +
-        xf_str + '_cfc=' + Format('%.6g ', [c]) +
-        xf_str + '_cfd=' + Format('%.6g ', [d]));
-      Strings.Add('  ' + xf_str + '_cfe=' + Format('%.6g ', [e]) +
-        ' ' + xf_str + '_cff=' + Format('%.6g ', [f]));
-      for i := 0 to NRVAR-1 do
-        if cp1.xform[m].GetVariation(i) <> 0 then begin
-          Strings.Add('  ' + xf_str + '_var_' + VarNames(i) + '=' +
-            floatToStr(cp1.xform[m].GetVariation(i)));
-        for j:= 0 to GetNrVariableNames - 1 do begin
-{$ifndef VAR_STR}
-          cp1.xform[m].GetVariable(GetVariableNameAt(j), v);
-          Strings.Add('  ' + xf_str + '_par_' + GetVariableNameAt(j) + '=' + floatToStr(v));
-{$else}
-          Strings.Add('  ' + xf_str + '_par_' +
-                      GetVariableNameAt(j) + '=' + cp1.xform[m].GetVariableStr(GetVariableNameAt(j)));
-{$endif}
-        end;
-      end;
-    end;
-    Strings.Add('gradient:');
-    Strings.Add(GradientString(cp1.cmap));
-    Strings.Add('}');
-    UPRString := Strings.Text;
-  finally
-    GradStrings.Free;
-    Strings.Free;
-  end;
 end;
 
 procedure TMainForm.mnuRandomClick(Sender: TObject);
