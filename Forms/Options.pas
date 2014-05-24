@@ -206,42 +206,6 @@ type
     txtMinNodes: TEdit;
     udMaxNodes: TUpDown;
     txtMaxNodes: TEdit;
-    TabSheet6: TTabSheet;
-    chkAdjustDensity: TCheckBox;
-    UPRPage: TPageControl;
-    GroupBox11: TGroupBox;
-    Panel37: TPanel;
-    Panel38: TPanel;
-    txtUPRHeight: TEdit;
-    txtUPRWidth: TEdit;
-    GroupBox9: TGroupBox;
-    Panel34: TPanel;
-    Panel35: TPanel;
-    Panel36: TPanel;
-    txtUPROversample: TEdit;
-    txtUPRFilterRadius: TEdit;
-    txtFIterDensity: TEdit;
-    GroupBox4: TGroupBox;
-    Panel30: TPanel;
-    Panel31: TPanel;
-    txtFCFile: TEdit;
-    txtFCIdent: TEdit;
-    GroupBox5: TGroupBox;
-    Panel32: TPanel;
-    Panel33: TPanel;
-    txtFFFile: TEdit;
-    txtFFIdent: TEdit;
-    TabSheet2: TTabSheet;
-    GroupBox6: TGroupBox;
-    Label5: TLabel;
-    Label6: TLabel;
-    Label15: TLabel;
-    txtNick: TEdit;
-    txtURL: TEdit;
-    txtPassword: TEdit;
-    GroupBox8: TGroupBox;
-    Label17: TLabel;
-    txtServer: TEdit;
     PathsPage: TTabSheet;
     btnDefGradient: TSpeedButton;
     btnSmooth: TSpeedButton;
@@ -503,19 +467,7 @@ begin
   udMaxSat.Position := MaxSat;
   udMaxLum.Position := MaxLum;
 
-  { UPR tab }
-  txtFIterDensity.text := IntToStr(UPRSampleDensity);
-  txtUPRFilterRadius.text := FloatToStr(UPRFilterRadius);
-  txtUPROversample.text := IntToStr(UPROversample);
-  txtFCIdent.text := UPRColoringIdent;
-  txtFCFile.text := UPRColoringFile;
-  txtFFIdent.text := UPRFormulaIdent;
-  txtFFFile.text := UPRFormulaFile;
-  txtUPRWidth.text := IntToStr(UPRWidth);
-  txtUPRHeight.text := IntToStr(UPRHeight);
-  chkAdjustDensity.checked := UPRAdjustDensity;
-
-  { UPR tab }
+  { Environment tab }
   txtHelp.Text := HelpPath;
   txtLibrary.text := defLibrary;
   Label45.Visible := false;
@@ -682,18 +634,6 @@ begin
   MaxHue := udMaxHue.Position;
   MaxSat := udMaxSat.Position;
   MaxLum := udMaxLum.Position;
-
-  { UPR options }
-  UPRSampleDensity := StrToInt(txtFIterDensity.text);
-  UPRFilterRadius := StrToFloat(txtUPRFilterRadius.text);
-  UPROversample := StrToInt(txtUPROversample.text);
-  UPRColoringIdent := txtFCIdent.text;
-  UPRColoringFile := txtFCFile.text;
-  UPRFormulaIdent := txtFFIdent.text;
-  UPRFormulaFile := txtFFFile.text;
-  UPRAdjustDensity := chkAdjustDensity.checked;
-  UPRWidth := StrToInt(txtUPRWidth.text);
-  UPRHeight := StrToInt(txtUPRHeight.text);
 
   {Paths}
   defLibrary := txtLibrary.text;
@@ -888,17 +828,10 @@ begin
 	Panel8.Caption := TextByKey('common-lowquality');
 	Panel9.Caption := TextByKey('common-mediumquality');
 	Panel10.Caption := TextByKey('common-highquality');
-	Panel37.Caption := TextByKey('common-width');
-	Panel38.Caption := TextByKey('common-height');
-	Panel31.Caption := TextByKey('common-filename');
-	Panel33.Caption := TextByKey('common-filename');
 	Panel44.Caption := TextByKey('common-filename');
 	Panel7.Caption := TextByKey('common-filterradius');
-	Panel35.Caption := TextByKey('common-filterradius');
 	Panel1.Caption := TextByKey('common-density');
-	Panel34.Caption := TextByKey('common-density');
 	Panel6.Caption := TextByKey('common-oversample');
-	Panel36.Caption := TextByKey('common-oversample');
 	Panel2.Caption := TextByKey('common-gamma');
 	Panel3.Caption := TextByKey('common-brightness');
 	Panel4.Caption := TextByKey('common-vibrancy');
@@ -1006,19 +939,10 @@ begin
 	GroupBox22.Caption := TextByKey('options-tab-gradient-lumbetween');
 	Panel28.Caption := TextByKey('options-tab-gradient-numtries');
 	Panel29.Caption := TextByKey('options-tab-gradient-trylength');
-	TabSheet6.Caption := TextByKey('options-tab-upr-title');
-	GroupBox9.Caption := TextByKey('options-tab-upr-paramdefaults');
-	GroupBox4.Caption := TextByKey('options-tab-upr-coloralgorithm');
-	GroupBox11.Caption := TextByKey('options-tab-upr-uprsize');
-	GroupBox5.Caption := TextByKey('options-tab-upr-formula');
-	Panel30.Caption := TextByKey('options-tab-upr-identifier');
-	Panel32.Caption := TextByKey('options-tab-upr-identifier');
-	chkAdjustDensity.Caption := TextByKey('options-tab-upr-adjustdensity');
   PathsPage.Caption := TextByKey('options-tab-environment-title');
 	Panel39.Caption := TextByKey('options-tab-environment-defaultparams');
 	Panel40.Caption := TextByKey('options-tab-environment-smoothpalette');
 	Panel41.Caption := TextByKey('options-tab-environment-functionlib');
-	//Panel42.Caption := TextByKey('options-tab-environment-exportrenderer');
 	Panel43.Caption := TextByKey('options-tab-environment-helpfile');
 	chkRememberLastOpen.Caption := TextByKey('options-tab-environment-rememberlastopen');
 	cbEnableAutosave.Caption := TextByKey('options-tab-environment-autosave');
