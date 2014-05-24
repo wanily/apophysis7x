@@ -101,7 +101,6 @@ type
     N3: TMenuItem;
     mnuOpen: TMenuItem;
     mnuSaveAs: TMenuItem;
-    mnuSmoothGradient: TMenuItem;
     mnuView: TMenuItem;
     mnuToolbar: TMenuItem;
     mnuStatusBar: TMenuItem;
@@ -117,7 +116,6 @@ type
     mnuFullScreen: TMenuItem;
     mnuRender: TMenuItem;
     mnuAdjust: TMenuItem;
-    mnuOpenGradient: TMenuItem;
     mnuResetLocation: TMenuItem;
     N4: TMenuItem;
     N14: TMenuItem;
@@ -128,7 +126,6 @@ type
     mnuPopUndo: TMenuItem;
     N16: TMenuItem;
     mnuPopRedo: TMenuItem;
-    N18: TMenuItem;
     mnuScript: TMenuItem;
     mnuRun: TMenuItem;
     mnuEditScript: TMenuItem;
@@ -242,11 +239,9 @@ type
     procedure MainViewClick(Sender: TObject);
     procedure MainToolsClick(Sender: TObject);
     procedure MainHelpClick(Sender: TObject);
-    procedure mnuVRandomClick(Sender: TObject);
     procedure mnuSaveAsClick(Sender: TObject);
     procedure mnuOpenClick(Sender: TObject);
     procedure mnuGradClick(Sender: TObject);
-    procedure mnuSmoothGradientClick(Sender: TObject);
     procedure mnuToolbarClick(Sender: TObject);
     procedure mnuStatusBarClick(Sender: TObject);
     procedure mnuFileContentsClick(Sender: TObject);
@@ -405,7 +400,6 @@ type
     procedure DrawFlame;
     procedure UpdateUndo;
     procedure LoadUndoFlame(index: integer; filename: string);
-    procedure SmoothPalette;
     procedure ClearCp(var cp: TControlPoint);
     function SaveGradient(Gradient, Title, FileName: string): boolean;
     function GradientFromPalette(const pal: TColorMap; const title: string): string;
@@ -466,7 +460,7 @@ uses
   {$else}
     ScriptForm, FormFavorites,
   {$endif}
-  RndFlame, Tracer, Types, SplashForm, varGenericPlugin;
+  Tracer, Types, SplashForm, varGenericPlugin;
 
 {$R *.DFM}
 
@@ -673,8 +667,6 @@ begin
 	mnuSaveAs.Caption := TextByKey('main-menu-file-saveparams');
 	btnSave.Hint := TextByKey('main-menu-file-saveparams');
 	mnuSaveAllAs.Caption := TextByKey('main-menu-file-saveallparams');
-	mnuSmoothGradient.Caption := TextByKey('main-menu-file-smoothpalette');
-	mnuOpenGradient.Caption := TextByKey('main-menu-file-gradientbrowser');
 	mnuExit.Caption := TextByKey('main-menu-file-exit');
 	MainEdit.Caption := TextByKey('main-menu-edit-title');
 	mnuSaveUndo.Caption := TextByKey('main-menu-edit-saveundo');
@@ -813,24 +805,6 @@ begin
       cp.xform[i].SetVariation(b, 1 - cp.xform[i].GetVariation(a));
     end;
   end;
-end;
-
-procedure SetVariation(cp: TControlPoint);
-{ Set the current Variation }
-var
-  i, j: integer;
-begin
-  if Variation = vRandom then
-  begin
-    RandomVariation(cp);
-  end
-  else
-    for i := 0 to cp.NumXForms - 1 do
-    begin
-      for j := 0 to NRVAR - 1 do
-        cp.xform[i].SetVariation(j, 0);
-      cp.xform[i].SetVariation(integer(Variation), 1);
-    end;
 end;
 
 procedure TMainForm.ClearCp(var cp: TControlPoint);
@@ -2217,8 +2191,9 @@ procedure TMainForm.EmptyBatch;
 var
   F: TextFile;
   b, RandFile: string;
+  cmap_index: integer;
 begin
-  b := IntToStr(BatchSize);
+  b := IntToStr(1);
   inc(MainSeed);
   RandSeed := MainSeed;
   try
@@ -2230,7 +2205,7 @@ begin
     inc(RandomIndex);
     Statusbar.SimpleText := Format(TextByKey('main-status-batchgenerate'), [1, b]);
     RandSeed := MainSeed;
-    if randGradient = 0 then cmap_index := random(NRCMAPS);
+    cmap_index := random(NRCMAPS);
     inc(MainSeed);
     RandSeed := MainSeed;
     ClearCp(MainCp);
@@ -2963,7 +2938,6 @@ begin
   ListView.RowSelect := True;
   inc(MainSeed);
   RandSeed := MainSeed;
-  Variation := vRandom;
   Maincp.brightness := defBrightness;
   maincp.gamma := defGamma;
   maincp.vibrancy := defVibrancy;
@@ -2989,8 +2963,6 @@ begin
   end
   else
   begin
-    cmap_index := random(NRCMAPS);
-    GetCMap(cmap_index, 1, maincp.cmap);
     DefaultPalette := maincp.cmap;
   end;
   if FileExists(GetEnvVarValue('APPDATA') + '\' + randFilename) then
@@ -3028,7 +3000,7 @@ begin
     OpenFile := GetEnvVarValue('APPDATA') + '\' + randFilename;
     ListXML(OpenFile, 1);
     OpenFileType := ftXML;
-    if batchsize = 1 then DrawFlame;
+    DrawFlame;
   end
   else
   begin
@@ -3045,7 +3017,7 @@ begin
       OpenFile := GetEnvVarValue('APPDATA') + '\' + randFilename;
       ListXML(OpenFile, 1);
       OpenFileType := ftXML;
-      if batchsize = 1 then DrawFlame;
+      DrawFlame;
     end else begin
       ListXML(OpenFile, index);
       OpenFileType := ftXML;
@@ -3103,7 +3075,6 @@ begin
       RedrawTimer.Enabled := True;
       Application.ProcessMessages;
       UpdateWindows;
-      AdjustForm.TemplateRandomizeGradient;
     end;
   end;
 
@@ -3486,10 +3457,8 @@ begin
         else
         begin
         { Open *.ifs File }
-          Variation := vLinear;
           VarMenus[0].Checked := True;
           StringToIFS(IFSStrings.Text);
-          SetVariation(maincp);
           maincp.CalcBoundBox;
         end;
 //        Zoom := maincp.zoom;
@@ -3662,24 +3631,6 @@ begin
   DrawFlame;
 end;
 
-procedure TMainForm.mnuVRandomClick(Sender: TObject);
-begin
-  StopThread;
-  UpdateUndo;
-  inc(MainSeed);
-  RandSeed := MainSeed;
-  repeat
-    Variation := vRandom;
-    SetVariation(maincp);
-  until not maincp.blowsup(1000);
-  inc(randomindex);
-  MainCp.name := RandomPrefix + RandomDate + '-' +
-    IntToStr(RandomIndex);
-  ResetLocation;
-  RedrawTimer.Enabled := True;
-  UpdateWindows;
-end;
-
 procedure TMainForm.mnuGradClick(Sender: TObject);
 begin
   AdjustForm.UpdateDisplay;
@@ -3713,170 +3664,6 @@ begin
   b2 := clist[i] shr 16 and 255;
   Result := abs((r1 - r2) * (r1 - r2)) + abs((g1 - g2) * (g1 - g2)) +
     abs((b1 - b2) * (b1 - b2));
-end;
-
-procedure TMainForm.mnuSmoothGradientClick(Sender: TObject);
-begin
-  SmoothPalette;
-end;
-
-procedure TMainForm.SmoothPalette;
-{ From Draves' Smooth palette Gimp plug-in }
-var
-  Bitmap: TBitMap;
-  JPEG: TJPEGImage;
-  pal: TColorMap;
-  strings: TStringlist;
-  ident, FileName: string;
-  len, len_best, as_is, swapd: cardinal;
-  cmap_best, original, clist: array[0..255] of cardinal;
-  p, total, j, rand, tryit, i0, i1, x, y, i, iw, ih: integer;
-  fn:string;
-begin
-  Total := Trunc(NumTries * TryLength / 100);
-  p := 0;
-  Bitmap := TBitmap.Create;
-  JPEG := TJPEGImage.Create;
-  strings := TStringList.Create;
-  try
-    begin
-      inc(MainSeed);
-      RandSeed := MainSeed;
-      OpenDialog.Filter := Format('%s|*.bmp;*.dib;*.jpg;*.jpeg|%s|*.bmp;*.dib|%s|*.jpg;*.jpeg|%s|*.*',
-        [TextByKey('common-filter-allimages'), TextByKey('common-filter-bitmap'),
-         TextByKey('common-filter-jpeg'), TextByKey('common-filter-allfiles')]);
-      OpenDialog.InitialDir := ImageFolder;
-      OpenDialog.Title := TextByKey('common-browse');
-      OpenDialog.FileName := '';
-      if OpenSaveFileDialog(MainForm, OpenDialog.DefaultExt, OpenDialog.Filter, OpenDialog.InitialDir, TextByKey('common-browse'), fn, true, false, false, true) then
-      //if OpenDialog.Execute then
-      begin
-        OpenDialog.FileName := fn;
-        ImageFolder := ExtractFilePath(OpenDialog.FileName);
-        Application.ProcessMessages;
-        len_best := 0;
-        if (UpperCase(ExtractFileExt(Opendialog.FileName)) = '.BMP')
-          or (UpperCase(ExtractFileExt(Opendialog.FileName)) = '.DIB') then
-          Bitmap.LoadFromFile(Opendialog.FileName);
-        if (UpperCase(ExtractFileExt(Opendialog.FileName)) = '.JPG')
-          or (UpperCase(ExtractFileExt(Opendialog.FileName)) = '.JPEG') then
-        begin
-          JPEG.LoadFromFile(Opendialog.FileName);
-          with Bitmap do
-          begin
-            Width := JPEG.Width;
-            Height := JPEG.Height;
-            Canvas.Draw(0, 0, JPEG);
-          end;
-        end;
-        iw := Bitmap.Width;
-        ih := Bitmap.Height;
-        for i := 0 to 255 do
-        begin
-          { Pick colors from 256 random pixels in the image }
-          x := random(iw);
-          y := random(ih);
-          clist[i] := Bitmap.canvas.Pixels[x, y];
-        end;
-        original := clist;
-        cmap_best := clist;
-        for tryit := 1 to NumTries do
-        begin
-          clist := original;
-          // scramble
-          for i := 0 to 255 do
-          begin
-            rand := random(256);
-            swapcolor(clist, i, rand);
-          end;
-          // measure
-          len := 0;
-          for i := 0 to 255 do
-            len := len + diffcolor(clist, i, i + 1);
-          // improve
-          for i := 1 to TryLength do
-          begin
-            inc(p);
-            //StatusBar.SimpleText := Format(StringReplace(TextByKey('main-status-calculatingpalette'), '%)', '%%)', [rfReplaceAll, rfIgnoreCase]), [(p div total)]);
-            i0 := 1 + random(254);
-            i1 := 1 + random(254);
-            if ((i0 - i1) = 1) then
-            begin
-              as_is := diffcolor(clist, i1 - 1, i1) + diffcolor(clist, i0, i0 + 1);
-              swapd := diffcolor(clist, i1 - 1, i0) + diffcolor(clist, i1, i0 + 1);
-            end
-            else if ((i1 - i0) = 1) then
-            begin
-              as_is := diffcolor(clist, i0 - 1, i0) + diffcolor(clist, i1, i1 + 1);
-              swapd := diffcolor(clist, i0 - 1, i1) + diffcolor(clist, i0, i1 + 1);
-            end
-            else
-            begin
-              as_is := diffcolor(clist, i0, i0 + 1) + diffcolor(clist, i0, i0 - 1) +
-                diffcolor(clist, i1, i1 + 1) + diffcolor(clist, i1, i1 - 1);
-              swapd := diffcolor(clist, i1, i0 + 1) + diffcolor(clist, i1, i0 - 1) +
-                diffcolor(clist, i0, i1 + 1) + diffcolor(clist, i0, i1 - 1);
-            end;
-            if (swapd < as_is) then
-            begin
-              swapcolor(clist, i0, i1);
-              len := abs(len + swapd - as_is);
-            end;
-          end;
-          if (tryit = 1) or (len < len_best) then
-          begin
-            cmap_best := clist;
-            len_best := len;
-          end;
-        end;
-        clist := cmap_best;
-        // clean
-        for i := 1 to 1024 do
-        begin
-          i0 := 1 + random(254);
-          i1 := i0 + 1;
-          as_is := diffcolor(clist, i0 - 1, i0) + diffcolor(clist, i1, i1 + 1);
-          swapd := diffcolor(clist, i0 - 1, i1) + diffcolor(clist, i0, i1 + 1);
-          if (swapd < as_is) then
-          begin
-            swapcolor(clist, i0, i1);
-            len_best := len_best + swapd - as_is;
-          end;
-        end;
-        { Convert to TColorMap, Gradient and save }
-        FileName := lowercase(ExtractFileName(Opendialog.FileName));
-        ident := CleanEntry(FileName);
-        strings.add(ident + ' {');
-        strings.add('gradient:');
-        strings.add(' title="' + CleanUPRTitle(FileName) + '" smooth=no');
-        for i := 0 to 255 do
-        begin
-          pal[i][0] := clist[i] and 255;
-          pal[i][1] := clist[i] shr 8 and 255;
-          pal[i][2] := clist[i] shr 16 and 255;
-          j := round(i * (399 / 255));
-          strings.Add(' index=' + IntToStr(j) + ' color=' + intToStr(clist[i]));
-        end;
-        strings.Add('}');
-        SaveGradient(Strings.Text, Ident, defSmoothPaletteFile);
-
-        StopThread;
-        UpdateUndo;
-        maincp.cmap := Pal;
-        maincp.cmapindex := -1;
-        AdjustForm.UpdateDisplay;
-
-        if EditForm.Visible then EditForm.UpdateDisplay;
-        RedrawTimer.enabled := true;
-
-      end;
-      StatusBar.SimpleText := '';
-    end;
-  finally
-    Bitmap.Free;
-    JPEG.Free;
-    strings.Free;
-  end;
 end;
 
 procedure TMainForm.mnuToolbarClick(Sender: TObject);

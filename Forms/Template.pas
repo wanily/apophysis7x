@@ -327,7 +327,6 @@ begin
   ci := Random(256); //Random(NRCMAPS);
   GetCMap(ci, 1, MainCp.cmap);
   MainCp.cmapIndex := ci;
-  AdjustForm.TemplateRandomizeGradient;
   btnCancelClick(sender);
 end;
 

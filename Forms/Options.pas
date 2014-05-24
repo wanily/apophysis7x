@@ -388,12 +388,8 @@ begin
 
   { General tab }
   JPEGQuality := StrToInt(txtJPEGQuality.text);
-  if NumTries < 1 then Numtries := 1;
-  if Trylength < 100 then trylength := 100;
   if JPEGQuality > 100 then JPEGQuality := 100;
   if JPEGQuality < 1 then JPEGQuality := 100;
-  if BatchSize < 1 then BatchSize := 1;
-  if BatchSize > 300 then BatchSize := 300;
 
   PNGTransparency := cbPNGTransparency.ItemIndex;
   ShowTransparency := chkShowTransparency.Checked;

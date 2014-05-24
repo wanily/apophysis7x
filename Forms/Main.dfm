@@ -5457,21 +5457,6 @@ object MainForm: TMainForm
       object N9: TMenuItem
         Caption = '-'
       end
-      object mnuSmoothGradient: TMenuItem
-        Caption = 'Smooth Palette...'
-        Hint = 'Create a smooth gradient from an image'
-        ImageIndex = 34
-        OnClick = mnuSmoothGradientClick
-      end
-      object mnuOpenGradient: TMenuItem
-        Caption = 'Gradient Browser...'
-        Hint = 'Show the gradient browser'
-        ImageIndex = 22
-        OnClick = mnuOpenGradientClick
-      end
-      object N18: TMenuItem
-        Caption = '-'
-      end
       object mnuExit: TMenuItem
         Caption = 'E&xit'
         Hint = 'Quit Apophysis'

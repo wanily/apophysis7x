@@ -115,26 +115,6 @@ var
   AvailableLanguages : TStringList;
   PluginPath : string;
 
-  { UPR Options }
-
-  UPRSampleDensity: integer;
-  UPRFilterRadius: double;
-  UPROversample: integer;
-  UPRAdjustDensity: boolean;
-  UPRColoringIdent: string;
-  UPRColoringFile: string;
-  UPRFormulaIdent: string;
-  UPRFormulaFile: string;
-  UPRWidth: Integer;
-  UPRHeight: Integer;
-  ImageFolder: string;
-  UPRPath: string; // Name and folder of last UPR file
-  cmap_index: integer; // Index to current gradient
-  Variation: TVariation; // Current variation
-  NumTries, TryLength: integer; // Settings for smooth palette
-  SmoothPaletteFile: string;
-  HelpPath : string;
-
   { Editor }
 
   UseFlameBackground, UseTransformColors: boolean;
@@ -199,9 +179,8 @@ var
   randMinTransforms, randMaxTransforms: integer;
   mutantMinTransforms, mutantMaxTransforms: integer;
   KeepBackground: boolean;
-  randGradient: Integer;
-  randGradientFile: string;
   defFlameFile: string;
+  HelpPath: string;
 
   PlaySoundOnRenderComplete: boolean;
   RenderCompleteSoundFile: string;
@@ -219,12 +198,6 @@ var
   MainForm_RotationMode: integer;
   PreserveQuality: boolean;
 
-  { For random gradients }
-
-  MinNodes, MaxNodes, MinHue, MaxHue, MinSat, MaxSat, MinLum, MaxLum: integer;
-  //ReferenceMode: integer;
-  BatchSize: Integer;
-  Compatibility: integer; //0 = original, 1 = Drave's
   Favorites: TStringList;
   Script: string;
   ScriptPath: string;

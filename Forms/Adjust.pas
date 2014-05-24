@@ -49,12 +49,9 @@ type
     PrevPnl: TPanel;
     PreviewImage: TImage;
     GradientPopup: TPopupMenu;
-    mnuRandomize: TMenuItem;
-    N7: TMenuItem;
     mnuInvert: TMenuItem;
     mnuReverse: TMenuItem;
     N3: TMenuItem;
-    mnuSmoothPalette: TMenuItem;
     mnuGradientBrowser: TMenuItem;
     N4: TMenuItem;
     SaveGradient1: TMenuItem;
@@ -81,14 +78,10 @@ type
     btnUndo: TSpeedButton;
     btnRedo: TSpeedButton;
     gradientGroup: TGroupBox;
-    btnOpen: TSpeedButton;
     cmbPalette: TComboBox;
     ScrollBar: TScrollBar;
     GradientPnl: TPanel;
     GradientImage: TImage;
-    btnSmoothPalette: TSpeedButton;
-    btnCopy: TSpeedButton;
-    btnPaste: TSpeedButton;
     btnColorPreset: TSpeedButton;
     btnMenu: TSpeedButton;
     txtVal: TEdit;
@@ -144,6 +137,9 @@ type
     CurvesPanel: TPanel;
     cbChannel: TComboBox;
     btnResetCurves: TButton;
+    btnCopy: TSpeedButton;
+    btnPaste: TSpeedButton;
+    btnOpen: TSpeedButton;
 
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -183,7 +179,6 @@ type
     procedure mnuBrightnessClick(Sender: TObject);
     procedure mnuBlurClick(Sender: TObject);
     procedure btnOpenClick(Sender: TObject);
-    procedure mnuSmoothPaletteClick(Sender: TObject);
     procedure SaveGradient1Click(Sender: TObject);
     procedure SaveasMapfile1Click(Sender: TObject);
     procedure cmbPaletteDrawItem(Control: TWinControl; Index: Integer;
@@ -194,7 +189,6 @@ type
     procedure btnPasteClick(Sender: TObject);
     procedure ApplicationEventsActivate(Sender: TObject);
     procedure mnuSaveasDefaultClick(Sender: TObject);
-    procedure mnuRandomizeClick(Sender: TObject);
     procedure mnuFrequencyClick(Sender: TObject);
     procedure mnuContrastClick(Sender: TObject);
 
@@ -219,7 +213,6 @@ type
     procedure GetMainWindowSize;
     procedure btnUndoClick(Sender: TObject);
     procedure btnRedoClick(Sender: TObject);
-    procedure GradientImageDblClick(Sender: TObject);
     procedure btnColorPresetClick(Sender: TObject);
     procedure btnApplySizeClick(Sender: TObject);
     procedure mnuInstantPreviewClick(Sender: TObject);
@@ -322,7 +315,6 @@ type
     procedure UpdateDisplay(PreviewOnly: boolean = false);
     procedure UpdateFlame(bBgOnly: boolean = false);
     procedure DrawPreview;
-    procedure TemplateRandomizeGradient;
     procedure Localize;
 
   end;
@@ -338,8 +330,8 @@ implementation
 
 //uses Main, Global, Registry, Mutate, Editor, Save, Browser;
 uses
-  RndFlame, Main, cmapdata, Math, Browser, Editor, Global,
-  Save, ClipBrd, GradientHlpr, Registry, Curves;
+  Main, cmapdata, Math, Browser, Editor, Global,
+  Save, ClipBrd, Registry, Curves;
 
 {$R *.DFM}
 
@@ -566,11 +558,8 @@ begin
   cbChannel.Items[3] := TextByKey('adjustment-tab-curves-blue');
 	chkResizeMain.Caption := TextByKey('adjustment-tab-size-resizemain');
 	mnuInstantPreview.Caption := TextByKey('adjustment-popup-quality-instantpreview');
-	mnuRandomize.Caption := TextByKey('adjustment-popup-gradient-randomize');
 	mnuInvert.Caption := TextByKey('adjustment-popup-gradient-invert');
 	mnuReverse.Caption := TextByKey('adjustment-popup-gradient-reverse');
-	mnuSmoothPalette.Caption := TextByKey('adjustment-popup-gradient-smooth');
-	btnSmoothPalette.Hint := TextByKey('adjustment-popup-gradient-smooth');
 	mnuGradientBrowser.Caption := TextByKey('adjustment-popup-gradient-browser');
 	btnOpen.Hint := TextByKey('adjustment-popup-gradient-browser');
 	SaveGradient1.Caption := TextByKey('adjustment-popup-gradient-saveasugr');
@@ -1391,11 +1380,6 @@ begin
   GradientBrowser.Show;
 end;
 
-procedure TAdjustForm.mnuSmoothPaletteClick(Sender: TObject);
-begin
-  MainForm.SmoothPalette;
-end;
-
 procedure TAdjustForm.SaveGradient1Click(Sender: TObject);
 var
   gradstr: TStringList;
@@ -1547,17 +1531,6 @@ procedure TAdjustForm.mnuSaveasDefaultClick(Sender: TObject);
 begin
   DefaultPalette := Palette;
   SaveMap(AppPath + 'default.map');
-end;
-
-procedure TAdjustForm.mnuRandomizeClick(Sender: TObject);
-begin
-  UpdateGradient(GradientHelper.RandomGradient);
-  Apply;
-end;
-
-procedure TAdjustForm.GradientImageDblClick(Sender: TObject);
-begin
-  mnuRandomizeClick(Sender);
 end;
 
 procedure TAdjustForm.GradImageMouseDown(Sender: TObject;
@@ -2511,11 +2484,6 @@ begin
     Key := #0;
     txtValExit(sender);
   end;
-end;
-
-procedure TAdjustForm.TemplateRandomizeGradient;
-begin
-  mnuRandomizeClick(nil);
 end;
 
 end.

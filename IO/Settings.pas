@@ -218,22 +218,6 @@ begin
       begin
         KeepBackground := False;
       end;
-      if Registry.ValueExists('NumTries') then
-      begin
-        NumTries := Registry.ReadInteger('NumTries');
-      end
-      else
-      begin
-        NumTries := 10;
-      end;
-      if Registry.ValueExists('TryLength') then
-      begin
-        TryLength := Registry.ReadInteger('TryLength');
-      end
-      else
-      begin
-        TryLength := 100000;
-      end;
 
       if Registry.ValueExists('MinTransforms') then
       begin
@@ -273,15 +257,6 @@ begin
         mutantMaxTransforms := mutantMinTransforms + 1;
       end;
 
-      if Registry.ValueExists('RandomGradient') then
-      begin
-        randGradient := Registry.ReadInteger('RandomGradient');
-      end
-      else
-      begin
-        randGradient := 0;
-      end;
-
       if Registry.ValueExists('ParameterFolder3D') then
       begin
         ParamFolder := Registry.ReadString('ParameterFolder3D');
@@ -297,39 +272,6 @@ begin
       end;
 
       if Registry.ValueExists('UPRPath') then
-      begin
-        UPRPath := Registry.ReadString('UPRPath');
-      end
-      else
-      begin
-        UPRPath := DefaultPath + '\';
-      end;
-
-      if Registry.ValueExists('ImageFolder') then
-      begin
-        ImageFolder := Registry.ReadString('ImageFolder');
-      end
-      else
-      begin
-        ImageFolder := DefaultPath + '\';
-      end;
-
-      if Registry.ValueExists('UPRWidth') then
-      begin
-        UPRWidth := Registry.ReadInteger('UPRWidth');
-      end
-      else
-      begin
-        UPRWidth := 640;
-      end;
-      if Registry.ValueExists('UPRHeight') then
-      begin
-        UPRHeight := Registry.ReadInteger('UPRHeight');
-      end
-      else
-      begin
-        UPRHeight := 480;
-      end;
 
       if Registry.ValueExists('BrowserPath') then
       begin
@@ -426,103 +368,11 @@ begin
       begin
         VariationOptions := VariationOptions or (int64(Registry.ReadInteger('VariationOptions2')) shl 32);
       end;
-//      UnpackVariations(VariationOptions);
-
-      if Registry.ValueExists('MinNodes') then
-      begin
-        MinNodes := Registry.ReadInteger('MinNodes');
-        if MinNodes < 2 then MinNodes := 2;
-      end
-      else
-      begin
-        MinNodes := 2;
-      end;
-      if Registry.ValueExists('MinHue') then
-      begin
-        MinHue := Registry.ReadInteger('MinHue');
-      end
-      else
-      begin
-        MinHue := 0;
-      end;
-      if Registry.ValueExists('MinSat') then
-      begin
-        MinSat := Registry.ReadInteger('MinSat');
-      end
-      else
-      begin
-        MinSat := 0;
-      end;
-      if Registry.ValueExists('MinLum') then
-      begin
-        MinLum := Registry.ReadInteger('MinLum');
-      end
-      else
-      begin
-        MinLum := 0;
-      end;
-      if Registry.ValueExists('MaxNodes') then
-      begin
-        MaxNodes := Registry.ReadInteger('MaxNodes');
-        if MaxNodes < MinNodes then MaxNodes := MinNodes;
-      end
-      else
-      begin
-        MaxNodes := 10;
-      end;
-      if Registry.ValueExists('MaxHue') then
-      begin
-        MaxHue := Registry.ReadInteger('MaxHue');
-        if MaxHue < 0 then MaxHue := 0;
-      end
-      else
-      begin
-        MaxHue := 600;
-      end;
-      if Registry.ValueExists('MaxSat') then
-      begin
-        MaxSat := Registry.ReadInteger('MaxSat');
-        if MaxSat < 0 then MaxSat := 0;
-      end
-      else
-      begin
-        MaxSat := 100;
-      end;
-      if Registry.ValueExists('RandomGradientFile') then
-      begin
-        randGradientFile := Registry.ReadString('RandomGradientFile');
-      end
-      else
-      begin
-        randGradientFile := ''
-      end;
-
-//      if Registry.ValueExists('ReferenceMode') then
-//        ReferenceMode := Registry.ReadInteger('ReferenceMode')
-//      else ReferenceMode := 0;
 
       if Registry.ValueExists('RotationMode') then
         MainForm_RotationMode := Registry.ReadInteger('RotationMode')
       else MainForm_RotationMode := 0;
 
-      if Registry.ValueExists('MaxLum') then
-      begin
-        MaxLum := Registry.ReadInteger('MaxLum');
-        if MaxLum <= 0 then MaxLum := 100;
-      end
-      else
-      begin
-        MaxLum := 100;
-      end;
-      if Registry.ValueExists('BatchSize') then
-      begin
-        BatchSize := Registry.ReadInteger('BatchSize');
-        if BatchSize <= 0 then BatchSize := 10;
-      end
-      else
-      begin
-        BatchSize := 100;
-      end;
       if Registry.ValueExists('ScriptPath') then
       begin
         ScriptPath := Registry.ReadString('ScriptPath');
@@ -706,12 +556,6 @@ begin
         UseSmallThumbnails := true;
       end;
 
-      if Registry.ValueExists('HelpPath') then begin
-        HelpPath := Registry.ReadString('HelpPath');
-      end else begin
-        HelpPath := ExtractFilePath(Application.ExeName) + 'Apophysis 7X.chm';
-      end;
-
     end
     else
     begin
@@ -727,25 +571,17 @@ begin
       EmbedThumbnails := false;
       WarnOnMissingPlugin := true;
       LanguageFile := '';
-      HelpPath := ExtractFilePath(Application.ExeName) + 'Apophysis 7X.chm';
       defSmoothPaletteFile := DefaultPath + '\SmoothPalette.ugr';
       ConfirmDelete := True;
       ConfirmExit := True;
       OldPaletteFormat := false;
-      NumTries := 10;
-      TryLength := 100000;
       randMinTransforms := 2;
       randMaxTransforms := 3;
       mutantMinTransforms := 2;
       mutantMaxTransforms := 6;
-      randGradient := 0;
       PreserveQuality := false;
       KeepBackground := False;
-      UPRPath := DefaultPath + '\';
-      ImageFolder := DefaultPath + '\';
       ParamFolder := DefaultPath + '\';
-      UPRWidth := 640;
-      UPRHeight := 480;
       RandomPrefix := 'Apo7X-';
       RandomIndex := 0;
       RandomDate := '';
@@ -753,17 +589,6 @@ begin
       SymmetryOrder := 4;
       SymmetryNVars := 12;
       VariationOptions := 262143;
-//      UnpackVariations(VariationOptions);
-      MinNodes := 2;
-      MaxNodes := 10;
-      MinHue := 0;
-      MinSat := 0;
-      MinLum := 0;
-      MaxHue := 600;
-      MaxSat := 100;
-      MaxLum := 100;
-      randGradientFile := '';
-      BatchSize := 100;
       ScriptPath := DefaultPath + '\';
       defLibrary := ExtractFilePath(Application.ExeName) + 'Functions.asc';
       ShowProgress := true;
@@ -994,87 +819,6 @@ begin
     end;
     Registry.CloseKey;
 
-    {UPR}
-    if Registry.OpenKey('Software\' + APP_NAME + '\UPR', False) then
-    begin
-      if Registry.ValueExists('FlameColoringFile') then
-      begin
-        UPRColoringFile := Registry.ReadString('FlameColoringFile');
-      end
-      else
-      begin
-        UPRColoringFile := 'apophysis.ucl';
-      end;
-      if Registry.ValueExists('FlameColoringIdent') then
-      begin
-        UPRColoringIdent := Registry.ReadString('FlameColoringIdent');
-      end
-      else
-      begin
-        UPRColoringIdent := 'enr-flame-a';
-      end;
-      if Registry.ValueExists('FlameFormulaFile') then
-      begin
-        UPRFormulaFile := Registry.ReadString('FlameFormulaFile');
-      end
-      else
-      begin
-        UPRFormulaFile := 'mt.ufm';
-      end;
-      if Registry.ValueExists('FlameFormulaIdent') then
-      begin
-        UPRFormulaIdent := Registry.ReadString('FlameFormulaIdent');
-      end
-      else
-      begin
-        UPRFormulaIdent := 'mt-pixel';
-      end;
-      if Registry.ValueExists('FlameIterDensity') then
-      begin
-        UPRSampleDensity := Registry.ReadInteger('FlameIterDensity');
-      end
-      else
-      begin
-        UPRSampleDensity := 35;
-      end;
-      if Registry.ValueExists('FlameFilterRadius') then
-      begin
-        UPRFilterRadius := Registry.ReadFloat('FlameFilterRadius');
-      end
-      else
-      begin
-        UPRFilterRadius := 0.7;
-      end;
-      if Registry.ValueExists('FlameOversample') then
-      begin
-        UPROversample := Registry.ReadInteger('FlameOversample');
-      end
-      else
-      begin
-        UPROversample := 3;
-      end;
-      if Registry.ValueExists('FlameAdjustDensity') then
-      begin
-        UPRAdjustDensity := Registry.ReadBool('FlameAdjustDensity');
-      end
-      else
-      begin
-        UPRAdjustDensity := true;
-      end;
-    end
-    else
-    begin
-      UPRColoringFile := 'apophysis.ucl';
-      UPRColoringIdent := 'enr-flame-a';
-      UPRFormulaFile := 'mt.ufm';
-      UPRFormulaIdent := 'mt-pixel';
-      UPRSampleDensity := 35;
-      UPRFilterRadius := 0.7;
-      UPROversample := 3;
-      UPRAdjustDensity := True; ;
-    end;
-    Registry.CloseKey;
-    
     if Registry.OpenKey('Software\' + APP_NAME + '\Display', False) then
     begin
       if Registry.ValueExists('SampleDensity') then
@@ -1237,8 +981,6 @@ begin
       Registry.WriteBool('StartupCheckForUpdates', StartupCheckForUpdates);
       Registry.WriteBool('AlwaysCreateBlankFlame', AlwaysCreateBlankFlame);
       Registry.WriteString('GradientFile', GradientFile);
-      Registry.WriteString('HelpPath', HelpPath);
-      Registry.WriteString('SmoothPaletteFile', SmoothPaletteFile);
       Registry.WriteBool('PlaySoundOnRenderComplete', PlaySoundOnRenderComplete);
       Registry.WriteString('RenderCompleteSoundFile', RenderCompleteSoundFile);
       Registry.WriteBool('AutoOpenLog', AutoOpenLog);
@@ -1262,19 +1004,12 @@ begin
       Registry.WriteBool('ConfirmDelete', ConfirmDelete);
       Registry.WriteBool('OldPaletteFormat', OldPaletteFormat);
       Registry.WriteBool('ConfirmExit', ConfirmExit);
-      Registry.WriteInteger('NumTries', NumTries);
-      Registry.WriteInteger('TryLength', TryLength);
       Registry.WriteInteger('MinTransforms', randMinTransforms);
       Registry.WriteInteger('MaxTransforms', randMaxTransforms);
       Registry.WriteInteger('MutationMinTransforms', mutantMinTransforms);
       Registry.WriteInteger('MutationMaxTransforms', mutantMaxTransforms);
-      Registry.WriteInteger('RandomGradient', randGradient);
       Registry.WriteString('ParameterFolder3D', ParamFolder);
-      Registry.WriteString('UPRPath', UPRPath);
-      Registry.WriteString('ImageFolder', ImageFolder);
       Registry.WriteString('SavePath3D', SavePath);
-      Registry.WriteInteger('UPRWidth', UPRWidth);
-      Registry.WriteInteger('UPRHeight', UPRHeight);
       Registry.WriteString('BrowserPath', BrowserPath);
       Registry.WriteInteger('EditPreviewQaulity', EditPrevQual);
       Registry.WriteInteger('MutatePreviewQaulity', MutatePrevQual);
@@ -1285,8 +1020,6 @@ begin
       Registry.WriteString('DefaultFlameFile3D', defFlameFile);
       Registry.WriteString('SmoothPalettePath', SmoothPalettePath);
       Registry.WriteString('GradientFile', GradientFile);
-      Registry.WriteInteger('TryLength', TryLength);
-      Registry.WriteInteger('NumTries', NumTries);
       Registry.WriteString('SmoothPaletteFile', defSmoothPaletteFile);
       Registry.WriteInteger('SymmetryType', SymmetryType);
       Registry.WriteInteger('SymmetryOrder', SymmetryOrder);
@@ -1295,16 +1028,6 @@ begin
 //      Registry.WriteInteger('VariationOptions2', VariationOptions shr 32);
 //      Registry.WriteInteger('ReferenceMode', ReferenceMode);
       Registry.WriteInteger('RotationMode', MainForm_RotationMode);
-      Registry.WriteInteger('MinNodes', MinNodes);
-      Registry.WriteInteger('MinHue', MinHue);
-      Registry.WriteInteger('MinSat', MinSat);
-      Registry.WriteInteger('MinLum', MinLum);
-      Registry.WriteInteger('MaxNodes', MaxNodes);
-      Registry.WriteInteger('MaxHue', MaxHue);
-      Registry.WriteInteger('MaxSat', MaxSat);
-      Registry.WriteInteger('MaxLum', MaxLum);
-      Registry.WriteString('RandomGradientFile', randGradientFile);
-      Registry.WriteInteger('BatchSize', BatchSize);
       Registry.WriteString('ScriptPath', ScriptPath);
       Registry.WriteBool('ShowProgress', ShowProgress);
       Registry.WriteBool('KeepBackground', KeepBackground);
@@ -1370,20 +1093,6 @@ begin
       Registry.WriteFloat('PreviewLowQuality', prevLowQuality);
       Registry.WriteFloat('PreviewMediumQuality', prevMediumQuality);
       Registry.WriteFloat('PreviewHighQuality', prevHighQuality);
-    end;
-    Registry.CloseKey;
-
-    { UPR }
-    if Registry.OpenKey('\Software\' + APP_NAME + '\UPR', True) then
-    begin
-      Registry.WriteString('FlameColoringFile', UPRColoringFile);
-      Registry.WriteString('FlameColoringIdent', UPRColoringIdent);
-      Registry.WriteString('FlameFormulaFile', UPRFormulaFile);
-      Registry.WriteString('FlameFormulaIdent', UPRFormulaIdent);
-      Registry.WriteInteger('FlameIterDensity', UPRSampleDensity);
-      Registry.WriteFloat('FlameFilterRadius', UPRFilterRadius);
-      Registry.WriteInteger('FlameOversample', UPROversample);
-      Registry.WriteBool('FlameAdjustDensity', UPRAdjustDensity);
     end;
     Registry.CloseKey;
 
