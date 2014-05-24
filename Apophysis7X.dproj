@@ -240,9 +240,6 @@
         <DCCReference Include="Forms\Fullscreen.pas">
             <Form>FullscreenForm</Form>
         </DCCReference>
-        <DCCReference Include="Forms\ImageColoring.pas">
-            <Form>frmImageColoring</Form>
-        </DCCReference>
         <DCCReference Include="Forms\LoadTracker.pas">
             <Form>LoadForm</Form>
         </DCCReference>

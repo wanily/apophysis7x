@@ -141,7 +141,6 @@ uses
   formPostProcess in 'Forms\formPostProcess.pas' {frmPostProcess},
   FormRender in 'Forms\FormRender.pas' {RenderForm},
   Fullscreen in 'Forms\Fullscreen.pas' {FullscreenForm},
-  ImageColoring in 'Forms\ImageColoring.pas' {frmImageColoring},
   LoadTracker in 'Forms\LoadTracker.pas' {LoadForm},
   Options in 'Forms\Options.pas' {OptionsForm},
   Save in 'Forms\Save.pas' {SaveForm},
@@ -184,7 +183,6 @@ begin
   Application.CreateForm(TfrmPostProcess, frmPostProcess);
   Application.CreateForm(TRenderForm, RenderForm);
   Application.CreateForm(TFullscreenForm, FullscreenForm);
-  Application.CreateForm(TfrmImageColoring, frmImageColoring);
   Application.CreateForm(TLoadForm, LoadForm);
   Application.CreateForm(TOptionsForm, OptionsForm);
   Application.CreateForm(TSaveForm, SaveForm);
