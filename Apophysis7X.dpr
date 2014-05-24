@@ -52,7 +52,6 @@ uses
   MissingPlugin in 'IO\MissingPlugin.pas',
   Settings in 'IO\Settings.pas',
   Translation in 'Core\Translation.pas',
-  Chaotica in 'Core\Chaotica.pas',
   ParameterIO in 'IO\ParameterIO.pas',
   Bezier in 'Core\Bezier.pas',
 
@@ -139,7 +138,6 @@ uses
   Adjust in 'Forms\Adjust.pas' {AdjustForm},
   Browser in 'Forms\Browser.pas' {GradientBrowser},
   Editor in 'Forms\Editor.pas' {EditForm},
-  FormExport in 'Forms\FormExport.pas' {ExportDialog},
   formPostProcess in 'Forms\formPostProcess.pas' {frmPostProcess},
   FormRender in 'Forms\FormRender.pas' {RenderForm},
   Fullscreen in 'Forms\Fullscreen.pas' {FullscreenForm},
@@ -183,7 +181,6 @@ begin
   Application.CreateForm(TAdjustForm, AdjustForm);
   Application.CreateForm(TGradientBrowser, GradientBrowser);
   Application.CreateForm(TEditForm, EditForm);
-  Application.CreateForm(TExportDialog, ExportDialog);
   Application.CreateForm(TfrmPostProcess, frmPostProcess);
   Application.CreateForm(TRenderForm, RenderForm);
   Application.CreateForm(TFullscreenForm, FullscreenForm);

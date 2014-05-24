@@ -149,7 +149,6 @@
         <DCCReference Include="IO\MissingPlugin.pas"/>
         <DCCReference Include="IO\Settings.pas"/>
         <DCCReference Include="Core\Translation.pas"/>
-        <DCCReference Include="Core\Chaotica.pas"/>
         <DCCReference Include="IO\ParameterIO.pas"/>
         <DCCReference Include="Core\Bezier.pas"/>
         <DCCReference Include="Flame\RndFlame.pas"/>
@@ -231,9 +230,6 @@
         </DCCReference>
         <DCCReference Include="Forms\Editor.pas">
             <Form>EditForm</Form>
-        </DCCReference>
-        <DCCReference Include="Forms\FormExport.pas">
-            <Form>ExportDialog</Form>
         </DCCReference>
         <DCCReference Include="Forms\formPostProcess.pas">
             <Form>frmPostProcess</Form>

@@ -5472,43 +5472,6 @@ object MainForm: TMainForm
       object N18: TMenuItem
         Caption = '-'
       end
-      object mnuSaveUPR: TMenuItem
-        Caption = 'Export &UPR...'
-        Hint = 
-          'Save the flame in UltraFractal parameter format *** OUTDATED ***' +
-          ' USE AT YOUR OWN RISK!'
-        OnClick = mnuSaveUPRClick
-      end
-      object mnuExportFLame: TMenuItem
-        Caption = 'Export Flame...'
-        Hint = 'Disabled in this "3D hack" version'
-        ShortCut = 16472
-        OnClick = mnuExportFLameClick
-      end
-      object mnuExportChaotica: TMenuItem
-        Caption = 'Export to Chaotica...'
-        ShortCut = 49240
-        OnClick = mnuExportChaoticaClick
-      end
-      object mnuImportGimp: TMenuItem
-        Caption = 'Import Gimp Parameters'
-        Hint = 'Import Gimp parameters'
-        OnClick = mnuImportGimpClick
-      end
-      object N1: TMenuItem
-        Caption = '-'
-      end
-      object mnuPostSheep: TMenuItem
-        Caption = 'Post Sheep...'
-        Enabled = False
-        ImageIndex = 45
-        ShortCut = 16456
-        Visible = False
-      end
-      object N21: TMenuItem
-        Caption = '-'
-        Visible = False
-      end
       object mnuRandomBatch: TMenuItem
         Caption = '&Random Batch'
         Hint = 'Create and load a file containing random flame parameters'

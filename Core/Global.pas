@@ -133,6 +133,7 @@ var
   Variation: TVariation; // Current variation
   NumTries, TryLength: integer; // Settings for smooth palette
   SmoothPaletteFile: string;
+  HelpPath : string;
 
   { Editor }
 
@@ -227,21 +228,12 @@ var
   Favorites: TStringList;
   Script: string;
   ScriptPath: string;
-  SheepServer, SheepNick, SheepURL, SheepPW, flam3Path, helpPath: string;
-  ExportBatches, ExportOversample, ExportWidth, ExportHeight, ExportFileFormat: Integer;
-  ExportFilter, ExportDensity: Double;
-  ExportEstimator, ExportEstimatorMin, ExportEstimatorCurve: double;
-  ExportJitters: integer;
-  ExportGammaTreshold: double;
   OpenFileType: TFileType;
 //  ResizeOnLoad: Boolean;
   ShowProgress: Boolean;
   defLibrary: string;
   LimitVibrancy: Boolean;
   DefaultPalette: TColorMap;
-
-  ChaoticaPath, ChaoticaPath64: string;
-  UseX64IfPossible: boolean;
 
   AutoOpenLog: Boolean;
   AutoSaveEnabled: Boolean;

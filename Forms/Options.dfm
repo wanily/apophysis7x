@@ -2429,54 +2429,9 @@ object OptionsForm: TOptionsForm
         ShowHint = True
         OnClick = SpeedButton2Click
       end
-      object btnRenderer: TSpeedButton
-        Left = 437
-        Top = 79
-        Width = 24
-        Height = 24
-        Hint = 'Browse...'
-        Anchors = [akTop, akRight]
-        Flat = True
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Arial'
-        Font.Style = [fsBold]
-        Glyph.Data = {
-          36030000424D3603000000000000360000002800000010000000100000000100
-          18000000000000030000120B0000120B00000000000000000000FF00FFFF00FF
-          FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
-          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
-          00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF75848F66808F
-          607987576E7B4E626F4456613948522E3A43252E351B222914191E0E12160E13
-          18FF00FFFF00FFFF00FF77879289A1AB6AB2D4008FCD008FCD008FCD048CC708
-          88BE0F82B4157CA91B779F1F7296224B5C87A2ABFF00FFFF00FF7A8A957EBED3
-          8AA4AE7EDCFF5FCFFF55CBFF4CC4FA41BCF537B3F02EAAEB24A0E5138CD42367
-          805E696DFF00FFFF00FF7D8E9879D2EC8BA4AD89C2CE71D8FF65D3FF5CCEFF51
-          C9FE49C1FA3FB9F534B0EE29A8E91085CD224B5B98B2BAFF00FF80919C81D7EF
-          7DC5E08CA6B080DDFE68D3FF67D4FF62D1FF58CDFF4EC7FC46BEF73BB6F231AC
-          EC2569817A95A1FF00FF83959F89DCF18CE2FF8DA8B18CBAC774D8FF67D4FF67
-          D4FF67D4FF5FD0FF54CDFF4BC5FC41BBF72EA2DB51677498B2BA869AA392E1F2
-          98E8FD80C4DE8EA7B081DEFD84E0FF84E0FF84E0FF84E0FF81DFFF7BDDFF74D8
-          FF6BD6FF56A9D18F9BA4889CA59AE6F39FEBFB98E8FE8BACB98BACB98AAAB788
-          A6B386A3AF839FAA819AA67F95A17C919D7A8E99798B957788938BA0A8A0EAF6
-          A6EEF99FEBFB98E8FE7ADAFF67D4FF67D4FF67D4FF67D4FF67D4FF67D4FF7788
-          93FF00FFFF00FFFF00FF8EA2ABA7EEF6ABF0F7A6EEF99FEBFB98E8FD71D4FB89
-          9EA78699A382949F7E909A7A8C97778893FF00FFFF00FFFF00FF8FA4ACA0D2DA
-          ABF0F7ABF0F7A6EEF99FEBFB8DA1AAB5CBD0FF00FFFF00FFFF00FFFF00FFFF00
-          FFFF00FFFF00FFFF00FFBDCED48FA4AC8FA4AC8FA4AC8FA4AC8FA4ACB5CBD0FF
-          00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
-          FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
-          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
-          00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        OnClick = btnRendererClick
-      end
       object btnHelp: TSpeedButton
         Left = 437
-        Top = 103
+        Top = 80
         Width = 24
         Height = 24
         Hint = 'Browse...'
@@ -2521,14 +2476,14 @@ object OptionsForm: TOptionsForm
       end
       object Label49: TLabel
         Left = 245
-        Top = 236
+        Top = 214
         Width = 37
         Height = 13
         Caption = 'minutes'
       end
       object btnFindDefaultSaveFile: TSpeedButton
         Left = 437
-        Top = 207
+        Top = 185
         Width = 24
         Height = 24
         Hint = 'Browse...'
@@ -2572,7 +2527,7 @@ object OptionsForm: TOptionsForm
       end
       object btnPluginPath: TSpeedButton
         Left = 437
-        Top = 128
+        Top = 106
         Width = 24
         Height = 24
         Hint = 'Browse...'
@@ -2617,7 +2572,7 @@ object OptionsForm: TOptionsForm
       end
       object chkRememberLastOpen: TCheckBox
         Left = 8
-        Top = 160
+        Top = 138
         Width = 433
         Height = 17
         Caption = 'Remember last opened parameters'
@@ -2678,23 +2633,11 @@ object OptionsForm: TOptionsForm
         Caption = 'Function library'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 8
-      end
-      object Panel42: TPanel
-        Left = 8
-        Top = 80
-        Width = 129
-        Height = 21
-        Cursor = crArrow
-        BevelOuter = bvLowered
-        Caption = 'flam3'
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 9
+        TabOrder = 7
       end
       object Panel43: TPanel
         Left = 8
-        Top = 104
+        Top = 80
         Width = 129
         Height = 21
         Cursor = crArrow
@@ -2702,7 +2645,7 @@ object OptionsForm: TOptionsForm
         Caption = 'Help file'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 10
+        TabOrder = 8
       end
       object txtLibrary: TEdit
         Left = 136
@@ -2715,7 +2658,7 @@ object OptionsForm: TOptionsForm
         ShowHint = False
         TabOrder = 5
       end
-      object txtRenderer: TEdit
+      object txtHelp: TEdit
         Left = 136
         Top = 80
         Width = 302
@@ -2726,29 +2669,18 @@ object OptionsForm: TOptionsForm
         ShowHint = False
         TabOrder = 6
       end
-      object txtHelp: TEdit
-        Left = 136
-        Top = 104
-        Width = 302
-        Height = 21
-        HelpContext = 1000
-        Anchors = [akLeft, akTop, akRight]
-        ParentShowHint = False
-        ShowHint = False
-        TabOrder = 7
-      end
       object cbEnableAutosave: TCheckBox
         Left = 8
-        Top = 184
+        Top = 162
         Width = 425
         Height = 17
         Caption = 'Enable autosave'
-        TabOrder = 13
+        TabOrder = 11
         OnClick = cbEnableAutosaveClick
       end
       object Panel44: TPanel
         Left = 24
-        Top = 208
+        Top = 186
         Width = 113
         Height = 21
         Cursor = crArrow
@@ -2756,21 +2688,21 @@ object OptionsForm: TOptionsForm
         Caption = 'File name'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 14
+        TabOrder = 12
       end
       object txtDefaultSaveFile: TEdit
         Left = 136
-        Top = 208
+        Top = 186
         Width = 302
         Height = 21
         HelpContext = 1000
         ParentShowHint = False
         ShowHint = False
-        TabOrder = 12
+        TabOrder = 10
       end
       object Panel45: TPanel
         Left = 24
-        Top = 232
+        Top = 210
         Width = 113
         Height = 21
         Cursor = crArrow
@@ -2778,16 +2710,16 @@ object OptionsForm: TOptionsForm
         Caption = 'Save frequency'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 15
+        TabOrder = 13
       end
       object cbFreq: TComboBox
         Left = 136
-        Top = 232
+        Top = 210
         Width = 105
         Height = 21
         Style = csDropDownList
         ItemIndex = 2
-        TabOrder = 11
+        TabOrder = 9
         Text = '5'
         Items.Strings = (
           '1'
@@ -2795,168 +2727,9 @@ object OptionsForm: TOptionsForm
           '5'
           '10')
       end
-      object GroupBox3: TGroupBox
-        Left = 8
-        Top = 264
-        Width = 457
-        Height = 73
-        Caption = 'Chaotica 0.45+'
-        TabOrder = 16
-        DesignSize = (
-          457
-          73)
-        object btnChaotica: TSpeedButton
-          Left = 425
-          Top = 18
-          Width = 24
-          Height = 24
-          Hint = 'Browse...'
-          Anchors = [akTop, akRight]
-          Flat = True
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Glyph.Data = {
-            36030000424D3603000000000000360000002800000010000000100000000100
-            18000000000000030000120B0000120B00000000000000000000FF00FFFF00FF
-            FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
-            FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
-            00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF75848F66808F
-            607987576E7B4E626F4456613948522E3A43252E351B222914191E0E12160E13
-            18FF00FFFF00FFFF00FF77879289A1AB6AB2D4008FCD008FCD008FCD048CC708
-            88BE0F82B4157CA91B779F1F7296224B5C87A2ABFF00FFFF00FF7A8A957EBED3
-            8AA4AE7EDCFF5FCFFF55CBFF4CC4FA41BCF537B3F02EAAEB24A0E5138CD42367
-            805E696DFF00FFFF00FF7D8E9879D2EC8BA4AD89C2CE71D8FF65D3FF5CCEFF51
-            C9FE49C1FA3FB9F534B0EE29A8E91085CD224B5B98B2BAFF00FF80919C81D7EF
-            7DC5E08CA6B080DDFE68D3FF67D4FF62D1FF58CDFF4EC7FC46BEF73BB6F231AC
-            EC2569817A95A1FF00FF83959F89DCF18CE2FF8DA8B18CBAC774D8FF67D4FF67
-            D4FF67D4FF5FD0FF54CDFF4BC5FC41BBF72EA2DB51677498B2BA869AA392E1F2
-            98E8FD80C4DE8EA7B081DEFD84E0FF84E0FF84E0FF84E0FF81DFFF7BDDFF74D8
-            FF6BD6FF56A9D18F9BA4889CA59AE6F39FEBFB98E8FE8BACB98BACB98AAAB788
-            A6B386A3AF839FAA819AA67F95A17C919D7A8E99798B957788938BA0A8A0EAF6
-            A6EEF99FEBFB98E8FE7ADAFF67D4FF67D4FF67D4FF67D4FF67D4FF67D4FF7788
-            93FF00FFFF00FFFF00FF8EA2ABA7EEF6ABF0F7A6EEF99FEBFB98E8FD71D4FB89
-            9EA78699A382949F7E909A7A8C97778893FF00FFFF00FFFF00FF8FA4ACA0D2DA
-            ABF0F7ABF0F7A6EEF99FEBFB8DA1AAB5CBD0FF00FFFF00FFFF00FFFF00FFFF00
-            FFFF00FFFF00FFFF00FFBDCED48FA4AC8FA4AC8FA4AC8FA4AC8FA4ACB5CBD0FF
-            00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
-            FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
-            FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
-            00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
-          ParentFont = False
-          ParentShowHint = False
-          ShowHint = True
-          OnClick = btnChaoticaClick
-        end
-        object btnChaotica64: TSpeedButton
-          Left = 425
-          Top = 98
-          Width = 24
-          Height = 24
-          Hint = 'Browse...'
-          Anchors = [akTop, akRight]
-          Flat = True
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Glyph.Data = {
-            36030000424D3603000000000000360000002800000010000000100000000100
-            18000000000000030000120B0000120B00000000000000000000FF00FFFF00FF
-            FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
-            FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
-            00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF75848F66808F
-            607987576E7B4E626F4456613948522E3A43252E351B222914191E0E12160E13
-            18FF00FFFF00FFFF00FF77879289A1AB6AB2D4008FCD008FCD008FCD048CC708
-            88BE0F82B4157CA91B779F1F7296224B5C87A2ABFF00FFFF00FF7A8A957EBED3
-            8AA4AE7EDCFF5FCFFF55CBFF4CC4FA41BCF537B3F02EAAEB24A0E5138CD42367
-            805E696DFF00FFFF00FF7D8E9879D2EC8BA4AD89C2CE71D8FF65D3FF5CCEFF51
-            C9FE49C1FA3FB9F534B0EE29A8E91085CD224B5B98B2BAFF00FF80919C81D7EF
-            7DC5E08CA6B080DDFE68D3FF67D4FF62D1FF58CDFF4EC7FC46BEF73BB6F231AC
-            EC2569817A95A1FF00FF83959F89DCF18CE2FF8DA8B18CBAC774D8FF67D4FF67
-            D4FF67D4FF5FD0FF54CDFF4BC5FC41BBF72EA2DB51677498B2BA869AA392E1F2
-            98E8FD80C4DE8EA7B081DEFD84E0FF84E0FF84E0FF84E0FF81DFFF7BDDFF74D8
-            FF6BD6FF56A9D18F9BA4889CA59AE6F39FEBFB98E8FE8BACB98BACB98AAAB788
-            A6B386A3AF839FAA819AA67F95A17C919D7A8E99798B957788938BA0A8A0EAF6
-            A6EEF99FEBFB98E8FE7ADAFF67D4FF67D4FF67D4FF67D4FF67D4FF67D4FF7788
-            93FF00FFFF00FFFF00FF8EA2ABA7EEF6ABF0F7A6EEF99FEBFB98E8FD71D4FB89
-            9EA78699A382949F7E909A7A8C97778893FF00FFFF00FFFF00FF8FA4ACA0D2DA
-            ABF0F7ABF0F7A6EEF99FEBFB8DA1AAB5CBD0FF00FFFF00FFFF00FFFF00FFFF00
-            FFFF00FFFF00FFFF00FFBDCED48FA4AC8FA4AC8FA4AC8FA4AC8FA4ACB5CBD0FF
-            00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
-            FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
-            FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
-            00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
-          ParentFont = False
-          ParentShowHint = False
-          ShowHint = True
-          Visible = False
-          OnClick = btnChaoticaClick
-        end
-        object Panel47: TPanel
-          Left = 8
-          Top = 20
-          Width = 129
-          Height = 21
-          Cursor = crArrow
-          BevelOuter = bvLowered
-          Caption = 'Location'
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 1
-        end
-        object cbC64: TCheckBox
-          Left = 8
-          Top = 48
-          Width = 441
-          Height = 17
-          Anchors = [akLeft, akTop, akRight]
-          Caption = 'Use x64-version if possible'
-          TabOrder = 2
-        end
-        object txtChaotica: TEdit
-          Left = 136
-          Top = 20
-          Width = 289
-          Height = 21
-          HelpContext = 1000
-          Anchors = [akLeft, akTop, akRight]
-          ParentShowHint = False
-          ShowHint = False
-          TabOrder = 0
-        end
-        object Panel49: TPanel
-          Left = 8
-          Top = 100
-          Width = 129
-          Height = 21
-          Cursor = crArrow
-          BevelOuter = bvLowered
-          Caption = 'File name (x64)'
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 3
-          Visible = False
-        end
-        object txtChaotica64: TEdit
-          Left = 136
-          Top = 100
-          Width = 289
-          Height = 21
-          HelpContext = 1000
-          Anchors = [akLeft, akTop, akRight]
-          ParentShowHint = False
-          ShowHint = False
-          TabOrder = 4
-          Visible = False
-        end
-      end
       object Panel50: TPanel
         Left = 8
-        Top = 130
+        Top = 106
         Width = 129
         Height = 21
         Cursor = crArrow
@@ -2964,18 +2737,18 @@ object OptionsForm: TOptionsForm
         Caption = 'Plugin folder'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 17
+        TabOrder = 14
       end
       object txtPluginFolder: TEdit
         Left = 136
-        Top = 130
+        Top = 106
         Width = 302
         Height = 21
         HelpContext = 1000
         Anchors = [akLeft, akTop, akRight]
         ParentShowHint = False
         ShowHint = False
-        TabOrder = 18
+        TabOrder = 15
       end
     end
   end

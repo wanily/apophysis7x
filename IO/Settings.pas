@@ -539,108 +539,7 @@ begin
       begin
         defLibrary := ExtractFilePath(Application.ExeName) + 'Functions.asc';
       end;
-      if Registry.ValueExists('ExportFileFormat') then
-      begin
-        ExportFileFormat := Registry.ReadInteger('ExportFileFormat');
-      end
-      else
-      begin
-        ExportFileFormat := 1;
-      end;
-      if Registry.ValueExists('ExportWidth') then
-      begin
-        ExportWidth := Registry.ReadInteger('ExportWidth');
-        if ExportWidth <= 0 then ExportWidth := 640;
-      end
-      else
-      begin
-        ExportWidth := 640;
-      end;
-      if Registry.ValueExists('ExportHeight') then
-      begin
-        ExportHeight := Registry.ReadInteger('ExportHeight');
-        if ExportHeight <= 0 then ExportHeight := 480;
-      end
-      else
-      begin
-        ExportHeight := 480;
-      end;
-      if Registry.ValueExists('ExportDensity') then
-      begin
-        ExportDensity := Registry.ReadFloat('ExportDensity');
-        if ExportDensity <= 0 then ExportDensity := 100;
-      end
-      else
-      begin
-        ExportDensity := 100;
-      end;
-      if Registry.ValueExists('ExportOversample') then
-      begin
-        ExportOversample := Registry.ReadInteger('ExportOversample');
-        if ExportOversample <= 0 then ExportOversample := 2;
-      end
-      else
-      begin
-        ExportOversample := 2;
-      end;
-      if Registry.ValueExists('ExportFilter') then
-      begin
-        ExportFilter := Registry.ReadFloat('ExportFilter');
-        if ExportFilter <= 0 then ExportFilter := 0.6;
-      end
-      else
-      begin
-        ExportFilter := 0.6;
-      end;
-      if Registry.ValueExists('ExportBatches') then
-      begin
-        ExportBatches := Registry.ReadInteger('ExportBatches');
-        if ExportBatches <= 0 then ExportBatches := 3;
-      end
-      else
-      begin
-        ExportBatches := 3;
-      end;
-      if Registry.ValueExists('Nick') then
-      begin
-        SheepNick := Registry.ReadString('Nick');
-      end
-      else
-      begin
-        SheepNick := '';
-      end;
-      if Registry.ValueExists('URL') then
-      begin
-        SheepURL := Registry.ReadString('URL');
-      end
-      else
-      begin
-        SheepURL := '';
-      end;
-      if Registry.ValueExists('Pass') then
-      begin
-        SheepPW := Registry.ReadString('Pass');
-      end
-      else
-      begin
-        SheepPW := '';
-      end;
-      if Registry.ValueExists('Renderer') then
-      begin
-        flam3Path := Registry.ReadString('Renderer');
-      end
-      else
-      begin
-        flam3Path := ExtractFilePath(Application.ExeName) + 'flam3.exe';
-      end;
-      if Registry.ValueExists('Server') then
-      begin
-        SheepServer := Registry.ReadString('Server');
-      end
-      else
-      begin
-        SheepServer := 'http://v2d5.sheepserver.net/';
-      end;
+      
       if Registry.ValueExists('ShowProgress') then
       begin
         ShowProgress := Registry.ReadBool('ShowProgress');
@@ -813,21 +712,6 @@ begin
         HelpPath := ExtractFilePath(Application.ExeName) + 'Apophysis 7X.chm';
       end;
 
-      if Registry.ValueExists('ChaoticaPath') then begin
-        ChaoticaPath := Registry.ReadString('ChaoticaPath');
-      end else begin
-        ChaoticaPath := '';
-      end;
-      if Registry.ValueExists('ChaoticaPath64') then begin
-        ChaoticaPath64 := Registry.ReadString('ChaoticaPath64');
-      end else begin
-        ChaoticaPath64 := '';
-      end;
-      if Registry.ValueExists('UseX64IfPossible') then begin
-        UseX64IfPossible := Registry.ReadBool('UseX64IfPossible');
-      end else begin
-        UseX64IfPossible := false;
-      end;
     end
     else
     begin
@@ -882,18 +766,6 @@ begin
       BatchSize := 100;
       ScriptPath := DefaultPath + '\';
       defLibrary := ExtractFilePath(Application.ExeName) + 'Functions.asc';
-      ExportFileFormat := 1;
-      ExportWidth := 640;
-      ExportHeight := 480;
-      ExportDensity := 100;
-      ExportOversample := 2;
-      ExportFilter := 0.6;
-      ExportBatches := 3;
-      SheepNick := '';
-      SheepURL := '';
-      SheepPW := '';
-      flam3Path := ExtractFilePath(Application.ExeName) + 'flam3.exe';
-      SheepServer := 'http://v2d5.sheepserver.net/';
       ShowProgress := true;
       SaveIncompleteRenders := false;
       LowerRenderPriority := false;
@@ -920,9 +792,6 @@ begin
       LineThirdsColor := $0000FF;
       LineGRColor := $00FF00;
       EnableGuides := false;
-      ChaoticaPath := '';
-      ChaoticaPath64 := '';
-      UseX64IfPossible := false;
     end;
     Registry.CloseKey;
 
@@ -1390,10 +1259,6 @@ begin
       Registry.WriteInteger('LineThirdsColor', LineThirdsColor);
       Registry.WriteInteger('LineGRColor', LineGRColor);
       Registry.WriteBool('EnableGuides', EnableGuides);
-      Registry.WriteString('ChaoticaPath', ChaoticaPath);
-      Registry.WriteString('ChaoticaPath64', ChaoticaPath64);
-      Registry.WriteBool('UseX64IfPossible', UseX64IfPossible);
-
       Registry.WriteBool('ConfirmDelete', ConfirmDelete);
       Registry.WriteBool('OldPaletteFormat', OldPaletteFormat);
       Registry.WriteBool('ConfirmExit', ConfirmExit);
@@ -1441,18 +1306,6 @@ begin
       Registry.WriteString('RandomGradientFile', randGradientFile);
       Registry.WriteInteger('BatchSize', BatchSize);
       Registry.WriteString('ScriptPath', ScriptPath);
-      Registry.WriteInteger('ExportFileFormat', ExportFileFormat);
-      Registry.WriteInteger('ExportWidth', ExportWidth);
-      Registry.WriteInteger('ExportHeight', ExportHeight);
-      Registry.WriteFloat('ExportDensity', ExportDensity);
-      Registry.WriteFloat('ExportFilter', ExportFilter);
-      Registry.WriteInteger('ExportOversample', ExportOversample);
-      Registry.WriteInteger('ExportBatches', ExportBatches);
-      Registry.WriteString('Nick', SheepNick);
-      Registry.WriteString('URL', SheepURL);
-      Registry.WriteString('Renderer', flam3Path);
-      Registry.WriteString('Server', SheepServer);
-      Registry.WriteString('Pass', SheepPW);
       Registry.WriteBool('ShowProgress', ShowProgress);
       Registry.WriteBool('KeepBackground', KeepBackground);
       Registry.WriteBool('PreserveQuality', PreserveQuality);

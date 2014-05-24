@@ -246,7 +246,6 @@ type
     btnDefGradient: TSpeedButton;
     btnSmooth: TSpeedButton;
     SpeedButton2: TSpeedButton;
-    btnRenderer: TSpeedButton;
     btnHelp: TSpeedButton;
     Label49: TLabel;
     btnFindDefaultSaveFile: TSpeedButton;
@@ -256,29 +255,18 @@ type
     Panel40: TPanel;
     txtDefSmoothFile: TEdit;
     Panel41: TPanel;
-    Panel42: TPanel;
     Panel43: TPanel;
     txtLibrary: TEdit;
-    txtRenderer: TEdit;
     txtHelp: TEdit;
     cbEnableAutosave: TCheckBox;
     Panel44: TPanel;
     txtDefaultSaveFile: TEdit;
     Panel45: TPanel;
     cbFreq: TComboBox;
-    GroupBox3: TGroupBox;
-    btnChaotica: TSpeedButton;
-    btnChaotica64: TSpeedButton;
-    Panel47: TPanel;
-    cbC64: TCheckBox;
-    txtChaotica: TEdit;
-    Panel49: TPanel;
-    txtChaotica64: TEdit;
     btnPluginPath: TSpeedButton;
     Panel50: TPanel;
     txtPluginFolder: TEdit;
     procedure chkEnableEditorPreviewClick(Sender: TObject);
-    procedure btnChaoticaClick(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure btnCancelClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -301,7 +289,6 @@ type
     procedure txtMaxXformsChange(Sender: TObject);
     procedure txtMinMutateChange(Sender: TObject);
     procedure txtMaxMutateChange(Sender: TObject);
-    procedure btnRendererClick(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure pnlBackColorClick(Sender: TObject);
@@ -529,12 +516,6 @@ begin
   chkAdjustDensity.checked := UPRAdjustDensity;
 
   { UPR tab }
-  txtNick.Text := SheepNick;
-  txtURL.Text := SheepURL;
-  txtPassword.Text := SheepPW;
-  txtRenderer.Text := flam3Path;
-  txtServer.Text := SheepServer;
-
   txtHelp.Text := HelpPath;
   txtLibrary.text := defLibrary;
   Label45.Visible := false;
@@ -550,15 +531,6 @@ begin
   pnlGRLine.Color := TColor(LineGRColor);
   cbGL.Checked := EnableGuides;
   cbGLClick(nil);
-  txtChaotica.Text := ChaoticaPath;
-  txtChaotica64.Text := ChaoticaPath64;
-
-  {$ifdef Apo7X64}
-  cbc64.Checked := true;
-  {$else}
-  cbC64.Checked := UseX64IfPossible;
-  {$endif}
-
   txtPluginFolder.Text := PluginPath;
 
   UpdateShapeColors;
@@ -723,13 +695,6 @@ begin
   UPRWidth := StrToInt(txtUPRWidth.text);
   UPRHeight := StrToInt(txtUPRHeight.text);
 
-  { Sheep options }
-  SheepNick := txtNick.Text;
-  SheepURL := txtURL.Text;
-  SheepPW := txtPassword.text;
-  flam3Path := txtRenderer.text;
-  SheepServer := txtServer.text;
-
   {Paths}
   defLibrary := txtLibrary.text;
   if (not RememberLastOpenFile) then defFlameFile := txtDefParameterFile.Text;
@@ -737,27 +702,14 @@ begin
   PlaySoundOnRenderComplete := chkPlaySound.Checked;
   RenderCompleteSoundFile := txtSoundFile.Text;
   HelpPath := txtHelp.Text;
-  ChaoticaPath := txtChaotica.text;
-  ChaoticaPath64 := txtChaotica64.text;
 
-  //{$ifdef Apo7X64}
-  //{$else}
-  UseX64IfPossible := cbC64.Checked;
   PluginPath := txtPluginFolder.Text;
   if (RightStr(PluginPath, 1) <> '\') and (PluginPath <> '') then
     PluginPath := PluginPath + '\';
-  //{$endif}
 
   AutoSaveEnabled := cbEnableAutosave.Checked;
   AutoSavePath := txtDefaultSaveFile.Text;
   AutoSaveFreq := cbFreq.ItemIndex;
-
-
-
-
-  MainForm.mnuExportFLame.Enabled := FileExists(flam3Path);
-  //MainForm.mnuExportChaotica.Enabled := FileExists(chaoticaPath);
-  MainForm.mnuExportChaotica.Enabled := FileExists(chaoticaPath + '\32bit\chaotica.exe');
 
   if (warn) then
     Application.MessageBox(PChar(TextByKey('options-restartnotice')), PChar('Apophysis'), MB_ICONWARNING);
@@ -913,21 +865,6 @@ begin
     udMinMutate.Position := StrToInt(txtMaxMutate.Text);
 end;
 
-procedure TOptionsForm.btnRendererClick(Sender: TObject);
-var
-  fn:string;
-begin
-  OpenDialog.Filter := TextBykey('common-filter-allfiles') + '|*.*';
-  OpenDialog.InitialDir := ExtractFilePath(flam3Path);
-  OpenDialog.FileName := '';
-  if OpenSaveFileDialog(OptionsForm, '', OpenDialog.Filter, OpenDialog.InitialDir, TextByKey('common-browse'), fn, true, false, false, true) then
-  //if OpenDialog.Execute then
-  begin
-    txtRenderer.text := fn;
-  end;
-
-end;
-
 procedure TOptionsForm.SpeedButton2Click(Sender: TObject);
 var
   fn:string;
@@ -981,11 +918,8 @@ begin
 	Panel24.Caption := TextByKey('common-maximum');
 	Panel27.Caption := TextByKey('common-maximum');
 	Label49.Caption := TextByKey('common-minutes');
-  Panel47.Caption := TextByKey('common-filename');
-  Panel50.Caption := TextByKey('options-tab-general-pluginpath');
   //Panel49.Caption := TextByKey('common-filename') + ' (x64)';
   Panel48.Caption := TextByKey('options-tab-editor-previewtransparency');
-  cbC64.Caption := textbykey('options-tab-environment-usex64chaotica');
   chkEnableEditorPreview.Caption := TextByKey('options-tab-editor-enablepreview');
 	self.Caption := TextByKey('options-title');
 	GeneralPage.Caption := TextByKey('options-tab-general-title');
@@ -1407,47 +1341,6 @@ begin
       Application.MessageBox(PChar(TextByKey('common-invalidformat')), PChar('Apophysis'), MB_ICONERROR);
     end;
   end;
-end;
-
-procedure TOptionsForm.btnChaoticaClick(Sender: TObject);
-var fn: string;
-begin
-
-  // new b. 1550
-  fn := ChaoticaPath;
-  if SelectDirectory(fn, [sdAllowCreate, sdPerformCreate, sdPrompt], 0) then
-  begin
-    txtChaotica.Text := fn;
-    if not FileExists(fn + '\32bit\chaotica.exe') then
-    begin
-      MessageBox(0,
-        PCHAR('Could not find "' + fn + '\32bit\chaotica.exe" - invalid Chaotica 0.45+ path'),
-        PCHAR('Apophysis 7X'), MB_ICONHAND or MB_OK);
-      txtChaotica.Text := ChaoticaPath;
-      fn := ChaoticaPath;
-    end;
-
-    if not FileExists(fn + '\64bit\chaotica.exe') then
-    begin
-      cbc64.Enabled := false;
-      cbc64.Checked := false;
-    end;
-  end;
-
-  {OpenDialog.Filter := TextBykey('common-filter-allfiles') + '|*.*';
-  if sender = TSpeedButton(btnChaotica) then
-    OpenDialog.InitialDir := ExtractFilePath(ChaoticaPath)
-  else
-    OpenDialog.InitialDir := ExtractFilePath(ChaoticaPath64);
-  OpenDialog.FileName := '';
-  if OpenSaveFileDialog(OptionsForm, '', OpenDialog.Filter, OpenDialog.InitialDir, TextByKey('common-browse'), fn, true, false, false, true) then
-  //if OpenDialog.Execute then
-  begin
-    if sender = TSpeedButton(btnChaotica) then txtChaotica.text := fn
-    else txtChaotica64.text := fn;
-  end; }
-
-
 end;
 
 procedure TOptionsForm.chkEnableEditorPreviewClick(Sender: TObject);

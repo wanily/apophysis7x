@@ -579,9 +579,6 @@ begin
     Result.background[2] := 0;
   end;
   Result.zoom := 0;
-  Result.Nick := SheepNick;
-  Result.URl := SheepURL;
-
   Result.xform[Result.NumXForms].Clear;
   Result.xform[Result.NumXForms].symmetry := 1;
 end;

@@ -39,7 +39,7 @@ uses
   LibXmlParser, LibXmlComps, PngImage, XPMan,
   StrUtils, LoadTracker, CheckLst,
   CommandLine, RegularExpressionsCore, MissingPlugin, Base64, Translation,
-  RegexHelper, Chaotica;//, WinInet;
+  RegexHelper;//, WinInet;
 
 const
   PixelCountMax = 32768;
@@ -85,8 +85,6 @@ type
     SmallImages: TImageList;
     MainMenu: TMainMenu;
     MainFile: TMenuItem;
-    mnuSaveUPR: TMenuItem;
-    N1: TMenuItem;
     mnuRandomBatch: TMenuItem;
     FileExitSep: TMenuItem;
     mnuExit: TMenuItem;
@@ -151,7 +149,6 @@ type
     N15: TMenuItem;
     mnuStop: TMenuItem;
     mnuOpenScript: TMenuItem;
-    mnuImportGimp: TMenuItem;
     N9: TMenuItem;
     N10: TMenuItem;
     mnuManageFavorites: TMenuItem;
@@ -160,9 +157,6 @@ type
     mnuPaste: TMenuItem;
     mnuCopy: TMenuItem;
     N20: TMenuItem;
-    mnuExportFLame: TMenuItem;
-    mnuPostSheep: TMenuItem;
-    N21: TMenuItem;
     mnuFlamepdf: TMenuItem;
     mnuimage: TMenuItem;
     mnuSaveAllAs: TMenuItem;
@@ -228,7 +222,6 @@ type
     Image: TImage;
     pnlLSPFrame: TPanel;
     LoadSaveProgress: TProgressBar;
-    mnuExportChaotica: TMenuItem;
     mnuResumeRender: TMenuItem;
     mnuManual: TMenuItem;
     N17: TMenuItem;
@@ -240,7 +233,6 @@ type
     procedure tbzoomoutwindowClick(Sender: TObject);
     procedure mnuimageClick(Sender: TObject);
     procedure mnuExitClick(Sender: TObject);
-    procedure mnuSaveUPRClick(Sender: TObject);
     procedure ListViewChange(Sender: TObject; Item: TListItem;
       Change: TItemChange);
     procedure FormCreate(Sender: TObject);
@@ -308,8 +300,6 @@ type
     procedure ApplicationEventsActivate(Sender: TObject);
     procedure mnuPasteClick(Sender: TObject);
     procedure mnuCopyClick(Sender: TObject);
-    procedure mnuExportFlameClick(Sender: TObject);
-    procedure mnuExportChaoticaClick(Sender: TObject);
 
     procedure ListXmlScannerStartTag(Sender: TObject; TagName: string;
       Attributes: TAttrList);
@@ -501,7 +491,7 @@ uses
   {$else}
     ScriptForm, FormFavorites,
   {$endif}
-  FormExport, RndFlame, Tracer, Types, SplashForm, varGenericPlugin;
+  RndFlame, Tracer, Types, SplashForm, varGenericPlugin;
 
 {$R *.DFM}
 
@@ -710,11 +700,6 @@ begin
 	mnuSaveAllAs.Caption := TextByKey('main-menu-file-saveallparams');
 	mnuSmoothGradient.Caption := TextByKey('main-menu-file-smoothpalette');
 	mnuOpenGradient.Caption := TextByKey('main-menu-file-gradientbrowser');
-	mnuSaveUPR.Caption := TextByKey('main-menu-file-exportupr');
-	mnuExportFlame.Caption := TextByKey('main-menu-file-exportflame');
-  mnuExportChaotica.Caption := TextByKey('main-menu-file-exportchaotica');
-	mnuImportGimp.Caption := TextByKey('main-menu-file-importgimp');
-	mnuPostSheep.Caption := TextByKey('main-menu-file-submitsheep');
 	mnuRandomBatch.Caption := TextByKey('main-menu-file-randombatch');
 	mnuExit.Caption := TextByKey('main-menu-file-exit');
 	MainEdit.Caption := TextByKey('main-menu-edit-title');
@@ -2958,18 +2943,6 @@ begin
   Close;
 end;
 
-procedure TMainForm.mnuSaveUPRClick(Sender: TObject);
-{ Write a UPR to a file }
-begin
-  SaveForm.SaveType := stExportUPR;
-  SaveForm.Filename := UPRPath;
-  SaveForm.Title := maincp.name;
-  if SaveForm.ShowModal = mrOK then
-  begin
-    UPRPath := SaveForm.FileName;
-    SaveUPR(SaveForm.Title, SaveForm.Filename);
-  end;
-end;
 
 procedure TMainForm.mnuSaveAsClick(Sender: TObject);
 { Save parameters to a file }
@@ -3268,8 +3241,6 @@ begin
   AvailableLanguages.Add('');
   ListLanguages;
 
-  C_SyncDllPlugins;
-
   cmdl := TCommandLine.Create;
   cmdl.Load;
 
@@ -3283,9 +3254,6 @@ begin
   Screen.Cursors[crEditRotate] := LoadCursor(HInstance, 'ROTATE_WB');
   Screen.Cursors[crEditScale]  := LoadCursor(HInstance, 'SCALE_WB');
   Caption := AppVersionString + APP_BUILD;
-
-  mnuExportFLame.Enabled := FileExists(flam3Path);
-  mnuExportChaotica.Enabled := FileExists(chaoticaPath + '\32bit\chaotica.exe');
 
   FMouseMoveState := msDrag;
   LimitVibrancy := False;
@@ -3492,7 +3460,6 @@ begin
   AdjustForm.cmbPalette.ItemIndex := 0;
 //  AdjustForm.cmbPalette.Items.clear;
 
-  ExportDialog.cmbDepth.ItemIndex := 2;
   DoNotAskAboutChange := false;
 
   if (AutoSaveFreq = 0) then mins := 1
@@ -4881,112 +4848,6 @@ begin
   WinShellExecute('open', AssociatedFile);
 end;
 
-
-procedure TMainForm.mnuExportFlameClick(Sender: TObject);
-var
-  FileList: Tstringlist;
-  Ext, ex, Path: string;
-  cp1: TControlPoint;
-begin
-  if not FileExists(flam3Path) then
-  begin
-    Application.MessageBox(PChar(TextByKey('main-status-noflam3')), 'Apophysis', 16);
-    exit;
-  end;
-  case ExportFileFormat of
-    1: Ext := 'jpg';
-    2: Ext := 'ppm';
-    3: Ext := 'png';
-  end;
-  FileList := TstringList.Create;
-  cp1 := TControlPoint.Create;
-  cp1.copy(Maincp);
-  ExportDialog.ImageWidth := ExportWidth;
-  ExportDialog.ImageHeight := ExportHeight;
-  ExportDialog.Sample_density := ExportDensity;
-  ExportDialog.Filter_Radius := ExportFilter;
-  ExportDialog.Oversample := ExportOversample;
-  try
-    ExportDialog.Filename := RenderPath + Maincp.name + '.' + Ext;
-    if ExportDialog.ShowModal = mrOK then
-    begin
-      ex := ExtractFileExt(ExportDialog.Filename);
-      if ExtractFileExt(ExportDialog.Filename) = '.ppm' then
-        ExportFileFormat := 2
-      else if ExtractFileExt(ExportDialog.Filename) = '.png' then
-        ExportFileFormat := 3
-      else
-        ExportFileFormat := 1;
-      case ExportFileFormat of
-        1: Ext := 'jpg';
-        2: Ext := 'ppm';
-        3: Ext := 'png';
-      end;
-      ExportWidth := ExportDialog.ImageWidth;
-      ExportHeight := ExportDialog.ImageHeight;
-      ExportDensity := ExportDialog.Sample_density;
-      ExportFilter := ExportDialog.Filter_Radius;
-      ExportOversample := ExportDialog.Oversample;
-      ExportBatches := ExportDialog.Batches;
-      ExportEstimator := ExportDialog.Estimator;
-      ExportEstimatorMin := ExportDialog.EstimatorMin;
-      ExportEstimatorCurve := ExportDialog.EstimatorCurve;
-      ExportJitters := ExportDialog.Jitters;
-      ExportGammaTreshold := ExportDialog.GammaTreshold;
-      cp1.sample_density := ExportDensity;
-      cp1.spatial_oversample := ExportOversample;
-      cp1.spatial_filter_radius := ExportFilter;
-      cp1.nbatches := ExportBatches;
-      if (cp1.width <> ExportWidth) or (cp1.Height <> ExportHeight) then
-        cp1.AdjustScale(ExportWidth, ExportHeight);
-      cp1.estimator := ExportEstimator;
-      cp1.estimator_min := ExportEstimatorMin;
-      cp1.estimator_curve := ExportEstimatorCurve;
-      cp1.jitters := ExportJitters;
-      cp1.gamma_threshold := ExportGammaTreshold;
-      FileList.Text := FlameToXML(cp1, true, false);
-      FileList.SaveToFile(ChangeFileExt(ExportDialog.Filename, '.flame'));
-      FileList.Clear;
-      FileList.Add('@echo off');
-      FileList.Add('set verbose=1');
-      FileList.Add('set format=' + Ext);
-      if ExportFileFormat = 1 then
-        FileList.Add('set jpeg=' + IntToStr(JPEGQuality));
-      case ExportDialog.cmbDepth.ItemIndex of
-        0: FileList.Add('set bits=16');
-        1: FileList.Add('set bits=32');
-        2: FileList.Add('set bits=33');
-        3: FileList.Add('set bits=64');
-      end;
-      if ExportDialog.udStrips.Position > 1 then
-        FileList.Add('set nstrips=' + IntToStr(ExportDialog.udStrips.Position));
-      if (PNGTransparency > 0) then
-        FileList.Add('set transparency=1')
-      else
-        FileList.Add('set transparency=0');
-      FileList.Add('set out=' + ExportDialog.Filename);
-      FileList.Add('@echo Rendering "' + ExportDialog.Filename + '"');
-{
-      FileList.Add(ExtractShortPathName(hqiPath) + ' < ' + ExtractShortPathName(ChangeFileExt(ExportDialog.Filename, '.flame')));
-      Path := ExtractShortPathName(ExtractFileDir(ExportDialog.Filename) + '\');
-}
-      FileList.Add('"' + flam3Path + '" < "' + ChangeFileExt(ExportDialog.Filename, '.flame') + '"');
-      Path := ExtractFilePath(ExtractFileDir(ExportDialog.Filename) + '\');
-
-      FileList.SaveToFile(ChangeFileExt(ExportDialog.Filename, '.bat'));
-      if ExportDialog.chkRender.Checked then
-      begin
-        SetCurrentDir(Path);
-        WinShellOpen(ChangeFileExt(ExportDialog.Filename, '.bat'));
-      end;
-    end;
-  finally
-    FileList.Free;
-    cp1.free;
-  end;
-
-end;
-
 ////////////////////////////////////////////////////////////////////////////////
 
 procedure ParseCompactColors(cp: TControlPoint; count: integer; in_data: string; alpha: boolean = true);
@@ -5189,13 +5050,6 @@ begin
       for i := 0 to tokens.Count - 1 do
         ParseCP.used_plugins.Add(tokens[i]);
     end;
-
-    v := Attributes.Value('nick');
-    if Trim(String(v)) = '' then v := TStringType(SheepNick);
-    Parsecp.Nick := String(v);
-    v := Attributes.Value('url');
-    if Trim(String(v)) = '' then v := TStringType(SheepUrl);
-    Parsecp.URL := String(v);
   end
   else if TagName='palette' then
   begin
@@ -6930,13 +6784,6 @@ begin
     str := str + #13#10 + '  - ' + MainCP.used_plugins[i];
   end;
   LoadForm.Output.Text := LoadForm.Output.Text + #13#10 + str + #13#10;
-end;
-
-procedure TMainForm.mnuExportChaoticaClick(Sender: TObject);
-begin
-  //
-  MainCP.FillUsedPlugins;
-  C_ExecuteChaotica(FlameToXml(MainCp, false, false), MainCp.used_plugins, UseX64IfPossible);
 end;
 
 procedure TMainForm.mnuManualClick(Sender: TObject);
