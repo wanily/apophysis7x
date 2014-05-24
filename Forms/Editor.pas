@@ -33,7 +33,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   ExtCtrls, StdCtrls, ComCtrls, Math, Menus, ToolWin, Registry,
   Grids, ValEdit, Buttons, ImgList, Types,  StrUtils , Curves,
-  ControlPoint, XForm, cmap, CustomDrawControl,
+  ControlPoint, XForm, cmap, CustomDrawControl, TransformSelection,
   RenderingInterface, Translation, RenderThread;
 
 type
@@ -5680,37 +5680,47 @@ end;
 
 procedure TEditForm.mnuLinkPostxformClick(Sender: TObject);
 var
-  i: integer;
+  i,j,r: integer;
+  incl: TStringList;
 begin
   if (Transforms < NXFORMS) and (SelectedTriangle <> Transforms) then
   begin
-    MainForm.UpdateUndo;
-    MainTriangles[Transforms+1] := MainTriangles[Transforms];
-    cp.xform[Transforms+1].Assign(cp.xform[Transforms]);
+    TransformSelectionForm.Select(cp, SelectedTriangle, Transforms);
 
-    MainTriangles[Transforms] := MainTriangles[-1];
-    cp.xform[Transforms].Clear;
-    cp.xform[Transforms].density := 0.5;
-    cp.xform[Transforms].SetVariation(0, 1);
+    r := TransformSelectionForm.ShowModal;
+    if (r = mrOK) then
+    begin
+      incl := TransformSelectionForm.IncludedIndices;
 
-    for i := 0 to Transforms-1 do begin
-      cp.xform[Transforms].modWeights[i] := cp.xform[SelectedTriangle].modWeights[i];
-      cp.xform[SelectedTriangle].modWeights[i] := 0;
+      MainForm.UpdateUndo;
+
+      MainTriangles[Transforms+1] := MainTriangles[Transforms];
+      cp.xform[Transforms+1].Assign(cp.xform[Transforms]);
+
+      MainTriangles[Transforms] := MainTriangles[-1];
+      cp.xform[Transforms].Clear;
+      cp.xform[Transforms].density := 0.5;
+      cp.xform[Transforms].SetVariation(0, 1);
+
+      for i := 0 to Transforms-1 do begin
+        cp.xform[Transforms].modWeights[i] := cp.xform[SelectedTriangle].modWeights[i];
+        for j := 0 to incl.Count -1 do cp.xform[StrToInt(incl[j])].modWeights[i] := 0;
+      end;
+
+      for i := 0 to Transforms do cp.xform[i].modWeights[Transforms] := 0;
+      for j := 0 to incl.Count -1 do cp.xform[StrToInt(incl[j])].modWeights[Transforms] := 1;
+
+      cp.xform[Transforms].symmetry := 1;
+      cp.xform[Transforms].transOpacity := cp.xform[SelectedTriangle].transOpacity;
+
+      for j := 0 to incl.Count -1 do cp.xform[StrToInt(incl[j])].transOpacity := 0;
+
+      SelectedTriangle := Transforms;
+
+      Inc(Transforms);
+      UpdateXformsList;
+      UpdateFlame(True);
     end;
-
-    for i := 0 to Transforms do
-      cp.xform[i].modWeights[Transforms] := 0;
-    cp.xform[SelectedTriangle].modWeights[Transforms] := 1;
-
-    cp.xform[Transforms].symmetry := 1;
-    cp.xform[Transforms].transOpacity := cp.xform[SelectedTriangle].transOpacity;
-    cp.xform[SelectedTriangle].transOpacity := 0;
-
-    SelectedTriangle := Transforms;
-
-    Inc(Transforms);
-    UpdateXformsList;
-    UpdateFlame(True);
   end;
 end;
 

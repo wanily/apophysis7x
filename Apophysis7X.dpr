@@ -143,7 +143,8 @@ uses
   Save in 'Forms\Save.pas' {SaveForm},
   SplashForm in 'Forms\SplashForm.pas' {SplashWindow},
   Template in 'Forms\Template.pas' {TemplateForm},
-  Curves in 'Forms\Curves.pas' {CurvesForm}
+  Curves in 'Forms\Curves.pas' {CurvesForm},
+  TransformSelection in 'Forms\TransformSelection.pas' {TransformSelectionForm}
 
   {$ifdef DisableScripting};
   // if scripting is disabled, don't import the scripting form units
@@ -183,6 +184,7 @@ begin
   Application.CreateForm(TSaveForm, SaveForm);
   Application.CreateForm(TTemplateForm, TemplateForm);
   Application.CreateForm(TCurvesForm, CurvesForm);
+  Application.CreateForm(TTransformSelectionForm, TransformSelectionForm);
 
   {$ifdef DisableScripting}
   // if scripting is disabled, don't create the scripting forms

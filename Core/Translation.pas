@@ -648,6 +648,11 @@ begin
 	Add('main-report-finaltransform', 'Has final transform: %s');
 	Add('main-report-usedplugins', 'Used plugins:');
 	Add('main-report-noplugins', '(none)');
+  Add('selecttransform-title', 'Select transforms');
+  Add('selecttransform-included', 'Transforms to link');
+  Add('selecttransform-excluded', 'Transforms to skip');
+  Add('selecttransform-item', 'Transform %d');
+  Add('selecttransform-item-withname', 'Transform %d (%s)');
 end;
 
 procedure Add(key, value: string);

@@ -253,6 +253,9 @@
         <DCCReference Include="Forms\Curves.pas">
             <Form>CurvesForm</Form>
         </DCCReference>
+        <DCCReference Include="Forms\TransformSelection.pas">
+            <Form>TransformSelectionForm</Form>
+        </DCCReference>
         <None Include="Apophysis7X.todo"/>
         <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>

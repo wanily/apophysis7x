@@ -31,6 +31,7 @@ uses
 
 type
   EFormatInvalid = class(Exception);
+  TIntegerArray = array[0..9] of Integer;
 
 { Weight manipulation }
 { Triangle transformations }
