@@ -90,10 +90,6 @@ type
     mnuExit: TMenuItem;
     MainEdit: TMenuItem;
     mnuEditor: TMenuItem;
-    mnuRandom: TMenuItem;
-    mnuNormalWeights: TMenuItem;
-    mnuEqualize: TMenuItem;
-    mnuRWeights: TMenuItem;
     mnuOptions: TMenuItem;
     MainHelp: TMenuItem;
     mnuHelpTopics: TMenuItem;
@@ -104,12 +100,9 @@ type
     DisplayPopup: TPopupMenu;
     mnuPopFullscreen: TMenuItem;
     RedrawTimer: TTimer;
-    mnuVar: TMenuItem;
-    mnuVRandom: TMenuItem;
     N3: TMenuItem;
     mnuOpen: TMenuItem;
     mnuSaveAs: TMenuItem;
-    N8: TMenuItem;
     mnuSmoothGradient: TMenuItem;
     mnuView: TMenuItem;
     mnuToolbar: TMenuItem;
@@ -137,11 +130,7 @@ type
     mnuPopUndo: TMenuItem;
     N16: TMenuItem;
     mnuPopRedo: TMenuItem;
-    mnuCalculateColors: TMenuItem;
-    mnuRandomizeColorValues: TMenuItem;
-    N7: TMenuItem;
     N18: TMenuItem;
-    N19: TMenuItem;
     mnuScript: TMenuItem;
     mnuRun: TMenuItem;
     mnuEditScript: TMenuItem;
@@ -160,8 +149,6 @@ type
     mnuSaveAllAs: TMenuItem;
     View1: TMenuItem;
     mnuRenderAll: TMenuItem;
-    mnuBuiltinVars: TMenuItem;
-    mnuPluginVars: TMenuItem;
     Thumbnails: TImageList;
     Image1: TImage;
     Splitter: TSplitter;
@@ -234,10 +221,7 @@ type
     procedure ListViewChange(Sender: TObject; Item: TListItem;
       Change: TItemChange);
     procedure FormCreate(Sender: TObject);
-    procedure mnuRandomClick(Sender: TObject);
-    procedure mnuEqualizeClick(Sender: TObject);
     procedure mnuEditorClick(Sender: TObject);
-    procedure mnuRWeightsClick(Sender: TObject);
     procedure mnuRandomBatchClick(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure FormKeyUpDown(Sender: TObject; var Key: Word;
@@ -379,9 +363,6 @@ type
     procedure DrawZoomWindow;
     procedure DrawRotatelines(Angle: double);
     procedure DrawPitchYawLines(YawAngle: double; PitchAngle:double);
-
-    procedure FillVariantMenu;
-    procedure VariantMenuClick(Sender: TObject);
 
     procedure FavoriteClick(Sender: TObject);
     procedure ScriptItemClick(Sender: TObject);
@@ -714,21 +695,11 @@ begin
 	mnuResetLocation.Caption := TextByKey('main-menu-flame-reset');
 	mnuPopResetLocation.Caption := TextByKey('main-menu-flame-reset');
 	btnReset.Hint := TextByKey('main-menu-flame-reset');
-	mnuRandom.Caption := TextByKey('main-menu-flame-randomize');
-	mnuRWeights.Caption := TextByKey('main-menu-flame-randomweights');
-	mnuEqualize.Caption := TextByKey('main-menu-flame-equalweights');
-	mnuNormalWeights.Caption := TextByKey('main-menu-flame-computeweights');
-	mnuCalculateColors.Caption := TextByKey('main-menu-flame-calculatecolors');
-	mnuRandomizeColorValues.Caption := TextByKey('main-menu-flame-randomizecolors');
 	mnuRender.Caption := TextByKey('main-menu-flame-rendertodisk');
 	btnRender.Hint := TextByKey('main-menu-flame-rendertodisk');
 	mnuRenderAll.Caption := TextByKey('main-menu-flame-renderallflames');
 	tbRenderAll.Hint := TextByKey('main-menu-flame-renderallflames');
 	mnuReportFlame.Caption := TextByKey('main-menu-flame-generatereport');
-	mnuVar.Caption := TextByKey('main-menu-variation-title');
-	mnuVRandom.Caption := TextByKey('main-menu-variation-random');
-	mnuBuiltinVars.Caption := TextByKey('main-menu-variation-builtin');
-	mnuPluginVars.Caption := TextByKey('main-menu-variation-plugins');
 	mnuScript.Caption := TextByKey('main-menu-script-title');
 	mnuRun.Caption := TextByKey('main-menu-script-run');
 	btnRunScript.Hint := TextByKey('main-menu-script-run');
@@ -2721,17 +2692,6 @@ begin
   UpdateWindows;
 end;
 
-procedure TMainForm.mnuRWeightsClick(Sender: TObject);
-begin
-  StopThread;
-  UpdateUndo;
-  inc(MainSeed);
-  RandSeed := MainSeed;
-  MainCp.RandomizeWeights;
-  RedrawTimer.Enabled := True;
-  UpdateWindows;
-end;
-
 procedure TMainForm.mnuRandomBatchClick(Sender: TObject);
 begin
 {$ifdef DisableScripting}
@@ -2763,34 +2723,6 @@ begin
   end;
   Result := Strings.Text;
   strings.Free;
-end;
-
-procedure TMainForm.mnuRandomClick(Sender: TObject);
-begin
-  StopThread;
-  UpdateUndo;
-  inc(MainSeed);
-  RandomizeCP(MainCp);
-  inc(RandomIndex);
-  MainCp.name := RandomPrefix + RandomDate + '-' +
-    IntToStr(RandomIndex);
-  Transforms := MainCp.TrianglesFromCP(MainTriangles);
-
-  if AdjustForm.visible then AdjustForm.UpdateDisplay;
-
-  StatusBar.Panels[3].text := maincp.name;
-  ResetLocation;
-  RedrawTimer.Enabled := true;
-  UpdateWindows;
-end;
-
-procedure TMainForm.mnuEqualizeClick(Sender: TObject);
-begin
-  StopThread;
-  UpdateUndo;
-  MainCP.EqualizeWeights;
-  RedrawTimer.Enabled := True;
-  UpdateWindows;
 end;
 
 procedure TMainForm.mnuEditorClick(Sender: TObject);
@@ -3141,7 +3073,6 @@ begin
   mnuExit.ShortCut := TextToShortCut('Alt+F4');
 
   SplashWindow.SetInfo(TextByKey('splash-loadingplugins'));
-  FillVariantMenu;
 
   tbQualityBox.Text := FloatToStr(defSampleDensity);
   tbShowAlpha.Down := ShowTransparency;
@@ -3918,7 +3849,6 @@ end;
 
 procedure TMainForm.mnuVRandomClick(Sender: TObject);
 begin
-  mnuVRandom.Checked := True;
   StopThread;
   UpdateUndo;
   inc(MainSeed);
@@ -5800,46 +5730,6 @@ end;
 procedure TMainForm.tbRotateClick(Sender: TObject);
 begin
   FMouseMoveState := msRotate;
-end;
-
-///////////////////////////////////////////////////////////////////////////////
-procedure TMainForm.FillVariantMenu;
-var
-  i: integer;
-  s: string;
-  NewMenuItem : TMenuItem;
-begin
-  SetLength(VarMenus, NrVar);
-
-  for i := 0 to NRVAR - 1 do begin
-    NewMenuItem := TMenuItem.Create(self);
-    s := varnames(i);
-    NewMenuItem.Caption    := uppercase(s[1]) + copy(s, 2, length(s)-1);
-    NewMenuItem.OnClick    := VariantMenuClick;
-    NewMenuItem.Enabled    := True;
-    NewMenuItem.Name       := 'var' + intTostr(i);
-    NewMenuItem.Tag        := i;
-    NewMenuItem.GroupIndex := 2;
-    NewMenuItem.RadioItem  := True;
-    VarMenus[i] := NewMenuItem;
-    if i < NumBuiltinVars then
-      mnuBuiltinVars.Add(NewMenuItem)
-    else
-      mnuPluginVars.Add(NewMenuItem);
-  end;
-end;
-
-///////////////////////////////////////////////////////////////////////////////
-
-procedure TMainForm.VariantMenuClick(Sender: TObject);
-begin
-  TMenuItem(Sender).Checked := True;
-  UpdateUndo;
-  Variation := TVariation(TMenuItem(Sender).Tag);
-  SetVariation(maincp);
-  ResetLocation;
-  RedrawTimer.Enabled := True;
-  UpdateWindows;
 end;
 
 //--Z--////////////////////////////////////////////////////////////////////////

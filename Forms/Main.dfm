@@ -5546,7 +5546,6 @@ object MainForm: TMainForm
         Hint = 'Show the Transform Editor'
         ImageIndex = 19
         ShortCut = 115
-        OnClick = mnuEditorClick
       end
       object mnuAdjust: TMenuItem
         Caption = 'Adjust'
@@ -5569,50 +5568,13 @@ object MainForm: TMainForm
       end
     end
     object F1: TMenuItem
-      Caption = 'Flame'
+      Caption = 'Fl&ame'
       object mnuResetLocation: TMenuItem
         Caption = 'Reset Location'
         Hint = 'Recalculate flame location'
         ImageIndex = 12
         ShortCut = 123
         OnClick = mnuResetLocationClick
-      end
-      object N19: TMenuItem
-        Caption = '-'
-      end
-      object mnuRandom: TMenuItem
-        Caption = '&Randomize'
-        Hint = 'Randomize flame parameters'
-        OnClick = mnuRandomClick
-      end
-      object mnuRWeights: TMenuItem
-        Caption = 'Random &Weights'
-        Hint = 'Randomize transform weights'
-        OnClick = mnuRWeightsClick
-      end
-      object mnuEqualize: TMenuItem
-        Caption = '&Equalize Weights'
-        Hint = 'Set all weights to the same value'
-        OnClick = mnuEqualizeClick
-      end
-      object mnuNormalWeights: TMenuItem
-        Caption = 'Compute  Weights'
-        Hint = 'Compute weights from triangle areas'
-        OnClick = mnuNormalWeightsClick
-      end
-      object N7: TMenuItem
-        Caption = '-'
-      end
-      object mnuCalculateColors: TMenuItem
-        Caption = 'Calculate Colors Values'
-        Hint = 'Spread the transform color parameters evenly'
-        OnClick = mnuCalculateColorsClick
-      end
-      object mnuRandomizeColorValues: TMenuItem
-        Caption = 'Randomize Color Values'
-        Hint = 'Randomize color parameters'
-        ShortCut = 49230
-        OnClick = mnuRandomizeColorValuesClick
       end
       object N2: TMenuItem
         Caption = '-'
@@ -5642,30 +5604,8 @@ object MainForm: TMainForm
         OnClick = mnuReportFlameClick
       end
     end
-    object mnuVar: TMenuItem
-      Caption = 'Variation'
-      object mnuVRandom: TMenuItem
-        Caption = 'Random'
-        GroupIndex = 2
-        RadioItem = True
-        ShortCut = 122
-        OnClick = mnuVRandomClick
-      end
-      object N8: TMenuItem
-        Caption = '-'
-        GroupIndex = 2
-      end
-      object mnuBuiltinVars: TMenuItem
-        Caption = 'Built-in'
-        GroupIndex = 2
-      end
-      object mnuPluginVars: TMenuItem
-        Caption = 'Plugins'
-        GroupIndex = 2
-      end
-    end
     object mnuScript: TMenuItem
-      Caption = 'Script'
+      Caption = '&Script'
       object mnuRun: TMenuItem
         Caption = 'Run script'
         Hint = 'Run the currently loaded script'
@@ -5710,7 +5650,7 @@ object MainForm: TMainForm
       end
     end
     object mnuView: TMenuItem
-      Caption = 'Options'
+      Caption = '&Options'
       object mnuToolbar: TMenuItem
         Caption = 'Main toolbar'
         Checked = True

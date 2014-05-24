@@ -203,7 +203,7 @@ object OptionsForm: TOptionsForm
     Top = 8
     Width = 475
     Height = 396
-    ActivePage = GeneralPage
+    ActivePage = VariationsPage
     Anchors = [akLeft, akTop, akRight, akBottom]
     MultiLine = True
     TabOrder = 3
@@ -1249,160 +1249,13 @@ object OptionsForm: TOptionsForm
           OnChange = txtMinXFormsChange
         end
       end
-      object gpFlameTitlePrefix: TGroupBox
-        Left = 232
-        Top = 88
-        Width = 217
-        Height = 97
-        Anchors = [akTop, akRight]
-        Caption = 'Random batch'
-        TabOrder = 1
-        object udBatchSize: TUpDown
-          Left = 195
-          Top = 20
-          Width = 13
-          Height = 21
-          Associate = txtBatchSize
-          Min = 1
-          Max = 300
-          Position = 10
-          TabOrder = 2
-          Thousands = False
-        end
-        object chkKeepBackground: TCheckBox
-          Left = 8
-          Top = 72
-          Width = 201
-          Height = 17
-          HelpContext = 1023
-          Caption = 'Keep background color'
-          TabOrder = 3
-        end
-        object Panel11: TPanel
-          Left = 8
-          Top = 20
-          Width = 105
-          Height = 21
-          Cursor = crArrow
-          BevelOuter = bvLowered
-          Caption = 'Batch size'
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 4
-        end
-        object Panel12: TPanel
-          Left = 8
-          Top = 44
-          Width = 105
-          Height = 21
-          Cursor = crArrow
-          BevelOuter = bvLowered
-          Caption = 'Title prefix'
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 5
-        end
-        object txtBatchSize: TEdit
-          Left = 112
-          Top = 20
-          Width = 83
-          Height = 21
-          HelpContext = 1004
-          TabOrder = 1
-          Text = '10'
-        end
-        object txtRandomPrefix: TEdit
-          Left = 112
-          Top = 44
-          Width = 96
-          Height = 21
-          HelpContext = 1021
-          TabOrder = 0
-          Text = 'Apophysis'
-        end
-      end
-      object gpMutationTransforms: TGroupBox
-        Left = 232
-        Top = 6
-        Width = 214
-        Height = 75
-        Anchors = [akTop, akRight]
-        Caption = 'Mutation transforms'
-        TabOrder = 3
-        object udMinMutate: TUpDown
-          Left = 197
-          Top = 20
-          Width = 12
-          Height = 21
-          Associate = txtMinMutate
-          Min = 2
-          Max = 12
-          Position = 2
-          TabOrder = 2
-        end
-        object udMaxMutate: TUpDown
-          Left = 197
-          Top = 44
-          Width = 12
-          Height = 21
-          Associate = txtMaxMutate
-          Min = 2
-          Max = 12
-          Position = 6
-          TabOrder = 3
-        end
-        object Panel13: TPanel
-          Left = 8
-          Top = 20
-          Width = 105
-          Height = 21
-          Cursor = crArrow
-          BevelOuter = bvLowered
-          Caption = 'Minimum'
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 4
-        end
-        object Panel14: TPanel
-          Left = 8
-          Top = 44
-          Width = 105
-          Height = 21
-          Cursor = crArrow
-          BevelOuter = bvLowered
-          Caption = 'Maximum'
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 5
-        end
-        object txtMaxMutate: TEdit
-          Left = 112
-          Top = 44
-          Width = 85
-          Height = 21
-          HelpContext = 1020
-          TabOrder = 1
-          Text = '6'
-          OnChange = txtMaxMutateChange
-        end
-        object txtMinMutate: TEdit
-          Left = 112
-          Top = 20
-          Width = 85
-          Height = 21
-          HelpContext = 1019
-          TabOrder = 0
-          Text = '2'
-          OnChange = txtMinMutateChange
-        end
-      end
       object gpForcedSymmetry: TGroupBox
         Left = 8
         Top = 88
         Width = 209
         Height = 97
         Caption = 'Forced symmetry'
-        TabOrder = 2
+        TabOrder = 1
         object udSymOrder: TUpDown
           Left = 187
           Top = 43
@@ -1495,91 +1348,90 @@ object OptionsForm: TOptionsForm
             'Dihedral')
         end
       end
-      object grpGradient: TRadioGroup
-        Left = 8
-        Top = 192
-        Width = 209
-        Height = 121
-        HelpContext = 1029
-        Caption = 'On random flame'
-        ItemIndex = 0
-        Items.Strings = (
-          'Use random preset'
-          'Use default'
-          'Use current'
-          'Randomize'
-          'Random from a file')
-        TabOrder = 4
-      end
-      object GroupBox16: TGroupBox
+      object gpFlameTitlePrefix: TGroupBox
         Left = 231
-        Top = 192
-        Width = 217
-        Height = 49
-        Caption = 'Random file to use'
-        TabOrder = 5
-        object btnGradientsFile: TSpeedButton
-          Left = 185
-          Top = 18
-          Width = 24
-          Height = 24
-          Hint = 'Browse...'
-          Flat = True
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Glyph.Data = {
-            36030000424D3603000000000000360000002800000010000000100000000100
-            18000000000000030000120B0000120B00000000000000000000FF00FFFF00FF
-            FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
-            FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
-            00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF75848F66808F
-            607987576E7B4E626F4456613948522E3A43252E351B222914191E0E12160E13
-            18FF00FFFF00FFFF00FF77879289A1AB6AB2D4008FCD008FCD008FCD048CC708
-            88BE0F82B4157CA91B779F1F7296224B5C87A2ABFF00FFFF00FF7A8A957EBED3
-            8AA4AE7EDCFF5FCFFF55CBFF4CC4FA41BCF537B3F02EAAEB24A0E5138CD42367
-            805E696DFF00FFFF00FF7D8E9879D2EC8BA4AD89C2CE71D8FF65D3FF5CCEFF51
-            C9FE49C1FA3FB9F534B0EE29A8E91085CD224B5B98B2BAFF00FF80919C81D7EF
-            7DC5E08CA6B080DDFE68D3FF67D4FF62D1FF58CDFF4EC7FC46BEF73BB6F231AC
-            EC2569817A95A1FF00FF83959F89DCF18CE2FF8DA8B18CBAC774D8FF67D4FF67
-            D4FF67D4FF5FD0FF54CDFF4BC5FC41BBF72EA2DB51677498B2BA869AA392E1F2
-            98E8FD80C4DE8EA7B081DEFD84E0FF84E0FF84E0FF84E0FF81DFFF7BDDFF74D8
-            FF6BD6FF56A9D18F9BA4889CA59AE6F39FEBFB98E8FE8BACB98BACB98AAAB788
-            A6B386A3AF839FAA819AA67F95A17C919D7A8E99798B957788938BA0A8A0EAF6
-            A6EEF99FEBFB98E8FE7ADAFF67D4FF67D4FF67D4FF67D4FF67D4FF67D4FF7788
-            93FF00FFFF00FFFF00FF8EA2ABA7EEF6ABF0F7A6EEF99FEBFB98E8FD71D4FB89
-            9EA78699A382949F7E909A7A8C97778893FF00FFFF00FFFF00FF8FA4ACA0D2DA
-            ABF0F7ABF0F7A6EEF99FEBFB8DA1AAB5CBD0FF00FFFF00FFFF00FFFF00FFFF00
-            FFFF00FFFF00FFFF00FFBDCED48FA4AC8FA4AC8FA4AC8FA4AC8FA4ACB5CBD0FF
-            00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
-            FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
-            FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
-            00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
-          ParentFont = False
+        Top = 3
+        Width = 226
+        Height = 97
+        Anchors = [akTop, akRight]
+        Caption = 'Random batch'
+        TabOrder = 2
+        object udBatchSize: TUpDown
+          Left = 195
+          Top = 20
+          Width = 16
+          Height = 21
+          Associate = txtBatchSize
+          Min = 1
+          Max = 300
+          Position = 10
+          TabOrder = 2
+          Thousands = False
+        end
+        object chkKeepBackground: TCheckBox
+          Left = 8
+          Top = 72
+          Width = 201
+          Height = 17
+          HelpContext = 1023
+          Caption = 'Keep background color'
+          TabOrder = 3
+        end
+        object Panel11: TPanel
+          Left = 8
+          Top = 20
+          Width = 105
+          Height = 21
+          Cursor = crArrow
+          BevelOuter = bvLowered
+          Caption = 'Batch size'
           ParentShowHint = False
           ShowHint = True
-          OnClick = btnGradientsFileClick
+          TabOrder = 4
         end
-        object txtGradientsFile: TEdit
-          Left = 11
-          Top = 19
-          Width = 174
+        object Panel12: TPanel
+          Left = 8
+          Top = 44
+          Width = 105
           Height = 21
+          Cursor = crArrow
+          BevelOuter = bvLowered
+          Caption = 'Title prefix'
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 5
+        end
+        object txtBatchSize: TEdit
+          Left = 112
+          Top = 20
+          Width = 83
+          Height = 21
+          HelpContext = 1004
+          TabOrder = 1
+          Text = '10'
+        end
+        object txtRandomPrefix: TEdit
+          Left = 112
+          Top = 44
+          Width = 96
+          Height = 21
+          HelpContext = 1021
           TabOrder = 0
+          Text = 'Apophysis'
         end
       end
     end
     object VariationsPage: TTabSheet
       Caption = 'Variations'
       ImageIndex = 4
+      ExplicitLeft = 8
+      ExplicitTop = 27
       DesignSize = (
         467
         368)
       object btnSetAll: TButton
-        Left = 373
-        Top = 4
+        Left = 0
+        Top = 340
         Width = 91
         Height = 25
         HelpContext = 1027
@@ -1589,8 +1441,8 @@ object OptionsForm: TOptionsForm
         OnClick = btnSetAllClick
       end
       object btnClearAll: TButton
-        Left = 373
-        Top = 32
+        Left = 97
+        Top = 340
         Width = 91
         Height = 25
         HelpContext = 1028
@@ -1602,8 +1454,8 @@ object OptionsForm: TOptionsForm
       object clbVarEnabled: TCheckListBox
         Left = 0
         Top = 0
-        Width = 366
-        Height = 366
+        Width = 464
+        Height = 337
         Anchors = [akLeft, akTop, akRight, akBottom]
         Columns = 2
         ItemHeight = 13

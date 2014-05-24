@@ -141,20 +141,6 @@ type
     Panel16: TPanel;
     txtMaxXforms: TEdit;
     txtMinXForms: TEdit;
-    gpFlameTitlePrefix: TGroupBox;
-    udBatchSize: TUpDown;
-    chkKeepBackground: TCheckBox;
-    Panel11: TPanel;
-    Panel12: TPanel;
-    txtBatchSize: TEdit;
-    txtRandomPrefix: TEdit;
-    gpMutationTransforms: TGroupBox;
-    udMinMutate: TUpDown;
-    udMaxMutate: TUpDown;
-    Panel13: TPanel;
-    Panel14: TPanel;
-    txtMaxMutate: TEdit;
-    txtMinMutate: TEdit;
     gpForcedSymmetry: TGroupBox;
     udSymOrder: TUpDown;
     udSymNVars: TUpDown;
@@ -164,10 +150,6 @@ type
     txtSymNVars: TEdit;
     txtSymOrder: TEdit;
     cmbSymType: TComboBox;
-    grpGradient: TRadioGroup;
-    GroupBox16: TGroupBox;
-    btnGradientsFile: TSpeedButton;
-    txtGradientsFile: TEdit;
     VariationsPage: TTabSheet;
     btnSetAll: TButton;
     btnClearAll: TButton;
@@ -230,6 +212,13 @@ type
     btnPluginPath: TSpeedButton;
     Panel50: TPanel;
     txtPluginFolder: TEdit;
+    gpFlameTitlePrefix: TGroupBox;
+    udBatchSize: TUpDown;
+    chkKeepBackground: TCheckBox;
+    Panel11: TPanel;
+    Panel12: TPanel;
+    txtBatchSize: TEdit;
+    txtRandomPrefix: TEdit;
     procedure chkEnableEditorPreviewClick(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure btnCancelClick(Sender: TObject);
@@ -251,8 +240,6 @@ type
     procedure txtMinLumChange(Sender: TObject);
     procedure txtMinXFormsChange(Sender: TObject);
     procedure txtMaxXformsChange(Sender: TObject);
-    procedure txtMinMutateChange(Sender: TObject);
-    procedure txtMaxMutateChange(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure pnlBackColorClick(Sender: TObject);
@@ -265,7 +252,6 @@ type
     procedure pnlThirdsLineClick(Sender: TObject);
     procedure pnlGRLineClick(Sender: TObject);
     procedure btnPlayClick(Sender: TObject);
-    procedure btnGradientsFileClick(Sender: TObject);
     procedure shCenterLineMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure shThirdsLineMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure shGRLineMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
@@ -437,8 +423,6 @@ begin
   { Random tab }
   udMinXforms.Position := randMinTransforms;
   udMaxXforms.Position := randMaxTransforms;
-  udMinMutate.Position := mutantMinTransforms;
-  udMaxMutate.Position := mutantMaxTransforms;
   txtRandomPrefix.text := RandomPrefix;
   chkKeepbackground.Checked := KeepBackground;
   cmbSymType.ItemIndex := SymmetryType;
@@ -456,8 +440,6 @@ begin
     clbVarEnabled.Checked[i] := Variations[i];
 
   { Gradient tab }
-  grpGradient.ItemIndex := randGradient;
-  txtGradientsFile.Text := randGradientFile;
   udMinNodes.Position := MinNodes;
   udMaxNodes.Position := MaxNodes;
   udMinHue.Position := MinHue;
@@ -615,8 +597,6 @@ begin
   { Random tab }
   randMinTransforms := udMinXforms.Position;
   randMaxTransforms := udMaxXforms.Position;
-  mutantMinTransforms := udMinMutate.Position;
-  mutantMaxTransforms := udMaxMutate.Position;
   RandomPrefix := txtRandomPrefix.text;
   SymmetryType := cmbSymType.ItemIndex;
   SymmetryOrder := udSymOrder.Position;
@@ -624,8 +604,6 @@ begin
   KeepBackground := chkKeepbackground.Checked;
 
   {Gradient tab }
-  randGradient := grpGradient.ItemIndex;
-  randGradientFile := txtGradientsFile.Text;
   MinNodes := udMinNodes.Position;
   MaxNodes := udMaxNodes.Position;
   MinHue := udMinHue.Position;
@@ -793,18 +771,6 @@ begin
     udMinXForms.Position := StrToInt(txtMaxXforms.Text);
 end;
 
-procedure TOptionsForm.txtMinMutateChange(Sender: TObject);
-begin
-  if StrToInt(txtMinMutate.Text) > udMaxMutate.position then
-    udMaxMutate.Position := StrToInt(txtMinMutate.Text);
-end;
-
-procedure TOptionsForm.txtMaxMutateChange(Sender: TObject);
-begin
-  if StrToInt(txtMaxMutate.Text) < udMinMutate.position then
-    udMinMutate.Position := StrToInt(txtMaxMutate.Text);
-end;
-
 procedure TOptionsForm.SpeedButton2Click(Sender: TObject);
 var
   fn:string;
@@ -838,13 +804,11 @@ begin
 	Panel5.Caption := TextByKey('common-gammathreshold');
 	cbPNGTransparency.Items[1] := TextByKey('common-enabled');
 	cbPNGTransparency.Items[0] := TextByKey('common-disabled');
-	Panel13.Caption := TextByKey('common-minimum');
 	Panel15.Caption := TextByKey('common-minimum');
 	Panel21.Caption := TextByKey('common-minimum');
 	Panel22.Caption := TextByKey('common-minimum');
 	Panel25.Caption := TextByKey('common-minimum');
 	Panel26.Caption := TextByKey('common-minimum');
-	Panel14.Caption := TextByKey('common-maximum');
 	Panel16.Caption := TextByKey('common-maximum');
 	Panel20.Caption := TextByKey('common-maximum');
 	Panel23.Caption := TextByKey('common-maximum');
@@ -908,7 +872,6 @@ begin
 	chkUseSmallThumbs.Caption := TextByKey('options-tab-display-usesmallthumbs');
 	RandomPage.Caption := TextByKey('options-tab-random-title');
 	gpNumberOfTransforms.Caption := TextByKey('options-tab-random-numberoftransforms');
-	gpMutationTransforms.Caption := TextByKey('options-tab-random-mutationtransforms');
 	gpFlameTitlePrefix.Caption := TextByKey('options-tab-random-randombatch');
 	gpForcedSymmetry.Caption := TextByKey('options-tab-random-forcedsymmetry');
 	Panel11.Caption := TextByKey('options-tab-random-batchsize');
@@ -921,13 +884,6 @@ begin
 	cmbSymType.Items[1] := TextByKey('options-tab-random-type-bilateral');
 	cmbSymType.Items[2] := TextByKey('options-tab-random-type-rotational');
 	cmbSymType.Items[3] := TextByKey('options-tab-random-type-dihedral');
-	grpGradient.Caption := TextByKey('options-tab-random-onrandom');
-	grpGradient.Items[0] := TextByKey('options-tab-random-userandom');
-	grpGradient.Items[1] := TextByKey('options-tab-random-usedefault');
-	grpGradient.Items[2] := TextByKey('options-tab-random-usecurrent');
-	grpGradient.Items[3] := TextByKey('options-tab-random-randomcalculated');
-	grpGradient.Items[4] := TextByKey('options-tab-random-randomfromfile');
-	GroupBox16.Caption := TextByKey('options-tab-random-filetouse');
 	VariationsPage.Caption := TextByKey('options-tab-variations-title');
 	btnSetAll.Caption := TextByKey('options-tab-variations-setall');
 	btnClearAll.Caption := TextByKey('options-tab-variations-clearall');
@@ -1096,20 +1052,6 @@ begin
     SHGetPathFromIDList(lpItemID, TempPath);
     txtPluginFolder.Text := TempPath;
     GlobalFreePtr(lpItemID);
-  end;
-end;
-
-procedure TOptionsForm.btnGradientsFileClick(Sender: TObject);
-var
-  fn:string;
-begin
-  OpenDialog.Filter := TextByKey('common-filter-gradientfiles') + '|*.gradient;*.ugr|' + TextBykey('common-filter-allfiles') + '|*.*';
-  OpenDialog.InitialDir := ExtractFilePath(randGradientFile);
-  OpenDialog.FileName := '';
-  if OpenSaveFileDialog(OptionsForm, '.ugr', OpenDialog.Filter, OpenDialog.InitialDir, TextByKey('common-browse'), fn, true, false, false, true) then
-  //if OpenDialog.Execute then
-  begin
-    txtGradientsFile.text := fn;
   end;
 end;
 
