@@ -2716,40 +2716,8 @@ object MainForm: TMainForm
         ImageIndex = 18
         OnClick = mnuAdjustClick
       end
-      object ToolButton7: TToolButton
-        Left = 424
-        Top = 0
-        Hint = 'Gradient'
-        Caption = 'ToolButton7'
-        ImageIndex = 11
-        OnClick = mnuGradClick
-      end
-      object ToolButton19: TToolButton
-        Left = 447
-        Top = 0
-        Hint = 'Curves'
-        Caption = 'Curves'
-        ImageIndex = 69
-        OnClick = ToolButton19Click
-      end
-      object ToolButton11: TToolButton
-        Left = 470
-        Top = 0
-        Hint = 'Mutate'
-        Caption = 'ToolButton11'
-        ImageIndex = 17
-        OnClick = mnuMutateClick
-      end
-      object ToolButton12: TToolButton
-        Left = 493
-        Top = 0
-        Hint = 'Image size'
-        Caption = 'ToolButton12'
-        ImageIndex = 51
-        OnClick = mnuImageSizeClick
-      end
       object ToolButton13: TToolButton
-        Left = 516
+        Left = 424
         Top = 0
         Hint = 'Messages'
         Caption = 'ToolButton13'
@@ -2757,7 +2725,7 @@ object MainForm: TMainForm
         OnClick = ToolButton7Click
       end
       object ToolButton14: TToolButton
-        Left = 539
+        Left = 447
         Top = 0
         Hint = 'Options'
         Caption = 'ToolButton14'
@@ -2765,7 +2733,7 @@ object MainForm: TMainForm
         OnClick = mnuOptionsClick
       end
       object ToolButton15: TToolButton
-        Left = 562
+        Left = 470
         Top = 0
         Width = 8
         Caption = 'ToolButton15'
@@ -2773,7 +2741,7 @@ object MainForm: TMainForm
         Style = tbsSeparator
       end
       object tbShowAlpha: TToolButton
-        Left = 570
+        Left = 478
         Top = 0
         Hint = 'Show transparency'
         Caption = 'Show Alpha'
@@ -2782,7 +2750,7 @@ object MainForm: TMainForm
         OnClick = tbShowAlphaClick
       end
       object tbGuides: TToolButton
-        Left = 593
+        Left = 501
         Top = 0
         Caption = 'Show guides'
         Down = True
@@ -2791,7 +2759,7 @@ object MainForm: TMainForm
         OnClick = tbGuidesClick
       end
       object ToolButton16: TToolButton
-        Left = 616
+        Left = 524
         Top = 0
         Width = 8
         Caption = 'ToolButton16'
@@ -2799,7 +2767,7 @@ object MainForm: TMainForm
         Style = tbsSeparator
       end
       object ToolButton17: TToolButton
-        Left = 624
+        Left = 532
         Top = 0
         Hint = 'Edit script'
         Caption = 'ToolButton17'
@@ -2807,7 +2775,7 @@ object MainForm: TMainForm
         OnClick = mnuEditScriptClick
       end
       object btnRunScript: TToolButton
-        Left = 647
+        Left = 555
         Top = 0
         Hint = 'Run script'
         Caption = 'btnRunScript'
@@ -2815,7 +2783,7 @@ object MainForm: TMainForm
         OnClick = btnRunClick
       end
       object btnStopScript: TToolButton
-        Left = 670
+        Left = 578
         Top = 0
         Hint = 'Stop script'
         Caption = 'btnStopScript'
@@ -2823,7 +2791,7 @@ object MainForm: TMainForm
         OnClick = mnuStopClick
       end
       object ToolButton18: TToolButton
-        Left = 693
+        Left = 601
         Top = 0
         Width = 8
         Caption = 'ToolButton18'
@@ -2831,7 +2799,7 @@ object MainForm: TMainForm
         Style = tbsSeparator
       end
       object tbDraw: TToolButton
-        Left = 701
+        Left = 609
         Top = 0
         Caption = 'tbDraw'
         Grouped = True
@@ -2840,7 +2808,7 @@ object MainForm: TMainForm
         OnClick = tbDragClick
       end
       object ToolButton20: TToolButton
-        Left = 724
+        Left = 632
         Top = 0
         Caption = 'ToolButton20'
         Grouped = True
@@ -2849,7 +2817,7 @@ object MainForm: TMainForm
         OnClick = tbRotateClick
       end
       object ToolButton21: TToolButton
-        Left = 747
+        Left = 655
         Top = 0
         Caption = 'ToolButton21'
         Grouped = True
@@ -2858,7 +2826,7 @@ object MainForm: TMainForm
         OnClick = tbzoomwindowClick
       end
       object ToolButton22: TToolButton
-        Left = 770
+        Left = 678
         Top = 0
         Caption = 'ToolButton22'
         Grouped = True
@@ -2920,7 +2888,7 @@ object MainForm: TMainForm
     Left = 104
     Top = 280
     Bitmap = {
-      494C0101470050006C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010147005000700010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002001000001002000000000000020
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5307,7 +5275,7 @@ object MainForm: TMainForm
     Left = 24
     Top = 224
     Bitmap = {
-      494C010101004400540010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010101004400580010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5634,33 +5602,8 @@ object MainForm: TMainForm
         ShortCut = 116
         OnClick = mnuAdjustClick
       end
-      object mnuGrad: TMenuItem
-        Caption = 'Gradient'
-        Hint = 'Show the Gradient window'
-        ImageIndex = 11
-        ShortCut = 117
-        OnClick = mnuGradClick
-      end
-      object mnuMutate: TMenuItem
-        Caption = 'Mutation'
-        Hint = 'Show the Mutation window'
-        ImageIndex = 17
-        ShortCut = 118
-        OnClick = mnuMutateClick
-      end
-      object mnuCurves: TMenuItem
-        Caption = 'Curves'
-        ImageIndex = 69
-        ShortCut = 119
-        OnClick = ToolButton19Click
-      end
       object N5: TMenuItem
         Caption = '-'
-      end
-      object mnuImageSize: TMenuItem
-        Caption = 'Image Size'
-        ImageIndex = 51
-        OnClick = mnuImageSizeClick
       end
       object mnuMessages: TMenuItem
         Caption = 'Messages'

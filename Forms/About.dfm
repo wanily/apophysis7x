@@ -14,10 +14,9 @@ object AboutForm: TAboutForm
   OldCreateOrder = False
   Position = poMainFormCenter
   OnCreate = FormCreate
-  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object Image1: TImage
+  object logoPicture: TImage
     Left = 8
     Top = 8
     Width = 377
@@ -1521,7 +1520,7 @@ object AboutForm: TAboutForm
       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00}
   end
-  object Label3: TLabel
+  object createdUsing: TLabel
     Left = 16
     Top = 196
     Width = 166
@@ -1534,7 +1533,7 @@ object AboutForm: TAboutForm
     Font.Style = []
     ParentFont = False
   end
-  object Label4: TLabel
+  object linkLabel: TLabel
     Left = 16
     Top = 64
     Width = 215
@@ -1550,21 +1549,21 @@ object AboutForm: TAboutForm
     ParentFont = False
     OnClick = DevelopersClick
   end
-  object Label10: TLabel
+  object fractalFlames: TLabel
     Left = 16
     Top = 246
     Width = 178
     Height = 13
     Caption = 'flame - cosmic recursive fractal flames'
   end
-  object Label11: TLabel
+  object copyrightScottDraves: TLabel
     Left = 16
     Top = 270
     Width = 178
     Height = 13
     Caption = 'Copyright '#169' 1992-2014  Scott Draves'
   end
-  object lblFlamecom: TLabel
+  object flam3: TLabel
     Left = 16
     Top = 286
     Width = 79
@@ -1580,14 +1579,14 @@ object AboutForm: TAboutForm
     ParentFont = False
     OnClick = DevelopersClick
   end
-  object Bevel1: TBevel
+  object fractalFlamesSeparator: TBevel
     Left = 16
     Top = 258
     Width = 385
     Height = 9
     Shape = bsBottomLine
   end
-  object Label6: TLabel
+  object copyright2005_2008: TLabel
     Left = 140
     Top = 116
     Width = 110
@@ -1600,7 +1599,7 @@ object AboutForm: TAboutForm
     Font.Style = []
     ParentFont = False
   end
-  object Label7: TLabel
+  object peterSbodnov: TLabel
     Left = 140
     Top = 148
     Width = 71
@@ -1616,7 +1615,7 @@ object AboutForm: TAboutForm
     ParentFont = False
     OnClick = DevelopersClick
   end
-  object Label8: TLabel
+  object piotrBorys: TLabel
     Left = 140
     Top = 164
     Width = 53
@@ -1632,14 +1631,14 @@ object AboutForm: TAboutForm
     ParentFont = False
     OnClick = DevelopersClick
   end
-  object Label9: TLabel
+  object ronaldHordijk: TLabel
     Left = 16
     Top = 164
     Width = 70
     Height = 13
     Caption = 'Ronald Hordijk'
   end
-  object Label12: TLabel
+  object copyright2001_2004: TLabel
     Left = 16
     Top = 116
     Width = 110
@@ -1652,7 +1651,7 @@ object AboutForm: TAboutForm
     Font.Style = []
     ParentFont = False
   end
-  object Label13: TLabel
+  object scripterStudio: TLabel
     Left = 16
     Top = 220
     Width = 69
@@ -1668,7 +1667,7 @@ object AboutForm: TAboutForm
     ParentFont = False
     OnClick = DevelopersClick
   end
-  object Label14: TLabel
+  object xmlParser: TLabel
     Left = 96
     Top = 220
     Width = 55
@@ -1684,14 +1683,14 @@ object AboutForm: TAboutForm
     ParentFont = False
     OnClick = DevelopersClick
   end
-  object Bevel3: TBevel
+  object copyrightSeparator: TBevel
     Left = 16
     Top = 126
     Width = 385
     Height = 11
     Shape = bsBottomLine
   end
-  object Label17: TLabel
+  object georgKiehne: TLabel
     Left = 264
     Top = 148
     Width = 65
@@ -1707,7 +1706,7 @@ object AboutForm: TAboutForm
     ParentFont = False
     OnClick = DevelopersClick
   end
-  object Label18: TLabel
+  object copyright2009_2014: TLabel
     Left = 264
     Top = 116
     Width = 110
@@ -1720,33 +1719,21 @@ object AboutForm: TAboutForm
     Font.Style = []
     ParentFont = False
   end
-  object Label16: TLabel
-    Left = 8
-    Top = 408
-    Width = 5
-    Height = 13
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'MS Sans Serif'
-    Font.Style = [fsBold]
-    ParentFont = False
-  end
-  object Label2: TLabel
+  object markTownsend: TLabel
     Left = 16
     Top = 148
     Width = 77
     Height = 13
     Caption = 'Mark Townsend'
   end
-  object Bevel2: TBevel
+  object createdUsingSeparator: TBevel
     Left = 16
     Top = 206
     Width = 385
     Height = 11
     Shape = bsBottomLine
   end
-  object Label19: TLabel
+  object pcreDelphi: TLabel
     Left = 160
     Top = 220
     Width = 77
@@ -1762,7 +1749,7 @@ object AboutForm: TAboutForm
     ParentFont = False
     OnClick = DevelopersClick
   end
-  object Label5: TLabel
+  object versionSpace: TLabel
     Left = 16
     Top = 88
     Width = 385
@@ -1770,20 +1757,19 @@ object AboutForm: TAboutForm
     AutoSize = False
     Visible = False
   end
-  object Label20: TLabel
+  object infoSpace: TLabel
     Left = 16
     Top = 316
     Width = 297
     Height = 13
     AutoSize = False
   end
-  object btnOK: TButton
+  object okButton: TButton
     Left = 320
     Top = 310
     Width = 91
     Height = 25
     Caption = 'OK'
     TabOrder = 0
-    OnClick = btnOKClick
   end
 end

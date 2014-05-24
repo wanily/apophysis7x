@@ -48,35 +48,6 @@ type
     ColorDialog: TColorDialog;
     PrevPnl: TPanel;
     PreviewImage: TImage;
-    PageControl: TPageControl;
-    TabSheet1: TTabSheet;
-    scrollZoom: TScrollBar;
-    txtZoom: TEdit;
-    scrollCenterX: TScrollBar;
-    txtCenterX: TEdit;
-    scrollCenterY: TScrollBar;
-    txtCenterY: TEdit;
-    TabSheet2: TTabSheet;
-    scrollGamma: TScrollBar;
-    txtGamma: TEdit;
-    scrollBrightness: TScrollBar;
-    txtBrightness: TEdit;
-    scrollVibrancy: TScrollBar;
-    txtVibrancy: TEdit;
-    ColorPanel: TPanel;
-    TabSheet3: TTabSheet;
-    scrollAngle: TScrollBar;
-    txtAngle: TEdit;
-    GradientPnl: TPanel;
-    GradientImage: TImage;
-    lblVal: TLabel;
-    ScrollBar: TScrollBar;
-    btnMenu: TSpeedButton;
-    btnOpen: TSpeedButton;
-    btnSmoothPalette: TSpeedButton;
-    btnPaste: TSpeedButton;
-    btnCopy: TSpeedButton;
-    cmbPalette: TComboBox;
     GradientPopup: TPopupMenu;
     mnuRandomize: TMenuItem;
     N7: TMenuItem;
@@ -105,123 +76,99 @@ type
     mnuFrequency: TMenuItem;
     SaveDialog: TSaveDialog;
     ApplicationEvents: TApplicationEvents;
-    TabSheet4: TTabSheet;
-    btnPreset1: TButton;
-    btnPreset2: TButton;
-    btnPreset3: TButton;
-    chkTransparent: TCheckBox;
-    btnColorPreset: TSpeedButton;
-    Bevel1: TBevel;
-    btnApplySize: TBitBtn;
-    chkMaintain: TCheckBox;
-    txtWidth: TComboBox;
-    txtHeight: TComboBox;
-    Bevel2: TBevel;
     N8: TMenuItem;
     mnuInstantPreview: TMenuItem;
+    btnUndo: TSpeedButton;
+    btnRedo: TSpeedButton;
+    gradientGroup: TGroupBox;
+    btnOpen: TSpeedButton;
+    cmbPalette: TComboBox;
+    ScrollBar: TScrollBar;
+    GradientPnl: TPanel;
+    GradientImage: TImage;
+    btnSmoothPalette: TSpeedButton;
+    btnCopy: TSpeedButton;
+    btnPaste: TSpeedButton;
+    btnColorPreset: TSpeedButton;
+    btnMenu: TSpeedButton;
+    txtVal: TEdit;
+    btnReset: TButton;
+    cameraGroup: TGroupBox;
     pnlZoom: TPanel;
     pnlXpos: TPanel;
     pnlYpos: TPanel;
     pnlAngle: TPanel;
-    pnlGamma: TPanel;
-    pnlBrightness: TPanel;
-    pnlVibrancy: TPanel;
-    chkResizeMain: TCheckBox;
-    Bevel3: TBevel;
-    pnlPitch: TPanel;
-    pnlYaw: TPanel;
-    pnlPersp: TPanel;
-    txtPitch: TEdit;
-    txtYaw: TEdit;
-    txtPersp: TEdit;
+    txtZoom: TEdit;
+    txtCenterX: TEdit;
+    txtCenterY: TEdit;
+    txtAngle: TEdit;
     pnlMasterScale: TPanel;
     editPPU: TEdit;
     pnlZpos: TPanel;
     txtZpos: TEdit;
+    pnlPitch: TPanel;
+    pnlYaw: TPanel;
+    txtPitch: TEdit;
+    txtYaw: TEdit;
+    pnlDOF: TPanel;
+    pnlPersp: TPanel;
+    txtDOF: TEdit;
+    txtPersp: TEdit;
+    renderingGroup: TGroupBox;
+    pnlGamma: TPanel;
+    pnlBrightness: TPanel;
+    pnlVibrancy: TPanel;
     pnlGammaThreshold: TPanel;
     txtGammaThreshold: TEdit;
-    Panel1: TPanel;
-    Label1: TLabel;
-    btnUndo: TSpeedButton;
-    btnRedo: TSpeedButton;
-    pnlDOF: TPanel;
-    txtDOF: TEdit;
-    btnSet1: TSpeedButton;
-    btnSet2: TSpeedButton;
-    btnSet3: TSpeedButton;
-    Label7: TLabel;
-    Label6: TLabel;
+    txtVibrancy: TEdit;
+    txtBrightness: TEdit;
+    txtGamma: TEdit;
+    pnlBackground: TPanel;
+    ColorPanel: TPanel;
     Shape1: TShape;
-    txtVal: TEdit;
-    btnReset: TButton;
+    imageSizeGroup: TGroupBox;
     pnlWidth: TPanel;
     pnlHeight: TPanel;
-    pnlBackground: TPanel;
-    TabSheet6: TTabSheet;
+    txtWidth: TComboBox;
+    txtHeight: TComboBox;
+    chkResizeMain: TCheckBox;
+    chkMaintain: TCheckBox;
+    btnPreset1: TButton;
+    btnSet1: TSpeedButton;
+    btnPreset2: TButton;
+    btnSet2: TSpeedButton;
+    btnPreset3: TButton;
+    btnSet3: TSpeedButton;
+    btnApplySize: TBitBtn;
+    curvesGroup: TGroupBox;
     CurvesPanel: TPanel;
-    tbWeightLeft: TScrollBar;
-    tbWeightRight: TScrollBar;
-    Panel3: TPanel;
-    Panel4: TPanel;
-    Panel5: TPanel;
     cbChannel: TComboBox;
     btnResetCurves: TButton;
+
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormDestroy(Sender: TObject);
-    procedure DrawPreview;
-//    procedure btnOKClick(Sender: TObject);
-//    procedure btnCancelClick(Sender: TObject);
-//    procedure btnCanelClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+
     procedure mnuLowQualityClick(Sender: TObject);
     procedure mnuMediumQualityClick(Sender: TObject);
     procedure mnuHighQualityClick(Sender: TObject);
-    procedure txtZoomKeyPress(Sender: TObject; var Key: Char);
-    procedure txtZoomExit(Sender: TObject);
-    procedure txtCenterXKeyPress(Sender: TObject; var Key: Char);
-    procedure txtCenterXExit(Sender: TObject);
-    procedure txtCenterYKeyPress(Sender: TObject; var Key: Char);
-    procedure txtCenterYExit(Sender: TObject);
-    procedure txtGammaKeyPress(Sender: TObject; var Key: Char);
-    procedure txtGammaExit(Sender: TObject);
-    procedure txtBrightnessKeyPress(Sender: TObject; var Key: Char);
-    procedure txtBrightnessExit(Sender: TObject);
-    procedure txtVibrancyKeyPress(Sender: TObject; var Key: Char);
-    procedure txtVibrancyExit(Sender: TObject);
-    procedure scrollZoomScroll(Sender: TObject; ScrollCode: TScrollCode;
-      var ScrollPos: Integer);
-    procedure scrollCenterXScroll(Sender: TObject; ScrollCode: TScrollCode;
-      var ScrollPos: Integer);
-    procedure scrollCenterYScroll(Sender: TObject; ScrollCode: TScrollCode;
-      var ScrollPos: Integer);
-    procedure scrollGammaScroll(Sender: TObject; ScrollCode: TScrollCode;
-      var ScrollPos: Integer);
-    procedure scrollBrightnessScroll(Sender: TObject;
-      ScrollCode: TScrollCode; var ScrollPos: Integer);
-    procedure scrollVibrancyScroll(Sender: TObject;
-      ScrollCode: TScrollCode; var ScrollPos: Integer);
-    procedure scrollVibrancyChange(Sender: TObject);
-    procedure scrollGammaChange(Sender: TObject);
-    procedure scrollBrightnessChange(Sender: TObject);
-    procedure scrollZoomChange(Sender: TObject);
-    procedure scrollCenterXChange(Sender: TObject);
-    procedure scrollCenterYChange(Sender: TObject);
+
     procedure ColorPanelClick(Sender: TObject);
-    procedure scrollContrastScroll(Sender: TObject;
-      ScrollCode: TScrollCode; var ScrollPos: Integer);
-    procedure txtGammaEnter(Sender: TObject);
-    procedure txtBrightnessEnter(Sender: TObject);
-    procedure txtVibrancyEnter(Sender: TObject);
-    procedure txtZoomEnter(Sender: TObject);
-    procedure txtCenterXEnter(Sender: TObject);
-    procedure txtCenterYEnter(Sender: TObject);
-    procedure scrollAngleChange(Sender: TObject);
-    procedure scrollAngleScroll(Sender: TObject; ScrollCode: TScrollCode;
-      var ScrollPos: Integer);
-    procedure txtAngleEnter(Sender: TObject);
-    procedure txtAngleExit(Sender: TObject);
-    procedure txtAngleKeyPress(Sender: TObject; var Key: Char);
+
+    // -X- Input stuff
+
+    procedure HandleEditBoxEnter(Sender: TObject);
+    procedure HandleEditBoxKeyPress(Sender: TObject; var Key: Char);
+
+    procedure UpdateAngleFromTextBox(Sender: TObject);
+    procedure UpdateZoomFromTextBox(Sender: TObject);
+    procedure UpdateCenterXFromTextBox(Sender: TObject);
+    procedure UpdateCenterYFromTextBox(Sender: TObject);
+    procedure UpdateBrightnessFromTextBox(Sender: TObject);
+    procedure UpdateGammaFromTextBox(Sender: TObject);
+    procedure UpdateVibrancyFromTextBox(Sender: TObject);
+    procedure UpdateGammaThresholdFromTextBox(Sender: TObject);
 
     // --Z-- // gradient functions
     procedure cmbPaletteChange(Sender: TObject);
@@ -305,10 +252,6 @@ type
     procedure PreviewImageMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure PreviewImageDblClick(Sender: TObject);
-    procedure txtGammaThresholdKeyPress(Sender: TObject; var Key: Char);
-    procedure txtGammaThresholdEnter(Sender: TObject);
-    procedure txtGammaThresholdExit(Sender: TObject);
-    procedure txtZoomChange(Sender: TObject);
     procedure Shape1MouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure btnResetClick(Sender: TObject);
@@ -316,7 +259,6 @@ type
     procedure txtValExit(Sender: TObject);
     procedure WeightScroll(Sender: TObject; ScrollCode: TScrollCode;
       var ScrollPos: Integer);
-    procedure WeightChange(Sender: TObject);
     procedure curveChange(Sender: TObject);
     procedure btnResetCurvesClick(Sender: TObject);
 
@@ -337,6 +279,8 @@ type
     camDragMode, camDragged, camMM: boolean;
     camDragPos, camDragOld: TPoint;
     camDragValueX, camDragValueY: double;
+
+    inlineUpdate: boolean;
 
   private // gradient stuff
     Palette, BackupPal: TColorMap;
@@ -377,7 +321,9 @@ type
 //    Center: array[0..1] of double;
     procedure UpdateDisplay(PreviewOnly: boolean = false);
     procedure UpdateFlame(bBgOnly: boolean = false);
+    procedure DrawPreview;
     procedure TemplateRandomizeGradient;
+    procedure Localize;
 
   end;
 
@@ -393,9 +339,25 @@ implementation
 //uses Main, Global, Registry, Mutate, Editor, Save, Browser;
 uses
   RndFlame, Main, cmapdata, Math, Browser, Editor, Global,
-  Save, Mutate, ClipBrd, GradientHlpr, Registry, Curves;
+  Save, ClipBrd, GradientHlpr, Registry, Curves;
 
 {$R *.DFM}
+
+procedure TAdjustForm.HandleEditBoxEnter(Sender: TObject);
+begin
+  EditBoxValue := TEdit(Sender).Text;
+end;
+
+procedure TAdjustForm.HandleEditBoxKeyPress(Sender: TObject; var Key: Char);
+var
+  v: integer;
+begin
+  if (key = #13) then
+  begin
+    key := #0;
+    TEdit(Sender).OnExit(Sender);
+  end;
+end;
 
 procedure TAdjustForm.SetCurvesCp(ccp: TControlPoint);
 begin
@@ -410,9 +372,6 @@ var
 begin
   cp.copy(MainCp);
   SetCurvesCp(MainCp);
-
-  tbWeightLeft.Position := Round(CurvesControl.WeightLeft * 10);
-  tbWeightRight.Position := Round(CurvesControl.WeightRight * 10);
 
   pw := PrevPnl.Width -2;
   ph := PrevPnl.Height -2;
@@ -437,27 +396,14 @@ begin
 
   if not PreviewOnly then begin //***
 
-//  zoom := MainForm.zoom;
-//  cp.zoom := zoom;
     Resetting := True; // So the preview doesn't get drawn with these changes..
-    scrollGamma.Position := trunc(cp.Gamma * 100);
-    scrollBrightness.Position := trunc(cp.Brightness * 100);
-    scrollVibrancy.Position := trunc(cp.vibrancy * 100);
-    scrollZoom.Position := trunc(cp.zoom * 1000);
-//  ScrollAngle.Position := Trunc(cp.FAngle * 18000.0 / PI) mod scrollAngle.Max;
-    scrollAngle.Position := Trunc(cp.FAngle * 18000.0 / PI) mod 36000;
 
-    if (abs(cp.Center[0]) < 1000) and (abs(cp.Center[1]) < 1000) then begin
-      scrollCenterX.Position := trunc(cp.Center[0] * 1000);
-      scrollCenterY.Position := trunc(cp.Center[1] * 1000);
-    end else begin
-      scrollCenterX.Position := 0;
-      scrollCenterY.Position := 0;
-    end;
+    txtGamma.Text := Format('%.6g', [cp.Gamma]);
+    txtBrightness.Text := Format('%.6g', [cp.Brightness]);
+    txtVibrancy.Text := Format('%.6g', [cp.vibrancy]);
 
     ColorPanel.color := cp.background[2] shl 16 + cp.background[1] shl 8 + cp.background[0];
     Shape1.Brush.Color := ColorPanel.Color;
-    //cbColor.text := IntToHex(integer(ColorPanel.Color), 6);
 
     GetMainWindowSize;
 
@@ -492,7 +438,6 @@ begin
   SetCurvesCp(cp);
 
   if EditForm.Visible then EditForm.UpdateDisplay;
-  if MutateForm.Visible then MutateForm.UpdateDisplay;
   if CurvesForm.Visible then CurvesForm.SetCp(cp);
 
   if bBgOnly then
@@ -548,7 +493,7 @@ begin
 //--end DrawPalette
 end;
 
-procedure TAdjustForm.FormCreate(Sender: TObject);
+procedure TAdjustForm.Localize;
 begin
   mnuCopy.Caption := TextByKey('common-copy');
   mnuPaste.Caption := TextByKey('common-paste');
@@ -562,7 +507,6 @@ begin
 	btnRedo.Hint := TextByKey('common-redo');
 	pnlWidth.Caption := TextByKey('common-width');
 	pnlHeight.Caption := TextByKey('common-height');
-	Label7.Caption := TextByKey('common-pixels');
 	chkMaintain.Caption := TextByKey('common-keepaspect');
 	pnlGamma.Caption := TextByKey('common-gamma');
 	pnlBrightness.Caption := TextByKey('common-brightness');
@@ -590,14 +534,13 @@ begin
 	pnlZpos.Caption := TextByKey('adjustment-common-height');
 	pnlPersp.Caption := TextByKey('adjustment-common-perspective');
 	pnlMasterScale.Caption := TextByKey('adjustment-common-scale');
-	TabSheet1.Caption := TextByKey('adjustment-tab-camera-title');
+	cameraGroup.Caption := TextByKey('adjustment-tab-camera-title');
 	pnlZoom.Caption := TextByKey('adjustment-tab-camera-zoom');
 	pnlXPos.Caption := TextByKey('adjustment-tab-camera-xpos');
 	pnlYPos.Caption := TextByKey('adjustment-tab-camera-ypos');
 	pnlAngle.Caption := TextByKey('adjustment-tab-camera-rotation');
-	TabSheet2.Caption := TextByKey('adjustment-tab-rendering-title');
-	chkTransparent.Caption := TextByKey('adjustment-tab-rendering-istransparent');
-  TabSheet3.Caption := TextByKey('adjustment-tab-gradient-title');
+	renderingGroup.Caption := TextByKey('adjustment-tab-rendering-title');
+  gradientGroup.Caption := TextByKey('adjustment-tab-gradient-title');
 	mnuRotate.Caption := TextByKey('adjustment-tab-gradient-moderotate');
 	mnuHue.Caption := TextByKey('adjustment-tab-gradient-modehue');
 	mnuSaturation.Caption := TextByKey('adjustment-tab-gradient-modesaturation');
@@ -611,13 +554,12 @@ begin
 	btnPreset1.Hint := TextByKey('adjustment-tab-gradient-presethint');
 	btnPreset2.Hint := TextByKey('adjustment-tab-gradient-presethint');
 	btnPreset3.Hint := TextByKey('adjustment-tab-gradient-presethint');
-	TabSheet4.Caption := TextByKey('adjustment-tab-size-title');
+	imageSizeGroup.Caption := TextByKey('adjustment-tab-size-title');
 	btnPreset1.Caption := TextByKey('adjustment-tab-size-preset');
 	btnPreset2.Caption := TextByKey('adjustment-tab-size-preset');
 	btnPreset3.Caption := TextByKey('adjustment-tab-size-preset');
-  TabSheet6.Caption := TextByKey('adjustment-tab-curves-title');
+  curvesGroup.Caption := TextByKey('adjustment-tab-curves-title');
   btnResetCurves.Caption := TextByKey('adjustment-tab-curves-reset');
-  Panel5.Caption := TextByKey('adjustment-tab-curves-selected');
   cbChannel.Items[0] := TextByKey('adjustment-tab-curves-overall');
   cbChannel.Items[1] := TextByKey('adjustment-tab-curves-red');
   cbChannel.Items[2] := TextByKey('adjustment-tab-curves-green');
@@ -635,7 +577,11 @@ begin
 	SaveasMapfile1.Caption := TextByKey('adjustment-popup-gradient-saveasmap');
 	mnuSaveAsDefault.Caption := TextByKey('adjustment-popup-gradient-saveasdefault');
   btnMenu.Caption := TextByKey('adjustment-tab-gradient-moderotate');
+end;
 
+procedure TAdjustForm.FormCreate(Sender: TObject);
+begin
+  Localize;
   cbChannel.ItemIndex := 0;
 
   if not (assigned(curvesControl)) then
@@ -644,9 +590,6 @@ begin
     CurvesControl.Align := alClient;
     CurvesControl.Parent := CurvesPanel;
   end;
-
-  tbWeightLeft.Position := Round(CurvesControl.WeightLeft * 10);
-  tbWeightRight.Position := Round(CurvesControl.WeightRight * 10);
 
   bm := TbitMap.Create;
   cp := TControlPoint.Create;
@@ -683,6 +626,8 @@ begin
     begin
       Registry.WriteInteger('Top', AdjustForm.Top);
       Registry.WriteInteger('Left', AdjustForm.Left);
+      Registry.WriteInteger('Width', AdjustForm.Width);
+      Registry.WriteInteger('Height', AdjustForm.Height);
       Registry.WriteBool('InstantPreview', mnuInstantPreview.Checked);
       Registry.WriteBool('ResizeMain', chkResizeMain.Checked);
     end;
@@ -705,7 +650,6 @@ var
   i: integer;
   strx, stry, strw, strh: string;
 begin
-  if LimitVibrancy then scrollVibrancy.Max := 100 else scrollVibrancy.Max := 3000;
   { Read posution from registry }
   Registry := TRegistry.Create;
   try
@@ -716,6 +660,10 @@ begin
         AdjustForm.Left := Registry.ReadInteger('Left');
       if Registry.ValueExists('Top') then
         AdjustForm.Top := Registry.ReadInteger('Top');
+      if Registry.ValueExists('Width') then
+        AdjustForm.Width := Registry.ReadInteger('Width');
+      if Registry.ValueExists('Height') then
+        AdjustForm.Height := Registry.ReadInteger('Height');
       if Registry.ValueExists('InstantPreview') then
         mnuInstantPreview.Checked := Registry.ReadBool('InstantPreview');
       if Registry.ValueExists('ResizeMain') then
@@ -786,292 +734,6 @@ begin
   DrawPreview;
 end;
 
-procedure TAdjustForm.txtZoomEnter(Sender: TObject);
-begin
-  EditBoxValue := txtZoom.Text;
-end;
-
-procedure TAdjustForm.txtZoomKeyPress(Sender: TObject; var Key: Char);
-var v: integer;
-begin
-  if ((key = #13) and (EditBoxValue <> txtZoom.Text)) then
-  begin
-    key := #0;
-    txtZoomExit(sender);
-  end;
-end;
-
-procedure TAdjustForm.txtZoomExit(Sender: TObject);
-var
-  v: integer;
-begin
-  if (EditBoxValue <> txtZoom.Text) then
-  try
-    v := Trunc(StrToFloat(txtZoom.Text) * 1000);
-    if v > scrollZoom.Max then v := scrollZoom.Max;
-    if v < scrollZoom.Min then v := scrollZoom.Min;
-    if v <> ScrollZoom.Position then begin
-      ScrollZoom.Position := v;
-      UpdateFlame;
-    end;
-  except on EConvertError do
-    txtZoom.Text := FloatToStr(cp.zoom)
-  end;
-end;
-
-procedure TAdjustForm.txtCenterXEnter(Sender: TObject);
-begin
-  EditBoxValue := txtCenterX.Text;
-end;
-
-procedure TAdjustForm.txtCenterXKeyPress(Sender: TObject; var Key: Char);
-var
-  v: integer;
-begin
-  if ((key = #13) and (EditBoxValue <> txtCenterX.Text)) then
-  begin
-    key := #0;
-    txtCenterXExit(sender);
-  end;
-end;
-
-procedure TAdjustForm.txtCenterXExit(Sender: TObject);
-var
-  v: integer;
-begin
-  if (EditBoxValue <> txtCenterX.Text) then
-  try
-    v := Trunc(StrToFloat(txtCenterX.Text) * 1000);
-    if v > scrollCenterX.Max then v := scrollCenterX.Max;
-    if v < scrollCenterX.Min then v := scrollCenterX.Min;
-    ScrollCenterX.Position := v;
-    UpdateFlame;
-  except on EConvertError do
-    txtCenterX.Text := FloatToStr(cp.center[0]);
-  end;
-end;
-
-procedure TAdjustForm.txtCenterYEnter(Sender: TObject);
-begin
-  EditBoxValue := txtCenterY.Text;
-end;
-
-procedure TAdjustForm.txtCenterYKeyPress(Sender: TObject; var Key: Char);
-var
-  v: integer;
-begin
-  if ((key = #13) and (EditBoxValue <> txtCenterY.Text)) then
-  begin
-    key := #0;
-    txtCenterYExit(sender);
-  end;
-end;
-
-procedure TAdjustForm.txtCenterYExit(Sender: TObject);
-var
-  v: integer;
-begin
-  if (EditBoxValue <> txtCenterY.Text) then
-  try
-    v := Trunc(StrToFloat(txtCenterY.Text) * 1000);
-    if v > ScrollCenterY.Max then v := ScrollCenterY.Max;
-    if v < ScrollCenterY.Min then v := ScrollCenterY.Min;
-    ScrollCenterY.Position := v;
-    UpdateFlame;
-  except on EConvertError do
-    txtCenterY.Text := FloatToStr(cp.center[1]);
-  end;
-end;
-
-procedure TAdjustForm.txtGammaEnter(Sender: TObject);
-begin
-  EditBoxValue := txtGamma.Text;
-end;
-
-procedure TAdjustForm.txtGammaExit(Sender: TObject);
-var
-  v: integer;
-begin
-  if (txtGamma.Text <> EditBoxValue) then
-  try
-    v := Trunc(StrToFloat(txtGamma.Text) * 100);
-    if v > scrollGamma.Max then v := scrollGamma.Max;
-    if v < scrollGamma.Min then v := scrollGamma.Min;
-    ScrollGamma.Position := v;
-    UpdateFlame;
-  except on EConvertError do
-    txtGamma.Text := FloatToStr(cp.gamma);
-  end;
-end;
-
-procedure TAdjustForm.txtGammaKeyPress(Sender: TObject; var Key: Char);
-var
-  v: integer;
-begin
-  if ((key = #13) and (txtGamma.Text <> EditBoxValue)) then
-  begin
-    key := #0;
-    txtGammaExit(sender);
-  end;
-end;
-
-procedure TAdjustForm.txtBrightnessEnter(Sender: TObject);
-begin
-  EditBoxValue := txtBrightness.Text;
-end;
-
-procedure TAdjustForm.txtBrightnessExit(Sender: TObject);
-var
-  v: integer;
-begin
-  if (txtBrightness.Text <> EditBoxValue) then
-  try
-    v := Trunc(StrToFloat(txtBrightness.Text) * 100);
-    if v > scrollBrightness.Max then v := scrollBrightness.Max;
-    if v < scrollBrightness.Min then v := scrollBrightness.Min;
-    ScrollBrightness.Position := v;
-    UpdateFlame;
-  except on EConvertError do
-    txtBrightness.Text := FloatToStr(cp.brightness);
-  end;
-end;
-
-procedure TAdjustForm.txtBrightnessKeyPress(Sender: TObject;
-  var Key: Char);
-var
-  v: integer;
-begin
-  if ((key = #13) and (txtBrightness.Text <> EditBoxValue)) then
-  begin
-    key := #0;
-    txtBrightnessExit(sender);
-  end;
-end;
-
-procedure TAdjustForm.txtVibrancyEnter(Sender: TObject);
-begin
-  EditBoxValue := txtVibrancy.Text;
-end;
-
-procedure TAdjustForm.txtVibrancyKeyPress(Sender: TObject; var Key: Char);
-var
-  v: integer;
-begin
-  if ((key = #13) and (txtVibrancy.Text <> EditBoxValue)) then
-  begin
-    key := #0;
-    txtVibrancyExit(sender);
-  end;
-end;
-
-procedure TAdjustForm.txtVibrancyExit(Sender: TObject);
-var
-  v: integer;
-begin
-  if (txtVibrancy.Text <> EditBoxValue) then
-  try
-    v := Trunc(StrToFloat(txtVibrancy.Text) * 100);
-    if v > scrollVibrancy.Max then v := scrollVibrancy.Max;
-    if v < scrollVibrancy.Min then v := scrollVibrancy.Min;
-    ScrollVibrancy.Position := v;
-    UpdateFlame;
-  except on EConvertError do
-    txtVibrancy.Text := FloatToStr(cp.Vibrancy);
-  end;
-end;
-
-procedure TAdjustForm.scrollZoomScroll(Sender: TObject;
-  ScrollCode: TScrollCode; var ScrollPos: Integer);
-begin
-  if ScrollCode = scEndScroll then UpdateFlame;
-  (*if (ScrollPos<>0) then
-    AdjustForm.Height := 390
-  else
-    AdjustForm.Height := 332; *)
-end;
-
-procedure TAdjustForm.scrollCenterXScroll(Sender: TObject;
-  ScrollCode: TScrollCode; var ScrollPos: Integer);
-begin
-  if ScrollCode = scEndScroll then UpdateFlame;
-end;
-
-procedure TAdjustForm.scrollCenterYScroll(Sender: TObject;
-  ScrollCode: TScrollCode; var ScrollPos: Integer);
-begin
-  if ScrollCode = scEndScroll then UpdateFlame;
-end;
-
-procedure TAdjustForm.scrollGammaScroll(Sender: TObject;
-  ScrollCode: TScrollCode; var ScrollPos: Integer);
-begin
-  if ScrollCode = scEndScroll then UpdateFlame;
-end;
-
-procedure TAdjustForm.scrollBrightnessScroll(Sender: TObject;
-  ScrollCode: TScrollCode; var ScrollPos: Integer);
-begin
-  if ScrollCode = scEndScroll then UpdateFlame;
-end;
-
-procedure TAdjustForm.scrollVibrancyScroll(Sender: TObject;
-  ScrollCode: TScrollCode; var ScrollPos: Integer);
-begin
-  if ScrollCode = scEndScroll then UpdateFlame;
-end;
-
-procedure TAdjustForm.scrollVibrancyChange(Sender: TObject);
-begin
-  cp.Vibrancy := ScrollVibrancy.Position / 100;
-  txtVibrancy.text := FloatToStr(cp.Vibrancy);
-  txtVibrancy.Refresh;
-  DrawPreview;
-end;
-
-procedure TAdjustForm.scrollGammaChange(Sender: TObject);
-begin
-  cp.Gamma := scrollGamma.Position / 100;
-  txtGamma.text := FloatToStr(cp.Gamma);
-  txtGamma.Refresh;
-  DrawPreview;
-end;
-
-procedure TAdjustForm.scrollBrightnessChange(Sender: TObject);
-begin
-  cp.Brightness := ScrollBrightness.Position / 100;
-  txtBrightness.text := FloatToStr(cp.Brightness);
-  txtBrightness.Refresh;
-  DrawPreview;
-end;
-
-procedure TAdjustForm.scrollZoomChange(Sender: TObject);
-begin
-  cp.zoom := scrollZoom.Position / 1000;
-  txtZoom.text := FloatToStr(cp.zoom);
-  txtZoom.Refresh;
-  DrawPreview;
-(*  if (scrollZoom.Position<>0) then
-    AdjustForm.Height := 390
-  else
-    AdjustForm.Height := 332;      *)
-end;
-
-procedure TAdjustForm.scrollCenterXChange(Sender: TObject);
-begin
-  cp.center[0] := scrollCenterX.Position / 1000;
-  txtCenterX.text := FloatToStr(cp.center[0]);
-  txtCenterX.Refresh;
-  DrawPreview;
-end;
-
-procedure TAdjustForm.scrollCenterYChange(Sender: TObject);
-begin
-  cp.center[1] := scrollCenterY.Position / 1000;
-  txtCenterY.text := FloatToStr(cp.center[1]);
-  txtCenterY.Refresh;
-  DrawPreview;
-end;
-
 procedure TAdjustForm.ColorPanelClick(Sender: TObject);
 var
   col: Longint;
@@ -1095,67 +757,186 @@ procedure TAdjustForm.curveChange(Sender: TObject);
 begin
   if CurvesControl = nil then Exit;
   CurvesControl.ActiveChannel := TCurvesChannel(cbChannel.ItemIndex);
-  tbWeightLeft.Position := Round(cp.curveWeights[cbChannel.ItemIndex][1] * 10); //Round(CurvesControl.WeightLeft * 10);
-  tbWeightRight.Position := Round(cp.curveWeights[cbChannel.ItemIndex][2] * 10); //Round(CurvesControl.WeightRight * 10);
 end;
 
-procedure TAdjustForm.scrollContrastScroll(Sender: TObject;
-  ScrollCode: TScrollCode; var ScrollPos: Integer);
-begin
-  if ScrollCode = scEndScroll then UpdateFlame;
-end;
-
-procedure TAdjustForm.scrollAngleChange(Sender: TObject);
-begin
-  cp.FAngle := scrollAngle.Position * PI / 18000.0;
-  txtAngle.text := FloatToStr(cp.FAngle * 180 / PI);
-  txtAngle.Refresh;
-  DrawPreview;
-end;
-
-procedure TAdjustForm.scrollAngleScroll(Sender: TObject;
-  ScrollCode: TScrollCode; var ScrollPos: Integer);
-begin
-  if ScrollCode = scEndScroll then UpdateFlame;
-end;
-
-procedure TAdjustForm.txtAngleEnter(Sender: TObject);
-begin
-  EditBoxValue := txtAngle.Text;
-end;
-
-procedure TAdjustForm.txtAngleKeyPress(Sender: TObject; var Key: Char);
+procedure TAdjustForm.UpdateAngleFromTextBox(Sender: TObject);
 var
   v: integer;
+  s: string;
 begin
-  if ((key = #13) and (txtAngle.Text <> EditBoxValue)) then
-  begin
-    key := #0;
-    try
-      v := Trunc(StrToFloat(txtAngle.Text) * 100) mod scrollAngle.Max;
-      //if v > scrollAngle.Max then v := v - scrollAngle.Max*2
-      if v < scrollAngle.Min then v := v + scrollAngle.Max;
-      ScrollAngle.Position := v;
-      UpdateFlame;
-      EditBoxValue := txtAngle.Text;
-    except on EConvertError do
+  s := TEdit(Sender).Text;
+
+  if (s <> EditBoxValue) then
+  try
+    v := Trunc(StrToFloat(s));
+
+    if (v < -180) or (v > 180) then
+    begin
+      TEdit(sender).Text := FloatToStr(v mod 180);
+      exit;
     end;
+
+    cp.FAngle := v * PI / 180.0;
+
+    if inlineUpdate then DrawPreview else UpdateFlame;
+  except on EConvertError do
+    TEdit(Sender).Text := FloatToStr(cp.FAngle * 180.0 / PI);
   end;
 end;
 
-procedure TAdjustForm.txtAngleExit(Sender: TObject);
+procedure TAdjustForm.UpdateZoomFromTextBox(Sender: TObject);
 var
-  v: integer;
+  v: extended;
+  s: string;
 begin
-  if (txtAngle.Text <> EditBoxValue) then
+  s := TEdit(Sender).Text;
+  if (EditBoxValue <> s) then
   try
-    v := Trunc(StrToFloat(txtAngle.Text) * 100) mod scrollAngle.Max;
-//    if v > scrollAngle.Max then v := v - scrollAngle.Max*2
-//    else if v < scrollAngle.Min then v := v + scrollAngle.Max*2;
-    ScrollAngle.Position := v;
-    UpdateFlame;
+    v := strToFloat(s);
+    cp.zoom := v;
+
+    if inlineUpdate then DrawPreview else UpdateFlame;
   except on EConvertError do
-      txtAngle.Text := FloatToStr(cp.FAngle * 180 / PI);
+    txtZoom.Text := FloatToStr(cp.zoom)
+  end;
+end;
+
+procedure TAdjustForm.UpdateCenterXFromTextBox(Sender: TObject);
+var
+  v: extended;
+  s: string;
+begin
+  s := TEdit(Sender).Text;
+  if (EditBoxValue <> s) then
+  try
+    v := strToFloat(s);
+    cp.center[0] := v;
+
+    if inlineUpdate then DrawPreview else UpdateFlame;
+  except on EConvertError do
+    txtZoom.Text := FloatToStr(cp.center[0])
+  end;
+end;
+
+procedure TAdjustForm.UpdateCenterYFromTextBox(Sender: TObject);
+var
+  v: extended;
+  s: string;
+begin
+  s := TEdit(Sender).Text;
+  if (EditBoxValue <> s) then
+  try
+    v := strToFloat(s);
+    cp.center[1] := v;
+
+    if inlineUpdate then DrawPreview else UpdateFlame;
+  except on EConvertError do
+    txtZoom.Text := FloatToStr(cp.center[1])
+  end;
+end;
+
+procedure TAdjustForm.UpdateGammaFromTextBox(Sender: TObject);
+var
+  v: extended;
+  s: string;
+begin
+  s := TEdit(Sender).Text;
+
+  if (s <> EditBoxValue) then
+  try
+    v := Trunc(StrToFloat(s));
+
+    if (v < 0) then
+    begin
+      TEdit(sender).Text := '0';
+      exit;
+    end;
+
+    cp.gamma := v;
+
+    if inlineUpdate then DrawPreview else UpdateFlame;
+  except on EConvertError do
+    TEdit(Sender).Text := FloatToStr(cp.gamma);
+  end;
+end;
+procedure TAdjustForm.UpdateBrightnessFromTextBox(Sender: TObject);
+var
+  v: extended;
+  s: string;
+begin
+  s := TEdit(Sender).Text;
+
+  if (s <> EditBoxValue) then
+  try
+    v := Trunc(StrToFloat(s));
+
+    if (v < 0) then
+    begin
+      TEdit(sender).Text := '0';
+      exit;
+    end;
+
+    cp.brightness := v;
+
+    if inlineUpdate then DrawPreview else UpdateFlame;
+  except on EConvertError do
+    TEdit(Sender).Text := FloatToStr(cp.brightness);
+  end;
+end;
+
+procedure TAdjustForm.UpdateVibrancyFromTextBox(Sender: TObject);
+var
+  v: extended;
+  s: string;
+begin
+  s := TEdit(Sender).Text;
+
+  if (s <> EditBoxValue) then
+  try
+    v := Trunc(StrToFloat(s));
+
+    if (v < 0) then
+    begin
+      TEdit(sender).Text := '0';
+      exit;
+    end;
+
+    if LimitVibrancy and (v > 1) then
+    begin
+      TEdit(sender).Text := '1';
+      exit;
+    end;
+
+    cp.vibrancy := v;
+
+    if inlineUpdate then DrawPreview else UpdateFlame;
+  except on EConvertError do
+    TEdit(Sender).Text := FloatToStr(cp.vibrancy);
+  end;
+end;
+
+procedure TAdjustForm.UpdateGammaThresholdFromTextBox(Sender: TObject);
+var
+  v: extended;
+  s: string;
+begin
+  s := TEdit(Sender).Text;
+
+  if (s <> EditBoxValue) then
+  try
+    v := Trunc(StrToFloat(s));
+
+    if (v < 0) then
+    begin
+      TEdit(sender).Text := '0';
+      exit;
+    end;
+
+    cp.gammaThreshRelative := v;
+
+    if inlineUpdate then DrawPreview else UpdateFlame;
+  except on EConvertError do
+    TEdit(Sender).Text := FloatToStr(cp.gammaThreshRelative);
   end;
 end;
 
@@ -1171,7 +952,6 @@ begin
   SetCurvesCp(MainCp);
 
   if EditForm.visible then EditForm.UpdateDisplay;
-  if MutateForm.Visible then MutateForm.UpdateDisplay;
   if CurvesForm.Visible then CurvesForm.SetCp(MainCp);
 
   if mnuInstantPreview.Checked then DrawPreview;
@@ -1427,9 +1207,7 @@ var
   intens, i, r, g, b: integer;
   h, s, v: real;
 begin
-  lblVal.Caption := IntToStr(ScrollBar.Position);
   txtVal.Text := IntToStr(ScrollBar.Position);
-  lblVal.Refresh;
   txtVal.Refresh;
 
   if Resetting then exit;
@@ -1912,17 +1690,6 @@ begin
   SetMainWindowSize;
 end;
 
-procedure TAdjustForm.WeightChange(Sender: TObject);
-begin
-  CurvesControl.WeightLeft := tbWeightLeft.Position / 10.0;
-  CurvesControl.WeightRight := tbWeightRight.Position / 10.0;
-
-  cp.curveWeights[cbChannel.ItemIndex][1] := tbWeightLeft.Position / 10.0;
-  cp.curveWeights[cbChannel.ItemIndex][2] := tbWeightRight.Position / 10.0;
-
-  DrawPreview;
-end;
-
 procedure TAdjustForm.WeightScroll(Sender: TObject; ScrollCode: TScrollCode;
   var ScrollPos: Integer);
 begin
@@ -1933,7 +1700,6 @@ begin
   MainCp.Copy(cp, true);
 
   if EditForm.Visible then EditForm.UpdateDisplay;
-  if MutateForm.Visible then MutateForm.UpdateDisplay;
   if CurvesForm.Visible then CurvesForm.SetCp(cp);
 
   MainForm.RedrawTimer.enabled := true;
@@ -2182,6 +1948,8 @@ begin
   if Button <> mbLeft then exit;
 
   enableDrag := true;
+  inlineUpdate := true;
+
   if (Sender = pnlMasterScale) then
     pnlDragValue := cp.pixels_per_unit / PreviewImage.Width
   else if (Sender = pnlZoom) then
@@ -2254,6 +2022,7 @@ begin
     SetCursorPos(MousePos.x, MousePos.y); // hmmm
     pnlMM:=true;
 
+
     if (Sender = pnlMasterScale) then
     begin
       v := Round6(pnlDragValue * power(2, pnlDragPos / sc / 2));
@@ -2263,31 +2032,43 @@ begin
     end
     else if (Sender = pnlZoom) then
     begin
-      scrollZoom.Position := trunc(v * 1000);
+      txtZoom.Text := FloatToStr(v);
+      UpdateZoomFromTextBox(txtZoom);
     end
     else if (Sender = pnlXpos) then
     begin
-      scrollCenterX.Position := trunc(v * 1000);
+      txtCenterX.Text := FloatToStr(v);
+      UpdateCenterXFromTextBox(txtCenterX);
     end
     else if (Sender = pnlYpos) then
     begin
-      scrollCenterY.Position := trunc(v * 1000);
+      txtCenterY.Text := FloatToStr(v);
+      UpdateCenterYFromTextBox(txtCenterY);
     end
     else if (Sender = pnlAngle) then
     begin
-      scrollAngle.Position := Trunc(v * 18000.0 / PI) mod 36000;
+      txtAngle.Text := FloatToStr(trunc(v * 180.0 / PI) mod 360);
+      UpdateAngleFromTextBox(txtAngle);
     end
     else if (Sender = pnlGamma) then
     begin
-      scrollGamma.Position := trunc(v * 100);
+      txtGamma.Text := FloatToStr(v);
+      UpdateGammaFromTextBox(txtGamma);
     end
     else if (Sender = pnlBrightness) then
     begin
-      scrollBrightness.Position := trunc(v * 100);
+      txtBrightness.Text := FloatToStr(v);
+      UpdateBrightnessFromTextBox(txtBrightness);
     end
     else if (Sender = pnlVibrancy) then
     begin
-      scrollVibrancy.Position := trunc(v * 100);
+      txtVibrancy.Text := FloatToStr(v);
+      UpdateVibrancyFromTextBox(txtVibrancy);
+    end
+    else if (Sender = pnlGammaThreshold) then
+    begin
+      txtGammaThreshold.Text := FloatToStr(v);
+      UpdateGammaThresholdFromTextBox(txtGammaThreshold);
     end
     else if (Sender = pnlPitch) then // 3d camera controls
     begin
@@ -2317,12 +2098,7 @@ begin
       cp.cameraDOF := v;
       txtDOF.Text := FloatToStr(v);
     end
-    else if (Sender = pnlGammaThreshold) then
-    begin
-      if v < 0 then v := 0;
-      cp.gammaThreshRelative := v;
-      txtGammaThreshold.Text := FloattoStr(cp.gammaThreshRelative);
-    end else exit;
+    else exit;
     //pEdit^.Text := FloatToStr(v);
     //pEdit.Refresh;
     pnlDragged := True;
@@ -2341,10 +2117,47 @@ begin
 
     pnlDragMode := false;
     Screen.Cursor := crDefault;
+    inlineUpdate := false;
 
     if pnlDragged then
     begin
-      UpdateFlame;
+      if (Sender = pnlZoom) then
+      begin
+        UpdateZoomFromTextBox(txtZoom);
+      end
+      else if (Sender = pnlXpos) then
+      begin
+        UpdateCenterXFromTextBox(txtCenterX);
+      end
+      else if (Sender = pnlYpos) then
+      begin
+        UpdateCenterYFromTextBox(txtCenterY);
+      end
+      else if (Sender = pnlAngle) then
+      begin
+        UpdateAngleFromTextBox(txtAngle);
+      end
+      else if (Sender = pnlGamma) then
+      begin
+        UpdateGammaFromTextBox(txtGamma);
+      end
+      else if (Sender = pnlBrightness) then
+      begin
+        UpdateBrightnessFromTextBox(txtBrightness);
+      end
+      else if (Sender = pnlVibrancy) then
+      begin
+        UpdateVibrancyFromTextBox(txtVibrancy);
+      end
+      else if (Sender = pnlGammaThreshold) then
+      begin
+        UpdateGammaThresholdFromTextBox(txtGammaThreshold);
+      end
+      else
+      begin
+        UpdateFlame;
+      end;
+
       pnlDragged := False;
     end;
   end;
@@ -2354,8 +2167,11 @@ procedure TAdjustForm.DragPanelDblClick(Sender: TObject);
 var
   pValue: ^double;
 begin
+
+  // camera
   if (Sender = pnlMasterScale) then
   begin
+    // -x- todo: map to other behavior
     pValue := @cp.pixels_per_unit;
     if pValue^ = PreviewImage.Width/4 then exit;
     pValue^ := PreviewImage.Width/4;
@@ -2363,32 +2179,55 @@ begin
   end
   else if (Sender = pnlZoom) then
   begin
-    scrollZoom.Position := 0;
+    txtZoom.Text := '0';
+    UpdateZoomFromTextBox(txtZoom);
+    Exit;
   end
   else if (Sender = pnlXpos) then
   begin
-    scrollCenterX.Position := 0;
+    txtCenterX.Text := '0';
+    UpdateCenterXFromTextBox(txtCenterX);
+    Exit;
   end
   else if (Sender = pnlYpos) then
   begin
-    scrollCenterY.Position := 0;
+    txtCenterY.Text := '0';
+    UpdateCenterYFromTextBox(txtCenterY);
+    Exit;
   end
   else if (Sender = pnlAngle) then
   begin
-    scrollAngle.Position := 0;
+    txtAngle.Text := '0';
+    UpdateAngleFromTextBox(txtAngle);
+    Exit;
   end
+
+  // rendering
   else if (Sender = pnlGamma) then
   begin
-    scrollGamma.Position := Round(defGamma * 100);
+    txtGamma.Text := FloatToStr(defGamma);
+    UpdateGammaFromTextBox(txtGamma);
+    Exit;
   end
   else if (Sender = pnlBrightness) then
   begin
-    scrollBrightness.Position := Round(defBrightness * 100);
+    txtBrightness.Text := FloatToStr(defBrightness);
+    UpdateBrightnessFromTextBox(txtGamma);
+    Exit;
   end
   else if (Sender = pnlVibrancy) then
   begin
-    scrollVibrancy.Position := Round(defVibrancy * 100);
+    txtVibrancy.Text := FloatToStr(defVibrancy);
+    UpdateVibrancyFromTextBox(txtGamma);
+    Exit;
   end
+  else if (Sender = pnlGammaThreshold) then
+  begin
+    txtGammaThreshold.Text := FloatToStr(defGammaThreshold);
+    UpdateGammaThresholdFromTextBox(txtGammaThreshold);
+    Exit;
+  end
+
   // 3d camera controls
   else if (Sender = pnlPitch) then
   begin
@@ -2416,12 +2255,7 @@ begin
     cp.cameraDOF := 0;
     txtDOF.Text := '0';
   end
-  else if (Sender = pnlGammaThreshold) then
-  begin
-    if cp.gammaThreshRelative = defGammaThreshold then exit;
-    cp.gammaThreshRelative := defGammaThreshold;
-    txtGammaThreshold.Text := FloatToStr(defGammaThreshold);
-  end
+
   else exit;//assert(false);
 
   UpdateFlame;
@@ -2636,55 +2470,13 @@ begin
   txtPitch.Text := '0';
   cp.cameraYaw := 0;
   txtYaw.Text := '0';
-//  cp.cameraZpos := 0;
-//  txtZpos.Text := '0';
-  scrollCenterX.Position := 0;
-  scrollCenterY.Position := 0;
+  txtCenterX.Text := '0';
+  txtCenterY.Text := '0';
 
   UpdateFlame;
 end;
 
-procedure TAdjustForm.txtGammaThresholdEnter(Sender: TObject);
-begin
-  EditBoxValue := txtGammaThreshold.Text;
-end;
 
-procedure TAdjustForm.txtGammaThresholdExit(Sender: TObject);
-var
-  v: double;
-begin
-  try
-    v := strtofloat(txtGammaThreshold.Text);
-  except
-    exit;
-  end;
-  if v < 0 then v := 0;
-  if v <> cp.gammaThreshRelative then begin
-    MainForm.UpdateUndo;
-    cp.gammaThreshRelative := v;
-    txtGammaThreshold.Text := FloatToStr(cp.gammaThreshRelative);
-    UpdateFlame;
-    EditBoxValue := txtGammaThreshold.Text;
-  end;
-end;
-
-procedure TAdjustForm.txtGammaThresholdKeyPress(Sender: TObject;
-  var Key: Char);
-begin
-  if key=#13 then
-  begin
-    key := #0;
-    txtGammaThresholdExit(Sender);
-  end;
-end;
-
-procedure TAdjustForm.txtZoomChange(Sender: TObject);
-begin
-(*  if (txtZoom.Text<>'0') then
-    AdjustForm.Height := 390
-  else
-    AdjustForm.Height := 332;   *)
-end;
 
 procedure TAdjustForm.Shape1MouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
@@ -2700,9 +2492,6 @@ end;
 procedure TAdjustForm.btnResetCurvesClick(Sender: TObject);
 var i: integer;
 begin
-  tbWeightLeft.Position := 10;
-  tbWeightRight.Position := 10;
-
   with cp do for i := 0 to 3 do
   begin
     curvePoints[i][0].x := 0.00; curvePoints[i][0].y := 0.00; curveWeights[i][0] := 1;

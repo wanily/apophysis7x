@@ -145,7 +145,6 @@ uses
   Fullscreen in 'Forms\Fullscreen.pas' {FullscreenForm},
   ImageColoring in 'Forms\ImageColoring.pas' {frmImageColoring},
   LoadTracker in 'Forms\LoadTracker.pas' {LoadForm},
-  Mutate in 'Forms\Mutate.pas' {MutateForm},
   Options in 'Forms\Options.pas' {OptionsForm},
   Save in 'Forms\Save.pas' {SaveForm},
   SavePreset in 'Forms\SavePreset.pas' {SavePresetForm},
@@ -190,7 +189,6 @@ begin
   Application.CreateForm(TFullscreenForm, FullscreenForm);
   Application.CreateForm(TfrmImageColoring, frmImageColoring);
   Application.CreateForm(TLoadForm, LoadForm);
-  Application.CreateForm(TMutateForm, MutateForm);
   Application.CreateForm(TOptionsForm, OptionsForm);
   Application.CreateForm(TSaveForm, SaveForm);
   Application.CreateForm(TSavePresetForm, SavePresetForm);

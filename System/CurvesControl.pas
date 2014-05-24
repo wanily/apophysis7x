@@ -71,7 +71,7 @@ implementation
 
 {$R *.DFM}
 
-uses Main, Editor, Mutate, Adjust;
+uses Main, Editor, Adjust;
 
 constructor TCurvesControl.Create(AOwner: TComponent);
 begin
@@ -120,7 +120,6 @@ begin
   MainCp.Copy(FCP, true);
 
   if EditForm.Visible then EditForm.UpdateDisplay;
-  if MutateForm.Visible then MutateForm.UpdateDisplay;
   if AdjustForm.Visible then AdjustForm.UpdateDisplay(true);
 
   MainForm.RedrawTimer.enabled := true;

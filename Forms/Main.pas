@@ -113,7 +113,6 @@ type
     mnuOpen: TMenuItem;
     mnuSaveAs: TMenuItem;
     N8: TMenuItem;
-    mnuGrad: TMenuItem;
     mnuSmoothGradient: TMenuItem;
     mnuView: TMenuItem;
     mnuToolbar: TMenuItem;
@@ -129,7 +128,6 @@ type
     mnuAbout: TMenuItem;
     mnuFullScreen: TMenuItem;
     mnuRender: TMenuItem;
-    mnuMutate: TMenuItem;
     mnuAdjust: TMenuItem;
     mnuOpenGradient: TMenuItem;
     mnuResetLocation: TMenuItem;
@@ -157,7 +155,6 @@ type
     N9: TMenuItem;
     N10: TMenuItem;
     mnuManageFavorites: TMenuItem;
-    mnuImageSize: TMenuItem;
     N13: TMenuItem;
     ApplicationEvents: TApplicationEvents;
     mnuPaste: TMenuItem;
@@ -206,9 +203,6 @@ type
     ToolButton4: TToolButton;
     ToolButton5: TToolButton;
     ToolButton6: TToolButton;
-    ToolButton7: TToolButton;
-    ToolButton11: TToolButton;
-    ToolButton12: TToolButton;
     ToolButton13: TToolButton;
     ToolButton14: TToolButton;
     ToolButton15: TToolButton;
@@ -237,8 +231,6 @@ type
     mnuExportChaotica: TMenuItem;
     mnuResumeRender: TMenuItem;
     mnuManual: TMenuItem;
-    ToolButton19: TToolButton;
-    mnuCurves: TMenuItem;
     N17: TMenuItem;
     mnuTrace: TMenuItem;
     ToolButton24: TToolButton;
@@ -295,7 +287,6 @@ type
     procedure mnuExportBitmapClick(Sender: TObject);
     procedure mnuFullScreenClick(Sender: TObject);
     procedure mnuRenderClick(Sender: TObject);
-    procedure mnuMutateClick(Sender: TObject);
     procedure mnuAdjustClick(Sender: TObject);
     procedure mnuResetLocationClick(Sender: TObject);
     procedure mnuAboutClick(Sender: TObject);
@@ -505,7 +496,7 @@ implementation
 
 uses
   Editor, Options, Settings, Template,
-  FullScreen, FormRender, Mutate, Adjust, Browser, Save, About, CmapData,
+  FullScreen, FormRender, Adjust, Browser, Save, About, CmapData,
   {$ifdef DisableScripting}
   {$else}
     ScriptForm, FormFavorites,
@@ -737,16 +728,8 @@ begin
 	ToolButton5.Hint := TextByKey('main-menu-view-editor');
 	mnuAdjust.Caption := TextByKey('main-menu-view-adjustment');
 	ToolButton6.Hint := TextByKey('main-menu-view-adjustment');
-	mnuGrad.Caption := TextByKey('main-menu-view-gradient');
-	ToolButton7.Hint := TextByKey('main-menu-view-gradient');
-	mnuMutate.Caption := TextByKey('main-menu-view-mutation');
-	ToolButton11.Hint := TextByKey('main-menu-view-mutation');
-	mnuImageSize.Caption := TextByKey('main-menu-view-imagesize');
-	ToolButton12.Hint := TextByKey('main-menu-view-imagesize');
 	mnuMessages.Caption := TextByKey('main-menu-view-messages');
 	toolButton13.Hint := TextByKey('main-menu-view-messages');
-  ToolButton19.Hint := TextByKey('main-menu-view-curves');
-  mnuCurves.Caption := TextByKey('main-menu-view-curves');
 	F1.Caption := TextByKey('main-menu-flame-title');
 	mnuResetLocation.Caption := TextByKey('main-menu-flame-reset');
 	mnuPopResetLocation.Caption := TextByKey('main-menu-flame-reset');
@@ -3626,7 +3609,6 @@ begin
   if EditForm.visible then EditForm.Close;
   if AdjustForm.visible then AdjustForm.close;
   if GradientBrowser.visible then GradientBrowser.close;
-  if MutateForm.visible then MutateForm.Close;
 //  if GradientForm.visible then GradientForm.Close;
 {$ifdef DisableScripting}
 {$else}
@@ -3981,7 +3963,6 @@ procedure TMainForm.UpdateWindows;
 begin
   if AdjustForm.visible then AdjustForm.UpdateDisplay;
   if EditForm.visible then EditForm.UpdateDisplay;
-  if MutateForm.visible then MutateForm.UpdateDisplay;
   if CurvesForm.Visible then CurvesForm.SetCp(MainCp);
   
 end;
@@ -4126,7 +4107,6 @@ end;
 procedure TMainForm.mnuGradClick(Sender: TObject);
 begin
   AdjustForm.UpdateDisplay;
-  AdjustForm.PageControl.TabIndex:=2;
   AdjustForm.Show;
 end;
 
@@ -4311,7 +4291,6 @@ begin
         AdjustForm.UpdateDisplay;
 
         if EditForm.Visible then EditForm.UpdateDisplay;
-        if MutateForm.Visible then MutateForm.UpdateDisplay;
         RedrawTimer.enabled := true;
 
       end;
@@ -4513,16 +4492,9 @@ begin
   RenderForm.Show;
 end;
 
-procedure TMainForm.mnuMutateClick(Sender: TObject);
-begin
-  MutateForm.Show;
-  MutateForm.UpdateDisplay;
-end;
-
 procedure TMainForm.mnuAdjustClick(Sender: TObject);
 begin
   AdjustForm.UpdateDisplay;
-  AdjustForm.PageControl.TabIndex := 0;
   AdjustForm.Show;
 end;
 
@@ -4756,7 +4728,6 @@ procedure TMainForm.mnuImageSizeClick(Sender: TObject);
 begin
 //  SizeTool.Show;
   AdjustForm.UpdateDisplay;
-  AdjustForm.PageControl.TabIndex:=3;
   AdjustForm.Show;
 end;
 
@@ -6375,7 +6346,6 @@ end;
 procedure TMainForm.ToolButton19Click(Sender: TObject);
 begin
   AdjustForm.UpdateDisplay;
-  AdjustForm.PageControl.TabIndex:=4;
   AdjustForm.Show;
 end;
 
@@ -6595,7 +6565,6 @@ begin
   {if EditForm.Active then HelpTopic := 'Transform editor.htm'
 //  else if GradientForm.Active then HelpTopic := 'Gradient window.htm'
   else if AdjustForm.Active then HelpTopic := 'Adjust window.htm'
-  else if MutateForm.Active then HelpTopic := 'Mutation window.htm'
   else if RenderForm.Active then HelpTopic := 'Render window.htm';
   HtmlHelp(0, nil, HH_CLOSE_ALL, 0);
   URL := AppPath + 'Apophysis 2.0.chm';
