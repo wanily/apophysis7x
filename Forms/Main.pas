@@ -325,6 +325,7 @@ type
 
     Renderer: TRenderThread;
     FNrThreads: integer;
+    FSwitching: boolean;
 
     FMouseMoveState: TMouseMoveState;
     FSelectRect, FClickRect: TRect;
@@ -750,7 +751,8 @@ begin
   RedrawTimer.Enabled := False;
   if Assigned(Renderer) then begin
     assert(Renderer.Suspended = false);
-    Renderer.Suspend;
+    FSwitching := true;
+    Renderer.BreakRender;
     Renderer.WaitFor;
   end;
 end;
@@ -1978,6 +1980,13 @@ procedure TMainForm.HandleThreadCompletion(var Message: TMessage);
 var
   oldscale: double;
 begin
+  if FSwitching then
+  begin
+    HandleThreadTermination(Message);
+    FSwitching := false;
+    Exit;
+  end;
+
   Trace2(MsgComplete + IntToStr(message.LParam));
   if not Assigned(Renderer) then begin
     Trace2(MsgNotAssigned);
@@ -2775,8 +2784,6 @@ var
 begin
   //KnownPlugins := TList.Create;
 
-  FNrThreads := 1;
-
   ApophysisSVN:=APP_VERSION;
   AppVersionString:=APP_NAME+' '+APP_VERSION;
 
@@ -3094,7 +3101,7 @@ begin
   end;
 {$endif}
 
-  //FNrThreads := Nrtreads;
+  FNrThreads := Nrtreads;
 
   SplashWindow.Hide;
   SplashWindow.Free;

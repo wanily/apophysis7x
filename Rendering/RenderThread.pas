@@ -225,7 +225,7 @@ begin
 RenderMore:
   assert(assigned(FRenderer));
 
-  Trace('Rendering');
+  Trace(Format('Rendering with %d cores', [FNrThreads]));
   FRenderer.Render;
 
   if Terminated or FRenderer.Failed then begin
