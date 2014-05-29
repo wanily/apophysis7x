@@ -2199,7 +2199,7 @@ procedure TMainForm.EmptyBatch;
 var
   F: TextFile;
   b, RandFile: string;
-  cmap_index: integer;
+  cmap_index,ci: integer;
 begin
   b := IntToStr(1);
   inc(MainSeed);
@@ -2217,10 +2217,12 @@ begin
     inc(MainSeed);
     RandSeed := MainSeed;
     ClearCp(MainCp);
-    MainCp.CalcBoundbox;
+    //MainCp.CalcBoundbox;
 
-    MainCp.name := RandomPrefix + RandomDate + '-' +
-      IntToStr(RandomIndex);
+    MainCp.name := RandomPrefix + RandomDate + '-' + IntToStr(RandomIndex);
+    ci := Random(256); //Random(NRCMAPS);
+    GetCMap(ci, 1, MainCp.cmap);
+    MainCp.cmapIndex := ci;
     Write(F, FlameToXML(MainCp, False, false));
 
     Write(F, '</random_batch>');
@@ -5573,10 +5575,23 @@ end;
 
 procedure TMainForm.ToolButton8Click(Sender: TObject);
 var
-  i:integer;
+  i, ci:integer;
 begin
   //EditForm.InvokeResetAll;
-  if (AlwaysCreateBlankFlame) then EditForm.InvokeResetAll
+  if (AlwaysCreateBlankFlame) then begin
+    ClearCp(MainCp);
+    inc(RandomIndex);
+    MainCp.name := RandomPrefix + RandomDate + '-' + IntToStr(RandomIndex);
+    ci := Random(256); //Random(NRCMAPS);
+    GetCMap(ci, 1, MainCp.cmap);
+    MainCp.cmapIndex := ci;
+
+    if AdjustForm.Visible then AdjustForm.UpdateDisplay;
+    if CurvesForm.Visible then CurvesForm.SetCp(MainCp);
+    if EditForm.Visible then EditForm.UpdateDisplay;
+    
+    RedrawTimer.enabled := true;
+  end
   else TemplateForm.Show;
 end;
 

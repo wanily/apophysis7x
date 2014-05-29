@@ -143,7 +143,6 @@ type
     bClear: TBitBtn;
     TabSheet4: TTabSheet;
     vleVariables: TValueListEditor;
-    chkCollapseVariables: TCheckBox;
     TabChaos: TTabSheet;
     vleChaos: TValueListEditor;
     optFrom: TRadioButton;
@@ -235,10 +234,6 @@ type
     mnuELowQuality: TMenuItem;
     Label4: TLabel;
     txtSearchBox: TEdit;
-    ToolButton5: TToolButton;
-    ToolButton12: TToolButton;
-    ToolButton13: TToolButton;
-    ToolButton14: TToolButton;
     SpeedButton1: TSpeedButton;
     GroupBox3: TGroupBox;
     btnResetPivot: TSpeedButton;
@@ -246,6 +241,7 @@ type
     btnPivotMode: TSpeedButton;
     editPivotY: TEdit;
     editPivotX: TEdit;
+    ToolButton13: TToolButton;
     procedure ToolButton12Click(Sender: TObject);
     procedure btnResetSearchClick(Sender: TObject);
     procedure txtSearchBoxKeyPress(Sender: TObject; var Key: Char);
@@ -1896,7 +1892,6 @@ begin
 	TabSheet4.Caption := TextByKey('editor-tab-variables-title');
 	vleVariables.TitleCaptions[0] := TextByKey('editor-tab-variables-name');
 	vleVariables.TitleCaptions[1] := TextByKey('editor-tab-variables-value');
-	chkCollapseVariables.Caption := TextByKey('editor-tab-variables-toggleshowall');
 	TabChaos.Caption := TextByKey('editor-tab-chaos-title');
 	vleChaos.TitleCaptions[0] := TextByKey('editor-tab-chaos-path');
 	vleChaos.TitleCaptions[1] := TextByKey('editor-tab-chaos-modifier');
@@ -5778,17 +5773,12 @@ var
 begin
   for i := 1 to vleVariables.RowCount - 1 do
   begin
-    if chkCollapseVariables.Checked then
-      vleVariables.RowHeights[i] := vleVariables.DefaultRowHeight
+    vari := GetVariationIndexFromVariableNameIndex(i-1);
+    if ( (vari = -1) or
+         ((Assigned(cp)) and (cp.xform[SelectedTriangle].GetVariation(vari) = 0)) ) then
+      vleVariables.RowHeights[i] := -1
     else
-    begin
-      vari := GetVariationIndexFromVariableNameIndex(i-1);
-      if ( (vari = -1) or
-           ((Assigned(cp)) and (cp.xform[SelectedTriangle].GetVariation(vari) = 0)) ) then
-        vleVariables.RowHeights[i] := -1
-      else
-        vleVariables.RowHeights[i] := vleVariables.DefaultRowHeight;
-    end;
+      vleVariables.RowHeights[i] := vleVariables.DefaultRowHeight;
   end;
 end;
 procedure TEditForm.shColorMouseDown(Sender: TObject; Button: TMouseButton;

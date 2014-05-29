@@ -235,7 +235,6 @@ begin
 	Add('editor-tab-variables-title', 'Variables');
 	Add('editor-tab-variables-name', 'Name');
 	Add('editor-tab-variables-value', 'Value');
-	Add('editor-tab-variables-toggleshowall', 'Show all variables');
 	Add('editor-tab-chaos-title', 'Xaos');
 	Add('editor-tab-chaos-path', 'Path');
 	Add('editor-tab-chaos-modifier', 'Weight modifier');
@@ -281,7 +280,7 @@ begin
 	Add('editor-tab-color-previewdepth', 'Depth');
 	Add('editor-tab-color-previewdensity', 'Density');
   Add('editor-tab-color-preview', 'Preview');
-	Add('editor-toolbar-newflame', 'New flame');
+	Add('editor-toolbar-newflame', 'Reset flame');
 	Add('editor-toolbar-newtransform', 'New transform');
 	Add('editor-toolbar-addlinkedtransform', 'Add linked transform');
 	Add('editor-toolbar-duplicatetransform', 'Duplicate transform');

@@ -53,7 +53,7 @@ type
 var
   TemplateForm: TTemplateForm;
 const
-  blankFlameXML1 = '<flame name="Blank Flame" version="Apophysis" size="1500 1000" center="0 0" background="0 0 0">';
+  blankFlameXML1 = '<flame name="Blank Flame" version="Apophysis" size="512 384" center="0 0" background="0 0 0" scale="128" gamma="4" brightness="4" gamma_threshold="0.04">';
   blankFlameXML2 = '<xform weight="0.5" color="0" linear3D="1" coefs="1 0 0 1 0 0" />';
   blankFlameXML3 = '<palette count="256" format="RGB">';
 
@@ -326,7 +326,9 @@ begin
   MainForm.UpdateWindows;
   ci := Random(256); //Random(NRCMAPS);
   GetCMap(ci, 1, MainCp.cmap);
+  inc(RandomIndex);
   MainCp.cmapIndex := ci;
+  MainCp.name := RandomPrefix + RandomDate + '-' + IntToStr(RandomIndex);
   btnCancelClick(sender);
 end;
 
