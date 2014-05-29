@@ -47,7 +47,6 @@ type
     SpeedButton1: TSpeedButton;
     pnlJPEGQuality: TPanel;
     chkConfirmDel: TCheckBox;
-    chkOldPaletteFormat: TCheckBox;
     chkConfirmExit: TCheckBox;
     chkConfirmStopRender: TCheckBox;
     cbUseTemplate: TCheckBox;
@@ -157,6 +156,9 @@ type
     btnPluginPath: TSpeedButton;
     Panel50: TPanel;
     txtPluginFolder: TEdit;
+    cbMultithreadedPreview: TCheckBox;
+    pnlWarning: TPanel;
+    cbMultithreadedPreviewWarning: TLabel;
     procedure chkEnableEditorPreviewClick(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure btnCancelClick(Sender: TObject);
@@ -198,6 +200,7 @@ type
     procedure btnHelpClick(Sender: TObject);
     procedure cbGLClick(Sender: TObject);
     procedure btnPluginPathClick(Sender: TObject);
+    procedure cbMultithreadedPreviewClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -282,7 +285,6 @@ begin
   end;
 
   chkConfirmDel.Checked := ConfirmDelete;
-  chkOldPaletteFormat.Checked := OldPaletteFormat;
   chkConfirmExit.Checked := ConfirmExit;
   chkConfirmStopRender.Checked := ConfirmStopRender;
   chkRememberLastOpen.Checked := RememberLastOpenFile;
@@ -290,7 +292,8 @@ begin
   cbUseTemplate.Checked := AlwaysCreateBlankFlame;
   cbMissingPlugin.Checked := WarnOnMissingPlugin;
   cbEmbedThumbs.Checked := EmbedThumbnails;
-  //cbSinglePrecision.Checked := SingleBuffer;
+  cbMultithreadedPreview.Checked := MultithreadedPreview;
+  cbMultithreadedPreviewClick(cbMultithreadedPreview);
 
   rgRotationMode.ItemIndex := MainForm_RotationMode;
   if PreserveQuality then
@@ -302,11 +305,7 @@ begin
   chkPlaySound.Checked := PlaySoundOnRenderComplete;
   txtSoundFile.Text := RenderCompleteSoundFile;
 
-  //cbInternalBitsPerSample.ItemIndex := InternalBitsPerSample;
-
-
   { Editor }
-//  rgReferenceMode.ItemIndex := ReferenceMode;
   chkUseXFormColor.checked := UseTransformColors;
   chkHelpers.Checked := HelpersEnabled;
   chkExtendedEdit.Checked := ExtEditEnabled;
@@ -383,8 +382,10 @@ procedure TOptionsForm.btnOKClick(Sender: TObject);
 var
   i: integer;
   warn: boolean;
+  warnmt: boolean;
 begin
   warn := (LanguageFile <> AvailableLanguages[txtLanguageFile.ItemIndex]) or (UseSmallThumbnails <> chkUseSmallThumbs.Checked);
+  warnmt := MultithreadedPreview <> cbMultithreadedPreview.Checked;
 
   { General tab }
   JPEGQuality := StrToInt(txtJPEGQuality.text);
@@ -396,7 +397,6 @@ begin
 
   NrTreads := StrToIntDef(cbNrTheads.text, 0);
   ConfirmDelete := chkConfirmDel.Checked;
-  OldPaletteFormat := chkOldPaletteFormat.Checked;
   ConfirmExit := chkConfirmExit.Checked;
   ConfirmStopRender := chkConfirmStopRender.Checked;
   RememberLastOpenFile := chkRememberLastOpen.Checked;
@@ -405,6 +405,7 @@ begin
   EmbedThumbnails := cbEmbedThumbs.Checked;
   WarnOnMissingPlugin := cbMissingPlugin.Checked;
   LanguageFile := AvailableLanguages.Strings[txtLanguageFile.ItemIndex];
+  MultithreadedPreview := cbMultithreadedPreview.Checked;
   //SingleBuffer := cbSinglePrecision.Checked;
 
   MainForm_RotationMode := rgRotationMode.ItemIndex;
@@ -479,7 +480,7 @@ begin
   AutoSavePath := txtDefaultSaveFile.Text;
   AutoSaveFreq := cbFreq.ItemIndex;
 
-  if (warn) then
+  if (warn or warnmt) then
     Application.MessageBox(PChar(TextByKey('options-restartnotice')), PChar('Apophysis'), MB_ICONWARNING);
 
   Close;
@@ -581,7 +582,6 @@ begin
 	chkConfirmDel.Caption := TextByKey('options-tab-general-confirmdelete');
 	chkConfirmExit.Caption := TextByKey('options-tab-general-confirmexit');
 	chkconfirmStopRender.Caption := TextByKey('options-tab-general-confirmrenderstop');
-	chkOldPaletteFormat.Caption := TextByKey('options-tab-general-oldgradientformat');
 	cbUseTemplate.Caption := TextByKey('options-tab-general-alwaysblankflame');
 	cbMissingplugin.Caption := TextByKey('options-tab-general-enablemissingpluginswarning');
 	cbEmbedThumbs.Caption := TextByKey('options-tab-general-enablethumbnailembedding');
@@ -631,6 +631,8 @@ begin
 	panel45.Caption := TextByKey('options-tab-environment-savefrequency');
   cbSinglePrecision.Caption := TextByKey('options-tab-general-singleprecision');
   grpEditorColors.Caption := TextByKey('editor-tab-color-title');
+  cbMultithreadedPreview.Caption := TextByKey('options-tab-general-multithreadedpreview');
+  cbMultithreadedPreviewWarning.Caption := TextByKey('options-tab-general-multithreadedpreview-warning');
 end;
 
 procedure TOptionsForm.pnlCenterLineClick(Sender: TObject);
@@ -892,6 +894,20 @@ begin
 
   if (pnlGoldenRatio.Enabled) then pnlGoldenRatio.Font.Color := clWindowText
   else pnlGoldenRatio.Font.Color := clGrayText;
+end;
+
+procedure TOptionsForm.cbMultithreadedPreviewClick(Sender: TObject);
+var
+  i: Integer;
+begin
+  pnlWarning.Visible := TCheckBox(sender).Checked;
+
+  for i := 0 to pnlWarning.ControlCount - 1 do
+  begin
+    pnlWarning.Controls[i].Visible := pnlWarning.Controls[i].Name = TCheckBox(sender).Name + 'Warning';
+  end;
+
+  if pnlWarning.visible then self.Height := 507 else self.Height := 467;
 end;
 
 procedure TOptionsForm.SpeedButton1Click(Sender: TObject);

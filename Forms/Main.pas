@@ -1432,7 +1432,7 @@ begin
     end;
 
     { Write palette data }
-    if exporting or OldPaletteFormat then
+    if exporting then
       FileList.Add(ColorToXml(cp1))
     else
       FileList.Add(ColorToXmlCompact(cp1));
@@ -1630,7 +1630,7 @@ begin
     end;
 
     { Write palette data }
-    if exporting or OldPaletteFormat then
+    if exporting then
       FileList.Add(ColorToXml(cp1))
     else
       FileList.Add(ColorToXmlCompact(cp1));
@@ -3102,6 +3102,8 @@ begin
 {$endif}
 
   FNrThreads := Nrtreads;
+  if not multithreadedPreview then
+    FNrThreads := 1;
 
   SplashWindow.Hide;
   SplashWindow.Free;

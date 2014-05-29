@@ -4,7 +4,7 @@ object OptionsForm: TOptionsForm
   BorderIcons = [biSystemMenu, biMinimize, biMaximize, biHelp]
   BorderStyle = bsSingle
   Caption = 'Options'
-  ClientHeight = 438
+  ClientHeight = 479
   ClientWidth = 487
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -57,7 +57,7 @@ object OptionsForm: TOptionsForm
   OnShow = FormShow
   DesignSize = (
     487
-    438)
+    479)
   PixelsPerInch = 96
   TextHeight = 13
   object Label45: TLabel
@@ -76,6 +76,43 @@ object OptionsForm: TOptionsForm
     ParentFont = False
     Visible = False
     WordWrap = True
+  end
+  object pnlWarning: TPanel
+    Left = -1
+    Top = -1
+    Width = 490
+    Height = 41
+    Anchors = [akLeft, akTop, akRight]
+    BevelKind = bkFlat
+    BevelOuter = bvNone
+    Color = clInfoBk
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentBackground = False
+    ParentFont = False
+    TabOrder = 4
+    object cbMultithreadedPreviewWarning: TLabel
+      Left = 7
+      Top = 5
+      Width = 475
+      Height = 28
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 
+        'WARNING: multithreaded previews are an experimental and might ca' +
+        'use problems while using Apophysis 7X. Please disable this setti' +
+        'ng in case of problems.'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clInfoText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      WordWrap = True
+    end
   end
   object GroupBox15: TGroupBox
     Left = 64
@@ -200,17 +237,30 @@ object OptionsForm: TOptionsForm
   end
   object Tabs: TPageControl
     Left = 8
-    Top = 8
+    Top = 49
     Width = 475
     Height = 396
     ActivePage = GeneralPage
-    Anchors = [akLeft, akTop, akRight, akBottom]
+    Anchors = [akLeft, akRight, akBottom]
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
     MultiLine = True
+    ParentFont = False
     TabOrder = 3
     TabStop = False
+    ExplicitTop = 8
     object GeneralPage: TTabSheet
       HelpContext = 1
       Caption = 'General'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
       DesignSize = (
         467
         368)
@@ -269,7 +319,7 @@ object OptionsForm: TOptionsForm
         Caption = 'JPEG Quality'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 10
+        TabOrder = 9
       end
       object chkConfirmDel: TCheckBox
         Left = 236
@@ -280,15 +330,6 @@ object OptionsForm: TOptionsForm
         Caption = 'Confirm delete'
         TabOrder = 0
       end
-      object chkOldPaletteFormat: TCheckBox
-        Left = 236
-        Top = 92
-        Width = 221
-        Height = 13
-        Caption = 'Save gradient in old file format'
-        TabOrder = 1
-        WordWrap = True
-      end
       object chkConfirmExit: TCheckBox
         Left = 236
         Top = 169
@@ -296,7 +337,7 @@ object OptionsForm: TOptionsForm
         Height = 17
         HelpContext = 1005
         Caption = 'Confirm exit'
-        TabOrder = 2
+        TabOrder = 1
       end
       object chkConfirmStopRender: TCheckBox
         Left = 236
@@ -304,7 +345,7 @@ object OptionsForm: TOptionsForm
         Width = 221
         Height = 17
         Caption = 'Confirm stop render'
-        TabOrder = 3
+        TabOrder = 2
       end
       object cbUseTemplate: TCheckBox
         Left = 236
@@ -312,7 +353,7 @@ object OptionsForm: TOptionsForm
         Width = 221
         Height = 17
         Caption = 'Always create blank flame'
-        TabOrder = 4
+        TabOrder = 3
       end
       object cbMissingPlugin: TCheckBox
         Left = 236
@@ -320,7 +361,7 @@ object OptionsForm: TOptionsForm
         Width = 221
         Height = 17
         Caption = 'Warn when plugins are missing'
-        TabOrder = 5
+        TabOrder = 4
         WordWrap = True
       end
       object cbEmbedThumbs: TCheckBox
@@ -329,7 +370,7 @@ object OptionsForm: TOptionsForm
         Width = 221
         Height = 17
         Caption = 'Enable thumbnail embedding'
-        TabOrder = 6
+        TabOrder = 5
         WordWrap = True
       end
       object chkShowRenderStats: TCheckBox
@@ -338,7 +379,7 @@ object OptionsForm: TOptionsForm
         Width = 221
         Height = 17
         Caption = 'Show extended render statistics'
-        TabOrder = 7
+        TabOrder = 6
       end
       object pnlMultithreading: TPanel
         Left = 8
@@ -350,7 +391,7 @@ object OptionsForm: TOptionsForm
         Caption = 'Multithreading'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 8
+        TabOrder = 7
       end
       object cbNrTheads: TComboBox
         Left = 112
@@ -359,7 +400,7 @@ object OptionsForm: TOptionsForm
         Height = 21
         Style = csDropDownList
         ItemIndex = 0
-        TabOrder = 9
+        TabOrder = 8
         Text = 'Off'
         Items.Strings = (
           'Off'
@@ -385,7 +426,7 @@ object OptionsForm: TOptionsForm
         Caption = 'PNG Transparency'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 12
+        TabOrder = 11
       end
       object grpGuidelines: TGroupBox
         Left = 8
@@ -394,7 +435,7 @@ object OptionsForm: TOptionsForm
         Height = 141
         Anchors = [akLeft, akTop, akBottom]
         Caption = 'Guidelines'
-        TabOrder = 14
+        TabOrder = 13
         object cbGL: TCheckBox
           Left = 8
           Top = 23
@@ -514,7 +555,7 @@ object OptionsForm: TOptionsForm
         Items.Strings = (
           'Rotate image'
           'Rotate frame')
-        TabOrder = 15
+        TabOrder = 14
       end
       object rgZoomingMode: TRadioGroup
         Left = 232
@@ -526,7 +567,7 @@ object OptionsForm: TOptionsForm
         Items.Strings = (
           'Preserve quality'
           'Preserve speed')
-        TabOrder = 16
+        TabOrder = 15
       end
       object Panel46: TPanel
         Left = 8
@@ -538,7 +579,7 @@ object OptionsForm: TOptionsForm
         Caption = 'Language file'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 17
+        TabOrder = 16
       end
       object txtLanguageFile: TComboBox
         Left = 112
@@ -546,7 +587,7 @@ object OptionsForm: TOptionsForm
         Width = 323
         Height = 21
         Anchors = [akLeft, akTop, akRight]
-        TabOrder = 18
+        TabOrder = 17
       end
       object cbPNGTransparency: TComboBox
         Left = 112
@@ -555,7 +596,7 @@ object OptionsForm: TOptionsForm
         Height = 21
         Style = csDropDownList
         ItemIndex = 0
-        TabOrder = 13
+        TabOrder = 12
         Text = 'Disabled'
         Items.Strings = (
           'Disabled'
@@ -567,7 +608,7 @@ object OptionsForm: TOptionsForm
         Width = 113
         Height = 21
         ItemIndex = 2
-        TabOrder = 11
+        TabOrder = 10
         Text = '100'
         Items.Strings = (
           '60'
@@ -581,8 +622,24 @@ object OptionsForm: TOptionsForm
         Width = 193
         Height = 17
         Caption = 'Use single-precision buffers'
-        TabOrder = 19
+        TabOrder = 18
         Visible = False
+      end
+      object cbMultithreadedPreview: TCheckBox
+        Left = 236
+        Top = 89
+        Width = 221
+        Height = 17
+        Caption = 'Multithreaded preview'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 19
+        WordWrap = True
+        OnClick = cbMultithreadedPreviewClick
       end
     end
     object EditorPage: TTabSheet
@@ -1638,7 +1695,7 @@ object OptionsForm: TOptionsForm
   end
   object btnOK: TButton
     Left = 304
-    Top = 409
+    Top = 450
     Width = 86
     Height = 25
     Anchors = [akRight, akBottom]
@@ -1646,16 +1703,18 @@ object OptionsForm: TOptionsForm
     Default = True
     TabOrder = 0
     OnClick = btnOKClick
+    ExplicitTop = 409
   end
   object btnCancel: TButton
     Left = 397
-    Top = 409
+    Top = 450
     Width = 86
     Height = 25
     Anchors = [akRight, akBottom]
     Caption = 'Cancel'
     TabOrder = 1
     OnClick = btnCancelClick
+    ExplicitTop = 409
   end
   object OpenDialog: TOpenDialog
     Left = 8

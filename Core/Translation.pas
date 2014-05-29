@@ -451,6 +451,8 @@ begin
 	Add('options-tab-general-guidegoldenratiocolor', 'Golden ratio ');
   Add('options-tab-general-singleprecision', 'Use single-precision buffers ');
   Add('options-tab-general-pluginpath', 'Plugin folder ');
+  Add('options-tab-general-multithreadedpreview', 'Multithreaded preview (experimental!)');
+  Add('options-tab-general-multithreadedpreview-warning', 'WARNING: multithreaded previews are an experimental and might cause problems while using Apophysis 7X. Please disable this setting in case of problems.');
 	Add('options-tab-editor-title', 'Editor ');
 	Add('options-tab-editor-editorgraph', 'Graph ');
 	Add('options-tab-editor-editordefaults', 'Defaults ');

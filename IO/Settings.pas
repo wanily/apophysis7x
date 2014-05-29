@@ -164,6 +164,13 @@ begin
         WarnOnMissingPlugin := Registry.ReadBool('WarnOnMissingPlugin');
       end
       else WarnOnMissingPlugin := true;
+
+      if Registry.ValueExists('MultithreadedPreview') then
+      begin
+        MultithreadedPreview := Registry.ReadBool('MultithreadedPreview');
+      end
+      else MultithreadedPreview := false;
+
       if Registry.ValueExists('LanguageFile') then
       begin
         LanguageFile := Registry.ReadString('LanguageFile');
@@ -192,10 +199,6 @@ begin
         ConfirmDelete := Registry.ReadBool('ConfirmDelete')
       else
         ConfirmDelete := True;
-      if Registry.ValueExists('OldPaletteFormat') then
-        OldPaletteFormat := Registry.ReadBool('OldPaletteFormat')
-      else
-        OldPaletteFormat := false;
       if Registry.ValueExists('ConfirmExit') then
         ConfirmExit := Registry.ReadBool('ConfirmExit')
       else
@@ -570,11 +573,11 @@ begin
       SavePath := DefaultPath + '\Flames.flame';
       EmbedThumbnails := false;
       WarnOnMissingPlugin := true;
+      MultithreadedPreview := false;
       LanguageFile := '';
       defSmoothPaletteFile := DefaultPath + '\SmoothPalette.ugr';
       ConfirmDelete := True;
       ConfirmExit := True;
-      OldPaletteFormat := false;
       randMinTransforms := 2;
       randMaxTransforms := 3;
       mutantMinTransforms := 2;
@@ -987,6 +990,7 @@ begin
       Registry.WriteBool('ClassicListMode', ClassicListMode);
       Registry.WriteBool('EmbedThumbnails', EmbedThumbnails);
       Registry.WriteBool('WarnOnMissingPlugin', WarnOnMissingPlugin);
+      Registry.WriteBool('MultithreadedPreview', MultithreadedPreview);
       Registry.WriteString('LanguageFile', LanguageFile);
       Registry.WriteString('LastOpenFile', LastOpenFile);
       Registry.WriteInteger('LastOpenFileEntry', LastOpenFileEntry);
@@ -1002,7 +1006,6 @@ begin
       Registry.WriteInteger('LineGRColor', LineGRColor);
       Registry.WriteBool('EnableGuides', EnableGuides);
       Registry.WriteBool('ConfirmDelete', ConfirmDelete);
-      Registry.WriteBool('OldPaletteFormat', OldPaletteFormat);
       Registry.WriteBool('ConfirmExit', ConfirmExit);
       Registry.WriteInteger('MinTransforms', randMinTransforms);
       Registry.WriteInteger('MaxTransforms', randMaxTransforms);

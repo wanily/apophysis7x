@@ -115,6 +115,7 @@ var
   LanguageFile : string;
   AvailableLanguages : TStringList;
   PluginPath : string;
+  MultithreadedPreview: boolean;
 
   { Editor }
 
@@ -165,7 +166,6 @@ var
   UseSmallThumbnails: boolean;
   ClassicListMode: boolean;
   ConfirmDelete: boolean; // Flag confirmation of entry deletion
-  OldPaletteFormat: boolean;
   ConfirmExit: boolean;
   ConfirmStopRender: boolean;
   SavePath, SmoothPalettePath: string;
