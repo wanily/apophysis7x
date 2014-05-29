@@ -461,7 +461,7 @@ uses
   {$else}
     ScriptForm, FormFavorites,
   {$endif}
-  Tracer, Types, SplashForm, varGenericPlugin;
+  Tracer, Types, varGenericPlugin;
 
 {$R *.DFM}
 
@@ -2840,7 +2840,6 @@ begin
   if (NXFORMS > 100) then AppVersionString := AppVersionString + ' (' + TextByKey('main-common-title-t500') + ')'
   else if (NXFORMS < 100) or (cmdl.Lite) then AppVersionString := AppVersionString + ' (' + TextByKey('main-common-title-lite') + ')';
 
-  SplashWindow.SetInfo(TextByKey('splash-loadingui'));
   LockListChangeUpdate := false;
   Screen.Cursors[crEditArrow]  := LoadCursor(HInstance, 'ARROW_WHITE');
   Screen.Cursors[crEditMove]   := LoadCursor(HInstance, 'MOVE_WB');
@@ -2861,15 +2860,11 @@ begin
   AppPath := ExtractFilePath(Application.ExeName);
   CanDrawOnResize := False;
 
-  SplashWindow.SetInfo(TextByKey('splash-loadingsettings'));
-
   Dte := FormatDateTime('yymmdd', Now);
   if Dte <> RandomDate then
     RandomIndex := 0;
   RandomDate := Dte;
   mnuExit.ShortCut := TextToShortCut('Alt+F4');
-
-  SplashWindow.SetInfo(TextByKey('splash-loadingplugins'));
 
   tbQualityBox.Text := FloatToStr(defSampleDensity);
   tbShowAlpha.Down := ShowTransparency;
@@ -2938,7 +2933,6 @@ begin
   end;
   { Synchronize menus etc..}
   // should be defaults....
-  SplashWindow.SetInfo(TextByKey('splash-initrenderer'));
   UndoIndex := 0;
   UndoMax := 0;
   index := 1;
@@ -2962,7 +2956,6 @@ begin
 // so we'll do it 'bad' way ;-)
   Image.Align := alNone;
 
-  SplashWindow.SetInfo(TextByKey('splash-initcolormap'));
   if FileExists(AppPath + 'default.map') then
   begin
     DefaultPalette := GradientBrowser.LoadFractintMap(AppPath + 'default.map');
@@ -2981,7 +2974,6 @@ begin
   openScript := '';
 
   // get filename from command line argument
-  SplashWindow.SetInfo(TextByKey('splash-initbatch'));
   if ParamCount > 0 then
     openFile := ParamStr(1)
   else
@@ -3104,9 +3096,6 @@ begin
   FNrThreads := Nrtreads;
   if not multithreadedPreview then
     FNrThreads := 1;
-
-  SplashWindow.Hide;
-  SplashWindow.Free;
 end;
 
 function TMainForm.SystemErrorMessage: string;

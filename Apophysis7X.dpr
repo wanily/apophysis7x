@@ -141,7 +141,6 @@ uses
   LoadTracker in 'Forms\LoadTracker.pas' {LoadForm},
   Options in 'Forms\Options.pas' {OptionsForm},
   Save in 'Forms\Save.pas' {SaveForm},
-  SplashForm in 'Forms\SplashForm.pas' {SplashWindow},
   Template in 'Forms\Template.pas' {TemplateForm},
   Curves in 'Forms\Curves.pas' {CurvesForm},
   TransformSelection in 'Forms\TransformSelection.pas' {TransformSelectionForm}
@@ -158,11 +157,7 @@ uses
 begin
   InitializePlugins;
 
-  SplashWindow := TSplashWindow.Create(Application);
-  SplashWindow.Show;
-
   Application.Initialize;
-  SplashWindow.Update;
 
   {$ifdef Apo7X64}
   Application.Title := 'Apophysis 7x (64 bit)';
