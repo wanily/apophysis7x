@@ -1771,5 +1771,6 @@ object AboutForm: TAboutForm
     Height = 25
     Caption = 'OK'
     TabOrder = 0
+    OnClick = okButtonClick
   end
 end

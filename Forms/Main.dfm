@@ -2541,16 +2541,8 @@ object MainForm: TMainForm
         ImageIndex = 3
         OnClick = mnuSaveAsClick
       end
-      object ToolButton24: TToolButton
-        Left = 69
-        Top = 0
-        Width = 8
-        Caption = 'ToolButton24'
-        ImageIndex = 50
-        Style = tbsSeparator
-      end
       object ToolButton10: TToolButton
-        Left = 77
+        Left = 69
         Top = 0
         Width = 8
         Caption = 'ToolButton10'
@@ -2558,7 +2550,7 @@ object MainForm: TMainForm
         Style = tbsSeparator
       end
       object btnRender: TToolButton
-        Left = 85
+        Left = 77
         Top = 0
         Hint = 'Render (Ctrl+R)|Render flame to disk'
         Caption = 'btnRender'
@@ -2566,7 +2558,7 @@ object MainForm: TMainForm
         OnClick = mnuRenderClick
       end
       object tbRenderAll: TToolButton
-        Left = 108
+        Left = 100
         Top = 0
         Hint = 'Render all'
         Caption = 'tbRenderAll'
@@ -2574,14 +2566,14 @@ object MainForm: TMainForm
         OnClick = mnuRenderAllClick
       end
       object ToolButton9: TToolButton
-        Left = 131
+        Left = 123
         Top = 0
         Width = 8
         ImageIndex = 8
         Style = tbsSeparator
       end
       object btnViewList: TToolButton
-        Left = 139
+        Left = 131
         Top = 0
         Hint = 'Change flame list view to report'
         Caption = 'Flame list view'
@@ -2589,7 +2581,7 @@ object MainForm: TMainForm
         OnClick = btnViewListClick
       end
       object btnViewIcons: TToolButton
-        Left = 162
+        Left = 154
         Top = 0
         Hint = 'Change flame list view to icons'
         Caption = 'Flame icon view'
@@ -2597,7 +2589,7 @@ object MainForm: TMainForm
         OnClick = btnViewIconsClick
       end
       object ToolButton2: TToolButton
-        Left = 185
+        Left = 177
         Top = 0
         Width = 8
         Caption = 'ToolButton2'
@@ -2605,7 +2597,7 @@ object MainForm: TMainForm
         Style = tbsSeparator
       end
       object btnUndo: TToolButton
-        Left = 193
+        Left = 185
         Top = 0
         Hint = 'Undo (Ctrl+Z)|Undo the last action'
         Caption = 'btnUndo'
@@ -2613,7 +2605,7 @@ object MainForm: TMainForm
         OnClick = mnuUndoClick
       end
       object btnRedo: TToolButton
-        Left = 216
+        Left = 208
         Top = 0
         Hint = 'Redo (Ctrl+Y)|Redo the last action'
         Caption = 'btnRedo'
@@ -2621,14 +2613,14 @@ object MainForm: TMainForm
         OnClick = mnuRedoClick
       end
       object ToolButton1: TToolButton
-        Left = 239
+        Left = 231
         Top = 0
         Width = 8
         ImageIndex = 18
         Style = tbsSeparator
       end
       object btnReset: TToolButton
-        Left = 247
+        Left = 239
         Top = 0
         Hint = 'Reset Location (F12)'
         Caption = 'btnReset'
@@ -2636,7 +2628,7 @@ object MainForm: TMainForm
         OnClick = mnuResetLocationClick
       end
       object btnFullScreen: TToolButton
-        Left = 270
+        Left = 262
         Top = 0
         Hint = 'Fullscreen View (F3)|Show full-screen view of the flame'
         Caption = 'btnFullScreen'
@@ -2644,7 +2636,7 @@ object MainForm: TMainForm
         OnClick = mnuFullScreenClick
       end
       object ToolButton3: TToolButton
-        Left = 293
+        Left = 285
         Top = 0
         Width = 8
         Caption = 'ToolButton3'
@@ -2652,7 +2644,7 @@ object MainForm: TMainForm
         Style = tbsSeparator
       end
       object tbQualityBox: TComboBoxEx
-        Left = 301
+        Left = 293
         Top = 0
         Width = 69
         Height = 22
@@ -2693,7 +2685,7 @@ object MainForm: TMainForm
         OnSelect = tbQualityBoxSet
       end
       object ToolButton4: TToolButton
-        Left = 370
+        Left = 362
         Top = 0
         Width = 8
         Caption = 'ToolButton4'
@@ -2701,7 +2693,7 @@ object MainForm: TMainForm
         Style = tbsSeparator
       end
       object ToolButton5: TToolButton
-        Left = 378
+        Left = 370
         Top = 0
         Hint = 'Editor'
         Caption = 'ToolButton5'
@@ -2709,7 +2701,7 @@ object MainForm: TMainForm
         OnClick = mnuEditorClick
       end
       object ToolButton6: TToolButton
-        Left = 401
+        Left = 393
         Top = 0
         Hint = 'Adjust'
         Caption = 'ToolButton6'
@@ -2717,7 +2709,7 @@ object MainForm: TMainForm
         OnClick = mnuAdjustClick
       end
       object ToolButton13: TToolButton
-        Left = 424
+        Left = 416
         Top = 0
         Hint = 'Messages'
         Caption = 'ToolButton13'
@@ -2725,7 +2717,7 @@ object MainForm: TMainForm
         OnClick = ToolButton7Click
       end
       object ToolButton14: TToolButton
-        Left = 447
+        Left = 439
         Top = 0
         Hint = 'Options'
         Caption = 'ToolButton14'
@@ -2733,7 +2725,7 @@ object MainForm: TMainForm
         OnClick = mnuOptionsClick
       end
       object ToolButton15: TToolButton
-        Left = 470
+        Left = 462
         Top = 0
         Width = 8
         Caption = 'ToolButton15'
@@ -2741,7 +2733,7 @@ object MainForm: TMainForm
         Style = tbsSeparator
       end
       object tbShowAlpha: TToolButton
-        Left = 478
+        Left = 470
         Top = 0
         Hint = 'Show transparency'
         Caption = 'Show Alpha'
@@ -2750,7 +2742,7 @@ object MainForm: TMainForm
         OnClick = tbShowAlphaClick
       end
       object tbGuides: TToolButton
-        Left = 501
+        Left = 493
         Top = 0
         Caption = 'Show guides'
         Down = True
@@ -2759,7 +2751,7 @@ object MainForm: TMainForm
         OnClick = tbGuidesClick
       end
       object ToolButton16: TToolButton
-        Left = 524
+        Left = 516
         Top = 0
         Width = 8
         Caption = 'ToolButton16'
@@ -2767,7 +2759,7 @@ object MainForm: TMainForm
         Style = tbsSeparator
       end
       object ToolButton17: TToolButton
-        Left = 532
+        Left = 524
         Top = 0
         Hint = 'Edit script'
         Caption = 'ToolButton17'
@@ -2775,7 +2767,7 @@ object MainForm: TMainForm
         OnClick = mnuEditScriptClick
       end
       object btnRunScript: TToolButton
-        Left = 555
+        Left = 547
         Top = 0
         Hint = 'Run script'
         Caption = 'btnRunScript'
@@ -2783,7 +2775,7 @@ object MainForm: TMainForm
         OnClick = btnRunClick
       end
       object btnStopScript: TToolButton
-        Left = 578
+        Left = 570
         Top = 0
         Hint = 'Stop script'
         Caption = 'btnStopScript'
@@ -2791,7 +2783,7 @@ object MainForm: TMainForm
         OnClick = mnuStopClick
       end
       object ToolButton18: TToolButton
-        Left = 601
+        Left = 593
         Top = 0
         Width = 8
         Caption = 'ToolButton18'
@@ -2799,7 +2791,7 @@ object MainForm: TMainForm
         Style = tbsSeparator
       end
       object tbDraw: TToolButton
-        Left = 609
+        Left = 601
         Top = 0
         Caption = 'tbDraw'
         Grouped = True
@@ -2808,7 +2800,7 @@ object MainForm: TMainForm
         OnClick = tbDragClick
       end
       object ToolButton20: TToolButton
-        Left = 632
+        Left = 624
         Top = 0
         Caption = 'ToolButton20'
         Grouped = True
@@ -2817,7 +2809,7 @@ object MainForm: TMainForm
         OnClick = tbRotateClick
       end
       object ToolButton21: TToolButton
-        Left = 655
+        Left = 647
         Top = 0
         Caption = 'ToolButton21'
         Grouped = True
@@ -2826,7 +2818,7 @@ object MainForm: TMainForm
         OnClick = tbzoomwindowClick
       end
       object ToolButton22: TToolButton
-        Left = 678
+        Left = 670
         Top = 0
         Caption = 'ToolButton22'
         Grouped = True
@@ -2888,7 +2880,7 @@ object MainForm: TMainForm
     Left = 104
     Top = 280
     Bitmap = {
-      494C010146005000840010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010146005000880010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002001000001002000000000000020
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5275,7 +5267,7 @@ object MainForm: TMainForm
     Left = 24
     Top = 224
     Bitmap = {
-      494C010101004400600010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010101004400640010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

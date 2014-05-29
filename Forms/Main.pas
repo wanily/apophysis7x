@@ -206,7 +206,6 @@ type
     mnuManual: TMenuItem;
     N17: TMenuItem;
     mnuTrace: TMenuItem;
-    ToolButton24: TToolButton;
     procedure mnuManualClick(Sender: TObject);
     procedure mnuReportFlameClick(Sender: TObject);
     procedure mnuTurnFlameToScriptClick(Sender: TObject);

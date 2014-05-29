@@ -34,6 +34,7 @@ type
 
     procedure DevelopersClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure okButtonClick(Sender: TObject);
 
   public
     procedure Localize;
@@ -66,6 +67,11 @@ begin
     versionSpace.Visible := (s1 <> '') and (s3 <> '');
     versionSpace.Caption := s1 + ' translation contributed by: ' + s3;
   end;
+end;
+
+procedure TAboutForm.okButtonClick(Sender: TObject);
+begin
+  Close;
 end;
 
 procedure TAboutForm.DevelopersClick(Sender: TObject);
