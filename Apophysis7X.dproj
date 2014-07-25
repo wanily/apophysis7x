@@ -151,9 +151,11 @@
         <DCCReference Include="Core\Translation.pas"/>
         <DCCReference Include="IO\ParameterIO.pas"/>
         <DCCReference Include="Core\Bezier.pas"/>
+        <DCCReference Include="Flame\RndFlame.pas"/>
         <DCCReference Include="Flame\ControlPoint.pas"/>
         <DCCReference Include="ColorMap\cmapdata.pas"/>
         <DCCReference Include="ColorMap\cmap.pas"/>
+        <DCCReference Include="ColorMap\GradientHlpr.pas"/>
         <DCCReference Include="Core\XFormMan.pas"/>
         <DCCReference Include="Flame\XForm.pas"/>
         <DCCReference Include="Core\BaseVariation.pas"/>

@@ -56,9 +56,11 @@ uses
   Bezier in 'Core\Bezier.pas',
 
 {-- FLAME --}
+  RndFlame in 'Flame\RndFlame.pas',
   ControlPoint in 'Flame\ControlPoint.pas',
   cmapdata in 'ColorMap\cmapdata.pas',
   cmap in 'ColorMap\cmap.pas',
+  GradientHlpr in 'ColorMap\GradientHlpr.pas',
   XFormMan in 'Core\XFormMan.pas',
   XForm in 'Flame\XForm.pas',
   BaseVariation in 'Core\BaseVariation.pas',

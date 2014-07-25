@@ -116,6 +116,8 @@ var
   AvailableLanguages : TStringList;
   PluginPath : string;
   MultithreadedPreview: boolean;
+  cmap_index: integer;
+  ImageFolder: string;
 
   { Editor }
 
@@ -199,6 +201,7 @@ var
   MainForm_RotationMode: integer;
   PreserveQuality: boolean;
 
+  BatchSize: Integer;
   Favorites: TStringList;
   Script: string;
   ScriptPath: string;

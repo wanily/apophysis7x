@@ -104,7 +104,7 @@ object OptionsForm: TOptionsForm
       Caption = 
         'WARNING: multithreaded previews are an experimental and might ca' +
         'use problems while using Apophysis 7X. Please disable this setti' +
-        'ng in case of problems.'
+        'ng in case of excessive memory usage or slowdowns.'
       Font.Charset = ANSI_CHARSET
       Font.Color = clInfoText
       Font.Height = -11
@@ -251,7 +251,6 @@ object OptionsForm: TOptionsForm
     ParentFont = False
     TabOrder = 3
     TabStop = False
-    ExplicitTop = 8
     object GeneralPage: TTabSheet
       HelpContext = 1
       Caption = 'General'
@@ -1703,7 +1702,6 @@ object OptionsForm: TOptionsForm
     Default = True
     TabOrder = 0
     OnClick = btnOKClick
-    ExplicitTop = 409
   end
   object btnCancel: TButton
     Left = 397
@@ -1714,7 +1712,6 @@ object OptionsForm: TOptionsForm
     Caption = 'Cancel'
     TabOrder = 1
     OnClick = btnCancelClick
-    ExplicitTop = 409
   end
   object OpenDialog: TOpenDialog
     Left = 8
