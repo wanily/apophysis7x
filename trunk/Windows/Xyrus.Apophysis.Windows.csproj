@@ -52,7 +52,9 @@
     </Compile>
     <Compile Include="Drawing\Canvas.cs" />
     <Compile Include="Drawing\CanvasSnapBehavior.cs" />
+    <Compile Include="Drawing\CanvasNagivationStrategy.cs" />
     <Compile Include="Drawing\Grid.cs" />
+    <Compile Include="Drawing\GridNavigationStrategy.cs" />
     <Compile Include="Forms\Editor.cs">
       <SubType>Form</SubType>
     </Compile>

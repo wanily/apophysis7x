@@ -9,7 +9,7 @@ namespace Xyrus.Apophysis.Windows.Math
 		private readonly Vector2 mB;
 		private const double mEps = 1e-300;
 
-		public Line(Vector2 a, Vector2 b)
+		public Line([NotNull] Vector2 a, [NotNull] Vector2 b)
 		{
 			if (a == null) throw new ArgumentNullException("a");
 			if (b == null) throw new ArgumentNullException("b");
@@ -27,7 +27,7 @@ namespace Xyrus.Apophysis.Windows.Math
 			get { return mB; }
 		}
 
-		public bool IsInProximity(Vector2 point, double epsilon = 1)
+		public bool IsInProximity([NotNull] Vector2 point, double epsilon = 1)
 		{
 			if (point == null) throw new ArgumentNullException("point");
 
@@ -65,13 +65,17 @@ namespace Xyrus.Apophysis.Windows.Math
 
 			return System.Math.Sqrt(dist) < epsilon;
 		}
-		public bool IsIntersecting(Line other)
+		public bool IsIntersecting([NotNull] Line other)
 		{
+			if (other == null) throw new ArgumentNullException("other");
+
 			return GetIntersectionPoint(other).IsNaN;
 		}
 
-		public Vector2 GetIntersectionPoint(Line other)
+		public Vector2 GetIntersectionPoint([NotNull] Line other)
 		{
+			if (other == null) throw new ArgumentNullException("other");
+
 			var direction = new Line(other.A - A, other.B - B);
 
 			var delta = direction.A.Y*-direction.B.X - direction.B.Y*-direction.A.X;

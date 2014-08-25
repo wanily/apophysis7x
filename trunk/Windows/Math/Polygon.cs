@@ -9,7 +9,7 @@ namespace Xyrus.Apophysis.Windows.Math
 	{
 		private readonly Vector2[] mVertices;
 
-		public Polygon(IEnumerable<Vector2> vertices)
+		public Polygon([NotNull] IEnumerable<Vector2> vertices)
 		{
 			if (vertices == null) throw new ArgumentNullException("vertices");
 

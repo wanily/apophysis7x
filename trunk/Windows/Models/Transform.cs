@@ -10,7 +10,7 @@ namespace Xyrus.Apophysis.Windows.Models
 		private readonly Matrix2X2 mAffineMatrix;
 		private readonly Vector2 mAffineOrigin;
 
-		public Transform(Flame hostingFlame)
+		public Transform([NotNull] Flame hostingFlame)
 		{
 			if (hostingFlame == null) throw new ArgumentNullException("hostingFlame");
 

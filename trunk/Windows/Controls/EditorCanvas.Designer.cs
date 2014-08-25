@@ -27,10 +27,6 @@
 			this.Name = "EditorCanvas";
 			this.Size = new System.Drawing.Size(175, 173);
 			this.Paint += new System.Windows.Forms.PaintEventHandler(this.OnCanvasPaint);
-			this.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.OnCanvasMouseDoubleClick);
-			this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnCanvasMouseDown);
-			this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.OnCanvasMouseMove);
-			this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnCanvasMouseUp);
 			this.Resize += new System.EventHandler(this.OnCanvasResized);
 			this.ResumeLayout(false);
 

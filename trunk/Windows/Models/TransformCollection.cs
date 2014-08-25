@@ -10,7 +10,7 @@ namespace Xyrus.Apophysis.Windows.Models
 		private readonly Flame mFlame;
 		private EventHandler mContentChanged;
 
-		public TransformCollection(Flame hostingFlame) : base(new List<Transform>())
+		public TransformCollection([NotNull] Flame hostingFlame) : base(new List<Transform>())
 		{
 			if (hostingFlame == null) throw new ArgumentNullException("hostingFlame");
 
@@ -33,7 +33,7 @@ namespace Xyrus.Apophysis.Windows.Models
 
 			return Count - 1;
 		}
-		public int Add(Transform transform)
+		public int Add([NotNull] Transform transform)
 		{
 			if (transform == null) throw new ArgumentNullException("transform");
 
@@ -55,7 +55,7 @@ namespace Xyrus.Apophysis.Windows.Models
 
 			return true;
 		}
-		public bool Remove(Transform transform)
+		public bool Remove([NotNull] Transform transform)
 		{
 			if (Count <= 1) throw new ApophysisException("Can't remove last transform of flame");
 

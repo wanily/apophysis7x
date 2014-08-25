@@ -20,6 +20,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 		private bool mIsDragging;
 
 		private Grid mGrid;
+		private GridNavigationStrategy mNavigation;
 
 		public EditorCanvas()
 		{
@@ -27,8 +28,6 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 			GridLineColor = Color.Gray;
 			BackdropColor = Color.Transparent;
-
-			MouseWheel += OnCanvasMouseWheel;
 		}
 		protected override void Dispose(bool disposing)
 		{
@@ -41,6 +40,12 @@ namespace Xyrus.Apophysis.Windows.Controls
 				{
 					mTransforms.ContentChanged -= OnTransformCollectionChanged;
 					mTransforms = null;
+				}
+
+				if (mNavigation != null)
+				{
+					mNavigation.Dispose();
+					mNavigation = null;
 				}
 			}
 
@@ -151,48 +156,6 @@ namespace Xyrus.Apophysis.Windows.Controls
 			}
 		}
 
-		private void BeginDrag(Vector2 cursor)
-		{
-			if (mGrid == null)
-				return;
-
-			var offset = mGrid.Offset * mGrid.Ratio;
-
-			mDragStart = cursor;
-			mOffsetStart = offset;
-			mIsDragging = true;
-		}
-		private void DragExecute(Vector2 cursor)
-		{
-			if (mGrid == null)
-				return;
-
-			mGrid.Pan((mOffsetStart - cursor + mDragStart) / mGrid.Ratio);
-		}
-		private void WheelExecute(int delta)
-		{
-			if (mGrid == null)
-				return;
-
-			mGrid.Zoom(delta);
-		}
-		private void ResetExecute()
-		{
-			if (mGrid == null)
-				return;
-
-			mGrid.Reset();
-		}
-		private void EndDrag()
-		{
-			if (mGrid == null)
-				return;
-
-			mDragStart = null;
-			mOffsetStart = null;
-			mIsDragging = false;
-		}
-
 		private void OnTransformCollectionChanged(object sender, EventArgs e)
 		{
 			Refresh();
@@ -224,68 +187,16 @@ namespace Xyrus.Apophysis.Windows.Controls
 			if (mGrid == null)
 			{
 				mGrid = new Grid(new Vector2(Width, Height));
-				Refresh();
-				return;
+				mNavigation = new GridNavigationStrategy(mGrid);
+
+				mNavigation.Attach(this);
 			}
-
-			mGrid.Resize(new Vector2(Width, Height));
-			Refresh();
-		}
-
-		private void OnCanvasMouseDown(object sender, MouseEventArgs e)
-		{
-			if (DesignMode)
+			else
 			{
-				return;
-			}
-
-			var cursor = new Vector2(e.X, e.Y);
-			BeginDrag(cursor);
-			Refresh();
-		}
-		private void OnCanvasMouseUp(object sender, MouseEventArgs e)
-		{
-			if (DesignMode)
-			{
-				return;
-			}
-
-			EndDrag();
-			Refresh();
-		}
-		private void OnCanvasMouseMove(object sender, MouseEventArgs e)
-		{
-			if (DesignMode)
-			{
-				return;
-			}
-
-			if (mIsDragging)
-			{
-				var cursor = new Vector2(e.X, e.Y);
-				DragExecute(cursor);
+				mGrid.Resize(new Vector2(Width, Height));
 			}
 
 			Refresh();
-		}
-		private void OnCanvasMouseWheel(object sender, MouseEventArgs e)
-		{
-			if (DesignMode)
-			{
-				return;
-			}
-
-			WheelExecute(e.Delta);
-			Refresh();
-		}
-		private void OnCanvasMouseDoubleClick(object sender, MouseEventArgs e)
-		{
-			if (DesignMode)
-			{
-				return;
-			}
-
-			ResetExecute();
 		}
 	}
 }

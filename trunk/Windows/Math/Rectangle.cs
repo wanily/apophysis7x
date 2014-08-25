@@ -1,4 +1,6 @@
-﻿namespace Xyrus.Apophysis.Windows.Math
+﻿using System;
+
+namespace Xyrus.Apophysis.Windows.Math
 {
 	[PublicAPI]
 	public class Rectangle
@@ -6,8 +8,11 @@
 		private readonly Vector2 mCorner;
 		private readonly Vector2 mSize;
 
-		public Rectangle(Vector2 corner, Vector2 size)
+		public Rectangle([NotNull] Vector2 corner, [NotNull] Vector2 size)
 		{
+			if (corner == null) throw new ArgumentNullException("corner");
+			if (size == null) throw new ArgumentNullException("size");
+
 			mCorner = corner;
 			mSize = size;
 		}

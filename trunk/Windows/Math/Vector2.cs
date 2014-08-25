@@ -29,7 +29,7 @@ namespace Xyrus.Apophysis.Windows.Math
 			set { mY = value; }
 		}
 
-		public Vector2 Add(Vector2 other)
+		public Vector2 Add([CanBeNull] Vector2 other)
 		{
 			if (other == null)
 				return Copy();
@@ -49,7 +49,7 @@ namespace Xyrus.Apophysis.Windows.Math
 			};
 		}
 
-		public Vector2 Subtract(Vector2 other)
+		public Vector2 Subtract([CanBeNull] Vector2 other)
 		{
 			if (other == null)
 				return Copy();
@@ -69,7 +69,7 @@ namespace Xyrus.Apophysis.Windows.Math
 			};
 		}
 
-		public Vector2 Multiply(Vector2 other)
+		public Vector2 Multiply([CanBeNull] Vector2 other)
 		{
 			if (other == null)
 				return Copy();
@@ -89,7 +89,7 @@ namespace Xyrus.Apophysis.Windows.Math
 			};
 		}
 
-		public Vector2 Divide(Vector2 other)
+		public Vector2 Divide([CanBeNull] Vector2 other)
 		{
 			if (other == null)
 				return Copy();
@@ -232,13 +232,13 @@ namespace Xyrus.Apophysis.Windows.Math
 		{
 			get { return double.IsNaN(mX) || double.IsNaN(mY); }
 		}
-		public bool IsInProximity(Vector2 point, double epsilon = 1)
+		public bool IsInProximity([NotNull] Vector2 point, double epsilon = 1)
 		{
 			if (point == null) throw new ArgumentNullException("point");
 			return (this - point).Length < System.Math.Abs(epsilon);
 		}
 
-		public static Vector2 Diff(Vector2 a, Vector2 b, Vector2 c)
+		public static Vector2 Diff([NotNull] Vector2 a, [NotNull] Vector2 b, [NotNull] Vector2 c)
 		{
 			if (a == null) throw new ArgumentNullException("a");
 			if (b == null) throw new ArgumentNullException("b");
