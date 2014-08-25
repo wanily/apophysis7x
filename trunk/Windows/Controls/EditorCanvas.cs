@@ -11,8 +11,14 @@ namespace Xyrus.Apophysis.Windows.Controls
 	public partial class EditorCanvas : UserControl
 	{
 		private TransformCollection mTransforms;
+
 		private Color mGridLineColor; 
 		private Color mBackdropColor;
+
+		private Vector2 mDragStart;
+		private Vector2 mOffsetStart;
+		private bool mIsDragging;
+
 		private Grid mGrid;
 
 		public EditorCanvas()
@@ -20,7 +26,9 @@ namespace Xyrus.Apophysis.Windows.Controls
 			InitializeComponent();
 
 			GridLineColor = Color.DarkGray;
-			BackdropColor = Color.FromArgb(0x33, 0xff, 0xff, 0xff);
+			BackdropColor = Color.FromArgb(0x10, 0xff, 0xff, 0xff);
+
+			MouseWheel += OnCanvasMouseWheel;
 		}
 		protected override void Dispose(bool disposing)
 		{
@@ -175,6 +183,27 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 		}
 
+		private void BeginDrag()
+		{
+
+		}
+		private void DragExecute(Vector2 cursor)
+		{
+			mGrid.Pan((mOffsetStart - cursor + mDragStart) / mGrid.Ratio);
+		}
+		private void WheelExecute(int delta)
+		{
+			mGrid.Zoom(delta);
+		}
+		private void ResetExecute()
+		{
+			mGrid.Reset();
+		}
+		private void EndDrag()
+		{
+
+		}
+
 		private void OnTransformCollectionChanged(object sender, EventArgs e)
 		{
 			Refresh();
@@ -211,6 +240,61 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 			mGrid.Resize(new Vector2(Width, Height));
 			Refresh();
+		}
+
+		private void OnCanvasMouseDown(object sender, MouseEventArgs e)
+		{
+			var cursor = new Vector2(e.X, e.Y);
+			var offset = mGrid.Offset*mGrid.Ratio;
+
+			mDragStart = cursor;
+			mOffsetStart = offset;
+			mIsDragging = true;
+
+			if (!DesignMode)
+			{
+				BeginDrag();
+				Refresh();
+			}
+		}
+		private void OnCanvasMouseUp(object sender, MouseEventArgs e)
+		{
+			if (!DesignMode)
+			{
+				EndDrag();
+			}
+
+			mDragStart = null;
+			mIsDragging = false;
+
+			if (!DesignMode)
+			{
+				Refresh();
+			}
+		}
+		private void OnCanvasMouseMove(object sender, MouseEventArgs e)
+		{
+			if (DesignMode)
+			{
+				return;
+			}
+
+			if (mIsDragging)
+			{
+				var cursor = new Vector2(e.X, e.Y);
+				DragExecute(cursor);
+			}
+
+			Refresh();
+		}
+		private void OnCanvasMouseWheel(object sender, MouseEventArgs e)
+		{
+			WheelExecute(e.Delta);
+			Refresh();
+		}
+		private void OnCanvasMouseDoubleClick(object sender, MouseEventArgs e)
+		{
+			ResetExecute();
 		}
 	}
 }

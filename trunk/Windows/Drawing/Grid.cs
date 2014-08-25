@@ -84,5 +84,10 @@ namespace Xyrus.Apophysis.Windows.Drawing
 		{
 			mPan = offset.Freeze();
 		}
+		public void Reset()
+		{
+			mPan = new ImmutableVector2(new Vector2());
+			mZoom = 1.0;
+		}
 	}
 }
