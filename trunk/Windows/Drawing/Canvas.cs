@@ -89,15 +89,6 @@ namespace Xyrus.Apophysis.Windows.Drawing
 		public abstract Vector2 CanvasToWorld(Vector2 canvas);
 		public abstract Vector2 WorldToCanvas(Vector2 world);
 
-		public double CanvasToWorld(double canvas)
-		{
-			return CanvasToWorld(new Vector2 { X = canvas, Y = canvas }).X;
-		}
-		public double WorldToCanvas(double world)
-		{
-			return WorldToCanvas(new Vector2 { X = world, Y = world }).X;
-		}
-
 		public bool IsOnCanvas(Vector2 worldPoint)
 		{
 			var canvas = WorldToCanvas(worldPoint);

@@ -34,13 +34,21 @@
 			// mCanvas
 			// 
 			this.mCanvas.BackColor = System.Drawing.Color.Black;
+			this.mCanvas.BackdropColor = System.Drawing.Color.Transparent;
 			this.mCanvas.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.mCanvas.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.mCanvas.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.mCanvas.ForeColor = System.Drawing.Color.White;
+			this.mCanvas.GridLineColor = System.Drawing.Color.Gray;
+			this.mCanvas.GridZeroLineColor = System.Drawing.Color.Gray;
 			this.mCanvas.Location = new System.Drawing.Point(0, 0);
 			this.mCanvas.Name = "mCanvas";
+			this.mCanvas.RulerBackdropColor = System.Drawing.Color.Transparent;
+			this.mCanvas.RulerBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+			this.mCanvas.RulerGridLineColor = System.Drawing.Color.Silver;
+			this.mCanvas.ShowRuler = true;
 			this.mCanvas.Size = new System.Drawing.Size(874, 516);
 			this.mCanvas.TabIndex = 0;
+			this.mCanvas.Transforms = null;
 			// 
 			// Editor
 			// 

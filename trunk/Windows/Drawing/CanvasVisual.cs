@@ -5,11 +5,13 @@ using Xyrus.Apophysis.Windows.Math;
 
 namespace Xyrus.Apophysis.Windows.Drawing
 {
+	[PublicAPI]
 	public abstract class CanvasVisual<T> : IDisposable where T: Canvas
 	{
 		private T mCanvas;
 		private Control mControl;
 
+		private Color mGridZeroLineColor;
 		private Color mGridLineColor;
 		private Color mBackdropColor;
 
@@ -45,6 +47,15 @@ namespace Xyrus.Apophysis.Windows.Drawing
 			set
 			{
 				mGridLineColor = value;
+				InvalidateControl();
+			}
+		}
+		public Color GridZeroLineColor
+		{
+			get { return mGridZeroLineColor; }
+			set
+			{
+				mGridZeroLineColor = value;
 				InvalidateControl();
 			}
 		}

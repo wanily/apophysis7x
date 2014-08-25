@@ -11,10 +11,6 @@ namespace Xyrus.Apophysis.Windows.Controls
 	{
 		private TransformCollection mTransforms;
 
-		private Vector2 mDragStart;
-		private Vector2 mOffsetStart;
-		private bool mIsDragging;
-
 		private GridNavigationStrategy mNavigation;
 		private GridVisual mVisual;
 		private GridRulerVisual mRulers;
@@ -33,14 +29,16 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 			mRulers = new GridRulerVisual(grid);
 			mRulers.Attach(this);
-			mRulers.ShowVertical = true;
 
-			GridLineColor = Color.Gray;
+			GridLineColor = Color.FromArgb(0xff, 0x66, 0x66, 0x66);
 			BackdropColor = Color.Transparent;
+			GridZeroLineColor = Color.FromArgb(0xff, 0xbb, 0xbb, 0xbb);
 
 			RulerGridLineColor = Color.Gray;
 			RulerBackgroundColor = Color.FromArgb(0xff, 0x33, 0x33, 0x33);
-			RulerBackdropColor = Color.FromArgb(0xff, 0x55, 0x55, 0x55);
+			RulerBackdropColor = Color.Transparent;
+
+			ShowRuler = true;
 		}
 		protected override void Dispose(bool disposing)
 		{
@@ -91,6 +89,11 @@ namespace Xyrus.Apophysis.Windows.Controls
 					value.ContentChanged += OnTransformCollectionChanged;
 			}
 		}
+		public Color GridZeroLineColor
+		{
+			get { return mVisual.GridZeroLineColor; }
+			set { mVisual.GridZeroLineColor = value; }
+		}
 		public Color GridLineColor
 		{
 			get { return mVisual.GridLineColor; }
@@ -116,6 +119,17 @@ namespace Xyrus.Apophysis.Windows.Controls
 		{
 			get { return mRulers.BackgroundColor; }
 			set { mRulers.BackgroundColor = value; }
+		}
+
+		public bool ShowRuler
+		{
+			get { return mRulers.ShowLabels || mRulers.ShowVertical || mRulers.ShowHorizontal; }
+			set
+			{
+				mRulers.ShowLabels = value;
+				mRulers.ShowHorizontal = value;
+				mRulers.ShowVertical = value;
+			}
 		}
 
 		private void OnTransformCollectionChanged(object sender, EventArgs e)

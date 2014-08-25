@@ -1,11 +1,10 @@
-﻿using System;
-using System.Drawing;
-using System.Globalization;
+﻿using System.Drawing;
 using Xyrus.Apophysis.Windows.Math;
 using Rectangle = Xyrus.Apophysis.Windows.Math.Rectangle;
 
 namespace Xyrus.Apophysis.Windows.Drawing
 {
+	[PublicAPI]
 	public class GridVisual : CanvasVisual<Grid>
 	{
 		public GridVisual([NotNull] Grid canvas) : base(canvas)
@@ -69,244 +68,42 @@ namespace Xyrus.Apophysis.Windows.Drawing
 			{
 				g.DrawLine(pen, new Point((int)x, (int)bounds.TopLeft.Y), new Point((int)x, (int)bounds.BottomRight.Y));
 			}
-
-			var line0 = Canvas.WorldToCanvas(new Vector2());
-			var world = new Rectangle(new Vector2(), Canvas.Size);
-
-			if (world.IsOnSurface(line0))
-			{
-				var y0 = new Point(0, (int) line0.Y);
-				var y1 = new Point((int)Canvas.Size.X, (int) line0.Y);
-
-				var x0 = new Point((int) line0.X, 0);
-				var x1 = new Point((int) line0.X, (int)Canvas.Size.Y);
-
-				using (var zpen = new Pen(pen.Brush, 4.0f))
-				{
-					g.DrawLine(zpen, x0, x1);
-					g.DrawLine(zpen, y0, y1);
-				}
-			}
 		}
 
 		protected override void OnControlPaint(Graphics graphics)
 		{
 			var glc = Color.FromArgb(0xff, GridLineColor.R, GridLineColor.G, GridLineColor.B);
 			var glc05 = Color.FromArgb(0x80, GridLineColor.R, GridLineColor.G, GridLineColor.B);
+			var glzc = Color.FromArgb(0xff, GridZeroLineColor.R, GridZeroLineColor.G, GridZeroLineColor.B);
 
 			using (var backdropBrush = new SolidBrush(BackdropColor))
 			using (var gridlinePen = new Pen(glc, 1.0f))
 			using (var gridlinePenHalf = new Pen(glc05, 1.0f))
+			using (var gridlinePenZero = new Pen(glzc, 1.0f))
 			{
 				var scale = new Vector2(Canvas.Scale, Canvas.Scale);
 
 				DrawBackground(graphics, scale, backdropBrush);
 				DrawGridLines(graphics, scale, gridlinePen);
 				DrawGridLines(graphics, scale * 0.1, gridlinePenHalf);
-			}
-		}
-	}
 
-	public class GridRulerVisual : GridVisual
-	{
-		private bool mShowHorizontal;
-		private bool mShowVertical;
-		private int mRulerSize;
+				var line0 = Canvas.WorldToCanvas(new Vector2());
+				var world = new Rectangle(new Vector2(), Canvas.Size);
 
-		private Color mBackgroundColor;
-
-		public GridRulerVisual([NotNull] Grid canvas) : base(canvas)
-		{
-			mShowHorizontal = true;
-			mRulerSize = 15;
-		}
-
-		public bool ShowHorizontal
-		{
-			get { return mShowHorizontal; }
-			set
-			{
-				mShowHorizontal = value;
-			}
-		}
-		public bool ShowVertical
-		{
-			get { return mShowVertical; }
-			set
-			{
-				mShowVertical = value;
-			}
-		}
-		public int RulerSize
-		{
-			get { return mRulerSize; }
-			set
-			{
-				if (value <= 1) throw new ArgumentOutOfRangeException("value");
-				mRulerSize = value;
-			}
-		}
-
-		public Color BackgroundColor
-		{
-			get { return mBackgroundColor; }
-			set
-			{
-				mBackgroundColor = value;
-				InvalidateControl();
-			}
-		}
-
-		private string GetMarkerString(double unit)
-		{
-			//todo
-			return System.Math.Round(unit, 3).ToString(CultureInfo.InvariantCulture);
-		}
-
-		private void DrawBackgroundHorizontal(Graphics g, Vector2 scale, Brush brush)
-		{
-			var step = (scale * Canvas.Ratio).Abs();
-			var bounds = GetCanvasBounds(scale);
-
-			for (double x = bounds.TopLeft.X; x <= bounds.BottomRight.X; x += step.X)
-			{
-				var cell = (int)System.Math.Round(Canvas.CanvasToWorld(x) / scale.X);
-				if (cell % 2 != 0)
-					continue;
-
-				var capped = System.Math.Max(ShowVertical ? RulerSize : 0, x);
-				var delta = System.Math.Abs(capped - x);
-
-				g.FillRectangle(brush, new System.Drawing.Rectangle((int)capped, 0, (int)step.X - (int)delta, RulerSize));
-			}
-		}
-		private void DrawBackgroundVertical(Graphics g, Vector2 scale, Brush brush)
-		{
-			var step = (scale * Canvas.Ratio).Abs();
-			var bounds = GetCanvasBounds(scale);
-
-			for (double y = bounds.TopLeft.Y; y <= bounds.BottomRight.Y; y += step.Y)
-			{
-				var cell = (int)System.Math.Round(Canvas.CanvasToWorld(y) / scale.Y);
-				if (cell % 2 != 0) 
-					continue;
-
-				var capped = System.Math.Max(ShowHorizontal ? RulerSize : 0, y);
-				var delta = System.Math.Abs(capped - y);
-
-				g.FillRectangle(brush, new System.Drawing.Rectangle(0, (int)capped, RulerSize, (int)step.Y - (int)delta));
-			}
-		}
-
-		private void DrawGridLinesHorizontal(Graphics g, Vector2 scale, Pen pen)
-		{
-			var step = (scale * Canvas.Ratio).Abs();
-			var bounds = GetCanvasBounds(scale);
-
-			for (double x = bounds.TopLeft.X; x <= bounds.BottomRight.X; x += step.X)
-			{
-				var capped = System.Math.Max(ShowVertical ? RulerSize : 0, x);
-
-				g.DrawLine(pen, new Point((int)capped, 0), new Point((int)capped, RulerSize));
-			}
-		}
-		private void DrawGridLinesVertical(Graphics g, Vector2 scale, Pen pen)
-		{
-			var step = (scale * Canvas.Ratio).Abs();
-			var bounds = GetCanvasBounds(scale);
-
-			for (double y = bounds.TopLeft.Y; y <= bounds.BottomRight.Y; y += step.Y)
-			{
-				var capped = System.Math.Max(ShowHorizontal ? RulerSize : 0, y);
-
-				g.DrawLine(pen, new Point(0, (int)capped), new Point(RulerSize, (int)capped));
-			}
-		}
-
-		private void DrawGridMarkersHorizontal(Graphics g, Vector2 scale, Brush background, Pen pen)
-		{
-			var step = (scale * Canvas.Ratio).Abs();
-			var bounds = GetCanvasBounds(scale);
-			var markerFont = GetFont();
-
-			for (double x = bounds.TopLeft.X; x <= bounds.BottomRight.X; x += step.X)
-			{
-				var unit = System.Math.Round(Canvas.CanvasToWorld(x));
-				var markerString = GetMarkerString(unit);
-				var offset = g.MeasureString(markerString, markerFont);
-				var position = new Point((int)(x - offset.Width / 2.0), RulerSize + 2);
-
-				g.FillRectangle(background, new System.Drawing.Rectangle(position, new Size((int)offset.Width, (int)offset.Height)));
-				g.DrawRectangle(pen, new System.Drawing.Rectangle(position, new Size((int)offset.Width, (int)offset.Height)));
-				g.DrawString(markerString, markerFont, pen.Brush, position);
-			}
-		}
-		private void DrawGridMarkersVertical(Graphics g, Vector2 scale, Brush background, Pen pen)
-		{
-			var step = (scale * Canvas.Ratio).Abs();
-			var bounds = GetCanvasBounds(scale);
-			var markerFont = GetFont();
-
-			for (double y = bounds.TopLeft.Y; y <= bounds.BottomRight.Y; y += step.Y)
-			{
-				var unit = System.Math.Round(Canvas.CanvasToWorld(y));
-				var markerString = GetMarkerString(unit);
-				var offset = g.MeasureString(markerString, markerFont);
-				var position = new Point(RulerSize + 2, (int)(y - offset.Height / 2.0));
-
-				g.FillRectangle(background, new System.Drawing.Rectangle(position, new Size((int)offset.Width, (int)offset.Height)));
-				g.DrawRectangle(pen, new System.Drawing.Rectangle(position, new Size((int)offset.Width, (int)offset.Height)));
-				g.DrawString(markerString, markerFont, pen.Brush, position);
-			}
-		}
-
-		protected override void OnControlPaint(Graphics graphics)
-		{
-			var glc = Color.FromArgb(0xff, GridLineColor.R, GridLineColor.G, GridLineColor.B);
-			var glc05 = Color.FromArgb(0x80, GridLineColor.R, GridLineColor.G, GridLineColor.B);
-
-			using (var backgroundBrush = new SolidBrush(BackgroundColor))
-			using (var backdropBrush = new SolidBrush(BackdropColor))
-			using (var gridlinePen = new Pen(glc, 1.0f))
-			using (var gridlinePenHalf = new Pen(glc05, 1.0f))
-			{
-				var scale = new Vector2(Canvas.Scale, Canvas.Scale);
-
-				if (ShowHorizontal && ShowVertical)
+				if (world.IsOnSurface(new Vector2(line0.X, Canvas.Size.Y / 2.0)))
 				{
-					graphics.FillRectangle(backgroundBrush, new System.Drawing.Rectangle(0, 0, RulerSize, RulerSize));
+					var x0 = new Point((int) line0.X, 0);
+					var x1 = new Point((int) line0.X, (int)Canvas.Size.Y);
+
+					graphics.DrawLine(gridlinePenZero, x0, x1);
 				}
 
-				if (ShowHorizontal)
+				if (world.IsOnSurface(new Vector2(Canvas.Size.X/2.0, line0.Y)))
 				{
-					DrawGridMarkersHorizontal(graphics, scale, backgroundBrush, gridlinePen);
-				}
+					var y0 = new Point(0, (int)line0.Y);
+					var y1 = new Point((int)Canvas.Size.X, (int)line0.Y);
 
-				if (ShowVertical)
-				{
-					DrawGridMarkersVertical(graphics, scale, backgroundBrush, gridlinePen);
-				}
-
-				if (ShowHorizontal)
-				{
-					graphics.FillRectangle(backgroundBrush, new System.Drawing.Rectangle(ShowVertical ? RulerSize : 0, 0, (int)Canvas.Size.X - (ShowVertical ? RulerSize : 0), RulerSize));
-
-					DrawBackgroundHorizontal(graphics, scale, backdropBrush);
-					DrawGridLinesHorizontal(graphics, scale, gridlinePen);
-					DrawGridLinesHorizontal(graphics, scale * 0.1, gridlinePenHalf);
-
-					graphics.DrawLine(gridlinePen, ShowVertical ? RulerSize : 0, RulerSize, (int)Canvas.Size.X, RulerSize);
-				}
-
-				if (ShowVertical)
-				{
-					graphics.FillRectangle(backgroundBrush, new System.Drawing.Rectangle(0, ShowHorizontal ? RulerSize : 0, RulerSize, (int)Canvas.Size.Y - (ShowHorizontal ? RulerSize : 0)));
-
-					DrawBackgroundVertical(graphics, scale, backdropBrush);
-					DrawGridLinesVertical(graphics, scale, gridlinePen);
-					DrawGridLinesVertical(graphics, scale * 0.1, gridlinePenHalf);
-
-					graphics.DrawLine(gridlinePen, RulerSize, ShowHorizontal ? RulerSize : 0, RulerSize, (int)Canvas.Size.Y);
+					graphics.DrawLine(gridlinePenZero, y0, y1);
 				}
 			}
 		}
