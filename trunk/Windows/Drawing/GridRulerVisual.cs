@@ -72,7 +72,7 @@ namespace Xyrus.Apophysis.Windows.Drawing
 			var scale = Canvas.Scale;
 			var digits = scale > 1 ? 0 : (int)-System.Math.Ceiling(System.Math.Log10(scale));
 
-			if (System.Math.Abs(unit) > 9999)
+			if (System.Math.Abs(unit) > 1e4-1)
 			{
 				var log = System.Math.Floor(System.Math.Log10(System.Math.Abs(unit)));
 				var pow = System.Math.Pow(10, log);
