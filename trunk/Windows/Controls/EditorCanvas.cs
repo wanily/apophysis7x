@@ -106,7 +106,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 			return new Rectangle(c0, c1 - c0);
 		}
 
-		private void DrawBackground(Graphics g, Vector2 scale, Brush brush, Orientation? orientation)
+		private void DrawBackground(Graphics g, Vector2 scale, Brush brush)
 		{
 			if (mGrid == null)
 				return;
@@ -115,49 +115,24 @@ namespace Xyrus.Apophysis.Windows.Controls
 			var bounds = GetCanvasBounds(scale);
 			var invScale = 1.0/scale;
 
-			if (!orientation.HasValue)
-			{
-				for (double y = bounds.TopLeft.Y; y <= bounds.BottomRight.Y; y += step.Y)
-				{
-					for (double x = bounds.TopLeft.X; x <= bounds.BottomRight.X; x += step.X)
-					{
-						var xy = new Vector2(x, y);
-						var uv = mGrid.CanvasToWorld(xy * invScale);
-
-						var uI = (int)System.Math.Round(uv.X);
-						var vI = (int)System.Math.Round(uv.Y);
-
-						if ((uI % 2 == 0 && vI % 2 == 0) || (uI % 2 != 0 && vI % 2 != 0))
-						{
-							g.FillRectangle(brush, new System.Drawing.Rectangle((int)xy.X, (int)xy.Y, (int)step.X, (int)step.Y));
-						}
-					}
-				}
-			}
-			else if (orientation.Value == Orientation.Horizontal)
-			{
-				for (double y = bounds.TopLeft.Y; y <= bounds.BottomRight.Y; y += step.Y)
-				{
-					var vI = (int)System.Math.Round(mGrid.CanvasToWorld(y * invScale.Y));
-					if (vI % 2 == 0)
-					{
-						g.FillRectangle(brush, new System.Drawing.Rectangle((int)bounds.Corner.X, (int)y, (int)bounds.Size.X, (int)y));
-					}
-				}
-			}
-			else if (orientation.Value == Orientation.Horizontal)
+			for (double y = bounds.TopLeft.Y; y <= bounds.BottomRight.Y; y += step.Y)
 			{
 				for (double x = bounds.TopLeft.X; x <= bounds.BottomRight.X; x += step.X)
 				{
-					var uI = (int)System.Math.Round(mGrid.CanvasToWorld(x * invScale.X));
-					if (uI % 2 == 0)
+					var xy = new Vector2(x, y);
+					var uv = mGrid.CanvasToWorld(xy * invScale);
+
+					var uI = (int)System.Math.Round(uv.X);
+					var vI = (int)System.Math.Round(uv.Y);
+
+					if ((uI % 2 == 0 && vI % 2 == 0) || (uI % 2 != 0 && vI % 2 != 0))
 					{
-						g.FillRectangle(brush, new System.Drawing.Rectangle((int)x, (int)bounds.Corner.Y, (int)x, (int)bounds.Size.Y));
+						g.FillRectangle(brush, new System.Drawing.Rectangle((int)xy.X, (int)xy.Y, (int)step.X, (int)step.Y));
 					}
 				}
 			}
 		}
-		private void DrawGrid(Graphics g, Vector2 scale, Pen pen, Orientation? orientation)
+		private void DrawGrid(Graphics g, Vector2 scale, Pen pen)
 		{
 			if (mGrid == null)
 				return;
@@ -165,49 +140,64 @@ namespace Xyrus.Apophysis.Windows.Controls
 			var step = (scale * mGrid.Ratio).Abs();
 			var bounds = GetCanvasBounds(scale);
 
-			if (!orientation.HasValue || orientation.Value == Orientation.Horizontal)
+			for (double y = bounds.TopLeft.Y; y <= bounds.BottomRight.Y; y += step.Y)
 			{
-				for (double y = bounds.TopLeft.Y; y <= bounds.BottomRight.Y; y += step.Y)
-				{
-					g.DrawLine(pen, new Point((int)bounds.TopLeft.X, (int)y), new Point((int)bounds.BottomRight.X, (int)y));
-				}
+				g.DrawLine(pen, new Point((int)bounds.TopLeft.X, (int)y), new Point((int)bounds.BottomRight.X, (int)y));
 			}
 
-			if (!orientation.HasValue || orientation.Value == Orientation.Vertical)
+			for (double x = bounds.TopLeft.X; x <= bounds.BottomRight.X; x += step.X)
 			{
-				for (double x = bounds.TopLeft.X; x <= bounds.BottomRight.X; x += step.X)
-				{
-					g.DrawLine(pen, new Point((int)x, (int)bounds.TopLeft.Y), new Point((int)x, (int)bounds.BottomRight.Y));
-				}
+				g.DrawLine(pen, new Point((int)x, (int)bounds.TopLeft.Y), new Point((int)x, (int)bounds.BottomRight.Y));
 			}
-
 		}
 
-		private void BeginDrag()
+		private void BeginDrag(Vector2 cursor)
 		{
+			if (mGrid == null)
+				return;
 
+			var offset = mGrid.Offset * mGrid.Ratio;
+
+			mDragStart = cursor;
+			mOffsetStart = offset;
+			mIsDragging = true;
 		}
 		private void DragExecute(Vector2 cursor)
 		{
+			if (mGrid == null)
+				return;
+
 			mGrid.Pan((mOffsetStart - cursor + mDragStart) / mGrid.Ratio);
 		}
 		private void WheelExecute(int delta)
 		{
+			if (mGrid == null)
+				return;
+
 			mGrid.Zoom(delta);
 		}
 		private void ResetExecute()
 		{
+			if (mGrid == null)
+				return;
+
 			mGrid.Reset();
 		}
 		private void EndDrag()
 		{
+			if (mGrid == null)
+				return;
 
+			mDragStart = null;
+			mOffsetStart = null;
+			mIsDragging = false;
 		}
 
 		private void OnTransformCollectionChanged(object sender, EventArgs e)
 		{
 			Refresh();
 		}
+
 		private void OnCanvasPaint(object sender, PaintEventArgs e)
 		{
 			if (mGrid == null)
@@ -224,9 +214,9 @@ namespace Xyrus.Apophysis.Windows.Controls
 			{
 				var scale = new Vector2(mGrid.Scale, mGrid.Scale);
 
-				DrawBackground(g, scale, backdropBrush, null);
-				DrawGrid(g, scale, gridlinePen, null);
-				DrawGrid(g, scale * 0.1, gridlinePenHalf, null);
+				DrawBackground(g, scale, backdropBrush);
+				DrawGrid(g, scale, gridlinePen);
+				DrawGrid(g, scale * 0.1, gridlinePenHalf);
 			}
 		}
 		private void OnCanvasResized(object sender, EventArgs e)
@@ -244,33 +234,24 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 		private void OnCanvasMouseDown(object sender, MouseEventArgs e)
 		{
-			var cursor = new Vector2(e.X, e.Y);
-			var offset = mGrid.Offset*mGrid.Ratio;
-
-			mDragStart = cursor;
-			mOffsetStart = offset;
-			mIsDragging = true;
-
-			if (!DesignMode)
+			if (DesignMode)
 			{
-				BeginDrag();
-				Refresh();
+				return;
 			}
+
+			var cursor = new Vector2(e.X, e.Y);
+			BeginDrag(cursor);
+			Refresh();
 		}
 		private void OnCanvasMouseUp(object sender, MouseEventArgs e)
 		{
-			if (!DesignMode)
+			if (DesignMode)
 			{
-				EndDrag();
+				return;
 			}
 
-			mDragStart = null;
-			mIsDragging = false;
-
-			if (!DesignMode)
-			{
-				Refresh();
-			}
+			EndDrag();
+			Refresh();
 		}
 		private void OnCanvasMouseMove(object sender, MouseEventArgs e)
 		{
@@ -289,11 +270,21 @@ namespace Xyrus.Apophysis.Windows.Controls
 		}
 		private void OnCanvasMouseWheel(object sender, MouseEventArgs e)
 		{
+			if (DesignMode)
+			{
+				return;
+			}
+
 			WheelExecute(e.Delta);
 			Refresh();
 		}
 		private void OnCanvasMouseDoubleClick(object sender, MouseEventArgs e)
 		{
+			if (DesignMode)
+			{
+				return;
+			}
+
 			ResetExecute();
 		}
 	}
