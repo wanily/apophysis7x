@@ -8,8 +8,6 @@ namespace Xyrus.Apophysis.Windows.Drawing
 	public abstract class CanvasNagivationStrategy<T> : ControlEventInterceptor where T: Canvas
 	{
 		private T mCanvas;
-		private EventHandler mCanvasUpdated;
-
 		private Vector2 mNavigationOrigin;
 		private Vector2 mNavigationOffset;
 		private bool mIsNavigating;
@@ -24,15 +22,6 @@ namespace Xyrus.Apophysis.Windows.Drawing
 			if (canvas == null) throw new ArgumentNullException("canvas");
 			mCanvas = canvas;
 		}
-
-		protected void RaiseCanvasUpdated()
-		{
-			if (mCanvasUpdated == null)
-				return;
-
-			mCanvasUpdated(this, new EventArgs());
-		}
-
 		protected override void DisposeOverride(bool disposing)
 		{
 			EndNavigate();
@@ -43,12 +32,6 @@ namespace Xyrus.Apophysis.Windows.Drawing
 		[NotNull] protected virtual Vector2 GetNextOffset([NotNull] Vector2 cursor)
 		{
 			return (mNavigationOffset - cursor + mNavigationOrigin)/Canvas.Ratio;
-		}
-
-		public event EventHandler CanvasUpdated
-		{
-			add { mCanvasUpdated += value; }
-			remove { mCanvasUpdated -= value; }
 		}
 
 		public T Canvas

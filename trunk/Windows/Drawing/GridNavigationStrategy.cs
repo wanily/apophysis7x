@@ -16,7 +16,6 @@ namespace Xyrus.Apophysis.Windows.Drawing
 				return;
 
 			Canvas.Pan(GetNextOffset(cursor));
-			RaiseCanvasUpdated();
 		}
 		public override void NavigateRotate(Vector2 cursor)
 		{
@@ -25,12 +24,10 @@ namespace Xyrus.Apophysis.Windows.Drawing
 		public override void NavigateZoom(double delta)
 		{
 			Canvas.Zoom(delta);
-			RaiseCanvasUpdated();
 		}
 		public override void NavigateReset()
 		{
 			Canvas.Reset();
-			RaiseCanvasUpdated();
 		}
 
 		protected override Vector2 GetCurrentOffset()
