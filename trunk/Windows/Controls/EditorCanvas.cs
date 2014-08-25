@@ -4,7 +4,6 @@ using System.Windows.Forms;
 using Xyrus.Apophysis.Windows.Drawing;
 using Xyrus.Apophysis.Windows.Math;
 using Xyrus.Apophysis.Windows.Models;
-using Rectangle = Xyrus.Apophysis.Windows.Math.Rectangle;
 
 namespace Xyrus.Apophysis.Windows.Controls
 {
@@ -12,22 +11,36 @@ namespace Xyrus.Apophysis.Windows.Controls
 	{
 		private TransformCollection mTransforms;
 
-		private Color mGridLineColor; 
-		private Color mBackdropColor;
-
 		private Vector2 mDragStart;
 		private Vector2 mOffsetStart;
 		private bool mIsDragging;
 
-		private Grid mGrid;
 		private GridNavigationStrategy mNavigation;
+		private GridVisual mVisual;
+		private GridRulerVisual mRulers;
 
 		public EditorCanvas()
 		{
 			InitializeComponent();
 
+			var grid = new Grid(new Vector2(Width, Height));
+
+			mNavigation = new GridNavigationStrategy(grid);
+			mNavigation.Attach(this);
+
+			mVisual = new GridVisual(grid);
+			mVisual.Attach(this);
+
+			mRulers = new GridRulerVisual(grid);
+			mRulers.Attach(this);
+			mRulers.ShowVertical = true;
+
 			GridLineColor = Color.Gray;
 			BackdropColor = Color.Transparent;
+
+			RulerGridLineColor = Color.Gray;
+			RulerBackgroundColor = Color.FromArgb(0xff, 0x33, 0x33, 0x33);
+			RulerBackdropColor = Color.FromArgb(0xff, 0x55, 0x55, 0x55);
 		}
 		protected override void Dispose(bool disposing)
 		{
@@ -46,6 +59,18 @@ namespace Xyrus.Apophysis.Windows.Controls
 				{
 					mNavigation.Dispose();
 					mNavigation = null;
+				}
+
+				if (mVisual != null)
+				{
+					mVisual.Dispose();
+					mVisual = null;
+				}
+
+				if (mRulers != null)
+				{
+					mRulers.Dispose();
+					mRulers = null;
 				}
 			}
 
@@ -68,134 +93,33 @@ namespace Xyrus.Apophysis.Windows.Controls
 		}
 		public Color GridLineColor
 		{
-			get { return mGridLineColor; }
-			set
-			{
-				mGridLineColor = value;
-				Refresh();
-			}
+			get { return mVisual.GridLineColor; }
+			set { mVisual.GridLineColor = value; }
 		}
 		public Color BackdropColor
 		{
-			get { return mBackdropColor; }
-			set
-			{
-				mBackdropColor = value;
-				Refresh();
-			}
+			get { return mVisual.BackdropColor; }
+			set { mVisual.BackdropColor = value; }
 		}
 
-		private Rectangle GetWorldBounds(Vector2 snapScale)
+		public Color RulerGridLineColor
 		{
-			var u = mGrid.CanvasToWorld(new Vector2(0, 0));
-			var v = mGrid.CanvasToWorld(new Vector2(Width, Height));
-
-			var sx0 = mGrid.Snap(u.X, snapScale.X, CanvasSnapBehavior.Floor);
-			var sx1 = mGrid.Snap(v.X, snapScale.X, CanvasSnapBehavior.Ceil);
-
-			var sy0 = mGrid.Snap(u.Y, snapScale.Y, CanvasSnapBehavior.Ceil);
-			var sy1 = mGrid.Snap(v.Y, snapScale.Y, CanvasSnapBehavior.Floor);
-
-			var c0 = new Vector2(sx0, sy0);
-			var c1 = new Vector2(sx1, sy1);
-
-			return new Rectangle(c0, c1 - c0);
+			get { return mRulers.GridLineColor; }
+			set { mRulers.GridLineColor = value; }
 		}
-		private Rectangle GetCanvasBounds(Vector2 snapScale)
+		public Color RulerBackdropColor
 		{
-			var wb = GetWorldBounds(snapScale);
-
-			var c0 = mGrid.WorldToCanvas(wb.TopLeft);
-			var c1 = mGrid.WorldToCanvas(wb.BottomRight);
-
-			return new Rectangle(c0, c1 - c0);
+			get { return mRulers.BackdropColor; }
+			set { mRulers.BackdropColor = value; }
 		}
-
-		private void DrawBackground(Graphics g, Vector2 scale, Brush brush)
+		public Color RulerBackgroundColor
 		{
-			if (mGrid == null)
-				return;
-
-			var step = (scale * mGrid.Ratio).Abs();
-			var bounds = GetCanvasBounds(scale);
-			var invScale = 1.0/scale;
-
-			for (double y = bounds.TopLeft.Y; y <= bounds.BottomRight.Y; y += step.Y)
-			{
-				for (double x = bounds.TopLeft.X; x <= bounds.BottomRight.X; x += step.X)
-				{
-					var xy = new Vector2(x, y);
-					var uv = mGrid.CanvasToWorld(xy * invScale);
-
-					var uI = (int)System.Math.Round(uv.X);
-					var vI = (int)System.Math.Round(uv.Y);
-
-					if ((uI % 2 == 0 && vI % 2 == 0) || (uI % 2 != 0 && vI % 2 != 0))
-					{
-						g.FillRectangle(brush, new System.Drawing.Rectangle((int)xy.X, (int)xy.Y, (int)step.X, (int)step.Y));
-					}
-				}
-			}
-		}
-		private void DrawGrid(Graphics g, Vector2 scale, Pen pen)
-		{
-			if (mGrid == null)
-				return;
-
-			var step = (scale * mGrid.Ratio).Abs();
-			var bounds = GetCanvasBounds(scale);
-
-			for (double y = bounds.TopLeft.Y; y <= bounds.BottomRight.Y; y += step.Y)
-			{
-				g.DrawLine(pen, new Point((int)bounds.TopLeft.X, (int)y), new Point((int)bounds.BottomRight.X, (int)y));
-			}
-
-			for (double x = bounds.TopLeft.X; x <= bounds.BottomRight.X; x += step.X)
-			{
-				g.DrawLine(pen, new Point((int)x, (int)bounds.TopLeft.Y), new Point((int)x, (int)bounds.BottomRight.Y));
-			}
+			get { return mRulers.BackgroundColor; }
+			set { mRulers.BackgroundColor = value; }
 		}
 
 		private void OnTransformCollectionChanged(object sender, EventArgs e)
 		{
-			Refresh();
-		}
-
-		private void OnCanvasPaint(object sender, PaintEventArgs e)
-		{
-			if (mGrid == null)
-				return;
-
-			var g = e.Graphics;
-
-			var glc = Color.FromArgb(0xff, GridLineColor.R, GridLineColor.G, GridLineColor.B);
-			var glc05 = Color.FromArgb(0x80, GridLineColor.R, GridLineColor.G, GridLineColor.B);
-
-			using (var backdropBrush = new SolidBrush(BackdropColor))
-			using (var gridlinePen = new Pen(glc, 1.0f))
-			using (var gridlinePenHalf = new Pen(glc05, 1.0f))
-			{
-				var scale = new Vector2(mGrid.Scale, mGrid.Scale);
-
-				DrawBackground(g, scale, backdropBrush);
-				DrawGrid(g, scale, gridlinePen);
-				DrawGrid(g, scale * 0.1, gridlinePenHalf);
-			}
-		}
-		private void OnCanvasResized(object sender, EventArgs e)
-		{
-			if (mGrid == null)
-			{
-				mGrid = new Grid(new Vector2(Width, Height));
-				mNavigation = new GridNavigationStrategy(mGrid);
-
-				mNavigation.Attach(this);
-			}
-			else
-			{
-				mGrid.Resize(new Vector2(Width, Height));
-			}
-
 			Refresh();
 		}
 	}

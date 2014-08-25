@@ -26,8 +26,6 @@
 			this.ForeColor = System.Drawing.Color.White;
 			this.Name = "EditorCanvas";
 			this.Size = new System.Drawing.Size(175, 173);
-			this.Paint += new System.Windows.Forms.PaintEventHandler(this.OnCanvasPaint);
-			this.Resize += new System.EventHandler(this.OnCanvasResized);
 			this.ResumeLayout(false);
 
 		}

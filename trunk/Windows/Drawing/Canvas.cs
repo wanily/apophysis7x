@@ -30,38 +30,48 @@ namespace Xyrus.Apophysis.Windows.Drawing
 			get;
 		}
 
-		public Vector2 Snap(Vector2 point, double gridSize, CanvasSnapBehavior snapBehavior = CanvasSnapBehavior.Round)
+		public Vector2 Snap(Vector2 point, Vector2 gridSize, CanvasSnapBehavior snapBehaviorX = CanvasSnapBehavior.Round, CanvasSnapBehavior snapBehaviorY = CanvasSnapBehavior.Round)
 		{
 			if (point == null) throw new ArgumentNullException("point");
-			if (gridSize <= 0) throw new ArgumentOutOfRangeException("gridSize");
+			if (gridSize == null) throw new ArgumentNullException("gridSize");
 
-			Func<double, double> func;
+			Func<double, double> funcX, funcY;
 
-			switch (snapBehavior)
+			switch (snapBehaviorX)
 			{
 				case CanvasSnapBehavior.Round:
-					func = System.Math.Round;
+					funcX = System.Math.Round;
 					break;
 				case CanvasSnapBehavior.Floor:
-					func = System.Math.Floor;
+					funcX = System.Math.Floor;
 					break;
 				case CanvasSnapBehavior.Ceil:
-					func = System.Math.Ceiling;
+					funcX = System.Math.Ceiling;
 					break;
 				default:
-					throw new ArgumentOutOfRangeException("snapBehavior");
+					throw new ArgumentOutOfRangeException("snapBehaviorX");
 			}
 
-			var x = func(point.X / gridSize) * gridSize;
-			var y = func(point.Y / gridSize) * gridSize;
+			switch (snapBehaviorY)
+			{
+				case CanvasSnapBehavior.Round:
+					funcY = System.Math.Round;
+					break;
+				case CanvasSnapBehavior.Floor:
+					funcY = System.Math.Floor;
+					break;
+				case CanvasSnapBehavior.Ceil:
+					funcY = System.Math.Ceiling;
+					break;
+				default:
+					throw new ArgumentOutOfRangeException("snapBehaviorY");
+			}
+
+			var x = funcX(point.X / gridSize.X) * gridSize.X;
+			var y = funcY(point.Y / gridSize.Y) * gridSize.Y;
 
 			return new Vector2 { X = x, Y = y};
 		}
-		public double Snap(double value, double gridSize, CanvasSnapBehavior snapBehavior = CanvasSnapBehavior.Round)
-		{
-			return Snap(new Vector2 {X = value}, gridSize, snapBehavior).X;
-		}
-
 		public void Resize(Vector2 newSize)
 		{
 			if (newSize == null) throw new ArgumentNullException("newSize");

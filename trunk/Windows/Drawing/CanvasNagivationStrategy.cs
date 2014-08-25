@@ -46,7 +46,7 @@ namespace Xyrus.Apophysis.Windows.Drawing
 		}
 		
 		[NotNull] protected abstract Vector2 GetCurrentOffset();
-		[NotNull] protected virtual Vector2 GetNextOffset(Vector2 cursor)
+		[NotNull] protected virtual Vector2 GetNextOffset([NotNull] Vector2 cursor)
 		{
 			return (mNavigationOffset - cursor + mNavigationOrigin)/Canvas.Ratio;
 		}
@@ -81,8 +81,8 @@ namespace Xyrus.Apophysis.Windows.Drawing
 			mIsNavigating = false;
 		}
 
-		public abstract void NavigateOffset(Vector2 cursor);
-		public abstract void NavigateRotate(Vector2 cursor);
+		public abstract void NavigateOffset([NotNull] Vector2 cursor);
+		public abstract void NavigateRotate([NotNull] Vector2 cursor);
 		public abstract void NavigateZoom(double delta);
 		public abstract void NavigateReset();
 
@@ -118,7 +118,7 @@ namespace Xyrus.Apophysis.Windows.Drawing
 			mControl = null;
 		}
 
-		protected virtual void OnAttachedControlMouseMove(Vector2 cursor, MouseButtons button)
+		protected virtual void OnAttachedControlMouseMove([NotNull] Vector2 cursor, MouseButtons button)
 		{
 			if (button == MouseButtons.Left)
 			{
@@ -133,7 +133,7 @@ namespace Xyrus.Apophysis.Windows.Drawing
 			}
 		}
 
-		private void InvalidateControl()
+		protected void InvalidateControl()
 		{
 			if (mControl == null)
 				return;
