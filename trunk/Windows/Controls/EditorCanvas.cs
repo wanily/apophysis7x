@@ -25,8 +25,8 @@ namespace Xyrus.Apophysis.Windows.Controls
 		{
 			InitializeComponent();
 
-			GridLineColor = Color.DarkGray;
-			BackdropColor = Color.FromArgb(0x10, 0xff, 0xff, 0xff);
+			GridLineColor = Color.Gray;
+			BackdropColor = Color.Transparent;
 
 			MouseWheel += OnCanvasMouseWheel;
 		}
