@@ -59,6 +59,7 @@
     <Compile Include="Drawing\GridNavigationStrategy.cs" />
     <Compile Include="Drawing\GridRulerVisual.cs" />
     <Compile Include="Drawing\GridVisual.cs" />
+    <Compile Include="Drawing\TransformVisual.cs" />
     <Compile Include="Forms\Editor.cs">
       <SubType>Form</SubType>
     </Compile>

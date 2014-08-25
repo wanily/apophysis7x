@@ -13,10 +13,6 @@ namespace Xyrus.Apophysis.Windows.Drawing
 		private bool mIsNavigating;
 		private bool mIsSuspended;
 
-		~CanvasNagivationStrategy()
-		{
-			Dispose(false);
-		}
 		protected CanvasNagivationStrategy([NotNull] T canvas)
 		{
 			if (canvas == null) throw new ArgumentNullException("canvas");

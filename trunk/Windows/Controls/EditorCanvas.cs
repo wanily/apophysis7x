@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Windows.Drawing;
@@ -9,28 +11,30 @@ namespace Xyrus.Apophysis.Windows.Controls
 {
 	public partial class EditorCanvas : UserControl
 	{
+		private Grid mGrid;
 		private TransformCollection mTransforms;
 
 		private GridNavigationStrategy mNavigation;
 		private GridVisual mVisual;
 		private GridRulerVisual mRulers;
+		private List<TransformVisual> mTransformVisuals;
 
 		public EditorCanvas()
 		{
 			InitializeComponent();
 
-			var grid = new Grid(new Vector2(Width, Height));
+			mGrid = new Grid(new Vector2(Width, Height));
 
-			//todo Add transform hit test interceptor here
-
-			mNavigation = new GridNavigationStrategy(grid);
+			mNavigation = new GridNavigationStrategy(mGrid);
 			mNavigation.Attach(this);
 
-			mVisual = new GridVisual(grid);
+			mVisual = new GridVisual(mGrid);
 			mVisual.Attach(this);
 
-			mRulers = new GridRulerVisual(grid);
+			mRulers = new GridRulerVisual(mGrid);
 			mRulers.Attach(this);
+
+			RebuildInterceptors();
 
 			GridLineColor = Color.FromArgb(0xff, 0x66, 0x66, 0x66);
 			BackdropColor = Color.Transparent;
@@ -42,19 +46,12 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 			ShowRuler = true;
 		}
-
 		protected override void Dispose(bool disposing)
 		{
 			if (disposing)
 			{
 				if (components != null)
 					components.Dispose();
-
-				if (mTransforms != null)
-				{
-					mTransforms.ContentChanged -= OnTransformCollectionChanged;
-					mTransforms = null;
-				}
 
 				if (mNavigation != null)
 				{
@@ -73,6 +70,12 @@ namespace Xyrus.Apophysis.Windows.Controls
 					mRulers.Dispose();
 					mRulers = null;
 				}
+
+				if (mTransforms != null)
+				{
+					mTransforms.ContentChanged -= OnTransformCollectionChanged;
+					DestroyInterceptors();
+				}
 			}
 
 			base.Dispose(disposing);
@@ -90,6 +93,8 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 				if (value != null)
 					value.ContentChanged += OnTransformCollectionChanged;
+
+				RebuildInterceptors();
 			}
 		}
 		public Color GridZeroLineColor
@@ -135,8 +140,34 @@ namespace Xyrus.Apophysis.Windows.Controls
 			}
 		}
 
+		private void RebuildInterceptors()
+		{
+			DestroyInterceptors();
+
+			mTransformVisuals = new List<TransformVisual>();
+			foreach (var transform in (IEnumerable<Transform>)mTransforms ?? new Transform[0])
+			{
+				var visual = new TransformVisual(mGrid, transform);
+
+				visual.Attach(this);
+				mTransformVisuals.Add(visual);
+			}
+		}
+		private void DestroyInterceptors()
+		{
+			if (mTransformVisuals != null)
+			{
+				foreach (var visual in mTransformVisuals)
+					visual.Dispose();
+
+				mTransformVisuals.Clear();
+				mTransformVisuals = null;
+			}
+		}
+
 		private void OnTransformCollectionChanged(object sender, EventArgs e)
 		{
+			//RebuildInterceptors();
 			Refresh();
 		}
 	}

@@ -8,6 +8,11 @@ namespace Xyrus.Apophysis.Windows.Drawing
 	{
 		private Control mControl;
 
+		~ControlEventInterceptor()
+		{
+			Dispose(false);
+		}
+
 		protected void Dispose(bool disposing)
 		{
 			if (disposing)
@@ -36,7 +41,7 @@ namespace Xyrus.Apophysis.Windows.Drawing
 		protected abstract void RegisterEvents(Control control);
 		protected abstract void UnregisterEvents(Control control);
 
-		protected void InvalidateControl()
+		public void InvalidateControl()
 		{
 			if (mControl == null)
 				return;

@@ -11,26 +11,6 @@ namespace Xyrus.Apophysis.Windows.Drawing
 		{
 		}
 
-		protected Rectangle GetWorldBounds(Vector2 snapScale)
-		{
-			var u = Canvas.CanvasToWorld(new Vector2());
-			var v = Canvas.CanvasToWorld(Canvas.Size);
-
-			var c0 = Canvas.Snap(u, snapScale, CanvasSnapBehavior.Floor, CanvasSnapBehavior.Ceil);
-			var c1 = Canvas.Snap(v, snapScale, CanvasSnapBehavior.Ceil, CanvasSnapBehavior.Floor);
-
-			return new Rectangle(c0, c1 - c0);
-		}
-		protected Rectangle GetCanvasBounds(Vector2 snapScale)
-		{
-			var wb = GetWorldBounds(snapScale);
-
-			var c0 = Canvas.WorldToCanvas(wb.TopLeft);
-			var c1 = Canvas.WorldToCanvas(wb.BottomRight);
-
-			return new Rectangle(c0, c1 - c0);
-		}
-
 		private void DrawBackground(Graphics g, Vector2 scale, Brush brush)
 		{
 			var step = (scale * Canvas.Ratio).Abs();
