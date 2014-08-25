@@ -5,7 +5,7 @@ using Xyrus.Apophysis.Windows.Math;
 namespace Xyrus.Apophysis.Windows.Drawing
 {
 	[PublicAPI]
-	public abstract class CanvasNagivationStrategy<T> : IDisposable where T: Canvas
+	public abstract class CanvasNagivationStrategy<T> : ControlEventInterceptor where T: Canvas
 	{
 		private T mCanvas;
 		private EventHandler mCanvasUpdated;
@@ -13,8 +13,7 @@ namespace Xyrus.Apophysis.Windows.Drawing
 		private Vector2 mNavigationOrigin;
 		private Vector2 mNavigationOffset;
 		private bool mIsNavigating;
-
-		private Control mControl;
+		private bool mIsSuspended;
 
 		~CanvasNagivationStrategy()
 		{
@@ -33,18 +32,13 @@ namespace Xyrus.Apophysis.Windows.Drawing
 
 			mCanvasUpdated(this, new EventArgs());
 		}
-		protected void Dispose(bool disposing)
-		{
-			if (disposing)
-			{
-				Detach();
-			}
 
+		protected override void DisposeOverride(bool disposing)
+		{
 			EndNavigate();
-			mControl = null;
 			mCanvas = null;
 		}
-		
+
 		[NotNull] protected abstract Vector2 GetCurrentOffset();
 		[NotNull] protected virtual Vector2 GetNextOffset([NotNull] Vector2 cursor)
 		{
@@ -86,36 +80,14 @@ namespace Xyrus.Apophysis.Windows.Drawing
 		public abstract void NavigateZoom(double delta);
 		public abstract void NavigateReset();
 
-		public void Dispose()
+		public void Suspend()
 		{
-			Dispose(true);
-			GC.SuppressFinalize(this);
+			mIsSuspended = true;
+			EndNavigate();
 		}
-
-		public void Attach([NotNull] Control control)
+		public void Resume()
 		{
-			if (control == null) throw new ArgumentNullException("control");
-
-			mControl = control;
-
-			mControl.MouseDown += OnCanvasMouseDown;
-			mControl.MouseUp += OnCanvasMouseUp;
-			mControl.MouseMove += OnCanvasMouseMove;
-			mControl.MouseWheel += OnCanvasMouseWheel;
-			mControl.MouseDoubleClick += OnCanvasMouseDoubleClick;
-		}
-		public void Detach()
-		{
-			if (mControl == null)
-				return;
-
-			mControl.MouseDown -= OnCanvasMouseDown;
-			mControl.MouseUp -= OnCanvasMouseUp;
-			mControl.MouseMove -= OnCanvasMouseMove;
-			mControl.MouseWheel -= OnCanvasMouseWheel;
-			mControl.MouseDoubleClick -= OnCanvasMouseDoubleClick;
-
-			mControl = null;
+			mIsSuspended = false;
 		}
 
 		protected virtual void OnAttachedControlMouseMove([NotNull] Vector2 cursor, MouseButtons button)
@@ -133,12 +105,21 @@ namespace Xyrus.Apophysis.Windows.Drawing
 			}
 		}
 
-		protected void InvalidateControl()
+		protected override void RegisterEvents(Control control)
 		{
-			if (mControl == null)
-				return;
-
-			mControl.Refresh();
+			control.MouseDown += OnCanvasMouseDown;
+			control.MouseUp += OnCanvasMouseUp;
+			control.MouseMove += OnCanvasMouseMove;
+			control.MouseWheel += OnCanvasMouseWheel;
+			control.MouseDoubleClick += OnCanvasMouseDoubleClick;
+		}
+		protected override void UnregisterEvents(Control control)
+		{
+			control.MouseDown -= OnCanvasMouseDown;
+			control.MouseUp -= OnCanvasMouseUp;
+			control.MouseMove -= OnCanvasMouseMove;
+			control.MouseWheel -= OnCanvasMouseWheel;
+			control.MouseDoubleClick -= OnCanvasMouseDoubleClick;
 		}
 
 		private void OnCanvasMouseDown(object sender, MouseEventArgs e)
@@ -152,16 +133,25 @@ namespace Xyrus.Apophysis.Windows.Drawing
 		}
 		private void OnCanvasMouseMove(object sender, MouseEventArgs e)
 		{
+			if (mIsSuspended)
+				return;
+
 			OnAttachedControlMouseMove(new Vector2(e.X, e.Y), e.Button);
 			InvalidateControl();
 		}
 		private void OnCanvasMouseWheel(object sender, MouseEventArgs e)
 		{
+			if (mIsSuspended)
+				return;
+
 			OnAttachedControlMouseWheel(e.Delta, e.Button);
 			InvalidateControl();
 		}
 		private void OnCanvasMouseDoubleClick(object sender, MouseEventArgs e)
 		{
+			if (mIsSuspended)
+				return;
+
 			NavigateReset();
 			InvalidateControl();
 		}

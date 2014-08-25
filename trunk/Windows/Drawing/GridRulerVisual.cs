@@ -148,7 +148,7 @@ namespace Xyrus.Apophysis.Windows.Drawing
 		{
 			var step = (scale * Canvas.Ratio).Abs();
 			var bounds = GetCanvasBounds(scale);
-			var markerFont = GetFont();
+			var markerFont = AttachedControl.Font;
 
 			for (double x = bounds.TopLeft.X; x <= bounds.BottomRight.X; x += step.X)
 			{
@@ -170,7 +170,7 @@ namespace Xyrus.Apophysis.Windows.Drawing
 		{
 			var step = (scale * Canvas.Ratio).Abs();
 			var bounds = GetCanvasBounds(scale);
-			var markerFont = GetFont();
+			var markerFont = AttachedControl.Font;
 
 			for (double y = bounds.TopLeft.Y; y <= bounds.BottomRight.Y; y += step.Y)
 			{

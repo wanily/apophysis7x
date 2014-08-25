@@ -54,6 +54,7 @@
     <Compile Include="Drawing\CanvasSnapBehavior.cs" />
     <Compile Include="Drawing\CanvasNagivationStrategy.cs" />
     <Compile Include="Drawing\CanvasVisual.cs" />
+    <Compile Include="Drawing\ControlEventInterceptor.cs" />
     <Compile Include="Drawing\Grid.cs" />
     <Compile Include="Drawing\GridNavigationStrategy.cs" />
     <Compile Include="Drawing\GridRulerVisual.cs" />

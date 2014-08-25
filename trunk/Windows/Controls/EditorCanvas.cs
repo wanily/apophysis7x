@@ -21,6 +21,8 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 			var grid = new Grid(new Vector2(Width, Height));
 
+			//todo Add transform hit test interceptor here
+
 			mNavigation = new GridNavigationStrategy(grid);
 			mNavigation.Attach(this);
 
@@ -40,6 +42,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 			ShowRuler = true;
 		}
+
 		protected override void Dispose(bool disposing)
 		{
 			if (disposing)

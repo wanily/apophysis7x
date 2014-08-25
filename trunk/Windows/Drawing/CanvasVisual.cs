@@ -6,10 +6,9 @@ using Xyrus.Apophysis.Windows.Math;
 namespace Xyrus.Apophysis.Windows.Drawing
 {
 	[PublicAPI]
-	public abstract class CanvasVisual<T> : IDisposable where T: Canvas
+	public abstract class CanvasVisual<T> : ControlEventInterceptor where T: Canvas
 	{
 		private T mCanvas;
-		private Control mControl;
 
 		private Color mGridZeroLineColor;
 		private Color mGridLineColor;
@@ -24,18 +23,10 @@ namespace Xyrus.Apophysis.Windows.Drawing
 			if (canvas == null) throw new ArgumentNullException("canvas");
 			mCanvas = canvas;
 		}
-
-		protected void Dispose(bool disposing)
+		protected override void DisposeOverride(bool disposing)
 		{
-			if (disposing)
-			{
-				Detach();
-			}
-
-			mControl = null;
 			mCanvas = null;
 		}
-		protected abstract void OnControlPaint([NotNull] Graphics graphics);
 
 		public T Canvas
 		{
@@ -69,46 +60,18 @@ namespace Xyrus.Apophysis.Windows.Drawing
 			}
 		}
 
-		public void Dispose()
+		protected override void RegisterEvents(Control control)
 		{
-			Dispose(true);
-			GC.SuppressFinalize(this);
+			control.Paint += OnCanvasPaint;
+			control.Resize += OnCanvasResize;
+		}
+		protected override void UnregisterEvents(Control control)
+		{
+			control.Paint -= OnCanvasPaint;
+			control.Resize -= OnCanvasResize;
 		}
 
-		public void Attach([NotNull] Control control)
-		{
-			if (control == null) throw new ArgumentNullException("control");
-
-			mControl = control;
-
-			mControl.Paint += OnCanvasPaint;
-			mControl.Resize += OnCanvasResize;
-		}
-		public void Detach()
-		{
-			if (mControl == null)
-				return;
-
-			mControl.Paint -= OnCanvasPaint;
-			mControl.Resize -= OnCanvasResize;
-
-			mControl = null;
-		}
-
-		protected void InvalidateControl()
-		{
-			if (mControl == null)
-				return;
-
-			mControl.Refresh();
-		}
-		protected Font GetFont()
-		{
-			if (mControl == null)
-				return null;
-
-			return mControl.Font;
-		}
+		protected abstract void OnControlPaint([NotNull] Graphics graphics);
 
 		private void OnCanvasPaint(object sender, PaintEventArgs e)
 		{
@@ -116,7 +79,11 @@ namespace Xyrus.Apophysis.Windows.Drawing
 		}
 		private void OnCanvasResize(object sender, EventArgs e)
 		{
-			mCanvas.Resize(new Vector2(mControl.Width, mControl.Height));
+			var control = sender as Control;
+			if (control == null)
+				return;
+
+			mCanvas.Resize(new Vector2(control.Width, control.Height));
 			InvalidateControl();
 		}
 	}
