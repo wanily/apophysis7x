@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace Xyrus.Apophysis.Windows.Math
 {
+	[PublicAPI]
 	public class Polygon
 	{
 		private readonly Vector2[] mVertices;

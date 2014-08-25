@@ -3,6 +3,7 @@ using System.Globalization;
 
 namespace Xyrus.Apophysis.Windows.Math
 {
+	[PublicAPI]
 	public class Vector2
 	{
 		private double mX, mY;

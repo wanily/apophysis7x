@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace Xyrus.Apophysis.Windows
 {
-	[Serializable]
+	[Serializable, PublicAPI]
 	public class ApophysisException : Exception
 	{
 		public ApophysisException() { }

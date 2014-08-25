@@ -1,5 +1,6 @@
 ﻿namespace Xyrus.Apophysis.Windows.Models
 {
+	[PublicAPI]
 	public class Flame
 	{
 		private readonly TransformCollection mTransforms;

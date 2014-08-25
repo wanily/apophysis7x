@@ -3,6 +3,7 @@ using Xyrus.Apophysis.Windows.Math;
 
 namespace Xyrus.Apophysis.Windows.Models
 {
+	[PublicAPI]
 	public class Transform
 	{
 		private readonly Flame mFlame;

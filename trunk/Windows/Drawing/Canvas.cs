@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Xyrus.Apophysis.Windows.Math;
 
 namespace Xyrus.Apophysis.Windows.Drawing
 {
+	[PublicAPI]
 	public abstract class Canvas
 	{
 		private Vector2 mSize;

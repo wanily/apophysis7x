@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 
 namespace Xyrus.Apophysis.Windows.Models
 {
+	[PublicAPI]
 	public class TransformCollection : ReadOnlyCollection<Transform>
 	{
 		private readonly Flame mFlame;

@@ -2,6 +2,7 @@ using System;
 
 namespace Xyrus.Apophysis.Windows.Math
 {
+	[PublicAPI]
 	public class Line
 	{
 		private readonly Vector2 mA;

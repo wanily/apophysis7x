@@ -2,6 +2,7 @@
 
 namespace Xyrus.Apophysis.Windows.Drawing
 {
+	[PublicAPI]
 	public class Grid : Canvas
 	{
 		private const double mBaseUnitToPixelRatio = 150.0;

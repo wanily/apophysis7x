@@ -5,6 +5,7 @@ using Xyrus.Apophysis.Windows.Models;
 
 namespace Xyrus.Apophysis.Windows
 {
+	[PublicAPI]
 	public static class ApophysisApplication
 	{
 		[STAThread]

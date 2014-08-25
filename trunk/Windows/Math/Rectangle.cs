@@ -1,5 +1,6 @@
 ﻿namespace Xyrus.Apophysis.Windows.Math
 {
+	[PublicAPI]
 	public class Rectangle
 	{
 		private readonly Vector2 mCorner;

@@ -2,6 +2,7 @@
 
 namespace Xyrus.Apophysis.Windows.Math
 {
+	[PublicAPI]
 	public class ImmutableVector2 : Vector2
 	{
 		public ImmutableVector2(Vector2 vector)

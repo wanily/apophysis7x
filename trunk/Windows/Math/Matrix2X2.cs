@@ -1,5 +1,6 @@
 ﻿namespace Xyrus.Apophysis.Windows.Math
 {
+	[PublicAPI]
 	public class Matrix2X2
 	{
 		private readonly Vector2 mRow0, mRow1;
