@@ -4,7 +4,8 @@ using System.Windows.Forms;
 
 namespace Xyrus.Apophysis.Windows.Drawing
 {
-	public abstract class ControlPainter : ControlEventInterceptor
+	[PublicAPI]
+	public abstract class ControlPainter : ChainItem
 	{
 		protected ControlPainter([NotNull] Control control) : base(control)
 		{

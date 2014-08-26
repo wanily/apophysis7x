@@ -5,9 +5,9 @@ using Xyrus.Apophysis.Windows.Math;
 namespace Xyrus.Apophysis.Windows.Drawing
 {
 	[PublicAPI]
-	public class GridNavigationStrategy : CanvasNagivationStrategy<Grid>
+	public class GridInteractionStrategy : CanvasInteractionStrategy<Grid>
 	{
-		public GridNavigationStrategy([NotNull] Control control, [NotNull] Grid canvas) : base(control, canvas)
+		public GridInteractionStrategy([NotNull] Control control, [NotNull] Grid canvas) : base(control, canvas)
 		{
 		}
 

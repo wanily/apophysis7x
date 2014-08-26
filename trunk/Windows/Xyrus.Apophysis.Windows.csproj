@@ -52,16 +52,22 @@
     </Compile>
     <Compile Include="Drawing\Canvas.cs" />
     <Compile Include="Drawing\CanvasSnapBehavior.cs" />
-    <Compile Include="Drawing\CanvasNagivationStrategy.cs" />
+    <Compile Include="Drawing\CanvasInteractionStrategy.cs" />
     <Compile Include="Drawing\CanvasVisual.cs" />
+    <Compile Include="Drawing\ChainItem.cs" />
+    <Compile Include="Drawing\ControlChain.cs" />
     <Compile Include="Drawing\ControlEventInterceptor.cs" />
     <Compile Include="Drawing\ControlPainter.cs" />
     <Compile Include="Drawing\ControlPaintingChain.cs" />
     <Compile Include="Drawing\Grid.cs" />
-    <Compile Include="Drawing\GridNavigationStrategy.cs" />
+    <Compile Include="Drawing\GridInteractionStrategy.cs" />
     <Compile Include="Drawing\GridRulerVisual.cs" />
     <Compile Include="Drawing\GridVisual.cs" />
+    <Compile Include="Drawing\InteractionHandler.cs" />
+    <Compile Include="Drawing\InteractionHandlerChain.cs" />
+    <Compile Include="Drawing\TransformCollectionInteractionHandler.cs" />
     <Compile Include="Drawing\TransformCollectionVisual.cs" />
+    <Compile Include="Drawing\TransformInteractionHandler.cs" />
     <Compile Include="Drawing\TransformVisual.cs" />
     <Compile Include="Forms\Editor.cs">
       <SubType>Form</SubType>
