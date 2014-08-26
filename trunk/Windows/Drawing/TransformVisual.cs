@@ -28,18 +28,28 @@ namespace Xyrus.Apophysis.Windows.Drawing
 			mTransform = null;
 		}
 
+		private Point ToPoint(Vector2 p)
+		{
+			const double min = -65536, max = 65535;
+
+			var x = System.Math.Max(min, System.Math.Min(p.X, max));
+			var y = System.Math.Max(min, System.Math.Min(p.Y, max));
+
+			return new Point((int)x, (int)y);
+		}
+
 		protected override void OnControlPaint(Graphics graphics)
 		{
-			var ox = new Line(Canvas.WorldToCanvas(mTransform.Origin), Canvas.WorldToCanvas(mTransform.Affine.X));
-			var oy = new Line(Canvas.WorldToCanvas(mTransform.Origin), Canvas.WorldToCanvas(mTransform.Affine.Y));
-			var xy = new Line(Canvas.WorldToCanvas(mTransform.Affine.X), Canvas.WorldToCanvas(mTransform.Affine.Y));
+			var ox = new Line(Canvas.WorldToCanvas(mTransform.Origin), Canvas.WorldToCanvas(mTransform.Affine.X + mTransform.Origin));
+			var oy = new Line(Canvas.WorldToCanvas(mTransform.Origin), Canvas.WorldToCanvas(mTransform.Affine.Y + mTransform.Origin));
+			var xy = new Line(Canvas.WorldToCanvas(mTransform.Affine.X + mTransform.Origin), Canvas.WorldToCanvas(mTransform.Affine.Y + mTransform.Origin));
 
 			var color = mColors[mTransform.Index%mColors.Length];
 			using (var linePen = new Pen(color))
 			{
-				graphics.DrawLine(linePen, new Point((int)ox.A.X, (int)ox.A.Y), new Point((int)ox.B.X, (int)ox.B.Y));
-				graphics.DrawLine(linePen, new Point((int)oy.A.X, (int)oy.A.Y), new Point((int)oy.B.X, (int)oy.B.Y));
-				graphics.DrawLine(linePen, new Point((int)xy.A.X, (int)xy.A.Y), new Point((int)xy.B.X, (int)xy.B.Y));
+				graphics.DrawLine(linePen, ToPoint(ox.A), ToPoint(ox.B));
+				graphics.DrawLine(linePen, ToPoint(oy.A), ToPoint(oy.B));
+				graphics.DrawLine(linePen, ToPoint(xy.A), ToPoint(xy.B));
 			}
 		}
 

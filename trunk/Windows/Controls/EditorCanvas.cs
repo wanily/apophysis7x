@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Windows.Drawing;
@@ -17,7 +15,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 		private GridNavigationStrategy mNavigation;
 		private GridVisual mVisual;
 		private GridRulerVisual mRulers;
-		private List<TransformVisual> mTransformVisuals;
+		private TransformCollectionVisual mContentVisual;
 
 		public EditorCanvas()
 		{
@@ -144,30 +142,26 @@ namespace Xyrus.Apophysis.Windows.Controls
 		{
 			DestroyInterceptors();
 
-			mTransformVisuals = new List<TransformVisual>();
-			foreach (var transform in (IEnumerable<Transform>)mTransforms ?? new Transform[0])
+			if (mTransforms == null)
 			{
-				var visual = new TransformVisual(mGrid, transform);
-
-				visual.Attach(this);
-				mTransformVisuals.Add(visual);
+				mContentVisual = null;
+				return;
 			}
+
+			mContentVisual = new TransformCollectionVisual(mGrid, mTransforms);
+			mContentVisual.Attach(this);
 		}
 		private void DestroyInterceptors()
 		{
-			if (mTransformVisuals != null)
+			if (mContentVisual != null)
 			{
-				foreach (var visual in mTransformVisuals)
-					visual.Dispose();
-
-				mTransformVisuals.Clear();
-				mTransformVisuals = null;
+				mContentVisual.Dispose();
+				mContentVisual = null;
 			}
 		}
 
 		private void OnTransformCollectionChanged(object sender, EventArgs e)
 		{
-			//RebuildInterceptors();
 			Refresh();
 		}
 	}

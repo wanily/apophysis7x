@@ -20,6 +20,9 @@ namespace Xyrus.Apophysis.Windows
 
 				window.Transforms = flame.Transforms;
 
+				flame.Transforms.Add();
+				flame.Transforms[1].Origin.X = 1;
+
 				Application.Run(window);
 			}
 		}

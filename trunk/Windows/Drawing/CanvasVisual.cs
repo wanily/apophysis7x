@@ -57,6 +57,19 @@ namespace Xyrus.Apophysis.Windows.Drawing
 			}
 		}
 
+		public void Paint()
+		{
+			using (var graphics = AttachedControl.CreateGraphics())
+			{
+				OnControlPaint(graphics);
+			}
+		}
+		public void Paint([NotNull] Graphics graphics)
+		{
+			if (graphics == null) throw new ArgumentNullException("graphics");
+			OnControlPaint(graphics);
+		}
+
 		protected Rectangle GetWorldBounds(Vector2 snapScale)
 		{
 			var u = Canvas.CanvasToWorld(new Vector2());
