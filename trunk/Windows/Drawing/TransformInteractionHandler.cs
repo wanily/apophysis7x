@@ -101,12 +101,15 @@ namespace Xyrus.Apophysis.Windows.Drawing
 			if (button != MouseButtons.Left)
 				return;
 
+			var c = mCanvas.CanvasToWorld(cursor);
+			var c0 = mCanvas.CanvasToWorld(mDragCursor);
+
 			switch (hitTest)
 			{
 				case HitTestResult.Surface:
 				case HitTestResult.O:
 
-					var o = mCanvas.CanvasToWorld(cursor) - mCanvas.CanvasToWorld(mDragCursor) + mDragOrigin;
+					var o = c - c0 + mDragOrigin;
 
 					mVisual.Model.Origin.X = o.X;
 					mVisual.Model.Origin.Y = o.Y;
@@ -115,7 +118,7 @@ namespace Xyrus.Apophysis.Windows.Drawing
 
 				case HitTestResult.X:
 
-					var x = mCanvas.CanvasToWorld(cursor) - mCanvas.CanvasToWorld(mDragCursor) + (mDragOrigin + mDragX);
+					var x = c - c0 + (mDragOrigin + mDragX);
 
 					mVisual.Model.Affine.X.X = x.X - mDragOrigin.X;
 					mVisual.Model.Affine.X.Y = x.Y - mDragOrigin.Y;
@@ -124,7 +127,7 @@ namespace Xyrus.Apophysis.Windows.Drawing
 
 				case HitTestResult.Y:
 					
-					var y = mCanvas.CanvasToWorld(cursor) - mCanvas.CanvasToWorld(mDragCursor) + (mDragOrigin + mDragY);
+					var y = c - c0 + (mDragOrigin + mDragY);
 
 					mVisual.Model.Affine.Y.X = y.X - mDragOrigin.X;
 					mVisual.Model.Affine.Y.Y = y.Y - mDragOrigin.Y;
@@ -140,7 +143,7 @@ namespace Xyrus.Apophysis.Windows.Drawing
 					var normalX = primary.Direction;
 					var normalY = secondary.Direction;
 
-					var deltaOrigin = mCanvas.CanvasToWorld(cursor) - mDragOrigin;
+					var deltaOrigin = c - mDragOrigin;
 					var angleBetweenOxAndOy = System.Math.Atan2(normalY.Y, normalY.X) - System.Math.Atan2(normalX.Y, normalX.X);
 					var angleBetweenOxAndDelta = System.Math.Atan2(deltaOrigin.Y, deltaOrigin.X) - System.Math.Atan2(normalX.Y, normalX.X);
 
@@ -176,6 +179,28 @@ namespace Xyrus.Apophysis.Windows.Drawing
 					break;
 
 				case HitTestResult.Xy:
+
+					var c0dO = c0 - mDragOrigin;
+
+					var vX = (mDragOrigin + mDragX);
+					var vY = (mDragOrigin + mDragY);
+
+					var denom = c0dO.Length;
+					if (System.Math.Abs(denom) < double.Epsilon)
+						break;
+
+					var scale = (c0dO.X * (c.X - mDragOrigin.X) + c0dO.Y * (c.Y - mDragOrigin.Y)) / (denom * denom);
+					if (System.Math.Abs(scale) < double.Epsilon)
+						scale = double.Epsilon;
+
+					var vXOut = scale * (vX - mDragOrigin);
+					var vYOut = scale * (vY - mDragOrigin);
+
+					mVisual.Model.Affine.X.X = vXOut.X;
+					mVisual.Model.Affine.X.Y = vXOut.Y;
+
+					mVisual.Model.Affine.Y.X = vYOut.X;
+					mVisual.Model.Affine.Y.Y = vYOut.Y;
 
 					break;
 			}

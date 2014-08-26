@@ -96,6 +96,10 @@ namespace Xyrus.Apophysis.Windows.Drawing
 			foreach (var handler in mHandlers)
 			{
 				handler.InvalidateHitTest();
+			}
+
+			foreach (var handler in mHandlers)
+			{
 				if (handler.HandleMouseMove(cursor, button))
 					return true;
 			}

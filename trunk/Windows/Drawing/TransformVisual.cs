@@ -98,17 +98,10 @@ namespace Xyrus.Apophysis.Windows.Drawing
 			IsEdgeXyHit = false;
 		}
 
-		public bool IsSurfaceHit { get; set; }
-
-		public bool IsVertexOHit { get; set; }
-		public bool IsVertexXHit { get; set; }
-		public bool IsVertexYHit { get; set; }
-
-		public bool IsEdgeOxHit { get; set; }
-		public bool IsEdgeOyHit { get; set; }
-		public bool IsEdgeXyHit { get; set; }
-
-		public bool IsActive { get; set; }
+		public Polygon GetPolygon()
+		{
+			return new Polygon(new[] { GetVertexO(), GetVertexX(), GetVertexY() });
+		}
 
 		public Vector2 GetVertexO()
 		{
@@ -136,14 +129,21 @@ namespace Xyrus.Apophysis.Windows.Drawing
 			return new Line(GetVertexX(), GetVertexY());
 		}
 
-		public Polygon GetPolygon()
-		{
-			return new Polygon(new[] { GetVertexO(), GetVertexX(), GetVertexY() });
-		}
-
 		public Transform Model
 		{
 			get { return mTransform; }
 		}
+
+		public bool IsSurfaceHit { get; set; }
+
+		public bool IsVertexOHit { get; set; }
+		public bool IsVertexXHit { get; set; }
+		public bool IsVertexYHit { get; set; }
+
+		public bool IsEdgeOxHit { get; set; }
+		public bool IsEdgeOyHit { get; set; }
+		public bool IsEdgeXyHit { get; set; }
+
+		public bool IsActive { get; set; }
 	}
 }
