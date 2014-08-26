@@ -3,20 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using Xyrus.Apophysis.Windows.Drawing;
+using Xyrus.Apophysis.Windows.Visuals;
 using Xyrus.Apophysis.Windows.Math;
 using Xyrus.Apophysis.Windows.Models;
 
 namespace Xyrus.Apophysis.Windows.Input
 {
 	[PublicAPI]
-	public class TransformCollectionInteractionHandler : InteractionHandler, IEnumerable<TransformInteractionHandler>
+	public class TransformCollectionInputHandler : InputHandler, IEnumerable<TransformInputHandler>
 	{
 		private TransformCollectionVisual mVisualCollection;
-		private List<TransformInteractionHandler> mHandlers;
+		private List<TransformInputHandler> mHandlers;
 		private Canvas mCanvas;
 
-		public TransformCollectionInteractionHandler([NotNull] Control control, [NotNull] TransformCollectionVisual visualCollection, [NotNull] Canvas canvas) : base(control)
+		public TransformCollectionInputHandler([NotNull] Control control, [NotNull] TransformCollectionVisual visualCollection, [NotNull] Canvas canvas) : base(control)
 		{
 			if (visualCollection == null) throw new ArgumentNullException("visualCollection");
 			if (canvas == null) throw new ArgumentNullException("canvas");
@@ -25,7 +25,7 @@ namespace Xyrus.Apophysis.Windows.Input
 			mCanvas = canvas;
 			mVisualCollection.ContentChanged += OnCollectionChanged;
 
-			mHandlers = new List<TransformInteractionHandler>();
+			mHandlers = new List<TransformInputHandler>();
 		}
 		protected override void DisposeOverride(bool disposing)
 		{
@@ -44,7 +44,7 @@ namespace Xyrus.Apophysis.Windows.Input
 		{
 			get { return mVisualCollection.Collection; }
 		}
-		public TransformInteractionHandler this[int index]
+		public TransformInputHandler this[int index]
 		{
 			get
 			{
@@ -72,7 +72,7 @@ namespace Xyrus.Apophysis.Windows.Input
 
 			foreach (var visual in mVisualCollection.Reverse())
 			{
-				mHandlers.Add(new TransformInteractionHandler(AttachedControl, visual, mCanvas));
+				mHandlers.Add(new TransformInputHandler(AttachedControl, visual, mCanvas));
 			}
 
 			InvalidateControl();
@@ -168,10 +168,10 @@ namespace Xyrus.Apophysis.Windows.Input
 			return false;
 		}
 
-		public IEnumerator<TransformInteractionHandler> GetEnumerator()
+		public IEnumerator<TransformInputHandler> GetEnumerator()
 		{
 			if (mHandlers == null)
-				return new List<TransformInteractionHandler>().GetEnumerator();
+				return new List<TransformInputHandler>().GetEnumerator();
 
 			return mHandlers.GetEnumerator();
 		}

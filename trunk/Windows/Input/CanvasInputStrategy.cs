@@ -5,14 +5,14 @@ using Xyrus.Apophysis.Windows.Math;
 namespace Xyrus.Apophysis.Windows.Input
 {
 	[PublicAPI]
-	public abstract class CanvasInteractionStrategy<T> : InteractionHandler where T : Canvas
+	public abstract class CanvasInputStrategy<T> : InputHandler where T : Canvas
 	{
 		private T mCanvas;
 		private Vector2 mNavigationOrigin;
 		private Vector2 mNavigationOffset;
 		private bool mIsNavigating;
 
-		protected CanvasInteractionStrategy([NotNull] Control control, [NotNull] T canvas) : base(control)
+		protected CanvasInputStrategy([NotNull] Control control, [NotNull] T canvas) : base(control)
 		{
 			if (canvas == null) throw new ArgumentNullException("canvas");
 			mCanvas = canvas;

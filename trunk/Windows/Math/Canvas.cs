@@ -1,6 +1,4 @@
 ﻿using System;
-using Xyrus.Apophysis.Windows.Drawing;
-using Xyrus.Apophysis.Windows.Input;
 
 namespace Xyrus.Apophysis.Windows.Math
 {

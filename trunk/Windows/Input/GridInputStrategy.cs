@@ -5,9 +5,9 @@ using Xyrus.Apophysis.Windows.Math;
 namespace Xyrus.Apophysis.Windows.Input
 {
 	[PublicAPI]
-	public class GridInteractionStrategy : CanvasInteractionStrategy<Grid>
+	public class GridInputStrategy : CanvasInputStrategy<Grid>
 	{
-		public GridInteractionStrategy([NotNull] Control control, [NotNull] Grid canvas) : base(control, canvas)
+		public GridInputStrategy([NotNull] Control control, [NotNull] Grid canvas) : base(control, canvas)
 		{
 		}
 

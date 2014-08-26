@@ -56,13 +56,14 @@
     <Compile Include="Controls\EditorCanvas.Designer.cs">
       <DependentUpon>EditorCanvas.cs</DependentUpon>
     </Compile>
-    <Compile Include="Drawing\CanvasVisual.cs" />
-    <Compile Include="Drawing\ControlVisual.cs" />
-    <Compile Include="Drawing\ControlVisualChain.cs" />
-    <Compile Include="Drawing\GridRulerVisual.cs" />
-    <Compile Include="Drawing\GridVisual.cs" />
-    <Compile Include="Drawing\TransformCollectionVisual.cs" />
-    <Compile Include="Drawing\TransformVisual.cs" />
+    <Compile Include="Math\CanvasSnapBehavior.cs" />
+    <Compile Include="Visuals\CanvasVisual.cs" />
+    <Compile Include="Visuals\ControlVisual.cs" />
+    <Compile Include="Visuals\ControlVisualChain.cs" />
+    <Compile Include="Visuals\GridRulerVisual.cs" />
+    <Compile Include="Visuals\GridVisual.cs" />
+    <Compile Include="Visuals\TransformCollectionVisual.cs" />
+    <Compile Include="Visuals\TransformVisual.cs" />
     <Compile Include="Forms\Editor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,13 +71,12 @@
       <DependentUpon>Editor.cs</DependentUpon>
     </Compile>
     <Compile Include="ApophysisApplication.cs" />
-    <Compile Include="Input\CanvasInteractionStrategy.cs" />
-    <Compile Include="Input\CanvasSnapBehavior.cs" />
-    <Compile Include="Input\GridInteractionStrategy.cs" />
-    <Compile Include="Input\InteractionHandler.cs" />
-    <Compile Include="Input\InteractionHandlerChain.cs" />
-    <Compile Include="Input\TransformCollectionInteractionHandler.cs" />
-    <Compile Include="Input\TransformInteractionHandler.cs" />
+    <Compile Include="Input\CanvasInputStrategy.cs" />
+    <Compile Include="Input\GridInputStrategy.cs" />
+    <Compile Include="Input\InputHandler.cs" />
+    <Compile Include="Input\InputHandlerChain.cs" />
+    <Compile Include="Input\TransformCollectionInputHandler.cs" />
+    <Compile Include="Input\TransformInputHandler.cs" />
     <Compile Include="Math\Canvas.cs" />
     <Compile Include="Math\Grid.cs" />
     <Compile Include="Math\ImmutableVector2.cs" />

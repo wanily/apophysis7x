@@ -5,9 +5,9 @@ using Xyrus.Apophysis.Windows.Math;
 namespace Xyrus.Apophysis.Windows.Input
 {
 	[PublicAPI]
-	public abstract class InteractionHandler : ChainItem
+	public abstract class InputHandler : ChainItem
 	{
-		protected InteractionHandler([NotNull] Control control) : base(control)
+		protected InputHandler([NotNull] Control control) : base(control)
 		{
 		}
 

@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using Xyrus.Apophysis.Windows.Math;
 using Rectangle = Xyrus.Apophysis.Windows.Math.Rectangle;
 
-namespace Xyrus.Apophysis.Windows.Drawing
+namespace Xyrus.Apophysis.Windows.Visuals
 {
 	[PublicAPI]
 	public class GridVisual : CanvasVisual<Grid>

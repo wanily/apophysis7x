@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
-using Xyrus.Apophysis.Windows.Drawing;
+using Xyrus.Apophysis.Windows.Visuals;
 using Xyrus.Apophysis.Windows.Input;
 using Xyrus.Apophysis.Windows.Math;
 using Xyrus.Apophysis.Windows.Models;
@@ -10,7 +10,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 	public partial class EditorCanvas : UserControl
 	{
 		private ControlVisualChain mVisual;
-		private InteractionHandlerChain mInteraction;
+		private InputHandlerChain mInteraction;
 
 		private GridVisual mGridPainter;
 		private GridRulerVisual mRulerPainter;
@@ -23,14 +23,14 @@ namespace Xyrus.Apophysis.Windows.Controls
 			var grid = new Grid(new Vector2(Width, Height));
 
 			mVisual = new ControlVisualChain(this);
-			mInteraction = new InteractionHandlerChain(this);
+			mInteraction = new InputHandlerChain(this);
 			
 			mVisual.Add(mGridPainter = new GridVisual(this, grid));
 			mVisual.Add(mTransformPainter = new TransformCollectionVisual(this, grid), 100);
 			mVisual.Add(mRulerPainter = new GridRulerVisual(this, grid), int.MaxValue);
 
-			mInteraction.Add(new GridInteractionStrategy(this, grid), int.MaxValue);
-			mInteraction.Add(new TransformCollectionInteractionHandler(this, mTransformPainter, grid), 100);
+			mInteraction.Add(new GridInputStrategy(this, grid), int.MaxValue);
+			mInteraction.Add(new TransformCollectionInputHandler(this, mTransformPainter, grid), 100);
 
 			GridLineColor = Color.FromArgb(0xff, 0x66, 0x66, 0x66);
 			BackdropColor = Color.Transparent;

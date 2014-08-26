@@ -1,14 +1,14 @@
 using System;
 using System.IO;
 using System.Windows.Forms;
-using Xyrus.Apophysis.Windows.Drawing;
+using Xyrus.Apophysis.Windows.Visuals;
 using Xyrus.Apophysis.Windows.Math;
 using Xyrus.Apophysis.Windows.Properties;
 
 namespace Xyrus.Apophysis.Windows.Input
 {
 	[PublicAPI]
-	public class TransformInteractionHandler : InteractionHandler
+	public class TransformInputHandler : InputHandler
 	{
 		enum HitTestResult
 		{
@@ -35,13 +35,13 @@ namespace Xyrus.Apophysis.Windows.Input
 		private static readonly Cursor mRotateCursor;
 		private static readonly Cursor mScaleCursor;
 
-		static TransformInteractionHandler()
+		static TransformInputHandler()
 		{
 			mMoveCursor = new Cursor(new MemoryStream(Resources.Move));
 			mRotateCursor = new Cursor(new MemoryStream(Resources.Rotate));
 			mScaleCursor = new Cursor(new MemoryStream(Resources.Scale));
 		}
-		public TransformInteractionHandler([NotNull] Control control, [NotNull] TransformVisual visual, [NotNull] Canvas canvas) : base(control)
+		public TransformInputHandler([NotNull] Control control, [NotNull] TransformVisual visual, [NotNull] Canvas canvas) : base(control)
 		{
 			if (visual == null) throw new ArgumentNullException("visual");
 			if (canvas == null) throw new ArgumentNullException("canvas");

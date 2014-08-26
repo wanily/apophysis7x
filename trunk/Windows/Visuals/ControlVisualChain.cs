@@ -2,7 +2,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace Xyrus.Apophysis.Windows.Drawing
+namespace Xyrus.Apophysis.Windows.Visuals
 {
 	[PublicAPI]
 	public class ControlVisualChain : ControlChain<ControlVisual>

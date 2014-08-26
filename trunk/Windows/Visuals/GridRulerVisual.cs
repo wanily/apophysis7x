@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Windows.Math;
 
-namespace Xyrus.Apophysis.Windows.Drawing
+namespace Xyrus.Apophysis.Windows.Visuals
 {
 	[PublicAPI]
 	public class GridRulerVisual : GridVisual

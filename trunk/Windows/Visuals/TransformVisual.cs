@@ -5,7 +5,7 @@ using Xyrus.Apophysis.Windows.Math;
 using Xyrus.Apophysis.Windows.Models;
 using Rectangle = System.Drawing.Rectangle;
 
-namespace Xyrus.Apophysis.Windows.Drawing
+namespace Xyrus.Apophysis.Windows.Visuals
 {
 	[PublicAPI]
 	public class TransformVisual : CanvasVisual<Canvas>
