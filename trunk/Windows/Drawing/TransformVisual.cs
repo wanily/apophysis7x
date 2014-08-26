@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using System.Windows.Forms;
 using Xyrus.Apophysis.Windows.Math;
 using Xyrus.Apophysis.Windows.Models;
 
@@ -18,7 +19,7 @@ namespace Xyrus.Apophysis.Windows.Drawing
 			Color.Blue
 		};
 
-		public TransformVisual([NotNull] Canvas canvas, [NotNull] Transform transform) : base(canvas)
+		public TransformVisual([NotNull] Control control, [NotNull] Canvas canvas, [NotNull] Transform transform) : base(control, canvas)
 		{
 			if (transform == null) throw new ArgumentNullException("transform");
 			mTransform = transform;
@@ -51,11 +52,6 @@ namespace Xyrus.Apophysis.Windows.Drawing
 				graphics.DrawLine(linePen, ToPoint(oy.A), ToPoint(oy.B));
 				graphics.DrawLine(linePen, ToPoint(xy.A), ToPoint(xy.B));
 			}
-		}
-
-		public Transform Transform
-		{
-			get { return mTransform; }
 		}
 	}
 }

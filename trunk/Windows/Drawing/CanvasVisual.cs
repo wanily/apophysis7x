@@ -7,7 +7,7 @@ using Rectangle = Xyrus.Apophysis.Windows.Math.Rectangle;
 namespace Xyrus.Apophysis.Windows.Drawing
 {
 	[PublicAPI]
-	public abstract class CanvasVisual<T> : ControlEventInterceptor where T: Canvas
+	public abstract class CanvasVisual<T> : ControlPainter where T: Canvas
 	{
 		private T mCanvas;
 
@@ -15,7 +15,7 @@ namespace Xyrus.Apophysis.Windows.Drawing
 		private Color mGridLineColor;
 		private Color mBackdropColor;
 
-		protected CanvasVisual([NotNull] T canvas)
+		protected CanvasVisual([NotNull] Control control, [NotNull] T canvas) : base(control)
 		{
 			if (canvas == null) throw new ArgumentNullException("canvas");
 			mCanvas = canvas;
@@ -57,19 +57,6 @@ namespace Xyrus.Apophysis.Windows.Drawing
 			}
 		}
 
-		public void Paint()
-		{
-			using (var graphics = AttachedControl.CreateGraphics())
-			{
-				OnControlPaint(graphics);
-			}
-		}
-		public void Paint([NotNull] Graphics graphics)
-		{
-			if (graphics == null) throw new ArgumentNullException("graphics");
-			OnControlPaint(graphics);
-		}
-
 		protected Rectangle GetWorldBounds(Vector2 snapScale)
 		{
 			var u = Canvas.CanvasToWorld(new Vector2());
@@ -90,23 +77,15 @@ namespace Xyrus.Apophysis.Windows.Drawing
 			return new Rectangle(c0, c1 - c0);
 		}
 
-		protected override void RegisterEvents(Control control)
+		protected sealed override void RegisterEvents(Control control)
 		{
-			control.Paint += OnCanvasPaint;
 			control.Resize += OnCanvasResize;
 		}
-		protected override void UnregisterEvents(Control control)
+		protected sealed override void UnregisterEvents(Control control)
 		{
-			control.Paint -= OnCanvasPaint;
 			control.Resize -= OnCanvasResize;
 		}
 
-		protected abstract void OnControlPaint([NotNull] Graphics graphics);
-
-		private void OnCanvasPaint(object sender, PaintEventArgs e)
-		{
-			OnControlPaint(e.Graphics);
-		}
 		private void OnCanvasResize(object sender, EventArgs e)
 		{
 			var control = sender as Control;

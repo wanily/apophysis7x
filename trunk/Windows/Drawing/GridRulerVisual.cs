@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using System.Globalization;
+using System.Windows.Forms;
 using Xyrus.Apophysis.Windows.Math;
 
 namespace Xyrus.Apophysis.Windows.Drawing
@@ -14,7 +15,7 @@ namespace Xyrus.Apophysis.Windows.Drawing
 		private Color mBackgroundColor;
 		private bool mShowLabels;
 
-		public GridRulerVisual([NotNull] Grid canvas) : base(canvas)
+		public GridRulerVisual([NotNull] Control control, [NotNull] Grid canvas) : base(control, canvas)
 		{
 			mShowHorizontal = true;
 			mRulerSize = 15;

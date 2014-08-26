@@ -13,6 +13,11 @@ namespace Xyrus.Apophysis.Windows.Drawing
 			Dispose(false);
 		}
 
+		protected ControlEventInterceptor([NotNull] Control control)
+		{
+			if (control == null) throw new ArgumentNullException("control");
+			Attach(control);
+		}
 		protected void Dispose(bool disposing)
 		{
 			if (disposing)
@@ -49,14 +54,14 @@ namespace Xyrus.Apophysis.Windows.Drawing
 			mControl.Refresh();
 		}
 
-		public void Attach([NotNull] Control control)
+		private void Attach([NotNull] Control control)
 		{
 			if (control == null) throw new ArgumentNullException("control");
 
 			mControl = control;
 			RegisterEvents(control);
 		}
-		public void Detach()
+		private void Detach()
 		{
 			if (mControl == null)
 				return;

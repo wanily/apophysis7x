@@ -1,5 +1,4 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Windows.Drawing;
 using Xyrus.Apophysis.Windows.Math;
@@ -13,9 +12,11 @@ namespace Xyrus.Apophysis.Windows.Controls
 		private TransformCollection mTransforms;
 
 		private GridNavigationStrategy mNavigation;
-		private GridVisual mVisual;
-		private GridRulerVisual mRulers;
-		private TransformCollectionVisual mContentVisual;
+		private ControlPaintingChain mPainting;
+
+		private GridVisual mGridPainter;
+		private GridRulerVisual mRulerPainter;
+		private TransformCollectionVisual mTransformPainter;
 
 		public EditorCanvas()
 		{
@@ -23,14 +24,12 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 			mGrid = new Grid(new Vector2(Width, Height));
 
-			mNavigation = new GridNavigationStrategy(mGrid);
-			mNavigation.Attach(this);
+			mPainting = new ControlPaintingChain(this);
+			
+			mPainting.Add(mGridPainter = new GridVisual(this, mGrid));
+			mPainting.Add(mRulerPainter = new GridRulerVisual(this, mGrid), int.MaxValue);
 
-			mVisual = new GridVisual(mGrid);
-			mVisual.Attach(this);
-
-			mRulers = new GridRulerVisual(mGrid);
-			mRulers.Attach(this);
+			mNavigation = new GridNavigationStrategy(this, mGrid);
 
 			RebuildInterceptors();
 
@@ -57,21 +56,13 @@ namespace Xyrus.Apophysis.Windows.Controls
 					mNavigation = null;
 				}
 
-				if (mVisual != null)
+				if (mPainting != null)
 				{
-					mVisual.Dispose();
-					mVisual = null;
-				}
-
-				if (mRulers != null)
-				{
-					mRulers.Dispose();
-					mRulers = null;
+					mPainting.Dispose();
 				}
 
 				if (mTransforms != null)
 				{
-					mTransforms.ContentChanged -= OnTransformCollectionChanged;
 					DestroyInterceptors();
 				}
 			}
@@ -84,57 +75,50 @@ namespace Xyrus.Apophysis.Windows.Controls
 			get { return mTransforms; }
 			set
 			{
-				if (mTransforms != null)
-					mTransforms.ContentChanged -= OnTransformCollectionChanged;
-
 				mTransforms = value;
-
-				if (value != null)
-					value.ContentChanged += OnTransformCollectionChanged;
-
 				RebuildInterceptors();
 			}
 		}
 		public Color GridZeroLineColor
 		{
-			get { return mVisual.GridZeroLineColor; }
-			set { mVisual.GridZeroLineColor = value; }
+			get { return mGridPainter.GridZeroLineColor; }
+			set { mGridPainter.GridZeroLineColor = value; }
 		}
 		public Color GridLineColor
 		{
-			get { return mVisual.GridLineColor; }
-			set { mVisual.GridLineColor = value; }
+			get { return mGridPainter.GridLineColor; }
+			set { mGridPainter.GridLineColor = value; }
 		}
 		public Color BackdropColor
 		{
-			get { return mVisual.BackdropColor; }
-			set { mVisual.BackdropColor = value; }
+			get { return mGridPainter.BackdropColor; }
+			set { mGridPainter.BackdropColor = value; }
 		}
 
 		public Color RulerGridLineColor
 		{
-			get { return mRulers.GridLineColor; }
-			set { mRulers.GridLineColor = value; }
+			get { return mRulerPainter.GridLineColor; }
+			set { mRulerPainter.GridLineColor = value; }
 		}
 		public Color RulerBackdropColor
 		{
-			get { return mRulers.BackdropColor; }
-			set { mRulers.BackdropColor = value; }
+			get { return mRulerPainter.BackdropColor; }
+			set { mRulerPainter.BackdropColor = value; }
 		}
 		public Color RulerBackgroundColor
 		{
-			get { return mRulers.BackgroundColor; }
-			set { mRulers.BackgroundColor = value; }
+			get { return mRulerPainter.BackgroundColor; }
+			set { mRulerPainter.BackgroundColor = value; }
 		}
 
 		public bool ShowRuler
 		{
-			get { return mRulers.ShowLabels || mRulers.ShowVertical || mRulers.ShowHorizontal; }
+			get { return mRulerPainter.ShowLabels || mRulerPainter.ShowVertical || mRulerPainter.ShowHorizontal; }
 			set
 			{
-				mRulers.ShowLabels = value;
-				mRulers.ShowHorizontal = value;
-				mRulers.ShowVertical = value;
+				mRulerPainter.ShowLabels = value;
+				mRulerPainter.ShowHorizontal = value;
+				mRulerPainter.ShowVertical = value;
 			}
 		}
 
@@ -144,25 +128,21 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 			if (mTransforms == null)
 			{
-				mContentVisual = null;
+				mTransformPainter = null;
 				return;
 			}
 
-			mContentVisual = new TransformCollectionVisual(mGrid, mTransforms);
-			mContentVisual.Attach(this);
+			mPainting.Add(mTransformPainter = new TransformCollectionVisual(this, mGrid, mTransforms), 100);
 		}
 		private void DestroyInterceptors()
 		{
-			if (mContentVisual != null)
+			if (mTransformPainter != null)
 			{
-				mContentVisual.Dispose();
-				mContentVisual = null;
-			}
-		}
+				mPainting.Remove(mTransformPainter);
 
-		private void OnTransformCollectionChanged(object sender, EventArgs e)
-		{
-			Refresh();
+				mTransformPainter.Dispose();
+				mTransformPainter = null;
+			}
 		}
 	}
 }

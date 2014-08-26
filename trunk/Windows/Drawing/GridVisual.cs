@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Windows.Forms;
 using Xyrus.Apophysis.Windows.Math;
 using Rectangle = Xyrus.Apophysis.Windows.Math.Rectangle;
 
@@ -7,7 +8,7 @@ namespace Xyrus.Apophysis.Windows.Drawing
 	[PublicAPI]
 	public class GridVisual : CanvasVisual<Grid>
 	{
-		public GridVisual([NotNull] Grid canvas) : base(canvas)
+		public GridVisual([NotNull] Control control, [NotNull] Grid canvas) : base(control, canvas)
 		{
 		}
 

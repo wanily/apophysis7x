@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 using Xyrus.Apophysis.Windows.Math;
 
 namespace Xyrus.Apophysis.Windows.Drawing
@@ -6,7 +7,7 @@ namespace Xyrus.Apophysis.Windows.Drawing
 	[PublicAPI]
 	public class GridNavigationStrategy : CanvasNagivationStrategy<Grid>
 	{
-		public GridNavigationStrategy([NotNull] Grid canvas) : base(canvas)
+		public GridNavigationStrategy([NotNull] Control control, [NotNull] Grid canvas) : base(control, canvas)
 		{
 		}
 
