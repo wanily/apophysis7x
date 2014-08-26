@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Editor));
 			this.mCanvas = new Xyrus.Apophysis.Windows.Controls.EditorCanvas();
 			this.SuspendLayout();
 			// 
@@ -56,6 +57,7 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(874, 516);
 			this.Controls.Add(this.mCanvas);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "Editor";
 			this.Text = "xw_prototype_2014-337";
 			this.ResumeLayout(false);
