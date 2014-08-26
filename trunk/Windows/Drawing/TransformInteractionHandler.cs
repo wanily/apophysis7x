@@ -1,6 +1,8 @@
 using System;
+using System.IO;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Windows.Math;
+using Xyrus.Apophysis.Windows.Properties;
 
 namespace Xyrus.Apophysis.Windows.Drawing
 {
@@ -28,6 +30,16 @@ namespace Xyrus.Apophysis.Windows.Drawing
 		private HitTestResult mLastHitTestResult;
 		private bool mIsMouseDown;
 
+		private static readonly Cursor mMoveCursor;
+		private static readonly Cursor mRotateCursor;
+		private static readonly Cursor mScaleCursor;
+
+		static TransformInteractionHandler()
+		{
+			mMoveCursor = new Cursor(new MemoryStream(Resources.Move));
+			mRotateCursor = new Cursor(new MemoryStream(Resources.Rotate));
+			mScaleCursor = new Cursor(new MemoryStream(Resources.Scale));
+		}
 		public TransformInteractionHandler([NotNull] Control control, [NotNull] TransformVisual visual, [NotNull] Canvas canvas) : base(control)
 		{
 			if (visual == null) throw new ArgumentNullException("visual");
@@ -182,28 +194,37 @@ namespace Xyrus.Apophysis.Windows.Drawing
 			mLastHitTestResult = hitTest;
 			mVisual.Reset();
 
+			AttachedControl.Cursor = null;
+
 			switch (hitTest)
 			{
 				case HitTestResult.O:
 					mVisual.IsVertexOHit = true;
+					AttachedControl.Cursor = mMoveCursor;
 					break;
 				case HitTestResult.X:
 					mVisual.IsVertexXHit = true;
+					AttachedControl.Cursor = mMoveCursor;
 					break;
 				case HitTestResult.Y:
 					mVisual.IsVertexYHit = true;
+					AttachedControl.Cursor = mMoveCursor;
 					break;
 				case HitTestResult.Ox:
 					mVisual.IsEdgeOxHit = true;
+					AttachedControl.Cursor = mRotateCursor;
 					break;
 				case HitTestResult.Oy:
 					mVisual.IsEdgeOyHit = true;
+					AttachedControl.Cursor = mRotateCursor;
 					break;
 				case HitTestResult.Xy:
 					mVisual.IsEdgeXyHit = true;
+					AttachedControl.Cursor = mScaleCursor;
 					break;
 				case HitTestResult.Surface:
 					mVisual.IsSurfaceHit = true;
+					AttachedControl.Cursor = mMoveCursor;
 					break;
 			}
 

@@ -57,7 +57,7 @@
 			this.ClientSize = new System.Drawing.Size(874, 516);
 			this.Controls.Add(this.mCanvas);
 			this.Name = "Editor";
-			this.Text = "Editor";
+			this.Text = "xw_prototype_2014-337";
 			this.ResumeLayout(false);
 
 		}
