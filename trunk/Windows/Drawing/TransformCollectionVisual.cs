@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Windows.Models;
 
@@ -105,7 +106,12 @@ namespace Xyrus.Apophysis.Windows.Drawing
 			if (mVisuals == null)
 				return;
 
-			foreach (var visual in mVisuals)
+			foreach (var visual in mVisuals.Where(x => !x.IsActive))
+			{
+				visual.Paint(graphics);
+			}
+
+			foreach (var visual in mVisuals.Where(x => x.IsActive))
 			{
 				visual.Paint(graphics);
 			}

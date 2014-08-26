@@ -29,7 +29,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 			mPainting.Add(mRulerPainter = new GridRulerVisual(this, grid), int.MaxValue);
 
 			mInteraction.Add(new GridInteractionStrategy(this, grid), int.MaxValue);
-			mInteraction.Add(new TransformCollectionInteractionHandler(this, mTransformPainter), 100);
+			mInteraction.Add(new TransformCollectionInteractionHandler(this, mTransformPainter, grid), 100);
 
 			GridLineColor = Color.FromArgb(0xff, 0x66, 0x66, 0x66);
 			BackdropColor = Color.Transparent;

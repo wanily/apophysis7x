@@ -108,6 +108,8 @@ namespace Xyrus.Apophysis.Windows.Drawing
 		public bool IsEdgeOyHit { get; set; }
 		public bool IsEdgeXyHit { get; set; }
 
+		public bool IsActive { get; set; }
+
 		public Vector2 GetVertexO()
 		{
 			return Canvas.WorldToCanvas(mTransform.Origin);
@@ -137,6 +139,11 @@ namespace Xyrus.Apophysis.Windows.Drawing
 		public Polygon GetPolygon()
 		{
 			return new Polygon(new[] { GetVertexO(), GetVertexX(), GetVertexY() });
+		}
+
+		public Transform Model
+		{
+			get { return mTransform; }
 		}
 	}
 }

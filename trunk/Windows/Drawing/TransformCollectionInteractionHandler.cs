@@ -13,12 +13,15 @@ namespace Xyrus.Apophysis.Windows.Drawing
 	{
 		private TransformCollectionVisual mVisualCollection;
 		private List<TransformInteractionHandler> mHandlers;
+		private Canvas mCanvas;
 
-		public TransformCollectionInteractionHandler([NotNull] Control control, [NotNull] TransformCollectionVisual visualCollection) : base(control)
+		public TransformCollectionInteractionHandler([NotNull] Control control, [NotNull] TransformCollectionVisual visualCollection, [NotNull] Canvas canvas) : base(control)
 		{
 			if (visualCollection == null) throw new ArgumentNullException("visualCollection");
+			if (canvas == null) throw new ArgumentNullException("canvas");
 
 			mVisualCollection = visualCollection;
+			mCanvas = canvas;
 			mVisualCollection.ContentChanged += OnCollectionChanged;
 
 			mHandlers = new List<TransformInteractionHandler>();
@@ -32,6 +35,8 @@ namespace Xyrus.Apophysis.Windows.Drawing
 				//disposed somewhere else
 				mVisualCollection = null;
 			}
+
+			mCanvas = null;
 		}
 
 		public TransformCollection Collection
@@ -66,7 +71,7 @@ namespace Xyrus.Apophysis.Windows.Drawing
 
 			foreach (var visual in mVisualCollection.Reverse())
 			{
-				mHandlers.Add(new TransformInteractionHandler(AttachedControl, visual));
+				mHandlers.Add(new TransformInteractionHandler(AttachedControl, visual, mCanvas));
 			}
 
 			InvalidateControl();
@@ -77,13 +82,20 @@ namespace Xyrus.Apophysis.Windows.Drawing
 			if (mHandlers == null)
 				return false;
 
-			foreach (var visual in mVisualCollection)
+			if (mHandlers.Any(x => x.IsDragging))
 			{
-				visual.Reset();
+				foreach (var handler in mHandlers.Where(x => x.IsDragging))
+				{
+					if (handler.HandleMouseMove(cursor, button))
+						return true;
+				}
+
+				return true;
 			}
 
 			foreach (var handler in mHandlers)
 			{
+				handler.InvalidateHitTest();
 				if (handler.HandleMouseMove(cursor, button))
 					return true;
 			}
@@ -112,7 +124,10 @@ namespace Xyrus.Apophysis.Windows.Drawing
 			foreach (var handler in mHandlers)
 			{
 				if (handler.HandleMouseDown(cursor))
+				{
+					InvalidateControl();
 					return true;
+				}
 			}
 
 			return false;
@@ -125,7 +140,10 @@ namespace Xyrus.Apophysis.Windows.Drawing
 			foreach (var handler in mHandlers)
 			{
 				if (handler.HandleMouseUp())
+				{
+					InvalidateControl();
 					return true;
+				}
 			}
 
 			return false;
