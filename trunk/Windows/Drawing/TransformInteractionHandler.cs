@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Windows.Math;
 
@@ -92,27 +91,79 @@ namespace Xyrus.Apophysis.Windows.Drawing
 
 			switch (hitTest)
 			{
-				case HitTestResult.X:
-					break;
-				case HitTestResult.Y:
-					break;
-				case HitTestResult.Ox:
-					break;
-				case HitTestResult.Oy:
-					break;
-				case HitTestResult.Xy:
-					break;
-				case HitTestResult.O:
 				case HitTestResult.Surface:
+				case HitTestResult.O:
 
-					var c = mCanvas.CanvasToWorld(cursor);
-					var c0 = mCanvas.CanvasToWorld(mDragCursor);
-					var o0 = mDragOrigin;
-
-					var o = c - c0 + o0;
+					var o = mCanvas.CanvasToWorld(cursor) - mCanvas.CanvasToWorld(mDragCursor) + mDragOrigin;
 
 					mVisual.Model.Origin.X = o.X;
 					mVisual.Model.Origin.Y = o.Y;
+
+					break;
+
+				case HitTestResult.X:
+
+					var x = mCanvas.CanvasToWorld(cursor) - mCanvas.CanvasToWorld(mDragCursor) + (mDragOrigin + mDragX);
+
+					mVisual.Model.Affine.X.X = x.X - mDragOrigin.X;
+					mVisual.Model.Affine.X.Y = x.Y - mDragOrigin.Y;
+
+					break;
+
+				case HitTestResult.Y:
+					
+					var y = mCanvas.CanvasToWorld(cursor) - mCanvas.CanvasToWorld(mDragCursor) + (mDragOrigin + mDragY);
+
+					mVisual.Model.Affine.Y.X = y.X - mDragOrigin.X;
+					mVisual.Model.Affine.Y.Y = y.Y - mDragOrigin.Y;
+
+					break;
+
+				case HitTestResult.Ox:
+				case HitTestResult.Oy:
+
+					var primary = hitTest == HitTestResult.Ox ? mDragX : mDragY;
+					var secondary = hitTest == HitTestResult.Ox ? mDragY : mDragX;
+
+					var normalX = primary.Direction;
+					var normalY = secondary.Direction;
+
+					var deltaOrigin = mCanvas.CanvasToWorld(cursor) - mDragOrigin;
+					var angleBetweenOxAndOy = System.Math.Atan2(normalY.Y, normalY.X) - System.Math.Atan2(normalX.Y, normalX.X);
+					var angleBetweenOxAndDelta = System.Math.Atan2(deltaOrigin.Y, deltaOrigin.X) - System.Math.Atan2(normalX.Y, normalX.X);
+
+					var cos0 = System.Math.Cos(angleBetweenOxAndOy);
+					var cos1 = System.Math.Cos(angleBetweenOxAndDelta);
+
+					var sin0 = System.Math.Sin(angleBetweenOxAndOy);
+					var sin1 = System.Math.Sin(angleBetweenOxAndDelta);
+
+					if (hitTest == HitTestResult.Ox)
+					{
+						mVisual.Model.Affine.X.X = cos1*primary.X - sin1*primary.Y;
+						mVisual.Model.Affine.X.Y = sin1*primary.X + cos1*primary.Y;
+
+						var newNormal = mVisual.Model.Affine.X.Direction;
+						var length = mVisual.Model.Affine.Y.Length;
+
+						mVisual.Model.Affine.Y.X = length*(cos0*newNormal.X - sin0*newNormal.Y);
+						mVisual.Model.Affine.Y.Y = length*(sin0*newNormal.X + cos0*newNormal.Y);
+					}
+					else if (hitTest == HitTestResult.Oy)
+					{
+						mVisual.Model.Affine.Y.X = cos1 * primary.X - sin1 * primary.Y;
+						mVisual.Model.Affine.Y.Y = sin1 * primary.X + cos1 * primary.Y;
+
+						var newNormal = mVisual.Model.Affine.Y.Direction;
+						var length = mVisual.Model.Affine.X.Length;
+
+						mVisual.Model.Affine.X.X = length * (cos0 * newNormal.X - sin0 * newNormal.Y);
+						mVisual.Model.Affine.X.Y = length * (sin0 * newNormal.X + cos0 * newNormal.Y);
+					}
+
+					break;
+
+				case HitTestResult.Xy:
 
 					break;
 			}
