@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace Xyrus.Apophysis.Windows.Drawing
+namespace Xyrus.Apophysis.Windows
 {
 	[PublicAPI]
 	public abstract class ControlEventInterceptor : IDisposable

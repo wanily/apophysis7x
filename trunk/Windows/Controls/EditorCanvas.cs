@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Windows.Drawing;
+using Xyrus.Apophysis.Windows.Input;
 using Xyrus.Apophysis.Windows.Math;
 using Xyrus.Apophysis.Windows.Models;
 
@@ -8,7 +9,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 {
 	public partial class EditorCanvas : UserControl
 	{
-		private ControlPaintingChain mPainting;
+		private ControlVisualChain mVisual;
 		private InteractionHandlerChain mInteraction;
 
 		private GridVisual mGridPainter;
@@ -21,12 +22,12 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 			var grid = new Grid(new Vector2(Width, Height));
 
-			mPainting = new ControlPaintingChain(this);
+			mVisual = new ControlVisualChain(this);
 			mInteraction = new InteractionHandlerChain(this);
 			
-			mPainting.Add(mGridPainter = new GridVisual(this, grid));
-			mPainting.Add(mTransformPainter = new TransformCollectionVisual(this, grid), 100);
-			mPainting.Add(mRulerPainter = new GridRulerVisual(this, grid), int.MaxValue);
+			mVisual.Add(mGridPainter = new GridVisual(this, grid));
+			mVisual.Add(mTransformPainter = new TransformCollectionVisual(this, grid), 100);
+			mVisual.Add(mRulerPainter = new GridRulerVisual(this, grid), int.MaxValue);
 
 			mInteraction.Add(new GridInteractionStrategy(this, grid), int.MaxValue);
 			mInteraction.Add(new TransformCollectionInteractionHandler(this, mTransformPainter, grid), 100);
@@ -54,9 +55,9 @@ namespace Xyrus.Apophysis.Windows.Controls
 					mInteraction = null;
 				}
 
-				if (mPainting != null)
+				if (mVisual != null)
 				{
-					mPainting.Dispose();
+					mVisual.Dispose();
 				}
 			}
 

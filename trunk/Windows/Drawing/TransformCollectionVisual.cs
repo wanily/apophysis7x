@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Xyrus.Apophysis.Windows.Math;
 using Xyrus.Apophysis.Windows.Models;
 
 namespace Xyrus.Apophysis.Windows.Drawing

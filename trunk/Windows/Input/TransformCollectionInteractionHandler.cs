@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using Xyrus.Apophysis.Windows.Drawing;
 using Xyrus.Apophysis.Windows.Math;
 using Xyrus.Apophysis.Windows.Models;
 
-namespace Xyrus.Apophysis.Windows.Drawing
+namespace Xyrus.Apophysis.Windows.Input
 {
 	[PublicAPI]
 	public class TransformCollectionInteractionHandler : InteractionHandler, IEnumerable<TransformInteractionHandler>

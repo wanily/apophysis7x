@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using Xyrus.Apophysis.Windows.Math;
 
-namespace Xyrus.Apophysis.Windows.Drawing
+namespace Xyrus.Apophysis.Windows.Input
 {
 	[PublicAPI]
 	public class GridInteractionStrategy : CanvasInteractionStrategy<Grid>

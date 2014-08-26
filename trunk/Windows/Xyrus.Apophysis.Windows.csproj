@@ -46,31 +46,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApophysisException.cs" />
+    <Compile Include="Common\ApophysisException.cs" />
+    <Compile Include="Common\ChainItem.cs" />
+    <Compile Include="Common\ControlChain.cs" />
+    <Compile Include="Common\ControlEventInterceptor.cs" />
     <Compile Include="Controls\EditorCanvas.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\EditorCanvas.Designer.cs">
       <DependentUpon>EditorCanvas.cs</DependentUpon>
     </Compile>
-    <Compile Include="Drawing\Canvas.cs" />
-    <Compile Include="Drawing\CanvasSnapBehavior.cs" />
-    <Compile Include="Drawing\CanvasInteractionStrategy.cs" />
     <Compile Include="Drawing\CanvasVisual.cs" />
-    <Compile Include="Drawing\ChainItem.cs" />
-    <Compile Include="Drawing\ControlChain.cs" />
-    <Compile Include="Drawing\ControlEventInterceptor.cs" />
-    <Compile Include="Drawing\ControlPainter.cs" />
-    <Compile Include="Drawing\ControlPaintingChain.cs" />
-    <Compile Include="Drawing\Grid.cs" />
-    <Compile Include="Drawing\GridInteractionStrategy.cs" />
+    <Compile Include="Drawing\ControlVisual.cs" />
+    <Compile Include="Drawing\ControlVisualChain.cs" />
     <Compile Include="Drawing\GridRulerVisual.cs" />
     <Compile Include="Drawing\GridVisual.cs" />
-    <Compile Include="Drawing\InteractionHandler.cs" />
-    <Compile Include="Drawing\InteractionHandlerChain.cs" />
-    <Compile Include="Drawing\TransformCollectionInteractionHandler.cs" />
     <Compile Include="Drawing\TransformCollectionVisual.cs" />
-    <Compile Include="Drawing\TransformInteractionHandler.cs" />
     <Compile Include="Drawing\TransformVisual.cs" />
     <Compile Include="Forms\Editor.cs">
       <SubType>Form</SubType>
@@ -79,6 +70,15 @@
       <DependentUpon>Editor.cs</DependentUpon>
     </Compile>
     <Compile Include="ApophysisApplication.cs" />
+    <Compile Include="Input\CanvasInteractionStrategy.cs" />
+    <Compile Include="Input\CanvasSnapBehavior.cs" />
+    <Compile Include="Input\GridInteractionStrategy.cs" />
+    <Compile Include="Input\InteractionHandler.cs" />
+    <Compile Include="Input\InteractionHandlerChain.cs" />
+    <Compile Include="Input\TransformCollectionInteractionHandler.cs" />
+    <Compile Include="Input\TransformInteractionHandler.cs" />
+    <Compile Include="Math\Canvas.cs" />
+    <Compile Include="Math\Grid.cs" />
     <Compile Include="Math\ImmutableVector2.cs" />
     <Compile Include="Math\Line.cs" />
     <Compile Include="Math\Matrix2X2.cs" />

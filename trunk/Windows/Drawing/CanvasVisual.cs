@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Xyrus.Apophysis.Windows.Input;
 using Xyrus.Apophysis.Windows.Math;
 using Rectangle = Xyrus.Apophysis.Windows.Math.Rectangle;
 
 namespace Xyrus.Apophysis.Windows.Drawing
 {
 	[PublicAPI]
-	public abstract class CanvasVisual<T> : ControlPainter where T: Canvas
+	public abstract class CanvasVisual<T> : ControlVisual where T: Canvas
 	{
 		private T mCanvas;
 

@@ -1,10 +1,11 @@
 using System;
 using System.IO;
 using System.Windows.Forms;
+using Xyrus.Apophysis.Windows.Drawing;
 using Xyrus.Apophysis.Windows.Math;
 using Xyrus.Apophysis.Windows.Properties;
 
-namespace Xyrus.Apophysis.Windows.Drawing
+namespace Xyrus.Apophysis.Windows.Input
 {
 	[PublicAPI]
 	public class TransformInteractionHandler : InteractionHandler

@@ -5,9 +5,9 @@ using System.Windows.Forms;
 namespace Xyrus.Apophysis.Windows.Drawing
 {
 	[PublicAPI]
-	public abstract class ControlPainter : ChainItem
+	public abstract class ControlVisual : ChainItem
 	{
-		protected ControlPainter([NotNull] Control control) : base(control)
+		protected ControlVisual([NotNull] Control control) : base(control)
 		{
 		}
 		protected abstract void OnControlPaint(Graphics graphics);
