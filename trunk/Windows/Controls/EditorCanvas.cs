@@ -124,6 +124,12 @@ namespace Xyrus.Apophysis.Windows.Controls
 			set { mRulerPainter.BackgroundColor = value; }
 		}
 
+		public Color ReferenceColor
+		{
+			get { return mTransformPainter.ReferenceColor; }
+			set { mTransformPainter.ReferenceColor = value; }
+		}
+
 		public Vector2 CursorPosition
 		{
 			get { return mGridInteraction.Canvas.CanvasToWorld(mInteraction.CursorPosition); }
@@ -138,6 +144,11 @@ namespace Xyrus.Apophysis.Windows.Controls
 				mRulerPainter.ShowHorizontal = value;
 				mRulerPainter.ShowVertical = value;
 			}
+		}
+		public bool HighlightOrigin
+		{
+			get { return mGridPainter.HighlightOrigin; }
+			set { mGridPainter.HighlightOrigin = value; }
 		}
 
 		private void OnTransformUpdated(object sender, TransformUpdatedEventArgs args)

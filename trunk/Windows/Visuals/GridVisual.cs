@@ -8,6 +8,8 @@ namespace Xyrus.Apophysis.Windows.Visuals
 	[PublicAPI]
 	public class GridVisual : CanvasVisual<Grid>
 	{
+		private bool mHighlightOrigin;
+
 		public GridVisual([NotNull] Control control, [NotNull] Grid canvas) : base(control, canvas)
 		{
 		}
@@ -51,6 +53,16 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			}
 		}
 
+		public bool HighlightOrigin
+		{
+			get { return mHighlightOrigin; }
+			set
+			{
+				mHighlightOrigin = value;
+				InvalidateControl();
+			}
+		}
+
 		protected override void OnControlPaint(Graphics graphics)
 		{
 			var glc = Color.FromArgb(0xff, GridLineColor.R, GridLineColor.G, GridLineColor.B);
@@ -68,23 +80,26 @@ namespace Xyrus.Apophysis.Windows.Visuals
 				DrawGridLines(graphics, scale, gridlinePen);
 				DrawGridLines(graphics, scale * 0.1, gridlinePenHalf);
 
-				var line0 = Canvas.WorldToCanvas(new Vector2());
-				var world = new Rectangle(new Vector2(), Canvas.Size);
-
-				if (world.IsOnSurface(new Vector2(line0.X, Canvas.Size.Y / 2.0)))
+				if (HighlightOrigin)
 				{
-					var x0 = new Point((int) line0.X, 0);
-					var x1 = new Point((int) line0.X, (int)Canvas.Size.Y);
+					var line0 = Canvas.WorldToCanvas(new Vector2());
+					var world = new Rectangle(new Vector2(), Canvas.Size);
 
-					graphics.DrawLine(gridlinePenZero, x0, x1);
-				}
+					if (world.IsOnSurface(new Vector2(line0.X, Canvas.Size.Y / 2.0)))
+					{
+						var x0 = new Point((int)line0.X, 0);
+						var x1 = new Point((int)line0.X, (int)Canvas.Size.Y);
 
-				if (world.IsOnSurface(new Vector2(Canvas.Size.X/2.0, line0.Y)))
-				{
-					var y0 = new Point(0, (int)line0.Y);
-					var y1 = new Point((int)Canvas.Size.X, (int)line0.Y);
+						graphics.DrawLine(gridlinePenZero, x0, x1);
+					}
 
-					graphics.DrawLine(gridlinePenZero, y0, y1);
+					if (world.IsOnSurface(new Vector2(Canvas.Size.X / 2.0, line0.Y)))
+					{
+						var y0 = new Point(0, (int)line0.Y);
+						var y1 = new Point((int)Canvas.Size.X, (int)line0.Y);
+
+						graphics.DrawLine(gridlinePenZero, y0, y1);
+					}
 				}
 			}
 		}

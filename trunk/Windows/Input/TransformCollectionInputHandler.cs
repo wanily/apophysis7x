@@ -36,7 +36,7 @@ namespace Xyrus.Apophysis.Windows.Input
 		{
 			if (mVisualCollection != null)
 			{
-				mVisualCollection.ContentChanged += OnCollectionChanged;
+				mVisualCollection.ContentChanged -= OnCollectionChanged;
 
 				//disposed somewhere else
 				mVisualCollection = null;
@@ -83,6 +83,23 @@ namespace Xyrus.Apophysis.Windows.Input
 			InvalidateControl();
 		}
 
+		private void SetOperation(TransformInputHandler handler)
+		{
+			if (handler == null)
+			{
+				mVisualCollection.CurrentOperation = null;
+				return;
+			}
+
+			var operation = handler.GetCurrentOperation();
+			if (operation != null)
+			{
+				RaiseTransformUpdated(operation);
+			}
+
+			mVisualCollection.CurrentOperation = operation;	
+		}
+
 		protected override bool OnAttachedControlMouseMove(Vector2 cursor, MouseButtons button)
 		{
 			if (mHandlers == null)
@@ -94,12 +111,7 @@ namespace Xyrus.Apophysis.Windows.Input
 				{
 					if (handler.HandleMouseMove(cursor, button))
 					{
-						var operation = handler.GetCurrentOperation();
-						if (operation != null)
-						{
-							RaiseTransformUpdated(operation);
-						}
-						
+						SetOperation(handler);
 						return true;
 					}
 				}
@@ -149,6 +161,7 @@ namespace Xyrus.Apophysis.Windows.Input
 				if (handler.HandleMouseDown(cursor))
 				{
 					RaiseBeginEdit();
+					SetOperation(handler);
 					InvalidateControl();
 					return true;
 				}
@@ -161,6 +174,7 @@ namespace Xyrus.Apophysis.Windows.Input
 			if (mHandlers == null)
 				return false;
 
+			SetOperation(null);
 			RaiseEndEdit();
 
 			foreach (var handler in mHandlers)

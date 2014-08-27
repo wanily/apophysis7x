@@ -288,7 +288,29 @@ namespace Xyrus.Apophysis.Windows.Input
 				mDragX = mVisual.Model.Affine.X.Copy();
 				mDragY = mVisual.Model.Affine.Y.Copy();
 
-				mOperation = null;
+				switch (hitTest)
+				{
+					case HitTestResult.Surface:
+					case HitTestResult.O:
+						mOperation = new TransformMoveOperation(mVisual.Model, mDragOrigin, mDragOrigin);
+						break;
+					case HitTestResult.X:
+						mOperation = new TransformMoveOperation(mVisual.Model, mDragX, mDragX);
+						break;
+					case HitTestResult.Y:
+						mOperation = new TransformMoveOperation(mVisual.Model, mDragY, mDragY);
+						break;
+					case HitTestResult.Ox:
+					case HitTestResult.Oy:
+						mOperation = new TransformRotateOperation(mVisual.Model, 2.0 * System.Math.PI);
+						break;
+					case HitTestResult.Xy:
+						mOperation = new TransformScaleOperation(mVisual.Model, 1.0);
+						break;
+					default:
+						mOperation = null;
+						break;
+				}
 
 				mVisual.IsActive = true;
 				mVisual.IsSelected = true;

@@ -69,6 +69,7 @@
     <Compile Include="Visuals\GridRulerVisual.cs" />
     <Compile Include="Visuals\GridVisual.cs" />
     <Compile Include="Visuals\TransformCollectionVisual.cs" />
+    <Compile Include="Visuals\TransformInputOperationVisual.cs" />
     <Compile Include="Visuals\TransformVisual.cs" />
     <Compile Include="Forms\Editor.cs">
       <SubType>Form</SubType>

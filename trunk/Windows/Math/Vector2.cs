@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Globalization;
 
 namespace Xyrus.Apophysis.Windows.Math
@@ -129,6 +130,39 @@ namespace Xyrus.Apophysis.Windows.Math
 		public ImmutableVector2 Freeze()
 		{
 			return new ImmutableVector2(this);
+		}
+
+		public Vector2 Transform([NotNull] Matrix2X2 matrix, Vector2 origin = null)
+		{
+			if (matrix == null) throw new ArgumentNullException("matrix");
+
+			return Transform(matrix.X, matrix.Y, origin);
+		}
+		public Vector2 Transform([NotNull] Vector2 dirX, [NotNull] Vector2 dirY, Vector2 origin = null)
+		{
+			if (dirX == null) throw new ArgumentNullException("dirX");
+			if (dirY == null) throw new ArgumentNullException("dirY");
+
+			var o = origin ?? new Vector2(0, 0);
+
+			return new Vector2
+			{
+				X = dirX.X * X + dirX.X * Y + o.X,
+				Y = dirY.X * X + dirY.Y * Y + o.Y
+			};
+		}
+
+		public Vector2 Rotate(double angle, [NotNull] Vector2 origin)
+		{
+			if (origin == null) throw new ArgumentNullException("origin");
+
+			var cos = System.Math.Cos(angle);
+			var sin = System.Math.Sin(angle);
+
+			var x = ((X - origin.X) * cos) - ((origin.Y - Y) * sin) + origin.X;
+			var y = ((origin.Y - Y) * cos) - ((X - origin.X) * sin) + origin.Y;
+
+			return new Vector2(x, y);
 		}
 
 		public static Vector2 operator +(Vector2 a, Vector2 b)
@@ -276,6 +310,15 @@ namespace Xyrus.Apophysis.Windows.Math
 			get { return new Vector2 {X = double.NaN, Y = double.NaN}; }
 		}
 
+		public Point ToPoint()
+		{
+			const double min = -65536, max = 65535;
+
+			var x = System.Math.Max(min, System.Math.Min(X, max));
+			var y = System.Math.Max(min, System.Math.Min(Y, max));
+
+			return new Point((int)x, (int)y);
+		}
 		public override string ToString()
 		{
 			return string.Format("{0}, {1}", X.ToString(CultureInfo.InvariantCulture), Y.ToString(CultureInfo.InvariantCulture));

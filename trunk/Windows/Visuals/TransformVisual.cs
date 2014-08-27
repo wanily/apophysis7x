@@ -62,13 +62,13 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			var translucentColor = Color.FromArgb(0x40, color.R, color.G, color.B);
 			var translucentColorLow = Color.FromArgb(0x05, color.R, color.G, color.B);
 
-			var posLo = ToPoint(ox.A + new Vector2(distLabel, distLabel));
-			var posLx = ToPoint(ox.B + new Vector2(distLabel, distLabel));
-			var posLy = ToPoint(oy.B + new Vector2(distLabel, distLabel));
-
-			//var sizeLo = graphics.MeasureString(lo, AttachedControl.Font);
+			var sizeLo = graphics.MeasureString(lo, AttachedControl.Font);
 			//var sizeLx = graphics.MeasureString(lx, AttachedControl.Font);
-			//var sizeLy = graphics.MeasureString(ly, AttachedControl.Font);
+			var sizeLy = graphics.MeasureString(ly, AttachedControl.Font);
+
+			var posLo = (ox.A + new Vector2(-distLabel - sizeLo.Width, distLabel)).ToPoint();
+			var posLx = (ox.B + new Vector2(distLabel, distLabel)).ToPoint();
+			var posLy = (oy.B + new Vector2(-distLabel - sizeLy.Width, -distLabel - sizeLy.Height)).ToPoint();
 
 			//var rectLo = new Rectangle(posLo, sizeLo.ToSize());
 			//var rectLx = new Rectangle(posLx, sizeLx.ToSize());
@@ -139,14 +139,10 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			}
 		}
 
+		//todo remove
 		private Point ToPoint(Vector2 p)
 		{
-			const double min = -65536, max = 65535;
-
-			var x = System.Math.Max(min, System.Math.Min(p.X, max));
-			var y = System.Math.Max(min, System.Math.Min(p.Y, max));
-
-			return new Point((int)x, (int)y);
+			return p.ToPoint();
 		}
 
 		public void Reset()
@@ -161,7 +157,6 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			IsEdgeOyHit = false;
 			IsEdgeXyHit = false;
 		}
-
 		public Polygon GetPolygon()
 		{
 			return new Polygon(new[] { GetVertexO(), GetVertexX(), GetVertexY() });

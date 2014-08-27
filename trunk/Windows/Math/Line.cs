@@ -91,5 +91,16 @@ namespace Xyrus.Apophysis.Windows.Math
 				Y = (direction.A.Y*vv - direction.B.Y*uu)/delta
 			};
 		}
+		public Vector2 GetNormal()
+		{
+			var d = B - A;
+			return new Vector2(-d.Y, d.X).Direction;
+		}
+
+		public Line Rotate(double angle, [NotNull] Vector2 origin)
+		{
+			if (origin == null) throw new ArgumentNullException("origin");
+			return new Line(A.Rotate(angle, origin), B.Rotate(angle, origin));
+		}
 	}
 }
