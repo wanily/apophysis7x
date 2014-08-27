@@ -17,7 +17,12 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			Color.Yellow,
 			Color.LightGreen,
 			Color.Cyan,
-			Color.Blue
+			Color.Blue,
+			Color.Magenta,
+			Color.Orange,
+			Color.LightSkyBlue,
+			Color.MediumOrchid,
+			Color.Salmon
 		};
 
 		public TransformVisual([NotNull] Control control, [NotNull] Canvas canvas, [NotNull] Transform transform) : base(control, canvas)
