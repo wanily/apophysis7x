@@ -56,7 +56,11 @@
     <Compile Include="Controls\EditorCanvas.Designer.cs">
       <DependentUpon>EditorCanvas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Input\EditorSettings.cs" />
+    <Compile Include="Input\TransformHitEventArgs.cs" />
+    <Compile Include="Input\TransformHitEventHandler.cs" />
     <Compile Include="Input\TransformInputOperation.cs" />
+    <Compile Include="Input\TransformMouseOverOperation.cs" />
     <Compile Include="Input\TransformMoveOperation.cs" />
     <Compile Include="Input\TransformRotateOperation.cs" />
     <Compile Include="Input\TransformScaleOperation.cs" />

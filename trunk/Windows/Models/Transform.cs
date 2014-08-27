@@ -36,5 +36,34 @@ namespace Xyrus.Apophysis.Windows.Models
 		{
 			get { return mFlame.Transforms.IndexOf(this); }
 		}
+
+		public void Rotate(double angle)
+		{
+			var x = mAffineMatrix.X.Rotate(angle, mAffineOrigin);
+			var y = mAffineMatrix.Y.Rotate(angle, mAffineOrigin);
+
+			mAffineMatrix.X.X = x.X;
+			mAffineMatrix.X.Y = x.Y;
+
+			mAffineMatrix.Y.X = y.X;
+			mAffineMatrix.Y.Y = y.Y;
+		}
+		public void Scale(double scale)
+		{
+			if (System.Math.Abs(scale) < double.Epsilon) throw new ArgumentOutOfRangeException("scale");
+
+			mAffineMatrix.X.X *= scale;
+			mAffineMatrix.X.Y *= scale;
+
+			mAffineMatrix.Y.X *= scale;
+			mAffineMatrix.Y.Y *= scale;
+		}
+		public void Move([NotNull] Vector2 offset)
+		{
+			if (offset == null) throw new ArgumentNullException("offset");
+
+			mAffineOrigin.X += offset.X;
+			mAffineOrigin.Y += offset.Y;
+		}
 	}
 }

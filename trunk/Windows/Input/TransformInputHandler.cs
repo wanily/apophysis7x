@@ -23,6 +23,7 @@ namespace Xyrus.Apophysis.Windows.Input
 			Surface
 		}
 
+		private EditorSettings mSettings;
 		private TransformVisual mVisual;
 		private Canvas mCanvas;
 
@@ -44,13 +45,16 @@ namespace Xyrus.Apophysis.Windows.Input
 			mRotateCursor = new Cursor(new MemoryStream(Resources.Rotate));
 			mScaleCursor = new Cursor(new MemoryStream(Resources.Scale));
 		}
-		public TransformInputHandler([NotNull] Control control, [NotNull] TransformVisual visual, [NotNull] Canvas canvas) : base(control)
+		public TransformInputHandler([NotNull] Control control, [NotNull] TransformVisual visual, [NotNull] Canvas canvas,
+			[NotNull] EditorSettings settings) : base(control)
 		{
 			if (visual == null) throw new ArgumentNullException("visual");
 			if (canvas == null) throw new ArgumentNullException("canvas");
+			if (settings == null) throw new ArgumentNullException("settings");
 
 			mVisual = visual;
 			mCanvas = canvas;
+			mSettings = settings;
 		}
 		protected override void DisposeOverride(bool disposing)
 		{
@@ -62,6 +66,7 @@ namespace Xyrus.Apophysis.Windows.Input
 
 			mVisual = null;
 			mCanvas = null;
+			mSettings = null;
 
 			mDragCursor = null;
 			mDragOrigin = null;
@@ -116,6 +121,13 @@ namespace Xyrus.Apophysis.Windows.Input
 
 					var o = c - c0 + mDragOrigin;
 
+					if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
+					{
+						var d = (c - c0).Abs();
+						if (d.X > d.Y) o.Y = mDragOrigin.Y;
+						else o.X = mDragOrigin.X;
+					}
+
 					mVisual.Model.Origin.X = o.X;
 					mVisual.Model.Origin.Y = o.Y;
 
@@ -127,6 +139,13 @@ namespace Xyrus.Apophysis.Windows.Input
 
 					var x = c - c0 + (mDragOrigin + mDragX);
 
+					if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
+					{
+						var d = (c - c0).Abs();
+						if (d.X > d.Y) x.Y = mDragX.Y;
+						else x.X = mDragX.X;
+					}
+
 					mVisual.Model.Affine.X.X = x.X - mDragOrigin.X;
 					mVisual.Model.Affine.X.Y = x.Y - mDragOrigin.Y;
 
@@ -137,6 +156,13 @@ namespace Xyrus.Apophysis.Windows.Input
 				case HitTestResult.Y:
 					
 					var y = c - c0 + (mDragOrigin + mDragY);
+
+					if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
+					{
+						var d = (c - c0).Abs();
+						if (d.X > d.Y) y.Y = mDragY.Y;
+						else y.X = mDragY.X;
+					}
 
 					mVisual.Model.Affine.Y.X = y.X - mDragOrigin.X;
 					mVisual.Model.Affine.Y.Y = y.Y - mDragOrigin.Y;
@@ -157,6 +183,14 @@ namespace Xyrus.Apophysis.Windows.Input
 					var deltaOrigin = c - mDragOrigin;
 					var angleBetweenOxAndOy = System.Math.Atan2(normalY.Y, normalY.X) - System.Math.Atan2(normalX.Y, normalX.X);
 					var angleBetweenOxAndDelta = System.Math.Atan2(deltaOrigin.Y, deltaOrigin.X) - System.Math.Atan2(normalX.Y, normalX.X);
+
+					if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
+					{
+						var ang = angleBetweenOxAndDelta * 180 / System.Math.PI;
+						var snapped = System.Math.Round(ang / mSettings.AngleSnap) * mSettings.AngleSnap;
+
+						angleBetweenOxAndDelta = snapped * System.Math.PI / 180.0;
+					}
 
 					var cos0 = System.Math.Cos(angleBetweenOxAndOy);
 					var cos1 = System.Math.Cos(angleBetweenOxAndDelta);
@@ -205,6 +239,16 @@ namespace Xyrus.Apophysis.Windows.Input
 					var scale = (c0dO.X * (c.X - mDragOrigin.X) + c0dO.Y * (c.Y - mDragOrigin.Y)) / (denom * denom);
 					if (System.Math.Abs(scale) < double.Epsilon)
 						scale = double.Epsilon;
+
+					if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
+					{
+						var snap = System.Math.Abs(scale) < 1 ? (100 * 100 / mSettings.ScaleSnap) : mSettings.ScaleSnap;
+
+						var ratio = scale * 100;
+						var snapped = System.Math.Round(ratio / snap) * snap;
+
+						scale = snapped / 100.0;
+					}
 
 					var vXOut = scale * (vX - mDragOrigin);
 					var vYOut = scale * (vY - mDragOrigin);

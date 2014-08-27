@@ -30,6 +30,20 @@ namespace Xyrus.Apophysis.Windows.Forms
 
 			mStatusStringLabel.Text = args.Operation.ToString();
 		}
+		private void OnTransformHitOnCanvas(object sender, TransformHitEventArgs args)
+		{
+			if (!mStatusStringLabel.Visible)
+			{
+				mStatusStringLabel.Visible = true;
+			}
+
+			mStatusStringLabel.Text = args.Operation.ToString();
+		}
+		private void OnTransformHitClearedOnCanvas(object sender, EventArgs e)
+		{
+			mStatusStringLabel.Visible = false;
+			mStatusStringLabel.Text = string.Empty;
+		}
 
 		private void OnCanvasBeginEdit(object sender, EventArgs e)
 		{

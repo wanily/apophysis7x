@@ -24,6 +24,8 @@ namespace Xyrus.Apophysis.Windows.Controls
 		private EventHandler mEndEdit;
 
 		private TransformUpdatedEventHandler mTransformUpdated;
+		private TransformHitEventHandler mTransformHit;
+		private EventHandler mTransformHitCleared;
 
 		public EditorCanvas()
 		{
@@ -41,7 +43,9 @@ namespace Xyrus.Apophysis.Windows.Controls
 			mInteraction.Add(mGridInteraction = new GridInputStrategy(this, grid), int.MaxValue);
 			mInteraction.Add(mTransformInteraction = new TransformCollectionInputHandler(this, mTransformPainter, grid), 100);
 
+			mTransformInteraction.TransformHitCleared += OnTransformHitCleared;
 			mTransformInteraction.TransformUpdated += OnTransformUpdated;
+			mTransformInteraction.TransformHit += OnTransformHit;
 			mTransformInteraction.BeginEdit += OnBeginEdit;
 			mTransformInteraction.EndEdit += OnEndEdit;
 
@@ -66,7 +70,9 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 				if (mTransformInteraction != null)
 				{
+					mTransformInteraction.TransformHitCleared -= OnTransformHitCleared;
 					mTransformInteraction.TransformUpdated -= OnTransformUpdated;
+					mTransformInteraction.TransformHit -= OnTransformHit;
 					mTransformInteraction.BeginEdit -= OnBeginEdit;
 					mTransformInteraction.EndEdit -= OnEndEdit;
 				}
@@ -130,6 +136,10 @@ namespace Xyrus.Apophysis.Windows.Controls
 			set { mTransformPainter.ReferenceColor = value; }
 		}
 
+		public EditorSettings Settings
+		{
+			get { return mTransformInteraction.Settings; }
+		}
 		public Vector2 CursorPosition
 		{
 			get { return mGridInteraction.Canvas.CanvasToWorld(mInteraction.CursorPosition); }
@@ -161,6 +171,26 @@ namespace Xyrus.Apophysis.Windows.Controls
 				mTransformUpdated(this, new TransformUpdatedEventArgs(operation));
 		}
 
+		private void OnTransformHit(object sender, TransformHitEventArgs args)
+		{
+			RaiseTransformHit(args.Operation);
+		}
+		protected void RaiseTransformHit([NotNull] TransformMouseOverOperation operation)
+		{
+			if (mTransformHit != null)
+				mTransformHit(this, new TransformHitEventArgs(operation));
+		}
+
+		private void OnTransformHitCleared(object sender, EventArgs args)
+		{
+			RaiseTransformHitCleared();
+		}
+		protected void RaiseTransformHitCleared()
+		{
+			if (mTransformHitCleared != null)
+				mTransformHitCleared(this, new EventArgs());
+		}
+
 		private void OnBeginEdit(object sender, EventArgs args)
 		{
 			RaiseBeginEdit();
@@ -185,6 +215,16 @@ namespace Xyrus.Apophysis.Windows.Controls
 		{
 			add { mTransformUpdated += value; }
 			remove { mTransformUpdated -= value; }
+		}
+		public event TransformHitEventHandler TransformHit
+		{
+			add { mTransformHit += value; }
+			remove { mTransformHit -= value; }
+		}
+		public event EventHandler TransformHitCleared
+		{
+			add { mTransformHitCleared += value; }
+			remove { mTransformHitCleared -= value; }
 		}
 
 		public event EventHandler BeginEdit

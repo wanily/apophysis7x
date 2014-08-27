@@ -31,9 +31,9 @@
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Editor));
 			this.mStatusbar = new System.Windows.Forms.StatusStrip();
 			this.mStatusXPositionLabel = new System.Windows.Forms.ToolStripStatusLabel();
+			this.mStatusYPositionLabel = new System.Windows.Forms.ToolStripStatusLabel();
 			this.mStatusStringLabel = new System.Windows.Forms.ToolStripStatusLabel();
 			this.mRootSplitter = new System.Windows.Forms.SplitContainer();
-			this.mStatusYPositionLabel = new System.Windows.Forms.ToolStripStatusLabel();
 			this.mCanvas = new Xyrus.Apophysis.Windows.Controls.EditorCanvas();
 			this.mStatusbar.SuspendLayout();
 			this.mRootSplitter.Panel1.SuspendLayout();
@@ -63,6 +63,15 @@
 			this.mStatusXPositionLabel.Text = "X: 0";
 			this.mStatusXPositionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
+			// mStatusYPositionLabel
+			// 
+			this.mStatusYPositionLabel.AutoSize = false;
+			this.mStatusYPositionLabel.BorderStyle = System.Windows.Forms.Border3DStyle.Bump;
+			this.mStatusYPositionLabel.Name = "mStatusYPositionLabel";
+			this.mStatusYPositionLabel.Size = new System.Drawing.Size(60, 19);
+			this.mStatusYPositionLabel.Text = "Y: 0";
+			this.mStatusYPositionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
 			// mStatusStringLabel
 			// 
 			this.mStatusStringLabel.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
@@ -86,15 +95,6 @@
 			this.mRootSplitter.SplitterDistance = 1011;
 			this.mRootSplitter.TabIndex = 3;
 			// 
-			// mStatusYPositionLabel
-			// 
-			this.mStatusYPositionLabel.AutoSize = false;
-			this.mStatusYPositionLabel.BorderStyle = System.Windows.Forms.Border3DStyle.Bump;
-			this.mStatusYPositionLabel.Name = "mStatusYPositionLabel";
-			this.mStatusYPositionLabel.Size = new System.Drawing.Size(60, 19);
-			this.mStatusYPositionLabel.Text = "Y: 0";
-			this.mStatusYPositionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
 			// mCanvas
 			// 
 			this.mCanvas.BackColor = System.Drawing.Color.Black;
@@ -105,8 +105,10 @@
 			this.mCanvas.ForeColor = System.Drawing.Color.White;
 			this.mCanvas.GridLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
 			this.mCanvas.GridZeroLineColor = System.Drawing.Color.Gray;
+			this.mCanvas.HighlightOrigin = false;
 			this.mCanvas.Location = new System.Drawing.Point(0, 0);
 			this.mCanvas.Name = "mCanvas";
+			this.mCanvas.ReferenceColor = System.Drawing.Color.Gray;
 			this.mCanvas.RulerBackdropColor = System.Drawing.Color.Transparent;
 			this.mCanvas.RulerBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
 			this.mCanvas.RulerGridLineColor = System.Drawing.Color.Silver;
@@ -115,6 +117,8 @@
 			this.mCanvas.TabIndex = 1;
 			this.mCanvas.Transforms = null;
 			this.mCanvas.TransformUpdated += new Xyrus.Apophysis.Windows.Input.TransformUpdatedEventHandler(this.OnTransformUpdatedFromCanvas);
+			this.mCanvas.TransformHit += new Xyrus.Apophysis.Windows.Input.TransformHitEventHandler(this.OnTransformHitOnCanvas);
+			this.mCanvas.TransformHitCleared += new System.EventHandler(this.OnTransformHitClearedOnCanvas);
 			this.mCanvas.BeginEdit += new System.EventHandler(this.OnCanvasBeginEdit);
 			this.mCanvas.EndEdit += new System.EventHandler(this.OnCanvasEndEdit);
 			this.mCanvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.OnCanvasMouseMove);

@@ -13,10 +13,13 @@ namespace Xyrus.Apophysis.Windows.Input
 	public class TransformCollectionInputHandler : InputHandler, IEnumerable<TransformInputHandler>
 	{
 		private TransformUpdatedEventHandler mTransformUpdated;
+		private TransformHitEventHandler mTransformHit;
+		private EventHandler mTransformHitCleared;
 
 		private EventHandler mBeginEdit;
 		private EventHandler mEndEdit;
 
+		private EditorSettings mSettings;
 		private TransformCollectionVisual mVisualCollection;
 		private List<TransformInputHandler> mHandlers;
 		private Canvas mCanvas;
@@ -28,6 +31,8 @@ namespace Xyrus.Apophysis.Windows.Input
 
 			mVisualCollection = visualCollection;
 			mCanvas = canvas;
+			mSettings = new EditorSettings();
+
 			mVisualCollection.ContentChanged += OnCollectionChanged;
 
 			mHandlers = new List<TransformInputHandler>();
@@ -42,6 +47,7 @@ namespace Xyrus.Apophysis.Windows.Input
 				mVisualCollection = null;
 			}
 
+			mSettings = null;
 			mCanvas = null;
 		}
 
@@ -62,6 +68,10 @@ namespace Xyrus.Apophysis.Windows.Input
 				return mHandlers[index];
 			}
 		}
+		public EditorSettings Settings
+		{
+			get { return mSettings; }
+		}
 
 		private void OnCollectionChanged(object sender, EventArgs eventArgs)
 		{
@@ -77,7 +87,7 @@ namespace Xyrus.Apophysis.Windows.Input
 
 			foreach (var visual in mVisualCollection.Reverse())
 			{
-				mHandlers.Add(new TransformInputHandler(AttachedControl, visual, mCanvas));
+				mHandlers.Add(new TransformInputHandler(AttachedControl, visual, mCanvas, mSettings));
 			}
 
 			InvalidateControl();
@@ -127,8 +137,13 @@ namespace Xyrus.Apophysis.Windows.Input
 			foreach (var handler in mHandlers)
 			{
 				if (handler.HandleMouseMove(cursor, button))
+				{
+					RaiseTransformHit(new TransformMouseOverOperation(handler.Transform));
 					return true;
+				}
 			}
+
+			RaiseTransformHitCleared();
 
 			return false;
 		}
@@ -208,6 +223,16 @@ namespace Xyrus.Apophysis.Windows.Input
 			if (mTransformUpdated != null)
 				mTransformUpdated(this, new TransformUpdatedEventArgs(operation));
 		}
+		protected void RaiseTransformHit([NotNull] TransformMouseOverOperation operation)
+		{
+			if (mTransformHit != null)
+				mTransformHit(this, new TransformHitEventArgs(operation));
+		}
+		protected void RaiseTransformHitCleared()
+		{
+			if (mTransformHitCleared != null)
+				mTransformHitCleared(this, new EventArgs());
+		}
 
 		protected void RaiseBeginEdit()
 		{
@@ -224,6 +249,16 @@ namespace Xyrus.Apophysis.Windows.Input
 		{
 			add { mTransformUpdated += value; }
 			remove { mTransformUpdated -= value; }
+		}
+		public event TransformHitEventHandler TransformHit
+		{
+			add { mTransformHit += value; }
+			remove { mTransformHit -= value; }
+		}
+		public event EventHandler TransformHitCleared
+		{
+			add { mTransformHitCleared += value; }
+			remove { mTransformHitCleared -= value; }
 		}
 
 		public event EventHandler BeginEdit
