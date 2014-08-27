@@ -12,6 +12,11 @@ namespace Xyrus.Apophysis.Windows.Input
 	[PublicAPI]
 	public class TransformCollectionInputHandler : InputHandler, IEnumerable<TransformInputHandler>
 	{
+		private TransformUpdatedEventHandler mTransformUpdated;
+
+		private EventHandler mBeginEdit;
+		private EventHandler mEndEdit;
+
 		private TransformCollectionVisual mVisualCollection;
 		private List<TransformInputHandler> mHandlers;
 		private Canvas mCanvas;
@@ -88,7 +93,15 @@ namespace Xyrus.Apophysis.Windows.Input
 				foreach (var handler in mHandlers.Where(x => x.IsDragging))
 				{
 					if (handler.HandleMouseMove(cursor, button))
+					{
+						var operation = handler.GetCurrentOperation();
+						if (operation != null)
+						{
+							RaiseTransformUpdated(operation);
+						}
+						
 						return true;
+					}
 				}
 
 				return true;
@@ -135,6 +148,7 @@ namespace Xyrus.Apophysis.Windows.Input
 			{
 				if (handler.HandleMouseDown(cursor))
 				{
+					RaiseBeginEdit();
 					InvalidateControl();
 					return true;
 				}
@@ -146,6 +160,8 @@ namespace Xyrus.Apophysis.Windows.Input
 		{
 			if (mHandlers == null)
 				return false;
+
+			RaiseEndEdit();
 
 			foreach (var handler in mHandlers)
 			{
@@ -171,6 +187,40 @@ namespace Xyrus.Apophysis.Windows.Input
 			}
 
 			return false;
+		}
+
+		protected void RaiseTransformUpdated([NotNull] TransformInputOperation operation)
+		{
+			if (mTransformUpdated != null)
+				mTransformUpdated(this, new TransformUpdatedEventArgs(operation));
+		}
+
+		protected void RaiseBeginEdit()
+		{
+			if (mBeginEdit != null)
+				mBeginEdit(this, new EventArgs());
+		}
+		protected void RaiseEndEdit()
+		{
+			if (mEndEdit != null)
+				mEndEdit(this, new EventArgs());
+		}
+
+		public event TransformUpdatedEventHandler TransformUpdated
+		{
+			add { mTransformUpdated += value; }
+			remove { mTransformUpdated -= value; }
+		}
+
+		public event EventHandler BeginEdit
+		{
+			add { mBeginEdit += value; }
+			remove { mBeginEdit -= value; }
+		}
+		public event EventHandler EndEdit
+		{
+			add { mEndEdit += value; }
+			remove { mEndEdit -= value; }
 		}
 
 		public IEnumerator<TransformInputHandler> GetEnumerator()

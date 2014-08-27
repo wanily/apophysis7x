@@ -6,12 +6,17 @@ namespace Xyrus.Apophysis.Windows.Input
 	[PublicAPI]
 	public class InputHandlerChain : ControlChain<InputHandler>
 	{
+		private Vector2 mCursor;
+
 		public InputHandlerChain([NotNull] Control control) : base(control)
 		{
+			mCursor = new Vector2();
 		}
 
 		private void OnAttachedControlMouseMove([NotNull] Vector2 cursor, MouseButtons button)
 		{
+			mCursor = cursor;
+
 			foreach (var item in GetChainItems())
 			{
 				if (item.HandleMouseMove(cursor, button))
@@ -93,6 +98,11 @@ namespace Xyrus.Apophysis.Windows.Input
 		{
 			OnAttachedControlMouseDoubleClick();
 			InvalidateControl();
+		}
+
+		public Vector2 CursorPosition
+		{
+			get { return mCursor; }
 		}
 	}
 }

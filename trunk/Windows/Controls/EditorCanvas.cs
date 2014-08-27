@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Windows.Visuals;
 using Xyrus.Apophysis.Windows.Input;
@@ -16,6 +17,14 @@ namespace Xyrus.Apophysis.Windows.Controls
 		private GridRulerVisual mRulerPainter;
 		private TransformCollectionVisual mTransformPainter;
 
+		private GridInputStrategy mGridInteraction;
+		private TransformCollectionInputHandler mTransformInteraction;
+
+		private EventHandler mBeginEdit;
+		private EventHandler mEndEdit;
+
+		private TransformUpdatedEventHandler mTransformUpdated;
+
 		public EditorCanvas()
 		{
 			InitializeComponent();
@@ -29,8 +38,12 @@ namespace Xyrus.Apophysis.Windows.Controls
 			mVisual.Add(mTransformPainter = new TransformCollectionVisual(this, grid), 100);
 			mVisual.Add(mRulerPainter = new GridRulerVisual(this, grid), int.MaxValue);
 
-			mInteraction.Add(new GridInputStrategy(this, grid), int.MaxValue);
-			mInteraction.Add(new TransformCollectionInputHandler(this, mTransformPainter, grid), 100);
+			mInteraction.Add(mGridInteraction = new GridInputStrategy(this, grid), int.MaxValue);
+			mInteraction.Add(mTransformInteraction = new TransformCollectionInputHandler(this, mTransformPainter, grid), 100);
+
+			mTransformInteraction.TransformUpdated += OnTransformUpdated;
+			mTransformInteraction.BeginEdit += OnBeginEdit;
+			mTransformInteraction.EndEdit += OnEndEdit;
 
 			GridLineColor = Color.FromArgb(0xff, 0x66, 0x66, 0x66);
 			BackdropColor = Color.Transparent;
@@ -47,7 +60,16 @@ namespace Xyrus.Apophysis.Windows.Controls
 			if (disposing)
 			{
 				if (components != null)
+				{
 					components.Dispose();
+				}
+
+				if (mTransformInteraction != null)
+				{
+					mTransformInteraction.TransformUpdated -= OnTransformUpdated;
+					mTransformInteraction.BeginEdit -= OnBeginEdit;
+					mTransformInteraction.EndEdit -= OnEndEdit;
+				}
 
 				if (mInteraction != null)
 				{
@@ -102,6 +124,11 @@ namespace Xyrus.Apophysis.Windows.Controls
 			set { mRulerPainter.BackgroundColor = value; }
 		}
 
+		public Vector2 CursorPosition
+		{
+			get { return mGridInteraction.Canvas.CanvasToWorld(mInteraction.CursorPosition); }
+		}
+
 		public bool ShowRuler
 		{
 			get { return mRulerPainter.ShowLabels || mRulerPainter.ShowVertical || mRulerPainter.ShowHorizontal; }
@@ -111,6 +138,53 @@ namespace Xyrus.Apophysis.Windows.Controls
 				mRulerPainter.ShowHorizontal = value;
 				mRulerPainter.ShowVertical = value;
 			}
+		}
+
+		private void OnTransformUpdated(object sender, TransformUpdatedEventArgs args)
+		{
+			RaiseTransformUpdated(args.Operation);
+		}
+		protected void RaiseTransformUpdated([NotNull] TransformInputOperation operation)
+		{
+			if (mTransformUpdated != null)
+				mTransformUpdated(this, new TransformUpdatedEventArgs(operation));
+		}
+
+		private void OnBeginEdit(object sender, EventArgs args)
+		{
+			RaiseBeginEdit();
+		}
+		protected void RaiseBeginEdit()
+		{
+			if (mBeginEdit != null)
+				mBeginEdit(this, new EventArgs());
+		}
+
+		private void OnEndEdit(object sender, EventArgs args)
+		{
+			RaiseEndEdit();
+		}
+		protected void RaiseEndEdit()
+		{
+			if (mEndEdit != null)
+				mEndEdit(this, new EventArgs());
+		}
+
+		public event TransformUpdatedEventHandler TransformUpdated
+		{
+			add { mTransformUpdated += value; }
+			remove { mTransformUpdated -= value; }
+		}
+
+		public event EventHandler BeginEdit
+		{
+			add { mBeginEdit += value; }
+			remove { mBeginEdit -= value; }
+		}
+		public event EventHandler EndEdit
+		{
+			add { mEndEdit += value; }
+			remove { mEndEdit -= value; }
 		}
 	}
 }

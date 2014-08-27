@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Windows.Forms;
+using Xyrus.Apophysis.Windows.Models;
 using Xyrus.Apophysis.Windows.Visuals;
 using Xyrus.Apophysis.Windows.Math;
 using Xyrus.Apophysis.Windows.Properties;
@@ -30,6 +31,8 @@ namespace Xyrus.Apophysis.Windows.Input
 
 		private HitTestResult mLastHitTestResult;
 		private bool mIsMouseDown;
+
+		private TransformInputOperation mOperation;
 
 		private static readonly Cursor mMoveCursor;
 		private static readonly Cursor mRotateCursor;
@@ -67,6 +70,7 @@ namespace Xyrus.Apophysis.Windows.Input
 
 			mIsMouseDown = false;
 			mLastHitTestResult = HitTestResult.None;
+			mOperation = null;
 		}
 
 		private HitTestResult HitTest(Vector2 cursor)
@@ -115,6 +119,8 @@ namespace Xyrus.Apophysis.Windows.Input
 					mVisual.Model.Origin.X = o.X;
 					mVisual.Model.Origin.Y = o.Y;
 
+					mOperation = new TransformMoveOperation(Transform, mDragOrigin, o);
+
 					break;
 
 				case HitTestResult.X:
@@ -124,6 +130,8 @@ namespace Xyrus.Apophysis.Windows.Input
 					mVisual.Model.Affine.X.X = x.X - mDragOrigin.X;
 					mVisual.Model.Affine.X.Y = x.Y - mDragOrigin.Y;
 
+					mOperation = new TransformMoveOperation(Transform, mDragX, x);
+
 					break;
 
 				case HitTestResult.Y:
@@ -132,6 +140,8 @@ namespace Xyrus.Apophysis.Windows.Input
 
 					mVisual.Model.Affine.Y.X = y.X - mDragOrigin.X;
 					mVisual.Model.Affine.Y.Y = y.Y - mDragOrigin.Y;
+
+					mOperation = new TransformMoveOperation(Transform, mDragY, y);
 
 					break;
 
@@ -177,6 +187,8 @@ namespace Xyrus.Apophysis.Windows.Input
 						mVisual.Model.Affine.X.Y = length * (sin0 * newNormal.X + cos0 * newNormal.Y);
 					}
 
+					mOperation = new TransformRotateOperation(Transform, angleBetweenOxAndDelta);
+
 					break;
 
 				case HitTestResult.Xy:
@@ -202,6 +214,8 @@ namespace Xyrus.Apophysis.Windows.Input
 
 					mVisual.Model.Affine.Y.X = vYOut.X;
 					mVisual.Model.Affine.Y.Y = vYOut.Y;
+
+					mOperation = new TransformScaleOperation(Transform, scale);
 
 					break;
 			}
@@ -274,6 +288,8 @@ namespace Xyrus.Apophysis.Windows.Input
 				mDragX = mVisual.Model.Affine.X.Copy();
 				mDragY = mVisual.Model.Affine.Y.Copy();
 
+				mOperation = null;
+
 				mVisual.IsActive = true;
 				mVisual.IsSelected = true;
 
@@ -294,6 +310,7 @@ namespace Xyrus.Apophysis.Windows.Input
 			mDragY = null;
 
 			mVisual.IsActive = false;
+			mOperation = null;
 
 			return old;
 		}
@@ -310,6 +327,15 @@ namespace Xyrus.Apophysis.Windows.Input
 		public void InvalidateHitTest()
 		{
 			mVisual.Reset();
+		}
+
+		public Transform Transform
+		{
+			get { return mVisual == null ? null : mVisual.Model; }
+		}
+		public TransformInputOperation GetCurrentOperation()
+		{
+			return mOperation;
 		}
 	}
 }
