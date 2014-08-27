@@ -126,6 +126,11 @@ namespace Xyrus.Apophysis.Windows.Input
 			if (mHandlers == null)
 				return false;
 
+			foreach (var visual in mVisualCollection)
+			{
+				visual.IsSelected = false;
+			}
+
 			foreach (var handler in mHandlers)
 			{
 				if (handler.HandleMouseDown(cursor))

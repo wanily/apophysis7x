@@ -54,7 +54,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 		protected override void OnControlPaint(Graphics graphics)
 		{
 			var glc = Color.FromArgb(0xff, GridLineColor.R, GridLineColor.G, GridLineColor.B);
-			var glc05 = Color.FromArgb(0x80, GridLineColor.R, GridLineColor.G, GridLineColor.B);
+			var glc05 = Color.FromArgb(0x40, GridLineColor.R, GridLineColor.G, GridLineColor.B);
 			var glzc = Color.FromArgb(0xff, GridZeroLineColor.R, GridZeroLineColor.G, GridZeroLineColor.B);
 
 			using (var backdropBrush = new SolidBrush(BackdropColor))

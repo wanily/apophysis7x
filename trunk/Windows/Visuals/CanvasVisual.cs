@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Xyrus.Apophysis.Windows.Input;
 using Xyrus.Apophysis.Windows.Math;
 using Rectangle = Xyrus.Apophysis.Windows.Math.Rectangle;
 
@@ -91,6 +90,9 @@ namespace Xyrus.Apophysis.Windows.Visuals
 		{
 			var control = sender as Control;
 			if (control == null)
+				return;
+
+			if (control.Width <= 0 || control.Height <= 0)
 				return;
 
 			mCanvas.Resize(new Vector2(control.Width, control.Height));

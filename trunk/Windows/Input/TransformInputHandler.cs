@@ -275,6 +275,7 @@ namespace Xyrus.Apophysis.Windows.Input
 				mDragY = mVisual.Model.Affine.Y.Copy();
 
 				mVisual.IsActive = true;
+				mVisual.IsSelected = true;
 
 				return true;
 			}

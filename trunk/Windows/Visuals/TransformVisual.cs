@@ -33,45 +33,107 @@ namespace Xyrus.Apophysis.Windows.Visuals
 		protected override void OnControlPaint(Graphics graphics)
 		{
 			const int vertexRadius = 3;
+			const double handleSize = 0.2;
+			const int distLabel = 4;
+
+			const string lo = "O";
+			const string lx = "X";
+			const string ly = "Y";
 
 			var ox = GetEdgeOx();
 			var oy = GetEdgeOy();
 			var xy = GetEdgeXy();
 
-			var color = mColors[mTransform.Index%mColors.Length];
-			var translucentColor = Color.FromArgb(0x80, color.R, color.G, color.B);
-			var translucentColorLow = Color.FromArgb(0x33, color.R, color.G, color.B);
+			var fo = mTransform.Origin;
+			var fx = mTransform.Affine.X;
+			var fy = mTransform.Affine.Y;
 
+			var cornerTopLeft = fy - fx;
+			var cornerTopRight = fy + fx;
+			var cornerBottomLeft = -1 * fy - fx;
+			var cornerBottomRight = -1 * fy + fx;
+
+			var left = -1 * fx;
+			var up = fy;
+			var right = fx;
+			var down = -1 * fy;
+
+			var color = mColors[mTransform.Index%mColors.Length];
+			var translucentColor = Color.FromArgb(0x40, color.R, color.G, color.B);
+			var translucentColorLow = Color.FromArgb(0x05, color.R, color.G, color.B);
+
+			var sizeLo = graphics.MeasureString(lo, AttachedControl.Font);
+			var sizeLx = graphics.MeasureString(lx, AttachedControl.Font);
+			var sizeLy = graphics.MeasureString(ly, AttachedControl.Font);
+
+			var posLo = ToPoint(ox.A + new Vector2(distLabel, distLabel));
+			var posLx = ToPoint(ox.B + new Vector2(distLabel, distLabel));
+			var posLy = ToPoint(oy.B + new Vector2(distLabel, distLabel));
+
+			var rectLo = new Rectangle(posLo, sizeLo.ToSize());
+			var rectLx = new Rectangle(posLx, sizeLx.ToSize());
+			var rectLy = new Rectangle(posLy, sizeLy.ToSize());
+
+			var posO = ToPoint(ox.A - new Vector2(vertexRadius, vertexRadius));
+			var posX = ToPoint(ox.B - new Vector2(vertexRadius, vertexRadius));
+			var posY = ToPoint(oy.B - new Vector2(vertexRadius, vertexRadius));
+
+			var vertexSize = new Size(2 * vertexRadius, 2 * vertexRadius);
+
+			var rectO = new Rectangle(posO, vertexSize);
+			var rectX = new Rectangle(posX, vertexSize);
+			var rectY = new Rectangle(posY, vertexSize);
+
+			using (var backgroundBrush = new SolidBrush(AttachedControl.BackColor))
+			using (var labelBrush = new SolidBrush(color))
+			using (var hitVertexOBrush = new SolidBrush(AttachedControl.ForeColor))
 			using (var hitVertexBrush = new SolidBrush(color))
 			using (var vertexBrush = new SolidBrush(translucentColor))
 			using (var lowFillBrush = new SolidBrush(translucentColorLow))
 			using (var fillBrush = new SolidBrush(translucentColor))
+			using (var widgetPen = new Pen(translucentColor))
+			using (var dashLinePen = new Pen(color))
 			using (var hitLinePen = new Pen(color, 2.0f))
 			using (var linePen = new Pen(color))
 			{
-				graphics.FillPolygon(IsSurfaceHit ? fillBrush : lowFillBrush, new[] { ToPoint(ox.A), ToPoint(ox.B), ToPoint(oy.B) });
+				dashLinePen.DashPattern = new[] {6.0f,4.0f};
 
-				graphics.DrawLine(IsEdgeOxHit ? hitLinePen : linePen, ToPoint(ox.A), ToPoint(ox.B));
-				graphics.DrawLine(IsEdgeOyHit ? hitLinePen : linePen, ToPoint(oy.A), ToPoint(oy.B));
-				graphics.DrawLine(IsEdgeXyHit ? hitLinePen : linePen, ToPoint(xy.A), ToPoint(xy.B));
+				graphics.DrawLine(IsEdgeOxHit ? hitLinePen : IsSelected || IsHit ? linePen : dashLinePen, ToPoint(ox.A), ToPoint(ox.B));
+				graphics.DrawLine(IsEdgeOyHit ? hitLinePen : IsSelected || IsHit ? linePen : dashLinePen, ToPoint(oy.A), ToPoint(oy.B));
+				graphics.DrawLine(IsEdgeXyHit ? hitLinePen : dashLinePen, ToPoint(xy.A), ToPoint(xy.B));
 
-				var o = ToPoint(ox.A - new Vector2(vertexRadius, vertexRadius));
-				var x = ToPoint(ox.B - new Vector2(vertexRadius, vertexRadius));
-				var y = ToPoint(oy.B - new Vector2(vertexRadius, vertexRadius));
+				graphics.FillEllipse(IsVertexOHit ? hitVertexOBrush : vertexBrush, rectO);
+				graphics.FillEllipse(IsVertexXHit ? hitVertexBrush : vertexBrush, rectX);
+				graphics.FillEllipse(IsVertexYHit ? hitVertexBrush : vertexBrush, rectY);
 
-				var size = new Size(2 * vertexRadius, 2 * vertexRadius);
+				graphics.DrawEllipse(IsVertexOHit ? hitLinePen : linePen, rectO);
+				graphics.DrawEllipse(IsVertexXHit ? hitLinePen : linePen, rectX);
+				graphics.DrawEllipse(IsVertexYHit ? hitLinePen : linePen, rectY);
 
-				var ro = new Rectangle(o, size);
-				var rx = new Rectangle(x, size);
-				var ry = new Rectangle(y, size);
+				graphics.FillRectangle(backgroundBrush, rectLo);
+				graphics.FillRectangle(backgroundBrush, rectLx);
+				graphics.FillRectangle(backgroundBrush, rectLy);
 
-				graphics.FillEllipse(IsVertexOHit ? hitVertexBrush : vertexBrush, ro);
-				graphics.FillEllipse(IsVertexXHit ? hitVertexBrush : vertexBrush, rx);
-				graphics.FillEllipse(IsVertexYHit ? hitVertexBrush : vertexBrush, ry);
+				graphics.FillPolygon(IsHit ? fillBrush : lowFillBrush, new[] { ToPoint(ox.A), ToPoint(ox.B), ToPoint(oy.B) });
 
-				graphics.DrawEllipse(IsVertexOHit ? hitLinePen : linePen, ro);
-				graphics.DrawEllipse(IsVertexXHit ? hitLinePen : linePen, rx);
-				graphics.DrawEllipse(IsVertexYHit ? hitLinePen : linePen, ry);
+				if (IsSelected)
+				{
+					graphics.DrawLine(IsHit ? linePen : widgetPen, ToPoint(Canvas.WorldToCanvas(cornerTopLeft + fo)), ToPoint(Canvas.WorldToCanvas(cornerTopLeft + right * handleSize + fo)));
+					graphics.DrawLine(IsHit ? linePen : widgetPen, ToPoint(Canvas.WorldToCanvas(cornerTopLeft + fo)), ToPoint(Canvas.WorldToCanvas(cornerTopLeft + down * handleSize + fo)));
+
+					graphics.DrawLine(IsHit ? linePen : widgetPen, ToPoint(Canvas.WorldToCanvas(cornerTopRight + fo)), ToPoint(Canvas.WorldToCanvas(cornerTopRight + left * handleSize + fo)));
+					graphics.DrawLine(IsHit ? linePen : widgetPen, ToPoint(Canvas.WorldToCanvas(cornerTopRight + fo)), ToPoint(Canvas.WorldToCanvas(cornerTopRight + down * handleSize + fo)));
+
+					graphics.DrawLine(IsHit ? linePen : widgetPen, ToPoint(Canvas.WorldToCanvas(cornerBottomLeft + fo)), ToPoint(Canvas.WorldToCanvas(cornerBottomLeft + right * handleSize + fo)));
+					graphics.DrawLine(IsHit ? linePen : widgetPen, ToPoint(Canvas.WorldToCanvas(cornerBottomLeft + fo)), ToPoint(Canvas.WorldToCanvas(cornerBottomLeft + up * handleSize + fo)));
+
+					graphics.DrawLine(IsHit ? linePen : widgetPen, ToPoint(Canvas.WorldToCanvas(cornerBottomRight + fo)), ToPoint(Canvas.WorldToCanvas(cornerBottomRight + left * handleSize + fo)));
+					graphics.DrawLine(IsHit ? linePen : widgetPen, ToPoint(Canvas.WorldToCanvas(cornerBottomRight + fo)), ToPoint(Canvas.WorldToCanvas(cornerBottomRight + up * handleSize + fo)));
+				}
+
+				graphics.DrawString(lo, AttachedControl.Font, labelBrush, posLo.X, posLo.Y);
+				graphics.DrawString(lx, AttachedControl.Font, labelBrush, posLx.X, posLx.Y);
+				graphics.DrawString(ly, AttachedControl.Font, labelBrush, posLy.X, posLy.Y);
 			}
 		}
 
@@ -134,6 +196,14 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			get { return mTransform; }
 		}
 
+		public bool IsHit
+		{
+			get
+			{
+				return IsSurfaceHit || IsVertexOHit || IsVertexXHit || IsVertexYHit || IsEdgeOxHit || IsEdgeOyHit || IsEdgeXyHit;
+			}
+		}
+
 		public bool IsSurfaceHit { get; set; }
 
 		public bool IsVertexOHit { get; set; }
@@ -145,5 +215,6 @@ namespace Xyrus.Apophysis.Windows.Visuals
 		public bool IsEdgeXyHit { get; set; }
 
 		public bool IsActive { get; set; }
+		public bool IsSelected { get; set; }
 	}
 }
