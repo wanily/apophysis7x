@@ -62,17 +62,17 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			var translucentColor = Color.FromArgb(0x40, color.R, color.G, color.B);
 			var translucentColorLow = Color.FromArgb(0x05, color.R, color.G, color.B);
 
-			var sizeLo = graphics.MeasureString(lo, AttachedControl.Font);
-			var sizeLx = graphics.MeasureString(lx, AttachedControl.Font);
-			var sizeLy = graphics.MeasureString(ly, AttachedControl.Font);
-
 			var posLo = ToPoint(ox.A + new Vector2(distLabel, distLabel));
 			var posLx = ToPoint(ox.B + new Vector2(distLabel, distLabel));
 			var posLy = ToPoint(oy.B + new Vector2(distLabel, distLabel));
 
-			var rectLo = new Rectangle(posLo, sizeLo.ToSize());
-			var rectLx = new Rectangle(posLx, sizeLx.ToSize());
-			var rectLy = new Rectangle(posLy, sizeLy.ToSize());
+			//var sizeLo = graphics.MeasureString(lo, AttachedControl.Font);
+			//var sizeLx = graphics.MeasureString(lx, AttachedControl.Font);
+			//var sizeLy = graphics.MeasureString(ly, AttachedControl.Font);
+
+			//var rectLo = new Rectangle(posLo, sizeLo.ToSize());
+			//var rectLx = new Rectangle(posLx, sizeLx.ToSize());
+			//var rectLy = new Rectangle(posLy, sizeLy.ToSize());
 
 			var posO = ToPoint(ox.A - new Vector2(vertexRadius, vertexRadius));
 			var posX = ToPoint(ox.B - new Vector2(vertexRadius, vertexRadius));
@@ -84,7 +84,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			var rectX = new Rectangle(posX, vertexSize);
 			var rectY = new Rectangle(posY, vertexSize);
 
-			using (var backgroundBrush = new SolidBrush(AttachedControl.BackColor))
+			//using (var backgroundBrush = new SolidBrush(AttachedControl.BackColor))
 			using (var labelBrush = new SolidBrush(color))
 			using (var hitVertexOBrush = new SolidBrush(AttachedControl.ForeColor))
 			using (var hitVertexBrush = new SolidBrush(color))
@@ -110,9 +110,11 @@ namespace Xyrus.Apophysis.Windows.Visuals
 				graphics.DrawEllipse(IsVertexXHit ? hitLinePen : linePen, rectX);
 				graphics.DrawEllipse(IsVertexYHit ? hitLinePen : linePen, rectY);
 
+				/*
 				graphics.FillRectangle(backgroundBrush, rectLo);
 				graphics.FillRectangle(backgroundBrush, rectLx);
 				graphics.FillRectangle(backgroundBrush, rectLy);
+				*/
 
 				graphics.FillPolygon(IsHit ? fillBrush : lowFillBrush, new[] { ToPoint(ox.A), ToPoint(ox.B), ToPoint(oy.B) });
 
