@@ -43,9 +43,6 @@ namespace Xyrus.Apophysis.Windows.Controls
 			mInteraction.Add(mGridInteraction = new GridInputStrategy(this, grid), int.MaxValue);
 			mInteraction.Add(mTransformInteraction = new TransformCollectionInputHandler(this, mTransformPainter, grid), 100);
 
-			mTransformInteraction.TransformHitCleared += OnTransformHitCleared;
-			mTransformInteraction.TransformUpdated += OnTransformUpdated;
-			mTransformInteraction.TransformHit += OnTransformHit;
 			mTransformInteraction.BeginEdit += OnBeginEdit;
 			mTransformInteraction.EndEdit += OnEndEdit;
 
@@ -70,9 +67,6 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 				if (mTransformInteraction != null)
 				{
-					mTransformInteraction.TransformHitCleared -= OnTransformHitCleared;
-					mTransformInteraction.TransformUpdated -= OnTransformUpdated;
-					mTransformInteraction.TransformHit -= OnTransformHit;
 					mTransformInteraction.BeginEdit -= OnBeginEdit;
 					mTransformInteraction.EndEdit -= OnEndEdit;
 				}
