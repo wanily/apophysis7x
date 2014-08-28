@@ -63,7 +63,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			var right = fx;
 			var down = -1 * fy;
 
-			var color = mColors[mTransform.Index%mColors.Length];
+			var color = GetTransformColor(mTransform);
 			var translucentColor = Color.FromArgb(0x40, color.R, color.G, color.B);
 			var translucentColorLow = Color.FromArgb(0x05, color.R, color.G, color.B);
 
@@ -218,5 +218,10 @@ namespace Xyrus.Apophysis.Windows.Visuals
 
 		public bool IsActive { get; set; }
 		public bool IsSelected { get; set; }
+
+		public static Color GetTransformColor(Transform transform)
+		{
+			return mColors[transform.Index%mColors.Length];
+		}
 	}
 }

@@ -88,7 +88,6 @@ namespace Xyrus.Apophysis.Windows.Input
 
 			InvalidateControl();
 		}
-
 		private void SetOperation(TransformInputHandler handler)
 		{
 			if (handler == null)
@@ -104,6 +103,8 @@ namespace Xyrus.Apophysis.Windows.Input
 		{
 			if (mHandlers == null)
 				return false;
+
+			mVisualCollection.CursorPosition = mCanvas.CanvasToWorld(cursor);
 
 			if (mHandlers.Any(x => x.IsDragging))
 			{
@@ -128,10 +129,12 @@ namespace Xyrus.Apophysis.Windows.Input
 			{
 				if (handler.HandleMouseMove(cursor, button))
 				{
+					mVisualCollection.CurrentOperation = (new TransformMouseOverOperation(handler.Transform));
 					return true;
 				}
 			}
 
+			mVisualCollection.CurrentOperation = null;
 			return false;
 		}
 		protected override bool OnAttachedControlMouseWheel(double delta, MouseButtons button)

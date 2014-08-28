@@ -95,8 +95,14 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			if (control.Width <= 0 || control.Height <= 0)
 				return;
 
+			var oldSize = mCanvas.Size;
+
 			mCanvas.Resize(new Vector2(control.Width, control.Height));
+			OnCanvasResize(oldSize, mCanvas.Size);
 			InvalidateControl();
+		}
+		protected virtual void OnCanvasResize(Vector2 oldSize, Vector2 newSize)
+		{
 		}
 	}
 }

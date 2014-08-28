@@ -1,3 +1,4 @@
+using System.Globalization;
 using Xyrus.Apophysis.Windows.Models;
 
 namespace Xyrus.Apophysis.Windows.Input
@@ -19,7 +20,7 @@ namespace Xyrus.Apophysis.Windows.Input
 
 		protected override string GetInfoString()
 		{
-			return string.Format("Scale: {0:0}%", ScaleFactor * 100);
+			return string.Format("Scale:\t {0}%", (ScaleFactor * 100).ToString("0", CultureInfo.CurrentCulture).PadLeft(5));
 		}
 	}
 }

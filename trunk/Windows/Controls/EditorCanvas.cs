@@ -5,6 +5,7 @@ using Xyrus.Apophysis.Windows.Visuals;
 using Xyrus.Apophysis.Windows.Input;
 using Xyrus.Apophysis.Windows.Math;
 using Xyrus.Apophysis.Windows.Models;
+using Rectangle = System.Drawing.Rectangle;
 
 namespace Xyrus.Apophysis.Windows.Controls
 {
@@ -147,6 +148,21 @@ namespace Xyrus.Apophysis.Windows.Controls
 				mRulerPainter.ShowLabels = value;
 				mRulerPainter.ShowHorizontal = value;
 				mRulerPainter.ShowVertical = value;
+
+				Point lt, rb;
+
+				if (value)
+				{
+					lt = new Point(mRulerPainter.RulerSize + 10, mRulerPainter.RulerSize + 10);
+					rb = new Point(10, 10);
+				}
+				else
+				{
+					lt = new Point(mRulerPainter.RulerSize + 10, mRulerPainter.RulerSize + 10);
+					rb = new Point(10, 10);
+				}
+
+				mTransformPainter.HintTextRectangle = new Rectangle(lt.X, lt.Y, rb.X - lt.X, rb.Y - lt.Y);
 			}
 		}
 		public bool HighlightOrigin

@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using Xyrus.Apophysis.Windows.Input;
 using Xyrus.Apophysis.Windows.Math;
 using Xyrus.Apophysis.Windows.Models;
+using Rectangle = System.Drawing.Rectangle;
 
 namespace Xyrus.Apophysis.Windows.Visuals
 {
@@ -99,6 +100,18 @@ namespace Xyrus.Apophysis.Windows.Visuals
 				OnCollectionChanged(mCollection, new EventArgs());
 			}
 		}
+
+		public Vector2 CursorPosition
+		{
+			get { return mOperationVisual.CursorPosition; }
+			set { mOperationVisual.CursorPosition = value; }
+		}
+		public Rectangle HintTextRectangle
+		{
+			get { return mOperationVisual.HintTextRectangle; }
+			set { mOperationVisual.HintTextRectangle = value; }
+		}
+
 		public TransformVisual this[int index]
 		{
 			get

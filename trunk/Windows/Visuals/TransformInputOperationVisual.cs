@@ -1,19 +1,33 @@
+using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Windows.Input;
 using Xyrus.Apophysis.Windows.Math;
+using Rectangle = System.Drawing.Rectangle;
 
 namespace Xyrus.Apophysis.Windows.Visuals
 {
 	[PublicAPI]
 	public class TransformInputOperationVisual : CanvasVisual<Canvas>
 	{
+		struct ColoredString
+		{
+			public string String;
+			public Color Color;
+		}
+
 		private TransformInputOperation mOperation;
 		private Color mReferenceColor;
+		private Vector2 mCursorPosition;
+		private Rectangle mHintTextRectangle;
 
 		public TransformInputOperationVisual([NotNull] Control control, [NotNull] Canvas canvas) : base(control, canvas)
 		{
 			mReferenceColor = Color.Gray;
+			mHintTextRectangle = new Rectangle(new Point(10, 10), new Size(0, 0));
+			mCursorPosition = new Vector2();
 		}
 		protected override void DisposeOverride(bool disposing)
 		{
@@ -35,10 +49,25 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			}
 		}
 
+		[NotNull]
+		public Vector2 CursorPosition
+		{
+			get { return mCursorPosition; }
+			set
+			{
+				if (value == null) throw new ArgumentNullException("value");
+				mCursorPosition = value;
+			}
+		}
+		public Rectangle HintTextRectangle
+		{
+			get { return mHintTextRectangle; }
+			set { mHintTextRectangle = value; }
+		}
+
 		protected override void OnControlPaint(Graphics graphics)
 		{
-			if (mOperation == null)
-				return;
+			var lines = new List<ColoredString>();
 
 			using (var referenceBrush = new SolidBrush(ReferenceColor))
 			using (var referencePen = new Pen(referenceBrush))
@@ -60,6 +89,12 @@ namespace Xyrus.Apophysis.Windows.Visuals
 
 					graphics.DrawLine(referencePen, ch.A.ToPoint(), ch.B.ToPoint());
 					graphics.DrawLine(referencePen, cv.A.ToPoint(), cv.B.ToPoint());
+
+					lines.Add(new ColoredString
+					{
+						String = move.ToString(),
+						Color = TransformVisual.GetTransformColor(move.Transform)
+					});
 				}
 
 				var rotate = mOperation as TransformRotateOperation;
@@ -70,7 +105,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 
 					var farRadius = System.Math.Max(Canvas.Size.X, Canvas.Size.Y);
 					var radius = System.Math.Max(rotate.Transform.Affine.X.Length, rotate.Transform.Affine.Y.Length) * (Canvas.Ratio.X + Canvas.Ratio.Y) * 0.5;
-					var rect = new System.Drawing.Rectangle((int)(origin.X - radius), (int)(origin.Y - radius), (int)(radius * 2), (int)(radius * 2));
+					var rect = new Rectangle((int)(origin.X - radius), (int)(origin.Y - radius), (int)(radius * 2), (int)(radius * 2));
 
 					var lh = new Line((x - origin).Direction * -farRadius + origin, (x - origin).Direction * farRadius + origin);
 					var lv = new Line(lh.GetNormal() * -radius + origin, lh.GetNormal() * radius + origin);
@@ -85,6 +120,12 @@ namespace Xyrus.Apophysis.Windows.Visuals
 
 					graphics.DrawLine(referencePen, lh.A.ToPoint(), lh.B.ToPoint());
 					graphics.DrawLine(referencePen, lv.A.ToPoint(), lv.B.ToPoint());
+
+					lines.Add(new ColoredString
+					{
+						String = rotate.ToString(),
+						Color = TransformVisual.GetTransformColor(rotate.Transform)
+					});
 				}
 
 				var scale = mOperation as TransformScaleOperation;
@@ -107,6 +148,45 @@ namespace Xyrus.Apophysis.Windows.Visuals
 
 					graphics.DrawLine(referencePen, lx.A.ToPoint(), lx.B.ToPoint());
 					graphics.DrawLine(referencePen, ly.A.ToPoint(), ly.B.ToPoint());
+
+					lines.Add(new ColoredString
+					{
+						String = scale.ToString(),
+						Color = TransformVisual.GetTransformColor(scale.Transform)
+					});
+				}
+
+				if (mOperation != null)
+				{
+					var text = new TransformMouseOverOperation(mOperation.Transform).ToString();
+					var textSize = graphics.MeasureString(text, AttachedControl.Font);
+
+					using (var brush = new SolidBrush(TransformVisual.GetTransformColor(mOperation.Transform)))
+					{
+						graphics.DrawString(text, AttachedControl.Font, brush,
+							(int)Canvas.Size.X - mHintTextRectangle.Right - textSize.Width,
+							(int)Canvas.Size.Y - mHintTextRectangle.Bottom - textSize.Height);
+					}
+				}
+
+				lines.Add(new ColoredString
+				{
+					String = string.Format("Cursor:\t {0}\t {1}", 
+						CursorPosition.X.ToString("0.000", CultureInfo.CurrentCulture).PadLeft(6),
+						CursorPosition.Y.ToString("0.000", CultureInfo.CurrentCulture).PadLeft(6)),
+					Color = AttachedControl.ForeColor
+				});
+
+				var lineHeight = graphics.MeasureString("fg", AttachedControl.Font).Height;
+				var yText = (int)Canvas.Size.Y - HintTextRectangle.Bottom - lineHeight*lines.Count;
+
+				foreach (var line in lines)
+				{
+					using (var brush = new SolidBrush(line.Color))
+					{
+						graphics.DrawString(line.String, AttachedControl.Font, brush, HintTextRectangle.Left, yText);
+						yText += lineHeight;
+					}
 				}
 			}
 		}

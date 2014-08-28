@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using Xyrus.Apophysis.Windows.Math;
 using Xyrus.Apophysis.Windows.Models;
 
@@ -38,7 +39,9 @@ namespace Xyrus.Apophysis.Windows.Input
 
 		protected override string GetInfoString()
 		{
-			return string.Format("Move: {0:0.000}; {1:0.000}", Delta.X, Delta.Y);
+			return string.Format("Move:\t {0}\t {1}",
+				Delta.X.ToString("0.000", CultureInfo.CurrentCulture).PadLeft(6),
+				Delta.Y.ToString("0.000", CultureInfo.CurrentCulture).PadLeft(6));
 		}
 	}
 }
