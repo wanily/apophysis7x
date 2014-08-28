@@ -58,8 +58,8 @@
 			this.mCanvas.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.mCanvas.ForeColor = System.Drawing.Color.White;
 			this.mCanvas.GridLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-			this.mCanvas.GridZeroLineColor = System.Drawing.Color.Gray;
-			this.mCanvas.HighlightOrigin = false;
+			this.mCanvas.GridZeroLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(92)))), ((int)(((byte)(92)))), ((int)(((byte)(92)))));
+			this.mCanvas.HighlightOrigin = true;
 			this.mCanvas.Location = new System.Drawing.Point(0, 0);
 			this.mCanvas.Name = "mCanvas";
 			this.mCanvas.ReferenceColor = System.Drawing.Color.Gray;

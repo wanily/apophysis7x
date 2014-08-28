@@ -24,10 +24,6 @@ namespace Xyrus.Apophysis.Windows.Controls
 		private EventHandler mBeginEdit;
 		private EventHandler mEndEdit;
 
-		private TransformUpdatedEventHandler mTransformUpdated;
-		private TransformHitEventHandler mTransformHit;
-		private EventHandler mTransformHitCleared;
-
 		public EditorCanvas()
 		{
 			InitializeComponent();
@@ -158,47 +154,18 @@ namespace Xyrus.Apophysis.Windows.Controls
 				}
 				else
 				{
-					lt = new Point(mRulerPainter.RulerSize + 10, mRulerPainter.RulerSize + 10);
+					lt = new Point(10, 10);
 					rb = new Point(10, 10);
 				}
 
 				mTransformPainter.HintTextRectangle = new Rectangle(lt.X, lt.Y, rb.X - lt.X, rb.Y - lt.Y);
+				Refresh();
 			}
 		}
 		public bool HighlightOrigin
 		{
 			get { return mGridPainter.HighlightOrigin; }
 			set { mGridPainter.HighlightOrigin = value; }
-		}
-
-		private void OnTransformUpdated(object sender, TransformUpdatedEventArgs args)
-		{
-			RaiseTransformUpdated(args.Operation);
-		}
-		protected void RaiseTransformUpdated([NotNull] TransformInputOperation operation)
-		{
-			if (mTransformUpdated != null)
-				mTransformUpdated(this, new TransformUpdatedEventArgs(operation));
-		}
-
-		private void OnTransformHit(object sender, TransformHitEventArgs args)
-		{
-			RaiseTransformHit(args.Operation);
-		}
-		protected void RaiseTransformHit([NotNull] TransformMouseOverOperation operation)
-		{
-			if (mTransformHit != null)
-				mTransformHit(this, new TransformHitEventArgs(operation));
-		}
-
-		private void OnTransformHitCleared(object sender, EventArgs args)
-		{
-			RaiseTransformHitCleared();
-		}
-		protected void RaiseTransformHitCleared()
-		{
-			if (mTransformHitCleared != null)
-				mTransformHitCleared(this, new EventArgs());
 		}
 
 		private void OnBeginEdit(object sender, EventArgs args)
@@ -219,22 +186,6 @@ namespace Xyrus.Apophysis.Windows.Controls
 		{
 			if (mEndEdit != null)
 				mEndEdit(this, new EventArgs());
-		}
-
-		public event TransformUpdatedEventHandler TransformUpdated
-		{
-			add { mTransformUpdated += value; }
-			remove { mTransformUpdated -= value; }
-		}
-		public event TransformHitEventHandler TransformHit
-		{
-			add { mTransformHit += value; }
-			remove { mTransformHit -= value; }
-		}
-		public event EventHandler TransformHitCleared
-		{
-			add { mTransformHitCleared += value; }
-			remove { mTransformHitCleared -= value; }
 		}
 
 		public event EventHandler BeginEdit
