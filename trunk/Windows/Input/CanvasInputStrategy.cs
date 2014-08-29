@@ -58,6 +58,61 @@ namespace Xyrus.Apophysis.Windows.Input
 		public abstract void NavigateZoom(double delta);
 		public abstract void NavigateReset();
 
+		protected override bool OnAttachedControlKeyPress(Keys key, Keys modifiers)
+		{
+			if (key == Keys.Left)
+			{
+				BeginNavigate(new Vector2(0, 0));
+				NavigateOffset(new Vector2(-Canvas.Scale, 0) * Canvas.Ratio);
+				EndNavigate();
+				InvalidateControl();
+				return true;
+			}
+
+			if (key == Keys.Right)
+			{
+				BeginNavigate(new Vector2(0, 0));
+				NavigateOffset(new Vector2(Canvas.Scale, 0) * Canvas.Ratio);
+				EndNavigate();
+				InvalidateControl();
+				return true;
+			}
+
+			if (key == Keys.Up)
+			{
+				BeginNavigate(new Vector2(0, 0));
+				NavigateOffset(new Vector2(0, -Canvas.Scale) * Canvas.Ratio);
+				EndNavigate();
+				InvalidateControl();
+				return true;
+			}
+
+			if (key == Keys.Down)
+			{
+				BeginNavigate(new Vector2(0, 0));
+				NavigateOffset(new Vector2(0, Canvas.Scale) * Canvas.Ratio);
+				EndNavigate();
+				InvalidateControl();
+				return true;
+			}
+
+			if (key == Keys.Multiply)
+			{
+				NavigateZoom(120);
+				InvalidateControl();
+				return true;
+			}
+
+			if (key == Keys.Divide)
+			{
+				NavigateZoom(-120);
+				InvalidateControl();
+				return true;
+			}
+
+			return false;
+		}
+
 		protected override bool OnAttachedControlMouseMove(Vector2 cursor, MouseButtons button)
 		{
 			if (button == MouseButtons.Left)

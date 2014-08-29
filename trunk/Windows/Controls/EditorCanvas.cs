@@ -52,6 +52,10 @@ namespace Xyrus.Apophysis.Windows.Controls
 			RulerBackdropColor = Color.Transparent;
 
 			ShowRuler = true;
+
+			Settings.MoveAmount = 0.5;
+			Settings.AngleSnap = 15;
+			Settings.ScaleSnap = 125;
 		}
 		protected override void Dispose(bool disposing)
 		{
@@ -197,6 +201,13 @@ namespace Xyrus.Apophysis.Windows.Controls
 		{
 			add { mEndEdit += value; }
 			remove { mEndEdit -= value; }
+		}
+
+		protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+		{
+			mInteraction.TriggerKeyPress(keyData);
+
+			return base.ProcessCmdKey(ref msg, keyData);
 		}
 	}
 }

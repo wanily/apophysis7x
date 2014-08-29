@@ -11,6 +11,8 @@ namespace Xyrus.Apophysis.Windows.Input
 		{
 		}
 
+		protected abstract bool OnAttachedControlKeyPress(Keys key, Keys modifiers);
+
 		protected abstract bool OnAttachedControlMouseMove([NotNull] Vector2 cursor, MouseButtons button);
 		protected abstract bool OnAttachedControlMouseWheel(double delta, MouseButtons button);
 
@@ -24,6 +26,11 @@ namespace Xyrus.Apophysis.Windows.Input
 		}
 		protected sealed override void UnregisterEvents(Control control)
 		{
+		}
+
+		public bool HandleKeyPress(Keys key, Keys modifiers)
+		{
+			return OnAttachedControlKeyPress(key, modifiers);
 		}
 
 		public bool HandleMouseDown([NotNull] Vector2 cursor)

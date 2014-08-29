@@ -13,6 +13,15 @@ namespace Xyrus.Apophysis.Windows.Input
 			mCursor = new Vector2();
 		}
 
+		private void OnAttachedControlKeyPress(Keys keyCode, Keys modifiers)
+		{
+			foreach (var item in GetChainItems())
+			{
+				if (item.HandleKeyPress(keyCode, modifiers))
+					break;
+			}
+		}
+
 		private void OnAttachedControlMouseMove([NotNull] Vector2 cursor, MouseButtons button)
 		{
 			mCursor = cursor;
@@ -60,6 +69,7 @@ namespace Xyrus.Apophysis.Windows.Input
 
 		protected override void RegisterEvents(Control control)
 		{
+			control.KeyDown += OnCanvasKeyPress;
 			control.MouseDown += OnCanvasMouseDown;
 			control.MouseUp += OnCanvasMouseUp;
 			control.MouseMove += OnCanvasMouseMove;
@@ -68,6 +78,7 @@ namespace Xyrus.Apophysis.Windows.Input
 		}
 		protected override void UnregisterEvents(Control control)
 		{
+			control.KeyDown -= OnCanvasKeyPress;
 			control.MouseDown -= OnCanvasMouseDown;
 			control.MouseUp -= OnCanvasMouseUp;
 			control.MouseMove -= OnCanvasMouseMove;
@@ -75,6 +86,10 @@ namespace Xyrus.Apophysis.Windows.Input
 			control.MouseDoubleClick -= OnCanvasMouseDoubleClick;
 		}
 
+		private void OnCanvasKeyPress(object sender, KeyEventArgs e)
+		{
+			OnAttachedControlKeyPress(e.KeyCode, e.Modifiers);
+		}
 		private void OnCanvasMouseDown(object sender, MouseEventArgs e)
 		{
 			var cursor = new Vector2(e.X, e.Y);
@@ -98,6 +113,11 @@ namespace Xyrus.Apophysis.Windows.Input
 		{
 			OnAttachedControlMouseDoubleClick();
 			InvalidateControl();
+		}
+
+		public void TriggerKeyPress(Keys key, Keys modifiers = Keys.None)
+		{
+			OnAttachedControlKeyPress(key, modifiers);
 		}
 
 		public Vector2 CursorPosition

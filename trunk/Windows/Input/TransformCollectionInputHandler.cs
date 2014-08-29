@@ -99,6 +99,22 @@ namespace Xyrus.Apophysis.Windows.Input
 			mVisualCollection.CurrentOperation = handler.GetCurrentOperation();
 		}
 
+		protected override bool OnAttachedControlKeyPress(Keys key, Keys modifiers)
+		{
+			if (mHandlers == null)
+				return false;
+
+			foreach (var handler in mHandlers)
+			{
+				if (handler.HandleKeyPress(key, modifiers))
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
 		protected override bool OnAttachedControlMouseMove(Vector2 cursor, MouseButtons button)
 		{
 			if (mHandlers == null)

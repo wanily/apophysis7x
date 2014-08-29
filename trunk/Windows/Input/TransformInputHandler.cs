@@ -265,6 +265,92 @@ namespace Xyrus.Apophysis.Windows.Input
 			}
 		}
 
+		protected override bool OnAttachedControlKeyPress(Keys key, Keys modifiers)
+		{
+			if (mVisual.IsSelected)
+			{
+				if (key == Keys.Left)
+				{
+					Transform.Origin.X -= mSettings.MoveAmount;
+					InvalidateControl();
+					return true;
+				}
+
+				if (key == Keys.Right)
+				{
+					Transform.Origin.X += mSettings.MoveAmount;
+					InvalidateControl();
+					InvalidateControl();
+					return true;
+				}
+
+				if (key == Keys.Up)
+				{
+					Transform.Origin.Y += mSettings.MoveAmount;
+					InvalidateControl();
+					InvalidateControl();
+					return true;
+				}
+
+				if (key == Keys.Down)
+				{
+					Transform.Origin.Y -= mSettings.MoveAmount;
+					InvalidateControl();
+					return true;
+				}
+
+				if (key == Keys.Add)
+				{
+					Transform.Affine.X.X *= mSettings.ScaleSnap / 100.0;
+					Transform.Affine.X.Y *= mSettings.ScaleSnap / 100.0;
+					Transform.Affine.Y.X *= mSettings.ScaleSnap / 100.0;
+					Transform.Affine.Y.Y *= mSettings.ScaleSnap / 100.0;
+					InvalidateControl();
+					return true;
+				}
+
+				if (key == Keys.Subtract)
+				{
+					Transform.Affine.X.X /= mSettings.ScaleSnap / 100.0;
+					Transform.Affine.X.Y /= mSettings.ScaleSnap / 100.0;
+					Transform.Affine.Y.X /= mSettings.ScaleSnap / 100.0;
+					Transform.Affine.Y.Y /= mSettings.ScaleSnap / 100.0;
+					InvalidateControl();
+					return true;
+				}
+
+				if (key == Keys.Multiply || key == Keys.Divide)
+				{
+					var normalX = Transform.Affine.X.Direction;
+					var normalY = Transform.Affine.Y.Direction;
+
+					var angleBetweenOxAndOy = System.Math.Atan2(normalY.Y, normalY.X) - System.Math.Atan2(normalX.Y, normalX.X);
+					var angle = mSettings.AngleSnap * (key == Keys.Multiply ? -1 : 1) * System.Math.PI / 360.0;
+
+					var cos0 = System.Math.Cos(angleBetweenOxAndOy);
+					var cos1 = System.Math.Cos(angle);
+
+					var sin0 = System.Math.Sin(angleBetweenOxAndOy);
+					var sin1 = System.Math.Sin(angle);
+
+					var original = Transform.Affine.X.Copy();
+
+					Transform.Affine.X.X = cos1 * original.X - sin1 * original.Y;
+					Transform.Affine.X.Y = sin1 * original.X + cos1 * original.Y;
+
+					var newNormal = mVisual.Model.Affine.X.Direction;
+					var length = mVisual.Model.Affine.Y.Length;
+
+					Transform.Affine.Y.X = length * (cos0 * newNormal.X - sin0 * newNormal.Y);
+					Transform.Affine.Y.Y = length * (sin0 * newNormal.X + cos0 * newNormal.Y);
+
+					InvalidateControl();
+					return true;
+				}
+			}
+			return false;
+		}
+
 		protected override bool OnAttachedControlMouseMove(Vector2 cursor, MouseButtons button)
 		{
 			if (mIsMouseDown)
