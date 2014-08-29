@@ -63,6 +63,10 @@
 			mBase = (newSize/2.0).Freeze();
 		}
 
+		public override void BringIntoView(Rectangle rectangle)
+		{
+			mPan = (((rectangle.BottomRight - rectangle.TopLeft) * 0.5 + rectangle.TopLeft) * new Vector2(1, -1)).Freeze();
+		}
 		public void Zoom(double delta)
 		{
 			var stepUp = mZoom*mZoomStepPositive;

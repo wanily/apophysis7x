@@ -93,5 +93,6 @@ namespace Xyrus.Apophysis.Windows.Math
 			var canvas = WorldToCanvas(worldPoint);
 			return canvas.X >= 0 && canvas.Y >= 0 && canvas.X < mSize.X && canvas.Y < mSize.Y;
 		}
+		public abstract void BringIntoView(Rectangle rectangle);
 	}
 }

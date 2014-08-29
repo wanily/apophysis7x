@@ -219,6 +219,17 @@ namespace Xyrus.Apophysis.Windows.Visuals
 		public bool IsActive { get; set; }
 		public bool IsSelected { get; set; }
 
+		public Math.Rectangle GetBounds()
+		{
+			var fo = mTransform.Origin;
+			var fx = mTransform.Affine.X;
+			var fy = mTransform.Affine.Y;
+
+			var cornerTopLeft = new Vector2(System.Math.Min(fx.X, fy.X), System.Math.Min(fx.Y, fy.Y)) + fo;
+			var cornerBottomRight = new Vector2(System.Math.Max(fx.X, fy.X), System.Math.Max(fx.Y, fy.Y)) + fo;
+
+			return new Math.Rectangle(cornerTopLeft, cornerBottomRight - cornerTopLeft);
+		}
 		public static Color GetTransformColor(Transform transform)
 		{
 			return mColors[transform.Index%mColors.Length];

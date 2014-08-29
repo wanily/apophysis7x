@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
@@ -56,9 +57,16 @@
     <Compile Include="Controls\EditorCanvas.Designer.cs">
       <DependentUpon>EditorCanvas.cs</DependentUpon>
     </Compile>
-    <Compile Include="Input\EditorSettings.cs">
+    <Compile Include="Controls\EditorCommands.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\EditorGridContextMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\EditorSettings.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\EditorSettingsSerializer.cs" />
     <Compile Include="Input\TransformHitEventArgs.cs" />
     <Compile Include="Input\TransformHitEventHandler.cs" />
     <Compile Include="Input\TransformInputOperation.cs" />

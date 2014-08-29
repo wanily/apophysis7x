@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Windows.Visuals;
@@ -21,12 +22,18 @@ namespace Xyrus.Apophysis.Windows.Controls
 		private GridInputStrategy mGridInteraction;
 		private TransformCollectionInputHandler mTransformInteraction;
 
+		private EditorGridContextMenu mGridContextMenu;
+		private EditorCommands mCommands;
+
 		private EventHandler mBeginEdit;
 		private EventHandler mEndEdit;
+
+		private bool mIsDisposed;
 
 		public EditorCanvas()
 		{
 			InitializeComponent();
+			SuspendLayout();
 
 			var grid = new Grid(new Vector2(Width, Height));
 
@@ -53,14 +60,21 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 			ShowRuler = true;
 
-			Settings.MoveAmount = 0.5;
-			Settings.AngleSnap = 15;
-			Settings.ScaleSnap = 125;
+			mCommands = new EditorCommands(this);
+			mGridContextMenu = new EditorGridContextMenu(this);
+
+			Settings.UnbindContextMenu();
+			Settings.BindContextMenu(mGridContextMenu);
+
+			MouseClick += OnCanvasMouseClick;
+			ResumeLayout(false);
 		}
 		protected override void Dispose(bool disposing)
 		{
-			if (disposing)
+			if (disposing && !mIsDisposed)
 			{
+				MouseClick -= OnCanvasMouseClick;
+
 				if (components != null)
 				{
 					components.Dispose();
@@ -81,8 +95,29 @@ namespace Xyrus.Apophysis.Windows.Controls
 				if (mVisual != null)
 				{
 					mVisual.Dispose();
+					mVisual = null;
 				}
+
+				if (mGridContextMenu != null)
+				{
+					mGridContextMenu.Dispose();
+					mGridContextMenu = null;
+				}
+
+				if (mCommands != null)
+				{
+					mCommands.Dispose();
+					mCommands = null;
+				}
+
+				mIsDisposed = true;
 			}
+
+			mGridPainter = null;
+			mRulerPainter = null;
+			mTransformPainter = null;
+			mGridInteraction = null;
+			mTransformInteraction = null;
 
 			base.Dispose(disposing);
 		}
@@ -131,10 +166,24 @@ namespace Xyrus.Apophysis.Windows.Controls
 			set { mTransformPainter.ReferenceColor = value; }
 		}
 
+		[Browsable(false)]
+		public EditorCommands Commands
+		{
+			get { return mCommands; }
+		}
+
+		[NotNull]
 		public EditorSettings Settings
 		{
 			get { return mTransformInteraction.Settings; }
+			set
+			{
+				mTransformInteraction.Settings.UnbindContextMenu();
+				mTransformInteraction.Settings = value;
+				mTransformInteraction.Settings.BindContextMenu(mGridContextMenu);
+			}
 		}
+
 		public Vector2 CursorPosition
 		{
 			get { return mGridInteraction.Canvas.CanvasToWorld(mInteraction.CursorPosition); }
@@ -172,6 +221,14 @@ namespace Xyrus.Apophysis.Windows.Controls
 			set { mGridPainter.HighlightOrigin = value; }
 		}
 
+		public void ZoomOptimally()
+		{
+			if (mTransformInteraction == null)
+				return;
+
+			mTransformInteraction.ZoomOptimally();
+		}
+
 		private void OnBeginEdit(object sender, EventArgs args)
 		{
 			RaiseBeginEdit();
@@ -203,6 +260,22 @@ namespace Xyrus.Apophysis.Windows.Controls
 			remove { mEndEdit -= value; }
 		}
 
+		private void OnCanvasMouseClick(object sender, MouseEventArgs e)
+		{
+			if (e.Button != MouseButtons.Right)
+				return;
+
+			var selected = mTransformInteraction == null ? null : mTransformInteraction.GetSelectedTransform();
+			if (selected != null)
+			{
+				//todo
+			}
+
+			if (selected == null && mGridContextMenu != null)
+			{
+				mGridContextMenu.Show(this, new Point(e.X, e.Y), ToolStripDropDownDirection.Default);
+			}
+		}
 		protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
 		{
 			mInteraction.TriggerKeyPress(keyData);

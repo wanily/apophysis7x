@@ -176,7 +176,6 @@ namespace Xyrus.Apophysis.Windows.Visuals
 				var xy = new Line(x, y);
 
 				var sizeLo = graphics.MeasureString(lo, AttachedControl.Font);
-				var sizeLx = graphics.MeasureString(lx, AttachedControl.Font);
 				var sizeLy = graphics.MeasureString(ly, AttachedControl.Font);
 
 				var posLo = (ox.A + new Vector2(-distLabel - sizeLo.Width, distLabel)).ToPoint();

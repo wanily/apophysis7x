@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using Xyrus.Apophysis.Windows.Controls;
 using Xyrus.Apophysis.Windows.Visuals;
 using Xyrus.Apophysis.Windows.Math;
 using Xyrus.Apophysis.Windows.Models;
@@ -16,6 +17,8 @@ namespace Xyrus.Apophysis.Windows.Input
 		private EventHandler mEndEdit;
 
 		private EditorSettings mSettings;
+		private EditorSettings mDefaultSettings;
+
 		private TransformCollectionVisual mVisualCollection;
 		private List<TransformInputHandler> mHandlers;
 		private Canvas mCanvas;
@@ -27,7 +30,9 @@ namespace Xyrus.Apophysis.Windows.Input
 
 			mVisualCollection = visualCollection;
 			mCanvas = canvas;
-			mSettings = new EditorSettings();
+
+			mDefaultSettings = new EditorSettings { MoveAmount = 0.5, AngleSnap = 15, ScaleSnap = 125 };
+			mSettings = mDefaultSettings;
 
 			mVisualCollection.ContentChanged += OnCollectionChanged;
 
@@ -43,6 +48,7 @@ namespace Xyrus.Apophysis.Windows.Input
 				mVisualCollection = null;
 			}
 
+			mDefaultSettings = null;
 			mSettings = null;
 			mCanvas = null;
 		}
@@ -64,9 +70,16 @@ namespace Xyrus.Apophysis.Windows.Input
 				return mHandlers[index];
 			}
 		}
+
+		[NotNull]
 		public EditorSettings Settings
 		{
 			get { return mSettings; }
+			set
+			{
+				if (value == null) throw new ArgumentNullException("value");
+				mSettings = value;
+			}
 		}
 
 		private void OnCollectionChanged(object sender, EventArgs eventArgs)
@@ -83,7 +96,7 @@ namespace Xyrus.Apophysis.Windows.Input
 
 			foreach (var visual in mVisualCollection.Reverse())
 			{
-				mHandlers.Add(new TransformInputHandler(AttachedControl, visual, mCanvas, mSettings));
+				mHandlers.Add(new TransformInputHandler(AttachedControl, visual, mCanvas, mSettings ?? mDefaultSettings));
 			}
 
 			InvalidateControl();
@@ -256,6 +269,26 @@ namespace Xyrus.Apophysis.Windows.Input
 		IEnumerator IEnumerable.GetEnumerator()
 		{
 			return GetEnumerator();
+		}
+
+		public Transform GetSelectedTransform()
+		{
+			var visual = mVisualCollection == null ? null : mVisualCollection.FirstOrDefault(x => x.IsSelected);
+			if (visual == null)
+				return null;
+
+			return visual.Model;
+		}
+		public void ZoomOptimally()
+		{
+			var bounds = mVisualCollection.Select(x => x.GetBounds()).ToList();
+
+			var corner1 = new Vector2(bounds.Select(x => x.TopLeft.X).Min(), bounds.Select(x => x.TopLeft.Y).Min());
+			var corner2 = new Vector2(bounds.Select(x => x.BottomRight.X).Max(), bounds.Select(x => x.BottomRight.Y).Max());
+
+			var rectangle = new Rectangle(corner1, corner2 - corner1);
+
+			mCanvas.BringIntoView(rectangle);
 		}
 	}
 }

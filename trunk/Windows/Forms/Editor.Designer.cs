@@ -1,4 +1,6 @@
-﻿namespace Xyrus.Apophysis.Windows.Forms
+﻿using Xyrus.Apophysis.Windows.Controls;
+
+namespace Xyrus.Apophysis.Windows.Forms
 {
 	partial class Editor
 	{
@@ -31,6 +33,7 @@
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Editor));
 			this.mRootSplitter = new System.Windows.Forms.SplitContainer();
 			this.mCanvas = new Xyrus.Apophysis.Windows.Controls.EditorCanvas();
+			this.mSettings = new EditorSettings();
 			this.mRootSplitter.Panel1.SuspendLayout();
 			this.mRootSplitter.SuspendLayout();
 			this.SuspendLayout();
@@ -66,10 +69,17 @@
 			this.mCanvas.RulerBackdropColor = System.Drawing.Color.Transparent;
 			this.mCanvas.RulerBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
 			this.mCanvas.RulerGridLineColor = System.Drawing.Color.Silver;
+			this.mCanvas.Settings = this.mSettings;
 			this.mCanvas.ShowRuler = true;
 			this.mCanvas.Size = new System.Drawing.Size(1043, 625);
 			this.mCanvas.TabIndex = 1;
 			this.mCanvas.Transforms = null;
+			// 
+			// mSettings
+			// 
+			this.mSettings.AngleSnap = 15D;
+			this.mSettings.MoveAmount = 0.1D;
+			this.mSettings.ScaleSnap = 125D;
 			// 
 			// Editor
 			// 
@@ -91,6 +101,7 @@
 
 		private System.Windows.Forms.SplitContainer mRootSplitter;
 		private Controls.EditorCanvas mCanvas;
+		private EditorSettings mSettings;
 	}
 }
 
