@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.Linq;
 using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Models;
 
@@ -49,6 +50,9 @@ namespace Xyrus.Apophysis.Windows.Controls
 			{
 				mEditor.ZoomOptimally();
 			}
+
+			mEditor.SelectedIterator = mEditor.Iterators.Last();
+			mEditor.RaiseSelectionChanged();
 
 			mEditor.Refresh();
 		}

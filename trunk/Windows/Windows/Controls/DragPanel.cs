@@ -37,10 +37,12 @@ namespace Xyrus.Apophysis.Windows.Controls
 				{
 					mTextBox.KeyPress -= OnTextBoxKeyPress;
 					mTextBox.TextChanged -= OnTextBoxChanged;
+					mTextBox.GotFocus -= OnTextBoxGotFocus;
+					mTextBox.LostFocus -= OnTextBoxLostFocus;
 					mTextBox = null;
 				}
 
-				MouseInputManager.MouseUp -= OnMouseUp;
+				//MouseInputManager.MouseUp -= OnMouseUp;
 			}
 			base.Dispose(disposing);
 		}
@@ -57,6 +59,8 @@ namespace Xyrus.Apophysis.Windows.Controls
 				{
 					mTextBox.KeyPress -= OnTextBoxKeyPress;
 					mTextBox.TextChanged -= OnTextBoxChanged;
+					mTextBox.GotFocus -= OnTextBoxGotFocus;
+					mTextBox.LostFocus -= OnTextBoxLostFocus;
 
 					if (!double.TryParse(mTextBox.Text, NumberStyles.Float, DisplayCulture, out oldValue))
 						oldValue = 0.0;
@@ -69,6 +73,8 @@ namespace Xyrus.Apophysis.Windows.Controls
 				{
 					mTextBox.KeyPress += OnTextBoxKeyPress;
 					mTextBox.TextChanged += OnTextBoxChanged;
+					mTextBox.GotFocus += OnTextBoxGotFocus;
+					mTextBox.LostFocus += OnTextBoxLostFocus;
 					Value = oldValue;
 				}
 			}
@@ -121,9 +127,24 @@ namespace Xyrus.Apophysis.Windows.Controls
 			}
 		}
 
+		public event EventHandler ValueChanged;
+		public event EventHandler BeginEdit;
+		public event EventHandler EndEdit;
+
+		private void OnTextBoxLostFocus(object sender, EventArgs e)
+		{
+			if (EndEdit != null)
+				EndEdit(this, new EventArgs());
+		}
+		private void OnTextBoxGotFocus(object sender, EventArgs e)
+		{
+			if (BeginEdit != null)
+				BeginEdit(this, new EventArgs());
+		}
 		private void OnTextBoxChanged(object sender, EventArgs e)
 		{
-			
+			if (ValueChanged != null)
+				ValueChanged(this, new EventArgs());
 		}
 		private void OnTextBoxKeyPress(object sender, KeyPressEventArgs e)
 		{
@@ -160,9 +181,11 @@ namespace Xyrus.Apophysis.Windows.Controls
 			mCursorStart = MouseInputManager.GetPosition();
 			mIsDragging = true;
 
+			if (BeginEdit != null)
+				BeginEdit(this, new EventArgs());
+
 			base.OnMouseDown(e);
 		}
-
 		protected override void OnMouseMove(MouseEventArgs e)
 		{
 			if (mIsDragging)
@@ -204,6 +227,9 @@ namespace Xyrus.Apophysis.Windows.Controls
 			Cursor.Current = mIsMouseOver ? Cursors.Hand : null;
 			mIsDragging = false;
 			mStart = Value;
+
+			if (EndEdit != null)
+				EndEdit(this, new EventArgs());
 		}
 	}
 }

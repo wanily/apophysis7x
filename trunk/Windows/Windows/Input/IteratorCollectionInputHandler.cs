@@ -14,12 +14,13 @@ namespace Xyrus.Apophysis.Windows.Input
 	{
 		private EventHandler mBeginEdit;
 		private EventHandler mEndEdit;
+		private EventHandler mSelectionChanged;
 
 		private EditorSettings mSettings;
 		private EditorSettings mDefaultSettings;
 
 		private IteratorCollectionVisual mVisualCollection;
-		private List<IteratorInputHandler> mHandlers;
+		private readonly List<IteratorInputHandler> mHandlers;
 		private Canvas mCanvas;
 		private IteratorMatrix mActiveMatrix;
 
@@ -83,6 +84,26 @@ namespace Xyrus.Apophysis.Windows.Input
 					ZoomOptimally();
 					InvalidateControl();
 				}
+			}
+		}
+		public Iterator SelectedIterator
+		{
+			get { return GetSelectedIterator(); }
+			set
+			{
+				foreach (var visual in mVisualCollection)
+				{
+					visual.IsSelected = false;
+				}
+
+				var newVisual = mVisualCollection.FirstOrDefault(x => ReferenceEquals(x.Model, value));
+
+				if (newVisual != null)
+				{
+					newVisual.IsSelected = true;
+				}
+
+				InvalidateControl();
 			}
 		}
 
@@ -250,6 +271,9 @@ namespace Xyrus.Apophysis.Windows.Input
 					}
 
 					RaiseBeginEdit();
+					if (mSelectionChanged != null)
+						mSelectionChanged(this, new EventArgs());
+
 					SetOperation(handler);
 					InvalidateControl();
 					return true;
@@ -313,6 +337,12 @@ namespace Xyrus.Apophysis.Windows.Input
 		{
 			add { mEndEdit += value; }
 			remove { mEndEdit -= value; }
+		}
+
+		public event EventHandler SelectionChanged
+		{
+			add { mSelectionChanged += value; }
+			remove { mSelectionChanged -= value; }
 		}
 
 		public IEnumerator<IteratorInputHandler> GetEnumerator()

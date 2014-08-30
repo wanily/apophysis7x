@@ -94,12 +94,6 @@
     </Compile>
     <Compile Include="Windows\Controls\EditorSettingsSerializer.cs" />
     <Compile Include="Windows\Controls\IteratorMatrix.cs" />
-    <Compile Include="Windows\Forms\DragPanelTest.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Windows\Forms\DragPanelTest.Designer.cs">
-      <DependentUpon>DragPanelTest.cs</DependentUpon>
-    </Compile>
     <Compile Include="Windows\Input\MouseHookEventArgs.cs" />
     <Compile Include="Windows\Input\InputOperation.cs" />
     <Compile Include="Windows\Input\KeyboardHookEventArgs.cs" />
@@ -152,9 +146,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\Controls\EditorCanvas.resx">
       <DependentUpon>EditorCanvas.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Windows\Forms\DragPanelTest.resx">
-      <DependentUpon>DragPanelTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\Forms\Editor.resx">
       <DependentUpon>Editor.cs</DependentUpon>

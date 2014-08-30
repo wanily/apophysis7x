@@ -25,6 +25,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 		private EventHandler mBeginEdit;
 		private EventHandler mEndEdit;
+		private EventHandler mSelectionChanged;
 
 		private bool mIsDisposed;
 
@@ -47,6 +48,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 			mIteratorInteraction.BeginEdit += OnBeginEdit;
 			mIteratorInteraction.EndEdit += OnEndEdit;
+			mIteratorInteraction.SelectionChanged += OnSelectionChanged;
 
 			GridLineColor = Color.FromArgb(0xff, 0x66, 0x66, 0x66);
 			BackdropColor = Color.Transparent;
@@ -80,6 +82,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 				if (mIteratorInteraction != null)
 				{
+					mIteratorInteraction.SelectionChanged -= OnSelectionChanged;
 					mIteratorInteraction.BeginEdit -= OnBeginEdit;
 					mIteratorInteraction.EndEdit -= OnEndEdit;
 				}
@@ -195,6 +198,16 @@ namespace Xyrus.Apophysis.Windows.Controls
 			set { mGridPainter.HighlightOrigin = value; }
 		}
 
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public Iterator SelectedIterator
+		{
+			get { return mIteratorInteraction.SelectedIterator; }
+			set
+			{
+				mIteratorInteraction.SelectedIterator = value;
+			}
+		}
 		public IteratorMatrix ActiveMatrix
 		{
 			get { return mIteratorInteraction.ActiveMatrix; }
@@ -252,6 +265,16 @@ namespace Xyrus.Apophysis.Windows.Controls
 				mEndEdit(this, new EventArgs());
 		}
 
+		private void OnSelectionChanged(object sender, EventArgs e)
+		{
+			RaiseSelectionChanged();
+		}
+		internal void RaiseSelectionChanged()
+		{
+			if (mSelectionChanged != null)
+				mSelectionChanged(this, new EventArgs());
+		}
+
 		public event EventHandler BeginEdit
 		{
 			add { mBeginEdit += value; }
@@ -261,6 +284,11 @@ namespace Xyrus.Apophysis.Windows.Controls
 		{
 			add { mEndEdit += value; }
 			remove { mEndEdit -= value; }
+		}
+		public event EventHandler SelectionChanged
+		{
+			add { mSelectionChanged += value; }
+			remove { mSelectionChanged -= value; }
 		}
 
 		private void OnCanvasMouseClick(object sender, MouseEventArgs e)

@@ -13,7 +13,7 @@ namespace Xyrus.Apophysis
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 
-			using (var window = GetWindow<DragPanelTest>())
+			using (var window = GetWindow<Editor>())
 			{
 				Application.Run(window);
 			}

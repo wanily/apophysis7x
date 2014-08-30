@@ -11,19 +11,49 @@ namespace Xyrus.Apophysis.Models
 
 		private AffineTransform mPreAffine;
 		private AffineTransform mPostAffine;
+		private string mName;
+		private double mWeight;
 
 		public Iterator([NotNull] Flame hostingFlame)
 		{
 			if (hostingFlame == null) throw new ArgumentNullException("hostingFlame");
 
 			mFlame = hostingFlame;
+
 			mPreAffine = new AffineTransform();
 			mPostAffine = new AffineTransform();
+
+			mWeight = 0.5;
 		}
 
 		public int Index
 		{
 			get { return mFlame.Iterators.IndexOf(this); }
+		}
+		public string Name
+		{
+			get { return mName; }
+			set
+			{
+				if (string.IsNullOrEmpty(value))
+					mName = null;
+				else if (string.IsNullOrEmpty(value.Trim()))
+					mName = null;
+				else mName = value;
+			}
+		}
+		public double Weight
+		{
+			get { return mWeight; }
+			set
+			{
+				if (value < double.Epsilon)
+				{
+					throw new ArgumentOutOfRangeException("value");
+				}
+
+				mWeight = value;
+			}
 		}
 
 		public AffineTransform PreAffine
@@ -45,6 +75,16 @@ namespace Xyrus.Apophysis.Models
 			}
 		}
 
+		private double ParseFloat([NotNull] XAttribute attribute, double defaultValue = 0)
+		{
+			if (attribute == null) throw new ArgumentNullException("attribute");
+
+			double value;
+			if (!double.TryParse(attribute.Value, NumberStyles.Number, CultureInfo.InvariantCulture, out value))
+				value = defaultValue;
+
+			return value;
+		}
 		private double[] ParseCoefficients([NotNull] XAttribute attribute)
 		{
 			if (attribute == null) throw new ArgumentNullException("attribute");
@@ -77,6 +117,21 @@ namespace Xyrus.Apophysis.Models
 			if ("xform" != element.Name.ToString().ToLower())
 			{
 				throw new ApophysisException("Expected XML node \"xform\" but received \"" + element.Name + "\"");
+			}
+
+			var nameAttribute = element.Attribute(XName.Get("name"));
+			Name = nameAttribute == null ? null : nameAttribute.Value;
+
+			var weightAttribute = element.Attribute(XName.Get("weight"));
+			if (weightAttribute != null)
+			{
+				var weight = ParseFloat(weightAttribute, 0.5);
+				if (weight < double.Epsilon)
+				{
+					throw new ApophysisException("Weight must not be less or equal to zero");
+				}
+
+				Weight = weight;
 			}
 
 			var coefsAttribute = element.Attribute(XName.Get("coefs"));
