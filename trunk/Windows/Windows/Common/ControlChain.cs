@@ -5,8 +5,7 @@ using System.Windows.Forms;
 
 namespace Xyrus.Apophysis.Windows
 {
-	[PublicAPI]
-	public abstract class ControlChain<T> : ControlEventInterceptor where T : ChainItem
+	abstract class ControlChain<T> : ControlEventInterceptor where T : ChainItem
 	{
 		class PriorizedChainItem
 		{

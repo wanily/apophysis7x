@@ -3,8 +3,7 @@ using System.Windows.Forms;
 
 namespace Xyrus.Apophysis.Windows
 {
-	[PublicAPI]
-	public abstract class ControlEventInterceptor : IDisposable
+	abstract class ControlEventInterceptor : IDisposable
 	{
 		private Control mControl;
 

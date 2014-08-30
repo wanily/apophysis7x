@@ -4,8 +4,7 @@ using System.Windows.Forms;
 
 namespace Xyrus.Apophysis.Windows.Visuals
 {
-	[PublicAPI]
-	public abstract class ControlVisual : ChainItem
+	abstract class ControlVisual : ChainItem
 	{
 		protected ControlVisual([NotNull] Control control) : base(control)
 		{

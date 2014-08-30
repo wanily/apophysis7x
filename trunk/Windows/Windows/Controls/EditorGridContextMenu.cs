@@ -3,8 +3,7 @@ using System.Windows.Forms;
 
 namespace Xyrus.Apophysis.Windows.Controls
 {
-	[PublicAPI]
-	public sealed class EditorGridContextMenu : ContextMenuStrip
+	sealed class EditorGridContextMenu : ContextMenuStrip
 	{
 		private EditorCanvas mEditor;
 

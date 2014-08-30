@@ -10,8 +10,7 @@ using Xyrus.Apophysis.Windows.Visuals;
 
 namespace Xyrus.Apophysis.Windows.Input
 {
-	[PublicAPI]
-	public class IteratorCollectionInputHandler : InputHandler, IEnumerable<IteratorInputHandler>
+	class IteratorCollectionInputHandler : InputHandler, IEnumerable<IteratorInputHandler>
 	{
 		private EventHandler mBeginEdit;
 		private EventHandler mEndEdit;

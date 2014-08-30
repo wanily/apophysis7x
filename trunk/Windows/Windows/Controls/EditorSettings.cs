@@ -15,14 +15,14 @@ namespace Xyrus.Apophysis.Windows.Controls
 			base.Dispose(disposing);
 		}
 
-		public void BindContextMenu([NotNull] EditorGridContextMenu menu)
+		internal void BindContextMenu([NotNull] EditorGridContextMenu menu)
 		{
 			if (menu == null) throw new ArgumentNullException("menu");
 
 			mContextMenu = menu;
 			mContextMenu.UpdateCheckedStates(this);
 		}
-		public void UnbindContextMenu()
+		internal void UnbindContextMenu()
 		{
 			if (mContextMenu == null)
 				return;

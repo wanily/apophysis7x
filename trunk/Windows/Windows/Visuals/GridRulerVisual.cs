@@ -6,8 +6,7 @@ using Xyrus.Apophysis.Math;
 
 namespace Xyrus.Apophysis.Windows.Visuals
 {
-	[PublicAPI]
-	public class GridRulerVisual : GridVisual
+	class GridRulerVisual : GridVisual
 	{
 		private bool mShowHorizontal;
 		private bool mShowVertical;

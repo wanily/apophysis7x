@@ -4,8 +4,7 @@ using Xyrus.Apophysis.Math;
 
 namespace Xyrus.Apophysis.Windows.Input
 {
-	[PublicAPI]
-	public class GridInputStrategy : CanvasInputStrategy<Grid>
+	class GridInputStrategy : CanvasInputStrategy<Grid>
 	{
 		public GridInputStrategy([NotNull] Control control, [NotNull] Grid canvas) : base(control, canvas)
 		{

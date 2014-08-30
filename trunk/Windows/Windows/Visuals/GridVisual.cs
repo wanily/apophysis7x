@@ -5,8 +5,7 @@ using Rectangle = Xyrus.Apophysis.Math.Rectangle;
 
 namespace Xyrus.Apophysis.Windows.Visuals
 {
-	[PublicAPI]
-	public class GridVisual : CanvasVisual<Grid>
+	class GridVisual : CanvasVisual<Grid>
 	{
 		private bool mHighlightOrigin;
 

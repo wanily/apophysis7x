@@ -11,8 +11,7 @@ using Rectangle = System.Drawing.Rectangle;
 
 namespace Xyrus.Apophysis.Windows.Visuals
 {
-	[PublicAPI]
-	public class InputOperationVisual : CanvasVisual<Canvas>
+	class InputOperationVisual : CanvasVisual<Canvas>
 	{
 		struct ColoredString
 		{

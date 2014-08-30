@@ -4,8 +4,7 @@ using Xyrus.Apophysis.Math;
 
 namespace Xyrus.Apophysis.Windows.Input
 {
-	[PublicAPI]
-	public abstract class InputHandler : ChainItem
+	abstract class InputHandler : ChainItem
 	{
 		protected InputHandler([NotNull] Control control) : base(control)
 		{

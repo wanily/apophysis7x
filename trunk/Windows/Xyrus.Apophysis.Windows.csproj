@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Design" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
@@ -70,6 +71,12 @@
     <Compile Include="Windows\Common\ChainItem.cs" />
     <Compile Include="Windows\Common\ControlChain.cs" />
     <Compile Include="Windows\Common\ControlEventInterceptor.cs" />
+    <Compile Include="Windows\Controls\DragPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Windows\Controls\DragPanel.Designer.cs">
+      <DependentUpon>DragPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Controls\EditorCanvas.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -87,9 +94,22 @@
     </Compile>
     <Compile Include="Windows\Controls\EditorSettingsSerializer.cs" />
     <Compile Include="Windows\Controls\IteratorMatrix.cs" />
+    <Compile Include="Windows\Forms\DragPanelTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\Forms\DragPanelTest.Designer.cs">
+      <DependentUpon>DragPanelTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Input\MouseHookEventArgs.cs" />
     <Compile Include="Windows\Input\InputOperation.cs" />
+    <Compile Include="Windows\Input\KeyboardHookEventArgs.cs" />
+    <Compile Include="Windows\Input\KeyboardHookEventHandler.cs" />
+    <Compile Include="Windows\Input\KeyboardInputManager.cs" />
+    <Compile Include="Windows\Input\MouseHookEventHandler.cs" />
+    <Compile Include="Windows\Input\MouseInputManager.cs" />
     <Compile Include="Windows\Input\MouseOverOperation.cs" />
     <Compile Include="Windows\Input\MoveOperation.cs" />
+    <Compile Include="Windows\Input\NativeHookManager.cs" />
     <Compile Include="Windows\Input\RotateOperation.cs" />
     <Compile Include="Windows\Input\ScaleOperation.cs" />
     <Compile Include="Windows\Common\CanvasSnapBehavior.cs" />
@@ -127,8 +147,14 @@
     <Compile Include="Models\AffineTransform.cs" />
     <Compile Include="Models\IteratorCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Windows\Controls\DragPanel.resx">
+      <DependentUpon>DragPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Windows\Controls\EditorCanvas.resx">
       <DependentUpon>EditorCanvas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\Forms\DragPanelTest.resx">
+      <DependentUpon>DragPanelTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\Forms\Editor.resx">
       <DependentUpon>Editor.cs</DependentUpon>

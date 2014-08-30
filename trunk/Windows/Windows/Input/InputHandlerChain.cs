@@ -3,8 +3,7 @@ using Xyrus.Apophysis.Math;
 
 namespace Xyrus.Apophysis.Windows.Input
 {
-	[PublicAPI]
-	public class InputHandlerChain : ControlChain<InputHandler>
+	class InputHandlerChain : ControlChain<InputHandler>
 	{
 		private Vector2 mCursor;
 

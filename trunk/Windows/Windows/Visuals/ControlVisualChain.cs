@@ -5,8 +5,7 @@ using System.Windows.Forms;
 
 namespace Xyrus.Apophysis.Windows.Visuals
 {
-	[PublicAPI]
-	public class ControlVisualChain : ControlChain<ControlVisual>
+	class ControlVisualChain : ControlChain<ControlVisual>
 	{
 		public ControlVisualChain([NotNull] Control control) : base(control)
 		{

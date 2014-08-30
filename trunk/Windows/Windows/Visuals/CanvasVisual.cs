@@ -6,8 +6,7 @@ using Rectangle = Xyrus.Apophysis.Math.Rectangle;
 
 namespace Xyrus.Apophysis.Windows.Visuals
 {
-	[PublicAPI]
-	public abstract class CanvasVisual<T> : ControlVisual where T: Canvas
+	abstract class CanvasVisual<T> : ControlVisual where T: Canvas
 	{
 		private T mCanvas;
 

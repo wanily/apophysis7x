@@ -8,8 +8,7 @@ using Rectangle = System.Drawing.Rectangle;
 
 namespace Xyrus.Apophysis.Windows.Visuals
 {
-	[PublicAPI]
-	public class IteratorVisual : CanvasVisual<Canvas>
+	class IteratorVisual : CanvasVisual<Canvas>
 	{
 		private Iterator mIterator;
 		private IteratorMatrix mActiveMatrix;

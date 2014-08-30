@@ -12,8 +12,7 @@ using Rectangle = System.Drawing.Rectangle;
 
 namespace Xyrus.Apophysis.Windows.Visuals
 {
-	[PublicAPI]
-	public class IteratorCollectionVisual : CanvasVisual<Canvas>, IEnumerable<IteratorVisual>
+	class IteratorCollectionVisual : CanvasVisual<Canvas>, IEnumerable<IteratorVisual>
 	{
 		private InputOperationVisual mOperationVisual;
 

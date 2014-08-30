@@ -3,8 +3,7 @@ using Xyrus.Apophysis.Models;
 
 namespace Xyrus.Apophysis.Windows.Input
 {
-	[PublicAPI]
-	public abstract class InputOperation
+	abstract class InputOperation
 	{
 		protected InputOperation([NotNull] Iterator iterator)
 		{

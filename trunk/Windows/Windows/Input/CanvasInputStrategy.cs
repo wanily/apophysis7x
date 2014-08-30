@@ -4,8 +4,7 @@ using Xyrus.Apophysis.Math;
 
 namespace Xyrus.Apophysis.Windows.Input
 {
-	[PublicAPI]
-	public abstract class CanvasInputStrategy<T> : InputHandler where T : Canvas
+	abstract class CanvasInputStrategy<T> : InputHandler where T : Canvas
 	{
 		private T mCanvas;
 		private Vector2 mNavigationOrigin;

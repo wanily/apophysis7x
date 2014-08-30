@@ -9,8 +9,7 @@ using Xyrus.Apophysis.Properties;
 
 namespace Xyrus.Apophysis.Windows.Input
 {
-	[PublicAPI]
-	public class IteratorInputHandler : InputHandler
+	class IteratorInputHandler : InputHandler
 	{
 		enum HitTestResult
 		{
