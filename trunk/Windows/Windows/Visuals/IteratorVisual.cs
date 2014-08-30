@@ -257,7 +257,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			var cornerTopLeft = new Vector2(System.Math.Min(fx.X, fy.X), System.Math.Min(fx.Y, fy.Y));
 			var cornerBottomRight = new Vector2(System.Math.Max(fx.X, fy.X), System.Math.Max(fx.Y, fy.Y));
 
-			return new Apophysis.Math.Rectangle(cornerTopLeft, cornerBottomRight - cornerTopLeft);
+			return new Math.Rectangle(cornerTopLeft, cornerBottomRight - cornerTopLeft);
 		}
 		public static Color GetColor(Iterator iterator)
 		{
