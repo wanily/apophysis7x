@@ -178,6 +178,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 					KeyboardInputManager.GetKeyState(Keys.LControlKey) ||
 					KeyboardInputManager.GetKeyState(Keys.RControlKey)
 				) multiplier = 10000;
+
 				else if (
 					KeyboardInputManager.GetKeyState(Keys.LShiftKey) ||
 					KeyboardInputManager.GetKeyState(Keys.RShiftKey)
