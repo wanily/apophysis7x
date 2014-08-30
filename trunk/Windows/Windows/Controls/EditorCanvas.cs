@@ -268,13 +268,13 @@ namespace Xyrus.Apophysis.Windows.Controls
 			if (e.Button != MouseButtons.Right)
 				return;
 
-			var selected = mIteratorInteraction == null ? null : mIteratorInteraction.GetSelectedIterator();
-			if (selected != null)
+			var hit = mIteratorInteraction == null ? null : mIteratorInteraction.HitTestIterator(new Vector2(e.X, e.Y));
+			if (hit != null)
 			{
 				//todo
 			}
 
-			if (selected == null && mGridContextMenu != null)
+			if (hit == null && mGridContextMenu != null)
 			{
 				mGridContextMenu.Show(this, new Point(e.X, e.Y), ToolStripDropDownDirection.Default);
 			}

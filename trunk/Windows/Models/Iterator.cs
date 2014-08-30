@@ -97,12 +97,12 @@ namespace Xyrus.Apophysis.Models
 			{
 				var vector = ParseCoefficients(postAttribute);
 
-				PreAffine.Matrix.X.X = vector[0];
-				PreAffine.Matrix.X.Y = -vector[1];
-				PreAffine.Matrix.Y.X = -vector[2];
-				PreAffine.Matrix.Y.Y = vector[3];
-				PreAffine.Origin.X = vector[4];
-				PreAffine.Origin.Y = -vector[5];
+				PostAffine.Matrix.X.X = vector[0];
+				PostAffine.Matrix.X.Y = -vector[1];
+				PostAffine.Matrix.Y.X = -vector[2];
+				PostAffine.Matrix.Y.Y = vector[3];
+				PostAffine.Origin.X = vector[4];
+				PostAffine.Origin.Y = -vector[5];
 			}
 		}
 	}

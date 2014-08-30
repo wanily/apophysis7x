@@ -328,6 +328,16 @@ namespace Xyrus.Apophysis.Windows.Input
 			return GetEnumerator();
 		}
 
+		public Iterator HitTestIterator(Vector2 cursor)
+		{
+			foreach (var handler in mHandlers)
+			{
+				if (handler.PerformHitTest(cursor))
+					return handler.Model;
+			}
+
+			return null;
+		}
 		public Iterator GetSelectedIterator()
 		{
 			var visual = mVisualCollection == null ? null : mVisualCollection.FirstOrDefault(x => x.IsSelected);

@@ -523,5 +523,10 @@ namespace Xyrus.Apophysis.Windows.Input
 		{
 			return mOperation;
 		}
+		public bool PerformHitTest(Vector2 cursor)
+		{
+			var hitTest = HitTest(cursor);
+			return hitTest != HitTestResult.None;
+		}
 	}
 }
