@@ -130,7 +130,7 @@ namespace Xyrus.Apophysis.Windows.Input
 
 		protected override bool OnAttachedControlKeyPress(Keys key, Keys modifiers)
 		{
-			if (mHandlers == null)
+			if (mHandlers == null || mVisualCollection == null)
 				return false;
 
 			if (key == Keys.Home)
@@ -138,6 +138,35 @@ namespace Xyrus.Apophysis.Windows.Input
 				ZoomOptimally();
 				InvalidateControl();
 				return true;
+			}
+
+			if (key == Keys.PageDown || key == Keys.PageUp)
+			{
+				var selected = mVisualCollection.Where(x => x.IsSelected).OrderByDescending(x => x.Model.Index).FirstOrDefault();
+
+				if (selected == null)
+				{
+					mVisualCollection.First().IsSelected = true;
+					InvalidateControl();
+					return true;
+				}
+
+				var indexDictionary = mVisualCollection.Select(x => x.Model).ToDictionary(x => x.Index);
+				var newIndex = selected.Model.Index + (key == Keys.PageDown ? 1 : -1);
+
+				if (indexDictionary.ContainsKey(newIndex))
+				{
+					foreach (var visual in mVisualCollection)
+					{
+						visual.IsSelected = false;
+					}
+
+					var newVisual = mVisualCollection.First(x => x.Model.Index == newIndex);
+					newVisual.IsSelected = true;
+
+					InvalidateControl();
+					return true;
+				}
 			}
 
 			foreach (var handler in mHandlers)

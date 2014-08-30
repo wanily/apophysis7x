@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("Apophysis [Prototype xw#2014/337]")]
-[assembly: AssemblyDescription("Apophysis [Prototype xw#2014/337]")]
+[assembly: AssemblyTitle("Apophysis [Prototype xw#2014/N]")]
+[assembly: AssemblyDescription("Apophysis [Prototype xw#2014/N]")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("XyrusWorx")]
 [assembly: AssemblyProduct("Apophysis")]
@@ -13,5 +13,5 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: Guid("23a15715-7de7-48a4-b72f-38086fe781fa")]
 
-[assembly: AssemblyVersion("0.0.2014.337")]
-[assembly: AssemblyFileVersion("0.0.2014.337")]
+[assembly: AssemblyVersion("0.0.2014.381")]
+[assembly: AssemblyFileVersion("0.0.2014.381")]

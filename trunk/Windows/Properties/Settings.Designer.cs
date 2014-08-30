@@ -22,5 +22,41 @@ namespace Xyrus.Apophysis.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.5")]
+        public double EditorMoveDistance {
+            get {
+                return ((double)(this["EditorMoveDistance"]));
+            }
+            set {
+                this["EditorMoveDistance"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("15")]
+        public double EditorRotateAngle {
+            get {
+                return ((double)(this["EditorRotateAngle"]));
+            }
+            set {
+                this["EditorRotateAngle"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("125")]
+        public double EditorScaleRatio {
+            get {
+                return ((double)(this["EditorScaleRatio"]));
+            }
+            set {
+                this["EditorScaleRatio"] = value;
+            }
+        }
     }
 }
