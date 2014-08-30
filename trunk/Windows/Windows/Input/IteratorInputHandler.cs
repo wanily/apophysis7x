@@ -2,8 +2,8 @@ using System;
 using System.IO;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Math;
+using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Controls;
-using Xyrus.Apophysis.Windows.Models;
 using Xyrus.Apophysis.Windows.Visuals;
 using Xyrus.Apophysis.Properties;
 

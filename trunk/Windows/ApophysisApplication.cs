@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
+using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Forms;
-using Xyrus.Apophysis.Windows.Models;
 
 namespace Xyrus.Apophysis
 {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace Xyrus.Apophysis.Windows.Models
+namespace Xyrus.Apophysis.Models
 {
 	[PublicAPI]
 	public class IteratorCollection : ReadOnlyCollection<Iterator>

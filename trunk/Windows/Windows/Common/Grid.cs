@@ -12,11 +12,11 @@ namespace Xyrus.Apophysis.Windows
 		private const double mZoomConstraint = 12;
 
 		private double mZoom = 1.0;
-		private ImmutableVector2 mBase, mPan;
+		private ReadOnlyVector2 mBase, mPan;
 
 		public Grid(Vector2 size) : base(size)
 		{
-			mPan = new ImmutableVector2(new Vector2());
+			mPan = new ReadOnlyVector2(new Vector2());
 			ResizeOverride(size);
 		}
 
@@ -24,7 +24,7 @@ namespace Xyrus.Apophysis.Windows
 		{
 			get { return mZoom; }
 		}
-		public ImmutableVector2 Offset
+		public ReadOnlyVector2 Offset
 		{
 			get { return mPan; }
 		}
@@ -106,7 +106,7 @@ namespace Xyrus.Apophysis.Windows
 		}
 		public void Reset()
 		{
-			mPan = new ImmutableVector2(new Vector2());
+			mPan = new ReadOnlyVector2(new Vector2());
 			mZoom = 1.0;
 		}
 	}

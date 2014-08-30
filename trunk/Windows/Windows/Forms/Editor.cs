@@ -1,5 +1,5 @@
 ﻿using System.Windows.Forms;
-using Xyrus.Apophysis.Windows.Models;
+using Xyrus.Apophysis.Models;
 
 namespace Xyrus.Apophysis.Windows.Forms
 {

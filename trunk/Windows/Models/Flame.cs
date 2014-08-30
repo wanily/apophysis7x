@@ -1,4 +1,4 @@
-﻿namespace Xyrus.Apophysis.Windows.Models
+﻿namespace Xyrus.Apophysis.Models
 {
 	[PublicAPI]
 	public class Flame

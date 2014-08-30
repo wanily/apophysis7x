@@ -1,7 +1,7 @@
 using System;
 using System.Globalization;
 using Xyrus.Apophysis.Math;
-using Xyrus.Apophysis.Windows.Models;
+using Xyrus.Apophysis.Models;
 
 namespace Xyrus.Apophysis.Windows.Input
 {
@@ -18,21 +18,21 @@ namespace Xyrus.Apophysis.Windows.Input
 		}
 
 		[NotNull]
-		public ImmutableVector2 Origin
+		public ReadOnlyVector2 Origin
 		{
 			get; 
 			private set;
 		}
 
 		[NotNull]
-		public ImmutableVector2 Current
+		public ReadOnlyVector2 Current
 		{
 			get;
 			private set;
 		}
 
 		[NotNull]
-		public ImmutableVector2 Delta
+		public ReadOnlyVector2 Delta
 		{
 			get { return (Current - Origin).Freeze(); }
 		}

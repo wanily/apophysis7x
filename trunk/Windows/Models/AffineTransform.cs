@@ -1,7 +1,7 @@
 ﻿using System;
 using Xyrus.Apophysis.Math;
 
-namespace Xyrus.Apophysis.Windows.Models
+namespace Xyrus.Apophysis.Models
 {
 	[PublicAPI]
 	public class AffineTransform

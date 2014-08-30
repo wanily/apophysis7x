@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Math;
+using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Controls;
 using Xyrus.Apophysis.Windows.Visuals;
-using Xyrus.Apophysis.Windows.Models;
 
 namespace Xyrus.Apophysis.Windows.Input
 {

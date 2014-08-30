@@ -127,9 +127,9 @@ namespace Xyrus.Apophysis.Math
 			};
 		}
 
-		public ImmutableVector2 Freeze()
+		public ReadOnlyVector2 Freeze()
 		{
-			return new ImmutableVector2(this);
+			return new ReadOnlyVector2(this);
 		}
 
 		public Vector2 Transform([NotNull] Matrix2X2 matrix, Vector2 origin = null)
