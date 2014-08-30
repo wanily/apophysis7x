@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -550,7 +551,14 @@ namespace Xyrus.Apophysis.Windows.Input
 
 		[DllImport("user32.dll", CharSet = CharSet.Auto, 
 			CallingConvention = CallingConvention.StdCall)]
-		private static extern short GetKeyState(int vKey);
+		public static extern short GetKeyState(int vKey);
+
+		[DllImport("user32.dll")]
+		public static extern bool SetCursorPos(int x, int y);
+
+		[DllImport("user32.dll")]
+		[return: MarshalAs(UnmanagedType.Bool)]
+		public static extern bool GetCursorPos(out Point lpPoint);
 
 		private delegate int HookProc(int nCode, int wParam, IntPtr lParam);
 

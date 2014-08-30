@@ -1,4 +1,6 @@
-﻿namespace Xyrus.Apophysis.Windows.Input
+﻿using System.Windows.Forms;
+
+namespace Xyrus.Apophysis.Windows.Input
 {
 	static class KeyboardInputManager
 	{
@@ -13,5 +15,10 @@
 
 		public static event KeyboardHookEventHandler KeyUp;
 		public static event KeyboardHookEventHandler KeyDown;
+
+		public static bool GetKeyState(Keys vk)
+		{
+			return NativeHookManager.GetKeyState((int)vk) < 0;
+		}
 	}
 }

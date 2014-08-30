@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using System.Windows.Forms;
 
 namespace Xyrus.Apophysis.Windows.Input
 {
@@ -31,11 +30,13 @@ namespace Xyrus.Apophysis.Windows.Input
 
 		public static Point GetPosition()
 		{
-			return new Point(Cursor.Position.X, Cursor.Position.Y);
+			Point p;
+			NativeHookManager.GetCursorPos(out p);
+			return p;
 		}
 		public static void SetPosition(Point p)
 		{
-			Cursor.Position = p;
+			NativeHookManager.SetCursorPos(p.X, p.Y);
 		}
 	}
 }
