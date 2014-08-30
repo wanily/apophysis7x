@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Xyrus.Apophysis.Windows
+namespace Xyrus.Apophysis
 {
 	[Serializable, PublicAPI]
 	public class ApophysisException : Exception

@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using Xyrus.Apophysis.Windows.Forms;
 using Xyrus.Apophysis.Windows.Models;
 
-namespace Xyrus.Apophysis.Windows
+namespace Xyrus.Apophysis
 {
 	[PublicAPI]
 	public static class ApophysisApplication

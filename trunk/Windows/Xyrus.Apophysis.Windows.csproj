@@ -32,7 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Resources\MAINICON.ico</ApplicationIcon>
+    <ApplicationIcon>Windows\Resources\MAINICON.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -47,58 +47,58 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\ApophysisException.cs" />
-    <Compile Include="Common\ChainItem.cs" />
-    <Compile Include="Common\ControlChain.cs" />
-    <Compile Include="Common\ControlEventInterceptor.cs" />
-    <Compile Include="Controls\EditorCanvas.cs">
+    <Compile Include="ApophysisException.cs" />
+    <Compile Include="Windows\Common\ChainItem.cs" />
+    <Compile Include="Windows\Common\ControlChain.cs" />
+    <Compile Include="Windows\Common\ControlEventInterceptor.cs" />
+    <Compile Include="Windows\Controls\EditorCanvas.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\EditorCanvas.Designer.cs">
+    <Compile Include="Windows\Controls\EditorCanvas.Designer.cs">
       <DependentUpon>EditorCanvas.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\EditorCommands.cs">
+    <Compile Include="Windows\Controls\EditorCommands.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\EditorGridContextMenu.cs">
+    <Compile Include="Windows\Controls\EditorGridContextMenu.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\EditorSettings.cs">
+    <Compile Include="Windows\Controls\EditorSettings.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\EditorSettingsSerializer.cs" />
-    <Compile Include="Controls\IteratorMatrix.cs" />
-    <Compile Include="Input\InputOperation.cs" />
-    <Compile Include="Input\MouseOverOperation.cs" />
-    <Compile Include="Input\MoveOperation.cs" />
-    <Compile Include="Input\RotateOperation.cs" />
-    <Compile Include="Input\ScaleOperation.cs" />
-    <Compile Include="Math\CanvasSnapBehavior.cs" />
+    <Compile Include="Windows\Controls\EditorSettingsSerializer.cs" />
+    <Compile Include="Windows\Controls\IteratorMatrix.cs" />
+    <Compile Include="Windows\Input\InputOperation.cs" />
+    <Compile Include="Windows\Input\MouseOverOperation.cs" />
+    <Compile Include="Windows\Input\MoveOperation.cs" />
+    <Compile Include="Windows\Input\RotateOperation.cs" />
+    <Compile Include="Windows\Input\ScaleOperation.cs" />
+    <Compile Include="Windows\Common\CanvasSnapBehavior.cs" />
     <Compile Include="Models\Iterator.cs" />
-    <Compile Include="Visuals\CanvasVisual.cs" />
-    <Compile Include="Visuals\ControlVisual.cs" />
-    <Compile Include="Visuals\ControlVisualChain.cs" />
-    <Compile Include="Visuals\GridRulerVisual.cs" />
-    <Compile Include="Visuals\GridVisual.cs" />
-    <Compile Include="Visuals\IteratorCollectionVisual.cs" />
-    <Compile Include="Visuals\InputOperationVisual.cs" />
-    <Compile Include="Visuals\IteratorVisual.cs" />
-    <Compile Include="Forms\Editor.cs">
+    <Compile Include="Windows\Visuals\CanvasVisual.cs" />
+    <Compile Include="Windows\Visuals\ControlVisual.cs" />
+    <Compile Include="Windows\Visuals\ControlVisualChain.cs" />
+    <Compile Include="Windows\Visuals\GridRulerVisual.cs" />
+    <Compile Include="Windows\Visuals\GridVisual.cs" />
+    <Compile Include="Windows\Visuals\IteratorCollectionVisual.cs" />
+    <Compile Include="Windows\Visuals\InputOperationVisual.cs" />
+    <Compile Include="Windows\Visuals\IteratorVisual.cs" />
+    <Compile Include="Windows\Forms\Editor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Editor.Designer.cs">
+    <Compile Include="Windows\Forms\Editor.Designer.cs">
       <DependentUpon>Editor.cs</DependentUpon>
     </Compile>
     <Compile Include="ApophysisApplication.cs" />
-    <Compile Include="Input\CanvasInputStrategy.cs" />
-    <Compile Include="Input\GridInputStrategy.cs" />
-    <Compile Include="Input\InputHandler.cs" />
-    <Compile Include="Input\InputHandlerChain.cs" />
-    <Compile Include="Input\IteratorCollectionInputHandler.cs" />
-    <Compile Include="Input\IteratorInputHandler.cs" />
-    <Compile Include="Math\Canvas.cs" />
-    <Compile Include="Math\Grid.cs" />
-    <Compile Include="Math\ImmutableVector2.cs" />
+    <Compile Include="Windows\Input\CanvasInputStrategy.cs" />
+    <Compile Include="Windows\Input\GridInputStrategy.cs" />
+    <Compile Include="Windows\Input\InputHandler.cs" />
+    <Compile Include="Windows\Input\InputHandlerChain.cs" />
+    <Compile Include="Windows\Input\IteratorCollectionInputHandler.cs" />
+    <Compile Include="Windows\Input\IteratorInputHandler.cs" />
+    <Compile Include="Windows\Common\Canvas.cs" />
+    <Compile Include="Windows\Common\Grid.cs" />
+    <Compile Include="Math\ReadOnlyVector2.cs" />
     <Compile Include="Math\Line.cs" />
     <Compile Include="Math\Matrix2X2.cs" />
     <Compile Include="Math\Polygon.cs" />
@@ -108,10 +108,10 @@
     <Compile Include="Models\AffineTransform.cs" />
     <Compile Include="Models\IteratorCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Controls\EditorCanvas.resx">
+    <EmbeddedResource Include="Windows\Controls\EditorCanvas.resx">
       <DependentUpon>EditorCanvas.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Editor.resx">
+    <EmbeddedResource Include="Windows\Forms\Editor.resx">
       <DependentUpon>Editor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -141,14 +141,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\MAINICON.ico" />
-    <EmbeddedResource Include="Resources\MOVE_WHITE.cur" />
-    <EmbeddedResource Include="Resources\ROTATE_WHITE.cur" />
-    <EmbeddedResource Include="Resources\SCALE_WHITE.cur" />
+    <EmbeddedResource Include="Windows\Resources\MAINICON.ico" />
+    <EmbeddedResource Include="Windows\Resources\MOVE_WHITE.cur" />
+    <EmbeddedResource Include="Windows\Resources\ROTATE_WHITE.cur" />
+    <EmbeddedResource Include="Windows\Resources\SCALE_WHITE.cur" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Windows\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

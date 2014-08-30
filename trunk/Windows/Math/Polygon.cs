@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Xyrus.Apophysis.Windows.Math
+namespace Xyrus.Apophysis.Math
 {
 	[PublicAPI]
 	public class Polygon

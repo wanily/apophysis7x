@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Globalization;
 
-namespace Xyrus.Apophysis.Windows.Math
+namespace Xyrus.Apophysis.Math
 {
 	[PublicAPI]
 	public class Vector2

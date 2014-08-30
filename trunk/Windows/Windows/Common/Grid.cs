@@ -1,4 +1,6 @@
-﻿namespace Xyrus.Apophysis.Windows.Math
+﻿using Xyrus.Apophysis.Math;
+
+namespace Xyrus.Apophysis.Windows
 {
 	[PublicAPI]
 	public class Grid : Canvas

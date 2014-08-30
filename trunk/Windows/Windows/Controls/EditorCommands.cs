@@ -1,6 +1,6 @@
 using System;
 using System.ComponentModel;
-using Xyrus.Apophysis.Windows.Math;
+using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Windows.Models;
 
 namespace Xyrus.Apophysis.Windows.Controls

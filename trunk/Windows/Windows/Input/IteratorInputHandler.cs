@@ -1,11 +1,11 @@
 using System;
 using System.IO;
 using System.Windows.Forms;
+using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Windows.Controls;
 using Xyrus.Apophysis.Windows.Models;
 using Xyrus.Apophysis.Windows.Visuals;
-using Xyrus.Apophysis.Windows.Math;
-using Xyrus.Apophysis.Windows.Properties;
+using Xyrus.Apophysis.Properties;
 
 namespace Xyrus.Apophysis.Windows.Input
 {

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
+using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Windows.Controls;
 using Xyrus.Apophysis.Windows.Input;
-using Xyrus.Apophysis.Windows.Math;
 using Xyrus.Apophysis.Windows.Models;
 using Rectangle = System.Drawing.Rectangle;
 

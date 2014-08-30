@@ -1,8 +1,8 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Windows.Controls;
-using Xyrus.Apophysis.Windows.Math;
 using Xyrus.Apophysis.Windows.Models;
 using Rectangle = System.Drawing.Rectangle;
 
@@ -248,7 +248,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 		public bool IsActive { get; set; }
 		public bool IsSelected { get; set; }
 
-		public Math.Rectangle GetBounds()
+		public Apophysis.Math.Rectangle GetBounds()
 		{
 			var fx = Canvas.WorldToCanvas(Matrix.X + Origin);
 			var fy = Canvas.WorldToCanvas(Matrix.Y + Origin);
@@ -256,7 +256,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			var cornerTopLeft = new Vector2(System.Math.Min(fx.X, fy.X), System.Math.Min(fx.Y, fy.Y));
 			var cornerBottomRight = new Vector2(System.Math.Max(fx.X, fy.X), System.Math.Max(fx.Y, fy.Y));
 
-			return new Math.Rectangle(cornerTopLeft, cornerBottomRight - cornerTopLeft);
+			return new Apophysis.Math.Rectangle(cornerTopLeft, cornerBottomRight - cornerTopLeft);
 		}
 		public static Color GetColor(Iterator iterator)
 		{

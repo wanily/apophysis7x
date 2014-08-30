@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace Xyrus.Apophysis.Windows.Math
+namespace Xyrus.Apophysis.Math
 {
 	[PublicAPI]
-	public class ImmutableVector2 : Vector2
+	public class ReadOnlyVector2 : Vector2
 	{
-		public ImmutableVector2([NotNull] Vector2 vector)
+		public ReadOnlyVector2([NotNull] Vector2 vector)
 		{
 			if (vector == null) throw new ArgumentNullException("vector");
 

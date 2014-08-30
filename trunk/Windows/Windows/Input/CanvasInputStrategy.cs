@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using Xyrus.Apophysis.Windows.Math;
+using Xyrus.Apophysis.Math;
 
 namespace Xyrus.Apophysis.Windows.Input
 {

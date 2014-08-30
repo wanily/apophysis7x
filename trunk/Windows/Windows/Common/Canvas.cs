@@ -1,6 +1,7 @@
 ﻿using System;
+using Xyrus.Apophysis.Math;
 
-namespace Xyrus.Apophysis.Windows.Math
+namespace Xyrus.Apophysis.Windows
 {
 	[PublicAPI]
 	public abstract class Canvas

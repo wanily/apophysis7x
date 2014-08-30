@@ -1,4 +1,4 @@
-﻿namespace Xyrus.Apophysis.Windows.Math
+﻿namespace Xyrus.Apophysis.Windows
 {
 	[PublicAPI]
 	public enum CanvasSnapBehavior

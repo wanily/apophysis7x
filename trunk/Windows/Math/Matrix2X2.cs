@@ -1,4 +1,4 @@
-﻿namespace Xyrus.Apophysis.Windows.Math
+﻿namespace Xyrus.Apophysis.Math
 {
 	[PublicAPI]
 	public class Matrix2X2
