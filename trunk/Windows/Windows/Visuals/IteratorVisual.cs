@@ -261,6 +261,9 @@ namespace Xyrus.Apophysis.Windows.Visuals
 		}
 		public static Color GetColor(Iterator iterator)
 		{
+			if (iterator.Index < 0)
+				return Color.Transparent;
+
 			return mColors[iterator.Index%mColors.Length];
 		}
 	}

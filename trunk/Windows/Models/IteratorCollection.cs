@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Xml.Linq;
 
 namespace Xyrus.Apophysis.Models
 {
@@ -72,6 +74,44 @@ namespace Xyrus.Apophysis.Models
 		{
 			add { mContentChanged += value; }
 			remove { mContentChanged -= value; }
+		}
+
+		public void ReadXml(IEnumerable<XElement> elements)
+		{
+			var array = (elements ?? new XElement[0]).ToArray();
+
+			if (!array.Any())
+			{
+				throw new ApophysisException("No transforms in flame");
+			}
+
+			var counter = 1;
+			var newCollection = new List<Iterator>();
+
+			foreach (var element in array)
+			{
+				var iterator = new Iterator(mFlame);
+
+				try
+				{
+					iterator.ReadXml(element);
+					newCollection.Add(iterator);
+				}
+				catch (ApophysisException exception)
+				{
+					throw new ApophysisException("Transform #" + counter + ": " + exception.Message, exception);
+				}
+
+				counter++;
+			}
+
+			Items.Clear();
+			foreach (var item in newCollection)
+			{
+				Items.Add(item);
+			}
+
+			RaiseContentChanged();
 		}
 	}
 }

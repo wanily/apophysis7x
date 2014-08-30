@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Forms;
 
 namespace Xyrus.Apophysis
@@ -16,13 +15,6 @@ namespace Xyrus.Apophysis
 
 			using (var window = GetWindow<Editor>())
 			{
-				var flame = new Flame();
-
-				window.Iterators = flame.Iterators;
-
-				flame.Iterators.Add();
-				flame.Iterators[1].PreAffine.Origin.X = 1;
-
 				Application.Run(window);
 			}
 		}

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Globalization;
+using System.Xml.Linq;
 
 namespace Xyrus.Apophysis.Models
 {
@@ -40,6 +42,67 @@ namespace Xyrus.Apophysis.Models
 			{
 				if (value == null) throw new ArgumentNullException("value");
 				mPostAffine = value;
+			}
+		}
+
+		private double[] ParseCoefficients([NotNull] XAttribute attribute)
+		{
+			if (attribute == null) throw new ArgumentNullException("attribute");
+
+			var strings = attribute.Value.Split(' ');
+			if (strings.Length != 6)
+			{
+				throw new ApophysisException("Invalid value for attribute \"" + attribute.Name + "\": " + attribute.Value);
+			}
+
+			var values = new double[6];
+			for (int i = 0; i < 6; i++)
+			{
+				double value;
+				if (!double.TryParse(strings[i], NumberStyles.Float, CultureInfo.InvariantCulture, out value))
+				{
+					throw new ApophysisException("Invalid value for attribute \"" + attribute.Name + "\": " + attribute.Value);
+				}
+
+				values[i] = value;
+			}
+
+			return values;
+		}
+
+		public void ReadXml([NotNull] XElement element)
+		{
+			if (element == null) throw new ArgumentNullException("element");
+
+			if ("xform" != element.Name.ToString().ToLower())
+			{
+				throw new ApophysisException("Expected XML node \"xform\" but received \"" + element.Name + "\"");
+			}
+
+			var coefsAttribute = element.Attribute(XName.Get("coefs"));
+			if (coefsAttribute != null)
+			{
+				var vector = ParseCoefficients(coefsAttribute);
+
+				PreAffine.Matrix.X.X = vector[0];
+				PreAffine.Matrix.X.Y = -vector[1];
+				PreAffine.Matrix.Y.X = -vector[2];
+				PreAffine.Matrix.Y.Y = vector[3];
+				PreAffine.Origin.X = vector[4];
+				PreAffine.Origin.Y = -vector[5];
+			}
+
+			var postAttribute = element.Attribute(XName.Get("post"));
+			if (postAttribute != null)
+			{
+				var vector = ParseCoefficients(postAttribute);
+
+				PreAffine.Matrix.X.X = vector[0];
+				PreAffine.Matrix.X.Y = -vector[1];
+				PreAffine.Matrix.Y.X = -vector[2];
+				PreAffine.Matrix.Y.Y = vector[3];
+				PreAffine.Origin.X = vector[4];
+				PreAffine.Origin.Y = -vector[5];
 			}
 		}
 	}
