@@ -221,12 +221,11 @@ namespace Xyrus.Apophysis.Windows.Visuals
 
 		public Math.Rectangle GetBounds()
 		{
-			var fo = mTransform.Origin;
-			var fx = mTransform.Affine.X;
-			var fy = mTransform.Affine.Y;
+			var fx = Canvas.WorldToCanvas(mTransform.Affine.X + mTransform.Origin);
+			var fy = Canvas.WorldToCanvas(mTransform.Affine.Y + mTransform.Origin);
 
-			var cornerTopLeft = new Vector2(System.Math.Min(fx.X, fy.X), System.Math.Min(fx.Y, fy.Y)) + fo;
-			var cornerBottomRight = new Vector2(System.Math.Max(fx.X, fy.X), System.Math.Max(fx.Y, fy.Y)) + fo;
+			var cornerTopLeft = new Vector2(System.Math.Min(fx.X, fy.X), System.Math.Min(fx.Y, fy.Y));
+			var cornerBottomRight = new Vector2(System.Math.Max(fx.X, fy.X), System.Math.Max(fx.Y, fy.Y));
 
 			return new Math.Rectangle(cornerTopLeft, cornerBottomRight - cornerTopLeft);
 		}

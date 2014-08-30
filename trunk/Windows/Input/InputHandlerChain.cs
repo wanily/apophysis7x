@@ -69,7 +69,6 @@ namespace Xyrus.Apophysis.Windows.Input
 
 		protected override void RegisterEvents(Control control)
 		{
-			control.KeyDown += OnCanvasKeyPress;
 			control.MouseDown += OnCanvasMouseDown;
 			control.MouseUp += OnCanvasMouseUp;
 			control.MouseMove += OnCanvasMouseMove;
@@ -78,7 +77,6 @@ namespace Xyrus.Apophysis.Windows.Input
 		}
 		protected override void UnregisterEvents(Control control)
 		{
-			control.KeyDown -= OnCanvasKeyPress;
 			control.MouseDown -= OnCanvasMouseDown;
 			control.MouseUp -= OnCanvasMouseUp;
 			control.MouseMove -= OnCanvasMouseMove;
@@ -86,10 +84,6 @@ namespace Xyrus.Apophysis.Windows.Input
 			control.MouseDoubleClick -= OnCanvasMouseDoubleClick;
 		}
 
-		private void OnCanvasKeyPress(object sender, KeyEventArgs e)
-		{
-			OnAttachedControlKeyPress(e.KeyCode, e.Modifiers);
-		}
 		private void OnCanvasMouseDown(object sender, MouseEventArgs e)
 		{
 			var cursor = new Vector2(e.X, e.Y);

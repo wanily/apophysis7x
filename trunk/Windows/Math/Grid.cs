@@ -65,7 +65,23 @@
 
 		public override void BringIntoView(Rectangle rectangle)
 		{
-			mPan = (((rectangle.BottomRight - rectangle.TopLeft) * 0.5 + rectangle.TopLeft) * new Vector2(1, -1)).Freeze();
+			var length = new Vector2(1, -1) * (rectangle.Size / Ratio);
+			var corner = CanvasToWorld(rectangle.Corner);
+			var center = corner + length * 0.5;
+
+			mPan = (new Vector2(1, -1) * center).Freeze();
+
+			var abs  = rectangle.Size.Abs();
+			if (abs.X > abs.Y)
+			{
+				mZoom *= Size.X / rectangle.Size.X;
+			}
+			else
+			{
+				mZoom *= Size.Y / rectangle.Size.Y;
+			}
+
+			Zoom(-1);
 		}
 		public void Zoom(double delta)
 		{

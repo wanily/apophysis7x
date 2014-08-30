@@ -117,6 +117,13 @@ namespace Xyrus.Apophysis.Windows.Input
 			if (mHandlers == null)
 				return false;
 
+			if (key == Keys.Home)
+			{
+				ZoomOptimally();
+				InvalidateControl();
+				return true;
+			}
+
 			foreach (var handler in mHandlers)
 			{
 				if (handler.HandleKeyPress(key, modifiers))
