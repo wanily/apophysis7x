@@ -44,30 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Annotations\AspMvcActionAttribute.cs" />
-    <Compile Include="Annotations\AspMvcActionSelectorAttribute.cs" />
-    <Compile Include="Annotations\AspMvcAreaAttribute.cs" />
-    <Compile Include="Annotations\AspMvcAreaMasterLocationFormatAttribute.cs" />
-    <Compile Include="Annotations\AspMvcAreaPartialViewLocationFormatAttribute.cs" />
-    <Compile Include="Annotations\AspMvcAreaViewLocationFormatAttribute.cs" />
-    <Compile Include="Annotations\AspMvcControllerAttribute.cs" />
-    <Compile Include="Annotations\AspMvcDisplayTemplateAttribute.cs" />
-    <Compile Include="Annotations\AspMvcEditorTemplateAttribute.cs" />
-    <Compile Include="Annotations\AspMvcMasterAttribute.cs" />
-    <Compile Include="Annotations\AspMvcMasterLocationFormatAttribute.cs" />
-    <Compile Include="Annotations\AspMvcModelTypeAttribute.cs" />
-    <Compile Include="Annotations\AspMvcPartialViewAttribute.cs" />
-    <Compile Include="Annotations\AspMvcPartialViewLocationFormatAttribute.cs" />
-    <Compile Include="Annotations\AspMvcSupressViewErrorAttribute.cs" />
-    <Compile Include="Annotations\AspMvcTemplateAttribute.cs" />
-    <Compile Include="Annotations\AspMvcViewAttribute.cs" />
-    <Compile Include="Annotations\AspMvcViewLocationFormatAttribute.cs" />
     <Compile Include="Annotations\BaseTypeRequiredAttribute.cs" />
     <Compile Include="Annotations\CanBeNullAttribute.cs" />
     <Compile Include="Annotations\CannotApplyEqualityOperatorAttribute.cs" />
     <Compile Include="Annotations\ContractAnnotationAttribute.cs" />
-    <Compile Include="Annotations\HtmlAttributeValueAttribute.cs" />
-    <Compile Include="Annotations\HtmlElementAttributesAttribute.cs" />
     <Compile Include="Annotations\ImplicitUseKindFlags.cs" />
     <Compile Include="Annotations\ImplicitUseTargetFlags.cs" />
     <Compile Include="Annotations\InstantHandleAttribute.cs" />
@@ -76,10 +56,8 @@
     <Compile Include="Annotations\MeansImplicitUseAttribute.cs" />
     <Compile Include="Annotations\NotifyPropertyChangedInvocatorAttribute.cs" />
     <Compile Include="Annotations\NotNullAttribute.cs" />
-    <Compile Include="Annotations\PathReferenceAttribute.cs" />
     <Compile Include="Annotations\PublicAPIAttribute.cs" />
     <Compile Include="Annotations\PureAttribute.cs" />
-    <Compile Include="Annotations\RazorSectionAttribute.cs" />
     <Compile Include="Annotations\StringFormatMethodAttribute.cs" />
     <Compile Include="Annotations\UsedImplicitlyAttribute.cs" />
     <Compile Include="ApophysisException.cs" />
@@ -177,9 +155,7 @@
     <EmbeddedResource Include="Windows\Resources\ROTATE_WHITE.cur" />
     <EmbeddedResource Include="Windows\Resources\SCALE_WHITE.cur" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Annotations\Properties\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
