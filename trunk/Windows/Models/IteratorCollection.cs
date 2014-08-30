@@ -5,17 +5,17 @@ using System.Collections.ObjectModel;
 namespace Xyrus.Apophysis.Windows.Models
 {
 	[PublicAPI]
-	public class TransformCollection : ReadOnlyCollection<Transform>
+	public class IteratorCollection : ReadOnlyCollection<Iterator>
 	{
 		private readonly Flame mFlame;
 		private EventHandler mContentChanged;
 
-		public TransformCollection([NotNull] Flame hostingFlame) : base(new List<Transform>())
+		public IteratorCollection([NotNull] Flame hostingFlame) : base(new List<Iterator>())
 		{
 			if (hostingFlame == null) throw new ArgumentNullException("hostingFlame");
 
 			mFlame = hostingFlame;
-			Items.Add(new Transform(mFlame));
+			Items.Add(new Iterator(mFlame));
 		}
 
 		private void RaiseContentChanged()
@@ -28,16 +28,16 @@ namespace Xyrus.Apophysis.Windows.Models
 
 		public int Add()
 		{
-			Items.Add(new Transform(mFlame));
+			Items.Add(new Iterator(mFlame));
 			RaiseContentChanged();
 
 			return Count - 1;
 		}
-		public int Add([NotNull] Transform transform)
+		public int Add([NotNull] Iterator iterator)
 		{
-			if (transform == null) throw new ArgumentNullException("transform");
+			if (iterator == null) throw new ArgumentNullException("iterator");
 
-			Items.Add(transform);
+			Items.Add(iterator);
 			RaiseContentChanged();
 
 			return Count - 1;
@@ -45,7 +45,7 @@ namespace Xyrus.Apophysis.Windows.Models
 
 		public bool Remove(int index)
 		{
-			if (Count <= 1) throw new ApophysisException("Can't remove last transform of flame");
+			if (Count <= 1) throw new ApophysisException("Can't remove last iterator of flame");
 
 			if (index < 0 || index >= Count)
 				return false;
@@ -55,14 +55,14 @@ namespace Xyrus.Apophysis.Windows.Models
 
 			return true;
 		}
-		public bool Remove([NotNull] Transform transform)
+		public bool Remove([NotNull] Iterator iterator)
 		{
-			if (Count <= 1) throw new ApophysisException("Can't remove last transform of flame");
+			if (Count <= 1) throw new ApophysisException("Can't remove last iterator of flame");
 
-			if (!Contains(transform)) 
+			if (!Contains(iterator)) 
 				return false;
 
-			Items.Remove(transform);
+			Items.Remove(iterator);
 			RaiseContentChanged();
 
 			return true;

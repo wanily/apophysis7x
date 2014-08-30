@@ -6,9 +6,9 @@ using Xyrus.Apophysis.Windows.Models;
 namespace Xyrus.Apophysis.Windows.Input
 {
 	[PublicAPI]
-	public class TransformMoveOperation : TransformInputOperation
+	public class MoveOperation : InputOperation
 	{
-		public TransformMoveOperation([NotNull] Transform transform, [NotNull] Vector2 origin, [NotNull] Vector2 current) : base(transform)
+		public MoveOperation([NotNull] Iterator iterator, [NotNull] Vector2 origin, [NotNull] Vector2 current) : base(iterator)
 		{
 			if (origin == null) throw new ArgumentNullException("origin");
 			if (current == null) throw new ArgumentNullException("current");

@@ -3,16 +3,16 @@
 	[PublicAPI]
 	public class Flame
 	{
-		private readonly TransformCollection mTransforms;
+		private readonly IteratorCollection mIterators;
 
 		public Flame()
 		{
-			mTransforms = new TransformCollection(this);
+			mIterators = new IteratorCollection(this);
 		}
 
-		public TransformCollection Transforms
+		public IteratorCollection Iterators
 		{
-			get { return mTransforms; }
+			get { return mIterators; }
 		}
 	}
 }

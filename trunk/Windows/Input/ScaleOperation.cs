@@ -4,10 +4,10 @@ using Xyrus.Apophysis.Windows.Models;
 namespace Xyrus.Apophysis.Windows.Input
 {
 	[PublicAPI]
-	public class TransformScaleOperation : TransformInputOperation
+	public class ScaleOperation : InputOperation
 	{
-		public TransformScaleOperation([NotNull] Transform transform, double scaleFactor)
-			: base(transform)
+		public ScaleOperation([NotNull] Iterator iterator, double scaleFactor)
+			: base(iterator)
 		{
 			ScaleFactor = scaleFactor;
 		}

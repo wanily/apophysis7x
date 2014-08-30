@@ -7,7 +7,7 @@
     <ProjectGuid>{8A655E50-B6A9-4A9B-B45F-1FD939B15BD8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Xyrus.Apophysis.Windows</RootNamespace>
+    <RootNamespace>Xyrus.Apophysis</RootNamespace>
     <AssemblyName>Apophysis</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -67,24 +67,22 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\EditorSettingsSerializer.cs" />
-    <Compile Include="Input\TransformHitEventArgs.cs" />
-    <Compile Include="Input\TransformHitEventHandler.cs" />
-    <Compile Include="Input\TransformInputOperation.cs" />
-    <Compile Include="Input\TransformMouseOverOperation.cs" />
-    <Compile Include="Input\TransformMoveOperation.cs" />
-    <Compile Include="Input\TransformRotateOperation.cs" />
-    <Compile Include="Input\TransformScaleOperation.cs" />
-    <Compile Include="Input\TransformUpdatedEventArgs.cs" />
-    <Compile Include="Input\TransformUpdatedEventHandler.cs" />
+    <Compile Include="Controls\IteratorMatrix.cs" />
+    <Compile Include="Input\InputOperation.cs" />
+    <Compile Include="Input\MouseOverOperation.cs" />
+    <Compile Include="Input\MoveOperation.cs" />
+    <Compile Include="Input\RotateOperation.cs" />
+    <Compile Include="Input\ScaleOperation.cs" />
     <Compile Include="Math\CanvasSnapBehavior.cs" />
+    <Compile Include="Models\Iterator.cs" />
     <Compile Include="Visuals\CanvasVisual.cs" />
     <Compile Include="Visuals\ControlVisual.cs" />
     <Compile Include="Visuals\ControlVisualChain.cs" />
     <Compile Include="Visuals\GridRulerVisual.cs" />
     <Compile Include="Visuals\GridVisual.cs" />
-    <Compile Include="Visuals\TransformCollectionVisual.cs" />
-    <Compile Include="Visuals\TransformInputOperationVisual.cs" />
-    <Compile Include="Visuals\TransformVisual.cs" />
+    <Compile Include="Visuals\IteratorCollectionVisual.cs" />
+    <Compile Include="Visuals\InputOperationVisual.cs" />
+    <Compile Include="Visuals\IteratorVisual.cs" />
     <Compile Include="Forms\Editor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,8 +94,8 @@
     <Compile Include="Input\GridInputStrategy.cs" />
     <Compile Include="Input\InputHandler.cs" />
     <Compile Include="Input\InputHandlerChain.cs" />
-    <Compile Include="Input\TransformCollectionInputHandler.cs" />
-    <Compile Include="Input\TransformInputHandler.cs" />
+    <Compile Include="Input\IteratorCollectionInputHandler.cs" />
+    <Compile Include="Input\IteratorInputHandler.cs" />
     <Compile Include="Math\Canvas.cs" />
     <Compile Include="Math\Grid.cs" />
     <Compile Include="Math\ImmutableVector2.cs" />
@@ -107,8 +105,8 @@
     <Compile Include="Math\Rectangle.cs" />
     <Compile Include="Math\Vector2.cs" />
     <Compile Include="Models\Flame.cs" />
-    <Compile Include="Models\Transform.cs" />
-    <Compile Include="Models\TransformCollection.cs" />
+    <Compile Include="Models\AffineTransform.cs" />
+    <Compile Include="Models\IteratorCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Controls\EditorCanvas.resx">
       <DependentUpon>EditorCanvas.cs</DependentUpon>
@@ -147,6 +145,9 @@
     <EmbeddedResource Include="Resources\MOVE_WHITE.cur" />
     <EmbeddedResource Include="Resources\ROTATE_WHITE.cur" />
     <EmbeddedResource Include="Resources\SCALE_WHITE.cur" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Windows\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

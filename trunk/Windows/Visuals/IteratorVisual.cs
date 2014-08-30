@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Xyrus.Apophysis.Windows.Controls;
 using Xyrus.Apophysis.Windows.Math;
 using Xyrus.Apophysis.Windows.Models;
 using Rectangle = System.Drawing.Rectangle;
@@ -8,9 +9,11 @@ using Rectangle = System.Drawing.Rectangle;
 namespace Xyrus.Apophysis.Windows.Visuals
 {
 	[PublicAPI]
-	public class TransformVisual : CanvasVisual<Canvas>
+	public class IteratorVisual : CanvasVisual<Canvas>
 	{
-		private Transform mTransform;
+		private Iterator mIterator;
+		private IteratorMatrix mActiveMatrix;
+
 		private static readonly Color[] mColors = 
 		{
 			Color.Red,
@@ -25,15 +28,17 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			Color.Salmon
 		};
 
-		public TransformVisual([NotNull] Control control, [NotNull] Canvas canvas, [NotNull] Transform transform) : base(control, canvas)
+		public IteratorVisual([NotNull] Control control, [NotNull] Canvas canvas, [NotNull] Iterator model, IteratorMatrix activeMatrix) : base(control, canvas)
 		{
-			if (transform == null) throw new ArgumentNullException("transform");
-			mTransform = transform;
+			if (model == null) throw new ArgumentNullException("model");
+
+			mIterator = model;
+			mActiveMatrix = activeMatrix;
 		}
-		
 		protected override void DisposeOverride(bool disposing)
 		{
-			mTransform = null;
+			mIterator = null;
+			mActiveMatrix = default(IteratorMatrix);
 		}
 		protected override void OnControlPaint(Graphics graphics)
 		{
@@ -49,9 +54,9 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			var oy = GetEdgeOy();
 			var xy = GetEdgeXy();
 
-			var fo = mTransform.Origin;
-			var fx = mTransform.Affine.X;
-			var fy = mTransform.Affine.Y;
+			var fo = Origin;
+			var fx = Matrix.X;
+			var fy = Matrix.Y;
 
 			var cornerTopLeft = fy - fx;
 			var cornerTopRight = fy + fx;
@@ -63,7 +68,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			var right = fx;
 			var down = -1 * fy;
 
-			var color = GetTransformColor(mTransform);
+			var color = GetColor(Model);
 			var translucentColor = Color.FromArgb(0x40, color.R, color.G, color.B);
 			var translucentColorLow = Color.FromArgb(0x05, color.R, color.G, color.B);
 
@@ -79,9 +84,9 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			//var rectLx = new Rectangle(posLx, sizeLx.ToSize());
 			//var rectLy = new Rectangle(posLy, sizeLy.ToSize());
 
-			var posO = ToPoint(ox.A - new Vector2(vertexRadius, vertexRadius));
-			var posX = ToPoint(ox.B - new Vector2(vertexRadius, vertexRadius));
-			var posY = ToPoint(oy.B - new Vector2(vertexRadius, vertexRadius));
+			var posO = (ox.A - new Vector2(vertexRadius, vertexRadius)).ToPoint();
+			var posX = (ox.B - new Vector2(vertexRadius, vertexRadius)).ToPoint();
+			var posY = (oy.B - new Vector2(vertexRadius, vertexRadius)).ToPoint();
 
 			var vertexSize = new Size(2 * vertexRadius, 2 * vertexRadius);
 
@@ -103,9 +108,9 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			{
 				dashLinePen.DashPattern = new[] {6.0f,4.0f};
 
-				graphics.DrawLine(IsEdgeOxHit ? hitLinePen : IsSelected || IsHit ? linePen : dashLinePen, ToPoint(ox.A), ToPoint(ox.B));
-				graphics.DrawLine(IsEdgeOyHit ? hitLinePen : IsSelected || IsHit ? linePen : dashLinePen, ToPoint(oy.A), ToPoint(oy.B));
-				graphics.DrawLine(IsEdgeXyHit ? hitLinePen : dashLinePen, ToPoint(xy.A), ToPoint(xy.B));
+				graphics.DrawLine(IsEdgeOxHit ? hitLinePen : IsSelected || IsHit ? linePen : dashLinePen, ox.A.ToPoint(), ox.B.ToPoint());
+				graphics.DrawLine(IsEdgeOyHit ? hitLinePen : IsSelected || IsHit ? linePen : dashLinePen, oy.A.ToPoint(), oy.B.ToPoint());
+				graphics.DrawLine(IsEdgeXyHit ? hitLinePen : dashLinePen, xy.A.ToPoint(), xy.B.ToPoint());
 
 				graphics.FillEllipse(IsVertexOHit ? hitVertexOBrush : vertexBrush, rectO);
 				graphics.FillEllipse(IsVertexXHit ? hitVertexBrush : vertexBrush, rectX);
@@ -121,33 +126,27 @@ namespace Xyrus.Apophysis.Windows.Visuals
 				graphics.FillRectangle(backgroundBrush, rectLy);
 				*/
 
-				graphics.FillPolygon(IsHit ? fillBrush : lowFillBrush, new[] { ToPoint(ox.A), ToPoint(ox.B), ToPoint(oy.B) });
+				graphics.FillPolygon(IsHit ? fillBrush : lowFillBrush, new[] { ox.A.ToPoint(), ox.B.ToPoint(), oy.B.ToPoint() });
 
 				if (IsSelected)
 				{
-					graphics.DrawLine(IsHit ? linePen : widgetPen, ToPoint(Canvas.WorldToCanvas(cornerTopLeft + fo)), ToPoint(Canvas.WorldToCanvas(cornerTopLeft + right * handleSize + fo)));
-					graphics.DrawLine(IsHit ? linePen : widgetPen, ToPoint(Canvas.WorldToCanvas(cornerTopLeft + fo)), ToPoint(Canvas.WorldToCanvas(cornerTopLeft + down * handleSize + fo)));
+					graphics.DrawLine(IsHit ? linePen : widgetPen, Canvas.WorldToCanvas(cornerTopLeft + fo).ToPoint(), Canvas.WorldToCanvas(cornerTopLeft + right * handleSize + fo).ToPoint());
+					graphics.DrawLine(IsHit ? linePen : widgetPen, Canvas.WorldToCanvas(cornerTopLeft + fo).ToPoint(), Canvas.WorldToCanvas(cornerTopLeft + down * handleSize + fo).ToPoint());
 
-					graphics.DrawLine(IsHit ? linePen : widgetPen, ToPoint(Canvas.WorldToCanvas(cornerTopRight + fo)), ToPoint(Canvas.WorldToCanvas(cornerTopRight + left * handleSize + fo)));
-					graphics.DrawLine(IsHit ? linePen : widgetPen, ToPoint(Canvas.WorldToCanvas(cornerTopRight + fo)), ToPoint(Canvas.WorldToCanvas(cornerTopRight + down * handleSize + fo)));
+					graphics.DrawLine(IsHit ? linePen : widgetPen, Canvas.WorldToCanvas(cornerTopRight + fo).ToPoint(), Canvas.WorldToCanvas(cornerTopRight + left * handleSize + fo).ToPoint());
+					graphics.DrawLine(IsHit ? linePen : widgetPen, Canvas.WorldToCanvas(cornerTopRight + fo).ToPoint(), Canvas.WorldToCanvas(cornerTopRight + down * handleSize + fo).ToPoint());
 
-					graphics.DrawLine(IsHit ? linePen : widgetPen, ToPoint(Canvas.WorldToCanvas(cornerBottomLeft + fo)), ToPoint(Canvas.WorldToCanvas(cornerBottomLeft + right * handleSize + fo)));
-					graphics.DrawLine(IsHit ? linePen : widgetPen, ToPoint(Canvas.WorldToCanvas(cornerBottomLeft + fo)), ToPoint(Canvas.WorldToCanvas(cornerBottomLeft + up * handleSize + fo)));
+					graphics.DrawLine(IsHit ? linePen : widgetPen, Canvas.WorldToCanvas(cornerBottomLeft + fo).ToPoint(), Canvas.WorldToCanvas(cornerBottomLeft + right * handleSize + fo).ToPoint());
+					graphics.DrawLine(IsHit ? linePen : widgetPen, Canvas.WorldToCanvas(cornerBottomLeft + fo).ToPoint(), Canvas.WorldToCanvas(cornerBottomLeft + up * handleSize + fo).ToPoint());
 
-					graphics.DrawLine(IsHit ? linePen : widgetPen, ToPoint(Canvas.WorldToCanvas(cornerBottomRight + fo)), ToPoint(Canvas.WorldToCanvas(cornerBottomRight + left * handleSize + fo)));
-					graphics.DrawLine(IsHit ? linePen : widgetPen, ToPoint(Canvas.WorldToCanvas(cornerBottomRight + fo)), ToPoint(Canvas.WorldToCanvas(cornerBottomRight + up * handleSize + fo)));
+					graphics.DrawLine(IsHit ? linePen : widgetPen, Canvas.WorldToCanvas(cornerBottomRight + fo).ToPoint(), Canvas.WorldToCanvas(cornerBottomRight + left * handleSize + fo).ToPoint());
+					graphics.DrawLine(IsHit ? linePen : widgetPen, Canvas.WorldToCanvas(cornerBottomRight + fo).ToPoint(), Canvas.WorldToCanvas(cornerBottomRight + up * handleSize + fo).ToPoint());
 				}
 
 				graphics.DrawString(lo, AttachedControl.Font, labelBrush, posLo.X, posLo.Y);
 				graphics.DrawString(lx, AttachedControl.Font, labelBrush, posLx.X, posLx.Y);
 				graphics.DrawString(ly, AttachedControl.Font, labelBrush, posLy.X, posLy.Y);
 			}
-		}
-
-		//todo remove
-		private Point ToPoint(Vector2 p)
-		{
-			return p.ToPoint();
 		}
 
 		public void Reset()
@@ -169,15 +168,15 @@ namespace Xyrus.Apophysis.Windows.Visuals
 
 		public Vector2 GetVertexO()
 		{
-			return Canvas.WorldToCanvas(mTransform.Origin);
+			return Canvas.WorldToCanvas(Origin);
 		}
 		public Vector2 GetVertexX()
 		{
-			return Canvas.WorldToCanvas(mTransform.Origin + mTransform.Affine.X);
+			return Canvas.WorldToCanvas(Origin + Matrix.X);
 		}
 		public Vector2 GetVertexY()
 		{
-			return Canvas.WorldToCanvas(mTransform.Origin + mTransform.Affine.Y);
+			return Canvas.WorldToCanvas(Origin + Matrix.Y);
 		}
 
 		public Line GetEdgeOx()
@@ -193,9 +192,39 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			return new Line(GetVertexX(), GetVertexY());
 		}
 
-		public Transform Model
+		public Vector2 Origin
 		{
-			get { return mTransform; }
+			get
+			{
+				switch (mActiveMatrix)
+				{
+					case IteratorMatrix.PreAffine:
+						return Model.PreAffine.Origin;
+					case IteratorMatrix.PostAffine:
+						return Model.PostAffine.Origin;
+					default:
+						throw new ArgumentOutOfRangeException();
+				}
+			}
+		}
+		public Matrix2X2 Matrix
+		{
+			get
+			{
+				switch (mActiveMatrix)
+				{
+					case IteratorMatrix.PreAffine:
+						return Model.PreAffine.Matrix;
+					case IteratorMatrix.PostAffine:
+						return Model.PostAffine.Matrix;
+					default:
+						throw new ArgumentOutOfRangeException();
+				}
+			}
+		}
+		public Iterator Model
+		{
+			get { return mIterator; }
 		}
 
 		public bool IsHit
@@ -221,17 +250,17 @@ namespace Xyrus.Apophysis.Windows.Visuals
 
 		public Math.Rectangle GetBounds()
 		{
-			var fx = Canvas.WorldToCanvas(mTransform.Affine.X + mTransform.Origin);
-			var fy = Canvas.WorldToCanvas(mTransform.Affine.Y + mTransform.Origin);
+			var fx = Canvas.WorldToCanvas(Matrix.X + Origin);
+			var fy = Canvas.WorldToCanvas(Matrix.Y + Origin);
 
 			var cornerTopLeft = new Vector2(System.Math.Min(fx.X, fy.X), System.Math.Min(fx.Y, fy.Y));
 			var cornerBottomRight = new Vector2(System.Math.Max(fx.X, fy.X), System.Math.Max(fx.Y, fy.Y));
 
 			return new Math.Rectangle(cornerTopLeft, cornerBottomRight - cornerTopLeft);
 		}
-		public static Color GetTransformColor(Transform transform)
+		public static Color GetColor(Iterator iterator)
 		{
-			return mColors[transform.Index%mColors.Length];
+			return mColors[iterator.Index%mColors.Length];
 		}
 	}
 }

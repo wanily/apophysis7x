@@ -11,7 +11,7 @@ using Xyrus.Apophysis.Windows.Models;
 namespace Xyrus.Apophysis.Windows.Input
 {
 	[PublicAPI]
-	public class TransformCollectionInputHandler : InputHandler, IEnumerable<TransformInputHandler>
+	public class IteratorCollectionInputHandler : InputHandler, IEnumerable<IteratorInputHandler>
 	{
 		private EventHandler mBeginEdit;
 		private EventHandler mEndEdit;
@@ -19,11 +19,12 @@ namespace Xyrus.Apophysis.Windows.Input
 		private EditorSettings mSettings;
 		private EditorSettings mDefaultSettings;
 
-		private TransformCollectionVisual mVisualCollection;
-		private List<TransformInputHandler> mHandlers;
+		private IteratorCollectionVisual mVisualCollection;
+		private List<IteratorInputHandler> mHandlers;
 		private Canvas mCanvas;
+		private IteratorMatrix mActiveMatrix;
 
-		public TransformCollectionInputHandler([NotNull] Control control, [NotNull] TransformCollectionVisual visualCollection, [NotNull] Canvas canvas) : base(control)
+		public IteratorCollectionInputHandler([NotNull] Control control, [NotNull] IteratorCollectionVisual visualCollection, [NotNull] Canvas canvas) : base(control)
 		{
 			if (visualCollection == null) throw new ArgumentNullException("visualCollection");
 			if (canvas == null) throw new ArgumentNullException("canvas");
@@ -36,7 +37,7 @@ namespace Xyrus.Apophysis.Windows.Input
 
 			mVisualCollection.ContentChanged += OnCollectionChanged;
 
-			mHandlers = new List<TransformInputHandler>();
+			mHandlers = new List<IteratorInputHandler>();
 		}
 		protected override void DisposeOverride(bool disposing)
 		{
@@ -53,11 +54,11 @@ namespace Xyrus.Apophysis.Windows.Input
 			mCanvas = null;
 		}
 
-		public TransformCollection Collection
+		public IteratorCollection Collection
 		{
 			get { return mVisualCollection.Collection; }
 		}
-		public TransformInputHandler this[int index]
+		public IteratorInputHandler this[int index]
 		{
 			get
 			{
@@ -68,6 +69,21 @@ namespace Xyrus.Apophysis.Windows.Input
 					throw new IndexOutOfRangeException();
 
 				return mHandlers[index];
+			}
+		}
+		public IteratorMatrix ActiveMatrix
+		{
+			get { return mActiveMatrix; }
+			set
+			{
+				mActiveMatrix = value;
+				mVisualCollection.ActiveMatrix = value;
+
+				if (mSettings.ZoomAutomatically)
+				{
+					ZoomOptimally();
+					InvalidateControl();
+				}
 			}
 		}
 
@@ -96,12 +112,12 @@ namespace Xyrus.Apophysis.Windows.Input
 
 			foreach (var visual in mVisualCollection.Reverse())
 			{
-				mHandlers.Add(new TransformInputHandler(AttachedControl, visual, mCanvas, mSettings ?? mDefaultSettings));
+				mHandlers.Add(new IteratorInputHandler(AttachedControl, visual, mCanvas, mSettings ?? mDefaultSettings, mActiveMatrix));
 			}
 
 			InvalidateControl();
 		}
-		private void SetOperation(TransformInputHandler handler)
+		private void SetOperation(IteratorInputHandler handler)
 		{
 			if (handler == null)
 			{
@@ -165,7 +181,7 @@ namespace Xyrus.Apophysis.Windows.Input
 			{
 				if (handler.HandleMouseMove(cursor, button))
 				{
-					mVisualCollection.CurrentOperation = (new TransformMouseOverOperation(handler.Transform));
+					mVisualCollection.CurrentOperation = (new MouseOverOperation(handler.Model));
 					return true;
 				}
 			}
@@ -241,7 +257,8 @@ namespace Xyrus.Apophysis.Windows.Input
 					return true;
 			}
 
-			return false;
+			ZoomOptimally();
+			return true;
 		}
 
 		protected void RaiseBeginEdit()
@@ -266,10 +283,10 @@ namespace Xyrus.Apophysis.Windows.Input
 			remove { mEndEdit -= value; }
 		}
 
-		public IEnumerator<TransformInputHandler> GetEnumerator()
+		public IEnumerator<IteratorInputHandler> GetEnumerator()
 		{
 			if (mHandlers == null)
-				return new List<TransformInputHandler>().GetEnumerator();
+				return new List<IteratorInputHandler>().GetEnumerator();
 
 			return mHandlers.GetEnumerator();
 		}
@@ -278,7 +295,7 @@ namespace Xyrus.Apophysis.Windows.Input
 			return GetEnumerator();
 		}
 
-		public Transform GetSelectedTransform()
+		public Iterator GetSelectedIterator()
 		{
 			var visual = mVisualCollection == null ? null : mVisualCollection.FirstOrDefault(x => x.IsSelected);
 			if (visual == null)

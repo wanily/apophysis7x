@@ -10,10 +10,10 @@ namespace Xyrus.Apophysis.Windows.Forms
 			InitializeComponent();
 		}
 
-		public TransformCollection Transforms
+		public IteratorCollection Iterators
 		{
-			get { return mCanvas.Transforms; }
-			set { mCanvas.Transforms = value; }
+			get { return mCanvas.Iterators; }
+			set { mCanvas.Iterators = value; }
 		}
 	}
 }

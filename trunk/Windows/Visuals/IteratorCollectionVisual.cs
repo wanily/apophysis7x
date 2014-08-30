@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Xyrus.Apophysis.Windows.Controls;
 using Xyrus.Apophysis.Windows.Input;
 using Xyrus.Apophysis.Windows.Math;
 using Xyrus.Apophysis.Windows.Models;
@@ -12,20 +13,21 @@ using Rectangle = System.Drawing.Rectangle;
 namespace Xyrus.Apophysis.Windows.Visuals
 {
 	[PublicAPI]
-	public class TransformCollectionVisual : CanvasVisual<Canvas>, IEnumerable<TransformVisual>
+	public class IteratorCollectionVisual : CanvasVisual<Canvas>, IEnumerable<IteratorVisual>
 	{
-		private TransformInputOperationVisual mOperationVisual;
+		private InputOperationVisual mOperationVisual;
 
-		private TransformCollection mCollection;
-		private List<TransformVisual> mVisuals;
+		private IteratorCollection mCollection;
+		private List<IteratorVisual> mVisuals;
 
 		private EventHandler mContentChanged;
 		private bool mShowReference;
+		private IteratorMatrix mActiveMatrix;
 
-		public TransformCollectionVisual([NotNull] Control control, [NotNull] Canvas canvas) : base(control, canvas)
+		public IteratorCollectionVisual([NotNull] Control control, [NotNull] Canvas canvas) : base(control, canvas)
 		{
-			mVisuals = new List<TransformVisual>();
-			mOperationVisual = new TransformInputOperationVisual(control, canvas);
+			mVisuals = new List<IteratorVisual>();
+			mOperationVisual = new InputOperationVisual(control, canvas);
 
 			ShowReference = true;
 		}
@@ -70,7 +72,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			}
 		}
 
-		public TransformInputOperation CurrentOperation
+		public InputOperation CurrentOperation
 		{
 			get { return mOperationVisual == null ? null : mOperationVisual.Operation; }
 			set
@@ -81,7 +83,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 				mOperationVisual.Operation = value;
 			}
 		}
-		public TransformCollection Collection
+		public IteratorCollection Collection
 		{
 			get { return mCollection; }
 			set
@@ -111,8 +113,18 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			get { return mOperationVisual.HintTextRectangle; }
 			set { mOperationVisual.HintTextRectangle = value; }
 		}
+		public IteratorMatrix ActiveMatrix
+		{
+			get { return mActiveMatrix; }
+			set
+			{
+				mActiveMatrix = value;
+				mOperationVisual.ActiveMatrix = value;
+				OnCollectionChanged(mCollection, new EventArgs());
+			}
+		}
 
-		public TransformVisual this[int index]
+		public IteratorVisual this[int index]
 		{
 			get
 			{
@@ -144,9 +156,9 @@ namespace Xyrus.Apophysis.Windows.Visuals
 
 			mVisuals.Clear();
 
-			foreach (var transform in mCollection)
+			foreach (var iterator in mCollection)
 			{
-				mVisuals.Add(new TransformVisual(AttachedControl, Canvas, transform));
+				mVisuals.Add(new IteratorVisual(AttachedControl, Canvas, iterator, mActiveMatrix));
 			}
 
 			if (mContentChanged != null)
@@ -214,10 +226,10 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			}
 		}
 
-		public IEnumerator<TransformVisual> GetEnumerator()
+		public IEnumerator<IteratorVisual> GetEnumerator()
 		{
 			if (mVisuals == null)
-				return new List<TransformVisual>().GetEnumerator();
+				return new List<IteratorVisual>().GetEnumerator();
 
 			return mVisuals.GetEnumerator();
 		}

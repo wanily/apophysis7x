@@ -13,8 +13,8 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 		private ToolStripButton mZoomAutomatically;
 		private ToolStripButton mShowVariationPreview;
-		private ToolStripButton mLockTransformAxes;
-		private ToolStripButton mEditPostTransforms;
+		private ToolStripButton mLockAxes;
+		private ToolStripButton mEditPostMatrix;
 
 		public EditorGridContextMenu([NotNull] EditorCanvas editor)
 		{
@@ -28,7 +28,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 				new ToolStripSeparator(),
 
-				new ToolStripButton("New transform", null, OnNewTransformClick),
+				new ToolStripButton("New transform", null, OnNewIteratorClick),
 
 				new ToolStripSeparator(),
 
@@ -37,8 +37,8 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 				new ToolStripSeparator(),
 
-				mLockTransformAxes = new ToolStripButton("Lock transform axes", null, OnLockTransformAxesClick) { Checked = editor.Settings.LockTransformAxes },
-				mEditPostTransforms = new ToolStripButton("Enable / edit post-transform", null, OnTogglePostTransformClick) { Checked = editor.Settings.EditPostTransforms },
+				mLockAxes = new ToolStripButton("Lock transform axes", null, OnLockAxesClick) { Checked = editor.Settings.LockAxes },
+				mEditPostMatrix = new ToolStripButton("Enable / edit post-transform", null, OnTogglePostMatrixClick) { Checked = editor.ActiveMatrix == IteratorMatrix.PostAffine },
 
 				new ToolStripSeparator(),
 
@@ -57,8 +57,8 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 			mZoomAutomatically = null;
 			mShowVariationPreview = null;
-			mLockTransformAxes = null;
-			mEditPostTransforms = null;
+			mLockAxes = null;
+			mEditPostMatrix = null;
 
 			Items.Clear();
 			base.Dispose(disposing);
@@ -85,9 +85,9 @@ namespace Xyrus.Apophysis.Windows.Controls
 			mRedoButton.Enabled = (mEditor.Commands.CanRedo());
 		}
 
-		private void OnNewTransformClick(object sender, EventArgs e)
+		private void OnNewIteratorClick(object sender, EventArgs e)
 		{
-			mEditor.Commands.NewTransform();
+			mEditor.Commands.NewIterator();
 		}
 
 		private void OnZoomAutomaticallyClick(object sender, EventArgs e)
@@ -109,22 +109,31 @@ namespace Xyrus.Apophysis.Windows.Controls
 			mEditor.Refresh();
 		}
 
-		private void OnLockTransformAxesClick(object sender, EventArgs e)
+		private void OnLockAxesClick(object sender, EventArgs e)
 		{
 			var item = sender as ToolStripButton;
 			if (item == null)
 				return;
 
-			item.Checked = (mEditor.Settings.LockTransformAxes = !mEditor.Settings.LockTransformAxes);
+			item.Checked = (mEditor.Settings.LockAxes = !mEditor.Settings.LockAxes);
 			mEditor.Refresh();
 		}
-		private void OnTogglePostTransformClick(object sender, EventArgs e)
+		private void OnTogglePostMatrixClick(object sender, EventArgs e)
 		{
 			var item = sender as ToolStripButton;
 			if (item == null)
 				return;
 
-			item.Checked = (mEditor.Settings.EditPostTransforms = !mEditor.Settings.EditPostTransforms);
+			if (mEditor.ActiveMatrix == IteratorMatrix.PostAffine)
+			{
+				mEditor.ActiveMatrix = IteratorMatrix.PreAffine;
+			}
+			else
+			{
+				mEditor.ActiveMatrix = IteratorMatrix.PostAffine;
+			}
+
+			item.Checked = (mEditor.ActiveMatrix == IteratorMatrix.PostAffine);
 			mEditor.Refresh();
 		}
 
@@ -137,6 +146,13 @@ namespace Xyrus.Apophysis.Windows.Controls
 			mEditor.Commands.FlipAllHorizontally();
 		}
 
+		public void UpdateCheckedStates(EditorCanvas editorCanvas)
+		{
+			if (editorCanvas != null)
+			{
+				mEditPostMatrix.Checked = mEditor.ActiveMatrix == IteratorMatrix.PostAffine;
+			}
+		}
 		public void UpdateCheckedStates(EditorSettings editorSettings)
 		{
 			if (mZoomAutomatically != null)
@@ -149,14 +165,9 @@ namespace Xyrus.Apophysis.Windows.Controls
 				mShowVariationPreview.Checked = editorSettings != null && editorSettings.ShowVariationPreview;
 			}
 
-			if (mLockTransformAxes != null)
+			if (mLockAxes != null)
 			{
-				mLockTransformAxes.Checked = editorSettings != null && editorSettings.LockTransformAxes;
-			}
-
-			if (mEditPostTransforms != null)
-			{
-				mEditPostTransforms.Checked = editorSettings != null && editorSettings.EditPostTransforms;
+				mLockAxes.Checked = editorSettings != null && editorSettings.LockAxes;
 			}
 		}
 	}

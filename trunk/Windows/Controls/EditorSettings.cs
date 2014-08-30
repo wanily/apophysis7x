@@ -27,7 +27,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 			if (mContextMenu == null)
 				return;
 
-			mContextMenu.UpdateCheckedStates(null);
+			mContextMenu.UpdateCheckedStates((EditorSettings)null);
 			mContextMenu = null;
 		}
 
@@ -37,7 +37,6 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 		public bool ZoomAutomatically { get; set; }
 		public bool ShowVariationPreview { get; set; }
-		public bool LockTransformAxes { get; set; }
-		public bool EditPostTransforms { get; set; }
+		public bool LockAxes { get; set; }
 	}
 }

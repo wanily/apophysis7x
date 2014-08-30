@@ -73,7 +73,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mCanvas.ShowRuler = true;
 			this.mCanvas.Size = new System.Drawing.Size(1043, 625);
 			this.mCanvas.TabIndex = 1;
-			this.mCanvas.Transforms = null;
+			this.mCanvas.Iterators = null;
 			// 
 			// mSettings
 			// 

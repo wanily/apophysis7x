@@ -18,10 +18,10 @@ namespace Xyrus.Apophysis.Windows
 			{
 				var flame = new Flame();
 
-				window.Transforms = flame.Transforms;
+				window.Iterators = flame.Iterators;
 
-				flame.Transforms.Add();
-				flame.Transforms[1].Origin.X = 1;
+				flame.Iterators.Add();
+				flame.Iterators[1].PreAffine.Origin.X = 1;
 
 				Application.Run(window);
 			}

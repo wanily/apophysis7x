@@ -17,10 +17,8 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 		private GridVisual mGridPainter;
 		private GridRulerVisual mRulerPainter;
-		private TransformCollectionVisual mTransformPainter;
-
-		private GridInputStrategy mGridInteraction;
-		private TransformCollectionInputHandler mTransformInteraction;
+		private IteratorCollectionVisual mIteratorPainter;
+		private IteratorCollectionInputHandler mIteratorInteraction;
 
 		private EditorGridContextMenu mGridContextMenu;
 		private EditorCommands mCommands;
@@ -41,14 +39,14 @@ namespace Xyrus.Apophysis.Windows.Controls
 			mInteraction = new InputHandlerChain(this);
 			
 			mVisual.Add(mGridPainter = new GridVisual(this, grid));
-			mVisual.Add(mTransformPainter = new TransformCollectionVisual(this, grid), 100);
+			mVisual.Add(mIteratorPainter = new IteratorCollectionVisual(this, grid), 100);
 			mVisual.Add(mRulerPainter = new GridRulerVisual(this, grid), int.MaxValue);
 
-			mInteraction.Add(mGridInteraction = new GridInputStrategy(this, grid), int.MaxValue);
-			mInteraction.Add(mTransformInteraction = new TransformCollectionInputHandler(this, mTransformPainter, grid), 100);
+			mInteraction.Add(new GridInputStrategy(this, grid), int.MaxValue);
+			mInteraction.Add(mIteratorInteraction = new IteratorCollectionInputHandler(this, mIteratorPainter, grid), 100);
 
-			mTransformInteraction.BeginEdit += OnBeginEdit;
-			mTransformInteraction.EndEdit += OnEndEdit;
+			mIteratorInteraction.BeginEdit += OnBeginEdit;
+			mIteratorInteraction.EndEdit += OnEndEdit;
 
 			GridLineColor = Color.FromArgb(0xff, 0x66, 0x66, 0x66);
 			BackdropColor = Color.Transparent;
@@ -80,10 +78,10 @@ namespace Xyrus.Apophysis.Windows.Controls
 					components.Dispose();
 				}
 
-				if (mTransformInteraction != null)
+				if (mIteratorInteraction != null)
 				{
-					mTransformInteraction.BeginEdit -= OnBeginEdit;
-					mTransformInteraction.EndEdit -= OnEndEdit;
+					mIteratorInteraction.BeginEdit -= OnBeginEdit;
+					mIteratorInteraction.EndEdit -= OnEndEdit;
 				}
 
 				if (mInteraction != null)
@@ -115,17 +113,16 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 			mGridPainter = null;
 			mRulerPainter = null;
-			mTransformPainter = null;
-			mGridInteraction = null;
-			mTransformInteraction = null;
+			mIteratorPainter = null;
+			mIteratorInteraction = null;
 
 			base.Dispose(disposing);
 		}
 
-		public TransformCollection Transforms
+		public IteratorCollection Iterators
 		{
-			get { return mTransformPainter.Collection; }
-			set { mTransformPainter.Collection = value; }
+			get { return mIteratorPainter.Collection; }
+			set { mIteratorPainter.Collection = value; }
 		}
 
 		public Color GridZeroLineColor
@@ -162,31 +159,8 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 		public Color ReferenceColor
 		{
-			get { return mTransformPainter.ReferenceColor; }
-			set { mTransformPainter.ReferenceColor = value; }
-		}
-
-		[Browsable(false)]
-		public EditorCommands Commands
-		{
-			get { return mCommands; }
-		}
-
-		[NotNull]
-		public EditorSettings Settings
-		{
-			get { return mTransformInteraction.Settings; }
-			set
-			{
-				mTransformInteraction.Settings.UnbindContextMenu();
-				mTransformInteraction.Settings = value;
-				mTransformInteraction.Settings.BindContextMenu(mGridContextMenu);
-			}
-		}
-
-		public Vector2 CursorPosition
-		{
-			get { return mGridInteraction.Canvas.CanvasToWorld(mInteraction.CursorPosition); }
+			get { return mIteratorPainter.ReferenceColor; }
+			set { mIteratorPainter.ReferenceColor = value; }
 		}
 
 		public bool ShowRuler
@@ -211,7 +185,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 					rb = new Point(10, 10);
 				}
 
-				mTransformPainter.HintTextRectangle = new Rectangle(lt.X, lt.Y, rb.X - lt.X, rb.Y - lt.Y);
+				mIteratorPainter.HintTextRectangle = new Rectangle(lt.X, lt.Y, rb.X - lt.X, rb.Y - lt.Y);
 				Refresh();
 			}
 		}
@@ -221,12 +195,41 @@ namespace Xyrus.Apophysis.Windows.Controls
 			set { mGridPainter.HighlightOrigin = value; }
 		}
 
+		public IteratorMatrix ActiveMatrix
+		{
+			get { return mIteratorInteraction.ActiveMatrix; }
+			set
+			{
+				mIteratorInteraction.ActiveMatrix = value;
+				mGridContextMenu.UpdateCheckedStates(this);
+				Refresh();
+			}
+		}
+
+		[NotNull, Browsable(false)]
+		public EditorCommands Commands
+		{
+			get { return mCommands; }
+		}
+
+		[NotNull]
+		public EditorSettings Settings
+		{
+			get { return mIteratorInteraction.Settings; }
+			set
+			{
+				mIteratorInteraction.Settings.UnbindContextMenu();
+				mIteratorInteraction.Settings = value;
+				mIteratorInteraction.Settings.BindContextMenu(mGridContextMenu);
+			}
+		}
+
 		public void ZoomOptimally()
 		{
-			if (mTransformInteraction == null)
+			if (mIteratorInteraction == null)
 				return;
 
-			mTransformInteraction.ZoomOptimally();
+			mIteratorInteraction.ZoomOptimally();
 		}
 
 		private void OnBeginEdit(object sender, EventArgs args)
@@ -265,7 +268,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 			if (e.Button != MouseButtons.Right)
 				return;
 
-			var selected = mTransformInteraction == null ? null : mTransformInteraction.GetSelectedTransform();
+			var selected = mIteratorInteraction == null ? null : mIteratorInteraction.GetSelectedIterator();
 			if (selected != null)
 			{
 				//todo
@@ -279,7 +282,6 @@ namespace Xyrus.Apophysis.Windows.Controls
 		protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
 		{
 			mInteraction.TriggerKeyPress(keyData);
-
 			return base.ProcessCmdKey(ref msg, keyData);
 		}
 	}

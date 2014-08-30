@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
+using Xyrus.Apophysis.Windows.Controls;
 using Xyrus.Apophysis.Windows.Input;
 using Xyrus.Apophysis.Windows.Math;
+using Xyrus.Apophysis.Windows.Models;
 using Rectangle = System.Drawing.Rectangle;
 
 namespace Xyrus.Apophysis.Windows.Visuals
 {
 	[PublicAPI]
-	public class TransformInputOperationVisual : CanvasVisual<Canvas>
+	public class InputOperationVisual : CanvasVisual<Canvas>
 	{
 		struct ColoredString
 		{
@@ -18,12 +20,12 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			public Color Color;
 		}
 
-		private TransformInputOperation mOperation;
 		private Color mReferenceColor;
 		private Vector2 mCursorPosition;
 		private Rectangle mHintTextRectangle;
+		private InputOperation mOperation;
 
-		public TransformInputOperationVisual([NotNull] Control control, [NotNull] Canvas canvas) : base(control, canvas)
+		public InputOperationVisual([NotNull] Control control, [NotNull] Canvas canvas) : base(control, canvas)
 		{
 			mReferenceColor = Color.Gray;
 			mHintTextRectangle = new Rectangle(new Point(10, 10), new Size(0, 0));
@@ -34,7 +36,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			mOperation = null;
 		}
 
-		public TransformInputOperation Operation
+		public InputOperation Operation
 		{
 			get { return mOperation; }
 			set { mOperation = value; }
@@ -64,6 +66,46 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			get { return mHintTextRectangle; }
 			set { mHintTextRectangle = value; }
 		}
+		public IteratorMatrix ActiveMatrix
+		{
+			get; 
+			set;
+		}
+
+		private Matrix2X2 GetMatrix([NotNull] Iterator iterator)
+		{
+			if (iterator == null)
+			{
+				throw new ArgumentNullException("iterator");
+			}
+
+			switch (ActiveMatrix)
+			{
+				case IteratorMatrix.PreAffine:
+					return iterator.PreAffine.Matrix;
+				case IteratorMatrix.PostAffine:
+					return iterator.PostAffine.Matrix;
+				default:
+					throw new ArgumentOutOfRangeException();
+			}
+		}
+		private Vector2 GetOrigin([NotNull] Iterator iterator)
+		{
+			if (iterator == null)
+			{
+				throw new ArgumentNullException("iterator");
+			}
+
+			switch (ActiveMatrix)
+			{
+				case IteratorMatrix.PreAffine:
+					return iterator.PreAffine.Origin;
+				case IteratorMatrix.PostAffine:
+					return iterator.PostAffine.Origin;
+				default:
+					throw new ArgumentOutOfRangeException();
+			}
+		}
 
 		protected override void OnControlPaint(Graphics graphics)
 		{
@@ -72,7 +114,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			using (var referenceBrush = new SolidBrush(ReferenceColor))
 			using (var referencePen = new Pen(referenceBrush))
 			{
-				var move = mOperation as TransformMoveOperation;
+				var move = mOperation as MoveOperation;
 				if (move != null)
 				{
 					var origin = Canvas.WorldToCanvas(move.Origin);
@@ -93,25 +135,28 @@ namespace Xyrus.Apophysis.Windows.Visuals
 					lines.Add(new ColoredString
 					{
 						String = move.ToString(),
-						Color = TransformVisual.GetTransformColor(move.Transform)
+						Color = IteratorVisual.GetColor(move.Iterator)
 					});
 				}
 
-				var rotate = mOperation as TransformRotateOperation;
+				var rotate = mOperation as RotateOperation;
 				if (rotate != null)
 				{
-					var origin = Canvas.WorldToCanvas(rotate.Transform.Origin);
-					var x = Canvas.WorldToCanvas(rotate.Transform.Affine.X + rotate.Transform.Origin);
+					var matrix = GetMatrix(rotate.Iterator);
+					var origin = GetOrigin(rotate.Iterator);
+
+					var originCanvas = Canvas.WorldToCanvas(origin);
+					var x = Canvas.WorldToCanvas(matrix.X + origin);
 
 					var farRadius = System.Math.Max(Canvas.Size.X, Canvas.Size.Y);
-					var radius = System.Math.Max(rotate.Transform.Affine.X.Length, rotate.Transform.Affine.Y.Length) * (Canvas.Ratio.X + Canvas.Ratio.Y) * 0.5;
-					var rect = new Rectangle((int)(origin.X - radius), (int)(origin.Y - radius), (int)(radius * 2), (int)(radius * 2));
+					var radius = System.Math.Max(matrix.X.Length, matrix.Y.Length) * (Canvas.Ratio.X + Canvas.Ratio.Y) * 0.5;
+					var rect = new Rectangle((int)(originCanvas.X - radius), (int)(originCanvas.Y - radius), (int)(radius * 2), (int)(radius * 2));
 
-					var lh = new Line((x - origin).Direction * -farRadius + origin, (x - origin).Direction * farRadius + origin);
-					var lv = new Line(lh.GetNormal() * -radius + origin, lh.GetNormal() * radius + origin);
+					var lh = new Line((x - originCanvas).Direction * -farRadius + originCanvas, (x - originCanvas).Direction * farRadius + originCanvas);
+					var lv = new Line(lh.GetNormal() * -radius + originCanvas, lh.GetNormal() * radius + originCanvas);
 
-					var loh = new Line(new Vector2(0, origin.Y), new Vector2(Canvas.Size.X, origin.Y));
-					var lov = new Line(new Vector2(origin.X, 0), new Vector2(origin.X, Canvas.Size.Y));
+					var loh = new Line(new Vector2(0, originCanvas.Y), new Vector2(Canvas.Size.X, originCanvas.Y));
+					var lov = new Line(new Vector2(originCanvas.X, 0), new Vector2(originCanvas.X, Canvas.Size.Y));
 
 					graphics.DrawLine(referencePen, loh.A.ToPoint(), loh.B.ToPoint());
 					graphics.DrawLine(referencePen, lov.A.ToPoint(), lov.B.ToPoint());
@@ -124,24 +169,27 @@ namespace Xyrus.Apophysis.Windows.Visuals
 					lines.Add(new ColoredString
 					{
 						String = rotate.ToString(),
-						Color = TransformVisual.GetTransformColor(rotate.Transform)
+						Color = IteratorVisual.GetColor(rotate.Iterator)
 					});
 				}
 
-				var scale = mOperation as TransformScaleOperation;
+				var scale = mOperation as ScaleOperation;
 				if (scale != null)
 				{
-					var origin = Canvas.WorldToCanvas(scale.Transform.Origin);
-					var x = Canvas.WorldToCanvas(scale.Transform.Affine.X + scale.Transform.Origin);
-					var y = Canvas.WorldToCanvas(scale.Transform.Affine.Y + scale.Transform.Origin);
+					var matrix = GetMatrix(scale.Iterator);
+					var origin = GetOrigin(scale.Iterator);
+
+					var originCanvas = Canvas.WorldToCanvas(origin);
+					var x = Canvas.WorldToCanvas(matrix.X + origin);
+					var y = Canvas.WorldToCanvas(matrix.Y + origin);
 
 					var farRadius = System.Math.Max(Canvas.Size.X, Canvas.Size.Y);
 
-					var lx = new Line((x - origin).Direction * -farRadius + origin, (x - origin).Direction * farRadius + origin);
-					var ly = new Line((y - origin).Direction * -farRadius + origin, (y - origin).Direction * farRadius + origin);
+					var lx = new Line((x - originCanvas).Direction * -farRadius + originCanvas, (x - originCanvas).Direction * farRadius + originCanvas);
+					var ly = new Line((y - originCanvas).Direction * -farRadius + originCanvas, (y - originCanvas).Direction * farRadius + originCanvas);
 
-					var loh = new Line(new Vector2(0, origin.Y), new Vector2(Canvas.Size.X, origin.Y));
-					var lov = new Line(new Vector2(origin.X, 0), new Vector2(origin.X, Canvas.Size.Y));
+					var loh = new Line(new Vector2(0, originCanvas.Y), new Vector2(Canvas.Size.X, originCanvas.Y));
+					var lov = new Line(new Vector2(originCanvas.X, 0), new Vector2(originCanvas.X, Canvas.Size.Y));
 
 					graphics.DrawLine(referencePen, loh.A.ToPoint(), loh.B.ToPoint());
 					graphics.DrawLine(referencePen, lov.A.ToPoint(), lov.B.ToPoint());
@@ -152,16 +200,16 @@ namespace Xyrus.Apophysis.Windows.Visuals
 					lines.Add(new ColoredString
 					{
 						String = scale.ToString(),
-						Color = TransformVisual.GetTransformColor(scale.Transform)
+						Color = IteratorVisual.GetColor(scale.Iterator)
 					});
 				}
 
 				if (mOperation != null)
 				{
-					var text = new TransformMouseOverOperation(mOperation.Transform).ToString();
+					var text = new MouseOverOperation(mOperation.Iterator).ToString();
 					var textSize = graphics.MeasureString(text, AttachedControl.Font);
 
-					using (var brush = new SolidBrush(TransformVisual.GetTransformColor(mOperation.Transform)))
+					using (var brush = new SolidBrush(IteratorVisual.GetColor(mOperation.Iterator)))
 					{
 						graphics.DrawString(text, AttachedControl.Font, brush,
 							(int)Canvas.Size.X - mHintTextRectangle.Right - textSize.Width,

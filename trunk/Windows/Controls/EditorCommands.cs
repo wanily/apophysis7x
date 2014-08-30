@@ -1,5 +1,7 @@
 using System;
 using System.ComponentModel;
+using Xyrus.Apophysis.Windows.Math;
+using Xyrus.Apophysis.Windows.Models;
 
 namespace Xyrus.Apophysis.Windows.Controls
 {
@@ -39,9 +41,9 @@ namespace Xyrus.Apophysis.Windows.Controls
 			throw new NotImplementedException();
 		}
 
-		public void NewTransform()
+		public void NewIterator()
 		{
-			mEditor.Transforms.Add();
+			mEditor.Iterators.Add();
 
 			if (mEditor.Settings.ZoomAutomatically)
 			{
@@ -53,9 +55,24 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 		public void FlipAllHorizontally()
 		{
-			foreach (var transform in mEditor.Transforms)
+			Func<Iterator, Vector2> getOrigin;
+
+			switch (mEditor.ActiveMatrix)
 			{
-				transform.Origin.X = -transform.Origin.X;
+				case IteratorMatrix.PreAffine:
+					getOrigin = t => t.PreAffine.Origin;
+					break;
+				case IteratorMatrix.PostAffine:
+					getOrigin = t => t.PostAffine.Origin;
+					break;
+				default:
+					throw new ArgumentOutOfRangeException();
+			}
+
+			foreach (var iterator in mEditor.Iterators)
+			{
+				var origin = getOrigin(iterator);
+				origin.X = -origin.X;
 			}
 
 			if (mEditor.Settings.ZoomAutomatically)
@@ -67,9 +84,24 @@ namespace Xyrus.Apophysis.Windows.Controls
 		}
 		public void FlipAllVertically()
 		{
-			foreach (var transform in mEditor.Transforms)
+			Func<Iterator, Vector2> getOrigin;
+
+			switch (mEditor.ActiveMatrix)
 			{
-				transform.Origin.Y = -transform.Origin.Y;
+				case IteratorMatrix.PreAffine:
+					getOrigin = t => t.PreAffine.Origin;
+					break;
+				case IteratorMatrix.PostAffine:
+					getOrigin = t => t.PostAffine.Origin;
+					break;
+				default:
+					throw new ArgumentOutOfRangeException();
+			}
+
+			foreach (var iterator in mEditor.Iterators)
+			{
+				var origin = getOrigin(iterator);
+				origin.Y = -origin.Y;
 			}
 
 			if (mEditor.Settings.ZoomAutomatically)

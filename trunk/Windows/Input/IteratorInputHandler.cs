@@ -10,7 +10,7 @@ using Xyrus.Apophysis.Windows.Properties;
 namespace Xyrus.Apophysis.Windows.Input
 {
 	[PublicAPI]
-	public class TransformInputHandler : InputHandler
+	public class IteratorInputHandler : InputHandler
 	{
 		enum HitTestResult
 		{
@@ -25,7 +25,8 @@ namespace Xyrus.Apophysis.Windows.Input
 		}
 
 		private EditorSettings mSettings;
-		private TransformVisual mVisual;
+		private IteratorMatrix mActiveMatrix;
+		private IteratorVisual mVisual;
 		private Canvas mCanvas;
 
 		private Vector2 mDragCursor, mDragOrigin;
@@ -34,20 +35,19 @@ namespace Xyrus.Apophysis.Windows.Input
 		private HitTestResult mLastHitTestResult;
 		private bool mIsMouseDown;
 
-		private TransformInputOperation mOperation;
+		private InputOperation mOperation;
 
 		private static readonly Cursor mMoveCursor;
 		private static readonly Cursor mRotateCursor;
 		private static readonly Cursor mScaleCursor;
 
-		static TransformInputHandler()
+		static IteratorInputHandler()
 		{
 			mMoveCursor = new Cursor(new MemoryStream(Resources.Move));
 			mRotateCursor = new Cursor(new MemoryStream(Resources.Rotate));
 			mScaleCursor = new Cursor(new MemoryStream(Resources.Scale));
 		}
-		public TransformInputHandler([NotNull] Control control, [NotNull] TransformVisual visual, [NotNull] Canvas canvas,
-			[NotNull] EditorSettings settings) : base(control)
+		public IteratorInputHandler([NotNull] Control control, [NotNull] IteratorVisual visual, [NotNull] Canvas canvas, [NotNull] EditorSettings settings, IteratorMatrix activeMatrix) : base(control)
 		{
 			if (visual == null) throw new ArgumentNullException("visual");
 			if (canvas == null) throw new ArgumentNullException("canvas");
@@ -56,6 +56,7 @@ namespace Xyrus.Apophysis.Windows.Input
 			mVisual = visual;
 			mCanvas = canvas;
 			mSettings = settings;
+			mActiveMatrix = activeMatrix;
 		}
 		protected override void DisposeOverride(bool disposing)
 		{
@@ -77,6 +78,7 @@ namespace Xyrus.Apophysis.Windows.Input
 			mIsMouseDown = false;
 			mLastHitTestResult = HitTestResult.None;
 			mOperation = null;
+			mActiveMatrix = default(IteratorMatrix);
 		}
 
 		private HitTestResult HitTest(Vector2 cursor)
@@ -129,10 +131,10 @@ namespace Xyrus.Apophysis.Windows.Input
 						else o.X = mDragOrigin.X;
 					}
 
-					mVisual.Model.Origin.X = o.X;
-					mVisual.Model.Origin.Y = o.Y;
+					Origin.X = o.X;
+					Origin.Y = o.Y;
 
-					mOperation = new TransformMoveOperation(Transform, mDragOrigin, o);
+					mOperation = new MoveOperation(Model, mDragOrigin, o);
 
 					break;
 
@@ -147,10 +149,10 @@ namespace Xyrus.Apophysis.Windows.Input
 						else x.X = mDragX.X;
 					}
 
-					mVisual.Model.Affine.X.X = x.X - mDragOrigin.X;
-					mVisual.Model.Affine.X.Y = x.Y - mDragOrigin.Y;
+					Matrix.X.X = x.X - mDragOrigin.X;
+					Matrix.X.Y = x.Y - mDragOrigin.Y;
 
-					mOperation = new TransformMoveOperation(Transform, mDragX, x);
+					mOperation = new MoveOperation(Model, mDragX, x);
 
 					break;
 
@@ -165,10 +167,10 @@ namespace Xyrus.Apophysis.Windows.Input
 						else y.X = mDragY.X;
 					}
 
-					mVisual.Model.Affine.Y.X = y.X - mDragOrigin.X;
-					mVisual.Model.Affine.Y.Y = y.Y - mDragOrigin.Y;
+					Matrix.Y.X = y.X - mDragOrigin.X;
+					Matrix.Y.Y = y.Y - mDragOrigin.Y;
 
-					mOperation = new TransformMoveOperation(Transform, mDragY, y);
+					mOperation = new MoveOperation(Model, mDragY, y);
 
 					break;
 
@@ -201,28 +203,28 @@ namespace Xyrus.Apophysis.Windows.Input
 
 					if (hitTest == HitTestResult.Ox)
 					{
-						mVisual.Model.Affine.X.X = cos1*primary.X - sin1*primary.Y;
-						mVisual.Model.Affine.X.Y = sin1*primary.X + cos1*primary.Y;
+						Matrix.X.X = cos1 * primary.X - sin1 * primary.Y;
+						Matrix.X.Y = sin1 * primary.X + cos1 * primary.Y;
 
-						var newNormal = mVisual.Model.Affine.X.Direction;
-						var length = mVisual.Model.Affine.Y.Length;
+						var newNormal = Matrix.X.Direction;
+						var length = Matrix.Y.Length;
 
-						mVisual.Model.Affine.Y.X = length*(cos0*newNormal.X - sin0*newNormal.Y);
-						mVisual.Model.Affine.Y.Y = length*(sin0*newNormal.X + cos0*newNormal.Y);
+						Matrix.Y.X = length * (cos0 * newNormal.X - sin0 * newNormal.Y);
+						Matrix.Y.Y = length * (sin0 * newNormal.X + cos0 * newNormal.Y);
 					}
 					else if (hitTest == HitTestResult.Oy)
 					{
-						mVisual.Model.Affine.Y.X = cos1 * primary.X - sin1 * primary.Y;
-						mVisual.Model.Affine.Y.Y = sin1 * primary.X + cos1 * primary.Y;
+						Matrix.Y.X = cos1 * primary.X - sin1 * primary.Y;
+						Matrix.Y.Y = sin1 * primary.X + cos1 * primary.Y;
 
-						var newNormal = mVisual.Model.Affine.Y.Direction;
-						var length = mVisual.Model.Affine.X.Length;
+						var newNormal = Matrix.Y.Direction;
+						var length = Matrix.X.Length;
 
-						mVisual.Model.Affine.X.X = length * (cos0 * newNormal.X - sin0 * newNormal.Y);
-						mVisual.Model.Affine.X.Y = length * (sin0 * newNormal.X + cos0 * newNormal.Y);
+						Matrix.X.X = length * (cos0 * newNormal.X - sin0 * newNormal.Y);
+						Matrix.X.Y = length * (sin0 * newNormal.X + cos0 * newNormal.Y);
 					}
 
-					mOperation = new TransformRotateOperation(Transform, angleBetweenOxAndDelta);
+					mOperation = new RotateOperation(Model, angleBetweenOxAndDelta);
 
 					break;
 
@@ -254,13 +256,13 @@ namespace Xyrus.Apophysis.Windows.Input
 					var vXOut = scale * (vX - mDragOrigin);
 					var vYOut = scale * (vY - mDragOrigin);
 
-					mVisual.Model.Affine.X.X = vXOut.X;
-					mVisual.Model.Affine.X.Y = vXOut.Y;
+					Matrix.X.X = vXOut.X;
+					Matrix.X.Y = vXOut.Y;
 
-					mVisual.Model.Affine.Y.X = vYOut.X;
-					mVisual.Model.Affine.Y.Y = vYOut.Y;
+					Matrix.Y.X = vYOut.X;
+					Matrix.Y.Y = vYOut.Y;
 
-					mOperation = new TransformScaleOperation(Transform, scale);
+					mOperation = new ScaleOperation(Model, scale);
 
 					break;
 			}
@@ -272,14 +274,14 @@ namespace Xyrus.Apophysis.Windows.Input
 			{
 				if (key == Keys.Left)
 				{
-					Transform.Origin.X -= mSettings.MoveAmount;
+					Origin.X -= mSettings.MoveAmount;
 					InvalidateControl();
 					return true;
 				}
 
 				if (key == Keys.Right)
 				{
-					Transform.Origin.X += mSettings.MoveAmount;
+					Origin.X += mSettings.MoveAmount;
 					InvalidateControl();
 					InvalidateControl();
 					return true;
@@ -287,7 +289,7 @@ namespace Xyrus.Apophysis.Windows.Input
 
 				if (key == Keys.Up)
 				{
-					Transform.Origin.Y += mSettings.MoveAmount;
+					Origin.Y += mSettings.MoveAmount;
 					InvalidateControl();
 					InvalidateControl();
 					return true;
@@ -295,35 +297,35 @@ namespace Xyrus.Apophysis.Windows.Input
 
 				if (key == Keys.Down)
 				{
-					Transform.Origin.Y -= mSettings.MoveAmount;
+					Origin.Y -= mSettings.MoveAmount;
 					InvalidateControl();
 					return true;
 				}
 
 				if (key == Keys.Add)
 				{
-					Transform.Affine.X.X *= mSettings.ScaleSnap / 100.0;
-					Transform.Affine.X.Y *= mSettings.ScaleSnap / 100.0;
-					Transform.Affine.Y.X *= mSettings.ScaleSnap / 100.0;
-					Transform.Affine.Y.Y *= mSettings.ScaleSnap / 100.0;
+					Matrix.X.X *= mSettings.ScaleSnap / 100.0;
+					Matrix.X.Y *= mSettings.ScaleSnap / 100.0;
+					Matrix.Y.X *= mSettings.ScaleSnap / 100.0;
+					Matrix.Y.Y *= mSettings.ScaleSnap / 100.0;
 					InvalidateControl();
 					return true;
 				}
 
 				if (key == Keys.Subtract)
 				{
-					Transform.Affine.X.X /= mSettings.ScaleSnap / 100.0;
-					Transform.Affine.X.Y /= mSettings.ScaleSnap / 100.0;
-					Transform.Affine.Y.X /= mSettings.ScaleSnap / 100.0;
-					Transform.Affine.Y.Y /= mSettings.ScaleSnap / 100.0;
+					Matrix.X.X /= mSettings.ScaleSnap / 100.0;
+					Matrix.X.Y /= mSettings.ScaleSnap / 100.0;
+					Matrix.Y.X /= mSettings.ScaleSnap / 100.0;
+					Matrix.Y.Y /= mSettings.ScaleSnap / 100.0;
 					InvalidateControl();
 					return true;
 				}
 
 				if (key == Keys.Multiply || key == Keys.Divide)
 				{
-					var normalX = Transform.Affine.X.Direction;
-					var normalY = Transform.Affine.Y.Direction;
+					var normalX = Matrix.X.Direction;
+					var normalY = Matrix.Y.Direction;
 
 					var angleBetweenOxAndOy = System.Math.Atan2(normalY.Y, normalY.X) - System.Math.Atan2(normalX.Y, normalX.X);
 					var angle = mSettings.AngleSnap * (key == Keys.Multiply ? -1 : 1) * System.Math.PI / 360.0;
@@ -334,16 +336,16 @@ namespace Xyrus.Apophysis.Windows.Input
 					var sin0 = System.Math.Sin(angleBetweenOxAndOy);
 					var sin1 = System.Math.Sin(angle);
 
-					var original = Transform.Affine.X.Copy();
+					var original = Matrix.X.Copy();
 
-					Transform.Affine.X.X = cos1 * original.X - sin1 * original.Y;
-					Transform.Affine.X.Y = sin1 * original.X + cos1 * original.Y;
+					Matrix.X.X = cos1 * original.X - sin1 * original.Y;
+					Matrix.X.Y = sin1 * original.X + cos1 * original.Y;
 
-					var newNormal = mVisual.Model.Affine.X.Direction;
-					var length = mVisual.Model.Affine.Y.Length;
+					var newNormal = Matrix.X.Direction;
+					var length = Matrix.Y.Length;
 
-					Transform.Affine.Y.X = length * (cos0 * newNormal.X - sin0 * newNormal.Y);
-					Transform.Affine.Y.Y = length * (sin0 * newNormal.X + cos0 * newNormal.Y);
+					Matrix.Y.X = length * (cos0 * newNormal.X - sin0 * newNormal.Y);
+					Matrix.Y.Y = length * (sin0 * newNormal.X + cos0 * newNormal.Y);
 
 					InvalidateControl();
 					return true;
@@ -415,28 +417,28 @@ namespace Xyrus.Apophysis.Windows.Input
 				mIsMouseDown = true;
 
 				mDragCursor = cursor;
-				mDragOrigin = mVisual.Model.Origin.Copy();
-				mDragX = mVisual.Model.Affine.X.Copy();
-				mDragY = mVisual.Model.Affine.Y.Copy();
+				mDragOrigin = Origin.Copy();
+				mDragX = Matrix.X.Copy();
+				mDragY = Matrix.Y.Copy();
 
 				switch (hitTest)
 				{
 					case HitTestResult.Surface:
 					case HitTestResult.O:
-						mOperation = new TransformMoveOperation(mVisual.Model, mDragOrigin, mDragOrigin);
+						mOperation = new MoveOperation(mVisual.Model, mDragOrigin, mDragOrigin);
 						break;
 					case HitTestResult.X:
-						mOperation = new TransformMoveOperation(mVisual.Model, mDragX, mDragX);
+						mOperation = new MoveOperation(mVisual.Model, mDragX, mDragX);
 						break;
 					case HitTestResult.Y:
-						mOperation = new TransformMoveOperation(mVisual.Model, mDragY, mDragY);
+						mOperation = new MoveOperation(mVisual.Model, mDragY, mDragY);
 						break;
 					case HitTestResult.Ox:
 					case HitTestResult.Oy:
-						mOperation = new TransformRotateOperation(mVisual.Model, 2.0 * System.Math.PI);
+						mOperation = new RotateOperation(mVisual.Model, 2.0 * System.Math.PI);
 						break;
 					case HitTestResult.Xy:
-						mOperation = new TransformScaleOperation(mVisual.Model, 1.0);
+						mOperation = new ScaleOperation(mVisual.Model, 1.0);
 						break;
 					default:
 						mOperation = null;
@@ -482,11 +484,42 @@ namespace Xyrus.Apophysis.Windows.Input
 			mVisual.Reset();
 		}
 
-		public Transform Transform
+		public Vector2 Origin
+		{
+			get
+			{
+				switch (mActiveMatrix)
+				{
+					case IteratorMatrix.PreAffine:
+						return Model.PreAffine.Origin;
+					case IteratorMatrix.PostAffine:
+						return Model.PostAffine.Origin;
+					default:
+						throw new ArgumentOutOfRangeException();
+				}
+			}
+		}
+		public Matrix2X2 Matrix
+		{
+			get
+			{
+				switch (mActiveMatrix)
+				{
+					case IteratorMatrix.PreAffine:
+						return Model.PreAffine.Matrix;
+					case IteratorMatrix.PostAffine:
+						return Model.PostAffine.Matrix;
+					default:
+						throw new ArgumentOutOfRangeException();
+				}
+			}
+		}
+		public Iterator Model
 		{
 			get { return mVisual == null ? null : mVisual.Model; }
 		}
-		public TransformInputOperation GetCurrentOperation()
+
+		public InputOperation GetCurrentOperation()
 		{
 			return mOperation;
 		}

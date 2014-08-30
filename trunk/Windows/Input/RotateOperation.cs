@@ -4,10 +4,10 @@ using Xyrus.Apophysis.Windows.Models;
 namespace Xyrus.Apophysis.Windows.Input
 {
 	[PublicAPI]
-	public class TransformRotateOperation : TransformInputOperation
+	public class RotateOperation : InputOperation
 	{
-		public TransformRotateOperation([NotNull] Transform transform, double rotationAngle)
-			: base(transform)
+		public RotateOperation([NotNull] Iterator iterator, double rotationAngle)
+			: base(iterator)
 		{
 			RotationAngle = rotationAngle;
 		}

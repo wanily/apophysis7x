@@ -4,16 +4,16 @@ using Xyrus.Apophysis.Windows.Models;
 namespace Xyrus.Apophysis.Windows.Input
 {
 	[PublicAPI]
-	public abstract class TransformInputOperation
+	public abstract class InputOperation
 	{
-		protected TransformInputOperation([NotNull] Transform transform)
+		protected InputOperation([NotNull] Iterator iterator)
 		{
-			if (transform == null) throw new ArgumentNullException("transform");
-			Transform = transform;
+			if (iterator == null) throw new ArgumentNullException("iterator");
+			Iterator = iterator;
 		}
 
 		[NotNull]
-		public Transform Transform
+		public Iterator Iterator
 		{
 			get; 
 			private set;
