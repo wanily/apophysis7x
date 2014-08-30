@@ -113,7 +113,10 @@ namespace Xyrus.Apophysis.Windows.Input
 			foreach (var visual in mVisualCollection.Reverse())
 			{
 				mHandlers.Add(new IteratorInputHandler(AttachedControl, visual, mCanvas, mSettings ?? mDefaultSettings, mActiveMatrix));
+				visual.IsSelected = false;
 			}
+
+			mVisualCollection.First().IsSelected = true;
 
 			InvalidateControl();
 		}
@@ -237,15 +240,16 @@ namespace Xyrus.Apophysis.Windows.Input
 			if (mHandlers == null)
 				return false;
 
-			foreach (var visual in mVisualCollection)
-			{
-				visual.IsSelected = false;
-			}
-
 			foreach (var handler in mHandlers)
 			{
 				if (handler.HandleMouseDown(cursor))
 				{
+					var searchHandler = handler;
+					foreach (var visual in mVisualCollection.Except(mVisualCollection.Where(x => ReferenceEquals(x.Model, searchHandler.Model))))
+					{
+						visual.IsSelected = false;
+					}
+
 					RaiseBeginEdit();
 					SetOperation(handler);
 					InvalidateControl();

@@ -69,6 +69,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			var down = -1 * fy;
 
 			var color = GetColor(Model);
+			var translucentColorHalf = Color.FromArgb(0x80, color.R, color.G, color.B);
 			var translucentColor = Color.FromArgb(0x40, color.R, color.G, color.B);
 			var translucentColorLow = Color.FromArgb(0x05, color.R, color.G, color.B);
 
@@ -101,7 +102,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			using (var vertexBrush = new SolidBrush(translucentColor))
 			using (var lowFillBrush = new SolidBrush(translucentColorLow))
 			using (var fillBrush = new SolidBrush(translucentColor))
-			using (var widgetPen = new Pen(translucentColor))
+			using (var widgetPen = new Pen(translucentColorHalf))
 			using (var dashLinePen = new Pen(color))
 			using (var hitLinePen = new Pen(color, 2.0f))
 			using (var linePen = new Pen(color))
@@ -248,7 +249,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 		public bool IsActive { get; set; }
 		public bool IsSelected { get; set; }
 
-		public Apophysis.Math.Rectangle GetBounds()
+		public Math.Rectangle GetBounds()
 		{
 			var fx = Canvas.WorldToCanvas(Matrix.X + Origin);
 			var fy = Canvas.WorldToCanvas(Matrix.Y + Origin);
