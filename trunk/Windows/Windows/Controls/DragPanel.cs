@@ -16,10 +16,17 @@ namespace Xyrus.Apophysis.Windows.Controls
 		private double mStart;
 		private Point mCursorStart;
 		private bool mIsDragging;
+		private double mDefault;
+		private double mMinimum;
+		private double mMaximum;
 
 		public DragPanel()
 		{
 			InitializeComponent();
+
+			mDefault = 0;
+			mMinimum = double.MinValue;
+			mMaximum = double.MaxValue;
 
 			Cursor = Cursors.Hand;
 			mDisplayCulture = CultureInfo.InvariantCulture;
@@ -127,6 +134,57 @@ namespace Xyrus.Apophysis.Windows.Controls
 			}
 		}
 
+		public Double Default
+		{
+			get { return mDefault; }
+			set
+			{
+				if (value > mMaximum || value < mMinimum)
+					throw new ArgumentOutOfRangeException("value");
+
+				mDefault = value;
+				Value = value;
+			}
+		}
+		public Double Minimum
+		{
+			get { return mMinimum; }
+			set
+			{
+				if (value > mMaximum)
+					throw new ArgumentOutOfRangeException("value");
+
+				mMinimum = value;
+				ConstrainValue(value, mMaximum);
+			}
+		}
+		public Double Maximum
+		{
+			get { return mMaximum; }
+			set
+			{
+				if (value < mMinimum)
+					throw new ArgumentOutOfRangeException("value");
+
+				mMaximum = value;
+				ConstrainValue(mMinimum, value);
+			}
+		}
+
+		private void ConstrainValue(double min, double max, bool withEvents = true)
+		{
+			var value = Value;
+			if (value < min || value > max)
+			{
+				if (withEvents && BeginEdit != null) BeginEdit(this, new EventArgs());
+
+				Value = System.Math.Max(min, System.Math.Min(value, max));
+
+				if (withEvents && ValueChanged != null) ValueChanged(this, new EventArgs());
+				if (withEvents && EndEdit != null) EndEdit(this, new EventArgs());
+			}
+		}
+
 		public event EventHandler ValueChanged;
 		public event EventHandler BeginEdit;
 		public event EventHandler EndEdit;
@@ -143,6 +201,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 		}
 		private void OnTextBoxChanged(object sender, EventArgs e)
 		{
+			ConstrainValue(mMinimum, mMaximum, false);
 			if (ValueChanged != null)
 				ValueChanged(this, new EventArgs());
 		}
@@ -218,6 +277,12 @@ namespace Xyrus.Apophysis.Windows.Controls
 			}
 
 			base.OnMouseMove(e);
+		}
+
+		protected override void OnMouseDoubleClick(MouseEventArgs e)
+		{
+			Value = Default;
+			base.OnMouseDoubleClick(e);
 		}
 
 		private void OnMouseUp(MouseHookEventArgs args)

@@ -11,8 +11,13 @@ namespace Xyrus.Apophysis.Models
 
 		private AffineTransform mPreAffine;
 		private AffineTransform mPostAffine;
+
 		private string mName;
 		private double mWeight;
+		private double mColor;
+		private double mColorSpeed;
+		private double mOpacity;
+		private double mDirectColor;
 
 		public Iterator([NotNull] Flame hostingFlame)
 		{
@@ -24,6 +29,10 @@ namespace Xyrus.Apophysis.Models
 			mPostAffine = new AffineTransform();
 
 			mWeight = 0.5;
+			mColor = 0.0;
+			mColorSpeed = 0.0;
+			mOpacity = 1.0;
+			mDirectColor = 1.0;
 		}
 
 		public int Index
@@ -53,6 +62,58 @@ namespace Xyrus.Apophysis.Models
 				}
 
 				mWeight = value;
+			}
+		}
+		public double Color
+		{
+			get { return mColor; }
+			set
+			{
+				if (value < 0 || value > 1)
+				{
+					throw new ArgumentOutOfRangeException("value");
+				}
+
+				mColor = value;
+			}
+		}
+		public double ColorSpeed
+		{
+			get { return mColorSpeed; }
+			set
+			{
+				if (value < -1 || value > 1)
+				{
+					throw new ArgumentOutOfRangeException("value");
+				}
+
+				mColorSpeed = value;
+			}
+		}
+		public double Opacity
+		{
+			get { return mOpacity; }
+			set
+			{
+				if (value < 0 || value > 1)
+				{
+					throw new ArgumentOutOfRangeException("value");
+				}
+
+				mOpacity = value;
+			}
+		}
+		public double DirectColor
+		{
+			get { return mDirectColor; }
+			set
+			{
+				if (value < 0 || value > 1)
+				{
+					throw new ArgumentOutOfRangeException("value");
+				}
+
+				mDirectColor = value;
 			}
 		}
 
@@ -128,10 +189,58 @@ namespace Xyrus.Apophysis.Models
 				var weight = ParseFloat(weightAttribute, 0.5);
 				if (weight < double.Epsilon)
 				{
-					throw new ApophysisException("Weight must not be less or equal to zero");
+					throw new ApophysisException("Weight must not be less or equal to 0");
 				}
 
 				Weight = weight;
+			}
+
+			var colorAttribute = element.Attribute(XName.Get("color"));
+			if (colorAttribute != null)
+			{
+				var color = ParseFloat(colorAttribute);
+				if (color < 0 || color > 1)
+				{
+					throw new ApophysisException("Color must be be in the range 0 - 1");
+				}
+
+				Color = color;
+			}
+
+			var colorSpeedAttribute = element.Attribute(XName.Get("symmetry"));
+			if (colorSpeedAttribute != null)
+			{
+				var colorSpeed = ParseFloat(colorSpeedAttribute);
+				if (colorSpeed < 0 || colorSpeed > 1)
+				{
+					throw new ApophysisException("Color must be be in the range -1 - 1");
+				}
+
+				ColorSpeed = colorSpeed;
+			}
+
+			var opacityAttribute = element.Attribute(XName.Get("opacity"));
+			if (opacityAttribute != null)
+			{
+				var opacity = ParseFloat(opacityAttribute);
+				if (opacity < 0 || opacity > 1)
+				{
+					throw new ApophysisException("Opacity must be be in the range 0 - 1");
+				}
+
+				Opacity = opacity;
+			}
+
+			var directColorAttribute = element.Attribute(XName.Get("var_color"));
+			if (directColorAttribute != null)
+			{
+				var directColor = ParseFloat(directColorAttribute);
+				if (directColor < 0 || directColor > 1)
+				{
+					throw new ApophysisException("DirectColor must be be in the range 0 - 1");
+				}
+
+				DirectColor = directColor;
 			}
 
 			var coefsAttribute = element.Attribute(XName.Get("coefs"));

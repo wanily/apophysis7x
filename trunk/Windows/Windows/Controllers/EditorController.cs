@@ -40,6 +40,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.IteratorSelectionComboBox.SelectedIndexChanged += OnIteratorSelectedFromComboBox;
 			View.IteratorCanvas.SelectionChanged += OnIteratorSelectedFromCanvas;
 
+			View.IteratorColorDragPanel.ValueChanged += OnColorChanged;
+			View.IteratorColorSpeedDragPanel.ValueChanged += OnColorSpeedChanged;
+			View.IteratorOpacityDragPanel.ValueChanged += OnOpacityChanged;
+			View.IteratorDirectColorDragPanel.ValueChanged += OnDirectColorChanged;
+			View.IteratorColorScrollBar.ValueChanged += OnColorChanged;
+
 			View.KeyDown += OnKeyDown;
 
 			View.IteratorCanvas.Settings = new EditorSettings
@@ -57,6 +63,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.IteratorNameTextBox.TextChanged -= OnNameChanged;
 			View.IteratorSelectionComboBox.SelectedIndexChanged -= OnIteratorSelectedFromComboBox;
 			View.IteratorCanvas.SelectionChanged -= OnIteratorSelectedFromCanvas;
+
+			View.IteratorColorDragPanel.ValueChanged -= OnColorChanged;
+			View.IteratorColorSpeedDragPanel.ValueChanged -= OnColorSpeedChanged;
+			View.IteratorOpacityDragPanel.ValueChanged -= OnOpacityChanged;
+			View.IteratorDirectColorDragPanel.ValueChanged -= OnDirectColorChanged;
+			View.IteratorColorScrollBar.ValueChanged -= OnColorChanged;
 
 			View.KeyDown -= OnKeyDown;
 		}
@@ -122,6 +134,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				View.IteratorSelectionComboBox.SelectedIndex = iterator == null ? -1 : iterator.Index;
 				View.IteratorNameTextBox.Text = iterator == null ? null : iterator.Name;
 				View.IteratorWeightDragPanel.Value = iterator == null ? 0.5 : iterator.Weight;
+				View.IteratorColorDragPanel.Value = iterator == null ? 0.0 : iterator.Color;
+				View.IteratorColorSpeedDragPanel.Value = iterator == null ? 0.0 : iterator.ColorSpeed;
+				View.IteratorOpacityDragPanel.Value = iterator == null ? 1.0 : iterator.Opacity;
+				View.IteratorDirectColorDragPanel.Value = iterator == null ? 1.0 : iterator.DirectColor;
+				View.IteratorColorScrollBar.Value = iterator == null ? 0 : (int)(iterator.Color * 1000);
 			}
 		}
 
@@ -159,6 +176,53 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				return;
 
 			iterator.Weight = View.IteratorWeightDragPanel.Value;
+		}
+		private void OnColorChanged(object sender, EventArgs e)
+		{
+			var iterator = View.IteratorCanvas.SelectedIterator;
+			if (mInitialize.IsBusy || iterator == null)
+				return;
+
+			if (ReferenceEquals(sender, View.IteratorColorDragPanel))
+			{
+				iterator.Color = View.IteratorColorDragPanel.Value;
+				using (mInitialize.Enter())
+				{
+					View.IteratorColorScrollBar.Value = (int)(iterator.Color * 1000);
+				}
+			}
+			else if (ReferenceEquals(sender, View.IteratorColorScrollBar))
+			{
+				iterator.Color = View.IteratorColorScrollBar.Value / 1000.0;
+				using (mInitialize.Enter())
+				{
+					View.IteratorColorDragPanel.Value = iterator.Color;
+				}
+			}
+		}
+		private void OnColorSpeedChanged(object sender, EventArgs e)
+		{
+			var iterator = View.IteratorCanvas.SelectedIterator;
+			if (mInitialize.IsBusy || iterator == null)
+				return;
+
+			iterator.ColorSpeed = View.IteratorColorSpeedDragPanel.Value;
+		}
+		private void OnOpacityChanged(object sender, EventArgs e)
+		{
+			var iterator = View.IteratorCanvas.SelectedIterator;
+			if (mInitialize.IsBusy || iterator == null)
+				return;
+
+			iterator.Opacity = View.IteratorOpacityDragPanel.Value;
+		}
+		private void OnDirectColorChanged(object sender, EventArgs e)
+		{
+			var iterator = View.IteratorCanvas.SelectedIterator;
+			if (mInitialize.IsBusy || iterator == null)
+				return;
+
+			iterator.DirectColor = View.IteratorDirectColorDragPanel.Value;
 		}
 
 		private void OnIteratorSelectedFromCanvas(object sender, EventArgs e)
