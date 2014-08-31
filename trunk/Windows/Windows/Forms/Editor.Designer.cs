@@ -209,6 +209,8 @@ namespace Xyrus.Apophysis.Windows.Forms
 			// 
 			// mIteratorColorGroupBox
 			// 
+			this.mIteratorColorGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.mIteratorColorGroupBox.Controls.Add(this.IteratorIsExclusiveCheckBox);
 			this.mIteratorColorGroupBox.Controls.Add(this.IteratorDirectColorTextBox);
 			this.mIteratorColorGroupBox.Controls.Add(this.IteratorDirectColorDragPanel);

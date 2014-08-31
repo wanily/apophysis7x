@@ -46,7 +46,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.IteratorDirectColorDragPanel.ValueChanged += OnDirectColorChanged;
 			View.IteratorColorScrollBar.ValueChanged += OnColorChanged;
 
-			View.KeyDown += OnKeyDown;
+			View.KeyHandler = OnKeyDown;
 
 			View.IteratorCanvas.Settings = new EditorSettings
 			{
@@ -70,7 +70,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.IteratorDirectColorDragPanel.ValueChanged -= OnDirectColorChanged;
 			View.IteratorColorScrollBar.ValueChanged -= OnColorChanged;
 
-			View.KeyDown -= OnKeyDown;
+			View.KeyHandler = null;
 		}
 
 		public void SetFlame([NotNull] Flame flame)
@@ -248,9 +248,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			BuildIteratorComboBox();
 		}
 
-		private void OnKeyDown(object sender, KeyEventArgs e)
+		private void OnKeyDown(Keys keys)
 		{
-			if (e.Control && (e.KeyCode & Keys.V) == Keys.V)
+			if ((keys & Keys.Control) == Keys.Control && (keys & Keys.V) == Keys.V)
 			{
 				ReadFlameFromClipboard();
 			}

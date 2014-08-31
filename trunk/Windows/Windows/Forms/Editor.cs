@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Windows.Visuals;
 
@@ -24,6 +25,14 @@ namespace Xyrus.Apophysis.Windows.Forms
 				}
 			}
 			base.Dispose(disposing);
+		}
+
+		internal Action<Keys> KeyHandler { get; set; }
+		protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+		{
+			if (KeyHandler != null)
+				KeyHandler(keyData);
+			return base.ProcessCmdKey(ref msg, keyData);
 		}
 
 		private void OnIteratorComboBoxDrawItem(object sender, DrawItemEventArgs e)
