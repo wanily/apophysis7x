@@ -19,20 +19,20 @@ namespace Xyrus.Apophysis.Windows.Forms
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Editor));
 			this.mRootSplitter = new System.Windows.Forms.SplitContainer();
+			this.IteratorCanvas = new Xyrus.Apophysis.Windows.Controls.EditorCanvas();
+			this.mSettings = new Xyrus.Apophysis.Windows.Controls.EditorSettings();
 			this.mSidebarSplitter = new System.Windows.Forms.SplitContainer();
 			this.mPreviewPanel = new System.Windows.Forms.Panel();
 			this.mPictureBevel = new System.Windows.Forms.Label();
-			this.mIteratorPropertyPanel = new System.Windows.Forms.Panel();
-			this.mIteratorWeight = new System.Windows.Forms.TextBox();
-			this.mIteratorName = new System.Windows.Forms.TextBox();
-			this.mIteratorNameLabel = new System.Windows.Forms.Label();
-			this.mIteratorSelect = new System.Windows.Forms.ComboBox();
-			this.mIteratorSelectLabel = new System.Windows.Forms.Label();
-			this.mCanvas = new Xyrus.Apophysis.Windows.Controls.EditorCanvas();
-			this.mSettings = new Xyrus.Apophysis.Windows.Controls.EditorSettings();
-			this.mIteratorWeightLabel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.mTabs = new System.Windows.Forms.TabControl();
 			this.mColorTab = new System.Windows.Forms.TabPage();
+			this.mIteratorPropertyPanel = new System.Windows.Forms.Panel();
+			this.IteratorWeightTextBox = new System.Windows.Forms.TextBox();
+			this.IteratorWeightDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
+			this.IteratorNameTextBox = new System.Windows.Forms.TextBox();
+			this.mIteratorNameLabel = new System.Windows.Forms.Label();
+			this.IteratorSelectionComboBox = new System.Windows.Forms.ComboBox();
+			this.mIteratorSelectLabel = new System.Windows.Forms.Label();
 			this.mRootSplitter.Panel1.SuspendLayout();
 			this.mRootSplitter.Panel2.SuspendLayout();
 			this.mRootSplitter.SuspendLayout();
@@ -40,8 +40,8 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mSidebarSplitter.Panel2.SuspendLayout();
 			this.mSidebarSplitter.SuspendLayout();
 			this.mPreviewPanel.SuspendLayout();
-			this.mIteratorPropertyPanel.SuspendLayout();
 			this.mTabs.SuspendLayout();
+			this.mIteratorPropertyPanel.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// mRootSplitter
@@ -52,7 +52,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			// 
 			// mRootSplitter.Panel1
 			// 
-			this.mRootSplitter.Panel1.Controls.Add(this.mCanvas);
+			this.mRootSplitter.Panel1.Controls.Add(this.IteratorCanvas);
 			// 
 			// mRootSplitter.Panel2
 			// 
@@ -60,6 +60,39 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mRootSplitter.Size = new System.Drawing.Size(1043, 625);
 			this.mRootSplitter.SplitterDistance = 740;
 			this.mRootSplitter.TabIndex = 3;
+			// 
+			// IteratorCanvas
+			// 
+			this.IteratorCanvas.ActiveMatrix = Xyrus.Apophysis.Windows.Controls.IteratorMatrix.PreAffine;
+			this.IteratorCanvas.BackColor = System.Drawing.Color.Black;
+			this.IteratorCanvas.BackdropColor = System.Drawing.Color.Transparent;
+			this.IteratorCanvas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.IteratorCanvas.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.IteratorCanvas.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.IteratorCanvas.ForeColor = System.Drawing.Color.White;
+			this.IteratorCanvas.GridLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+			this.IteratorCanvas.GridZeroLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(92)))), ((int)(((byte)(92)))), ((int)(((byte)(92)))));
+			this.IteratorCanvas.HighlightOrigin = true;
+			this.IteratorCanvas.Iterators = null;
+			this.IteratorCanvas.Location = new System.Drawing.Point(0, 0);
+			this.IteratorCanvas.Name = "IteratorCanvas";
+			this.IteratorCanvas.ReferenceColor = System.Drawing.Color.Gray;
+			this.IteratorCanvas.RulerBackdropColor = System.Drawing.Color.Transparent;
+			this.IteratorCanvas.RulerBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+			this.IteratorCanvas.RulerGridLineColor = System.Drawing.Color.Silver;
+			this.IteratorCanvas.Settings = this.mSettings;
+			this.IteratorCanvas.ShowRuler = true;
+			this.IteratorCanvas.Size = new System.Drawing.Size(740, 625);
+			this.IteratorCanvas.TabIndex = 1;
+			// 
+			// mSettings
+			// 
+			this.mSettings.AngleSnap = 15D;
+			this.mSettings.LockAxes = false;
+			this.mSettings.MoveAmount = 0.1D;
+			this.mSettings.ScaleSnap = 125D;
+			this.mSettings.ShowVariationPreview = false;
+			this.mSettings.ZoomAutomatically = false;
 			// 
 			// mSidebarSplitter
 			// 
@@ -98,128 +131,6 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mPictureBevel.Size = new System.Drawing.Size(299, 187);
 			this.mPictureBevel.TabIndex = 0;
 			// 
-			// mIteratorPropertyPanel
-			// 
-			this.mIteratorPropertyPanel.Controls.Add(this.mIteratorWeight);
-			this.mIteratorPropertyPanel.Controls.Add(this.mIteratorWeightLabel);
-			this.mIteratorPropertyPanel.Controls.Add(this.mIteratorName);
-			this.mIteratorPropertyPanel.Controls.Add(this.mIteratorNameLabel);
-			this.mIteratorPropertyPanel.Controls.Add(this.mIteratorSelect);
-			this.mIteratorPropertyPanel.Controls.Add(this.mIteratorSelectLabel);
-			this.mIteratorPropertyPanel.Dock = System.Windows.Forms.DockStyle.Top;
-			this.mIteratorPropertyPanel.Location = new System.Drawing.Point(0, 0);
-			this.mIteratorPropertyPanel.Name = "mIteratorPropertyPanel";
-			this.mIteratorPropertyPanel.Size = new System.Drawing.Size(299, 86);
-			this.mIteratorPropertyPanel.TabIndex = 0;
-			// 
-			// mIteratorWeight
-			// 
-			this.mIteratorWeight.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.mIteratorWeight.Location = new System.Drawing.Point(120, 53);
-			this.mIteratorWeight.Name = "mIteratorWeight";
-			this.mIteratorWeight.Size = new System.Drawing.Size(168, 20);
-			this.mIteratorWeight.TabIndex = 5;
-			this.mIteratorWeight.Text = "0.000";
-			// 
-			// mIteratorName
-			// 
-			this.mIteratorName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.mIteratorName.Location = new System.Drawing.Point(120, 32);
-			this.mIteratorName.Name = "mIteratorName";
-			this.mIteratorName.Size = new System.Drawing.Size(168, 20);
-			this.mIteratorName.TabIndex = 3;
-			this.mIteratorName.TextChanged += new System.EventHandler(this.OnIteratorNameChanged);
-			// 
-			// mIteratorNameLabel
-			// 
-			this.mIteratorNameLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.mIteratorNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.mIteratorNameLabel.Location = new System.Drawing.Point(14, 32);
-			this.mIteratorNameLabel.Name = "mIteratorNameLabel";
-			this.mIteratorNameLabel.Size = new System.Drawing.Size(107, 20);
-			this.mIteratorNameLabel.TabIndex = 2;
-			this.mIteratorNameLabel.Text = "Name:";
-			this.mIteratorNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// mIteratorSelect
-			// 
-			this.mIteratorSelect.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.mIteratorSelect.BackColor = System.Drawing.Color.Black;
-			this.mIteratorSelect.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-			this.mIteratorSelect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.mIteratorSelect.ForeColor = System.Drawing.Color.White;
-			this.mIteratorSelect.FormattingEnabled = true;
-			this.mIteratorSelect.ItemHeight = 15;
-			this.mIteratorSelect.Location = new System.Drawing.Point(120, 10);
-			this.mIteratorSelect.MaxDropDownItems = 20;
-			this.mIteratorSelect.Name = "mIteratorSelect";
-			this.mIteratorSelect.Size = new System.Drawing.Size(168, 21);
-			this.mIteratorSelect.TabIndex = 1;
-			this.mIteratorSelect.SelectedIndexChanged += new System.EventHandler(this.OnIteratorSelectedFromCombo);
-			// 
-			// mIteratorSelectLabel
-			// 
-			this.mIteratorSelectLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.mIteratorSelectLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.mIteratorSelectLabel.Location = new System.Drawing.Point(14, 10);
-			this.mIteratorSelectLabel.Name = "mIteratorSelectLabel";
-			this.mIteratorSelectLabel.Size = new System.Drawing.Size(107, 21);
-			this.mIteratorSelectLabel.TabIndex = 0;
-			this.mIteratorSelectLabel.Text = "Transform:";
-			this.mIteratorSelectLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// mCanvas
-			// 
-			this.mCanvas.ActiveMatrix = Xyrus.Apophysis.Windows.Controls.IteratorMatrix.PreAffine;
-			this.mCanvas.BackColor = System.Drawing.Color.Black;
-			this.mCanvas.BackdropColor = System.Drawing.Color.Transparent;
-			this.mCanvas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.mCanvas.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.mCanvas.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.mCanvas.ForeColor = System.Drawing.Color.White;
-			this.mCanvas.GridLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-			this.mCanvas.GridZeroLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(92)))), ((int)(((byte)(92)))), ((int)(((byte)(92)))));
-			this.mCanvas.HighlightOrigin = true;
-			this.mCanvas.Iterators = null;
-			this.mCanvas.Location = new System.Drawing.Point(0, 0);
-			this.mCanvas.Name = "mCanvas";
-			this.mCanvas.ReferenceColor = System.Drawing.Color.Gray;
-			this.mCanvas.RulerBackdropColor = System.Drawing.Color.Transparent;
-			this.mCanvas.RulerBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-			this.mCanvas.RulerGridLineColor = System.Drawing.Color.Silver;
-			this.mCanvas.Settings = this.mSettings;
-			this.mCanvas.ShowRuler = true;
-			this.mCanvas.Size = new System.Drawing.Size(740, 625);
-			this.mCanvas.TabIndex = 1;
-			this.mCanvas.SelectionChanged += new System.EventHandler(this.OnIteratorSelectedByCanvas);
-			// 
-			// mSettings
-			// 
-			this.mSettings.AngleSnap = 15D;
-			this.mSettings.LockAxes = false;
-			this.mSettings.MoveAmount = 0.1D;
-			this.mSettings.ScaleSnap = 125D;
-			this.mSettings.ShowVariationPreview = false;
-			this.mSettings.ZoomAutomatically = false;
-			// 
-			// mIteratorWeightLabel
-			// 
-			this.mIteratorWeightLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.mIteratorWeightLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.mIteratorWeightLabel.DisplayCulture = new System.Globalization.CultureInfo("");
-			this.mIteratorWeightLabel.Location = new System.Drawing.Point(14, 53);
-			this.mIteratorWeightLabel.Name = "mIteratorWeightLabel";
-			this.mIteratorWeightLabel.Size = new System.Drawing.Size(107, 20);
-			this.mIteratorWeightLabel.TabIndex = 4;
-			this.mIteratorWeightLabel.Text = "Weight:";
-			this.mIteratorWeightLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.mIteratorWeightLabel.TextBox = this.mIteratorWeight;
-			this.mIteratorWeightLabel.Value = 0D;
-			this.mIteratorWeightLabel.ValueChanged += new System.EventHandler(this.OnIteratorWeightChanged);
-			// 
 			// mTabs
 			// 
 			this.mTabs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -242,6 +153,91 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mColorTab.Text = "Color";
 			this.mColorTab.UseVisualStyleBackColor = true;
 			// 
+			// mIteratorPropertyPanel
+			// 
+			this.mIteratorPropertyPanel.Controls.Add(this.IteratorWeightTextBox);
+			this.mIteratorPropertyPanel.Controls.Add(this.IteratorWeightDragPanel);
+			this.mIteratorPropertyPanel.Controls.Add(this.IteratorNameTextBox);
+			this.mIteratorPropertyPanel.Controls.Add(this.mIteratorNameLabel);
+			this.mIteratorPropertyPanel.Controls.Add(this.IteratorSelectionComboBox);
+			this.mIteratorPropertyPanel.Controls.Add(this.mIteratorSelectLabel);
+			this.mIteratorPropertyPanel.Dock = System.Windows.Forms.DockStyle.Top;
+			this.mIteratorPropertyPanel.Location = new System.Drawing.Point(0, 0);
+			this.mIteratorPropertyPanel.Name = "mIteratorPropertyPanel";
+			this.mIteratorPropertyPanel.Size = new System.Drawing.Size(299, 86);
+			this.mIteratorPropertyPanel.TabIndex = 0;
+			// 
+			// IteratorWeightTextBox
+			// 
+			this.IteratorWeightTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.IteratorWeightTextBox.Location = new System.Drawing.Point(120, 53);
+			this.IteratorWeightTextBox.Name = "IteratorWeightTextBox";
+			this.IteratorWeightTextBox.Size = new System.Drawing.Size(168, 20);
+			this.IteratorWeightTextBox.TabIndex = 5;
+			this.IteratorWeightTextBox.Text = "0.000";
+			// 
+			// IteratorWeightDragPanel
+			// 
+			this.IteratorWeightDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.IteratorWeightDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.IteratorWeightDragPanel.DisplayCulture = new System.Globalization.CultureInfo("");
+			this.IteratorWeightDragPanel.Location = new System.Drawing.Point(14, 53);
+			this.IteratorWeightDragPanel.Name = "IteratorWeightDragPanel";
+			this.IteratorWeightDragPanel.Size = new System.Drawing.Size(107, 20);
+			this.IteratorWeightDragPanel.TabIndex = 4;
+			this.IteratorWeightDragPanel.Text = "Weight:";
+			this.IteratorWeightDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.IteratorWeightDragPanel.TextBox = this.IteratorWeightTextBox;
+			this.IteratorWeightDragPanel.Value = 0D;
+			// 
+			// IteratorNameTextBox
+			// 
+			this.IteratorNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.IteratorNameTextBox.Location = new System.Drawing.Point(120, 32);
+			this.IteratorNameTextBox.Name = "IteratorNameTextBox";
+			this.IteratorNameTextBox.Size = new System.Drawing.Size(168, 20);
+			this.IteratorNameTextBox.TabIndex = 3;
+			// 
+			// mIteratorNameLabel
+			// 
+			this.mIteratorNameLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.mIteratorNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.mIteratorNameLabel.Location = new System.Drawing.Point(14, 32);
+			this.mIteratorNameLabel.Name = "mIteratorNameLabel";
+			this.mIteratorNameLabel.Size = new System.Drawing.Size(107, 20);
+			this.mIteratorNameLabel.TabIndex = 2;
+			this.mIteratorNameLabel.Text = "Name:";
+			this.mIteratorNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// IteratorSelectionComboBox
+			// 
+			this.IteratorSelectionComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.IteratorSelectionComboBox.BackColor = System.Drawing.Color.Black;
+			this.IteratorSelectionComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+			this.IteratorSelectionComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.IteratorSelectionComboBox.ForeColor = System.Drawing.Color.White;
+			this.IteratorSelectionComboBox.FormattingEnabled = true;
+			this.IteratorSelectionComboBox.ItemHeight = 15;
+			this.IteratorSelectionComboBox.Location = new System.Drawing.Point(120, 10);
+			this.IteratorSelectionComboBox.MaxDropDownItems = 20;
+			this.IteratorSelectionComboBox.Name = "IteratorSelectionComboBox";
+			this.IteratorSelectionComboBox.Size = new System.Drawing.Size(168, 21);
+			this.IteratorSelectionComboBox.TabIndex = 1;
+			// 
+			// mIteratorSelectLabel
+			// 
+			this.mIteratorSelectLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.mIteratorSelectLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.mIteratorSelectLabel.Location = new System.Drawing.Point(14, 10);
+			this.mIteratorSelectLabel.Name = "mIteratorSelectLabel";
+			this.mIteratorSelectLabel.Size = new System.Drawing.Size(107, 21);
+			this.mIteratorSelectLabel.TabIndex = 0;
+			this.mIteratorSelectLabel.Text = "Transform:";
+			this.mIteratorSelectLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
 			// Editor
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -259,9 +255,9 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mSidebarSplitter.Panel2.ResumeLayout(false);
 			this.mSidebarSplitter.ResumeLayout(false);
 			this.mPreviewPanel.ResumeLayout(false);
+			this.mTabs.ResumeLayout(false);
 			this.mIteratorPropertyPanel.ResumeLayout(false);
 			this.mIteratorPropertyPanel.PerformLayout();
-			this.mTabs.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -269,20 +265,20 @@ namespace Xyrus.Apophysis.Windows.Forms
 		#endregion
 
 		private System.Windows.Forms.SplitContainer mRootSplitter;
-		private Controls.EditorCanvas mCanvas;
 		private EditorSettings mSettings;
 		private System.Windows.Forms.SplitContainer mSidebarSplitter;
 		private System.Windows.Forms.Panel mPreviewPanel;
 		private System.Windows.Forms.Panel mIteratorPropertyPanel;
-		private System.Windows.Forms.ComboBox mIteratorSelect;
 		private System.Windows.Forms.Label mIteratorSelectLabel;
 		private System.Windows.Forms.Label mIteratorNameLabel;
-		private System.Windows.Forms.TextBox mIteratorName;
-		private DragPanel mIteratorWeightLabel;
-		private System.Windows.Forms.TextBox mIteratorWeight;
 		private System.Windows.Forms.Label mPictureBevel;
 		private System.Windows.Forms.TabControl mTabs;
 		private System.Windows.Forms.TabPage mColorTab;
+		public System.Windows.Forms.ComboBox IteratorSelectionComboBox;
+		public System.Windows.Forms.TextBox IteratorNameTextBox;
+		public DragPanel IteratorWeightDragPanel;
+		public System.Windows.Forms.TextBox IteratorWeightTextBox;
+		public EditorCanvas IteratorCanvas;
 	}
 }
 

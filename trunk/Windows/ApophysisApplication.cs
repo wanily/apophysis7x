@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
+using Xyrus.Apophysis.Windows;
+using Xyrus.Apophysis.Windows.Controllers;
 using Xyrus.Apophysis.Windows.Forms;
 
 namespace Xyrus.Apophysis
@@ -13,15 +15,15 @@ namespace Xyrus.Apophysis
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 
-			using (var window = GetWindow<Editor>())
+			using (var window = GetWindow<Editor, EditorController>())
 			{
-				Application.Run(window);
+				window.StartApplication();
 			}
 		}
 
-		public static T GetWindow<T>() where T : Form, new()
+		public static TController GetWindow<TView, TController>() where TView : Form, new() where TController: WindowController<TView>, new()
 		{
-			return new T();
+			return new TController();
 		}
 	}
 }
