@@ -75,5 +75,11 @@ namespace Xyrus.Apophysis.Windows.Forms
 			e.ItemWidth = (int)size.Width;
 			e.ItemHeight = (int)size.Height;
 		}
+
+		private void OnWindowLoaded(object sender, EventArgs e)
+		{
+			mRootSplitter.Panel2MinSize = 250;
+			mSidebarSplitter.Panel1MinSize = 250;
+		}
 	}
 }

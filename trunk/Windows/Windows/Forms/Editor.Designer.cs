@@ -24,20 +24,21 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mPictureBevel = new System.Windows.Forms.Label();
 			this.mTabs = new System.Windows.Forms.TabControl();
 			this.mColorTab = new System.Windows.Forms.TabPage();
+			this.mIteratorColorGroupBox = new System.Windows.Forms.GroupBox();
+			this.IteratorIsExclusiveCheckBox = new System.Windows.Forms.CheckBox();
+			this.IteratorDirectColorTextBox = new System.Windows.Forms.TextBox();
+			this.IteratorOpacityTextBox = new System.Windows.Forms.TextBox();
+			this.IteratorColorSpeedTextBox = new System.Windows.Forms.TextBox();
+			this.IteratorColorScrollBar = new System.Windows.Forms.HScrollBar();
+			this.mPalettePictureBox = new System.Windows.Forms.PictureBox();
+			this.IteratorColorTextBox = new System.Windows.Forms.TextBox();
 			this.mIteratorPropertyPanel = new System.Windows.Forms.Panel();
 			this.IteratorWeightTextBox = new System.Windows.Forms.TextBox();
 			this.IteratorNameTextBox = new System.Windows.Forms.TextBox();
 			this.mIteratorNameLabel = new System.Windows.Forms.Label();
 			this.IteratorSelectionComboBox = new System.Windows.Forms.ComboBox();
 			this.mIteratorSelectLabel = new System.Windows.Forms.Label();
-			this.mIteratorColorGroupBox = new System.Windows.Forms.GroupBox();
-			this.IteratorColorTextBox = new System.Windows.Forms.TextBox();
-			this.mPalettePictureBox = new System.Windows.Forms.PictureBox();
-			this.IteratorColorScrollBar = new System.Windows.Forms.HScrollBar();
-			this.IteratorColorSpeedTextBox = new System.Windows.Forms.TextBox();
-			this.IteratorOpacityTextBox = new System.Windows.Forms.TextBox();
-			this.IteratorDirectColorTextBox = new System.Windows.Forms.TextBox();
-			this.IteratorIsExclusiveCheckBox = new System.Windows.Forms.CheckBox();
+			this.mPaletteBevel = new System.Windows.Forms.Label();
 			this.IteratorCanvas = new Xyrus.Apophysis.Windows.Controls.EditorCanvas();
 			this.mSettings = new Xyrus.Apophysis.Windows.Controls.EditorSettings();
 			this.IteratorDirectColorDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
@@ -54,9 +55,9 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mPreviewPanel.SuspendLayout();
 			this.mTabs.SuspendLayout();
 			this.mColorTab.SuspendLayout();
-			this.mIteratorPropertyPanel.SuspendLayout();
 			this.mIteratorColorGroupBox.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.mPalettePictureBox)).BeginInit();
+			this.mIteratorPropertyPanel.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// mRootSplitter
@@ -72,8 +73,8 @@ namespace Xyrus.Apophysis.Windows.Forms
 			// mRootSplitter.Panel2
 			// 
 			this.mRootSplitter.Panel2.Controls.Add(this.mSidebarSplitter);
-			this.mRootSplitter.Size = new System.Drawing.Size(1043, 765);
-			this.mRootSplitter.SplitterDistance = 740;
+			this.mRootSplitter.Size = new System.Drawing.Size(1014, 659);
+			this.mRootSplitter.SplitterDistance = 711;
 			this.mRootSplitter.TabIndex = 3;
 			// 
 			// mSidebarSplitter
@@ -86,13 +87,14 @@ namespace Xyrus.Apophysis.Windows.Forms
 			// mSidebarSplitter.Panel1
 			// 
 			this.mSidebarSplitter.Panel1.Controls.Add(this.mPreviewPanel);
+			this.mSidebarSplitter.Panel1MinSize = 100;
 			// 
 			// mSidebarSplitter.Panel2
 			// 
 			this.mSidebarSplitter.Panel2.Controls.Add(this.mTabs);
 			this.mSidebarSplitter.Panel2.Controls.Add(this.mIteratorPropertyPanel);
-			this.mSidebarSplitter.Size = new System.Drawing.Size(299, 765);
-			this.mSidebarSplitter.SplitterDistance = 182;
+			this.mSidebarSplitter.Size = new System.Drawing.Size(299, 659);
+			this.mSidebarSplitter.SplitterDistance = 156;
 			this.mSidebarSplitter.TabIndex = 0;
 			// 
 			// mPreviewPanel
@@ -101,16 +103,18 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mPreviewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.mPreviewPanel.Location = new System.Drawing.Point(0, 0);
 			this.mPreviewPanel.Name = "mPreviewPanel";
-			this.mPreviewPanel.Size = new System.Drawing.Size(299, 182);
+			this.mPreviewPanel.Size = new System.Drawing.Size(299, 156);
 			this.mPreviewPanel.TabIndex = 0;
 			// 
 			// mPictureBevel
 			// 
+			this.mPictureBevel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.mPictureBevel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.mPictureBevel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.mPictureBevel.Location = new System.Drawing.Point(0, 0);
+			this.mPictureBevel.Location = new System.Drawing.Point(0, 4);
 			this.mPictureBevel.Name = "mPictureBevel";
-			this.mPictureBevel.Size = new System.Drawing.Size(299, 182);
+			this.mPictureBevel.Size = new System.Drawing.Size(296, 152);
 			this.mPictureBevel.TabIndex = 0;
 			// 
 			// mTabs
@@ -119,22 +123,117 @@ namespace Xyrus.Apophysis.Windows.Forms
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.mTabs.Controls.Add(this.mColorTab);
-			this.mTabs.Location = new System.Drawing.Point(4, 90);
+			this.mTabs.Location = new System.Drawing.Point(10, 95);
 			this.mTabs.Name = "mTabs";
 			this.mTabs.SelectedIndex = 0;
-			this.mTabs.Size = new System.Drawing.Size(293, 486);
+			this.mTabs.Size = new System.Drawing.Size(280, 392);
 			this.mTabs.TabIndex = 1;
 			// 
 			// mColorTab
 			// 
+			this.mColorTab.BackColor = System.Drawing.SystemColors.ControlLightLight;
 			this.mColorTab.Controls.Add(this.mIteratorColorGroupBox);
 			this.mColorTab.Location = new System.Drawing.Point(4, 22);
 			this.mColorTab.Name = "mColorTab";
 			this.mColorTab.Padding = new System.Windows.Forms.Padding(3);
-			this.mColorTab.Size = new System.Drawing.Size(285, 460);
+			this.mColorTab.Size = new System.Drawing.Size(272, 366);
 			this.mColorTab.TabIndex = 0;
 			this.mColorTab.Text = "Color";
-			this.mColorTab.UseVisualStyleBackColor = true;
+			// 
+			// mIteratorColorGroupBox
+			// 
+			this.mIteratorColorGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.mIteratorColorGroupBox.Controls.Add(this.IteratorIsExclusiveCheckBox);
+			this.mIteratorColorGroupBox.Controls.Add(this.IteratorDirectColorTextBox);
+			this.mIteratorColorGroupBox.Controls.Add(this.IteratorDirectColorDragPanel);
+			this.mIteratorColorGroupBox.Controls.Add(this.IteratorOpacityTextBox);
+			this.mIteratorColorGroupBox.Controls.Add(this.IteratorOpacityDragPanel);
+			this.mIteratorColorGroupBox.Controls.Add(this.IteratorColorSpeedTextBox);
+			this.mIteratorColorGroupBox.Controls.Add(this.IteratorColorSpeedDragPanel);
+			this.mIteratorColorGroupBox.Controls.Add(this.IteratorColorScrollBar);
+			this.mIteratorColorGroupBox.Controls.Add(this.mPalettePictureBox);
+			this.mIteratorColorGroupBox.Controls.Add(this.IteratorColorTextBox);
+			this.mIteratorColorGroupBox.Controls.Add(this.IteratorColorDragPanel);
+			this.mIteratorColorGroupBox.Controls.Add(this.mPaletteBevel);
+			this.mIteratorColorGroupBox.Location = new System.Drawing.Point(6, 6);
+			this.mIteratorColorGroupBox.Name = "mIteratorColorGroupBox";
+			this.mIteratorColorGroupBox.Size = new System.Drawing.Size(260, 228);
+			this.mIteratorColorGroupBox.TabIndex = 0;
+			this.mIteratorColorGroupBox.TabStop = false;
+			this.mIteratorColorGroupBox.Text = "Transform color";
+			// 
+			// IteratorIsExclusiveCheckBox
+			// 
+			this.IteratorIsExclusiveCheckBox.AutoSize = true;
+			this.IteratorIsExclusiveCheckBox.Location = new System.Drawing.Point(7, 194);
+			this.IteratorIsExclusiveCheckBox.Name = "IteratorIsExclusiveCheckBox";
+			this.IteratorIsExclusiveCheckBox.Size = new System.Drawing.Size(47, 17);
+			this.IteratorIsExclusiveCheckBox.TabIndex = 16;
+			this.IteratorIsExclusiveCheckBox.Text = "Solo";
+			this.IteratorIsExclusiveCheckBox.UseVisualStyleBackColor = true;
+			// 
+			// IteratorDirectColorTextBox
+			// 
+			this.IteratorDirectColorTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.IteratorDirectColorTextBox.Location = new System.Drawing.Point(112, 158);
+			this.IteratorDirectColorTextBox.Name = "IteratorDirectColorTextBox";
+			this.IteratorDirectColorTextBox.Size = new System.Drawing.Size(142, 20);
+			this.IteratorDirectColorTextBox.TabIndex = 15;
+			this.IteratorDirectColorTextBox.Text = "1.000";
+			// 
+			// IteratorOpacityTextBox
+			// 
+			this.IteratorOpacityTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.IteratorOpacityTextBox.Location = new System.Drawing.Point(112, 135);
+			this.IteratorOpacityTextBox.Name = "IteratorOpacityTextBox";
+			this.IteratorOpacityTextBox.Size = new System.Drawing.Size(142, 20);
+			this.IteratorOpacityTextBox.TabIndex = 13;
+			this.IteratorOpacityTextBox.Text = "1.000";
+			// 
+			// IteratorColorSpeedTextBox
+			// 
+			this.IteratorColorSpeedTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.IteratorColorSpeedTextBox.Location = new System.Drawing.Point(112, 112);
+			this.IteratorColorSpeedTextBox.Name = "IteratorColorSpeedTextBox";
+			this.IteratorColorSpeedTextBox.Size = new System.Drawing.Size(142, 20);
+			this.IteratorColorSpeedTextBox.TabIndex = 11;
+			this.IteratorColorSpeedTextBox.Text = "0.000";
+			// 
+			// IteratorColorScrollBar
+			// 
+			this.IteratorColorScrollBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.IteratorColorScrollBar.LargeChange = 1;
+			this.IteratorColorScrollBar.Location = new System.Drawing.Point(7, 76);
+			this.IteratorColorScrollBar.Maximum = 1000;
+			this.IteratorColorScrollBar.Name = "IteratorColorScrollBar";
+			this.IteratorColorScrollBar.Size = new System.Drawing.Size(248, 17);
+			this.IteratorColorScrollBar.TabIndex = 9;
+			// 
+			// mPalettePictureBox
+			// 
+			this.mPalettePictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.mPalettePictureBox.BackColor = System.Drawing.Color.Black;
+			this.mPalettePictureBox.Location = new System.Drawing.Point(8, 55);
+			this.mPalettePictureBox.Name = "mPalettePictureBox";
+			this.mPalettePictureBox.Size = new System.Drawing.Size(247, 18);
+			this.mPalettePictureBox.TabIndex = 8;
+			this.mPalettePictureBox.TabStop = false;
+			// 
+			// IteratorColorTextBox
+			// 
+			this.IteratorColorTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.IteratorColorTextBox.Location = new System.Drawing.Point(59, 31);
+			this.IteratorColorTextBox.Name = "IteratorColorTextBox";
+			this.IteratorColorTextBox.Size = new System.Drawing.Size(196, 20);
+			this.IteratorColorTextBox.TabIndex = 7;
+			this.IteratorColorTextBox.Text = "0.000";
 			// 
 			// mIteratorPropertyPanel
 			// 
@@ -147,14 +246,14 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mIteratorPropertyPanel.Dock = System.Windows.Forms.DockStyle.Top;
 			this.mIteratorPropertyPanel.Location = new System.Drawing.Point(0, 0);
 			this.mIteratorPropertyPanel.Name = "mIteratorPropertyPanel";
-			this.mIteratorPropertyPanel.Size = new System.Drawing.Size(299, 86);
+			this.mIteratorPropertyPanel.Size = new System.Drawing.Size(299, 89);
 			this.mIteratorPropertyPanel.TabIndex = 0;
 			// 
 			// IteratorWeightTextBox
 			// 
 			this.IteratorWeightTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.IteratorWeightTextBox.Location = new System.Drawing.Point(120, 53);
+			this.IteratorWeightTextBox.Location = new System.Drawing.Point(120, 57);
 			this.IteratorWeightTextBox.Name = "IteratorWeightTextBox";
 			this.IteratorWeightTextBox.Size = new System.Drawing.Size(168, 20);
 			this.IteratorWeightTextBox.TabIndex = 5;
@@ -164,18 +263,20 @@ namespace Xyrus.Apophysis.Windows.Forms
 			// 
 			this.IteratorNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.IteratorNameTextBox.Location = new System.Drawing.Point(120, 32);
+			this.IteratorNameTextBox.Location = new System.Drawing.Point(120, 34);
 			this.IteratorNameTextBox.Name = "IteratorNameTextBox";
 			this.IteratorNameTextBox.Size = new System.Drawing.Size(168, 20);
 			this.IteratorNameTextBox.TabIndex = 3;
 			// 
 			// mIteratorNameLabel
 			// 
+			this.mIteratorNameLabel.BackColor = System.Drawing.SystemColors.Window;
 			this.mIteratorNameLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.mIteratorNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.mIteratorNameLabel.Location = new System.Drawing.Point(14, 32);
+			this.mIteratorNameLabel.ForeColor = System.Drawing.SystemColors.WindowText;
+			this.mIteratorNameLabel.Location = new System.Drawing.Point(10, 34);
 			this.mIteratorNameLabel.Name = "mIteratorNameLabel";
-			this.mIteratorNameLabel.Size = new System.Drawing.Size(107, 21);
+			this.mIteratorNameLabel.Size = new System.Drawing.Size(110, 21);
 			this.mIteratorNameLabel.TabIndex = 2;
 			this.mIteratorNameLabel.Text = "Name:";
 			this.mIteratorNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -198,107 +299,26 @@ namespace Xyrus.Apophysis.Windows.Forms
 			// 
 			// mIteratorSelectLabel
 			// 
+			this.mIteratorSelectLabel.BackColor = System.Drawing.SystemColors.Window;
 			this.mIteratorSelectLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.mIteratorSelectLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.mIteratorSelectLabel.Location = new System.Drawing.Point(14, 10);
+			this.mIteratorSelectLabel.ForeColor = System.Drawing.SystemColors.WindowText;
+			this.mIteratorSelectLabel.Location = new System.Drawing.Point(10, 10);
 			this.mIteratorSelectLabel.Name = "mIteratorSelectLabel";
-			this.mIteratorSelectLabel.Size = new System.Drawing.Size(107, 22);
+			this.mIteratorSelectLabel.Size = new System.Drawing.Size(110, 22);
 			this.mIteratorSelectLabel.TabIndex = 0;
 			this.mIteratorSelectLabel.Text = "Transform:";
 			this.mIteratorSelectLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
-			// mIteratorColorGroupBox
+			// mPaletteBevel
 			// 
-			this.mIteratorColorGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.mPaletteBevel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.mIteratorColorGroupBox.Controls.Add(this.IteratorIsExclusiveCheckBox);
-			this.mIteratorColorGroupBox.Controls.Add(this.IteratorDirectColorTextBox);
-			this.mIteratorColorGroupBox.Controls.Add(this.IteratorDirectColorDragPanel);
-			this.mIteratorColorGroupBox.Controls.Add(this.IteratorOpacityTextBox);
-			this.mIteratorColorGroupBox.Controls.Add(this.IteratorOpacityDragPanel);
-			this.mIteratorColorGroupBox.Controls.Add(this.IteratorColorSpeedTextBox);
-			this.mIteratorColorGroupBox.Controls.Add(this.IteratorColorSpeedDragPanel);
-			this.mIteratorColorGroupBox.Controls.Add(this.IteratorColorScrollBar);
-			this.mIteratorColorGroupBox.Controls.Add(this.mPalettePictureBox);
-			this.mIteratorColorGroupBox.Controls.Add(this.IteratorColorTextBox);
-			this.mIteratorColorGroupBox.Controls.Add(this.IteratorColorDragPanel);
-			this.mIteratorColorGroupBox.Location = new System.Drawing.Point(6, 6);
-			this.mIteratorColorGroupBox.Name = "mIteratorColorGroupBox";
-			this.mIteratorColorGroupBox.Size = new System.Drawing.Size(273, 187);
-			this.mIteratorColorGroupBox.TabIndex = 0;
-			this.mIteratorColorGroupBox.TabStop = false;
-			this.mIteratorColorGroupBox.Text = "Transform color";
-			// 
-			// IteratorColorTextBox
-			// 
-			this.IteratorColorTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.IteratorColorTextBox.Location = new System.Drawing.Point(58, 19);
-			this.IteratorColorTextBox.Name = "IteratorColorTextBox";
-			this.IteratorColorTextBox.Size = new System.Drawing.Size(209, 20);
-			this.IteratorColorTextBox.TabIndex = 7;
-			this.IteratorColorTextBox.Text = "0.000";
-			// 
-			// mPalettePictureBox
-			// 
-			this.mPalettePictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.mPalettePictureBox.BackColor = System.Drawing.Color.Black;
-			this.mPalettePictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.mPalettePictureBox.Location = new System.Drawing.Point(6, 39);
-			this.mPalettePictureBox.Name = "mPalettePictureBox";
-			this.mPalettePictureBox.Size = new System.Drawing.Size(262, 20);
-			this.mPalettePictureBox.TabIndex = 8;
-			this.mPalettePictureBox.TabStop = false;
-			// 
-			// IteratorColorScrollBar
-			// 
-			this.IteratorColorScrollBar.LargeChange = 1;
-			this.IteratorColorScrollBar.Location = new System.Drawing.Point(6, 59);
-			this.IteratorColorScrollBar.Maximum = 1000;
-			this.IteratorColorScrollBar.Name = "IteratorColorScrollBar";
-			this.IteratorColorScrollBar.Size = new System.Drawing.Size(261, 17);
-			this.IteratorColorScrollBar.TabIndex = 9;
-			// 
-			// IteratorColorSpeedTextBox
-			// 
-			this.IteratorColorSpeedTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.IteratorColorSpeedTextBox.Location = new System.Drawing.Point(112, 88);
-			this.IteratorColorSpeedTextBox.Name = "IteratorColorSpeedTextBox";
-			this.IteratorColorSpeedTextBox.Size = new System.Drawing.Size(155, 20);
-			this.IteratorColorSpeedTextBox.TabIndex = 11;
-			this.IteratorColorSpeedTextBox.Text = "0.000";
-			// 
-			// IteratorOpacityTextBox
-			// 
-			this.IteratorOpacityTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.IteratorOpacityTextBox.Location = new System.Drawing.Point(112, 109);
-			this.IteratorOpacityTextBox.Name = "IteratorOpacityTextBox";
-			this.IteratorOpacityTextBox.Size = new System.Drawing.Size(155, 20);
-			this.IteratorOpacityTextBox.TabIndex = 13;
-			this.IteratorOpacityTextBox.Text = "1.000";
-			// 
-			// IteratorDirectColorTextBox
-			// 
-			this.IteratorDirectColorTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.IteratorDirectColorTextBox.Location = new System.Drawing.Point(112, 130);
-			this.IteratorDirectColorTextBox.Name = "IteratorDirectColorTextBox";
-			this.IteratorDirectColorTextBox.Size = new System.Drawing.Size(155, 20);
-			this.IteratorDirectColorTextBox.TabIndex = 15;
-			this.IteratorDirectColorTextBox.Text = "1.000";
-			// 
-			// IteratorIsExclusiveCheckBox
-			// 
-			this.IteratorIsExclusiveCheckBox.AutoSize = true;
-			this.IteratorIsExclusiveCheckBox.Location = new System.Drawing.Point(6, 160);
-			this.IteratorIsExclusiveCheckBox.Name = "IteratorIsExclusiveCheckBox";
-			this.IteratorIsExclusiveCheckBox.Size = new System.Drawing.Size(47, 17);
-			this.IteratorIsExclusiveCheckBox.TabIndex = 16;
-			this.IteratorIsExclusiveCheckBox.Text = "Solo";
-			this.IteratorIsExclusiveCheckBox.UseVisualStyleBackColor = true;
+			this.mPaletteBevel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.mPaletteBevel.Location = new System.Drawing.Point(7, 54);
+			this.mPaletteBevel.Name = "mPaletteBevel";
+			this.mPaletteBevel.Size = new System.Drawing.Size(249, 20);
+			this.mPaletteBevel.TabIndex = 17;
 			// 
 			// IteratorCanvas
 			// 
@@ -321,7 +341,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorCanvas.RulerGridLineColor = System.Drawing.Color.Silver;
 			this.IteratorCanvas.Settings = this.mSettings;
 			this.IteratorCanvas.ShowRuler = true;
-			this.IteratorCanvas.Size = new System.Drawing.Size(740, 765);
+			this.IteratorCanvas.Size = new System.Drawing.Size(711, 659);
 			this.IteratorCanvas.TabIndex = 1;
 			// 
 			// mSettings
@@ -335,11 +355,13 @@ namespace Xyrus.Apophysis.Windows.Forms
 			// 
 			// IteratorDirectColorDragPanel
 			// 
+			this.IteratorDirectColorDragPanel.BackColor = System.Drawing.SystemColors.Window;
 			this.IteratorDirectColorDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.IteratorDirectColorDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.IteratorDirectColorDragPanel.Default = 1D;
 			this.IteratorDirectColorDragPanel.DisplayCulture = new System.Globalization.CultureInfo("");
-			this.IteratorDirectColorDragPanel.Location = new System.Drawing.Point(6, 130);
+			this.IteratorDirectColorDragPanel.ForeColor = System.Drawing.SystemColors.WindowText;
+			this.IteratorDirectColorDragPanel.Location = new System.Drawing.Point(6, 158);
 			this.IteratorDirectColorDragPanel.Maximum = 1D;
 			this.IteratorDirectColorDragPanel.Minimum = 0D;
 			this.IteratorDirectColorDragPanel.Name = "IteratorDirectColorDragPanel";
@@ -352,11 +374,13 @@ namespace Xyrus.Apophysis.Windows.Forms
 			// 
 			// IteratorOpacityDragPanel
 			// 
+			this.IteratorOpacityDragPanel.BackColor = System.Drawing.SystemColors.Window;
 			this.IteratorOpacityDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.IteratorOpacityDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.IteratorOpacityDragPanel.Default = 1D;
 			this.IteratorOpacityDragPanel.DisplayCulture = new System.Globalization.CultureInfo("");
-			this.IteratorOpacityDragPanel.Location = new System.Drawing.Point(6, 109);
+			this.IteratorOpacityDragPanel.ForeColor = System.Drawing.SystemColors.WindowText;
+			this.IteratorOpacityDragPanel.Location = new System.Drawing.Point(6, 135);
 			this.IteratorOpacityDragPanel.Maximum = 1D;
 			this.IteratorOpacityDragPanel.Minimum = 0D;
 			this.IteratorOpacityDragPanel.Name = "IteratorOpacityDragPanel";
@@ -369,11 +393,13 @@ namespace Xyrus.Apophysis.Windows.Forms
 			// 
 			// IteratorColorSpeedDragPanel
 			// 
+			this.IteratorColorSpeedDragPanel.BackColor = System.Drawing.SystemColors.Window;
 			this.IteratorColorSpeedDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.IteratorColorSpeedDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.IteratorColorSpeedDragPanel.Default = 0D;
 			this.IteratorColorSpeedDragPanel.DisplayCulture = new System.Globalization.CultureInfo("");
-			this.IteratorColorSpeedDragPanel.Location = new System.Drawing.Point(6, 88);
+			this.IteratorColorSpeedDragPanel.ForeColor = System.Drawing.SystemColors.WindowText;
+			this.IteratorColorSpeedDragPanel.Location = new System.Drawing.Point(6, 112);
 			this.IteratorColorSpeedDragPanel.Maximum = 1D;
 			this.IteratorColorSpeedDragPanel.Minimum = -1D;
 			this.IteratorColorSpeedDragPanel.Name = "IteratorColorSpeedDragPanel";
@@ -391,7 +417,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorColorDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.IteratorColorDragPanel.Default = 0D;
 			this.IteratorColorDragPanel.DisplayCulture = new System.Globalization.CultureInfo("");
-			this.IteratorColorDragPanel.Location = new System.Drawing.Point(6, 19);
+			this.IteratorColorDragPanel.Location = new System.Drawing.Point(7, 31);
 			this.IteratorColorDragPanel.Maximum = 1D;
 			this.IteratorColorDragPanel.Minimum = 0D;
 			this.IteratorColorDragPanel.Name = "IteratorColorDragPanel";
@@ -403,15 +429,17 @@ namespace Xyrus.Apophysis.Windows.Forms
 			// 
 			// IteratorWeightDragPanel
 			// 
+			this.IteratorWeightDragPanel.BackColor = System.Drawing.SystemColors.Window;
 			this.IteratorWeightDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.IteratorWeightDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.IteratorWeightDragPanel.Default = 0.5D;
 			this.IteratorWeightDragPanel.DisplayCulture = new System.Globalization.CultureInfo("");
-			this.IteratorWeightDragPanel.Location = new System.Drawing.Point(14, 53);
+			this.IteratorWeightDragPanel.ForeColor = System.Drawing.SystemColors.WindowText;
+			this.IteratorWeightDragPanel.Location = new System.Drawing.Point(10, 57);
 			this.IteratorWeightDragPanel.Maximum = 1000D;
 			this.IteratorWeightDragPanel.Minimum = 0.001D;
 			this.IteratorWeightDragPanel.Name = "IteratorWeightDragPanel";
-			this.IteratorWeightDragPanel.Size = new System.Drawing.Size(107, 21);
+			this.IteratorWeightDragPanel.Size = new System.Drawing.Size(110, 21);
 			this.IteratorWeightDragPanel.TabIndex = 4;
 			this.IteratorWeightDragPanel.Text = "Weight:";
 			this.IteratorWeightDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -422,12 +450,13 @@ namespace Xyrus.Apophysis.Windows.Forms
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1043, 765);
+			this.ClientSize = new System.Drawing.Size(1014, 659);
 			this.Controls.Add(this.mRootSplitter);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-			this.MinimumSize = new System.Drawing.Size(600, 39);
+			this.MinimumSize = new System.Drawing.Size(600, 600);
 			this.Name = "Editor";
 			this.Text = "xw_prototype_2014-337";
+			this.Load += new System.EventHandler(this.OnWindowLoaded);
 			this.mRootSplitter.Panel1.ResumeLayout(false);
 			this.mRootSplitter.Panel2.ResumeLayout(false);
 			this.mRootSplitter.ResumeLayout(false);
@@ -437,11 +466,11 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mPreviewPanel.ResumeLayout(false);
 			this.mTabs.ResumeLayout(false);
 			this.mColorTab.ResumeLayout(false);
-			this.mIteratorPropertyPanel.ResumeLayout(false);
-			this.mIteratorPropertyPanel.PerformLayout();
 			this.mIteratorColorGroupBox.ResumeLayout(false);
 			this.mIteratorColorGroupBox.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.mPalettePictureBox)).EndInit();
+			this.mIteratorPropertyPanel.ResumeLayout(false);
+			this.mIteratorPropertyPanel.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
@@ -475,6 +504,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 		public DragPanel IteratorDirectColorDragPanel;
 		public System.Windows.Forms.CheckBox IteratorIsExclusiveCheckBox;
 		public System.Windows.Forms.HScrollBar IteratorColorScrollBar;
+		private System.Windows.Forms.Label mPaletteBevel;
 	}
 }
 
