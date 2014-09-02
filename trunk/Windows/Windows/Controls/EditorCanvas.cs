@@ -26,7 +26,9 @@ namespace Xyrus.Apophysis.Windows.Controls
 		private EventHandler mBeginEdit;
 		private EventHandler mEndEdit;
 		private EventHandler mEdit;
+
 		private EventHandler mSelectionChanged;
+		private EventHandler mActiveMatrixChanged;
 
 		private bool mIsDisposed;
 
@@ -219,6 +221,11 @@ namespace Xyrus.Apophysis.Windows.Controls
 				mIteratorInteraction.ActiveMatrix = value;
 				mGridContextMenu.UpdateCheckedStates(this);
 				Refresh();
+
+				if (mActiveMatrixChanged != null)
+				{
+					mActiveMatrixChanged(this, new EventArgs());
+				}
 			}
 		}
 
@@ -303,10 +310,16 @@ namespace Xyrus.Apophysis.Windows.Controls
 			add { mEdit += value; }
 			remove { mEdit -= value; }
 		}
+
 		public event EventHandler SelectionChanged
 		{
 			add { mSelectionChanged += value; }
 			remove { mSelectionChanged -= value; }
+		}
+		public event EventHandler ActiveMatrixChanged
+		{
+			add { mActiveMatrixChanged += value; }
+			remove { mActiveMatrixChanged -= value; }
 		}
 
 		private void OnCanvasMouseClick(object sender, MouseEventArgs e)
