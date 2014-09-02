@@ -6,6 +6,8 @@ namespace Xyrus.Apophysis.Windows
 	public abstract class Controller<TView> : IDisposable where TView: Component, new()
 	{
 		private TView mView;
+		private bool mDisposed;
+		private bool mInitialized;
 
 		~Controller()
 		{
@@ -14,9 +16,22 @@ namespace Xyrus.Apophysis.Windows
 		protected Controller()
 		{
 			mView = new TView();
-			
-			// ReSharper disable once DoNotCallOverridableMethodsInConstructor
+		}
+		protected Controller([NotNull] TView view)
+		{
+			if (view == null) throw new ArgumentNullException("view");
+			mView = view;
+		}
+
+		public void Initialize()
+		{
+			if (mInitialized)
+			{
+				DetachView();
+			}
+
 			AttachView();
+			mInitialized = true;
 		}
 		public void Dispose()
 		{
@@ -26,6 +41,9 @@ namespace Xyrus.Apophysis.Windows
 
 		protected void Dispose(bool disposing)
 		{
+			if (mDisposed)
+				return;
+
 			DisposeOverride(disposing);
 
 			if (disposing)
@@ -37,6 +55,8 @@ namespace Xyrus.Apophysis.Windows
 					mView = null;
 				}
 			}
+
+			mDisposed = true;
 		}
 		protected virtual void DisposeOverride(bool disposing)
 		{
@@ -47,7 +67,10 @@ namespace Xyrus.Apophysis.Windows
 
 		protected TView View
 		{
-			get { return mView; }
+			get
+			{
+				return mView;
+			}
 		}
 	}
 }

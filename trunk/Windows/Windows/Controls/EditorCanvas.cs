@@ -218,8 +218,16 @@ namespace Xyrus.Apophysis.Windows.Controls
 			get { return mIteratorInteraction.ActiveMatrix; }
 			set
 			{
+				var selected = SelectedIterator;
+
 				mIteratorInteraction.ActiveMatrix = value;
 				mGridContextMenu.UpdateCheckedStates(this);
+
+				if (selected != null)
+				{
+					SelectedIterator = selected;
+				}
+
 				Refresh();
 
 				if (mActiveMatrixChanged != null)

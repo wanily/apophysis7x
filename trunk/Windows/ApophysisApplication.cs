@@ -23,7 +23,9 @@ namespace Xyrus.Apophysis
 
 		public static TController GetWindow<TView, TController>() where TView : Form, new() where TController: WindowController<TView>, new()
 		{
-			return new TController();
+			var controller = new TController();
+			controller.Initialize();
+			return controller;
 		}
 	}
 }
