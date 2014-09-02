@@ -88,13 +88,6 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorPostAffineYxTextBox = new System.Windows.Forms.TextBox();
 			this.IteratorPostAffineXyTextBox = new System.Windows.Forms.TextBox();
 			this.IteratorPostAffineXxTextBox = new System.Windows.Forms.TextBox();
-			this.IteratorCanvas = new Xyrus.Apophysis.Windows.Controls.EditorCanvas();
-			this.mSettings = new Xyrus.Apophysis.Windows.Controls.EditorSettings();
-			this.IteratorDirectColorDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
-			this.IteratorOpacityDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
-			this.IteratorColorSpeedDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
-			this.IteratorColorDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
-			this.IteratorWeightDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.mToolbar = new System.Windows.Forms.ToolStrip();
 			this.mToolbarImages = new System.Windows.Forms.ImageList(this.components);
 			this.AddIteratorButton = new System.Windows.Forms.ToolStripButton();
@@ -106,6 +99,13 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.UndoButton = new System.Windows.Forms.ToolStripButton();
 			this.RedoButton = new System.Windows.Forms.ToolStripButton();
 			this.mToolbarSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+			this.IteratorCanvas = new Xyrus.Apophysis.Windows.Controls.EditorCanvas();
+			this.mSettings = new Xyrus.Apophysis.Windows.Controls.EditorSettings();
+			this.IteratorDirectColorDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
+			this.IteratorOpacityDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
+			this.IteratorColorSpeedDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
+			this.IteratorColorDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
+			this.IteratorWeightDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.mRootSplitter.Panel1.SuspendLayout();
 			this.mRootSplitter.Panel2.SuspendLayout();
 			this.mRootSplitter.SuspendLayout();
@@ -129,6 +129,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			// 
 			// mRootSplitter
 			// 
+			this.mRootSplitter.BackColor = System.Drawing.SystemColors.Control;
 			this.mRootSplitter.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.mRootSplitter.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
 			this.mRootSplitter.IsSplitterFixed = true;
@@ -795,7 +796,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			// 
 			// mIteratorNameLabel
 			// 
-			this.mIteratorNameLabel.BackColor = System.Drawing.SystemColors.Window;
+			this.mIteratorNameLabel.BackColor = System.Drawing.SystemColors.Control;
 			this.mIteratorNameLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.mIteratorNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.mIteratorNameLabel.ForeColor = System.Drawing.SystemColors.WindowText;
@@ -824,7 +825,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			// 
 			// mIteratorSelectLabel
 			// 
-			this.mIteratorSelectLabel.BackColor = System.Drawing.SystemColors.Window;
+			this.mIteratorSelectLabel.BackColor = System.Drawing.SystemColors.Control;
 			this.mIteratorSelectLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.mIteratorSelectLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.mIteratorSelectLabel.ForeColor = System.Drawing.SystemColors.WindowText;
@@ -956,6 +957,125 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorPostAffineXxTextBox.Size = new System.Drawing.Size(99, 20);
 			this.IteratorPostAffineXxTextBox.TabIndex = 3;
 			// 
+			// mToolbar
+			// 
+			this.mToolbar.AllowMerge = false;
+			this.mToolbar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+			this.mToolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ResetAllIteratorsButton,
+            this.mToolbarSeparator1,
+            this.AddIteratorButton,
+            this.DuplicateIteratorButton,
+            this.RemoveIteratorButton,
+            this.mToolbarSeparator2,
+            this.UndoButton,
+            this.RedoButton,
+            this.mToolbarSeparator3});
+			this.mToolbar.Location = new System.Drawing.Point(0, 0);
+			this.mToolbar.Name = "mToolbar";
+			this.mToolbar.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+			this.mToolbar.Size = new System.Drawing.Size(711, 25);
+			this.mToolbar.TabIndex = 2;
+			// 
+			// mToolbarImages
+			// 
+			this.mToolbarImages.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("mToolbarImages.ImageStream")));
+			this.mToolbarImages.TransparentColor = System.Drawing.Color.Fuchsia;
+			this.mToolbarImages.Images.SetKeyName(0, "ResetAll.bmp");
+			this.mToolbarImages.Images.SetKeyName(1, "NewIterator.bmp");
+			this.mToolbarImages.Images.SetKeyName(2, "DuplicateIterator.bmp");
+			this.mToolbarImages.Images.SetKeyName(3, "RemoveIterator.bmp");
+			this.mToolbarImages.Images.SetKeyName(4, "Undo.bmp");
+			this.mToolbarImages.Images.SetKeyName(5, "Redo.bmp");
+			this.mToolbarImages.Images.SetKeyName(6, "CopyIterator.bmp");
+			this.mToolbarImages.Images.SetKeyName(7, "PasteIterator.bmp");
+			this.mToolbarImages.Images.SetKeyName(8, "SelectMode.bmp");
+			this.mToolbarImages.Images.SetKeyName(9, "MoveMode.bmp");
+			this.mToolbarImages.Images.SetKeyName(10, "RotateMode.bmp");
+			this.mToolbarImages.Images.SetKeyName(11, "ScaleMode.bmp");
+			this.mToolbarImages.Images.SetKeyName(12, "ToggleWorldPivot.bmp");
+			this.mToolbarImages.Images.SetKeyName(13, "FlipAllHorizontal.bmp");
+			this.mToolbarImages.Images.SetKeyName(14, "FlipAllVertical.bmp");
+			this.mToolbarImages.Images.SetKeyName(15, "ToggleVariationPrevie.bmp");
+			this.mToolbarImages.Images.SetKeyName(16, "TogglePostMatrix.bmp");
+			this.mToolbarImages.Images.SetKeyName(17, "ToggleFinalIterator.bmp");
+			this.mToolbarImages.Images.SetKeyName(18, "LinkIterator.bmp");
+			this.mToolbarImages.Images.SetKeyName(19, "LockTransformAxes.bmp");
+			this.mToolbarImages.Images.SetKeyName(20, "ResetIterator.bmp");
+			this.mToolbarImages.Images.SetKeyName(21, "ResetIteratorOrigin.bmp");
+			this.mToolbarImages.Images.SetKeyName(22, "ResetIteratorAngle.bmp");
+			this.mToolbarImages.Images.SetKeyName(23, "ResetIteratorScale.bmp");
+			this.mToolbarImages.Images.SetKeyName(24, "ToggleAutoZoom.bmp");
+			// 
+			// AddIteratorButton
+			// 
+			this.AddIteratorButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.AddIteratorButton.Image = ((System.Drawing.Image)(resources.GetObject("AddIteratorButton.Image")));
+			this.AddIteratorButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.AddIteratorButton.Name = "AddIteratorButton";
+			this.AddIteratorButton.Size = new System.Drawing.Size(23, 22);
+			this.AddIteratorButton.Text = "Add transform";
+			// 
+			// RemoveIteratorButton
+			// 
+			this.RemoveIteratorButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.RemoveIteratorButton.Image = ((System.Drawing.Image)(resources.GetObject("RemoveIteratorButton.Image")));
+			this.RemoveIteratorButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.RemoveIteratorButton.Name = "RemoveIteratorButton";
+			this.RemoveIteratorButton.Size = new System.Drawing.Size(23, 22);
+			this.RemoveIteratorButton.Text = "Remove transform";
+			// 
+			// DuplicateIteratorButton
+			// 
+			this.DuplicateIteratorButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.DuplicateIteratorButton.Image = ((System.Drawing.Image)(resources.GetObject("DuplicateIteratorButton.Image")));
+			this.DuplicateIteratorButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.DuplicateIteratorButton.Name = "DuplicateIteratorButton";
+			this.DuplicateIteratorButton.Size = new System.Drawing.Size(23, 22);
+			this.DuplicateIteratorButton.Text = "Duplicate transform";
+			// 
+			// mToolbarSeparator2
+			// 
+			this.mToolbarSeparator2.Name = "mToolbarSeparator2";
+			this.mToolbarSeparator2.Size = new System.Drawing.Size(6, 25);
+			// 
+			// ResetAllIteratorsButton
+			// 
+			this.ResetAllIteratorsButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.ResetAllIteratorsButton.Image = ((System.Drawing.Image)(resources.GetObject("ResetAllIteratorsButton.Image")));
+			this.ResetAllIteratorsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.ResetAllIteratorsButton.Name = "ResetAllIteratorsButton";
+			this.ResetAllIteratorsButton.Size = new System.Drawing.Size(23, 22);
+			this.ResetAllIteratorsButton.Text = "Reset all transforms";
+			// 
+			// mToolbarSeparator1
+			// 
+			this.mToolbarSeparator1.Name = "mToolbarSeparator1";
+			this.mToolbarSeparator1.Size = new System.Drawing.Size(6, 25);
+			// 
+			// UndoButton
+			// 
+			this.UndoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.UndoButton.Image = ((System.Drawing.Image)(resources.GetObject("UndoButton.Image")));
+			this.UndoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.UndoButton.Name = "UndoButton";
+			this.UndoButton.Size = new System.Drawing.Size(23, 22);
+			this.UndoButton.Text = "Undo";
+			// 
+			// RedoButton
+			// 
+			this.RedoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.RedoButton.Image = ((System.Drawing.Image)(resources.GetObject("RedoButton.Image")));
+			this.RedoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.RedoButton.Name = "RedoButton";
+			this.RedoButton.Size = new System.Drawing.Size(23, 22);
+			this.RedoButton.Text = "Redo";
+			// 
+			// mToolbarSeparator3
+			// 
+			this.mToolbarSeparator3.Name = "mToolbarSeparator3";
+			this.mToolbarSeparator3.Size = new System.Drawing.Size(6, 25);
+			// 
 			// IteratorCanvas
 			// 
 			this.IteratorCanvas.ActiveMatrix = Xyrus.Apophysis.Windows.Controls.IteratorMatrix.PreAffine;
@@ -971,7 +1091,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorCanvas.GridZeroLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(92)))), ((int)(((byte)(92)))), ((int)(((byte)(92)))));
 			this.IteratorCanvas.HighlightOrigin = true;
 			this.IteratorCanvas.Iterators = null;
-			this.IteratorCanvas.Location = new System.Drawing.Point(0, 28);
+			this.IteratorCanvas.Location = new System.Drawing.Point(0, 24);
 			this.IteratorCanvas.Name = "IteratorCanvas";
 			this.IteratorCanvas.ReferenceColor = System.Drawing.Color.Gray;
 			this.IteratorCanvas.RulerBackdropColor = System.Drawing.Color.Transparent;
@@ -979,7 +1099,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorCanvas.RulerGridLineColor = System.Drawing.Color.Silver;
 			this.IteratorCanvas.Settings = this.mSettings;
 			this.IteratorCanvas.ShowRuler = true;
-			this.IteratorCanvas.Size = new System.Drawing.Size(711, 633);
+			this.IteratorCanvas.Size = new System.Drawing.Size(711, 637);
 			this.IteratorCanvas.TabIndex = 1;
 			// 
 			// mSettings
@@ -1063,7 +1183,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			// 
 			// IteratorWeightDragPanel
 			// 
-			this.IteratorWeightDragPanel.BackColor = System.Drawing.SystemColors.Window;
+			this.IteratorWeightDragPanel.BackColor = System.Drawing.SystemColors.Control;
 			this.IteratorWeightDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.IteratorWeightDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.IteratorWeightDragPanel.Default = 0.5D;
@@ -1078,125 +1198,6 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorWeightDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.IteratorWeightDragPanel.TextBox = this.IteratorWeightTextBox;
 			this.IteratorWeightDragPanel.Value = 0.5D;
-			// 
-			// mToolbar
-			// 
-			this.mToolbar.AllowMerge = false;
-			this.mToolbar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-			this.mToolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ResetAllIteratorsButton,
-            this.mToolbarSeparator1,
-            this.AddIteratorButton,
-            this.DuplicateIteratorButton,
-            this.RemoveIteratorButton,
-            this.mToolbarSeparator2,
-            this.UndoButton,
-            this.RedoButton,
-            this.mToolbarSeparator3});
-			this.mToolbar.Location = new System.Drawing.Point(0, 0);
-			this.mToolbar.Name = "mToolbar";
-			this.mToolbar.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-			this.mToolbar.Size = new System.Drawing.Size(711, 25);
-			this.mToolbar.TabIndex = 2;
-			// 
-			// mToolbarImages
-			// 
-			this.mToolbarImages.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("mToolbarImages.ImageStream")));
-			this.mToolbarImages.TransparentColor = System.Drawing.Color.Fuchsia;
-			this.mToolbarImages.Images.SetKeyName(0, "ResetAll.bmp");
-			this.mToolbarImages.Images.SetKeyName(1, "NewIterator.bmp");
-			this.mToolbarImages.Images.SetKeyName(2, "DuplicateIterator.bmp");
-			this.mToolbarImages.Images.SetKeyName(3, "RemoveIterator.bmp");
-			this.mToolbarImages.Images.SetKeyName(4, "Undo.bmp");
-			this.mToolbarImages.Images.SetKeyName(5, "Redo.bmp");
-			this.mToolbarImages.Images.SetKeyName(6, "CopyIterator.bmp");
-			this.mToolbarImages.Images.SetKeyName(7, "PasteIterator.bmp");
-			this.mToolbarImages.Images.SetKeyName(8, "SelectMode.bmp");
-			this.mToolbarImages.Images.SetKeyName(9, "MoveMode.bmp");
-			this.mToolbarImages.Images.SetKeyName(10, "RotateMode.bmp");
-			this.mToolbarImages.Images.SetKeyName(11, "ScaleMode.bmp");
-			this.mToolbarImages.Images.SetKeyName(12, "ToggleWorldPivot.bmp");
-			this.mToolbarImages.Images.SetKeyName(13, "FlipAllHorizontal.bmp");
-			this.mToolbarImages.Images.SetKeyName(14, "FlipAllVertical.bmp");
-			this.mToolbarImages.Images.SetKeyName(15, "ToggleVariationPrevie.bmp");
-			this.mToolbarImages.Images.SetKeyName(16, "TogglePostMatrix.bmp");
-			this.mToolbarImages.Images.SetKeyName(17, "ToggleFinalIterator.bmp");
-			this.mToolbarImages.Images.SetKeyName(18, "LinkIterator.bmp");
-			this.mToolbarImages.Images.SetKeyName(19, "LockTransformAxes.bmp");
-			this.mToolbarImages.Images.SetKeyName(20, "ResetIterator.bmp");
-			this.mToolbarImages.Images.SetKeyName(21, "ResetIteratorOrigin.bmp");
-			this.mToolbarImages.Images.SetKeyName(22, "ResetIteratorAngle.bmp");
-			this.mToolbarImages.Images.SetKeyName(23, "ResetIteratorScale.bmp");
-			this.mToolbarImages.Images.SetKeyName(24, "ToggleAutoZoom.bmp");
-			// 
-			// AddIteratorButton
-			// 
-			this.AddIteratorButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.AddIteratorButton.Image = ((System.Drawing.Image)(resources.GetObject("AddIteratorButton.Image")));
-			this.AddIteratorButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.AddIteratorButton.Name = "AddIteratorButton";
-			this.AddIteratorButton.Size = new System.Drawing.Size(23, 22);
-			this.AddIteratorButton.Text = "toolStripButton1";
-			// 
-			// RemoveIteratorButton
-			// 
-			this.RemoveIteratorButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.RemoveIteratorButton.Image = ((System.Drawing.Image)(resources.GetObject("RemoveIteratorButton.Image")));
-			this.RemoveIteratorButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.RemoveIteratorButton.Name = "RemoveIteratorButton";
-			this.RemoveIteratorButton.Size = new System.Drawing.Size(23, 22);
-			this.RemoveIteratorButton.Text = "toolStripButton2";
-			// 
-			// DuplicateIteratorButton
-			// 
-			this.DuplicateIteratorButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.DuplicateIteratorButton.Image = ((System.Drawing.Image)(resources.GetObject("DuplicateIteratorButton.Image")));
-			this.DuplicateIteratorButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.DuplicateIteratorButton.Name = "DuplicateIteratorButton";
-			this.DuplicateIteratorButton.Size = new System.Drawing.Size(23, 22);
-			this.DuplicateIteratorButton.Text = "toolStripButton3";
-			// 
-			// mToolbarSeparator2
-			// 
-			this.mToolbarSeparator2.Name = "mToolbarSeparator2";
-			this.mToolbarSeparator2.Size = new System.Drawing.Size(6, 25);
-			// 
-			// ResetAllIteratorsButton
-			// 
-			this.ResetAllIteratorsButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.ResetAllIteratorsButton.Image = ((System.Drawing.Image)(resources.GetObject("ResetAllIteratorsButton.Image")));
-			this.ResetAllIteratorsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.ResetAllIteratorsButton.Name = "ResetAllIteratorsButton";
-			this.ResetAllIteratorsButton.Size = new System.Drawing.Size(23, 22);
-			this.ResetAllIteratorsButton.Text = "toolStripButton4";
-			// 
-			// mToolbarSeparator1
-			// 
-			this.mToolbarSeparator1.Name = "mToolbarSeparator1";
-			this.mToolbarSeparator1.Size = new System.Drawing.Size(6, 25);
-			// 
-			// UndoButton
-			// 
-			this.UndoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.UndoButton.Image = ((System.Drawing.Image)(resources.GetObject("UndoButton.Image")));
-			this.UndoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.UndoButton.Name = "UndoButton";
-			this.UndoButton.Size = new System.Drawing.Size(23, 22);
-			this.UndoButton.Text = "toolStripButton1";
-			// 
-			// RedoButton
-			// 
-			this.RedoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.RedoButton.Image = ((System.Drawing.Image)(resources.GetObject("RedoButton.Image")));
-			this.RedoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.RedoButton.Name = "RedoButton";
-			this.RedoButton.Size = new System.Drawing.Size(23, 22);
-			this.RedoButton.Text = "toolStripButton2";
-			// 
-			// mToolbarSeparator3
-			// 
-			this.mToolbarSeparator3.Name = "mToolbarSeparator3";
-			this.mToolbarSeparator3.Size = new System.Drawing.Size(6, 25);
 			// 
 			// Editor
 			// 
