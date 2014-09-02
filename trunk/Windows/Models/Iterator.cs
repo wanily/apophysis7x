@@ -24,15 +24,47 @@ namespace Xyrus.Apophysis.Models
 			if (hostingFlame == null) throw new ArgumentNullException("hostingFlame");
 
 			mFlame = hostingFlame;
+			Reset();
+		}
 
+		public void Reset()
+		{
 			mPreAffine = new AffineTransform();
 			mPostAffine = new AffineTransform();
 
-			mWeight = 0.5;
+			mName = null;
+			mWeight= 0.5;
 			mColor = 0.0;
 			mColorSpeed = 0.0;
 			mOpacity = 1.0;
 			mDirectColor = 1.0;
+		}
+		public Iterator Copy()
+		{
+			var copy = new Iterator(mFlame);
+
+			copy.mName = mName;
+			copy.mWeight = mWeight;
+			copy.mColor = mColor;
+			copy.mColorSpeed = mColorSpeed;
+			copy.mOpacity = mOpacity;
+			copy.mDirectColor = mDirectColor;
+
+			copy.PreAffine.Origin.X = PreAffine.Origin.X;
+			copy.PreAffine.Origin.Y = PreAffine.Origin.Y;
+			copy.PreAffine.Matrix.X.X = PreAffine.Matrix.X.X;
+			copy.PreAffine.Matrix.X.Y = PreAffine.Matrix.X.Y;
+			copy.PreAffine.Matrix.Y.X = PreAffine.Matrix.Y.X;
+			copy.PreAffine.Matrix.Y.Y = PreAffine.Matrix.Y.Y;
+
+			copy.PostAffine.Origin.X = PostAffine.Origin.X;
+			copy.PostAffine.Origin.Y = PostAffine.Origin.Y;
+			copy.PostAffine.Matrix.X.X = PostAffine.Matrix.X.X;
+			copy.PostAffine.Matrix.X.Y = PostAffine.Matrix.X.Y;
+			copy.PostAffine.Matrix.Y.X = PostAffine.Matrix.Y.X;
+			copy.PostAffine.Matrix.Y.Y = PostAffine.Matrix.Y.Y;
+
+			return copy;
 		}
 
 		public int Index

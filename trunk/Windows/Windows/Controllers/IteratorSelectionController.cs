@@ -77,6 +77,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			}
 
 			mParent.UpdateCoordinates();
+			mParent.UpdateToolbar();
 		}
 	}
 }

@@ -35,11 +35,17 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 		public void Undo() /*todo*/
 		{
-			throw new NotImplementedException();
+			//todo
+
+			if (UndoRedoCommitted != null)
+				UndoRedoCommitted(this, new EventArgs());
 		}
 		public void Redo() /*todo*/
 		{
-			throw new NotImplementedException();
+			//todo
+
+			if (UndoRedoCommitted != null)
+				UndoRedoCommitted(this, new EventArgs());
 		}
 
 		public void NewIterator()
@@ -52,6 +58,41 @@ namespace Xyrus.Apophysis.Windows.Controls
 			}
 
 			mEditor.SelectedIterator = mEditor.Iterators.Last();
+			mEditor.RaiseSelectionChanged();
+
+			mEditor.Refresh();
+		}
+		public void DuplicateSelectedIterator()
+		{
+			if (mEditor.SelectedIterator == null)
+				return;
+
+			mEditor.Iterators.Add(mEditor.SelectedIterator.Copy());
+
+			if (mEditor.Settings.ZoomAutomatically)
+			{
+				mEditor.ZoomOptimally();
+			}
+
+			mEditor.SelectedIterator = mEditor.Iterators.Last();
+			mEditor.RaiseSelectionChanged();
+
+			mEditor.Refresh();
+		}
+		public void RemoveSelectedIterator()
+		{
+			if (mEditor.SelectedIterator == null || mEditor.Iterators.Count <= 1)
+				return;
+
+			var index = mEditor.Iterators.IndexOf(mEditor.SelectedIterator);
+			mEditor.Iterators.Remove(mEditor.SelectedIterator);
+
+			if (mEditor.Settings.ZoomAutomatically)
+			{
+				mEditor.ZoomOptimally();
+			}
+
+			mEditor.SelectedIterator = mEditor.Iterators[System.Math.Max(0, System.Math.Min(index, mEditor.Iterators.Count - 1))];
 			mEditor.RaiseSelectionChanged();
 
 			mEditor.Refresh();
@@ -166,5 +207,9 @@ namespace Xyrus.Apophysis.Windows.Controls
 			mEditor.Refresh();
 			mEditor.RaiseEndEdit();
 		}
+
+		public event EventHandler UndoRedoCommitted;
+
+		
 	}
 }

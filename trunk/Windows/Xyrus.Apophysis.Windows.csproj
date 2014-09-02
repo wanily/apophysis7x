@@ -77,6 +77,7 @@
     <Compile Include="Windows\Common\WindowController.cs" />
     <Compile Include="Windows\Controllers\EditorController.cs" />
     <Compile Include="Windows\Controllers\EditorKeyboardController.cs" />
+    <Compile Include="Windows\Controllers\EditorToolbarController.cs" />
     <Compile Include="Windows\Controllers\InputController.cs" />
     <Compile Include="Windows\Controllers\IteratorColorController.cs" />
     <Compile Include="Windows\Controllers\IteratorPointEditController.cs" />

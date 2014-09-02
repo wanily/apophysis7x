@@ -13,6 +13,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 	public class EditorController : WindowController<Editor>
 	{
 		private EditorKeyboardController mKeyboardController;
+		private EditorToolbarController mToolbarController;
 		private IteratorPropertiesController mPropertiesController;
 		private IteratorSelectionController mSelectionController;
 		private IteratorColorController mColorController;
@@ -25,6 +26,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		public EditorController()
 		{
 			mKeyboardController = new EditorKeyboardController(View, this);
+			mToolbarController = new EditorToolbarController(View, this);
 			mPropertiesController = new IteratorPropertiesController(View, this);
 			mSelectionController = new IteratorSelectionController(View, this);
 			mColorController = new IteratorColorController(View, this);
@@ -65,6 +67,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 					mPropertiesController = null;
 				}
 
+				if (mToolbarController != null)
+				{
+					mToolbarController.Dispose();
+					mToolbarController = null;
+				}
+
 				if (mKeyboardController != null)
 				{
 					mKeyboardController.Dispose();
@@ -95,6 +103,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			};
 
 			mKeyboardController.Initialize();
+			mToolbarController.Initialize();
 			mPropertiesController.Initialize();
 			mSelectionController.Initialize();
 			mColorController.Initialize();
@@ -127,6 +136,16 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			
 		}
+		internal void UpdateToolbar()
+		{
+			mToolbarController.UpdateButtonStates();
+		}
+		internal void AfterReset()
+		{
+			mSelectionController.BuildIteratorComboBox();
+			mSelectionController.SelectIterator(mFlame.Iterators.First());
+			UpdateToolbar();
+		}
 
 		[NotNull]
 		public Flame Flame
@@ -147,9 +166,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				using (mInitialize.Enter())
 				{
 					View.IteratorCanvas.Iterators = mFlame.Iterators;
-
-					mSelectionController.BuildIteratorComboBox();
-					mSelectionController.SelectIterator(mFlame.Iterators.First());
+					AfterReset();
 				}
 
 				View.Text = string.Format("Editor - {0}", mFlame.CalculatedName);
@@ -180,7 +197,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		private void OnIteratorCollectionChanged(object sender, EventArgs e)
 		{
+			if (mInitialize.IsBusy)
+				return;
+
 			mSelectionController.BuildIteratorComboBox();
+			UpdateToolbar();
 		}
 		private void OnCanvasEdit(object sender, EventArgs e)
 		{
