@@ -359,7 +359,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.ColorTab.Location = new System.Drawing.Point(4, 22);
 			this.ColorTab.Name = "ColorTab";
 			this.ColorTab.Padding = new System.Windows.Forms.Padding(3);
-			this.ColorTab.Size = new System.Drawing.Size(272, 382);
+			this.ColorTab.Size = new System.Drawing.Size(272, 350);
 			this.ColorTab.TabIndex = 0;
 			this.ColorTab.Text = "Color";
 			// 
@@ -767,7 +767,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MinimumSize = new System.Drawing.Size(800, 700);
 			this.Name = "Editor";
-			this.Text = "xw_prototype_2014-337";
+			this.Text = "Editor";
 			this.Load += new System.EventHandler(this.OnWindowLoaded);
 			this.mRootSplitter.Panel1.ResumeLayout(false);
 			this.mRootSplitter.Panel2.ResumeLayout(false);
