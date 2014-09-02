@@ -170,6 +170,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				BuildIteratorComboBox();
 				SelectIterator(mFlame.Iterators.First());
 			}
+
+			View.Text = string.Format("Editor - {0}", mFlame.CalculatedName);
 		}
 		public void ReadFlameFromClipboard()
 		{
