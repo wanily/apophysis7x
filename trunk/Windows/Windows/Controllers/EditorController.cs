@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
+using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Controls;
 using Xyrus.Apophysis.Windows.Forms;
@@ -12,7 +13,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 {
 	public class EditorController : WindowController<Editor>
 	{
-		private static readonly double[] mMoveOffsetOptions = { 1.0, 0.5, 0.25, 0.05, 0.025, 0.01 };
+		private static readonly double[] mMoveOffsetOptions = { 1.0, 0.5, 0.25, 0.1, 0.05, 0.025, 0.01 };
 		private static readonly double[] mSnapAngleOptions = { 5.0, 15.0, 30.0, 45.0, 60.0, 90.0, 120.0, 180.0 };
 		private static readonly double[] mScaleRatioOptions = { 110.0, 125.0, 150.0, 175.0, 200.0 };
 
@@ -81,9 +82,25 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.IteratorRotateCCW.Click += OnIteratorRotateClick;
 			View.IteratorRotateCW.Click += OnIteratorRotateClick;
 
+			View.IteratorMoveUp.Click += OnIteratorMoveClick;
+			View.IteratorMoveDown.Click += OnIteratorMoveClick;
+			View.IteratorMoveLeft.Click += OnIteratorMoveClick;
+			View.IteratorMoveRight.Click += OnIteratorMoveClick;
+
+			View.IteratorScaleUp.Click += OnIteratorScaleClick;
+			View.IteratorScaleDown.Click += OnIteratorScaleClick;
+
 			View.IteratorSnapAngle.Items.AddRange(mSnapAngleOptions.OfType<object>().ToArray());
 			View.IteratorSnapAngle.Text = View.IteratorCanvas.Settings.AngleSnap.ToString(InputController.Culture);
 			View.IteratorSnapAngle.TextChanged += OnSnapAngleChanged;
+
+			View.IteratorMoveOffset.Items.AddRange(mMoveOffsetOptions.OfType<object>().ToArray());
+			View.IteratorMoveOffset.Text = View.IteratorCanvas.Settings.MoveAmount.ToString(InputController.Culture);
+			View.IteratorMoveOffset.TextChanged += OnMoveOffsetChanged;
+
+			View.IteratorScaleRatio.Items.AddRange(mScaleRatioOptions.OfType<object>().ToArray());
+			View.IteratorScaleRatio.Text = View.IteratorCanvas.Settings.ScaleSnap.ToString(InputController.Culture);
+			View.IteratorScaleRatio.TextChanged += OnScaleRatioChanged;
 
 			SetFlame(new Flame());
 		}
@@ -113,7 +130,22 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.IteratorRotateCCW.Click -= OnIteratorRotateClick;
 			View.IteratorRotateCW.Click -= OnIteratorRotateClick;
 
+			View.IteratorMoveUp.Click -= OnIteratorMoveClick;
+			View.IteratorMoveDown.Click -= OnIteratorMoveClick;
+			View.IteratorMoveLeft.Click -= OnIteratorMoveClick;
+			View.IteratorMoveRight.Click -= OnIteratorMoveClick;
+
+			View.IteratorScaleUp.Click -= OnIteratorScaleClick;
+			View.IteratorScaleDown.Click -= OnIteratorScaleClick;
+
 			View.IteratorSnapAngle.TextChanged -= OnSnapAngleChanged;
+			View.IteratorSnapAngle.Items.Clear();
+
+			View.IteratorMoveOffset.TextChanged -= OnMoveOffsetChanged;
+			View.IteratorMoveOffset.Items.Clear();
+
+			View.IteratorScaleRatio.TextChanged -= OnScaleRatioChanged;
+			View.IteratorScaleRatio.Items.Clear();
 
 			View.KeyHandler = null;
 			mPointTextBoxes = null;
@@ -337,6 +369,74 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			}
 
 			View.IteratorCanvas.Settings.AngleSnap = value;
+		}
+
+		private void OnIteratorMoveClick(object sender, EventArgs e)
+		{
+			Vector2 offset;
+
+			if (ReferenceEquals(sender, View.IteratorMoveLeft))
+			{
+				offset = new Vector2(-1, 0);
+			}
+			else if (ReferenceEquals(sender, View.IteratorMoveRight))
+			{
+				offset = new Vector2(1, 0);
+			}
+			else if (ReferenceEquals(sender, View.IteratorMoveUp))
+			{
+				offset = new Vector2(0, 1);
+			}
+			else if (ReferenceEquals(sender, View.IteratorMoveDown))
+			{
+				offset = new Vector2(0, -1);
+			}
+			else
+			{
+				return;
+			}
+
+			View.IteratorCanvas.Commands.MoveSelected(offset * View.IteratorCanvas.Settings.MoveAmount);
+		}
+		private void OnMoveOffsetChanged(object sender, EventArgs e)
+		{
+			double value;
+			if (!double.TryParse(View.IteratorMoveOffset.Text, NumberStyles.Float, InputController.Culture, out value))
+			{
+				value = View.IteratorCanvas.Settings.MoveAmount;
+			}
+
+			View.IteratorCanvas.Settings.MoveAmount = value;
+		}
+
+		private void OnIteratorScaleClick(object sender, EventArgs e)
+		{
+			double ratio;
+
+			if (ReferenceEquals(sender, View.IteratorScaleDown))
+			{
+				ratio = 100.0 / View.IteratorCanvas.Settings.ScaleSnap;
+			}
+			else if (ReferenceEquals(sender, View.IteratorScaleUp))
+			{
+				ratio = View.IteratorCanvas.Settings.ScaleSnap / 100.0;
+			}
+			else
+			{
+				return;
+			}
+
+			View.IteratorCanvas.Commands.ScaleSelected(ratio);
+		}
+		private void OnScaleRatioChanged(object sender, EventArgs e)
+		{
+			double value;
+			if (!double.TryParse(View.IteratorScaleRatio.Text, NumberStyles.Float, InputController.Culture, out value))
+			{
+				value = View.IteratorCanvas.Settings.ScaleSnap;
+			}
+
+			View.IteratorCanvas.Settings.ScaleSnap = value;
 		}
 
 		private void OnCanvasEdit(object sender, EventArgs e)

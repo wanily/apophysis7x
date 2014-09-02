@@ -56,6 +56,14 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mIteratorNameLabel = new System.Windows.Forms.Label();
 			this.IteratorSelectionComboBox = new System.Windows.Forms.ComboBox();
 			this.mIteratorSelectLabel = new System.Windows.Forms.Label();
+			this.IteratorMoveLeft = new System.Windows.Forms.Button();
+			this.IteratorMoveDown = new System.Windows.Forms.Button();
+			this.IteratorMoveRight = new System.Windows.Forms.Button();
+			this.IteratorMoveUp = new System.Windows.Forms.Button();
+			this.IteratorMoveOffset = new System.Windows.Forms.ComboBox();
+			this.IteratorScaleRatio = new System.Windows.Forms.ComboBox();
+			this.IteratorScaleUp = new System.Windows.Forms.Button();
+			this.IteratorScaleDown = new System.Windows.Forms.Button();
 			this.IteratorCanvas = new Xyrus.Apophysis.Windows.Controls.EditorCanvas();
 			this.mSettings = new Xyrus.Apophysis.Windows.Controls.EditorSettings();
 			this.IteratorDirectColorDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
@@ -83,6 +91,8 @@ namespace Xyrus.Apophysis.Windows.Forms
 			// mRootSplitter
 			// 
 			this.mRootSplitter.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.mRootSplitter.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+			this.mRootSplitter.IsSplitterFixed = true;
 			this.mRootSplitter.Location = new System.Drawing.Point(0, 0);
 			this.mRootSplitter.Name = "mRootSplitter";
 			// 
@@ -93,7 +103,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			// mRootSplitter.Panel2
 			// 
 			this.mRootSplitter.Panel2.Controls.Add(this.mSidebarSplitter);
-			this.mRootSplitter.Size = new System.Drawing.Size(1014, 659);
+			this.mRootSplitter.Size = new System.Drawing.Size(1014, 661);
 			this.mRootSplitter.SplitterDistance = 711;
 			this.mRootSplitter.TabIndex = 3;
 			// 
@@ -113,8 +123,8 @@ namespace Xyrus.Apophysis.Windows.Forms
 			// 
 			this.mSidebarSplitter.Panel2.Controls.Add(this.Tabs);
 			this.mSidebarSplitter.Panel2.Controls.Add(this.mIteratorPropertyPanel);
-			this.mSidebarSplitter.Size = new System.Drawing.Size(299, 659);
-			this.mSidebarSplitter.SplitterDistance = 156;
+			this.mSidebarSplitter.Size = new System.Drawing.Size(299, 661);
+			this.mSidebarSplitter.SplitterDistance = 250;
 			this.mSidebarSplitter.TabIndex = 0;
 			// 
 			// mPreviewPanel
@@ -123,7 +133,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mPreviewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.mPreviewPanel.Location = new System.Drawing.Point(0, 0);
 			this.mPreviewPanel.Name = "mPreviewPanel";
-			this.mPreviewPanel.Size = new System.Drawing.Size(299, 156);
+			this.mPreviewPanel.Size = new System.Drawing.Size(299, 250);
 			this.mPreviewPanel.TabIndex = 0;
 			// 
 			// mPictureBevel
@@ -134,7 +144,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mPictureBevel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.mPictureBevel.Location = new System.Drawing.Point(0, 4);
 			this.mPictureBevel.Name = "mPictureBevel";
-			this.mPictureBevel.Size = new System.Drawing.Size(296, 152);
+			this.mPictureBevel.Size = new System.Drawing.Size(296, 246);
 			this.mPictureBevel.TabIndex = 0;
 			// 
 			// Tabs
@@ -147,23 +157,33 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.Tabs.Location = new System.Drawing.Point(10, 95);
 			this.Tabs.Name = "Tabs";
 			this.Tabs.SelectedIndex = 0;
-			this.Tabs.Size = new System.Drawing.Size(280, 392);
+			this.Tabs.Size = new System.Drawing.Size(280, 300);
 			this.Tabs.TabIndex = 1;
 			// 
 			// PointTab
 			// 
+			this.PointTab.BackColor = System.Drawing.SystemColors.ControlLightLight;
 			this.PointTab.Controls.Add(this.mIteratorControlsGroupBox);
 			this.PointTab.Controls.Add(this.mPointCoordGroupBox);
 			this.PointTab.Location = new System.Drawing.Point(4, 22);
 			this.PointTab.Name = "PointTab";
 			this.PointTab.Padding = new System.Windows.Forms.Padding(3);
-			this.PointTab.Size = new System.Drawing.Size(272, 366);
+			this.PointTab.Size = new System.Drawing.Size(272, 274);
 			this.PointTab.TabIndex = 1;
 			this.PointTab.Text = "Triangle";
-			this.PointTab.UseVisualStyleBackColor = true;
 			// 
 			// mIteratorControlsGroupBox
 			// 
+			this.mIteratorControlsGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.mIteratorControlsGroupBox.Controls.Add(this.IteratorScaleRatio);
+			this.mIteratorControlsGroupBox.Controls.Add(this.IteratorScaleUp);
+			this.mIteratorControlsGroupBox.Controls.Add(this.IteratorScaleDown);
+			this.mIteratorControlsGroupBox.Controls.Add(this.IteratorMoveOffset);
+			this.mIteratorControlsGroupBox.Controls.Add(this.IteratorMoveLeft);
+			this.mIteratorControlsGroupBox.Controls.Add(this.IteratorMoveDown);
+			this.mIteratorControlsGroupBox.Controls.Add(this.IteratorMoveRight);
+			this.mIteratorControlsGroupBox.Controls.Add(this.IteratorMoveUp);
 			this.mIteratorControlsGroupBox.Controls.Add(this.IteratorSnapAngle);
 			this.mIteratorControlsGroupBox.Controls.Add(this.IteratorRotateCW);
 			this.mIteratorControlsGroupBox.Controls.Add(this.IteratorRotateCCW);
@@ -171,7 +191,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mIteratorControlsGroupBox.Controls.Add(this.IteratorRotate90CCW);
 			this.mIteratorControlsGroupBox.Location = new System.Drawing.Point(24, 131);
 			this.mIteratorControlsGroupBox.Name = "mIteratorControlsGroupBox";
-			this.mIteratorControlsGroupBox.Size = new System.Drawing.Size(224, 144);
+			this.mIteratorControlsGroupBox.Size = new System.Drawing.Size(224, 123);
 			this.mIteratorControlsGroupBox.TabIndex = 1;
 			this.mIteratorControlsGroupBox.TabStop = false;
 			// 
@@ -238,6 +258,8 @@ namespace Xyrus.Apophysis.Windows.Forms
 			// 
 			// mPointCoordGroupBox
 			// 
+			this.mPointCoordGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.mPointCoordGroupBox.Controls.Add(this.IteratorPointOyTextBox);
 			this.mPointCoordGroupBox.Controls.Add(this.IteratorPointOxTextBox);
 			this.mPointCoordGroupBox.Controls.Add(this.IteratorPointYyTextBox);
@@ -335,7 +357,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.ColorTab.Location = new System.Drawing.Point(4, 22);
 			this.ColorTab.Name = "ColorTab";
 			this.ColorTab.Padding = new System.Windows.Forms.Padding(3);
-			this.ColorTab.Size = new System.Drawing.Size(272, 366);
+			this.ColorTab.Size = new System.Drawing.Size(272, 274);
 			this.ColorTab.TabIndex = 0;
 			this.ColorTab.Text = "Color";
 			// 
@@ -519,6 +541,100 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mIteratorSelectLabel.Text = "Transform:";
 			this.mIteratorSelectLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
+			// IteratorMoveLeft
+			// 
+			this.IteratorMoveLeft.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+			this.IteratorMoveLeft.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.HotTrack;
+			this.IteratorMoveLeft.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
+			this.IteratorMoveLeft.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.IteratorMoveLeft.Image = ((System.Drawing.Image)(resources.GetObject("IteratorMoveLeft.Image")));
+			this.IteratorMoveLeft.Location = new System.Drawing.Point(152, 53);
+			this.IteratorMoveLeft.Name = "IteratorMoveLeft";
+			this.IteratorMoveLeft.Size = new System.Drawing.Size(24, 24);
+			this.IteratorMoveLeft.TabIndex = 8;
+			this.IteratorMoveLeft.UseVisualStyleBackColor = true;
+			// 
+			// IteratorMoveDown
+			// 
+			this.IteratorMoveDown.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+			this.IteratorMoveDown.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.HotTrack;
+			this.IteratorMoveDown.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
+			this.IteratorMoveDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.IteratorMoveDown.Image = ((System.Drawing.Image)(resources.GetObject("IteratorMoveDown.Image")));
+			this.IteratorMoveDown.Location = new System.Drawing.Point(50, 53);
+			this.IteratorMoveDown.Name = "IteratorMoveDown";
+			this.IteratorMoveDown.Size = new System.Drawing.Size(24, 24);
+			this.IteratorMoveDown.TabIndex = 7;
+			this.IteratorMoveDown.UseVisualStyleBackColor = true;
+			// 
+			// IteratorMoveRight
+			// 
+			this.IteratorMoveRight.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+			this.IteratorMoveRight.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.HotTrack;
+			this.IteratorMoveRight.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
+			this.IteratorMoveRight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.IteratorMoveRight.Image = ((System.Drawing.Image)(resources.GetObject("IteratorMoveRight.Image")));
+			this.IteratorMoveRight.Location = new System.Drawing.Point(182, 53);
+			this.IteratorMoveRight.Name = "IteratorMoveRight";
+			this.IteratorMoveRight.Size = new System.Drawing.Size(24, 24);
+			this.IteratorMoveRight.TabIndex = 6;
+			this.IteratorMoveRight.UseVisualStyleBackColor = true;
+			// 
+			// IteratorMoveUp
+			// 
+			this.IteratorMoveUp.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+			this.IteratorMoveUp.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.HotTrack;
+			this.IteratorMoveUp.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
+			this.IteratorMoveUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.IteratorMoveUp.Image = ((System.Drawing.Image)(resources.GetObject("IteratorMoveUp.Image")));
+			this.IteratorMoveUp.Location = new System.Drawing.Point(20, 53);
+			this.IteratorMoveUp.Name = "IteratorMoveUp";
+			this.IteratorMoveUp.Size = new System.Drawing.Size(24, 24);
+			this.IteratorMoveUp.TabIndex = 5;
+			this.IteratorMoveUp.UseVisualStyleBackColor = true;
+			// 
+			// IteratorMoveOffset
+			// 
+			this.IteratorMoveOffset.FormattingEnabled = true;
+			this.IteratorMoveOffset.Location = new System.Drawing.Point(80, 55);
+			this.IteratorMoveOffset.Name = "IteratorMoveOffset";
+			this.IteratorMoveOffset.Size = new System.Drawing.Size(66, 21);
+			this.IteratorMoveOffset.TabIndex = 9;
+			// 
+			// IteratorScaleRatio
+			// 
+			this.IteratorScaleRatio.FormattingEnabled = true;
+			this.IteratorScaleRatio.Location = new System.Drawing.Point(80, 85);
+			this.IteratorScaleRatio.Name = "IteratorScaleRatio";
+			this.IteratorScaleRatio.Size = new System.Drawing.Size(66, 21);
+			this.IteratorScaleRatio.TabIndex = 12;
+			// 
+			// IteratorScaleUp
+			// 
+			this.IteratorScaleUp.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+			this.IteratorScaleUp.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.HotTrack;
+			this.IteratorScaleUp.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
+			this.IteratorScaleUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.IteratorScaleUp.Image = ((System.Drawing.Image)(resources.GetObject("IteratorScaleUp.Image")));
+			this.IteratorScaleUp.Location = new System.Drawing.Point(152, 83);
+			this.IteratorScaleUp.Name = "IteratorScaleUp";
+			this.IteratorScaleUp.Size = new System.Drawing.Size(24, 24);
+			this.IteratorScaleUp.TabIndex = 11;
+			this.IteratorScaleUp.UseVisualStyleBackColor = true;
+			// 
+			// IteratorScaleDown
+			// 
+			this.IteratorScaleDown.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+			this.IteratorScaleDown.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.HotTrack;
+			this.IteratorScaleDown.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
+			this.IteratorScaleDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.IteratorScaleDown.Image = ((System.Drawing.Image)(resources.GetObject("IteratorScaleDown.Image")));
+			this.IteratorScaleDown.Location = new System.Drawing.Point(50, 83);
+			this.IteratorScaleDown.Name = "IteratorScaleDown";
+			this.IteratorScaleDown.Size = new System.Drawing.Size(24, 24);
+			this.IteratorScaleDown.TabIndex = 10;
+			this.IteratorScaleDown.UseVisualStyleBackColor = true;
+			// 
 			// IteratorCanvas
 			// 
 			this.IteratorCanvas.ActiveMatrix = Xyrus.Apophysis.Windows.Controls.IteratorMatrix.PreAffine;
@@ -540,7 +656,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorCanvas.RulerGridLineColor = System.Drawing.Color.Silver;
 			this.IteratorCanvas.Settings = this.mSettings;
 			this.IteratorCanvas.ShowRuler = true;
-			this.IteratorCanvas.Size = new System.Drawing.Size(711, 659);
+			this.IteratorCanvas.Size = new System.Drawing.Size(711, 661);
 			this.IteratorCanvas.TabIndex = 1;
 			// 
 			// mSettings
@@ -644,10 +760,10 @@ namespace Xyrus.Apophysis.Windows.Forms
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1014, 659);
+			this.ClientSize = new System.Drawing.Size(1014, 661);
 			this.Controls.Add(this.mRootSplitter);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-			this.MinimumSize = new System.Drawing.Size(600, 600);
+			this.MinimumSize = new System.Drawing.Size(800, 700);
 			this.Name = "Editor";
 			this.Text = "xw_prototype_2014-337";
 			this.Load += new System.EventHandler(this.OnWindowLoaded);
@@ -720,6 +836,14 @@ namespace Xyrus.Apophysis.Windows.Forms
 		public System.Windows.Forms.TabControl Tabs;
 		public System.Windows.Forms.TabPage PointTab;
 		public System.Windows.Forms.TabPage ColorTab;
+		public System.Windows.Forms.Button IteratorMoveLeft;
+		public System.Windows.Forms.Button IteratorMoveDown;
+		public System.Windows.Forms.Button IteratorMoveRight;
+		public System.Windows.Forms.Button IteratorMoveUp;
+		public System.Windows.Forms.ComboBox IteratorMoveOffset;
+		public System.Windows.Forms.ComboBox IteratorScaleRatio;
+		public System.Windows.Forms.Button IteratorScaleUp;
+		public System.Windows.Forms.Button IteratorScaleDown;
 	}
 }
 

@@ -83,8 +83,9 @@ namespace Xyrus.Apophysis.Windows.Forms
 
 		private void OnWindowLoaded(object sender, EventArgs e)
 		{
-			mRootSplitter.Panel2MinSize = 250;
-			mSidebarSplitter.Panel1MinSize = 250;
+			//mRootSplitter.Panel2MinSize = 300;
+			//mSidebarSplitter.Panel1MinSize = 250;
+			mSidebarSplitter.Panel2MinSize = 430;
 		}
 
 		private void OnNumericTextBoxKeyPress(object sender, KeyPressEventArgs e)
