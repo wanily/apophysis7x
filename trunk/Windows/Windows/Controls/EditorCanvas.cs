@@ -25,6 +25,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 		private EventHandler mBeginEdit;
 		private EventHandler mEndEdit;
+		private EventHandler mEdit;
 		private EventHandler mSelectionChanged;
 
 		private bool mIsDisposed;
@@ -48,6 +49,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 			mIteratorInteraction.BeginEdit += OnBeginEdit;
 			mIteratorInteraction.EndEdit += OnEndEdit;
+			mIteratorInteraction.Edit += OnEdit;
 			mIteratorInteraction.SelectionChanged += OnSelectionChanged;
 
 			GridLineColor = Color.FromArgb(0xff, 0x66, 0x66, 0x66);
@@ -85,6 +87,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 					mIteratorInteraction.SelectionChanged -= OnSelectionChanged;
 					mIteratorInteraction.BeginEdit -= OnBeginEdit;
 					mIteratorInteraction.EndEdit -= OnEndEdit;
+					mIteratorInteraction.Edit -= OnEdit;
 				}
 
 				if (mInteraction != null)
@@ -255,6 +258,16 @@ namespace Xyrus.Apophysis.Windows.Controls
 				mBeginEdit(this, new EventArgs());
 		}
 
+		private void OnEdit(object sender, EventArgs args)
+		{
+			RaiseEdit();
+		}
+		internal void RaiseEdit()
+		{
+			if (mEdit != null)
+				mEdit(this, new EventArgs());
+		}
+
 		private void OnEndEdit(object sender, EventArgs args)
 		{
 			RaiseEndEdit();
@@ -284,6 +297,11 @@ namespace Xyrus.Apophysis.Windows.Controls
 		{
 			add { mEndEdit += value; }
 			remove { mEndEdit -= value; }
+		}
+		public event EventHandler Edit
+		{
+			add { mEdit += value; }
+			remove { mEdit -= value; }
 		}
 		public event EventHandler SelectionChanged
 		{

@@ -19,6 +19,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		private Lock mInitialize = new Lock();
 		private Flame mFlame;
 
+		private TextBox[] mPointTextBoxes;
+
 		protected override void DisposeOverride(bool disposing)
 		{
 			if (disposing)
@@ -39,6 +41,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		protected override void AttachView()
 		{
+			View.IteratorCanvas.Edit += OnCanvasEdit;
+
 			View.IteratorWeightDragPanel.ValueChanged += OnWeightChanged;
 			View.IteratorNameTextBox.TextChanged += OnNameChanged;
 			View.IteratorSelectionComboBox.SelectedIndexChanged += OnIteratorSelectedFromComboBox;
@@ -59,6 +63,19 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				ScaleSnap = ApophysisSettings.EditorScaleRatio
 			};
 
+			mPointTextBoxes = new[]
+			{
+				View.IteratorPointOxTextBox, View.IteratorPointOyTextBox,
+				View.IteratorPointXxTextBox, View.IteratorPointXyTextBox,
+				View.IteratorPointYxTextBox, View.IteratorPointYyTextBox
+			};
+
+			foreach (var box in mPointTextBoxes)
+			{
+				box.TextChanged += OnPointChanged;
+				box.LostFocus += OnPointCommit;
+			}
+
 			View.IteratorRotate90CCW.Click += OnIteratorRotateClick;
 			View.IteratorRotate90CW.Click += OnIteratorRotateClick;
 			View.IteratorRotateCCW.Click += OnIteratorRotateClick;
@@ -72,6 +89,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 		protected override void DetachView()
 		{
+			View.IteratorCanvas.Edit -= OnCanvasEdit;
+
 			View.IteratorWeightDragPanel.ValueChanged -= OnWeightChanged;
 			View.IteratorNameTextBox.TextChanged -= OnNameChanged;
 			View.IteratorSelectionComboBox.SelectedIndexChanged -= OnIteratorSelectedFromComboBox;
@@ -83,6 +102,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.IteratorDirectColorDragPanel.ValueChanged -= OnDirectColorChanged;
 			View.IteratorColorScrollBar.ValueChanged -= OnColorChanged;
 
+			foreach (var box in mPointTextBoxes)
+			{
+				box.TextChanged -= OnPointChanged;
+				box.LostFocus -= OnPointCommit;
+			}
+
 			View.IteratorRotate90CCW.Click -= OnIteratorRotateClick;
 			View.IteratorRotate90CW.Click -= OnIteratorRotateClick;
 			View.IteratorRotateCCW.Click -= OnIteratorRotateClick;
@@ -91,6 +116,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.IteratorSnapAngle.TextChanged -= OnSnapAngleChanged;
 
 			View.KeyHandler = null;
+			mPointTextBoxes = null;
 		}
 
 		public void SetFlame([NotNull] Flame flame)
@@ -160,6 +186,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				View.IteratorDirectColorDragPanel.Value = iterator == null ? 1.0 : iterator.DirectColor;
 				View.IteratorColorScrollBar.Value = iterator == null ? 0 : (int)(iterator.Color * 1000);
 			}
+
+			OnCanvasEdit(View.IteratorCanvas, new EventArgs());
 		}
 
 		private string GetIteratorDisplayName(Iterator iterator)
@@ -309,6 +337,95 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			}
 
 			View.IteratorCanvas.Settings.AngleSnap = value;
+		}
+
+		private void OnCanvasEdit(object sender, EventArgs e)
+		{
+			if (View.IteratorCanvas.SelectedIterator == null || mInitialize.IsBusy)
+				return;
+
+			var iterator = View.IteratorCanvas.SelectedIterator;
+			var matrix = View.IteratorCanvas.ActiveMatrix == IteratorMatrix.PostAffine ? iterator.PostAffine : iterator.PreAffine;
+
+			var o = matrix.Origin;
+			var x = matrix.Matrix.X + o;
+			var y = matrix.Matrix.Y + o;
+
+			using (mInitialize.Enter())
+			{
+				View.IteratorPointOxTextBox.Text = o.X.ToString(InputController.PreciseFormat, InputController.Culture);
+				View.IteratorPointOyTextBox.Text = o.Y.ToString(InputController.PreciseFormat, InputController.Culture);
+				View.IteratorPointXxTextBox.Text = x.X.ToString(InputController.PreciseFormat, InputController.Culture);
+				View.IteratorPointXyTextBox.Text = x.Y.ToString(InputController.PreciseFormat, InputController.Culture);
+				View.IteratorPointYxTextBox.Text = y.X.ToString(InputController.PreciseFormat, InputController.Culture);
+				View.IteratorPointYyTextBox.Text = y.Y.ToString(InputController.PreciseFormat, InputController.Culture);
+			}
+
+			if (ReferenceEquals(View.Tabs.SelectedTab, View.PointTab))
+			{
+				foreach (var box in mPointTextBoxes)
+				{
+					box.Refresh();
+				}
+			}
+		}
+		private void OnPointChanged(object sender, EventArgs e)
+		{
+			if (View.IteratorCanvas.SelectedIterator == null || mInitialize.IsBusy)
+				return;
+
+			var iterator = View.IteratorCanvas.SelectedIterator;
+			var matrix = View.IteratorCanvas.ActiveMatrix == IteratorMatrix.PostAffine ? iterator.PostAffine : iterator.PreAffine;
+
+			double ox, oy, xx, xy, yx, yy;
+
+			using (mInitialize.Enter())
+			{
+				if (!double.TryParse(View.IteratorPointOxTextBox.Text, NumberStyles.Float, InputController.Culture, out ox)) ox = matrix.Origin.X;
+				if (!double.TryParse(View.IteratorPointOyTextBox.Text, NumberStyles.Float, InputController.Culture, out oy)) oy = matrix.Origin.Y;
+				if (!double.TryParse(View.IteratorPointXxTextBox.Text, NumberStyles.Float, InputController.Culture, out xx)) xx = matrix.Matrix.X.X + ox;
+				if (!double.TryParse(View.IteratorPointXyTextBox.Text, NumberStyles.Float, InputController.Culture, out xy)) xy = matrix.Matrix.X.Y + oy;
+				if (!double.TryParse(View.IteratorPointYxTextBox.Text, NumberStyles.Float, InputController.Culture, out yx)) yx = matrix.Matrix.Y.X + ox;
+				if (!double.TryParse(View.IteratorPointYyTextBox.Text, NumberStyles.Float, InputController.Culture, out yy)) yy = matrix.Matrix.Y.Y + oy;
+			}
+
+			matrix.Origin.X = ox;
+			matrix.Origin.Y = oy;
+			matrix.Matrix.X.X = xx - ox;
+			matrix.Matrix.X.Y = xy - oy;
+			matrix.Matrix.Y.X = yx - ox;
+			matrix.Matrix.Y.Y = yy - oy;
+
+			View.IteratorCanvas.Refresh();
+		}
+		private void OnPointCommit(object sender, EventArgs e)
+		{
+			if (View.IteratorCanvas.SelectedIterator == null || mInitialize.IsBusy)
+				return;
+
+			var textBox = sender as TextBox;
+
+			var iterator = View.IteratorCanvas.SelectedIterator;
+			var matrix = View.IteratorCanvas.ActiveMatrix == IteratorMatrix.PostAffine ? iterator.PostAffine : iterator.PreAffine;
+
+			var o = matrix.Origin;
+			var x = matrix.Matrix.X + o;
+			var y = matrix.Matrix.Y + o;
+
+			using (mInitialize.Enter()) 
+			{
+				if (ReferenceEquals(sender, View.IteratorPointOxTextBox)) View.IteratorPointOxTextBox.Text = o.X.ToString(InputController.PreciseFormat, InputController.Culture);
+				if (ReferenceEquals(sender, View.IteratorPointOyTextBox)) View.IteratorPointOyTextBox.Text = o.Y.ToString(InputController.PreciseFormat, InputController.Culture);
+				if (ReferenceEquals(sender, View.IteratorPointXxTextBox)) View.IteratorPointXxTextBox.Text = x.X.ToString(InputController.PreciseFormat, InputController.Culture);
+				if (ReferenceEquals(sender, View.IteratorPointXyTextBox)) View.IteratorPointXyTextBox.Text = x.Y.ToString(InputController.PreciseFormat, InputController.Culture);
+				if (ReferenceEquals(sender, View.IteratorPointYxTextBox)) View.IteratorPointYxTextBox.Text = y.X.ToString(InputController.PreciseFormat, InputController.Culture);
+				if (ReferenceEquals(sender, View.IteratorPointYyTextBox)) View.IteratorPointYyTextBox.Text = y.Y.ToString(InputController.PreciseFormat, InputController.Culture);
+			}
+
+			if (textBox != null)
+			{
+				textBox.Refresh();
+			}
 		}
 
 		private void OnKeyDown(Keys keys)

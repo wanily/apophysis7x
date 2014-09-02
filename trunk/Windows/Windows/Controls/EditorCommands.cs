@@ -129,8 +129,10 @@ namespace Xyrus.Apophysis.Windows.Controls
 			
 			matrix.Rotate(angle);
 			
-			mEditor.Refresh();
+			mEditor.RaiseEdit();
 			mEditor.RaiseEndEdit();
+
+			mEditor.Refresh();
 		}
 		public void ScaleSelected(double ratio)
 		{

@@ -15,6 +15,7 @@ namespace Xyrus.Apophysis.Windows.Input
 		private EventHandler mBeginEdit;
 		private EventHandler mEndEdit;
 		private EventHandler mSelectionChanged;
+		private EventHandler mEdit;
 
 		private EditorSettings mSettings;
 		private EditorSettings mDefaultSettings;
@@ -54,23 +55,6 @@ namespace Xyrus.Apophysis.Windows.Input
 			mCanvas = null;
 		}
 
-		public IteratorCollection Collection
-		{
-			get { return mVisualCollection.Collection; }
-		}
-		public IteratorInputHandler this[int index]
-		{
-			get
-			{
-				if (mHandlers == null)
-					throw new IndexOutOfRangeException();
-
-				if (index < 0 || index >= mHandlers.Count)
-					throw new IndexOutOfRangeException();
-
-				return mHandlers[index];
-			}
-		}
 		public IteratorMatrix ActiveMatrix
 		{
 			get { return mActiveMatrix; }
@@ -187,18 +171,24 @@ namespace Xyrus.Apophysis.Windows.Input
 					var newVisual = mVisualCollection.First(x => x.Model.Index == newIndex);
 					newVisual.IsSelected = true;
 
+					if (mSelectionChanged != null)
+						mSelectionChanged(this, new EventArgs());
+
 					InvalidateControl();
 					return true;
 				}
 			}
 
+			RaiseBeginEdit();
 			foreach (var handler in mHandlers)
 			{
 				if (handler.HandleKeyPress(key, modifiers))
 				{
+					RaiseEdit();
 					return true;
 				}
 			}
+			RaiseEndEdit();
 
 			return false;
 		}
@@ -217,6 +207,10 @@ namespace Xyrus.Apophysis.Windows.Input
 					if (handler.HandleMouseMove(cursor, button))
 					{
 						SetOperation(handler);
+						if (mEdit != null)
+						{
+							mEdit(this, new EventArgs());
+						}
 						return true;
 					}
 				}
@@ -327,6 +321,11 @@ namespace Xyrus.Apophysis.Windows.Input
 			if (mEndEdit != null)
 				mEndEdit(this, new EventArgs());
 		}
+		protected void RaiseEdit()
+		{
+			if (mEdit != null)
+				mEdit(this, new EventArgs());
+		}
 
 		public event EventHandler BeginEdit
 		{
@@ -337,6 +336,11 @@ namespace Xyrus.Apophysis.Windows.Input
 		{
 			add { mEndEdit += value; }
 			remove { mEndEdit -= value; }
+		}
+		public event EventHandler Edit
+		{
+			add { mEdit += value; }
+			remove { mEdit -= value; }
 		}
 
 		public event EventHandler SelectionChanged

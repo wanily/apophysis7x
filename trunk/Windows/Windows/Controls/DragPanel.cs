@@ -114,7 +114,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 				if (TextBox == null)
 					return;
 
-				TextBox.Text = value.ToString("#,###,##0.000", DisplayCulture);
+				TextBox.Text = value.ToString(InputController.DefaultFormat, DisplayCulture);
 				TextBox.Refresh();
 			}
 		}

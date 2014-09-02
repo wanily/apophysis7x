@@ -327,7 +327,7 @@ namespace Xyrus.Apophysis.Windows.Input
 					var normalY = Matrix.Y.Direction;
 
 					var angleBetweenOxAndOy = System.Math.Atan2(normalY.Y, normalY.X) - System.Math.Atan2(normalX.Y, normalX.X);
-					var angle = mSettings.AngleSnap * (key == Keys.Multiply ? -1 : 1) * System.Math.PI / 360.0;
+					var angle = mSettings.AngleSnap * (key == Keys.Multiply ? -1 : 1) * System.Math.PI / 180.0;
 
 					var cos0 = System.Math.Cos(angleBetweenOxAndOy);
 					var cos1 = System.Math.Cos(angle);

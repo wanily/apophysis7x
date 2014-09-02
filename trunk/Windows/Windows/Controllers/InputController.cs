@@ -25,5 +25,13 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			get { return CultureInfo.InvariantCulture; }
 		}
+		public static string DefaultFormat
+		{
+			get { return "#,###,##0.000"; }
+		}
+		public static string PreciseFormat
+		{
+			get { return "#,###,##0.000000"; }
+		}
 	}
 }
