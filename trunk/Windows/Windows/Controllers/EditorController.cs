@@ -12,6 +12,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 {
 	public class EditorController : WindowController<Editor>
 	{
+		private static readonly double[] mMoveOffsetOptions = { 1.0, 0.5, 0.25, 0.05, 0.025, 0.01 };
+		private static readonly double[] mSnapAngleOptions = { 5.0, 15.0, 30.0, 45.0, 60.0, 90.0, 120.0, 180.0 };
+		private static readonly double[] mScaleRatioOptions = { 110.0, 125.0, 150.0, 175.0, 200.0 };
+
 		private Lock mInitialize = new Lock();
 		private Flame mFlame;
 
@@ -55,6 +59,15 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				ScaleSnap = ApophysisSettings.EditorScaleRatio
 			};
 
+			View.IteratorRotate90CCW.Click += OnIteratorRotateClick;
+			View.IteratorRotate90CW.Click += OnIteratorRotateClick;
+			View.IteratorRotateCCW.Click += OnIteratorRotateClick;
+			View.IteratorRotateCW.Click += OnIteratorRotateClick;
+
+			View.IteratorSnapAngle.Items.AddRange(mSnapAngleOptions.OfType<object>().ToArray());
+			View.IteratorSnapAngle.Text = View.IteratorCanvas.Settings.AngleSnap.ToString(InputController.Culture);
+			View.IteratorSnapAngle.TextChanged += OnSnapAngleChanged;
+
 			SetFlame(new Flame());
 		}
 		protected override void DetachView()
@@ -69,6 +82,13 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.IteratorOpacityDragPanel.ValueChanged -= OnOpacityChanged;
 			View.IteratorDirectColorDragPanel.ValueChanged -= OnDirectColorChanged;
 			View.IteratorColorScrollBar.ValueChanged -= OnColorChanged;
+
+			View.IteratorRotate90CCW.Click -= OnIteratorRotateClick;
+			View.IteratorRotate90CW.Click -= OnIteratorRotateClick;
+			View.IteratorRotateCCW.Click -= OnIteratorRotateClick;
+			View.IteratorRotateCW.Click -= OnIteratorRotateClick;
+
+			View.IteratorSnapAngle.TextChanged -= OnSnapAngleChanged;
 
 			View.KeyHandler = null;
 		}
@@ -246,6 +266,49 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		private void OnIteratorCollectionChanged(object sender, EventArgs e)
 		{
 			BuildIteratorComboBox();
+		}
+
+		private void OnIteratorRotateClick(object sender, EventArgs e)
+		{
+			double angle;
+
+			if (ReferenceEquals(sender, View.IteratorRotate90CCW))
+			{
+				angle = -90;
+			}
+			else if (ReferenceEquals(sender, View.IteratorRotate90CW))
+			{
+				angle = 90;
+			}
+			else if (ReferenceEquals(sender, View.IteratorRotateCCW))
+			{
+				angle = -View.IteratorCanvas.Settings.AngleSnap;
+			}
+			else if (ReferenceEquals(sender, View.IteratorRotateCW))
+			{
+				angle = View.IteratorCanvas.Settings.AngleSnap;
+			}
+			else
+			{
+				return;
+			}
+
+			while (angle < 0)
+			{
+				angle = 360 + angle;
+			}
+
+			View.IteratorCanvas.Commands.RotateSelected(-angle * System.Math.PI / 180.0);
+		}
+		private void OnSnapAngleChanged(object sender, EventArgs e)
+		{
+			double value;
+			if (!double.TryParse(View.IteratorSnapAngle.Text, NumberStyles.Float, InputController.Culture, out value))
+			{
+				value = View.IteratorCanvas.Settings.AngleSnap;
+			}
+
+			View.IteratorCanvas.Settings.AngleSnap = value;
 		}
 
 		private void OnKeyDown(Keys keys)

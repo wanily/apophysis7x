@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Drawing;
 using System.Globalization;
-using System.Linq;
 using System.Windows.Forms;
+using Xyrus.Apophysis.Windows.Controllers;
 using Xyrus.Apophysis.Windows.Input;
 
 namespace Xyrus.Apophysis.Windows.Controls
 {
 	public sealed partial class DragPanel : Label
 	{
+		private readonly InputController mInputHandler;
+
 		private CultureInfo mDisplayCulture;
 		private TextBox mTextBox;
 		private bool mIsMouseOver;
@@ -29,7 +31,9 @@ namespace Xyrus.Apophysis.Windows.Controls
 			mMaximum = double.MaxValue;
 
 			Cursor = Cursors.Hand;
-			mDisplayCulture = CultureInfo.InvariantCulture;
+			mDisplayCulture = InputController.Culture;
+
+			mInputHandler = new InputController();
 		}
 		protected override void Dispose(bool disposing)
 		{
@@ -91,25 +95,6 @@ namespace Xyrus.Apophysis.Windows.Controls
 		public CultureInfo DisplayCulture
 		{
 			get { return mDisplayCulture; }
-			set
-			{
-				if (value == null) throw new ArgumentNullException("value");
-
-				if (TextBox == null)
-				{
-					mDisplayCulture = value;
-				}
-				else
-				{
-					double oldValue;
-					if (!double.TryParse(TextBox.Text, NumberStyles.Float, mDisplayCulture, out oldValue))
-						oldValue = 0.0;
-
-					mDisplayCulture = value;
-
-					Value = oldValue;
-				}
-			}
 		}
 		public Double Value
 		{
@@ -207,17 +192,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 		}
 		private void OnTextBoxKeyPress(object sender, KeyPressEventArgs e)
 		{
-			char[] chars =
-			{
-				'.', ',', '-', 'e', 'E', '+',
-				'0', '1', '2', '3', '4', '5',
-				'6', '7', '8', '9'
-			};
-
-			if (!chars.Contains(e.KeyChar))
-			{
-				e.Handled = true;
-			}
+			mInputHandler.HandleKeyPressForNumericTextBox(e);
 		}
 
 		protected override void OnMouseEnter(EventArgs e)

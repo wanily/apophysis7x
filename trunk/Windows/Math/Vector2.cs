@@ -159,8 +159,8 @@ namespace Xyrus.Apophysis.Math
 			var cos = System.Math.Cos(angle);
 			var sin = System.Math.Sin(angle);
 
-			var x = ((X - origin.X) * cos) - ((origin.Y - Y) * sin) + origin.X;
-			var y = ((origin.Y - Y) * cos) - ((X - origin.X) * sin) + origin.Y;
+			var x = ((X - origin.X) * cos) - ((Y - origin.Y) * sin) + origin.X;
+			var y = ((X - origin.Y) * sin) + ((Y - origin.Y) * cos) + origin.Y;
 
 			return new Vector2(x, y);
 		}

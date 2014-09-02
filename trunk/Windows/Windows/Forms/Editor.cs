@@ -1,18 +1,23 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Xyrus.Apophysis.Windows.Controllers;
 using Xyrus.Apophysis.Windows.Visuals;
 
 namespace Xyrus.Apophysis.Windows.Forms
 {
 	public partial class Editor : Form
 	{
+		private readonly InputController mInputHandler;
+
 		public Editor()
 		{
 			InitializeComponent();
 
 			IteratorSelectionComboBox.DrawItem += OnIteratorComboBoxDrawItem;
 			IteratorSelectionComboBox.MeasureItem += OnIteratorComboBoxMeasureItem;
+
+			mInputHandler = new InputController();
 		}
 		protected override void Dispose(bool disposing)
 		{
@@ -80,6 +85,11 @@ namespace Xyrus.Apophysis.Windows.Forms
 		{
 			mRootSplitter.Panel2MinSize = 250;
 			mSidebarSplitter.Panel1MinSize = 250;
+		}
+
+		private void OnNumericTextBoxKeyPress(object sender, KeyPressEventArgs e)
+		{
+			mInputHandler.HandleKeyPressForNumericTextBox(e);
 		}
 	}
 }

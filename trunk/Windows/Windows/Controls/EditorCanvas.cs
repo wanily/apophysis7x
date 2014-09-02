@@ -249,7 +249,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 		{
 			RaiseBeginEdit();
 		}
-		protected void RaiseBeginEdit()
+		internal void RaiseBeginEdit()
 		{
 			if (mBeginEdit != null)
 				mBeginEdit(this, new EventArgs());
@@ -259,7 +259,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 		{
 			RaiseEndEdit();
 		}
-		protected void RaiseEndEdit()
+		internal void RaiseEndEdit()
 		{
 			if (mEndEdit != null)
 				mEndEdit(this, new EventArgs());

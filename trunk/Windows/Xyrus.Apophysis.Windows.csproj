@@ -75,6 +75,7 @@
     <Compile Include="Windows\Common\Lock.cs" />
     <Compile Include="Windows\Common\WindowController.cs" />
     <Compile Include="Windows\Controllers\EditorController.cs" />
+    <Compile Include="Windows\Controllers\InputController.cs" />
     <Compile Include="Windows\Controls\DragPanel.cs">
       <SubType>Component</SubType>
     </Compile>

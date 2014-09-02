@@ -115,5 +115,54 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 			mEditor.Refresh();
 		}
+
+		public void RotateSelected(double angle)
+		{
+			if (mEditor.SelectedIterator == null)
+				return;
+
+			var matrix = mEditor.ActiveMatrix == IteratorMatrix.PostAffine
+				? mEditor.SelectedIterator.PostAffine
+				: mEditor.SelectedIterator.PreAffine;
+
+			mEditor.RaiseBeginEdit();
+			
+			matrix.Rotate(angle);
+			
+			mEditor.Refresh();
+			mEditor.RaiseEndEdit();
+		}
+		public void ScaleSelected(double ratio)
+		{
+			if (mEditor.SelectedIterator == null)
+				return;
+
+			var matrix = mEditor.ActiveMatrix == IteratorMatrix.PostAffine
+				? mEditor.SelectedIterator.PostAffine
+				: mEditor.SelectedIterator.PreAffine;
+
+			mEditor.RaiseBeginEdit();
+
+			matrix.Scale(ratio);
+
+			mEditor.Refresh();
+			mEditor.RaiseEndEdit();
+		}
+		public void MoveSelected(Vector2 offset)
+		{
+			if (mEditor.SelectedIterator == null)
+				return;
+
+			var matrix = mEditor.ActiveMatrix == IteratorMatrix.PostAffine
+				? mEditor.SelectedIterator.PostAffine
+				: mEditor.SelectedIterator.PreAffine;
+
+			mEditor.RaiseBeginEdit();
+
+			matrix.Move(offset);
+
+			mEditor.Refresh();
+			mEditor.RaiseEndEdit();
+		}
 	}
 }
