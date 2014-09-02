@@ -110,6 +110,8 @@ namespace Xyrus.Apophysis.Windows.Forms
 			// mSidebarSplitter
 			// 
 			this.mSidebarSplitter.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.mSidebarSplitter.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+			this.mSidebarSplitter.IsSplitterFixed = true;
 			this.mSidebarSplitter.Location = new System.Drawing.Point(0, 0);
 			this.mSidebarSplitter.Name = "mSidebarSplitter";
 			this.mSidebarSplitter.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -124,7 +126,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mSidebarSplitter.Panel2.Controls.Add(this.Tabs);
 			this.mSidebarSplitter.Panel2.Controls.Add(this.mIteratorPropertyPanel);
 			this.mSidebarSplitter.Size = new System.Drawing.Size(299, 661);
-			this.mSidebarSplitter.SplitterDistance = 250;
+			this.mSidebarSplitter.SplitterDistance = 174;
 			this.mSidebarSplitter.TabIndex = 0;
 			// 
 			// mPreviewPanel
@@ -133,7 +135,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mPreviewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.mPreviewPanel.Location = new System.Drawing.Point(0, 0);
 			this.mPreviewPanel.Name = "mPreviewPanel";
-			this.mPreviewPanel.Size = new System.Drawing.Size(299, 250);
+			this.mPreviewPanel.Size = new System.Drawing.Size(299, 174);
 			this.mPreviewPanel.TabIndex = 0;
 			// 
 			// mPictureBevel
@@ -144,7 +146,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mPictureBevel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.mPictureBevel.Location = new System.Drawing.Point(0, 4);
 			this.mPictureBevel.Name = "mPictureBevel";
-			this.mPictureBevel.Size = new System.Drawing.Size(296, 246);
+			this.mPictureBevel.Size = new System.Drawing.Size(296, 170);
 			this.mPictureBevel.TabIndex = 0;
 			// 
 			// Tabs
@@ -157,7 +159,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.Tabs.Location = new System.Drawing.Point(10, 95);
 			this.Tabs.Name = "Tabs";
 			this.Tabs.SelectedIndex = 0;
-			this.Tabs.Size = new System.Drawing.Size(280, 300);
+			this.Tabs.Size = new System.Drawing.Size(280, 376);
 			this.Tabs.TabIndex = 1;
 			// 
 			// PointTab
@@ -168,7 +170,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.PointTab.Location = new System.Drawing.Point(4, 22);
 			this.PointTab.Name = "PointTab";
 			this.PointTab.Padding = new System.Windows.Forms.Padding(3);
-			this.PointTab.Size = new System.Drawing.Size(272, 274);
+			this.PointTab.Size = new System.Drawing.Size(272, 350);
 			this.PointTab.TabIndex = 1;
 			this.PointTab.Text = "Triangle";
 			// 
@@ -357,7 +359,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.ColorTab.Location = new System.Drawing.Point(4, 22);
 			this.ColorTab.Name = "ColorTab";
 			this.ColorTab.Padding = new System.Windows.Forms.Padding(3);
-			this.ColorTab.Size = new System.Drawing.Size(272, 274);
+			this.ColorTab.Size = new System.Drawing.Size(272, 382);
 			this.ColorTab.TabIndex = 0;
 			this.ColorTab.Text = "Color";
 			// 
