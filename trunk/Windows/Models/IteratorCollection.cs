@@ -70,6 +70,14 @@ namespace Xyrus.Apophysis.Models
 			return true;
 		}
 
+		public void Reset()
+		{
+			Items.Clear();
+			Items.Add(new Iterator(mFlame));
+
+			RaiseContentChanged();
+		}
+
 		public event EventHandler ContentChanged
 		{
 			add { mContentChanged += value; }

@@ -118,16 +118,121 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="CopyIterator" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Windows\Resources\Toolbar\Editor\CopyIterator.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DuplicateIterator" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Windows\Resources\Toolbar\Editor\DuplicateIterator.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FlipAllHorizontal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Windows\Resources\Toolbar\Editor\FlipAllHorizontal.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FlipAllVertical" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Windows\Resources\Toolbar\Editor\FlipAllVertical.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LinkIterator" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Windows\Resources\Toolbar\Editor\LinkIterator.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LockTransformAxes" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Windows\Resources\Toolbar\Editor\LockTransformAxes.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="MainIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\windows\resources\mainicon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Move" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\windows\resources\move_white.cur;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="MoveDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Windows\Resources\Icons\MoveDown.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MoveLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Windows\Resources\Icons\MoveLeft.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MoveMode" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Windows\Resources\Toolbar\Editor\MoveMode.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MoveRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Windows\Resources\Icons\MoveRight.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MoveUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Windows\Resources\Icons\MoveUp.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NewIterator" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Windows\Resources\Toolbar\Editor\NewIterator.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PasteIterator" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Windows\Resources\Toolbar\Editor\PasteIterator.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Redo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Windows\Resources\Toolbar\Editor\Redo.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RemoveIterator" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Windows\Resources\Toolbar\Editor\RemoveIterator.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ResetAll" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Windows\Resources\Toolbar\Editor\ResetAll.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ResetIterator" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Windows\Resources\Toolbar\Editor\ResetIterator.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ResetIteratorAngle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Windows\Resources\Toolbar\Editor\ResetIteratorAngle.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ResetIteratorOrigin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Windows\Resources\Toolbar\Editor\ResetIteratorOrigin.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ResetIteratorScale" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Windows\Resources\Toolbar\Editor\ResetIteratorScale.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Rotate" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\windows\resources\rotate_white.cur;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Rotate90Clockwise" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Windows\Resources\Icons\Rotate90Clockwise.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Rotate90CounterClockwise" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Windows\Resources\Icons\Rotate90CounterClockwise.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RotateClockwise" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Windows\Resources\Icons\RotateClockwise.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RotateCounterClockwise" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Windows\Resources\Icons\RotateCounterClockwise.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RotateMode" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Windows\Resources\Toolbar\Editor\RotateMode.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Scale" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\windows\resources\scale_white.cur;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ScaleDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Windows\Resources\Icons\ScaleDown.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ScaleMode" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Windows\Resources\Toolbar\Editor\ScaleMode.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ScaleUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Windows\Resources\Icons\ScaleUp.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SelectMode" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Windows\Resources\Toolbar\Editor\SelectMode.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ToggleAutoZoom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Windows\Resources\Toolbar\Editor\ToggleAutoZoom.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ToggleFinalIterator" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Windows\Resources\Toolbar\Editor\ToggleFinalIterator.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TogglePostMatrix" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Windows\Resources\Toolbar\Editor\TogglePostMatrix.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ToggleVariationPrevie" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Windows\Resources\Toolbar\Editor\ToggleVariationPrevie.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ToggleWorldPivot" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Windows\Resources\Toolbar\Editor\ToggleWorldPivot.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Undo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Windows\Resources\Toolbar\Editor\Undo.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

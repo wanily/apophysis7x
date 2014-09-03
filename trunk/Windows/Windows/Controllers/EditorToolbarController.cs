@@ -44,18 +44,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		private void OnResetAllIteratorsClick(object sender, EventArgs e)
 		{
-			using (mParent.Initializer.Enter())
-			{
-				var toRemove = mParent.Flame.Iterators.Skip(1).ToArray();
-				foreach (var item in toRemove)
-				{
-					mParent.Flame.Iterators.Remove(item);
-				}
-
-				mParent.Flame.Iterators[0].Reset();
-			}
-
-			mParent.AfterReset();
+			View.IteratorCanvas.Commands.ResetAll();
 		}
 
 		private void OnAddIteratorClick(object sender, EventArgs e)

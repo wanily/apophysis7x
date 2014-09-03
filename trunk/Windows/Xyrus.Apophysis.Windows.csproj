@@ -104,6 +104,9 @@
     <Compile Include="Windows\Controls\EditorGridContextMenu.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Windows\Controls\EditorIteratorContextMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Windows\Controls\EditorSettings.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -188,7 +191,111 @@
     <EmbeddedResource Include="Windows\Resources\ROTATE_WHITE.cur" />
     <EmbeddedResource Include="Windows\Resources\SCALE_WHITE.cur" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Windows\Resources\Toolbar\Editor\CopyIterator.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Windows\Resources\Toolbar\Editor\DuplicateIterator.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Windows\Resources\Toolbar\Editor\FlipAllHorizontal.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Windows\Resources\Toolbar\Editor\FlipAllVertical.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Windows\Resources\Toolbar\Editor\LinkIterator.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Windows\Resources\Toolbar\Editor\LockTransformAxes.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Windows\Resources\Toolbar\Editor\MoveMode.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Windows\Resources\Toolbar\Editor\NewIterator.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Windows\Resources\Toolbar\Editor\PasteIterator.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Windows\Resources\Toolbar\Editor\Redo.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Windows\Resources\Toolbar\Editor\RemoveIterator.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Windows\Resources\Toolbar\Editor\ResetAll.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Windows\Resources\Toolbar\Editor\ResetIterator.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Windows\Resources\Toolbar\Editor\ResetIteratorAngle.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Windows\Resources\Toolbar\Editor\ResetIteratorOrigin.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Windows\Resources\Toolbar\Editor\ResetIteratorScale.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Windows\Resources\Toolbar\Editor\RotateMode.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Windows\Resources\Toolbar\Editor\ScaleMode.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Windows\Resources\Toolbar\Editor\SelectMode.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Windows\Resources\Toolbar\Editor\ToggleAutoZoom.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Windows\Resources\Toolbar\Editor\ToggleFinalIterator.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Windows\Resources\Toolbar\Editor\TogglePostMatrix.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Windows\Resources\Toolbar\Editor\ToggleVariationPrevie.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Windows\Resources\Toolbar\Editor\ToggleWorldPivot.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Windows\Resources\Toolbar\Editor\Undo.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Windows\Resources\Icons\MoveDown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Windows\Resources\Icons\MoveLeft.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Windows\Resources\Icons\MoveRight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Windows\Resources\Icons\MoveUp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Windows\Resources\Icons\Rotate90Clockwise.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Windows\Resources\Icons\Rotate90CounterClockwise.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Windows\Resources\Icons\RotateClockwise.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Windows\Resources\Icons\RotateCounterClockwise.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Windows\Resources\Icons\ScaleDown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Windows\Resources\Icons\ScaleUp.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -21,6 +21,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 		private IteratorCollectionInputHandler mIteratorInteraction;
 
 		private EditorGridContextMenu mGridContextMenu;
+		private EditorIteratorContextMenu mIteratorContextMenu;
 		private EditorCommands mCommands;
 
 		private EventHandler mBeginEdit;
@@ -66,6 +67,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 			mCommands = new EditorCommands(this);
 			mGridContextMenu = new EditorGridContextMenu(this);
+			mIteratorContextMenu = new EditorIteratorContextMenu(this);
 
 			Settings.UnbindContextMenu();
 			Settings.BindContextMenu(mGridContextMenu);
@@ -110,6 +112,12 @@ namespace Xyrus.Apophysis.Windows.Controls
 					mGridContextMenu = null;
 				}
 
+				if (mIteratorContextMenu != null)
+				{
+					mIteratorContextMenu.Dispose();
+					mIteratorContextMenu = null;
+				}
+
 				if (mCommands != null)
 				{
 					mCommands.Dispose();
@@ -130,7 +138,21 @@ namespace Xyrus.Apophysis.Windows.Controls
 		public IteratorCollection Iterators
 		{
 			get { return mIteratorPainter.Collection; }
-			set { mIteratorPainter.Collection = value; }
+			set
+			{
+				if (mIteratorPainter.Collection != null)
+				{
+					mIteratorPainter.Collection.ContentChanged -= OnCollectionChanged;
+				}
+
+				mIteratorPainter.Collection = value;
+
+				if (mIteratorPainter.Collection != null)
+				{
+					mIteratorPainter.Collection.ContentChanged += OnCollectionChanged;
+					OnCollectionChanged(mIteratorPainter.Collection, new EventArgs());
+				}
+			}
 		}
 
 		public Color GridZeroLineColor
@@ -336,9 +358,10 @@ namespace Xyrus.Apophysis.Windows.Controls
 				return;
 
 			var hit = mIteratorInteraction == null ? null : mIteratorInteraction.HitTestIterator(new Vector2(e.X, e.Y));
-			if (hit != null)
+			if (hit != null && mIteratorContextMenu != null)
 			{
-				//todo
+				mIteratorContextMenu.Iterator = hit;
+				mIteratorContextMenu.Show(this, new Point(e.X, e.Y), ToolStripDropDownDirection.Default);
 			}
 
 			if (hit == null && mGridContextMenu != null)
@@ -350,6 +373,13 @@ namespace Xyrus.Apophysis.Windows.Controls
 		{
 			mInteraction.TriggerKeyPress(keyData);
 			return base.ProcessCmdKey(ref msg, keyData);
+		}
+		private void OnCollectionChanged(object sender, EventArgs e)
+		{
+			if (mIteratorContextMenu != null)
+			{
+				mIteratorContextMenu.CanRemoveIterator = Iterators != null && Iterators.Count > 1;
+			}
 		}
 	}
 }

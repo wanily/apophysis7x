@@ -139,7 +139,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				angle = 360 + angle;
 			}
 
-			View.IteratorCanvas.Commands.RotateSelected(-angle * System.Math.PI / 180.0);
+			View.IteratorCanvas.Commands.RotateSelectedIterator(-angle * System.Math.PI / 180.0);
 		}
 		private void OnSnapAngleChanged(object sender, EventArgs e)
 		{
@@ -177,7 +177,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				return;
 			}
 
-			View.IteratorCanvas.Commands.MoveSelected(offset * View.IteratorCanvas.Settings.MoveAmount);
+			View.IteratorCanvas.Commands.MoveSelectedIterator(offset * View.IteratorCanvas.Settings.MoveAmount);
 		}
 		private void OnMoveOffsetChanged(object sender, EventArgs e)
 		{
@@ -207,7 +207,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				return;
 			}
 
-			View.IteratorCanvas.Commands.ScaleSelected(ratio);
+			View.IteratorCanvas.Commands.ScaleSelectedIterator(ratio);
 		}
 		private void OnScaleRatioChanged(object sender, EventArgs e)
 		{
