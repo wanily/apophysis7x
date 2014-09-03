@@ -20,6 +20,16 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Editor));
 			this.mRootSplitter = new System.Windows.Forms.SplitContainer();
+			this.mToolbar = new System.Windows.Forms.ToolStrip();
+			this.ResetAllIteratorsButton = new System.Windows.Forms.ToolStripButton();
+			this.mToolbarSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+			this.AddIteratorButton = new System.Windows.Forms.ToolStripButton();
+			this.DuplicateIteratorButton = new System.Windows.Forms.ToolStripButton();
+			this.RemoveIteratorButton = new System.Windows.Forms.ToolStripButton();
+			this.mToolbarSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+			this.UndoButton = new System.Windows.Forms.ToolStripButton();
+			this.RedoButton = new System.Windows.Forms.ToolStripButton();
+			this.mToolbarSeparator3 = new System.Windows.Forms.ToolStripSeparator();
 			this.mSidebarSplitter = new System.Windows.Forms.SplitContainer();
 			this.mPreviewPanel = new System.Windows.Forms.Panel();
 			this.mPictureBevel = new System.Windows.Forms.Label();
@@ -50,6 +60,17 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorPointXyTextBox = new System.Windows.Forms.TextBox();
 			this.IteratorPointXxTextBox = new System.Windows.Forms.TextBox();
 			this.VectorTab = new System.Windows.Forms.TabPage();
+			this.mIteratorPostAffineGroupBox = new System.Windows.Forms.GroupBox();
+			this.IteratorResetPostAffine = new System.Windows.Forms.Button();
+			this.IteratorResetPostAffineY = new System.Windows.Forms.Button();
+			this.IteratorResetPostAffineO = new System.Windows.Forms.Button();
+			this.IteratorResetPostAffineX = new System.Windows.Forms.Button();
+			this.IteratorPostAffineOyTextBox = new System.Windows.Forms.TextBox();
+			this.IteratorPostAffineOxTextBox = new System.Windows.Forms.TextBox();
+			this.IteratorPostAffineYyTextBox = new System.Windows.Forms.TextBox();
+			this.IteratorPostAffineYxTextBox = new System.Windows.Forms.TextBox();
+			this.IteratorPostAffineXyTextBox = new System.Windows.Forms.TextBox();
+			this.IteratorPostAffineXxTextBox = new System.Windows.Forms.TextBox();
 			this.mPreAffineGroupBox = new System.Windows.Forms.GroupBox();
 			this.IteratorResetPreAffine = new System.Windows.Forms.Button();
 			this.IteratorResetPreAffineY = new System.Windows.Forms.Button();
@@ -77,28 +98,12 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mIteratorNameLabel = new System.Windows.Forms.Label();
 			this.IteratorSelectionComboBox = new System.Windows.Forms.ComboBox();
 			this.mIteratorSelectLabel = new System.Windows.Forms.Label();
-			this.mIteratorPostAffineGroupBox = new System.Windows.Forms.GroupBox();
-			this.IteratorResetPostAffine = new System.Windows.Forms.Button();
-			this.IteratorResetPostAffineY = new System.Windows.Forms.Button();
-			this.IteratorResetPostAffineO = new System.Windows.Forms.Button();
-			this.IteratorResetPostAffineX = new System.Windows.Forms.Button();
-			this.IteratorPostAffineOyTextBox = new System.Windows.Forms.TextBox();
-			this.IteratorPostAffineOxTextBox = new System.Windows.Forms.TextBox();
-			this.IteratorPostAffineYyTextBox = new System.Windows.Forms.TextBox();
-			this.IteratorPostAffineYxTextBox = new System.Windows.Forms.TextBox();
-			this.IteratorPostAffineXyTextBox = new System.Windows.Forms.TextBox();
-			this.IteratorPostAffineXxTextBox = new System.Windows.Forms.TextBox();
-			this.mToolbar = new System.Windows.Forms.ToolStrip();
 			this.mToolbarImages = new System.Windows.Forms.ImageList(this.components);
-			this.AddIteratorButton = new System.Windows.Forms.ToolStripButton();
-			this.RemoveIteratorButton = new System.Windows.Forms.ToolStripButton();
-			this.DuplicateIteratorButton = new System.Windows.Forms.ToolStripButton();
-			this.mToolbarSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-			this.ResetAllIteratorsButton = new System.Windows.Forms.ToolStripButton();
-			this.mToolbarSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-			this.UndoButton = new System.Windows.Forms.ToolStripButton();
-			this.RedoButton = new System.Windows.Forms.ToolStripButton();
-			this.mToolbarSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+			this.IteratorResetButton = new System.Windows.Forms.ToolStripButton();
+			this.IteratorResetOriginButton = new System.Windows.Forms.ToolStripButton();
+			this.IteratorResetAngleButton = new System.Windows.Forms.ToolStripButton();
+			this.IteratorResetScaleButton = new System.Windows.Forms.ToolStripButton();
+			this.mToolbarSeparator4 = new System.Windows.Forms.ToolStripSeparator();
 			this.IteratorCanvas = new Xyrus.Apophysis.Windows.Controls.EditorCanvas();
 			this.mSettings = new Xyrus.Apophysis.Windows.Controls.EditorSettings();
 			this.IteratorDirectColorDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
@@ -109,6 +114,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mRootSplitter.Panel1.SuspendLayout();
 			this.mRootSplitter.Panel2.SuspendLayout();
 			this.mRootSplitter.SuspendLayout();
+			this.mToolbar.SuspendLayout();
 			this.mSidebarSplitter.Panel1.SuspendLayout();
 			this.mSidebarSplitter.Panel2.SuspendLayout();
 			this.mSidebarSplitter.SuspendLayout();
@@ -118,13 +124,12 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mIteratorControlsGroupBox.SuspendLayout();
 			this.mPointCoordGroupBox.SuspendLayout();
 			this.VectorTab.SuspendLayout();
+			this.mIteratorPostAffineGroupBox.SuspendLayout();
 			this.mPreAffineGroupBox.SuspendLayout();
 			this.ColorTab.SuspendLayout();
 			this.mIteratorColorGroupBox.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.mPalettePictureBox)).BeginInit();
 			this.mIteratorPropertyPanel.SuspendLayout();
-			this.mIteratorPostAffineGroupBox.SuspendLayout();
-			this.mToolbar.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// mRootSplitter
@@ -147,6 +152,100 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mRootSplitter.Size = new System.Drawing.Size(1014, 661);
 			this.mRootSplitter.SplitterDistance = 711;
 			this.mRootSplitter.TabIndex = 3;
+			// 
+			// mToolbar
+			// 
+			this.mToolbar.AllowMerge = false;
+			this.mToolbar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+			this.mToolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ResetAllIteratorsButton,
+            this.mToolbarSeparator1,
+            this.AddIteratorButton,
+            this.DuplicateIteratorButton,
+            this.RemoveIteratorButton,
+            this.mToolbarSeparator2,
+            this.UndoButton,
+            this.RedoButton,
+            this.mToolbarSeparator3,
+            this.IteratorResetButton,
+            this.IteratorResetOriginButton,
+            this.IteratorResetAngleButton,
+            this.IteratorResetScaleButton,
+            this.mToolbarSeparator4});
+			this.mToolbar.Location = new System.Drawing.Point(0, 0);
+			this.mToolbar.Name = "mToolbar";
+			this.mToolbar.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+			this.mToolbar.Size = new System.Drawing.Size(711, 25);
+			this.mToolbar.TabIndex = 2;
+			// 
+			// ResetAllIteratorsButton
+			// 
+			this.ResetAllIteratorsButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.ResetAllIteratorsButton.Image = ((System.Drawing.Image)(resources.GetObject("ResetAllIteratorsButton.Image")));
+			this.ResetAllIteratorsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.ResetAllIteratorsButton.Name = "ResetAllIteratorsButton";
+			this.ResetAllIteratorsButton.Size = new System.Drawing.Size(23, 22);
+			this.ResetAllIteratorsButton.Text = "Reset all transforms";
+			// 
+			// mToolbarSeparator1
+			// 
+			this.mToolbarSeparator1.Name = "mToolbarSeparator1";
+			this.mToolbarSeparator1.Size = new System.Drawing.Size(6, 25);
+			// 
+			// AddIteratorButton
+			// 
+			this.AddIteratorButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.AddIteratorButton.Image = ((System.Drawing.Image)(resources.GetObject("AddIteratorButton.Image")));
+			this.AddIteratorButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.AddIteratorButton.Name = "AddIteratorButton";
+			this.AddIteratorButton.Size = new System.Drawing.Size(23, 22);
+			this.AddIteratorButton.Text = "Add transform";
+			// 
+			// DuplicateIteratorButton
+			// 
+			this.DuplicateIteratorButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.DuplicateIteratorButton.Image = ((System.Drawing.Image)(resources.GetObject("DuplicateIteratorButton.Image")));
+			this.DuplicateIteratorButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.DuplicateIteratorButton.Name = "DuplicateIteratorButton";
+			this.DuplicateIteratorButton.Size = new System.Drawing.Size(23, 22);
+			this.DuplicateIteratorButton.Text = "Duplicate transform";
+			// 
+			// RemoveIteratorButton
+			// 
+			this.RemoveIteratorButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.RemoveIteratorButton.Image = ((System.Drawing.Image)(resources.GetObject("RemoveIteratorButton.Image")));
+			this.RemoveIteratorButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.RemoveIteratorButton.Name = "RemoveIteratorButton";
+			this.RemoveIteratorButton.Size = new System.Drawing.Size(23, 22);
+			this.RemoveIteratorButton.Text = "Remove transform";
+			// 
+			// mToolbarSeparator2
+			// 
+			this.mToolbarSeparator2.Name = "mToolbarSeparator2";
+			this.mToolbarSeparator2.Size = new System.Drawing.Size(6, 25);
+			// 
+			// UndoButton
+			// 
+			this.UndoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.UndoButton.Image = ((System.Drawing.Image)(resources.GetObject("UndoButton.Image")));
+			this.UndoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.UndoButton.Name = "UndoButton";
+			this.UndoButton.Size = new System.Drawing.Size(23, 22);
+			this.UndoButton.Text = "Undo";
+			// 
+			// RedoButton
+			// 
+			this.RedoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.RedoButton.Image = ((System.Drawing.Image)(resources.GetObject("RedoButton.Image")));
+			this.RedoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.RedoButton.Name = "RedoButton";
+			this.RedoButton.Size = new System.Drawing.Size(23, 22);
+			this.RedoButton.Text = "Redo";
+			// 
+			// mToolbarSeparator3
+			// 
+			this.mToolbarSeparator3.Name = "mToolbarSeparator3";
+			this.mToolbarSeparator3.Size = new System.Drawing.Size(6, 25);
 			// 
 			// mSidebarSplitter
 			// 
@@ -518,6 +617,127 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.VectorTab.TabIndex = 2;
 			this.VectorTab.Text = "Transform";
 			// 
+			// mIteratorPostAffineGroupBox
+			// 
+			this.mIteratorPostAffineGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.mIteratorPostAffineGroupBox.Controls.Add(this.IteratorResetPostAffine);
+			this.mIteratorPostAffineGroupBox.Controls.Add(this.IteratorResetPostAffineY);
+			this.mIteratorPostAffineGroupBox.Controls.Add(this.IteratorResetPostAffineO);
+			this.mIteratorPostAffineGroupBox.Controls.Add(this.IteratorResetPostAffineX);
+			this.mIteratorPostAffineGroupBox.Controls.Add(this.IteratorPostAffineOyTextBox);
+			this.mIteratorPostAffineGroupBox.Controls.Add(this.IteratorPostAffineOxTextBox);
+			this.mIteratorPostAffineGroupBox.Controls.Add(this.IteratorPostAffineYyTextBox);
+			this.mIteratorPostAffineGroupBox.Controls.Add(this.IteratorPostAffineYxTextBox);
+			this.mIteratorPostAffineGroupBox.Controls.Add(this.IteratorPostAffineXyTextBox);
+			this.mIteratorPostAffineGroupBox.Controls.Add(this.IteratorPostAffineXxTextBox);
+			this.mIteratorPostAffineGroupBox.Location = new System.Drawing.Point(11, 149);
+			this.mIteratorPostAffineGroupBox.Name = "mIteratorPostAffineGroupBox";
+			this.mIteratorPostAffineGroupBox.Size = new System.Drawing.Size(249, 136);
+			this.mIteratorPostAffineGroupBox.TabIndex = 17;
+			this.mIteratorPostAffineGroupBox.TabStop = false;
+			// 
+			// IteratorResetPostAffine
+			// 
+			this.IteratorResetPostAffine.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+			this.IteratorResetPostAffine.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.HotTrack;
+			this.IteratorResetPostAffine.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
+			this.IteratorResetPostAffine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.IteratorResetPostAffine.Location = new System.Drawing.Point(6, 97);
+			this.IteratorResetPostAffine.Margin = new System.Windows.Forms.Padding(0);
+			this.IteratorResetPostAffine.Name = "IteratorResetPostAffine";
+			this.IteratorResetPostAffine.Size = new System.Drawing.Size(231, 29);
+			this.IteratorResetPostAffine.TabIndex = 16;
+			this.IteratorResetPostAffine.Text = "Reset post transform";
+			this.IteratorResetPostAffine.UseVisualStyleBackColor = true;
+			// 
+			// IteratorResetPostAffineY
+			// 
+			this.IteratorResetPostAffineY.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+			this.IteratorResetPostAffineY.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.HotTrack;
+			this.IteratorResetPostAffineY.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
+			this.IteratorResetPostAffineY.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.IteratorResetPostAffineY.Font = new System.Drawing.Font("Tahoma", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.IteratorResetPostAffineY.Location = new System.Drawing.Point(6, 44);
+			this.IteratorResetPostAffineY.Margin = new System.Windows.Forms.Padding(0);
+			this.IteratorResetPostAffineY.Name = "IteratorResetPostAffineY";
+			this.IteratorResetPostAffineY.Size = new System.Drawing.Size(20, 20);
+			this.IteratorResetPostAffineY.TabIndex = 15;
+			this.IteratorResetPostAffineY.Text = "Y";
+			this.IteratorResetPostAffineY.UseVisualStyleBackColor = true;
+			// 
+			// IteratorResetPostAffineO
+			// 
+			this.IteratorResetPostAffineO.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+			this.IteratorResetPostAffineO.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.HotTrack;
+			this.IteratorResetPostAffineO.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
+			this.IteratorResetPostAffineO.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.IteratorResetPostAffineO.Font = new System.Drawing.Font("Tahoma", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.IteratorResetPostAffineO.Location = new System.Drawing.Point(6, 70);
+			this.IteratorResetPostAffineO.Margin = new System.Windows.Forms.Padding(0);
+			this.IteratorResetPostAffineO.Name = "IteratorResetPostAffineO";
+			this.IteratorResetPostAffineO.Size = new System.Drawing.Size(20, 20);
+			this.IteratorResetPostAffineO.TabIndex = 14;
+			this.IteratorResetPostAffineO.Text = "O";
+			this.IteratorResetPostAffineO.UseVisualStyleBackColor = true;
+			// 
+			// IteratorResetPostAffineX
+			// 
+			this.IteratorResetPostAffineX.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+			this.IteratorResetPostAffineX.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.HotTrack;
+			this.IteratorResetPostAffineX.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
+			this.IteratorResetPostAffineX.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.IteratorResetPostAffineX.Font = new System.Drawing.Font("Tahoma", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.IteratorResetPostAffineX.Location = new System.Drawing.Point(6, 19);
+			this.IteratorResetPostAffineX.Margin = new System.Windows.Forms.Padding(0);
+			this.IteratorResetPostAffineX.Name = "IteratorResetPostAffineX";
+			this.IteratorResetPostAffineX.Size = new System.Drawing.Size(20, 20);
+			this.IteratorResetPostAffineX.TabIndex = 11;
+			this.IteratorResetPostAffineX.Text = "X";
+			this.IteratorResetPostAffineX.UseVisualStyleBackColor = true;
+			// 
+			// IteratorPostAffineOyTextBox
+			// 
+			this.IteratorPostAffineOyTextBox.Location = new System.Drawing.Point(138, 70);
+			this.IteratorPostAffineOyTextBox.Name = "IteratorPostAffineOyTextBox";
+			this.IteratorPostAffineOyTextBox.Size = new System.Drawing.Size(99, 20);
+			this.IteratorPostAffineOyTextBox.TabIndex = 8;
+			// 
+			// IteratorPostAffineOxTextBox
+			// 
+			this.IteratorPostAffineOxTextBox.Location = new System.Drawing.Point(33, 70);
+			this.IteratorPostAffineOxTextBox.Name = "IteratorPostAffineOxTextBox";
+			this.IteratorPostAffineOxTextBox.Size = new System.Drawing.Size(99, 20);
+			this.IteratorPostAffineOxTextBox.TabIndex = 7;
+			// 
+			// IteratorPostAffineYyTextBox
+			// 
+			this.IteratorPostAffineYyTextBox.Location = new System.Drawing.Point(138, 44);
+			this.IteratorPostAffineYyTextBox.Name = "IteratorPostAffineYyTextBox";
+			this.IteratorPostAffineYyTextBox.Size = new System.Drawing.Size(99, 20);
+			this.IteratorPostAffineYyTextBox.TabIndex = 6;
+			// 
+			// IteratorPostAffineYxTextBox
+			// 
+			this.IteratorPostAffineYxTextBox.Location = new System.Drawing.Point(33, 44);
+			this.IteratorPostAffineYxTextBox.Name = "IteratorPostAffineYxTextBox";
+			this.IteratorPostAffineYxTextBox.Size = new System.Drawing.Size(99, 20);
+			this.IteratorPostAffineYxTextBox.TabIndex = 5;
+			// 
+			// IteratorPostAffineXyTextBox
+			// 
+			this.IteratorPostAffineXyTextBox.Location = new System.Drawing.Point(138, 19);
+			this.IteratorPostAffineXyTextBox.Name = "IteratorPostAffineXyTextBox";
+			this.IteratorPostAffineXyTextBox.Size = new System.Drawing.Size(99, 20);
+			this.IteratorPostAffineXyTextBox.TabIndex = 4;
+			// 
+			// IteratorPostAffineXxTextBox
+			// 
+			this.IteratorPostAffineXxTextBox.Location = new System.Drawing.Point(33, 19);
+			this.IteratorPostAffineXxTextBox.Name = "IteratorPostAffineXxTextBox";
+			this.IteratorPostAffineXxTextBox.Size = new System.Drawing.Size(99, 20);
+			this.IteratorPostAffineXxTextBox.TabIndex = 3;
+			// 
 			// mPreAffineGroupBox
 			// 
 			this.mPreAffineGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -836,147 +1056,6 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mIteratorSelectLabel.Text = "Transform:";
 			this.mIteratorSelectLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
-			// mIteratorPostAffineGroupBox
-			// 
-			this.mIteratorPostAffineGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.mIteratorPostAffineGroupBox.Controls.Add(this.IteratorResetPostAffine);
-			this.mIteratorPostAffineGroupBox.Controls.Add(this.IteratorResetPostAffineY);
-			this.mIteratorPostAffineGroupBox.Controls.Add(this.IteratorResetPostAffineO);
-			this.mIteratorPostAffineGroupBox.Controls.Add(this.IteratorResetPostAffineX);
-			this.mIteratorPostAffineGroupBox.Controls.Add(this.IteratorPostAffineOyTextBox);
-			this.mIteratorPostAffineGroupBox.Controls.Add(this.IteratorPostAffineOxTextBox);
-			this.mIteratorPostAffineGroupBox.Controls.Add(this.IteratorPostAffineYyTextBox);
-			this.mIteratorPostAffineGroupBox.Controls.Add(this.IteratorPostAffineYxTextBox);
-			this.mIteratorPostAffineGroupBox.Controls.Add(this.IteratorPostAffineXyTextBox);
-			this.mIteratorPostAffineGroupBox.Controls.Add(this.IteratorPostAffineXxTextBox);
-			this.mIteratorPostAffineGroupBox.Location = new System.Drawing.Point(11, 149);
-			this.mIteratorPostAffineGroupBox.Name = "mIteratorPostAffineGroupBox";
-			this.mIteratorPostAffineGroupBox.Size = new System.Drawing.Size(249, 136);
-			this.mIteratorPostAffineGroupBox.TabIndex = 17;
-			this.mIteratorPostAffineGroupBox.TabStop = false;
-			// 
-			// IteratorResetPostAffine
-			// 
-			this.IteratorResetPostAffine.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
-			this.IteratorResetPostAffine.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.HotTrack;
-			this.IteratorResetPostAffine.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
-			this.IteratorResetPostAffine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.IteratorResetPostAffine.Location = new System.Drawing.Point(6, 97);
-			this.IteratorResetPostAffine.Margin = new System.Windows.Forms.Padding(0);
-			this.IteratorResetPostAffine.Name = "IteratorResetPostAffine";
-			this.IteratorResetPostAffine.Size = new System.Drawing.Size(231, 29);
-			this.IteratorResetPostAffine.TabIndex = 16;
-			this.IteratorResetPostAffine.Text = "Reset post transform";
-			this.IteratorResetPostAffine.UseVisualStyleBackColor = true;
-			// 
-			// IteratorResetPostAffineY
-			// 
-			this.IteratorResetPostAffineY.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
-			this.IteratorResetPostAffineY.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.HotTrack;
-			this.IteratorResetPostAffineY.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
-			this.IteratorResetPostAffineY.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.IteratorResetPostAffineY.Font = new System.Drawing.Font("Tahoma", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.IteratorResetPostAffineY.Location = new System.Drawing.Point(6, 44);
-			this.IteratorResetPostAffineY.Margin = new System.Windows.Forms.Padding(0);
-			this.IteratorResetPostAffineY.Name = "IteratorResetPostAffineY";
-			this.IteratorResetPostAffineY.Size = new System.Drawing.Size(20, 20);
-			this.IteratorResetPostAffineY.TabIndex = 15;
-			this.IteratorResetPostAffineY.Text = "Y";
-			this.IteratorResetPostAffineY.UseVisualStyleBackColor = true;
-			// 
-			// IteratorResetPostAffineO
-			// 
-			this.IteratorResetPostAffineO.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
-			this.IteratorResetPostAffineO.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.HotTrack;
-			this.IteratorResetPostAffineO.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
-			this.IteratorResetPostAffineO.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.IteratorResetPostAffineO.Font = new System.Drawing.Font("Tahoma", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.IteratorResetPostAffineO.Location = new System.Drawing.Point(6, 70);
-			this.IteratorResetPostAffineO.Margin = new System.Windows.Forms.Padding(0);
-			this.IteratorResetPostAffineO.Name = "IteratorResetPostAffineO";
-			this.IteratorResetPostAffineO.Size = new System.Drawing.Size(20, 20);
-			this.IteratorResetPostAffineO.TabIndex = 14;
-			this.IteratorResetPostAffineO.Text = "O";
-			this.IteratorResetPostAffineO.UseVisualStyleBackColor = true;
-			// 
-			// IteratorResetPostAffineX
-			// 
-			this.IteratorResetPostAffineX.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
-			this.IteratorResetPostAffineX.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.HotTrack;
-			this.IteratorResetPostAffineX.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
-			this.IteratorResetPostAffineX.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.IteratorResetPostAffineX.Font = new System.Drawing.Font("Tahoma", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.IteratorResetPostAffineX.Location = new System.Drawing.Point(6, 19);
-			this.IteratorResetPostAffineX.Margin = new System.Windows.Forms.Padding(0);
-			this.IteratorResetPostAffineX.Name = "IteratorResetPostAffineX";
-			this.IteratorResetPostAffineX.Size = new System.Drawing.Size(20, 20);
-			this.IteratorResetPostAffineX.TabIndex = 11;
-			this.IteratorResetPostAffineX.Text = "X";
-			this.IteratorResetPostAffineX.UseVisualStyleBackColor = true;
-			// 
-			// IteratorPostAffineOyTextBox
-			// 
-			this.IteratorPostAffineOyTextBox.Location = new System.Drawing.Point(138, 70);
-			this.IteratorPostAffineOyTextBox.Name = "IteratorPostAffineOyTextBox";
-			this.IteratorPostAffineOyTextBox.Size = new System.Drawing.Size(99, 20);
-			this.IteratorPostAffineOyTextBox.TabIndex = 8;
-			// 
-			// IteratorPostAffineOxTextBox
-			// 
-			this.IteratorPostAffineOxTextBox.Location = new System.Drawing.Point(33, 70);
-			this.IteratorPostAffineOxTextBox.Name = "IteratorPostAffineOxTextBox";
-			this.IteratorPostAffineOxTextBox.Size = new System.Drawing.Size(99, 20);
-			this.IteratorPostAffineOxTextBox.TabIndex = 7;
-			// 
-			// IteratorPostAffineYyTextBox
-			// 
-			this.IteratorPostAffineYyTextBox.Location = new System.Drawing.Point(138, 44);
-			this.IteratorPostAffineYyTextBox.Name = "IteratorPostAffineYyTextBox";
-			this.IteratorPostAffineYyTextBox.Size = new System.Drawing.Size(99, 20);
-			this.IteratorPostAffineYyTextBox.TabIndex = 6;
-			// 
-			// IteratorPostAffineYxTextBox
-			// 
-			this.IteratorPostAffineYxTextBox.Location = new System.Drawing.Point(33, 44);
-			this.IteratorPostAffineYxTextBox.Name = "IteratorPostAffineYxTextBox";
-			this.IteratorPostAffineYxTextBox.Size = new System.Drawing.Size(99, 20);
-			this.IteratorPostAffineYxTextBox.TabIndex = 5;
-			// 
-			// IteratorPostAffineXyTextBox
-			// 
-			this.IteratorPostAffineXyTextBox.Location = new System.Drawing.Point(138, 19);
-			this.IteratorPostAffineXyTextBox.Name = "IteratorPostAffineXyTextBox";
-			this.IteratorPostAffineXyTextBox.Size = new System.Drawing.Size(99, 20);
-			this.IteratorPostAffineXyTextBox.TabIndex = 4;
-			// 
-			// IteratorPostAffineXxTextBox
-			// 
-			this.IteratorPostAffineXxTextBox.Location = new System.Drawing.Point(33, 19);
-			this.IteratorPostAffineXxTextBox.Name = "IteratorPostAffineXxTextBox";
-			this.IteratorPostAffineXxTextBox.Size = new System.Drawing.Size(99, 20);
-			this.IteratorPostAffineXxTextBox.TabIndex = 3;
-			// 
-			// mToolbar
-			// 
-			this.mToolbar.AllowMerge = false;
-			this.mToolbar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-			this.mToolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ResetAllIteratorsButton,
-            this.mToolbarSeparator1,
-            this.AddIteratorButton,
-            this.DuplicateIteratorButton,
-            this.RemoveIteratorButton,
-            this.mToolbarSeparator2,
-            this.UndoButton,
-            this.RedoButton,
-            this.mToolbarSeparator3});
-			this.mToolbar.Location = new System.Drawing.Point(0, 0);
-			this.mToolbar.Name = "mToolbar";
-			this.mToolbar.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-			this.mToolbar.Size = new System.Drawing.Size(711, 25);
-			this.mToolbar.TabIndex = 2;
-			// 
 			// mToolbarImages
 			// 
 			this.mToolbarImages.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("mToolbarImages.ImageStream")));
@@ -1007,74 +1086,46 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mToolbarImages.Images.SetKeyName(23, "ResetIteratorScale.bmp");
 			this.mToolbarImages.Images.SetKeyName(24, "ToggleAutoZoom.bmp");
 			// 
-			// AddIteratorButton
+			// IteratorResetButton
 			// 
-			this.AddIteratorButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.AddIteratorButton.Image = ((System.Drawing.Image)(resources.GetObject("AddIteratorButton.Image")));
-			this.AddIteratorButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.AddIteratorButton.Name = "AddIteratorButton";
-			this.AddIteratorButton.Size = new System.Drawing.Size(23, 22);
-			this.AddIteratorButton.Text = "Add transform";
+			this.IteratorResetButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.IteratorResetButton.Image = ((System.Drawing.Image)(resources.GetObject("IteratorResetButton.Image")));
+			this.IteratorResetButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.IteratorResetButton.Name = "IteratorResetButton";
+			this.IteratorResetButton.Size = new System.Drawing.Size(23, 22);
+			this.IteratorResetButton.Text = "Reset transform";
 			// 
-			// RemoveIteratorButton
+			// IteratorResetOriginButton
 			// 
-			this.RemoveIteratorButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.RemoveIteratorButton.Image = ((System.Drawing.Image)(resources.GetObject("RemoveIteratorButton.Image")));
-			this.RemoveIteratorButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.RemoveIteratorButton.Name = "RemoveIteratorButton";
-			this.RemoveIteratorButton.Size = new System.Drawing.Size(23, 22);
-			this.RemoveIteratorButton.Text = "Remove transform";
+			this.IteratorResetOriginButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.IteratorResetOriginButton.Image = ((System.Drawing.Image)(resources.GetObject("IteratorResetOriginButton.Image")));
+			this.IteratorResetOriginButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.IteratorResetOriginButton.Name = "IteratorResetOriginButton";
+			this.IteratorResetOriginButton.Size = new System.Drawing.Size(23, 22);
+			this.IteratorResetOriginButton.Text = "Reset transform origin";
 			// 
-			// DuplicateIteratorButton
+			// IteratorResetAngleButton
 			// 
-			this.DuplicateIteratorButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.DuplicateIteratorButton.Image = ((System.Drawing.Image)(resources.GetObject("DuplicateIteratorButton.Image")));
-			this.DuplicateIteratorButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.DuplicateIteratorButton.Name = "DuplicateIteratorButton";
-			this.DuplicateIteratorButton.Size = new System.Drawing.Size(23, 22);
-			this.DuplicateIteratorButton.Text = "Duplicate transform";
+			this.IteratorResetAngleButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.IteratorResetAngleButton.Image = ((System.Drawing.Image)(resources.GetObject("IteratorResetAngleButton.Image")));
+			this.IteratorResetAngleButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.IteratorResetAngleButton.Name = "IteratorResetAngleButton";
+			this.IteratorResetAngleButton.Size = new System.Drawing.Size(23, 22);
+			this.IteratorResetAngleButton.Text = "Reset transform angle";
 			// 
-			// mToolbarSeparator2
+			// IteratorResetScaleButton
 			// 
-			this.mToolbarSeparator2.Name = "mToolbarSeparator2";
-			this.mToolbarSeparator2.Size = new System.Drawing.Size(6, 25);
+			this.IteratorResetScaleButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.IteratorResetScaleButton.Image = ((System.Drawing.Image)(resources.GetObject("IteratorResetScaleButton.Image")));
+			this.IteratorResetScaleButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.IteratorResetScaleButton.Name = "IteratorResetScaleButton";
+			this.IteratorResetScaleButton.Size = new System.Drawing.Size(23, 22);
+			this.IteratorResetScaleButton.Text = "Reset transform scale";
 			// 
-			// ResetAllIteratorsButton
+			// mToolbarSeparator4
 			// 
-			this.ResetAllIteratorsButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.ResetAllIteratorsButton.Image = ((System.Drawing.Image)(resources.GetObject("ResetAllIteratorsButton.Image")));
-			this.ResetAllIteratorsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.ResetAllIteratorsButton.Name = "ResetAllIteratorsButton";
-			this.ResetAllIteratorsButton.Size = new System.Drawing.Size(23, 22);
-			this.ResetAllIteratorsButton.Text = "Reset all transforms";
-			// 
-			// mToolbarSeparator1
-			// 
-			this.mToolbarSeparator1.Name = "mToolbarSeparator1";
-			this.mToolbarSeparator1.Size = new System.Drawing.Size(6, 25);
-			// 
-			// UndoButton
-			// 
-			this.UndoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.UndoButton.Image = ((System.Drawing.Image)(resources.GetObject("UndoButton.Image")));
-			this.UndoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.UndoButton.Name = "UndoButton";
-			this.UndoButton.Size = new System.Drawing.Size(23, 22);
-			this.UndoButton.Text = "Undo";
-			// 
-			// RedoButton
-			// 
-			this.RedoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.RedoButton.Image = ((System.Drawing.Image)(resources.GetObject("RedoButton.Image")));
-			this.RedoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.RedoButton.Name = "RedoButton";
-			this.RedoButton.Size = new System.Drawing.Size(23, 22);
-			this.RedoButton.Text = "Redo";
-			// 
-			// mToolbarSeparator3
-			// 
-			this.mToolbarSeparator3.Name = "mToolbarSeparator3";
-			this.mToolbarSeparator3.Size = new System.Drawing.Size(6, 25);
+			this.mToolbarSeparator4.Name = "mToolbarSeparator4";
+			this.mToolbarSeparator4.Size = new System.Drawing.Size(6, 25);
 			// 
 			// IteratorCanvas
 			// 
@@ -1214,6 +1265,8 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mRootSplitter.Panel1.PerformLayout();
 			this.mRootSplitter.Panel2.ResumeLayout(false);
 			this.mRootSplitter.ResumeLayout(false);
+			this.mToolbar.ResumeLayout(false);
+			this.mToolbar.PerformLayout();
 			this.mSidebarSplitter.Panel1.ResumeLayout(false);
 			this.mSidebarSplitter.Panel2.ResumeLayout(false);
 			this.mSidebarSplitter.ResumeLayout(false);
@@ -1224,6 +1277,8 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mPointCoordGroupBox.ResumeLayout(false);
 			this.mPointCoordGroupBox.PerformLayout();
 			this.VectorTab.ResumeLayout(false);
+			this.mIteratorPostAffineGroupBox.ResumeLayout(false);
+			this.mIteratorPostAffineGroupBox.PerformLayout();
 			this.mPreAffineGroupBox.ResumeLayout(false);
 			this.mPreAffineGroupBox.PerformLayout();
 			this.ColorTab.ResumeLayout(false);
@@ -1232,10 +1287,6 @@ namespace Xyrus.Apophysis.Windows.Forms
 			((System.ComponentModel.ISupportInitialize)(this.mPalettePictureBox)).EndInit();
 			this.mIteratorPropertyPanel.ResumeLayout(false);
 			this.mIteratorPropertyPanel.PerformLayout();
-			this.mIteratorPostAffineGroupBox.ResumeLayout(false);
-			this.mIteratorPostAffineGroupBox.PerformLayout();
-			this.mToolbar.ResumeLayout(false);
-			this.mToolbar.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
@@ -1329,6 +1380,11 @@ namespace Xyrus.Apophysis.Windows.Forms
 		private System.Windows.Forms.ToolStripSeparator mToolbarSeparator3;
 		public System.Windows.Forms.ToolStripButton UndoButton;
 		public System.Windows.Forms.ToolStripButton RedoButton;
+		private System.Windows.Forms.ToolStripSeparator mToolbarSeparator4;
+		public System.Windows.Forms.ToolStripButton IteratorResetButton;
+		public System.Windows.Forms.ToolStripButton IteratorResetOriginButton;
+		public System.Windows.Forms.ToolStripButton IteratorResetAngleButton;
+		public System.Windows.Forms.ToolStripButton IteratorResetScaleButton;
 	}
 }
 

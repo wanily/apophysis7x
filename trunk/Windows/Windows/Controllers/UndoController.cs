@@ -44,6 +44,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		public void CommitChange([NotNull] Flame flame)
 		{
 			if (flame == null) throw new ArgumentNullException("flame");
+			if (flame.IsEqual(mCurrent))
+				return;
 			
 			var old = mCurrent.Copy();
 

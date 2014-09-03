@@ -71,5 +71,18 @@ namespace Xyrus.Apophysis.Models
 
 			Iterators.ReadXml(element.Descendants(XName.Get("xform")));
 		}
+
+		public bool IsEqual([NotNull] Flame flame)
+		{
+			if (flame == null) throw new ArgumentNullException("flame");
+
+			if (!mIterators.IsEqual(flame.mIterators))
+				return false;
+
+			if (!Equals(mName, flame.mName))
+				return false;
+
+			return true;
+		}
 	}
 }

@@ -135,5 +135,21 @@ namespace Xyrus.Apophysis.Models
 
 			RaiseContentChanged();
 		}
+
+		public bool IsEqual([NotNull] IteratorCollection iterators)
+		{
+			if (iterators == null) throw new ArgumentNullException("iterators");
+
+			if (!Equals(iterators.Count, Count))
+				return false;
+
+			for (int i = 0; i < iterators.Count; i++)
+			{
+				if (!iterators[i].IsEqual(this[i]))
+					return false;
+			}
+
+			return true;
+		}
 	}
 }

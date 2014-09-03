@@ -68,5 +68,30 @@ namespace Xyrus.Apophysis.Models
 			Origin.X += offset.X;
 			Origin.Y += offset.Y;
 		}
+
+		public bool IsEqual([NotNull] AffineTransform transform)
+		{
+			if (transform == null) throw new ArgumentNullException("transform");
+
+			if (!Equals(mOrigin.X, transform.mOrigin.X))
+				return false;
+
+			if (!Equals(mOrigin.Y, transform.mOrigin.Y))
+				return false;
+
+			if (!Equals(mMatrix.X.X, transform.mMatrix.X.X))
+				return false;
+
+			if (!Equals(mMatrix.X.Y, transform.mMatrix.X.Y))
+				return false;
+
+			if (!Equals(mMatrix.Y.X, transform.mMatrix.Y.X))
+				return false;
+
+			if (!Equals(mMatrix.Y.Y, transform.mMatrix.Y.Y))
+				return false;
+
+			return true;
+		}
 	}
 }

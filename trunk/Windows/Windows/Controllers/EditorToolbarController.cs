@@ -29,6 +29,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			View.UndoButton.Click += OnUndoClick;
 			View.RedoButton.Click += OnRedoClick;
+
+			View.IteratorResetButton.Click += OnResetIteratorClick;
+			View.IteratorResetOriginButton.Click += OnResetIteratorClick;
+			View.IteratorResetAngleButton.Click += OnResetIteratorClick;
+			View.IteratorResetScaleButton.Click += OnResetIteratorClick;
 		}
 		protected override void DetachView()
 		{
@@ -40,6 +45,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			View.UndoButton.Click -= OnUndoClick;
 			View.RedoButton.Click -= OnRedoClick;
+
+			View.IteratorResetButton.Click -= OnResetIteratorClick;
+			View.IteratorResetOriginButton.Click -= OnResetIteratorClick;
+			View.IteratorResetAngleButton.Click -= OnResetIteratorClick;
+			View.IteratorResetScaleButton.Click -= OnResetIteratorClick;
 		}
 
 		private void OnResetAllIteratorsClick(object sender, EventArgs e)
@@ -67,6 +77,21 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		private void OnRedoClick(object sender, EventArgs e)
 		{
 			mParent.Flame = mParent.UndoController.Redo();
+		}
+
+		private void OnResetIteratorClick(object sender, EventArgs e)
+		{
+			Action action = null;
+
+			if (ReferenceEquals(sender, View.IteratorResetButton)) action = View.IteratorCanvas.Commands.ResetSelectedIterator;
+			if (ReferenceEquals(sender, View.IteratorResetOriginButton)) action = View.IteratorCanvas.Commands.ResetSelectedIteratorOrigin;
+			if (ReferenceEquals(sender, View.IteratorResetAngleButton)) action = View.IteratorCanvas.Commands.ResetSelectedIteratorAngle;
+			if (ReferenceEquals(sender, View.IteratorResetScaleButton)) action = View.IteratorCanvas.Commands.ResetSelectedIteratorScale;
+
+			if (action != null)
+			{
+				action();
+			}
 		}
 
 		public void UpdateButtonStates()

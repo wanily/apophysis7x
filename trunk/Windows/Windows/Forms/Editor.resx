@@ -193,6 +193,37 @@
         RU5ErkJggg==
 </value>
   </data>
+  <data name="IteratorResetButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAA/SURBVDhPYyAA/kPpgQMUuwBkAEWG/A8KCqLIELBGSgyB
+        ayLXEBQN+AyBCWKjcWEQgNG0A7S3gRAY/i5gYAAAnO4huzyhuUsAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="IteratorResetOriginButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABdSURBVDhPxY4BCsAgDAP7xn5h/3+Do9UMFxjaFtlBiEIS
+        Kgva8P8oX2ADpZGmqqURLwZGLg49/8SIOdT5GJmDbxn97SWWAZ/xwnBoGw6HykzqAoASe5h0ERwfELkB
+        GyVDeHSLA7AAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="IteratorResetAngleButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABkSURBVDhPtZELCgAhCEQ9o1fY+5+hZSRlk34j7AMxwnlF
+        yYHWO8NTCWVCciPD8KpMgGKxMGiqykoiDGxdkAQRqkqGwE7im7O+KuCdYXijI2nYv5eTdDyU+57JUOn0
+        L5zg7xuIvEEKQCfEhX38AAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="IteratorResetScaleButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABUSURBVDhPY8APkv9DGeQAkGYYJhnANKHTJAOwRnI1g0Dy
+        /6CgIEoMgTidAkMQfkc1hOgwQVWIzxAYB40GKSKEyQbEacahiCKbSQP0swkXoLULGBgAoDM1XG2VDdYA
+        AAAASUVORK5CYII=
+</value>
+  </data>
   <metadata name="mSettings.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
@@ -691,7 +722,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAu
-        MQAAAk1TRnQBSQFMAgEBGQEAAUABAAFAAQABEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        MQAAAk1TRnQBSQFMAgEBGQEAAWABAAFgAQABEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABcAMAAQEBAAEYBgABVP8A/wD/AP8AsQADUroAA1K6AANSugADUv8A/wD/AP8A/wB1AAFjPgABY4AA
         AWM+AAFjgAABYz4AAWN6AAFjBQABYwUAAWM4AAFjfQABYwIAAWMCAAFjNQABYwUAAWMFAAFjbgABYwsA
         AWM7AAFjAgABYwIAAWMvAAFjRAABYwUAAWMCAAFjAgABYzsAAWM1AAFjNQABYwIAAWMCAAFjAgABYwIA

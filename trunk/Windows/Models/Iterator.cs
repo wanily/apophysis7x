@@ -309,5 +309,36 @@ namespace Xyrus.Apophysis.Models
 				PostAffine.Origin.Y = -vector[5];
 			}
 		}
+
+		public bool IsEqual([NotNull] Iterator iterator)
+		{
+			if (iterator == null) throw new ArgumentNullException("iterator");
+
+			if (!Equals(mName, iterator.mName))
+				return false;
+
+			if (!Equals(mWeight, iterator.mWeight))
+				return false;
+
+			if (!Equals(mColor, iterator.mColor))
+				return false;
+
+			if (!Equals(mColorSpeed, iterator.mColorSpeed))
+				return false;
+
+			if (!Equals(mOpacity, iterator.mOpacity))
+				return false;
+
+			if (!Equals(mDirectColor, iterator.mDirectColor))
+				return false;
+
+			if (!mPreAffine.IsEqual(iterator.mPreAffine))
+				return false;
+
+			if (!mPostAffine.IsEqual(iterator.mPostAffine))
+				return false;
+
+			return true;
+		}
 	}
 }
