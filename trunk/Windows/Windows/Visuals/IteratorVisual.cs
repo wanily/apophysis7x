@@ -57,6 +57,23 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			var fx = Matrix.X;
 			var fy = Matrix.Y;
 
+			var ao = AlternativeOrigin;
+			var ax = AlternativeMatrix.X;
+			var ay = AlternativeMatrix.Y;
+
+			var apx = Canvas.WorldToCanvas(ao + ax);
+			var apy = Canvas.WorldToCanvas(ao + ay);
+			var apxn = Canvas.WorldToCanvas(ao - ax);
+			var apyn = Canvas.WorldToCanvas(ao - ay);
+
+			var acorner = new[]
+			{
+				Canvas.WorldToCanvas(ao - ax + ay),
+				Canvas.WorldToCanvas(ao + ax + ay),
+				Canvas.WorldToCanvas(ao + ax - ay),
+				Canvas.WorldToCanvas(ao - ax - ay)
+			};
+
 			var cornerTopLeft = fy - fx;
 			var cornerTopRight = fy + fx;
 			var cornerBottomLeft = -1 * fy - fx;
@@ -73,16 +90,11 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			var translucentColorLow = Color.FromArgb(0x05, color.R, color.G, color.B);
 
 			var sizeLo = graphics.MeasureString(lo, AttachedControl.Font);
-			//var sizeLx = graphics.MeasureString(lx, AttachedControl.Font);
 			var sizeLy = graphics.MeasureString(ly, AttachedControl.Font);
 
 			var posLo = (ox.A + new Vector2(-distLabel - sizeLo.Width, distLabel)).ToPoint();
 			var posLx = (ox.B + new Vector2(distLabel, distLabel)).ToPoint();
 			var posLy = (oy.B + new Vector2(-distLabel - sizeLy.Width, -distLabel - sizeLy.Height)).ToPoint();
-
-			//var rectLo = new Rectangle(posLo, sizeLo.ToSize());
-			//var rectLx = new Rectangle(posLx, sizeLx.ToSize());
-			//var rectLy = new Rectangle(posLy, sizeLy.ToSize());
 
 			var posO = (ox.A - new Vector2(vertexRadius, vertexRadius)).ToPoint();
 			var posX = (ox.B - new Vector2(vertexRadius, vertexRadius)).ToPoint();
@@ -94,7 +106,6 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			var rectX = new Rectangle(posX, vertexSize);
 			var rectY = new Rectangle(posY, vertexSize);
 
-			//using (var backgroundBrush = new SolidBrush(AttachedControl.BackColor))
 			using (var labelBrush = new SolidBrush(color))
 			using (var hitVertexOBrush = new SolidBrush(AttachedControl.ForeColor))
 			using (var hitVertexBrush = new SolidBrush(color))
@@ -103,10 +114,24 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			using (var fillBrush = new SolidBrush(translucentColor))
 			using (var widgetPen = new Pen(translucentColorHalf))
 			using (var dashLinePen = new Pen(color))
+			using (var dashWidgetPen = new Pen(translucentColorHalf))
 			using (var hitLinePen = new Pen(color, 2.0f))
 			using (var linePen = new Pen(color))
 			{
-				dashLinePen.DashPattern = new[] {6.0f,4.0f};
+				dashLinePen.DashPattern = new[] { 6.0f, 4.0f };
+				dashWidgetPen.DashPattern = new[] { 6.0f, 4.0f };
+
+				if (!AlternativeOrigin.IsZero || !AlternativeMatrix.IsLinear || mActiveMatrix == IteratorMatrix.PostAffine)
+				{
+					graphics.DrawLine(widgetPen, apxn.ToPoint(), apx.ToPoint());
+					graphics.DrawLine(widgetPen, apyn.ToPoint(), apy.ToPoint());
+					graphics.DrawLine(widgetPen, apx.ToPoint(), apy.ToPoint());
+
+					graphics.DrawLine(dashWidgetPen, acorner[0].ToPoint(), acorner[1].ToPoint());
+					graphics.DrawLine(dashWidgetPen, acorner[1].ToPoint(), acorner[2].ToPoint());
+					graphics.DrawLine(dashWidgetPen, acorner[2].ToPoint(), acorner[3].ToPoint());
+					graphics.DrawLine(dashWidgetPen, acorner[3].ToPoint(), acorner[0].ToPoint());
+				}
 
 				graphics.DrawLine(IsEdgeOxHit ? hitLinePen : IsSelected || IsHit ? linePen : dashLinePen, ox.A.ToPoint(), ox.B.ToPoint());
 				graphics.DrawLine(IsEdgeOyHit ? hitLinePen : IsSelected || IsHit ? linePen : dashLinePen, oy.A.ToPoint(), oy.B.ToPoint());
@@ -119,12 +144,6 @@ namespace Xyrus.Apophysis.Windows.Visuals
 				graphics.DrawEllipse(IsVertexOHit ? hitLinePen : linePen, rectO);
 				graphics.DrawEllipse(IsVertexXHit ? hitLinePen : linePen, rectX);
 				graphics.DrawEllipse(IsVertexYHit ? hitLinePen : linePen, rectY);
-
-				/*
-				graphics.FillRectangle(backgroundBrush, rectLo);
-				graphics.FillRectangle(backgroundBrush, rectLx);
-				graphics.FillRectangle(backgroundBrush, rectLy);
-				*/
 
 				graphics.FillPolygon(IsHit ? fillBrush : lowFillBrush, new[] { ox.A.ToPoint(), ox.B.ToPoint(), oy.B.ToPoint() });
 
@@ -225,6 +244,37 @@ namespace Xyrus.Apophysis.Windows.Visuals
 		public Iterator Model
 		{
 			get { return mIterator; }
+		}
+
+		public Vector2 AlternativeOrigin
+		{
+			get
+			{
+				switch (mActiveMatrix)
+				{
+					case IteratorMatrix.PreAffine:
+						return Model.PostAffine.Origin;
+					case IteratorMatrix.PostAffine:
+						return Model.PreAffine.Origin;
+					default:
+						throw new ArgumentOutOfRangeException();
+				}
+			}
+		}
+		public Matrix2X2 AlternativeMatrix
+		{
+			get
+			{
+				switch (mActiveMatrix)
+				{
+					case IteratorMatrix.PreAffine:
+						return Model.PostAffine.Matrix;
+					case IteratorMatrix.PostAffine:
+						return Model.PreAffine.Matrix;
+					default:
+						throw new ArgumentOutOfRangeException();
+				}
+			}
 		}
 
 		public bool IsHit

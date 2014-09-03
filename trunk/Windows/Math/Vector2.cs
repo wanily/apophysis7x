@@ -271,6 +271,10 @@ namespace Xyrus.Apophysis.Math
 			if (point == null) throw new ArgumentNullException("point");
 			return (this - point).Length < System.Math.Abs(epsilon);
 		}
+		public bool IsZero
+		{
+			get { return System.Math.Abs(mX) < double.Epsilon && System.Math.Abs(mY) < double.Epsilon; }
+		}
 
 		public static Vector2 Diff([NotNull] Vector2 a, [NotNull] Vector2 b, [NotNull] Vector2 c)
 		{

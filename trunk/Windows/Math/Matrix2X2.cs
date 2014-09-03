@@ -31,5 +31,17 @@ namespace Xyrus.Apophysis.Math
 				mRow1 = value;
 			}
 		}
+
+		public bool IsLinear
+		{
+			get 
+			{ 
+				return 
+					System.Math.Abs(mRow0.X - 1) < double.Epsilon && 
+					System.Math.Abs(mRow0.Y) < double.Epsilon && 
+					System.Math.Abs(mRow1.X) < double.Epsilon && 
+					System.Math.Abs(mRow1.Y - 1) < double.Epsilon; 
+			}
+		}
 	}
 }
