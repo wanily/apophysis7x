@@ -11,7 +11,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		public EditorToolbarController([NotNull] Editor view, [NotNull] EditorController parent) : base(view)
 		{
 			if (parent == null) throw new ArgumentNullException("parent");
-			
+
 			mParent = parent;
 		}
 		protected override void DisposeOverride(bool disposing)
@@ -73,11 +73,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		private void OnUndoClick(object sender, EventArgs e)
 		{
-			View.IteratorCanvas.Commands.Undo();
+			mParent.Flame = mParent.UndoController.Undo();
 		}
 		private void OnRedoClick(object sender, EventArgs e)
 		{
-			View.IteratorCanvas.Commands.Redo();
+			mParent.Flame = mParent.UndoController.Redo();
 		}
 
 		public void UpdateButtonStates()
@@ -85,8 +85,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.DuplicateIteratorButton.Enabled = View.IteratorCanvas.SelectedIterator != null;
 			View.RemoveIteratorButton.Enabled = mParent.Flame.Iterators.Count > 1;
 
-			View.UndoButton.Enabled = View.IteratorCanvas.Commands.CanUndo();
-			View.RedoButton.Enabled = View.IteratorCanvas.Commands.CanRedo();
+			View.UndoButton.Enabled = mParent.UndoController.CanUndo;
+			View.RedoButton.Enabled = mParent.UndoController.CanRedo;
 		}
 	}
 }

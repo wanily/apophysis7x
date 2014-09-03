@@ -7,7 +7,7 @@ namespace Xyrus.Apophysis.Models
 	[PublicAPI]
 	public class Iterator
 	{
-		private readonly Flame mFlame;
+		private Flame mFlame;
 
 		private AffineTransform mPreAffine;
 		private AffineTransform mPostAffine;
@@ -64,6 +64,14 @@ namespace Xyrus.Apophysis.Models
 			copy.PostAffine.Matrix.Y.X = PostAffine.Matrix.Y.X;
 			copy.PostAffine.Matrix.Y.Y = PostAffine.Matrix.Y.Y;
 
+			return copy;
+		}
+
+		internal Iterator Copy([NotNull] Flame flame)
+		{
+			if (flame == null) throw new ArgumentNullException("flame");
+			var copy = Copy();
+			copy.mFlame = flame;
 			return copy;
 		}
 

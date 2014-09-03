@@ -3,16 +3,28 @@ using System.ComponentModel;
 
 namespace Xyrus.Apophysis.Windows
 {
-	public abstract class Controller<TView> : IDisposable where TView: Component, new()
+	[PublicAPI]
+	public abstract class Controller : IDisposable
+	{
+		~Controller()
+		{
+			Dispose(false);
+		}
+		protected abstract void Dispose(bool disposing);
+		public void Dispose()
+		{
+			Dispose(true);
+			GC.SuppressFinalize(this);
+		}
+	}
+
+	[PublicAPI]
+	public abstract class Controller<TView> : Controller where TView : Component, new()
 	{
 		private TView mView;
 		private bool mDisposed;
 		private bool mInitialized;
 
-		~Controller()
-		{
-			Dispose(false);
-		}
 		protected Controller()
 		{
 			mView = new TView();
@@ -33,18 +45,11 @@ namespace Xyrus.Apophysis.Windows
 			AttachView();
 			mInitialized = true;
 		}
-		public void Dispose()
-		{
-			Dispose(true);
-			GC.SuppressFinalize(this);
-		}
 
-		protected void Dispose(bool disposing)
+		protected sealed override void Dispose(bool disposing)
 		{
 			if (mDisposed)
 				return;
-
-			DisposeOverride(disposing);
 
 			if (disposing)
 			{
@@ -55,6 +60,8 @@ namespace Xyrus.Apophysis.Windows
 					mView = null;
 				}
 			}
+
+			DisposeOverride(disposing);
 
 			mDisposed = true;
 		}

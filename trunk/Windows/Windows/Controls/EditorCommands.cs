@@ -22,32 +22,6 @@ namespace Xyrus.Apophysis.Windows.Controls
 			base.Dispose(disposing);
 		}
 
-		public bool CanUndo()
-		{
-			//todo
-			return false;
-		}
-		public bool CanRedo()
-		{
-			//todo
-			return false;
-		}
-
-		public void Undo() /*todo*/
-		{
-			//todo
-
-			if (UndoRedoCommitted != null)
-				UndoRedoCommitted(this, new EventArgs());
-		}
-		public void Redo() /*todo*/
-		{
-			//todo
-
-			if (UndoRedoCommitted != null)
-				UndoRedoCommitted(this, new EventArgs());
-		}
-
 		public void NewIterator()
 		{
 			mEditor.Iterators.Add();
@@ -207,9 +181,5 @@ namespace Xyrus.Apophysis.Windows.Controls
 			mEditor.Refresh();
 			mEditor.RaiseEndEdit();
 		}
-
-		public event EventHandler UndoRedoCommitted;
-
-		
 	}
 }

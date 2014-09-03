@@ -76,6 +76,20 @@ namespace Xyrus.Apophysis.Models
 			remove { mContentChanged -= value; }
 		}
 
+		internal IteratorCollection Copy([NotNull] Flame flame)
+		{
+			if (flame == null) throw new ArgumentNullException("flame");
+			var copy = new IteratorCollection(flame);
+
+			copy.Items.Clear();
+			foreach (var item in Items)
+			{
+				copy.Items.Add(item.Copy(flame));
+			}
+
+			return copy;
+		}
+
 		public void ReadXml(IEnumerable<XElement> elements)
 		{
 			var array = (elements ?? new XElement[0]).ToArray();

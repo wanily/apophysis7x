@@ -12,6 +12,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 	[PublicAPI]
 	public class EditorController : WindowController<Editor>
 	{
+		private UndoController mUndoController;
+		private EditorUndoController mEditorUndoController;
 		private EditorKeyboardController mKeyboardController;
 		private EditorToolbarController mToolbarController;
 		private IteratorPropertiesController mPropertiesController;
@@ -23,8 +25,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		private Lock mInitialize = new Lock();
 		private Flame mFlame;
 
-		public EditorController()
+		public EditorController([NotNull] UndoController undoController)
 		{
+			if (undoController == null) throw new ArgumentNullException("undoController");
+			mUndoController = undoController;
+
+			mEditorUndoController = new EditorUndoController(View, this);
 			mKeyboardController = new EditorKeyboardController(View, this);
 			mToolbarController = new EditorToolbarController(View, this);
 			mPropertiesController = new IteratorPropertiesController(View, this);
@@ -79,6 +85,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 					mKeyboardController = null;
 				}
 
+				if (mEditorUndoController != null)
+				{
+					mEditorUndoController.Dispose();
+					mEditorUndoController = null;
+				}
+
 				if (mInitialize != null)
 				{
 					mInitialize.Dispose();
@@ -91,6 +103,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 					mFlame = null;
 				}
 			}
+
+			mUndoController = null;
 		}
 
 		protected override void AttachView()
@@ -102,6 +116,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				ScaleSnap = ApophysisSettings.EditorScaleRatio
 			};
 
+			mEditorUndoController.Initialize();
 			mKeyboardController.Initialize();
 			mToolbarController.Initialize();
 			mPropertiesController.Initialize();
@@ -115,6 +130,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			UpdateActiveMatrix();
 			Flame = new Flame();
+			mUndoController.Initialize(Flame);
 		}
 		protected override void DetachView()
 		{
@@ -145,6 +161,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mSelectionController.BuildIteratorComboBox();
 			mSelectionController.SelectIterator(mFlame.Iterators.First());
 			UpdateToolbar();
+		}
+
+		[NotNull]
+		public UndoController UndoController
+		{
+			get { return mUndoController; }
 		}
 
 		[NotNull]

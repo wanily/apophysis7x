@@ -7,9 +7,10 @@ namespace Xyrus.Apophysis.Models
 	[PublicAPI]
 	public class Flame
 	{
-		private readonly IteratorCollection mIterators;
+		private IteratorCollection mIterators;
 		private static int mCounter;
 		private int mIndex;
+		private string mName;
 
 		public Flame()
 		{
@@ -17,7 +18,11 @@ namespace Xyrus.Apophysis.Models
 			mIndex = ++mCounter;
 		}
 
-		public string Name { get; set; }
+		public string Name
+		{
+			get { return mName; }
+			set { mName = value; }
+		}
 		public string CalculatedName
 		{
 			get
@@ -41,6 +46,17 @@ namespace Xyrus.Apophysis.Models
 			get { return mIterators; }
 		}
 
+		public Flame Copy()
+		{
+			var copy = new Flame();
+			mCounter--;
+
+			copy.mIndex = mIndex;
+			copy.Name = mName;
+			copy.mIterators = mIterators.Copy(copy);
+
+			return copy;
+		}
 		public void ReadXml([NotNull] XElement element)
 		{
 			if (element == null) throw new ArgumentNullException("element");

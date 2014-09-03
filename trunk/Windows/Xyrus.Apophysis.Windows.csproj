@@ -78,12 +78,14 @@
     <Compile Include="Windows\Controllers\EditorController.cs" />
     <Compile Include="Windows\Controllers\EditorKeyboardController.cs" />
     <Compile Include="Windows\Controllers\EditorToolbarController.cs" />
+    <Compile Include="Windows\Controllers\EditorUndoController.cs" />
     <Compile Include="Windows\Controllers\InputController.cs" />
     <Compile Include="Windows\Controllers\IteratorColorController.cs" />
     <Compile Include="Windows\Controllers\IteratorPointEditController.cs" />
     <Compile Include="Windows\Controllers\IteratorPropertiesController.cs" />
     <Compile Include="Windows\Controllers\IteratorSelectionController.cs" />
     <Compile Include="Windows\Controllers\IteratorVectorEditController.cs" />
+    <Compile Include="Windows\Controllers\UndoController.cs" />
     <Compile Include="Windows\Controls\DragPanel.cs">
       <SubType>Component</SubType>
     </Compile>

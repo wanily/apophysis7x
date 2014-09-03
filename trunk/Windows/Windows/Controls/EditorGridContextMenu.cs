@@ -7,9 +7,6 @@ namespace Xyrus.Apophysis.Windows.Controls
 	{
 		private EditorCanvas mEditor;
 
-		private ToolStripItem mUndoButton;
-		private ToolStripItem mRedoButton;
-
 		private ToolStripButton mZoomAutomatically;
 		private ToolStripButton mShowVariationPreview;
 		private ToolStripButton mLockAxes;
@@ -20,13 +17,8 @@ namespace Xyrus.Apophysis.Windows.Controls
 			if (editor == null) throw new ArgumentNullException("editor");
 			mEditor = editor;
 
-			var items = new []
+			var items = new ToolStripItem[]
 			{
-				mUndoButton = new ToolStripButton("Undo", null, OnUndoClick) { Enabled = editor.Commands.CanUndo() },
-				mRedoButton = new ToolStripButton("Redo", null, OnRedoClick) { Enabled = editor.Commands.CanRedo() },
-
-				new ToolStripSeparator(),
-
 				new ToolStripButton("New transform", null, OnNewIteratorClick),
 
 				new ToolStripSeparator(),
@@ -51,9 +43,6 @@ namespace Xyrus.Apophysis.Windows.Controls
 		{
 			mEditor = null;
 
-			mUndoButton = null;
-			mRedoButton = null;
-
 			mZoomAutomatically = null;
 			mShowVariationPreview = null;
 			mLockAxes = null;
@@ -61,27 +50,6 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 			Items.Clear();
 			base.Dispose(disposing);
-		}
-
-		private void OnUndoClick(object sender, EventArgs e)
-		{
-			if (!mEditor.Commands.CanUndo())
-				return;
-
-			mEditor.Commands.Undo();
-
-			mUndoButton.Enabled = (mEditor.Commands.CanUndo());
-			mRedoButton.Enabled = (mEditor.Commands.CanRedo());
-		}
-		private void OnRedoClick(object sender, EventArgs e)
-		{
-			if (!mEditor.Commands.CanRedo())
-				return;
-
-			mEditor.Commands.Redo();
-
-			mUndoButton.Enabled = (mEditor.Commands.CanUndo());
-			mRedoButton.Enabled = (mEditor.Commands.CanRedo());
 		}
 
 		private void OnNewIteratorClick(object sender, EventArgs e)
