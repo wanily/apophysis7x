@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using Xyrus.Apophysis.Windows.Forms;
 
 namespace Xyrus.Apophysis.Windows.Controllers
