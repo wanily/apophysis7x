@@ -1,4 +1,5 @@
 using System;
+using Xyrus.Apophysis.Windows.Controls;
 using Xyrus.Apophysis.Windows.Forms;
 
 namespace Xyrus.Apophysis.Windows.Controllers
@@ -43,6 +44,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			View.ToggleRulersButton.Click += OnToggleRulersClick;
 			View.ToggleVariationPreviewButton.Click += OnToggleVariationPreviewClick;
+			View.TogglePostMatrixButton.Click += OnTogglePostMatrixClick;
 		}
 		protected override void DetachView()
 		{
@@ -69,6 +71,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			View.ToggleRulersButton.Click -= OnToggleRulersClick;
 			View.ToggleVariationPreviewButton.Click -= OnToggleVariationPreviewClick;
+			View.TogglePostMatrixButton.Click -= OnTogglePostMatrixClick;
 		}
 
 		private void OnResetAllIteratorsClick(object sender, EventArgs e)
@@ -144,6 +147,13 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.ToggleVariationPreviewButton.Checked = !View.ToggleVariationPreviewButton.Checked;
 			View.IteratorCanvas.Settings.ShowVariationPreview = View.ToggleVariationPreviewButton.Checked;
 		}
+		private void OnTogglePostMatrixClick(object sender, EventArgs e)
+		{
+			View.TogglePostMatrixButton.Checked = !View.TogglePostMatrixButton.Checked;
+			View.IteratorCanvas.ActiveMatrix = View.TogglePostMatrixButton.Checked
+				? IteratorMatrix.PostAffine
+				: IteratorMatrix.PreAffine;
+		}
 
 		private void OnSettingsChanged(object sender, EventArgs e)
 		{
@@ -160,6 +170,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			View.ToggleRulersButton.Checked = View.IteratorCanvas.ShowRuler;
 			View.ToggleVariationPreviewButton.Checked = View.IteratorCanvas.Settings.ShowVariationPreview;
+			View.TogglePostMatrixButton.Checked = View.IteratorCanvas.ActiveMatrix == IteratorMatrix.PostAffine;
 		}
 	}
 }

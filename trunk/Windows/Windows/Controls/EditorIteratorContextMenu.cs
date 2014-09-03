@@ -21,6 +21,16 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 			var items = new ToolStripItem[]
 			{
+				new ToolStripButton("Reset transform", Resources.ResetIterator, OnResetIteratorClick) { ImageTransparentColor = Color.Fuchsia },
+
+				new ToolStripSeparator(),
+
+				new ToolStripButton("Reset position", Resources.ResetIteratorOrigin, OnResetOriginClick) { ImageTransparentColor = Color.Fuchsia },
+				new ToolStripButton("Reset angle", Resources.ResetIteratorAngle, OnResetRotationClick) { ImageTransparentColor = Color.Fuchsia },
+				new ToolStripButton("Reset scale", Resources.ResetIteratorScale, OnResetScaleClick) { ImageTransparentColor = Color.Fuchsia },
+
+				new ToolStripSeparator(),
+
 				new ToolStripButton("Duplicate transform", Resources.DuplicateIterator, OnDuplicateIteratorClick) { ImageTransparentColor = Color.Fuchsia },
 				mRemoveIterator = new ToolStripButton("Remove transform", Resources.RemoveIterator, OnRemoveIteratorClick) { ImageTransparentColor = Color.Fuchsia },
 
@@ -29,14 +39,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 				new ToolStripButton("Rotate 90° counter-clockwise", Resources.Rotate90CounterClockwise, OnRotate90CcwClick) { ImageTransparentColor = Color.Fuchsia },
 				new ToolStripButton("Rotate 90° clockwise", Resources.Rotate90Clockwise, OnRotate90CwClick) { ImageTransparentColor = Color.Fuchsia },
 				new ToolStripButton("Flip vertically", Resources.FlipAllVertical, OnFlipVerticallyClick) { ImageTransparentColor = Color.Fuchsia },
-				new ToolStripButton("Flip horizontally", Resources.FlipAllHorizontal, OnFlipHorizontallyClick) { ImageTransparentColor = Color.Fuchsia },
-
-				new ToolStripSeparator(),
-
-				new ToolStripButton("Reset transform", Resources.ResetIterator, OnResetIteratorClick) { ImageTransparentColor = Color.Fuchsia },
-				new ToolStripButton("Reset position", Resources.ResetIteratorOrigin, OnResetOriginClick) { ImageTransparentColor = Color.Fuchsia },
-				new ToolStripButton("Reset angle", Resources.ResetIteratorAngle, OnResetRotationClick) { ImageTransparentColor = Color.Fuchsia },
-				new ToolStripButton("Reset scale", Resources.ResetIteratorScale, OnResetScaleClick) { ImageTransparentColor = Color.Fuchsia },
+				new ToolStripButton("Flip horizontally", Resources.FlipAllHorizontal, OnFlipHorizontallyClick) { ImageTransparentColor = Color.Fuchsia }
 			};
 
 			Items.AddRange(items);
