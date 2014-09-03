@@ -18,11 +18,8 @@ namespace Xyrus.Apophysis.Windows.Visuals
 
 		private IteratorCollection mCollection;
 		private List<IteratorVisual> mVisuals;
-		private IteratorVisual mFinalVisual;
 
 		private EventHandler mContentChanged;
-		private EventHandler mFinalChanged;
-
 		private bool mShowReference;
 		private IteratorMatrix mActiveMatrix;
 
@@ -45,12 +42,6 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			{
 				mOperationVisual.Dispose();
 				mOperationVisual = null;
-			}
-
-			if (mFinalVisual != null)
-			{
-				mFinalVisual.Dispose();
-				mFinalVisual = null;
 			}
 
 			if (mVisuals != null)
@@ -96,8 +87,6 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			get { return mCollection; }
 			set
 			{
-				mFinalVisual = null;
-
 				if (mCollection != null)
 				{
 					mCollection.ContentChanged -= OnCollectionChanged;
@@ -106,16 +95,10 @@ namespace Xyrus.Apophysis.Windows.Visuals
 				if (value != null)
 				{
 					value.ContentChanged += OnCollectionChanged;
-					mFinalVisual = new IteratorVisual(AttachedControl, Canvas, value.FinalIterator, ActiveMatrix);
-					mFinalVisual.ForcedColor = Color.White;
 				}
 
 				mCollection = value;
 				OnCollectionChanged(mCollection, new EventArgs());
-				if (mFinalChanged != null)
-				{
-					mFinalChanged(this, new EventArgs());
-				}
 			}
 		}
 
@@ -136,12 +119,6 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			{
 				mActiveMatrix = value;
 				mOperationVisual.ActiveMatrix = value;
-
-				if (mFinalVisual != null)
-				{
-					mFinalVisual.ActiveMatrix = value;
-				}
-
 				OnCollectionChanged(mCollection, new EventArgs());
 			}
 		}
@@ -159,20 +136,11 @@ namespace Xyrus.Apophysis.Windows.Visuals
 				return mVisuals[index];
 			}
 		}
-		public IteratorVisual FinalVisual
-		{
-			get { return mFinalVisual; }
-		}
 
 		public event EventHandler ContentChanged
 		{
 			add { mContentChanged += value; }
 			remove { mContentChanged -= value; }
-		}
-		public event EventHandler FinalChanged
-		{
-			add { mFinalChanged += value; }
-			remove { mFinalChanged -= value; }
 		}
 		
 		private void OnCollectionChanged(object sender, EventArgs eventArgs)
@@ -199,7 +167,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 		}
 		protected override void OnControlPaint(Graphics graphics)
 		{
-			if (mVisuals == null || mCollection == null)
+			if (mVisuals == null)
 				return;
 
 			if (ShowReference)
@@ -239,11 +207,6 @@ namespace Xyrus.Apophysis.Windows.Visuals
 					graphics.DrawString(ly, AttachedControl.Font, labelBrush, posLy.X, posLy.Y);
 
 				}
-			}
-
-			if (mFinalVisual != null && mCollection.UseFinalIterator)
-			{
-				mFinalVisual.Paint(graphics);
 			}
 
 			if (mOperationVisual != null)

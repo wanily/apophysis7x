@@ -210,28 +210,6 @@ namespace Xyrus.Apophysis.Windows.Controls
 			mEditor.Refresh();
 		}
 
-		public void SetUseFinalIterator(bool useFinalIterator)
-		{
-			mEditor.RaiseBeginEdit();
-
-			mEditor.Iterators.UseFinalIterator = useFinalIterator;
-
-			if (useFinalIterator)
-			{
-				mEditor.SelectedIterator = mEditor.Iterators.FinalIterator;
-			}
-			else if (ReferenceEquals(mEditor.SelectedIterator, mEditor.Iterators.FinalIterator))
-			{
-				mEditor.SelectedIterator = mEditor.Iterators.Last();
-			}
-
-			mEditor.RaiseEdit();
-			mEditor.RaiseEndEdit();
-			mEditor.RaiseSelectionChanged();
-
-			mEditor.Refresh();
-		}
-
 		public void RotateIterator([NotNull] Iterator iterator, double angle)
 		{
 			if (iterator == null) throw new ArgumentNullException("iterator");

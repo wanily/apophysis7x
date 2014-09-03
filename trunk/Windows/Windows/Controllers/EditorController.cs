@@ -174,7 +174,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 		internal void AfterReset()
 		{
-			mSelectionController.InitializeFlame(mFlame);
 			mSelectionController.BuildIteratorComboBox();
 			mSelectionController.SelectIterator(mFlame.Iterators.First());
 			UpdateToolbar();

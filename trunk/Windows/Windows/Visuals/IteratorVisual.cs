@@ -84,7 +84,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			var right = fx;
 			var down = -1 * fy;
 
-			var color = ForcedColor.GetValueOrDefault(GetColor(Model));
+			var color = GetColor(Model);
 			var translucentColorHalf = Color.FromArgb(0x80, color.R, color.G, color.B);
 			var translucentColor = Color.FromArgb(0x40, color.R, color.G, color.B);
 			var translucentColorLow = Color.FromArgb(0x05, color.R, color.G, color.B);
@@ -277,8 +277,6 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			}
 		}
 
-		public Color? ForcedColor { get; set; }
-
 		public bool IsHit
 		{
 			get
@@ -286,6 +284,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 				return IsSurfaceHit || IsVertexOHit || IsVertexXHit || IsVertexYHit || IsEdgeOxHit || IsEdgeOyHit || IsEdgeXyHit;
 			}
 		}
+
 		public bool IsSurfaceHit { get; set; }
 
 		public bool IsVertexOHit { get; set; }
@@ -298,12 +297,6 @@ namespace Xyrus.Apophysis.Windows.Visuals
 
 		public bool IsActive { get; set; }
 		public bool IsSelected { get; set; }
-
-		public IteratorMatrix ActiveMatrix
-		{
-			get { return mActiveMatrix; }
-			set { mActiveMatrix = value; }
-		}
 
 		public Math.Rectangle GetBounds()
 		{
