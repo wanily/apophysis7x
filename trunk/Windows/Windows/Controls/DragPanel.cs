@@ -34,6 +34,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 			mDisplayCulture = InputController.Culture;
 
 			mInputHandler = new InputController();
+			EnabledChanged += OnEnabledChanged;
 		}
 		protected override void Dispose(bool disposing)
 		{
@@ -270,6 +271,13 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 			if (EndEdit != null)
 				EndEdit(this, new EventArgs());
+		}
+		private void OnEnabledChanged(object sender, EventArgs e)
+		{
+			if (TextBox != null)
+			{
+				TextBox.Enabled = Enabled;
+			}
 		}
 	}
 }
