@@ -251,9 +251,9 @@ namespace Xyrus.Apophysis.Models
 			if (colorSpeedAttribute != null)
 			{
 				var colorSpeed = ParseFloat(colorSpeedAttribute);
-				if (colorSpeed < 0 || colorSpeed > 1)
+				if (colorSpeed < -1 || colorSpeed > 1)
 				{
-					throw new ApophysisException("Color must be be in the range -1 - 1");
+					throw new ApophysisException("Color speed must be be in the range -1 - 1");
 				}
 
 				ColorSpeed = colorSpeed;
