@@ -23,7 +23,6 @@ namespace Xyrus.Apophysis
 				}
 
 				mSettings.EditorMoveDistance = value;
-				mSettings.Save();
 			}
 		}
 		public static double EditorRotateAngle
@@ -37,7 +36,6 @@ namespace Xyrus.Apophysis
 				}
 
 				mSettings.EditorRotateAngle = value;
-				mSettings.Save();
 			}
 		}
 		public static double EditorScaleRatio
@@ -51,7 +49,6 @@ namespace Xyrus.Apophysis
 				}
 
 				mSettings.EditorScaleRatio = value;
-				mSettings.Save();
 			}
 		}
 
@@ -61,8 +58,39 @@ namespace Xyrus.Apophysis
 			set
 			{
 				mSettings.EditorLockAxes = value;
-				mSettings.Save();
 			}
+		}
+
+		public static bool EditorShowVariationPreview
+		{
+			get { return mSettings.EditorShowVariationPreview; }
+			set
+			{
+				mSettings.EditorShowVariationPreview = value;
+			}
+		}
+
+		public static bool EditorShowRulers
+		{
+			get { return mSettings.EditorShowRulers; }
+			set
+			{
+				mSettings.EditorShowRulers = value;
+			}
+		}
+
+		public static bool EditorAutoZoom
+		{
+			get { return mSettings.EditorAutoZoom; }
+			set
+			{
+				mSettings.EditorAutoZoom = value;
+			}
+		}
+
+		public static void Serialize()
+		{
+			mSettings.Save();
 		}
 	}
 }

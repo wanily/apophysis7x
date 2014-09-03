@@ -23,6 +23,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		private IteratorVectorEditController mVectorEditController;
 
 		private Lock mInitialize = new Lock();
+		private EditorSettings mSettings;
 		private Flame mFlame;
 
 		public EditorController([NotNull] UndoController undoController)
@@ -109,13 +110,17 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		protected override void AttachView()
 		{
-			View.IteratorCanvas.Settings = new EditorSettings
+			View.IteratorCanvas.Settings = mSettings = new EditorSettings
 			{
 				MoveAmount = ApophysisSettings.EditorMoveDistance,
 				AngleSnap = ApophysisSettings.EditorRotateAngle,
 				ScaleSnap = ApophysisSettings.EditorScaleRatio,
-				LockAxes = ApophysisSettings.EditorLockAxes
+				LockAxes = ApophysisSettings.EditorLockAxes,
+				ShowVariationPreview = ApophysisSettings.EditorShowVariationPreview,
+				ZoomAutomatically = ApophysisSettings.EditorAutoZoom
 			};
+
+			View.IteratorCanvas.ShowRuler = ApophysisSettings.EditorShowRulers;
 
 			mEditorUndoController.Initialize();
 			mKeyboardController.Initialize();
@@ -135,6 +140,16 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 		protected override void DetachView()
 		{
+			ApophysisSettings.EditorLockAxes = mSettings.LockAxes;
+			ApophysisSettings.EditorMoveDistance = mSettings.MoveAmount;
+			ApophysisSettings.EditorRotateAngle = mSettings.AngleSnap;
+			ApophysisSettings.EditorScaleRatio = mSettings.ScaleSnap;
+			ApophysisSettings.EditorShowRulers = View.IteratorCanvas.ShowRuler;
+			ApophysisSettings.EditorShowVariationPreview = mSettings.ShowVariationPreview;
+			ApophysisSettings.EditorAutoZoom = mSettings.ZoomAutomatically;
+
+			ApophysisSettings.Serialize();
+
 			View.IteratorCanvas.Edit -= OnCanvasEdit;
 			View.IteratorCanvas.ActiveMatrixChanged -= OnActiveMatrixChanged;
 		}

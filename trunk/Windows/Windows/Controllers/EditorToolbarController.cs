@@ -20,6 +20,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		protected override void AttachView()
 		{
+			View.IteratorCanvas.Settings.SettingsChanged += OnSettingsChanged;
+
 			View.ResetAllIteratorsButton.Click += OnResetAllIteratorsClick;
 
 			View.AddIteratorButton.Click += OnAddIteratorClick;
@@ -33,9 +35,19 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.IteratorResetOriginButton.Click += OnResetIteratorClick;
 			View.IteratorResetAngleButton.Click += OnResetIteratorClick;
 			View.IteratorResetScaleButton.Click += OnResetIteratorClick;
+
+			View.Rotate90CcwButton.Click += OnRotateClick;
+			View.Rotate90CwButton.Click += OnRotateClick;
+			View.FlipAllHorizontalButton.Click += OnFlipClick;
+			View.FlipAllVerticalButton.Click += OnFlipClick;
+
+			View.ToggleRulersButton.Click += OnToggleRulersClick;
+			View.ToggleVariationPreviewButton.Click += OnToggleVariationPreviewClick;
 		}
 		protected override void DetachView()
 		{
+			//View.IteratorCanvas.Settings.SettingsChanged -= OnSettingsChanged;
+
 			View.ResetAllIteratorsButton.Click -= OnResetAllIteratorsClick;
 
 			View.AddIteratorButton.Click -= OnAddIteratorClick;
@@ -49,6 +61,14 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.IteratorResetOriginButton.Click -= OnResetIteratorClick;
 			View.IteratorResetAngleButton.Click -= OnResetIteratorClick;
 			View.IteratorResetScaleButton.Click -= OnResetIteratorClick;
+
+			View.Rotate90CcwButton.Click -= OnRotateClick;
+			View.Rotate90CwButton.Click -= OnRotateClick;
+			View.FlipAllHorizontalButton.Click -= OnFlipClick;
+			View.FlipAllVerticalButton.Click -= OnFlipClick;
+
+			View.ToggleRulersButton.Click -= OnToggleRulersClick;
+			View.ToggleVariationPreviewButton.Click -= OnToggleVariationPreviewClick;
 		}
 
 		private void OnResetAllIteratorsClick(object sender, EventArgs e)
@@ -92,6 +112,43 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				action();
 			}
 		}
+		private void OnRotateClick(object sender, EventArgs e)
+		{
+			double angle = 0;
+
+			if (ReferenceEquals(sender, View.Rotate90CcwButton)) angle = System.Math.PI / 2.0;
+			if (ReferenceEquals(sender, View.Rotate90CwButton)) angle = -System.Math.PI / 2.0;
+
+			View.IteratorCanvas.Commands.RotateWorld(angle);
+		}
+		private void OnFlipClick(object sender, EventArgs e)
+		{
+			Action action = null;
+
+			if (ReferenceEquals(sender, View.FlipAllHorizontalButton)) action = View.IteratorCanvas.Commands.FlipAllHorizontally;
+			if (ReferenceEquals(sender, View.FlipAllVerticalButton)) action = View.IteratorCanvas.Commands.FlipAllVertically;
+
+			if (action != null)
+			{
+				action();
+			}
+		}
+
+		private void OnToggleRulersClick(object sender, EventArgs e)
+		{
+			View.ToggleRulersButton.Checked = !View.ToggleRulersButton.Checked;
+			View.IteratorCanvas.ShowRuler = View.ToggleRulersButton.Checked;
+		}
+		private void OnToggleVariationPreviewClick(object sender, EventArgs e)
+		{
+			View.ToggleVariationPreviewButton.Checked = !View.ToggleVariationPreviewButton.Checked;
+			View.IteratorCanvas.Settings.ShowVariationPreview = View.ToggleVariationPreviewButton.Checked;
+		}
+
+		private void OnSettingsChanged(object sender, EventArgs e)
+		{
+			UpdateButtonStates();
+		}
 
 		public void UpdateButtonStates()
 		{
@@ -100,6 +157,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			View.UndoButton.Enabled = mParent.UndoController.CanUndo;
 			View.RedoButton.Enabled = mParent.UndoController.CanRedo;
+
+			View.ToggleRulersButton.Checked = View.IteratorCanvas.ShowRuler;
+			View.ToggleVariationPreviewButton.Checked = View.IteratorCanvas.Settings.ShowVariationPreview;
 		}
 	}
 }

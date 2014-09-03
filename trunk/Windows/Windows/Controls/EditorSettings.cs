@@ -8,6 +8,12 @@ namespace Xyrus.Apophysis.Windows.Controls
 	public class EditorSettings : Component
 	{
 		private EditorGridContextMenu mContextMenu;
+		private bool mZoomAutomatically;
+		private bool mShowVariationPreview;
+		private bool mLockAxes;
+		private double mMoveAmount;
+		private double mAngleSnap;
+		private double mScaleSnap;
 
 		protected override void Dispose(bool disposing)
 		{
@@ -31,12 +37,69 @@ namespace Xyrus.Apophysis.Windows.Controls
 			mContextMenu = null;
 		}
 
-		public double MoveAmount { get; set; }
-		public double AngleSnap { get; set; }
-		public double ScaleSnap { get; set; }
+		public double MoveAmount
+		{
+			get { return mMoveAmount; }
+			set
+			{
+				mMoveAmount = value;
+				RaiseSettingsChanged();
+			}
+		}
+		public double AngleSnap
+		{
+			get { return mAngleSnap; }
+			set
+			{
+				mAngleSnap = value;
+				RaiseSettingsChanged();
+			}
+		}
+		public double ScaleSnap
+		{
+			get { return mScaleSnap; }
+			set
+			{
+				mScaleSnap = value;
+				RaiseSettingsChanged();
+			}
+		}
 
-		public bool ZoomAutomatically { get; set; }
-		public bool ShowVariationPreview { get; set; }
-		public bool LockAxes { get; set; }
+		public bool ZoomAutomatically
+		{
+			get { return mZoomAutomatically; }
+			set
+			{
+				mZoomAutomatically = value;
+				RaiseSettingsChanged();
+			}
+		}
+		public bool ShowVariationPreview
+		{
+			get { return mShowVariationPreview; }
+			set
+			{
+				mShowVariationPreview = value;
+				RaiseSettingsChanged();
+			}
+		}
+		public bool LockAxes
+		{
+			get { return mLockAxes; }
+			set
+			{
+				mLockAxes = value;
+				RaiseSettingsChanged();
+			}
+		}
+
+		public event EventHandler SettingsChanged;
+		private void RaiseSettingsChanged()
+		{
+			if (SettingsChanged != null)
+			{
+				SettingsChanged(this, new EventArgs());
+			}
+		}
 	}
 }

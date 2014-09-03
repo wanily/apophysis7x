@@ -156,6 +156,9 @@ namespace Xyrus.Apophysis.Math
 		{
 			if (origin == null) throw new ArgumentNullException("origin");
 
+			if (System.Math.Abs(origin.X - X) < double.Epsilon && System.Math.Abs(origin.Y - Y) < double.Epsilon)
+				return origin.Copy();
+
 			var cos = System.Math.Cos(angle);
 			var sin = System.Math.Sin(angle);
 

@@ -32,6 +32,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 		private EventHandler mActiveMatrixChanged;
 
 		private bool mIsDisposed;
+		private bool mShowRulers;
 
 		public EditorCanvas()
 		{
@@ -195,9 +196,11 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 		public bool ShowRuler
 		{
-			get { return mRulerPainter.ShowLabels || mRulerPainter.ShowVertical || mRulerPainter.ShowHorizontal; }
+			get { return mShowRulers; }
 			set
 			{
+				mShowRulers = value;
+
 				mRulerPainter.ShowLabels = value;
 				mRulerPainter.ShowHorizontal = value;
 				mRulerPainter.ShowVertical = value;

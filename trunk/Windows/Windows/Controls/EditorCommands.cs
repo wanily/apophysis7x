@@ -352,11 +352,12 @@ namespace Xyrus.Apophysis.Windows.Controls
 			var handle = matrix.Matrix.X;
 			var axis = new Vector2(1, 0);
 
+			var delta = System.Math.Atan2(matrix.Matrix.X.Y, matrix.Matrix.X.X) - System.Math.Atan2(matrix.Matrix.Y.Y, matrix.Matrix.Y.X);
 			var angle = System.Math.Atan2(handle.Y, handle.X) - System.Math.Atan2(axis.Y, axis.X) * 180.0 / System.Math.PI;
 			var newAngle = System.Math.Round(angle / 90) * System.Math.PI / 2.0;
 
 			var x = axis.Rotate(newAngle, new Vector2()) * scale.X;
-			var y = x.Direction.Rotate(System.Math.PI / 2.0, new Vector2()) * scale.Y;
+			var y = x.Direction.Rotate(-delta, new Vector2()) * scale.Y;
 
 			matrix.Matrix.X.X = x.X;
 			matrix.Matrix.X.Y = x.Y;
@@ -402,6 +403,41 @@ namespace Xyrus.Apophysis.Windows.Controls
 				return;
 
 			ResetIteratorScale(mEditor.SelectedIterator);
+		}
+
+		public void RotateWorld(double angle)
+		{
+			var origin = new Vector2(0, 0);
+
+			mEditor.RaiseBeginEdit();
+
+			foreach (var iterator in mEditor.Iterators)
+			{
+				var matrices = new[] {iterator.PreAffine, iterator.PostAffine};
+
+				foreach (var matrix in matrices)
+				{
+					var o = matrix.Origin;
+					var x = matrix.Matrix.X + o;
+					var y = matrix.Matrix.Y + o;
+
+					o = o.Rotate(angle, origin);
+					x = x.Rotate(angle, origin);
+					y = y.Rotate(angle, origin);
+
+					matrix.Origin.X = System.Math.Round(o.X, 6);
+					matrix.Origin.Y = System.Math.Round(o.Y, 6);
+					matrix.Matrix.X.X = System.Math.Round(x.X - o.X, 6);
+					matrix.Matrix.X.Y = System.Math.Round(x.Y - o.Y, 6);
+					matrix.Matrix.Y.X = System.Math.Round(y.X - o.X, 6);
+					matrix.Matrix.Y.Y = System.Math.Round(y.Y - o.Y, 6);
+				}
+			}
+
+			mEditor.RaiseEdit();
+			mEditor.RaiseEndEdit();
+
+			mEditor.Refresh();
 		}
 	}
 }
