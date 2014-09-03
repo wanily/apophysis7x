@@ -176,12 +176,22 @@ namespace Xyrus.Apophysis.Models
 			}
 		}
 
+		private int ParseInt([NotNull] XAttribute attribute, int defaultValue = 0)
+		{
+			if (attribute == null) throw new ArgumentNullException("attribute");
+
+			int value;
+			if (!int.TryParse(attribute.Value, NumberStyles.Integer, CultureInfo.InvariantCulture, out value))
+				value = defaultValue;
+
+			return value;
+		}
 		private double ParseFloat([NotNull] XAttribute attribute, double defaultValue = 0)
 		{
 			if (attribute == null) throw new ArgumentNullException("attribute");
 
 			double value;
-			if (!double.TryParse(attribute.Value, NumberStyles.Number, CultureInfo.InvariantCulture, out value))
+			if (!double.TryParse(attribute.Value, NumberStyles.Float, CultureInfo.InvariantCulture, out value))
 				value = defaultValue;
 
 			return value;
@@ -211,30 +221,8 @@ namespace Xyrus.Apophysis.Models
 			return values;
 		}
 
-		public void ReadXml([NotNull] XElement element)
+		private void ReadCommonProperties(XElement element)
 		{
-			if (element == null) throw new ArgumentNullException("element");
-
-			if ("xform" != element.Name.ToString().ToLower())
-			{
-				throw new ApophysisException("Expected XML node \"xform\" but received \"" + element.Name + "\"");
-			}
-
-			var nameAttribute = element.Attribute(XName.Get("name"));
-			Name = nameAttribute == null ? null : nameAttribute.Value;
-
-			var weightAttribute = element.Attribute(XName.Get("weight"));
-			if (weightAttribute != null)
-			{
-				var weight = ParseFloat(weightAttribute, 0.5);
-				if (weight < double.Epsilon)
-				{
-					throw new ApophysisException("Weight must not be less or equal to 0");
-				}
-
-				Weight = weight;
-			}
-
 			var colorAttribute = element.Attribute(XName.Get("color"));
 			if (colorAttribute != null)
 			{
@@ -245,30 +233,6 @@ namespace Xyrus.Apophysis.Models
 				}
 
 				Color = color;
-			}
-
-			var colorSpeedAttribute = element.Attribute(XName.Get("symmetry"));
-			if (colorSpeedAttribute != null)
-			{
-				var colorSpeed = ParseFloat(colorSpeedAttribute);
-				if (colorSpeed < 0 || colorSpeed > 1)
-				{
-					throw new ApophysisException("Color must be be in the range -1 - 1");
-				}
-
-				ColorSpeed = colorSpeed;
-			}
-
-			var opacityAttribute = element.Attribute(XName.Get("opacity"));
-			if (opacityAttribute != null)
-			{
-				var opacity = ParseFloat(opacityAttribute);
-				if (opacity < 0 || opacity > 1)
-				{
-					throw new ApophysisException("Opacity must be be in the range 0 - 1");
-				}
-
-				Opacity = opacity;
 			}
 
 			var directColorAttribute = element.Attribute(XName.Get("var_color"));
@@ -310,6 +274,70 @@ namespace Xyrus.Apophysis.Models
 			}
 		}
 
+		public void ReadXml([NotNull] XElement element)
+		{
+			if (element == null) throw new ArgumentNullException("element");
+
+			if ("xform" != element.Name.ToString().ToLower())
+			{
+				throw new ApophysisException("Expected XML node \"xform\" but received \"" + element.Name + "\"");
+			}
+
+			var nameAttribute = element.Attribute(XName.Get("name"));
+			Name = nameAttribute == null ? null : nameAttribute.Value;
+
+			var weightAttribute = element.Attribute(XName.Get("weight"));
+			if (weightAttribute != null)
+			{
+				var weight = ParseFloat(weightAttribute, 0.5);
+				if (weight < double.Epsilon)
+				{
+					throw new ApophysisException("Weight must not be less or equal to 0");
+				}
+
+				Weight = weight;
+			}
+
+			var colorSpeedAttribute = element.Attribute(XName.Get("symmetry"));
+			if (colorSpeedAttribute != null)
+			{
+				var colorSpeed = ParseFloat(colorSpeedAttribute);
+				if (colorSpeed < 0 || colorSpeed > 1)
+				{
+					throw new ApophysisException("Color must be be in the range -1 - 1");
+				}
+
+				ColorSpeed = colorSpeed;
+			}
+
+			var opacityAttribute = element.Attribute(XName.Get("opacity"));
+			if (opacityAttribute != null)
+			{
+				var opacity = ParseFloat(opacityAttribute);
+				if (opacity < 0 || opacity > 1)
+				{
+					throw new ApophysisException("Opacity must be be in the range 0 - 1");
+				}
+
+				Opacity = opacity;
+			}
+
+			ReadCommonProperties(element);
+		}
+		public void ReadXmlFinal([NotNull] XElement element, ref bool isEnabled)
+		{
+			if (element == null) throw new ArgumentNullException("element");
+
+			ReadCommonProperties(element);
+
+			var enabledAttribute = element.Attribute(XName.Get("opacity"));
+			if (enabledAttribute != null)
+			{
+				var enabled = ParseInt(enabledAttribute, isEnabled?1:0);
+				isEnabled = enabled != 0;
+			}
+		}
+
 		public bool IsEqual([NotNull] Iterator iterator)
 		{
 			if (iterator == null) throw new ArgumentNullException("iterator");
@@ -340,5 +368,7 @@ namespace Xyrus.Apophysis.Models
 
 			return true;
 		}
+
+		
 	}
 }

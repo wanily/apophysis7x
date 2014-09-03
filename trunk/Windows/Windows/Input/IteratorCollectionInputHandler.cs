@@ -22,6 +22,7 @@ namespace Xyrus.Apophysis.Windows.Input
 
 		private IteratorCollectionVisual mVisualCollection;
 		private readonly List<IteratorInputHandler> mHandlers;
+		private IteratorInputHandler mFinalHandler;
 		private Canvas mCanvas;
 		private IteratorMatrix mActiveMatrix;
 
@@ -37,6 +38,7 @@ namespace Xyrus.Apophysis.Windows.Input
 			mSettings = mDefaultSettings;
 
 			mVisualCollection.ContentChanged += OnCollectionChanged;
+			mVisualCollection.FinalChanged += OnFinalChanged;
 
 			mHandlers = new List<IteratorInputHandler>();
 		}
@@ -45,8 +47,8 @@ namespace Xyrus.Apophysis.Windows.Input
 			if (mVisualCollection != null)
 			{
 				mVisualCollection.ContentChanged -= OnCollectionChanged;
+				mVisualCollection.FinalChanged -= OnFinalChanged;
 
-				//disposed somewhere else
 				mVisualCollection = null;
 			}
 
@@ -62,6 +64,11 @@ namespace Xyrus.Apophysis.Windows.Input
 			{
 				mActiveMatrix = value;
 				mVisualCollection.ActiveMatrix = value;
+
+				if (mFinalHandler != null)
+				{
+					mFinalHandler.ActiveMatrix = value;
+				}
 
 				if (mSettings.ZoomAutomatically)
 				{
@@ -80,11 +87,23 @@ namespace Xyrus.Apophysis.Windows.Input
 					visual.IsSelected = false;
 				}
 
+				if (mVisualCollection.FinalVisual != null)
+				{
+					mVisualCollection.FinalVisual.IsSelected = false;
+				}
+
 				var newVisual = mVisualCollection.FirstOrDefault(x => ReferenceEquals(x.Model, value));
 
 				if (newVisual != null)
 				{
 					newVisual.IsSelected = true;
+				}
+				else
+				{
+					if (mVisualCollection.Collection.UseFinalIterator && mVisualCollection.FinalVisual != null && ReferenceEquals(value, mVisualCollection.FinalVisual.Model))
+					{
+						mVisualCollection.FinalVisual.IsSelected = true;
+					}
 				}
 
 				InvalidateControl();
@@ -102,6 +121,15 @@ namespace Xyrus.Apophysis.Windows.Input
 			}
 		}
 
+		private void OnFinalChanged(object sender, EventArgs eventArgs)
+		{
+			if (mVisualCollection == null)
+				return;
+
+			mFinalHandler = mVisualCollection.FinalVisual == null
+				? null
+				: new IteratorInputHandler(AttachedControl, mVisualCollection.FinalVisual, mCanvas, mSettings ?? mDefaultSettings, mActiveMatrix);
+		}
 		private void OnCollectionChanged(object sender, EventArgs eventArgs)
 		{
 			if (mHandlers == null || mVisualCollection == null)
@@ -150,16 +178,28 @@ namespace Xyrus.Apophysis.Windows.Input
 			if (key == Keys.PageDown || key == Keys.PageUp)
 			{
 				var selected = mVisualCollection.Where(x => x.IsSelected).OrderByDescending(x => x.Model.Index).FirstOrDefault();
-
 				if (selected == null)
 				{
-					mVisualCollection.First().IsSelected = true;
-					InvalidateControl();
-					return true;
+					if (mVisualCollection.FinalVisual != null && mVisualCollection.Collection.UseFinalIterator &&
+					    mVisualCollection.FinalVisual.IsSelected)
+					{
+						selected = mVisualCollection.FinalVisual;
+					}
+					else
+					{
+						mVisualCollection.First().IsSelected = true;
+						InvalidateControl();
+						return true;
+					}
 				}
 
-				var indexDictionary = mVisualCollection.Select(x => x.Model).ToDictionary(x => x.Index);
-				var newIndex = selected.Model.Index + (key == Keys.PageDown ? 1 : -1);
+				var indexDictionary = mVisualCollection.Select(x => x).ToDictionary(x => x.Model.Index);
+				var newIndex = (selected.Model.Index < 0 ? indexDictionary.Keys.Max() + 1 : selected.Model.Index) + (key == Keys.PageDown ? 1 : -1);
+
+				if (mVisualCollection.FinalVisual != null && mVisualCollection.Collection.UseFinalIterator)
+				{
+					indexDictionary.Add(indexDictionary.Keys.Max() + 1, mVisualCollection.FinalVisual);
+				}
 
 				if (indexDictionary.ContainsKey(newIndex))
 				{
@@ -168,7 +208,7 @@ namespace Xyrus.Apophysis.Windows.Input
 						visual.IsSelected = false;
 					}
 
-					var newVisual = mVisualCollection.First(x => x.Model.Index == newIndex);
+					var newVisual = indexDictionary[newIndex];
 					newVisual.IsSelected = true;
 
 					if (mSelectionChanged != null)
@@ -180,6 +220,11 @@ namespace Xyrus.Apophysis.Windows.Input
 			}
 
 			RaiseBeginEdit();
+			if (mFinalHandler != null)
+			{
+				mFinalHandler.HandleKeyPress(key, modifiers);
+			}
+
 			foreach (var handler in mHandlers)
 			{
 				if (handler.HandleKeyPress(key, modifiers))
@@ -200,6 +245,21 @@ namespace Xyrus.Apophysis.Windows.Input
 
 			mVisualCollection.CursorPosition = mCanvas.CanvasToWorld(cursor);
 
+			if (mFinalHandler != null && mVisualCollection.Collection.UseFinalIterator && mFinalHandler.IsDragging)
+			{
+				if (mFinalHandler.HandleMouseMove(cursor, button))
+				{
+					SetOperation(mFinalHandler);
+					if (mEdit != null)
+					{
+						mEdit(this, new EventArgs());
+					}
+					return true;
+				}
+
+				return true;
+			}
+
 			if (mHandlers.Any(x => x.IsDragging))
 			{
 				foreach (var handler in mHandlers.Where(x => x.IsDragging))
@@ -218,9 +278,23 @@ namespace Xyrus.Apophysis.Windows.Input
 				return true;
 			}
 
+			if (mFinalHandler != null)
+			{
+				mFinalHandler.InvalidateHitTest();
+			}
+
 			foreach (var handler in mHandlers)
 			{
 				handler.InvalidateHitTest();
+			}
+
+			if (mFinalHandler != null && mVisualCollection.Collection.UseFinalIterator)
+			{
+				if (mFinalHandler.HandleMouseMove(cursor, button))
+				{
+					mVisualCollection.CurrentOperation = new MouseOverOperation(mFinalHandler.Model);
+					return true;
+				}
 			}
 
 			foreach (var handler in mHandlers)
@@ -240,6 +314,14 @@ namespace Xyrus.Apophysis.Windows.Input
 			if (mHandlers == null)
 				return false;
 
+			if (mFinalHandler != null && mVisualCollection.Collection.UseFinalIterator)
+			{
+				if (mFinalHandler.HandleMouseWheel(delta, button))
+				{
+					return true;
+				}
+			}
+
 			foreach (var handler in mHandlers)
 			{
 				if (handler.HandleMouseWheel(delta, button))
@@ -254,7 +336,14 @@ namespace Xyrus.Apophysis.Windows.Input
 			if (mHandlers == null)
 				return false;
 
-			foreach (var handler in mHandlers)
+			var prepend = new List<IteratorInputHandler>();
+
+			if (mFinalHandler != null && mVisualCollection.Collection.UseFinalIterator)
+			{
+				prepend.Add(mFinalHandler);
+			}
+
+			foreach (var handler in prepend.Concat(mHandlers))
 			{
 				if (handler.HandleMouseDown(cursor))
 				{
@@ -284,6 +373,14 @@ namespace Xyrus.Apophysis.Windows.Input
 			SetOperation(null);
 			RaiseEndEdit();
 
+			if (mFinalHandler != null && mVisualCollection.Collection.UseFinalIterator)
+			{
+				if (mFinalHandler.HandleMouseUp())
+				{
+					return true;
+				}
+			}
+
 			foreach (var handler in mHandlers)
 			{
 				if (handler.HandleMouseUp())
@@ -300,6 +397,14 @@ namespace Xyrus.Apophysis.Windows.Input
 		{
 			if (mHandlers == null)
 				return false;
+
+			if (mFinalHandler != null && mVisualCollection.Collection.UseFinalIterator)
+			{
+				if (mFinalHandler.HandleMouseDoubleClick())
+				{
+					return true;
+				}
+			}
 
 			foreach (var handler in mHandlers)
 			{
@@ -363,6 +468,14 @@ namespace Xyrus.Apophysis.Windows.Input
 
 		public Iterator HitTestIterator(Vector2 cursor)
 		{
+			if (mFinalHandler != null)
+			{
+				if (mFinalHandler.PerformHitTest(cursor))
+				{
+					return mFinalHandler.Model;
+				}
+			}
+
 			foreach (var handler in mHandlers)
 			{
 				if (handler.PerformHitTest(cursor))
@@ -375,13 +488,26 @@ namespace Xyrus.Apophysis.Windows.Input
 		{
 			var visual = mVisualCollection == null ? null : mVisualCollection.FirstOrDefault(x => x.IsSelected);
 			if (visual == null)
+			{
+				if (mVisualCollection != null && mVisualCollection.FinalVisual != null)
+				{
+					if (mVisualCollection.FinalVisual.IsSelected)
+					{
+						return mVisualCollection.FinalVisual.Model;
+					}
+				}
 				return null;
+			}
 
 			return visual.Model;
 		}
 		public void ZoomOptimally()
 		{
-			var bounds = mVisualCollection.Select(x => x.GetBounds()).ToList();
+			var bounds = mVisualCollection
+				.Concat(mVisualCollection.FinalVisual != null && mVisualCollection.Collection.UseFinalIterator 
+					? new[] { mVisualCollection.FinalVisual } 
+					: new IteratorVisual[0])
+				.Select(x => x.GetBounds()).ToList();
 
 			var corner1 = new Vector2(bounds.Select(x => x.TopLeft.X).Min(), bounds.Select(x => x.TopLeft.Y).Min());
 			var corner2 = new Vector2(bounds.Select(x => x.BottomRight.X).Max(), bounds.Select(x => x.BottomRight.Y).Max());

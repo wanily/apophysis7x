@@ -524,6 +524,12 @@ namespace Xyrus.Apophysis.Windows.Input
 			get { return mVisual == null ? null : mVisual.Model; }
 		}
 
+		public IteratorMatrix ActiveMatrix
+		{
+			get { return mActiveMatrix; }
+			set { mActiveMatrix = value; }
+		}
+
 		public InputOperation GetCurrentOperation()
 		{
 			return mOperation;

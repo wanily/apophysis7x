@@ -11,12 +11,17 @@ namespace Xyrus.Apophysis.Models
 	{
 		private readonly Flame mFlame;
 		private EventHandler mContentChanged;
+		private Iterator mFinalIterator;
+		private bool mUseFinalIterator;
 
 		public IteratorCollection([NotNull] Flame hostingFlame) : base(new List<Iterator>())
 		{
 			if (hostingFlame == null) throw new ArgumentNullException("hostingFlame");
 
 			mFlame = hostingFlame;
+			mFinalIterator = new Iterator(mFlame);
+			mUseFinalIterator = false;
+
 			Items.Add(new Iterator(mFlame));
 		}
 
@@ -78,6 +83,22 @@ namespace Xyrus.Apophysis.Models
 			RaiseContentChanged();
 		}
 
+		[NotNull]
+		public Iterator FinalIterator
+		{
+			get { return mFinalIterator; }
+			set
+			{
+				if (value == null) throw new ArgumentNullException("value");
+				mFinalIterator = value;
+			}
+		}
+		public bool UseFinalIterator
+		{
+			get { return mUseFinalIterator; }
+			set { mUseFinalIterator = value; }
+		}
+
 		public event EventHandler ContentChanged
 		{
 			add { mContentChanged += value; }
@@ -94,6 +115,9 @@ namespace Xyrus.Apophysis.Models
 			{
 				copy.Items.Add(item.Copy(flame));
 			}
+
+			copy.mFinalIterator = mFinalIterator.Copy();
+			copy.mUseFinalIterator = mUseFinalIterator;
 
 			return copy;
 		}
@@ -127,6 +151,25 @@ namespace Xyrus.Apophysis.Models
 				counter++;
 			}
 
+			var finalIterator = new Iterator(mFlame);
+			var finalIteratorElement = array.FirstOrDefault(x => x.Name.ToString().ToLower() == "finalxform");
+			var finalIteratorEnabled = true;
+
+			if (finalIteratorElement != null)
+			{
+				try
+				{
+					finalIterator.ReadXmlFinal(finalIteratorElement, ref finalIteratorEnabled);
+				}
+				catch (ApophysisException exception)
+				{
+					throw new ApophysisException("Final transform: " + exception.Message, exception);
+				}
+			}
+
+			mFinalIterator = finalIterator;
+			mUseFinalIterator = finalIteratorEnabled;
+			
 			Items.Clear();
 			foreach (var item in newCollection)
 			{
@@ -141,6 +184,12 @@ namespace Xyrus.Apophysis.Models
 			if (iterators == null) throw new ArgumentNullException("iterators");
 
 			if (!Equals(iterators.Count, Count))
+				return false;
+
+			if (!Equals(iterators.mUseFinalIterator, mUseFinalIterator))
+				return false;
+
+			if (!iterators.mFinalIterator.IsEqual(mFinalIterator))
 				return false;
 
 			for (int i = 0; i < iterators.Count; i++)

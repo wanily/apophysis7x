@@ -108,10 +108,12 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mIteratorPropertyPanel = new System.Windows.Forms.Panel();
 			this.IteratorWeightTextBox = new System.Windows.Forms.TextBox();
 			this.IteratorNameTextBox = new System.Windows.Forms.TextBox();
-			this.mIteratorNameLabel = new System.Windows.Forms.Label();
+			this.IteratorNameLabel = new System.Windows.Forms.Label();
 			this.IteratorSelectionComboBox = new System.Windows.Forms.ComboBox();
 			this.mIteratorSelectLabel = new System.Windows.Forms.Label();
 			this.mToolbarImages = new System.Windows.Forms.ImageList(this.components);
+			this.TogglePostMatrixButton = new System.Windows.Forms.ToolStripButton();
+			this.ToggleUseFinalIteratorButton = new System.Windows.Forms.ToolStripButton();
 			this.IteratorCanvas = new Xyrus.Apophysis.Windows.Controls.EditorCanvas();
 			this.mSettings = new Xyrus.Apophysis.Windows.Controls.EditorSettings();
 			this.IteratorDirectColorDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
@@ -119,7 +121,6 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorColorSpeedDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.IteratorColorDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.IteratorWeightDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
-			this.TogglePostMatrixButton = new System.Windows.Forms.ToolStripButton();
 			this.mRootSplitter.Panel1.SuspendLayout();
 			this.mRootSplitter.Panel2.SuspendLayout();
 			this.mRootSplitter.SuspendLayout();
@@ -189,7 +190,8 @@ namespace Xyrus.Apophysis.Windows.Forms
             this.ToggleRulersButton,
             this.ToggleVariationPreviewButton,
             this.mToolbarSeparator,
-            this.TogglePostMatrixButton});
+            this.TogglePostMatrixButton,
+            this.ToggleUseFinalIteratorButton});
 			this.mToolbar.Location = new System.Drawing.Point(0, 0);
 			this.mToolbar.Name = "mToolbar";
 			this.mToolbar.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -1109,7 +1111,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mIteratorPropertyPanel.Controls.Add(this.IteratorWeightTextBox);
 			this.mIteratorPropertyPanel.Controls.Add(this.IteratorWeightDragPanel);
 			this.mIteratorPropertyPanel.Controls.Add(this.IteratorNameTextBox);
-			this.mIteratorPropertyPanel.Controls.Add(this.mIteratorNameLabel);
+			this.mIteratorPropertyPanel.Controls.Add(this.IteratorNameLabel);
 			this.mIteratorPropertyPanel.Controls.Add(this.IteratorSelectionComboBox);
 			this.mIteratorPropertyPanel.Controls.Add(this.mIteratorSelectLabel);
 			this.mIteratorPropertyPanel.Dock = System.Windows.Forms.DockStyle.Top;
@@ -1137,18 +1139,18 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorNameTextBox.Size = new System.Drawing.Size(168, 20);
 			this.IteratorNameTextBox.TabIndex = 3;
 			// 
-			// mIteratorNameLabel
+			// IteratorNameLabel
 			// 
-			this.mIteratorNameLabel.BackColor = System.Drawing.SystemColors.Control;
-			this.mIteratorNameLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.mIteratorNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.mIteratorNameLabel.ForeColor = System.Drawing.SystemColors.WindowText;
-			this.mIteratorNameLabel.Location = new System.Drawing.Point(10, 34);
-			this.mIteratorNameLabel.Name = "mIteratorNameLabel";
-			this.mIteratorNameLabel.Size = new System.Drawing.Size(110, 21);
-			this.mIteratorNameLabel.TabIndex = 2;
-			this.mIteratorNameLabel.Text = "Name:";
-			this.mIteratorNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.IteratorNameLabel.BackColor = System.Drawing.SystemColors.Control;
+			this.IteratorNameLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.IteratorNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.IteratorNameLabel.ForeColor = System.Drawing.SystemColors.WindowText;
+			this.IteratorNameLabel.Location = new System.Drawing.Point(10, 34);
+			this.IteratorNameLabel.Name = "IteratorNameLabel";
+			this.IteratorNameLabel.Size = new System.Drawing.Size(110, 21);
+			this.IteratorNameLabel.TabIndex = 2;
+			this.IteratorNameLabel.Text = "Name:";
+			this.IteratorNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// IteratorSelectionComboBox
 			// 
@@ -1208,6 +1210,24 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mToolbarImages.Images.SetKeyName(22, "ResetIteratorAngle.bmp");
 			this.mToolbarImages.Images.SetKeyName(23, "ResetIteratorScale.bmp");
 			this.mToolbarImages.Images.SetKeyName(24, "ToggleAutoZoom.bmp");
+			// 
+			// TogglePostMatrixButton
+			// 
+			this.TogglePostMatrixButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.TogglePostMatrixButton.Image = ((System.Drawing.Image)(resources.GetObject("TogglePostMatrixButton.Image")));
+			this.TogglePostMatrixButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.TogglePostMatrixButton.Name = "TogglePostMatrixButton";
+			this.TogglePostMatrixButton.Size = new System.Drawing.Size(23, 22);
+			this.TogglePostMatrixButton.Text = "Enable / edit post-transform";
+			// 
+			// ToggleUseFinalIteratorButton
+			// 
+			this.ToggleUseFinalIteratorButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.ToggleUseFinalIteratorButton.Image = ((System.Drawing.Image)(resources.GetObject("ToggleUseFinalIteratorButton.Image")));
+			this.ToggleUseFinalIteratorButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.ToggleUseFinalIteratorButton.Name = "ToggleUseFinalIteratorButton";
+			this.ToggleUseFinalIteratorButton.Size = new System.Drawing.Size(23, 22);
+			this.ToggleUseFinalIteratorButton.Text = "Enable final transform";
 			// 
 			// IteratorCanvas
 			// 
@@ -1332,15 +1352,6 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorWeightDragPanel.TextBox = this.IteratorWeightTextBox;
 			this.IteratorWeightDragPanel.Value = 0.5D;
 			// 
-			// TogglePostMatrixButton
-			// 
-			this.TogglePostMatrixButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.TogglePostMatrixButton.Image = ((System.Drawing.Image)(resources.GetObject("TogglePostMatrixButton.Image")));
-			this.TogglePostMatrixButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.TogglePostMatrixButton.Name = "TogglePostMatrixButton";
-			this.TogglePostMatrixButton.Size = new System.Drawing.Size(23, 22);
-			this.TogglePostMatrixButton.Text = "Enable / edit post-transform";
-			// 
 			// Editor
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1390,7 +1401,6 @@ namespace Xyrus.Apophysis.Windows.Forms
 		private System.Windows.Forms.Panel mPreviewPanel;
 		private System.Windows.Forms.Panel mIteratorPropertyPanel;
 		private System.Windows.Forms.Label mIteratorSelectLabel;
-		private System.Windows.Forms.Label mIteratorNameLabel;
 		private System.Windows.Forms.Label mPictureBevel;
 		public System.Windows.Forms.ComboBox IteratorSelectionComboBox;
 		public System.Windows.Forms.TextBox IteratorNameTextBox;
@@ -1485,6 +1495,8 @@ namespace Xyrus.Apophysis.Windows.Forms
 		public System.Windows.Forms.ToolStripButton ToggleRulersButton;
 		public System.Windows.Forms.ToolStripButton ToggleVariationPreviewButton;
 		public System.Windows.Forms.ToolStripButton TogglePostMatrixButton;
+		public System.Windows.Forms.ToolStripButton ToggleUseFinalIteratorButton;
+		public System.Windows.Forms.Label IteratorNameLabel;
 	}
 }
 
