@@ -120,6 +120,7 @@
     <Compile Include="Windows\Input\MoveOperation.cs" />
     <Compile Include="Windows\Input\NativeHookManager.cs" />
     <Compile Include="Windows\Input\RotateOperation.cs" />
+    <Compile Include="Windows\Input\RotationAxis.cs" />
     <Compile Include="Windows\Input\ScaleOperation.cs" />
     <Compile Include="Windows\Common\CanvasSnapBehavior.cs" />
     <Compile Include="Models\Iterator.cs" />

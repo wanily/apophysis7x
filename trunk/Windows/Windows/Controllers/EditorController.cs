@@ -113,7 +113,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			{
 				MoveAmount = ApophysisSettings.EditorMoveDistance,
 				AngleSnap = ApophysisSettings.EditorRotateAngle,
-				ScaleSnap = ApophysisSettings.EditorScaleRatio
+				ScaleSnap = ApophysisSettings.EditorScaleRatio,
+				LockAxes = ApophysisSettings.EditorLockAxes
 			};
 
 			mEditorUndoController.Initialize();

@@ -205,25 +205,31 @@ namespace Xyrus.Apophysis.Windows.Input
 						Matrix.X.X = cos1 * primary.X - sin1 * primary.Y;
 						Matrix.X.Y = sin1 * primary.X + cos1 * primary.Y;
 
-						var newNormal = Matrix.X.Direction;
-						var length = Matrix.Y.Length;
+						if (mSettings.LockAxes)
+						{
+							var newNormal = Matrix.X.Direction;
+							var length = Matrix.Y.Length;
 
-						Matrix.Y.X = length * (cos0 * newNormal.X - sin0 * newNormal.Y);
-						Matrix.Y.Y = length * (sin0 * newNormal.X + cos0 * newNormal.Y);
+							Matrix.Y.X = length * (cos0 * newNormal.X - sin0 * newNormal.Y);
+							Matrix.Y.Y = length * (sin0 * newNormal.X + cos0 * newNormal.Y);
+						}
 					}
 					else if (hitTest == HitTestResult.Oy)
 					{
 						Matrix.Y.X = cos1 * primary.X - sin1 * primary.Y;
 						Matrix.Y.Y = sin1 * primary.X + cos1 * primary.Y;
 
-						var newNormal = Matrix.Y.Direction;
-						var length = Matrix.X.Length;
+						if (mSettings.LockAxes)
+						{
+							var newNormal = Matrix.Y.Direction;
+							var length = Matrix.X.Length;
 
-						Matrix.X.X = length * (cos0 * newNormal.X - sin0 * newNormal.Y);
-						Matrix.X.Y = length * (sin0 * newNormal.X + cos0 * newNormal.Y);
+							Matrix.X.X = length * (cos0 * newNormal.X - sin0 * newNormal.Y);
+							Matrix.X.Y = length * (sin0 * newNormal.X + cos0 * newNormal.Y);
+						}
 					}
 
-					mOperation = new RotateOperation(Model, angleBetweenOxAndDelta);
+					mOperation = new RotateOperation(Model, angleBetweenOxAndDelta, HitTestResult.Ox == hitTest ? RotationAxis.X : RotationAxis.Y);
 
 					break;
 
@@ -434,7 +440,7 @@ namespace Xyrus.Apophysis.Windows.Input
 						break;
 					case HitTestResult.Ox:
 					case HitTestResult.Oy:
-						mOperation = new RotateOperation(mVisual.Model, 2.0 * System.Math.PI);
+						mOperation = new RotateOperation(mVisual.Model, 2.0 * System.Math.PI, hitTest == HitTestResult.Ox ? RotationAxis.X : RotationAxis.Y);
 						break;
 					case HitTestResult.Xy:
 						mOperation = new ScaleOperation(mVisual.Model, 1.0);

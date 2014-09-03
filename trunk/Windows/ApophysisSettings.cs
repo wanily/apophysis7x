@@ -54,5 +54,15 @@ namespace Xyrus.Apophysis
 				mSettings.Save();
 			}
 		}
+
+		public static bool EditorLockAxes
+		{
+			get { return mSettings.EditorLockAxes; }
+			set
+			{
+				mSettings.EditorLockAxes = value;
+				mSettings.Save();
+			}
+		}
 	}
 }

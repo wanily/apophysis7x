@@ -11,5 +11,8 @@
     <Setting Name="EditorScaleRatio" Type="System.Double" Scope="User">
       <Value Profile="(Default)">125</Value>
     </Setting>
+    <Setting Name="EditorLockAxes" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

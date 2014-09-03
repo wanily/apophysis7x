@@ -145,7 +145,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 					var origin = GetOrigin(rotate.Iterator);
 
 					var originCanvas = Canvas.WorldToCanvas(origin);
-					var x = Canvas.WorldToCanvas(matrix.X + origin);
+					var x = Canvas.WorldToCanvas((rotate.Axis == RotationAxis.X ? matrix.X : matrix.Y) + origin);
 
 					var farRadius = System.Math.Max(Canvas.Size.X, Canvas.Size.Y);
 					var radius = System.Math.Max(matrix.X.Length, matrix.Y.Length) * (Canvas.Ratio.X + Canvas.Ratio.Y) * 0.5;

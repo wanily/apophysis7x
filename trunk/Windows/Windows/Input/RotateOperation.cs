@@ -5,15 +5,21 @@ namespace Xyrus.Apophysis.Windows.Input
 {
 	class RotateOperation : InputOperation
 	{
-		public RotateOperation([NotNull] Iterator iterator, double rotationAngle)
+		public RotateOperation([NotNull] Iterator iterator, double rotationAngle, RotationAxis axis)
 			: base(iterator)
 		{
 			RotationAngle = rotationAngle;
+			Axis = axis;
 		}
 
 		public double RotationAngle
 		{
 			get;
+			private set;
+		}
+		public RotationAxis Axis
+		{
+			get; 
 			private set;
 		}
 
