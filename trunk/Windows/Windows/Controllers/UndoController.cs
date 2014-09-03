@@ -30,8 +30,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mCurrent = null;
 		}
 
-		public void Initialize(Flame flame)
+		public void Initialize([NotNull] Flame flame)
 		{
+			if (flame == null) throw new ArgumentNullException("flame");
 			if (mInitialized)
 				return;
 
@@ -40,8 +41,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mRedoStack = new Stack<Flame>();
 			mInitialized = true;
 		}
-		public void CommitChange(Flame flame)
+		public void CommitChange([NotNull] Flame flame)
 		{
+			if (flame == null) throw new ArgumentNullException("flame");
+			
 			var old = mCurrent.Copy();
 
 			mCurrent = flame.Copy();
@@ -67,7 +70,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			}
 
 			var pop = mUndoStack.Pop();
-			mRedoStack.Push(pop);
+			mRedoStack.Push(mCurrent);
+			mCurrent = pop.Copy();
 			RaiseStackChanged();
 			return pop;
 		}
@@ -79,7 +83,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			}
 
 			var pop = mRedoStack.Pop();
-			mUndoStack.Push(pop);
+			mUndoStack.Push(mCurrent);
+			mCurrent = pop.Copy();
 			RaiseStackChanged();
 			return pop;
 		}
