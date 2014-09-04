@@ -141,18 +141,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 			get { return mIteratorPainter.Collection; }
 			set
 			{
-				if (mIteratorPainter.Collection != null)
-				{
-					mIteratorPainter.Collection.ContentChanged -= OnCollectionChanged;
-				}
-
 				mIteratorPainter.Collection = value;
-
-				if (mIteratorPainter.Collection != null)
-				{
-					mIteratorPainter.Collection.ContentChanged += OnCollectionChanged;
-					OnCollectionChanged(mIteratorPainter.Collection, new EventArgs());
-				}
 			}
 		}
 
@@ -376,13 +365,6 @@ namespace Xyrus.Apophysis.Windows.Controls
 		{
 			mInteraction.TriggerKeyPress(keyData);
 			return base.ProcessCmdKey(ref msg, keyData);
-		}
-		private void OnCollectionChanged(object sender, EventArgs e)
-		{
-			if (mIteratorContextMenu != null)
-			{
-				mIteratorContextMenu.CanRemoveIterator = Iterators != null && Iterators.Count > 1;
-			}
 		}
 	}
 }

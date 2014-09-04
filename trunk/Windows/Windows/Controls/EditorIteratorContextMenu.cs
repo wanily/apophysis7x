@@ -55,7 +55,11 @@ namespace Xyrus.Apophysis.Windows.Controls
 		public Iterator Iterator
 		{
 			get { return mIterator; }
-			set { mIterator = value; }
+			set
+			{
+				mIterator = value;
+				CanRemoveIterator = value != null && mEditor.Iterators.CanRemove(value.GroupIndex);
+			}
 		}
 
 		public bool CanRemoveIterator

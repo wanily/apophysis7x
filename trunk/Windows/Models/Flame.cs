@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 using System.Xml.Linq;
 
 namespace Xyrus.Apophysis.Models
@@ -69,7 +70,10 @@ namespace Xyrus.Apophysis.Models
 			var nameAttribute = element.Attribute(XName.Get("name"));
 			Name = nameAttribute == null ? null : nameAttribute.Value;
 
-			Iterators.ReadXml(element.Descendants(XName.Get("xform")));
+			var iterators = element.Descendants(XName.Get("xform"));
+			iterators = iterators.Concat(element.Descendants(XName.Get("finalxform")));
+
+			Iterators.ReadXml(iterators);
 		}
 
 		public bool IsEqual([NotNull] Flame flame)

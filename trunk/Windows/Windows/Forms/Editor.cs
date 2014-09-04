@@ -55,9 +55,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 					new Point(e.Bounds.Left + e.Bounds.Height - 2, e.Bounds.Top + 2)
 				};
 
-			var color = e.Index < 0 || e.Index >= IteratorCanvas.Iterators.Count ?
-				Color.White :
-				IteratorVisual.GetColor(IteratorCanvas.Iterators[e.Index]);
+			var color = e.Index < 0 || e.Index >= IteratorCanvas.Iterators.Count ? Color.White : IteratorCanvas.Iterators[e.Index].GetColor();
 
 			using (var backgroundBrush = new SolidBrush(IteratorSelectionComboBox.BackColor))
 			using (var foregroundBrush = new SolidBrush(IteratorSelectionComboBox.ForeColor))

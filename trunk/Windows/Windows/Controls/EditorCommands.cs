@@ -32,7 +32,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 				mEditor.ZoomOptimally();
 			}
 
-			mEditor.SelectedIterator = mEditor.Iterators.Last();
+			mEditor.SelectedIterator = mEditor.Iterators.Last(x => Equals(x.GroupIndex, mEditor.SelectedIterator.GroupIndex));
 
 			mEditor.RaiseEdit();
 			mEditor.RaiseEndEdit();
@@ -52,7 +52,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 				mEditor.ZoomOptimally();
 			}
 
-			mEditor.SelectedIterator = mEditor.Iterators.Last();
+			mEditor.SelectedIterator = mEditor.Iterators.Last(x => Equals(x.GroupIndex, iterator.GroupIndex));
 
 			mEditor.RaiseEdit();
 			mEditor.RaiseEndEdit();
@@ -70,10 +70,11 @@ namespace Xyrus.Apophysis.Windows.Controls
 		public void RemoveIterator([NotNull] Iterator iterator)
 		{
 			if (iterator == null) throw new ArgumentNullException("iterator");
-			if (mEditor.Iterators.Count <= 1)
+			if (!mEditor.Iterators.CanRemove(iterator.GroupIndex))
 				return;
 
-			var index = mEditor.Iterators.IndexOf(iterator);
+			var index = iterator.GroupItemIndex;
+			var groupIndex = iterator.GroupIndex;
 
 			mEditor.RaiseBeginEdit();
 			mEditor.Iterators.Remove(iterator);
@@ -83,7 +84,26 @@ namespace Xyrus.Apophysis.Windows.Controls
 				mEditor.ZoomOptimally();
 			}
 
-			mEditor.SelectedIterator = mEditor.Iterators[System.Math.Max(0, System.Math.Min(index, mEditor.Iterators.Count - 1))];
+			var groupItems = mEditor.Iterators.Where(x => Equals(groupIndex, x.GroupIndex)).ToArray();
+			if (!groupItems.Any())
+			{
+				var newGroupIndex = groupIndex - 1;
+				if (newGroupIndex < 0)
+				{
+					mEditor.SelectedIterator = mEditor.Iterators.Last();
+				}
+				else
+				{
+					mEditor.SelectedIterator = mEditor.Iterators.Last(x => Equals(x.GroupIndex, newGroupIndex));
+				}
+			}
+			else
+			{
+				var maxItemIndex = groupItems.Max(x => x.GroupItemIndex);
+				var newItemIndex = System.Math.Max(0, System.Math.Min(index, maxItemIndex));
+
+				mEditor.SelectedIterator = mEditor.Iterators.First(x => Equals(x.GroupIndex, groupIndex) && Equals(x.GroupItemIndex, newItemIndex));
+			}
 
 			mEditor.RaiseEdit();
 			mEditor.RaiseEndEdit();
@@ -93,7 +113,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 		}
 		public void RemoveSelectedIterator()
 		{
-			if (mEditor.SelectedIterator == null || mEditor.Iterators.Count <= 1)
+			if (mEditor.SelectedIterator == null || !mEditor.Iterators.CanRemove(mEditor.SelectedIterator.GroupIndex))
 				return;
 
 			RemoveIterator(mEditor.SelectedIterator);

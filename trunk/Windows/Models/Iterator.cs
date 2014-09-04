@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 using System.Xml.Linq;
 
 namespace Xyrus.Apophysis.Models
@@ -18,6 +19,7 @@ namespace Xyrus.Apophysis.Models
 		private double mColorSpeed;
 		private double mOpacity;
 		private double mDirectColor;
+		private int mGroupIndex;
 
 		public Iterator([NotNull] Flame hostingFlame)
 		{
@@ -49,6 +51,7 @@ namespace Xyrus.Apophysis.Models
 			copy.mColorSpeed = mColorSpeed;
 			copy.mOpacity = mOpacity;
 			copy.mDirectColor = mDirectColor;
+			copy.mGroupIndex = mGroupIndex;
 
 			copy.PreAffine.Origin.X = PreAffine.Origin.X;
 			copy.PreAffine.Origin.Y = PreAffine.Origin.Y;
@@ -79,6 +82,20 @@ namespace Xyrus.Apophysis.Models
 		{
 			get { return mFlame.Iterators.IndexOf(this); }
 		}
+		public int GroupIndex
+		{
+			get { return mGroupIndex; }
+			set { mGroupIndex = value; }
+		}
+		public int GroupItemIndex
+		{
+			get { return mFlame.Iterators.Where(x => Equals(x.GroupIndex, GroupIndex)).ToList().IndexOf(this); }
+		}
+		public bool IsSingleInGroup
+		{
+			get { return mFlame.Iterators.Count(x => Equals(x.GroupIndex, GroupIndex)) == 1; }
+		}
+
 		public string Name
 		{
 			get { return mName; }
@@ -215,10 +232,29 @@ namespace Xyrus.Apophysis.Models
 		{
 			if (element == null) throw new ArgumentNullException("element");
 
-			if ("xform" != element.Name.ToString().ToLower())
+			var elementName = element.Name.ToString().ToLower();
+			var elementNames = new[] {"xform", "finalxform"};
+
+			int groupIndex;
+
+			switch (elementName)
 			{
-				throw new ApophysisException("Expected XML node \"xform\" but received \"" + element.Name + "\"");
+				case "xform":
+					groupIndex = 0;
+					break;
+				case "finalxform":
+					groupIndex = 1;
+					break;
+				default:
+					var expectedNameString = elementNames.Length == 1
+						? elementNames[0]
+						: string.Format("{0} or {1}",
+							string.Join(@", ", elementNames.Select(x => @"""" + x + @"""").Take(elementNames.Length - 2).ToArray()),
+							@"""" + elementNames.Last() + @"""");
+					throw new ApophysisException(string.Format("Expected XML node {0} but received \"{1}\"", expectedNameString, elementName));
 			}
+
+			GroupIndex = groupIndex;
 
 			var nameAttribute = element.Attribute(XName.Get("name"));
 			Name = nameAttribute == null ? null : nameAttribute.Value;

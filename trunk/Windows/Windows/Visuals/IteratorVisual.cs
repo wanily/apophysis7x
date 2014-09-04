@@ -13,20 +13,6 @@ namespace Xyrus.Apophysis.Windows.Visuals
 		private Iterator mIterator;
 		private IteratorMatrix mActiveMatrix;
 
-		private static readonly Color[] mColors = 
-		{
-			Color.Red,
-			Color.Yellow,
-			Color.LightGreen,
-			Color.Cyan,
-			Color.Blue,
-			Color.Magenta,
-			Color.Orange,
-			Color.LightSkyBlue,
-			Color.MediumOrchid,
-			Color.Salmon
-		};
-
 		public IteratorVisual([NotNull] Control control, [NotNull] Canvas canvas, [NotNull] Iterator model, IteratorMatrix activeMatrix) : base(control, canvas)
 		{
 			if (model == null) throw new ArgumentNullException("model");
@@ -84,7 +70,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			var right = fx;
 			var down = -1 * fy;
 
-			var color = GetColor(Model);
+			var color = Model.GetColor();
 			var translucentColorHalf = Color.FromArgb(0x80, color.R, color.G, color.B);
 			var translucentColor = Color.FromArgb(0x40, color.R, color.G, color.B);
 			var translucentColorLow = Color.FromArgb(0x05, color.R, color.G, color.B);
@@ -307,13 +293,6 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			var cornerBottomRight = new Vector2(System.Math.Max(fx.X, fy.X), System.Math.Max(fx.Y, fy.Y));
 
 			return new Math.Rectangle(cornerTopLeft, cornerBottomRight - cornerTopLeft);
-		}
-		public static Color GetColor(Iterator iterator)
-		{
-			if (iterator.Index < 0)
-				return Color.Transparent;
-
-			return mColors[iterator.Index%mColors.Length];
 		}
 	}
 }

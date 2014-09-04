@@ -10,7 +10,7 @@ namespace Xyrus.Apophysis.Windows.Input
 
 		protected override string GetInfoString()
 		{
-			return string.Format("Transform #{0}", Iterator.Index + 1);
+			return string.Format(Iterator.GetVerboseDisplayName());
 		}
 	}
 }

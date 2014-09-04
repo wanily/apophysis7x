@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Xml.Linq;
+using Xyrus.Apophysis.Windows;
 
 namespace Xyrus.Apophysis.Models
 {
@@ -20,17 +21,11 @@ namespace Xyrus.Apophysis.Models
 			Items.Add(new Iterator(mFlame));
 		}
 
-		private void RaiseContentChanged()
-		{
-			if (mContentChanged == null)
-				return;
-
-			mContentChanged(this, new EventArgs());
-		}
-
 		public int Add()
 		{
 			Items.Add(new Iterator(mFlame));
+			Items.Sort(x => x.GroupIndex, x => x.GroupItemIndex);
+
 			RaiseContentChanged();
 
 			return Count - 1;
@@ -40,6 +35,8 @@ namespace Xyrus.Apophysis.Models
 			if (iterator == null) throw new ArgumentNullException("iterator");
 
 			Items.Add(iterator);
+			Items.Sort(x => x.GroupIndex, x => x.GroupItemIndex);
+
 			RaiseContentChanged();
 
 			return Count - 1;
@@ -47,10 +44,8 @@ namespace Xyrus.Apophysis.Models
 
 		public bool Remove(int index)
 		{
-			if (Count <= 1) throw new ApophysisException("Can't remove last iterator of flame");
-
-			if (index < 0 || index >= Count)
-				return false;
+			if (index < 0 || index >= Count) return false;
+			if (!CanRemove(this[index].GroupIndex)) throw new ApophysisException("Can't remove last primary iterator of flame");
 
 			Items.RemoveAt(index);
 			RaiseContentChanged();
@@ -59,13 +54,23 @@ namespace Xyrus.Apophysis.Models
 		}
 		public bool Remove([NotNull] Iterator iterator)
 		{
-			if (Count <= 1) throw new ApophysisException("Can't remove last iterator of flame");
+			if (iterator == null) throw new ArgumentNullException("iterator");
+			if (!CanRemove(iterator.GroupIndex)) throw new ApophysisException("Can't remove last primary iterator of flame");
 
 			if (!Contains(iterator)) 
 				return false;
 
 			Items.Remove(iterator);
 			RaiseContentChanged();
+
+			return true;
+		}
+		public bool CanRemove(int groupIndex)
+		{
+			if (groupIndex == 0)
+			{
+				return this.Count(x => x.GroupIndex == 0) > 1;
+			}
 
 			return true;
 		}
@@ -78,6 +83,13 @@ namespace Xyrus.Apophysis.Models
 			RaiseContentChanged();
 		}
 
+		private void RaiseContentChanged()
+		{
+			if (mContentChanged == null)
+				return;
+
+			mContentChanged(this, new EventArgs());
+		}
 		public event EventHandler ContentChanged
 		{
 			add { mContentChanged += value; }
@@ -127,6 +139,8 @@ namespace Xyrus.Apophysis.Models
 				counter++;
 			}
 
+			newCollection.Sort(x => x.GroupIndex, x => x.GroupItemIndex);
+
 			Items.Clear();
 			foreach (var item in newCollection)
 			{
@@ -135,7 +149,6 @@ namespace Xyrus.Apophysis.Models
 
 			RaiseContentChanged();
 		}
-
 		public bool IsEqual([NotNull] IteratorCollection iterators)
 		{
 			if (iterators == null) throw new ArgumentNullException("iterators");

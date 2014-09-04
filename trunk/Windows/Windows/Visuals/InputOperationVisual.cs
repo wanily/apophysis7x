@@ -134,7 +134,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 					lines.Add(new ColoredString
 					{
 						String = move.ToString(),
-						Color = IteratorVisual.GetColor(move.Iterator)
+						Color = move.Iterator.GetColor()
 					});
 				}
 
@@ -168,7 +168,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 					lines.Add(new ColoredString
 					{
 						String = rotate.ToString(),
-						Color = IteratorVisual.GetColor(rotate.Iterator)
+						Color = rotate.Iterator.GetColor()
 					});
 				}
 
@@ -199,7 +199,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 					lines.Add(new ColoredString
 					{
 						String = scale.ToString(),
-						Color = IteratorVisual.GetColor(scale.Iterator)
+						Color = scale.Iterator.GetColor()
 					});
 				}
 
@@ -208,7 +208,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 					var text = new MouseOverOperation(mOperation.Iterator).ToString();
 					var textSize = graphics.MeasureString(text, AttachedControl.Font);
 
-					using (var brush = new SolidBrush(IteratorVisual.GetColor(mOperation.Iterator)))
+					using (var brush = new SolidBrush(mOperation.Iterator.GetColor()))
 					{
 						graphics.DrawString(text, AttachedControl.Font, brush,
 							(int)Canvas.Size.X - mHintTextRectangle.Right - textSize.Width,

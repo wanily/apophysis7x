@@ -163,7 +163,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		public void UpdateButtonStates()
 		{
 			View.DuplicateIteratorButton.Enabled = View.IteratorCanvas.SelectedIterator != null;
-			View.RemoveIteratorButton.Enabled = mParent.Flame.Iterators.Count > 1;
+			View.RemoveIteratorButton.Enabled = 
+				View.IteratorCanvas.SelectedIterator != null && 
+				mParent.Flame.Iterators.CanRemove(View.IteratorCanvas.SelectedIterator.GroupIndex);
 
 			View.UndoButton.Enabled = mParent.UndoController.CanUndo;
 			View.RedoButton.Enabled = mParent.UndoController.CanRedo;
