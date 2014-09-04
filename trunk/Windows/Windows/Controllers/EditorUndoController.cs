@@ -27,7 +27,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.IteratorColorScrollBar.MouseUp += OnRequestCommit;
 			View.IteratorColorSpeedDragPanel.EndEdit += OnRequestCommit;
 			View.IteratorDirectColorDragPanel.EndEdit += OnRequestCommit;
-			View.IteratorIsExclusiveCheckBox.MouseUp += OnRequestCommit;
 			View.IteratorNameTextBox.LostFocus += OnRequestCommit;
 			View.IteratorOpacityDragPanel.EndEdit += OnRequestCommit;
 			View.IteratorPointOxTextBox.LostFocus += OnRequestCommit;
@@ -58,7 +57,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.IteratorColorScrollBar.MouseUp -= OnRequestCommit;
 			View.IteratorColorSpeedDragPanel.EndEdit -= OnRequestCommit;
 			View.IteratorDirectColorDragPanel.EndEdit -= OnRequestCommit;
-			View.IteratorIsExclusiveCheckBox.MouseUp -= OnRequestCommit;
 			View.IteratorNameTextBox.LostFocus -= OnRequestCommit;
 			View.IteratorOpacityDragPanel.EndEdit -= OnRequestCommit;
 			View.IteratorPointOxTextBox.LostFocus -= OnRequestCommit;
