@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -30,6 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Windows\Resources\MAINICON.ico</ApplicationIcon>
@@ -68,6 +70,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Calculation\IterationData.cs" />
+    <Compile Include="Variations\Linear.cs" />
+    <Compile Include="Variations\Spherical.cs" />
+    <Compile Include="Variations\Swirl.cs" />
+    <Compile Include="Variations\Variable.cs" />
+    <Compile Include="Variations\Variation.cs" />
+    <Compile Include="Variations\VariationRegistry.cs" />
     <Compile Include="Windows\Common\ChainItem.cs" />
     <Compile Include="Windows\Common\ControlChain.cs" />
     <Compile Include="Windows\Common\ControlEventInterceptor.cs" />
