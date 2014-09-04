@@ -26,6 +26,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.ResetAllIteratorsButton.Click += OnResetAllIteratorsClick;
 
 			View.AddIteratorButton.Click += OnAddIteratorClick;
+			View.AddFinalIteratorButton.Click += OnAddIteratorClick;
 			View.DuplicateIteratorButton.Click += OnDuplicateIteratorClick;
 			View.RemoveIteratorButton.Click += OnRemoveIteratorClick;
 
@@ -45,6 +46,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.ToggleRulersButton.Click += OnToggleRulersClick;
 			View.ToggleVariationPreviewButton.Click += OnToggleVariationPreviewClick;
 			View.TogglePostMatrixButton.Click += OnTogglePostMatrixClick;
+
+			View.IteratorConvertToRegularButton.Click += OnConvertClick;
+			View.IteratorConvertToFinalButton.Click += OnConvertClick;
 		}
 		protected override void DetachView()
 		{
@@ -53,6 +57,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.ResetAllIteratorsButton.Click -= OnResetAllIteratorsClick;
 
 			View.AddIteratorButton.Click -= OnAddIteratorClick;
+			View.AddFinalIteratorButton.Click -= OnAddIteratorClick;
 			View.DuplicateIteratorButton.Click -= OnDuplicateIteratorClick;
 			View.RemoveIteratorButton.Click -= OnRemoveIteratorClick;
 
@@ -72,6 +77,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.ToggleRulersButton.Click -= OnToggleRulersClick;
 			View.ToggleVariationPreviewButton.Click -= OnToggleVariationPreviewClick;
 			View.TogglePostMatrixButton.Click -= OnTogglePostMatrixClick;
+
+			View.IteratorConvertToRegularButton.Click -= OnConvertClick;
+			View.IteratorConvertToFinalButton.Click -= OnConvertClick;
 		}
 
 		private void OnResetAllIteratorsClick(object sender, EventArgs e)
@@ -81,7 +89,14 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		private void OnAddIteratorClick(object sender, EventArgs e)
 		{
-			View.IteratorCanvas.Commands.NewIterator();
+			if (ReferenceEquals(sender, View.AddIteratorButton))
+			{
+				View.IteratorCanvas.Commands.NewIterator();
+			}
+			else if (ReferenceEquals(sender, View.AddFinalIteratorButton))
+			{
+				View.IteratorCanvas.Commands.NewFinalIterator();
+			}
 		}
 		private void OnDuplicateIteratorClick(object sender, EventArgs e)
 		{
@@ -155,6 +170,18 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				: IteratorMatrix.PreAffine;
 		}
 
+		private void OnConvertClick(object sender, EventArgs e)
+		{
+			if (ReferenceEquals(sender, View.IteratorConvertToRegularButton))
+			{
+				View.IteratorCanvas.Commands.ConvertSelectedIterator(0);
+			}
+			else if (ReferenceEquals(sender, View.IteratorConvertToFinalButton))
+			{
+				View.IteratorCanvas.Commands.ConvertSelectedIterator(1);
+			}
+		}
+
 		private void OnSettingsChanged(object sender, EventArgs e)
 		{
 			UpdateButtonStates();
@@ -173,6 +200,14 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.ToggleRulersButton.Checked = View.IteratorCanvas.ShowRuler;
 			View.ToggleVariationPreviewButton.Checked = View.IteratorCanvas.Settings.ShowVariationPreview;
 			View.TogglePostMatrixButton.Checked = View.IteratorCanvas.ActiveMatrix == IteratorMatrix.PostAffine;
+
+			View.IteratorConvertToRegularButton.Enabled =
+				View.IteratorCanvas.SelectedIterator != null &&
+				View.IteratorCanvas.SelectedIterator.GroupIndex != 0;
+			View.IteratorConvertToFinalButton.Enabled =
+				View.IteratorCanvas.SelectedIterator != null &&
+				View.IteratorCanvas.SelectedIterator.GroupIndex != 1 &&
+				!View.IteratorCanvas.SelectedIterator.IsSingleInGroup;
 		}
 	}
 }

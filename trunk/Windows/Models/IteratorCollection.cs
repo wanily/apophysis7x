@@ -23,7 +23,11 @@ namespace Xyrus.Apophysis.Models
 
 		public int Add()
 		{
-			Items.Add(new Iterator(mFlame));
+			return Add(0);
+		}
+		public int Add(int groupIndex)
+		{
+			Items.Add(new Iterator(mFlame) { GroupIndex = groupIndex });
 			Items.Sort(x => x.GroupIndex, x => x.GroupItemIndex);
 
 			RaiseContentChanged();
@@ -73,6 +77,23 @@ namespace Xyrus.Apophysis.Models
 			}
 
 			return true;
+		}
+
+		internal Iterator ConvertIterator(Iterator iterator, int groupIndex)
+		{
+			var copy = iterator.Copy();
+
+			copy.GroupIndex = groupIndex;
+			copy.Weight = groupIndex == 1 ? 0.5 : copy.Weight;
+			copy.ColorSpeed = groupIndex == 1 ? 0 : copy.ColorSpeed;
+			copy.Opacity = groupIndex == 1 ? 1 : copy.Opacity;
+
+			Items.Remove(iterator);
+			Items.Add(copy);
+			Items.Sort(x => x.GroupIndex, x => x.GroupItemIndex);
+			
+			RaiseContentChanged();
+			return copy;
 		}
 
 		public void Reset()

@@ -80,6 +80,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				View.IteratorColorDragPanel.Enabled = iterator == null || iterator.GroupIndex == 0;
 				View.IteratorColorScrollBar.Enabled = iterator == null || iterator.GroupIndex == 0;
 				View.IteratorIsExclusiveCheckBox.Enabled = iterator == null || iterator.GroupIndex == 0;
+				View.IteratorOpacityDragPanel.Enabled = iterator == null || iterator.GroupIndex == 0;
 			}
 
 			mParent.UpdateCoordinates();

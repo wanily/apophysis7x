@@ -12,6 +12,8 @@ namespace Xyrus.Apophysis.Windows.Controls
 		private Iterator mIterator;
 
 		private ToolStripButton mRemoveIterator;
+		private ToolStripButton mConvertToRegular;
+		private ToolStripButton mConvertToFinal;
 
 		public EditorIteratorContextMenu([NotNull] EditorCanvas editor)
 		{
@@ -36,6 +38,14 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 				new ToolStripSeparator(),
 
+				new ToolStripMenuItem("Convert to", null, new ToolStripItem[]
+					{
+						mConvertToRegular = new ToolStripButton("Transform", Resources.RegularIterator, OnConvertClick) { ImageTransparentColor = Color.Fuchsia }, 
+						mConvertToFinal = new ToolStripButton("Final transform", Resources.FinalIterator, OnConvertClick) { ImageTransparentColor = Color.Fuchsia }, 
+					}), 
+
+				new ToolStripSeparator(), 
+
 				new ToolStripButton("Rotate 90° counter-clockwise", Resources.Rotate90CounterClockwise, OnRotate90CcwClick) { ImageTransparentColor = Color.Fuchsia },
 				new ToolStripButton("Rotate 90° clockwise", Resources.Rotate90Clockwise, OnRotate90CwClick) { ImageTransparentColor = Color.Fuchsia },
 				new ToolStripButton("Flip vertically", Resources.FlipAllVertical, OnFlipVerticallyClick) { ImageTransparentColor = Color.Fuchsia },
@@ -47,6 +57,8 @@ namespace Xyrus.Apophysis.Windows.Controls
 		protected override void Dispose(bool disposing)
 		{
 			base.Dispose(disposing);
+			mConvertToFinal = null;
+			mConvertToRegular = null;
 			mRemoveIterator = null;
 			mIterator = null;
 			mEditor = null;
@@ -58,14 +70,11 @@ namespace Xyrus.Apophysis.Windows.Controls
 			set
 			{
 				mIterator = value;
-				CanRemoveIterator = value != null && mEditor.Iterators.CanRemove(value.GroupIndex);
+				
+				mRemoveIterator.Enabled = value != null && mEditor.Iterators.CanRemove(value.GroupIndex);
+				mConvertToRegular.Enabled = value != null && value.GroupIndex != 0;
+				mConvertToFinal.Enabled = value != null && value.GroupIndex != 1 && !value.IsSingleInGroup;
 			}
-		}
-
-		public bool CanRemoveIterator
-		{
-			get { return mRemoveIterator.Enabled; }
-			set { mRemoveIterator.Enabled = value; }
 		}
 
 		private void OnDuplicateIteratorClick(object sender, EventArgs e)
@@ -139,6 +148,28 @@ namespace Xyrus.Apophysis.Windows.Controls
 				return;
 
 			mEditor.Commands.ResetIteratorScale(mIterator);
+		}
+		private void OnConvertClick(object sender, EventArgs e)
+		{
+			if (mIterator == null)
+				return;
+
+			int groupIndex;
+
+			if (ReferenceEquals(sender, mConvertToRegular))
+			{
+				groupIndex = 0;
+			}
+			else if (ReferenceEquals(sender, mConvertToFinal))
+			{
+				groupIndex = 1;
+			}
+			else
+			{
+				return;
+			}
+
+			mEditor.Commands.ConvertIterator(mIterator, groupIndex);
 		}
 	}
 }

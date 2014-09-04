@@ -22,22 +22,44 @@ namespace Xyrus.Apophysis.Windows.Controls
 			base.Dispose(disposing);
 		}
 
+		private Iterator GetLastIteratorOfGroup(int groupIndex)
+		{
+			return mEditor.Iterators.Last(x => Equals(x.GroupIndex, groupIndex));
+		}
+		private void CorrectZoomIfSettingEnabled()
+		{
+			if (mEditor.Settings.ZoomAutomatically)
+			{
+				mEditor.ZoomOptimally();
+			}
+		}
+
 		public void NewIterator()
 		{
 			mEditor.RaiseBeginEdit();
 			mEditor.Iterators.Add();
 
-			if (mEditor.Settings.ZoomAutomatically)
-			{
-				mEditor.ZoomOptimally();
-			}
-
-			mEditor.SelectedIterator = mEditor.Iterators.Last(x => Equals(x.GroupIndex, mEditor.SelectedIterator.GroupIndex));
+			mEditor.SelectedIterator = GetLastIteratorOfGroup(0);
 
 			mEditor.RaiseEdit();
 			mEditor.RaiseEndEdit();
 			mEditor.RaiseSelectionChanged();
 
+			CorrectZoomIfSettingEnabled();
+			mEditor.Refresh();
+		}
+		public void NewFinalIterator()
+		{
+			mEditor.RaiseBeginEdit();
+			mEditor.Iterators.Add(1);
+
+			mEditor.SelectedIterator = GetLastIteratorOfGroup(1);
+
+			mEditor.RaiseEdit();
+			mEditor.RaiseEndEdit();
+			mEditor.RaiseSelectionChanged();
+
+			CorrectZoomIfSettingEnabled();
 			mEditor.Refresh();
 		}
 		public void DuplicateIterator([NotNull] Iterator iterator)
@@ -47,17 +69,13 @@ namespace Xyrus.Apophysis.Windows.Controls
 			mEditor.RaiseBeginEdit();
 			mEditor.Iterators.Add(iterator.Copy());
 
-			if (mEditor.Settings.ZoomAutomatically)
-			{
-				mEditor.ZoomOptimally();
-			}
-
-			mEditor.SelectedIterator = mEditor.Iterators.Last(x => Equals(x.GroupIndex, iterator.GroupIndex));
+			mEditor.SelectedIterator = GetLastIteratorOfGroup(iterator.GroupIndex);
 
 			mEditor.RaiseEdit();
 			mEditor.RaiseEndEdit();
 			mEditor.RaiseSelectionChanged();
 
+			CorrectZoomIfSettingEnabled();
 			mEditor.Refresh();
 		}
 		public void DuplicateSelectedIterator()
@@ -79,11 +97,6 @@ namespace Xyrus.Apophysis.Windows.Controls
 			mEditor.RaiseBeginEdit();
 			mEditor.Iterators.Remove(iterator);
 
-			if (mEditor.Settings.ZoomAutomatically)
-			{
-				mEditor.ZoomOptimally();
-			}
-
 			var groupItems = mEditor.Iterators.Where(x => Equals(groupIndex, x.GroupIndex)).ToArray();
 			if (!groupItems.Any())
 			{
@@ -94,7 +107,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 				}
 				else
 				{
-					mEditor.SelectedIterator = mEditor.Iterators.Last(x => Equals(x.GroupIndex, newGroupIndex));
+					mEditor.SelectedIterator = GetLastIteratorOfGroup(newGroupIndex);
 				}
 			}
 			else
@@ -109,6 +122,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 			mEditor.RaiseEndEdit();
 			mEditor.RaiseSelectionChanged();
 
+			CorrectZoomIfSettingEnabled();
 			mEditor.Refresh();
 		}
 		public void RemoveSelectedIterator()
@@ -117,6 +131,29 @@ namespace Xyrus.Apophysis.Windows.Controls
 				return;
 
 			RemoveIterator(mEditor.SelectedIterator);
+		}
+		public void ConvertIterator([NotNull] Iterator iterator, int groupIndex)
+		{
+			if (iterator == null) throw new ArgumentNullException("iterator");
+
+			mEditor.RaiseBeginEdit();
+
+			var result = iterator.Convert(groupIndex);
+			mEditor.SelectedIterator = result;
+
+			mEditor.RaiseEdit();
+			mEditor.RaiseEndEdit();
+			mEditor.RaiseSelectionChanged();
+
+			mEditor.Refresh();
+		}
+
+		public void ConvertSelectedIterator(int groupIndex)
+		{
+			if (mEditor.SelectedIterator == null)
+				return;
+
+			ConvertIterator(mEditor.SelectedIterator, groupIndex);
 		}
 
 		public void FlipAllHorizontally()
@@ -143,14 +180,10 @@ namespace Xyrus.Apophysis.Windows.Controls
 				origin.X = -origin.X;
 			}
 
-			if (mEditor.Settings.ZoomAutomatically)
-			{
-				mEditor.ZoomOptimally();
-			}
-
 			mEditor.RaiseEdit();
 			mEditor.RaiseEndEdit();
 
+			CorrectZoomIfSettingEnabled();
 			mEditor.Refresh();
 		}
 		public void FlipHorizontally([NotNull] Iterator iterator)
@@ -164,14 +197,10 @@ namespace Xyrus.Apophysis.Windows.Controls
 			matrix.Matrix.X.X *= -1;
 			matrix.Matrix.Y.X *= -1;
 
-			if (mEditor.Settings.ZoomAutomatically)
-			{
-				mEditor.ZoomOptimally();
-			}
-
 			mEditor.RaiseEdit();
 			mEditor.RaiseEndEdit();
 
+			CorrectZoomIfSettingEnabled();
 			mEditor.Refresh();
 		}
 		public void FlipAllVertically()
@@ -198,14 +227,10 @@ namespace Xyrus.Apophysis.Windows.Controls
 				origin.Y = -origin.Y;
 			}
 
-			if (mEditor.Settings.ZoomAutomatically)
-			{
-				mEditor.ZoomOptimally();
-			}
-
 			mEditor.RaiseEdit();
 			mEditor.RaiseEndEdit();
 
+			CorrectZoomIfSettingEnabled();
 			mEditor.Refresh();
 		}
 		public void FlipVertically([NotNull] Iterator iterator)
@@ -219,14 +244,10 @@ namespace Xyrus.Apophysis.Windows.Controls
 			matrix.Matrix.X.Y *= -1;
 			matrix.Matrix.Y.Y *= -1;
 
-			if (mEditor.Settings.ZoomAutomatically)
-			{
-				mEditor.ZoomOptimally();
-			}
-
 			mEditor.RaiseEdit();
 			mEditor.RaiseEndEdit();
 
+			CorrectZoomIfSettingEnabled();
 			mEditor.Refresh();
 		}
 
@@ -244,6 +265,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 			mEditor.RaiseEdit();
 			mEditor.RaiseEndEdit();
 
+			CorrectZoomIfSettingEnabled();
 			mEditor.Refresh();
 		}
 		public void RotateSelectedIterator(double angle)
@@ -264,8 +286,11 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 			matrix.Scale(ratio);
 
-			mEditor.Refresh();
+			mEditor.RaiseEdit();
 			mEditor.RaiseEndEdit();
+
+			CorrectZoomIfSettingEnabled();
+			mEditor.Refresh();
 		}
 		public void ScaleSelectedIterator(double ratio)
 		{
@@ -284,9 +309,12 @@ namespace Xyrus.Apophysis.Windows.Controls
 			mEditor.RaiseBeginEdit();
 
 			matrix.Move(offset);
-
-			mEditor.Refresh();
+			
+			mEditor.RaiseEdit();
 			mEditor.RaiseEndEdit();
+
+			CorrectZoomIfSettingEnabled();
+			mEditor.Refresh();
 		}
 		public void MoveSelectedIterator(Vector2 offset)
 		{
@@ -307,6 +335,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 			mEditor.RaiseEndEdit();
 			mEditor.RaiseSelectionChanged();
 
+			CorrectZoomIfSettingEnabled();
 			mEditor.Refresh();
 		}
 
@@ -328,6 +357,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 			mEditor.RaiseEdit();
 			mEditor.RaiseEndEdit();
 
+			CorrectZoomIfSettingEnabled();
 			mEditor.Refresh();
 		}
 		public void ResetSelectedIterator()
@@ -351,6 +381,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 			mEditor.RaiseEdit();
 			mEditor.RaiseEndEdit();
 
+			CorrectZoomIfSettingEnabled();
 			mEditor.Refresh();
 		}
 		public void ResetSelectedIteratorOrigin()
@@ -387,6 +418,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 			mEditor.RaiseEdit();
 			mEditor.RaiseEndEdit();
 
+			CorrectZoomIfSettingEnabled();
 			mEditor.Refresh();
 		}
 		public void ResetSelectedIteratorAngle()
@@ -415,6 +447,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 			mEditor.RaiseEdit();
 			mEditor.RaiseEndEdit();
 
+			CorrectZoomIfSettingEnabled();
 			mEditor.Refresh();
 		}
 		public void ResetSelectedIteratorScale()
@@ -457,6 +490,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 			mEditor.RaiseEdit();
 			mEditor.RaiseEndEdit();
 
+			CorrectZoomIfSettingEnabled();
 			mEditor.Refresh();
 		}
 	}

@@ -69,6 +69,10 @@ namespace Xyrus.Apophysis.Models
 
 			return copy;
 		}
+		public Iterator Convert(int groupIndex)
+		{
+			return mFlame.Iterators.ConvertIterator(this, groupIndex);
+		}
 
 		internal Iterator Copy([NotNull] Flame flame)
 		{
@@ -296,7 +300,7 @@ namespace Xyrus.Apophysis.Models
 			}
 
 			var opacityAttribute = element.Attribute(XName.Get("opacity"));
-			if (opacityAttribute != null)
+			if (opacityAttribute != null && groupIndex == 0)
 			{
 				var opacity = ParseFloat(opacityAttribute);
 				if (opacity < 0 || opacity > 1)

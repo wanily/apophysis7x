@@ -192,79 +192,79 @@
     <EmbeddedResource Include="Windows\Resources\SCALE_WHITE.cur" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Windows\Resources\Toolbar\Editor\CopyIterator.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Editor\CopyIterator.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Windows\Resources\Toolbar\Editor\DuplicateIterator.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Editor\DuplicateIterator.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Windows\Resources\Toolbar\Editor\FlipAllHorizontal.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Editor\FlipAllHorizontal.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Windows\Resources\Toolbar\Editor\FlipAllVertical.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Editor\FlipAllVertical.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Windows\Resources\Toolbar\Editor\LinkIterator.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Editor\LinkIterator.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Windows\Resources\Toolbar\Editor\LockTransformAxes.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Editor\LockTransformAxes.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Windows\Resources\Toolbar\Editor\MoveMode.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Editor\MoveMode.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Windows\Resources\Toolbar\Editor\NewIterator.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Editor\NewIterator.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Windows\Resources\Toolbar\Editor\PasteIterator.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Editor\PasteIterator.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Windows\Resources\Toolbar\Editor\Redo.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Editor\Redo.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Windows\Resources\Toolbar\Editor\RemoveIterator.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Editor\RemoveIterator.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Windows\Resources\Toolbar\Editor\ResetAll.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Editor\ResetAll.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Windows\Resources\Toolbar\Editor\ResetIterator.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Editor\ResetIterator.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Windows\Resources\Toolbar\Editor\ResetIteratorAngle.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Editor\ResetIteratorAngle.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Windows\Resources\Toolbar\Editor\ResetIteratorOrigin.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Editor\ResetIteratorOrigin.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Windows\Resources\Toolbar\Editor\ResetIteratorScale.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Editor\ResetIteratorScale.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Windows\Resources\Toolbar\Editor\RotateMode.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Editor\RotateMode.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Windows\Resources\Toolbar\Editor\ScaleMode.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Editor\ScaleMode.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Windows\Resources\Toolbar\Editor\SelectMode.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Editor\SelectMode.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Windows\Resources\Toolbar\Editor\ToggleAutoZoom.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Editor\ToggleAutoZoom.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Windows\Resources\Toolbar\Editor\ToggleFinalIterator.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Editor\ToggleFinalIterator.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Windows\Resources\Toolbar\Editor\TogglePostMatrix.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Editor\TogglePostMatrix.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Windows\Resources\Toolbar\Editor\ToggleVariationPrevie.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Editor\ToggleVariationPrevie.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Windows\Resources\Toolbar\Editor\ToggleWorldPivot.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Editor\ToggleWorldPivot.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Windows\Resources\Toolbar\Editor\Undo.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Editor\Undo.bmp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Windows\Resources\Icons\MoveDown.png" />
@@ -298,6 +298,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Windows\Resources\Icons\ToggleRulers.png" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Editor\AddFinalIterator.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Editor\FinalIterator.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Editor\RegularIterator.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

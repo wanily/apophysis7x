@@ -42,8 +42,9 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mToolbarSeparator5 = new System.Windows.Forms.ToolStripSeparator();
 			this.ToggleRulersButton = new System.Windows.Forms.ToolStripButton();
 			this.ToggleVariationPreviewButton = new System.Windows.Forms.ToolStripButton();
-			this.mToolbarSeparator = new System.Windows.Forms.ToolStripSeparator();
+			this.mToolbarSeparator6 = new System.Windows.Forms.ToolStripSeparator();
 			this.TogglePostMatrixButton = new System.Windows.Forms.ToolStripButton();
+			this.AddFinalIteratorButton = new System.Windows.Forms.ToolStripButton();
 			this.IteratorCanvas = new Xyrus.Apophysis.Windows.Controls.EditorCanvas();
 			this.mSettings = new Xyrus.Apophysis.Windows.Controls.EditorSettings();
 			this.mSidebarSplitter = new System.Windows.Forms.SplitContainer();
@@ -120,6 +121,9 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorSelectionComboBox = new System.Windows.Forms.ComboBox();
 			this.mIteratorSelectLabel = new System.Windows.Forms.Label();
 			this.mToolbarImages = new System.Windows.Forms.ImageList(this.components);
+			this.mToolbarSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+			this.IteratorConvertToRegularButton = new System.Windows.Forms.ToolStripButton();
+			this.IteratorConvertToFinalButton = new System.Windows.Forms.ToolStripButton();
 			this.mRootSplitter.Panel1.SuspendLayout();
 			this.mRootSplitter.Panel2.SuspendLayout();
 			this.mRootSplitter.SuspendLayout();
@@ -188,8 +192,12 @@ namespace Xyrus.Apophysis.Windows.Forms
             this.mToolbarSeparator5,
             this.ToggleRulersButton,
             this.ToggleVariationPreviewButton,
-            this.mToolbarSeparator,
-            this.TogglePostMatrixButton});
+            this.mToolbarSeparator6,
+            this.TogglePostMatrixButton,
+            this.AddFinalIteratorButton,
+            this.mToolbarSeparator7,
+            this.IteratorConvertToRegularButton,
+            this.IteratorConvertToFinalButton});
 			this.mToolbar.Location = new System.Drawing.Point(0, 0);
 			this.mToolbar.Name = "mToolbar";
 			this.mToolbar.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -365,10 +373,10 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.ToggleVariationPreviewButton.Size = new System.Drawing.Size(23, 22);
 			this.ToggleVariationPreviewButton.Text = "Show variation preview";
 			// 
-			// mToolbarSeparator
+			// mToolbarSeparator6
 			// 
-			this.mToolbarSeparator.Name = "mToolbarSeparator";
-			this.mToolbarSeparator.Size = new System.Drawing.Size(6, 25);
+			this.mToolbarSeparator6.Name = "mToolbarSeparator6";
+			this.mToolbarSeparator6.Size = new System.Drawing.Size(6, 25);
 			// 
 			// TogglePostMatrixButton
 			// 
@@ -378,6 +386,15 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.TogglePostMatrixButton.Name = "TogglePostMatrixButton";
 			this.TogglePostMatrixButton.Size = new System.Drawing.Size(23, 22);
 			this.TogglePostMatrixButton.Text = "Enable / edit post-transform";
+			// 
+			// AddFinalIteratorButton
+			// 
+			this.AddFinalIteratorButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.AddFinalIteratorButton.Image = ((System.Drawing.Image)(resources.GetObject("AddFinalIteratorButton.Image")));
+			this.AddFinalIteratorButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.AddFinalIteratorButton.Name = "AddFinalIteratorButton";
+			this.AddFinalIteratorButton.Size = new System.Drawing.Size(23, 22);
+			this.AddFinalIteratorButton.Text = "Add final transform";
 			// 
 			// IteratorCanvas
 			// 
@@ -1341,6 +1358,29 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mToolbarImages.Images.SetKeyName(23, "ResetIteratorScale.bmp");
 			this.mToolbarImages.Images.SetKeyName(24, "ToggleAutoZoom.bmp");
 			// 
+			// mToolbarSeparator7
+			// 
+			this.mToolbarSeparator7.Name = "mToolbarSeparator7";
+			this.mToolbarSeparator7.Size = new System.Drawing.Size(6, 25);
+			// 
+			// IteratorConvertToRegularButton
+			// 
+			this.IteratorConvertToRegularButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.IteratorConvertToRegularButton.Image = ((System.Drawing.Image)(resources.GetObject("IteratorConvertToRegularButton.Image")));
+			this.IteratorConvertToRegularButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.IteratorConvertToRegularButton.Name = "IteratorConvertToRegularButton";
+			this.IteratorConvertToRegularButton.Size = new System.Drawing.Size(23, 22);
+			this.IteratorConvertToRegularButton.Text = "Convert to regular transform";
+			// 
+			// IteratorConvertToFinalButton
+			// 
+			this.IteratorConvertToFinalButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.IteratorConvertToFinalButton.Image = ((System.Drawing.Image)(resources.GetObject("IteratorConvertToFinalButton.Image")));
+			this.IteratorConvertToFinalButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.IteratorConvertToFinalButton.Name = "IteratorConvertToFinalButton";
+			this.IteratorConvertToFinalButton.Size = new System.Drawing.Size(23, 22);
+			this.IteratorConvertToFinalButton.Text = "Convert to final transform";
+			// 
 			// Editor
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1481,10 +1521,14 @@ namespace Xyrus.Apophysis.Windows.Forms
 		public System.Windows.Forms.ToolStripButton Rotate90CwButton;
 		public System.Windows.Forms.ToolStripButton FlipAllHorizontalButton;
 		public System.Windows.Forms.ToolStripButton FlipAllVerticalButton;
-		private System.Windows.Forms.ToolStripSeparator mToolbarSeparator;
+		private System.Windows.Forms.ToolStripSeparator mToolbarSeparator6;
 		public System.Windows.Forms.ToolStripButton ToggleRulersButton;
 		public System.Windows.Forms.ToolStripButton ToggleVariationPreviewButton;
 		public System.Windows.Forms.ToolStripButton TogglePostMatrixButton;
+		public System.Windows.Forms.ToolStripButton AddFinalIteratorButton;
+		private System.Windows.Forms.ToolStripSeparator mToolbarSeparator7;
+		public System.Windows.Forms.ToolStripButton IteratorConvertToRegularButton;
+		public System.Windows.Forms.ToolStripButton IteratorConvertToFinalButton;
 	}
 }
 
