@@ -2,9 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Xyrus.Apophysis.Calculation;
 
-namespace Xyrus.Apophysis.Variations
+namespace Xyrus.Apophysis.Calculation
 {
 	[PublicAPI]
 	public abstract class Variation : IDisposable

@@ -65,6 +65,9 @@
     <Compile Include="Annotations\UsedImplicitlyAttribute.cs" />
     <Compile Include="ApophysisException.cs" />
     <Compile Include="ApophysisSettings.cs" />
+    <Compile Include="Calculation\Variable.cs" />
+    <Compile Include="Calculation\Variation.cs" />
+    <Compile Include="Calculation\VariationRegistry.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -74,9 +77,6 @@
     <Compile Include="Variations\Linear.cs" />
     <Compile Include="Variations\Spherical.cs" />
     <Compile Include="Variations\Swirl.cs" />
-    <Compile Include="Variations\Variable.cs" />
-    <Compile Include="Variations\Variation.cs" />
-    <Compile Include="Variations\VariationRegistry.cs" />
     <Compile Include="Windows\Common\ChainItem.cs" />
     <Compile Include="Windows\Common\ControlChain.cs" />
     <Compile Include="Windows\Common\ControlEventInterceptor.cs" />

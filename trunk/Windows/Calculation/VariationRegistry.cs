@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Xyrus.Apophysis.Variations
+namespace Xyrus.Apophysis.Calculation
 {
 	[PublicAPI]
 	public static class VariationRegistry

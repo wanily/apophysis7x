@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Xyrus.Apophysis.Variations
+namespace Xyrus.Apophysis.Calculation
 {
 	[PublicAPI]
 	public class Variable
