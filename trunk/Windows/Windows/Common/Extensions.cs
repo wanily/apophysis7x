@@ -25,7 +25,7 @@ namespace Xyrus.Apophysis.Windows
 
 			if (!string.IsNullOrEmpty(iterator.Name))
 			{
-				formatString += "- {2}";
+				formatString += " - {2}";
 			}
 
 			return string.Format(formatString, groupName, iterator.GroupItemIndex + 1, iterator.Name);
@@ -46,7 +46,7 @@ namespace Xyrus.Apophysis.Windows
 
 			if (!string.IsNullOrEmpty(iterator.Name))
 			{
-				formatString += "- {2}";
+				formatString += " - {2}";
 			}
 
 			return string.Format(formatString, groupName, iterator.GroupItemIndex + 1, iterator.Name);

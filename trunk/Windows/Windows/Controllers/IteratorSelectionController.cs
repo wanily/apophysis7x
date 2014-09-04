@@ -74,6 +74,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				View.IteratorOpacityDragPanel.Value = iterator == null ? 1.0 : iterator.Opacity;
 				View.IteratorDirectColorDragPanel.Value = iterator == null ? 1.0 : iterator.DirectColor;
 				View.IteratorColorScrollBar.Value = iterator == null ? 0 : (int)(iterator.Color * 1000);
+
+				View.IteratorWeightDragPanel.Enabled = iterator == null || iterator.GroupIndex == 0;
+				View.IteratorColorSpeedDragPanel.Enabled = iterator == null || iterator.GroupIndex == 0;
+				View.IteratorColorDragPanel.Enabled = iterator == null || iterator.GroupIndex == 0;
+				View.IteratorColorScrollBar.Enabled = iterator == null || iterator.GroupIndex == 0;
+				View.IteratorIsExclusiveCheckBox.Enabled = iterator == null || iterator.GroupIndex == 0;
 			}
 
 			mParent.UpdateCoordinates();

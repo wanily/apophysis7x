@@ -260,7 +260,7 @@ namespace Xyrus.Apophysis.Models
 			Name = nameAttribute == null ? null : nameAttribute.Value;
 
 			var weightAttribute = element.Attribute(XName.Get("weight"));
-			if (weightAttribute != null)
+			if (weightAttribute != null && groupIndex == 0)
 			{
 				var weight = ParseFloat(weightAttribute, 0.5);
 				if (weight < double.Epsilon)
@@ -272,7 +272,7 @@ namespace Xyrus.Apophysis.Models
 			}
 
 			var colorAttribute = element.Attribute(XName.Get("color"));
-			if (colorAttribute != null)
+			if (colorAttribute != null && groupIndex == 0)
 			{
 				var color = ParseFloat(colorAttribute);
 				if (color < 0 || color > 1)
@@ -284,7 +284,7 @@ namespace Xyrus.Apophysis.Models
 			}
 
 			var colorSpeedAttribute = element.Attribute(XName.Get("symmetry"));
-			if (colorSpeedAttribute != null)
+			if (colorSpeedAttribute != null && groupIndex == 0)
 			{
 				var colorSpeed = ParseFloat(colorSpeedAttribute);
 				if (colorSpeed < -1 || colorSpeed > 1)
@@ -345,7 +345,6 @@ namespace Xyrus.Apophysis.Models
 				PostAffine.Origin.Y = -vector[5];
 			}
 		}
-
 		public bool IsEqual([NotNull] Iterator iterator)
 		{
 			if (iterator == null) throw new ArgumentNullException("iterator");
