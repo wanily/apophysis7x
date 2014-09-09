@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Models;
+using Xyrus.Apophysis.Windows.Controllers;
 using Xyrus.Apophysis.Windows.Controls;
 using Xyrus.Apophysis.Windows.Input;
 using Rectangle = System.Drawing.Rectangle;
@@ -206,8 +208,14 @@ namespace Xyrus.Apophysis.Windows.Visuals
 				if (mOperation != null)
 				{
 					var text = new MouseOverOperation(mOperation.Iterator).ToString();
-					var textSize = graphics.MeasureString(text, AttachedControl.Font);
+					foreach (var variation in mOperation.Iterator.Variations.Where(x => System.Math.Abs(x.Weight) > double.Epsilon))
+					{
+						text += Environment.NewLine + 
+							variation.Name + " = " + 
+							variation.Weight.ToString(InputController.DefaultFormat, InputController.Culture);
+					}
 
+					var textSize = graphics.MeasureString(text, AttachedControl.Font);
 					using (var brush = new SolidBrush(mOperation.Iterator.GetColor()))
 					{
 						graphics.DrawString(text, AttachedControl.Font, brush,
