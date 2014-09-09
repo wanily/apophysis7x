@@ -24,11 +24,16 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			View.IteratorSelectionComboBox.SelectedIndexChanged += OnIteratorSelectedFromComboBox;
 			View.IteratorCanvas.SelectionChanged += OnIteratorSelectedFromCanvas;
+
+			View.PaletteSelectComboBox.Items.Clear();
+			View.PaletteSelectComboBox.Items.AddRange(Palette.Flam3Palettes.OfType<object>().ToArray());
 		}
 		protected override void DetachView()
 		{
 			View.IteratorSelectionComboBox.SelectedIndexChanged -= OnIteratorSelectedFromComboBox;
 			View.IteratorCanvas.SelectionChanged -= OnIteratorSelectedFromCanvas;
+
+			View.PaletteSelectComboBox.Items.Clear();
 		}
 
 		private void OnIteratorSelectedFromCanvas(object sender, EventArgs e)
@@ -52,13 +57,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		public void BuildIteratorComboBox()
 		{
-			View.IteratorSelectionComboBox.Items.Clear();
-			View.IteratorSelectionComboBox.Items.AddRange(mParent
-				.Flame
-				.Iterators
-				.Select(x => Extensions.GetDisplayName(x))
-				.OfType<object>()
-				.ToArray());
+			View.IteratorSelectionComboBox.Flame = mParent.Flame;
 		}
 		public void SelectIterator([CanBeNull] Iterator iterator)
 		{

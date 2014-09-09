@@ -113,7 +113,6 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorWeightTextBox = new System.Windows.Forms.TextBox();
 			this.IteratorNameTextBox = new System.Windows.Forms.TextBox();
 			this.mIteratorNameLabel = new System.Windows.Forms.Label();
-			this.IteratorSelectionComboBox = new System.Windows.Forms.ComboBox();
 			this.mIteratorSelectLabel = new System.Windows.Forms.Label();
 			this.mToolbarImages = new System.Windows.Forms.ImageList(this.components);
 			this.IteratorCanvas = new Xyrus.Apophysis.Windows.Controls.EditorCanvas();
@@ -123,6 +122,8 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorColorSpeedDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.IteratorColorDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.IteratorWeightDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
+			this.IteratorSelectionComboBox = new Xyrus.Apophysis.Windows.Controls.IteratorSelectComboBox();
+			this.PaletteSelectComboBox = new Xyrus.Apophysis.Windows.Controls.PaletteSelectComboBox();
 			this.mRootSplitter.Panel1.SuspendLayout();
 			this.mRootSplitter.Panel2.SuspendLayout();
 			this.mRootSplitter.SuspendLayout();
@@ -1039,6 +1040,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			// ColorTab
 			// 
 			this.ColorTab.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.ColorTab.Controls.Add(this.PaletteSelectComboBox);
 			this.ColorTab.Controls.Add(this.mIteratorColorGroupBox);
 			this.ColorTab.Location = new System.Drawing.Point(4, 22);
 			this.ColorTab.Name = "ColorTab";
@@ -1185,22 +1187,6 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mIteratorNameLabel.TabIndex = 2;
 			this.mIteratorNameLabel.Text = "Name:";
 			this.mIteratorNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// IteratorSelectionComboBox
-			// 
-			this.IteratorSelectionComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.IteratorSelectionComboBox.BackColor = System.Drawing.Color.Black;
-			this.IteratorSelectionComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-			this.IteratorSelectionComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.IteratorSelectionComboBox.ForeColor = System.Drawing.Color.White;
-			this.IteratorSelectionComboBox.FormattingEnabled = true;
-			this.IteratorSelectionComboBox.ItemHeight = 15;
-			this.IteratorSelectionComboBox.Location = new System.Drawing.Point(113, 0);
-			this.IteratorSelectionComboBox.MaxDropDownItems = 20;
-			this.IteratorSelectionComboBox.Name = "IteratorSelectionComboBox";
-			this.IteratorSelectionComboBox.Size = new System.Drawing.Size(179, 21);
-			this.IteratorSelectionComboBox.TabIndex = 1;
 			// 
 			// mIteratorSelectLabel
 			// 
@@ -1368,6 +1354,31 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorWeightDragPanel.TextBox = this.IteratorWeightTextBox;
 			this.IteratorWeightDragPanel.Value = 0.5D;
 			// 
+			// IteratorSelectionComboBox
+			// 
+			this.IteratorSelectionComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.IteratorSelectionComboBox.BackColor = System.Drawing.Color.Black;
+			this.IteratorSelectionComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+			this.IteratorSelectionComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.IteratorSelectionComboBox.Flame = null;
+			this.IteratorSelectionComboBox.ForeColor = System.Drawing.Color.White;
+			this.IteratorSelectionComboBox.FormattingEnabled = true;
+			this.IteratorSelectionComboBox.ItemHeight = 15;
+			this.IteratorSelectionComboBox.Location = new System.Drawing.Point(113, 0);
+			this.IteratorSelectionComboBox.MaxDropDownItems = 20;
+			this.IteratorSelectionComboBox.Name = "IteratorSelectionComboBox";
+			this.IteratorSelectionComboBox.Size = new System.Drawing.Size(179, 21);
+			this.IteratorSelectionComboBox.TabIndex = 1;
+			// 
+			// PaletteSelectComboBox
+			// 
+			this.PaletteSelectComboBox.FormattingEnabled = true;
+			this.PaletteSelectComboBox.Location = new System.Drawing.Point(21, 201);
+			this.PaletteSelectComboBox.Name = "PaletteSelectComboBox";
+			this.PaletteSelectComboBox.Size = new System.Drawing.Size(174, 21);
+			this.PaletteSelectComboBox.TabIndex = 1;
+			// 
 			// Editor
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1378,7 +1389,6 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.MinimumSize = new System.Drawing.Size(800, 700);
 			this.Name = "Editor";
 			this.Text = "Editor";
-			this.Load += new System.EventHandler(this.OnWindowLoaded);
 			this.mRootSplitter.Panel1.ResumeLayout(false);
 			this.mRootSplitter.Panel1.PerformLayout();
 			this.mRootSplitter.Panel2.ResumeLayout(false);
@@ -1419,7 +1429,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 		private System.Windows.Forms.Label mIteratorSelectLabel;
 		private System.Windows.Forms.Label mIteratorNameLabel;
 		private System.Windows.Forms.Label mPictureBevel;
-		public System.Windows.Forms.ComboBox IteratorSelectionComboBox;
+		public Xyrus.Apophysis.Windows.Controls.IteratorSelectComboBox IteratorSelectionComboBox;
 		public System.Windows.Forms.TextBox IteratorNameTextBox;
 		public DragPanel IteratorWeightDragPanel;
 		public System.Windows.Forms.TextBox IteratorWeightTextBox;
@@ -1515,6 +1525,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 		public System.Windows.Forms.ToolStripButton IteratorConvertToRegularButton;
 		public System.Windows.Forms.ToolStripButton IteratorConvertToFinalButton;
 		public System.Windows.Forms.PictureBox IteratorPalettePictureBox;
+		public PaletteSelectComboBox PaletteSelectComboBox;
 	}
 }
 

@@ -122,6 +122,18 @@
     </Compile>
     <Compile Include="Windows\Controls\EditorSettingsSerializer.cs" />
     <Compile Include="Windows\Controls\IteratorMatrix.cs" />
+    <Compile Include="Windows\Controls\PaletteSelectComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Windows\Controls\PaletteSelectComboBox.Designer.cs">
+      <DependentUpon>PaletteSelectComboBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Controls\IteratorSelectComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Windows\Controls\IteratorSelectComboBox.Designer.cs">
+      <DependentUpon>IteratorSelectComboBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Input\MouseHookEventArgs.cs" />
     <Compile Include="Windows\Input\InputOperation.cs" />
     <Compile Include="Windows\Input\KeyboardHookEventArgs.cs" />
