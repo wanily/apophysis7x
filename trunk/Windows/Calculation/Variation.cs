@@ -24,24 +24,11 @@ namespace Xyrus.Apophysis.Calculation
 			if (mIsDisposed)
 				return;
 
-			if (disposing)
-			{
-				Release();
-			}
-
-			DisposeOverride();
+			DisposeOverride(disposing);
 
 			mIsDisposed = true;
 		}
-		protected void DisposeOverride()
-		{
-			
-		}
-
-		public virtual void Prepare()
-		{
-		}
-		public virtual void Release()
+		protected virtual void DisposeOverride(bool disposing)
 		{
 			
 		}
@@ -65,6 +52,9 @@ namespace Xyrus.Apophysis.Calculation
 			}
 		}
 
+		public virtual void Prepare(IterationData data)
+		{
+		}
 		public abstract void Calculate(IterationData data);
 		public void Dispose()
 		{
