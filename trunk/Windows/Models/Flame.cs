@@ -50,9 +50,16 @@ namespace Xyrus.Apophysis.Models
 		{
 			get { return mIterators; }
 		}
+
+		[NotNull]
 		public Palette Palette
 		{
 			get { return mPalette; }
+			set
+			{
+				if (value == null) throw new ArgumentNullException("value");
+				mPalette = value;
+			}
 		}
 
 		public Flame Copy()

@@ -189,7 +189,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			get { return mUndoController; }
 		}
 
-		[NotNull]
 		public Flame Flame
 		{
 			get { return mFlame; }

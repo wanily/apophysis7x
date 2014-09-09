@@ -1,6 +1,4 @@
 ﻿using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Linq;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Models;
 
@@ -15,7 +13,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 			DrawMode = DrawMode.OwnerDrawVariable;
 			DropDownStyle = ComboBoxStyle.DropDownList;
 			FormattingEnabled = true;
-			ItemHeight = 15;
+			ItemHeight = 25;
 		}
 
 		protected override void OnDrawItem(DrawItemEventArgs e)
@@ -25,30 +23,21 @@ namespace Xyrus.Apophysis.Windows.Controls
 			if (e.Index < 0)
 				return;
 
-			var size = e.Graphics.MeasureString("fg", Font);
 			var item = Items[e.Index] as Palette;
 			if (item == null)
 				return;
 
-			using (var backgroundBrush = new SolidBrush(BackColor))
+			var w = (float)e.Bounds.Width;
+			var h = e.Bounds.Height;
+
+			for (float pos = 0; pos < w; pos++)
 			{
-				e.Graphics.FillRectangle(backgroundBrush, e.Bounds);
-				e.DrawFocusRectangle();
+				var i = (int)System.Math.Round((item.Length - 1) * pos / w);
+				var p = pos / w * (w - 4) + 2;
 
-				var w = (float)e.Bounds.Width;
-				var h = e.Bounds.Height;
-
-				e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-
-				for (float pos = 0; pos < w; pos++)
+				using (var brush = new SolidBrush(item[i]))
 				{
-					var i = (int)System.Math.Round((item.Length - 1) * pos / w);
-					var p = pos / w * (w - 4) + 2;
-
-					using (var brush = new SolidBrush(item[i]))
-					{
-						e.Graphics.FillRectangle(brush, p + e.Bounds.Left, 2.0f + e.Bounds.Top, w - p, h - 2.0f);
-					}
+					e.Graphics.FillRectangle(brush, p + e.Bounds.Left, 2.0f + e.Bounds.Top, w - p, h - 2.0f);
 				}
 			}
 		}
@@ -56,10 +45,8 @@ namespace Xyrus.Apophysis.Windows.Controls
 		{
 			base.OnMeasureItem(e);
 
-			var size = e.Graphics.MeasureString("fg", Font);
-
 			e.ItemWidth = ClientSize.Width;
-			e.ItemHeight = (int)size.Height;
+			e.ItemHeight = ItemHeight;
 		}
 	}
 }

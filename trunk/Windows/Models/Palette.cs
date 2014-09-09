@@ -222,5 +222,23 @@ namespace Xyrus.Apophysis.Models
 
 			return copy;
 		}
+
+		public override int GetHashCode()
+		{
+			unchecked
+			{
+				// ReSharper disable NonReadonlyFieldInGetHashCode
+				return ((mColors != null ? mColors.GetHashCode() : 0) * 397) ^ (mName != null ? mName.GetHashCode() : 0);
+				// ReSharper restore NonReadonlyFieldInGetHashCode
+			}
+		}
+		public override bool Equals(object obj)
+		{
+			if (ReferenceEquals(null, obj)) return false;
+			if (ReferenceEquals(this, obj)) return true;
+			if (obj.GetType() != GetType()) return false;
+			
+			return IsEqual((Palette)obj);
+		}
 	}
 }

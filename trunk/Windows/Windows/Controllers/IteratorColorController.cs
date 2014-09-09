@@ -2,6 +2,7 @@ using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
+using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Forms;
 
 namespace Xyrus.Apophysis.Windows.Controllers
@@ -28,7 +29,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.IteratorOpacityDragPanel.ValueChanged += OnOpacityChanged;
 			View.IteratorDirectColorDragPanel.ValueChanged += OnDirectColorChanged;
 			View.IteratorColorScrollBar.ValueChanged += OnColorChanged;
-			View.IteratorPalettePictureBox.Paint += OnPalettePaint;
+			View.PaletteSelectComboBox.SelectedIndexChanged += OnPaletteSelected;
+
+			UpdateControls();
 		}
 		protected override void DetachView()
 		{
@@ -37,28 +40,17 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.IteratorOpacityDragPanel.ValueChanged -= OnOpacityChanged;
 			View.IteratorDirectColorDragPanel.ValueChanged -= OnDirectColorChanged;
 			View.IteratorColorScrollBar.ValueChanged -= OnColorChanged;
-			View.IteratorPalettePictureBox.Paint -= OnPalettePaint;
+			View.PaletteSelectComboBox.SelectedIndexChanged -= OnPaletteSelected;
 		}
 
-		private void OnPalettePaint(object sender, PaintEventArgs e)
+		private void OnPaletteSelected(object sender, EventArgs e)
 		{
-			if (mParent == null || (View.IteratorCanvas.SelectedIterator != null && View.IteratorCanvas.SelectedIterator.GroupIndex > 0))
+			var palette = View.PaletteSelectComboBox.SelectedItem as Palette;
+			if (mParent.Initializer.IsBusy || palette == null)
 				return;
 
-			var palette = mParent.Flame.Palette;
-			var w = (float)View.IteratorPalettePictureBox.ClientSize.Width;
-			var h = (float)View.IteratorPalettePictureBox.ClientSize.Height;
-
-			e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-
-			for (float pos = 0; pos < w; pos++)
-			{
-				var i = (int)System.Math.Round((palette.Length - 1) * pos / w);
-				using (var brush = new SolidBrush(palette[i]))
-				{
-					e.Graphics.FillRectangle(brush, pos, 0.0f, w - pos, h);
-				}
-			}
+			mParent.Flame.Palette = palette;
+			UpdateControls();
 		}
 		private void OnColorChanged(object sender, EventArgs e)
 		{
@@ -113,8 +105,22 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		public void UpdateControls()
 		{
-			View.IteratorPalettePictureBox.Refresh();
-			OnColorChanged(null, null);
+			if (!mParent.Initializer.IsBusy && mParent.Flame != null)
+			{
+				using (mParent.Initializer.Enter())
+				{
+					var index = View.PaletteSelectComboBox.Items.IndexOf(mParent.Flame.Palette);
+					if (index < 0)
+					{
+						View.PaletteSelectComboBox.Items.Add(mParent.Flame.Palette);
+						index = View.PaletteSelectComboBox.Items.Count - 1;
+					}
+
+					View.PaletteSelectComboBox.SelectedIndex = index;
+				}
+
+				OnColorChanged(null, null);
+			}
 		}
 	}
 }
