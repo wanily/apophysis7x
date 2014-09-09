@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using Xyrus.Apophysis.Calculation;
 using Xyrus.Apophysis.Windows.Controls;
 using Xyrus.Apophysis.Windows.Forms;
@@ -75,7 +76,21 @@ namespace Xyrus.Apophysis.Windows.Controllers
 					continue;
 				}
 
+				var color = SystemColors.Window;
+
+				if (variation is ExtendedVariation)
+				{
+					color = Color.AliceBlue;
+				}
+				else if (variation is ExternalVariation)
+				{
+					color = Color.FloralWhite;
+				}
+
 				View.VariationsGrid.Rows.Add(variation, variation.Weight.ToString(InputController.PreciseFormat, InputController.Culture));
+				View.VariationsGrid.Rows[View.VariationsGrid.RowCount - 1].Cells[0].Style.BackColor = color;
+				View.VariationsGrid.Rows[View.VariationsGrid.RowCount - 1].Cells[1].Style.BackColor = color;
+
 			}
 		}
 	}

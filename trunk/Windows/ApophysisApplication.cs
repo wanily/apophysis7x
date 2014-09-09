@@ -20,6 +20,8 @@ namespace Xyrus.Apophysis
 			VariationRegistry.Register<Swirl>();
 			VariationRegistry.Register<Test>();
 
+			VariationRegistry.RegisterDll(@"D:\Install\Apophysis\Bin\Plugins\falloff3.x64.dll");
+
 			using (var editor = new EditorController(new UndoController()))
 			{
 				editor.Initialize();

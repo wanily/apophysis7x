@@ -10,6 +10,15 @@ namespace Xyrus.Apophysis.Models
 	{
 		private readonly Dictionary<string, Variation> mVariationInstances;
 
+		~VariationCollection()
+		{
+			foreach (var instance in mVariationInstances.Values)
+			{
+				instance.Dispose();
+			}
+
+			mVariationInstances.Clear();
+		}
 		public VariationCollection() : base(new List<Variation>())
 		{
 			mVariationInstances = new Dictionary<string, Variation>();

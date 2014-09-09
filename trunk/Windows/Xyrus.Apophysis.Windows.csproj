@@ -65,6 +65,7 @@
     <Compile Include="Annotations\UsedImplicitlyAttribute.cs" />
     <Compile Include="ApophysisException.cs" />
     <Compile Include="ApophysisSettings.cs" />
+    <Compile Include="Calculation\ExtendedVariation.cs" />
     <Compile Include="Calculation\ExternalVariation.cs" />
     <Compile Include="Calculation\Variation.cs" />
     <Compile Include="Calculation\VariationRegistry.cs" />

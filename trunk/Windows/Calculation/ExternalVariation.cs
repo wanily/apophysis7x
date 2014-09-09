@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 
 namespace Xyrus.Apophysis.Calculation
 {
+	[PublicAPI]
 	public unsafe sealed class ExternalVariation : Variation
 	{
 		private const CallingConvention mConvention = CallingConvention.StdCall;
@@ -234,7 +235,7 @@ namespace Xyrus.Apophysis.Calculation
 			mSetVariable = (PluginVarSetVariableDelegate)Marshal.GetDelegateForFunctionPointer(GetProcAddress(mHModule, "PluginVarSetVariable"), typeof(PluginVarSetVariableDelegate));
 			mGetName = (PluginVarGetNameDelegate)Marshal.GetDelegateForFunctionPointer(GetProcAddress(mHModule, "PluginVarGetName"), typeof(PluginVarGetNameDelegate));
 			mGetNrVariables = (PluginVarGetNrVariablesDelegate)Marshal.GetDelegateForFunctionPointer(GetProcAddress(mHModule, "PluginVarGetNrVariables"), typeof(PluginVarGetNrVariablesDelegate));
-			mCalculate = (PluginVarCalculateDelegate)Marshal.GetDelegateForFunctionPointer(GetProcAddress(mHModule, "PluginVarCalculate"), typeof(PluginVarCalculateDelegate));
+			mCalculate = (PluginVarCalculateDelegate)Marshal.GetDelegateForFunctionPointer(GetProcAddress(mHModule, "PluginVarCalc"), typeof(PluginVarCalculateDelegate));
 			mPrepare = (PluginVarPrepareDelegate)Marshal.GetDelegateForFunctionPointer(GetProcAddress(mHModule, "PluginVarPrepare"), typeof(PluginVarPrepareDelegate));
 
 			mVp = mCreate();
@@ -249,19 +250,21 @@ namespace Xyrus.Apophysis.Calculation
 
 			mColor = (double*) Marshal.AllocHGlobal(sizeof (double)).ToPointer();
 
-			mInit = (PluginVarInitDcDelegate)Marshal.GetDelegateForFunctionPointer(GetProcAddress(mHModule, "PluginVarInitDC"), typeof(PluginVarInitDcDelegate));
-
-			if (mInit == null)
+			var init = GetProcAddress(mHModule, "PluginVarInitDC");
+			if (init != IntPtr.Zero)
 			{
-				mInitLegacy3D =
-					(PluginVarInit3DDelegate)
-						Marshal.GetDelegateForFunctionPointer(GetProcAddress(mHModule, "PluginVarInit3D"),
-							typeof (PluginVarInit3DDelegate));
-				if (mInitLegacy3D == null)
+				mInit = (PluginVarInitDcDelegate) Marshal.GetDelegateForFunctionPointer(init, typeof (PluginVarInitDcDelegate));
+			}
+			else
+			{
+				init = GetProcAddress(mHModule, "PluginVarInit3D");
+				if (init != IntPtr.Zero)
 				{
-					mInitLegacy =
-						(PluginVarInitDelegate)
-							Marshal.GetDelegateForFunctionPointer(GetProcAddress(mHModule, "PluginVarInit"), typeof (PluginVarInitDelegate));
+					mInitLegacy3D = (PluginVarInit3DDelegate) Marshal.GetDelegateForFunctionPointer(init, typeof (PluginVarInit3DDelegate));
+				}
+				else
+				{
+					mInitLegacy = (PluginVarInitDelegate) Marshal.GetDelegateForFunctionPointer(GetProcAddress(mHModule, "PluginVarInit"), typeof(PluginVarInitDelegate));
 				}
 			}
 		}
@@ -311,6 +314,11 @@ namespace Xyrus.Apophysis.Calculation
 			mPostZ = null;
 
 			mColor = null;
+		}
+
+		public Variation CreateInstance()
+		{
+			return new ExternalVariation(mDllPath);
 		}
 	}
 }

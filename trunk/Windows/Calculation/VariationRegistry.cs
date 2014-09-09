@@ -16,6 +16,15 @@ namespace Xyrus.Apophysis.Calculation
 			mVariationsByName = new Dictionary<string, Variation>();
 		}
 
+		public static void RegisterDll([NotNull] string dllPath)
+		{
+			var variation = new ExternalVariation(dllPath);
+			
+			mVariations.Add(variation);
+			mVariationsByName.Add(variation.Name, variation);
+
+			variation.Dispose();
+		}
 		public static void Register<T>() where T : Variation, new()
 		{
 			var instance = new T();
@@ -27,6 +36,12 @@ namespace Xyrus.Apophysis.Calculation
 		{
 			if (!mVariationsByName.ContainsKey(name))
 				throw new KeyNotFoundException();
+
+			var variation = mVariationsByName[name] as ExternalVariation;
+			if (variation != null)
+			{
+				return variation.CreateInstance();
+			}
 
 			return (Variation)Activator.CreateInstance(mVariationsByName[name].GetType());
 		}

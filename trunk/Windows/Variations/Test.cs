@@ -3,7 +3,7 @@ using Xyrus.Apophysis.Calculation;
 
 namespace Xyrus.Apophysis.Variations
 {
-	class Test : Variation
+	class Test : ExtendedVariation
 	{
 		private double mVariable;
 
