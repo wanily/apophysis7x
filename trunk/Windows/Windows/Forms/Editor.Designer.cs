@@ -45,6 +45,9 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mToolbarSeparator6 = new System.Windows.Forms.ToolStripSeparator();
 			this.TogglePostMatrixButton = new System.Windows.Forms.ToolStripButton();
 			this.AddFinalIteratorButton = new System.Windows.Forms.ToolStripButton();
+			this.mToolbarSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+			this.IteratorConvertToRegularButton = new System.Windows.Forms.ToolStripButton();
+			this.IteratorConvertToFinalButton = new System.Windows.Forms.ToolStripButton();
 			this.mSidebarSplitter = new System.Windows.Forms.SplitContainer();
 			this.mPreviewPanel = new System.Windows.Forms.Panel();
 			this.mPictureBevel = new System.Windows.Forms.Label();
@@ -103,7 +106,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorOpacityTextBox = new System.Windows.Forms.TextBox();
 			this.IteratorColorSpeedTextBox = new System.Windows.Forms.TextBox();
 			this.IteratorColorScrollBar = new System.Windows.Forms.HScrollBar();
-			this.mPalettePictureBox = new System.Windows.Forms.PictureBox();
+			this.IteratorPalettePictureBox = new System.Windows.Forms.PictureBox();
 			this.IteratorColorTextBox = new System.Windows.Forms.TextBox();
 			this.mPaletteBevel = new System.Windows.Forms.Label();
 			this.mIteratorPropertyPanel = new System.Windows.Forms.Panel();
@@ -113,9 +116,6 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorSelectionComboBox = new System.Windows.Forms.ComboBox();
 			this.mIteratorSelectLabel = new System.Windows.Forms.Label();
 			this.mToolbarImages = new System.Windows.Forms.ImageList(this.components);
-			this.mToolbarSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-			this.IteratorConvertToRegularButton = new System.Windows.Forms.ToolStripButton();
-			this.IteratorConvertToFinalButton = new System.Windows.Forms.ToolStripButton();
 			this.IteratorCanvas = new Xyrus.Apophysis.Windows.Controls.EditorCanvas();
 			this.mSettings = new Xyrus.Apophysis.Windows.Controls.EditorSettings();
 			this.IteratorDirectColorDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
@@ -140,7 +140,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mPreAffineGroupBox.SuspendLayout();
 			this.ColorTab.SuspendLayout();
 			this.mIteratorColorGroupBox.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.mPalettePictureBox)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.IteratorPalettePictureBox)).BeginInit();
 			this.mIteratorPropertyPanel.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -394,6 +394,29 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.AddFinalIteratorButton.Name = "AddFinalIteratorButton";
 			this.AddFinalIteratorButton.Size = new System.Drawing.Size(23, 22);
 			this.AddFinalIteratorButton.Text = "Add final transform";
+			// 
+			// mToolbarSeparator7
+			// 
+			this.mToolbarSeparator7.Name = "mToolbarSeparator7";
+			this.mToolbarSeparator7.Size = new System.Drawing.Size(6, 25);
+			// 
+			// IteratorConvertToRegularButton
+			// 
+			this.IteratorConvertToRegularButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.IteratorConvertToRegularButton.Image = ((System.Drawing.Image)(resources.GetObject("IteratorConvertToRegularButton.Image")));
+			this.IteratorConvertToRegularButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.IteratorConvertToRegularButton.Name = "IteratorConvertToRegularButton";
+			this.IteratorConvertToRegularButton.Size = new System.Drawing.Size(23, 22);
+			this.IteratorConvertToRegularButton.Text = "Convert to regular transform";
+			// 
+			// IteratorConvertToFinalButton
+			// 
+			this.IteratorConvertToFinalButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.IteratorConvertToFinalButton.Image = ((System.Drawing.Image)(resources.GetObject("IteratorConvertToFinalButton.Image")));
+			this.IteratorConvertToFinalButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.IteratorConvertToFinalButton.Name = "IteratorConvertToFinalButton";
+			this.IteratorConvertToFinalButton.Size = new System.Drawing.Size(23, 22);
+			this.IteratorConvertToFinalButton.Text = "Convert to final transform";
 			// 
 			// mSidebarSplitter
 			// 
@@ -1035,7 +1058,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mIteratorColorGroupBox.Controls.Add(this.IteratorColorSpeedTextBox);
 			this.mIteratorColorGroupBox.Controls.Add(this.IteratorColorSpeedDragPanel);
 			this.mIteratorColorGroupBox.Controls.Add(this.IteratorColorScrollBar);
-			this.mIteratorColorGroupBox.Controls.Add(this.mPalettePictureBox);
+			this.mIteratorColorGroupBox.Controls.Add(this.IteratorPalettePictureBox);
 			this.mIteratorColorGroupBox.Controls.Add(this.IteratorColorTextBox);
 			this.mIteratorColorGroupBox.Controls.Add(this.IteratorColorDragPanel);
 			this.mIteratorColorGroupBox.Controls.Add(this.mPaletteBevel);
@@ -1086,16 +1109,16 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorColorScrollBar.Size = new System.Drawing.Size(251, 17);
 			this.IteratorColorScrollBar.TabIndex = 9;
 			// 
-			// mPalettePictureBox
+			// IteratorPalettePictureBox
 			// 
-			this.mPalettePictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.IteratorPalettePictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.mPalettePictureBox.BackColor = System.Drawing.Color.Black;
-			this.mPalettePictureBox.Location = new System.Drawing.Point(11, 44);
-			this.mPalettePictureBox.Name = "mPalettePictureBox";
-			this.mPalettePictureBox.Size = new System.Drawing.Size(249, 18);
-			this.mPalettePictureBox.TabIndex = 8;
-			this.mPalettePictureBox.TabStop = false;
+			this.IteratorPalettePictureBox.BackColor = System.Drawing.SystemColors.Control;
+			this.IteratorPalettePictureBox.Location = new System.Drawing.Point(12, 44);
+			this.IteratorPalettePictureBox.Name = "IteratorPalettePictureBox";
+			this.IteratorPalettePictureBox.Size = new System.Drawing.Size(249, 18);
+			this.IteratorPalettePictureBox.TabIndex = 8;
+			this.IteratorPalettePictureBox.TabStop = false;
 			// 
 			// IteratorColorTextBox
 			// 
@@ -1221,29 +1244,6 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mToolbarImages.Images.SetKeyName(22, "ResetIteratorAngle.bmp");
 			this.mToolbarImages.Images.SetKeyName(23, "ResetIteratorScale.bmp");
 			this.mToolbarImages.Images.SetKeyName(24, "ToggleAutoZoom.bmp");
-			// 
-			// mToolbarSeparator7
-			// 
-			this.mToolbarSeparator7.Name = "mToolbarSeparator7";
-			this.mToolbarSeparator7.Size = new System.Drawing.Size(6, 25);
-			// 
-			// IteratorConvertToRegularButton
-			// 
-			this.IteratorConvertToRegularButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.IteratorConvertToRegularButton.Image = ((System.Drawing.Image)(resources.GetObject("IteratorConvertToRegularButton.Image")));
-			this.IteratorConvertToRegularButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.IteratorConvertToRegularButton.Name = "IteratorConvertToRegularButton";
-			this.IteratorConvertToRegularButton.Size = new System.Drawing.Size(23, 22);
-			this.IteratorConvertToRegularButton.Text = "Convert to regular transform";
-			// 
-			// IteratorConvertToFinalButton
-			// 
-			this.IteratorConvertToFinalButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.IteratorConvertToFinalButton.Image = ((System.Drawing.Image)(resources.GetObject("IteratorConvertToFinalButton.Image")));
-			this.IteratorConvertToFinalButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.IteratorConvertToFinalButton.Name = "IteratorConvertToFinalButton";
-			this.IteratorConvertToFinalButton.Size = new System.Drawing.Size(23, 22);
-			this.IteratorConvertToFinalButton.Text = "Convert to final transform";
 			// 
 			// IteratorCanvas
 			// 
@@ -1402,7 +1402,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.ColorTab.ResumeLayout(false);
 			this.mIteratorColorGroupBox.ResumeLayout(false);
 			this.mIteratorColorGroupBox.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.mPalettePictureBox)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.IteratorPalettePictureBox)).EndInit();
 			this.mIteratorPropertyPanel.ResumeLayout(false);
 			this.mIteratorPropertyPanel.PerformLayout();
 			this.ResumeLayout(false);
@@ -1427,7 +1427,6 @@ namespace Xyrus.Apophysis.Windows.Forms
 		private System.Windows.Forms.GroupBox mIteratorColorGroupBox;
 		public System.Windows.Forms.TextBox IteratorColorTextBox;
 		public DragPanel IteratorColorDragPanel;
-		private System.Windows.Forms.PictureBox mPalettePictureBox;
 		public System.Windows.Forms.TextBox IteratorColorSpeedTextBox;
 		public DragPanel IteratorColorSpeedDragPanel;
 		public System.Windows.Forms.TextBox IteratorOpacityTextBox;
@@ -1515,6 +1514,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 		private System.Windows.Forms.ToolStripSeparator mToolbarSeparator7;
 		public System.Windows.Forms.ToolStripButton IteratorConvertToRegularButton;
 		public System.Windows.Forms.ToolStripButton IteratorConvertToFinalButton;
+		public System.Windows.Forms.PictureBox IteratorPalettePictureBox;
 	}
 }
 

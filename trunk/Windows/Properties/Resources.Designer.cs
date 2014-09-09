@@ -101,6 +101,23 @@ namespace Xyrus.Apophysis.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to south-sea-bather {
+        ///gradient:
+        ///  smooth=no index=0 color=15461049 index=7 color=15464141 index=14
+        ///  color=15462098 index=15 color=14807761 index=17 color=15463126 index=18
+        ///  color=16709341 index=20 color=16052949 index=21 color=16055026 index=23
+        ///  color=15463138 index=26 color=15463126 index=28 color=16052950 index=32
+        ///  color=16051917 index=34 color=15462093 index=37 color=15462089 index=39
+        ///  color=16051913 index=48 color=16053969 index=53 color=16052925 index=57
+        ///  color=16052917 index=61 color=160529 [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Flam3ColorMaps {
+            get {
+                return ResourceManager.GetString("Flam3ColorMaps", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap FlipAllHorizontal {

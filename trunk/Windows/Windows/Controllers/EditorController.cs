@@ -172,6 +172,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			mToolbarController.UpdateButtonStates();
 		}
+		internal void UpdateColor()
+		{
+			mColorController.UpdateControls();
+		}
 		internal void AfterReset()
 		{
 			mSelectionController.BuildIteratorComboBox();

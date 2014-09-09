@@ -1,4 +1,7 @@
 using System;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Windows.Forms;
 using Xyrus.Apophysis.Windows.Forms;
 
 namespace Xyrus.Apophysis.Windows.Controllers
@@ -25,6 +28,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.IteratorOpacityDragPanel.ValueChanged += OnOpacityChanged;
 			View.IteratorDirectColorDragPanel.ValueChanged += OnDirectColorChanged;
 			View.IteratorColorScrollBar.ValueChanged += OnColorChanged;
+			View.IteratorPalettePictureBox.Paint += OnPalettePaint;
 		}
 		protected override void DetachView()
 		{
@@ -33,8 +37,29 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.IteratorOpacityDragPanel.ValueChanged -= OnOpacityChanged;
 			View.IteratorDirectColorDragPanel.ValueChanged -= OnDirectColorChanged;
 			View.IteratorColorScrollBar.ValueChanged -= OnColorChanged;
+			View.IteratorPalettePictureBox.Paint -= OnPalettePaint;
 		}
 
+		private void OnPalettePaint(object sender, PaintEventArgs e)
+		{
+			if (mParent == null || (View.IteratorCanvas.SelectedIterator != null && View.IteratorCanvas.SelectedIterator.GroupIndex > 0))
+				return;
+
+			var palette = mParent.Flame.Palette;
+			var w = (float)View.IteratorPalettePictureBox.ClientSize.Width;
+			var h = (float)View.IteratorPalettePictureBox.ClientSize.Height;
+
+			e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+			for (float pos = 0; pos < w; pos++)
+			{
+				var i = (int)System.Math.Round((palette.Length - 1) * pos / w);
+				using (var brush = new SolidBrush(palette[i]))
+				{
+					e.Graphics.FillRectangle(brush, pos, 0.0f, w - pos, h);
+				}
+			}
+		}
 		private void OnColorChanged(object sender, EventArgs e)
 		{
 			var iterator = View.IteratorCanvas.SelectedIterator;
@@ -57,6 +82,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 					View.IteratorColorDragPanel.Value = iterator.Color;
 				}
 			}
+
+			var color = (int)System.Math.Round(iterator.Color * (mParent.Flame.Palette.Length - 1));
+			View.IteratorColorDragPanel.BackColor = iterator.GroupIndex > 0 ? SystemColors.Control : mParent.Flame.Palette[color];
 		}
 		private void OnColorSpeedChanged(object sender, EventArgs e)
 		{
@@ -81,6 +109,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				return;
 
 			iterator.DirectColor = View.IteratorDirectColorDragPanel.Value;
+		}
+
+		public void UpdateControls()
+		{
+			View.IteratorPalettePictureBox.Refresh();
+			OnColorChanged(null, null);
 		}
 	}
 }

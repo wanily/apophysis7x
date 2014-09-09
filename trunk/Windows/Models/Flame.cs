@@ -9,14 +9,18 @@ namespace Xyrus.Apophysis.Models
 	public class Flame
 	{
 		private IteratorCollection mIterators;
+		private Palette mPalette;
+
 		private static int mCounter;
 		private int mIndex;
 		private string mName;
 
 		public Flame()
 		{
-			mIterators = new IteratorCollection(this);
 			mIndex = ++mCounter;
+
+			mIterators = new IteratorCollection(this);
+			mPalette = Palette.GetRandomPalette(this);
 		}
 
 		public string Name
@@ -46,6 +50,10 @@ namespace Xyrus.Apophysis.Models
 		{
 			get { return mIterators; }
 		}
+		public Palette Palette
+		{
+			get { return mPalette; }
+		}
 
 		public Flame Copy()
 		{
@@ -55,6 +63,7 @@ namespace Xyrus.Apophysis.Models
 			copy.mIndex = mIndex;
 			copy.Name = mName;
 			copy.mIterators = mIterators.Copy(copy);
+			copy.mPalette = mPalette.Copy();
 
 			return copy;
 		}
@@ -72,18 +81,27 @@ namespace Xyrus.Apophysis.Models
 
 			var iterators = element.Descendants(XName.Get("xform"));
 			iterators = iterators.Concat(element.Descendants(XName.Get("finalxform")));
-
 			Iterators.ReadXml(iterators);
+
+			var palette = element.Descendants(XName.Get("palette")).FirstOrDefault();
+			if (palette == null)
+			{
+				throw new ApophysisException("No descendant node \"palette\" found");
+			}
+			Palette.ReadData(palette.Value);
 		}
 
 		public bool IsEqual([NotNull] Flame flame)
 		{
 			if (flame == null) throw new ArgumentNullException("flame");
 
-			if (!mIterators.IsEqual(flame.mIterators))
+			if (!Equals(mName, flame.mName))
 				return false;
 
-			if (!Equals(mName, flame.mName))
+			if (!mPalette.IsEqual(flame.mPalette))
+				return false;
+
+			if (!mIterators.IsEqual(flame.mIterators))
 				return false;
 
 			return true;

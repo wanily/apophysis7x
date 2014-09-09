@@ -68,6 +68,7 @@
     <Compile Include="Calculation\Variable.cs" />
     <Compile Include="Calculation\Variation.cs" />
     <Compile Include="Calculation\VariationRegistry.cs" />
+    <Compile Include="Models\Palette.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -306,6 +307,7 @@
     <None Include="Windows\Resources\Icons\ScaleUp.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Flam3ColorMaps.txt" />
     <Content Include="Windows\Resources\Icons\ToggleRulers.png" />
     <EmbeddedResource Include="Windows\Resources\Toolbar\Editor\AddFinalIterator.bmp" />
     <EmbeddedResource Include="Windows\Resources\Toolbar\Editor\FinalIterator.bmp" />
