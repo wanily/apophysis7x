@@ -72,15 +72,15 @@ namespace Xyrus.Apophysis.Calculation
 			GC.SuppressFinalize(this);
 		}
 
-		public virtual double GetVariable(string name)
+		public virtual double GetVariable([NotNull] string name)
 		{
 			return 0.0;
 		}
-		public virtual double SetVariable(string name, double value)
+		public virtual double SetVariable([NotNull] string name, double value)
 		{
 			return 0.0;
 		}
-		public virtual double ResetVariable(string name)
+		public virtual double ResetVariable([NotNull] string name)
 		{
 			return 0.0;
 		}

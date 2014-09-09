@@ -78,6 +78,7 @@
     <Compile Include="Variations\Linear.cs" />
     <Compile Include="Variations\Spherical.cs" />
     <Compile Include="Variations\Swirl.cs" />
+    <Compile Include="Variations\Test.cs" />
     <Compile Include="Windows\Common\ChainItem.cs" />
     <Compile Include="Windows\Common\ControlChain.cs" />
     <Compile Include="Windows\Common\ControlEventInterceptor.cs" />
@@ -94,15 +95,21 @@
     <Compile Include="Windows\Controllers\IteratorPointEditController.cs" />
     <Compile Include="Windows\Controllers\IteratorPropertiesController.cs" />
     <Compile Include="Windows\Controllers\IteratorSelectionController.cs" />
+    <Compile Include="Windows\Controllers\IteratorVariablesController.cs" />
     <Compile Include="Windows\Controllers\IteratorVariationsController.cs" />
     <Compile Include="Windows\Controllers\IteratorVectorEditController.cs" />
     <Compile Include="Windows\Controllers\UndoController.cs" />
+    <Compile Include="Windows\Controls\CellValueChangedEventArgs.cs" />
+    <Compile Include="Windows\Controls\CellValueChangedEventHandler.cs" />
+    <Compile Include="Windows\Controls\CellValueResetEventArgs.cs" />
+    <Compile Include="Windows\Controls\CellValueResetEventHandler.cs" />
     <Compile Include="Windows\Controls\DragGrid.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Windows\Controls\DragGrid.Designer.cs">
       <DependentUpon>DragGrid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Controls\DragGridResetMode.cs" />
     <Compile Include="Windows\Controls\DragPanel.cs">
       <SubType>Component</SubType>
     </Compile>

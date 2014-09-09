@@ -20,6 +20,11 @@ namespace Xyrus.Apophysis.Models
 
 				mVariationInstances.Add(variation, instance);
 				Items.Add(instance);
+
+				foreach (var variable in instance.EnumerateVariables())
+				{
+					instance.ResetVariable(variable);
+				}
 			}
 		}
 

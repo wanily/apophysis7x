@@ -18,6 +18,7 @@ namespace Xyrus.Apophysis
 			VariationRegistry.Register<Linear>();
 			VariationRegistry.Register<Spherical>();
 			VariationRegistry.Register<Swirl>();
+			VariationRegistry.Register<Test>();
 
 			using (var editor = new EditorController(new UndoController()))
 			{

@@ -79,7 +79,7 @@ namespace Xyrus.Apophysis.Models
 			copy.mVariations.ClearWeights();
 			foreach (var variation in mVariations.Where(x => System.Math.Abs(x.Weight) > double.Epsilon))
 			{
-				variation.Weight = variation.Weight;
+				copy.mVariations.SetWeight(variation.Name, variation.Weight);
 
 				var variables = variation.EnumerateVariables();
 				foreach (var variable in variables)

@@ -22,6 +22,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		private IteratorPointEditController mPointEditController;
 		private IteratorVectorEditController mVectorEditController;
 		private IteratorVariationsController mVariationsController;
+		private IteratorVariablesController mVariablesController;
 
 		private Lock mInitialize = new Lock();
 		private EditorSettings mSettings;
@@ -41,11 +42,18 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mPointEditController = new IteratorPointEditController(View, this);
 			mVectorEditController = new IteratorVectorEditController(View, this);
 			mVariationsController = new IteratorVariationsController(View, this);
+			mVariablesController = new IteratorVariablesController(View, this);
 		}
 		protected override void DisposeOverride(bool disposing)
 		{
 			if (disposing)
 			{
+				if (mVariablesController != null)
+				{
+					mVariablesController.Dispose();
+					mVariablesController = null;
+				}
+
 				if (mVariationsController != null)
 				{
 					mVariationsController.Dispose();
@@ -139,6 +147,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mPointEditController.Initialize();
 			mVectorEditController.Initialize();
 			mVariationsController.Initialize();
+			mVariablesController.Initialize();
 
 			View.IteratorCanvas.Edit += OnCanvasEdit;
 			View.IteratorCanvas.ActiveMatrixChanged += OnActiveMatrixChanged;
@@ -185,6 +194,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			mVariationsController.UpdateList();
 		}
+		internal void UpdateVariables()
+		{
+			mVariablesController.UpdateList();
+		}
 		internal void UpdateColor()
 		{
 			mColorController.UpdateControls();
@@ -193,6 +206,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			mSelectionController.BuildIteratorComboBox();
 			mSelectionController.SelectIterator(mFlame.Iterators.First());
+
 			UpdateToolbar();
 		}
 

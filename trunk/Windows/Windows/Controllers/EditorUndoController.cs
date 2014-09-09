@@ -47,6 +47,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.IteratorPostAffineXyTextBox.LostFocus += OnRequestCommit;
 			View.IteratorPostAffineYxTextBox.LostFocus += OnRequestCommit;
 			View.IteratorPostAffineYyTextBox.LostFocus += OnRequestCommit;
+			View.VariablesGrid.CellEndEdit += OnRequestCommit;
+			View.VariationsGrid.CellEndEdit += OnRequestCommit;
+			View.ClearVariationsButton.Click += OnRequestCommit;
 		}
 		protected override void DetachView()
 		{
@@ -77,6 +80,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.IteratorPostAffineXyTextBox.LostFocus -= OnRequestCommit;
 			View.IteratorPostAffineYxTextBox.LostFocus -= OnRequestCommit;
 			View.IteratorPostAffineYyTextBox.LostFocus -= OnRequestCommit;
+			View.VariablesGrid.CellEndEdit -= OnRequestCommit;
+			View.VariationsGrid.CellEndEdit -= OnRequestCommit;
+			View.ClearVariationsButton.Click -= OnRequestCommit;
 		}
 
 		private void OnRequestCommit(object sender, EventArgs e)
