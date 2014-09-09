@@ -48,7 +48,6 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mToolbarSeparator7 = new System.Windows.Forms.ToolStripSeparator();
 			this.IteratorConvertToRegularButton = new System.Windows.Forms.ToolStripButton();
 			this.IteratorConvertToFinalButton = new System.Windows.Forms.ToolStripButton();
-			this.mToolbarImages = new System.Windows.Forms.ImageList(this.components);
 			this.IteratorCanvas = new Xyrus.Apophysis.Windows.Controls.EditorCanvas();
 			this.mSettings = new Xyrus.Apophysis.Windows.Controls.EditorSettings();
 			this.mSidebarSplitter = new System.Windows.Forms.SplitContainer();
@@ -104,8 +103,8 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorPreAffineXyTextBox = new System.Windows.Forms.TextBox();
 			this.IteratorPreAffineXxTextBox = new System.Windows.Forms.TextBox();
 			this.ColorTab = new System.Windows.Forms.TabPage();
-			this.PaletteSelectComboBox = new Xyrus.Apophysis.Windows.Controls.PaletteSelectComboBox();
 			this.mIteratorColorGroupBox = new System.Windows.Forms.GroupBox();
+			this.PaletteSelectComboBox = new Xyrus.Apophysis.Windows.Controls.PaletteSelectComboBox();
 			this.IteratorDirectColorTextBox = new System.Windows.Forms.TextBox();
 			this.IteratorDirectColorDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.IteratorOpacityTextBox = new System.Windows.Forms.TextBox();
@@ -122,6 +121,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mIteratorNameLabel = new System.Windows.Forms.Label();
 			this.IteratorSelectionComboBox = new Xyrus.Apophysis.Windows.Controls.IteratorSelectComboBox();
 			this.mIteratorSelectLabel = new System.Windows.Forms.Label();
+			this.mToolbarImages = new System.Windows.Forms.ImageList(this.components);
 			this.mRootSplitter.Panel1.SuspendLayout();
 			this.mRootSplitter.Panel2.SuspendLayout();
 			this.mRootSplitter.SuspendLayout();
@@ -415,36 +415,6 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorConvertToFinalButton.Name = "IteratorConvertToFinalButton";
 			this.IteratorConvertToFinalButton.Size = new System.Drawing.Size(23, 22);
 			this.IteratorConvertToFinalButton.Text = "Convert to final transform";
-			// 
-			// mToolbarImages
-			// 
-			this.mToolbarImages.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("mToolbarImages.ImageStream")));
-			this.mToolbarImages.TransparentColor = System.Drawing.Color.Fuchsia;
-			this.mToolbarImages.Images.SetKeyName(0, "ResetAll.bmp");
-			this.mToolbarImages.Images.SetKeyName(1, "NewIterator.bmp");
-			this.mToolbarImages.Images.SetKeyName(2, "DuplicateIterator.bmp");
-			this.mToolbarImages.Images.SetKeyName(3, "RemoveIterator.bmp");
-			this.mToolbarImages.Images.SetKeyName(4, "Undo.bmp");
-			this.mToolbarImages.Images.SetKeyName(5, "Redo.bmp");
-			this.mToolbarImages.Images.SetKeyName(6, "CopyIterator.bmp");
-			this.mToolbarImages.Images.SetKeyName(7, "PasteIterator.bmp");
-			this.mToolbarImages.Images.SetKeyName(8, "SelectMode.bmp");
-			this.mToolbarImages.Images.SetKeyName(9, "MoveMode.bmp");
-			this.mToolbarImages.Images.SetKeyName(10, "RotateMode.bmp");
-			this.mToolbarImages.Images.SetKeyName(11, "ScaleMode.bmp");
-			this.mToolbarImages.Images.SetKeyName(12, "ToggleWorldPivot.bmp");
-			this.mToolbarImages.Images.SetKeyName(13, "FlipAllHorizontal.bmp");
-			this.mToolbarImages.Images.SetKeyName(14, "FlipAllVertical.bmp");
-			this.mToolbarImages.Images.SetKeyName(15, "ToggleVariationPrevie.bmp");
-			this.mToolbarImages.Images.SetKeyName(16, "TogglePostMatrix.bmp");
-			this.mToolbarImages.Images.SetKeyName(17, "ToggleFinalIterator.bmp");
-			this.mToolbarImages.Images.SetKeyName(18, "LinkIterator.bmp");
-			this.mToolbarImages.Images.SetKeyName(19, "LockTransformAxes.bmp");
-			this.mToolbarImages.Images.SetKeyName(20, "ResetIterator.bmp");
-			this.mToolbarImages.Images.SetKeyName(21, "ResetIteratorOrigin.bmp");
-			this.mToolbarImages.Images.SetKeyName(22, "ResetIteratorAngle.bmp");
-			this.mToolbarImages.Images.SetKeyName(23, "ResetIteratorScale.bmp");
-			this.mToolbarImages.Images.SetKeyName(24, "ToggleAutoZoom.bmp");
 			// 
 			// IteratorCanvas
 			// 
@@ -1110,17 +1080,6 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.ColorTab.TabIndex = 0;
 			this.ColorTab.Text = "Color";
 			// 
-			// PaletteSelectComboBox
-			// 
-			this.PaletteSelectComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-			this.PaletteSelectComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.PaletteSelectComboBox.FormattingEnabled = true;
-			this.PaletteSelectComboBox.ItemHeight = 15;
-			this.PaletteSelectComboBox.Location = new System.Drawing.Point(11, 43);
-			this.PaletteSelectComboBox.Name = "PaletteSelectComboBox";
-			this.PaletteSelectComboBox.Size = new System.Drawing.Size(251, 21);
-			this.PaletteSelectComboBox.TabIndex = 1;
-			// 
 			// mIteratorColorGroupBox
 			// 
 			this.mIteratorColorGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -1140,6 +1099,17 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mIteratorColorGroupBox.Size = new System.Drawing.Size(273, 177);
 			this.mIteratorColorGroupBox.TabIndex = 0;
 			this.mIteratorColorGroupBox.TabStop = false;
+			// 
+			// PaletteSelectComboBox
+			// 
+			this.PaletteSelectComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+			this.PaletteSelectComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.PaletteSelectComboBox.FormattingEnabled = true;
+			this.PaletteSelectComboBox.ItemHeight = 15;
+			this.PaletteSelectComboBox.Location = new System.Drawing.Point(11, 62);
+			this.PaletteSelectComboBox.Name = "PaletteSelectComboBox";
+			this.PaletteSelectComboBox.Size = new System.Drawing.Size(251, 21);
+			this.PaletteSelectComboBox.TabIndex = 1;
 			// 
 			// IteratorDirectColorTextBox
 			// 
@@ -1230,7 +1200,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorColorScrollBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.IteratorColorScrollBar.LargeChange = 1;
-			this.IteratorColorScrollBar.Location = new System.Drawing.Point(11, 67);
+			this.IteratorColorScrollBar.Location = new System.Drawing.Point(11, 42);
 			this.IteratorColorScrollBar.Maximum = 1000;
 			this.IteratorColorScrollBar.Name = "IteratorColorScrollBar";
 			this.IteratorColorScrollBar.Size = new System.Drawing.Size(251, 17);
@@ -1355,6 +1325,36 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mIteratorSelectLabel.TabIndex = 0;
 			this.mIteratorSelectLabel.Text = "Transform:";
 			this.mIteratorSelectLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// mToolbarImages
+			// 
+			this.mToolbarImages.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("mToolbarImages.ImageStream")));
+			this.mToolbarImages.TransparentColor = System.Drawing.Color.Fuchsia;
+			this.mToolbarImages.Images.SetKeyName(0, "ResetAll.bmp");
+			this.mToolbarImages.Images.SetKeyName(1, "NewIterator.bmp");
+			this.mToolbarImages.Images.SetKeyName(2, "DuplicateIterator.bmp");
+			this.mToolbarImages.Images.SetKeyName(3, "RemoveIterator.bmp");
+			this.mToolbarImages.Images.SetKeyName(4, "Undo.bmp");
+			this.mToolbarImages.Images.SetKeyName(5, "Redo.bmp");
+			this.mToolbarImages.Images.SetKeyName(6, "CopyIterator.bmp");
+			this.mToolbarImages.Images.SetKeyName(7, "PasteIterator.bmp");
+			this.mToolbarImages.Images.SetKeyName(8, "SelectMode.bmp");
+			this.mToolbarImages.Images.SetKeyName(9, "MoveMode.bmp");
+			this.mToolbarImages.Images.SetKeyName(10, "RotateMode.bmp");
+			this.mToolbarImages.Images.SetKeyName(11, "ScaleMode.bmp");
+			this.mToolbarImages.Images.SetKeyName(12, "ToggleWorldPivot.bmp");
+			this.mToolbarImages.Images.SetKeyName(13, "FlipAllHorizontal.bmp");
+			this.mToolbarImages.Images.SetKeyName(14, "FlipAllVertical.bmp");
+			this.mToolbarImages.Images.SetKeyName(15, "ToggleVariationPrevie.bmp");
+			this.mToolbarImages.Images.SetKeyName(16, "TogglePostMatrix.bmp");
+			this.mToolbarImages.Images.SetKeyName(17, "ToggleFinalIterator.bmp");
+			this.mToolbarImages.Images.SetKeyName(18, "LinkIterator.bmp");
+			this.mToolbarImages.Images.SetKeyName(19, "LockTransformAxes.bmp");
+			this.mToolbarImages.Images.SetKeyName(20, "ResetIterator.bmp");
+			this.mToolbarImages.Images.SetKeyName(21, "ResetIteratorOrigin.bmp");
+			this.mToolbarImages.Images.SetKeyName(22, "ResetIteratorAngle.bmp");
+			this.mToolbarImages.Images.SetKeyName(23, "ResetIteratorScale.bmp");
+			this.mToolbarImages.Images.SetKeyName(24, "ToggleAutoZoom.bmp");
 			// 
 			// Editor
 			// 

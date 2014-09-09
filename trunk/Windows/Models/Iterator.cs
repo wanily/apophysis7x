@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Xml.Linq;
+using Xyrus.Apophysis.Calculation;
 
 namespace Xyrus.Apophysis.Models
 {
@@ -12,6 +14,8 @@ namespace Xyrus.Apophysis.Models
 
 		private AffineTransform mPreAffine;
 		private AffineTransform mPostAffine;
+
+		private VariationCollection mVariations;
 
 		private string mName;
 		private double mWeight;
@@ -25,7 +29,9 @@ namespace Xyrus.Apophysis.Models
 		{
 			if (hostingFlame == null) throw new ArgumentNullException("hostingFlame");
 
+			mVariations = new VariationCollection();
 			mFlame = hostingFlame;
+
 			Reset();
 		}
 
@@ -40,6 +46,9 @@ namespace Xyrus.Apophysis.Models
 			mColorSpeed = 0.0;
 			mOpacity = 1.0;
 			mDirectColor = 1.0;
+
+			mVariations.ClearWeights();
+			mVariations.SetWeight("linear", 1.0);
 		}
 		public Iterator Copy()
 		{
@@ -66,6 +75,19 @@ namespace Xyrus.Apophysis.Models
 			copy.PostAffine.Matrix.X.Y = PostAffine.Matrix.X.Y;
 			copy.PostAffine.Matrix.Y.X = PostAffine.Matrix.Y.X;
 			copy.PostAffine.Matrix.Y.Y = PostAffine.Matrix.Y.Y;
+
+			copy.mVariations.ClearWeights();
+			foreach (var variation in mVariations.Where(x => System.Math.Abs(x.Weight) > double.Epsilon))
+			{
+				variation.Weight = variation.Weight;
+
+				var variables = variation.EnumerateVariables();
+				foreach (var variable in variables)
+				{
+					var value = variation.GetVariable(variable);
+					copy.mVariations.SetVariable(variable, value);
+				}
+			}
 
 			return copy;
 		}
@@ -197,6 +219,11 @@ namespace Xyrus.Apophysis.Models
 			}
 		}
 
+		public VariationCollection Variations
+		{
+			get { return mVariations; }
+		}
+
 		private double ParseFloat([NotNull] XAttribute attribute, double defaultValue = 0)
 		{
 			if (attribute == null) throw new ArgumentNullException("attribute");
@@ -238,6 +265,8 @@ namespace Xyrus.Apophysis.Models
 
 			var elementName = element.Name.ToString().ToLower();
 			var elementNames = new[] {"xform", "finalxform"};
+
+			string[] knownNames = { "name", "weight", "color", "symmetry", "opacity", "var_color", "coefs", "post" };
 
 			int groupIndex;
 
@@ -348,6 +377,29 @@ namespace Xyrus.Apophysis.Models
 				PostAffine.Origin.X = vector[4];
 				PostAffine.Origin.Y = -vector[5];
 			}
+
+			Variations.ClearWeights();
+
+			var potentialVariations = element.Attributes().Where(x => !knownNames.Contains(x.Name.ToString().ToLower()));
+			foreach (var attribute in potentialVariations)
+			{
+				var attributeName = attribute.Name.ToString();
+				var attributeValue = ParseFloat(attribute);
+
+				if (VariationRegistry.IsVariation(attributeName))
+				{
+					mVariations.SetWeight(attributeName, attributeValue);
+				}
+				else if (VariationRegistry.IsVariable(attributeName))
+				{
+					mVariations.SetVariable(attributeName, attributeValue);
+				}
+				else
+				{
+					//todo
+					Trace.TraceError("Could not process attribute: {0}", attributeName);
+				}
+			}
 		}
 		public bool IsEqual([NotNull] Iterator iterator)
 		{
@@ -371,10 +423,16 @@ namespace Xyrus.Apophysis.Models
 			if (!Equals(mDirectColor, iterator.mDirectColor))
 				return false;
 
+			if (!Equals(mGroupIndex, iterator.mGroupIndex))
+				return false;
+
 			if (!mPreAffine.IsEqual(iterator.mPreAffine))
 				return false;
 
 			if (!mPostAffine.IsEqual(iterator.mPostAffine))
+				return false;
+
+			if (!mVariations.IsEqual(iterator.mVariations))
 				return false;
 
 			return true;

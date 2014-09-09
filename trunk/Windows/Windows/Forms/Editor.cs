@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Windows.Controllers;
-using Xyrus.Apophysis.Windows.Visuals;
+using Xyrus.Apophysis.Windows.Input;
 
 namespace Xyrus.Apophysis.Windows.Forms
 {
@@ -35,6 +35,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 				KeyHandler(keyData);
 			return base.ProcessCmdKey(ref msg, keyData);
 		}
+
 
 		private void OnNumericTextBoxKeyPress(object sender, KeyPressEventArgs e)
 		{

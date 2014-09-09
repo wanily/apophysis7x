@@ -33,11 +33,24 @@ namespace Xyrus.Apophysis.Calculation
 
 		public static bool IsVariable(string name)
 		{
-			return mVariations.Any(x => x.HasVariable(name));
+			return mVariations.Any(x => x.EnumerateVariables().Any(y => Equals((y ?? string.Empty).ToLower(), name.ToLower())));
 		}
 		public static bool IsVariation(string name)
 		{
 			return mVariationsByName.ContainsKey(name);
+		}
+
+		public static IEnumerable<string> GetVariationNames()
+		{
+			return mVariationsByName.Keys;
+		}
+		public static string GetVariationNameForVariable(string variableName)
+		{
+			var variation = mVariations.FirstOrDefault(x => x.EnumerateVariables().Any(y => Equals((y ?? string.Empty).ToLower(), variableName.ToLower())));
+			if (variation == null)
+				return null;
+
+			return variation.Name;
 		}
 	}
 }

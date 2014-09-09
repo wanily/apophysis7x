@@ -65,9 +65,9 @@
     <Compile Include="Annotations\UsedImplicitlyAttribute.cs" />
     <Compile Include="ApophysisException.cs" />
     <Compile Include="ApophysisSettings.cs" />
-    <Compile Include="Calculation\Variable.cs" />
     <Compile Include="Calculation\Variation.cs" />
     <Compile Include="Calculation\VariationRegistry.cs" />
+    <Compile Include="Models\VariationCollection.cs" />
     <Compile Include="Models\Palette.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -94,8 +94,15 @@
     <Compile Include="Windows\Controllers\IteratorPointEditController.cs" />
     <Compile Include="Windows\Controllers\IteratorPropertiesController.cs" />
     <Compile Include="Windows\Controllers\IteratorSelectionController.cs" />
+    <Compile Include="Windows\Controllers\IteratorVariationsController.cs" />
     <Compile Include="Windows\Controllers\IteratorVectorEditController.cs" />
     <Compile Include="Windows\Controllers\UndoController.cs" />
+    <Compile Include="Windows\Controls\DragGrid.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Windows\Controls\DragGrid.Designer.cs">
+      <DependentUpon>DragGrid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Controls\DragPanel.cs">
       <SubType>Component</SubType>
     </Compile>

@@ -1,15 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 
 namespace Xyrus.Apophysis.Calculation
 {
 	[PublicAPI]
 	public abstract class Variation : IDisposable
 	{
-		private ICollection<Variable> mEmptyCollection;
-
 		private string mDefaultName;
 		private bool mIsDisposed;
 
@@ -21,7 +17,6 @@ namespace Xyrus.Apophysis.Calculation
 		protected Variation()
 		{
 			mDefaultName = GetType().Name.ToLower();
-			mEmptyCollection = new Collection<Variable>();
 		}
 
 		protected void Dispose(bool disposing)
@@ -43,12 +38,6 @@ namespace Xyrus.Apophysis.Calculation
 			
 		}
 
-		[NotNull]
-		protected virtual ICollection<Variable> GetVariables()
-		{
-			return mEmptyCollection;
-		}
-
 		public virtual void Prepare()
 		{
 		}
@@ -61,12 +50,19 @@ namespace Xyrus.Apophysis.Calculation
 		{
 			get { return mDefaultName; }
 		}
-		public bool HasVariable([NotNull] string name)
+		public double Weight
 		{
-			if (string.IsNullOrEmpty(name))
-				return false;
+			get; 
+			set;
+		}
 
-			return GetVariables().Any(x => Equals((x.Name ?? string.Empty).ToLower(), name.ToLower()));
+		public IEnumerable<string> EnumerateVariables()
+		{
+			var count = GetVariableCount();
+			for (int i = 0; i < count; i++)
+			{
+				yield return GetVariableNameAt(i);
+			}
 		}
 
 		public abstract void Calculate(IterationData data);
@@ -74,6 +70,33 @@ namespace Xyrus.Apophysis.Calculation
 		{
 			Dispose(true);
 			GC.SuppressFinalize(this);
+		}
+
+		public virtual double GetVariable(string name)
+		{
+			return 0.0;
+		}
+		public virtual double SetVariable(string name, double value)
+		{
+			return 0.0;
+		}
+		public virtual double ResetVariable(string name)
+		{
+			return 0.0;
+		}
+
+		public virtual int GetVariableCount()
+		{
+			return 0;
+		}
+		public virtual string GetVariableNameAt(int index)
+		{
+			return null;
+		}
+
+		public override string ToString()
+		{
+			return Name;
 		}
 	}
 }

@@ -21,6 +21,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		private IteratorColorController mColorController;
 		private IteratorPointEditController mPointEditController;
 		private IteratorVectorEditController mVectorEditController;
+		private IteratorVariationsController mVariationsController;
 
 		private Lock mInitialize = new Lock();
 		private EditorSettings mSettings;
@@ -39,11 +40,18 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mColorController = new IteratorColorController(View, this);
 			mPointEditController = new IteratorPointEditController(View, this);
 			mVectorEditController = new IteratorVectorEditController(View, this);
+			mVariationsController = new IteratorVariationsController(View, this);
 		}
 		protected override void DisposeOverride(bool disposing)
 		{
 			if (disposing)
 			{
+				if (mVariationsController != null)
+				{
+					mVariationsController.Dispose();
+					mVariationsController = null;
+				}
+
 				if (mVectorEditController != null)
 				{
 					mVectorEditController.Dispose();
@@ -130,6 +138,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mColorController.Initialize();
 			mPointEditController.Initialize();
 			mVectorEditController.Initialize();
+			mVariationsController.Initialize();
 
 			View.IteratorCanvas.Edit += OnCanvasEdit;
 			View.IteratorCanvas.ActiveMatrixChanged += OnActiveMatrixChanged;
@@ -171,6 +180,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		internal void UpdateToolbar()
 		{
 			mToolbarController.UpdateButtonStates();
+		}
+		internal void UpdateVariations()
+		{
+			mVariationsController.UpdateList();
 		}
 		internal void UpdateColor()
 		{
