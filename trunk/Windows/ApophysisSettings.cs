@@ -60,7 +60,6 @@ namespace Xyrus.Apophysis
 				mSettings.EditorLockAxes = value;
 			}
 		}
-
 		public static bool EditorShowVariationPreview
 		{
 			get { return mSettings.EditorShowVariationPreview; }
@@ -69,7 +68,6 @@ namespace Xyrus.Apophysis
 				mSettings.EditorShowVariationPreview = value;
 			}
 		}
-
 		public static bool EditorShowRulers
 		{
 			get { return mSettings.EditorShowRulers; }
@@ -78,7 +76,6 @@ namespace Xyrus.Apophysis
 				mSettings.EditorShowRulers = value;
 			}
 		}
-
 		public static bool EditorAutoZoom
 		{
 			get { return mSettings.EditorAutoZoom; }
@@ -86,6 +83,11 @@ namespace Xyrus.Apophysis
 			{
 				mSettings.EditorAutoZoom = value;
 			}
+		}
+
+		public static string PluginDirectoryName
+		{
+			get { return mSettings.PluginDirectoryName; }
 		}
 
 		public static void Serialize()

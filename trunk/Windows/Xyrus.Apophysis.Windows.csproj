@@ -77,6 +77,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Calculation\IterationData.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="Variations\Linear.cs" />
     <Compile Include="Variations\Spherical.cs" />
     <Compile Include="Variations\Swirl.cs" />

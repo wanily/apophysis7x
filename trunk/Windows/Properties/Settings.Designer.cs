@@ -106,5 +106,14 @@ namespace Xyrus.Apophysis.Properties {
                 this["EditorAutoZoom"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Plugins")]
+        public string PluginDirectoryName {
+            get {
+                return ((string)(this["PluginDirectoryName"]));
+            }
+        }
     }
 }

@@ -21,8 +21,7 @@ namespace Xyrus.Apophysis
 			VariationRegistry.Register<Swirl>();
 			VariationRegistry.Register<Test>();
 
-			//todo make configurable
-			var pluginDir = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath)??string.Empty, "Plugins");
+			var pluginDir = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath)??string.Empty, ApophysisSettings.PluginDirectoryName);
 			if (Directory.Exists(pluginDir))
 			{
 				var files = Directory.GetFiles(pluginDir);
