@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Calculation;
 using Xyrus.Apophysis.Variations;
@@ -20,7 +21,16 @@ namespace Xyrus.Apophysis
 			VariationRegistry.Register<Swirl>();
 			VariationRegistry.Register<Test>();
 
-			VariationRegistry.RegisterDll(@"D:\Install\Apophysis\Bin\Plugins\falloff3.x64.dll");
+			//todo make configurable
+			var pluginDir = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath)??string.Empty, "Plugins");
+			if (Directory.Exists(pluginDir))
+			{
+				var files = Directory.GetFiles(pluginDir);
+				foreach (var file in files)
+				{
+					VariationRegistry.RegisterDll(file);
+				}
+			}
 
 			using (var editor = new EditorController(new UndoController()))
 			{
