@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Xyrus.Apophysis.Calculation;
 
 namespace Xyrus.Apophysis.Models
@@ -84,6 +85,10 @@ namespace Xyrus.Apophysis.Models
 			{
 				variation.Weight = 0;
 			}
+		}
+		public IEnumerable<Variation> GetOrderedForExecution()
+		{
+			return this.OrderBy(x => (int) x.Priority).ThenBy(x => x.Name);
 		}
 
 		public bool IsEqual([NotNull] VariationCollection variations)

@@ -142,6 +142,17 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			}
 		}
 
+		public double PreviewRange
+		{
+			get { return mPreviewVisual.Range; }
+			set { mPreviewVisual.Range = value; }
+		}
+		public double PreviewDensity
+		{
+			get { return mPreviewVisual.Density; }
+			set { mPreviewVisual.Density = value; }
+		}
+
 		public IteratorVisual this[int index]
 		{
 			get

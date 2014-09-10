@@ -34,6 +34,9 @@ namespace Xyrus.Apophysis.Windows.Controls
 		private bool mIsDisposed;
 		private bool mShowRulers;
 
+		private double mPreviewRange;
+		private double mPreviewDensity;
+
 		public EditorCanvas()
 		{
 			InitializeComponent();
@@ -215,6 +218,27 @@ namespace Xyrus.Apophysis.Windows.Controls
 		{
 			get { return mGridPainter.HighlightOrigin; }
 			set { mGridPainter.HighlightOrigin = value; }
+		}
+
+		public double PreviewRange
+		{
+			get { return mPreviewRange; }
+			set
+			{
+				mPreviewRange = value;
+				mIteratorPainter.PreviewRange = value;
+				Refresh();
+			}
+		}
+		public double PreviewDensity
+		{
+			get { return mPreviewDensity; }
+			set
+			{
+				mPreviewDensity = value;
+				mIteratorPainter.PreviewDensity = value;
+				Refresh();
+			}
 		}
 
 		[Browsable(false)]

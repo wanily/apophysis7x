@@ -393,6 +393,15 @@ namespace Xyrus.Apophysis.Calculation
 				namePtr = mGetVariableNameAt(i);
 				mVariables.Add(GetStringFromPointer(namePtr));
 			}
+
+			if (mName.ToLower().StartsWith("pre_"))
+			{
+				Priority = VariationPriority.Pre;
+			}
+			else if (mName.ToLower().StartsWith("post_"))
+			{
+				Priority = VariationPriority.Post;
+			}
 		}
 		private void Initialize()
 		{
@@ -484,6 +493,8 @@ namespace Xyrus.Apophysis.Calculation
 			instance.mName = mName;
 			instance.mVariables = new List<string>();
 			instance.mVariables.AddRange(mVariables);
+
+			instance.Priority = Priority;
 
 			return instance;
 		}

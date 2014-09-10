@@ -22,11 +22,23 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			View.IteratorWeightDragPanel.ValueChanged += OnWeightChanged;
 			View.IteratorNameTextBox.TextChanged += OnNameChanged;
+
+			View.PreviewDensityTrackBar.ValueChanged += OnDensityChanged;
+			View.PreviewRangeTrackBar.ValueChanged += OnRangeChanged;
+
+			using (mParent.Initializer.Enter())
+			{
+				View.PreviewDensityTrackBar.Value = (int)View.IteratorCanvas.PreviewDensity;
+				View.PreviewRangeTrackBar.Value = (int) View.IteratorCanvas.PreviewRange;
+			}
 		}
 		protected override void DetachView()
 		{
 			View.IteratorWeightDragPanel.ValueChanged -= OnWeightChanged;
 			View.IteratorNameTextBox.TextChanged -= OnNameChanged;
+
+			View.PreviewDensityTrackBar.ValueChanged -= OnDensityChanged;
+			View.PreviewRangeTrackBar.ValueChanged -= OnRangeChanged;
 		}
 
 		private void OnNameChanged(object sender, EventArgs e)
@@ -51,6 +63,18 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				return;
 
 			iterator.Weight = View.IteratorWeightDragPanel.Value;
+		}
+		private void OnDensityChanged(object sender, EventArgs e)
+		{
+			if (mParent.Initializer.IsBusy)
+				return;
+			View.IteratorCanvas.PreviewDensity = View.PreviewDensityTrackBar.Value;
+		}
+		private void OnRangeChanged(object sender, EventArgs e)
+		{
+			if (mParent.Initializer.IsBusy)
+				return;
+			View.IteratorCanvas.PreviewRange = View.PreviewRangeTrackBar.Value;
 		}
 	}
 }

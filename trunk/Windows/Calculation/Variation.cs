@@ -8,6 +8,7 @@ namespace Xyrus.Apophysis.Calculation
 	{
 		private string mDefaultName;
 		private bool mIsDisposed;
+		private VariationPriority mPriority;
 
 		~Variation()
 		{
@@ -17,6 +18,7 @@ namespace Xyrus.Apophysis.Calculation
 		protected Variation()
 		{
 			mDefaultName = GetType().Name.ToLower();
+			mPriority = VariationPriority.Normal;
 		}
 
 		protected void Dispose(bool disposing)
@@ -41,6 +43,11 @@ namespace Xyrus.Apophysis.Calculation
 		{
 			get; 
 			set;
+		}
+		public VariationPriority Priority
+		{
+			get { return mPriority; }
+			protected set { mPriority = value; }
 		}
 
 		public IEnumerable<string> EnumerateVariables()

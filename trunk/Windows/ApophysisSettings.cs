@@ -85,6 +85,33 @@ namespace Xyrus.Apophysis
 			}
 		}
 
+		public static double EditorPreviewRange
+		{
+			get { return mSettings.EditorPreviewRange; }
+			set
+			{
+				if (value <= 0)
+				{
+					throw new ArgumentOutOfRangeException("value");
+				}
+
+				mSettings.EditorPreviewRange = value;
+			}
+		}
+		public static double EditorPreviewDensity
+		{
+			get { return mSettings.EditorPreviewDensity; }
+			set
+			{
+				if (value <= 0)
+				{
+					throw new ArgumentOutOfRangeException("value");
+				}
+
+				mSettings.EditorPreviewDensity = value;
+			}
+		}
+
 		public static string PluginDirectoryName
 		{
 			get { return mSettings.PluginDirectoryName; }

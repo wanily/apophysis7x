@@ -137,6 +137,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			};
 
 			View.IteratorCanvas.ShowRuler = ApophysisSettings.EditorShowRulers;
+			View.IteratorCanvas.PreviewDensity = ApophysisSettings.EditorPreviewDensity;
+			View.IteratorCanvas.PreviewRange = ApophysisSettings.EditorPreviewRange;
 
 			mEditorUndoController.Initialize();
 			mKeyboardController.Initialize();
@@ -165,6 +167,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			ApophysisSettings.EditorShowRulers = View.IteratorCanvas.ShowRuler;
 			ApophysisSettings.EditorShowVariationPreview = mSettings.ShowVariationPreview;
 			ApophysisSettings.EditorAutoZoom = mSettings.ZoomAutomatically;
+			ApophysisSettings.EditorPreviewDensity = View.IteratorCanvas.PreviewDensity;
+			ApophysisSettings.EditorPreviewRange = View.IteratorCanvas.PreviewRange;
 
 			ApophysisSettings.Serialize();
 

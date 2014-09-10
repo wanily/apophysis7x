@@ -13,15 +13,39 @@ namespace Xyrus.Apophysis.Windows.Visuals
 	class IteratorPreviewVisual : CanvasVisual<Canvas>
 	{
 		private IEnumerable<IteratorVisual> mCollection;
+		private double mRange;
+		private double mDensity;
 
 		public IteratorPreviewVisual([NotNull] Control control, [NotNull] Canvas canvas, [NotNull] IEnumerable<IteratorVisual> collection) : base(control, canvas)
 		{
 			if (collection == null) throw new ArgumentNullException("collection");
+
 			mCollection = collection;
+			mRange = 1;
+			mDensity = 1;
 		}
 		protected override void DisposeOverride(bool disposing)
 		{
 			mCollection = null;
+		}
+
+		public double Range
+		{
+			get { return mRange; }
+			set
+			{
+				if (value <= 0) throw new ArgumentOutOfRangeException();
+				mRange = value;
+			}
+		}
+		public double Density
+		{
+			get { return mDensity; }
+			set
+			{
+				if (value <= 0) throw new ArgumentOutOfRangeException();
+				mDensity = value;
+			}
 		}
 
 		private Vector2 IterateSample(Iterator model, Vector2 input, IEnumerable<Variation> variations, IterationData data)
@@ -58,9 +82,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 		}
 		private void DrawModel(Graphics graphics, Iterator model)
 		{
-			var variations = model.Variations.Where(x => System.Math.Abs((double)x.Weight) > double.Epsilon).ToArray();
-			var p1 = new Vector2(-1, -1);
-			var p2 = new Vector2(1, 1);
+			var variations = model.Variations.GetOrderedForExecution().Where(x => System.Math.Abs(x.Weight) > double.Epsilon).ToArray();
 			var data = new IterationData();
 
 			foreach (var variation in variations)
@@ -71,7 +93,13 @@ namespace Xyrus.Apophysis.Windows.Visuals
 
 			data.Weight = 0;
 
-			const double step = 0.1;
+			var n = Range;
+			var d1 = Density * 5;
+
+			var p1 = new Vector2(-n, -n);
+			var p2 = new Vector2(n, n);
+
+			var step = 1 / d1;
 
 			using (var brush = new SolidBrush(Color.FromArgb(0x80, model.GetColor())))
 			//using (var pen = new Pen(brush))

@@ -80,6 +80,9 @@ namespace Xyrus.Apophysis.Windows.Controls
 		{
 			get
 			{
+				if (row < 0)
+					return 0;
+
 				double value;
 				if (!double.TryParse(Rows[row].Cells[1].Value as string ?? string.Empty, NumberStyles.Float, InputController.Culture, out value))
 					value = 0.0;
@@ -88,6 +91,9 @@ namespace Xyrus.Apophysis.Windows.Controls
 			}
 			set
 			{
+				if (row < 0)
+					return;
+
 				Rows[row].Cells[1].Value = value.ToString(InputController.PreciseFormat, InputController.Culture);
 			}
 		}
@@ -106,7 +112,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 		protected override void OnCellMouseEnter(DataGridViewCellEventArgs e)
 		{
 			base.OnCellMouseEnter(e);
-			if (e.ColumnIndex != 0)
+			if (e.ColumnIndex != 0 || e.RowIndex < 0)
 				return;
 
 			mIsMouseOver = true;
@@ -115,7 +121,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 		protected override void OnCellMouseLeave(DataGridViewCellEventArgs e)
 		{
 			base.OnCellMouseLeave(e);
-			if (e.ColumnIndex != 0)
+			if (e.ColumnIndex != 0 || e.RowIndex < 0)
 				return;
 
 			mIsMouseOver = false;
@@ -128,7 +134,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 		protected override void OnCellMouseDown(DataGridViewCellMouseEventArgs e)
 		{
 			base.OnCellMouseDown(e);
-			if (e.ColumnIndex != 0)
+			if (e.ColumnIndex != 0 || e.RowIndex < 0)
 				return;
 
 			Cursor.Current = Cursors.VSplit;
@@ -147,7 +153,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 		protected override void OnCellMouseDoubleClick(DataGridViewCellMouseEventArgs e)
 		{
 			base.OnCellMouseDoubleClick(e);
-			if (e.ColumnIndex != 0)
+			if (e.ColumnIndex != 0 || e.RowIndex < 0)
 				return;
 
 			var value = mLastValue = this[e.RowIndex];
@@ -184,7 +190,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 		protected override void OnCellEnter(DataGridViewCellEventArgs e)
 		{
 			base.OnCellEnter(e);
-			if (e.ColumnIndex != 1)
+			if (e.ColumnIndex != 1 || e.RowIndex < 0)
 				return;
 
 			mLastValue = this[e.RowIndex];
@@ -195,7 +201,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 		protected override void OnCellLeave(DataGridViewCellEventArgs e)
 		{
 			base.OnCellLeave(e);
-			if (e.ColumnIndex != 1)
+			if (e.ColumnIndex != 1 || e.RowIndex < 0)
 				return;
 
 			if (CellEndEdit != null)
@@ -205,7 +211,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 		protected override void OnCellValueChanged(DataGridViewCellEventArgs e)
 		{
 			base.OnCellValueChanged(e);
-			if (e.ColumnIndex != 1 || mInternalEdit.IsBusy)
+			if (e.ColumnIndex != 1 || mInternalEdit.IsBusy || e.RowIndex < 0)
 				return;
 
 			var value = this[e.RowIndex];

@@ -328,6 +328,11 @@ namespace Xyrus.Apophysis.Math
 		{
 			const double min = -65536, max = 65535;
 
+			if (IsNaN)
+			{
+				return new Point((int)min, (int)min);
+			}
+
 			var x = System.Math.Max(min, System.Math.Min(X, max));
 			var y = System.Math.Max(min, System.Math.Min(Y, max));
 
