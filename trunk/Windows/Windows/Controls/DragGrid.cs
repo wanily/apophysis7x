@@ -240,6 +240,19 @@ namespace Xyrus.Apophysis.Windows.Controls
 			}
 		}
 
+		protected override void OnCellEndEdit(DataGridViewCellEventArgs e)
+		{
+			base.OnCellEndEdit(e);
+			if (e.ColumnIndex != 1 || e.RowIndex < 0)
+				return;
+
+			//looks funny...just to reformat the cell content
+			using (mInternalEdit.Enter())
+			{
+				this[e.RowIndex] = this[e.RowIndex];
+			}
+		}
+
 		private void OnCellGlobalMouseMove(MouseHookEventArgs e)
 		{
 			if (!mIsDragging || mDragColumn != 0)
