@@ -1,13 +1,16 @@
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace Xyrus.Apophysis.Calculation
 {
 	[PublicAPI]
 	public unsafe sealed class ExternalVariation : Variation
 	{
-		private const CallingConvention mConvention = CallingConvention.StdCall;
+		private const CallingConvention mConvention = CallingConvention.Cdecl;
 
 		enum MachineType : ushort
 		{
@@ -67,24 +70,22 @@ namespace Xyrus.Apophysis.Calculation
 		private delegate bool PluginVarInitDcDelegate(void* vp, void* pFPx, void* pFPy, void* pFPz, void* pFTx, void* pFTy, void* pFTz, void* pColor, double vvar, double a, double b, double c, double d, double e, double f);
 
 		[UnmanagedFunctionPointer(mConvention)]
-		[return: MarshalAs(UnmanagedType.LPStr)]
-		private delegate string PluginVarGetVariableNameAtDelegate(int index);
+		private delegate byte* PluginVarGetVariableNameAtDelegate(int index);
 
 		[UnmanagedFunctionPointer(mConvention)]
 		[return: MarshalAs(UnmanagedType.Bool)]
-		private delegate bool PluginVarResetVariableDelegate(void* vp, [MarshalAs(UnmanagedType.LPStr)] string name);
+		private delegate bool PluginVarResetVariableDelegate(void* vp, byte* name);
 
 		[UnmanagedFunctionPointer(mConvention)]
 		[return: MarshalAs(UnmanagedType.Bool)]
-		private delegate bool PluginVarGetVariableDelegate(void* vp, [MarshalAs(UnmanagedType.LPStr)] string name, double* value);
+		private delegate bool PluginVarGetVariableDelegate(void* vp, byte* name, double* value);
 
 		[UnmanagedFunctionPointer(mConvention)]
 		[return: MarshalAs(UnmanagedType.Bool)]
-		private delegate bool PluginVarSetVariableDelegate(void* vp, [MarshalAs(UnmanagedType.LPStr)] string name, double* value);
+		private delegate bool PluginVarSetVariableDelegate(void* vp, byte* name, double* value);
 
 		[UnmanagedFunctionPointer(mConvention)]
-		[return: MarshalAs(UnmanagedType.LPStr)]
-		private delegate string PluginVarGetNameDelegate();
+		private delegate byte* PluginVarGetNameDelegate();
 
 		[UnmanagedFunctionPointer(mConvention)]
 		private delegate int PluginVarGetNrVariablesDelegate();
@@ -110,9 +111,12 @@ namespace Xyrus.Apophysis.Calculation
 		private PluginVarGetNrVariablesDelegate mGetNrVariables;
 		private PluginVarPrepareDelegate mPrepare;
 		private PluginVarCalculateDelegate mCalculate;
-		
+
+		private List<string> mVariables;
+
 		private readonly string mDllPath;
 		private IntPtr mHModule;
+		private string mName;
 		private void* mVp;
 
 		private double* mPreX, mPostX, mPreY, mPostY, mPreZ, mPostZ, mColor;
@@ -143,6 +147,7 @@ namespace Xyrus.Apophysis.Calculation
 			return (is64Bit && type == MachineType.IMAGE_FILE_MACHINE_AMD64) ||
 			       (!is64Bit && type == MachineType.IMAGE_FILE_MACHINE_I386);
 		}
+
 		private static MachineType GetDllMachineType([NotNull] string dllPath)
 		{
 			var file = new FileStream(dllPath, FileMode.Open, FileAccess.Read);
@@ -165,35 +170,99 @@ namespace Xyrus.Apophysis.Calculation
 			return machineType;
 		}
 
+		private static string GetStringFromPointer(byte* ptr)
+		{
+			if (ptr == null)
+			{
+				return null;
+			}
+
+			const int bufferSize = 1024;
+
+			var array = new byte[bufferSize];
+			var count = 0;
+
+			for (var c = 0; c < bufferSize; c++)
+			{
+				byte b = *(ptr + c);
+
+				if (b == 0)
+				{
+					count = c; 
+					break;
+				}
+
+				array[c] = b;
+			}
+
+			if (count <= 0)
+			{
+				return string.Empty;
+			}
+
+			var str = new byte[count];
+			Array.Copy(array, str, count);
+
+			return Encoding.ASCII.GetString(str);
+		}
+		private static byte[] GetArrayFromString(string str)
+		{
+			return Encoding.ASCII.GetBytes(str);
+		}
+
 		public override double GetVariable(string name)
 		{
-			double ptr = 0;
-			mGetVariable(mVp, name, &ptr);
-			return ptr;
+			double value = 0;
+			byte[] nbytes = GetArrayFromString(name);
+
+			fixed(byte* nptr = &nbytes[0])
+			{
+				double* vptr = &value;
+				bool result = mGetVariable(mVp, nptr, vptr);
+
+				Debug.Assert(result, "PluginVarGetVariable");
+
+				return value;
+			}
 		}
 		public override double SetVariable(string name, double value)
 		{
-			mSetVariable(mVp, name, &value);
-			return value;
+			byte[] nbytes = GetArrayFromString(name);
+
+			fixed(byte* nptr = &nbytes[0])
+			{
+				double* vptr = &value;
+				bool result = mSetVariable(mVp, nptr, vptr);
+
+				Debug.Assert(result, "PluginVarSetVariable");
+
+				return value;
+			}
 		}
 		public override double ResetVariable(string name)
 		{
-			mResetVariable(mVp, name);
+			byte[] nbytes = GetArrayFromString(name);
+
+			fixed (byte* nptr = &nbytes[0])
+			{
+				mResetVariable(mVp, nptr);
+			}
+
 			return GetVariable(name);
 		}
 
 		public override int GetVariableCount()
 		{
-			return mGetNrVariables();
+			return mVariables.Count;
 		}
 		public override string GetVariableNameAt(int index)
 		{
-			return mGetVariableNameAt(index);
+			return mVariables[index];
 		}
 
 		public override string Name
 		{
-			get { return mGetName(); }
+			get { return mName; }
 		}
 
 		public override void Prepare(IterationData data)
@@ -266,6 +335,19 @@ namespace Xyrus.Apophysis.Calculation
 				{
 					mInitLegacy = (PluginVarInitDelegate) Marshal.GetDelegateForFunctionPointer(GetProcAddress(mHModule, "PluginVarInit"), typeof(PluginVarInitDelegate));
 				}
+			}
+
+			var namePtr = mGetName();
+
+			mName = GetStringFromPointer(namePtr);
+			mVariables = new List<string>();
+
+			var count = mGetNrVariables();
+
+			for (int i = 0; i < count; i++)
+			{
+				namePtr = mGetVariableNameAt(i);
+				mVariables.Add(GetStringFromPointer(namePtr));
 			}
 		}
 		protected override void DisposeOverride(bool disposing)
