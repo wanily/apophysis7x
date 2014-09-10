@@ -289,7 +289,27 @@ namespace Xyrus.Apophysis.Calculation
 		}
 		public override void Calculate(IterationData data)
 		{
+			*mPreX = data.PreX;
+			*mPreY = data.PreY;
+			*mPreZ = data.PreZ;
+
+			*mPostX = data.PostX;
+			*mPostY = data.PostY;
+			*mPostZ = data.PostZ;
+
+			*mColor = data.Color;
+
 			mCalculate(mVp);
+
+			data.PreX = *mPreX;
+			data.PreY = *mPreY;
+			data.PreZ = *mPreZ;
+
+			data.PostX = *mPostX;
+			data.PostY = *mPostY;
+			data.PostZ = *mPostZ;
+
+			data.Color = *mColor;
 		}
 
 		private void LoadModule()

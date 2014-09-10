@@ -15,23 +15,33 @@ namespace Xyrus.Apophysis.Windows.Visuals
 	class IteratorCollectionVisual : CanvasVisual<Canvas>, IEnumerable<IteratorVisual>
 	{
 		private InputOperationVisual mOperationVisual;
+		private IteratorPreviewVisual mPreviewVisual;
 
 		private IteratorCollection mCollection;
 		private List<IteratorVisual> mVisuals;
 
 		private EventHandler mContentChanged;
-		private bool mShowReference;
+
 		private IteratorMatrix mActiveMatrix;
+		private bool mShowReference;
+		private bool mShowPreview;
 
 		public IteratorCollectionVisual([NotNull] Control control, [NotNull] Canvas canvas) : base(control, canvas)
 		{
 			mVisuals = new List<IteratorVisual>();
 			mOperationVisual = new InputOperationVisual(control, canvas);
+			mPreviewVisual = new IteratorPreviewVisual(control, canvas, mVisuals);
 
 			ShowReference = true;
 		}
 		protected override void DisposeOverride(bool disposing)
 		{
+			if (mPreviewVisual != null)
+			{
+				mPreviewVisual.Dispose();
+				mPreviewVisual = null;
+			}
+
 			if (mCollection != null)
 			{
 				mCollection.ContentChanged -= OnCollectionChanged;
@@ -67,6 +77,15 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			set
 			{
 				mShowReference = value;
+				InvalidateControl();
+			}
+		}
+		public bool ShowPreview
+		{
+			get { return mShowPreview; }
+			set
+			{
+				mShowPreview = value;
 				InvalidateControl();
 			}
 		}
@@ -207,6 +226,11 @@ namespace Xyrus.Apophysis.Windows.Visuals
 					graphics.DrawString(ly, AttachedControl.Font, labelBrush, posLy.X, posLy.Y);
 
 				}
+			}
+
+			if (mShowPreview)
+			{
+				mPreviewVisual.Paint(graphics);
 			}
 
 			if (mOperationVisual != null)

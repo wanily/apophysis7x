@@ -47,6 +47,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				return;
 
 			e.Value = View.IteratorCanvas.SelectedIterator.Variations.SetWeight(variation.Name, e.Value);
+
+			if (View.IteratorCanvas.Settings.ShowVariationPreview)
+			{
+				View.IteratorCanvas.Refresh();
+			}
 		}
 		private void OnHideUnusedVariationsCheckBoxClick(object sender, EventArgs e)
 		{

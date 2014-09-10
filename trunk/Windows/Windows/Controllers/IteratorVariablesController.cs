@@ -37,6 +37,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				return;
 
 			e.Value = View.IteratorCanvas.SelectedIterator.Variations.SetVariable(variable, e.Value);
+
+			if (View.IteratorCanvas.Settings.ShowVariationPreview)
+			{
+				View.IteratorCanvas.Refresh();
+			}
 		}
 		private void OnHideUnrelatedVariablesCheckBoxClick(object sender, EventArgs e)
 		{

@@ -270,7 +270,6 @@ namespace Xyrus.Apophysis.Windows.Visuals
 				return IsSurfaceHit || IsVertexOHit || IsVertexXHit || IsVertexYHit || IsEdgeOxHit || IsEdgeOyHit || IsEdgeXyHit;
 			}
 		}
-
 		public bool IsSurfaceHit { get; set; }
 
 		public bool IsVertexOHit { get; set; }

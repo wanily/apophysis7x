@@ -263,9 +263,13 @@ namespace Xyrus.Apophysis.Windows.Controls
 			get { return mIteratorInteraction.Settings; }
 			set
 			{
+				mIteratorInteraction.Settings.SettingsChanged -= OnSettingsChanged;
 				mIteratorInteraction.Settings.UnbindContextMenu();
 				mIteratorInteraction.Settings = value;
 				mIteratorInteraction.Settings.BindContextMenu(mGridContextMenu);
+				mIteratorInteraction.Settings.SettingsChanged += OnSettingsChanged;
+
+				OnSettingsChanged(mIteratorInteraction.Settings, new EventArgs());
 			}
 		}
 
@@ -344,6 +348,11 @@ namespace Xyrus.Apophysis.Windows.Controls
 			remove { mActiveMatrixChanged -= value; }
 		}
 
+		private void OnSettingsChanged(object sender, EventArgs e)
+		{
+			mIteratorPainter.ShowPreview = Settings.ShowVariationPreview;
+			Refresh();
+		}
 		private void OnCanvasMouseClick(object sender, MouseEventArgs e)
 		{
 			if (e.Button != MouseButtons.Right)

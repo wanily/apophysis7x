@@ -173,6 +173,7 @@
     <Compile Include="Windows\Visuals\GridVisual.cs" />
     <Compile Include="Windows\Visuals\IteratorCollectionVisual.cs" />
     <Compile Include="Windows\Visuals\InputOperationVisual.cs" />
+    <Compile Include="Windows\Visuals\IteratorPreviewVisual.cs" />
     <Compile Include="Windows\Visuals\IteratorVisual.cs" />
     <Compile Include="Windows\Forms\Editor.cs">
       <SubType>Form</SubType>

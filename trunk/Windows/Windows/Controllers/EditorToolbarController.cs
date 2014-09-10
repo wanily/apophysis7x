@@ -181,7 +181,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				View.IteratorCanvas.Commands.ConvertSelectedIterator(1);
 			}
 		}
-
 		private void OnSettingsChanged(object sender, EventArgs e)
 		{
 			UpdateButtonStates();
