@@ -52,6 +52,11 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mPreviewPanel = new System.Windows.Forms.Panel();
 			this.mPictureBevel = new System.Windows.Forms.Label();
 			this.Tabs = new System.Windows.Forms.TabControl();
+			this.VariationsTab = new System.Windows.Forms.TabPage();
+			this.ClearVariationsButton = new System.Windows.Forms.Button();
+			this.HideUnusedVariationsCheckBox = new System.Windows.Forms.CheckBox();
+			this.VariablesTab = new System.Windows.Forms.TabPage();
+			this.HideUnrelatedVariablesCheckBox = new System.Windows.Forms.CheckBox();
 			this.PointTab = new System.Windows.Forms.TabPage();
 			this.mIteratorControlsGroupBox = new System.Windows.Forms.GroupBox();
 			this.IteratorScaleRatio = new System.Windows.Forms.ComboBox();
@@ -113,15 +118,20 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mIteratorNameLabel = new System.Windows.Forms.Label();
 			this.mIteratorSelectLabel = new System.Windows.Forms.Label();
 			this.mToolbarImages = new System.Windows.Forms.ImageList(this.components);
-			this.VariationsTab = new System.Windows.Forms.TabPage();
-			this.VariablesTab = new System.Windows.Forms.TabPage();
-			this.HideUnusedVariationsCheckBox = new System.Windows.Forms.CheckBox();
-			this.ClearVariationsButton = new System.Windows.Forms.Button();
+			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.IteratorCanvas = new Xyrus.Apophysis.Windows.Controls.EditorCanvas();
 			this.mSettings = new Xyrus.Apophysis.Windows.Controls.EditorSettings();
 			this.VariationsGrid = new Xyrus.Apophysis.Windows.Controls.DragGrid();
-			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.VariablesGrid = new Xyrus.Apophysis.Windows.Controls.DragGrid();
+			this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.PaletteSelectComboBox = new Xyrus.Apophysis.Windows.Controls.PaletteSelectComboBox();
 			this.IteratorDirectColorDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.IteratorOpacityDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
@@ -129,12 +139,6 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorColorDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.IteratorWeightDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.IteratorSelectionComboBox = new Xyrus.Apophysis.Windows.Controls.IteratorSelectComboBox();
-			this.VariablesGrid = new Xyrus.Apophysis.Windows.Controls.DragGrid();
-			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.HideUnrelatedVariablesCheckBox = new System.Windows.Forms.CheckBox();
 			this.mRootSplitter.Panel1.SuspendLayout();
 			this.mRootSplitter.Panel2.SuspendLayout();
 			this.mRootSplitter.SuspendLayout();
@@ -144,6 +148,8 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mSidebarSplitter.SuspendLayout();
 			this.mPreviewPanel.SuspendLayout();
 			this.Tabs.SuspendLayout();
+			this.VariationsTab.SuspendLayout();
+			this.VariablesTab.SuspendLayout();
 			this.PointTab.SuspendLayout();
 			this.mIteratorControlsGroupBox.SuspendLayout();
 			this.mPointCoordGroupBox.SuspendLayout();
@@ -153,8 +159,6 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.ColorTab.SuspendLayout();
 			this.mIteratorColorGroupBox.SuspendLayout();
 			this.mIteratorPropertyPanel.SuspendLayout();
-			this.VariationsTab.SuspendLayout();
-			this.VariablesTab.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.VariationsGrid)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.VariablesGrid)).BeginInit();
 			this.SuspendLayout();
@@ -490,6 +494,62 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.Tabs.SelectedIndex = 0;
 			this.Tabs.Size = new System.Drawing.Size(293, 405);
 			this.Tabs.TabIndex = 1;
+			// 
+			// VariationsTab
+			// 
+			this.VariationsTab.Controls.Add(this.ClearVariationsButton);
+			this.VariationsTab.Controls.Add(this.HideUnusedVariationsCheckBox);
+			this.VariationsTab.Controls.Add(this.VariationsGrid);
+			this.VariationsTab.Location = new System.Drawing.Point(4, 22);
+			this.VariationsTab.Name = "VariationsTab";
+			this.VariationsTab.Padding = new System.Windows.Forms.Padding(3);
+			this.VariationsTab.Size = new System.Drawing.Size(285, 379);
+			this.VariationsTab.TabIndex = 3;
+			this.VariationsTab.Text = "Variations";
+			this.VariationsTab.UseVisualStyleBackColor = true;
+			// 
+			// ClearVariationsButton
+			// 
+			this.ClearVariationsButton.Location = new System.Drawing.Point(3, 351);
+			this.ClearVariationsButton.Name = "ClearVariationsButton";
+			this.ClearVariationsButton.Size = new System.Drawing.Size(279, 25);
+			this.ClearVariationsButton.TabIndex = 2;
+			this.ClearVariationsButton.Text = "Clear";
+			this.ClearVariationsButton.UseVisualStyleBackColor = true;
+			// 
+			// HideUnusedVariationsCheckBox
+			// 
+			this.HideUnusedVariationsCheckBox.AutoSize = true;
+			this.HideUnusedVariationsCheckBox.Location = new System.Drawing.Point(3, 329);
+			this.HideUnusedVariationsCheckBox.Name = "HideUnusedVariationsCheckBox";
+			this.HideUnusedVariationsCheckBox.Size = new System.Drawing.Size(134, 17);
+			this.HideUnusedVariationsCheckBox.TabIndex = 1;
+			this.HideUnusedVariationsCheckBox.Text = "Hide unused variations";
+			this.HideUnusedVariationsCheckBox.UseVisualStyleBackColor = true;
+			// 
+			// VariablesTab
+			// 
+			this.VariablesTab.Controls.Add(this.HideUnrelatedVariablesCheckBox);
+			this.VariablesTab.Controls.Add(this.VariablesGrid);
+			this.VariablesTab.Location = new System.Drawing.Point(4, 22);
+			this.VariablesTab.Name = "VariablesTab";
+			this.VariablesTab.Padding = new System.Windows.Forms.Padding(3);
+			this.VariablesTab.Size = new System.Drawing.Size(285, 379);
+			this.VariablesTab.TabIndex = 4;
+			this.VariablesTab.Text = "Variables";
+			this.VariablesTab.UseVisualStyleBackColor = true;
+			// 
+			// HideUnrelatedVariablesCheckBox
+			// 
+			this.HideUnrelatedVariablesCheckBox.AutoSize = true;
+			this.HideUnrelatedVariablesCheckBox.Checked = true;
+			this.HideUnrelatedVariablesCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.HideUnrelatedVariablesCheckBox.Location = new System.Drawing.Point(3, 356);
+			this.HideUnrelatedVariablesCheckBox.Name = "HideUnrelatedVariablesCheckBox";
+			this.HideUnrelatedVariablesCheckBox.Size = new System.Drawing.Size(202, 17);
+			this.HideUnrelatedVariablesCheckBox.TabIndex = 3;
+			this.HideUnrelatedVariablesCheckBox.Text = "Hide variables from unused variations";
+			this.HideUnrelatedVariablesCheckBox.UseVisualStyleBackColor = true;
 			// 
 			// PointTab
 			// 
@@ -1224,49 +1284,41 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mToolbarImages.Images.SetKeyName(23, "ResetIteratorScale.bmp");
 			this.mToolbarImages.Images.SetKeyName(24, "ToggleAutoZoom.bmp");
 			// 
-			// VariationsTab
+			// dataGridViewTextBoxColumn1
 			// 
-			this.VariationsTab.Controls.Add(this.ClearVariationsButton);
-			this.VariationsTab.Controls.Add(this.HideUnusedVariationsCheckBox);
-			this.VariationsTab.Controls.Add(this.VariationsGrid);
-			this.VariationsTab.Location = new System.Drawing.Point(4, 22);
-			this.VariationsTab.Name = "VariationsTab";
-			this.VariationsTab.Padding = new System.Windows.Forms.Padding(3);
-			this.VariationsTab.Size = new System.Drawing.Size(285, 379);
-			this.VariationsTab.TabIndex = 3;
-			this.VariationsTab.Text = "Variations";
-			this.VariationsTab.UseVisualStyleBackColor = true;
+			this.dataGridViewTextBoxColumn1.HeaderText = "Name";
+			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+			this.dataGridViewTextBoxColumn1.ReadOnly = true;
 			// 
-			// VariablesTab
+			// dataGridViewTextBoxColumn2
 			// 
-			this.VariablesTab.Controls.Add(this.HideUnrelatedVariablesCheckBox);
-			this.VariablesTab.Controls.Add(this.VariablesGrid);
-			this.VariablesTab.Location = new System.Drawing.Point(4, 22);
-			this.VariablesTab.Name = "VariablesTab";
-			this.VariablesTab.Padding = new System.Windows.Forms.Padding(3);
-			this.VariablesTab.Size = new System.Drawing.Size(285, 379);
-			this.VariablesTab.TabIndex = 4;
-			this.VariablesTab.Text = "Variables";
-			this.VariablesTab.UseVisualStyleBackColor = true;
+			this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.dataGridViewTextBoxColumn2.HeaderText = "Value";
+			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
 			// 
-			// HideUnusedVariationsCheckBox
+			// dataGridViewTextBoxColumn3
 			// 
-			this.HideUnusedVariationsCheckBox.AutoSize = true;
-			this.HideUnusedVariationsCheckBox.Location = new System.Drawing.Point(3, 329);
-			this.HideUnusedVariationsCheckBox.Name = "HideUnusedVariationsCheckBox";
-			this.HideUnusedVariationsCheckBox.Size = new System.Drawing.Size(134, 17);
-			this.HideUnusedVariationsCheckBox.TabIndex = 1;
-			this.HideUnusedVariationsCheckBox.Text = "Hide unused variations";
-			this.HideUnusedVariationsCheckBox.UseVisualStyleBackColor = true;
+			this.dataGridViewTextBoxColumn3.HeaderText = "Name";
+			this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+			this.dataGridViewTextBoxColumn3.ReadOnly = true;
 			// 
-			// ClearVariationsButton
+			// dataGridViewTextBoxColumn4
 			// 
-			this.ClearVariationsButton.Location = new System.Drawing.Point(3, 351);
-			this.ClearVariationsButton.Name = "ClearVariationsButton";
-			this.ClearVariationsButton.Size = new System.Drawing.Size(279, 25);
-			this.ClearVariationsButton.TabIndex = 2;
-			this.ClearVariationsButton.Text = "Clear";
-			this.ClearVariationsButton.UseVisualStyleBackColor = true;
+			this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.dataGridViewTextBoxColumn4.HeaderText = "Value";
+			this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+			// 
+			// dataGridViewTextBoxColumn5
+			// 
+			this.dataGridViewTextBoxColumn5.HeaderText = "Name";
+			this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+			this.dataGridViewTextBoxColumn5.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn6
+			// 
+			this.dataGridViewTextBoxColumn6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.dataGridViewTextBoxColumn6.HeaderText = "Value";
+			this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
 			// 
 			// IteratorCanvas
 			// 
@@ -1333,17 +1385,59 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.VariationsGrid.Size = new System.Drawing.Size(279, 320);
 			this.VariationsGrid.TabIndex = 0;
 			// 
-			// dataGridViewTextBoxColumn1
+			// dataGridViewTextBoxColumn7
 			// 
-			this.dataGridViewTextBoxColumn1.HeaderText = "Name";
-			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-			this.dataGridViewTextBoxColumn1.ReadOnly = true;
+			this.dataGridViewTextBoxColumn7.HeaderText = "Name";
+			this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+			this.dataGridViewTextBoxColumn7.ReadOnly = true;
 			// 
-			// dataGridViewTextBoxColumn2
+			// dataGridViewTextBoxColumn8
 			// 
-			this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.dataGridViewTextBoxColumn2.HeaderText = "Value";
-			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+			this.dataGridViewTextBoxColumn8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.dataGridViewTextBoxColumn8.HeaderText = "Value";
+			this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+			// 
+			// VariablesGrid
+			// 
+			this.VariablesGrid.AllowUserToAddRows = false;
+			this.VariablesGrid.AllowUserToDeleteRows = false;
+			this.VariablesGrid.AllowUserToOrderColumns = true;
+			this.VariablesGrid.AllowUserToResizeRows = false;
+			this.VariablesGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.VariablesGrid.BackgroundColor = System.Drawing.SystemColors.Window;
+			this.VariablesGrid.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
+			this.VariablesGrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+			this.VariablesGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.VariablesGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+			this.VariablesGrid.EnableHeadersVisualStyles = false;
+			this.VariablesGrid.GridColor = System.Drawing.SystemColors.ControlLight;
+			this.VariablesGrid.Location = new System.Drawing.Point(3, 3);
+			this.VariablesGrid.MultiSelect = false;
+			this.VariablesGrid.Name = "VariablesGrid";
+			this.VariablesGrid.ResetMode = Xyrus.Apophysis.Windows.Controls.DragGridResetMode.Override;
+			this.VariablesGrid.RowHeadersVisible = false;
+			this.VariablesGrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.VariablesGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.VariablesGrid.ShowCellErrors = false;
+			this.VariablesGrid.ShowCellToolTips = false;
+			this.VariablesGrid.ShowEditingIcon = false;
+			this.VariablesGrid.ShowRowErrors = false;
+			this.VariablesGrid.Size = new System.Drawing.Size(279, 347);
+			this.VariablesGrid.TabIndex = 1;
+			// 
+			// dataGridViewTextBoxColumn9
+			// 
+			this.dataGridViewTextBoxColumn9.HeaderText = "Name";
+			this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+			this.dataGridViewTextBoxColumn9.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn10
+			// 
+			this.dataGridViewTextBoxColumn10.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.dataGridViewTextBoxColumn10.HeaderText = "Value";
+			this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
 			// 
 			// PaletteSelectComboBox
 			// 
@@ -1461,72 +1555,6 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorSelectionComboBox.Size = new System.Drawing.Size(179, 21);
 			this.IteratorSelectionComboBox.TabIndex = 1;
 			// 
-			// VariablesGrid
-			// 
-			this.VariablesGrid.AllowUserToAddRows = false;
-			this.VariablesGrid.AllowUserToDeleteRows = false;
-			this.VariablesGrid.AllowUserToOrderColumns = true;
-			this.VariablesGrid.AllowUserToResizeRows = false;
-			this.VariablesGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.VariablesGrid.BackgroundColor = System.Drawing.SystemColors.Window;
-			this.VariablesGrid.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
-			this.VariablesGrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-			this.VariablesGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.VariablesGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-			this.VariablesGrid.EnableHeadersVisualStyles = false;
-			this.VariablesGrid.GridColor = System.Drawing.SystemColors.ControlLight;
-			this.VariablesGrid.Location = new System.Drawing.Point(3, 3);
-			this.VariablesGrid.MultiSelect = false;
-			this.VariablesGrid.Name = "VariablesGrid";
-			this.VariablesGrid.ResetMode = Xyrus.Apophysis.Windows.Controls.DragGridResetMode.Toggle;
-			this.VariablesGrid.RowHeadersVisible = false;
-			this.VariablesGrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.VariablesGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.VariablesGrid.ShowCellErrors = false;
-			this.VariablesGrid.ShowCellToolTips = false;
-			this.VariablesGrid.ShowEditingIcon = false;
-			this.VariablesGrid.ShowRowErrors = false;
-			this.VariablesGrid.Size = new System.Drawing.Size(279, 347);
-			this.VariablesGrid.TabIndex = 1;
-			// 
-			// dataGridViewTextBoxColumn3
-			// 
-			this.dataGridViewTextBoxColumn3.HeaderText = "Name";
-			this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-			this.dataGridViewTextBoxColumn3.ReadOnly = true;
-			// 
-			// dataGridViewTextBoxColumn4
-			// 
-			this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.dataGridViewTextBoxColumn4.HeaderText = "Value";
-			this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-			// 
-			// dataGridViewTextBoxColumn5
-			// 
-			this.dataGridViewTextBoxColumn5.HeaderText = "Name";
-			this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-			this.dataGridViewTextBoxColumn5.ReadOnly = true;
-			// 
-			// dataGridViewTextBoxColumn6
-			// 
-			this.dataGridViewTextBoxColumn6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.dataGridViewTextBoxColumn6.HeaderText = "Value";
-			this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-			// 
-			// HideUnrelatedVariablesCheckBox
-			// 
-			this.HideUnrelatedVariablesCheckBox.AutoSize = true;
-			this.HideUnrelatedVariablesCheckBox.Checked = true;
-			this.HideUnrelatedVariablesCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.HideUnrelatedVariablesCheckBox.Location = new System.Drawing.Point(3, 356);
-			this.HideUnrelatedVariablesCheckBox.Name = "HideUnrelatedVariablesCheckBox";
-			this.HideUnrelatedVariablesCheckBox.Size = new System.Drawing.Size(202, 17);
-			this.HideUnrelatedVariablesCheckBox.TabIndex = 3;
-			this.HideUnrelatedVariablesCheckBox.Text = "Hide variables from unused variations";
-			this.HideUnrelatedVariablesCheckBox.UseVisualStyleBackColor = true;
-			// 
 			// Editor
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1548,6 +1576,10 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mSidebarSplitter.ResumeLayout(false);
 			this.mPreviewPanel.ResumeLayout(false);
 			this.Tabs.ResumeLayout(false);
+			this.VariationsTab.ResumeLayout(false);
+			this.VariationsTab.PerformLayout();
+			this.VariablesTab.ResumeLayout(false);
+			this.VariablesTab.PerformLayout();
 			this.PointTab.ResumeLayout(false);
 			this.mIteratorControlsGroupBox.ResumeLayout(false);
 			this.mPointCoordGroupBox.ResumeLayout(false);
@@ -1562,10 +1594,6 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mIteratorColorGroupBox.PerformLayout();
 			this.mIteratorPropertyPanel.ResumeLayout(false);
 			this.mIteratorPropertyPanel.PerformLayout();
-			this.VariationsTab.ResumeLayout(false);
-			this.VariationsTab.PerformLayout();
-			this.VariablesTab.ResumeLayout(false);
-			this.VariablesTab.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.VariationsGrid)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.VariablesGrid)).EndInit();
 			this.ResumeLayout(false);
@@ -1690,6 +1718,10 @@ namespace Xyrus.Apophysis.Windows.Forms
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
 		public System.Windows.Forms.CheckBox HideUnrelatedVariablesCheckBox;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
 	}
 }
 

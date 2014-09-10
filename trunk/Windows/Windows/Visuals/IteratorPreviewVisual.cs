@@ -74,15 +74,33 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			const double step = 0.1;
 
 			using (var brush = new SolidBrush(Color.FromArgb(0x80, model.GetColor())))
+			//using (var pen = new Pen(brush))
 			{
+				//Vector2 lastPoint = null;
+
+				var plot = new Action<double, double>((x, y) =>
+				{
+					var vout = IterateSample(model, new Vector2(x, y), variations, data);
+					var pos = Canvas.WorldToCanvas(vout);
+
+					// ReSharper disable once AccessToModifiedClosure
+					//var pA = (lastPoint ?? pos).ToPoint();
+					var pB = pos.ToPoint();
+
+					// ReSharper disable once AccessToDisposedClosure
+					graphics.FillEllipse(brush, pB.X - 1, pB.Y - 1, 3, 3);
+					//graphics.DrawLine(pen, pA, pB);
+
+					//lastPoint = pos;
+				});
+
 				for (double y = p1.Y; y <= p2.Y; y += step)
 				{
+					//lastPoint = null;
+
 					for (double x = p1.X; x <= p2.X; x += step)
 					{
-						var vout = IterateSample(model, new Vector2(x, y), variations, data);
-						var pos = Canvas.WorldToCanvas(vout);
-
-						graphics.FillRectangle(brush, new System.Drawing.Rectangle(pos.ToPoint(), new Size(2, 2)));
+						plot(x, y);
 					}
 				}
 			}

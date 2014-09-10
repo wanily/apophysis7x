@@ -23,13 +23,23 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			View.HideUnrelatedVariablesCheckBox.Click += OnHideUnrelatedVariablesCheckBoxClick;
 			View.VariablesGrid.CellValueChanged += OnCellValueChanged;
+			View.VariablesGrid.CellValueReset += OnCellValueReset;
 		}
 		protected override void DetachView()
 		{
 			View.HideUnrelatedVariablesCheckBox.Click -= OnHideUnrelatedVariablesCheckBoxClick;
 			View.VariablesGrid.CellValueChanged -= OnCellValueChanged;
+			View.VariablesGrid.CellValueReset -= OnCellValueReset;
 		}
 
+		private void OnCellValueReset(object sender, CellValueResetEventArgs e)
+		{
+			var variable = View.VariablesGrid.Rows[e.Row].Cells[0].Value as string;
+			if (string.IsNullOrEmpty(variable) || View.IteratorCanvas.SelectedIterator == null)
+				return;
+
+			e.Value = View.IteratorCanvas.SelectedIterator.Variations.ResetVariable(variable);
+		}
 		private void OnCellValueChanged(object sender, CellValueChangedEventArgs e)
 		{
 			var variable = View.VariablesGrid.Rows[e.Row].Cells[0].Value as string;

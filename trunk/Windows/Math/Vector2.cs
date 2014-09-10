@@ -317,6 +317,13 @@ namespace Xyrus.Apophysis.Math
 			get { return new Vector2 {X = double.NaN, Y = double.NaN}; }
 		}
 
+		public void Swap()
+		{
+			var t = mX;
+			mX = mY;
+			mY = t;
+		}
+
 		public Point ToPoint()
 		{
 			const double min = -65536, max = 65535;

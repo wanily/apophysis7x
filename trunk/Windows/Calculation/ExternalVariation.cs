@@ -240,9 +240,9 @@ namespace Xyrus.Apophysis.Calculation
 				bool result = mSetVariable(mVp, nptr, vptr);
 
 				Debug.Assert(result, "PluginVarSetVariable");
-
-				return value;
 			}
+
+			return GetVariable(name);
 		}
 		public override double ResetVariable(string name)
 		{
