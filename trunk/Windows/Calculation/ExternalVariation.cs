@@ -152,25 +152,35 @@ namespace Xyrus.Apophysis.Calculation
 			return (is64Bit && type == MachineType.IMAGE_FILE_MACHINE_AMD64) ||
 			       (!is64Bit && type == MachineType.IMAGE_FILE_MACHINE_I386);
 		}
-
 		private static MachineType GetDllMachineType([NotNull] string dllPath)
 		{
 			var file = new FileStream(dllPath, FileMode.Open, FileAccess.Read);
 			var reader = new BinaryReader(file);
 
-			file.Seek(0x3c, SeekOrigin.Begin);
-			var peOffset = reader.ReadInt32();
+			MachineType machineType;
 
-			file.Seek(peOffset, SeekOrigin.Begin);
-			var peHead = reader.ReadUInt32();
+			try
+			{
+				file.Seek(0x3c, SeekOrigin.Begin);
+				var peOffset = reader.ReadInt32();
 
-			if (peHead != 0x00004550)
-				throw new ApophysisException(string.Format("Unable to find PE header of library \"{0}\"", dllPath));
+				file.Seek(peOffset, SeekOrigin.Begin);
+				var peHead = reader.ReadUInt32();
 
-			var machineType = (MachineType)reader.ReadUInt16();
+				if (peHead != 0x00004550)
+					throw new ApophysisException(string.Format("Invalid DLL (can't find PE header)"));
 
-			reader.Close();
-			file.Close();
+				machineType = (MachineType) reader.ReadUInt16();
+			}
+			catch
+			{
+				throw new ApophysisException(string.Format("Invalid DLL (unknown machine type)"));
+			}
+			finally
+			{
+				reader.Close();
+				file.Close();
+			}
 
 			return machineType;
 		}
@@ -312,6 +322,14 @@ namespace Xyrus.Apophysis.Calculation
 			data.Color = *mColor;
 		}
 
+		private T LoadProc<T>(IntPtr hModule, string name)
+		{
+			var ptr = GetProcAddress(hModule, name);
+			if (ptr == IntPtr.Zero)
+				return (T)(object)null;
+
+			return (T)(object)Marshal.GetDelegateForFunctionPointer(ptr, typeof (T));
+		}
 		private void LoadModule()
 		{
 			if (mHModule != IntPtr.Zero)
@@ -321,16 +339,23 @@ namespace Xyrus.Apophysis.Calculation
 
 			mHModule = LoadLibrary(mDllPath);
 
-			mCreate = (PluginVarCreateDelegate)Marshal.GetDelegateForFunctionPointer(GetProcAddress(mHModule, "PluginVarCreate"), typeof(PluginVarCreateDelegate));
-			mDestroy = (PluginVarDestroyDelegate)Marshal.GetDelegateForFunctionPointer(GetProcAddress(mHModule, "PluginVarDestroy"), typeof(PluginVarDestroyDelegate));
-			mGetVariableNameAt = (PluginVarGetVariableNameAtDelegate)Marshal.GetDelegateForFunctionPointer(GetProcAddress(mHModule, "PluginVarGetVariableNameAt"), typeof(PluginVarGetVariableNameAtDelegate));
-			mResetVariable = (PluginVarResetVariableDelegate)Marshal.GetDelegateForFunctionPointer(GetProcAddress(mHModule, "PluginVarResetVariable"), typeof(PluginVarResetVariableDelegate));
-			mGetVariable = (PluginVarGetVariableDelegate)Marshal.GetDelegateForFunctionPointer(GetProcAddress(mHModule, "PluginVarGetVariable"), typeof(PluginVarGetVariableDelegate));
-			mSetVariable = (PluginVarSetVariableDelegate)Marshal.GetDelegateForFunctionPointer(GetProcAddress(mHModule, "PluginVarSetVariable"), typeof(PluginVarSetVariableDelegate));
-			mGetName = (PluginVarGetNameDelegate)Marshal.GetDelegateForFunctionPointer(GetProcAddress(mHModule, "PluginVarGetName"), typeof(PluginVarGetNameDelegate));
-			mGetNrVariables = (PluginVarGetNrVariablesDelegate)Marshal.GetDelegateForFunctionPointer(GetProcAddress(mHModule, "PluginVarGetNrVariables"), typeof(PluginVarGetNrVariablesDelegate));
-			mCalculate = (PluginVarCalculateDelegate)Marshal.GetDelegateForFunctionPointer(GetProcAddress(mHModule, "PluginVarCalc"), typeof(PluginVarCalculateDelegate));
-			mPrepare = (PluginVarPrepareDelegate)Marshal.GetDelegateForFunctionPointer(GetProcAddress(mHModule, "PluginVarPrepare"), typeof(PluginVarPrepareDelegate));
+			mCreate = LoadProc<PluginVarCreateDelegate>(mHModule, "PluginVarCreate");
+			mDestroy = LoadProc<PluginVarDestroyDelegate>(mHModule, "PluginVarDestroy");
+			mGetVariableNameAt = LoadProc<PluginVarGetVariableNameAtDelegate>(mHModule, "PluginVarGetVariableNameAt");
+			mResetVariable = LoadProc<PluginVarResetVariableDelegate>(mHModule, "PluginVarResetVariable");
+			mGetVariable = LoadProc<PluginVarGetVariableDelegate>(mHModule, "PluginVarGetVariable");
+			mSetVariable = LoadProc<PluginVarSetVariableDelegate>(mHModule, "PluginVarSetVariable");
+			mGetName = LoadProc<PluginVarGetNameDelegate>(mHModule, "PluginVarGetName");
+			mGetNrVariables = LoadProc<PluginVarGetNrVariablesDelegate>(mHModule, "PluginVarGetNrVariables");
+			mCalculate = LoadProc<PluginVarCalculateDelegate>(mHModule, "PluginVarCalc");
+			mPrepare = LoadProc<PluginVarPrepareDelegate>(mHModule, "PluginVarPrepare");
+
+			if (mCreate == null || mDestroy == null || mGetVariableNameAt == null || mResetVariable == null ||
+			    mGetVariable == null || mSetVariable == null || mGetName == null || mGetNrVariables == null || 
+				mCalculate == null || mPrepare == null)
+			{
+				throw new ApophysisException("Incompatible Apophysis plugin");
+			}
 
 			Initialize();
 
@@ -349,6 +374,10 @@ namespace Xyrus.Apophysis.Calculation
 				else
 				{
 					mInitLegacy = (PluginVarInitDelegate) Marshal.GetDelegateForFunctionPointer(GetProcAddress(mHModule, "PluginVarInit"), typeof(PluginVarInitDelegate));
+					if (mInitLegacy == null)
+					{
+						throw new ApophysisException("Incompatible Apophysis plugin");
+					}
 				}
 			}
 

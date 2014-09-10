@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Calculation;
@@ -25,9 +26,28 @@ namespace Xyrus.Apophysis
 			if (Directory.Exists(pluginDir))
 			{
 				var files = Directory.GetFiles(pluginDir);
+				var errorList = new List<string>();
+
 				foreach (var file in files)
 				{
-					VariationRegistry.RegisterDll(file);
+					try
+					{
+						if (!ExternalVariation.FitsCurrentMachineType(file))
+							continue;
+
+						VariationRegistry.RegisterDll(file);
+					}
+					catch (ApophysisException exception)
+					{
+						errorList.Add(string.Format("   - {0}: {1}", Path.GetFileName(file), exception.Message));
+					}
+				}
+
+				if (errorList.Count > 0)
+				{
+					MessageBox.Show(
+						string.Format("The following plugins could not be loaded:\r\n\r\n{0}", string.Join("\r\n", errorList.ToArray())), 
+						Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				}
 			}
 
