@@ -22,8 +22,6 @@ namespace Xyrus.Apophysis.Calculation
 			
 			mVariations.Add(variation);
 			mVariationsByName.Add(variation.Name, variation);
-
-			variation.Dispose();
 		}
 		public static void Register<T>() where T : Variation, new()
 		{

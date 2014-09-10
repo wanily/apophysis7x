@@ -121,6 +121,11 @@ namespace Xyrus.Apophysis.Calculation
 
 		private double* mPreX, mPostX, mPreY, mPostY, mPreZ, mPostZ, mColor;
 
+		private ExternalVariation([NotNull] string dllPath, IntPtr hModule)
+		{
+			mDllPath = dllPath;
+			mHModule = hModule;
+		}
 		public ExternalVariation([NotNull] string dllPath)
 		{
 			if (string.IsNullOrEmpty(dllPath)) throw new ArgumentNullException("dllPath");
@@ -307,17 +312,7 @@ namespace Xyrus.Apophysis.Calculation
 			mCalculate = (PluginVarCalculateDelegate)Marshal.GetDelegateForFunctionPointer(GetProcAddress(mHModule, "PluginVarCalc"), typeof(PluginVarCalculateDelegate));
 			mPrepare = (PluginVarPrepareDelegate)Marshal.GetDelegateForFunctionPointer(GetProcAddress(mHModule, "PluginVarPrepare"), typeof(PluginVarPrepareDelegate));
 
-			mVp = mCreate();
-
-			mPreX = (double*) Marshal.AllocHGlobal(sizeof (double)).ToPointer();
-			mPreY = (double*) Marshal.AllocHGlobal(sizeof (double)).ToPointer();
-			mPreZ = (double*) Marshal.AllocHGlobal(sizeof (double)).ToPointer();
-
-			mPostX = (double*) Marshal.AllocHGlobal(sizeof (double)).ToPointer();
-			mPostY = (double*) Marshal.AllocHGlobal(sizeof (double)).ToPointer();
-			mPostZ = (double*) Marshal.AllocHGlobal(sizeof (double)).ToPointer();
-
-			mColor = (double*) Marshal.AllocHGlobal(sizeof (double)).ToPointer();
+			Initialize();
 
 			var init = GetProcAddress(mHModule, "PluginVarInitDC");
 			if (init != IntPtr.Zero)
@@ -350,6 +345,21 @@ namespace Xyrus.Apophysis.Calculation
 				mVariables.Add(GetStringFromPointer(namePtr));
 			}
 		}
+		private void Initialize()
+		{
+			mVp = mCreate();
+
+			mPreX = (double*)Marshal.AllocHGlobal(sizeof(double)).ToPointer();
+			mPreY = (double*)Marshal.AllocHGlobal(sizeof(double)).ToPointer();
+			mPreZ = (double*)Marshal.AllocHGlobal(sizeof(double)).ToPointer();
+
+			mPostX = (double*)Marshal.AllocHGlobal(sizeof(double)).ToPointer();
+			mPostY = (double*)Marshal.AllocHGlobal(sizeof(double)).ToPointer();
+			mPostZ = (double*)Marshal.AllocHGlobal(sizeof(double)).ToPointer();
+
+			mColor = (double*)Marshal.AllocHGlobal(sizeof(double)).ToPointer();
+		}
+
 		protected override void DisposeOverride(bool disposing)
 		{
 			if (mHModule != IntPtr.Zero && disposing)
@@ -369,7 +379,6 @@ namespace Xyrus.Apophysis.Calculation
 
 				Marshal.FreeHGlobal(new IntPtr(mColor));
 
-				FreeLibrary(mHModule);
 				mHModule = IntPtr.Zero;
 			}
 
@@ -400,7 +409,34 @@ namespace Xyrus.Apophysis.Calculation
 
 		public Variation CreateInstance()
 		{
-			return new ExternalVariation(mDllPath);
+			if (mHModule == IntPtr.Zero)
+			{
+				throw new ObjectDisposedException(GetType().Name);
+			}
+
+			var instance = new ExternalVariation(mDllPath, mHModule);
+
+			instance.mCreate = mCreate;
+			instance.mDestroy = mDestroy;
+			instance.mGetName = mGetName;
+			instance.mGetNrVariables = mGetNrVariables;
+			instance.mGetVariableNameAt = mGetVariableNameAt;
+			instance.mInit = mInit;
+			instance.mInitLegacy = mInitLegacy;
+			instance.mInitLegacy3D = mInitLegacy3D;
+			instance.mResetVariable = mResetVariable;
+			instance.mGetVariable = mGetVariable;
+			instance.mSetVariable = mSetVariable;
+			instance.mPrepare = mPrepare;
+			instance.mCalculate = mCalculate;
+
+			instance.Initialize();
+			
+			instance.mName = mName;
+			instance.mVariables = new List<string>();
+			instance.mVariables.AddRange(mVariables);
+
+			return instance;
 		}
 	}
 }
