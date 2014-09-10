@@ -3,13 +3,14 @@ using System.Windows.Forms;
 
 namespace Xyrus.Apophysis.Windows.Forms
 {
-	public partial class Banner : Form
+	public sealed partial class Banner : Form
 	{
 		private string mBannerText;
 
 		public Banner()
 		{
 			InitializeComponent();
+			Text = Application.ProductName;
 		}
 
 		public string BannerText
