@@ -89,6 +89,7 @@
     <Compile Include="Windows\Common\Extensions.cs" />
     <Compile Include="Windows\Common\Lock.cs" />
     <Compile Include="Windows\Common\WindowController.cs" />
+    <Compile Include="Windows\Controllers\BannerController.cs" />
     <Compile Include="Windows\Controllers\EditorController.cs" />
     <Compile Include="Windows\Controllers\EditorKeyboardController.cs" />
     <Compile Include="Windows\Controllers\EditorToolbarController.cs" />
@@ -151,6 +152,12 @@
     <Compile Include="Windows\Controls\IteratorSelectComboBox.Designer.cs">
       <DependentUpon>IteratorSelectComboBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Forms\Banner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\Forms\Banner.Designer.cs">
+      <DependentUpon>Banner.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Input\MouseHookEventArgs.cs" />
     <Compile Include="Windows\Input\InputOperation.cs" />
     <Compile Include="Windows\Input\KeyboardHookEventArgs.cs" />
@@ -205,6 +212,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\Controls\EditorCanvas.resx">
       <DependentUpon>EditorCanvas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\Forms\Banner.resx">
+      <DependentUpon>Banner.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\Forms\Editor.resx">
       <DependentUpon>Editor.cs</DependentUpon>

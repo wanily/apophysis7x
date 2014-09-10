@@ -16,19 +16,23 @@ namespace Xyrus.Apophysis.Calculation
 			mVariationsByName = new Dictionary<string, Variation>();
 		}
 
-		public static void RegisterDll([NotNull] string dllPath)
+		public static string RegisterDll([NotNull] string dllPath)
 		{
 			var variation = new ExternalVariation(dllPath);
 			
 			mVariations.Add(variation);
 			mVariationsByName.Add(variation.Name, variation);
+
+			return variation.Name;
 		}
-		public static void Register<T>() where T : Variation, new()
+		public static string Register<T>() where T : Variation, new()
 		{
 			var instance = new T();
 
 			mVariationsByName.Add(instance.Name, instance);
 			mVariations.Add(instance);
+
+			return instance.Name;
 		}
 		public static Variation GetInstance(string name)
 		{

@@ -8,9 +8,10 @@ namespace Xyrus.Apophysis.Windows
 		{
 			View.Show();
 		}
-		public void StartApplication()
+		public new WindowController<TView> Initialize()
 		{
-			Application.Run(View);
+			base.Initialize();
+			return this;
 		}
 	}
 }
