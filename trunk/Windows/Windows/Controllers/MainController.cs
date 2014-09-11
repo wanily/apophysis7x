@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
@@ -19,6 +20,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		private BatchListController mBatchListController;
 
 		private Lock mInitialize = new Lock();
+		private FlameCollection mFlames;
 
 		public MainController()
 		{
@@ -69,21 +71,79 @@ namespace Xyrus.Apophysis.Windows.Controllers
 					mUndoController.Dispose();
 					mUndoController = null;
 				}
+
+				if (mFlames != null)
+				{
+					mFlames.ContentChanged -= OnFlameCollectionChanged;
+					mFlames = null;
+				}
 			}
 		}
 
 		protected override void AttachView()
 		{
+			mEditorController.View.Owner = View;
+
 			mEditorController.Initialize();
 			mMenuController.Initialize();
 			mToolbarController.Initialize();
 			mBatchListController.Initialize();
 
-			//todo select first from default batch instead (use batch list controller)
-			LoadFlameAndEraseHistory(new Flame());
+			Flames = new FlameCollection();
+
+			//todo temp
+			Flames.Append();
 		}
 		protected override void DetachView()
 		{
+			mEditorController.View.Owner = null;
+		}
+
+		[NotNull]
+		internal Lock Initializer
+		{
+			get { return mInitialize; }
+		}
+
+		private void AfterReset()
+		{
+			mBatchListController.BuildFlameList();
+			mBatchListController.SelectFlame(mFlames.First());
+		}
+
+		public FlameCollection Flames
+		{
+			get { return mFlames; }
+			set
+			{
+				if (value == null) throw new ArgumentNullException("value");
+
+				if (mFlames != null)
+				{
+					mFlames.ContentChanged -= OnFlameCollectionChanged;
+				}
+
+				mFlames = value;
+				mFlames.ContentChanged += OnFlameCollectionChanged;
+
+				using (mInitialize.Enter())
+				{
+					AfterReset();
+				}
+
+				View.Text = string.Format("Apophysis - {0}", mFlames.CalculatedName);
+			}
+		}
+
+		private void OnFlameCollectionChanged(object sender, EventArgs e)
+		{
+			if (mInitialize.IsBusy)
+				return;
+
+			var selection = mBatchListController.GetSelectedFlame();
+
+			mBatchListController.BuildFlameList();
+			mBatchListController.SelectFlame(selection ?? mFlames.First());
 		}
 
 		public UndoController UndoController
@@ -121,8 +181,41 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			if (flame == null) throw new ArgumentNullException("flame");
 
-			mEditorController.Flame = new Flame();
-			mUndoController.Initialize(flame);
+			mEditorController.Flame = flame;
+			mUndoController.Reset(flame);
+		}
+		public void NotifyFlameNameChanged(Flame flame)
+		{
+			if (ReferenceEquals(flame, mEditorController.Flame))
+			{
+				mEditorController.UpdateWindowTitle();
+			}
+		}
+		public void DeleteFlameIfPossibleWithConfirm(Flame flame)
+		{
+			if (!mFlames.CanRemove())
+				return;
+
+			if (!mFlames.Contains(flame))
+				return;
+
+			if (DialogResult.Yes == MessageBox.Show(
+				string.Format("Do you really want to remove \"{0}\" from the batch? This can't be undone!", flame.CalculatedName),
+				Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+			{
+				var selection = mBatchListController.GetSelectedFlame();
+				var index = selection == null ? 0 : mFlames.IndexOf(selection);
+
+				if (index < 0)
+					index = 0;
+
+				mFlames.Remove(flame);
+
+				if (index >= mFlames.Count)
+					index = mFlames.Count - 1;
+
+				mBatchListController.SelectFlame(mFlames[index]);
+			}
 		}
 
 		public void ShowEditor()

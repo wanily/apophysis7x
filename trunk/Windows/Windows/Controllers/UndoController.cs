@@ -41,6 +41,16 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mRedoStack = new Stack<Flame>();
 			mInitialized = true;
 		}
+		public void Reset([NotNull] Flame flame)
+		{
+			if (flame == null) throw new ArgumentNullException("flame");
+
+			mCurrent = flame.Copy();
+			mUndoStack = new Stack<Flame>();
+			mRedoStack = new Stack<Flame>();
+			mInitialized = true;
+		}
+
 		public void CommitChange([NotNull] Flame flame)
 		{
 			if (flame == null) throw new ArgumentNullException("flame");

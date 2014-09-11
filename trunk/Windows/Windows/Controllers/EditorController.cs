@@ -167,10 +167,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 
 		[NotNull]
-		public Lock Initializer
+		internal Lock Initializer
 		{
 			get { return mInitialize; }
 		}
+
 		public void UpdateCoordinates()
 		{
 			mPointEditController.UpdatePointControls();
@@ -196,7 +197,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			mColorController.UpdateControls();
 		}
-		public void AfterReset()
+		public void UpdateWindowTitle()
+		{
+			View.Text = string.Format("Editor - {0}", mFlame.CalculatedName);
+		}
+
+		private void AfterReset()
 		{
 			mSelectionController.BuildIteratorComboBox();
 			mSelectionController.SelectIterator(mFlame.Iterators.First());
@@ -229,7 +235,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 					AfterReset();
 				}
 
-				View.Text = string.Format("Editor - {0}", mFlame.CalculatedName);
+				UpdateWindowTitle();
 			}
 		}
 

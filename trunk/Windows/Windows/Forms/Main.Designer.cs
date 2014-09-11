@@ -30,9 +30,9 @@
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
 			this.mMainMenu = new System.Windows.Forms.MenuStrip();
-			this.mToolbar = new System.Windows.Forms.ToolStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.mToolbar = new System.Windows.Forms.ToolStrip();
 			this.mRootSplitter = new System.Windows.Forms.SplitContainer();
 			this.BatchListView = new System.Windows.Forms.ListView();
 			this.BatchListNameColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -50,17 +50,10 @@
             this.fileToolStripMenuItem});
 			this.mMainMenu.Location = new System.Drawing.Point(0, 0);
 			this.mMainMenu.Name = "mMainMenu";
+			this.mMainMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
 			this.mMainMenu.Size = new System.Drawing.Size(1146, 24);
 			this.mMainMenu.TabIndex = 0;
 			this.mMainMenu.Text = "menuStrip1";
-			// 
-			// mToolbar
-			// 
-			this.mToolbar.Location = new System.Drawing.Point(0, 24);
-			this.mToolbar.Name = "mToolbar";
-			this.mToolbar.Size = new System.Drawing.Size(1146, 25);
-			this.mToolbar.TabIndex = 1;
-			this.mToolbar.Text = "toolStrip1";
 			// 
 			// fileToolStripMenuItem
 			// 
@@ -73,8 +66,19 @@
 			// ExitToolStripMenuItem
 			// 
 			this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
-			this.ExitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.ExitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
 			this.ExitToolStripMenuItem.Text = "E&xit";
+			// 
+			// mToolbar
+			// 
+			this.mToolbar.AllowMerge = false;
+			this.mToolbar.GripMargin = new System.Windows.Forms.Padding(0);
+			this.mToolbar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+			this.mToolbar.Location = new System.Drawing.Point(0, 24);
+			this.mToolbar.Name = "mToolbar";
+			this.mToolbar.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+			this.mToolbar.Size = new System.Drawing.Size(1146, 25);
+			this.mToolbar.TabIndex = 1;
 			// 
 			// mRootSplitter
 			// 
@@ -95,19 +99,24 @@
 			// 
 			// BatchListView
 			// 
+			this.BatchListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.BatchListView.BackColor = System.Drawing.SystemColors.ControlLightLight;
 			this.BatchListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.BatchListNameColumn});
-			this.BatchListView.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.BatchListView.FullRowSelect = true;
+			this.BatchListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
 			this.BatchListView.LabelEdit = true;
-			this.BatchListView.Location = new System.Drawing.Point(0, 0);
+			this.BatchListView.Location = new System.Drawing.Point(3, 3);
 			this.BatchListView.MultiSelect = false;
 			this.BatchListView.Name = "BatchListView";
 			this.BatchListView.ShowGroups = false;
-			this.BatchListView.Size = new System.Drawing.Size(250, 649);
+			this.BatchListView.Size = new System.Drawing.Size(247, 620);
 			this.BatchListView.TabIndex = 0;
 			this.BatchListView.UseCompatibleStateImageBehavior = false;
 			this.BatchListView.View = System.Windows.Forms.View.Details;
+			this.BatchListView.Resize += new System.EventHandler(this.OnBatchListResized);
 			// 
 			// BatchListNameColumn
 			// 
@@ -115,17 +124,20 @@
 			// 
 			// mPreviewBevel
 			// 
+			this.mPreviewBevel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.mPreviewBevel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.mPreviewBevel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.mPreviewBevel.Location = new System.Drawing.Point(0, 0);
+			this.mPreviewBevel.Location = new System.Drawing.Point(0, 3);
 			this.mPreviewBevel.Name = "mPreviewBevel";
-			this.mPreviewBevel.Size = new System.Drawing.Size(892, 649);
+			this.mPreviewBevel.Size = new System.Drawing.Size(889, 620);
 			this.mPreviewBevel.TabIndex = 0;
 			// 
 			// StatusBar
 			// 
 			this.StatusBar.Location = new System.Drawing.Point(0, 676);
 			this.StatusBar.Name = "StatusBar";
+			this.StatusBar.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
 			this.StatusBar.Size = new System.Drawing.Size(1146, 22);
 			this.StatusBar.TabIndex = 3;
 			// 
@@ -143,6 +155,7 @@
 			this.MinimumSize = new System.Drawing.Size(640, 480);
 			this.Name = "Main";
 			this.Text = "Apophysis";
+			this.Load += new System.EventHandler(this.OnWindowLoaded);
 			this.mMainMenu.ResumeLayout(false);
 			this.mMainMenu.PerformLayout();
 			this.mRootSplitter.Panel1.ResumeLayout(false);
