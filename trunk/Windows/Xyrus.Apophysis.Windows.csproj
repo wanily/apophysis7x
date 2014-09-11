@@ -90,8 +90,9 @@
     <Compile Include="Windows\Common\Lock.cs" />
     <Compile Include="Windows\Common\WindowController.cs" />
     <Compile Include="Windows\Controllers\BannerController.cs" />
+    <Compile Include="Windows\Controllers\BatchListController.cs" />
     <Compile Include="Windows\Controllers\EditorController.cs" />
-    <Compile Include="Windows\Controllers\EditorKeyboardController.cs" />
+    <Compile Include="Windows\Controllers\KeyboardController.cs" />
     <Compile Include="Windows\Controllers\EditorToolbarController.cs" />
     <Compile Include="Windows\Controllers\EditorUndoController.cs" />
     <Compile Include="Windows\Controllers\InputController.cs" />
@@ -102,6 +103,9 @@
     <Compile Include="Windows\Controllers\IteratorVariablesController.cs" />
     <Compile Include="Windows\Controllers\IteratorVariationsController.cs" />
     <Compile Include="Windows\Controllers\IteratorVectorEditController.cs" />
+    <Compile Include="Windows\Controllers\MainController.cs" />
+    <Compile Include="Windows\Controllers\MainMenuController.cs" />
+    <Compile Include="Windows\Controllers\MainToolbarController.cs" />
     <Compile Include="Windows\Controllers\UndoController.cs" />
     <Compile Include="Windows\Controls\CellValueChangedEventArgs.cs" />
     <Compile Include="Windows\Controls\CellValueChangedEventHandler.cs" />
@@ -157,6 +161,12 @@
     </Compile>
     <Compile Include="Windows\Forms\Banner.Designer.cs">
       <DependentUpon>Banner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Forms\Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\Forms\Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
     </Compile>
     <Compile Include="Windows\Input\MouseHookEventArgs.cs" />
     <Compile Include="Windows\Input\InputOperation.cs" />
@@ -236,6 +246,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Windows\Forms\Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Windows\Resources\MAINICON.ico" />
     <EmbeddedResource Include="Windows\Resources\MOVE_WHITE.cur" />
     <EmbeddedResource Include="Windows\Resources\ROTATE_WHITE.cur" />

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Drawing;
+﻿using System.ComponentModel;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Windows.Controllers;
-using Xyrus.Apophysis.Windows.Input;
 
 namespace Xyrus.Apophysis.Windows.Forms
 {
@@ -28,14 +26,18 @@ namespace Xyrus.Apophysis.Windows.Forms
 			base.Dispose(disposing);
 		}
 
-		internal Action<Keys> KeyHandler { get; set; }
 		protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
 		{
-			if (KeyHandler != null)
-				KeyHandler(keyData);
+			InputController.HandleKeyboardInput(this, keyData);
 			return base.ProcessCmdKey(ref msg, keyData);
 		}
+		protected override void OnClosing(CancelEventArgs e)
+		{
+			base.OnClosing(e);
 
+			e.Cancel = true;
+			Hide();
+		}
 
 		private void OnNumericTextBoxKeyPress(object sender, KeyPressEventArgs e)
 		{

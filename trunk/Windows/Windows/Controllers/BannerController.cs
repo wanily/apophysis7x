@@ -2,6 +2,7 @@
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
+	[PublicAPI]
 	public class BannerController : WindowController<Banner>
 	{
 		protected override void AttachView()

@@ -9,12 +9,11 @@ using Xyrus.Apophysis.Windows.Forms;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
-	[PublicAPI]
-	public class EditorController : WindowController<Editor>
+	class EditorController : WindowController<Editor>
 	{
-		private UndoController mUndoController;
+		private MainController mParent;
+
 		private EditorUndoController mEditorUndoController;
-		private EditorKeyboardController mKeyboardController;
 		private EditorToolbarController mToolbarController;
 		private IteratorPropertiesController mPropertiesController;
 		private IteratorSelectionController mSelectionController;
@@ -28,13 +27,13 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		private EditorSettings mSettings;
 		private Flame mFlame;
 
-		public EditorController([NotNull] UndoController undoController)
+		public EditorController([NotNull] MainController parent)
 		{
-			if (undoController == null) throw new ArgumentNullException("undoController");
-			mUndoController = undoController;
+			if (parent == null) throw new ArgumentNullException("parent");
+
+			mParent = parent;
 
 			mEditorUndoController = new EditorUndoController(View, this);
-			mKeyboardController = new EditorKeyboardController(View, this);
 			mToolbarController = new EditorToolbarController(View, this);
 			mPropertiesController = new IteratorPropertiesController(View, this);
 			mSelectionController = new IteratorSelectionController(View, this);
@@ -96,12 +95,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 					mToolbarController = null;
 				}
 
-				if (mKeyboardController != null)
-				{
-					mKeyboardController.Dispose();
-					mKeyboardController = null;
-				}
-
 				if (mEditorUndoController != null)
 				{
 					mEditorUndoController.Dispose();
@@ -121,7 +114,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				}
 			}
 
-			mUndoController = null;
+			mParent = null;
 		}
 
 		protected override void AttachView()
@@ -141,7 +134,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.IteratorCanvas.PreviewRange = ApophysisSettings.EditorPreviewRange;
 
 			mEditorUndoController.Initialize();
-			mKeyboardController.Initialize();
 			mToolbarController.Initialize();
 			mPropertiesController.Initialize();
 			mSelectionController.Initialize();
@@ -155,8 +147,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.IteratorCanvas.ActiveMatrixChanged += OnActiveMatrixChanged;
 
 			UpdateActiveMatrix();
-			Flame = new Flame();
-			mUndoController.Initialize(Flame);
 		}
 		protected override void DetachView()
 		{
@@ -177,36 +167,36 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 
 		[NotNull]
-		internal Lock Initializer
+		public Lock Initializer
 		{
 			get { return mInitialize; }
 		}
-		internal void UpdateCoordinates()
+		public void UpdateCoordinates()
 		{
 			mPointEditController.UpdatePointControls();
 			mVectorEditController.UpdateVectorControls();
 		}
-		internal void UpdateActiveMatrix()
+		public void UpdateActiveMatrix()
 		{
 			
 		}
-		internal void UpdateToolbar()
+		public void UpdateToolbar()
 		{
 			mToolbarController.UpdateButtonStates();
 		}
-		internal void UpdateVariations()
+		public void UpdateVariations()
 		{
 			mVariationsController.UpdateList();
 		}
-		internal void UpdateVariables()
+		public void UpdateVariables()
 		{
 			mVariablesController.UpdateList();
 		}
-		internal void UpdateColor()
+		public void UpdateColor()
 		{
 			mColorController.UpdateControls();
 		}
-		internal void AfterReset()
+		public void AfterReset()
 		{
 			mSelectionController.BuildIteratorComboBox();
 			mSelectionController.SelectIterator(mFlame.Iterators.First());
@@ -214,12 +204,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			UpdateToolbar();
 		}
 
-		[NotNull]
 		public UndoController UndoController
 		{
-			get { return mUndoController; }
+			get { return mParent.UndoController; }
 		}
-
 		public Flame Flame
 		{
 			get { return mFlame; }
@@ -242,28 +230,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				}
 
 				View.Text = string.Format("Editor - {0}", mFlame.CalculatedName);
-			}
-		}
-		public void ReadFlameFromClipboard()
-		{
-			var clipboard = Clipboard.GetText();
-			if (!string.IsNullOrEmpty(clipboard))
-			{
-				try
-				{
-					var flame = new Flame();
-					
-					flame.ReadXml(XElement.Parse(clipboard, LoadOptions.None));
-					Flame = flame;
-				}
-				catch (ApophysisException exception)
-				{
-					MessageBox.Show(exception.Message, View.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-				}
-				catch (XmlException exception)
-				{
-					MessageBox.Show(exception.Message, View.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-				}
 			}
 		}
 

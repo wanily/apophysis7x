@@ -14,8 +14,9 @@ namespace Xyrus.Apophysis
 	[PublicAPI]
 	public static class ApophysisApplication
 	{
-		public static BannerController Banner { get; private set; }
-		public static EditorController Editor { get; private set; }
+		private static BannerController mBanner;
+
+		public static MainController MainWindow { get; private set; }
 
 		[STAThread]
 		static void Main()
@@ -23,26 +24,25 @@ namespace Xyrus.Apophysis
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 
-			Banner = new BannerController();
-			Banner.Initialize();
+			mBanner = new BannerController();
+			mBanner.Initialize();
 			
 			LoadVariations();
 
-			Banner.BannerText = "Loading GUI";
+			mBanner.BannerText = "Loading GUI";
 
-			//todo more forms
-			using (Editor = (EditorController)new EditorController(new UndoController()).Initialize())
+			using (MainWindow = (MainController)new MainController().Initialize())
 			{
-				Banner.Dispose();
+				mBanner.Dispose();
+				mBanner = null;
 
-				//todo use main form instead
-				Application.Run(Editor.View);
+				Application.Run(MainWindow.View);
 			}
 		}
 
 		static void LoadVariations()
 		{
-			Banner.BannerText = "Loading variations";
+			mBanner.BannerText = "Loading variations";
 
 			var types = typeof(Linear).Assembly.GetTypes();
 			var registerMethod = typeof(VariationRegistry).GetMethod("Register", BindingFlags.Static | BindingFlags.Public);
@@ -56,7 +56,7 @@ namespace Xyrus.Apophysis
 				var result = method.Invoke(null, new object[0]) as string;
 
 				Debug.Assert(!string.IsNullOrEmpty(result));
-				Banner.BannerText = result;
+				mBanner.BannerText = result;
 #if DEBUG
 				Thread.Sleep(10);
 #endif
@@ -76,7 +76,7 @@ namespace Xyrus.Apophysis
 							continue;
 
 						var name = VariationRegistry.RegisterDll(file);
-						Banner.BannerText = name;
+						mBanner.BannerText = name;
 #if DEBUG
 						Thread.Sleep(10);
 #endif

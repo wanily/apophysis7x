@@ -33,5 +33,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			get { return "#,###,##0.000000"; }
 		}
+
+		public static event KeyEventHandler GlobalKeyPressed;
+		public static void HandleKeyboardInput(Form window, Keys keyData)
+		{
+			if (GlobalKeyPressed != null)
+				GlobalKeyPressed(window, new KeyEventArgs(keyData));
+		}
 	}
 }
