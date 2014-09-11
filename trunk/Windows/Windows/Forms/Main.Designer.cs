@@ -142,7 +142,7 @@
 			this.MainMenuStrip = this.mMainMenu;
 			this.MinimumSize = new System.Drawing.Size(640, 480);
 			this.Name = "Main";
-			this.Text = "Main";
+			this.Text = "Apophysis";
 			this.mMainMenu.ResumeLayout(false);
 			this.mMainMenu.PerformLayout();
 			this.mRootSplitter.Panel1.ResumeLayout(false);
