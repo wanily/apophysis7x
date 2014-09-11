@@ -20,7 +20,7 @@ namespace Xyrus.Apophysis.Models
 			mIndex = ++mCounter;
 
 			mIterators = new IteratorCollection(this);
-			mPalette = Palette.GetRandomPalette(this);
+			mPalette = PaletteCollection.GetRandomPalette(this);
 		}
 
 		public string Name
@@ -35,10 +35,10 @@ namespace Xyrus.Apophysis.Models
 				if (string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(Name.Trim()))
 				{
 					var today = DateTime.Today;
-					return "Apo7X-" + 
+					return ApophysisSettings.NamePrefix + @"-" +
 						today.Year.ToString(CultureInfo.InvariantCulture).PadLeft(4, '0') +
 						today.Month.ToString(CultureInfo.InvariantCulture).PadLeft(2, '0') +
-						today.Day.ToString(CultureInfo.InvariantCulture).PadLeft(2, '0') + "-" +
+						today.Day.ToString(CultureInfo.InvariantCulture).PadLeft(2, '0') + @"-" +
 						mIndex.ToString(CultureInfo.InvariantCulture);
 				}
 
@@ -95,7 +95,7 @@ namespace Xyrus.Apophysis.Models
 			{
 				throw new ApophysisException("No descendant node \"palette\" found");
 			}
-			Palette.ReadData(palette.Value);
+			Palette.ReadCondensedHexData(palette.Value);
 		}
 
 		public bool IsEqual([NotNull] Flame flame)

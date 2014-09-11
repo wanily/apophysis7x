@@ -26,7 +26,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.IteratorCanvas.SelectionChanged += OnIteratorSelectedFromCanvas;
 
 			View.PaletteSelectComboBox.Items.Clear();
-			View.PaletteSelectComboBox.Items.AddRange(Palette.Flam3Palettes.OfType<object>().ToArray());
+			View.PaletteSelectComboBox.Items.AddRange(PaletteCollection.Flam3Palettes.OfType<object>().ToArray());
 		}
 		protected override void DetachView()
 		{

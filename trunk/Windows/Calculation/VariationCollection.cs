@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Xyrus.Apophysis.Calculation;
 
-namespace Xyrus.Apophysis.Models
+namespace Xyrus.Apophysis.Calculation
 {
 	[PublicAPI]
 	public class VariationCollection : ReadOnlyCollection<Variation>

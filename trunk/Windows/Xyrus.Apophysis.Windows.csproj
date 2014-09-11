@@ -68,10 +68,12 @@
     <Compile Include="Calculation\ExtendedVariation.cs" />
     <Compile Include="Calculation\ExternalVariation.cs" />
     <Compile Include="Calculation\Variation.cs" />
+    <Compile Include="Calculation\VariationCollection.cs" />
     <Compile Include="Calculation\VariationPriority.cs" />
     <Compile Include="Calculation\VariationRegistry.cs" />
-    <Compile Include="Models\VariationCollection.cs" />
+    <Compile Include="Models\FlameCollection.cs" />
     <Compile Include="Models\Palette.cs" />
+    <Compile Include="Models\PaletteCollection.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

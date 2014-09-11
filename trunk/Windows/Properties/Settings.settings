@@ -32,5 +32,8 @@
     <Setting Name="EditorPreviewRange" Type="System.Double" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
+    <Setting Name="NamePrefix" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Apo7x</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -19,7 +19,7 @@ namespace Xyrus.Apophysis
 			{
 				if (value < 0)
 				{
-					throw new ArgumentOutOfRangeException("value");
+					throw new ArgumentOutOfRangeException(@"value");
 				}
 
 				mSettings.EditorMoveDistance = value;
@@ -32,7 +32,7 @@ namespace Xyrus.Apophysis
 			{
 				if (value < double.Epsilon || value > 360)
 				{
-					throw new ArgumentOutOfRangeException("value");
+					throw new ArgumentOutOfRangeException(@"value");
 				}
 
 				mSettings.EditorRotateAngle = value;
@@ -45,7 +45,7 @@ namespace Xyrus.Apophysis
 			{
 				if (value < 1)
 				{
-					throw new ArgumentOutOfRangeException("value");
+					throw new ArgumentOutOfRangeException(@"value");
 				}
 
 				mSettings.EditorScaleRatio = value;
@@ -92,7 +92,7 @@ namespace Xyrus.Apophysis
 			{
 				if (value <= 0)
 				{
-					throw new ArgumentOutOfRangeException("value");
+					throw new ArgumentOutOfRangeException(@"value");
 				}
 
 				mSettings.EditorPreviewRange = value;
@@ -105,7 +105,7 @@ namespace Xyrus.Apophysis
 			{
 				if (value <= 0)
 				{
-					throw new ArgumentOutOfRangeException("value");
+					throw new ArgumentOutOfRangeException(@"value");
 				}
 
 				mSettings.EditorPreviewDensity = value;
@@ -115,6 +115,18 @@ namespace Xyrus.Apophysis
 		public static string PluginDirectoryName
 		{
 			get { return mSettings.PluginDirectoryName; }
+		}
+
+		public static string NamePrefix
+		{
+			get { return mSettings.NamePrefix; }
+			set
+			{
+				if (string.IsNullOrEmpty(value) || string.IsNullOrEmpty(value.Trim()))
+					throw new ArgumentNullException(@"value");
+
+				mSettings.NamePrefix = value;
+			}
 		}
 
 		public static void Serialize()

@@ -133,7 +133,7 @@ namespace Xyrus.Apophysis.Models
 
 		public void ReadXml(IEnumerable<XElement> elements)
 		{
-			var array = (elements ?? new XElement[0]).ToArray();
+			var array = (elements ?? new XElement[0]).Where(x => x != null).ToArray();
 
 			if (!array.Any())
 			{
