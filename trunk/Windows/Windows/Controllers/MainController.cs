@@ -92,7 +92,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			Flames = new FlameCollection();
 
 			//todo temp
-			Flames.Append();
+			for(int i = 0; i < 10; i++)
+				Flames.Append();
 		}
 		protected override void DetachView()
 		{
