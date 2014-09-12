@@ -36,6 +36,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 		private double mPreviewRange;
 		private double mPreviewDensity;
+		private bool mPreviewApplyPostTransform;
 
 		public EditorCanvas()
 		{
@@ -237,6 +238,16 @@ namespace Xyrus.Apophysis.Windows.Controls
 			{
 				mPreviewDensity = value;
 				mIteratorPainter.PreviewDensity = value;
+				Refresh();
+			}
+		}
+		public bool PreviewApplyPostTransform
+		{
+			get { return mPreviewApplyPostTransform; }
+			set
+			{
+				mPreviewApplyPostTransform = value;
+				mIteratorPainter.PreviewApplyPostTransform = value;
 				Refresh();
 			}
 		}

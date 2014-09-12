@@ -153,6 +153,12 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			set { mPreviewVisual.Density = value; }
 		}
 
+		public bool PreviewApplyPostTransform
+		{
+			get { return mPreviewVisual.ApplyPostTransform; }
+			set { mPreviewVisual.ApplyPostTransform = value; }
+		}
+
 		public IteratorVisual this[int index]
 		{
 			get

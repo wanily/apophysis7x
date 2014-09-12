@@ -112,6 +112,14 @@ namespace Xyrus.Apophysis
 				mSettings.EditorVariationPreviewDensity = value;
 			}
 		}
+		public static bool EditorVariationPreviewApplyPostTransform
+		{
+			get { return mSettings.EditorVariationPreviewApplyPostTransform; }
+			set
+			{
+				mSettings.EditorVariationPreviewApplyPostTransform = value;
+			}
+		}
 
 		public static DensityLevel EditorPreviewDensityLevel
 		{

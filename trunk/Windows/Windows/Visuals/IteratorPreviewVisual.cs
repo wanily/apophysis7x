@@ -14,6 +14,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 		private IEnumerable<IteratorVisual> mCollection;
 		private double mRange;
 		private double mDensity;
+		private bool mApplyPostTransform;
 
 		public IteratorPreviewVisual([NotNull] Control control, [NotNull] Canvas canvas, [NotNull] IEnumerable<IteratorVisual> collection) : base(control, canvas)
 		{
@@ -22,6 +23,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			mCollection = collection;
 			mRange = 1;
 			mDensity = 1;
+			mApplyPostTransform = true;
 		}
 		protected override void DisposeOverride(bool disposing)
 		{
@@ -46,6 +48,11 @@ namespace Xyrus.Apophysis.Windows.Visuals
 				mDensity = value;
 			}
 		}
+		public bool ApplyPostTransform
+		{
+			get { return mApplyPostTransform; }
+			set { mApplyPostTransform = value; }
+		}
 
 		private Vector2 IterateSample(Iterator model, Vector2 point, IEnumerable<Variation> variations, IterationData data)
 		{
@@ -66,7 +73,8 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			point.X = data.PostX;
 			point.Y = data.PostY;
 
-			point = model.PostAffine.TransformPoint(point);
+			if (mApplyPostTransform)
+				point = model.PostAffine.TransformPoint(point);
 
 			return point;
 		}

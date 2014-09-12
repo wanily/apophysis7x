@@ -235,5 +235,17 @@ namespace Xyrus.Apophysis.Properties {
                 this["EditorPreviewDensityLevel"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool EditorVariationPreviewApplyPostTransform {
+            get {
+                return ((bool)(this["EditorVariationPreviewApplyPostTransform"]));
+            }
+            set {
+                this["EditorVariationPreviewApplyPostTransform"] = value;
+            }
+        }
     }
 }
