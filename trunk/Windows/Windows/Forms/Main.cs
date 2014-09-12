@@ -5,9 +5,12 @@ namespace Xyrus.Apophysis.Windows.Forms
 {
 	public partial class Main : Form
 	{
+		private readonly InputController mInputController;
+
 		public Main()
 		{
-			InitializeComponent();;
+			InitializeComponent();
+			mInputController = new InputController();
 		}
 
 		protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -28,6 +31,11 @@ namespace Xyrus.Apophysis.Windows.Forms
 		internal void UpdateBatchListColumnSize()
 		{
 			BatchListView.Columns[0].Width = BatchListView.ClientSize.Width - 3;
+		}
+
+		private void OnDensityKeyPress(object sender, KeyPressEventArgs e)
+		{
+			mInputController.HandleKeyPressForIntegerTextBox(e);
 		}
 	}
 }

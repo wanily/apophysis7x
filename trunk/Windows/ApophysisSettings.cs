@@ -206,6 +206,20 @@ namespace Xyrus.Apophysis
 			}
 		}
 
+		public static int MainPreviewDensity
+		{
+			get { return mSettings.MainPreviewDensity; }
+			set
+			{
+				if (value <= 0)
+				{
+					throw new ArgumentOutOfRangeException("value");
+				}
+
+				mSettings.MainPreviewDensity = value;
+			}
+		}
+
 		public static void Serialize()
 		{
 			mSettings.Save();

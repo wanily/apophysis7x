@@ -29,6 +29,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.UndoButton.Click += mParent.MainMenuController.OnUndoClick;
 			View.RedoButton.Click += mParent.MainMenuController.OnRedoClick;
 
+			View.EditorButton.Click += mParent.MainMenuController.OnEditorClick;
+
 			UpdateButtonStates();
 		}
 		protected override void DetachView()
@@ -42,6 +44,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			View.UndoButton.Click -= mParent.MainMenuController.OnUndoClick;
 			View.RedoButton.Click -= mParent.MainMenuController.OnRedoClick;
+
+			View.EditorButton.Click -= mParent.MainMenuController.OnEditorClick;
 		}
 
 		private void OnBatchListViewClick(object sender, EventArgs e)

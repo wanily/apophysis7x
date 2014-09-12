@@ -56,6 +56,12 @@
 			this.NewFlameButton = new System.Windows.Forms.ToolStripButton();
 			this.OpenBatchButton = new System.Windows.Forms.ToolStripButton();
 			this.SaveFlameButton = new System.Windows.Forms.ToolStripButton();
+			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+			this.RenderFlameButton = new System.Windows.Forms.ToolStripButton();
+			this.RenderBatchButton = new System.Windows.Forms.ToolStripButton();
+			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+			this.BatchListViewButton = new System.Windows.Forms.ToolStripButton();
+			this.BatchIconViewButton = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.UndoButton = new System.Windows.Forms.ToolStripButton();
 			this.RedoButton = new System.Windows.Forms.ToolStripButton();
@@ -64,17 +70,22 @@
 			this.BatchListNameColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.mPreviewBevel = new System.Windows.Forms.Label();
 			this.StatusBar = new System.Windows.Forms.StatusStrip();
-			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-			this.RenderFlameButton = new System.Windows.Forms.ToolStripButton();
-			this.RenderBatchButton = new System.Windows.Forms.ToolStripButton();
-			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-			this.BatchListViewButton = new System.Windows.Forms.ToolStripButton();
-			this.BatchIconViewButton = new System.Windows.Forms.ToolStripButton();
+			this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+			this.ResetCameraButton = new System.Windows.Forms.ToolStripButton();
+			this.OpenFullscreenPreviewButton = new System.Windows.Forms.ToolStripButton();
+			this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+			this.PreviewDensityComboBox = new System.Windows.Forms.ToolStripComboBox();
+			this.PreviewPicture = new System.Windows.Forms.PictureBox();
+			this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+			this.EditorButton = new System.Windows.Forms.ToolStripButton();
+			this.OpenFullscreenPreviewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
 			this.mMainMenu.SuspendLayout();
 			this.mToolbar.SuspendLayout();
 			this.mRootSplitter.Panel1.SuspendLayout();
 			this.mRootSplitter.Panel2.SuspendLayout();
 			this.mRootSplitter.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.PreviewPicture)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// mMainMenu
@@ -220,7 +231,7 @@
 			this.UndoMenuItem.ImageTransparentColor = System.Drawing.Color.Fuchsia;
 			this.UndoMenuItem.Name = "UndoMenuItem";
 			this.UndoMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-			this.UndoMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.UndoMenuItem.Size = new System.Drawing.Size(144, 22);
 			this.UndoMenuItem.Text = "&Undo";
 			// 
 			// RedoMenuItem
@@ -229,13 +240,13 @@
 			this.RedoMenuItem.ImageTransparentColor = System.Drawing.Color.Fuchsia;
 			this.RedoMenuItem.Name = "RedoMenuItem";
 			this.RedoMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
-			this.RedoMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.RedoMenuItem.Size = new System.Drawing.Size(144, 22);
 			this.RedoMenuItem.Text = "&Redo";
 			// 
 			// toolStripMenuItem5
 			// 
 			this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-			this.toolStripMenuItem5.Size = new System.Drawing.Size(149, 6);
+			this.toolStripMenuItem5.Size = new System.Drawing.Size(141, 6);
 			// 
 			// CopyMenuItem
 			// 
@@ -243,7 +254,7 @@
 			this.CopyMenuItem.ImageTransparentColor = System.Drawing.Color.Fuchsia;
 			this.CopyMenuItem.Name = "CopyMenuItem";
 			this.CopyMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-			this.CopyMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.CopyMenuItem.Size = new System.Drawing.Size(144, 22);
 			this.CopyMenuItem.Text = "&Copy";
 			// 
 			// PasteMenuItem
@@ -252,12 +263,14 @@
 			this.PasteMenuItem.ImageTransparentColor = System.Drawing.Color.Fuchsia;
 			this.PasteMenuItem.Name = "PasteMenuItem";
 			this.PasteMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-			this.PasteMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.PasteMenuItem.Size = new System.Drawing.Size(144, 22);
 			this.PasteMenuItem.Text = "&Paste";
 			// 
 			// viewToolStripMenuItem
 			// 
 			this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.OpenFullscreenPreviewMenuItem,
+            this.toolStripMenuItem6,
             this.EditorMenuItem});
 			this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
 			this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
@@ -269,7 +282,7 @@
 			this.EditorMenuItem.ImageTransparentColor = System.Drawing.Color.Fuchsia;
 			this.EditorMenuItem.Name = "EditorMenuItem";
 			this.EditorMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F4;
-			this.EditorMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.EditorMenuItem.Size = new System.Drawing.Size(190, 22);
 			this.EditorMenuItem.Text = "&Editor";
 			// 
 			// mToolbar
@@ -289,7 +302,14 @@
             this.BatchIconViewButton,
             this.toolStripSeparator1,
             this.UndoButton,
-            this.RedoButton});
+            this.RedoButton,
+            this.toolStripSeparator4,
+            this.ResetCameraButton,
+            this.OpenFullscreenPreviewButton,
+            this.toolStripSeparator5,
+            this.PreviewDensityComboBox,
+            this.toolStripSeparator6,
+            this.EditorButton});
 			this.mToolbar.Location = new System.Drawing.Point(0, 24);
 			this.mToolbar.Name = "mToolbar";
 			this.mToolbar.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
@@ -322,90 +342,6 @@
 			this.SaveFlameButton.Name = "SaveFlameButton";
 			this.SaveFlameButton.Size = new System.Drawing.Size(23, 22);
 			this.SaveFlameButton.Text = "toolStripButton1";
-			// 
-			// toolStripSeparator1
-			// 
-			this.toolStripSeparator1.Name = "toolStripSeparator1";
-			this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-			// 
-			// UndoButton
-			// 
-			this.UndoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.UndoButton.Image = ((System.Drawing.Image)(resources.GetObject("UndoButton.Image")));
-			this.UndoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.UndoButton.Name = "UndoButton";
-			this.UndoButton.Size = new System.Drawing.Size(23, 22);
-			this.UndoButton.Text = "toolStripButton1";
-			// 
-			// RedoButton
-			// 
-			this.RedoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.RedoButton.Image = ((System.Drawing.Image)(resources.GetObject("RedoButton.Image")));
-			this.RedoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.RedoButton.Name = "RedoButton";
-			this.RedoButton.Size = new System.Drawing.Size(23, 22);
-			this.RedoButton.Text = "toolStripButton1";
-			// 
-			// mRootSplitter
-			// 
-			this.mRootSplitter.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.mRootSplitter.Location = new System.Drawing.Point(0, 49);
-			this.mRootSplitter.Name = "mRootSplitter";
-			// 
-			// mRootSplitter.Panel1
-			// 
-			this.mRootSplitter.Panel1.Controls.Add(this.BatchListView);
-			// 
-			// mRootSplitter.Panel2
-			// 
-			this.mRootSplitter.Panel2.Controls.Add(this.mPreviewBevel);
-			this.mRootSplitter.Size = new System.Drawing.Size(1146, 649);
-			this.mRootSplitter.SplitterDistance = 250;
-			this.mRootSplitter.TabIndex = 2;
-			// 
-			// BatchListView
-			// 
-			this.BatchListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.BatchListView.BackColor = System.Drawing.SystemColors.ControlLightLight;
-			this.BatchListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.BatchListNameColumn});
-			this.BatchListView.FullRowSelect = true;
-			this.BatchListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-			this.BatchListView.LabelEdit = true;
-			this.BatchListView.Location = new System.Drawing.Point(3, 3);
-			this.BatchListView.MultiSelect = false;
-			this.BatchListView.Name = "BatchListView";
-			this.BatchListView.ShowGroups = false;
-			this.BatchListView.Size = new System.Drawing.Size(247, 620);
-			this.BatchListView.TabIndex = 0;
-			this.BatchListView.UseCompatibleStateImageBehavior = false;
-			this.BatchListView.View = System.Windows.Forms.View.Details;
-			this.BatchListView.Resize += new System.EventHandler(this.OnBatchListResized);
-			// 
-			// BatchListNameColumn
-			// 
-			this.BatchListNameColumn.Text = "Name";
-			// 
-			// mPreviewBevel
-			// 
-			this.mPreviewBevel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.mPreviewBevel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.mPreviewBevel.Location = new System.Drawing.Point(0, 3);
-			this.mPreviewBevel.Name = "mPreviewBevel";
-			this.mPreviewBevel.Size = new System.Drawing.Size(889, 620);
-			this.mPreviewBevel.TabIndex = 0;
-			// 
-			// StatusBar
-			// 
-			this.StatusBar.Location = new System.Drawing.Point(0, 676);
-			this.StatusBar.Name = "StatusBar";
-			this.StatusBar.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-			this.StatusBar.Size = new System.Drawing.Size(1146, 22);
-			this.StatusBar.TabIndex = 3;
 			// 
 			// toolStripSeparator2
 			// 
@@ -453,6 +389,176 @@
 			this.BatchIconViewButton.Size = new System.Drawing.Size(23, 22);
 			this.BatchIconViewButton.Text = "toolStripButton4";
 			// 
+			// toolStripSeparator1
+			// 
+			this.toolStripSeparator1.Name = "toolStripSeparator1";
+			this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+			// 
+			// UndoButton
+			// 
+			this.UndoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.UndoButton.Image = ((System.Drawing.Image)(resources.GetObject("UndoButton.Image")));
+			this.UndoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.UndoButton.Name = "UndoButton";
+			this.UndoButton.Size = new System.Drawing.Size(23, 22);
+			this.UndoButton.Text = "toolStripButton1";
+			// 
+			// RedoButton
+			// 
+			this.RedoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.RedoButton.Image = ((System.Drawing.Image)(resources.GetObject("RedoButton.Image")));
+			this.RedoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.RedoButton.Name = "RedoButton";
+			this.RedoButton.Size = new System.Drawing.Size(23, 22);
+			this.RedoButton.Text = "toolStripButton1";
+			// 
+			// mRootSplitter
+			// 
+			this.mRootSplitter.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.mRootSplitter.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+			this.mRootSplitter.Location = new System.Drawing.Point(0, 49);
+			this.mRootSplitter.Name = "mRootSplitter";
+			// 
+			// mRootSplitter.Panel1
+			// 
+			this.mRootSplitter.Panel1.Controls.Add(this.BatchListView);
+			// 
+			// mRootSplitter.Panel2
+			// 
+			this.mRootSplitter.Panel2.Controls.Add(this.PreviewPicture);
+			this.mRootSplitter.Panel2.Controls.Add(this.mPreviewBevel);
+			this.mRootSplitter.Size = new System.Drawing.Size(1146, 649);
+			this.mRootSplitter.SplitterDistance = 227;
+			this.mRootSplitter.TabIndex = 2;
+			// 
+			// BatchListView
+			// 
+			this.BatchListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.BatchListView.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.BatchListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.BatchListNameColumn});
+			this.BatchListView.FullRowSelect = true;
+			this.BatchListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+			this.BatchListView.LabelEdit = true;
+			this.BatchListView.Location = new System.Drawing.Point(3, 3);
+			this.BatchListView.MultiSelect = false;
+			this.BatchListView.Name = "BatchListView";
+			this.BatchListView.ShowGroups = false;
+			this.BatchListView.Size = new System.Drawing.Size(224, 620);
+			this.BatchListView.TabIndex = 0;
+			this.BatchListView.UseCompatibleStateImageBehavior = false;
+			this.BatchListView.View = System.Windows.Forms.View.Details;
+			this.BatchListView.Resize += new System.EventHandler(this.OnBatchListResized);
+			// 
+			// BatchListNameColumn
+			// 
+			this.BatchListNameColumn.Text = "Name";
+			// 
+			// mPreviewBevel
+			// 
+			this.mPreviewBevel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.mPreviewBevel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.mPreviewBevel.Location = new System.Drawing.Point(0, 3);
+			this.mPreviewBevel.Name = "mPreviewBevel";
+			this.mPreviewBevel.Size = new System.Drawing.Size(912, 620);
+			this.mPreviewBevel.TabIndex = 0;
+			// 
+			// StatusBar
+			// 
+			this.StatusBar.Location = new System.Drawing.Point(0, 676);
+			this.StatusBar.Name = "StatusBar";
+			this.StatusBar.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+			this.StatusBar.Size = new System.Drawing.Size(1146, 22);
+			this.StatusBar.TabIndex = 3;
+			// 
+			// toolStripSeparator4
+			// 
+			this.toolStripSeparator4.Name = "toolStripSeparator4";
+			this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+			// 
+			// ResetCameraButton
+			// 
+			this.ResetCameraButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.ResetCameraButton.Image = ((System.Drawing.Image)(resources.GetObject("ResetCameraButton.Image")));
+			this.ResetCameraButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.ResetCameraButton.Name = "ResetCameraButton";
+			this.ResetCameraButton.Size = new System.Drawing.Size(23, 22);
+			this.ResetCameraButton.Text = "toolStripButton1";
+			// 
+			// OpenFullscreenPreviewButton
+			// 
+			this.OpenFullscreenPreviewButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.OpenFullscreenPreviewButton.Image = ((System.Drawing.Image)(resources.GetObject("OpenFullscreenPreviewButton.Image")));
+			this.OpenFullscreenPreviewButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.OpenFullscreenPreviewButton.Name = "OpenFullscreenPreviewButton";
+			this.OpenFullscreenPreviewButton.Size = new System.Drawing.Size(23, 22);
+			this.OpenFullscreenPreviewButton.Text = "toolStripButton2";
+			// 
+			// toolStripSeparator5
+			// 
+			this.toolStripSeparator5.Name = "toolStripSeparator5";
+			this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
+			// 
+			// PreviewDensityComboBox
+			// 
+			this.PreviewDensityComboBox.Items.AddRange(new object[] {
+            "5",
+            "10",
+            "15",
+            "25",
+            "50",
+            "100",
+            "250",
+            "500",
+            "1000"});
+			this.PreviewDensityComboBox.Name = "PreviewDensityComboBox";
+			this.PreviewDensityComboBox.Size = new System.Drawing.Size(80, 25);
+			this.PreviewDensityComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnDensityKeyPress);
+			// 
+			// PreviewPicture
+			// 
+			this.PreviewPicture.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.PreviewPicture.BackColor = System.Drawing.Color.Black;
+			this.PreviewPicture.Location = new System.Drawing.Point(1, 4);
+			this.PreviewPicture.Name = "PreviewPicture";
+			this.PreviewPicture.Size = new System.Drawing.Size(910, 618);
+			this.PreviewPicture.TabIndex = 1;
+			this.PreviewPicture.TabStop = false;
+			// 
+			// toolStripSeparator6
+			// 
+			this.toolStripSeparator6.Name = "toolStripSeparator6";
+			this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
+			// 
+			// EditorButton
+			// 
+			this.EditorButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.EditorButton.Image = ((System.Drawing.Image)(resources.GetObject("EditorButton.Image")));
+			this.EditorButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.EditorButton.Name = "EditorButton";
+			this.EditorButton.Size = new System.Drawing.Size(23, 22);
+			this.EditorButton.Text = "toolStripButton1";
+			// 
+			// OpenFullscreenPreviewMenuItem
+			// 
+			this.OpenFullscreenPreviewMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("OpenFullscreenPreviewMenuItem.Image")));
+			this.OpenFullscreenPreviewMenuItem.ImageTransparentColor = System.Drawing.Color.Fuchsia;
+			this.OpenFullscreenPreviewMenuItem.Name = "OpenFullscreenPreviewMenuItem";
+			this.OpenFullscreenPreviewMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F3;
+			this.OpenFullscreenPreviewMenuItem.Size = new System.Drawing.Size(190, 22);
+			this.OpenFullscreenPreviewMenuItem.Text = "Fullscreen preview";
+			// 
+			// toolStripMenuItem6
+			// 
+			this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+			this.toolStripMenuItem6.Size = new System.Drawing.Size(187, 6);
+			// 
 			// Main
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -475,6 +581,7 @@
 			this.mRootSplitter.Panel1.ResumeLayout(false);
 			this.mRootSplitter.Panel2.ResumeLayout(false);
 			this.mRootSplitter.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.PreviewPicture)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -523,5 +630,15 @@
 		public System.Windows.Forms.ToolStripButton RenderBatchButton;
 		public System.Windows.Forms.ToolStripButton BatchListViewButton;
 		public System.Windows.Forms.ToolStripButton BatchIconViewButton;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+		public System.Windows.Forms.ToolStripButton ResetCameraButton;
+		public System.Windows.Forms.ToolStripButton OpenFullscreenPreviewButton;
+		public System.Windows.Forms.ToolStripComboBox PreviewDensityComboBox;
+		public System.Windows.Forms.PictureBox PreviewPicture;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+		public System.Windows.Forms.ToolStripMenuItem OpenFullscreenPreviewMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem6;
+		public System.Windows.Forms.ToolStripButton EditorButton;
 	}
 }

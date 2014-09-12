@@ -21,6 +21,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		private MainToolbarController mToolbarController;
 		private MainUndoController mMainUndoController;
 		private BatchListController mBatchListController;
+		private MainPreviewController mMainPreviewController;
 
 		private Lock mInitialize = new Lock();
 		private FlameCollection mFlames;
@@ -36,11 +37,18 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mToolbarController = new MainToolbarController(View, this);
 			mMainUndoController = new MainUndoController(View, this);
 			mBatchListController = new BatchListController(View, this);
+			mMainPreviewController = new MainPreviewController(View, this);
 		}
 		protected override void DisposeOverride(bool disposing)
 		{
 			if (disposing)
 			{
+				if (mMainPreviewController != null)
+				{
+					mMainPreviewController.Dispose();
+					mMainPreviewController = null;
+				}
+
 				if (mBatchListController != null)
 				{
 					mBatchListController.Dispose();
@@ -100,6 +108,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mToolbarController.Initialize();
 			mMainUndoController.Initialize();
 			mBatchListController.Initialize();
+			mMainPreviewController.Initialize();
 
 			View.Load += OnViewLoaded;
 		}
@@ -154,6 +163,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		public void UpdatePreviews()
 		{
 			mEditorController.UpdatePreview();
+			mMainPreviewController.UpdatePreview();
 		}
 
 		private void OnFlameCollectionChanged(object sender, EventArgs e)

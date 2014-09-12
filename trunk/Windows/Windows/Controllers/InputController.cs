@@ -20,6 +20,19 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				args.Handled = true;
 			}
 		}
+		public void HandleKeyPressForIntegerTextBox(KeyPressEventArgs args)
+		{
+			char[] chars =
+			{
+				'0', '1', '2', '3', '4', '5',
+				'6', '7', '8', '9', (char)0x08
+			};
+
+			if (!chars.Contains(args.KeyChar))
+			{
+				args.Handled = true;
+			}
+		}
 
 		public static CultureInfo Culture
 		{
