@@ -48,16 +48,12 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			}
 		}
 
-		private Vector2 IterateSample(Iterator model, Vector2 input, IEnumerable<Variation> variations, IterationData data)
+		private Vector2 IterateSample(Iterator model, Vector2 point, IEnumerable<Variation> variations, IterationData data)
 		{
-			var vecOut = new Vector2
-			{
-				X = model.PreAffine.Matrix.X.X * input.X + model.PreAffine.Matrix.X.Y * -input.Y + model.PreAffine.Origin.X,
-				Y = model.PreAffine.Matrix.Y.X * -input.X + model.PreAffine.Matrix.Y.Y * input.Y + model.PreAffine.Origin.Y,
-			};
+			point = model.PreAffine.TransformPoint(point);
 
-			data.PreX = vecOut.X;
-			data.PreY = vecOut.Y;
+			data.PreX = point.X;
+			data.PreY = point.Y;
 			data.PreZ = 0;
 			data.PostX = 0;
 			data.PostY = 0;
@@ -65,20 +61,15 @@ namespace Xyrus.Apophysis.Windows.Visuals
 
 			foreach (var variation in variations)
 			{
-				data.Weight = variation.Weight;
 				variation.Calculate(data);
 			}
 
-			vecOut.X = data.PostX;
-			vecOut.Y = data.PostY;
+			point.X = data.PostX;
+			point.Y = data.PostY;
 
-			vecOut = new Vector2
-			{
-				X = model.PostAffine.Matrix.X.X * vecOut.X + model.PostAffine.Matrix.X.Y * -vecOut.Y + model.PostAffine.Origin.X,
-				Y = model.PostAffine.Matrix.Y.X * -vecOut.X + model.PostAffine.Matrix.Y.Y * vecOut.Y + model.PostAffine.Origin.Y,
-			};
+			point = model.PostAffine.TransformPoint(point);
 
-			return vecOut;
+			return point;
 		}
 		private void DrawModel(Graphics graphics, Iterator model)
 		{
@@ -87,11 +78,8 @@ namespace Xyrus.Apophysis.Windows.Visuals
 
 			foreach (var variation in variations)
 			{
-				data.Weight = variation.Weight;
 				variation.Prepare(data);
 			}
-
-			data.Weight = 0;
 
 			var n = Range;
 			var d1 = Density * 5;

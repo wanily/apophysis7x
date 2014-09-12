@@ -40,6 +40,15 @@ namespace Xyrus.Apophysis.Models
 			}
 		}
 
+		public Vector2 TransformPoint(Vector2 point)
+		{
+			return new Vector2
+			{
+				X = Matrix.X.X * point.X + Matrix.Y.X * point.Y + Origin.X,
+				Y = Matrix.X.Y * point.X + Matrix.Y.Y * point.Y + Origin.Y,
+			};
+		}
+
 		public void Rotate(double angle)
 		{
 			var x = Matrix.X.Rotate(angle, Origin);

@@ -284,15 +284,15 @@ namespace Xyrus.Apophysis.Calculation
 		{
 			if (mInit != null)
 			{
-				mInit(mVp, mPostX, mPostY, mPostZ, mPreX, mPreY, mPreZ, mColor, data.Weight, 1, 0, 0, 1, 0, 0);
+				mInit(mVp, mPostX, mPostY, mPostZ, mPreX, mPreY, mPreZ, mColor, Weight, 1, 0, 0, 1, 0, 0);
 			}
 			else if (mInitLegacy3D != null)
 			{
-				mInitLegacy3D(mVp, mPostX, mPostY, mPostZ, mPreX, mPreY, mPreZ, data.Weight);
+				mInitLegacy3D(mVp, mPostX, mPostY, mPostZ, mPreX, mPreY, mPreZ, Weight);
 			}
 			else
 			{
-				mInitLegacy(mVp, mPostX, mPostY, mPreX, mPreY, data.Weight);
+				mInitLegacy(mVp, mPostX, mPostY, mPreX, mPreY, Weight);
 			}
 
 			mPrepare(mVp);

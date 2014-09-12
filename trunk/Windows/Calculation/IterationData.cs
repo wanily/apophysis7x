@@ -5,8 +5,6 @@ namespace Xyrus.Apophysis.Calculation
 	{
 		public double PreX, PreY, PreZ;
 		public double PostX, PostY, PostZ;
-
-		public double Weight;
 		public double Color;
 	}
 }

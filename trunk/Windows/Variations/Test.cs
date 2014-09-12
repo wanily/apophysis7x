@@ -51,9 +51,9 @@ namespace Xyrus.Apophysis.Variations
 
 		public override void Calculate(IterationData data)
 		{
-			data.PostX += data.Weight * mVariable*data.PreX;
-			data.PostY += data.Weight * mVariable/(System.Math.Abs(data.PreY) < double.Epsilon ? double.Epsilon : data.PreY);
-			data.PostZ += data.Weight * data.PreZ;
+			data.PostX += Weight * mVariable*data.PreX;
+			data.PostY += Weight * mVariable/(System.Math.Abs(data.PreY) < double.Epsilon ? double.Epsilon : data.PreY);
+			data.PostZ += Weight * data.PreZ;
 		}
 	}
 }

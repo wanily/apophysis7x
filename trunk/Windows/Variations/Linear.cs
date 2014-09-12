@@ -6,9 +6,9 @@ namespace Xyrus.Apophysis.Variations
 	{
 		public override void Calculate(IterationData data)
 		{
-			data.PostX += data.Weight * data.PreX;
-			data.PostY += data.Weight * data.PreY;
-			data.PostZ += data.Weight * data.PreZ;
+			data.PostX += Weight * data.PreX;
+			data.PostY += Weight * data.PreY;
+			data.PostZ += Weight * data.PreZ;
 		}
 	}
 }

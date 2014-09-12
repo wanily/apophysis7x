@@ -11,9 +11,9 @@ namespace Xyrus.Apophysis.Variations
 			var sin = System.Math.Sin(theta);
 			var cos = System.Math.Cos(theta);
 
-			data.PostX += data.Weight * (sin * data.PreX - cos * data.PreY);
-			data.PostY += data.Weight * (cos * data.PreX + sin * data.PreY);
-			data.PostZ += data.Weight * data.PreZ;
+			data.PostX += Weight * (sin * data.PreX - cos * data.PreY);
+			data.PostY += Weight * (cos * data.PreX + sin * data.PreY);
+			data.PostZ += Weight * data.PreZ;
 		}
 	}
 }
