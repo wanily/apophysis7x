@@ -86,7 +86,6 @@
     <Compile Include="Variations\Linear.cs" />
     <Compile Include="Variations\Spherical.cs" />
     <Compile Include="Variations\Swirl.cs" />
-    <Compile Include="Variations\Test.cs" />
     <Compile Include="Windows\Common\ChainItem.cs" />
     <Compile Include="Windows\Common\ControlChain.cs" />
     <Compile Include="Windows\Common\ControlEventInterceptor.cs" />
