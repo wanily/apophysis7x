@@ -24,6 +24,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		private Lock mInitialize = new Lock();
 		private FlameCollection mFlames;
+		private bool mHasChanges;
 
 		public MainController()
 		{
@@ -126,6 +127,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			mBatchListController.BuildFlameList();
 			mBatchListController.SelectFlame(mFlames.First());
+			mHasChanges = false;
 		}
 
 		public FlameCollection Flames
@@ -185,13 +187,17 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mBatchListController.SelectFlame(mFlames[index]);
 		}
 
-		public void ReadFlameFromFile(string result)
+		public void ReadBatchFromFile(string path)
 		{
 			try
 			{
 				var batch = new FlameCollection();
-				batch.ReadXml(XElement.Parse(File.ReadAllText(result), LoadOptions.None));
+
+				Flame.ReduceCounter();
+				batch.ReadXml(XElement.Parse(File.ReadAllText(path), LoadOptions.None));
+
 				Flames = batch;
+				View.Text = Application.ProductName + @" - " + path;
 			}
 			catch (ApophysisException exception)
 			{
@@ -212,6 +218,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 					var flame = new Flame();
 
 					flame.ReadXml(XElement.Parse(clipboard, LoadOptions.None));
+					if (!string.IsNullOrEmpty(flame.Name))
+					{
+						Flame.ReduceCounter();
+					}
+
 					AppendFlame(flame);
 				}
 				catch (ApophysisException exception)
@@ -254,11 +265,15 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			else
 			{
 				Flames = new FlameCollection(batch);
+				View.Text = Application.ProductName + @" - " + "Random batch";
 			}
 		}
 
 		public bool ConfirmReplaceBatch()
 		{
+			if (!mHasChanges)
+				return true;
+
 			var result = MessageBox.Show(
 				string.Format("Do you want to save the current batch before loading a new one?"),
 				Application.ProductName, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
@@ -321,6 +336,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			}
 		}
 
+		public void SetDirty()
+		{
+			mHasChanges = true;
+		}
 		public void SaveCurrentBatch()
 		{
 			//todo

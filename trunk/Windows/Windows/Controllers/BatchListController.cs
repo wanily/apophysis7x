@@ -111,8 +111,15 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			if (flame == null)
 				return;
 
-			flame.Name = e.Label;
-			mParent.NotifyFlameNameChanged(flame);
+			if (!string.IsNullOrEmpty(e.Label) && !string.IsNullOrEmpty(e.Label.Trim()))
+			{
+				flame.Name = e.Label;
+				mParent.NotifyFlameNameChanged(flame);
+			}
+			else
+			{
+				e.CancelEdit = true;
+			}
 		}
 		private void OnCurrentFlameReplaced(object sender, EventArgs e)
 		{

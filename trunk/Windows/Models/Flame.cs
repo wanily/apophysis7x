@@ -65,7 +65,7 @@ namespace Xyrus.Apophysis.Models
 		public Flame Copy()
 		{
 			var copy = new Flame();
-			mCounter--;
+			ReduceCounter();
 
 			copy.mIndex = mIndex;
 			copy.Name = mName;
@@ -74,6 +74,12 @@ namespace Xyrus.Apophysis.Models
 
 			return copy;
 		}
+
+		internal static void ReduceCounter()
+		{
+			mCounter--;
+		}
+
 		public void ReadXml([NotNull] XElement element)
 		{
 			if (element == null) throw new ArgumentNullException("element");
@@ -97,7 +103,6 @@ namespace Xyrus.Apophysis.Models
 			}
 			Palette.ReadCondensedHexData(palette.Value);
 		}
-
 		public bool IsEqual([NotNull] Flame flame)
 		{
 			if (flame == null) throw new ArgumentNullException("flame");

@@ -168,8 +168,13 @@ namespace Xyrus.Apophysis.Models
 
 				try
 				{
-					flame.ReadXml(element);
+					flame.ReadXml(flameNode);
 					newCollection.Add(flame);
+
+					if (!string.IsNullOrEmpty(flame.Name))
+					{
+						Flame.ReduceCounter();
+					}
 				}
 				catch (ApophysisException exception)
 				{
@@ -180,6 +185,7 @@ namespace Xyrus.Apophysis.Models
 			}
 
 			Items.Clear();
+
 			foreach (var item in newCollection)
 			{
 				Items.Add(item);

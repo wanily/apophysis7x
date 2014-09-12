@@ -21,12 +21,18 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		protected override void AttachView()
 		{
 			mParent.UndoController.StackChanged += OnUndoStackChanged;
+			mParent.UndoController.ChangeCommitted += OnChangeCommitted;
 		}
 		protected override void DetachView()
 		{
 			mParent.UndoController.StackChanged -= OnUndoStackChanged;
+			mParent.UndoController.ChangeCommitted -= OnChangeCommitted;
 		}
 
+		private void OnChangeCommitted(object sender, EventArgs e)
+		{
+			mParent.SetDirty();
+		}
 		private void OnUndoStackChanged(object sender, EventArgs e)
 		{
 			mParent.UpdateToolbar();

@@ -75,7 +75,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				if (string.IsNullOrEmpty(result))
 					return;
 
-				mParent.ReadFlameFromFile(result);
+				mParent.ReadBatchFromFile(result);
 			}
 		}
 		private void OnRestoreAutosaveClick(object sender, EventArgs e)

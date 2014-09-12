@@ -121,11 +121,32 @@
   <data name="AddFinalIterator" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\windows\resources\toolbar\editor\addfinaliterator.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="BatchIconView" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\windows\resources\toolbar\main\batchiconview.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BatchListView" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\windows\resources\toolbar\main\batchlistview.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CanvasProperties" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\windows\resources\toolbar\main\canvasproperties.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Copy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\windows\resources\toolbar\main\copy.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="CopyIterator" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Windows\Resources\Toolbar\Editor\CopyIterator.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Cut" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\windows\resources\toolbar\main\cut.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DeleteFlame" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\windows\resources\toolbar\main\deleteflame.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="DuplicateIterator" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Windows\Resources\Toolbar\Editor\DuplicateIterator.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Editor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\windows\resources\toolbar\main\editor.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="FinalIterator" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\windows\resources\toolbar\editor\finaliterator.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -133,11 +154,17 @@
   <data name="Flam3ColorMaps" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Flam3ColorMaps.txt;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
+  <data name="FlameProperties" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\windows\resources\toolbar\main\flameproperties.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="FlipAllHorizontal" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Windows\Resources\Toolbar\Editor\FlipAllHorizontal.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="FlipAllVertical" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Windows\Resources\Toolbar\Editor\FlipAllVertical.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FullscreenPreview" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\windows\resources\toolbar\main\fullscreenpreview.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="LinkIterator" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Windows\Resources\Toolbar\Editor\LinkIterator.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -166,8 +193,26 @@
   <data name="MoveUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Windows\Resources\Icons\MoveUp.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="NewFlame" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\windows\resources\toolbar\main\newflame.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="NewIterator" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Windows\Resources\Toolbar\Editor\NewIterator.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="OpenBatch" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\windows\resources\toolbar\main\openbatch.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PaletteBrowser" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\windows\resources\toolbar\main\palettebrowser.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PaletteEditor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\windows\resources\toolbar\main\paletteeditor.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PanCamera" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\windows\resources\toolbar\main\pancamera.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Paste" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\windows\resources\toolbar\main\paste.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="PasteIterator" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Windows\Resources\Toolbar\Editor\PasteIterator.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -175,14 +220,26 @@
   <data name="Redo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Windows\Resources\Toolbar\Editor\Redo.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Redo1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\windows\resources\toolbar\main\redo.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="RegularIterator" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\windows\resources\toolbar\editor\regulariterator.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="RemoveIterator" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Windows\Resources\Toolbar\Editor\RemoveIterator.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="RenderBatch" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\windows\resources\toolbar\main\renderbatch.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RenderFlame" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\windows\resources\toolbar\main\renderflame.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="ResetAll" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Windows\Resources\Toolbar\Editor\ResetAll.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ResetCamera" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\windows\resources\toolbar\main\resetcamera.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ResetIterator" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Windows\Resources\Toolbar\Editor\ResetIterator.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -205,6 +262,9 @@
   <data name="Rotate90CounterClockwise" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Windows\Resources\Icons\Rotate90CounterClockwise.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="RotateCamera" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\windows\resources\toolbar\main\rotatecamera.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="RotateClockwise" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Windows\Resources\Icons\RotateClockwise.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -213,6 +273,9 @@
   </data>
   <data name="RotateMode" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Windows\Resources\Toolbar\Editor\RotateMode.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SaveFlame" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\windows\resources\toolbar\main\saveflame.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Scale" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\windows\resources\scale_white.cur;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -229,17 +292,29 @@
   <data name="SelectMode" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Windows\Resources\Toolbar\Editor\SelectMode.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Settings" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\windows\resources\toolbar\main\settings.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SmoothPalette" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\windows\resources\toolbar\main\smoothpalette.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="ToggleAutoZoom" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Windows\Resources\Toolbar\Editor\ToggleAutoZoom.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ToggleFinalIterator" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Windows\Resources\Toolbar\Editor\ToggleFinalIterator.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ToggleGuidelines" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\windows\resources\toolbar\main\toggleguidelines.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="TogglePostMatrix" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Windows\Resources\Toolbar\Editor\TogglePostMatrix.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ToggleRulers" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\windows\resources\icons\togglerulers.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ToggleTransparency" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\windows\resources\toolbar\main\toggletransparency.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ToggleVariationPrevie" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Windows\Resources\Toolbar\Editor\ToggleVariationPrevie.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -249,5 +324,14 @@
   </data>
   <data name="Undo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Windows\Resources\Toolbar\Editor\Undo.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Undo1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\windows\resources\toolbar\main\undo.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ZoomInCamera" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\windows\resources\toolbar\main\zoomincamera.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ZoomOutCamera" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\windows\resources\toolbar\main\zoomoutcamera.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

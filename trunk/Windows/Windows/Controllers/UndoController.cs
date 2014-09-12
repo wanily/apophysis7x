@@ -63,6 +63,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mUndoStack.Push(old);
 			mRedoStack.Clear();
 			RaiseStackChanged();
+			RaiseChangeCommitted();
 		}
 
 		public bool CanUndo
@@ -121,5 +122,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				CurrentReplaced(this, new EventArgs());
 		}
 		public event EventHandler CurrentReplaced;
+
+		private void RaiseChangeCommitted()
+		{
+			if (ChangeCommitted != null)
+				ChangeCommitted(this, new EventArgs());
+		}
+		public event EventHandler ChangeCommitted;
 	}
 }

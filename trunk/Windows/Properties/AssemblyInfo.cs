@@ -1,11 +1,11 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("Apophysis 7x.net")]
-[assembly: AssemblyDescription("Apophysis 7x.net")]
+[assembly: AssemblyTitle("Apophysis 7x")]
+[assembly: AssemblyDescription("Apophysis 7x")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("XyrusWorx")]
-[assembly: AssemblyProduct("Apophysis")]
+[assembly: AssemblyProduct("Apophysis 7x")]
 [assembly: AssemblyCopyright("Copyright © 2014 XyrusWorx. All rights reserved")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

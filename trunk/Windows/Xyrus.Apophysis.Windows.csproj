@@ -364,6 +364,34 @@
     <None Include="Windows\Resources\Icons\ScaleUp.png" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Main\BatchIconView.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Main\BatchListView.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Main\CanvasProperties.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Main\Copy.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Main\Cut.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Main\DeleteFlame.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Main\Editor.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Main\FlameProperties.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Main\FullscreenPreview.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Main\NewFlame.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Main\OpenBatch.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Main\PaletteBrowser.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Main\PaletteEditor.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Main\PanCamera.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Main\Paste.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Main\Redo.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Main\RenderBatch.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Main\RenderFlame.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Main\ResetCamera.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Main\RotateCamera.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Main\SaveFlame.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Main\Settings.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Main\SmoothPalette.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Main\ToggleGuidelines.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Main\ToggleTransparency.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Main\Undo.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Main\ZoomInCamera.bmp" />
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Main\ZoomOutCamera.bmp" />
     <None Include="Resources\Flam3ColorMaps.txt" />
     <Content Include="Windows\Resources\Icons\ToggleRulers.png" />
     <EmbeddedResource Include="Windows\Resources\Toolbar\Editor\AddFinalIterator.bmp" />
