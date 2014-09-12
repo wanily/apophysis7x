@@ -60,11 +60,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.EditorMenuItem.Click -= OnEditorClick;
 		}
 
-		private void OnNewFlameClick(object sender, EventArgs e)
+		internal void OnNewFlameClick(object sender, EventArgs e)
 		{
 			mParent.AppendFlame(new Flame());
 		}
-		private void OnOpenBatchClick(object sender, EventArgs e)
+		internal void OnOpenBatchClick(object sender, EventArgs e)
 		{
 			if (!mParent.ConfirmReplaceBatch())
 				return;
@@ -78,59 +78,59 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				mParent.ReadBatchFromFile(result);
 			}
 		}
-		private void OnRestoreAutosaveClick(object sender, EventArgs e)
+		internal void OnRestoreAutosaveClick(object sender, EventArgs e)
 		{
 			//todo
 		}
-		private void OnSaveFlameClick(object sender, EventArgs e)
+		internal void OnSaveFlameClick(object sender, EventArgs e)
 		{
 			//todo
 		}
-		private void OnSaveBatchClick(object sender, EventArgs e)
+		internal void OnSaveBatchClick(object sender, EventArgs e)
 		{
 			mParent.SaveCurrentBatch();
 		}
-		private void OnPaletteFromImageClick(object sender, EventArgs e)
+		internal void OnPaletteFromImageClick(object sender, EventArgs e)
 		{
 			//todo
 		}
-		private void OnBrowsePalettesClick(object sender, EventArgs e)
+		internal void OnBrowsePalettesClick(object sender, EventArgs e)
 		{
 			//todo
 		}
-		private void OnRandomBatchClick(object sender, EventArgs e)
+		internal void OnRandomBatchClick(object sender, EventArgs e)
 		{
 			mParent.GenerateRandomFlames(10);
 		}
-		private void OnExitClick(object sender, EventArgs e)
+		internal void OnExitClick(object sender, EventArgs e)
 		{
 			View.Close();
 		}
 
-		private void OnUndoClick(object sender, EventArgs e)
+		internal void OnUndoClick(object sender, EventArgs e)
 		{
 			if (mParent.UndoController.CanUndo)
 			{
 				mParent.UndoController.Undo();
 			}
 		}
-		private void OnRedoClick(object sender, EventArgs e)
+		internal void OnRedoClick(object sender, EventArgs e)
 		{
 			if (mParent.UndoController.CanRedo)
 			{
 				mParent.UndoController.Redo();
 			}
 		}
-		private void OnCopyClick(object sender, EventArgs e)
+		internal void OnCopyClick(object sender, EventArgs e)
 		{
 			//todo
 		}
-		private void OnPasteClick(object sender, EventArgs e)
+		internal void OnPasteClick(object sender, EventArgs e)
 		{
 			mParent.ReadFlameFromClipboard();
 		}
 
-		private void OnEditorClick(object sender, EventArgs e)
+		internal void OnEditorClick(object sender, EventArgs e)
 		{
 			mParent.ShowEditor();
 		}

@@ -35,5 +35,8 @@
     <Setting Name="NamePrefix" Type="System.String" Scope="User">
       <Value Profile="(Default)">Apo7x</Value>
     </Setting>
+    <Setting Name="BatchListUsePreviews" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

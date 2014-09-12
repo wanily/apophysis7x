@@ -19,16 +19,51 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		protected override void AttachView()
 		{
+			View.NewFlameButton.Click += mParent.MainMenuController.OnNewFlameClick;
+			View.OpenBatchButton.Click += mParent.MainMenuController.OnOpenBatchClick;
+			View.SaveFlameButton.Click += mParent.MainMenuController.OnSaveFlameClick;
+
+			View.BatchListViewButton.Click += OnBatchListViewClick;
+			View.BatchIconViewButton.Click += OnBatchIconViewClick;
+
+			View.UndoButton.Click += mParent.MainMenuController.OnUndoClick;
+			View.RedoButton.Click += mParent.MainMenuController.OnRedoClick;
+
 			UpdateButtonStates();
 		}
 		protected override void DetachView()
 		{
+			View.NewFlameButton.Click -= mParent.MainMenuController.OnNewFlameClick;
+			View.OpenBatchButton.Click -= mParent.MainMenuController.OnOpenBatchClick;
+			View.SaveFlameButton.Click -= mParent.MainMenuController.OnSaveFlameClick;
+
+			View.BatchListViewButton.Click -= OnBatchListViewClick;
+			View.BatchIconViewButton.Click -= OnBatchIconViewClick;
+
+			View.UndoButton.Click -= mParent.MainMenuController.OnUndoClick;
+			View.RedoButton.Click -= mParent.MainMenuController.OnRedoClick;
+		}
+
+		private void OnBatchListViewClick(object sender, EventArgs e)
+		{
+			View.BatchListViewButton.Checked = !View.BatchListViewButton.Checked;
+			View.BatchIconViewButton.Checked = !View.BatchListViewButton.Checked;
+			mParent.BatchListController.IsIconViewEnabled = !View.BatchListViewButton.Checked;
+		}
+		private void OnBatchIconViewClick(object sender, EventArgs e)
+		{
+			View.BatchIconViewButton.Checked = !View.BatchIconViewButton.Checked;
+			View.BatchListViewButton.Checked = !View.BatchIconViewButton.Checked;
+			mParent.BatchListController.IsIconViewEnabled = View.BatchIconViewButton.Checked;
 		}
 
 		public void UpdateButtonStates()
 		{
 			View.UndoButton.Enabled = mParent.UndoController.CanUndo;
 			View.RedoButton.Enabled = mParent.UndoController.CanRedo;
+
+			View.BatchListViewButton.Checked = !mParent.BatchListController.IsIconViewEnabled;
+			View.BatchIconViewButton.Checked = mParent.BatchListController.IsIconViewEnabled;
 		}
 	}
 }

@@ -128,6 +128,14 @@ namespace Xyrus.Apophysis
 				mSettings.NamePrefix = value;
 			}
 		}
+		public static bool BatchListUsePreviews
+		{
+			get { return mSettings.BatchListUsePreviews; }
+			set
+			{
+				mSettings.BatchListUsePreviews = value;
+			}
+		}
 
 		public static void Serialize()
 		{

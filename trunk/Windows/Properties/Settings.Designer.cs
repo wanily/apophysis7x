@@ -151,5 +151,17 @@ namespace Xyrus.Apophysis.Properties {
                 this["NamePrefix"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool BatchListUsePreviews {
+            get {
+                return ((bool)(this["BatchListUsePreviews"]));
+            }
+            set {
+                this["BatchListUsePreviews"] = value;
+            }
+        }
     }
 }

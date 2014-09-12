@@ -178,6 +178,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			get { return mBatchListController; }
 		}
+		internal MainMenuController MainMenuController
+		{
+			get { return mMenuController; }
+		}
 
 		public void AppendFlame([NotNull] Flame flame)
 		{

@@ -18,11 +18,16 @@ namespace Xyrus.Apophysis.Windows.Forms
 
 		private void OnBatchListResized(object sender, System.EventArgs e)
 		{
-			BatchListView.Columns[0].Width = BatchListView.ClientSize.Width - 3;
+			UpdateBatchListColumnSize();
 		}
 		private void OnWindowLoaded(object sender, System.EventArgs e)
 		{
-			OnBatchListResized(sender, e);
+			UpdateBatchListColumnSize();
+		}
+
+		internal void UpdateBatchListColumnSize()
+		{
+			BatchListView.Columns[0].Width = BatchListView.ClientSize.Width - 3;
 		}
 	}
 }
