@@ -22,11 +22,15 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		protected override void AttachView()
 		{
+			mParent.UndoController.CurrentReplaced += OnCurrentFlameReplaced;
+
 			View.BatchListView.SelectedIndexChanged += OnListSelectionChanged;
 			View.BatchListView.AfterLabelEdit += OnListLabelEdited;
 		}
 		protected override void DetachView()
 		{
+			mParent.UndoController.CurrentReplaced -= OnCurrentFlameReplaced;
+
 			View.BatchListView.SelectedIndexChanged -= OnListSelectionChanged;
 			View.BatchListView.AfterLabelEdit -= OnListLabelEdited;
 		}
@@ -62,6 +66,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			}
 
 			mParent.LoadFlameAndEraseHistory(flame);
+			mParent.Editor.Flame = flame;
 		}
 		public Flame GetSelectedFlame()
 		{
@@ -79,6 +84,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				return;
 
 			mParent.LoadFlameAndEraseHistory(flame);
+			mParent.UpdateToolbar();
+			mParent.UpdateMenu();
 		}
 		private void OnListLabelEdited(object sender, LabelEditEventArgs e)
 		{
@@ -90,6 +97,14 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			flame.Name = e.Label;
 			mParent.NotifyFlameNameChanged(flame);
+		}
+		private void OnCurrentFlameReplaced(object sender, EventArgs e)
+		{
+			var selected = GetSelectedFlame();
+			if (selected == null)
+				return;
+
+			mParent.Flames.Replace(selected, mParent.UndoController.Current);
 		}
 
 	}

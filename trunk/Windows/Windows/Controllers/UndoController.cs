@@ -74,6 +74,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			get { return mRedoStack != null && mRedoStack.Count >= 1; }
 		}
 
+		public Flame Current
+		{
+			get { return mCurrent; }
+		}
+
 		public Flame Undo()
 		{
 			if (!CanUndo)
@@ -85,6 +90,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mRedoStack.Push(mCurrent);
 			mCurrent = pop.Copy();
 			RaiseStackChanged();
+			RaiseCurrentReplaced();
 			return pop;
 		}
 		public Flame Redo()
@@ -98,6 +104,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mUndoStack.Push(mCurrent);
 			mCurrent = pop.Copy();
 			RaiseStackChanged();
+			RaiseCurrentReplaced();
 			return pop;
 		}
 
@@ -107,5 +114,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				StackChanged(this, new EventArgs());
 		}
 		public event EventHandler StackChanged;
+
+		private void RaiseCurrentReplaced()
+		{
+			if (CurrentReplaced != null)
+				CurrentReplaced(this, new EventArgs());
+		}
+		public event EventHandler CurrentReplaced;
 	}
 }

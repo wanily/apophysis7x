@@ -94,6 +94,8 @@
     <Compile Include="Windows\Controllers\BannerController.cs" />
     <Compile Include="Windows\Controllers\BatchListController.cs" />
     <Compile Include="Windows\Controllers\EditorController.cs" />
+    <Compile Include="Windows\Controllers\FileDialogController.cs" />
+    <Compile Include="Windows\Controllers\MainUndoController.cs" />
     <Compile Include="Windows\Controllers\KeyboardController.cs" />
     <Compile Include="Windows\Controllers\EditorToolbarController.cs" />
     <Compile Include="Windows\Controllers\EditorUndoController.cs" />

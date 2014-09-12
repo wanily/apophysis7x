@@ -18,6 +18,15 @@ namespace Xyrus.Apophysis.Models
 			mName = null;
 			Append();
 		}
+		public FlameCollection(IEnumerable<Flame> flames) : base(flames.ToList())
+		{
+			if (Items.Count == 0)
+			{
+				throw new ArgumentException("Batch can't be empty", @"flames");
+			}
+
+			mName = null;
+		}
 
 		public string Name
 		{

@@ -1,15 +1,13 @@
 using System;
 using System.Linq;
-using System.Windows.Forms;
-using System.Xml;
-using System.Xml.Linq;
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Controls;
 using Xyrus.Apophysis.Windows.Forms;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
-	class EditorController : WindowController<Editor>
+	[PublicAPI]
+	public class EditorController : WindowController<Editor>
 	{
 		private MainController mParent;
 

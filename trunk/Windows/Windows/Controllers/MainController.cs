@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using System.Xml;
@@ -17,6 +19,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		private MainMenuController mMenuController;
 		private MainToolbarController mToolbarController;
+		private MainUndoController mMainUndoController;
 		private BatchListController mBatchListController;
 
 		private Lock mInitialize = new Lock();
@@ -30,6 +33,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			mMenuController = new MainMenuController(View, this);
 			mToolbarController = new MainToolbarController(View, this);
+			mMainUndoController = new MainUndoController(View, this);
 			mBatchListController = new BatchListController(View, this);
 		}
 		protected override void DisposeOverride(bool disposing)
@@ -40,6 +44,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				{
 					mBatchListController.Dispose();
 					mBatchListController = null;
+				}
+
+				if (mMainUndoController != null)
+				{
+					mMainUndoController.Dispose();
+					mMainUndoController = null;
 				}
 
 				if (mToolbarController != null)
@@ -87,13 +97,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mEditorController.Initialize();
 			mMenuController.Initialize();
 			mToolbarController.Initialize();
+			mMainUndoController.Initialize();
 			mBatchListController.Initialize();
 
-			Flames = new FlameCollection();
-
-			//todo temp
-			for(int i = 0; i < 10; i++)
-				Flames.Append();
+			GenerateRandomFlames(10, false);
 		}
 		protected override void DetachView()
 		{
@@ -104,6 +111,15 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		internal Lock Initializer
 		{
 			get { return mInitialize; }
+		}
+
+		internal void UpdateToolbar()
+		{
+			mToolbarController.UpdateButtonStates();
+		}
+		internal void UpdateMenu()
+		{
+			mMenuController.UpdateButtonStates();
 		}
 
 		private void AfterReset()
@@ -127,11 +143,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				mFlames = value;
 				mFlames.ContentChanged += OnFlameCollectionChanged;
 
-				using (mInitialize.Enter())
-				{
-					AfterReset();
-				}
-
+				AfterReset();
 				View.Text = string.Format("Apophysis - {0}", mFlames.CalculatedName);
 			}
 		}
@@ -156,6 +168,36 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			get { return mKeyboardController; }
 		}
 
+		public EditorController Editor
+		{
+			get { return mEditorController; }
+		}
+
+		public void AppendFlame([NotNull] Flame flame)
+		{
+			if (flame == null) throw new ArgumentNullException("flame");
+
+			var index = mFlames.Append(flame);
+			mBatchListController.SelectFlame(mFlames[index]);
+		}
+
+		public void ReadFlameFromFile(string result)
+		{
+			try
+			{
+				var batch = new FlameCollection();
+				batch.ReadXml(XElement.Parse(File.ReadAllText(result), LoadOptions.None));
+				Flames = batch;
+			}
+			catch (ApophysisException exception)
+			{
+				MessageBox.Show(exception.Message, View.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+			catch (XmlException exception)
+			{
+				MessageBox.Show(exception.Message, View.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
 		public void ReadFlameFromClipboard()
 		{
 			var clipboard = Clipboard.GetText();
@@ -166,7 +208,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 					var flame = new Flame();
 
 					flame.ReadXml(XElement.Parse(clipboard, LoadOptions.None));
-					LoadFlameAndEraseHistory(flame);
+					AppendFlame(flame);
 				}
 				catch (ApophysisException exception)
 				{
@@ -178,6 +220,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				}
 			}
 		}
+
 		public void LoadFlameAndEraseHistory([NotNull] Flame flame)
 		{
 			if (flame == null) throw new ArgumentNullException("flame");
@@ -192,8 +235,61 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				mEditorController.UpdateWindowTitle();
 			}
 		}
-		public void DeleteFlameIfPossibleWithConfirm(Flame flame)
+		public void GenerateRandomFlames(int count, bool confirm = true)
 		{
+			var batch = new List<Flame>();
+			for (int i = 0; i < count; i++)
+				batch.Add(new Flame());
+
+			if (confirm)
+			{
+				ReplaceBatchWithConfirm(new FlameCollection(batch));
+			}
+			else
+			{
+				Flames = new FlameCollection(batch);
+			}
+		}
+
+		public bool ConfirmReplaceBatch()
+		{
+			var result = MessageBox.Show(
+				string.Format("Do you want to save the current batch before loading a new one?"),
+				Application.ProductName, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+			bool save;
+			switch (result)
+			{
+				case DialogResult.Yes:
+					save = true;
+					break;
+				case DialogResult.No:
+					save = false;
+					break;
+				default:
+					return false;
+			}
+
+			if (save)
+			{
+				SaveCurrentBatch();
+			}
+
+			return true;
+		}
+
+		public void ReplaceBatchWithConfirm([NotNull] FlameCollection batch)
+		{
+			if (batch == null) throw new ArgumentNullException("batch");
+
+			if (!ConfirmReplaceBatch())
+				return;
+
+			Flames = batch;
+		}
+		public void DeleteFlameIfPossibleWithConfirm([NotNull] Flame flame)
+		{
+			if (flame == null) throw new ArgumentNullException("flame");
 			if (!mFlames.CanRemove())
 				return;
 
@@ -217,6 +313,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 				mBatchListController.SelectFlame(mFlames[index]);
 			}
+		}
+
+		public void SaveCurrentBatch()
+		{
+			//todo
 		}
 
 		public void ShowEditor()

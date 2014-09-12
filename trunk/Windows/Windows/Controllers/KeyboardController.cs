@@ -17,29 +17,20 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		private void OnKeyDown(object sender, KeyEventArgs args)
 		{
-			HandleApplicationWideShortcuts(sender, args);
-
-			HandleMainWindowToolbarShortcuts(sender, args);
-			HandleMainWindowBatchListShortcuts(sender, args);
+			HandleEditorShortcuts(sender, args);
+			HandleBatchListShortcuts(sender, args);
 		}
 
-		private void HandleApplicationWideShortcuts(object sender, KeyEventArgs args)
+		private void HandleEditorShortcuts(object sender, KeyEventArgs args)
 		{
-			if ((args.KeyData & Keys.Control) == Keys.Control && (args.KeyData & Keys.V) == Keys.V)
+			if (args.Control && args.KeyData == Keys.V && sender is Editor)
 			{
 				ApophysisApplication.MainWindow.ReadFlameFromClipboard();
 			}
 		}
-		private void HandleMainWindowToolbarShortcuts(object sender, KeyEventArgs args)
+		private void HandleBatchListShortcuts(object sender, KeyEventArgs args)
 		{
-			if ((args.KeyData & Keys.F4) == Keys.F4 && sender is Main)
-			{
-				ApophysisApplication.MainWindow.ShowEditor();
-			}
-		}
-		private void HandleMainWindowBatchListShortcuts(object sender, KeyEventArgs args)
-		{
-			if ((args.KeyData & Keys.F2) == Keys.F2 && sender is Main)
+			if (args.KeyData == Keys.F2 && sender is Main)
 			{
 				var main = (Main)sender;
 				if (main.BatchListView.Focused)
