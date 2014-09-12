@@ -43,7 +43,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				}
 			}
 
-			if ((args.KeyData & Keys.Delete) == Keys.Delete && sender is Main)
+			if (args.KeyData == Keys.Delete && sender is Main)
 			{
 				var main = (Main)sender;
 				if (main.BatchListView.Focused)

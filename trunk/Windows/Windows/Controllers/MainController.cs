@@ -167,10 +167,14 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			get { return mKeyboardController; }
 		}
-
-		public EditorController Editor
+		public EditorController EditorController
 		{
 			get { return mEditorController; }
+		}
+
+		internal BatchListController BatchListController
+		{
+			get { return mBatchListController; }
 		}
 
 		public void AppendFlame([NotNull] Flame flame)
@@ -234,6 +238,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			{
 				mEditorController.UpdateWindowTitle();
 			}
+
+			mUndoController.CommitChange(flame);
 		}
 		public void GenerateRandomFlames(int count, bool confirm = true)
 		{

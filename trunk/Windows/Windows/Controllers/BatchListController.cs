@@ -45,8 +45,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			foreach (var flame in mParent.Flames)
 			{
 				var item = View.BatchListView.Items.Add(flame.CalculatedName);
-				
-				item.Tag = flame;
+
+				SetItemProperties(item, flame);
 				item.ImageIndex = index++;
 			}
 		}
@@ -58,23 +58,39 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			using (mParent.Initializer.Enter())
 			{
-				var index = mParent.Flames.IndexOf(flame);
-				if (index < 0)
-					return;
-
-				View.BatchListView.Items[index].Selected = true;
+				SetListSelection(flame);
 			}
 
 			mParent.LoadFlameAndEraseHistory(flame);
-			mParent.Editor.Flame = flame;
+			mParent.EditorController.Flame = flame;
 		}
 		public Flame GetSelectedFlame()
 		{
-			var item = View.BatchListView.Items.OfType<ListViewItem>().FirstOrDefault(x => x.Selected);
+			var item = GetSelectedItem();
 			if (item == null)
 				return null;
 
 			return item.Tag as Flame;
+		}
+
+		private void SetItemProperties(ListViewItem item, Flame flame)
+		{
+			item.Text = flame.CalculatedName;
+			item.Tag = flame;
+		}
+		private ListViewItem GetSelectedItem()
+		{
+			return View.BatchListView.Items.OfType<ListViewItem>().FirstOrDefault(x => x.Selected);
+		}
+
+		internal void SetListSelection([NotNull] Flame flame)
+		{
+			if (flame == null) throw new ArgumentNullException("flame");
+			var index = mParent.Flames.IndexOf(flame);
+			if (index < 0)
+				return;
+
+			View.BatchListView.Items[index].Selected = true;
 		}
 
 		private void OnListSelectionChanged(object sender, EventArgs e)
@@ -100,11 +116,20 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 		private void OnCurrentFlameReplaced(object sender, EventArgs e)
 		{
-			var selected = GetSelectedFlame();
+			var selected = GetSelectedItem();
 			if (selected == null)
 				return;
 
-			mParent.Flames.Replace(selected, mParent.UndoController.Current);
+			var flame = selected.Tag as Flame;
+			if (flame == null)
+				return;
+
+			using (mParent.Initializer.Enter())
+			{
+				mParent.Flames.Replace(flame, mParent.UndoController.Current);
+				SetItemProperties(selected, mParent.UndoController.Current);
+				mParent.EditorController.Flame = mParent.UndoController.Current;
+			}
 		}
 
 	}
