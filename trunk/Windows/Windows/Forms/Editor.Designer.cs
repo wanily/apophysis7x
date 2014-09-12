@@ -48,30 +48,24 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mToolbarSeparator7 = new System.Windows.Forms.ToolStripSeparator();
 			this.IteratorConvertToRegularButton = new System.Windows.Forms.ToolStripButton();
 			this.IteratorConvertToFinalButton = new System.Windows.Forms.ToolStripButton();
-			this.mToolbarImages = new System.Windows.Forms.ImageList(this.components);
-			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.IteratorCanvas = new Xyrus.Apophysis.Windows.Controls.EditorCanvas();
 			this.mSettings = new Xyrus.Apophysis.Windows.Controls.EditorSettings();
 			this.mSidebarSplitter = new System.Windows.Forms.SplitContainer();
 			this.mPreviewPanel = new System.Windows.Forms.Panel();
+			this.PreviewPicture = new System.Windows.Forms.PictureBox();
 			this.mPictureBevel = new System.Windows.Forms.Label();
 			this.Tabs = new System.Windows.Forms.TabControl();
 			this.VariationsTab = new System.Windows.Forms.TabPage();
 			this.ClearVariationsButton = new System.Windows.Forms.Button();
 			this.HideUnusedVariationsCheckBox = new System.Windows.Forms.CheckBox();
 			this.VariationsGrid = new Xyrus.Apophysis.Windows.Controls.DragGrid();
-			this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.VariablesTab = new System.Windows.Forms.TabPage();
 			this.HideUnrelatedVariablesCheckBox = new System.Windows.Forms.CheckBox();
 			this.VariablesGrid = new Xyrus.Apophysis.Windows.Controls.DragGrid();
-			this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.PointTab = new System.Windows.Forms.TabPage();
 			this.mIteratorControlsGroupBox = new System.Windows.Forms.GroupBox();
 			this.IteratorScaleRatio = new System.Windows.Forms.ComboBox();
@@ -121,6 +115,11 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorPreAffineXyTextBox = new System.Windows.Forms.TextBox();
 			this.IteratorPreAffineXxTextBox = new System.Windows.Forms.TextBox();
 			this.ColorTab = new System.Windows.Forms.TabPage();
+			this.mPreviewGroupBox = new System.Windows.Forms.GroupBox();
+			this.mPreviewDensityLabel = new System.Windows.Forms.Label();
+			this.mPreviewRangeLabel = new System.Windows.Forms.Label();
+			this.PreviewDensityTrackBar = new System.Windows.Forms.TrackBar();
+			this.PreviewRangeTrackBar = new System.Windows.Forms.TrackBar();
 			this.mIteratorColorGroupBox = new System.Windows.Forms.GroupBox();
 			this.PaletteSelectComboBox = new Xyrus.Apophysis.Windows.Controls.PaletteSelectComboBox();
 			this.IteratorDirectColorTextBox = new System.Windows.Forms.TextBox();
@@ -139,11 +138,25 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mIteratorNameLabel = new System.Windows.Forms.Label();
 			this.IteratorSelectionComboBox = new Xyrus.Apophysis.Windows.Controls.IteratorSelectComboBox();
 			this.mIteratorSelectLabel = new System.Windows.Forms.Label();
-			this.mPreviewGroupBox = new System.Windows.Forms.GroupBox();
-			this.PreviewRangeTrackBar = new System.Windows.Forms.TrackBar();
-			this.PreviewDensityTrackBar = new System.Windows.Forms.TrackBar();
-			this.mPreviewRangeLabel = new System.Windows.Forms.Label();
-			this.mPreviewDensityLabel = new System.Windows.Forms.Label();
+			this.mToolbarImages = new System.Windows.Forms.ImageList(this.components);
+			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.mPreviewContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.LowQualityMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.MediumQualityMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.HighQualityMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.mRootSplitter.Panel1.SuspendLayout();
 			this.mRootSplitter.Panel2.SuspendLayout();
 			this.mRootSplitter.SuspendLayout();
@@ -152,6 +165,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mSidebarSplitter.Panel2.SuspendLayout();
 			this.mSidebarSplitter.SuspendLayout();
 			this.mPreviewPanel.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.PreviewPicture)).BeginInit();
 			this.Tabs.SuspendLayout();
 			this.VariationsTab.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.VariationsGrid)).BeginInit();
@@ -164,11 +178,12 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mIteratorPostAffineGroupBox.SuspendLayout();
 			this.mPreAffineGroupBox.SuspendLayout();
 			this.ColorTab.SuspendLayout();
+			this.mPreviewGroupBox.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.PreviewDensityTrackBar)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.PreviewRangeTrackBar)).BeginInit();
 			this.mIteratorColorGroupBox.SuspendLayout();
 			this.mIteratorPropertyPanel.SuspendLayout();
-			this.mPreviewGroupBox.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.PreviewRangeTrackBar)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.PreviewDensityTrackBar)).BeginInit();
+			this.mPreviewContextMenu.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// mRootSplitter
@@ -445,72 +460,6 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorConvertToFinalButton.Size = new System.Drawing.Size(23, 22);
 			this.IteratorConvertToFinalButton.Text = "Convert to final transform";
 			// 
-			// mToolbarImages
-			// 
-			this.mToolbarImages.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("mToolbarImages.ImageStream")));
-			this.mToolbarImages.TransparentColor = System.Drawing.Color.Fuchsia;
-			this.mToolbarImages.Images.SetKeyName(0, "ResetAll.bmp");
-			this.mToolbarImages.Images.SetKeyName(1, "NewIterator.bmp");
-			this.mToolbarImages.Images.SetKeyName(2, "DuplicateIterator.bmp");
-			this.mToolbarImages.Images.SetKeyName(3, "RemoveIterator.bmp");
-			this.mToolbarImages.Images.SetKeyName(4, "Undo.bmp");
-			this.mToolbarImages.Images.SetKeyName(5, "Redo.bmp");
-			this.mToolbarImages.Images.SetKeyName(6, "CopyIterator.bmp");
-			this.mToolbarImages.Images.SetKeyName(7, "PasteIterator.bmp");
-			this.mToolbarImages.Images.SetKeyName(8, "SelectMode.bmp");
-			this.mToolbarImages.Images.SetKeyName(9, "MoveMode.bmp");
-			this.mToolbarImages.Images.SetKeyName(10, "RotateMode.bmp");
-			this.mToolbarImages.Images.SetKeyName(11, "ScaleMode.bmp");
-			this.mToolbarImages.Images.SetKeyName(12, "ToggleWorldPivot.bmp");
-			this.mToolbarImages.Images.SetKeyName(13, "FlipAllHorizontal.bmp");
-			this.mToolbarImages.Images.SetKeyName(14, "FlipAllVertical.bmp");
-			this.mToolbarImages.Images.SetKeyName(15, "ToggleVariationPrevie.bmp");
-			this.mToolbarImages.Images.SetKeyName(16, "TogglePostMatrix.bmp");
-			this.mToolbarImages.Images.SetKeyName(17, "ToggleFinalIterator.bmp");
-			this.mToolbarImages.Images.SetKeyName(18, "LinkIterator.bmp");
-			this.mToolbarImages.Images.SetKeyName(19, "LockTransformAxes.bmp");
-			this.mToolbarImages.Images.SetKeyName(20, "ResetIterator.bmp");
-			this.mToolbarImages.Images.SetKeyName(21, "ResetIteratorOrigin.bmp");
-			this.mToolbarImages.Images.SetKeyName(22, "ResetIteratorAngle.bmp");
-			this.mToolbarImages.Images.SetKeyName(23, "ResetIteratorScale.bmp");
-			this.mToolbarImages.Images.SetKeyName(24, "ToggleAutoZoom.bmp");
-			// 
-			// dataGridViewTextBoxColumn1
-			// 
-			this.dataGridViewTextBoxColumn1.HeaderText = "Name";
-			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-			this.dataGridViewTextBoxColumn1.ReadOnly = true;
-			// 
-			// dataGridViewTextBoxColumn2
-			// 
-			this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.dataGridViewTextBoxColumn2.HeaderText = "Value";
-			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-			// 
-			// dataGridViewTextBoxColumn3
-			// 
-			this.dataGridViewTextBoxColumn3.HeaderText = "Name";
-			this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-			this.dataGridViewTextBoxColumn3.ReadOnly = true;
-			// 
-			// dataGridViewTextBoxColumn4
-			// 
-			this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.dataGridViewTextBoxColumn4.HeaderText = "Value";
-			this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-			// 
-			// dataGridViewTextBoxColumn5
-			// 
-			this.dataGridViewTextBoxColumn5.HeaderText = "Name";
-			this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-			this.dataGridViewTextBoxColumn5.ReadOnly = true;
-			// 
-			// dataGridViewTextBoxColumn6
-			// 
-			this.dataGridViewTextBoxColumn6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.dataGridViewTextBoxColumn6.HeaderText = "Value";
-			this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-			// 
 			// IteratorCanvas
 			// 
 			this.IteratorCanvas.ActiveMatrix = Xyrus.Apophysis.Windows.Controls.IteratorMatrix.PreAffine;
@@ -572,12 +521,26 @@ namespace Xyrus.Apophysis.Windows.Forms
 			// 
 			// mPreviewPanel
 			// 
+			this.mPreviewPanel.Controls.Add(this.PreviewPicture);
 			this.mPreviewPanel.Controls.Add(this.mPictureBevel);
 			this.mPreviewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.mPreviewPanel.Location = new System.Drawing.Point(0, 0);
 			this.mPreviewPanel.Name = "mPreviewPanel";
 			this.mPreviewPanel.Size = new System.Drawing.Size(299, 174);
 			this.mPreviewPanel.TabIndex = 0;
+			// 
+			// PreviewPicture
+			// 
+			this.PreviewPicture.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.PreviewPicture.BackColor = System.Drawing.Color.Black;
+			this.PreviewPicture.ContextMenuStrip = this.mPreviewContextMenu;
+			this.PreviewPicture.Location = new System.Drawing.Point(4, 10);
+			this.PreviewPicture.Name = "PreviewPicture";
+			this.PreviewPicture.Size = new System.Drawing.Size(287, 158);
+			this.PreviewPicture.TabIndex = 1;
+			this.PreviewPicture.TabStop = false;
 			// 
 			// mPictureBevel
 			// 
@@ -668,17 +631,17 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.VariationsGrid.Size = new System.Drawing.Size(279, 320);
 			this.VariationsGrid.TabIndex = 0;
 			// 
-			// dataGridViewTextBoxColumn7
+			// dataGridViewTextBoxColumn15
 			// 
-			this.dataGridViewTextBoxColumn7.HeaderText = "Name";
-			this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-			this.dataGridViewTextBoxColumn7.ReadOnly = true;
+			this.dataGridViewTextBoxColumn15.HeaderText = "Name";
+			this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+			this.dataGridViewTextBoxColumn15.ReadOnly = true;
 			// 
-			// dataGridViewTextBoxColumn8
+			// dataGridViewTextBoxColumn16
 			// 
-			this.dataGridViewTextBoxColumn8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.dataGridViewTextBoxColumn8.HeaderText = "Value";
-			this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+			this.dataGridViewTextBoxColumn16.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.dataGridViewTextBoxColumn16.HeaderText = "Value";
+			this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
 			// 
 			// VariablesTab
 			// 
@@ -734,17 +697,17 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.VariablesGrid.Size = new System.Drawing.Size(279, 347);
 			this.VariablesGrid.TabIndex = 1;
 			// 
-			// dataGridViewTextBoxColumn9
+			// dataGridViewTextBoxColumn17
 			// 
-			this.dataGridViewTextBoxColumn9.HeaderText = "Name";
-			this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-			this.dataGridViewTextBoxColumn9.ReadOnly = true;
+			this.dataGridViewTextBoxColumn17.HeaderText = "Name";
+			this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
+			this.dataGridViewTextBoxColumn17.ReadOnly = true;
 			// 
-			// dataGridViewTextBoxColumn10
+			// dataGridViewTextBoxColumn18
 			// 
-			this.dataGridViewTextBoxColumn10.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.dataGridViewTextBoxColumn10.HeaderText = "Value";
-			this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+			this.dataGridViewTextBoxColumn18.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.dataGridViewTextBoxColumn18.HeaderText = "Value";
+			this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
 			// 
 			// PointTab
 			// 
@@ -1320,6 +1283,63 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.ColorTab.TabIndex = 0;
 			this.ColorTab.Text = "Color";
 			// 
+			// mPreviewGroupBox
+			// 
+			this.mPreviewGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.mPreviewGroupBox.Controls.Add(this.mPreviewDensityLabel);
+			this.mPreviewGroupBox.Controls.Add(this.mPreviewRangeLabel);
+			this.mPreviewGroupBox.Controls.Add(this.PreviewDensityTrackBar);
+			this.mPreviewGroupBox.Controls.Add(this.PreviewRangeTrackBar);
+			this.mPreviewGroupBox.Location = new System.Drawing.Point(6, 200);
+			this.mPreviewGroupBox.Name = "mPreviewGroupBox";
+			this.mPreviewGroupBox.Size = new System.Drawing.Size(273, 127);
+			this.mPreviewGroupBox.TabIndex = 1;
+			this.mPreviewGroupBox.TabStop = false;
+			this.mPreviewGroupBox.Text = "Variation preview";
+			// 
+			// mPreviewDensityLabel
+			// 
+			this.mPreviewDensityLabel.AutoSize = true;
+			this.mPreviewDensityLabel.Location = new System.Drawing.Point(10, 71);
+			this.mPreviewDensityLabel.Name = "mPreviewDensityLabel";
+			this.mPreviewDensityLabel.Size = new System.Drawing.Size(45, 13);
+			this.mPreviewDensityLabel.TabIndex = 3;
+			this.mPreviewDensityLabel.Text = "Density:";
+			// 
+			// mPreviewRangeLabel
+			// 
+			this.mPreviewRangeLabel.AutoSize = true;
+			this.mPreviewRangeLabel.Location = new System.Drawing.Point(9, 33);
+			this.mPreviewRangeLabel.Name = "mPreviewRangeLabel";
+			this.mPreviewRangeLabel.Size = new System.Drawing.Size(42, 13);
+			this.mPreviewRangeLabel.TabIndex = 2;
+			this.mPreviewRangeLabel.Text = "Range:";
+			// 
+			// PreviewDensityTrackBar
+			// 
+			this.PreviewDensityTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.PreviewDensityTrackBar.Location = new System.Drawing.Point(57, 67);
+			this.PreviewDensityTrackBar.Maximum = 4;
+			this.PreviewDensityTrackBar.Minimum = 1;
+			this.PreviewDensityTrackBar.Name = "PreviewDensityTrackBar";
+			this.PreviewDensityTrackBar.Size = new System.Drawing.Size(210, 45);
+			this.PreviewDensityTrackBar.TabIndex = 1;
+			this.PreviewDensityTrackBar.Value = 1;
+			// 
+			// PreviewRangeTrackBar
+			// 
+			this.PreviewRangeTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.PreviewRangeTrackBar.Location = new System.Drawing.Point(57, 29);
+			this.PreviewRangeTrackBar.Maximum = 5;
+			this.PreviewRangeTrackBar.Minimum = 1;
+			this.PreviewRangeTrackBar.Name = "PreviewRangeTrackBar";
+			this.PreviewRangeTrackBar.Size = new System.Drawing.Size(210, 45);
+			this.PreviewRangeTrackBar.TabIndex = 0;
+			this.PreviewRangeTrackBar.Value = 1;
+			// 
 			// mIteratorColorGroupBox
 			// 
 			this.mIteratorColorGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -1566,62 +1586,147 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mIteratorSelectLabel.Text = "Transform:";
 			this.mIteratorSelectLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
-			// mPreviewGroupBox
+			// mToolbarImages
 			// 
-			this.mPreviewGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.mPreviewGroupBox.Controls.Add(this.mPreviewDensityLabel);
-			this.mPreviewGroupBox.Controls.Add(this.mPreviewRangeLabel);
-			this.mPreviewGroupBox.Controls.Add(this.PreviewDensityTrackBar);
-			this.mPreviewGroupBox.Controls.Add(this.PreviewRangeTrackBar);
-			this.mPreviewGroupBox.Location = new System.Drawing.Point(6, 200);
-			this.mPreviewGroupBox.Name = "mPreviewGroupBox";
-			this.mPreviewGroupBox.Size = new System.Drawing.Size(273, 127);
-			this.mPreviewGroupBox.TabIndex = 1;
-			this.mPreviewGroupBox.TabStop = false;
-			this.mPreviewGroupBox.Text = "Variation preview";
+			this.mToolbarImages.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("mToolbarImages.ImageStream")));
+			this.mToolbarImages.TransparentColor = System.Drawing.Color.Fuchsia;
+			this.mToolbarImages.Images.SetKeyName(0, "ResetAll.bmp");
+			this.mToolbarImages.Images.SetKeyName(1, "NewIterator.bmp");
+			this.mToolbarImages.Images.SetKeyName(2, "DuplicateIterator.bmp");
+			this.mToolbarImages.Images.SetKeyName(3, "RemoveIterator.bmp");
+			this.mToolbarImages.Images.SetKeyName(4, "Undo.bmp");
+			this.mToolbarImages.Images.SetKeyName(5, "Redo.bmp");
+			this.mToolbarImages.Images.SetKeyName(6, "CopyIterator.bmp");
+			this.mToolbarImages.Images.SetKeyName(7, "PasteIterator.bmp");
+			this.mToolbarImages.Images.SetKeyName(8, "SelectMode.bmp");
+			this.mToolbarImages.Images.SetKeyName(9, "MoveMode.bmp");
+			this.mToolbarImages.Images.SetKeyName(10, "RotateMode.bmp");
+			this.mToolbarImages.Images.SetKeyName(11, "ScaleMode.bmp");
+			this.mToolbarImages.Images.SetKeyName(12, "ToggleWorldPivot.bmp");
+			this.mToolbarImages.Images.SetKeyName(13, "FlipAllHorizontal.bmp");
+			this.mToolbarImages.Images.SetKeyName(14, "FlipAllVertical.bmp");
+			this.mToolbarImages.Images.SetKeyName(15, "ToggleVariationPrevie.bmp");
+			this.mToolbarImages.Images.SetKeyName(16, "TogglePostMatrix.bmp");
+			this.mToolbarImages.Images.SetKeyName(17, "ToggleFinalIterator.bmp");
+			this.mToolbarImages.Images.SetKeyName(18, "LinkIterator.bmp");
+			this.mToolbarImages.Images.SetKeyName(19, "LockTransformAxes.bmp");
+			this.mToolbarImages.Images.SetKeyName(20, "ResetIterator.bmp");
+			this.mToolbarImages.Images.SetKeyName(21, "ResetIteratorOrigin.bmp");
+			this.mToolbarImages.Images.SetKeyName(22, "ResetIteratorAngle.bmp");
+			this.mToolbarImages.Images.SetKeyName(23, "ResetIteratorScale.bmp");
+			this.mToolbarImages.Images.SetKeyName(24, "ToggleAutoZoom.bmp");
 			// 
-			// PreviewRangeTrackBar
+			// dataGridViewTextBoxColumn1
 			// 
-			this.PreviewRangeTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.PreviewRangeTrackBar.Location = new System.Drawing.Point(57, 29);
-			this.PreviewRangeTrackBar.Maximum = 5;
-			this.PreviewRangeTrackBar.Minimum = 1;
-			this.PreviewRangeTrackBar.Name = "PreviewRangeTrackBar";
-			this.PreviewRangeTrackBar.Size = new System.Drawing.Size(210, 45);
-			this.PreviewRangeTrackBar.TabIndex = 0;
-			this.PreviewRangeTrackBar.Value = 1;
+			this.dataGridViewTextBoxColumn1.HeaderText = "Name";
+			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+			this.dataGridViewTextBoxColumn1.ReadOnly = true;
 			// 
-			// PreviewDensityTrackBar
+			// dataGridViewTextBoxColumn2
 			// 
-			this.PreviewDensityTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.PreviewDensityTrackBar.Location = new System.Drawing.Point(57, 67);
-			this.PreviewDensityTrackBar.Maximum = 4;
-			this.PreviewDensityTrackBar.Minimum = 1;
-			this.PreviewDensityTrackBar.Name = "PreviewDensityTrackBar";
-			this.PreviewDensityTrackBar.Size = new System.Drawing.Size(210, 45);
-			this.PreviewDensityTrackBar.TabIndex = 1;
-			this.PreviewDensityTrackBar.Value = 1;
+			this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.dataGridViewTextBoxColumn2.HeaderText = "Value";
+			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
 			// 
-			// mPreviewRangeLabel
+			// dataGridViewTextBoxColumn3
 			// 
-			this.mPreviewRangeLabel.AutoSize = true;
-			this.mPreviewRangeLabel.Location = new System.Drawing.Point(9, 33);
-			this.mPreviewRangeLabel.Name = "mPreviewRangeLabel";
-			this.mPreviewRangeLabel.Size = new System.Drawing.Size(42, 13);
-			this.mPreviewRangeLabel.TabIndex = 2;
-			this.mPreviewRangeLabel.Text = "Range:";
+			this.dataGridViewTextBoxColumn3.HeaderText = "Name";
+			this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+			this.dataGridViewTextBoxColumn3.ReadOnly = true;
 			// 
-			// mPreviewDensityLabel
+			// dataGridViewTextBoxColumn4
 			// 
-			this.mPreviewDensityLabel.AutoSize = true;
-			this.mPreviewDensityLabel.Location = new System.Drawing.Point(10, 71);
-			this.mPreviewDensityLabel.Name = "mPreviewDensityLabel";
-			this.mPreviewDensityLabel.Size = new System.Drawing.Size(45, 13);
-			this.mPreviewDensityLabel.TabIndex = 3;
-			this.mPreviewDensityLabel.Text = "Density:";
+			this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.dataGridViewTextBoxColumn4.HeaderText = "Value";
+			this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+			// 
+			// dataGridViewTextBoxColumn5
+			// 
+			this.dataGridViewTextBoxColumn5.HeaderText = "Name";
+			this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+			this.dataGridViewTextBoxColumn5.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn6
+			// 
+			this.dataGridViewTextBoxColumn6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.dataGridViewTextBoxColumn6.HeaderText = "Value";
+			this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+			// 
+			// dataGridViewTextBoxColumn7
+			// 
+			this.dataGridViewTextBoxColumn7.HeaderText = "Name";
+			this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+			this.dataGridViewTextBoxColumn7.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn8
+			// 
+			this.dataGridViewTextBoxColumn8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.dataGridViewTextBoxColumn8.HeaderText = "Value";
+			this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+			// 
+			// dataGridViewTextBoxColumn9
+			// 
+			this.dataGridViewTextBoxColumn9.HeaderText = "Name";
+			this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+			this.dataGridViewTextBoxColumn9.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn10
+			// 
+			this.dataGridViewTextBoxColumn10.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.dataGridViewTextBoxColumn10.HeaderText = "Value";
+			this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+			// 
+			// dataGridViewTextBoxColumn11
+			// 
+			this.dataGridViewTextBoxColumn11.HeaderText = "Name";
+			this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+			this.dataGridViewTextBoxColumn11.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn12
+			// 
+			this.dataGridViewTextBoxColumn12.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.dataGridViewTextBoxColumn12.HeaderText = "Value";
+			this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+			// 
+			// dataGridViewTextBoxColumn13
+			// 
+			this.dataGridViewTextBoxColumn13.HeaderText = "Name";
+			this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+			this.dataGridViewTextBoxColumn13.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn14
+			// 
+			this.dataGridViewTextBoxColumn14.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.dataGridViewTextBoxColumn14.HeaderText = "Value";
+			this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+			// 
+			// mPreviewContextMenu
+			// 
+			this.mPreviewContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.LowQualityMenuItem,
+            this.MediumQualityMenuItem,
+            this.HighQualityMenuItem});
+			this.mPreviewContextMenu.Name = "mPreviewContextMenu";
+			this.mPreviewContextMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+			this.mPreviewContextMenu.Size = new System.Drawing.Size(159, 92);
+			// 
+			// LowQualityMenuItem
+			// 
+			this.LowQualityMenuItem.Name = "LowQualityMenuItem";
+			this.LowQualityMenuItem.Size = new System.Drawing.Size(158, 22);
+			this.LowQualityMenuItem.Text = "&Low quality";
+			// 
+			// MediumQualityMenuItem
+			// 
+			this.MediumQualityMenuItem.Name = "MediumQualityMenuItem";
+			this.MediumQualityMenuItem.Size = new System.Drawing.Size(158, 22);
+			this.MediumQualityMenuItem.Text = "&Medium quality";
+			// 
+			// HighQualityMenuItem
+			// 
+			this.HighQualityMenuItem.Name = "HighQualityMenuItem";
+			this.HighQualityMenuItem.Size = new System.Drawing.Size(158, 22);
+			this.HighQualityMenuItem.Text = "&High quality";
 			// 
 			// Editor
 			// 
@@ -1643,6 +1748,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mSidebarSplitter.Panel2.ResumeLayout(false);
 			this.mSidebarSplitter.ResumeLayout(false);
 			this.mPreviewPanel.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.PreviewPicture)).EndInit();
 			this.Tabs.ResumeLayout(false);
 			this.VariationsTab.ResumeLayout(false);
 			this.VariationsTab.PerformLayout();
@@ -1660,14 +1766,15 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mPreAffineGroupBox.ResumeLayout(false);
 			this.mPreAffineGroupBox.PerformLayout();
 			this.ColorTab.ResumeLayout(false);
+			this.mPreviewGroupBox.ResumeLayout(false);
+			this.mPreviewGroupBox.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.PreviewDensityTrackBar)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.PreviewRangeTrackBar)).EndInit();
 			this.mIteratorColorGroupBox.ResumeLayout(false);
 			this.mIteratorColorGroupBox.PerformLayout();
 			this.mIteratorPropertyPanel.ResumeLayout(false);
 			this.mIteratorPropertyPanel.PerformLayout();
-			this.mPreviewGroupBox.ResumeLayout(false);
-			this.mPreviewGroupBox.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.PreviewRangeTrackBar)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.PreviewDensityTrackBar)).EndInit();
+			this.mPreviewContextMenu.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -1799,6 +1906,19 @@ namespace Xyrus.Apophysis.Windows.Forms
 		private System.Windows.Forms.Label mPreviewRangeLabel;
 		public System.Windows.Forms.TrackBar PreviewRangeTrackBar;
 		public System.Windows.Forms.TrackBar PreviewDensityTrackBar;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
+		public System.Windows.Forms.PictureBox PreviewPicture;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn18;
+		private System.Windows.Forms.ContextMenuStrip mPreviewContextMenu;
+		public System.Windows.Forms.ToolStripMenuItem LowQualityMenuItem;
+		public System.Windows.Forms.ToolStripMenuItem MediumQualityMenuItem;
+		public System.Windows.Forms.ToolStripMenuItem HighQualityMenuItem;
 	}
 }
 

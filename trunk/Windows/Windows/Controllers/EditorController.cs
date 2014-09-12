@@ -12,6 +12,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		private MainController mParent;
 
 		private EditorUndoController mEditorUndoController;
+		private EditorPreviewController mEditorPreviewController;
 		private EditorToolbarController mToolbarController;
 		private IteratorPropertiesController mPropertiesController;
 		private IteratorSelectionController mSelectionController;
@@ -32,6 +33,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mParent = parent;
 
 			mEditorUndoController = new EditorUndoController(View, this);
+			mEditorPreviewController = new EditorPreviewController(View, this);
 			mToolbarController = new EditorToolbarController(View, this);
 			mPropertiesController = new IteratorPropertiesController(View, this);
 			mSelectionController = new IteratorSelectionController(View, this);
@@ -93,6 +95,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 					mToolbarController = null;
 				}
 
+				if (mEditorPreviewController != null)
+				{
+					mEditorPreviewController.Dispose();
+					mEditorPreviewController = null;
+				}
+
 				if (mEditorUndoController != null)
 				{
 					mEditorUndoController.Dispose();
@@ -128,10 +136,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			};
 
 			View.IteratorCanvas.ShowRuler = ApophysisSettings.EditorShowRulers;
-			View.IteratorCanvas.PreviewDensity = ApophysisSettings.EditorPreviewDensity;
-			View.IteratorCanvas.PreviewRange = ApophysisSettings.EditorPreviewRange;
+			View.IteratorCanvas.PreviewDensity = ApophysisSettings.EditorVariationPreviewDensity;
+			View.IteratorCanvas.PreviewRange = ApophysisSettings.EditorVariationPreviewRange;
 
 			mEditorUndoController.Initialize();
+			mEditorPreviewController.Initialize();
 			mToolbarController.Initialize();
 			mPropertiesController.Initialize();
 			mSelectionController.Initialize();
@@ -155,8 +164,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			ApophysisSettings.EditorShowRulers = View.IteratorCanvas.ShowRuler;
 			ApophysisSettings.EditorShowVariationPreview = mSettings.ShowVariationPreview;
 			ApophysisSettings.EditorAutoZoom = mSettings.ZoomAutomatically;
-			ApophysisSettings.EditorPreviewDensity = View.IteratorCanvas.PreviewDensity;
-			ApophysisSettings.EditorPreviewRange = View.IteratorCanvas.PreviewRange;
+			ApophysisSettings.EditorVariationPreviewDensity = View.IteratorCanvas.PreviewDensity;
+			ApophysisSettings.EditorVariationPreviewRange = View.IteratorCanvas.PreviewRange;
 
 			ApophysisSettings.Serialize();
 
@@ -199,6 +208,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			View.Text = string.Format("Editor - {0}", mFlame.CalculatedName);
 		}
+		public void UpdatePreview()
+		{
+			mEditorPreviewController.UpdatePreview();
+		}
 
 		private void AfterReset()
 		{
@@ -206,6 +219,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mSelectionController.SelectIterator(mFlame.Iterators.First());
 
 			UpdateToolbar();
+			UpdatePreview();
 		}
 
 		public UndoController UndoController

@@ -119,24 +119,24 @@ namespace Xyrus.Apophysis.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public double EditorPreviewDensity {
+        public double EditorVariationPreviewDensity {
             get {
-                return ((double)(this["EditorPreviewDensity"]));
+                return ((double)(this["EditorVariationPreviewDensity"]));
             }
             set {
-                this["EditorPreviewDensity"] = value;
+                this["EditorVariationPreviewDensity"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public double EditorPreviewRange {
+        public double EditorVariationPreviewRange {
             get {
-                return ((double)(this["EditorPreviewRange"]));
+                return ((double)(this["EditorVariationPreviewRange"]));
             }
             set {
-                this["EditorPreviewRange"] = value;
+                this["EditorVariationPreviewRange"] = value;
             }
         }
         
@@ -185,6 +185,54 @@ namespace Xyrus.Apophysis.Properties {
             }
             set {
                 this["BatchListPreviewDensity"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.1")]
+        public double PreviewLowQualityDensity {
+            get {
+                return ((double)(this["PreviewLowQualityDensity"]));
+            }
+            set {
+                this["PreviewLowQualityDensity"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public double PreviewMediumQualityDensity {
+            get {
+                return ((double)(this["PreviewMediumQualityDensity"]));
+            }
+            set {
+                this["PreviewMediumQualityDensity"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public double PreviewHighQualityDensity {
+            get {
+                return ((double)(this["PreviewHighQualityDensity"]));
+            }
+            set {
+                this["PreviewHighQualityDensity"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int EditorPreviewDensityLevel {
+            get {
+                return ((int)(this["EditorPreviewDensityLevel"]));
+            }
+            set {
+                this["EditorPreviewDensityLevel"] = value;
             }
         }
     }

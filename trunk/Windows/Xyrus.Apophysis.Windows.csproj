@@ -67,7 +67,7 @@
     <Compile Include="ApophysisSettings.cs" />
     <Compile Include="Calculation\ExtendedVariation.cs" />
     <Compile Include="Calculation\ExternalVariation.cs" />
-    <Compile Include="Calculation\SingleThreadedRenderer.cs" />
+    <Compile Include="Calculation\ThumbnailRenderer.cs" />
     <Compile Include="Calculation\Variation.cs" />
     <Compile Include="Calculation\VariationCollection.cs" />
     <Compile Include="Calculation\VariationPriority.cs" />
@@ -91,12 +91,14 @@
     <Compile Include="Windows\Common\ControlChain.cs" />
     <Compile Include="Windows\Common\ControlEventInterceptor.cs" />
     <Compile Include="Windows\Common\Controller.cs" />
+    <Compile Include="Windows\Common\DensityLevel.cs" />
     <Compile Include="Windows\Common\Extensions.cs" />
     <Compile Include="Windows\Common\Lock.cs" />
     <Compile Include="Windows\Common\WindowController.cs" />
     <Compile Include="Windows\Controllers\BannerController.cs" />
     <Compile Include="Windows\Controllers\BatchListController.cs" />
     <Compile Include="Windows\Controllers\EditorController.cs" />
+    <Compile Include="Windows\Controllers\EditorPreviewController.cs" />
     <Compile Include="Windows\Controllers\FileDialogController.cs" />
     <Compile Include="Windows\Controllers\MainUndoController.cs" />
     <Compile Include="Windows\Controllers\KeyboardController.cs" />

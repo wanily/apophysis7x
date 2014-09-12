@@ -17,9 +17,11 @@ namespace Xyrus.Apophysis.Calculation
 			if (size.Width <= 0 || size.Height <= 0) throw new ArgumentOutOfRangeException("size");
 
 			var bitmap = new Bitmap(size.Width, size.Height, PixelFormat.Format32bppArgb);
-			var random = new Random((int)DateTime.Now.Ticks);
+			var random = new Random(flame.GetHashCode());
 
 			var col = Color.FromArgb(random.Next() % 255, random.Next() % 255, random.Next() % 255).ToArgb();
+
+			random = new Random(flame.GetHashCode() ^ (int)DateTime.Now.Ticks);
 
 			using (var graphics = Graphics.FromImage(bitmap))
 			using (var brush = new SolidBrush(Color.Black))

@@ -125,13 +125,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mMenuController.UpdateButtonStates();
 		}
 
-		private void AfterReset()
-		{
-			mBatchListController.BuildFlameList();
-			mBatchListController.SelectFlame(mFlames.First());
-			mHasChanges = false;
-		}
-
 		public FlameCollection Flames
 		{
 			get { return mFlames; }
@@ -150,6 +143,17 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				AfterReset();
 				View.Text = string.Format("Apophysis - {0}", mFlames.CalculatedName);
 			}
+		}
+		private void AfterReset()
+		{
+			mBatchListController.BuildFlameList();
+			mBatchListController.SelectFlame(mFlames.First());
+			mHasChanges = false;
+		}
+		
+		public void UpdatePreviews()
+		{
+			mEditorController.UpdatePreview();
 		}
 
 		private void OnFlameCollectionChanged(object sender, EventArgs e)
@@ -252,6 +256,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			mEditorController.Flame = flame;
 			mUndoController.Reset(flame);
+
+			UpdatePreviews();
 		}
 		public void NotifyFlameNameChanged(Flame flame)
 		{

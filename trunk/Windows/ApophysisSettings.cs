@@ -1,5 +1,6 @@
 ﻿using System;
 using Xyrus.Apophysis.Properties;
+using Xyrus.Apophysis.Windows;
 
 namespace Xyrus.Apophysis
 {
@@ -85,9 +86,9 @@ namespace Xyrus.Apophysis
 			}
 		}
 
-		public static double EditorPreviewRange
+		public static double EditorVariationPreviewRange
 		{
-			get { return mSettings.EditorPreviewRange; }
+			get { return mSettings.EditorVariationPreviewRange; }
 			set
 			{
 				if (value <= 0)
@@ -95,12 +96,12 @@ namespace Xyrus.Apophysis
 					throw new ArgumentOutOfRangeException(@"value");
 				}
 
-				mSettings.EditorPreviewRange = value;
+				mSettings.EditorVariationPreviewRange = value;
 			}
 		}
-		public static double EditorPreviewDensity
+		public static double EditorVariationPreviewDensity
 		{
-			get { return mSettings.EditorPreviewDensity; }
+			get { return mSettings.EditorVariationPreviewDensity; }
 			set
 			{
 				if (value <= 0)
@@ -108,8 +109,14 @@ namespace Xyrus.Apophysis
 					throw new ArgumentOutOfRangeException(@"value");
 				}
 
-				mSettings.EditorPreviewDensity = value;
+				mSettings.EditorVariationPreviewDensity = value;
 			}
+		}
+
+		public static DensityLevel EditorPreviewDensityLevel
+		{
+			get { return (DensityLevel) mSettings.EditorPreviewDensityLevel; }
+			set { mSettings.EditorPreviewDensityLevel = (int) value; }
 		}
 
 		public static string NamePrefix
@@ -160,6 +167,34 @@ namespace Xyrus.Apophysis
 				}
 
 				mSettings.BatchListPreviewDensity = value;
+			}
+		}
+
+		public static double PreviewLowQualityDensity
+		{
+			get { return mSettings.PreviewLowQualityDensity; }
+			set
+			{
+				if (value <= 0) throw new ArgumentOutOfRangeException("value");
+				mSettings.PreviewLowQualityDensity = value;
+			}
+		}
+		public static double PreviewMediumQualityDensity
+		{
+			get { return mSettings.PreviewMediumQualityDensity; }
+			set
+			{
+				if (value <= 0) throw new ArgumentOutOfRangeException("value");
+				mSettings.PreviewMediumQualityDensity = value;
+			}
+		}
+		public static double PreviewHighQualityDensity
+		{
+			get { return mSettings.PreviewHighQualityDensity; }
+			set
+			{
+				if (value <= 0) throw new ArgumentOutOfRangeException("value");
+				mSettings.PreviewHighQualityDensity = value;
 			}
 		}
 
