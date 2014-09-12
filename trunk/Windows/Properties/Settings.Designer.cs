@@ -163,5 +163,29 @@ namespace Xyrus.Apophysis.Properties {
                 this["BatchListUsePreviews"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("120")]
+        public int BatchListPreviewSize {
+            get {
+                return ((int)(this["BatchListPreviewSize"]));
+            }
+            set {
+                this["BatchListPreviewSize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public double BatchListPreviewDensity {
+            get {
+                return ((double)(this["BatchListPreviewDensity"]));
+            }
+            set {
+                this["BatchListPreviewDensity"] = value;
+            }
+        }
     }
 }

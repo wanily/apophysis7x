@@ -101,11 +101,13 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mMainUndoController.Initialize();
 			mBatchListController.Initialize();
 
-			GenerateRandomFlames(10, false);
+			View.Load += OnViewLoaded;
 		}
 		protected override void DetachView()
 		{
 			mEditorController.View.Owner = null;
+
+			View.Load -= OnViewLoaded;
 		}
 
 		[NotNull]
@@ -159,6 +161,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			mBatchListController.BuildFlameList();
 			mBatchListController.SelectFlame(selection ?? mFlames.First());
+		}
+		private void OnViewLoaded(object sender, EventArgs e)
+		{
+			GenerateRandomFlames(10, false);
 		}
 
 		public UndoController UndoController

@@ -67,6 +67,7 @@
     <Compile Include="ApophysisSettings.cs" />
     <Compile Include="Calculation\ExtendedVariation.cs" />
     <Compile Include="Calculation\ExternalVariation.cs" />
+    <Compile Include="Calculation\SingleThreadedRenderer.cs" />
     <Compile Include="Calculation\Variation.cs" />
     <Compile Include="Calculation\VariationCollection.cs" />
     <Compile Include="Calculation\VariationPriority.cs" />
@@ -80,6 +81,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Calculation\IterationData.cs" />
+    <Compile Include="Threading\ThreadController.cs" />
+    <Compile Include="Threading\ThreadStateToken.cs" />
     <Compile Include="Variations\Linear.cs" />
     <Compile Include="Variations\Spherical.cs" />
     <Compile Include="Variations\Swirl.cs" />

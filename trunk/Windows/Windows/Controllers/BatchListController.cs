@@ -1,38 +1,43 @@
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
+using Xyrus.Apophysis.Calculation;
 using Xyrus.Apophysis.Models;
+using Xyrus.Apophysis.Threading;
 using Xyrus.Apophysis.Windows.Forms;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
 	class BatchListController : Controller<Main>
 	{
+		private ThreadController mPreviewThreadController;
 		private MainController mParent;
 		private bool mIsIconViewEnabled;
 
-		private static Bitmap mWaitImage;
-
 		private const char mWaitGlyph = '6';
-		private static readonly Color mWaitBackground = Color.Black;
-		private static readonly Size mIconSize = new Size(120, 120);
+		private readonly Color mWaitBackground = Color.Black;
 
+		private Bitmap mWaitImage;
 		private ImageList mPreviewImages;
+		private int mPreviewSize;
+		private double mPreviewDensity;
 
-		static BatchListController()
-		{
-			DrawWaitImage();
-		}
 		public BatchListController([NotNull] Main view, [NotNull] MainController parent) : base(view)
 		{
 			if (parent == null) throw new ArgumentNullException("parent");
 
 			mParent = parent;
+			mPreviewThreadController = new ThreadController(ThreadPriority.Lowest);
 
-			mPreviewImages = new ImageList();
-			mPreviewImages.ColorDepth = ColorDepth.Depth32Bit;
-			mPreviewImages.ImageSize = mIconSize;
+			mPreviewImages = new ImageList
+			{
+				ColorDepth = ColorDepth.Depth32Bit, 
+				ImageSize = new Size(120, 120)
+			};
 		}
 		protected override void DisposeOverride(bool disposing)
 		{
@@ -43,6 +48,18 @@ namespace Xyrus.Apophysis.Windows.Controllers
 					DisposeIcons();
 					mPreviewImages.Dispose();
 					mPreviewImages = null;
+				}
+
+				if (mWaitImage != null)
+				{
+					mWaitImage.Dispose();
+					mWaitImage = null;
+				}
+
+				if (mPreviewThreadController != null)
+				{
+					mPreviewThreadController.Dispose();
+					mPreviewThreadController = null;
 				}
 			}
 
@@ -58,7 +75,14 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.BatchListView.SelectedIndexChanged += OnListSelectionChanged;
 			View.BatchListView.AfterLabelEdit += OnListLabelEdited;
 
-			IsIconViewEnabled = ApophysisSettings.BatchListUsePreviews;
+			using (mParent.Initializer.Enter())
+			{
+				IsIconViewEnabled = ApophysisSettings.BatchListUsePreviews;
+				ListPreviewSize = ApophysisSettings.BatchListPreviewSize;
+				ListPreviewDensity = ApophysisSettings.BatchListPreviewDensity;
+			}
+
+			DrawWaitImage();
 		}
 		protected override void DetachView()
 		{
@@ -70,6 +94,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.BatchListView.AfterLabelEdit -= OnListLabelEdited;
 
 			ApophysisSettings.BatchListUsePreviews = mIsIconViewEnabled;
+			ApophysisSettings.BatchListPreviewSize = mPreviewSize;
+			ApophysisSettings.BatchListPreviewDensity = mPreviewDensity;
 		}
 
 		public void BuildFlameList()
@@ -80,19 +106,15 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			DisposeIcons();
 
-			var index = 0;
 			foreach (var flame in mParent.Flames)
 			{
 				var item = View.BatchListView.Items.Add(flame.CalculatedName);
 
 				SetItemProperties(item, flame);
 				item.ImageIndex = 0;
-
-				if (IsIconViewEnabled)
-				{
-					RedrawIcon(item, ++index);
-				}
 			}
+
+			RedrawIcons();
 		}
 
 		public void SelectFlame([NotNull] Flame flame)
@@ -127,9 +149,15 @@ namespace Xyrus.Apophysis.Windows.Controllers
 					return;
 
 				mIsIconViewEnabled = value;
-
 				View.BatchListView.View = value ? System.Windows.Forms.View.LargeIcon : System.Windows.Forms.View.Details;
-				//View.BatchListView.OwnerDraw = value;
+
+				if (!value)
+				{
+					View.UpdateBatchListColumnSize();
+				}
+
+				if (mParent.Initializer.IsBusy)
+					return;
 
 				if (value)
 				{
@@ -138,7 +166,58 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				else
 				{
 					DisposeIcons();
-					View.UpdateBatchListColumnSize();
+				}
+			}
+		}
+		public int ListPreviewSize
+		{
+			get { return mPreviewSize; }
+			set
+			{
+				if (Equals(value, mPreviewSize))
+					return;
+
+				if (value < 50 || value > 120) 
+					throw new ArgumentOutOfRangeException();
+
+				mPreviewSize = value;
+				mPreviewImages.ImageSize = new Size(value, value);
+
+				if (mParent.Initializer.IsBusy)
+					return;
+
+				if (mWaitImage != null)
+				{
+					mWaitImage.Dispose();
+				}
+
+				DrawWaitImage();
+
+				if (mIsIconViewEnabled)
+				{
+					RedrawIcons();
+				}
+			}
+		}
+		public double ListPreviewDensity
+		{
+			get { return mPreviewDensity; }
+			set
+			{
+				if (Equals(value, mPreviewDensity))
+					return;
+
+				if (value <= 0 || value > 100)
+					throw new ArgumentOutOfRangeException();
+
+				mPreviewDensity = value;
+
+				if (mParent.Initializer.IsBusy)
+					return;
+
+				if (mIsIconViewEnabled)
+				{
+					RedrawIcons();
 				}
 			}
 		}
@@ -162,20 +241,49 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.BatchListView.Items[index].Selected = true;
 		}
 
-		private void RedrawIcon(ListViewItem item, int imageListIndex)
+		private void RedrawIcon(ListViewItem item, ThreadStateToken threadState)
 		{
-			//todo
+			var flame = item.Tag as Flame;
+			Debug.Assert(flame != null);
+
+			var renderer = new ThumbnailRenderer();
+			var bitmap = renderer.CreateBitmap(flame, mPreviewDensity, new Size(mPreviewSize, mPreviewSize), threadState);
+
+			View.Invoke(new Action(() =>
+				{
+					mPreviewImages.Images.Add(bitmap);
+					item.ImageIndex = mPreviewImages.Images.Count - 1;
+				}));
 		}
 		private void RedrawIcons()
 		{
 			DisposeIcons();
-
-			var index = 0;
-			foreach (ListViewItem item in View.BatchListView.Items)
-				RedrawIcon(item, ++index);
+			mPreviewThreadController.StartThread(RedrawIconsThread);
 		}
+		private void RedrawIconsThread(ThreadStateToken threadState)
+		{
+			var items = new List<ListViewItem>();
+			View.Invoke(new Action(() => items.AddRange(View.BatchListView.Items.OfType<ListViewItem>())));
+
+			foreach (ListViewItem item in items)
+			{
+				if (threadState.IsCancelling)
+					break;
+
+				if (threadState.IsSuspended)
+				{
+					Thread.Sleep(10);
+					continue;
+				}
+
+				RedrawIcon(item, threadState);
+			}
+		}
+
 		private void DisposeIcons()
 		{
+			mPreviewThreadController.Cancel();
+
 			foreach (Image image in mPreviewImages.Images)
 			{
 				image.Dispose();
@@ -231,24 +339,24 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			}
 		}
 
-		private static void DrawWaitImage()
+		private void DrawWaitImage()
 		{
-			mWaitImage = new Bitmap(mIconSize.Width, mIconSize.Height);
+			mWaitImage = new Bitmap(mPreviewSize, mPreviewSize);
 
 			using (var graphics = Graphics.FromImage(mWaitImage))
 			using (var background = new SolidBrush(mWaitBackground))
 			using (var foreground = new SolidBrush(Color.FromArgb(255 - mWaitBackground.R, 255 - mWaitBackground.G, 255 - mWaitBackground.B)))
 			using (var frame = new Pen(foreground))
 			{
-				graphics.FillRectangle(background, new Rectangle(new Point(), mIconSize));
-				graphics.DrawRectangle(frame, new Rectangle(new Point(), mIconSize));
+				graphics.FillRectangle(background, new Rectangle(new Point(), mWaitImage.Size));
+				graphics.DrawRectangle(frame, new Rectangle(new Point(), mWaitImage.Size));
 
 				using (var glyphFont = new Font("Wingdings", 50f, FontStyle.Bold))
 				{
 					var glyph = new string(mWaitGlyph, 1);
 					var glyphSize = graphics.MeasureString(glyph, glyphFont);
 
-					graphics.DrawString(glyph, glyphFont, foreground, mIconSize.Width / 2f - glyphSize.Width / 2f, mIconSize.Height / 2f - glyphSize.Height / 2f);
+					graphics.DrawString(glyph, glyphFont, foreground, mPreviewSize / 2f - glyphSize.Width / 2f, mPreviewSize / 2f - glyphSize.Height / 2f);
 				}
 			}
 		}

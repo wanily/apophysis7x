@@ -112,11 +112,6 @@ namespace Xyrus.Apophysis
 			}
 		}
 
-		public static string PluginDirectoryName
-		{
-			get { return mSettings.PluginDirectoryName; }
-		}
-
 		public static string NamePrefix
 		{
 			get { return mSettings.NamePrefix; }
@@ -128,12 +123,43 @@ namespace Xyrus.Apophysis
 				mSettings.NamePrefix = value;
 			}
 		}
+		public static string PluginDirectoryName
+		{
+			get { return mSettings.PluginDirectoryName; }
+		}
+
 		public static bool BatchListUsePreviews
 		{
 			get { return mSettings.BatchListUsePreviews; }
 			set
 			{
 				mSettings.BatchListUsePreviews = value;
+			}
+		}
+		public static int BatchListPreviewSize
+		{
+			get { return mSettings.BatchListPreviewSize; }
+			set
+			{
+				if (value < 50 || value > 120)
+				{
+					throw new ArgumentOutOfRangeException("value");
+				}
+
+				mSettings.BatchListPreviewSize = value;
+			}
+		}
+		public static double BatchListPreviewDensity
+		{
+			get { return mSettings.BatchListPreviewDensity; }
+			set
+			{
+				if (value <= 0 || value > 100)
+				{
+					throw new ArgumentOutOfRangeException("value");
+				}
+
+				mSettings.BatchListPreviewDensity = value;
 			}
 		}
 
