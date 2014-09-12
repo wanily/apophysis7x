@@ -6,7 +6,6 @@ using System.Windows.Forms;
 using Xyrus.Apophysis.Calculation;
 using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Models;
-using Rectangle = Xyrus.Apophysis.Math.Rectangle;
 
 namespace Xyrus.Apophysis.Windows.Visuals
 {
