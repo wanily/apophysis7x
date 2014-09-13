@@ -282,13 +282,13 @@ namespace Xyrus.Apophysis.Windows.Input
 				return false;
 
 			SetOperation(null);
-			RaiseEndEdit();
 
 			foreach (var handler in mHandlers)
 			{
 				if (handler.HandleMouseUp())
 				{
 					InvalidateControl();
+					RaiseEndEdit();
 					return true;
 				}
 			}
