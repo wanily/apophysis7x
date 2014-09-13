@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
+using System.Threading;
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Threading;
 
@@ -35,12 +36,26 @@ namespace Xyrus.Apophysis.Calculation
 				if (threadState != null && threadState.IsCancelling)
 					break;
 
+				if (threadState != null && threadState.IsSuspended)
+				{
+					Thread.Sleep(10);
+					i--;
+					continue;
+				}
+
 				var pos = new Point(random.Next() % bitmap.Width, random.Next() % bitmap.Height);
 
 				Marshal.WriteInt32(data.Scan0, pos.Y * data.Stride + pos.X * 4, col);
 			}
 
 			bitmap.UnlockBits(data);
+
+			if (threadState != null && threadState.IsCancelling)
+			{
+				bitmap.Dispose();
+				return null;
+			}
+
 			return bitmap;
 		}
 	}

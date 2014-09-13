@@ -1,15 +1,17 @@
 using System;
-using System.Diagnostics;
+using System.Drawing;
 using System.Globalization;
-using System.Runtime.Remoting.Messaging;
+using Xyrus.Apophysis.Calculation;
 using Xyrus.Apophysis.Windows.Forms;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
 	class MainPreviewController : Controller<Main>
 	{
+		private ThreadedRenderer mRenderer;
 		private TimeLock mPreviewTimeLock;
 		private MainController mParent;
+		private Bitmap mBitmap;
 		private int mPreviewDensity;
 
 		public MainPreviewController([NotNull] Main view, [NotNull] MainController parent) : base(view)
@@ -19,15 +21,29 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mParent = parent;
 			mPreviewTimeLock = new TimeLock(OnPreviewSizeChangedCallback);
 			mPreviewTimeLock.Delay = 250;
+
+			mRenderer = new ThreadedRenderer();
 		}
 		protected override void DisposeOverride(bool disposing)
 		{
 			if (disposing)
 			{
+				if (mRenderer != null)
+				{
+					mRenderer.Dispose();
+					mRenderer = null;
+				}
+
 				if (mPreviewTimeLock != null)
 				{
 					mPreviewTimeLock.Dispose();
 					mPreviewTimeLock = null;
+				}
+
+				if (mBitmap != null)
+				{
+					mBitmap.Dispose();
+					mBitmap = null;
 				}
 			}
 
@@ -45,6 +61,16 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				PreviewDensity = ApophysisSettings.MainPreviewDensity;
 			}
 		}
+		protected override void DetachView()
+		{
+			View.PreviewDensityComboBox.SelectedIndexChanged -= OnDensityChanged;
+			View.PreviewDensityComboBox.LostFocus -= OnDensityChanged;
+			View.PreviewPicture.SizeChanged -= OnPreviewSizeChanged;
+
+			View.PreviewPicture.Image = null;
+
+			ApophysisSettings.MainPreviewDensity = PreviewDensity;
+		}
 
 		private void OnPreviewSizeChangedCallback()
 		{
@@ -53,14 +79,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		private void OnPreviewSizeChanged(object sender, EventArgs e)
 		{
 			mPreviewTimeLock.Enter();
-		}
-
-		protected override void DetachView()
-		{
-			View.PreviewDensityComboBox.SelectedIndexChanged -= OnDensityChanged;
-			View.PreviewDensityComboBox.LostFocus -= OnDensityChanged;
-
-			ApophysisSettings.MainPreviewDensity = PreviewDensity;
 		}
 
 		private void OnDensityChanged(object sender, EventArgs e)
@@ -82,6 +100,24 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			UpdatePreview();
 		}
+		private void OnRendererFinished(Bitmap bitmap)
+		{
+			if (bitmap == null)
+				return;
+
+			if (mBitmap != null)
+			{
+				mBitmap.Dispose();
+			}
+
+			mBitmap = bitmap;
+
+			View.PreviewPicture.Invoke(new Action(() =>
+			{
+				View.PreviewPicture.Image = bitmap;
+				View.PreviewPicture.Refresh();
+			}));
+		}
 
 		public int PreviewDensity
 		{
@@ -94,6 +130,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				UpdatePreview();
 			}
 		}
+
 		public void UpdatePreview()
 		{
 			var flame = mParent.BatchListController.GetSelectedFlame();
@@ -103,8 +140,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			var density = (double)PreviewDensity;
 			var size = View.PreviewPicture.ClientSize;
 
-			//todo
-			Trace.TraceInformation(@"Updating preview ({3} - {0}x{1} / {2})", size.Width, size.Height, density, flame.CalculatedName);
+			View.PreviewPicture.Image = null;
+
+			mRenderer.Cancel();
+			mRenderer.StartCreateBitmap(flame, density, size, OnRendererFinished);
 		}
 	}
 }
