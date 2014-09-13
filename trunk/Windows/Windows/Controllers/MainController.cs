@@ -15,6 +15,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 	{
 		private UndoController mUndoController;
 		private EditorController mEditorController;
+		private FullscreenController mFullscreenController;
 		private KeyboardController mKeyboardController;
 
 		private MainMenuController mMenuController;
@@ -32,6 +33,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mUndoController = new UndoController();
 			mKeyboardController = new KeyboardController();
 			mEditorController = new EditorController(this);
+			mFullscreenController = new FullscreenController(this);
 
 			mMenuController = new MainMenuController(View, this);
 			mToolbarController = new MainToolbarController(View, this);
@@ -73,6 +75,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 					mMenuController = null;
 				}
 
+				if (mFullscreenController != null)
+				{
+					mFullscreenController.Dispose();
+					mFullscreenController = null;
+				}
+
 				if (mEditorController != null)
 				{
 					mEditorController.Dispose();
@@ -104,6 +112,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mEditorController.View.Owner = View;
 
 			mEditorController.Initialize();
+			mFullscreenController.Initialize();
 			mMenuController.Initialize();
 			mToolbarController.Initialize();
 			mMainUndoController.Initialize();
@@ -200,6 +209,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			get { return mEditorController; }
 		}
+		public FullscreenController FullscreenController
+		{
+			get { return mFullscreenController; }
+		}
 
 		internal BatchListController BatchListController
 		{
@@ -208,6 +221,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		internal MainMenuController MainMenuController
 		{
 			get { return mMenuController; }
+		}
+		internal MainPreviewController MainPreviewController
+		{
+			get { return mMainPreviewController; }
 		}
 
 		public void AppendFlame([NotNull] Flame flame)

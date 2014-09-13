@@ -108,6 +108,7 @@
     <Compile Include="Windows\Controllers\EditorController.cs" />
     <Compile Include="Windows\Controllers\EditorPreviewController.cs" />
     <Compile Include="Windows\Controllers\FileDialogController.cs" />
+    <Compile Include="Windows\Controllers\FullscreenController.cs" />
     <Compile Include="Windows\Controllers\MainPreviewController.cs" />
     <Compile Include="Windows\Controllers\MainUndoController.cs" />
     <Compile Include="Windows\Controllers\KeyboardController.cs" />
@@ -180,6 +181,12 @@
     </Compile>
     <Compile Include="Windows\Forms\Banner.Designer.cs">
       <DependentUpon>Banner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Forms\Fullscreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\Forms\Fullscreen.Designer.cs">
+      <DependentUpon>Fullscreen.cs</DependentUpon>
     </Compile>
     <Compile Include="Windows\Forms\Main.cs">
       <SubType>Form</SubType>
@@ -265,6 +272,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Windows\Forms\Fullscreen.resx">
+      <DependentUpon>Fullscreen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Windows\Forms\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>

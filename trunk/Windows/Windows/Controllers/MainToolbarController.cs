@@ -29,6 +29,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.UndoButton.Click += mParent.MainMenuController.OnUndoClick;
 			View.RedoButton.Click += mParent.MainMenuController.OnRedoClick;
 
+			View.OpenFullscreenPreviewButton.Click += mParent.MainMenuController.OnFullscreenClick;
 			View.EditorButton.Click += mParent.MainMenuController.OnEditorClick;
 
 			UpdateButtonStates();
@@ -45,6 +46,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.UndoButton.Click -= mParent.MainMenuController.OnUndoClick;
 			View.RedoButton.Click -= mParent.MainMenuController.OnRedoClick;
 
+			View.OpenFullscreenPreviewButton.Click -= mParent.MainMenuController.OnFullscreenClick;
 			View.EditorButton.Click -= mParent.MainMenuController.OnEditorClick;
 		}
 

@@ -36,6 +36,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.CopyMenuItem.Click += OnCopyClick;
 			View.PasteMenuItem.Click += OnPasteClick;
 
+			View.OpenFullscreenPreviewMenuItem.Click += OnFullscreenClick;
 			View.EditorMenuItem.Click += OnEditorClick;
 
 			UpdateButtonStates();
@@ -57,6 +58,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.CopyMenuItem.Click -= OnCopyClick;
 			View.PasteMenuItem.Click -= OnPasteClick;
 
+			View.OpenFullscreenPreviewMenuItem.Click -= OnFullscreenClick;
 			View.EditorMenuItem.Click -= OnEditorClick;
 		}
 
@@ -130,6 +132,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mParent.ReadFlameFromClipboard();
 		}
 
+		internal void OnFullscreenClick(object sender, EventArgs e)
+		{
+			mParent.FullscreenController.EnterFullscreen();
+		}
 		internal void OnEditorClick(object sender, EventArgs e)
 		{
 			mParent.ShowEditor();
