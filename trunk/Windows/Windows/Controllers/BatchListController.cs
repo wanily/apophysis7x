@@ -110,7 +110,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			{
 				var item = View.BatchListView.Items.Add(flame.CalculatedName);
 
-				SetItemProperties(item, flame);
+				SetItemProperties(item, flame, false);
 				item.ImageIndex = 0;
 			}
 
@@ -138,6 +138,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				return null;
 
 			return item.Tag as Flame;
+		}
+
+		public void UpdateSelectedPreview()
+		{
+			var item = GetSelectedItem();
+			RedrawIcon(item, null);
 		}
 
 		public bool IsIconViewEnabled
@@ -222,10 +228,15 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			}
 		}
 
-		private void SetItemProperties(ListViewItem item, Flame flame)
+		private void SetItemProperties(ListViewItem item, Flame flame, bool updatePreview)
 		{
 			item.Text = flame.CalculatedName;
 			item.Tag = flame;
+
+			if (updatePreview)
+			{
+				RedrawIcon(item, null);
+			}
 		}
 		private ListViewItem GetSelectedItem()
 		{
@@ -335,9 +346,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			using (mParent.Initializer.Enter())
 			{
 				mParent.Flames.Replace(flame, mParent.UndoController.Current);
-				SetItemProperties(selected, mParent.UndoController.Current);
+				SetItemProperties(selected, mParent.UndoController.Current, true);
 				mParent.EditorController.Flame = mParent.UndoController.Current;
 			}
+
+			mParent.UpdatePreviews();
 		}
 
 		private void DrawWaitImage()

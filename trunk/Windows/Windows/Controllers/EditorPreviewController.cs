@@ -163,7 +163,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		private void OnRequestCommit(object sender, EventArgs e)
 		{
-			UpdatePreview();
+			mParent.UpdatePreviewsGlobally();
 		}
 		private void OnQualitySelect(object sender, EventArgs e)
 		{

@@ -89,7 +89,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			var pop = mUndoStack.Pop();
 			mRedoStack.Push(mCurrent);
-			mCurrent = pop.Copy();
+			mCurrent = pop;//.Copy();
 			RaiseStackChanged();
 			RaiseCurrentReplaced();
 			return pop;
@@ -103,7 +103,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			var pop = mRedoStack.Pop();
 			mUndoStack.Push(mCurrent);
-			mCurrent = pop.Copy();
+			mCurrent = pop;//.Copy();
 			RaiseStackChanged();
 			RaiseCurrentReplaced();
 			return pop;

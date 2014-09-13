@@ -93,6 +93,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				return;
 
 			mParent.UndoController.CommitChange(mParent.Flame);
+			mParent.RaiseFlameChanged();
 		}
 		private void OnUndoStackChanged(object sender, EventArgs e)
 		{

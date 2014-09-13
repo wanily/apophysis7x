@@ -215,6 +215,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mEditorPreviewController.UpdatePreview();
 		}
 
+		internal void UpdatePreviewsGlobally()
+		{
+			mParent.UpdatePreviews(false);
+		}
+
 		private void AfterReset()
 		{
 			mSelectionController.BuildIteratorComboBox();
@@ -223,7 +228,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			UpdateToolbar();
 			UpdatePreview();
 		}
-
+		
 		public UndoController UndoController
 		{
 			get { return mParent.UndoController; }
@@ -251,6 +256,13 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 				UpdateWindowTitle();
 			}
+		}
+
+		internal event EventHandler FlameChanged;
+		internal void RaiseFlameChanged()
+		{
+			if (FlameChanged != null)
+				FlameChanged(this, new EventArgs());
 		}
 
 		private void OnIteratorCollectionChanged(object sender, EventArgs e)

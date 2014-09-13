@@ -162,10 +162,15 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.LoadingStatusLabel.Text = mFlames.CalculatedName;
 		}
 		
-		public void UpdatePreviews()
+		public void UpdatePreviews(bool withMainPreview = true)
 		{
+			mBatchListController.UpdateSelectedPreview();
 			mEditorController.UpdatePreview();
-			mMainPreviewController.UpdatePreview();
+
+			if (withMainPreview)
+			{
+				mMainPreviewController.UpdatePreview();
+			}
 		}
 
 		private void OnFlameCollectionChanged(object sender, EventArgs e)
