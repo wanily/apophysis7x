@@ -2,6 +2,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Calculation;
+using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Windows.Forms;
 
 namespace Xyrus.Apophysis.Windows.Controllers
@@ -155,9 +156,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			};
 
 			var density = densities[(int)mPreviewDensityLevel];
-			mBitmap = mRenderer.CreateBitmap(mParent.Flame, density, View.PreviewPicture.ClientSize);
+			var renderSize = mParent.Flame.CanvasSize.FitToFrame(View.PreviewPicture.ClientSize);
 
-			View.PreviewPicture.Image = mBitmap;
+			mBitmap = mRenderer.CreateBitmap(mParent.Flame, density, renderSize);
+
+			View.PreviewPicture.BackgroundImage = mBitmap;
 			View.PreviewPicture.Refresh();
 		}
 

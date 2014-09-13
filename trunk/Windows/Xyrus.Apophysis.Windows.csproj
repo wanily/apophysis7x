@@ -77,9 +77,12 @@
     <Compile Include="Calculation\VariationCollection.cs" />
     <Compile Include="Calculation\VariationPriority.cs" />
     <Compile Include="Calculation\VariationRegistry.cs" />
+    <Compile Include="Math\UtilityExtensions.cs" />
+    <Compile Include="Models\Axis.cs" />
     <Compile Include="Models\FlameCollection.cs" />
     <Compile Include="Models\Palette.cs" />
     <Compile Include="Models\PaletteCollection.cs" />
+    <Compile Include="Models\ParserExtensions.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -122,6 +125,7 @@
     <Compile Include="Windows\Controllers\MainMenuController.cs" />
     <Compile Include="Windows\Controllers\MainToolbarController.cs" />
     <Compile Include="Windows\Controllers\UndoController.cs" />
+    <Compile Include="Windows\Controllers\WaitImageController.cs" />
     <Compile Include="Windows\Controls\CellValueChangedEventArgs.cs" />
     <Compile Include="Windows\Controls\CellValueChangedEventHandler.cs" />
     <Compile Include="Windows\Controls\CellValueResetEventArgs.cs" />

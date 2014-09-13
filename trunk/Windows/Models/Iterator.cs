@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
 using System.Xml.Linq;
 using Xyrus.Apophysis.Calculation;
@@ -224,41 +223,6 @@ namespace Xyrus.Apophysis.Models
 			get { return mVariations; }
 		}
 
-		private double ParseFloat([NotNull] XAttribute attribute, double defaultValue = 0)
-		{
-			if (attribute == null) throw new ArgumentNullException("attribute");
-
-			double value;
-			if (!double.TryParse(attribute.Value, NumberStyles.Number, CultureInfo.InvariantCulture, out value))
-				value = defaultValue;
-
-			return value;
-		}
-		private double[] ParseCoefficients([NotNull] XAttribute attribute)
-		{
-			if (attribute == null) throw new ArgumentNullException("attribute");
-
-			var strings = attribute.Value.Split(' ');
-			if (strings.Length != 6)
-			{
-				throw new ApophysisException("Invalid value for attribute \"" + attribute.Name + "\": " + attribute.Value);
-			}
-
-			var values = new double[6];
-			for (int i = 0; i < 6; i++)
-			{
-				double value;
-				if (!double.TryParse(strings[i], NumberStyles.Float, CultureInfo.InvariantCulture, out value))
-				{
-					throw new ApophysisException("Invalid value for attribute \"" + attribute.Name + "\": " + attribute.Value);
-				}
-
-				values[i] = value;
-			}
-
-			return values;
-		}
-
 		public void ReadXml([NotNull] XElement element)
 		{
 			if (element == null) throw new ArgumentNullException("element");
@@ -295,7 +259,7 @@ namespace Xyrus.Apophysis.Models
 			var weightAttribute = element.Attribute(XName.Get("weight"));
 			if (weightAttribute != null && groupIndex == 0)
 			{
-				var weight = ParseFloat(weightAttribute, 0.5);
+				var weight = weightAttribute.ParseFloat(0.5);
 				if (weight < double.Epsilon)
 				{
 					throw new ApophysisException("Weight must not be less or equal to 0");
@@ -307,7 +271,7 @@ namespace Xyrus.Apophysis.Models
 			var colorAttribute = element.Attribute(XName.Get("color"));
 			if (colorAttribute != null && groupIndex == 0)
 			{
-				var color = ParseFloat(colorAttribute);
+				var color = colorAttribute.ParseFloat();
 				if (color < 0 || color > 1)
 				{
 					throw new ApophysisException("Color must be be in the range 0 - 1");
@@ -319,7 +283,7 @@ namespace Xyrus.Apophysis.Models
 			var colorSpeedAttribute = element.Attribute(XName.Get("symmetry"));
 			if (colorSpeedAttribute != null && groupIndex == 0)
 			{
-				var colorSpeed = ParseFloat(colorSpeedAttribute);
+				var colorSpeed = colorSpeedAttribute.ParseFloat();
 				if (colorSpeed < -1 || colorSpeed > 1)
 				{
 					throw new ApophysisException("Color speed must be be in the range -1 - 1");
@@ -331,7 +295,7 @@ namespace Xyrus.Apophysis.Models
 			var opacityAttribute = element.Attribute(XName.Get("opacity"));
 			if (opacityAttribute != null && groupIndex == 0)
 			{
-				var opacity = ParseFloat(opacityAttribute);
+				var opacity = opacityAttribute.ParseFloat();
 				if (opacity < 0 || opacity > 1)
 				{
 					throw new ApophysisException("Opacity must be be in the range 0 - 1");
@@ -343,7 +307,7 @@ namespace Xyrus.Apophysis.Models
 			var directColorAttribute = element.Attribute(XName.Get("var_color"));
 			if (directColorAttribute != null)
 			{
-				var directColor = ParseFloat(directColorAttribute);
+				var directColor = directColorAttribute.ParseFloat();
 				if (directColor < 0 || directColor > 1)
 				{
 					throw new ApophysisException("DirectColor must be be in the range 0 - 1");
@@ -355,7 +319,7 @@ namespace Xyrus.Apophysis.Models
 			var coefsAttribute = element.Attribute(XName.Get("coefs"));
 			if (coefsAttribute != null)
 			{
-				var vector = ParseCoefficients(coefsAttribute);
+				var vector = coefsAttribute.ParseCoefficients();
 
 				PreAffine.Matrix.X.X = vector[0];
 				PreAffine.Matrix.X.Y = -vector[1];
@@ -368,7 +332,7 @@ namespace Xyrus.Apophysis.Models
 			var postAttribute = element.Attribute(XName.Get("post"));
 			if (postAttribute != null)
 			{
-				var vector = ParseCoefficients(postAttribute);
+				var vector = postAttribute.ParseCoefficients();
 
 				PostAffine.Matrix.X.X = vector[0];
 				PostAffine.Matrix.X.Y = -vector[1];
@@ -384,7 +348,7 @@ namespace Xyrus.Apophysis.Models
 			foreach (var attribute in potentialVariations)
 			{
 				var attributeName = attribute.Name.ToString();
-				var attributeValue = ParseFloat(attribute);
+				var attributeValue = attribute.ParseFloat();
 
 				if (VariationRegistry.IsVariation(attributeName))
 				{

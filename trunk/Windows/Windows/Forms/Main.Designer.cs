@@ -539,7 +539,8 @@
 			this.PreviewPicture.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.PreviewPicture.BackColor = System.Drawing.Color.Black;
+			this.PreviewPicture.BackColor = System.Drawing.SystemColors.Control;
+			this.PreviewPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
 			this.PreviewPicture.Location = new System.Drawing.Point(1, 4);
 			this.PreviewPicture.Name = "PreviewPicture";
 			this.PreviewPicture.Size = new System.Drawing.Size(910, 618);
@@ -650,7 +651,6 @@
 		private System.Windows.Forms.SplitContainer mRootSplitter;
 		public System.Windows.Forms.ListView BatchListView;
 		private System.Windows.Forms.ColumnHeader BatchListNameColumn;
-		private System.Windows.Forms.Label mPreviewBevel;
 		private System.Windows.Forms.StatusStrip StatusBar;
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
@@ -699,5 +699,6 @@
 		public System.Windows.Forms.ToolStripStatusLabel PreviewTimeRemainingLabel;
 		public System.Windows.Forms.ToolStripStatusLabel FlameNameLabel;
 		public System.Windows.Forms.ToolStripProgressBar PreviewProgressBar;
+		private System.Windows.Forms.Label mPreviewBevel;
 	}
 }

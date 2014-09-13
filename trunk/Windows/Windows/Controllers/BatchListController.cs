@@ -18,9 +18,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		private MainController mParent;
 		private bool mIsIconViewEnabled;
 
-		private const char mWaitGlyph = '6';
-		private readonly Color mWaitBackground = Color.Black;
-
 		private Bitmap mWaitImage;
 		private ImageList mPreviewImages;
 		private int mPreviewSize;
@@ -82,7 +79,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				ListPreviewDensity = ApophysisSettings.BatchListPreviewDensity;
 			}
 
-			DrawWaitImage();
+			mWaitImage = WaitImageController.DrawWaitImage(new Size(mPreviewSize, mPreviewSize), Color.Black);
 		}
 		protected override void DetachView()
 		{
@@ -197,7 +194,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 					mWaitImage.Dispose();
 				}
 
-				DrawWaitImage();
+				mWaitImage = WaitImageController.DrawWaitImage(new Size(mPreviewSize, mPreviewSize), Color.Black);
 
 				if (mIsIconViewEnabled)
 				{
@@ -351,28 +348,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			}
 
 			mParent.UpdatePreviews();
-		}
-
-		private void DrawWaitImage()
-		{
-			mWaitImage = new Bitmap(mPreviewSize, mPreviewSize);
-
-			using (var graphics = Graphics.FromImage(mWaitImage))
-			using (var background = new SolidBrush(mWaitBackground))
-			using (var foreground = new SolidBrush(Color.FromArgb(255 - mWaitBackground.R, 255 - mWaitBackground.G, 255 - mWaitBackground.B)))
-			using (var frame = new Pen(foreground))
-			{
-				graphics.FillRectangle(background, new Rectangle(new Point(), mWaitImage.Size));
-				graphics.DrawRectangle(frame, new Rectangle(new Point(), mWaitImage.Size));
-
-				using (var glyphFont = new Font("Wingdings", 50f, FontStyle.Bold))
-				{
-					var glyph = new string(mWaitGlyph, 1);
-					var glyphSize = graphics.MeasureString(glyph, glyphFont);
-
-					graphics.DrawString(glyph, glyphFont, foreground, mPreviewSize / 2f - glyphSize.Width / 2f, mPreviewSize / 2f - glyphSize.Height / 2f);
-				}
-			}
 		}
 	}
 }

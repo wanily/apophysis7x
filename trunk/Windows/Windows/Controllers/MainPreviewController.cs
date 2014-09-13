@@ -2,6 +2,7 @@ using System;
 using System.Drawing;
 using System.Globalization;
 using Xyrus.Apophysis.Calculation;
+using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Windows.Forms;
 
 namespace Xyrus.Apophysis.Windows.Controllers
@@ -111,6 +112,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 		private void OnPreviewSizeChanged(object sender, EventArgs e)
 		{
+			if (mParent.Initializer.IsBusy)
+				return;
+
 			mPreviewTimeLock.Enter();
 		}
 		private void OnDensityChanged(object sender, EventArgs e)
@@ -149,8 +153,15 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			View.PreviewPicture.Invoke(new Action(() =>
 			{
-				View.PreviewPicture.Image = bitmap;
+				var oldImage = View.PreviewPicture.BackgroundImage;
+
+				View.PreviewPicture.BackgroundImage = bitmap;
 				View.PreviewPicture.Refresh();
+
+				if (oldImage != null)
+				{
+					oldImage.Dispose();
+				}
 			}));
 		}
 		private void OnChangeCommitted(object sender, EventArgs e)
@@ -184,7 +195,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				UpdatePreview();
 			}
 		}
-
 		public void UpdatePreview()
 		{
 			var flame = mParent.BatchListController.GetSelectedFlame();
@@ -192,14 +202,15 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				return;
 
 			var density = (double)PreviewDensity;
-			var size = View.PreviewPicture.ClientSize;
+			var canvasSize = View.PreviewPicture.ClientSize;
+			var renderSize = flame.CanvasSize.FitToFrame(canvasSize);
 
-			View.PreviewPicture.Image = null;
+			View.PreviewPicture.BackgroundImage = WaitImageController.DrawWaitImage(renderSize, Color.Black);
 
 			mRenderer.Cancel();
 
 			mElapsedTimer.SetStartingTime();
-			mRenderer.StartCreateBitmap(flame, density, size, OnRendererFinished);
+			mRenderer.StartCreateBitmap(flame, density, renderSize, OnRendererFinished);
 		}
 	}
 }

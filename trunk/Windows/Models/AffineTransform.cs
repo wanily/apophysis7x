@@ -40,6 +40,32 @@ namespace Xyrus.Apophysis.Models
 			}
 		}
 
+		public double GetAxisAngle(Axis axis)
+		{
+			Vector2 axisVector;
+			Vector2 transformVector;
+
+			switch (axis)
+			{
+				case Axis.X:
+					axisVector = new Vector2(1, 0);
+					transformVector = Matrix.X;
+					break;
+				case Axis.Y:
+					axisVector = new Vector2(0, 1);
+					transformVector = Matrix.Y;
+					break;
+				default:
+					throw new ArgumentOutOfRangeException("axis");
+			}
+
+			return System.Math.Atan2(transformVector.Y, transformVector.X) - System.Math.Atan2(axisVector.Y, axisVector.X);
+		}
+		public double GetInternalAngle()
+		{
+			return System.Math.Atan2(Matrix.Y.Y, Matrix.Y.X) - System.Math.Atan2(Matrix.X.Y, Matrix.X.X);
+		}
+
 		public Vector2 TransformPoint(Vector2 point)
 		{
 			return new Vector2
@@ -49,6 +75,15 @@ namespace Xyrus.Apophysis.Models
 			};
 		}
 
+		public void Reset()
+		{
+			mOrigin.X = 0;
+			mOrigin.Y = 0;
+			mMatrix.X.X = 1;
+			mMatrix.X.Y = 0;
+			mMatrix.Y.X = 0;
+			mMatrix.Y.Y = 1;
+		}
 		public void Rotate(double angle)
 		{
 			var x = Matrix.X.Rotate(angle, Origin);
