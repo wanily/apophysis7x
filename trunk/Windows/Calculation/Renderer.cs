@@ -10,6 +10,8 @@ namespace Xyrus.Apophysis.Calculation
 {
 	class Renderer
 	{
+		private double? mLastSecondsPerIteration;
+
 		//todo - render real fractal ... rofl
 		public Bitmap CreateBitmap([NotNull] Flame flame, double density, Size size, Action<ProgressEventArgs> progressCallback = null, ThreadStateToken threadState = null)
 		{
@@ -22,6 +24,7 @@ namespace Xyrus.Apophysis.Calculation
 			var bitmap = new Bitmap(size.Width, size.Height, PixelFormat.Format32bppArgb);
 			var random = new Random(flame.GetHashCode());
 
+			var samples = density * size.Width * size.Height + 20;
 			var col = Color.FromArgb(random.Next() % 255, random.Next() % 255, random.Next() % 255).ToArgb();
 
 			random = new Random(flame.GetHashCode() ^ (int)DateTime.Now.Ticks);
@@ -30,7 +33,8 @@ namespace Xyrus.Apophysis.Calculation
 			{
 				if (threadState == null || !threadState.IsCancelling)
 				{
-					progressCallback(new ProgressEventArgs(0));
+					var estimatedDuration = mLastSecondsPerIteration == null? (TimeSpan?)null: TimeSpan.FromSeconds(samples * mLastSecondsPerIteration.Value);
+					progressCallback(new ProgressEventArgs(0, estimatedDuration));
 				}
 			}
 
@@ -43,7 +47,6 @@ namespace Xyrus.Apophysis.Calculation
 			timer.SetStartingTime();
 
 			var data = bitmap.LockBits(new Rectangle(new Point(), bitmap.Size), ImageLockMode.WriteOnly, bitmap.PixelFormat);
-			var samples = density * size.Width * size.Height + 20;
 			var lastExcursion = 0;
 
 			for (int i = 0; i < samples; i++)
@@ -65,7 +68,9 @@ namespace Xyrus.Apophysis.Calculation
 
 				if (time > 1)
 				{
-					var remaining = (time / (i - lastExcursion)) * (samples - i);
+					mLastSecondsPerIteration = (time/(i - lastExcursion));
+
+					var remaining = mLastSecondsPerIteration.Value * (samples - i);
 					var progress = i / samples;
 
 					if (progressCallback != null)

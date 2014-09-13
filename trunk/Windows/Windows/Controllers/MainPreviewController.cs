@@ -59,6 +59,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.PreviewDensityComboBox.LostFocus += OnDensityChanged;
 			View.PreviewPicture.SizeChanged += OnPreviewSizeChanged;
 
+			mParent.UndoController.ChangeCommitted += OnChangeCommitted;
+
 			mRenderer.Progress += OnRendererProgress;
 			mRenderer.Exit += OnRendererExit;
 
@@ -73,6 +75,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.PreviewDensityComboBox.LostFocus -= OnDensityChanged;
 			View.PreviewPicture.SizeChanged -= OnPreviewSizeChanged;
 
+			mParent.UndoController.ChangeCommitted -= OnChangeCommitted;
+
 			View.PreviewPicture.Image = null;
 
 			mRenderer.Progress -= OnRendererProgress;
@@ -81,30 +85,24 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			ApophysisSettings.MainPreviewDensity = PreviewDensity;
 		}
 
-		private void OnRendererProgress(object sender, ProgressEventArgs args)
-		{
-			SetProgress(args.Progress);
-			SetElapsed(TimeSpan.FromSeconds(mElapsedTimer.GetElapsedTimeInSeconds()));
-			SetRemaining(args.TimeRemaining);
-		}
-		private void OnRendererExit(object sender, EventArgs e)
-		{
-			SetProgress(0);
-			SetElapsed(TimeSpan.FromSeconds(mElapsedTimer.GetElapsedTimeInSeconds()));
-			SetRemaining(TimeSpan.FromSeconds(0));
-		}
-
 		private void SetProgress(double progress)
 		{
 			View.Invoke(new Action(() => View.PreviewProgressBar.Value = (int)(progress * 100)));
 		}
 		private void SetElapsed(TimeSpan elapsed)
 		{
-			View.Invoke(new Action(() => View.PreviewTimeElapsedLabel.Text = string.Format("Elapsed: {0}", elapsed)));
+			View.Invoke(new Action(() => View.PreviewTimeElapsedLabel.Text = string.Format("Elapsed: {0}", GetTimespanString(elapsed))));
 		}
 		private void SetRemaining(TimeSpan? remaining)
 		{
-			View.Invoke(new Action(() => View.PreviewTimeRemainingLabel.Text = string.Format("Remaining: {0}", remaining == null ? "calculating..." : remaining.ToString())));
+			View.Invoke(new Action(() => View.PreviewTimeRemainingLabel.Text = string.Format("Remaining: {0}", remaining == null ? "calculating..." : GetTimespanString(remaining.Value))));
+		}
+		private string GetTimespanString(TimeSpan time)
+		{
+			return string.Format("{0}:{1}:{2}",
+				time.Hours.ToString("#0", InputController.Culture).PadLeft(2, '0'),
+				time.Minutes.ToString("#0", InputController.Culture).PadLeft(2, '0'),
+				time.Seconds.ToString("#0", InputController.Culture).PadLeft(2, '0'));
 		}
 
 		private void OnPreviewSizeChangedCallback()
@@ -154,6 +152,22 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				View.PreviewPicture.Image = bitmap;
 				View.PreviewPicture.Refresh();
 			}));
+		}
+		private void OnChangeCommitted(object sender, EventArgs e)
+		{
+			UpdatePreview();
+		}
+		private void OnRendererProgress(object sender, ProgressEventArgs args)
+		{
+			SetProgress(args.Progress);
+			SetElapsed(TimeSpan.FromSeconds(mElapsedTimer.GetElapsedTimeInSeconds()));
+			SetRemaining(args.TimeRemaining);
+		}
+		private void OnRendererExit(object sender, EventArgs e)
+		{
+			SetProgress(0);
+			SetElapsed(TimeSpan.FromSeconds(mElapsedTimer.GetElapsedTimeInSeconds()));
+			SetRemaining(TimeSpan.FromSeconds(0));
 		}
 
 		public int PreviewDensity

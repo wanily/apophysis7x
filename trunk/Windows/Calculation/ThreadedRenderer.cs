@@ -22,6 +22,7 @@ namespace Xyrus.Apophysis.Calculation
 			}
 		}
 
+		private Renderer mRenderer;
 		private RenderParameters mParameters;
 		private ThreadController mThreadController;
 		private bool mIsDisposed;
@@ -33,6 +34,7 @@ namespace Xyrus.Apophysis.Calculation
 		public ThreadedRenderer()
 		{
 			mThreadController = new ThreadController();
+			mRenderer = new Renderer();
 		}
 		protected void Dispose(bool disposing)
 		{
@@ -49,6 +51,8 @@ namespace Xyrus.Apophysis.Calculation
 			}
 
 			DisposeOverride(disposing);
+
+			mRenderer = null;
 			mIsDisposed = true;
 		}
 		protected virtual void DisposeOverride(bool disposing)
@@ -102,8 +106,7 @@ namespace Xyrus.Apophysis.Calculation
 		//todo multithreading
 		private Bitmap CreateBitmap(ThreadStateToken threadState)
 		{
-			var renderer = new Renderer();
-			var result = renderer.CreateBitmap(mParameters.Flame, mParameters.Density, mParameters.Size, ProgressUpdate, threadState);
+			var result = mRenderer.CreateBitmap(mParameters.Flame, mParameters.Density, mParameters.Size, ProgressUpdate, threadState);
 
 			mParameters = null;
 
