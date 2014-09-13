@@ -115,7 +115,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			mPreviewTimeLock.Enter();
 		}
-
 		private void OnDensityChanged(object sender, EventArgs e)
 		{
 			if (mParent.Initializer.IsBusy)
