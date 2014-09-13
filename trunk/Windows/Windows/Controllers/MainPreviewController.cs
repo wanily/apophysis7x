@@ -59,7 +59,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.PreviewDensityComboBox.LostFocus += OnDensityChanged;
 			View.PreviewPicture.SizeChanged += OnPreviewSizeChanged;
 
-			mParent.UndoController.ChangeCommitted += OnChangeCommitted;
+			mParent.UndoController.StackChanged += OnChangeCommitted;
 
 			mRenderer.Progress += OnRendererProgress;
 			mRenderer.Exit += OnRendererExit;
@@ -75,7 +75,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.PreviewDensityComboBox.LostFocus -= OnDensityChanged;
 			View.PreviewPicture.SizeChanged -= OnPreviewSizeChanged;
 
-			mParent.UndoController.ChangeCommitted -= OnChangeCommitted;
+			mParent.UndoController.StackChanged -= OnChangeCommitted;
 
 			View.PreviewPicture.Image = null;
 

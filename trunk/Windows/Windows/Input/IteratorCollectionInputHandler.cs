@@ -179,16 +179,16 @@ namespace Xyrus.Apophysis.Windows.Input
 				}
 			}
 
-			RaiseBeginEdit();
 			foreach (var handler in mHandlers)
 			{
 				if (handler.HandleKeyPress(key, modifiers))
 				{
+					RaiseBeginEdit();
 					RaiseEdit();
+					RaiseEndEdit();
 					return true;
 				}
 			}
-			RaiseEndEdit();
 
 			return false;
 		}
