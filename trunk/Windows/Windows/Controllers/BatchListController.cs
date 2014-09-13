@@ -239,6 +239,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				return;
 
 			View.BatchListView.Items[index].Selected = true;
+			View.FlameNameLabel.Text = flame.CalculatedName;
 		}
 
 		private void RedrawIcon(ListViewItem item, ThreadStateToken threadState)

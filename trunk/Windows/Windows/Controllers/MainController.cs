@@ -158,6 +158,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mBatchListController.BuildFlameList();
 			mBatchListController.SelectFlame(mFlames.First());
 			mHasChanges = false;
+
+			View.LoadingStatusLabel.Text = mFlames.CalculatedName;
 		}
 		
 		public void UpdatePreviews()

@@ -5,6 +5,7 @@ using Xyrus.Apophysis.Threading;
 
 namespace Xyrus.Apophysis.Calculation
 {
+	[PublicAPI]
 	public class ThreadedRenderer : IDisposable
 	{
 		class RenderParameters
@@ -95,14 +96,26 @@ namespace Xyrus.Apophysis.Calculation
 			get { return mThreadController.IsCancelling; }
 		}
 
-		//todo - render real fractal ... rofl
+		public event ProgressEventHandler Progress;
+		public event EventHandler Exit;
+
+		//todo multithreading
 		private Bitmap CreateBitmap(ThreadStateToken threadState)
 		{
-			var dummyRenderer = new ThumbnailRenderer();
-			var result = dummyRenderer.CreateBitmap(mParameters.Flame, mParameters.Density, mParameters.Size, threadState);
+			var renderer = new Renderer();
+			var result = renderer.CreateBitmap(mParameters.Flame, mParameters.Density, mParameters.Size, ProgressUpdate, threadState);
 
 			mParameters = null;
+
+			if (Exit != null)
+				Exit(this, new EventArgs());
+
 			return result;
+		}
+		private void ProgressUpdate(ProgressEventArgs args)
+		{
+			if (Progress != null)
+				Progress(this, args);
 		}
 	}
 }

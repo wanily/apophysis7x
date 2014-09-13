@@ -67,6 +67,10 @@
     <Compile Include="ApophysisSettings.cs" />
     <Compile Include="Calculation\ExtendedVariation.cs" />
     <Compile Include="Calculation\ExternalVariation.cs" />
+    <Compile Include="Calculation\NativeTimer.cs" />
+    <Compile Include="Calculation\ProgressEventHandler.cs" />
+    <Compile Include="Calculation\ProgressEventArgs.cs" />
+    <Compile Include="Calculation\Renderer.cs" />
     <Compile Include="Calculation\ThreadedRenderer.cs" />
     <Compile Include="Calculation\ThumbnailRenderer.cs" />
     <Compile Include="Calculation\Variation.cs" />

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Net.Mime;
 using System.Threading;
+using System.Windows.Forms;
 using Xyrus.Apophysis.Windows;
 
 namespace Xyrus.Apophysis.Threading
@@ -114,7 +116,7 @@ namespace Xyrus.Apophysis.Threading
 		{
 			while (mRunning)
 			{
-				Thread.Sleep(100);
+				Application.DoEvents();
 			}
 		}
 		public void Cancel()
