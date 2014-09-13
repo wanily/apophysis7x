@@ -124,7 +124,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 		private void OnRendererExit(object sender, EventArgs e)
 		{
-			if (!mHiding.IsBusy)
+			if (mHiding.IsBusy)
 				return;
 
 			SetProgress(0);

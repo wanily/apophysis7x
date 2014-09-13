@@ -81,8 +81,8 @@ namespace Xyrus.Apophysis.Windows.Forms
 				e.Graphics.DrawRectangle(pen, rect);
 				e.Graphics.FillRectangle(foreground, rectProgress);
 
-				var elapsedString = "Elapsed: " + TimeElapsed;
-				var remainingString = "Remaining: " + TimeRemaining;
+				var elapsedString = TimeElapsed;
+				var remainingString = TimeRemaining;
 
 				var elapsedSize = e.Graphics.MeasureString(elapsedString, Font);
 				var remainingSize = e.Graphics.MeasureString(remainingString, Font);
