@@ -45,6 +45,28 @@ namespace Xyrus.Apophysis.Models
 			return new Vector2(x, y);
 		}
 
+		public static Color ParseColor([NotNull] this XAttribute attribute, Color defaultValue = default(Color))
+		{
+			if (attribute == null) throw new ArgumentNullException("attribute");
+
+			var tokens = attribute.Value.Split(' ');
+			if (tokens.Length < 3)
+				return defaultValue;
+
+			double x, y, z;
+			if (!double.TryParse(tokens[0], NumberStyles.Float, CultureInfo.InvariantCulture, out x))
+				x = defaultValue.R / 255.0;
+			if (!double.TryParse(tokens[1], NumberStyles.Float, CultureInfo.InvariantCulture, out y))
+				y = defaultValue.G / 255.0;
+			if (!double.TryParse(tokens[1], NumberStyles.Float, CultureInfo.InvariantCulture, out z))
+				z = defaultValue.B / 255.0;
+
+			return Color.FromArgb(
+				(int) (System.Math.Max(0, System.Math.Min(x, 1))*255),
+				(int) (System.Math.Max(0, System.Math.Min(y, 1))*255),
+				(int) (System.Math.Max(0, System.Math.Min(z, 1))*255));
+		}
+
 		public static double ParseFloat([NotNull] this XAttribute attribute, double defaultValue = 0)
 		{
 			if (attribute == null) throw new ArgumentNullException("attribute");

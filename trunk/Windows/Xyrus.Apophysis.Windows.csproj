@@ -431,6 +431,8 @@
     <EmbeddedResource Include="Windows\Resources\Toolbar\Main\ZoomInCamera.bmp" />
     <EmbeddedResource Include="Windows\Resources\Toolbar\Main\ZoomOutCamera.bmp" />
     <None Include="Resources\Flam3ColorMaps.txt" />
+    <EmbeddedResource Include="Windows\Resources\Adjust.ico" />
+    <EmbeddedResource Include="Windows\Resources\Editor.ico" />
     <Content Include="Windows\Resources\Icons\ToggleRulers.png" />
     <EmbeddedResource Include="Windows\Resources\Toolbar\Editor\AddFinalIterator.bmp" />
     <EmbeddedResource Include="Windows\Resources\Toolbar\Editor\FinalIterator.bmp" />

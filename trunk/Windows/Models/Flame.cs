@@ -28,6 +28,7 @@ namespace Xyrus.Apophysis.Models
 		private double mPerspective;
 		private double mYaw;
 		private double mPitch;
+		private Color mBackground;
 
 		public Flame()
 		{
@@ -43,6 +44,7 @@ namespace Xyrus.Apophysis.Models
 			mGamma = 4;
 			mGammaThreshold = 0.001;
 			mVibrancy = 1;
+			mBackground = Color.Black;
 		}
 
 		[CanBeNull]
@@ -170,6 +172,14 @@ namespace Xyrus.Apophysis.Models
 				mVibrancy = value;
 			}
 		}
+		public Color Background
+		{
+			get { return mBackground; }
+			set
+			{
+				mBackground = Color.FromArgb(value.R, value.G, value.B);
+			}
+		}
 
 		[NotNull]
 		public IteratorCollection Iterators
@@ -227,6 +237,7 @@ namespace Xyrus.Apophysis.Models
 			copy.mGamma = mGamma;
 			copy.mGammaThreshold = mGammaThreshold;
 			copy.mVibrancy = mVibrancy;
+			copy.mBackground = mBackground;
 
 			return copy;
 		}
@@ -377,6 +388,13 @@ namespace Xyrus.Apophysis.Models
 				mVibrancy = vibrancy;
 			}
 
+			var colorAttribute = element.Attribute(XName.Get("background"));
+			if (colorAttribute != null)
+			{
+				var background = colorAttribute.ParseColor();
+				mBackground = background;
+			}
+
 			var iterators = element.Descendants(XName.Get("xform"));
 			iterators = iterators.Concat(element.Descendants(XName.Get("finalxform")));
 			Iterators.ReadXml(iterators);
@@ -429,6 +447,9 @@ namespace Xyrus.Apophysis.Models
 				return false;
 
 			if (!Equals(mVibrancy, flame.mVibrancy))
+				return false;
+
+			if (!Equals(mBackground, flame.mBackground))
 				return false;
 
 			if (!mPalette.IsEqual(flame.mPalette))

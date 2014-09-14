@@ -63,13 +63,13 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.ClearVariationsButton = new System.Windows.Forms.Button();
 			this.HideUnusedVariationsCheckBox = new System.Windows.Forms.CheckBox();
 			this.VariationsGrid = new Xyrus.Apophysis.Windows.Controls.DragGrid();
-			this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn27 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn28 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.VariablesTab = new System.Windows.Forms.TabPage();
 			this.HideUnrelatedVariablesCheckBox = new System.Windows.Forms.CheckBox();
 			this.VariablesGrid = new Xyrus.Apophysis.Windows.Controls.DragGrid();
-			this.dataGridViewTextBoxColumn25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn26 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn29 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn30 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.PointTab = new System.Windows.Forms.TabPage();
 			this.mIteratorControlsGroupBox = new System.Windows.Forms.GroupBox();
 			this.IteratorScaleRatio = new System.Windows.Forms.ComboBox();
@@ -142,6 +142,10 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mIteratorNameLabel = new System.Windows.Forms.Label();
 			this.IteratorSelectionComboBox = new Xyrus.Apophysis.Windows.Controls.IteratorSelectComboBox();
 			this.mIteratorSelectLabel = new System.Windows.Forms.Label();
+			this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn26 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -672,17 +676,17 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.VariationsGrid.Size = new System.Drawing.Size(279, 316);
 			this.VariationsGrid.TabIndex = 0;
 			// 
-			// dataGridViewTextBoxColumn23
+			// dataGridViewTextBoxColumn27
 			// 
-			this.dataGridViewTextBoxColumn23.HeaderText = "Name";
-			this.dataGridViewTextBoxColumn23.Name = "dataGridViewTextBoxColumn23";
-			this.dataGridViewTextBoxColumn23.ReadOnly = true;
+			this.dataGridViewTextBoxColumn27.HeaderText = "Name";
+			this.dataGridViewTextBoxColumn27.Name = "dataGridViewTextBoxColumn27";
+			this.dataGridViewTextBoxColumn27.ReadOnly = true;
 			// 
-			// dataGridViewTextBoxColumn24
+			// dataGridViewTextBoxColumn28
 			// 
-			this.dataGridViewTextBoxColumn24.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.dataGridViewTextBoxColumn24.HeaderText = "Value";
-			this.dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24";
+			this.dataGridViewTextBoxColumn28.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.dataGridViewTextBoxColumn28.HeaderText = "Value";
+			this.dataGridViewTextBoxColumn28.Name = "dataGridViewTextBoxColumn28";
 			// 
 			// VariablesTab
 			// 
@@ -739,17 +743,17 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.VariablesGrid.Size = new System.Drawing.Size(279, 342);
 			this.VariablesGrid.TabIndex = 1;
 			// 
-			// dataGridViewTextBoxColumn25
+			// dataGridViewTextBoxColumn29
 			// 
-			this.dataGridViewTextBoxColumn25.HeaderText = "Name";
-			this.dataGridViewTextBoxColumn25.Name = "dataGridViewTextBoxColumn25";
-			this.dataGridViewTextBoxColumn25.ReadOnly = true;
+			this.dataGridViewTextBoxColumn29.HeaderText = "Name";
+			this.dataGridViewTextBoxColumn29.Name = "dataGridViewTextBoxColumn29";
+			this.dataGridViewTextBoxColumn29.ReadOnly = true;
 			// 
-			// dataGridViewTextBoxColumn26
+			// dataGridViewTextBoxColumn30
 			// 
-			this.dataGridViewTextBoxColumn26.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.dataGridViewTextBoxColumn26.HeaderText = "Value";
-			this.dataGridViewTextBoxColumn26.Name = "dataGridViewTextBoxColumn26";
+			this.dataGridViewTextBoxColumn30.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.dataGridViewTextBoxColumn30.HeaderText = "Value";
+			this.dataGridViewTextBoxColumn30.Name = "dataGridViewTextBoxColumn30";
 			// 
 			// PointTab
 			// 
@@ -1429,6 +1433,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorDirectColorDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.IteratorDirectColorDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.IteratorDirectColorDragPanel.Default = 1D;
+			this.IteratorDirectColorDragPanel.DragStepping = 0.1D;
 			this.IteratorDirectColorDragPanel.ForeColor = System.Drawing.SystemColors.WindowText;
 			this.IteratorDirectColorDragPanel.Location = new System.Drawing.Point(11, 142);
 			this.IteratorDirectColorDragPanel.Maximum = 1D;
@@ -1457,6 +1462,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorOpacityDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.IteratorOpacityDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.IteratorOpacityDragPanel.Default = 1D;
+			this.IteratorOpacityDragPanel.DragStepping = 0.1D;
 			this.IteratorOpacityDragPanel.ForeColor = System.Drawing.SystemColors.WindowText;
 			this.IteratorOpacityDragPanel.Location = new System.Drawing.Point(11, 119);
 			this.IteratorOpacityDragPanel.Maximum = 1D;
@@ -1485,6 +1491,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorColorSpeedDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.IteratorColorSpeedDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.IteratorColorSpeedDragPanel.Default = 0D;
+			this.IteratorColorSpeedDragPanel.DragStepping = 0.1D;
 			this.IteratorColorSpeedDragPanel.ForeColor = System.Drawing.SystemColors.WindowText;
 			this.IteratorColorSpeedDragPanel.Location = new System.Drawing.Point(11, 96);
 			this.IteratorColorSpeedDragPanel.Maximum = 1D;
@@ -1524,6 +1531,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorColorDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.IteratorColorDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.IteratorColorDragPanel.Default = 0D;
+			this.IteratorColorDragPanel.DragStepping = 0.1D;
 			this.IteratorColorDragPanel.Location = new System.Drawing.Point(11, 19);
 			this.IteratorColorDragPanel.Maximum = 1D;
 			this.IteratorColorDragPanel.Minimum = 0D;
@@ -1564,6 +1572,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorWeightDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.IteratorWeightDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.IteratorWeightDragPanel.Default = 0.5D;
+			this.IteratorWeightDragPanel.DragStepping = 0.1D;
 			this.IteratorWeightDragPanel.ForeColor = System.Drawing.SystemColors.WindowText;
 			this.IteratorWeightDragPanel.Location = new System.Drawing.Point(3, 47);
 			this.IteratorWeightDragPanel.Maximum = 1000D;
@@ -1627,6 +1636,30 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mIteratorSelectLabel.TabIndex = 0;
 			this.mIteratorSelectLabel.Text = "Transform:";
 			this.mIteratorSelectLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// dataGridViewTextBoxColumn23
+			// 
+			this.dataGridViewTextBoxColumn23.HeaderText = "Name";
+			this.dataGridViewTextBoxColumn23.Name = "dataGridViewTextBoxColumn23";
+			this.dataGridViewTextBoxColumn23.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn24
+			// 
+			this.dataGridViewTextBoxColumn24.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.dataGridViewTextBoxColumn24.HeaderText = "Value";
+			this.dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24";
+			// 
+			// dataGridViewTextBoxColumn25
+			// 
+			this.dataGridViewTextBoxColumn25.HeaderText = "Name";
+			this.dataGridViewTextBoxColumn25.Name = "dataGridViewTextBoxColumn25";
+			this.dataGridViewTextBoxColumn25.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn26
+			// 
+			this.dataGridViewTextBoxColumn26.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.dataGridViewTextBoxColumn26.HeaderText = "Value";
+			this.dataGridViewTextBoxColumn26.Name = "dataGridViewTextBoxColumn26";
 			// 
 			// dataGridViewTextBoxColumn15
 			// 
@@ -1989,6 +2022,10 @@ namespace Xyrus.Apophysis.Windows.Forms
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn24;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn25;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn26;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn27;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn28;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn29;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn30;
 	}
 }
 

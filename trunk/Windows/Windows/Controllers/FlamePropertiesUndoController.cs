@@ -34,6 +34,29 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.HeightTextBox.LostFocus += OnRequestCommit;
 			View.PerspectiveTextBox.LostFocus += OnRequestCommit;
 			View.ScaleTextBox.LostFocus += OnRequestCommit;
+			View.ZoomDragPanel.EndEdit += OnRequestCommit;
+			View.ZoomTextBox.LostFocus += OnRequestCommit;
+			View.ZoomScrollBar.MouseUp += OnRequestCommit;
+			View.XPositionDragPanel.EndEdit += OnRequestCommit;
+			View.XPositionTextBox.LostFocus += OnRequestCommit;
+			View.XPositionScrollBar.MouseUp += OnRequestCommit;
+			View.YPositionDragPanel.EndEdit += OnRequestCommit;
+			View.YPositionTextBox.LostFocus += OnRequestCommit;
+			View.YPositionScrollBar.MouseUp += OnRequestCommit;
+			View.RotationDragPanel.EndEdit += OnRequestCommit;
+			View.RotationTextBox.LostFocus += OnRequestCommit;
+			View.RotationScrollBar.MouseUp += OnRequestCommit;
+			View.GammaDragPanel.EndEdit += OnRequestCommit;
+			View.GammaTextBox.LostFocus += OnRequestCommit;
+			View.GammaScrollBar.MouseUp += OnRequestCommit;
+			View.BrightnessDragPanel.EndEdit += OnRequestCommit;
+			View.BrightnessTextBox.LostFocus += OnRequestCommit;
+			View.BrightnessScrollBar.MouseUp += OnRequestCommit;
+			View.VibrancyDragPanel.EndEdit += OnRequestCommit;
+			View.VibrancyTextBox.LostFocus += OnRequestCommit;
+			View.VibrancyScrollBar.MouseUp += OnRequestCommit;
+			View.GammaThresholdDragPanel.EndEdit += OnRequestCommit;
+			View.GammaThresholdTextBox.LostFocus += OnRequestCommit;
 		}
 		protected override void DetachView()
 		{
@@ -51,6 +74,29 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.HeightTextBox.LostFocus -= OnRequestCommit;
 			View.PerspectiveTextBox.LostFocus -= OnRequestCommit;
 			View.ScaleTextBox.LostFocus -= OnRequestCommit;
+			View.ZoomDragPanel.EndEdit -= OnRequestCommit;
+			View.ZoomTextBox.LostFocus -= OnRequestCommit;
+			View.ZoomScrollBar.MouseUp -= OnRequestCommit;
+			View.XPositionDragPanel.EndEdit -= OnRequestCommit;
+			View.XPositionTextBox.LostFocus -= OnRequestCommit;
+			View.XPositionScrollBar.MouseUp -= OnRequestCommit;
+			View.YPositionDragPanel.EndEdit -= OnRequestCommit;
+			View.YPositionTextBox.LostFocus -= OnRequestCommit;
+			View.YPositionScrollBar.MouseUp -= OnRequestCommit;
+			View.RotationDragPanel.EndEdit -= OnRequestCommit;
+			View.RotationTextBox.LostFocus -= OnRequestCommit;
+			View.RotationScrollBar.MouseUp -= OnRequestCommit;
+			View.GammaDragPanel.EndEdit -= OnRequestCommit;
+			View.GammaTextBox.LostFocus -= OnRequestCommit;
+			View.GammaScrollBar.MouseUp -= OnRequestCommit;
+			View.BrightnessDragPanel.EndEdit -= OnRequestCommit;
+			View.BrightnessTextBox.LostFocus -= OnRequestCommit;
+			View.BrightnessScrollBar.MouseUp -= OnRequestCommit;
+			View.VibrancyDragPanel.EndEdit -= OnRequestCommit;
+			View.VibrancyTextBox.LostFocus -= OnRequestCommit;
+			View.VibrancyScrollBar.MouseUp -= OnRequestCommit;
+			View.GammaThresholdDragPanel.EndEdit -= OnRequestCommit;
+			View.GammaThresholdTextBox.LostFocus -= OnRequestCommit;
 		}
 
 		private void OnRequestCommit(object sender, EventArgs e)

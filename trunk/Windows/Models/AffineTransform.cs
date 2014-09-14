@@ -114,6 +114,15 @@ namespace Xyrus.Apophysis.Models
 			Origin.X += offset.X;
 			Origin.Y += offset.Y;
 		}
+		public void SetAngle(double angle)
+		{
+			Matrix.X.X = 1;
+			Matrix.X.Y = 0;
+			Matrix.Y.X = 0;
+			Matrix.Y.Y = 1;
+
+			Rotate(angle);
+		}
 
 		public bool IsEqual([NotNull] AffineTransform transform)
 		{
@@ -139,5 +148,7 @@ namespace Xyrus.Apophysis.Models
 
 			return true;
 		}
+
+		
 	}
 }
