@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Xyrus.Apophysis.Properties;
 
 namespace Xyrus.Apophysis.Models
 {
@@ -40,16 +38,19 @@ namespace Xyrus.Apophysis.Models
 			mName = flame.CalculatedName;
 		}
 
+		[CanBeNull]
 		public string Name
 		{
 			get { return mName; }
 			set { mName = value; }
 		}
+
+		[NotNull]
 		public string CalculatedName
 		{
 			get
 			{
-				if (string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(Name.Trim()))
+				if (string.IsNullOrEmpty(mName) || string.IsNullOrEmpty(mName.Trim()))
 				{
 					var today = DateTime.Today;
 					return ApophysisSettings.NamePrefix + @"-" +
@@ -59,7 +60,7 @@ namespace Xyrus.Apophysis.Models
 						mIndex.ToString(CultureInfo.InvariantCulture);
 				}
 
-				return Name;
+				return mName;
 			}
 		}
 
@@ -98,6 +99,7 @@ namespace Xyrus.Apophysis.Models
 			}
 		}
 
+		[NotNull]
 		internal static Palette ReadCmap(string name, string data)
 		{
 			const string collectArrays = @"(alpha|gradient):\s*((?:(?:title|smooth|index|color)=[a-z0-9=\s\-_""]+(\s+|$))+)";
@@ -213,6 +215,8 @@ namespace Xyrus.Apophysis.Models
 
 			return true;
 		}
+
+		[NotNull]
 		public Palette Copy()
 		{
 			var copy = new Palette(mName);

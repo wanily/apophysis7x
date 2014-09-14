@@ -24,6 +24,8 @@ namespace Xyrus.Apophysis.Models
 
 			return new Size(x, y);
 		}
+
+		[NotNull]
 		public static Vector2 ParseVector([NotNull] this XAttribute attribute, Vector2 defaultValue = null)
 		{
 			if (attribute == null) throw new ArgumentNullException("attribute");
@@ -42,6 +44,7 @@ namespace Xyrus.Apophysis.Models
 
 			return new Vector2(x, y);
 		}
+
 		public static double ParseFloat([NotNull] this XAttribute attribute, double defaultValue = 0)
 		{
 			if (attribute == null) throw new ArgumentNullException("attribute");
@@ -52,6 +55,8 @@ namespace Xyrus.Apophysis.Models
 
 			return value;
 		}
+
+		[NotNull]
 		public static double[] ParseCoefficients([NotNull] this XAttribute attribute)
 		{
 			if (attribute == null) throw new ArgumentNullException("attribute");

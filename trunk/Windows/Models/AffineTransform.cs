@@ -66,8 +66,10 @@ namespace Xyrus.Apophysis.Models
 			return System.Math.Atan2(Matrix.Y.Y, Matrix.Y.X) - System.Math.Atan2(Matrix.X.Y, Matrix.X.X);
 		}
 
-		public Vector2 TransformPoint(Vector2 point)
+		[NotNull]
+		public Vector2 TransformPoint([NotNull] Vector2 point)
 		{
+			if (point == null) throw new ArgumentNullException("point");
 			return new Vector2
 			{
 				X = Matrix.X.X * point.X + Matrix.Y.X * point.Y + Origin.X,

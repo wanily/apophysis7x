@@ -79,8 +79,10 @@ namespace Xyrus.Apophysis.Models
 			return true;
 		}
 
-		internal Iterator ConvertIterator(Iterator iterator, int groupIndex)
+		[NotNull]
+		internal Iterator ConvertIterator([NotNull] Iterator iterator, int groupIndex)
 		{
+			if (iterator == null) throw new ArgumentNullException("iterator");
 			var copy = iterator.Copy();
 
 			copy.GroupIndex = groupIndex;
@@ -117,6 +119,7 @@ namespace Xyrus.Apophysis.Models
 			remove { mContentChanged -= value; }
 		}
 
+		[NotNull]
 		internal IteratorCollection Copy([NotNull] Flame flame)
 		{
 			if (flame == null) throw new ArgumentNullException("flame");
@@ -131,8 +134,9 @@ namespace Xyrus.Apophysis.Models
 			return copy;
 		}
 
-		public void ReadXml(IEnumerable<XElement> elements)
+		public void ReadXml([NotNull] IEnumerable<XElement> elements)
 		{
+			// ReSharper disable once ConstantNullCoalescingCondition
 			var array = (elements ?? new XElement[0]).Where(x => x != null).ToArray();
 
 			if (!array.Any())

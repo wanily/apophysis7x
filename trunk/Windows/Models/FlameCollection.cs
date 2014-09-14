@@ -18,7 +18,7 @@ namespace Xyrus.Apophysis.Models
 			mName = null;
 			Append();
 		}
-		public FlameCollection(IEnumerable<Flame> flames) : base(flames.ToList())
+		public FlameCollection([NotNull] IEnumerable<Flame> flames) : base(flames.ToList())
 		{
 			if (Items.Count == 0)
 			{
@@ -28,11 +28,14 @@ namespace Xyrus.Apophysis.Models
 			mName = null;
 		}
 
+		[CanBeNull]
 		public string Name
 		{
 			get { return mName; }
 			set { mName = value; }
 		}
+
+		[NotNull]
 		public string CalculatedName
 		{
 			get

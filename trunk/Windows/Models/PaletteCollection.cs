@@ -38,10 +38,13 @@ namespace Xyrus.Apophysis.Models
 			}
 		}
 
+		[NotNull]
 		public static PaletteCollection Flam3Palettes
 		{
 			get { return mFlam3Palettes ?? (mFlam3Palettes = new PaletteCollection(ReadUgr(Resources.Flam3ColorMaps).ToArray())); }
 		}
+
+		[NotNull]
 		public static Palette GetRandomPalette([CanBeNull] Flame flame = null)
 		{
 			var rnd = new Random();
@@ -55,21 +58,24 @@ namespace Xyrus.Apophysis.Models
 			return palette;
 		}
 
+		[CanBeNull]
 		public string Name
 		{
 			get { return mName; }
 			set { mName = value; }
 		}
+
+		[NotNull]
 		public string CalculatedName
 		{
 			get
 			{
-				if (string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(Name.Trim()))
+				if (string.IsNullOrEmpty(mName) || string.IsNullOrEmpty(mName.Trim()))
 				{
 					return Items.First().CalculatedName;
 				}
 
-				return Name;
+				return mName;
 			}
 		}
 
@@ -124,8 +130,12 @@ namespace Xyrus.Apophysis.Models
 			remove { mContentChanged -= value; }
 		}
 
-		internal static IEnumerable<Palette> ReadUgr(string data)
+		[NotNull]
+		internal static IEnumerable<Palette> ReadUgr([NotNull] string data)
 		{
+			if (string.IsNullOrEmpty(data) || string.IsNullOrEmpty(data.Trim()))
+				throw new ArgumentNullException(@"data");
+
 			const string collectPalettes = @"([a-z0-9\-_]+)\s*{\s*((?:gradient|alpha):\s*([a-z0-9=\s\-_""]+)\s*)}";
 			var palettes = Regex.Matches(data, collectPalettes, RegexOptions.IgnoreCase).OfType<Match>();
 

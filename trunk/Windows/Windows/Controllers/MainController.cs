@@ -306,7 +306,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			var batch = new List<Flame>();
 			for (int i = 0; i < count; i++)
-				batch.Add(new Flame());
+				batch.Add(Flame.Random());
 
 			if (confirm)
 			{

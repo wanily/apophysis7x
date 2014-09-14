@@ -49,6 +49,8 @@ namespace Xyrus.Apophysis.Models
 			mVariations.ClearWeights();
 			mVariations.SetWeight("linear", 1.0);
 		}
+
+		[NotNull]
 		public Iterator Copy()
 		{
 			var copy = new Iterator(mFlame);
@@ -90,11 +92,14 @@ namespace Xyrus.Apophysis.Models
 
 			return copy;
 		}
+
+		[NotNull]
 		public Iterator Convert(int groupIndex)
 		{
 			return mFlame.Iterators.ConvertIterator(this, groupIndex);
 		}
 
+		[NotNull]
 		internal Iterator Copy([NotNull] Flame flame)
 		{
 			if (flame == null) throw new ArgumentNullException("flame");
@@ -121,6 +126,7 @@ namespace Xyrus.Apophysis.Models
 			get { return mFlame.Iterators.Count(x => Equals(x.GroupIndex, GroupIndex)) == 1; }
 		}
 
+		[CanBeNull]
 		public string Name
 		{
 			get { return mName; }
@@ -133,6 +139,7 @@ namespace Xyrus.Apophysis.Models
 				else mName = value;
 			}
 		}
+
 		public double Weight
 		{
 			get { return mWeight; }
@@ -199,6 +206,7 @@ namespace Xyrus.Apophysis.Models
 			}
 		}
 
+		[NotNull]
 		public AffineTransform PreAffine
 		{
 			get { return mPreAffine; }
@@ -208,6 +216,8 @@ namespace Xyrus.Apophysis.Models
 				mPreAffine = value;
 			}
 		}
+
+		[NotNull]
 		public AffineTransform PostAffine
 		{
 			get { return mPostAffine; }
@@ -218,6 +228,7 @@ namespace Xyrus.Apophysis.Models
 			}
 		}
 
+		[NotNull]
 		public VariationCollection Variations
 		{
 			get { return mVariations; }

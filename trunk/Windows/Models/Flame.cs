@@ -18,6 +18,16 @@ namespace Xyrus.Apophysis.Models
 		private string mName;
 		private Size mCanvasSize;
 		private double mPixelsPerUnit;
+		private double mZoom;
+		private double mVibrancy;
+		private double mGammaThreshold;
+		private double mGamma;
+		private double mBrightness;
+		private double mDepthOfField;
+		private double mHeight;
+		private double mPerspective;
+		private double mYaw;
+		private double mPitch;
 
 		public Flame()
 		{
@@ -29,18 +39,25 @@ namespace Xyrus.Apophysis.Models
 
 			mCanvasSize = new Size(1920, 1080);
 			mPixelsPerUnit = 50.0 * mCanvasSize.Width / 100.0;
+			mBrightness = 4;
+			mGamma = 4;
+			mGammaThreshold = 0.001;
+			mVibrancy = 1;
 		}
 
+		[CanBeNull]
 		public string Name
 		{
 			get { return mName; }
 			set { mName = value; }
 		}
+
+		[NotNull]
 		public string CalculatedName
 		{
 			get
 			{
-				if (string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(Name.Trim()))
+				if (string.IsNullOrEmpty(mName) || string.IsNullOrEmpty(mName.Trim()))
 				{
 					var today = DateTime.Today;
 					return ApophysisSettings.NamePrefix + @"-" +
@@ -50,9 +67,10 @@ namespace Xyrus.Apophysis.Models
 						mIndex.ToString(CultureInfo.InvariantCulture);
 				}
 
-				return Name;
+				return mName;
 			}
 		}
+
 		public Size CanvasSize
 		{
 			get { return mCanvasSize; }
@@ -76,6 +94,80 @@ namespace Xyrus.Apophysis.Models
 					throw new ArgumentOutOfRangeException("value");
 
 				mPixelsPerUnit = value;
+			}
+		}
+		public double Zoom
+		{
+			get { return mZoom; }
+			set { mZoom = value; }
+		}
+		public double Pitch
+		{
+			get { return mPitch; }
+			set { mPitch = value; }
+		}
+		public double Yaw
+		{
+			get { return mYaw; }
+			set { mYaw = value; }
+		}
+		public double Perspective
+		{
+			get { return mPerspective; }
+			set { mPerspective = value; }
+		}
+		public double Height
+		{
+			get { return mHeight; }
+			set { mHeight = value; }
+		}
+		public double DepthOfField
+		{
+			get { return mDepthOfField; }
+			set
+			{
+				if (value < 0)
+					throw new ArgumentOutOfRangeException("value"); mDepthOfField = value;
+			}
+		}
+		public double Brightness
+		{
+			get { return mBrightness; }
+			set
+			{
+				if (value <= 0)
+					throw new ArgumentOutOfRangeException("value");
+				mBrightness = value;
+			}
+		}
+		public double Gamma
+		{
+			get { return mGamma; }
+			set
+			{
+				if (value < 1)
+					throw new ArgumentOutOfRangeException("value");
+				mGamma = value;
+			}
+		}
+		public double GammaThreshold
+		{
+			get { return mGammaThreshold; }
+			set
+			{
+				if (value < 0)
+					throw new ArgumentOutOfRangeException("value");
+				mGammaThreshold = value;
+			}
+		}
+		public double Vibrancy
+		{
+			get { return mVibrancy; }
+			set
+			{
+				if (value < 0)
+					throw new ArgumentOutOfRangeException("value");
+				mVibrancy = value;
 			}
 		}
 
@@ -107,6 +199,7 @@ namespace Xyrus.Apophysis.Models
 			}
 		}
 
+		[NotNull]
 		public Flame Copy()
 		{
 			var copy = new Flame();
@@ -124,9 +217,20 @@ namespace Xyrus.Apophysis.Models
 			copy.mCamera.Matrix.Y.Y = mCamera.Matrix.Y.Y;
 			copy.mCanvasSize = mCanvasSize;
 			copy.mPixelsPerUnit = mPixelsPerUnit;
+			copy.mZoom = mZoom;
+			copy.mPitch = mPitch;
+			copy.mYaw = mYaw;
+			copy.mPerspective = mPerspective;
+			copy.mHeight = mHeight;
+			copy.mDepthOfField = mDepthOfField;
+			copy.mBrightness = mBrightness;
+			copy.mGamma = mGamma;
+			copy.mGammaThreshold = mGammaThreshold;
+			copy.mVibrancy = mVibrancy;
 
 			return copy;
 		}
+
 		public void ReadXml([NotNull] XElement element)
 		{
 			if (element == null) throw new ArgumentNullException("element");
@@ -183,6 +287,92 @@ namespace Xyrus.Apophysis.Models
 				mPixelsPerUnit = pixelsPerUnit;
 			}
 
+			var zoomAttribute = element.Attribute(XName.Get("zoom"));
+			if (zoomAttribute != null)
+			{
+				var zoom = zoomAttribute.ParseFloat();
+				mZoom = zoom;
+			}
+
+			var pitchAttribute = element.Attribute(XName.Get("cam_pitch"));
+			if (pitchAttribute != null)
+			{
+				var pitch = pitchAttribute.ParseFloat();
+				mPitch = pitch;
+			}
+
+			var yawAttribute = element.Attribute(XName.Get("cam_yaw"));
+			if (yawAttribute != null)
+			{
+				var yaw = yawAttribute.ParseFloat();
+				mYaw = yaw;
+			}
+
+			var heightAttribute = element.Attribute(XName.Get("cam_zpos"));
+			if (heightAttribute != null)
+			{
+				var height = heightAttribute.ParseFloat();
+				mHeight = height;
+			}
+
+			var dofAttribute = element.Attribute(XName.Get("cam_dof"));
+			if (dofAttribute != null)
+			{
+				var dof = dofAttribute.ParseFloat();
+				mDepthOfField = dof;
+			}
+
+			var perspectiveAttribute = element.Attribute(XName.Get("cam_perspective"));
+			if (perspectiveAttribute != null)
+			{
+				var perspective = perspectiveAttribute.ParseFloat();
+				mPerspective = perspective;
+			}
+
+			var brightnessAttribute = element.Attribute(XName.Get("brightness"));
+			if (brightnessAttribute != null)
+			{
+				var brightness = brightnessAttribute.ParseFloat();
+				if (brightness <= 0)
+				{
+					throw new ApophysisException("Brightness must be greater than zero");
+				}
+				mBrightness = brightness;
+			}
+
+			var gammaAttribute = element.Attribute(XName.Get("gamma"));
+			if (gammaAttribute != null)
+			{
+				var gamma = gammaAttribute.ParseFloat();
+				if (gamma < 0)
+				{
+					throw new ApophysisException("Gamma must be greater than or equal to one");
+				}
+				mGamma = gamma;
+			}
+
+			var gammaThresholdAttribute = element.Attribute(XName.Get("gamma_threshold"));
+			if (gammaThresholdAttribute != null)
+			{
+				var gammaThreshold = gammaThresholdAttribute.ParseFloat();
+				if (gammaThreshold < 0)
+				{
+					throw new ApophysisException("Gamma threshold must be greater than or equal to zero");
+				}
+				mGammaThreshold = gammaThreshold;
+			}
+
+			var vibrancyAttribute = element.Attribute(XName.Get("vibrancy"));
+			if (vibrancyAttribute != null)
+			{
+				var vibrancy = vibrancyAttribute.ParseFloat();
+				if (vibrancy < 0)
+				{
+					throw new ApophysisException("Vibrancy must be greater than or equal to zero");
+				}
+				mVibrancy = vibrancy;
+			}
+
 			var iterators = element.Descendants(XName.Get("xform"));
 			iterators = iterators.Concat(element.Descendants(XName.Get("finalxform")));
 			Iterators.ReadXml(iterators);
@@ -201,6 +391,42 @@ namespace Xyrus.Apophysis.Models
 			if (!Equals(mName, flame.mName))
 				return false;
 
+			if (!Equals(mCanvasSize, flame.mCanvasSize))
+				return false;
+
+			if (!Equals(mPixelsPerUnit, flame.mPixelsPerUnit))
+				return false;
+
+			if (!Equals(mZoom, flame.mZoom))
+				return false;
+
+			if (!Equals(mPitch, flame.mPitch))
+				return false;
+
+			if (!Equals(mYaw, flame.mYaw))
+				return false;
+
+			if (!Equals(mHeight, flame.mHeight))
+				return false;
+
+			if (!Equals(mPerspective, flame.mPerspective))
+				return false;
+
+			if (!Equals(mDepthOfField, flame.mDepthOfField))
+				return false;
+
+			if (!Equals(mBrightness, flame.mBrightness))
+				return false;
+
+			if (!Equals(mGamma, flame.mGamma))
+				return false;
+
+			if (!Equals(mGammaThreshold, flame.mGammaThreshold))
+				return false;
+
+			if (!Equals(mVibrancy, flame.mVibrancy))
+				return false;
+
 			if (!mPalette.IsEqual(flame.mPalette))
 				return false;
 
@@ -208,6 +434,13 @@ namespace Xyrus.Apophysis.Models
 				return false;
 
 			return true;
+		}
+
+		[NotNull]
+		public static Flame Random()
+		{
+			//todo add random flame feature
+			return new Flame();
 		}
 
 		internal static void ReduceCounter()
