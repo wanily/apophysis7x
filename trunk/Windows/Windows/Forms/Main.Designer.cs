@@ -54,6 +54,26 @@
 			this.OpenFullscreenPreviewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
 			this.EditorMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.FlamePropertiesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.PalettePropertiesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.CanvasPropertiesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripSeparator();
+			this.ShowToolBarMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.ShowStatusBarMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.ShowBatchMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripSeparator();
+			this.ResetLayoutMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.flameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.ResetCameraMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.RandomizeFlameMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripSeparator();
+			this.RenderFlameMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.RenderBatchMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem10 = new System.Windows.Forms.ToolStripSeparator();
+			this.SummarizeMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.OpenSettingsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem11 = new System.Windows.Forms.ToolStripMenuItem();
 			this.mToolbar = new System.Windows.Forms.ToolStrip();
 			this.NewFlameButton = new System.Windows.Forms.ToolStripButton();
 			this.OpenBatchButton = new System.Windows.Forms.ToolStripButton();
@@ -74,6 +94,7 @@
 			this.PreviewDensityComboBox = new System.Windows.Forms.ToolStripComboBox();
 			this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
 			this.EditorButton = new System.Windows.Forms.ToolStripButton();
+			this.FlamePropertiesButton = new System.Windows.Forms.ToolStripButton();
 			this.mRootSplitter = new System.Windows.Forms.SplitContainer();
 			this.BatchListView = new System.Windows.Forms.ListView();
 			this.BatchListNameColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -85,8 +106,18 @@
 			this.PreviewTimeRemainingLabel = new System.Windows.Forms.ToolStripStatusLabel();
 			this.FlameNameLabel = new System.Windows.Forms.ToolStripStatusLabel();
 			this.PreviewProgressBar = new System.Windows.Forms.ToolStripProgressBar();
-			this.FlamePropertiesButton = new System.Windows.Forms.ToolStripButton();
-			this.FlamePropertiesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.OpenAboutMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.PalettePropertiesButton = new System.Windows.Forms.ToolStripButton();
+			this.CanvasPropertiesButton = new System.Windows.Forms.ToolStripButton();
+			this.OpenSettingsButton = new System.Windows.Forms.ToolStripButton();
+			this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+			this.ToggleTransparencyButton = new System.Windows.Forms.ToolStripButton();
+			this.ToggleGuidelinesButton = new System.Windows.Forms.ToolStripButton();
+			this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+			this.PanCameraModeButton = new System.Windows.Forms.ToolStripButton();
+			this.RotateCameraModeButton = new System.Windows.Forms.ToolStripButton();
+			this.ZoomInCameraModeButton = new System.Windows.Forms.ToolStripButton();
+			this.ZoomOutCameraModeButton = new System.Windows.Forms.ToolStripButton();
 			this.mMainMenu.SuspendLayout();
 			this.mToolbar.SuspendLayout();
 			this.mRootSplitter.Panel1.SuspendLayout();
@@ -101,7 +132,10 @@
 			this.mMainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
-            this.viewToolStripMenuItem});
+            this.viewToolStripMenuItem,
+            this.flameToolStripMenuItem,
+            this.toolsToolStripMenuItem,
+            this.toolStripMenuItem11});
 			this.mMainMenu.Location = new System.Drawing.Point(0, 0);
 			this.mMainMenu.Name = "mMainMenu";
 			this.mMainMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
@@ -280,7 +314,15 @@
             this.OpenFullscreenPreviewMenuItem,
             this.toolStripMenuItem6,
             this.EditorMenuItem,
-            this.FlamePropertiesMenuItem});
+            this.FlamePropertiesMenuItem,
+            this.PalettePropertiesMenuItem,
+            this.CanvasPropertiesMenuItem,
+            this.toolStripMenuItem7,
+            this.ShowToolBarMenuItem,
+            this.ShowStatusBarMenuItem,
+            this.ShowBatchMenuItem,
+            this.toolStripMenuItem8,
+            this.ResetLayoutMenuItem});
 			this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
 			this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
 			this.viewToolStripMenuItem.Text = "&View";
@@ -292,7 +334,7 @@
 			this.OpenFullscreenPreviewMenuItem.Name = "OpenFullscreenPreviewMenuItem";
 			this.OpenFullscreenPreviewMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F3;
 			this.OpenFullscreenPreviewMenuItem.Size = new System.Drawing.Size(190, 22);
-			this.OpenFullscreenPreviewMenuItem.Text = "Fullscreen preview";
+			this.OpenFullscreenPreviewMenuItem.Text = "&Fullscreen preview";
 			// 
 			// toolStripMenuItem6
 			// 
@@ -307,6 +349,151 @@
 			this.EditorMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F4;
 			this.EditorMenuItem.Size = new System.Drawing.Size(190, 22);
 			this.EditorMenuItem.Text = "&Editor";
+			// 
+			// FlamePropertiesMenuItem
+			// 
+			this.FlamePropertiesMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("FlamePropertiesMenuItem.Image")));
+			this.FlamePropertiesMenuItem.ImageTransparentColor = System.Drawing.Color.Fuchsia;
+			this.FlamePropertiesMenuItem.Name = "FlamePropertiesMenuItem";
+			this.FlamePropertiesMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
+			this.FlamePropertiesMenuItem.Size = new System.Drawing.Size(190, 22);
+			this.FlamePropertiesMenuItem.Text = "&Adjustment";
+			// 
+			// PalettePropertiesMenuItem
+			// 
+			this.PalettePropertiesMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("PalettePropertiesMenuItem.Image")));
+			this.PalettePropertiesMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.PalettePropertiesMenuItem.Name = "PalettePropertiesMenuItem";
+			this.PalettePropertiesMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F6;
+			this.PalettePropertiesMenuItem.Size = new System.Drawing.Size(190, 22);
+			this.PalettePropertiesMenuItem.Text = "&Gradient";
+			// 
+			// CanvasPropertiesMenuItem
+			// 
+			this.CanvasPropertiesMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("CanvasPropertiesMenuItem.Image")));
+			this.CanvasPropertiesMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.CanvasPropertiesMenuItem.Name = "CanvasPropertiesMenuItem";
+			this.CanvasPropertiesMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F7;
+			this.CanvasPropertiesMenuItem.Size = new System.Drawing.Size(190, 22);
+			this.CanvasPropertiesMenuItem.Text = "&Image size";
+			// 
+			// toolStripMenuItem7
+			// 
+			this.toolStripMenuItem7.Name = "toolStripMenuItem7";
+			this.toolStripMenuItem7.Size = new System.Drawing.Size(187, 6);
+			// 
+			// ShowToolBarMenuItem
+			// 
+			this.ShowToolBarMenuItem.Name = "ShowToolBarMenuItem";
+			this.ShowToolBarMenuItem.Size = new System.Drawing.Size(190, 22);
+			this.ShowToolBarMenuItem.Text = "Show &toolbar";
+			// 
+			// ShowStatusBarMenuItem
+			// 
+			this.ShowStatusBarMenuItem.Name = "ShowStatusBarMenuItem";
+			this.ShowStatusBarMenuItem.Size = new System.Drawing.Size(190, 22);
+			this.ShowStatusBarMenuItem.Text = "Show &status bar";
+			// 
+			// ShowBatchMenuItem
+			// 
+			this.ShowBatchMenuItem.Name = "ShowBatchMenuItem";
+			this.ShowBatchMenuItem.Size = new System.Drawing.Size(190, 22);
+			this.ShowBatchMenuItem.Text = "Show &batch";
+			// 
+			// toolStripMenuItem8
+			// 
+			this.toolStripMenuItem8.Name = "toolStripMenuItem8";
+			this.toolStripMenuItem8.Size = new System.Drawing.Size(187, 6);
+			// 
+			// ResetLayoutMenuItem
+			// 
+			this.ResetLayoutMenuItem.Name = "ResetLayoutMenuItem";
+			this.ResetLayoutMenuItem.Size = new System.Drawing.Size(190, 22);
+			this.ResetLayoutMenuItem.Text = "Reset &layout";
+			// 
+			// flameToolStripMenuItem
+			// 
+			this.flameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ResetCameraMenuItem,
+            this.RandomizeFlameMenuItem,
+            this.toolStripMenuItem9,
+            this.RenderFlameMenuItem,
+            this.RenderBatchMenuItem,
+            this.toolStripMenuItem10,
+            this.SummarizeMenuItem});
+			this.flameToolStripMenuItem.Name = "flameToolStripMenuItem";
+			this.flameToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
+			this.flameToolStripMenuItem.Text = "F&lame";
+			// 
+			// ResetCameraMenuItem
+			// 
+			this.ResetCameraMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("ResetCameraMenuItem.Image")));
+			this.ResetCameraMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.ResetCameraMenuItem.Name = "ResetCameraMenuItem";
+			this.ResetCameraMenuItem.Size = new System.Drawing.Size(153, 22);
+			this.ResetCameraMenuItem.Text = "&Reset camera";
+			// 
+			// RandomizeFlameMenuItem
+			// 
+			this.RandomizeFlameMenuItem.Name = "RandomizeFlameMenuItem";
+			this.RandomizeFlameMenuItem.Size = new System.Drawing.Size(153, 22);
+			this.RandomizeFlameMenuItem.Text = "R&andomize";
+			// 
+			// toolStripMenuItem9
+			// 
+			this.toolStripMenuItem9.Name = "toolStripMenuItem9";
+			this.toolStripMenuItem9.Size = new System.Drawing.Size(150, 6);
+			// 
+			// RenderFlameMenuItem
+			// 
+			this.RenderFlameMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("RenderFlameMenuItem.Image")));
+			this.RenderFlameMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.RenderFlameMenuItem.Name = "RenderFlameMenuItem";
+			this.RenderFlameMenuItem.Size = new System.Drawing.Size(153, 22);
+			this.RenderFlameMenuItem.Text = "Render &flame...";
+			// 
+			// RenderBatchMenuItem
+			// 
+			this.RenderBatchMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("RenderBatchMenuItem.Image")));
+			this.RenderBatchMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.RenderBatchMenuItem.Name = "RenderBatchMenuItem";
+			this.RenderBatchMenuItem.Size = new System.Drawing.Size(153, 22);
+			this.RenderBatchMenuItem.Text = "Render &batch...";
+			// 
+			// toolStripMenuItem10
+			// 
+			this.toolStripMenuItem10.Name = "toolStripMenuItem10";
+			this.toolStripMenuItem10.Size = new System.Drawing.Size(150, 6);
+			// 
+			// SummarizeMenuItem
+			// 
+			this.SummarizeMenuItem.Name = "SummarizeMenuItem";
+			this.SummarizeMenuItem.Size = new System.Drawing.Size(153, 22);
+			this.SummarizeMenuItem.Text = "S&ummarize...";
+			// 
+			// toolsToolStripMenuItem
+			// 
+			this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.OpenSettingsMenuItem});
+			this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+			this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+			this.toolsToolStripMenuItem.Text = "&Tools";
+			// 
+			// OpenSettingsMenuItem
+			// 
+			this.OpenSettingsMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("OpenSettingsMenuItem.Image")));
+			this.OpenSettingsMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.OpenSettingsMenuItem.Name = "OpenSettingsMenuItem";
+			this.OpenSettingsMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.OpenSettingsMenuItem.Text = "&Settings...";
+			// 
+			// toolStripMenuItem11
+			// 
+			this.toolStripMenuItem11.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.OpenAboutMenuItem});
+			this.toolStripMenuItem11.Name = "toolStripMenuItem11";
+			this.toolStripMenuItem11.Size = new System.Drawing.Size(24, 20);
+			this.toolStripMenuItem11.Text = "&?";
 			// 
 			// mToolbar
 			// 
@@ -333,7 +520,18 @@
             this.PreviewDensityComboBox,
             this.toolStripSeparator6,
             this.EditorButton,
-            this.FlamePropertiesButton});
+            this.FlamePropertiesButton,
+            this.PalettePropertiesButton,
+            this.CanvasPropertiesButton,
+            this.OpenSettingsButton,
+            this.toolStripSeparator7,
+            this.ToggleTransparencyButton,
+            this.ToggleGuidelinesButton,
+            this.toolStripSeparator8,
+            this.PanCameraModeButton,
+            this.RotateCameraModeButton,
+            this.ZoomInCameraModeButton,
+            this.ZoomOutCameraModeButton});
 			this.mToolbar.Location = new System.Drawing.Point(0, 24);
 			this.mToolbar.Name = "mToolbar";
 			this.mToolbar.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
@@ -347,7 +545,7 @@
 			this.NewFlameButton.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.NewFlameButton.Name = "NewFlameButton";
 			this.NewFlameButton.Size = new System.Drawing.Size(23, 22);
-			this.NewFlameButton.Text = "toolStripButton1";
+			this.NewFlameButton.Text = "New";
 			// 
 			// OpenBatchButton
 			// 
@@ -356,7 +554,7 @@
 			this.OpenBatchButton.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.OpenBatchButton.Name = "OpenBatchButton";
 			this.OpenBatchButton.Size = new System.Drawing.Size(23, 22);
-			this.OpenBatchButton.Text = "toolStripButton1";
+			this.OpenBatchButton.Text = "Open batch...";
 			// 
 			// SaveFlameButton
 			// 
@@ -365,7 +563,7 @@
 			this.SaveFlameButton.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.SaveFlameButton.Name = "SaveFlameButton";
 			this.SaveFlameButton.Size = new System.Drawing.Size(23, 22);
-			this.SaveFlameButton.Text = "toolStripButton1";
+			this.SaveFlameButton.Text = "Save flame...";
 			// 
 			// toolStripSeparator2
 			// 
@@ -379,7 +577,7 @@
 			this.RenderFlameButton.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.RenderFlameButton.Name = "RenderFlameButton";
 			this.RenderFlameButton.Size = new System.Drawing.Size(23, 22);
-			this.RenderFlameButton.Text = "toolStripButton1";
+			this.RenderFlameButton.Text = "Render flame...";
 			// 
 			// RenderBatchButton
 			// 
@@ -388,7 +586,7 @@
 			this.RenderBatchButton.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.RenderBatchButton.Name = "RenderBatchButton";
 			this.RenderBatchButton.Size = new System.Drawing.Size(23, 22);
-			this.RenderBatchButton.Text = "toolStripButton2";
+			this.RenderBatchButton.Text = "Render batch...";
 			// 
 			// toolStripSeparator3
 			// 
@@ -402,7 +600,7 @@
 			this.BatchListViewButton.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.BatchListViewButton.Name = "BatchListViewButton";
 			this.BatchListViewButton.Size = new System.Drawing.Size(23, 22);
-			this.BatchListViewButton.Text = "toolStripButton3";
+			this.BatchListViewButton.Text = "Show batch as list";
 			// 
 			// BatchIconViewButton
 			// 
@@ -411,7 +609,7 @@
 			this.BatchIconViewButton.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.BatchIconViewButton.Name = "BatchIconViewButton";
 			this.BatchIconViewButton.Size = new System.Drawing.Size(23, 22);
-			this.BatchIconViewButton.Text = "toolStripButton4";
+			this.BatchIconViewButton.Text = "Show batch as icons";
 			// 
 			// toolStripSeparator1
 			// 
@@ -425,7 +623,7 @@
 			this.UndoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.UndoButton.Name = "UndoButton";
 			this.UndoButton.Size = new System.Drawing.Size(23, 22);
-			this.UndoButton.Text = "toolStripButton1";
+			this.UndoButton.Text = "Undo";
 			// 
 			// RedoButton
 			// 
@@ -434,7 +632,7 @@
 			this.RedoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.RedoButton.Name = "RedoButton";
 			this.RedoButton.Size = new System.Drawing.Size(23, 22);
-			this.RedoButton.Text = "toolStripButton1";
+			this.RedoButton.Text = "Redo";
 			// 
 			// toolStripSeparator4
 			// 
@@ -448,7 +646,7 @@
 			this.ResetCameraButton.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.ResetCameraButton.Name = "ResetCameraButton";
 			this.ResetCameraButton.Size = new System.Drawing.Size(23, 22);
-			this.ResetCameraButton.Text = "toolStripButton1";
+			this.ResetCameraButton.Text = "Reset camera";
 			// 
 			// OpenFullscreenPreviewButton
 			// 
@@ -457,7 +655,7 @@
 			this.OpenFullscreenPreviewButton.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.OpenFullscreenPreviewButton.Name = "OpenFullscreenPreviewButton";
 			this.OpenFullscreenPreviewButton.Size = new System.Drawing.Size(23, 22);
-			this.OpenFullscreenPreviewButton.Text = "toolStripButton2";
+			this.OpenFullscreenPreviewButton.Text = "Fullscreen preview";
 			// 
 			// toolStripSeparator5
 			// 
@@ -478,6 +676,7 @@
             "1000"});
 			this.PreviewDensityComboBox.Name = "PreviewDensityComboBox";
 			this.PreviewDensityComboBox.Size = new System.Drawing.Size(80, 25);
+			this.PreviewDensityComboBox.ToolTipText = "Density";
 			this.PreviewDensityComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnDensityKeyPress);
 			// 
 			// toolStripSeparator6
@@ -492,7 +691,16 @@
 			this.EditorButton.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.EditorButton.Name = "EditorButton";
 			this.EditorButton.Size = new System.Drawing.Size(23, 22);
-			this.EditorButton.Text = "toolStripButton1";
+			this.EditorButton.Text = "Editor";
+			// 
+			// FlamePropertiesButton
+			// 
+			this.FlamePropertiesButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.FlamePropertiesButton.Image = ((System.Drawing.Image)(resources.GetObject("FlamePropertiesButton.Image")));
+			this.FlamePropertiesButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.FlamePropertiesButton.Name = "FlamePropertiesButton";
+			this.FlamePropertiesButton.Size = new System.Drawing.Size(23, 22);
+			this.FlamePropertiesButton.Text = "Adjustment";
 			// 
 			// mRootSplitter
 			// 
@@ -616,23 +824,103 @@
 			this.PreviewProgressBar.Name = "PreviewProgressBar";
 			this.PreviewProgressBar.Size = new System.Drawing.Size(200, 16);
 			// 
-			// FlamePropertiesButton
+			// OpenAboutMenuItem
 			// 
-			this.FlamePropertiesButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.FlamePropertiesButton.Image = ((System.Drawing.Image)(resources.GetObject("FlamePropertiesButton.Image")));
-			this.FlamePropertiesButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.FlamePropertiesButton.Name = "FlamePropertiesButton";
-			this.FlamePropertiesButton.Size = new System.Drawing.Size(23, 22);
-			this.FlamePropertiesButton.Text = "toolStripButton1";
+			this.OpenAboutMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("OpenAboutMenuItem.Image")));
+			this.OpenAboutMenuItem.Name = "OpenAboutMenuItem";
+			this.OpenAboutMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.OpenAboutMenuItem.Text = "&About...";
 			// 
-			// FlamePropertiesMenuItem
+			// PalettePropertiesButton
 			// 
-			this.FlamePropertiesMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("FlamePropertiesMenuItem.Image")));
-			this.FlamePropertiesMenuItem.ImageTransparentColor = System.Drawing.Color.Fuchsia;
-			this.FlamePropertiesMenuItem.Name = "FlamePropertiesMenuItem";
-			this.FlamePropertiesMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
-			this.FlamePropertiesMenuItem.Size = new System.Drawing.Size(190, 22);
-			this.FlamePropertiesMenuItem.Text = "&Adjustment";
+			this.PalettePropertiesButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.PalettePropertiesButton.Image = ((System.Drawing.Image)(resources.GetObject("PalettePropertiesButton.Image")));
+			this.PalettePropertiesButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.PalettePropertiesButton.Name = "PalettePropertiesButton";
+			this.PalettePropertiesButton.Size = new System.Drawing.Size(23, 22);
+			this.PalettePropertiesButton.Text = "Gradient";
+			// 
+			// CanvasPropertiesButton
+			// 
+			this.CanvasPropertiesButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.CanvasPropertiesButton.Image = ((System.Drawing.Image)(resources.GetObject("CanvasPropertiesButton.Image")));
+			this.CanvasPropertiesButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.CanvasPropertiesButton.Name = "CanvasPropertiesButton";
+			this.CanvasPropertiesButton.Size = new System.Drawing.Size(23, 22);
+			this.CanvasPropertiesButton.Text = "Image size";
+			// 
+			// OpenSettingsButton
+			// 
+			this.OpenSettingsButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.OpenSettingsButton.Image = ((System.Drawing.Image)(resources.GetObject("OpenSettingsButton.Image")));
+			this.OpenSettingsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.OpenSettingsButton.Name = "OpenSettingsButton";
+			this.OpenSettingsButton.Size = new System.Drawing.Size(23, 22);
+			this.OpenSettingsButton.Text = "Settings...";
+			// 
+			// toolStripSeparator7
+			// 
+			this.toolStripSeparator7.Name = "toolStripSeparator7";
+			this.toolStripSeparator7.Size = new System.Drawing.Size(6, 25);
+			// 
+			// ToggleTransparencyButton
+			// 
+			this.ToggleTransparencyButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.ToggleTransparencyButton.Image = ((System.Drawing.Image)(resources.GetObject("ToggleTransparencyButton.Image")));
+			this.ToggleTransparencyButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.ToggleTransparencyButton.Name = "ToggleTransparencyButton";
+			this.ToggleTransparencyButton.Size = new System.Drawing.Size(23, 22);
+			this.ToggleTransparencyButton.Text = "Show transparency";
+			// 
+			// ToggleGuidelinesButton
+			// 
+			this.ToggleGuidelinesButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.ToggleGuidelinesButton.Image = ((System.Drawing.Image)(resources.GetObject("ToggleGuidelinesButton.Image")));
+			this.ToggleGuidelinesButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.ToggleGuidelinesButton.Name = "ToggleGuidelinesButton";
+			this.ToggleGuidelinesButton.Size = new System.Drawing.Size(23, 22);
+			this.ToggleGuidelinesButton.Text = "Show guidelines";
+			// 
+			// toolStripSeparator8
+			// 
+			this.toolStripSeparator8.Name = "toolStripSeparator8";
+			this.toolStripSeparator8.Size = new System.Drawing.Size(6, 25);
+			// 
+			// PanCameraModeButton
+			// 
+			this.PanCameraModeButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.PanCameraModeButton.Image = ((System.Drawing.Image)(resources.GetObject("PanCameraModeButton.Image")));
+			this.PanCameraModeButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.PanCameraModeButton.Name = "PanCameraModeButton";
+			this.PanCameraModeButton.Size = new System.Drawing.Size(23, 22);
+			this.PanCameraModeButton.Text = "Pan camera";
+			// 
+			// RotateCameraModeButton
+			// 
+			this.RotateCameraModeButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.RotateCameraModeButton.Image = ((System.Drawing.Image)(resources.GetObject("RotateCameraModeButton.Image")));
+			this.RotateCameraModeButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.RotateCameraModeButton.Name = "RotateCameraModeButton";
+			this.RotateCameraModeButton.Size = new System.Drawing.Size(23, 22);
+			this.RotateCameraModeButton.Text = "Rotate camera";
+			// 
+			// ZoomInCameraModeButton
+			// 
+			this.ZoomInCameraModeButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.ZoomInCameraModeButton.Image = ((System.Drawing.Image)(resources.GetObject("ZoomInCameraModeButton.Image")));
+			this.ZoomInCameraModeButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.ZoomInCameraModeButton.Name = "ZoomInCameraModeButton";
+			this.ZoomInCameraModeButton.Size = new System.Drawing.Size(23, 22);
+			this.ZoomInCameraModeButton.Text = "Zoom in";
+			// 
+			// ZoomOutCameraModeButton
+			// 
+			this.ZoomOutCameraModeButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.ZoomOutCameraModeButton.Image = ((System.Drawing.Image)(resources.GetObject("ZoomOutCameraModeButton.Image")));
+			this.ZoomOutCameraModeButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.ZoomOutCameraModeButton.Name = "ZoomOutCameraModeButton";
+			this.ZoomOutCameraModeButton.Size = new System.Drawing.Size(23, 22);
+			this.ZoomOutCameraModeButton.Text = "Zoom out";
 			// 
 			// Main
 			// 
@@ -724,5 +1012,36 @@
 		private System.Windows.Forms.Label mPreviewBevel;
 		public System.Windows.Forms.ToolStripButton FlamePropertiesButton;
 		public System.Windows.Forms.ToolStripMenuItem FlamePropertiesMenuItem;
+		public System.Windows.Forms.ToolStripMenuItem PalettePropertiesMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem7;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem8;
+		private System.Windows.Forms.ToolStripMenuItem flameToolStripMenuItem;
+		public System.Windows.Forms.ToolStripMenuItem CanvasPropertiesMenuItem;
+		public System.Windows.Forms.ToolStripMenuItem ShowToolBarMenuItem;
+		public System.Windows.Forms.ToolStripMenuItem ShowStatusBarMenuItem;
+		public System.Windows.Forms.ToolStripMenuItem ShowBatchMenuItem;
+		public System.Windows.Forms.ToolStripMenuItem ResetLayoutMenuItem;
+		public System.Windows.Forms.ToolStripMenuItem ResetCameraMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem9;
+		public System.Windows.Forms.ToolStripMenuItem RandomizeFlameMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem10;
+		public System.Windows.Forms.ToolStripMenuItem RenderFlameMenuItem;
+		public System.Windows.Forms.ToolStripMenuItem RenderBatchMenuItem;
+		public System.Windows.Forms.ToolStripMenuItem SummarizeMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem11;
+		public System.Windows.Forms.ToolStripMenuItem OpenAboutMenuItem;
+		public System.Windows.Forms.ToolStripMenuItem OpenSettingsMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+		public System.Windows.Forms.ToolStripButton PalettePropertiesButton;
+		public System.Windows.Forms.ToolStripButton CanvasPropertiesButton;
+		public System.Windows.Forms.ToolStripButton OpenSettingsButton;
+		public System.Windows.Forms.ToolStripButton ToggleTransparencyButton;
+		public System.Windows.Forms.ToolStripButton ToggleGuidelinesButton;
+		public System.Windows.Forms.ToolStripButton PanCameraModeButton;
+		public System.Windows.Forms.ToolStripButton RotateCameraModeButton;
+		public System.Windows.Forms.ToolStripButton ZoomInCameraModeButton;
+		public System.Windows.Forms.ToolStripButton ZoomOutCameraModeButton;
 	}
 }

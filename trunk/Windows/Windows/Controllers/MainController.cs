@@ -424,6 +424,22 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		public void ShowFlameProperties()
 		{
 			mFlamePropertiesController.View.Show();
+			mFlamePropertiesController.View.Tabs.SelectTab(mFlamePropertiesController.View.CameraTab);
+		}
+		public void ShowImagingProperties()
+		{
+			mFlamePropertiesController.View.Show();
+			mFlamePropertiesController.View.Tabs.SelectTab(mFlamePropertiesController.View.ImagingTab);
+		}
+		public void ShowPaletteProperties()
+		{
+			mFlamePropertiesController.View.Show();
+			mFlamePropertiesController.View.Tabs.SelectTab(mFlamePropertiesController.View.PaletteTab);
+		}
+		public void ShowCanvasProperties()
+		{
+			mFlamePropertiesController.View.Show();
+			mFlamePropertiesController.View.Tabs.SelectTab(mFlamePropertiesController.View.CanvasTab);
 		}
 	}
 }

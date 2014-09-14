@@ -402,6 +402,7 @@
     <None Include="Windows\Resources\Icons\ScaleUp.png" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Main\About.bmp" />
     <EmbeddedResource Include="Windows\Resources\Toolbar\Main\BatchIconView.bmp" />
     <EmbeddedResource Include="Windows\Resources\Toolbar\Main\BatchListView.bmp" />
     <EmbeddedResource Include="Windows\Resources\Toolbar\Main\CanvasProperties.bmp" />

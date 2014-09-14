@@ -26,7 +26,7 @@
 			this.mToolbar = new System.Windows.Forms.ToolStrip();
 			this.UndoButton = new System.Windows.Forms.ToolStripButton();
 			this.RedoButton = new System.Windows.Forms.ToolStripButton();
-			this.mCameraTab = new System.Windows.Forms.TabPage();
+			this.CameraTab = new System.Windows.Forms.TabPage();
 			this.RotationScrollBar = new System.Windows.Forms.HScrollBar();
 			this.RotationTextBox = new System.Windows.Forms.TextBox();
 			this.YPositionScrollBar = new System.Windows.Forms.HScrollBar();
@@ -35,8 +35,8 @@
 			this.XPositionTextBox = new System.Windows.Forms.TextBox();
 			this.ZoomScrollBar = new System.Windows.Forms.HScrollBar();
 			this.ZoomTextBox = new System.Windows.Forms.TextBox();
-			this.mTabs = new System.Windows.Forms.TabControl();
-			this.mImagingTab = new System.Windows.Forms.TabPage();
+			this.Tabs = new System.Windows.Forms.TabControl();
+			this.ImagingTab = new System.Windows.Forms.TabPage();
 			this.GammaThresholdTextBox = new System.Windows.Forms.TextBox();
 			this.mBackgroundLabel = new System.Windows.Forms.Label();
 			this.VibrancyScrollBar = new System.Windows.Forms.HScrollBar();
@@ -52,6 +52,7 @@
 			this.HeightTextBox = new System.Windows.Forms.TextBox();
 			this.PerspectiveTextBox = new System.Windows.Forms.TextBox();
 			this.ScaleTextBox = new System.Windows.Forms.TextBox();
+			this.BackgroundPictureBox = new System.Windows.Forms.PictureBox();
 			this.ScaleDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.PerspectiveDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.HeightDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
@@ -66,13 +67,14 @@
 			this.VibrancyDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.BrightnessDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.GammaDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
-			this.BackgroundPictureBox = new System.Windows.Forms.PictureBox();
+			this.PaletteTab = new System.Windows.Forms.TabPage();
+			this.CanvasTab = new System.Windows.Forms.TabPage();
 			((System.ComponentModel.ISupportInitialize)(this.PreviewPicture)).BeginInit();
 			this.mPreviewContextMenu.SuspendLayout();
 			this.mToolbar.SuspendLayout();
-			this.mCameraTab.SuspendLayout();
-			this.mTabs.SuspendLayout();
-			this.mImagingTab.SuspendLayout();
+			this.CameraTab.SuspendLayout();
+			this.Tabs.SuspendLayout();
+			this.ImagingTab.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.BackgroundPictureBox)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -160,28 +162,28 @@
 			this.RedoButton.Size = new System.Drawing.Size(23, 18);
 			this.RedoButton.Text = "Redo";
 			// 
-			// mCameraTab
+			// CameraTab
 			// 
-			this.mCameraTab.BackColor = System.Drawing.SystemColors.ControlLightLight;
-			this.mCameraTab.Controls.Add(this.RotationScrollBar);
-			this.mCameraTab.Controls.Add(this.RotationTextBox);
-			this.mCameraTab.Controls.Add(this.RotationDragPanel);
-			this.mCameraTab.Controls.Add(this.YPositionScrollBar);
-			this.mCameraTab.Controls.Add(this.YPositionTextBox);
-			this.mCameraTab.Controls.Add(this.YPositionDragPanel);
-			this.mCameraTab.Controls.Add(this.XPositionScrollBar);
-			this.mCameraTab.Controls.Add(this.XPositionTextBox);
-			this.mCameraTab.Controls.Add(this.XPositionDragPanel);
-			this.mCameraTab.Controls.Add(this.ZoomScrollBar);
-			this.mCameraTab.Controls.Add(this.ZoomTextBox);
-			this.mCameraTab.Controls.Add(this.ZoomDragPanel);
-			this.mCameraTab.ImageIndex = 0;
-			this.mCameraTab.Location = new System.Drawing.Point(4, 23);
-			this.mCameraTab.Name = "mCameraTab";
-			this.mCameraTab.Padding = new System.Windows.Forms.Padding(3);
-			this.mCameraTab.Size = new System.Drawing.Size(492, 132);
-			this.mCameraTab.TabIndex = 0;
-			this.mCameraTab.Text = "Camera";
+			this.CameraTab.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.CameraTab.Controls.Add(this.RotationScrollBar);
+			this.CameraTab.Controls.Add(this.RotationTextBox);
+			this.CameraTab.Controls.Add(this.RotationDragPanel);
+			this.CameraTab.Controls.Add(this.YPositionScrollBar);
+			this.CameraTab.Controls.Add(this.YPositionTextBox);
+			this.CameraTab.Controls.Add(this.YPositionDragPanel);
+			this.CameraTab.Controls.Add(this.XPositionScrollBar);
+			this.CameraTab.Controls.Add(this.XPositionTextBox);
+			this.CameraTab.Controls.Add(this.XPositionDragPanel);
+			this.CameraTab.Controls.Add(this.ZoomScrollBar);
+			this.CameraTab.Controls.Add(this.ZoomTextBox);
+			this.CameraTab.Controls.Add(this.ZoomDragPanel);
+			this.CameraTab.ImageIndex = 0;
+			this.CameraTab.Location = new System.Drawing.Point(4, 23);
+			this.CameraTab.Name = "CameraTab";
+			this.CameraTab.Padding = new System.Windows.Forms.Padding(3);
+			this.CameraTab.Size = new System.Drawing.Size(490, 132);
+			this.CameraTab.TabIndex = 0;
+			this.CameraTab.Text = "Camera";
 			// 
 			// RotationScrollBar
 			// 
@@ -192,13 +194,13 @@
 			this.RotationScrollBar.Maximum = 360;
 			this.RotationScrollBar.Minimum = -360;
 			this.RotationScrollBar.Name = "RotationScrollBar";
-			this.RotationScrollBar.Size = new System.Drawing.Size(284, 21);
+			this.RotationScrollBar.Size = new System.Drawing.Size(282, 21);
 			this.RotationScrollBar.TabIndex = 22;
 			// 
 			// RotationTextBox
 			// 
 			this.RotationTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.RotationTextBox.Location = new System.Drawing.Point(421, 103);
+			this.RotationTextBox.Location = new System.Drawing.Point(419, 103);
 			this.RotationTextBox.Name = "RotationTextBox";
 			this.RotationTextBox.Size = new System.Drawing.Size(64, 20);
 			this.RotationTextBox.TabIndex = 21;
@@ -213,13 +215,13 @@
 			this.YPositionScrollBar.Maximum = 10000;
 			this.YPositionScrollBar.Minimum = -10000;
 			this.YPositionScrollBar.Name = "YPositionScrollBar";
-			this.YPositionScrollBar.Size = new System.Drawing.Size(284, 21);
+			this.YPositionScrollBar.Size = new System.Drawing.Size(282, 21);
 			this.YPositionScrollBar.TabIndex = 19;
 			// 
 			// YPositionTextBox
 			// 
 			this.YPositionTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.YPositionTextBox.Location = new System.Drawing.Point(421, 73);
+			this.YPositionTextBox.Location = new System.Drawing.Point(419, 73);
 			this.YPositionTextBox.Name = "YPositionTextBox";
 			this.YPositionTextBox.Size = new System.Drawing.Size(64, 20);
 			this.YPositionTextBox.TabIndex = 18;
@@ -234,13 +236,13 @@
 			this.XPositionScrollBar.Maximum = 10000;
 			this.XPositionScrollBar.Minimum = -10000;
 			this.XPositionScrollBar.Name = "XPositionScrollBar";
-			this.XPositionScrollBar.Size = new System.Drawing.Size(284, 21);
+			this.XPositionScrollBar.Size = new System.Drawing.Size(282, 21);
 			this.XPositionScrollBar.TabIndex = 16;
 			// 
 			// XPositionTextBox
 			// 
 			this.XPositionTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.XPositionTextBox.Location = new System.Drawing.Point(421, 42);
+			this.XPositionTextBox.Location = new System.Drawing.Point(419, 42);
 			this.XPositionTextBox.Name = "XPositionTextBox";
 			this.XPositionTextBox.Size = new System.Drawing.Size(64, 20);
 			this.XPositionTextBox.TabIndex = 15;
@@ -255,55 +257,57 @@
 			this.ZoomScrollBar.Maximum = 3000;
 			this.ZoomScrollBar.Minimum = -3000;
 			this.ZoomScrollBar.Name = "ZoomScrollBar";
-			this.ZoomScrollBar.Size = new System.Drawing.Size(284, 21);
+			this.ZoomScrollBar.Size = new System.Drawing.Size(282, 21);
 			this.ZoomScrollBar.TabIndex = 13;
 			// 
 			// ZoomTextBox
 			// 
 			this.ZoomTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.ZoomTextBox.Location = new System.Drawing.Point(421, 11);
+			this.ZoomTextBox.Location = new System.Drawing.Point(419, 11);
 			this.ZoomTextBox.Name = "ZoomTextBox";
 			this.ZoomTextBox.Size = new System.Drawing.Size(64, 20);
 			this.ZoomTextBox.TabIndex = 12;
 			this.ZoomTextBox.Text = "0.000";
 			// 
-			// mTabs
+			// Tabs
 			// 
-			this.mTabs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+			this.Tabs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.mTabs.Controls.Add(this.mCameraTab);
-			this.mTabs.Controls.Add(this.mImagingTab);
-			this.mTabs.ImageList = this.mTabImages;
-			this.mTabs.Location = new System.Drawing.Point(5, 153);
-			this.mTabs.Name = "mTabs";
-			this.mTabs.SelectedIndex = 0;
-			this.mTabs.Size = new System.Drawing.Size(498, 159);
-			this.mTabs.TabIndex = 6;
+			this.Tabs.Controls.Add(this.CameraTab);
+			this.Tabs.Controls.Add(this.ImagingTab);
+			this.Tabs.Controls.Add(this.PaletteTab);
+			this.Tabs.Controls.Add(this.CanvasTab);
+			this.Tabs.ImageList = this.mTabImages;
+			this.Tabs.Location = new System.Drawing.Point(5, 153);
+			this.Tabs.Name = "Tabs";
+			this.Tabs.SelectedIndex = 0;
+			this.Tabs.Size = new System.Drawing.Size(498, 159);
+			this.Tabs.TabIndex = 6;
 			// 
-			// mImagingTab
+			// ImagingTab
 			// 
-			this.mImagingTab.BackColor = System.Drawing.SystemColors.ControlLightLight;
-			this.mImagingTab.Controls.Add(this.BackgroundPictureBox);
-			this.mImagingTab.Controls.Add(this.GammaThresholdTextBox);
-			this.mImagingTab.Controls.Add(this.GammaThresholdDragPanel);
-			this.mImagingTab.Controls.Add(this.mBackgroundLabel);
-			this.mImagingTab.Controls.Add(this.VibrancyScrollBar);
-			this.mImagingTab.Controls.Add(this.VibrancyTextBox);
-			this.mImagingTab.Controls.Add(this.VibrancyDragPanel);
-			this.mImagingTab.Controls.Add(this.BrightnessScrollBar);
-			this.mImagingTab.Controls.Add(this.BrightnessTextBox);
-			this.mImagingTab.Controls.Add(this.BrightnessDragPanel);
-			this.mImagingTab.Controls.Add(this.GammaScrollBar);
-			this.mImagingTab.Controls.Add(this.GammaTextBox);
-			this.mImagingTab.Controls.Add(this.GammaDragPanel);
-			this.mImagingTab.ImageIndex = 1;
-			this.mImagingTab.Location = new System.Drawing.Point(4, 23);
-			this.mImagingTab.Name = "mImagingTab";
-			this.mImagingTab.Padding = new System.Windows.Forms.Padding(3);
-			this.mImagingTab.Size = new System.Drawing.Size(490, 132);
-			this.mImagingTab.TabIndex = 1;
-			this.mImagingTab.Text = "Rendering";
+			this.ImagingTab.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.ImagingTab.Controls.Add(this.BackgroundPictureBox);
+			this.ImagingTab.Controls.Add(this.GammaThresholdTextBox);
+			this.ImagingTab.Controls.Add(this.GammaThresholdDragPanel);
+			this.ImagingTab.Controls.Add(this.mBackgroundLabel);
+			this.ImagingTab.Controls.Add(this.VibrancyScrollBar);
+			this.ImagingTab.Controls.Add(this.VibrancyTextBox);
+			this.ImagingTab.Controls.Add(this.VibrancyDragPanel);
+			this.ImagingTab.Controls.Add(this.BrightnessScrollBar);
+			this.ImagingTab.Controls.Add(this.BrightnessTextBox);
+			this.ImagingTab.Controls.Add(this.BrightnessDragPanel);
+			this.ImagingTab.Controls.Add(this.GammaScrollBar);
+			this.ImagingTab.Controls.Add(this.GammaTextBox);
+			this.ImagingTab.Controls.Add(this.GammaDragPanel);
+			this.ImagingTab.ImageIndex = 1;
+			this.ImagingTab.Location = new System.Drawing.Point(4, 23);
+			this.ImagingTab.Name = "ImagingTab";
+			this.ImagingTab.Padding = new System.Windows.Forms.Padding(3);
+			this.ImagingTab.Size = new System.Drawing.Size(490, 132);
+			this.ImagingTab.TabIndex = 1;
+			this.ImagingTab.Text = "Rendering";
 			// 
 			// GammaThresholdTextBox
 			// 
@@ -458,6 +462,18 @@
 			this.ScaleTextBox.Size = new System.Drawing.Size(115, 20);
 			this.ScaleTextBox.TabIndex = 18;
 			this.ScaleTextBox.Text = "25.000";
+			// 
+			// BackgroundPictureBox
+			// 
+			this.BackgroundPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.BackgroundPictureBox.BackColor = System.Drawing.Color.Black;
+			this.BackgroundPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.BackgroundPictureBox.Location = new System.Drawing.Point(134, 102);
+			this.BackgroundPictureBox.Name = "BackgroundPictureBox";
+			this.BackgroundPictureBox.Size = new System.Drawing.Size(150, 22);
+			this.BackgroundPictureBox.TabIndex = 32;
+			this.BackgroundPictureBox.TabStop = false;
 			// 
 			// ScaleDragPanel
 			// 
@@ -698,17 +714,27 @@
 			this.GammaDragPanel.TextBox = this.GammaTextBox;
 			this.GammaDragPanel.Value = 4D;
 			// 
-			// BackgroundPictureBox
+			// PaletteTab
 			// 
-			this.BackgroundPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.BackgroundPictureBox.BackColor = System.Drawing.Color.Black;
-			this.BackgroundPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.BackgroundPictureBox.Location = new System.Drawing.Point(134, 102);
-			this.BackgroundPictureBox.Name = "BackgroundPictureBox";
-			this.BackgroundPictureBox.Size = new System.Drawing.Size(150, 22);
-			this.BackgroundPictureBox.TabIndex = 32;
-			this.BackgroundPictureBox.TabStop = false;
+			this.PaletteTab.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.PaletteTab.ImageIndex = 2;
+			this.PaletteTab.Location = new System.Drawing.Point(4, 23);
+			this.PaletteTab.Name = "PaletteTab";
+			this.PaletteTab.Padding = new System.Windows.Forms.Padding(3);
+			this.PaletteTab.Size = new System.Drawing.Size(490, 132);
+			this.PaletteTab.TabIndex = 2;
+			this.PaletteTab.Text = "Gradient";
+			// 
+			// CanvasTab
+			// 
+			this.CanvasTab.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.CanvasTab.ImageIndex = 3;
+			this.CanvasTab.Location = new System.Drawing.Point(4, 23);
+			this.CanvasTab.Name = "CanvasTab";
+			this.CanvasTab.Padding = new System.Windows.Forms.Padding(3);
+			this.CanvasTab.Size = new System.Drawing.Size(490, 132);
+			this.CanvasTab.TabIndex = 3;
+			this.CanvasTab.Text = "Image size";
 			// 
 			// FlameProperties
 			// 
@@ -727,7 +753,7 @@
 			this.Controls.Add(this.PitchDragPanel);
 			this.Controls.Add(this.DepthBlurTextBox);
 			this.Controls.Add(this.DepthBlurDragPanel);
-			this.Controls.Add(this.mTabs);
+			this.Controls.Add(this.Tabs);
 			this.Controls.Add(this.mToolbar);
 			this.Controls.Add(this.PreviewPicture);
 			this.Controls.Add(this.mPictureBevel);
@@ -740,11 +766,11 @@
 			this.mPreviewContextMenu.ResumeLayout(false);
 			this.mToolbar.ResumeLayout(false);
 			this.mToolbar.PerformLayout();
-			this.mCameraTab.ResumeLayout(false);
-			this.mCameraTab.PerformLayout();
-			this.mTabs.ResumeLayout(false);
-			this.mImagingTab.ResumeLayout(false);
-			this.mImagingTab.PerformLayout();
+			this.CameraTab.ResumeLayout(false);
+			this.CameraTab.PerformLayout();
+			this.Tabs.ResumeLayout(false);
+			this.ImagingTab.ResumeLayout(false);
+			this.ImagingTab.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.BackgroundPictureBox)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -762,8 +788,6 @@
 		private System.Windows.Forms.ToolStrip mToolbar;
 		public System.Windows.Forms.ToolStripButton UndoButton;
 		public System.Windows.Forms.ToolStripButton RedoButton;
-		private System.Windows.Forms.TabPage mCameraTab;
-		private System.Windows.Forms.TabControl mTabs;
 		public Controls.DragPanel DepthBlurDragPanel;
 		public System.Windows.Forms.TextBox DepthBlurTextBox;
 		public System.Windows.Forms.TextBox PitchTextBox;
@@ -789,7 +813,6 @@
 		public System.Windows.Forms.TextBox RotationTextBox;
 		public Controls.DragPanel RotationDragPanel;
 		private System.Windows.Forms.ImageList mTabImages;
-		private System.Windows.Forms.TabPage mImagingTab;
 		public System.Windows.Forms.HScrollBar VibrancyScrollBar;
 		public System.Windows.Forms.TextBox VibrancyTextBox;
 		public Controls.DragPanel VibrancyDragPanel;
@@ -803,5 +826,10 @@
 		public System.Windows.Forms.TextBox GammaThresholdTextBox;
 		public Controls.DragPanel GammaThresholdDragPanel;
 		public System.Windows.Forms.PictureBox BackgroundPictureBox;
+		public System.Windows.Forms.TabControl Tabs;
+		public System.Windows.Forms.TabPage CameraTab;
+		public System.Windows.Forms.TabPage ImagingTab;
+		public System.Windows.Forms.TabPage PaletteTab;
+		public System.Windows.Forms.TabPage CanvasTab;
 	}
 }
