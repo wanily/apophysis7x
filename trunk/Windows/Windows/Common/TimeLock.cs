@@ -56,7 +56,7 @@ namespace Xyrus.Apophysis.Windows
 			get { return mDelay; }
 			set
 			{
-				if (value < 1) throw new ArgumentOutOfRangeException("value");
+				if (value < 0) throw new ArgumentOutOfRangeException("value");
 
 				if (Equals(mDelay, value))
 					return;
@@ -73,6 +73,9 @@ namespace Xyrus.Apophysis.Windows
 
 		public void Enter()
 		{
+			if (mDelay == 0)
+				OnTick(mTimer, new EventArgs());
+
 			mTimer.Enabled = false;
 			mTimer.Enabled = true;
 			mIsBusy = true;

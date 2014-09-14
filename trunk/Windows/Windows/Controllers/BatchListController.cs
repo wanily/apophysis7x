@@ -127,6 +127,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			mParent.LoadFlameAndEraseHistory(flame);
 			mParent.EditorController.Flame = flame;
+			mParent.FlamePropertiesController.Flame = flame;
 		}
 		public Flame GetSelectedFlame()
 		{
@@ -345,6 +346,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				mParent.Flames.Replace(flame, mParent.UndoController.Current);
 				SetItemProperties(selected, mParent.UndoController.Current, true);
 				mParent.EditorController.Flame = mParent.UndoController.Current;
+				mParent.FlamePropertiesController.Flame = mParent.UndoController.Current;
 			}
 
 			mParent.UpdatePreviews();

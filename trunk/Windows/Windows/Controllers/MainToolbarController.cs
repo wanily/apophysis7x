@@ -31,6 +31,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			View.OpenFullscreenPreviewButton.Click += mParent.MainMenuController.OnFullscreenClick;
 			View.EditorButton.Click += mParent.MainMenuController.OnEditorClick;
+			View.FlamePropertiesButton.Click += mParent.MainMenuController.OnFlamePropertiesClick;
 
 			UpdateButtonStates();
 		}
@@ -48,6 +49,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			View.OpenFullscreenPreviewButton.Click -= mParent.MainMenuController.OnFullscreenClick;
 			View.EditorButton.Click -= mParent.MainMenuController.OnEditorClick;
+			View.FlamePropertiesButton.Click -= mParent.MainMenuController.OnFlamePropertiesClick;
 		}
 
 		private void OnBatchListViewClick(object sender, EventArgs e)

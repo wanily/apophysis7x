@@ -14,6 +14,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		private Bitmap mBitmap;
 		private DensityLevel mPreviewDensityLevel;
+		private TimeLock mUpdateTimeLock;
 
 		public EditorPreviewController([NotNull] Editor view, [NotNull] EditorController parent) : base(view)
 		{
@@ -21,11 +22,18 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			mParent = parent;
 			mRenderer = new ThumbnailRenderer();
+			mUpdateTimeLock = new TimeLock(UpdatePreview);
 		}
 		protected override void DisposeOverride(bool disposing)
 		{
 			if (disposing)
 			{
+				if (mUpdateTimeLock != null)
+				{
+					mUpdateTimeLock.Dispose();
+					mUpdateTimeLock = null;
+				}
+
 				if (mBitmap != null)
 				{
 					mBitmap.Dispose();
@@ -42,6 +50,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.LowQualityMenuItem.Click += OnQualitySelect;
 			View.MediumQualityMenuItem.Click += OnQualitySelect;
 			View.HighQualityMenuItem.Click += OnQualitySelect;
+
+			View.Activated += OnActivated;
 
 			View.IteratorCanvas.Edit += OnRequestCommit;
 			View.IteratorColorDragPanel.ValueChanged += OnRequestCommit;
@@ -96,6 +106,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.MediumQualityMenuItem.Click -= OnQualitySelect;
 			View.HighQualityMenuItem.Click -= OnQualitySelect;
 
+			View.Activated -= OnActivated;
+
 			View.IteratorCanvas.Edit -= OnRequestCommit;
 			View.IteratorColorDragPanel.ValueChanged -= OnRequestCommit;
 			View.IteratorColorScrollBar.ValueChanged -= OnRequestCommit;
@@ -135,6 +147,15 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			set
 			{
 				mPreviewDensityLevel = value;
+
+				var densities = new[]
+				{
+					ApophysisSettings.PreviewLowQualityDensity,
+					ApophysisSettings.PreviewMediumQualityDensity,
+					ApophysisSettings.PreviewHighQualityDensity
+				};
+
+				mUpdateTimeLock.Delay = (int) (ApophysisSettings.MiniPreviewUpdateResolution*densities[(int)value]);
 				UpdatePreview();
 			}
 		}
@@ -164,9 +185,13 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.PreviewPicture.Refresh();
 		}
 
+		private void OnActivated(object sender, EventArgs e)
+		{
+			UpdatePreview();
+		}
 		private void OnRequestCommit(object sender, EventArgs e)
 		{
-			mParent.UpdatePreviewsGlobally();
+			mUpdateTimeLock.Enter();
 		}
 		private void OnQualitySelect(object sender, EventArgs e)
 		{

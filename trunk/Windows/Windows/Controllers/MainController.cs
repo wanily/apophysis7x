@@ -16,8 +16,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		private UndoController mUndoController;
 		private EditorController mEditorController;
 		private FullscreenController mFullscreenController;
-		private KeyboardController mKeyboardController;
+		private FlamePropertiesController mFlamePropertiesController;
 
+		private KeyboardController mKeyboardController;
 		private MainMenuController mMenuController;
 		private MainToolbarController mToolbarController;
 		private MainUndoController mMainUndoController;
@@ -34,6 +35,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mKeyboardController = new KeyboardController();
 			mEditorController = new EditorController(this);
 			mFullscreenController = new FullscreenController(this);
+			mFlamePropertiesController = new FlamePropertiesController(this);
 
 			mMenuController = new MainMenuController(View, this);
 			mToolbarController = new MainToolbarController(View, this);
@@ -81,6 +83,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 					mFullscreenController = null;
 				}
 
+				if (mFlamePropertiesController != null)
+				{
+					mFlamePropertiesController.Dispose();
+					mFlamePropertiesController = null;
+				}
+
 				if (mEditorController != null)
 				{
 					mEditorController.Dispose();
@@ -110,8 +118,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		protected override void AttachView()
 		{
 			mEditorController.View.Owner = View;
+			mFlamePropertiesController.View.Owner = View;
 
 			mEditorController.Initialize();
+			mFlamePropertiesController.Initialize();
 			mFullscreenController.Initialize();
 			mMenuController.Initialize();
 			mToolbarController.Initialize();
@@ -124,6 +134,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		protected override void DetachView()
 		{
 			mEditorController.View.Owner = null;
+			mFlamePropertiesController.View.Owner = null;
 
 			View.Load -= OnViewLoaded;
 		}
@@ -175,6 +186,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			mBatchListController.UpdateSelectedPreview();
 			mEditorController.UpdatePreview();
+			mFlamePropertiesController.UpdatePreview();
 
 			if (withMainPreview)
 			{
@@ -212,6 +224,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		public FullscreenController FullscreenController
 		{
 			get { return mFullscreenController; }
+		}
+		public FlamePropertiesController FlamePropertiesController
+		{
+			get { return mFlamePropertiesController; }
 		}
 
 		internal BatchListController BatchListController
@@ -289,6 +305,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			if (flame == null) throw new ArgumentNullException("flame");
 
 			mEditorController.Flame = flame;
+			mFlamePropertiesController.Flame = flame;
 			mUndoController.Reset(flame);
 
 			UpdatePreviews();
@@ -298,6 +315,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			if (ReferenceEquals(flame, mEditorController.Flame))
 			{
 				mEditorController.UpdateWindowTitle();
+			}
+
+			if (ReferenceEquals(flame, mFlamePropertiesController.Flame))
+			{
+				mFlamePropertiesController.UpdateWindowTitle();
 			}
 
 			mUndoController.CommitChange(flame);
@@ -398,6 +420,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		public void ShowEditor()
 		{
 			mEditorController.View.Show();
+		}
+		public void ShowFlameProperties()
+		{
+			mFlamePropertiesController.View.Show();
 		}
 	}
 }

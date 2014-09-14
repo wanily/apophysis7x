@@ -259,5 +259,29 @@ namespace Xyrus.Apophysis.Properties {
                 this["MainPreviewDensity"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int FlamePropertiesPreviewDensityLevel {
+            get {
+                return ((int)(this["FlamePropertiesPreviewDensityLevel"]));
+            }
+            set {
+                this["FlamePropertiesPreviewDensityLevel"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public int MiniPreviewUpdateResolution {
+            get {
+                return ((int)(this["MiniPreviewUpdateResolution"]));
+            }
+            set {
+                this["MiniPreviewUpdateResolution"] = value;
+            }
+        }
     }
 }

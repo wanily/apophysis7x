@@ -61,6 +61,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.PreviewPicture.SizeChanged += OnPreviewSizeChanged;
 
 			mParent.EditorController.FlameChanged += OnChangeCommitted;
+			mParent.FlamePropertiesController.FlameChanged += OnChangeCommitted;
 
 			mRenderer.Progress += OnRendererProgress;
 			mRenderer.Exit += OnRendererExit;
@@ -77,6 +78,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.PreviewPicture.SizeChanged -= OnPreviewSizeChanged;
 
 			mParent.EditorController.FlameChanged -= OnChangeCommitted;
+			mParent.FlamePropertiesController.FlameChanged -= OnChangeCommitted;
 
 			View.PreviewPicture.Image = null;
 

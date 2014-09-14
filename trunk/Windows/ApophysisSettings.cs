@@ -219,6 +219,25 @@ namespace Xyrus.Apophysis
 				mSettings.MainPreviewDensity = value;
 			}
 		}
+		public static int MiniPreviewUpdateResolution
+		{
+			get { return mSettings.MiniPreviewUpdateResolution; }
+			set
+			{
+				if (value < 0 || value > 1000)
+				{
+					throw new ArgumentOutOfRangeException("value");
+				}
+
+				mSettings.MiniPreviewUpdateResolution = value;
+			}
+		}
+
+		public static DensityLevel FlamePropertiesPreviewDensityLevel
+		{
+			get { return (DensityLevel)mSettings.FlamePropertiesPreviewDensityLevel; }
+			set { mSettings.FlamePropertiesPreviewDensityLevel = (int)value; }
+		}
 
 		public static void Serialize()
 		{

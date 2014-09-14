@@ -85,6 +85,8 @@
 			this.PreviewTimeRemainingLabel = new System.Windows.Forms.ToolStripStatusLabel();
 			this.FlameNameLabel = new System.Windows.Forms.ToolStripStatusLabel();
 			this.PreviewProgressBar = new System.Windows.Forms.ToolStripProgressBar();
+			this.FlamePropertiesButton = new System.Windows.Forms.ToolStripButton();
+			this.FlamePropertiesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.mMainMenu.SuspendLayout();
 			this.mToolbar.SuspendLayout();
 			this.mRootSplitter.Panel1.SuspendLayout();
@@ -277,7 +279,8 @@
 			this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.OpenFullscreenPreviewMenuItem,
             this.toolStripMenuItem6,
-            this.EditorMenuItem});
+            this.EditorMenuItem,
+            this.FlamePropertiesMenuItem});
 			this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
 			this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
 			this.viewToolStripMenuItem.Text = "&View";
@@ -329,7 +332,8 @@
             this.toolStripSeparator5,
             this.PreviewDensityComboBox,
             this.toolStripSeparator6,
-            this.EditorButton});
+            this.EditorButton,
+            this.FlamePropertiesButton});
 			this.mToolbar.Location = new System.Drawing.Point(0, 24);
 			this.mToolbar.Name = "mToolbar";
 			this.mToolbar.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
@@ -612,6 +616,24 @@
 			this.PreviewProgressBar.Name = "PreviewProgressBar";
 			this.PreviewProgressBar.Size = new System.Drawing.Size(200, 16);
 			// 
+			// FlamePropertiesButton
+			// 
+			this.FlamePropertiesButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.FlamePropertiesButton.Image = ((System.Drawing.Image)(resources.GetObject("FlamePropertiesButton.Image")));
+			this.FlamePropertiesButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.FlamePropertiesButton.Name = "FlamePropertiesButton";
+			this.FlamePropertiesButton.Size = new System.Drawing.Size(23, 22);
+			this.FlamePropertiesButton.Text = "toolStripButton1";
+			// 
+			// FlamePropertiesMenuItem
+			// 
+			this.FlamePropertiesMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("FlamePropertiesMenuItem.Image")));
+			this.FlamePropertiesMenuItem.ImageTransparentColor = System.Drawing.Color.Fuchsia;
+			this.FlamePropertiesMenuItem.Name = "FlamePropertiesMenuItem";
+			this.FlamePropertiesMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
+			this.FlamePropertiesMenuItem.Size = new System.Drawing.Size(190, 22);
+			this.FlamePropertiesMenuItem.Text = "&Adjustment";
+			// 
 			// Main
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -700,5 +722,7 @@
 		public System.Windows.Forms.ToolStripStatusLabel FlameNameLabel;
 		public System.Windows.Forms.ToolStripProgressBar PreviewProgressBar;
 		private System.Windows.Forms.Label mPreviewBevel;
+		public System.Windows.Forms.ToolStripButton FlamePropertiesButton;
+		public System.Windows.Forms.ToolStripMenuItem FlamePropertiesMenuItem;
 	}
 }

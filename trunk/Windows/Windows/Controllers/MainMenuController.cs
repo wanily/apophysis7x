@@ -38,6 +38,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			View.OpenFullscreenPreviewMenuItem.Click += OnFullscreenClick;
 			View.EditorMenuItem.Click += OnEditorClick;
+			View.FlamePropertiesMenuItem.Click += OnFlamePropertiesClick;
 
 			UpdateButtonStates();
 		}
@@ -60,6 +61,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			View.OpenFullscreenPreviewMenuItem.Click -= OnFullscreenClick;
 			View.EditorMenuItem.Click -= OnEditorClick;
+			View.FlamePropertiesMenuItem.Click -= OnFlamePropertiesClick;
 		}
 
 		internal void OnNewFlameClick(object sender, EventArgs e)
@@ -139,6 +141,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		internal void OnEditorClick(object sender, EventArgs e)
 		{
 			mParent.ShowEditor();
+		}
+		internal void OnFlamePropertiesClick(object sender, EventArgs e)
+		{
+			mParent.ShowFlameProperties();
 		}
 
 		public void UpdateButtonStates()
