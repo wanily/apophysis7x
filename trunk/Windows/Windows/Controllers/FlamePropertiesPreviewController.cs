@@ -53,8 +53,18 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			View.Activated += OnActivated;
 
-			//todo register all the fields :D
-			//View.IteratorColorDragPanel.ValueChanged += OnRequestCommit;
+			View.DepthBlurDragPanel.ValueChanged += OnRequestCommit;
+			View.PitchDragPanel.ValueChanged += OnRequestCommit;
+			View.YawDragPanel.ValueChanged += OnRequestCommit;
+			View.HeightDragPanel.ValueChanged += OnRequestCommit;
+			View.PerspectiveDragPanel.ValueChanged += OnRequestCommit;
+			View.ScaleDragPanel.ValueChanged += OnRequestCommit;
+			View.DepthBlurTextBox.LostFocus += OnRequestCommit;
+			View.PitchTextBox.LostFocus += OnRequestCommit;
+			View.YawTextBox.LostFocus += OnRequestCommit;
+			View.HeightTextBox.LostFocus += OnRequestCommit;
+			View.PerspectiveTextBox.LostFocus += OnRequestCommit;
+			View.ScaleTextBox.LostFocus += OnRequestCommit;
 
 			using (mParent.Initializer.Enter())
 			{
@@ -82,8 +92,18 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			View.Activated -= OnActivated;
 
-			//todo unregister all the fields :D
-			//View.IteratorColorDragPanel.ValueChanged -= OnRequestCommit;
+			View.DepthBlurDragPanel.ValueChanged -= OnRequestCommit;
+			View.PitchDragPanel.ValueChanged -= OnRequestCommit;
+			View.YawDragPanel.ValueChanged -= OnRequestCommit;
+			View.HeightDragPanel.ValueChanged -= OnRequestCommit;
+			View.PerspectiveDragPanel.ValueChanged -= OnRequestCommit;
+			View.ScaleDragPanel.ValueChanged -= OnRequestCommit;
+			View.DepthBlurTextBox.LostFocus -= OnRequestCommit;
+			View.PitchTextBox.LostFocus -= OnRequestCommit;
+			View.YawTextBox.LostFocus -= OnRequestCommit;
+			View.HeightTextBox.LostFocus -= OnRequestCommit;
+			View.PerspectiveTextBox.LostFocus -= OnRequestCommit;
+			View.ScaleTextBox.LostFocus -= OnRequestCommit;
 
 			View.PreviewPicture.Image = null;
 			ApophysisSettings.FlamePropertiesPreviewDensityLevel = PreviewDensityLevel;

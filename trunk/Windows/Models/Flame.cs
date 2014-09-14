@@ -38,7 +38,7 @@ namespace Xyrus.Apophysis.Models
 			mCamera = new AffineTransform();
 
 			mCanvasSize = new Size(1920, 1080);
-			mPixelsPerUnit = 50.0 * mCanvasSize.Width / 100.0;
+			mPixelsPerUnit = 25.0 * mCanvasSize.Width / 100.0;
 			mBrightness = 4;
 			mGamma = 4;
 			mGammaThreshold = 0.001;
@@ -298,14 +298,14 @@ namespace Xyrus.Apophysis.Models
 			if (pitchAttribute != null)
 			{
 				var pitch = pitchAttribute.ParseFloat();
-				mPitch = pitch;
+				mPitch = pitch * System.Math.PI / 180.0;
 			}
 
 			var yawAttribute = element.Attribute(XName.Get("cam_yaw"));
 			if (yawAttribute != null)
 			{
 				var yaw = yawAttribute.ParseFloat();
-				mYaw = yaw;
+				mYaw = yaw * System.Math.PI / 180.0;
 			}
 
 			var heightAttribute = element.Attribute(XName.Get("cam_zpos"));
@@ -319,6 +319,10 @@ namespace Xyrus.Apophysis.Models
 			if (dofAttribute != null)
 			{
 				var dof = dofAttribute.ParseFloat();
+				if (dof < 0)
+				{
+					throw new ApophysisException("Depth of field must be greater than or equal to zero");
+				}
 				mDepthOfField = dof;
 			}
 

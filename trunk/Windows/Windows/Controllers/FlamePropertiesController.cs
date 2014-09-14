@@ -53,13 +53,68 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		protected override void AttachView()
 		{
+			View.DepthBlurDragPanel.ValueChanged += OnDepthBlurChanged;
+			View.PitchDragPanel.ValueChanged += OnPitchChanged;
+			View.YawDragPanel.ValueChanged += OnYawChanged;
+			View.HeightDragPanel.ValueChanged += OnHeightChanged;
+			View.PerspectiveDragPanel.ValueChanged += OnPerspectiveChanged;
+			View.ScaleDragPanel.ValueChanged += OnScaleChanged;
+
 			mUndoController.Initialize();
 			mPreviewController.Initialize();
 			mToolbarController.Initialize();
 		}
 		protected override void DetachView()
 		{
-			
+			View.DepthBlurDragPanel.ValueChanged -= OnDepthBlurChanged;
+			View.PitchDragPanel.ValueChanged -= OnPitchChanged;
+			View.YawDragPanel.ValueChanged -= OnYawChanged;
+			View.HeightDragPanel.ValueChanged -= OnHeightChanged;
+			View.PerspectiveDragPanel.ValueChanged -= OnPerspectiveChanged;
+			View.ScaleDragPanel.ValueChanged -= OnScaleChanged;
+		}
+
+		private void OnDepthBlurChanged(object sender, EventArgs e)
+		{
+			if (mFlame == null || mInitialize.IsBusy)
+				return;
+
+			mFlame.DepthOfField = View.DepthBlurDragPanel.Value;
+		}
+		private void OnPitchChanged(object sender, EventArgs e)
+		{
+			if (mFlame == null || mInitialize.IsBusy)
+				return;
+
+			mFlame.Pitch = View.PitchDragPanel.Value * System.Math.PI / 180.0;
+		}
+		private void OnYawChanged(object sender, EventArgs e)
+		{
+			if (mFlame == null || mInitialize.IsBusy)
+				return;
+
+			mFlame.Yaw = View.YawDragPanel.Value * System.Math.PI / 180.0;
+		}
+		private void OnHeightChanged(object sender, EventArgs e)
+		{
+			if (mFlame == null || mInitialize.IsBusy)
+				return;
+
+			mFlame.Height = View.HeightDragPanel.Value;
+		}
+		private void OnPerspectiveChanged(object sender, EventArgs e)
+		{
+			if (mFlame == null || mInitialize.IsBusy)
+				return;
+
+			mFlame.Perspective = View.PerspectiveDragPanel.Value;
+		}
+		private void OnScaleChanged(object sender, EventArgs e)
+		{
+			if (mFlame == null || mInitialize.IsBusy)
+				return;
+
+			mFlame.PixelsPerUnit = View.ScaleDragPanel.Value * mFlame.CanvasSize.Width / 100;
 		}
 
 		public void UpdateToolbar()
@@ -110,7 +165,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		private void AfterReset()
 		{
-			//todo set all the fields :D
+			View.DepthBlurDragPanel.Value = mFlame.DepthOfField;
+			View.PitchDragPanel.Value = mFlame.Pitch * 180.0 / System.Math.PI;
+			View.YawDragPanel.Value = mFlame.Yaw * 180.0 / System.Math.PI;
+			View.HeightDragPanel.Value = mFlame.Height;
+			View.PerspectiveDragPanel.Value = mFlame.Perspective;
+			View.ScaleDragPanel.Value = mFlame.PixelsPerUnit * 100.0 / mFlame.CanvasSize.Width;
 
 			UpdateToolbar();
 			UpdatePreview();

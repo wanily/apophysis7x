@@ -140,8 +140,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.IteratorCanvas.PreviewRange = ApophysisSettings.EditorVariationPreviewRange;
 			View.IteratorCanvas.PreviewApplyPostTransform = ApophysisSettings.EditorVariationPreviewApplyPostTransform;
 
-			mEditorUndoController.Initialize();
-			mEditorPreviewController.Initialize();
 			mToolbarController.Initialize();
 			mPropertiesController.Initialize();
 			mSelectionController.Initialize();
@@ -150,6 +148,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mVectorEditController.Initialize();
 			mVariationsController.Initialize();
 			mVariablesController.Initialize();
+			mEditorUndoController.Initialize();
+			mEditorPreviewController.Initialize();
 
 			View.IteratorCanvas.Edit += OnCanvasEdit;
 			View.IteratorCanvas.ActiveMatrixChanged += OnActiveMatrixChanged;

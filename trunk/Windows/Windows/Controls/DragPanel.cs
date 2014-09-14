@@ -21,6 +21,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 		private double mDefault;
 		private double mMinimum;
 		private double mMaximum;
+		private double mDragStepping;
 
 		public DragPanel()
 		{
@@ -29,6 +30,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 			mDefault = 0;
 			mMinimum = double.MinValue;
 			mMaximum = double.MaxValue;
+			mDragStepping = 0.1;
 
 			Cursor = Cursors.Hand;
 			mDisplayCulture = InputController.Culture;
@@ -156,6 +158,11 @@ namespace Xyrus.Apophysis.Windows.Controls
 				ConstrainValue(mMinimum, value);
 			}
 		}
+		public Double DragStepping
+		{
+			get { return mDragStepping; }
+			set { mDragStepping = value; }
+		}
 
 		private void ConstrainValue(double min, double max, bool withEvents = true)
 		{
@@ -241,6 +248,8 @@ namespace Xyrus.Apophysis.Windows.Controls
 					KeyboardInputManager.GetKeyState(Keys.LShiftKey) ||
 					KeyboardInputManager.GetKeyState(Keys.RShiftKey)
 				) multiplier = 100;
+
+				multiplier /= (10 * mDragStepping);
 
 				var newValue = System.Math.Round(mStart + delta / multiplier, 3);
 

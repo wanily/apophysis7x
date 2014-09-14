@@ -22,15 +22,35 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			mParent.UndoController.StackChanged += OnUndoStackChanged;
 
-			//todo register all the fields :D
-			//View.IteratorColorDragPanel.EndEdit += OnRequestCommit;
+			View.DepthBlurDragPanel.EndEdit += OnRequestCommit;
+			View.PitchDragPanel.EndEdit += OnRequestCommit;
+			View.YawDragPanel.EndEdit += OnRequestCommit;
+			View.HeightDragPanel.EndEdit += OnRequestCommit;
+			View.PerspectiveDragPanel.EndEdit += OnRequestCommit;
+			View.ScaleDragPanel.EndEdit += OnRequestCommit;
+			View.DepthBlurTextBox.LostFocus += OnRequestCommit;
+			View.PitchTextBox.LostFocus += OnRequestCommit;
+			View.YawTextBox.LostFocus += OnRequestCommit;
+			View.HeightTextBox.LostFocus += OnRequestCommit;
+			View.PerspectiveTextBox.LostFocus += OnRequestCommit;
+			View.ScaleTextBox.LostFocus += OnRequestCommit;
 		}
 		protected override void DetachView()
 		{
 			mParent.UndoController.StackChanged -= OnUndoStackChanged;
 
-			//todo unregister all the fields :D
-			//View.IteratorColorDragPanel.EndEdit -= OnRequestCommit;
+			View.DepthBlurDragPanel.EndEdit -= OnRequestCommit;
+			View.PitchDragPanel.EndEdit -= OnRequestCommit;
+			View.YawDragPanel.EndEdit -= OnRequestCommit;
+			View.HeightDragPanel.EndEdit -= OnRequestCommit;
+			View.PerspectiveDragPanel.EndEdit -= OnRequestCommit;
+			View.ScaleDragPanel.EndEdit -= OnRequestCommit;
+			View.DepthBlurTextBox.LostFocus -= OnRequestCommit;
+			View.PitchTextBox.LostFocus -= OnRequestCommit;
+			View.YawTextBox.LostFocus -= OnRequestCommit;
+			View.HeightTextBox.LostFocus -= OnRequestCommit;
+			View.PerspectiveTextBox.LostFocus -= OnRequestCommit;
+			View.ScaleTextBox.LostFocus -= OnRequestCommit;
 		}
 
 		private void OnRequestCommit(object sender, EventArgs e)
