@@ -1,7 +1,7 @@
 using System;
-using System.Globalization;
 using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Models;
+using Xyrus.Apophysis.Windows.Controllers;
 
 namespace Xyrus.Apophysis.Windows.Input
 {
@@ -39,8 +39,8 @@ namespace Xyrus.Apophysis.Windows.Input
 		protected override string GetInfoString()
 		{
 			return string.Format("Move:\t {0}\t {1}",
-				Delta.X.ToString("0.000", CultureInfo.CurrentCulture).PadLeft(6),
-				Delta.Y.ToString("0.000", CultureInfo.CurrentCulture).PadLeft(6));
+				Delta.X.ToString("0.000", InputController.Culture).PadLeft(6),
+				Delta.Y.ToString("0.000", InputController.Culture).PadLeft(6));
 		}
 	}
 }

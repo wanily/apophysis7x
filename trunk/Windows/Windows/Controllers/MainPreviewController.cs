@@ -4,6 +4,7 @@ using System.Globalization;
 using Xyrus.Apophysis.Calculation;
 using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Windows.Forms;
+using Xyrus.Apophysis.Windows.Input;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
@@ -68,6 +69,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			mParent.EditorController.FlameChanged += OnChangeCommitted;
 			mParent.FlamePropertiesController.FlameChanged += OnChangeCommitted;
+			View.CameraChanged += OnCameraChanged;
 
 			mRenderer.Progress += OnRendererProgress;
 			mRenderer.Exit += OnRendererExit;
@@ -86,6 +88,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			mParent.EditorController.FlameChanged -= OnChangeCommitted;
 			mParent.FlamePropertiesController.FlameChanged -= OnChangeCommitted;
+			View.CameraChanged += OnCameraChanged;
 
 			View.PreviewPicture.Image = null;
 
@@ -194,6 +197,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			SetElapsed(TimeSpan.FromSeconds(mElapsedTimer.GetElapsedTimeInSeconds()));
 			SetRemaining(TimeSpan.FromSeconds(0));
 		}
+		private void OnCameraChanged(object sender, CameraChangedEventArgs args)
+		{
+			View.LoadingStatusLabel.Text = args.Operation.ToString();
+			View.StatusBar.Refresh();
+		}
 
 		public int PreviewDensity
 		{
@@ -218,6 +226,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 					return;
 
 				mFitImage = value;
+				View.FitFrame = value;
 				UpdatePreview();
 			}
 		}

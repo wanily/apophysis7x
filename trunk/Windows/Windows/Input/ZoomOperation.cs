@@ -1,23 +1,24 @@
-using System;
-using Xyrus.Apophysis.Math;
+using Xyrus.Apophysis.Models;
+using Xyrus.Apophysis.Windows.Controllers;
 
 namespace Xyrus.Apophysis.Windows.Input
 {
-	class ZoomOperation : CameraInputOperation
+	[PublicAPI]
+	public class ZoomOperation : CameraInputOperation
 	{
-		[NotNull]
-		public Vector2 X0 { get; set; }
+		public double Factor { get; private set; }
+		public double OriginalFactor { get; private set; }
+		public bool UseScale { get; private set; }
 
-		[NotNull]
-		public Vector2 X1 { get; set; }
-
-		public ZoomOperation([NotNull] Vector2 x0, [NotNull] Vector2 x1)
+		public ZoomOperation([NotNull] Flame flame, double factor, double originalFactor, bool useScale) : base(flame)
 		{
-			if (x0 == null) throw new ArgumentNullException("x0");
-			if (x1 == null) throw new ArgumentNullException("x1");
+			Factor = factor;
+			OriginalFactor = originalFactor;
+		}
 
-			X0 = x0;
-			X1 = x1;
+		public override string ToString()
+		{
+			return string.Format(UseScale ? "Scale: {0}" : "Zoom: {0}", Factor.ToString("0.000", InputController.Culture));
 		}
 	}
 }

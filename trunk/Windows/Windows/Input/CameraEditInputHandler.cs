@@ -67,9 +67,12 @@ namespace Xyrus.Apophysis.Windows.Input
 			mIsMouseDown = true;
 
 			mDragCursor = cursor;
-			mDragOrigin = mFlame.Camera.Origin.Copy();
+			mDragOrigin = mFlame.Origin.Copy();
 			mDragAngle = System.Math.Atan2(cursor.Y - AttachedControl.ClientSize.Height / 2.0, AttachedControl.ClientSize.Width / 2.0 - cursor.X);
-			mDragAngleOld = mFlame.Camera.GetAxisAngle(Axis.X);
+			mDragAngleOld = mFlame.Angle;
+
+			if (BeginEdit != null)
+				BeginEdit(this, new EventArgs());
 
 			return true;
 		}
@@ -78,27 +81,26 @@ namespace Xyrus.Apophysis.Windows.Input
 			if (mFlame == null || !mIsMouseDown)
 				return false;
 
-			var c = mFlame.PixelToWorld(cursor);
-			var c0 = mFlame.PixelToWorld(mDragCursor);
+			mInputVisual.Operation = null;
 
 			switch (EditMode)
 			{
 				case CameraEditMode.Pan:
 
-					var o = c - c0 + mDragOrigin;
+					var scale = System.Math.Pow(2, mFlame.Zoom) * mFlame.PixelsPerUnit;
+					var point = mDragOrigin + (cursor - mDragCursor) / scale;
 
 					if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
 					{
-						var d = (c - c0).Abs();
-						if (d.X > d.Y) o.Y = mDragOrigin.Y;
-						else o.X = mDragOrigin.X;
+						var d = (cursor - mDragCursor).Abs();
+						if (d.X > d.Y) point.Y = mDragOrigin.Y / scale;
+						else point.X = mDragOrigin.X / scale;
 					}
 
-					mFlame.Camera.Origin.X = o.X;
-					mFlame.Camera.Origin.Y = o.Y;
-					mInputVisual.Operation = new PanOperation(o);
+					mFlame.Origin = point;
+					mInputVisual.Operation = new PanOperation(mFlame, point, mDragOrigin);
 
-					return true;
+					break;
 				case CameraEditMode.Rotate:
 
 					var angle = System.Math.Atan2(
@@ -114,17 +116,22 @@ namespace Xyrus.Apophysis.Windows.Input
 						angle = snapped * System.Math.PI / 180.0;
 					}
 
-					mFlame.Camera.SetAngle(mDragAngleOld + angle);
-					mInputVisual.Operation = new RotateCanvasOperation(-angle);
+					mFlame.Angle = (mDragAngleOld + angle);
+					mInputVisual.Operation = new RotateCanvasOperation(mFlame, angle + mDragAngleOld, mDragAngleOld);
 
-					return true;
+					break;
 				case CameraEditMode.ZoomIn:
-					return false;
+					break;
 				case CameraEditMode.ZoomOut:
-					return false;
-				default:
-					return false;
+					break;
 			}
+
+			if (mInputVisual.Operation != null && CameraChanged != null)
+			{
+				CameraChanged(this, new CameraChangedEventArgs(mInputVisual.Operation));
+			}
+
+			return mInputVisual.Operation != null;
 		}
 		protected override bool OnAttachedControlMouseUp()
 		{
@@ -139,7 +146,14 @@ namespace Xyrus.Apophysis.Windows.Input
 			mDragAngle = 0;
 			mDragAngleOld = 0;
 
+			if (EndEdit != null)
+				EndEdit(this, new EventArgs());
+
 			return true;
 		}
+
+		public event EventHandler BeginEdit;
+		public event EventHandler EndEdit;
+		public event CameraChangedEventHandler CameraChanged;
 	}
 }

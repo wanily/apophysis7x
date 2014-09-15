@@ -205,6 +205,8 @@
     <Compile Include="Windows\Forms\Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Input\CameraChangedEventArgs.cs" />
+    <Compile Include="Windows\Input\CameraChangedEventHandler.cs" />
     <Compile Include="Windows\Input\CameraEditInputHandler.cs" />
     <Compile Include="Windows\Input\IteratorInputOperation.cs" />
     <Compile Include="Windows\Input\MouseHookEventArgs.cs" />

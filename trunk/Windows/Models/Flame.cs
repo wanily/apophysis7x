@@ -10,7 +10,6 @@ namespace Xyrus.Apophysis.Models
 	[PublicAPI]
 	public class Flame
 	{
-		private AffineTransform mCamera;
 		private IteratorCollection mIterators;
 		private Palette mPalette;
 
@@ -30,6 +29,8 @@ namespace Xyrus.Apophysis.Models
 		private double mYaw;
 		private double mPitch;
 		private Color mBackground;
+		private Vector2 mOrigin;
+		private double mAngle;
 
 		public Flame()
 		{
@@ -37,8 +38,9 @@ namespace Xyrus.Apophysis.Models
 
 			mIterators = new IteratorCollection(this);
 			mPalette = PaletteCollection.GetRandomPalette(this);
-			mCamera = new AffineTransform();
 
+			mOrigin = new Vector2();
+			mAngle = 0;
 			mCanvasSize = new Size(1920, 1080);
 			mPixelsPerUnit = 25.0 * mCanvasSize.Width / 100.0;
 			mBrightness = 4;
@@ -74,6 +76,17 @@ namespace Xyrus.Apophysis.Models
 			}
 		}
 
+		[NotNull]
+		public Vector2 Origin
+		{
+			get { return mOrigin; }
+			set
+			{
+				if (value == null) throw new ArgumentNullException("value");
+				mOrigin = value;
+			}
+		}
+
 		public Size CanvasSize
 		{
 			get { return mCanvasSize; }
@@ -87,6 +100,11 @@ namespace Xyrus.Apophysis.Models
 				mCanvasSize = value;
 				PixelsPerUnit = PixelsPerUnit * value.Width / old.Width;
 			}
+		}
+		public double Angle
+		{
+			get { return mAngle; }
+			set { mAngle = value; }
 		}
 		public double PixelsPerUnit
 		{
@@ -200,17 +218,6 @@ namespace Xyrus.Apophysis.Models
 		}
 
 		[NotNull]
-		public AffineTransform Camera
-		{
-			get { return mCamera; }
-			set
-			{
-				if (value == null) throw new ArgumentNullException("value");
-				mCamera = value;
-			}
-		}
-
-		[NotNull]
 		public Flame Copy()
 		{
 			var copy = new Flame();
@@ -220,12 +227,8 @@ namespace Xyrus.Apophysis.Models
 			copy.Name = mName;
 			copy.mIterators = mIterators.Copy(copy);
 			copy.mPalette = mPalette.Copy();
-			copy.mCamera.Origin.X = mCamera.Origin.X;
-			copy.mCamera.Origin.Y = mCamera.Origin.Y;
-			copy.mCamera.Matrix.X.X = mCamera.Matrix.X.X;
-			copy.mCamera.Matrix.X.Y = mCamera.Matrix.X.Y;
-			copy.mCamera.Matrix.Y.X = mCamera.Matrix.Y.X;
-			copy.mCamera.Matrix.Y.Y = mCamera.Matrix.Y.Y;
+			copy.mOrigin = mOrigin.Copy();
+			copy.mAngle = mAngle;
 			copy.mCanvasSize = mCanvasSize;
 			copy.mPixelsPerUnit = mPixelsPerUnit;
 			copy.mZoom = mZoom;
@@ -244,12 +247,14 @@ namespace Xyrus.Apophysis.Models
 		}
 
 		[NotNull]
-		public Vector2 PixelToWorld(Vector2 cursor)
+		public Vector2 PixelToWorld(Vector2 pixel)
 		{
 			var scaleFactor = System.Math.Pow(2, mZoom) * mPixelsPerUnit;
-			var scaledCursor = cursor / scaleFactor;
+			var scaledPixel = pixel / scaleFactor;
 
-			return Camera.TransformPoint(scaledCursor);
+			return new Vector2(
+				scaledPixel.X * System.Math.Cos(mAngle) - scaledPixel.Y * System.Math.Sin(mAngle),
+				scaledPixel.X * System.Math.Sin(mAngle) + scaledPixel.Y * System.Math.Cos(mAngle));
 		}
 
 		public void ReadXml([NotNull] XElement element)
@@ -260,8 +265,6 @@ namespace Xyrus.Apophysis.Models
 			{
 				throw new ApophysisException("Expected XML node \"flame\" but received \"" + element.Name + "\"");
 			}
-
-			mCamera.Reset();
 
 			var nameAttribute = element.Attribute(XName.Get("name"));
 			Name = nameAttribute == null ? null : nameAttribute.Value;
@@ -286,14 +289,14 @@ namespace Xyrus.Apophysis.Models
 			if (centerAttribute != null)
 			{
 				var center = centerAttribute.ParseVector();
-				mCamera.Move(center);
+				mOrigin = center;
 			}
 
 			var angleAttribute = element.Attribute(XName.Get("angle"));
 			if (angleAttribute != null)
 			{
 				var angle = angleAttribute.ParseFloat();
-				mCamera.Rotate(angle);
+				mAngle = angle;
 			}
 
 			var ppuAttribute = element.Attribute(XName.Get("scale"));

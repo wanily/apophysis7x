@@ -1,5 +1,6 @@
 using System;
 using Xyrus.Apophysis.Windows.Forms;
+using Xyrus.Apophysis.Windows.Input;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {

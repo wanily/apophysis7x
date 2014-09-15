@@ -1,5 +1,6 @@
 using System;
 using System.Windows.Forms;
+using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Forms;
 
@@ -207,7 +208,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			if (flame == null)
 				return;
 
-			flame.Camera.Reset();
+			flame.Angle = 0;
+			flame.Origin = new Vector2();
 			flame.Zoom = 0;
 			flame.PixelsPerUnit = 25 * flame.CanvasSize.Width / 100.0;
 

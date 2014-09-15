@@ -1,5 +1,5 @@
-using System.Globalization;
 using Xyrus.Apophysis.Models;
+using Xyrus.Apophysis.Windows.Controllers;
 
 namespace Xyrus.Apophysis.Windows.Input
 {
@@ -31,7 +31,7 @@ namespace Xyrus.Apophysis.Windows.Input
 				angle = 360 + angle;
 			}
 
-			return string.Format("Rotate:\t {0}°", (360 - angle).ToString("0", CultureInfo.CurrentCulture).PadLeft(5));
+			return string.Format("Rotate:\t {0}°", (360 - angle).ToString("0", InputController.Culture).PadLeft(5));
 		}
 	}
 }

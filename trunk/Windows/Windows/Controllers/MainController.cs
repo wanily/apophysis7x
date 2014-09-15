@@ -7,6 +7,7 @@ using System.Xml;
 using System.Xml.Linq;
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Forms;
+using Xyrus.Apophysis.Windows.Input;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
@@ -130,6 +131,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mMainPreviewController.Initialize();
 
 			View.Load += OnViewLoaded;
+			View.CameraEndEdit += OnCameraEndEdit;
+			View.CameraChanged += OnCameraChanged;
 		}
 		protected override void DetachView()
 		{
@@ -137,6 +140,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mFlamePropertiesController.View.Owner = null;
 
 			View.Load -= OnViewLoaded;
+			View.CameraEndEdit -= OnCameraEndEdit;
+			View.CameraChanged -= OnCameraChanged;
 		}
 
 		[NotNull]
@@ -207,6 +212,24 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		private void OnViewLoaded(object sender, EventArgs e)
 		{
 			GenerateRandomFlames(10, false);
+		}
+		private void OnCameraEndEdit(object sender, EventArgs e)
+		{
+			var flame = mBatchListController.GetSelectedFlame();
+			if (flame == null)
+				return;
+
+			UndoController.CommitChange(flame);
+			FlamePropertiesController.RaiseFlameChanged();
+
+			View.LoadingStatusLabel.Text = mFlames.CalculatedName;
+		}
+		private void OnCameraChanged(object sender, CameraChangedEventArgs args)
+		{
+			using (mFlamePropertiesController.Initializer.Enter())
+			{
+				mFlamePropertiesController.UpdateCamera();
+			}
 		}
 
 		public UndoController UndoController

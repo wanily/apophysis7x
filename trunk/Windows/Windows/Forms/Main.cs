@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Controllers;
@@ -40,6 +41,10 @@ namespace Xyrus.Apophysis.Windows.Forms
 			mInput = new InputHandlerChain(PreviewPicture);
 			mInput.Add(mCameraEditHandler = new CameraEditInputHandler(PreviewPicture, mInputVisual));
 
+			mCameraEditHandler.BeginEdit += OnCameraBeginEdit;
+			mCameraEditHandler.CameraChanged += OnCameraChanged;
+			mCameraEditHandler.EndEdit += OnCameraEndEdit;
+
 			// hack http://stackoverflow.com/questions/2646606/c-sharp-winforms-statusstrip-how-do-i-reclaim-the-space-from-the-grip
 			StatusBar.Padding = new Padding(StatusBar.Padding.Left, StatusBar.Padding.Top, StatusBar.Padding.Left, StatusBar.Padding.Bottom);
 		}
@@ -47,6 +52,13 @@ namespace Xyrus.Apophysis.Windows.Forms
 		{
 			if (disposing)
 			{
+				if (mCameraEditHandler != null)
+				{
+					mCameraEditHandler.BeginEdit -= OnCameraBeginEdit;
+					mCameraEditHandler.CameraChanged -= OnCameraChanged;
+					mCameraEditHandler.EndEdit -= OnCameraEndEdit;
+				}
+
 				if (mPainter != null)
 				{
 					mPainter.Dispose();
@@ -80,13 +92,28 @@ namespace Xyrus.Apophysis.Windows.Forms
 			InputController.HandleKeyboardInput(this, keyData);
 			return base.ProcessCmdKey(ref msg, keyData);
 		}
-		private void OnWindowLoaded(object sender, System.EventArgs e)
+		private void OnWindowLoaded(object sender, EventArgs e)
 		{
 			UpdateBatchListColumnSize();
 		}
 		private void OnDensityKeyPress(object sender, KeyPressEventArgs e)
 		{
 			mInputController.HandleKeyPressForIntegerTextBox(e);
+		}
+		private void OnCameraChanged(object sender, CameraChangedEventArgs args)
+		{
+			if (CameraChanged != null)
+				CameraChanged(this, args);
+		}
+		private void OnCameraBeginEdit(object sender, EventArgs e)
+		{
+			if (CameraBeginEdit != null)
+				CameraBeginEdit(this, new EventArgs());
+		}
+		private void OnCameraEndEdit(object sender, EventArgs e)
+		{
+			if (CameraEndEdit != null)
+				CameraEndEdit(this, new EventArgs());
 		}
 
 		public bool ShowGuidelines
@@ -105,11 +132,23 @@ namespace Xyrus.Apophysis.Windows.Forms
 				mBackgroundVisual.ShowTransparency = mShowTransparency = value;
 			}
 		}
+		public bool FitFrame
+		{
+			get { return mInputVisual.FitFrame; }
+			set
+			{
+				mInputVisual.FitFrame = value;
+			}
+		}
 
 		public Flame PreviewedFlame
 		{
 			get { return mCameraEditHandler.Flame; }
-			set { mCameraEditHandler.Flame = value; }
+			set
+			{
+				mCameraEditHandler.Flame = value;
+				mInputVisual.ImageSize = value == null? new Size() : value.CanvasSize;
+			}
 		}
 		public Bitmap PreviewImage
 		{
@@ -130,6 +169,10 @@ namespace Xyrus.Apophysis.Windows.Forms
 			get { return mCameraEditUseScale; }
 			set { mCameraEditHandler.UseScale = mCameraEditUseScale = value; }
 		}
+
+		public event EventHandler CameraBeginEdit;
+		public event EventHandler CameraEndEdit;
+		public event CameraChangedEventHandler CameraChanged;
 
 		internal void UpdateBatchListColumnSize()
 		{

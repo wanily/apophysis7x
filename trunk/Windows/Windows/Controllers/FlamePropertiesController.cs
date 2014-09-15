@@ -202,7 +202,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 					View.XPositionScrollBar.Value = (int)(View.XPositionDragPanel.Value*1000);
 			}
 
-			mFlame.Camera.Origin.X = View.XPositionDragPanel.Value;
+			mFlame.Origin.X = View.XPositionDragPanel.Value;
 		}
 		private void OnYPositionChanged(object sender, EventArgs e)
 		{
@@ -220,7 +220,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 					View.YPositionScrollBar.Value = (int)(View.YPositionDragPanel.Value * 1000);
 			}
 
-			mFlame.Camera.Origin.Y = View.YPositionDragPanel.Value;
+			mFlame.Origin.Y = View.YPositionDragPanel.Value;
 		}
 		private void OnRotationChanged(object sender, EventArgs e)
 		{
@@ -238,7 +238,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 					View.RotationScrollBar.Value = (int)(View.RotationDragPanel.Value);
 			}
 
-			mFlame.Camera.SetAngle(View.RotationDragPanel.Value * System.Math.PI / 180.0);
+			mFlame.Angle = (-View.RotationDragPanel.Value * System.Math.PI / 180.0);
 		}
 		private void OnZoomChanged(object sender, EventArgs e)
 		{
@@ -354,15 +354,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.YawDragPanel.Value = mFlame.Yaw * 180.0 / System.Math.PI;
 			View.HeightDragPanel.Value = mFlame.Height;
 			View.PerspectiveDragPanel.Value = mFlame.Perspective;
-			View.ScaleDragPanel.Value = mFlame.PixelsPerUnit * 100.0 / mFlame.CanvasSize.Width;
-			View.ZoomDragPanel.Value = mFlame.Zoom;
-			View.ZoomScrollBar.Value = (int) (mFlame.Zoom*1000);
-			View.XPositionDragPanel.Value = mFlame.Camera.Origin.X;
-			View.XPositionScrollBar.Value = (int)(mFlame.Camera.Origin.X * 1000);
-			View.YPositionDragPanel.Value = mFlame.Camera.Origin.Y;
-			View.YPositionScrollBar.Value = (int)(mFlame.Camera.Origin.Y * 1000);
-			View.RotationDragPanel.Value = mFlame.Camera.GetAxisAngle(Axis.X);
-			View.RotationScrollBar.Value = (int)(View.RotationDragPanel.Value);
 			View.GammaDragPanel.Value = mFlame.Gamma;
 			View.GammaScrollBar.Value = (int)(mFlame.Gamma * 1000);
 			View.BrightnessDragPanel.Value = mFlame.Brightness;
@@ -372,6 +363,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.GammaThresholdDragPanel.Value = mFlame.GammaThreshold;
 			View.BackgroundPictureBox.BackColor = mFlame.Background;
 
+			UpdateCamera();
 			UpdateToolbar();
 			UpdatePreview();
 		}
@@ -381,6 +373,19 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			if (FlameChanged != null)
 				FlameChanged(this, new EventArgs());
+		}
+
+		public void UpdateCamera()
+		{
+			View.ScaleDragPanel.Value = mFlame.PixelsPerUnit * 100.0 / mFlame.CanvasSize.Width;
+			View.ZoomDragPanel.Value = mFlame.Zoom;
+			View.ZoomScrollBar.Value = (int)(mFlame.Zoom * 1000);
+			View.XPositionDragPanel.Value = mFlame.Origin.X;
+			View.XPositionScrollBar.Value = (int)(mFlame.Origin.X * 1000);
+			View.YPositionDragPanel.Value = mFlame.Origin.Y;
+			View.YPositionScrollBar.Value = (int)(mFlame.Origin.Y * 1000);
+			View.RotationDragPanel.Value = -mFlame.Angle * 180 / System.Math.PI;
+			View.RotationScrollBar.Value = (int)(View.RotationDragPanel.Value);
 		}
 	}
 }
