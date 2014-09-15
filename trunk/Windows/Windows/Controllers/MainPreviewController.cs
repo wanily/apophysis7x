@@ -56,6 +56,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		protected override void AttachView()
 		{
+			View.ShowGuidelines = ApophysisSettings.MainPreviewShowGuidelines;
+
 			View.PreviewDensityComboBox.SelectedIndexChanged += OnDensityChanged;
 			View.PreviewDensityComboBox.LostFocus += OnDensityChanged;
 			View.PreviewPicture.SizeChanged += OnPreviewSizeChanged;
@@ -86,6 +88,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mRenderer.Exit -= OnRendererExit;
 
 			ApophysisSettings.MainPreviewDensity = PreviewDensity;
+			ApophysisSettings.MainPreviewShowGuidelines = View.ShowGuidelines;
 		}
 
 		private void SetProgress(double progress)
@@ -155,15 +158,15 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			View.PreviewPicture.Invoke(new Action(() =>
 			{
-				var oldImage = View.PreviewPicture.BackgroundImage;
+				//var oldImage = View.PreviewPicture.Image;
 
-				View.PreviewPicture.BackgroundImage = bitmap;
+				View.PreviewPicture.Image = bitmap;
 				View.PreviewPicture.Refresh();
 
-				if (oldImage != null)
+				/*if (oldImage != null)
 				{
 					oldImage.Dispose();
-				}
+				}*/
 			}));
 		}
 		private void OnChangeCommitted(object sender, EventArgs e)
@@ -207,7 +210,20 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			var canvasSize = View.PreviewPicture.ClientSize;
 			var renderSize = flame.CanvasSize.FitToFrame(canvasSize);
 
-			View.PreviewPicture.BackgroundImage = WaitImageController.DrawWaitImage(renderSize, Color.Black);
+			/*Color backgroundWait, foregroundWait;
+			if (View.ShowTransparency)
+			{
+				backgroundWait = Color.Transparent;
+				foregroundWait = Color.Black;
+			}
+			else
+			{
+				backgroundWait = Color.Transparent;
+				foregroundWait = Color.White;
+			}*/
+
+			View.PreviewPicture.BackColor = flame.Background;
+			//View.PreviewPicture.Image = WaitImageController.DrawWaitImage(renderSize, backgroundWait, foregroundWait);
 
 			mRenderer.Cancel();
 

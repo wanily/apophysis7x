@@ -815,6 +815,9 @@
 			// 
 			// RootSplitter
 			// 
+			this.RootSplitter.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.RootSplitter.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
 			this.RootSplitter.Location = new System.Drawing.Point(0, 3);
 			this.RootSplitter.Name = "RootSplitter";

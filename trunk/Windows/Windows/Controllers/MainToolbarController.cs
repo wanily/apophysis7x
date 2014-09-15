@@ -39,6 +39,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.FlamePropertiesButton.Click += mParent.MainMenuController.OnFlamePropertiesClick;
 			View.PalettePropertiesButton.Click += mParent.MainMenuController.OnPalettePropertiesClick;
 			View.CanvasPropertiesButton.Click += mParent.MainMenuController.OnCanvasPropertiesClick;
+
+			View.ToggleGuidelinesButton.Click += OnToggleGuidelines;
+			View.ToggleTransparencyButton.Click += OnToggleTransparency;
 		}
 		protected override void DetachView()
 		{
@@ -59,6 +62,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.FlamePropertiesButton.Click -= mParent.MainMenuController.OnFlamePropertiesClick;
 			View.PalettePropertiesButton.Click -= mParent.MainMenuController.OnPalettePropertiesClick;
 			View.CanvasPropertiesButton.Click -= mParent.MainMenuController.OnCanvasPropertiesClick;
+
+			View.ToggleGuidelinesButton.Click -= OnToggleGuidelines;
+			View.ToggleTransparencyButton.Click -= OnToggleTransparency;
 
 			ApophysisSettings.IsMainToolbarVisible = View.ToolBar.Visible;
 			ApophysisSettings.IsMainStatusbarVisible = View.BottomPanel.Visible;
@@ -84,6 +90,16 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.BatchListViewButton.Checked = !View.BatchIconViewButton.Checked;
 			mParent.BatchListController.IsIconViewEnabled = View.BatchIconViewButton.Checked;
 		}
+		private void OnToggleGuidelines(object sender, EventArgs e)
+		{
+			View.ToggleGuidelinesButton.Checked = !View.ToggleGuidelinesButton.Checked;
+			View.ShowGuidelines = View.ToggleGuidelinesButton.Checked;
+		}
+		private void OnToggleTransparency(object sender, EventArgs e)
+		{
+			View.ToggleTransparencyButton.Checked = !View.ToggleTransparencyButton.Checked;
+			View.ShowTransparency = View.ToggleTransparencyButton.Checked;
+		}
 
 		public void UpdateButtonStates()
 		{
@@ -92,6 +108,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			View.BatchListViewButton.Checked = !mParent.BatchListController.IsIconViewEnabled;
 			View.BatchIconViewButton.Checked = mParent.BatchListController.IsIconViewEnabled;
+
+			View.ToggleGuidelinesButton.Checked = View.ShowGuidelines;
 		}
 		public void UpdateRootPanelSize()
 		{

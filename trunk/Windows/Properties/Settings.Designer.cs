@@ -331,5 +331,17 @@ namespace Xyrus.Apophysis.Properties {
                 this["IsBatchListVisible"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool MainPreviewShowGuidelines {
+            get {
+                return ((bool)(this["MainPreviewShowGuidelines"]));
+            }
+            set {
+                this["MainPreviewShowGuidelines"] = value;
+            }
+        }
     }
 }

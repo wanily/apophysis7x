@@ -145,7 +145,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			var canvasSize = View.ClientSize;
 			var renderSize = flame.CanvasSize.FitToFrame(canvasSize);
 
-			View.BackgroundImage = WaitImageController.DrawWaitImage(renderSize, Color.Black);
+			View.BackgroundImage = WaitImageController.DrawWaitImage(renderSize, Color.Black, Color.White);
 
 			mRenderer.Cancel();
 

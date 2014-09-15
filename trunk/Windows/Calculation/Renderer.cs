@@ -13,7 +13,7 @@ namespace Xyrus.Apophysis.Calculation
 		private double? mLastSecondsPerIteration;
 
 		//todo - render real fractal ... rofl
-		public Bitmap CreateBitmap([NotNull] Flame flame, double density, Size size, Action<ProgressEventArgs> progressCallback = null, ThreadStateToken threadState = null)
+		public Bitmap CreateBitmap([NotNull] Flame flame, double density, Size size, bool withTransparency, Action<ProgressEventArgs> progressCallback = null, ThreadStateToken threadState = null)
 		{
 			if (flame == null) throw new ArgumentNullException("flame");
 			if (density <= 0) throw new ArgumentOutOfRangeException("density");
@@ -38,11 +38,15 @@ namespace Xyrus.Apophysis.Calculation
 				}
 			}
 
-			using (var graphics = Graphics.FromImage(bitmap))
-			using (var brush = new SolidBrush(Color.Black))
+			if (withTransparency)
 			{
-				graphics.FillRectangle(brush, new Rectangle(new Point(), bitmap.Size));
+				using (var graphics = Graphics.FromImage(bitmap))
+				using (var brush = new SolidBrush(flame.Background))
+				{
+					graphics.FillRectangle(brush, new Rectangle(new Point(), bitmap.Size));
+				}
 			}
+			
 
 			timer.SetStartingTime();
 

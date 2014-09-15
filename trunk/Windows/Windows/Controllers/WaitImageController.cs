@@ -6,13 +6,13 @@ namespace Xyrus.Apophysis.Windows.Controllers
 	{
 		private const char mWaitGlyph = '6';
 
-		public static Bitmap DrawWaitImage(Size size, Color backgroundColor, float glyphFontSize = 50.0f)
+		public static Bitmap DrawWaitImage(Size size, Color backgroundColor, Color glyphColor, float glyphFontSize = 50.0f)
 		{
 			var bitmap = new Bitmap(size.Width, size.Height);
 
 			using (var graphics = Graphics.FromImage(bitmap))
 			using (var background = new SolidBrush(backgroundColor))
-			using (var foreground = new SolidBrush(Color.FromArgb(255 - backgroundColor.R, 255 - backgroundColor.G, 255 - backgroundColor.B)))
+			using (var foreground = new SolidBrush(glyphColor))
 			using (var frame = new Pen(foreground))
 			{
 				graphics.FillRectangle(background, new Rectangle(new Point(), bitmap.Size));

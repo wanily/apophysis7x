@@ -15,7 +15,7 @@ namespace Xyrus.Apophysis.Calculation
 
 			var renderer = new Renderer();
 
-			return renderer.CreateBitmap(flame, density, size, null, threadState);
+			return renderer.CreateBitmap(flame, density, size, false, null, threadState);
 		}
 	}
 }

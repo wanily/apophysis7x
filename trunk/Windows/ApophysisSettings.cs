@@ -230,6 +230,7 @@ namespace Xyrus.Apophysis
 				mSettings.IsBatchListVisible = value;
 			}
 		}
+
 		public static int MainPreviewDensity
 		{
 			get { return mSettings.MainPreviewDensity; }
@@ -256,6 +257,15 @@ namespace Xyrus.Apophysis
 				mSettings.MiniPreviewUpdateResolution = value;
 			}
 		}
+		public static bool MainPreviewShowGuidelines
+		{
+			get { return mSettings.MainPreviewShowGuidelines; }
+			set
+			{
+				mSettings.MainPreviewShowGuidelines = value;
+			}
+		}
+
 		public static int BatchListSize
 		{
 			get { return mSettings.BatchListSize; }

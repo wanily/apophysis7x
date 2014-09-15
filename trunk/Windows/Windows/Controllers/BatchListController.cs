@@ -81,7 +81,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				ListPreviewDensity = ApophysisSettings.BatchListPreviewDensity;
 			}
 
-			mWaitImage = WaitImageController.DrawWaitImage(new Size(mPreviewSize, mPreviewSize), Color.Black);
+			mWaitImage = WaitImageController.DrawWaitImage(new Size(mPreviewSize, mPreviewSize), Color.Black, Color.White);
 		}
 		protected override void DetachView()
 		{
@@ -199,7 +199,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 					mWaitImage.Dispose();
 				}
 
-				mWaitImage = WaitImageController.DrawWaitImage(new Size(mPreviewSize, mPreviewSize), Color.Black);
+				mWaitImage = WaitImageController.DrawWaitImage(new Size(mPreviewSize, mPreviewSize), Color.Black, Color.White);
 
 				if (mIsIconViewEnabled)
 				{

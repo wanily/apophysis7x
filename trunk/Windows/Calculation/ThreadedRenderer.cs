@@ -10,12 +10,14 @@ namespace Xyrus.Apophysis.Calculation
 	{
 		class RenderParameters
 		{
+			public readonly bool WithTransparency;
 			public readonly Flame Flame;
 			public readonly double Density;
 			public readonly Size Size;
 
-			public RenderParameters(Flame flame, double density, Size size)
+			public RenderParameters(Flame flame, double density, Size size, bool withTransparency)
 			{
+				WithTransparency = withTransparency;
 				Flame = flame;
 				Density = density;
 				Size = size;
@@ -70,7 +72,7 @@ namespace Xyrus.Apophysis.Calculation
 			if (density <= 0) throw new ArgumentOutOfRangeException("density");
 			if (size.Width <= 0 || size.Height <= 0) throw new ArgumentOutOfRangeException("size");
 
-			mParameters = new RenderParameters(flame, density, size);
+			mParameters = new RenderParameters(flame, density, size, true);
 			mThreadController.StartThread(CreateBitmap, callback);
 		}
 
@@ -106,7 +108,7 @@ namespace Xyrus.Apophysis.Calculation
 		//todo multithreading
 		private Bitmap CreateBitmap(ThreadStateToken threadState)
 		{
-			var result = mRenderer.CreateBitmap(mParameters.Flame, mParameters.Density, mParameters.Size, ProgressUpdate, threadState);
+			var result = mRenderer.CreateBitmap(mParameters.Flame, mParameters.Density, mParameters.Size, mParameters.WithTransparency, ProgressUpdate, threadState);
 
 			mParameters = null;
 
