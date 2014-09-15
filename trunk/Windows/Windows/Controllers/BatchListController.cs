@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Calculation;
+using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Threading;
 using Xyrus.Apophysis.Windows.Forms;
@@ -33,7 +35,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mPreviewImages = new ImageList
 			{
 				ColorDepth = ColorDepth.Depth32Bit, 
-				ImageSize = new Size(120, 120)
+				ImageSize = new Size(120, 120),
 			};
 		}
 		protected override void DisposeOverride(bool disposing)
@@ -260,12 +262,22 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			var flame = item.Tag as Flame;
 			Debug.Assert(flame != null);
 
+			var canvas = new Size(mPreviewSize, mPreviewSize);
+			var size = flame.CanvasSize.FitToFrame(canvas);
+
 			var renderer = new ThumbnailRenderer();
-			var bitmap = renderer.CreateBitmap(flame, mPreviewDensity, new Size(mPreviewSize, mPreviewSize), threadState);
+			var bitmap = renderer.CreateBitmap(flame, mPreviewDensity, size, threadState);
+
+			var fitBitmap = new Bitmap(canvas.Width, canvas.Height, PixelFormat.Format32bppArgb);
+			using (var graphics = Graphics.FromImage(fitBitmap))
+			{
+				graphics.DrawImageUnscaled(bitmap, canvas.Width / 2 - size.Width / 2, canvas.Height / 2 - size.Height / 2);
+				bitmap.Dispose();
+			}
 
 			View.Invoke(new Action(() =>
 				{
-					mPreviewImages.Images.Add(bitmap);
+					mPreviewImages.Images.Add(fitBitmap);
 					item.ImageIndex = mPreviewImages.Images.Count - 1;
 				}));
 		}

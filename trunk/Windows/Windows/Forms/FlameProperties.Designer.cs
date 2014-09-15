@@ -29,22 +29,33 @@
 			this.CameraTab = new System.Windows.Forms.TabPage();
 			this.RotationScrollBar = new System.Windows.Forms.HScrollBar();
 			this.RotationTextBox = new System.Windows.Forms.TextBox();
+			this.RotationDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.YPositionScrollBar = new System.Windows.Forms.HScrollBar();
 			this.YPositionTextBox = new System.Windows.Forms.TextBox();
+			this.YPositionDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.XPositionScrollBar = new System.Windows.Forms.HScrollBar();
 			this.XPositionTextBox = new System.Windows.Forms.TextBox();
+			this.XPositionDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.ZoomScrollBar = new System.Windows.Forms.HScrollBar();
 			this.ZoomTextBox = new System.Windows.Forms.TextBox();
+			this.ZoomDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.Tabs = new System.Windows.Forms.TabControl();
 			this.ImagingTab = new System.Windows.Forms.TabPage();
+			this.BackgroundPictureBox = new System.Windows.Forms.PictureBox();
 			this.GammaThresholdTextBox = new System.Windows.Forms.TextBox();
+			this.GammaThresholdDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.mBackgroundLabel = new System.Windows.Forms.Label();
 			this.VibrancyScrollBar = new System.Windows.Forms.HScrollBar();
 			this.VibrancyTextBox = new System.Windows.Forms.TextBox();
+			this.VibrancyDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.BrightnessScrollBar = new System.Windows.Forms.HScrollBar();
 			this.BrightnessTextBox = new System.Windows.Forms.TextBox();
+			this.BrightnessDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.GammaScrollBar = new System.Windows.Forms.HScrollBar();
 			this.GammaTextBox = new System.Windows.Forms.TextBox();
+			this.GammaDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
+			this.PaletteTab = new System.Windows.Forms.TabPage();
+			this.CanvasTab = new System.Windows.Forms.TabPage();
 			this.mTabImages = new System.Windows.Forms.ImageList(this.components);
 			this.DepthBlurTextBox = new System.Windows.Forms.TextBox();
 			this.PitchTextBox = new System.Windows.Forms.TextBox();
@@ -52,23 +63,12 @@
 			this.HeightTextBox = new System.Windows.Forms.TextBox();
 			this.PerspectiveTextBox = new System.Windows.Forms.TextBox();
 			this.ScaleTextBox = new System.Windows.Forms.TextBox();
-			this.BackgroundPictureBox = new System.Windows.Forms.PictureBox();
 			this.ScaleDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.PerspectiveDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.HeightDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.YawDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.PitchDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.DepthBlurDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
-			this.RotationDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
-			this.YPositionDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
-			this.XPositionDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
-			this.ZoomDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
-			this.GammaThresholdDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
-			this.VibrancyDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
-			this.BrightnessDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
-			this.GammaDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
-			this.PaletteTab = new System.Windows.Forms.TabPage();
-			this.CanvasTab = new System.Windows.Forms.TabPage();
 			((System.ComponentModel.ISupportInitialize)(this.PreviewPicture)).BeginInit();
 			this.mPreviewContextMenu.SuspendLayout();
 			this.mToolbar.SuspendLayout();
@@ -206,6 +206,23 @@
 			this.RotationTextBox.TabIndex = 21;
 			this.RotationTextBox.Text = "0.000";
 			// 
+			// RotationDragPanel
+			// 
+			this.RotationDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.RotationDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.RotationDragPanel.Default = 0D;
+			this.RotationDragPanel.DragStepping = 5D;
+			this.RotationDragPanel.Location = new System.Drawing.Point(5, 102);
+			this.RotationDragPanel.Maximum = 360D;
+			this.RotationDragPanel.Minimum = -360D;
+			this.RotationDragPanel.Name = "RotationDragPanel";
+			this.RotationDragPanel.Size = new System.Drawing.Size(126, 21);
+			this.RotationDragPanel.TabIndex = 20;
+			this.RotationDragPanel.Text = "Rotation";
+			this.RotationDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.RotationDragPanel.TextBox = this.RotationTextBox;
+			this.RotationDragPanel.Value = 0D;
+			// 
 			// YPositionScrollBar
 			// 
 			this.YPositionScrollBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -226,6 +243,23 @@
 			this.YPositionTextBox.Size = new System.Drawing.Size(64, 20);
 			this.YPositionTextBox.TabIndex = 18;
 			this.YPositionTextBox.Text = "0.000";
+			// 
+			// YPositionDragPanel
+			// 
+			this.YPositionDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.YPositionDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.YPositionDragPanel.Default = 0D;
+			this.YPositionDragPanel.DragStepping = 0.1D;
+			this.YPositionDragPanel.Location = new System.Drawing.Point(5, 73);
+			this.YPositionDragPanel.Maximum = 10D;
+			this.YPositionDragPanel.Minimum = -10D;
+			this.YPositionDragPanel.Name = "YPositionDragPanel";
+			this.YPositionDragPanel.Size = new System.Drawing.Size(126, 21);
+			this.YPositionDragPanel.TabIndex = 17;
+			this.YPositionDragPanel.Text = "Y-Position";
+			this.YPositionDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.YPositionDragPanel.TextBox = this.YPositionTextBox;
+			this.YPositionDragPanel.Value = 0D;
 			// 
 			// XPositionScrollBar
 			// 
@@ -248,6 +282,23 @@
 			this.XPositionTextBox.TabIndex = 15;
 			this.XPositionTextBox.Text = "0.000";
 			// 
+			// XPositionDragPanel
+			// 
+			this.XPositionDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.XPositionDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.XPositionDragPanel.Default = 0D;
+			this.XPositionDragPanel.DragStepping = 0.1D;
+			this.XPositionDragPanel.Location = new System.Drawing.Point(5, 41);
+			this.XPositionDragPanel.Maximum = 10D;
+			this.XPositionDragPanel.Minimum = -10D;
+			this.XPositionDragPanel.Name = "XPositionDragPanel";
+			this.XPositionDragPanel.Size = new System.Drawing.Size(126, 21);
+			this.XPositionDragPanel.TabIndex = 14;
+			this.XPositionDragPanel.Text = "X-Position";
+			this.XPositionDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.XPositionDragPanel.TextBox = this.XPositionTextBox;
+			this.XPositionDragPanel.Value = 0D;
+			// 
 			// ZoomScrollBar
 			// 
 			this.ZoomScrollBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -268,6 +319,23 @@
 			this.ZoomTextBox.Size = new System.Drawing.Size(64, 20);
 			this.ZoomTextBox.TabIndex = 12;
 			this.ZoomTextBox.Text = "0.000";
+			// 
+			// ZoomDragPanel
+			// 
+			this.ZoomDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.ZoomDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.ZoomDragPanel.Default = 0D;
+			this.ZoomDragPanel.DragStepping = 0.1D;
+			this.ZoomDragPanel.Location = new System.Drawing.Point(5, 11);
+			this.ZoomDragPanel.Maximum = 3D;
+			this.ZoomDragPanel.Minimum = -3D;
+			this.ZoomDragPanel.Name = "ZoomDragPanel";
+			this.ZoomDragPanel.Size = new System.Drawing.Size(126, 21);
+			this.ZoomDragPanel.TabIndex = 11;
+			this.ZoomDragPanel.Text = "Zoom";
+			this.ZoomDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.ZoomDragPanel.TextBox = this.ZoomTextBox;
+			this.ZoomDragPanel.Value = 0D;
 			// 
 			// Tabs
 			// 
@@ -309,6 +377,18 @@
 			this.ImagingTab.TabIndex = 1;
 			this.ImagingTab.Text = "Rendering";
 			// 
+			// BackgroundPictureBox
+			// 
+			this.BackgroundPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.BackgroundPictureBox.BackColor = System.Drawing.Color.Black;
+			this.BackgroundPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.BackgroundPictureBox.Location = new System.Drawing.Point(134, 102);
+			this.BackgroundPictureBox.Name = "BackgroundPictureBox";
+			this.BackgroundPictureBox.Size = new System.Drawing.Size(150, 22);
+			this.BackgroundPictureBox.TabIndex = 32;
+			this.BackgroundPictureBox.TabStop = false;
+			// 
 			// GammaThresholdTextBox
 			// 
 			this.GammaThresholdTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -317,6 +397,24 @@
 			this.GammaThresholdTextBox.Size = new System.Drawing.Size(64, 20);
 			this.GammaThresholdTextBox.TabIndex = 31;
 			this.GammaThresholdTextBox.Text = "0.001";
+			// 
+			// GammaThresholdDragPanel
+			// 
+			this.GammaThresholdDragPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.GammaThresholdDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.GammaThresholdDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.GammaThresholdDragPanel.Default = 0.001D;
+			this.GammaThresholdDragPanel.DragStepping = 0.1D;
+			this.GammaThresholdDragPanel.Location = new System.Drawing.Point(290, 103);
+			this.GammaThresholdDragPanel.Maximum = 1.7976931348623157E+308D;
+			this.GammaThresholdDragPanel.Minimum = -1.7976931348623157E+308D;
+			this.GammaThresholdDragPanel.Name = "GammaThresholdDragPanel";
+			this.GammaThresholdDragPanel.Size = new System.Drawing.Size(126, 21);
+			this.GammaThresholdDragPanel.TabIndex = 30;
+			this.GammaThresholdDragPanel.Text = "Gamma threshold";
+			this.GammaThresholdDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.GammaThresholdDragPanel.TextBox = this.GammaThresholdTextBox;
+			this.GammaThresholdDragPanel.Value = 0.001D;
 			// 
 			// mBackgroundLabel
 			// 
@@ -349,13 +447,30 @@
 			this.VibrancyTextBox.TabIndex = 27;
 			this.VibrancyTextBox.Text = "1.000";
 			// 
+			// VibrancyDragPanel
+			// 
+			this.VibrancyDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.VibrancyDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.VibrancyDragPanel.Default = 1D;
+			this.VibrancyDragPanel.DragStepping = 0.1D;
+			this.VibrancyDragPanel.Location = new System.Drawing.Point(5, 73);
+			this.VibrancyDragPanel.Maximum = 3D;
+			this.VibrancyDragPanel.Minimum = 0D;
+			this.VibrancyDragPanel.Name = "VibrancyDragPanel";
+			this.VibrancyDragPanel.Size = new System.Drawing.Size(126, 21);
+			this.VibrancyDragPanel.TabIndex = 26;
+			this.VibrancyDragPanel.Text = "Vibrancy";
+			this.VibrancyDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.VibrancyDragPanel.TextBox = this.VibrancyTextBox;
+			this.VibrancyDragPanel.Value = 1D;
+			// 
 			// BrightnessScrollBar
 			// 
 			this.BrightnessScrollBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.BrightnessScrollBar.LargeChange = 1;
 			this.BrightnessScrollBar.Location = new System.Drawing.Point(134, 41);
-			this.BrightnessScrollBar.Maximum = 16000;
+			this.BrightnessScrollBar.Maximum = 100000;
 			this.BrightnessScrollBar.Minimum = 1;
 			this.BrightnessScrollBar.Name = "BrightnessScrollBar";
 			this.BrightnessScrollBar.Size = new System.Drawing.Size(282, 21);
@@ -370,6 +485,23 @@
 			this.BrightnessTextBox.Size = new System.Drawing.Size(64, 20);
 			this.BrightnessTextBox.TabIndex = 24;
 			this.BrightnessTextBox.Text = "4.000";
+			// 
+			// BrightnessDragPanel
+			// 
+			this.BrightnessDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.BrightnessDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.BrightnessDragPanel.Default = 4D;
+			this.BrightnessDragPanel.DragStepping = 0.1D;
+			this.BrightnessDragPanel.Location = new System.Drawing.Point(5, 41);
+			this.BrightnessDragPanel.Maximum = 100D;
+			this.BrightnessDragPanel.Minimum = 0.001D;
+			this.BrightnessDragPanel.Name = "BrightnessDragPanel";
+			this.BrightnessDragPanel.Size = new System.Drawing.Size(126, 21);
+			this.BrightnessDragPanel.TabIndex = 23;
+			this.BrightnessDragPanel.Text = "Brightness";
+			this.BrightnessDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.BrightnessDragPanel.TextBox = this.BrightnessTextBox;
+			this.BrightnessDragPanel.Value = 4D;
 			// 
 			// GammaScrollBar
 			// 
@@ -392,6 +524,45 @@
 			this.GammaTextBox.Size = new System.Drawing.Size(64, 20);
 			this.GammaTextBox.TabIndex = 21;
 			this.GammaTextBox.Text = "4.000";
+			// 
+			// GammaDragPanel
+			// 
+			this.GammaDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.GammaDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.GammaDragPanel.Default = 4D;
+			this.GammaDragPanel.DragStepping = 0.1D;
+			this.GammaDragPanel.Location = new System.Drawing.Point(5, 11);
+			this.GammaDragPanel.Maximum = 5D;
+			this.GammaDragPanel.Minimum = 1D;
+			this.GammaDragPanel.Name = "GammaDragPanel";
+			this.GammaDragPanel.Size = new System.Drawing.Size(126, 21);
+			this.GammaDragPanel.TabIndex = 20;
+			this.GammaDragPanel.Text = "Gamma";
+			this.GammaDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.GammaDragPanel.TextBox = this.GammaTextBox;
+			this.GammaDragPanel.Value = 4D;
+			// 
+			// PaletteTab
+			// 
+			this.PaletteTab.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.PaletteTab.ImageIndex = 2;
+			this.PaletteTab.Location = new System.Drawing.Point(4, 23);
+			this.PaletteTab.Name = "PaletteTab";
+			this.PaletteTab.Padding = new System.Windows.Forms.Padding(3);
+			this.PaletteTab.Size = new System.Drawing.Size(490, 132);
+			this.PaletteTab.TabIndex = 2;
+			this.PaletteTab.Text = "Gradient";
+			// 
+			// CanvasTab
+			// 
+			this.CanvasTab.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.CanvasTab.ImageIndex = 3;
+			this.CanvasTab.Location = new System.Drawing.Point(4, 23);
+			this.CanvasTab.Name = "CanvasTab";
+			this.CanvasTab.Padding = new System.Windows.Forms.Padding(3);
+			this.CanvasTab.Size = new System.Drawing.Size(490, 132);
+			this.CanvasTab.TabIndex = 3;
+			this.CanvasTab.Text = "Image size";
 			// 
 			// mTabImages
 			// 
@@ -462,18 +633,6 @@
 			this.ScaleTextBox.Size = new System.Drawing.Size(115, 20);
 			this.ScaleTextBox.TabIndex = 18;
 			this.ScaleTextBox.Text = "25.000";
-			// 
-			// BackgroundPictureBox
-			// 
-			this.BackgroundPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.BackgroundPictureBox.BackColor = System.Drawing.Color.Black;
-			this.BackgroundPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.BackgroundPictureBox.Location = new System.Drawing.Point(134, 102);
-			this.BackgroundPictureBox.Name = "BackgroundPictureBox";
-			this.BackgroundPictureBox.Size = new System.Drawing.Size(150, 22);
-			this.BackgroundPictureBox.TabIndex = 32;
-			this.BackgroundPictureBox.TabStop = false;
 			// 
 			// ScaleDragPanel
 			// 
@@ -576,165 +735,6 @@
 			this.DepthBlurDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.DepthBlurDragPanel.TextBox = this.DepthBlurTextBox;
 			this.DepthBlurDragPanel.Value = 0D;
-			// 
-			// RotationDragPanel
-			// 
-			this.RotationDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.RotationDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.RotationDragPanel.Default = 0D;
-			this.RotationDragPanel.DragStepping = 5D;
-			this.RotationDragPanel.Location = new System.Drawing.Point(5, 102);
-			this.RotationDragPanel.Maximum = 360D;
-			this.RotationDragPanel.Minimum = -360D;
-			this.RotationDragPanel.Name = "RotationDragPanel";
-			this.RotationDragPanel.Size = new System.Drawing.Size(126, 21);
-			this.RotationDragPanel.TabIndex = 20;
-			this.RotationDragPanel.Text = "Rotation";
-			this.RotationDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.RotationDragPanel.TextBox = this.RotationTextBox;
-			this.RotationDragPanel.Value = 0D;
-			// 
-			// YPositionDragPanel
-			// 
-			this.YPositionDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.YPositionDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.YPositionDragPanel.Default = 0D;
-			this.YPositionDragPanel.DragStepping = 0.1D;
-			this.YPositionDragPanel.Location = new System.Drawing.Point(5, 73);
-			this.YPositionDragPanel.Maximum = 10D;
-			this.YPositionDragPanel.Minimum = -10D;
-			this.YPositionDragPanel.Name = "YPositionDragPanel";
-			this.YPositionDragPanel.Size = new System.Drawing.Size(126, 21);
-			this.YPositionDragPanel.TabIndex = 17;
-			this.YPositionDragPanel.Text = "Y-Position";
-			this.YPositionDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.YPositionDragPanel.TextBox = this.YPositionTextBox;
-			this.YPositionDragPanel.Value = 0D;
-			// 
-			// XPositionDragPanel
-			// 
-			this.XPositionDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.XPositionDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.XPositionDragPanel.Default = 0D;
-			this.XPositionDragPanel.DragStepping = 0.1D;
-			this.XPositionDragPanel.Location = new System.Drawing.Point(5, 41);
-			this.XPositionDragPanel.Maximum = 10D;
-			this.XPositionDragPanel.Minimum = -10D;
-			this.XPositionDragPanel.Name = "XPositionDragPanel";
-			this.XPositionDragPanel.Size = new System.Drawing.Size(126, 21);
-			this.XPositionDragPanel.TabIndex = 14;
-			this.XPositionDragPanel.Text = "X-Position";
-			this.XPositionDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.XPositionDragPanel.TextBox = this.XPositionTextBox;
-			this.XPositionDragPanel.Value = 0D;
-			// 
-			// ZoomDragPanel
-			// 
-			this.ZoomDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.ZoomDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.ZoomDragPanel.Default = 0D;
-			this.ZoomDragPanel.DragStepping = 0.1D;
-			this.ZoomDragPanel.Location = new System.Drawing.Point(5, 11);
-			this.ZoomDragPanel.Maximum = 3D;
-			this.ZoomDragPanel.Minimum = -3D;
-			this.ZoomDragPanel.Name = "ZoomDragPanel";
-			this.ZoomDragPanel.Size = new System.Drawing.Size(126, 21);
-			this.ZoomDragPanel.TabIndex = 11;
-			this.ZoomDragPanel.Text = "Zoom";
-			this.ZoomDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.ZoomDragPanel.TextBox = this.ZoomTextBox;
-			this.ZoomDragPanel.Value = 0D;
-			// 
-			// GammaThresholdDragPanel
-			// 
-			this.GammaThresholdDragPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.GammaThresholdDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.GammaThresholdDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.GammaThresholdDragPanel.Default = 0.001D;
-			this.GammaThresholdDragPanel.DragStepping = 0.1D;
-			this.GammaThresholdDragPanel.Location = new System.Drawing.Point(290, 103);
-			this.GammaThresholdDragPanel.Maximum = 1.7976931348623157E+308D;
-			this.GammaThresholdDragPanel.Minimum = -1.7976931348623157E+308D;
-			this.GammaThresholdDragPanel.Name = "GammaThresholdDragPanel";
-			this.GammaThresholdDragPanel.Size = new System.Drawing.Size(126, 21);
-			this.GammaThresholdDragPanel.TabIndex = 30;
-			this.GammaThresholdDragPanel.Text = "Gamma threshold";
-			this.GammaThresholdDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.GammaThresholdDragPanel.TextBox = this.GammaThresholdTextBox;
-			this.GammaThresholdDragPanel.Value = 0.001D;
-			// 
-			// VibrancyDragPanel
-			// 
-			this.VibrancyDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.VibrancyDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.VibrancyDragPanel.Default = 1D;
-			this.VibrancyDragPanel.DragStepping = 0.1D;
-			this.VibrancyDragPanel.Location = new System.Drawing.Point(5, 73);
-			this.VibrancyDragPanel.Maximum = 3D;
-			this.VibrancyDragPanel.Minimum = 0D;
-			this.VibrancyDragPanel.Name = "VibrancyDragPanel";
-			this.VibrancyDragPanel.Size = new System.Drawing.Size(126, 21);
-			this.VibrancyDragPanel.TabIndex = 26;
-			this.VibrancyDragPanel.Text = "Vibrancy";
-			this.VibrancyDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.VibrancyDragPanel.TextBox = this.VibrancyTextBox;
-			this.VibrancyDragPanel.Value = 1D;
-			// 
-			// BrightnessDragPanel
-			// 
-			this.BrightnessDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.BrightnessDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.BrightnessDragPanel.Default = 4D;
-			this.BrightnessDragPanel.DragStepping = 0.1D;
-			this.BrightnessDragPanel.Location = new System.Drawing.Point(5, 41);
-			this.BrightnessDragPanel.Maximum = 16D;
-			this.BrightnessDragPanel.Minimum = 0.001D;
-			this.BrightnessDragPanel.Name = "BrightnessDragPanel";
-			this.BrightnessDragPanel.Size = new System.Drawing.Size(126, 21);
-			this.BrightnessDragPanel.TabIndex = 23;
-			this.BrightnessDragPanel.Text = "Brightness";
-			this.BrightnessDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.BrightnessDragPanel.TextBox = this.BrightnessTextBox;
-			this.BrightnessDragPanel.Value = 4D;
-			// 
-			// GammaDragPanel
-			// 
-			this.GammaDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.GammaDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.GammaDragPanel.Default = 4D;
-			this.GammaDragPanel.DragStepping = 0.1D;
-			this.GammaDragPanel.Location = new System.Drawing.Point(5, 11);
-			this.GammaDragPanel.Maximum = 5D;
-			this.GammaDragPanel.Minimum = 1D;
-			this.GammaDragPanel.Name = "GammaDragPanel";
-			this.GammaDragPanel.Size = new System.Drawing.Size(126, 21);
-			this.GammaDragPanel.TabIndex = 20;
-			this.GammaDragPanel.Text = "Gamma";
-			this.GammaDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.GammaDragPanel.TextBox = this.GammaTextBox;
-			this.GammaDragPanel.Value = 4D;
-			// 
-			// PaletteTab
-			// 
-			this.PaletteTab.BackColor = System.Drawing.SystemColors.ControlLightLight;
-			this.PaletteTab.ImageIndex = 2;
-			this.PaletteTab.Location = new System.Drawing.Point(4, 23);
-			this.PaletteTab.Name = "PaletteTab";
-			this.PaletteTab.Padding = new System.Windows.Forms.Padding(3);
-			this.PaletteTab.Size = new System.Drawing.Size(490, 132);
-			this.PaletteTab.TabIndex = 2;
-			this.PaletteTab.Text = "Gradient";
-			// 
-			// CanvasTab
-			// 
-			this.CanvasTab.BackColor = System.Drawing.SystemColors.ControlLightLight;
-			this.CanvasTab.ImageIndex = 3;
-			this.CanvasTab.Location = new System.Drawing.Point(4, 23);
-			this.CanvasTab.Name = "CanvasTab";
-			this.CanvasTab.Padding = new System.Windows.Forms.Padding(3);
-			this.CanvasTab.Size = new System.Drawing.Size(490, 132);
-			this.CanvasTab.TabIndex = 3;
-			this.CanvasTab.Text = "Image size";
 			// 
 			// FlameProperties
 			// 

@@ -362,7 +362,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.YPositionDragPanel.Value = mFlame.Camera.Origin.Y;
 			View.YPositionScrollBar.Value = (int)(mFlame.Camera.Origin.Y * 1000);
 			View.RotationDragPanel.Value = mFlame.Camera.GetAxisAngle(Axis.X);
-			View.RotationScrollBar.Value = (int)(View.RotationDragPanel.Value * 1000);
+			View.RotationScrollBar.Value = (int)(View.RotationDragPanel.Value);
 			View.GammaDragPanel.Value = mFlame.Gamma;
 			View.GammaScrollBar.Value = (int)(mFlame.Gamma * 1000);
 			View.BrightnessDragPanel.Value = mFlame.Brightness;
