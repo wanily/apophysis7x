@@ -11,6 +11,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 		private CameraInputOperation mOperation;
 		private Size mImageSize;
 		private bool mFitFrame;
+		private Color mGuideColor;
 
 		public PreviewInputVisual([NotNull] PictureBox control) : base(control)
 		{
@@ -26,7 +27,8 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			set
 			{
 				mOperation = value;
-				InvalidateControl();
+				if (value != null)
+					InvalidateControl();
 			}
 		}
 		public Size ImageSize
@@ -38,6 +40,11 @@ namespace Xyrus.Apophysis.Windows.Visuals
 		{
 			get { return mFitFrame; }
 			set { mFitFrame = value; }
+		}
+		public Color GuideColor
+		{
+			get { return mGuideColor; }
+			set { mGuideColor = value; }
 		}
 
 		protected override void RegisterEvents(PictureBox control)
@@ -97,7 +104,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 
 		private void DrawRectangle(Graphics graphics, Vector2 x0, Vector2 x1, Vector2 x2, Vector2 x3)
 		{
-			using (var pen = new Pen(Color.White, 1.0f))
+			using (var pen = new Pen(GuideColor, 1.0f))
 			{
 				pen.DashPattern = new[] { 6.0f, 4.0f };
 

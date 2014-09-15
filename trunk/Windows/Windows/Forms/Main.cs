@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Controllers;
 using Xyrus.Apophysis.Windows.Input;
@@ -130,6 +131,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			set
 			{
 				mBackgroundVisual.ShowTransparency = mShowTransparency = value;
+				UpdateGuideColor();
 			}
 		}
 		public bool FitFrame
@@ -147,8 +149,14 @@ namespace Xyrus.Apophysis.Windows.Forms
 			set
 			{
 				mCameraEditHandler.Flame = value;
-				mInputVisual.ImageSize = value == null? new Size() : value.CanvasSize;
-				mGuidelinesVisual.ImageSize = mInputVisual.ImageSize;
+
+				if (value != null)
+				{
+					mInputVisual.ImageSize = value.CanvasSize;
+					mGuidelinesVisual.ImageSize = mInputVisual.ImageSize;
+				}
+
+				UpdateGuideColor();
 			}
 		}
 		public Bitmap PreviewImage
@@ -174,6 +182,11 @@ namespace Xyrus.Apophysis.Windows.Forms
 		public event EventHandler CameraBeginEdit;
 		public event EventHandler CameraEndEdit;
 		public event CameraChangedEventHandler CameraChanged;
+
+		private void UpdateGuideColor()
+		{
+			mInputVisual.GuideColor = ShowTransparency ? Color.Black : PreviewedFlame == null ? Color.White : PreviewedFlame.Background.Invert();
+		}
 
 		internal void UpdateBatchListColumnSize()
 		{
