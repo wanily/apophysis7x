@@ -65,6 +65,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		protected override void AttachView()
 		{
+			View.RootSplitter.SplitterDistance = ApophysisSettings.BatchListSize;
+			View.RootSplitter.Panel1Collapsed = !ApophysisSettings.IsBatchListVisible;
 			View.BatchListView.LargeImageList = mPreviewImages;
 
 			mParent.UndoController.CurrentReplaced += OnCurrentFlameReplaced;
@@ -93,6 +95,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			ApophysisSettings.BatchListUsePreviews = mIsIconViewEnabled;
 			ApophysisSettings.BatchListPreviewSize = mPreviewSize;
 			ApophysisSettings.BatchListPreviewDensity = mPreviewDensity;
+			ApophysisSettings.IsBatchListVisible = !View.RootSplitter.Panel1Collapsed;
+			ApophysisSettings.BatchListSize = View.RootSplitter.SplitterDistance;
 		}
 
 		public void BuildFlameList()

@@ -39,6 +39,13 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.OpenFullscreenPreviewMenuItem.Click += OnFullscreenClick;
 			View.EditorMenuItem.Click += OnEditorClick;
 			View.FlamePropertiesMenuItem.Click += OnFlamePropertiesClick;
+			View.PalettePropertiesMenuItem.Click += OnPalettePropertiesClick;
+			View.CanvasPropertiesMenuItem.Click += OnCanvasPropertiesClick;
+
+			View.ShowToolBarMenuItem.Click += OnShowToolbarClick;
+			View.ShowStatusBarMenuItem.Click += OnShowStatusbarClick;
+			View.ShowBatchMenuItem.Click += OnShowBatchListClick;
+			View.ResetLayoutMenuItem.Click += OnResetLayoutClick;
 
 			UpdateButtonStates();
 		}
@@ -62,6 +69,13 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.OpenFullscreenPreviewMenuItem.Click -= OnFullscreenClick;
 			View.EditorMenuItem.Click -= OnEditorClick;
 			View.FlamePropertiesMenuItem.Click -= OnFlamePropertiesClick;
+			View.PalettePropertiesMenuItem.Click -= OnPalettePropertiesClick;
+			View.CanvasPropertiesMenuItem.Click -= OnCanvasPropertiesClick;
+
+			View.ShowToolBarMenuItem.Click -= OnShowToolbarClick;
+			View.ShowStatusBarMenuItem.Click -= OnShowStatusbarClick;
+			View.ShowBatchMenuItem.Click -= OnShowBatchListClick;
+			View.ResetLayoutMenuItem.Click -= OnResetLayoutClick;
 		}
 
 		internal void OnNewFlameClick(object sender, EventArgs e)
@@ -146,11 +160,54 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			mParent.ShowFlameProperties();
 		}
+		internal void OnPalettePropertiesClick(object sender, EventArgs e)
+		{
+			mParent.ShowPaletteProperties();
+		}
+		internal void OnCanvasPropertiesClick(object sender, EventArgs e)
+		{
+			mParent.ShowCanvasProperties();
+		}
+
+		internal void OnShowToolbarClick(object sender, EventArgs e)
+		{
+			View.ShowToolBarMenuItem.Checked = !View.ShowToolBarMenuItem.Checked;
+			View.ToolBar.Visible = View.ShowToolBarMenuItem.Checked;
+
+			mParent.ToolbarController.UpdateRootPanelSize();
+		}
+		internal void OnShowStatusbarClick(object sender, EventArgs e)
+		{
+			View.ShowStatusBarMenuItem.Checked = !View.ShowStatusBarMenuItem.Checked;
+			View.BottomPanel.Visible = View.ShowStatusBarMenuItem.Checked;
+
+			mParent.ToolbarController.UpdateRootPanelSize();
+		}
+		internal void OnShowBatchListClick(object sender, EventArgs e)
+		{
+			View.ShowBatchMenuItem.Checked = !View.ShowBatchMenuItem.Checked;
+			View.RootSplitter.Panel1Collapsed = !View.ShowBatchMenuItem.Checked;
+		}
+		internal void OnResetLayoutClick(object sender, EventArgs e)
+		{
+			View.RootSplitter.SplitterDistance = 230;
+			View.BottomPanel.Visible = true;
+			View.ToolBar.Visible = true;
+			View.RootSplitter.Panel1Collapsed = false;
+
+			mParent.ToolbarController.UpdateRootPanelSize();
+
+			UpdateButtonStates();
+		}
 
 		public void UpdateButtonStates()
 		{
 			View.UndoMenuItem.Enabled = mParent.UndoController.CanUndo;
 			View.RedoMenuItem.Enabled = mParent.UndoController.CanRedo;
+
+			View.ShowToolBarMenuItem.Checked = View.ToolBar.Visible;
+			View.ShowStatusBarMenuItem.Checked = View.StatusBar.Visible;
+			View.ShowBatchMenuItem.Checked = !View.RootSplitter.Panel1Collapsed;
 		}
 	}
 }

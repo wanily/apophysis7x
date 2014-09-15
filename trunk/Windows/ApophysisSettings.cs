@@ -206,6 +206,30 @@ namespace Xyrus.Apophysis
 			}
 		}
 
+		public static bool IsMainToolbarVisible
+		{
+			get { return mSettings.IsMainToolbarVisible; }
+			set
+			{
+				mSettings.IsMainToolbarVisible = value;
+			}
+		}
+		public static bool IsMainStatusbarVisible
+		{
+			get { return mSettings.IsMainStatusbarVisible; }
+			set
+			{
+				mSettings.IsMainStatusbarVisible = value;
+			}
+		}
+		public static bool IsBatchListVisible
+		{
+			get { return mSettings.IsBatchListVisible; }
+			set
+			{
+				mSettings.IsBatchListVisible = value;
+			}
+		}
 		public static int MainPreviewDensity
 		{
 			get { return mSettings.MainPreviewDensity; }
@@ -230,6 +254,19 @@ namespace Xyrus.Apophysis
 				}
 
 				mSettings.MiniPreviewUpdateResolution = value;
+			}
+		}
+		public static int BatchListSize
+		{
+			get { return mSettings.BatchListSize; }
+			set
+			{
+				if (value < 25)
+				{
+					throw new ArgumentOutOfRangeException("value");
+				}
+
+				mSettings.BatchListSize = value;
 			}
 		}
 

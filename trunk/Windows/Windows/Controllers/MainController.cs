@@ -242,6 +242,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			get { return mMainPreviewController; }
 		}
+		internal MainToolbarController ToolbarController
+		{
+			get { return mToolbarController; }
+		}
 
 		public void AppendFlame([NotNull] Flame flame)
 		{

@@ -19,6 +19,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		protected override void AttachView()
 		{
+			View.ToolBar.Visible = ApophysisSettings.IsMainToolbarVisible;
+			View.BottomPanel.Visible = ApophysisSettings.IsMainStatusbarVisible;
+
+			View.Load += OnViewLoaded;
+
 			View.NewFlameButton.Click += mParent.MainMenuController.OnNewFlameClick;
 			View.OpenBatchButton.Click += mParent.MainMenuController.OnOpenBatchClick;
 			View.SaveFlameButton.Click += mParent.MainMenuController.OnSaveFlameClick;
@@ -32,11 +37,13 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.OpenFullscreenPreviewButton.Click += mParent.MainMenuController.OnFullscreenClick;
 			View.EditorButton.Click += mParent.MainMenuController.OnEditorClick;
 			View.FlamePropertiesButton.Click += mParent.MainMenuController.OnFlamePropertiesClick;
-
-			UpdateButtonStates();
+			View.PalettePropertiesButton.Click += mParent.MainMenuController.OnPalettePropertiesClick;
+			View.CanvasPropertiesButton.Click += mParent.MainMenuController.OnCanvasPropertiesClick;
 		}
 		protected override void DetachView()
 		{
+			View.Load -= OnViewLoaded;
+
 			View.NewFlameButton.Click -= mParent.MainMenuController.OnNewFlameClick;
 			View.OpenBatchButton.Click -= mParent.MainMenuController.OnOpenBatchClick;
 			View.SaveFlameButton.Click -= mParent.MainMenuController.OnSaveFlameClick;
@@ -50,6 +57,19 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.OpenFullscreenPreviewButton.Click -= mParent.MainMenuController.OnFullscreenClick;
 			View.EditorButton.Click -= mParent.MainMenuController.OnEditorClick;
 			View.FlamePropertiesButton.Click -= mParent.MainMenuController.OnFlamePropertiesClick;
+			View.PalettePropertiesButton.Click -= mParent.MainMenuController.OnPalettePropertiesClick;
+			View.CanvasPropertiesButton.Click -= mParent.MainMenuController.OnCanvasPropertiesClick;
+
+			ApophysisSettings.IsMainToolbarVisible = View.ToolBar.Visible;
+			ApophysisSettings.IsMainStatusbarVisible = View.BottomPanel.Visible;
+		}
+
+		private void OnViewLoaded(object sender, EventArgs e)
+		{
+			UpdateRootPanelSize();
+			UpdateButtonStates();
+
+			mParent.MainMenuController.UpdateButtonStates();
 		}
 
 		private void OnBatchListViewClick(object sender, EventArgs e)
@@ -72,6 +92,13 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			View.BatchListViewButton.Checked = !mParent.BatchListController.IsIconViewEnabled;
 			View.BatchIconViewButton.Checked = mParent.BatchListController.IsIconViewEnabled;
+		}
+		public void UpdateRootPanelSize()
+		{
+			View.RootSplitter.Height = 
+				View.ClientPanel.Height
+			    - View.BottomPanel.Height * (View.BottomPanel.Visible ? 1 : 0)
+				;//+ View.ToolBar.Height * (View.ToolBar.Visible ? 0 : 1);
 		}
 	}
 }
