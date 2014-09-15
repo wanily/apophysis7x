@@ -343,5 +343,17 @@ namespace Xyrus.Apophysis.Properties {
                 this["MainPreviewShowGuidelines"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool MainPreviewShowTransparency {
+            get {
+                return ((bool)(this["MainPreviewShowTransparency"]));
+            }
+            set {
+                this["MainPreviewShowTransparency"] = value;
+            }
+        }
     }
 }

@@ -57,6 +57,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		protected override void AttachView()
 		{
 			View.ShowGuidelines = ApophysisSettings.MainPreviewShowGuidelines;
+			View.ShowTransparency = ApophysisSettings.MainPreviewShowTransparency;
 
 			View.PreviewDensityComboBox.SelectedIndexChanged += OnDensityChanged;
 			View.PreviewDensityComboBox.LostFocus += OnDensityChanged;
@@ -89,6 +90,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			ApophysisSettings.MainPreviewDensity = PreviewDensity;
 			ApophysisSettings.MainPreviewShowGuidelines = View.ShowGuidelines;
+			ApophysisSettings.MainPreviewShowTransparency = View.ShowTransparency;
 		}
 
 		private void SetProgress(double progress)

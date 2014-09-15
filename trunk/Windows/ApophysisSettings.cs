@@ -265,6 +265,14 @@ namespace Xyrus.Apophysis
 				mSettings.MainPreviewShowGuidelines = value;
 			}
 		}
+		public static bool MainPreviewShowTransparency
+		{
+			get { return mSettings.MainPreviewShowTransparency; }
+			set
+			{
+				mSettings.MainPreviewShowTransparency = value;
+			}
+		}
 
 		public static int BatchListSize
 		{

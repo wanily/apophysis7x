@@ -38,7 +38,7 @@ namespace Xyrus.Apophysis.Calculation
 				}
 			}
 
-			if (withTransparency)
+			if (!withTransparency)
 			{
 				using (var graphics = Graphics.FromImage(bitmap))
 				using (var brush = new SolidBrush(flame.Background))

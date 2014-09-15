@@ -110,6 +110,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.BatchIconViewButton.Checked = mParent.BatchListController.IsIconViewEnabled;
 
 			View.ToggleGuidelinesButton.Checked = View.ShowGuidelines;
+			View.ToggleTransparencyButton.Checked = View.ShowTransparency;
 		}
 		public void UpdateRootPanelSize()
 		{
