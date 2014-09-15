@@ -1,6 +1,8 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
+using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Controllers;
+using Xyrus.Apophysis.Windows.Input;
 using Xyrus.Apophysis.Windows.Visuals;
 
 namespace Xyrus.Apophysis.Windows.Forms
@@ -8,14 +10,21 @@ namespace Xyrus.Apophysis.Windows.Forms
 	public partial class Main : Form
 	{
 		private ControlVisualChain<PictureBox> mPainter;
+		private InputHandlerChain mInput;
+
 		private PreviewBackgroundVisual mBackgroundVisual;
 		private PreviewImageVisual mImageVisual;
 		private PreviewGuidelinesVisual mGuidelinesVisual;
+		private PreviewInputVisual mInputVisual;
+		private CameraEditInputHandler mCameraEditHandler;
 
 		private InputController mInputController;
 
 		private bool mShowGuidelines;
 		private bool mShowTransparency;
+
+		private CameraEditMode mCameraEditMode;
+		private bool mCameraEditUseScale;
 
 		public Main()
 		{
@@ -26,6 +35,10 @@ namespace Xyrus.Apophysis.Windows.Forms
 			mPainter.Add(mBackgroundVisual = new PreviewBackgroundVisual(PreviewPicture), 100);
 			mPainter.Add(mImageVisual = new PreviewImageVisual(PreviewPicture), 200);
 			mPainter.Add(mGuidelinesVisual = new PreviewGuidelinesVisual(PreviewPicture), 300);
+			mPainter.Add(mInputVisual = new PreviewInputVisual(PreviewPicture), 400);
+
+			mInput = new InputHandlerChain(PreviewPicture);
+			mInput.Add(mCameraEditHandler = new CameraEditInputHandler(PreviewPicture, mInputVisual));
 
 			// hack http://stackoverflow.com/questions/2646606/c-sharp-winforms-statusstrip-how-do-i-reclaim-the-space-from-the-grip
 			StatusBar.Padding = new Padding(StatusBar.Padding.Left, StatusBar.Padding.Top, StatusBar.Padding.Left, StatusBar.Padding.Bottom);
@@ -40,6 +53,12 @@ namespace Xyrus.Apophysis.Windows.Forms
 					mPainter = null;
 				}
 
+				if (mInput != null)
+				{
+					mInput.Dispose();
+					mInput = null;
+				}
+
 				if (components != null)
 				{
 					components.Dispose();
@@ -52,6 +71,8 @@ namespace Xyrus.Apophysis.Windows.Forms
 			mBackgroundVisual = null;
 			mGuidelinesVisual = null;
 			mImageVisual = null;
+			mInputVisual = null;
+			mCameraEditHandler = null;
 		}
 
 		protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -85,6 +106,11 @@ namespace Xyrus.Apophysis.Windows.Forms
 			}
 		}
 
+		public Flame PreviewedFlame
+		{
+			get { return mCameraEditHandler.Flame; }
+			set { mCameraEditHandler.Flame = value; }
+		}
 		public Bitmap PreviewImage
 		{
 			get { return mImageVisual.PreviewImage; }
@@ -92,6 +118,17 @@ namespace Xyrus.Apophysis.Windows.Forms
 			{
 				mImageVisual.PreviewImage = value;
 			}
+		}
+
+		public CameraEditMode CameraEditMode
+		{
+			get { return mCameraEditMode; }
+			set { mCameraEditHandler.EditMode = mCameraEditMode = value; }
+		}
+		public bool CameraEditUseScale
+		{
+			get { return mCameraEditUseScale; }
+			set { mCameraEditHandler.UseScale = mCameraEditUseScale = value; }
 		}
 
 		internal void UpdateBatchListColumnSize()

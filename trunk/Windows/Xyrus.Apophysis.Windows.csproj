@@ -94,6 +94,7 @@
     <Compile Include="Variations\Linear.cs" />
     <Compile Include="Variations\Spherical.cs" />
     <Compile Include="Variations\Swirl.cs" />
+    <Compile Include="Windows\Common\CameraEditMode.cs" />
     <Compile Include="Windows\Common\ChainItem.cs" />
     <Compile Include="Windows\Common\ControlChain.cs" />
     <Compile Include="Windows\Common\ControlEventInterceptor.cs" />
@@ -204,6 +205,7 @@
     <Compile Include="Windows\Forms\Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Input\CameraEditInputHandler.cs" />
     <Compile Include="Windows\Input\MouseHookEventArgs.cs" />
     <Compile Include="Windows\Input\InputOperation.cs" />
     <Compile Include="Windows\Input\KeyboardHookEventArgs.cs" />
@@ -256,6 +258,7 @@
     <Compile Include="Windows\Visuals\PreviewBackgroundVisual.cs" />
     <Compile Include="Windows\Visuals\PreviewGuidelinesVisual.cs" />
     <Compile Include="Windows\Visuals\PreviewImageVisual.cs" />
+    <Compile Include="Windows\Visuals\PreviewInputVisual.cs" />
     <EmbeddedResource Include="Windows\Controls\DragPanel.resx">
       <DependentUpon>DragPanel.cs</DependentUpon>
     </EmbeddedResource>

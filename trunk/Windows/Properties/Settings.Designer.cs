@@ -367,5 +367,29 @@ namespace Xyrus.Apophysis.Properties {
                 this["MainPreviewFitImage"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int CameraEditMode {
+            get {
+                return ((int)(this["CameraEditMode"]));
+            }
+            set {
+                this["CameraEditMode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool CameraEditUseScale {
+            get {
+                return ((bool)(this["CameraEditUseScale"]));
+            }
+            set {
+                this["CameraEditUseScale"] = value;
+            }
+        }
     }
 }

@@ -45,6 +45,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.ToggleGuidelinesButton.Click += OnToggleGuidelines;
 			View.ToggleTransparencyButton.Click += OnToggleTransparency;
 			View.ToggleFitPreviewImage.Click += OnToggleFitPreviewImage;
+
+			View.PanCameraModeButton.Click += OnCameraModeChanged;
+			View.RotateCameraModeButton.Click += OnCameraModeChanged;
+			View.ZoomInCameraModeButton.Click += OnCameraModeChanged;
+			View.ZoomOutCameraModeButton.Click += OnCameraModeChanged;
 		}
 		protected override void DetachView()
 		{
@@ -71,6 +76,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.ToggleGuidelinesButton.Click -= OnToggleGuidelines;
 			View.ToggleTransparencyButton.Click -= OnToggleTransparency;
 			View.ToggleFitPreviewImage.Click -= OnToggleFitPreviewImage;
+
+			View.PanCameraModeButton.Click -= OnCameraModeChanged;
+			View.RotateCameraModeButton.Click -= OnCameraModeChanged;
+			View.ZoomInCameraModeButton.Click -= OnCameraModeChanged;
+			View.ZoomOutCameraModeButton.Click -= OnCameraModeChanged;
 
 			ApophysisSettings.IsMainToolbarVisible = View.ToolBar.Visible;
 			ApophysisSettings.IsMainStatusbarVisible = View.BottomPanel.Visible;
@@ -111,6 +121,27 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.ToggleFitPreviewImage.Checked = !View.ToggleFitPreviewImage.Checked;
 			mParent.MainPreviewController.FitImage = View.ToggleFitPreviewImage.Checked;
 		}
+		private void OnCameraModeChanged(object sender, EventArgs e)
+		{
+			if (ReferenceEquals(sender, View.PanCameraModeButton))
+			{
+				View.CameraEditMode = CameraEditMode.Pan;
+			}
+			else if (ReferenceEquals(sender, View.RotateCameraModeButton))
+			{
+				View.CameraEditMode = CameraEditMode.Rotate;
+			}
+			else if (ReferenceEquals(sender, View.ZoomInCameraModeButton))
+			{
+				View.CameraEditMode = CameraEditMode.ZoomIn;
+			}
+			else if (ReferenceEquals(sender, View.ZoomOutCameraModeButton))
+			{
+				View.CameraEditMode = CameraEditMode.ZoomOut;
+			}
+
+			UpdateButtonStates();
+		}
 
 		public void UpdateButtonStates()
 		{
@@ -123,6 +154,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.ToggleGuidelinesButton.Checked = View.ShowGuidelines;
 			View.ToggleTransparencyButton.Checked = View.ShowTransparency;
 			View.ToggleFitPreviewImage.Checked = mParent.MainPreviewController.FitImage;
+
+			View.PanCameraModeButton.Checked = View.CameraEditMode == CameraEditMode.Pan;
+			View.RotateCameraModeButton.Checked = View.CameraEditMode == CameraEditMode.Rotate;
+			View.ZoomInCameraModeButton.Checked = View.CameraEditMode == CameraEditMode.ZoomIn;
+			View.ZoomOutCameraModeButton.Checked = View.CameraEditMode == CameraEditMode.ZoomOut;
 		}
 		public void UpdateRootPanelSize()
 		{

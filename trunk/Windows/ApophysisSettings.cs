@@ -231,6 +231,19 @@ namespace Xyrus.Apophysis
 			}
 		}
 
+		public static int BatchListSize
+		{
+			get { return mSettings.BatchListSize; }
+			set
+			{
+				if (value < 25)
+				{
+					throw new ArgumentOutOfRangeException("value");
+				}
+
+				mSettings.BatchListSize = value;
+			}
+		}
 		public static int MainPreviewDensity
 		{
 			get { return mSettings.MainPreviewDensity; }
@@ -279,18 +292,15 @@ namespace Xyrus.Apophysis
 			set { mSettings.MainPreviewFitImage = value; }
 		}
 
-		public static int BatchListSize
+		public static CameraEditMode CameraEditMode
 		{
-			get { return mSettings.BatchListSize; }
-			set
-			{
-				if (value < 25)
-				{
-					throw new ArgumentOutOfRangeException("value");
-				}
-
-				mSettings.BatchListSize = value;
-			}
+			get { return (CameraEditMode)mSettings.CameraEditMode; }
+			set { mSettings.CameraEditMode = (int)value; }
+		}
+		public static bool CameraEditUseScale
+		{
+			get { return mSettings.CameraEditUseScale; }
+			set { mSettings.CameraEditUseScale = value; }
 		}
 
 		public static DensityLevel FlamePropertiesPreviewDensityLevel
