@@ -215,6 +215,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			mParent.UndoController.CommitChange(flame);
 			mParent.FlamePropertiesController.RaiseFlameChanged();
+			mParent.FlamePropertiesController.UpdateCamera();
 		}
 
 		public void UpdateButtonStates()

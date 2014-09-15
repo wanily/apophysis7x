@@ -42,7 +42,6 @@ namespace Xyrus.Apophysis.Windows.Visuals
 
 		protected override void RegisterEvents(PictureBox control)
 		{
-			ImageSize = control.ClientSize;
 		}
 		protected override void UnregisterEvents(PictureBox control)
 		{
@@ -64,7 +63,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 				var x2 = new Vector2(fractalRect.Right, fractalRect.Bottom);
 				var x3 = new Vector2(fractalRect.Left, fractalRect.Bottom);
 
-				var offset = System.Math.Pow(2, pan.Flame.Zoom)*pan.Flame.PixelsPerUnit*(pan.Offset - pan.Origin);
+				var offset = System.Math.Pow(2, pan.Flame.Zoom)*pan.Flame.PixelsPerUnit*(pan.NewOffset - pan.OldOffset);
 
 				x0 += offset;
 				x1 += offset;
@@ -84,8 +83,8 @@ namespace Xyrus.Apophysis.Windows.Visuals
 
 				var o = new Vector2(AttachedControl.ClientSize.Width/2.0, AttachedControl.ClientSize.Height/2.0);
 
-				var cos = System.Math.Cos(rotate.Angle - rotate.OriginalAngle);
-				var sin = System.Math.Sin(rotate.Angle - rotate.OriginalAngle);
+				var cos = System.Math.Cos(rotate.NewAngle - rotate.OldAngle);
+				var sin = System.Math.Sin(rotate.NewAngle - rotate.OldAngle);
 
 				x0 = new Vector2((x0.X - o.X) * cos + (x0.Y - o.Y) * sin + o.X, (x0.Y - o.Y) * cos - (x0.X - o.X) * sin + o.Y);
 				x1 = new Vector2((x1.X - o.X) * cos + (x1.Y - o.Y) * sin + o.X, (x1.Y - o.Y) * cos - (x1.X - o.X) * sin + o.Y);

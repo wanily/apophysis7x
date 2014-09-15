@@ -148,6 +148,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			{
 				mCameraEditHandler.Flame = value;
 				mInputVisual.ImageSize = value == null? new Size() : value.CanvasSize;
+				mGuidelinesVisual.ImageSize = mInputVisual.ImageSize;
 			}
 		}
 		public Bitmap PreviewImage

@@ -71,6 +71,20 @@ namespace Xyrus.Apophysis.Windows.Input
 			mDragAngle = System.Math.Atan2(cursor.Y - AttachedControl.ClientSize.Height / 2.0, AttachedControl.ClientSize.Width / 2.0 - cursor.X);
 			mDragAngleOld = mFlame.Angle;
 
+			switch (EditMode)
+			{
+				case CameraEditMode.Pan:
+					mInputVisual.Operation = new PanOperation(mFlame, mDragOrigin, mDragOrigin);
+					break;
+				case CameraEditMode.Rotate:
+					mInputVisual.Operation = new RotateCanvasOperation(mFlame, mDragAngleOld, mDragAngleOld);
+					break;
+				case CameraEditMode.ZoomIn:
+					break;
+				case CameraEditMode.ZoomOut:
+					break;
+			}
+
 			if (BeginEdit != null)
 				BeginEdit(this, new EventArgs());
 

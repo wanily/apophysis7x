@@ -6,18 +6,18 @@ namespace Xyrus.Apophysis.Windows.Input
 	[PublicAPI]
 	public class RotateCanvasOperation : CameraInputOperation
 	{
-		public double Angle { get; private set; }
-		public double OriginalAngle { get; private set; }
+		public double NewAngle { get; private set; }
+		public double OldAngle { get; private set; }
 
-		public RotateCanvasOperation([NotNull] Flame flame, double angle, double originalAngle) : base(flame)
+		public RotateCanvasOperation([NotNull] Flame flame, double newAngle, double oldAngle) : base(flame)
 		{
-			Angle = angle;
-			OriginalAngle = originalAngle;
+			NewAngle = newAngle;
+			OldAngle = oldAngle;
 		}
 
 		public override string ToString()
 		{
-			var angle = Angle * 180.0 / System.Math.PI;
+			var angle = NewAngle * 180.0 / System.Math.PI;
 			if (angle < 0)
 			{
 				angle = 360 + angle;
