@@ -405,6 +405,7 @@
     <None Include="Windows\Resources\Icons\ScaleUp.png" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Windows\Resources\SplashScreen.bmp" />
     <EmbeddedResource Include="Windows\Resources\Toolbar\Main\FitImage.bmp" />
     <EmbeddedResource Include="Windows\Resources\Toolbar\Main\About.bmp" />
     <EmbeddedResource Include="Windows\Resources\Toolbar\Main\BatchIconView.bmp" />
