@@ -35,6 +35,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.RedoButton.Click += mParent.MainMenuController.OnRedoClick;
 
 			View.OpenFullscreenPreviewButton.Click += mParent.MainMenuController.OnFullscreenClick;
+			View.ResetCameraButton.Click += mParent.MainMenuController.OnResetCameraClick;
+
 			View.EditorButton.Click += mParent.MainMenuController.OnEditorClick;
 			View.FlamePropertiesButton.Click += mParent.MainMenuController.OnFlamePropertiesClick;
 			View.PalettePropertiesButton.Click += mParent.MainMenuController.OnPalettePropertiesClick;
@@ -42,6 +44,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			View.ToggleGuidelinesButton.Click += OnToggleGuidelines;
 			View.ToggleTransparencyButton.Click += OnToggleTransparency;
+			View.ToggleFitPreviewImage.Click += OnToggleFitPreviewImage;
 		}
 		protected override void DetachView()
 		{
@@ -58,6 +61,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.RedoButton.Click -= mParent.MainMenuController.OnRedoClick;
 
 			View.OpenFullscreenPreviewButton.Click -= mParent.MainMenuController.OnFullscreenClick;
+			View.ResetCameraButton.Click -= mParent.MainMenuController.OnResetCameraClick;
+
 			View.EditorButton.Click -= mParent.MainMenuController.OnEditorClick;
 			View.FlamePropertiesButton.Click -= mParent.MainMenuController.OnFlamePropertiesClick;
 			View.PalettePropertiesButton.Click -= mParent.MainMenuController.OnPalettePropertiesClick;
@@ -65,6 +70,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			View.ToggleGuidelinesButton.Click -= OnToggleGuidelines;
 			View.ToggleTransparencyButton.Click -= OnToggleTransparency;
+			View.ToggleFitPreviewImage.Click -= OnToggleFitPreviewImage;
 
 			ApophysisSettings.IsMainToolbarVisible = View.ToolBar.Visible;
 			ApophysisSettings.IsMainStatusbarVisible = View.BottomPanel.Visible;
@@ -100,6 +106,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.ToggleTransparencyButton.Checked = !View.ToggleTransparencyButton.Checked;
 			View.ShowTransparency = View.ToggleTransparencyButton.Checked;
 		}
+		private void OnToggleFitPreviewImage(object sender, EventArgs e)
+		{
+			View.ToggleFitPreviewImage.Checked = !View.ToggleFitPreviewImage.Checked;
+			mParent.MainPreviewController.FitImage = View.ToggleFitPreviewImage.Checked;
+		}
 
 		public void UpdateButtonStates()
 		{
@@ -111,6 +122,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			View.ToggleGuidelinesButton.Checked = View.ShowGuidelines;
 			View.ToggleTransparencyButton.Checked = View.ShowTransparency;
+			View.ToggleFitPreviewImage.Checked = mParent.MainPreviewController.FitImage;
 		}
 		public void UpdateRootPanelSize()
 		{

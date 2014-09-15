@@ -15,6 +15,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		private MainController mParent;
 		private Bitmap mBitmap;
 		private int mPreviewDensity;
+		private bool mFitImage;
 
 		public MainPreviewController([NotNull] Main view, [NotNull] MainController parent) : base(view)
 		{
@@ -72,6 +73,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			using (mParent.Initializer.Enter())
 			{
 				PreviewDensity = ApophysisSettings.MainPreviewDensity;
+				FitImage = ApophysisSettings.MainPreviewFitImage;
 			}
 		}
 		protected override void DetachView()
@@ -91,6 +93,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			ApophysisSettings.MainPreviewDensity = PreviewDensity;
 			ApophysisSettings.MainPreviewShowGuidelines = View.ShowGuidelines;
 			ApophysisSettings.MainPreviewShowTransparency = View.ShowTransparency;
+			ApophysisSettings.MainPreviewFitImage = FitImage;
 		}
 
 		private void SetProgress(double progress)
@@ -160,10 +163,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			View.PreviewPicture.Invoke(new Action(() =>
 			{
-				//var oldImage = View.PreviewPicture.Image;
+				//var oldImage = View.PreviewImage;
 
-				View.PreviewPicture.Image = bitmap;
-				View.PreviewPicture.Refresh();
+				View.PreviewImage = bitmap;
 
 				/*if (oldImage != null)
 				{
@@ -202,6 +204,19 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				UpdatePreview();
 			}
 		}
+		public bool FitImage
+		{
+			get { return mFitImage; }
+			set
+			{
+				if (Equals(mFitImage, value))
+					return;
+
+				mFitImage = value;
+				UpdatePreview();
+			}
+		}
+
 		public void UpdatePreview()
 		{
 			var flame = mParent.BatchListController.GetSelectedFlame();
@@ -210,7 +225,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			var density = (double)PreviewDensity;
 			var canvasSize = View.PreviewPicture.ClientSize;
-			var renderSize = flame.CanvasSize.FitToFrame(canvasSize);
+			var renderSize = FitImage
+				? canvasSize 
+				: flame.CanvasSize.FitToFrame(canvasSize);
 
 			/*Color backgroundWait, foregroundWait;
 			if (View.ShowTransparency)
@@ -225,7 +242,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			}*/
 
 			View.PreviewPicture.BackColor = flame.Background;
-			//View.PreviewPicture.Image = WaitImageController.DrawWaitImage(renderSize, backgroundWait, foregroundWait);
+			//View.PreviewImage = WaitImageController.DrawWaitImage(renderSize, backgroundWait, foregroundWait);
 
 			mRenderer.Cancel();
 

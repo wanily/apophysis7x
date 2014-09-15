@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace Xyrus.Apophysis.Windows.Visuals
 {
-	class ControlVisualChain : ControlChain<ControlVisual>
+	class ControlVisualChain<T> : ControlChain<T, ControlVisual<T>> where T: Control
 	{
 		public ControlVisualChain([NotNull] Control control) : base(control)
 		{
@@ -48,6 +48,13 @@ namespace Xyrus.Apophysis.Windows.Visuals
 		{
 			if (graphics == null) throw new ArgumentNullException("graphics");
 			OnControlPaint(graphics);
+		}
+	}
+
+	class ControlVisualChain : ControlVisualChain<Control>
+	{
+		public ControlVisualChain([NotNull] Control control) : base(control)
+		{
 		}
 	}
 }

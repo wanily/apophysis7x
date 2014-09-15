@@ -273,6 +273,11 @@ namespace Xyrus.Apophysis
 				mSettings.MainPreviewShowTransparency = value;
 			}
 		}
+		public static bool MainPreviewFitImage
+		{
+			get { return mSettings.MainPreviewFitImage; }
+			set { mSettings.MainPreviewFitImage = value; }
+		}
 
 		public static int BatchListSize
 		{

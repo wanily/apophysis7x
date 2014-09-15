@@ -253,6 +253,9 @@
     <Compile Include="Models\AffineTransform.cs" />
     <Compile Include="Models\IteratorCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Windows\Visuals\PreviewBackgroundVisual.cs" />
+    <Compile Include="Windows\Visuals\PreviewGuidelinesVisual.cs" />
+    <Compile Include="Windows\Visuals\PreviewImageVisual.cs" />
     <EmbeddedResource Include="Windows\Controls\DragPanel.resx">
       <DependentUpon>DragPanel.cs</DependentUpon>
     </EmbeddedResource>
@@ -402,6 +405,7 @@
     <None Include="Windows\Resources\Icons\ScaleUp.png" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Windows\Resources\Toolbar\Main\FitImage.bmp" />
     <EmbeddedResource Include="Windows\Resources\Toolbar\Main\About.bmp" />
     <EmbeddedResource Include="Windows\Resources\Toolbar\Main\BatchIconView.bmp" />
     <EmbeddedResource Include="Windows\Resources\Toolbar\Main\BatchListView.bmp" />

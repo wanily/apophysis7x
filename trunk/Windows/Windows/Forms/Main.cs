@@ -1,12 +1,19 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Windows.Controllers;
+using Xyrus.Apophysis.Windows.Visuals;
 
 namespace Xyrus.Apophysis.Windows.Forms
 {
 	public partial class Main : Form
 	{
-		private readonly InputController mInputController;
+		private ControlVisualChain<PictureBox> mPainter;
+		private PreviewBackgroundVisual mBackgroundVisual;
+		private PreviewImageVisual mImageVisual;
+		private PreviewGuidelinesVisual mGuidelinesVisual;
+
+		private InputController mInputController;
+
 		private bool mShowGuidelines;
 		private bool mShowTransparency;
 
@@ -14,101 +21,37 @@ namespace Xyrus.Apophysis.Windows.Forms
 		{
 			InitializeComponent();
 			mInputController = new InputController();
-			PreviewPicture.Paint += OnPreviewPaint;
+
+			mPainter = new ControlVisualChain<PictureBox>(PreviewPicture);
+			mPainter.Add(mBackgroundVisual = new PreviewBackgroundVisual(PreviewPicture), 100);
+			mPainter.Add(mImageVisual = new PreviewImageVisual(PreviewPicture), 200);
+			mPainter.Add(mGuidelinesVisual = new PreviewGuidelinesVisual(PreviewPicture), 300);
+
+			// hack http://stackoverflow.com/questions/2646606/c-sharp-winforms-statusstrip-how-do-i-reclaim-the-space-from-the-grip
+			StatusBar.Padding = new Padding(StatusBar.Padding.Left, StatusBar.Padding.Top, StatusBar.Padding.Left, StatusBar.Padding.Bottom);
 		}
-
-		private void OnPreviewPaint(object sender, PaintEventArgs e)
+		protected override void Dispose(bool disposing)
 		{
-			var s = sender as PictureBox;
-				if (s == null)
-					return;
-
-			if (ShowTransparency)
+			if (disposing)
 			{
-				var tilesX = (s.ClientSize.Width + 10) / 10;
-				var tilesY = (s.ClientSize.Height + 10) / 10;
-
-				if (tilesX % 2 != 0) tilesX++;
-				if (tilesY % 2 != 0) tilesY++;
-
-				using (var brushA = new SolidBrush(Color.White))
-				using (var brushB = new SolidBrush(Color.LightGray))
+				if (mPainter != null)
 				{
-					int ii = 0, jj;
-					for (int i = 0; i < tilesX; i ++)
-					{
-						jj = 0;
-						for (int j = 0; j <= tilesY; j ++)
-						{
-							var brush = ((i+j) % 2 != 0) ? brushA : brushB;
-
-							e.Graphics.FillRectangle(brush, new Rectangle(new Point(ii, jj), new Size(10,10)));
-
-							jj+=10;
-						}
-						ii+=10;
-					}
-
+					mPainter.Dispose();
+					mPainter = null;
 				}
-			}
-			else
-			{
-				using (var brush = new SolidBrush(s.BackColor))
+
+				if (components != null)
 				{
-					e.Graphics.FillRectangle(brush, new Rectangle(new Point(), s.ClientSize));
+					components.Dispose();
 				}
 			}
 
-			if (s.Image != null)
-			{
-				e.Graphics.DrawImage(s.Image, new Rectangle(s.ClientSize.Width / 2 - s.Image.Width / 2, s.ClientSize.Height / 2 - s.Image.Height / 2, s.Image.Width, s.Image.Height));
-			}
+			base.Dispose(disposing);
 
-			if (ShowGuidelines)
-			{
-				Point p1, p2;
-				const double ratio = 0.61803399;
-
-				p1 = new Point(s.Width / 2, 0);
-				p2 = new Point(p1.X, s.Height);
-				e.Graphics.DrawLine(Pens.White, p1, p2);
-
-				p1 = new Point(0, s.Height / 2);
-				p2 = new Point(s.Width, p1.Y);
-				e.Graphics.DrawLine(Pens.White, p1, p2);
-
-				p1 = new Point(s.Width / 3, 0);
-				p2 = new Point(p1.X, s.Height);
-				e.Graphics.DrawLine(Pens.Red, p1, p2);
-
-				p1 = new Point(0, s.Height / 3);
-				p2 = new Point(s.Width, p1.Y);
-				e.Graphics.DrawLine(Pens.Red, p1, p2);
-
-				p1 = new Point(2 * s.Width / 3, 0);
-				p2 = new Point(p1.X, s.Height);
-				e.Graphics.DrawLine(Pens.Red, p1, p2);
-
-				p1 = new Point(0, 2 * s.Height / 3);
-				p2 = new Point(s.Width, p1.Y);
-				e.Graphics.DrawLine(Pens.Red, p1, p2);
-
-				p1 = new Point((int)(ratio * s.Width), 0);
-				p2 = new Point(p1.X, s.Height);
-				e.Graphics.DrawLine(Pens.Green, p1, p2);
-
-				p1 = new Point(0, (int)(ratio * s.Height));
-				p2 = new Point(s.Width, p1.Y);
-				e.Graphics.DrawLine(Pens.Green, p1, p2);
-
-				p1 = new Point(s.Width - (int)(ratio * s.Width), 0);
-				p2 = new Point(p1.X, s.Height);
-				e.Graphics.DrawLine(Pens.Green, p1, p2);
-
-				p1 = new Point(0, s.Height - (int)(ratio * s.Height));
-				p2 = new Point(s.Width, p1.Y);
-				e.Graphics.DrawLine(Pens.Green, p1, p2);
-			}
+			mInputController = null;
+			mBackgroundVisual = null;
+			mGuidelinesVisual = null;
+			mImageVisual = null;
 		}
 
 		protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -116,10 +59,13 @@ namespace Xyrus.Apophysis.Windows.Forms
 			InputController.HandleKeyboardInput(this, keyData);
 			return base.ProcessCmdKey(ref msg, keyData);
 		}
-
 		private void OnWindowLoaded(object sender, System.EventArgs e)
 		{
 			UpdateBatchListColumnSize();
+		}
+		private void OnDensityKeyPress(object sender, KeyPressEventArgs e)
+		{
+			mInputController.HandleKeyPressForIntegerTextBox(e);
 		}
 
 		public bool ShowGuidelines
@@ -127,8 +73,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			get { return mShowGuidelines; }
 			set
 			{
-				mShowGuidelines = value;
-				PreviewPicture.Refresh();
+				mGuidelinesVisual.Visible = mShowGuidelines = value;
 			}
 		}
 		public bool ShowTransparency
@@ -136,19 +81,22 @@ namespace Xyrus.Apophysis.Windows.Forms
 			get { return mShowTransparency; }
 			set
 			{
-				mShowTransparency = value;
-				PreviewPicture.Refresh();
+				mBackgroundVisual.ShowTransparency = mShowTransparency = value;
+			}
+		}
+
+		public Bitmap PreviewImage
+		{
+			get { return mImageVisual.PreviewImage; }
+			set
+			{
+				mImageVisual.PreviewImage = value;
 			}
 		}
 
 		internal void UpdateBatchListColumnSize()
 		{
 			BatchListView.Columns[0].Width = BatchListView.ClientSize.Width - 3;
-		}
-
-		private void OnDensityKeyPress(object sender, KeyPressEventArgs e)
-		{
-			mInputController.HandleKeyPressForIntegerTextBox(e);
 		}
 	}
 }

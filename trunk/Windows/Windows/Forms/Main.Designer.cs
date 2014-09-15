@@ -7,18 +7,6 @@
 		/// </summary>
 		private System.ComponentModel.IContainer components = null;
 
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
-		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-		protected override void Dispose(bool disposing)
-		{
-			if (disposing && (components != null))
-			{
-				components.Dispose();
-			}
-			base.Dispose(disposing);
-		}
 
 		#region Windows Form Designer generated code
 
@@ -120,6 +108,7 @@
 			this.PreviewTimeRemainingLabel = new System.Windows.Forms.ToolStripStatusLabel();
 			this.FlameNameLabel = new System.Windows.Forms.ToolStripStatusLabel();
 			this.PreviewProgressBar = new System.Windows.Forms.ToolStripProgressBar();
+			this.ToggleFitPreviewImage = new System.Windows.Forms.ToolStripButton();
 			this.mMainMenu.SuspendLayout();
 			this.ToolBar.SuspendLayout();
 			this.ClientPanel.SuspendLayout();
@@ -538,6 +527,7 @@
             this.toolStripSeparator7,
             this.ToggleTransparencyButton,
             this.ToggleGuidelinesButton,
+            this.ToggleFitPreviewImage,
             this.toolStripSeparator8,
             this.PanCameraModeButton,
             this.RotateCameraModeButton,
@@ -945,6 +935,15 @@
 			this.PreviewProgressBar.Name = "PreviewProgressBar";
 			this.PreviewProgressBar.Size = new System.Drawing.Size(200, 16);
 			// 
+			// ToggleFitPreviewImage
+			// 
+			this.ToggleFitPreviewImage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.ToggleFitPreviewImage.Image = ((System.Drawing.Image)(resources.GetObject("ToggleFitPreviewImage.Image")));
+			this.ToggleFitPreviewImage.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.ToggleFitPreviewImage.Name = "ToggleFitPreviewImage";
+			this.ToggleFitPreviewImage.Size = new System.Drawing.Size(23, 22);
+			this.ToggleFitPreviewImage.Text = "Fit preview image";
+			// 
 			// Main
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1071,5 +1070,6 @@
 		public System.Windows.Forms.ToolStripProgressBar PreviewProgressBar;
 		public System.Windows.Forms.Panel ClientPanel;
 		public System.Windows.Forms.Panel BottomPanel;
+		public System.Windows.Forms.ToolStripButton ToggleFitPreviewImage;
 	}
 }

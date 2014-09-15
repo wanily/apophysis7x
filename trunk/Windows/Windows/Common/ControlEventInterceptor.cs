@@ -3,16 +3,16 @@ using System.Windows.Forms;
 
 namespace Xyrus.Apophysis.Windows
 {
-	abstract class ControlEventInterceptor : IDisposable
+	abstract class ControlEventInterceptor<T> : IDisposable where T: Control
 	{
-		private Control mControl;
+		private T mControl;
 
 		~ControlEventInterceptor()
 		{
 			Dispose(false);
 		}
 
-		protected ControlEventInterceptor([NotNull] Control control)
+		protected ControlEventInterceptor([NotNull] T control)
 		{
 			if (control == null) throw new ArgumentNullException("control");
 			Attach(control);
@@ -37,13 +37,13 @@ namespace Xyrus.Apophysis.Windows
 			GC.SuppressFinalize(this);
 		}
 
-		protected Control AttachedControl
+		protected T AttachedControl
 		{
 			get { return mControl; }
 		}
 
-		protected abstract void RegisterEvents(Control control);
-		protected abstract void UnregisterEvents(Control control);
+		protected abstract void RegisterEvents(T control);
+		protected abstract void UnregisterEvents(T control);
 
 		public void InvalidateControl()
 		{
@@ -53,7 +53,7 @@ namespace Xyrus.Apophysis.Windows
 			mControl.Refresh();
 		}
 
-		private void Attach([NotNull] Control control)
+		private void Attach([NotNull] T control)
 		{
 			if (control == null) throw new ArgumentNullException("control");
 
@@ -67,6 +67,13 @@ namespace Xyrus.Apophysis.Windows
 
 			UnregisterEvents(mControl);
 			mControl = null;
+		}
+	}
+
+	abstract class ControlEventInterceptor : ControlEventInterceptor<Control>
+	{
+		protected ControlEventInterceptor([NotNull] Control control) : base(control)
+		{
 		}
 	}
 }

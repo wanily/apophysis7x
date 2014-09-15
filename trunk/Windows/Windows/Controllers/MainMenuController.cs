@@ -41,11 +41,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.FlamePropertiesMenuItem.Click += OnFlamePropertiesClick;
 			View.PalettePropertiesMenuItem.Click += OnPalettePropertiesClick;
 			View.CanvasPropertiesMenuItem.Click += OnCanvasPropertiesClick;
-
 			View.ShowToolBarMenuItem.Click += OnShowToolbarClick;
 			View.ShowStatusBarMenuItem.Click += OnShowStatusbarClick;
 			View.ShowBatchMenuItem.Click += OnShowBatchListClick;
 			View.ResetLayoutMenuItem.Click += OnResetLayoutClick;
+
+			View.ResetCameraMenuItem.Click += OnResetCameraClick;
 
 			UpdateButtonStates();
 		}
@@ -71,11 +72,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.FlamePropertiesMenuItem.Click -= OnFlamePropertiesClick;
 			View.PalettePropertiesMenuItem.Click -= OnPalettePropertiesClick;
 			View.CanvasPropertiesMenuItem.Click -= OnCanvasPropertiesClick;
-
 			View.ShowToolBarMenuItem.Click -= OnShowToolbarClick;
 			View.ShowStatusBarMenuItem.Click -= OnShowStatusbarClick;
 			View.ShowBatchMenuItem.Click -= OnShowBatchListClick;
 			View.ResetLayoutMenuItem.Click -= OnResetLayoutClick;
+
+			View.ResetCameraMenuItem.Click -= OnResetCameraClick;
 		}
 
 		internal void OnNewFlameClick(object sender, EventArgs e)
@@ -168,7 +170,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			mParent.ShowCanvasProperties();
 		}
-
 		internal void OnShowToolbarClick(object sender, EventArgs e)
 		{
 			View.ShowToolBarMenuItem.Checked = !View.ShowToolBarMenuItem.Checked;
@@ -198,6 +199,20 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mParent.ToolbarController.UpdateRootPanelSize();
 
 			UpdateButtonStates();
+		}
+
+		internal void OnResetCameraClick(object sender, EventArgs e)
+		{
+			var flame = mParent.BatchListController.GetSelectedFlame();
+			if (flame == null)
+				return;
+
+			flame.Camera.Reset();
+			flame.Zoom = 0;
+			flame.PixelsPerUnit = 25 * flame.CanvasSize.Width / 100.0;
+
+			mParent.UndoController.CommitChange(flame);
+			mParent.FlamePropertiesController.RaiseFlameChanged();
 		}
 
 		public void UpdateButtonStates()

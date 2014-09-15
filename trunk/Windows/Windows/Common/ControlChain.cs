@@ -5,12 +5,12 @@ using System.Windows.Forms;
 
 namespace Xyrus.Apophysis.Windows
 {
-	abstract class ControlChain<T> : ControlEventInterceptor where T : ChainItem
+	abstract class ControlChain<TControl, TChainItem> : ControlEventInterceptor where TChainItem : ChainItem<TControl> where TControl: Control
 	{
 		class PriorizedChainItem
 		{
 			[NotNull]
-			public T Handler;
+			public TChainItem Handler;
 			public int Priority;
 		}
 
@@ -32,22 +32,22 @@ namespace Xyrus.Apophysis.Windows
 			}
 		}
 
-		protected IEnumerable<T> GetChainItems()
+		protected IEnumerable<TChainItem> GetChainItems()
 		{
 			if (mChain == null)
-				return new T[0];
+				return new TChainItem[0];
 
 			return mChain.OrderBy(x => x.Priority).Select(x => x.Handler);
 		}
 
-		public void Add([NotNull] T handler, int priority = 1)
+		public void Add([NotNull] TChainItem handler, int priority = 1)
 		{
 			if (handler == null) throw new ArgumentNullException("handler");
 			if (priority < 1) throw new ArgumentOutOfRangeException("priority");
 
 			mChain.Add(new PriorizedChainItem { Handler = handler, Priority = priority });
 		}
-		public void Remove([NotNull] T painter)
+		public void Remove([NotNull] TChainItem painter)
 		{
 			if (painter == null) throw new ArgumentNullException("painter");
 
@@ -63,6 +63,13 @@ namespace Xyrus.Apophysis.Windows
 		public void Clear()
 		{
 			mChain.Clear();
+		}
+	}
+
+	abstract class ControlChain<T> : ControlChain<Control, T> where T : ChainItem
+	{
+		protected ControlChain([NotNull] Control control) : base(control)
+		{
 		}
 	}
 }
