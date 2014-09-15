@@ -206,8 +206,9 @@
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
     <Compile Include="Windows\Input\CameraEditInputHandler.cs" />
+    <Compile Include="Windows\Input\IteratorInputOperation.cs" />
     <Compile Include="Windows\Input\MouseHookEventArgs.cs" />
-    <Compile Include="Windows\Input\InputOperation.cs" />
+    <Compile Include="Windows\Input\CameraInputOperation.cs" />
     <Compile Include="Windows\Input\KeyboardHookEventArgs.cs" />
     <Compile Include="Windows\Input\KeyboardHookEventHandler.cs" />
     <Compile Include="Windows\Input\KeyboardInputManager.cs" />
@@ -216,11 +217,14 @@
     <Compile Include="Windows\Input\MouseOverOperation.cs" />
     <Compile Include="Windows\Input\MoveOperation.cs" />
     <Compile Include="Windows\Input\NativeHookManager.cs" />
+    <Compile Include="Windows\Input\PanOperation.cs" />
+    <Compile Include="Windows\Input\RotateCanvasOperation.cs" />
     <Compile Include="Windows\Input\RotateOperation.cs" />
     <Compile Include="Windows\Input\RotationAxis.cs" />
     <Compile Include="Windows\Input\ScaleOperation.cs" />
     <Compile Include="Windows\Common\CanvasSnapBehavior.cs" />
     <Compile Include="Models\Iterator.cs" />
+    <Compile Include="Windows\Input\ZoomOperation.cs" />
     <Compile Include="Windows\Visuals\CanvasVisual.cs" />
     <Compile Include="Windows\Visuals\ControlVisual.cs" />
     <Compile Include="Windows\Visuals\ControlVisualChain.cs" />

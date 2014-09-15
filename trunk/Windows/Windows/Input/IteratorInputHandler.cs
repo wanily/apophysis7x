@@ -34,7 +34,7 @@ namespace Xyrus.Apophysis.Windows.Input
 		private HitTestResult mLastHitTestResult;
 		private bool mIsMouseDown;
 
-		private InputOperation mOperation;
+		private IteratorInputOperation mOperation;
 
 		private static readonly Cursor mMoveCursor;
 		private static readonly Cursor mRotateCursor;
@@ -524,7 +524,7 @@ namespace Xyrus.Apophysis.Windows.Input
 			get { return mVisual == null ? null : mVisual.Model; }
 		}
 
-		public InputOperation GetCurrentOperation()
+		public IteratorInputOperation GetCurrentOperation()
 		{
 			return mOperation;
 		}

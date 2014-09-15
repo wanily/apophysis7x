@@ -5,7 +5,7 @@ using Xyrus.Apophysis.Models;
 
 namespace Xyrus.Apophysis.Windows.Input
 {
-	class MoveOperation : InputOperation
+	class MoveOperation : IteratorInputOperation
 	{
 		public MoveOperation([NotNull] Iterator iterator, [NotNull] Vector2 origin, [NotNull] Vector2 current) : base(iterator)
 		{

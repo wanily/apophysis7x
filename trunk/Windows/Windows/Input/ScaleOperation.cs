@@ -3,7 +3,7 @@ using Xyrus.Apophysis.Models;
 
 namespace Xyrus.Apophysis.Windows.Input
 {
-	class ScaleOperation : InputOperation
+	class ScaleOperation : IteratorInputOperation
 	{
 		public ScaleOperation([NotNull] Iterator iterator, double scaleFactor)
 			: base(iterator)

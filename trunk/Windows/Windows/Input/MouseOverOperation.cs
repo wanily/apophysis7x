@@ -2,7 +2,7 @@ using Xyrus.Apophysis.Models;
 
 namespace Xyrus.Apophysis.Windows.Input
 {
-	class MouseOverOperation : InputOperation
+	class MouseOverOperation : IteratorInputOperation
 	{
 		public MouseOverOperation([NotNull] Iterator iterator) : base(iterator)
 		{

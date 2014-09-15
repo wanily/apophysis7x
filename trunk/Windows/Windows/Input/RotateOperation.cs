@@ -3,7 +3,7 @@ using Xyrus.Apophysis.Models;
 
 namespace Xyrus.Apophysis.Windows.Input
 {
-	class RotateOperation : InputOperation
+	class RotateOperation : IteratorInputOperation
 	{
 		public RotateOperation([NotNull] Iterator iterator, double rotationAngle, RotationAxis axis)
 			: base(iterator)

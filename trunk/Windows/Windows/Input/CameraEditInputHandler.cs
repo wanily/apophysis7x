@@ -11,6 +11,12 @@ namespace Xyrus.Apophysis.Windows.Input
 		private PreviewInputVisual mInputVisual;
 		private Flame mFlame;
 
+		private double mDragAngle;
+		private Vector2 mDragOrigin;
+		private Vector2 mDragCursor;
+		private bool mIsMouseDown;
+		private double mDragAngleOld;
+
 		public CameraEditInputHandler([NotNull] Control control, [NotNull] PreviewInputVisual inputVisual) : base(control)
 		{
 			if (inputVisual == null) throw new ArgumentNullException("inputVisual");
@@ -21,6 +27,13 @@ namespace Xyrus.Apophysis.Windows.Input
 		{
 			mInputVisual = null;
 			mFlame = null;
+
+			mDragCursor = null;
+			mDragOrigin = null;
+			mDragAngle = 0;
+			mDragAngleOld = 0;
+
+			mIsMouseDown = false;
 		}
 
 		public Flame Flame
@@ -48,18 +61,85 @@ namespace Xyrus.Apophysis.Windows.Input
 
 		protected override bool OnAttachedControlMouseDown(Vector2 cursor)
 		{
-			//todo
-			return false;
+			if (mFlame == null)
+				return false;
+
+			mIsMouseDown = true;
+
+			mDragCursor = cursor;
+			mDragOrigin = mFlame.Camera.Origin.Copy();
+			mDragAngle = System.Math.Atan2(cursor.Y - AttachedControl.ClientSize.Height / 2.0, AttachedControl.ClientSize.Width / 2.0 - cursor.X);
+			mDragAngleOld = mFlame.Camera.GetAxisAngle(Axis.X);
+
+			return true;
 		}
 		protected override bool OnAttachedControlMouseMove(Vector2 cursor, MouseButtons button)
 		{
-			//todo
-			return false;
+			if (mFlame == null || !mIsMouseDown)
+				return false;
+
+			var c = mFlame.PixelToWorld(cursor);
+			var c0 = mFlame.PixelToWorld(mDragCursor);
+
+			switch (EditMode)
+			{
+				case CameraEditMode.Pan:
+
+					var o = c - c0 + mDragOrigin;
+
+					if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
+					{
+						var d = (c - c0).Abs();
+						if (d.X > d.Y) o.Y = mDragOrigin.Y;
+						else o.X = mDragOrigin.X;
+					}
+
+					mFlame.Camera.Origin.X = o.X;
+					mFlame.Camera.Origin.Y = o.Y;
+					mInputVisual.Operation = new PanOperation(o);
+
+					return true;
+				case CameraEditMode.Rotate:
+
+					var angle = System.Math.Atan2(
+						cursor.Y - AttachedControl.ClientSize.Height / 2.0, 
+						AttachedControl.ClientSize.Width / 2.0 - cursor.X) -
+						mDragAngle;
+
+					if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
+					{
+						var ang = angle * 180 / System.Math.PI;
+						var snapped = System.Math.Round(ang / 15) * 15;
+
+						angle = snapped * System.Math.PI / 180.0;
+					}
+
+					mFlame.Camera.SetAngle(mDragAngleOld + angle);
+					mInputVisual.Operation = new RotateCanvasOperation(-angle);
+
+					return true;
+				case CameraEditMode.ZoomIn:
+					return false;
+				case CameraEditMode.ZoomOut:
+					return false;
+				default:
+					return false;
+			}
 		}
 		protected override bool OnAttachedControlMouseUp()
 		{
-			//todo
-			return false;
+			if (mFlame == null)
+				return false;
+
+			mInputVisual.Operation = null;
+			mIsMouseDown = false;
+
+			mDragCursor = null;
+			mDragOrigin = null;
+			mDragAngle = 0;
+			mDragAngleOld = 0;
+
+			return true;
 		}
 	}
 }

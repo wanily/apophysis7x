@@ -3,9 +3,9 @@ using Xyrus.Apophysis.Models;
 
 namespace Xyrus.Apophysis.Windows.Input
 {
-	abstract class InputOperation
+	abstract class IteratorInputOperation
 	{
-		protected InputOperation([NotNull] Iterator iterator)
+		protected IteratorInputOperation([NotNull] Iterator iterator)
 		{
 			if (iterator == null) throw new ArgumentNullException("iterator");
 			Iterator = iterator;

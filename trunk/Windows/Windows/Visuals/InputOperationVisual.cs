@@ -24,7 +24,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 		private Color mReferenceColor;
 		private Vector2 mCursorPosition;
 		private Rectangle mHintTextRectangle;
-		private InputOperation mOperation;
+		private IteratorInputOperation mOperation;
 
 		public InputOperationVisual([NotNull] Control control, [NotNull] Canvas canvas) : base(control, canvas)
 		{
@@ -37,7 +37,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			mOperation = null;
 		}
 
-		public InputOperation Operation
+		public IteratorInputOperation Operation
 		{
 			get { return mOperation; }
 			set { mOperation = value; }
@@ -73,7 +73,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			set;
 		}
 
-		private Matrix2X2 GetMatrix([NotNull] Iterator iterator)
+		protected virtual Matrix2X2 GetMatrix([NotNull] Iterator iterator)
 		{
 			if (iterator == null)
 			{
@@ -90,7 +90,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 					throw new ArgumentOutOfRangeException();
 			}
 		}
-		private Vector2 GetOrigin([NotNull] Iterator iterator)
+		protected virtual Vector2 GetOrigin([NotNull] Iterator iterator)
 		{
 			if (iterator == null)
 			{

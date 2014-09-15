@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Xml.Linq;
+using Xyrus.Apophysis.Math;
 
 namespace Xyrus.Apophysis.Models
 {
@@ -240,6 +241,15 @@ namespace Xyrus.Apophysis.Models
 			copy.mBackground = mBackground;
 
 			return copy;
+		}
+
+		[NotNull]
+		public Vector2 PixelToWorld(Vector2 cursor)
+		{
+			var scaleFactor = System.Math.Pow(2, mZoom) * mPixelsPerUnit;
+			var scaledCursor = cursor / scaleFactor;
+
+			return Camera.TransformPoint(scaledCursor);
 		}
 
 		public void ReadXml([NotNull] XElement element)

@@ -90,7 +90,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			}
 		}
 
-		public InputOperation CurrentOperation
+		public IteratorInputOperation CurrentOperation
 		{
 			get { return mOperationVisual == null ? null : mOperationVisual.Operation; }
 			set
