@@ -75,6 +75,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			View.BatchListView.SelectedIndexChanged += OnListSelectionChanged;
 			View.BatchListView.AfterLabelEdit += OnListLabelEdited;
+			View.BatchListView.SizeChanged += OnListResized;
 
 			using (mParent.Initializer.Enter())
 			{
@@ -93,6 +94,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			View.BatchListView.SelectedIndexChanged -= OnListSelectionChanged;
 			View.BatchListView.AfterLabelEdit -= OnListLabelEdited;
+			View.BatchListView.SizeChanged -= OnListResized;
 
 			ApophysisSettings.BatchListUsePreviews = mIsIconViewEnabled;
 			ApophysisSettings.BatchListPreviewSize = mPreviewSize;
@@ -366,6 +368,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			}
 
 			mParent.UpdatePreviews();
+		}
+		private void OnListResized(object sender, EventArgs e)
+		{
+			View.UpdateBatchListColumnSize();
 		}
 	}
 }
