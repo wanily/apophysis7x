@@ -377,13 +377,17 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		public void UpdateCamera()
 		{
+			var sz = System.Math.Max(-3, System.Math.Min(mFlame.Zoom, 3));
+			var sx = System.Math.Max(-10, System.Math.Min(mFlame.Origin.X, 10));
+			var sy = System.Math.Max(-10, System.Math.Min(mFlame.Origin.Y, 10));
+
 			View.ScaleDragPanel.Value = mFlame.PixelsPerUnit * 100.0 / mFlame.CanvasSize.Width;
 			View.ZoomDragPanel.Value = mFlame.Zoom;
-			View.ZoomScrollBar.Value = (int)(mFlame.Zoom * 1000);
+			View.ZoomScrollBar.Value = (int)(sz * 1000);
 			View.XPositionDragPanel.Value = mFlame.Origin.X;
-			View.XPositionScrollBar.Value = (int)(mFlame.Origin.X * 1000);
+			View.XPositionScrollBar.Value = (int)(sx * 1000);
 			View.YPositionDragPanel.Value = mFlame.Origin.Y;
-			View.YPositionScrollBar.Value = (int)(mFlame.Origin.Y * 1000);
+			View.YPositionScrollBar.Value = (int)(sy * 1000);
 			View.RotationDragPanel.Value = -mFlame.Angle * 180 / System.Math.PI;
 			View.RotationScrollBar.Value = (int)(View.RotationDragPanel.Value);
 		}
