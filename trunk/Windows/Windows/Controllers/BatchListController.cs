@@ -11,11 +11,13 @@ using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Threading;
 using Xyrus.Apophysis.Windows.Forms;
+using Xyrus.Apophysis.Windows.Input;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
 	class BatchListController : Controller<Main>
 	{
+		private TimeLock mIconUpdateTimeLock;
 		private ThreadController mPreviewThreadController;
 		private MainController mParent;
 		private bool mIsIconViewEnabled;
@@ -31,6 +33,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			mParent = parent;
 			mPreviewThreadController = new ThreadController(ThreadPriority.Lowest);
+			mIconUpdateTimeLock = new TimeLock(UpdateSelectedPreview);
 
 			mPreviewImages = new ImageList
 			{
@@ -42,6 +45,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			if (disposing)
 			{
+				if (mIconUpdateTimeLock != null)
+				{
+					mIconUpdateTimeLock.Dispose();
+					mIconUpdateTimeLock = null;
+				}
+
 				if (mPreviewImages != null)
 				{
 					DisposeIcons();
@@ -76,6 +85,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.BatchListView.SelectedIndexChanged += OnListSelectionChanged;
 			View.BatchListView.AfterLabelEdit += OnListLabelEdited;
 			View.BatchListView.SizeChanged += OnListResized;
+			View.CameraChanged += OnCameraChanged;
 
 			using (mParent.Initializer.Enter())
 			{
@@ -95,6 +105,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.BatchListView.SelectedIndexChanged -= OnListSelectionChanged;
 			View.BatchListView.AfterLabelEdit -= OnListLabelEdited;
 			View.BatchListView.SizeChanged -= OnListResized;
+			View.CameraChanged -= OnCameraChanged;
 
 			ApophysisSettings.BatchListUsePreviews = mIsIconViewEnabled;
 			ApophysisSettings.BatchListPreviewSize = mPreviewSize;
@@ -223,6 +234,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 					throw new ArgumentOutOfRangeException();
 
 				mPreviewDensity = value;
+				mIconUpdateTimeLock.Delay = (int) (ApophysisSettings.MiniPreviewUpdateResolution*value);
 
 				if (mParent.Initializer.IsBusy)
 					return;
@@ -361,10 +373,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			using (mParent.Initializer.Enter())
 			{
-				mParent.Flames.Replace(flame, mParent.UndoController.Current);
-				SetItemProperties(selected, mParent.UndoController.Current, true);
-				mParent.EditorController.Flame = mParent.UndoController.Current;
-				mParent.FlamePropertiesController.Flame = mParent.UndoController.Current;
+				var newFlame = mParent.UndoController.RequestCurrent();
+
+				mParent.Flames.Replace(flame, newFlame);
+				SetItemProperties(selected, newFlame, true);
+				mParent.EditorController.Flame = newFlame;
+				mParent.FlamePropertiesController.Flame = newFlame;
 			}
 
 			mParent.UpdatePreviews();
@@ -372,6 +386,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		private void OnListResized(object sender, EventArgs e)
 		{
 			View.UpdateBatchListColumnSize();
+		}
+		private void OnCameraChanged(object sender, CameraChangedEventArgs args)
+		{
+			mIconUpdateTimeLock.Enter();
 		}
 	}
 }

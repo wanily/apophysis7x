@@ -21,6 +21,8 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			mOperation = null;
 		}
 
+		internal CameraData EditData { get; set; }
+
 		public CameraInputOperation Operation
 		{
 			get { return mOperation; }
@@ -56,7 +58,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 
 		protected override void OnControlPaint(Graphics graphics)
 		{
-			if (mImageSize.Width <= 0 || mImageSize.Height <= 0)
+			if (EditData == null || mImageSize.Width <= 0 || mImageSize.Height <= 0)
 				return;
 
 			var fractalSize = FitFrame ? AttachedControl.ClientSize : mImageSize.FitToFrame(AttachedControl.ClientSize);
@@ -70,7 +72,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 				var x2 = new Vector2(fractalRect.Right, fractalRect.Bottom);
 				var x3 = new Vector2(fractalRect.Left, fractalRect.Bottom);
 
-				var offset = System.Math.Pow(2, pan.Flame.Zoom)*pan.Flame.PixelsPerUnit*(pan.NewOffset - pan.OldOffset);
+				var offset = System.Math.Pow(2, EditData.Zoom) * EditData.Scale * (pan.NewOffset - pan.OldOffset);
 
 				x0 += offset;
 				x1 += offset;

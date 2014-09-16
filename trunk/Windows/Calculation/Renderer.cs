@@ -3,8 +3,10 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using System.Threading;
+using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Threading;
+using Rectangle = System.Drawing.Rectangle;
 
 namespace Xyrus.Apophysis.Calculation
 {
@@ -25,7 +27,10 @@ namespace Xyrus.Apophysis.Calculation
 			var random = new Random(flame.GetHashCode());
 
 			var samples = density * size.Width * size.Height + 20;
-			var col = Color.FromArgb(random.Next() % 255, random.Next() % 255, random.Next() % 255).ToArgb();
+			var color = Color.FromArgb(random.Next()%255, random.Next()%255, random.Next()%255);
+
+			var col = color.ToArgb();
+			var icol = color.Invert().ToArgb();
 
 			random = new Random(flame.GetHashCode() ^ (int)DateTime.Now.Ticks);
 
@@ -53,6 +58,14 @@ namespace Xyrus.Apophysis.Calculation
 			var data = bitmap.LockBits(new Rectangle(new Point(), bitmap.Size), ImageLockMode.WriteOnly, bitmap.PixelFormat);
 			var lastExcursion = 0;
 
+			var rcenter = new Vector2(bitmap.Size.Width, bitmap.Size.Height)/2.0;
+			var scale = flame.PixelsPerUnit * bitmap.Size.Width / flame.CanvasSize.Width * System.Math.Pow(2, flame.Zoom);
+			var vscale = new Vector2(1, -1) / new Vector2(scale, scale);
+
+			const int gridPow = 0;
+			double grid = System.Math.Pow(10, -gridPow);
+			double gridAcc = 4 * grid/scale;
+
 			for (int i = 0; i < samples; i++)
 			{
 				if (threadState != null && threadState.IsCancelling)
@@ -66,9 +79,14 @@ namespace Xyrus.Apophysis.Calculation
 				}
 
 				var pos = new Point(random.Next() % bitmap.Width, random.Next() % bitmap.Height);
+				var posC = flame.CanvasToWorld(new Vector2(pos.X, pos.Y), rcenter, vscale);
+
 				var time = timer.GetElapsedTimeInSeconds();
 
-				Marshal.WriteInt32(data.Scan0, pos.Y * data.Stride + pos.X * 4, col);
+				var isDiscrete = System.Math.Abs(posC.X - System.Math.Round(posC.X, gridPow)) < gridAcc ||
+								 System.Math.Abs(posC.Y - System.Math.Round(posC.Y, gridPow)) < gridAcc;
+
+				Marshal.WriteInt32(data.Scan0, pos.Y * data.Stride + pos.X * 4, isDiscrete ? icol : col);
 
 				if (time > 1)
 				{

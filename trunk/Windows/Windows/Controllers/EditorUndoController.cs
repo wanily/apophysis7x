@@ -1,4 +1,5 @@
 using System;
+using System.Windows.Forms;
 using Xyrus.Apophysis.Windows.Forms;
 
 namespace Xyrus.Apophysis.Windows.Controllers
@@ -24,9 +25,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			View.IteratorCanvas.EndEdit += OnRequestCommit;
 			View.IteratorColorDragPanel.EndEdit += OnRequestCommit;
-			View.IteratorColorScrollBar.MouseUp += OnRequestCommit;
+			View.IteratorColorScrollBar.Scroll += OnScrollbarCommit;
 			View.IteratorColorSpeedDragPanel.EndEdit += OnRequestCommit;
 			View.IteratorDirectColorDragPanel.EndEdit += OnRequestCommit;
+			View.IteratorWeightDragPanel.EndEdit += OnRequestCommit;
+			View.IteratorWeightTextBox.LostFocus += OnRequestCommit;
 			View.IteratorNameTextBox.LostFocus += OnRequestCommit;
 			View.IteratorOpacityDragPanel.EndEdit += OnRequestCommit;
 			View.IteratorPointOxTextBox.LostFocus += OnRequestCommit;
@@ -58,9 +61,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			View.IteratorCanvas.EndEdit -= OnRequestCommit;
 			View.IteratorColorDragPanel.EndEdit -= OnRequestCommit;
-			View.IteratorColorScrollBar.MouseUp -= OnRequestCommit;
+			View.IteratorColorScrollBar.Scroll -= OnScrollbarCommit;
 			View.IteratorColorSpeedDragPanel.EndEdit -= OnRequestCommit;
 			View.IteratorDirectColorDragPanel.EndEdit -= OnRequestCommit;
+			View.IteratorWeightDragPanel.EndEdit -= OnRequestCommit;
+			View.IteratorWeightTextBox.LostFocus -= OnRequestCommit;
 			View.IteratorNameTextBox.LostFocus -= OnRequestCommit;
 			View.IteratorOpacityDragPanel.EndEdit -= OnRequestCommit;
 			View.IteratorPointOxTextBox.LostFocus -= OnRequestCommit;
@@ -87,6 +92,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.PaletteSelectComboBox.SelectedIndexChanged -= OnRequestCommit;
 		}
 
+		private void OnScrollbarCommit(object sender, ScrollEventArgs e)
+		{
+			if (e.Type == ScrollEventType.EndScroll)
+				OnRequestCommit(sender, e);
+		}
 		private void OnRequestCommit(object sender, EventArgs e)
 		{
 			if (mParent.Initializer.IsBusy)

@@ -1,4 +1,3 @@
-using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Controllers;
 
 namespace Xyrus.Apophysis.Windows.Input
@@ -11,7 +10,7 @@ namespace Xyrus.Apophysis.Windows.Input
 
 		public bool UseScale { get; private set; }
 
-		public ZoomOperation([NotNull] Flame flame, double newFactor, double oldFactor, bool useScale) : base(flame)
+		public ZoomOperation(double newFactor, double oldFactor, bool useScale)
 		{
 			NewFactor = newFactor;
 			OldFactor = oldFactor;

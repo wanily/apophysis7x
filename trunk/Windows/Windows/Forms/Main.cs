@@ -111,10 +111,10 @@ namespace Xyrus.Apophysis.Windows.Forms
 			if (CameraBeginEdit != null)
 				CameraBeginEdit(this, new EventArgs());
 		}
-		private void OnCameraEndEdit(object sender, EventArgs e)
+		private void OnCameraEndEdit(object sender, CameraEndEditEventArgs e)
 		{
 			if (CameraEndEdit != null)
-				CameraEndEdit(this, new EventArgs());
+				CameraEndEdit(this, e);
 		}
 
 		public bool ShowGuidelines
@@ -150,9 +150,9 @@ namespace Xyrus.Apophysis.Windows.Forms
 			{
 				mCameraEditHandler.Flame = value;
 
-				if (value != null)
+				if (mCameraEditHandler.Flame != null)
 				{
-					mInputVisual.ImageSize = value.CanvasSize;
+					mInputVisual.ImageSize = mCameraEditHandler.Flame.CanvasSize;
 					mGuidelinesVisual.ImageSize = mInputVisual.ImageSize;
 				}
 
@@ -180,7 +180,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 		}
 
 		public event EventHandler CameraBeginEdit;
-		public event EventHandler CameraEndEdit;
+		public event CameraEndEditEventHandler CameraEndEdit;
 		public event CameraChangedEventHandler CameraChanged;
 
 		private void UpdateGuideColor()

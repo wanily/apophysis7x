@@ -207,7 +207,10 @@
     </Compile>
     <Compile Include="Windows\Input\CameraChangedEventArgs.cs" />
     <Compile Include="Windows\Input\CameraChangedEventHandler.cs" />
+    <Compile Include="Windows\Input\CameraData.cs" />
     <Compile Include="Windows\Input\CameraEditInputHandler.cs" />
+    <Compile Include="Windows\Input\CameraEndEditEventArgs.cs" />
+    <Compile Include="Windows\Input\CameraEndEditEventHandler.cs" />
     <Compile Include="Windows\Input\IteratorInputOperation.cs" />
     <Compile Include="Windows\Input\MouseHookEventArgs.cs" />
     <Compile Include="Windows\Input\CameraInputOperation.cs" />

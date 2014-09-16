@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Globalization;
 using Xyrus.Apophysis.Calculation;
 using Xyrus.Apophysis.Math;
+using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Forms;
 using Xyrus.Apophysis.Windows.Input;
 
@@ -15,6 +16,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		private TimeLock mPreviewTimeLock;
 		private MainController mParent;
 		private Bitmap mBitmap;
+		private Flame mFlame;
 		private int mPreviewDensity;
 		private bool mFitImage;
 
@@ -166,7 +168,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				//var oldImage = View.PreviewImage;
 				var oldOutput = mBitmap;
 
-				View.PreviewedFlame = mParent.BatchListController.GetSelectedFlame();
+				View.PreviewedFlame = mFlame;
 				View.PreviewImage = mBitmap = bitmap;
 
 				if (oldOutput != null)
@@ -183,6 +185,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		private void OnChangeCommitted(object sender, EventArgs e)
 		{
 			UpdatePreview();
+			mParent.BatchListController.UpdateSelectedPreview();
 		}
 		private void OnRendererProgress(object sender, ProgressEventArgs args)
 		{
@@ -236,11 +239,13 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			if (mParent.Initializer.IsBusy || flame == null)
 				return;
 
+			mFlame = flame;//.Copy();
+
 			var density = (double)PreviewDensity;
 			var canvasSize = View.PreviewPicture.ClientSize;
 			var renderSize = FitImage
-				? canvasSize 
-				: flame.CanvasSize.FitToFrame(canvasSize);
+				? canvasSize
+				: mFlame.CanvasSize.FitToFrame(canvasSize);
 
 			/*Color backgroundWait, foregroundWait;
 			if (View.ShowTransparency)
@@ -254,7 +259,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				foregroundWait = Color.White;
 			}*/
 
-			View.PreviewPicture.BackColor = flame.Background;
+			View.PreviewPicture.BackColor = mFlame.Background;
 			View.PreviewedFlame = null;
 
 			//View.PreviewImage = WaitImageController.DrawWaitImage(renderSize, backgroundWait, foregroundWait);
@@ -262,7 +267,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mRenderer.Cancel();
 
 			mElapsedTimer.SetStartingTime();
-			mRenderer.StartCreateBitmap(flame, density, renderSize, OnRendererFinished);
+			mRenderer.StartCreateBitmap(mFlame, density, renderSize, OnRendererFinished);
 		}
 	}
 }

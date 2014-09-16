@@ -266,7 +266,13 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 		protected override void OnMouseDoubleClick(MouseEventArgs e)
 		{
+			if (BeginEdit != null)
+				BeginEdit(this, new EventArgs());
+
 			Value = Default;
+
+			if (EndEdit != null)
+				EndEdit(this, new EventArgs());
 			base.OnMouseDoubleClick(e);
 		}
 

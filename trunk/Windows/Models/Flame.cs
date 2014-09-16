@@ -32,6 +32,17 @@ namespace Xyrus.Apophysis.Models
 		private Vector2 mOrigin;
 		private double mAngle;
 
+		private Vector2 mHalfSize;
+		private double mScaleFactor;
+		private Vector2 mScaleVector;
+		private Vector2 mScaleVectorInv;
+		private double mSinAngle;
+		private double mCosAngle;
+		private double mSinAngleInv;
+		private double mCosAngleInv;
+
+		private static readonly Vector2 mFlipY = new Vector2(1, -1).Freeze();
+
 		public Flame()
 		{
 			mIndex = ++mCounter;
@@ -48,6 +59,8 @@ namespace Xyrus.Apophysis.Models
 			mGammaThreshold = 0.001;
 			mVibrancy = 1;
 			mBackground = Color.Black;
+
+			UpdateCalculatedValues();
 		}
 
 		[CanBeNull]
@@ -98,13 +111,19 @@ namespace Xyrus.Apophysis.Models
 				var old = mCanvasSize;
 
 				mCanvasSize = value;
-				PixelsPerUnit = PixelsPerUnit * value.Width / old.Width;
+				mPixelsPerUnit = mPixelsPerUnit * value.Width / old.Width;
+
+				UpdateCalculatedValues();
 			}
 		}
 		public double Angle
 		{
 			get { return mAngle; }
-			set { mAngle = value; }
+			set
+			{
+				mAngle = value;
+				UpdateCalculatedValues();
+			}
 		}
 		public double PixelsPerUnit
 		{
@@ -115,12 +134,18 @@ namespace Xyrus.Apophysis.Models
 					throw new ArgumentOutOfRangeException("value");
 
 				mPixelsPerUnit = value;
+
+				UpdateCalculatedValues();
 			}
 		}
 		public double Zoom
 		{
 			get { return mZoom; }
-			set { mZoom = value; }
+			set
+			{
+				mZoom = value;
+				UpdateCalculatedValues();
+			}
 		}
 		public double Pitch
 		{
@@ -243,18 +268,35 @@ namespace Xyrus.Apophysis.Models
 			copy.mVibrancy = mVibrancy;
 			copy.mBackground = mBackground;
 
+			copy.UpdateCalculatedValues();
+
 			return copy;
 		}
 
 		[NotNull]
-		public Vector2 PixelToWorld(Vector2 pixel)
+		public Vector2 CanvasToWorld(Vector2 canvas, Vector2 center = null, Vector2 scale = null)
 		{
-			var scaleFactor = System.Math.Pow(2, mZoom) * mPixelsPerUnit;
-			var scaledPixel = pixel / scaleFactor;
+			var c = center ?? mHalfSize;
+			var s = scale ?? mScaleVectorInv;
 
-			return new Vector2(
-				scaledPixel.X * System.Math.Cos(mAngle) - scaledPixel.Y * System.Math.Sin(mAngle),
-				scaledPixel.X * System.Math.Sin(mAngle) + scaledPixel.Y * System.Math.Cos(mAngle));
+			var vector = new Vector2(
+				(canvas.X - c.X) * s.X - Origin.X,
+				(canvas.Y - c.Y) * s.Y + Origin.Y);
+
+			return RotateVector(vector, mCosAngleInv, mSinAngleInv);
+		}
+
+		[NotNull]
+		public Vector2 WorldToCanvas(Vector2 world, Vector2 center = null, Vector2 scale = null)
+		{
+			var c = center ?? mHalfSize;
+			var s = scale ?? mScaleVector;
+
+			var vector = new Vector2(
+				(world.X + Origin.X) * s.X + c.X,
+				(world.Y - Origin.Y) * s.Y + c.Y);
+
+			return RotateVector(vector, mCosAngle, mSinAngle);
 		}
 
 		public void ReadXml([NotNull] XElement element)
@@ -417,7 +459,9 @@ namespace Xyrus.Apophysis.Models
 			{
 				throw new ApophysisException("No descendant node \"palette\" found");
 			}
+
 			Palette.ReadCondensedHexData(palette.Value);
+			UpdateCalculatedValues();
 		}
 		public bool IsEqual([NotNull] Flame flame)
 		{
@@ -430,6 +474,15 @@ namespace Xyrus.Apophysis.Models
 				return false;
 
 			if (!Equals(mPixelsPerUnit, flame.mPixelsPerUnit))
+				return false;
+
+			if (!Equals(mOrigin.X, flame.mOrigin.X))
+				return false;
+
+			if (!Equals(mOrigin.Y, flame.mOrigin.Y))
+				return false;
+
+			if (!Equals(mAngle, flame.mAngle))
 				return false;
 
 			if (!Equals(mZoom, flame.mZoom))
@@ -481,6 +534,23 @@ namespace Xyrus.Apophysis.Models
 			return new Flame();
 		}
 
+		private void UpdateCalculatedValues()
+		{
+			mHalfSize = new Vector2(CanvasSize.Width / 2.0, CanvasSize.Height / 2.0).Freeze();
+			mScaleFactor = (System.Math.Pow(2, mZoom) * mPixelsPerUnit);
+			mScaleVector = mScaleFactor * mFlipY;
+			mScaleVectorInv = (1.0 / mScaleFactor) * mFlipY;
+			mSinAngle = System.Math.Sin(mAngle);
+			mCosAngle = System.Math.Cos(mAngle);
+			mSinAngleInv = System.Math.Sin(-mAngle);
+			mCosAngleInv = System.Math.Cos(-mAngle);
+		}
+		private static Vector2 RotateVector(Vector2 vector, double cos, double sin)
+		{
+			return new Vector2(
+				vector.X * cos - vector.Y * sin,
+				vector.X * sin + vector.Y * cos);
+		}
 		internal static void ReduceCounter()
 		{
 			mCounter--;

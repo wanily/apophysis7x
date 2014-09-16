@@ -58,6 +58,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.IteratorColorScrollBar.ValueChanged += OnRequestCommit;
 			View.IteratorColorSpeedDragPanel.ValueChanged += OnRequestCommit;
 			View.IteratorDirectColorDragPanel.ValueChanged += OnRequestCommit;
+			View.IteratorWeightDragPanel.ValueChanged += OnRequestCommit;
+			View.IteratorWeightTextBox.LostFocus += OnRequestCommit;
 			View.IteratorOpacityDragPanel.ValueChanged += OnRequestCommit;
 			View.IteratorPointOxTextBox.LostFocus += OnRequestCommit;
 			View.IteratorPointOyTextBox.LostFocus += OnRequestCommit;
@@ -113,6 +115,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.IteratorColorScrollBar.ValueChanged -= OnRequestCommit;
 			View.IteratorColorSpeedDragPanel.ValueChanged -= OnRequestCommit;
 			View.IteratorDirectColorDragPanel.ValueChanged -= OnRequestCommit;
+			View.IteratorWeightDragPanel.ValueChanged -= OnRequestCommit;
+			View.IteratorWeightTextBox.LostFocus -= OnRequestCommit;
 			View.IteratorOpacityDragPanel.ValueChanged -= OnRequestCommit;
 			View.IteratorPointOxTextBox.LostFocus -= OnRequestCommit;
 			View.IteratorPointOyTextBox.LostFocus -= OnRequestCommit;

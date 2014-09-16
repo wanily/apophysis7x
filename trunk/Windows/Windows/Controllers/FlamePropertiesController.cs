@@ -77,9 +77,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.GammaThresholdDragPanel.ValueChanged += OnGammaThresholdChanged;
 			View.BackgroundPictureBox.Click += OnRequestBackgroundChange;
 
-			mUndoController.Initialize();
 			mPreviewController.Initialize();
 			mToolbarController.Initialize();
+			mUndoController.Initialize();
 		}
 		protected override void DetachView()
 		{

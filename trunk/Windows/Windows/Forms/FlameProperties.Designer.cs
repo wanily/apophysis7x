@@ -406,8 +406,8 @@
 			this.GammaThresholdDragPanel.Default = 0.001D;
 			this.GammaThresholdDragPanel.DragStepping = 0.1D;
 			this.GammaThresholdDragPanel.Location = new System.Drawing.Point(290, 103);
-			this.GammaThresholdDragPanel.Maximum = 1.7976931348623157E+308D;
-			this.GammaThresholdDragPanel.Minimum = -1.7976931348623157E+308D;
+			this.GammaThresholdDragPanel.Maximum = 100000D;
+			this.GammaThresholdDragPanel.Minimum = 0.001D;
 			this.GammaThresholdDragPanel.Name = "GammaThresholdDragPanel";
 			this.GammaThresholdDragPanel.Size = new System.Drawing.Size(126, 21);
 			this.GammaThresholdDragPanel.TabIndex = 30;

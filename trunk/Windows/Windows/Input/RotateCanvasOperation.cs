@@ -1,4 +1,3 @@
-using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Controllers;
 
 namespace Xyrus.Apophysis.Windows.Input
@@ -9,7 +8,7 @@ namespace Xyrus.Apophysis.Windows.Input
 		public double NewAngle { get; private set; }
 		public double OldAngle { get; private set; }
 
-		public RotateCanvasOperation([NotNull] Flame flame, double newAngle, double oldAngle) : base(flame)
+		public RotateCanvasOperation(double newAngle, double oldAngle)
 		{
 			NewAngle = newAngle;
 			OldAngle = oldAngle;

@@ -126,9 +126,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mFullscreenController.Initialize();
 			mMenuController.Initialize();
 			mToolbarController.Initialize();
-			mMainUndoController.Initialize();
 			mBatchListController.Initialize();
 			mMainPreviewController.Initialize();
+			mMainUndoController.Initialize();
 
 			View.Load += OnViewLoaded;
 			View.CameraEndEdit += OnCameraEndEdit;
@@ -213,21 +213,29 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			GenerateRandomFlames(10, false);
 		}
-		private void OnCameraEndEdit(object sender, EventArgs e)
+		private void OnCameraEndEdit(object sender, CameraEndEditEventArgs e)
 		{
 			var flame = mBatchListController.GetSelectedFlame();
-			if (flame == null)
+			if (flame == null || Initializer.IsBusy)
 				return;
 
-			UndoController.CommitChange(flame);
+			FlamePropertiesController.UndoController.CommitChange(flame);
 			FlamePropertiesController.RaiseFlameChanged();
 
 			View.LoadingStatusLabel.Text = mFlames.CalculatedName;
 		}
-		private void OnCameraChanged(object sender, CameraChangedEventArgs args)
+		private void OnCameraChanged(object sender, CameraChangedEventArgs e)
 		{
+			var flame = mBatchListController.GetSelectedFlame();
+			if (flame == null || Initializer.IsBusy)
+				return;
+
 			using (mFlamePropertiesController.Initializer.Enter())
 			{
+				flame.Angle = e.Data.Angle;
+				flame.Origin = e.Data.Origin.Copy();
+				flame.Zoom = e.Data.Zoom;
+				flame.PixelsPerUnit = e.Data.Scale;
 				mFlamePropertiesController.UpdateCamera();
 			}
 		}
@@ -333,6 +341,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			mEditorController.Flame = flame;
 			mFlamePropertiesController.Flame = flame;
+
 			mUndoController.Reset(flame);
 
 			UpdatePreviews();

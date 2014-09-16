@@ -1,6 +1,5 @@
 using System;
 using Xyrus.Apophysis.Math;
-using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Controllers;
 
 namespace Xyrus.Apophysis.Windows.Input
@@ -14,7 +13,7 @@ namespace Xyrus.Apophysis.Windows.Input
 		[NotNull]
 		public Vector2 OldOffset { get; private set; }
 
-		public PanOperation([NotNull] Flame flame, [NotNull] Vector2 newOffset, [NotNull] Vector2 oldOffset) : base(flame)
+		public PanOperation([NotNull] Vector2 newOffset, [NotNull] Vector2 oldOffset)
 		{
 			if (newOffset == null) throw new ArgumentNullException("newOffset");
 			if (oldOffset == null) throw new ArgumentNullException("oldOffset");
