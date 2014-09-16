@@ -161,19 +161,18 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			if (bitmap == null)
 				return;
 
-			if (mBitmap != null)
-			{
-				mBitmap.Dispose();
-			}
-
-			mBitmap = bitmap;
-
-			View.PreviewPicture.Invoke(new Action(() =>
+			View.Invoke(new Action(() =>
 			{
 				//var oldImage = View.PreviewImage;
+				var oldOutput = mBitmap;
 
 				View.PreviewedFlame = mParent.BatchListController.GetSelectedFlame();
-				View.PreviewImage = bitmap;
+				View.PreviewImage = mBitmap = bitmap;
+
+				if (oldOutput != null)
+				{
+					oldOutput.Dispose();
+				}
 
 				/*if (oldImage != null)
 				{
