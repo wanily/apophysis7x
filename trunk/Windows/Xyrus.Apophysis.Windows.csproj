@@ -78,7 +78,6 @@
     <Compile Include="Calculation\VariationPriority.cs" />
     <Compile Include="Calculation\VariationRegistry.cs" />
     <Compile Include="Math\UtilityExtensions.cs" />
-    <Compile Include="Models\Axis.cs" />
     <Compile Include="Models\FlameCollection.cs" />
     <Compile Include="Models\Palette.cs" />
     <Compile Include="Models\PaletteCollection.cs" />

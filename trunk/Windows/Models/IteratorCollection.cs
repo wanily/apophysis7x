@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Forms;
 using System.Xml.Linq;
 using Xyrus.Apophysis.Windows;
 
@@ -188,6 +189,30 @@ namespace Xyrus.Apophysis.Models
 			}
 
 			return true;
+		}
+
+		public void NormalizeWeights()
+		{
+			var total = 0.0;
+			for (int i = 0; i < Count; i++)
+			{
+				total += this[i].Weight;
+			}
+
+			if (total < 0.001)
+			{
+				for (int i = 0; i < Count; i++)
+				{
+					total = 1.0 / total;
+				}
+			}
+			else
+			{
+				for (int i = 0; i < Count; i++)
+				{
+					total /= total;
+				}
+			}
 		}
 	}
 }

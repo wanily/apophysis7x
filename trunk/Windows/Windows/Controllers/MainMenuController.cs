@@ -48,6 +48,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.ResetLayoutMenuItem.Click += OnResetLayoutClick;
 
 			View.ResetCameraMenuItem.Click += OnResetCameraClick;
+			View.RandomizeFlameMenuItem.Click += OnRandomizeClick;
 
 			UpdateButtonStates();
 		}
@@ -79,6 +80,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.ResetLayoutMenuItem.Click -= OnResetLayoutClick;
 
 			View.ResetCameraMenuItem.Click -= OnResetCameraClick;
+			View.RandomizeFlameMenuItem.Click -= OnRandomizeClick;
 		}
 
 		internal void OnNewFlameClick(object sender, EventArgs e)
@@ -212,6 +214,20 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			flame.Origin = new Vector2();
 			flame.Zoom = 0;
 			flame.PixelsPerUnit = 25 * flame.CanvasSize.Width / 100.0;
+
+			mParent.UndoController.CommitChange(flame);
+			mParent.FlamePropertiesController.RaiseFlameChanged();
+			mParent.FlamePropertiesController.UpdateCamera();
+
+			mParent.BatchListController.UpdateSelectedPreview();
+		}
+		internal void OnRandomizeClick(object sender, EventArgs e)
+		{
+			var flame = mParent.BatchListController.GetSelectedFlame();
+			if (flame == null)
+				return;
+			
+			flame.Randomize();
 
 			mParent.UndoController.CommitChange(flame);
 			mParent.FlamePropertiesController.RaiseFlameChanged();

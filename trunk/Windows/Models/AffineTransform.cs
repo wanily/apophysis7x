@@ -40,32 +40,6 @@ namespace Xyrus.Apophysis.Models
 			}
 		}
 
-		public double GetAxisAngle(Axis axis)
-		{
-			Vector2 axisVector;
-			Vector2 transformVector;
-
-			switch (axis)
-			{
-				case Axis.X:
-					axisVector = new Vector2(1, 0);
-					transformVector = Matrix.X;
-					break;
-				case Axis.Y:
-					axisVector = new Vector2(0, 1);
-					transformVector = Matrix.Y;
-					break;
-				default:
-					throw new ArgumentOutOfRangeException("axis");
-			}
-
-			return System.Math.Atan2(transformVector.Y, transformVector.X) - System.Math.Atan2(axisVector.Y, axisVector.X);
-		}
-		public double GetInternalAngle()
-		{
-			return System.Math.Atan2(Matrix.Y.Y, Matrix.Y.X) - System.Math.Atan2(Matrix.X.Y, Matrix.X.X);
-		}
-
 		[NotNull]
 		public Vector2 TransformPoint([NotNull] Vector2 point)
 		{
@@ -75,6 +49,43 @@ namespace Xyrus.Apophysis.Models
 				X = Matrix.X.X * point.X + Matrix.Y.X * point.Y + Origin.X,
 				Y = Matrix.X.Y * point.X + Matrix.Y.Y * point.Y + Origin.Y,
 			};
+		}
+
+		public void MatrixTransform(Matrix2X2 operand)
+		{
+			var m1 = new[,]
+			{
+				{ Matrix.X.X, Matrix.X.Y, 0 },
+				{ Matrix.Y.X, Matrix.Y.Y, 0 },
+				{ Origin.X, Origin.Y, 0 }
+			};
+
+			var m2 = new[,]
+			{
+				{ operand.X.X, operand.X.Y, 0 },
+				{ operand.Y.X, operand.Y.Y, 0 },
+				{ 0, 0, 0 }
+			};
+
+			var result = new double[3, 3];
+
+			result[0, 0] = m1[0, 0] * m2[0, 0] + m1[0, 1] * m2[1, 0] + m1[0, 2] * m2[2, 0];
+			result[0, 1] = m1[0, 0] * m2[0, 1] + m1[0, 1] * m2[1, 1] + m1[0, 2] * m2[2, 1];
+			result[0, 2] = m1[0, 0] * m2[0, 2] + m1[0, 1] * m2[1, 2] + m1[0, 2] * m2[2, 2];
+			result[1, 0] = m1[1, 0] * m2[0, 0] + m1[1, 1] * m2[1, 0] + m1[1, 2] * m2[2, 0];
+			result[1, 1] = m1[1, 0] * m2[0, 1] + m1[1, 1] * m2[1, 1] + m1[1, 2] * m2[2, 1];
+			result[1, 2] = m1[1, 0] * m2[0, 2] + m1[1, 1] * m2[1, 2] + m1[1, 2] * m2[2, 2];
+			result[2, 0] = m1[2, 0] * m2[0, 0] + m1[2, 1] * m2[1, 0] + m1[2, 2] * m2[2, 0];
+			result[2, 0] = m1[2, 0] * m2[0, 1] + m1[2, 1] * m2[1, 1] + m1[2, 2] * m2[2, 1];
+			result[2, 0] = m1[2, 0] * m2[0, 2] + m1[2, 1] * m2[1, 2] + m1[2, 2] * m2[2, 2];
+
+			Matrix.X.X = result[0, 0];
+			Matrix.X.Y = result[0, 1];
+			Matrix.Y.X = result[1, 0];
+			Matrix.Y.Y = result[1, 1];
+
+			Origin.X = result[2, 0];
+			Origin.Y = result[2, 1];
 		}
 
 		public void Reset()
@@ -114,15 +125,6 @@ namespace Xyrus.Apophysis.Models
 			Origin.X += offset.X;
 			Origin.Y += offset.Y;
 		}
-		public void SetAngle(double angle)
-		{
-			Matrix.X.X = 1;
-			Matrix.X.Y = 0;
-			Matrix.Y.X = 0;
-			Matrix.Y.Y = 1;
-
-			Rotate(angle);
-		}
 
 		public bool IsEqual([NotNull] AffineTransform transform)
 		{
@@ -148,7 +150,5 @@ namespace Xyrus.Apophysis.Models
 
 			return true;
 		}
-
-		
 	}
 }

@@ -3,7 +3,9 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Xml.Linq;
+using Xyrus.Apophysis.Calculation;
 using Xyrus.Apophysis.Math;
+using Xyrus.Apophysis.Variations;
 
 namespace Xyrus.Apophysis.Models
 {
@@ -527,11 +529,93 @@ namespace Xyrus.Apophysis.Models
 			return true;
 		}
 
+		public void Randomize()
+		{
+			const int minIterators = 2;
+			const int maxIterators = 5;
+
+			var random = new Random((int)DateTime.Now.Ticks % mCounter);
+			var numIterators = random.Next(minIterators, maxIterators + 1);
+
+			Iterators.Reset();
+
+			for (int i = 0; i < numIterators; i++)
+			{
+				if (i > 0)
+				{
+					Iterators.Add();
+				}
+
+				var iterator = Iterators[i];
+
+				if (random.Next()%10 < 9)
+				{
+					iterator.PreAffine.Origin.X = -1;
+				}
+
+				iterator.Color = random.NextDouble();
+				iterator.ColorSpeed = random.NextDouble()*2 - 1;
+				
+				iterator.PreAffine.Move(new Vector2(random.NextDouble() * 2 - 1, random.NextDouble() * 2 - 1));
+				iterator.PreAffine.Rotate(random.NextDouble() * System.Math.PI * 2 - System.Math.PI);
+				iterator.PreAffine.Scale(i > 0 ? (random.NextDouble() * 0.8 + 0.2) : (random.NextDouble() * 0.4 + 0.6));
+
+				if (random.Next()%2 > 0)
+				{
+					iterator.PreAffine.MatrixTransform(new Matrix2X2 { X = new Vector2(1, random.NextDouble() - 0.5), Y = new Vector2(random.NextDouble() - 0.5, 1)});
+				}
+
+				iterator.Variations.SetWeight(VariationRegistry.GetName<Linear>(), random.NextDouble()*0.5 + 0.5);
+			}
+
+			if (random.Next()%2 > 0)
+			{
+				var totalArea = 0.0;
+				for (int i = 0; i < numIterators; i++)
+				{
+					var matrix = Iterators[i].PreAffine;
+					var tri = new[] {matrix.Matrix.X, matrix.Matrix.Y};
+					var angle = System.Math.Atan2(tri[1].Y, tri[1].X) - System.Math.Atan2(tri[0].Y, tri[0].X);
+					var area = tri[1].Length*tri[0].Length*System.Math.Sin(angle)*0.5;
+
+					Iterators[i].Weight = System.Math.Abs(area);
+					totalArea += Iterators[i].Weight;
+				}
+
+				for (int i = 0; i < numIterators; i++)
+				{
+					Iterators[i].Weight /= totalArea;
+				}
+
+				Iterators.NormalizeWeights();
+			}
+			else
+			{
+				for (int i = 0; i < numIterators; i++)
+				{
+					Iterators[i].Weight = 1.0 / numIterators;
+				}
+			}
+
+			Brightness = 4;
+			Gamma = 4;
+			GammaThreshold = 0.001;
+			Vibrancy = 1;
+			Background = Color.Black;
+			Zoom = 0;
+			PixelsPerUnit = 25.0 * mCanvasSize.Width / 100.0;
+
+			Angle = random.NextDouble()*System.Math.PI*2 - System.Math.PI;
+			Origin = new Vector2(random.NextDouble() * 2 - 1, random.NextDouble() * 2 - 1);
+			Palette = PaletteCollection.GetRandomPalette(this);
+		}
+
 		[NotNull]
 		public static Flame Random()
 		{
-			//todo add random flame feature
-			return new Flame();
+			var flame = new Flame();
+			flame.Randomize();
+			return flame;
 		}
 
 		private void UpdateCalculatedValues()

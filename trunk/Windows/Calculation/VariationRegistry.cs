@@ -69,5 +69,13 @@ namespace Xyrus.Apophysis.Calculation
 
 			return variation.Name;
 		}
+
+		public static string GetName<T>() where T: Variation, new()
+		{
+			using (var instance = new T())
+			{
+				return instance.Name;
+			}
+		}
 	}
 }
