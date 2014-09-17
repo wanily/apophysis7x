@@ -91,8 +91,8 @@ namespace Xyrus.Apophysis.Models
 
 		public void Rotate(double angle)
 		{
-			var x = Matrix.X.Rotate(angle, Origin);
-			var y = Matrix.Y.Rotate(angle, Origin);
+			var x = Matrix.X.Rotate(angle, new Vector2());
+			var y = Matrix.Y.Rotate(angle, new Vector2());
 
 			Matrix.X.X = x.X;
 			Matrix.X.Y = x.Y;
