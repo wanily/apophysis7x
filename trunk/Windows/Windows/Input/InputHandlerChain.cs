@@ -7,7 +7,6 @@ namespace Xyrus.Apophysis.Windows.Input
 	{
 		public InputHandlerChain([NotNull] Control control) : base(control)
 		{
-			mCursor = new Vector2();
 		}
 
 		private void OnAttachedControlKeyPress(Keys keyCode, Keys modifiers)
@@ -21,8 +20,6 @@ namespace Xyrus.Apophysis.Windows.Input
 
 		private void OnAttachedControlMouseMove([NotNull] Vector2 cursor, MouseButtons button)
 		{
-			mCursor = cursor;
-
 			foreach (var item in GetChainItems())
 			{
 				if (item.HandleMouseMove(cursor, button))
