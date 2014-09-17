@@ -65,42 +65,11 @@ namespace Xyrus.Apophysis.Math
 
 			return System.Math.Sqrt(dist) < epsilon;
 		}
-		public bool IsIntersecting([NotNull] Line other)
-		{
-			if (other == null) throw new ArgumentNullException("other");
 
-			return GetIntersectionPoint(other).IsNaN;
-		}
-
-		public Vector2 GetIntersectionPoint([NotNull] Line other)
-		{
-			if (other == null) throw new ArgumentNullException("other");
-
-			var direction = new Line(other.A - A, other.B - B);
-
-			var delta = direction.A.Y*-direction.B.X - direction.B.Y*-direction.A.X;
-			if (System.Math.Abs(delta) < mEps)
-				return Vector2.NaN;
-
-			var uu = direction.A.Y*A.X - direction.A.X*A.Y;
-			var vv = direction.B.Y*B.X - direction.B.X*B.Y;
-
-			return new Vector2
-			{
-				X = (-direction.B.X*uu + direction.A.X*vv)/delta,
-				Y = (direction.A.Y*vv - direction.B.Y*uu)/delta
-			};
-		}
 		public Vector2 GetNormal()
 		{
 			var d = B - A;
 			return new Vector2(-d.Y, d.X).Direction;
-		}
-
-		public Line Rotate(double angle, [NotNull] Vector2 origin)
-		{
-			if (origin == null) throw new ArgumentNullException("origin");
-			return new Line(A.Rotate(angle, origin), B.Rotate(angle, origin));
 		}
 	}
 }

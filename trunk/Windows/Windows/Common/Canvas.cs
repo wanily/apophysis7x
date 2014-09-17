@@ -89,11 +89,6 @@ namespace Xyrus.Apophysis.Windows
 		public abstract Vector2 CanvasToWorld(Vector2 canvas);
 		public abstract Vector2 WorldToCanvas(Vector2 world);
 
-		public bool IsOnCanvas(Vector2 worldPoint)
-		{
-			var canvas = WorldToCanvas(worldPoint);
-			return canvas.X >= 0 && canvas.Y >= 0 && canvas.X < mSize.X && canvas.Y < mSize.Y;
-		}
 		public abstract void BringIntoView(Rectangle rectangle);
 	}
 }

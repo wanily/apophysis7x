@@ -20,10 +20,6 @@ namespace Xyrus.Apophysis.Windows
 			ResizeOverride(size);
 		}
 
-		public double ZoomRatio
-		{
-			get { return mZoom; }
-		}
 		public ReadOnlyVector2 Offset
 		{
 			get { return mPan; }
@@ -97,8 +93,7 @@ namespace Xyrus.Apophysis.Windows
 			if (outOfBounds)
 				return;
 
-			if (delta > 0) mZoom = stepUp;
-			else mZoom = stepDown;
+			mZoom = delta > 0 ? stepUp : stepDown;
 		}
 		public void Pan(Vector2 offset)
 		{

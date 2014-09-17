@@ -11,11 +11,10 @@ namespace Xyrus.Apophysis.Models
 	public class FlameCollection : ReadOnlyCollection<Flame>
 	{
 		private EventHandler mContentChanged;
-		private string mName;
 
 		public FlameCollection() : base(new List<Flame>())
 		{
-			mName = null;
+			Name = null;
 			Append();
 		}
 		public FlameCollection([NotNull] IEnumerable<Flame> flames) : base(flames.ToList())
@@ -25,14 +24,14 @@ namespace Xyrus.Apophysis.Models
 				throw new ArgumentException("Batch can't be empty", @"flames");
 			}
 
-			mName = null;
+			Name = null;
 		}
 
 		[CanBeNull]
 		public string Name
 		{
-			get { return mName; }
-			set { mName = value; }
+			get; 
+			set;
 		}
 
 		[NotNull]
@@ -40,12 +39,12 @@ namespace Xyrus.Apophysis.Models
 		{
 			get
 			{
-				if (string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(Name.Trim()))
+				if (string.IsNullOrEmpty(Name) || string.IsNullOrEmpty((Name??string.Empty).Trim()))
 				{
 					return Items.First().CalculatedName;
 				}
 
-				return Name;
+				return (Name ?? string.Empty);
 			}
 		}
 

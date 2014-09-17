@@ -14,7 +14,7 @@ namespace Xyrus.Apophysis.Models
 		private AffineTransform mPreAffine;
 		private AffineTransform mPostAffine;
 
-		private VariationCollection mVariations;
+		private readonly VariationCollection mVariations;
 
 		private string mName;
 		private double mWeight;
@@ -53,15 +53,16 @@ namespace Xyrus.Apophysis.Models
 		[NotNull]
 		public Iterator Copy()
 		{
-			var copy = new Iterator(mFlame);
-
-			copy.mName = mName;
-			copy.mWeight = mWeight;
-			copy.mColor = mColor;
-			copy.mColorSpeed = mColorSpeed;
-			copy.mOpacity = mOpacity;
-			copy.mDirectColor = mDirectColor;
-			copy.mGroupIndex = mGroupIndex;
+			var copy = new Iterator(mFlame)
+			{
+				mName = mName,
+				mWeight = mWeight,
+				mColor = mColor,
+				mColorSpeed = mColorSpeed,
+				mOpacity = mOpacity,
+				mDirectColor = mDirectColor,
+				mGroupIndex = mGroupIndex
+			};
 
 			copy.PreAffine.Origin.X = PreAffine.Origin.X;
 			copy.PreAffine.Origin.Y = PreAffine.Origin.Y;

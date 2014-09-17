@@ -6,9 +6,8 @@ namespace Xyrus.Apophysis.Calculation
 	[PublicAPI]
 	public abstract class Variation : IDisposable
 	{
-		private string mDefaultName;
+		private readonly string mDefaultName;
 		private bool mIsDisposed;
-		private VariationPriority mPriority;
 
 		~Variation()
 		{
@@ -18,7 +17,7 @@ namespace Xyrus.Apophysis.Calculation
 		protected Variation()
 		{
 			mDefaultName = GetType().Name.ToLower();
-			mPriority = VariationPriority.Normal;
+			Priority = VariationPriority.Normal;
 		}
 
 		protected void Dispose(bool disposing)
@@ -46,8 +45,8 @@ namespace Xyrus.Apophysis.Calculation
 		}
 		public VariationPriority Priority
 		{
-			get { return mPriority; }
-			protected set { mPriority = value; }
+			get; 
+			protected set;
 		}
 
 		public IEnumerable<string> EnumerateVariables()

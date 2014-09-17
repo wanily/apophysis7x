@@ -220,8 +220,6 @@ namespace Xyrus.Apophysis.Windows.Input
 					var cos = System.Math.Cos(mDragAngle);
 					var sin = System.Math.Sin(mDragAngle);
 
-					outerRectangle.Scale(mFlame.CanvasSize.Width/(double) size.Width);
-
 					if (EditMode == CameraEditMode.ZoomIn)
 					{
 						var oldppu = mDragScale * oldZoom;

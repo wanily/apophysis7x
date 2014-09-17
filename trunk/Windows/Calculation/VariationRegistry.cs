@@ -7,8 +7,8 @@ namespace Xyrus.Apophysis.Calculation
 	[PublicAPI]
 	public static class VariationRegistry
 	{
-		private static List<Variation> mVariations;
-		private static Dictionary<string, Variation> mVariationsByName;
+		private static readonly List<Variation> mVariations;
+		private static readonly Dictionary<string, Variation> mVariationsByName;
 
 		static VariationRegistry()
 		{
@@ -34,6 +34,7 @@ namespace Xyrus.Apophysis.Calculation
 
 			return instance.Name;
 		}
+
 		public static Variation GetInstance(string name)
 		{
 			if (!mVariationsByName.ContainsKey(name))

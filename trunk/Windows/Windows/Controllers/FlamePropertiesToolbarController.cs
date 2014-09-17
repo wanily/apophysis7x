@@ -31,11 +31,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		private void OnUndoClick(object sender, EventArgs e)
 		{
-			mParent.ReplaceFlame(mParent.UndoController.Undo());
+			mParent.UndoController.Undo();
 		}
 		private void OnRedoClick(object sender, EventArgs e)
 		{
-			mParent.ReplaceFlame(mParent.UndoController.Redo());
+			mParent.UndoController.Redo();
 		}
 
 		public void UpdateButtonStates()

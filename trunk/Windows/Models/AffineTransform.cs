@@ -12,10 +12,11 @@ namespace Xyrus.Apophysis.Models
 		public AffineTransform()
 		{
 			mOrigin = new Vector2();
-			mMatrix = new Matrix2X2();
-
-			mMatrix.X.X = 1;
-			mMatrix.Y.Y = 1;
+			mMatrix = new Matrix2X2
+			{
+				X = {X = 1}, 
+				Y = {Y = 1}
+			};
 		}
 
 		[NotNull]
@@ -88,15 +89,6 @@ namespace Xyrus.Apophysis.Models
 			Origin.Y = result[2, 1];
 		}
 
-		public void Reset()
-		{
-			mOrigin.X = 0;
-			mOrigin.Y = 0;
-			mMatrix.X.X = 1;
-			mMatrix.X.Y = 0;
-			mMatrix.Y.X = 0;
-			mMatrix.Y.Y = 1;
-		}
 		public void Rotate(double angle)
 		{
 			var x = Matrix.X.Rotate(angle, Origin);

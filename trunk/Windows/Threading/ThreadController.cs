@@ -12,13 +12,12 @@ namespace Xyrus.Apophysis.Threading
 		private volatile bool mRunning;
 
 		private Thread mThread;
-		private ThreadPriority mPriority;
-		private Thread mParentThread;
+
+		private readonly ThreadPriority mPriority;
 
 		public ThreadController(ThreadPriority priority = ThreadPriority.Normal)
 		{
 			mPriority = priority;
-			mParentThread = Thread.CurrentThread;
 		}
 		protected override void Dispose(bool disposing)
 		{
@@ -26,8 +25,6 @@ namespace Xyrus.Apophysis.Threading
 			{
 				Cancel();
 			}
-
-			mParentThread = null;
 		}
 
 		public void StartThread(Action threadAction, Action callback = null)
@@ -91,9 +88,8 @@ namespace Xyrus.Apophysis.Threading
 				mSuspended = false;
 				mRunning = false;
 				mThread = null;
-			});
+			}) {Priority = mPriority};
 
-			mThread.Priority = mPriority;
 			mThread.Start();
 		}
 
@@ -141,11 +137,6 @@ namespace Xyrus.Apophysis.Threading
 		public bool IsCancelling
 		{
 			get { return mCancel; }
-		}
-
-		internal Thread ParentThread
-		{
-			get { return mParentThread; }
 		}
 	}
 }

@@ -102,7 +102,6 @@
     <Compile Include="Windows\Common\Extensions.cs" />
     <Compile Include="Windows\Common\Lock.cs" />
     <Compile Include="Windows\Common\TimeLock.cs" />
-    <Compile Include="Windows\Common\WindowController.cs" />
     <Compile Include="Windows\Controllers\BannerController.cs" />
     <Compile Include="Windows\Controllers\BatchListController.cs" />
     <Compile Include="Windows\Controllers\EditorController.cs" />

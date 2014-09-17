@@ -30,14 +30,6 @@ namespace Xyrus.Apophysis.Math
 		{
 			get { return mCorner; }
 		}
-		public Vector2 TopRight
-		{
-			get { return mCorner + new Vector2(mSize.X, 0); }
-		}
-		public Vector2 BottomLeft
-		{
-			get { return mCorner + new Vector2(0, mSize.Y); }
-		}
 		public Vector2 BottomRight
 		{
 			get { return mCorner + new Vector2(mSize.X, mSize.Y); }

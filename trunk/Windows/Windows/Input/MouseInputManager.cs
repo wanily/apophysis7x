@@ -6,12 +6,12 @@ namespace Xyrus.Apophysis.Windows.Input
 	{
 		static MouseInputManager()
 		{
-			MouseMove += (e) => { };
-			MouseClick += (e) => { };
-			MouseDown += (e) => { };
-			MouseUp += (e) => { };
-			MouseWheel += (e) => { };
-			MouseDoubleClick += (e) => { };
+			MouseMove += e => { };
+			MouseClick += e => { };
+			MouseDown += e => { };
+			MouseUp += e => { };
+			MouseWheel += e => { };
+			MouseDoubleClick += e => { };
 
 			NativeHookManager.MouseMove += (o, e) => MouseMove(new MouseHookEventArgs(e.X, e.Y, (e.Button), e.Delta));
 			NativeHookManager.MouseClick += (o, e) => MouseClick(new MouseHookEventArgs(e.X, e.Y, (e.Button), e.Delta));

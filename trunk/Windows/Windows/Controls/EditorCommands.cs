@@ -101,14 +101,9 @@ namespace Xyrus.Apophysis.Windows.Controls
 			if (!groupItems.Any())
 			{
 				var newGroupIndex = groupIndex - 1;
-				if (newGroupIndex < 0)
-				{
-					mEditor.SelectedIterator = mEditor.Iterators.Last();
-				}
-				else
-				{
-					mEditor.SelectedIterator = GetLastIteratorOfGroup(newGroupIndex);
-				}
+				mEditor.SelectedIterator = newGroupIndex < 0 
+					? mEditor.Iterators.Last() 
+					: GetLastIteratorOfGroup(newGroupIndex);
 			}
 			else
 			{

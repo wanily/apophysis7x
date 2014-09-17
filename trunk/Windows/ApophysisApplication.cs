@@ -31,8 +31,10 @@ namespace Xyrus.Apophysis
 
 			mBanner.BannerText = "Loading GUI";
 
-			using (MainWindow = (MainController)new MainController().Initialize())
+			using (MainWindow = new MainController())
 			{
+				MainWindow.Initialize();
+
 				mBanner.Dispose();
 				mBanner = null;
 

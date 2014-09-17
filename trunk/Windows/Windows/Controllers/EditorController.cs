@@ -7,7 +7,7 @@ using Xyrus.Apophysis.Windows.Forms;
 namespace Xyrus.Apophysis.Windows.Controllers
 {
 	[PublicAPI]
-	public class EditorController : WindowController<Editor>
+	public class EditorController : Controller<Editor>
 	{
 		private MainController mParent;
 
@@ -41,7 +41,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mPointEditController = new IteratorPointEditController(View, this);
 			mVectorEditController = new IteratorVectorEditController(View, this);
 			mVariationsController = new IteratorVariationsController(View, this);
-			mVariablesController = new IteratorVariablesController(View, this);
+			mVariablesController = new IteratorVariablesController(View);
 		}
 		protected override void DisposeOverride(bool disposing)
 		{
@@ -215,11 +215,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mEditorPreviewController.UpdatePreview();
 		}
 
-		internal void UpdatePreviewsGlobally()
-		{
-			mParent.UpdatePreviews(false);
-		}
-
 		private void AfterReset()
 		{
 			mSelectionController.BuildIteratorComboBox();
@@ -263,13 +258,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			if (FlameChanged != null)
 				FlameChanged(this, new EventArgs());
-		}
-		internal void ReplaceFlame([NotNull] Flame flame)
-		{
-			if (flame == null) throw new ArgumentNullException("flame");
-
-			//via event...
-			//mParent.LoadFlameAndEraseHistory(flame);
 		}
 
 		private void OnIteratorCollectionChanged(object sender, EventArgs e)

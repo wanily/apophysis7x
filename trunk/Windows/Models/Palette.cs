@@ -11,7 +11,7 @@ namespace Xyrus.Apophysis.Models
 	public class Palette
 	{
 		private static int mCounter;
-		private int mIndex;
+		private readonly int mIndex;
 
 		private const int mDefaultLength = 256;
 
@@ -219,10 +219,11 @@ namespace Xyrus.Apophysis.Models
 		[NotNull]
 		public Palette Copy()
 		{
-			var copy = new Palette(mName);
-
-			copy.mColors = new Color[Length];
-			copy.mName = mName;
+			var copy = new Palette(mName)
+			{
+				mColors = new Color[Length], 
+				mName = mName
+			};
 
 			for (int i = 0; i < Length; i++)
 			{

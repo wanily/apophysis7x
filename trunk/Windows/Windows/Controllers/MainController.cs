@@ -12,7 +12,7 @@ using Xyrus.Apophysis.Windows.Input;
 namespace Xyrus.Apophysis.Windows.Controllers
 {
 	[PublicAPI]
-	public class MainController : WindowController<Main>
+	public class MainController : Controller<Main>
 	{
 		private UndoController mUndoController;
 		private EditorController mEditorController;
@@ -26,7 +26,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		private BatchListController mBatchListController;
 		private MainPreviewController mMainPreviewController;
 
-		private Lock mInitialize = new Lock();
+		private readonly Lock mInitialize = new Lock();
 		private FlameCollection mFlames;
 		private bool mHasChanges;
 
@@ -243,10 +243,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		public UndoController UndoController
 		{
 			get { return mUndoController; }
-		}
-		public KeyboardController KeyboardController
-		{
-			get { return mKeyboardController; }
 		}
 		public EditorController EditorController
 		{

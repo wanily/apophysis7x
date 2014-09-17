@@ -41,7 +41,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 				new ToolStripMenuItem("Convert to", null, new ToolStripItem[]
 					{
 						mConvertToRegular = new ToolStripButton("Transform", Resources.RegularIterator, OnConvertClick) { ImageTransparentColor = Color.Fuchsia }, 
-						mConvertToFinal = new ToolStripButton("Final transform", Resources.FinalIterator, OnConvertClick) { ImageTransparentColor = Color.Fuchsia }, 
+						mConvertToFinal = new ToolStripButton("Final transform", Resources.FinalIterator, OnConvertClick) { ImageTransparentColor = Color.Fuchsia } 
 					}), 
 
 				new ToolStripSeparator(), 

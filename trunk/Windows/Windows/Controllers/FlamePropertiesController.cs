@@ -6,9 +6,9 @@ using Xyrus.Apophysis.Windows.Forms;
 namespace Xyrus.Apophysis.Windows.Controllers
 {
 	[PublicAPI]
-	public class FlamePropertiesController : WindowController<FlameProperties>
+	public class FlamePropertiesController : Controller<FlameProperties>
 	{
-		private Lock mInitialize = new Lock();
+		private readonly Lock mInitialize = new Lock();
 		private MainController mParent;
 		private Flame mFlame;
 
@@ -318,18 +318,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		internal Lock Initializer
 		{
 			get { return mInitialize; }
-		}
-
-		internal void UpdatePreviewsGlobally()
-		{
-			mParent.UpdatePreviews(false);
-		}
-		internal void ReplaceFlame([NotNull] Flame flame)
-		{
-			if (flame == null) throw new ArgumentNullException("flame");
-
-			//via event...
-			//mParent.LoadFlameAndEraseHistory(flame);
 		}
 
 		public UndoController UndoController

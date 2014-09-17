@@ -42,15 +42,15 @@ namespace Xyrus.Apophysis.Windows.Visuals
 				using (var brushA = new SolidBrush(Color.White))
 				using (var brushB = new SolidBrush(Color.LightGray))
 				{
-					int ii = 0, jj;
+					int ii = 0;
 					for (int i = 0; i < tilesX; i++)
 					{
-						jj = 0;
+						int jj = 0;
 						for (int j = 0; j <= tilesY; j++)
 						{
 							var brush = ((i + j) % 2 != 0) ? brushA : brushB;
 
-							graphics.FillRectangle(brush, new System.Drawing.Rectangle(new Point(ii, jj), new Size(10, 10)));
+							graphics.FillRectangle(brush, new Rectangle(new Point(ii, jj), new Size(10, 10)));
 
 							jj += 10;
 						}
@@ -63,7 +63,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			{
 				using (var brush = new SolidBrush(AttachedControl.BackColor))
 				{
-					graphics.FillRectangle(brush, new System.Drawing.Rectangle(new Point(), AttachedControl.ClientSize));
+					graphics.FillRectangle(brush, new Rectangle(new Point(), AttachedControl.ClientSize));
 				}
 			}
 		}

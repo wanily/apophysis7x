@@ -93,14 +93,9 @@ namespace Xyrus.Apophysis.Windows.Controls
 			if (item == null)
 				return;
 
-			if (mEditor.ActiveMatrix == IteratorMatrix.PostAffine)
-			{
-				mEditor.ActiveMatrix = IteratorMatrix.PreAffine;
-			}
-			else
-			{
-				mEditor.ActiveMatrix = IteratorMatrix.PostAffine;
-			}
+			mEditor.ActiveMatrix = mEditor.ActiveMatrix == IteratorMatrix.PostAffine 
+				? IteratorMatrix.PreAffine 
+				: IteratorMatrix.PostAffine;
 
 			item.Checked = (mEditor.ActiveMatrix == IteratorMatrix.PostAffine);
 			mEditor.Refresh();

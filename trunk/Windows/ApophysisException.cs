@@ -6,7 +6,6 @@ namespace Xyrus.Apophysis
 	[Serializable, PublicAPI]
 	public class ApophysisException : Exception
 	{
-		public ApophysisException() { }
 		public ApophysisException(string message) : base(message) { }
 		public ApophysisException(string message, Exception innerException) : base(message, innerException) { }
 

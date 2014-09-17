@@ -132,26 +132,6 @@ namespace Xyrus.Apophysis.Math
 			return new ReadOnlyVector2(this);
 		}
 
-		public Vector2 Transform([NotNull] Matrix2X2 matrix, Vector2 origin = null)
-		{
-			if (matrix == null) throw new ArgumentNullException("matrix");
-
-			return Transform(matrix.X, matrix.Y, origin);
-		}
-		public Vector2 Transform([NotNull] Vector2 dirX, [NotNull] Vector2 dirY, Vector2 origin = null)
-		{
-			if (dirX == null) throw new ArgumentNullException("dirX");
-			if (dirY == null) throw new ArgumentNullException("dirY");
-
-			var o = origin ?? new Vector2(0, 0);
-
-			return new Vector2
-			{
-				X = dirX.X * X + dirX.X * Y + o.X,
-				Y = dirY.X * X + dirY.Y * Y + o.Y
-			};
-		}
-
 		public Vector2 Rotate(double angle, [NotNull] Vector2 origin)
 		{
 			if (origin == null) throw new ArgumentNullException("origin");
@@ -277,51 +257,6 @@ namespace Xyrus.Apophysis.Math
 		public bool IsZero
 		{
 			get { return System.Math.Abs(mX) < double.Epsilon && System.Math.Abs(mY) < double.Epsilon; }
-		}
-
-		public static Vector2 Diff([NotNull] Vector2 a, [NotNull] Vector2 b, [NotNull] Vector2 c)
-		{
-			if (a == null) throw new ArgumentNullException("a");
-			if (b == null) throw new ArgumentNullException("b");
-			if (c == null) throw new ArgumentNullException("c");
-
-			var delta1 = (b - a);
-			var delta2 = (c - a);
-
-			var dist = delta1.Abs();
-
-			double x, y;
-
-			if (dist.X > mEps)
-			{
-				x = delta2.X / delta1.X;
-			}
-			else
-			{
-				x = 0;
-			}
-
-			if (dist.Y > mEps)
-			{
-				y = delta2.Y / delta1.Y;
-			}
-			else
-			{
-				y = 0;
-			}
-
-			return new Vector2 { X = x, Y = y };
-		}
-		public static Vector2 NaN
-		{
-			get { return new Vector2 {X = double.NaN, Y = double.NaN}; }
-		}
-
-		public void Swap()
-		{
-			var t = mX;
-			mX = mY;
-			mY = t;
 		}
 
 		public Point ToPoint()

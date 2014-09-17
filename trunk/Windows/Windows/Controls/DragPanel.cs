@@ -11,7 +11,6 @@ namespace Xyrus.Apophysis.Windows.Controls
 	{
 		private readonly InputController mInputHandler;
 
-		private CultureInfo mDisplayCulture;
 		private TextBox mTextBox;
 		private bool mIsMouseOver;
 
@@ -33,7 +32,6 @@ namespace Xyrus.Apophysis.Windows.Controls
 			mDragStepping = 0.1;
 
 			Cursor = Cursors.Hand;
-			mDisplayCulture = InputController.Culture;
 
 			mInputHandler = new InputController();
 			EnabledChanged += OnEnabledChanged;
@@ -76,7 +74,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 					mTextBox.GotFocus -= OnTextBoxGotFocus;
 					mTextBox.LostFocus -= OnTextBoxLostFocus;
 
-					if (!double.TryParse(mTextBox.Text, NumberStyles.Float, DisplayCulture, out oldValue))
+					if (!double.TryParse(mTextBox.Text, NumberStyles.Float, InputController.Culture, out oldValue))
 						oldValue = 0.0;
 				}
 				else oldValue = 0.0;
@@ -94,11 +92,6 @@ namespace Xyrus.Apophysis.Windows.Controls
 			}
 		}
 
-		[NotNull]
-		public CultureInfo DisplayCulture
-		{
-			get { return mDisplayCulture; }
-		}
 		public Double Value
 		{
 			get
@@ -107,7 +100,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 					return 0.0;
 
 				double value;
-				if (!double.TryParse(TextBox.Text, NumberStyles.Float, DisplayCulture, out value))
+				if (!double.TryParse(TextBox.Text, NumberStyles.Float, InputController.Culture, out value))
 					return 0.0;
 
 				return value;
@@ -117,11 +110,10 @@ namespace Xyrus.Apophysis.Windows.Controls
 				if (TextBox == null)
 					return;
 
-				TextBox.Text = value.ToString(InputController.DefaultFormat, DisplayCulture);
+				TextBox.Text = value.ToString(InputController.DefaultFormat, InputController.Culture);
 				TextBox.Refresh();
 			}
 		}
-
 		public Double Default
 		{
 			get { return mDefault; }

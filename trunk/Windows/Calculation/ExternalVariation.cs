@@ -46,9 +46,9 @@ namespace Xyrus.Apophysis.Calculation
 		[DllImport("kernel32", CharSet = CharSet.Ansi, ExactSpelling = true, SetLastError = true)]
 		private static extern IntPtr GetProcAddress(IntPtr hModule, string procName);
 
-		[DllImport("kernel32.dll", SetLastError = true)]
-		[return: MarshalAs(UnmanagedType.Bool)]
-		private static extern bool FreeLibrary(IntPtr hModule);
+		//[DllImport("kernel32.dll", SetLastError = true)]
+		//[return: MarshalAs(UnmanagedType.Bool)]
+		//private static extern bool FreeLibrary(IntPtr hModule);
 
 		[UnmanagedFunctionPointer(mConvention)]
 		private delegate void* PluginVarCreateDelegate();
@@ -472,21 +472,22 @@ namespace Xyrus.Apophysis.Calculation
 				throw new ObjectDisposedException(GetType().Name);
 			}
 
-			var instance = new ExternalVariation(mDllPath, mHModule);
-
-			instance.mCreate = mCreate;
-			instance.mDestroy = mDestroy;
-			instance.mGetName = mGetName;
-			instance.mGetNrVariables = mGetNrVariables;
-			instance.mGetVariableNameAt = mGetVariableNameAt;
-			instance.mInit = mInit;
-			instance.mInitLegacy = mInitLegacy;
-			instance.mInitLegacy3D = mInitLegacy3D;
-			instance.mResetVariable = mResetVariable;
-			instance.mGetVariable = mGetVariable;
-			instance.mSetVariable = mSetVariable;
-			instance.mPrepare = mPrepare;
-			instance.mCalculate = mCalculate;
+			var instance = new ExternalVariation(mDllPath, mHModule)
+			{
+				mCreate = mCreate,
+				mDestroy = mDestroy,
+				mGetName = mGetName,
+				mGetNrVariables = mGetNrVariables,
+				mGetVariableNameAt = mGetVariableNameAt,
+				mInit = mInit,
+				mInitLegacy = mInitLegacy,
+				mInitLegacy3D = mInitLegacy3D,
+				mResetVariable = mResetVariable,
+				mGetVariable = mGetVariable,
+				mSetVariable = mSetVariable,
+				mPrepare = mPrepare,
+				mCalculate = mCalculate
+			};
 
 			instance.Initialize();
 			

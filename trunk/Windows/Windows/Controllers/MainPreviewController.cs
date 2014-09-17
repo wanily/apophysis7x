@@ -25,8 +25,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			if (parent == null) throw new ArgumentNullException("parent");
 
 			mParent = parent;
-			mPreviewTimeLock = new TimeLock(OnPreviewSizeChangedCallback);
-			mPreviewTimeLock.Delay = 250;
+			mPreviewTimeLock = new TimeLock(OnPreviewSizeChangedCallback)
+			{
+				Delay = 250
+			};
 
 			mRenderer = new ThreadedRenderer();
 			mElapsedTimer = new NativeTimer();

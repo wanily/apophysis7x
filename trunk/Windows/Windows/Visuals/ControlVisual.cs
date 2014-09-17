@@ -11,13 +11,6 @@ namespace Xyrus.Apophysis.Windows.Visuals
 		}
 		protected abstract void OnControlPaint(Graphics graphics);
 
-		public void Paint()
-		{
-			using (var graphics = AttachedControl.CreateGraphics())
-			{
-				OnControlPaint(graphics);
-			}
-		}
 		public void Paint([NotNull] Graphics graphics)
 		{
 			if (graphics == null) throw new ArgumentNullException("graphics");

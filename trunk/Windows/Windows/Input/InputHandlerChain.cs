@@ -5,8 +5,6 @@ namespace Xyrus.Apophysis.Windows.Input
 {
 	class InputHandlerChain : ControlChain<InputHandler>
 	{
-		private Vector2 mCursor;
-
 		public InputHandlerChain([NotNull] Control control) : base(control)
 		{
 			mCursor = new Vector2();
@@ -111,11 +109,6 @@ namespace Xyrus.Apophysis.Windows.Input
 		public void TriggerKeyPress(Keys key, Keys modifiers = Keys.None)
 		{
 			OnAttachedControlKeyPress(key, modifiers);
-		}
-
-		public Vector2 CursorPosition
-		{
-			get { return mCursor; }
 		}
 	}
 }

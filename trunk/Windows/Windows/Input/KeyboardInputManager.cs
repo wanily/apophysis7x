@@ -6,8 +6,8 @@ namespace Xyrus.Apophysis.Windows.Input
 	{
 		static KeyboardInputManager()
 		{
-			KeyUp += (e) => { };
-			KeyDown += (e) => { };
+			KeyUp += e => { };
+			KeyDown += e => { };
 
 			NativeHookManager.KeyDown += (o, e) => KeyDown(new KeyboardHookEventArgs((int)e.KeyData));
 			NativeHookManager.KeyUp += (o, e) => KeyUp(new KeyboardHookEventArgs((int)e.KeyData));

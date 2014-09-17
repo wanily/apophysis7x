@@ -6,17 +6,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 {
 	class IteratorVariablesController : Controller<Editor>
 	{
-		private EditorController mParent;
-
-		public IteratorVariablesController([NotNull] Editor view, [NotNull] EditorController parent) : base(view)
+		public IteratorVariablesController([NotNull] Editor view) : base(view)
 		{
-			if (parent == null) throw new ArgumentNullException("parent");
-
-			mParent = parent;
 		}
 		protected override void DisposeOverride(bool disposing)
 		{
-			mParent = null;
 		}
 
 		protected override void AttachView()

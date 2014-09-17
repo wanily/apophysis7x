@@ -11,7 +11,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		private Stack<Flame> mRedoStack;
 
 		private Flame mCurrent;
-		private bool mInitialized;
 
 		protected override void Dispose(bool disposing)
 		{
@@ -30,14 +29,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mCurrent = null;
 		}
 
-		public void Initialize([NotNull] Flame flame)
-		{
-			if (flame == null) throw new ArgumentNullException("flame");
-			if (mInitialized)
-				return;
-
-			Reset(flame);
-		}
 		public void Reset([NotNull] Flame flame)
 		{
 			if (flame == null) throw new ArgumentNullException("flame");
@@ -45,7 +36,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mCurrent = flame.Copy();
 			mUndoStack = new Stack<Flame>();
 			mRedoStack = new Stack<Flame>();
-			mInitialized = true;
 		}
 
 		public void CommitChange([NotNull] Flame flame)
@@ -72,7 +62,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			get { return mRedoStack != null && mRedoStack.Count >= 1; }
 		}
 
-		public Flame Undo()
+		public void Undo()
 		{
 			if (!CanUndo)
 			{
@@ -84,9 +74,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mCurrent = pop;//.Copy();
 			RaiseStackChanged();
 			RaiseCurrentReplaced();
-			return pop;
 		}
-		public Flame Redo()
+		public void Redo()
 		{
 			if (!CanRedo)
 			{
@@ -98,7 +87,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mCurrent = pop;//.Copy();
 			RaiseStackChanged();
 			RaiseCurrentReplaced();
-			return pop;
 		}
 
 		private void RaiseStackChanged()

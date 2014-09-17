@@ -6,13 +6,13 @@ using Xyrus.Apophysis.Windows.Forms;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
-	public class FullscreenController : WindowController<Fullscreen>
+	public class FullscreenController : Controller<Fullscreen>
 	{
+		private readonly Lock mHiding;
 		private NativeTimer mElapsedTimer;
 		private ThreadedRenderer mRenderer;
 		private MainController mParent;
 		private Bitmap mBitmap;
-		private Lock mHiding;
 
 		public FullscreenController([NotNull] MainController parent)
 		{

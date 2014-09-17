@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 
 namespace Xyrus.Apophysis.Threading
 {
@@ -13,18 +12,9 @@ namespace Xyrus.Apophysis.Threading
 			mController = controller;
 		}
 
-		~ThreadStateToken()
-		{
-			Dispose(false);
-		}
-		private void Dispose(bool disposing)
-		{
-			mController = null;
-		}
 		public void Dispose()
 		{
-			Dispose(true);
-			GC.SuppressFinalize(this);
+			mController = null;
 		}
 
 		public bool IsCancelling
@@ -34,10 +24,6 @@ namespace Xyrus.Apophysis.Threading
 		public bool IsSuspended
 		{
 			get { return mController.IsSuspended; }
-		}
-		public Thread ParentThread
-		{
-			get { return mController.ParentThread; }
 		}
 	}
 }

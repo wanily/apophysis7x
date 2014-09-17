@@ -35,7 +35,7 @@ namespace Xyrus.Apophysis.Windows
 			mView = view;
 		}
 
-		public Controller<TView> Initialize()
+		public void Initialize()
 		{
 			if (mInitialized)
 			{
@@ -44,7 +44,6 @@ namespace Xyrus.Apophysis.Windows
 
 			AttachView();
 			mInitialized = true;
-			return this;
 		}
 
 		protected sealed override void Dispose(bool disposing)

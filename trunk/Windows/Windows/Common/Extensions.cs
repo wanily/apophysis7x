@@ -90,10 +90,7 @@ namespace Xyrus.Apophysis.Windows
 			var funcs = (sortExpressions ?? new Expression<Func<T, object>>[0]).Select(x => x.Compile());
 			var result = list.ToArray().AsEnumerable();
 
-			foreach (var expression in funcs)
-			{
-				result = result.OrderBy(expression);
-			}
+			result = funcs.Aggregate(result, (current, expression) => current.OrderBy(expression));
 
 			list.Clear();
 			foreach (var item in result)

@@ -14,9 +14,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		public FileDialogController(string title, params string[] filters)
 		{
-			mDialog = new T();
-			mDialog.Filter = string.Join("|", filters);
-			mDialog.Title = title;
+			mDialog = new T
+			{
+				Filter = string.Join("|", filters), 
+				Title = title
+			};
 		} 
 		protected override void Dispose(bool disposing)
 		{

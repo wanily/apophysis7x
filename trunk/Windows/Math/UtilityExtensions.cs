@@ -13,16 +13,9 @@ namespace Xyrus.Apophysis.Math
 			if (canvasSize.Width <= 0 || canvasSize.Height <= 0)
 				return canvasSize;
 
-			Size outputSize;
-
-			if ((double)size.Width / size.Height > (double)canvasSize.Width / canvasSize.Height)
-			{
-				outputSize = new Size(canvasSize.Width, (int)(canvasSize.Width * (double)size.Height / size.Width));
-			}
-			else
-			{
-				outputSize = new Size((int)(canvasSize.Height * (double)size.Width / size.Height), canvasSize.Height);
-			}
+			var outputSize = (double)size.Width / size.Height > (double)canvasSize.Width / canvasSize.Height 
+				? new Size(canvasSize.Width, (int)(canvasSize.Width * (double)size.Height / size.Width)) 
+				: new Size((int)(canvasSize.Height * (double)size.Width / size.Height), canvasSize.Height);
 
 			return outputSize;
 		}
@@ -30,11 +23,6 @@ namespace Xyrus.Apophysis.Math
 		public static Color Invert(this Color color)
 		{
 			return Color.FromArgb(255 - color.R, 255 - color.G, 255 - color.B);
-		}
-
-		public static System.Drawing.Rectangle Scale(this System.Drawing.Rectangle rect, double factor)
-		{
-			return new System.Drawing.Rectangle((int)(rect.Left * factor), (int)(rect.Top * factor), (int)(rect.Right * factor - rect.Left * factor), (int)(rect.Bottom * factor - rect.Top * factor));
 		}
 	}
 }

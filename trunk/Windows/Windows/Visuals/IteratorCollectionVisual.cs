@@ -159,20 +159,6 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			set { mPreviewVisual.ApplyPostTransform = value; }
 		}
 
-		public IteratorVisual this[int index]
-		{
-			get
-			{
-				if (mVisuals == null)
-					throw new IndexOutOfRangeException();
-
-				if (index < 0 || index >= mVisuals.Count)
-					throw new IndexOutOfRangeException();
-
-				return mVisuals[index];
-			}
-		}
-
 		public event EventHandler ContentChanged
 		{
 			add { mContentChanged += value; }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Forms;
 using System.Xml.Linq;
 using Xyrus.Apophysis.Windows;
 
@@ -182,13 +181,7 @@ namespace Xyrus.Apophysis.Models
 			if (!Equals(iterators.Count, Count))
 				return false;
 
-			for (int i = 0; i < iterators.Count; i++)
-			{
-				if (!iterators[i].IsEqual(this[i]))
-					return false;
-			}
-
-			return true;
+			return !iterators.Where((t, i) => !t.IsEqual(this[i])).Any();
 		}
 
 		public void NormalizeWeights()
