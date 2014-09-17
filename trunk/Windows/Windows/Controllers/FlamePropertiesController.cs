@@ -324,6 +324,13 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			mParent.UpdatePreviews(false);
 		}
+		internal void ReplaceFlame([NotNull] Flame flame)
+		{
+			if (flame == null) throw new ArgumentNullException("flame");
+
+			//via event...
+			//mParent.LoadFlameAndEraseHistory(flame);
+		}
 
 		public UndoController UndoController
 		{

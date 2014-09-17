@@ -264,6 +264,13 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			if (FlameChanged != null)
 				FlameChanged(this, new EventArgs());
 		}
+		internal void ReplaceFlame([NotNull] Flame flame)
+		{
+			if (flame == null) throw new ArgumentNullException("flame");
+
+			//via event...
+			//mParent.LoadFlameAndEraseHistory(flame);
+		}
 
 		private void OnIteratorCollectionChanged(object sender, EventArgs e)
 		{
