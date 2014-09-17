@@ -223,8 +223,8 @@ namespace Xyrus.Apophysis.Windows.Input
 					{
 						var oldppu = mDragScale * oldZoom;
 
-						var x = ((outerRectangle.Left + outerRectangle.Right) / 2.0 - mFlame.CanvasSize.Width / 2.0) / oldppu;
-						var y = ((outerRectangle.Top + outerRectangle.Bottom) / 2.0 - mFlame.CanvasSize.Height / 2.0) / oldppu;
+						var x = ((outerRectangle.Left + outerRectangle.Right) / 2.0 - size.Width / 2.0) / oldppu;
+						var y = ((outerRectangle.Top + outerRectangle.Bottom) / 2.0 - size.Height / 2.0) / oldppu;
 
 						mData.Origin = new Vector2(mDragOrigin.X + cos * x - sin * y, mDragOrigin.Y + sin * x + cos * y);
 
@@ -250,8 +250,8 @@ namespace Xyrus.Apophysis.Windows.Input
 
 						var newppu = mData.Scale * System.Math.Pow(2, mData.Zoom);
 
-						var x = ((outerRectangle.Left + outerRectangle.Right) / 2.0 - mFlame.CanvasSize.Width / 2.0) / newppu;
-						var y = ((outerRectangle.Top + outerRectangle.Bottom) / 2.0 - mFlame.CanvasSize.Height / 2.0) / newppu;
+						var x = ((outerRectangle.Left + outerRectangle.Right) / 2.0 - size.Width / 2.0) / newppu;
+						var y = ((outerRectangle.Top + outerRectangle.Bottom) / 2.0 - size.Height / 2.0) / newppu;
 
 						mData.Origin = new Vector2(mDragOrigin.X - cos * x + sin * y, mDragOrigin.Y - sin * x - cos * y);
 					}
