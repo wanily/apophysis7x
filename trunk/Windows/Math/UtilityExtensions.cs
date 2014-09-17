@@ -31,5 +31,10 @@ namespace Xyrus.Apophysis.Math
 		{
 			return Color.FromArgb(255 - color.R, 255 - color.G, 255 - color.B);
 		}
+
+		public static System.Drawing.Rectangle Scale(this System.Drawing.Rectangle rect, double factor)
+		{
+			return new System.Drawing.Rectangle((int)(rect.Left * factor), (int)(rect.Top * factor), (int)(rect.Right * factor - rect.Left * factor), (int)(rect.Bottom * factor - rect.Top * factor));
+		}
 	}
 }

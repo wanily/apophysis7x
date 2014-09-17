@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Math;
@@ -166,7 +167,7 @@ namespace Xyrus.Apophysis.Windows.Input
 					var dx = (double)innerRectangle.Width;
 					var dy = (double)innerRectangle.Height;
 
-					var size = mInputVisual.FitFrame ? AttachedControl.ClientSize : mFlame.CanvasSize;
+					var size = mInputVisual.FitFrame ? AttachedControl.ClientSize : mFlame.CanvasSize.FitToFrame(AttachedControl.ClientSize);
 
 					if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
 					{
@@ -219,6 +220,8 @@ namespace Xyrus.Apophysis.Windows.Input
 					var cos = System.Math.Cos(mDragAngle);
 					var sin = System.Math.Sin(mDragAngle);
 
+					outerRectangle.Scale(mFlame.CanvasSize.Width/(double) size.Width);
+
 					if (EditMode == CameraEditMode.ZoomIn)
 					{
 						var oldppu = mDragScale * oldZoom;
@@ -226,26 +229,28 @@ namespace Xyrus.Apophysis.Windows.Input
 						var x = ((outerRectangle.Left + outerRectangle.Right) / 2.0 - size.Width / 2.0) / oldppu;
 						var y = ((outerRectangle.Top + outerRectangle.Bottom) / 2.0 - size.Height / 2.0) / oldppu;
 
+						Debug.Print("{0} | {1}", outerRectangle, size);
+
 						mData.Origin = new Vector2(mDragOrigin.X + cos * x - sin * y, mDragOrigin.Y + sin * x + cos * y);
 
 						if (UseScale)
 						{
-							mData.Zoom = System.Math.Log(oldZoom * ((double)mFlame.CanvasSize.Width / (System.Math.Abs(outerRectangle.Right - outerRectangle.Left) + 1))) / mLog2;
+							mData.Scale = mDragScale * size.Width / (System.Math.Abs(outerRectangle.Right - outerRectangle.Left));
 						}
 						else
 						{
-							mData.Scale = mDragScale * mFlame.CanvasSize.Width / (System.Math.Abs(outerRectangle.Right - outerRectangle.Left));
+							mData.Zoom = System.Math.Log(oldZoom * ((double)size.Width / (System.Math.Abs(outerRectangle.Right - outerRectangle.Left) + 1))) / mLog2;
 						}
 					}
 					else
 					{
 						if (UseScale)
 						{
-							mData.Zoom = System.Math.Log(oldZoom / ((double)mFlame.CanvasSize.Width / (System.Math.Abs(outerRectangle.Right - outerRectangle.Left) + 1))) / mLog2;
+							mData.Scale = mDragScale / size.Width * (System.Math.Abs(outerRectangle.Right - outerRectangle.Left)); 
 						}
 						else
 						{
-							mData.Scale = mDragScale / mFlame.CanvasSize.Width * (System.Math.Abs(outerRectangle.Right - outerRectangle.Left));
+							mData.Zoom = System.Math.Log(oldZoom / ((double)size.Width / (System.Math.Abs(outerRectangle.Right - outerRectangle.Left) + 1))) / mLog2;
 						}
 
 						var newppu = mData.Scale * System.Math.Pow(2, mData.Zoom);
