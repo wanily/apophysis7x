@@ -69,6 +69,23 @@
 			this.VibrancyDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.BrightnessDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.GammaDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
+			this.mSizeGroupBox = new System.Windows.Forms.GroupBox();
+			this.mPresetGroupBox = new System.Windows.Forms.GroupBox();
+			this.mResizeGroupBox = new System.Windows.Forms.GroupBox();
+			this.mWidthLabel = new System.Windows.Forms.Label();
+			this.mHeightLabel = new System.Windows.Forms.Label();
+			this.MaintainAspectRatioCheckBox = new System.Windows.Forms.CheckBox();
+			this.ResizeMainWindowCheckBox = new System.Windows.Forms.CheckBox();
+			this.ApplyButton = new System.Windows.Forms.Button();
+			this.WidthComboBox = new System.Windows.Forms.ComboBox();
+			this.HeightComboBox = new System.Windows.Forms.ComboBox();
+			this.Preset1SelectButton = new System.Windows.Forms.Button();
+			this.mButtonImages = new System.Windows.Forms.ImageList(this.components);
+			this.Preset1SaveButton = new System.Windows.Forms.Button();
+			this.Preset2SaveButton = new System.Windows.Forms.Button();
+			this.Preset2SelectButton = new System.Windows.Forms.Button();
+			this.Preset3SaveButton = new System.Windows.Forms.Button();
+			this.Preset3SelectButton = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.PreviewPicture)).BeginInit();
 			this.mPreviewContextMenu.SuspendLayout();
 			this.mToolbar.SuspendLayout();
@@ -76,6 +93,10 @@
 			this.Tabs.SuspendLayout();
 			this.ImagingTab.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.BackgroundPictureBox)).BeginInit();
+			this.CanvasTab.SuspendLayout();
+			this.mSizeGroupBox.SuspendLayout();
+			this.mPresetGroupBox.SuspendLayout();
+			this.mResizeGroupBox.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// PreviewPicture
@@ -419,6 +440,9 @@
 			// CanvasTab
 			// 
 			this.CanvasTab.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.CanvasTab.Controls.Add(this.mResizeGroupBox);
+			this.CanvasTab.Controls.Add(this.mPresetGroupBox);
+			this.CanvasTab.Controls.Add(this.mSizeGroupBox);
 			this.CanvasTab.ImageIndex = 3;
 			this.CanvasTab.Location = new System.Drawing.Point(4, 23);
 			this.CanvasTab.Name = "CanvasTab";
@@ -736,6 +760,216 @@
 			this.GammaDragPanel.TextBox = this.GammaTextBox;
 			this.GammaDragPanel.Value = 4D;
 			// 
+			// mSizeGroupBox
+			// 
+			this.mSizeGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+			this.mSizeGroupBox.Controls.Add(this.HeightComboBox);
+			this.mSizeGroupBox.Controls.Add(this.WidthComboBox);
+			this.mSizeGroupBox.Controls.Add(this.MaintainAspectRatioCheckBox);
+			this.mSizeGroupBox.Controls.Add(this.mHeightLabel);
+			this.mSizeGroupBox.Controls.Add(this.mWidthLabel);
+			this.mSizeGroupBox.Location = new System.Drawing.Point(6, 0);
+			this.mSizeGroupBox.Name = "mSizeGroupBox";
+			this.mSizeGroupBox.Size = new System.Drawing.Size(210, 126);
+			this.mSizeGroupBox.TabIndex = 0;
+			this.mSizeGroupBox.TabStop = false;
+			// 
+			// mPresetGroupBox
+			// 
+			this.mPresetGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.mPresetGroupBox.Controls.Add(this.Preset3SaveButton);
+			this.mPresetGroupBox.Controls.Add(this.Preset3SelectButton);
+			this.mPresetGroupBox.Controls.Add(this.Preset2SaveButton);
+			this.mPresetGroupBox.Controls.Add(this.Preset2SelectButton);
+			this.mPresetGroupBox.Controls.Add(this.Preset1SaveButton);
+			this.mPresetGroupBox.Controls.Add(this.Preset1SelectButton);
+			this.mPresetGroupBox.Location = new System.Drawing.Point(222, 0);
+			this.mPresetGroupBox.Name = "mPresetGroupBox";
+			this.mPresetGroupBox.Size = new System.Drawing.Size(147, 126);
+			this.mPresetGroupBox.TabIndex = 1;
+			this.mPresetGroupBox.TabStop = false;
+			// 
+			// mResizeGroupBox
+			// 
+			this.mResizeGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.mResizeGroupBox.Controls.Add(this.ApplyButton);
+			this.mResizeGroupBox.Controls.Add(this.ResizeMainWindowCheckBox);
+			this.mResizeGroupBox.Location = new System.Drawing.Point(375, 0);
+			this.mResizeGroupBox.Name = "mResizeGroupBox";
+			this.mResizeGroupBox.Size = new System.Drawing.Size(109, 126);
+			this.mResizeGroupBox.TabIndex = 3;
+			this.mResizeGroupBox.TabStop = false;
+			// 
+			// mWidthLabel
+			// 
+			this.mWidthLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.mWidthLabel.Location = new System.Drawing.Point(6, 21);
+			this.mWidthLabel.Name = "mWidthLabel";
+			this.mWidthLabel.Size = new System.Drawing.Size(97, 21);
+			this.mWidthLabel.TabIndex = 30;
+			this.mWidthLabel.Text = "Width";
+			this.mWidthLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// mHeightLabel
+			// 
+			this.mHeightLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.mHeightLabel.Location = new System.Drawing.Point(6, 51);
+			this.mHeightLabel.Name = "mHeightLabel";
+			this.mHeightLabel.Size = new System.Drawing.Size(97, 21);
+			this.mHeightLabel.TabIndex = 31;
+			this.mHeightLabel.Text = "Height";
+			this.mHeightLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// MaintainAspectRatioCheckBox
+			// 
+			this.MaintainAspectRatioCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.MaintainAspectRatioCheckBox.Location = new System.Drawing.Point(6, 87);
+			this.MaintainAspectRatioCheckBox.Name = "MaintainAspectRatioCheckBox";
+			this.MaintainAspectRatioCheckBox.Size = new System.Drawing.Size(198, 32);
+			this.MaintainAspectRatioCheckBox.TabIndex = 32;
+			this.MaintainAspectRatioCheckBox.Text = "Maintain aspect ratio";
+			this.MaintainAspectRatioCheckBox.UseVisualStyleBackColor = true;
+			// 
+			// ResizeMainWindowCheckBox
+			// 
+			this.ResizeMainWindowCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.ResizeMainWindowCheckBox.Location = new System.Drawing.Point(6, 16);
+			this.ResizeMainWindowCheckBox.Name = "ResizeMainWindowCheckBox";
+			this.ResizeMainWindowCheckBox.Size = new System.Drawing.Size(97, 32);
+			this.ResizeMainWindowCheckBox.TabIndex = 34;
+			this.ResizeMainWindowCheckBox.Text = "Resize main window";
+			this.ResizeMainWindowCheckBox.UseVisualStyleBackColor = true;
+			// 
+			// ApplyButton
+			// 
+			this.ApplyButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.ApplyButton.Location = new System.Drawing.Point(6, 87);
+			this.ApplyButton.Name = "ApplyButton";
+			this.ApplyButton.Size = new System.Drawing.Size(97, 32);
+			this.ApplyButton.TabIndex = 35;
+			this.ApplyButton.Text = "Apply";
+			this.ApplyButton.UseVisualStyleBackColor = true;
+			// 
+			// WidthComboBox
+			// 
+			this.WidthComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.WidthComboBox.FormattingEnabled = true;
+			this.WidthComboBox.Items.AddRange(new object[] {
+            "512",
+            "640",
+            "800",
+            "1024",
+            "1280",
+            "1920"});
+			this.WidthComboBox.Location = new System.Drawing.Point(100, 21);
+			this.WidthComboBox.Name = "WidthComboBox";
+			this.WidthComboBox.Size = new System.Drawing.Size(104, 21);
+			this.WidthComboBox.TabIndex = 33;
+			// 
+			// HeightComboBox
+			// 
+			this.HeightComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.HeightComboBox.FormattingEnabled = true;
+			this.HeightComboBox.Items.AddRange(new object[] {
+            "384",
+            "400",
+            "480",
+            "512",
+            "600",
+            "720",
+            "768",
+            "960",
+            "1024",
+            "1080"});
+			this.HeightComboBox.Location = new System.Drawing.Point(100, 51);
+			this.HeightComboBox.Name = "HeightComboBox";
+			this.HeightComboBox.Size = new System.Drawing.Size(104, 21);
+			this.HeightComboBox.TabIndex = 34;
+			// 
+			// Preset1SelectButton
+			// 
+			this.Preset1SelectButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.Preset1SelectButton.ImageList = this.mButtonImages;
+			this.Preset1SelectButton.Location = new System.Drawing.Point(6, 16);
+			this.Preset1SelectButton.Name = "Preset1SelectButton";
+			this.Preset1SelectButton.Size = new System.Drawing.Size(102, 32);
+			this.Preset1SelectButton.TabIndex = 0;
+			this.Preset1SelectButton.Text = "Preset 1";
+			this.Preset1SelectButton.UseVisualStyleBackColor = true;
+			// 
+			// mButtonImages
+			// 
+			this.mButtonImages.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("mButtonImages.ImageStream")));
+			this.mButtonImages.TransparentColor = System.Drawing.Color.Fuchsia;
+			this.mButtonImages.Images.SetKeyName(0, "SaveFlame.bmp");
+			// 
+			// Preset1SaveButton
+			// 
+			this.Preset1SaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.Preset1SaveButton.ImageIndex = 0;
+			this.Preset1SaveButton.ImageList = this.mButtonImages;
+			this.Preset1SaveButton.Location = new System.Drawing.Point(109, 16);
+			this.Preset1SaveButton.Name = "Preset1SaveButton";
+			this.Preset1SaveButton.Size = new System.Drawing.Size(32, 32);
+			this.Preset1SaveButton.TabIndex = 1;
+			this.Preset1SaveButton.UseVisualStyleBackColor = true;
+			// 
+			// Preset2SaveButton
+			// 
+			this.Preset2SaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.Preset2SaveButton.ImageIndex = 0;
+			this.Preset2SaveButton.ImageList = this.mButtonImages;
+			this.Preset2SaveButton.Location = new System.Drawing.Point(109, 51);
+			this.Preset2SaveButton.Name = "Preset2SaveButton";
+			this.Preset2SaveButton.Size = new System.Drawing.Size(32, 32);
+			this.Preset2SaveButton.TabIndex = 3;
+			this.Preset2SaveButton.UseVisualStyleBackColor = true;
+			// 
+			// Preset2SelectButton
+			// 
+			this.Preset2SelectButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.Preset2SelectButton.ImageList = this.mButtonImages;
+			this.Preset2SelectButton.Location = new System.Drawing.Point(6, 51);
+			this.Preset2SelectButton.Name = "Preset2SelectButton";
+			this.Preset2SelectButton.Size = new System.Drawing.Size(102, 32);
+			this.Preset2SelectButton.TabIndex = 2;
+			this.Preset2SelectButton.Text = "Preset 2";
+			this.Preset2SelectButton.UseVisualStyleBackColor = true;
+			// 
+			// Preset3SaveButton
+			// 
+			this.Preset3SaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.Preset3SaveButton.ImageIndex = 0;
+			this.Preset3SaveButton.ImageList = this.mButtonImages;
+			this.Preset3SaveButton.Location = new System.Drawing.Point(109, 87);
+			this.Preset3SaveButton.Name = "Preset3SaveButton";
+			this.Preset3SaveButton.Size = new System.Drawing.Size(32, 32);
+			this.Preset3SaveButton.TabIndex = 5;
+			this.Preset3SaveButton.UseVisualStyleBackColor = true;
+			// 
+			// Preset3SelectButton
+			// 
+			this.Preset3SelectButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.Preset3SelectButton.ImageList = this.mButtonImages;
+			this.Preset3SelectButton.Location = new System.Drawing.Point(6, 87);
+			this.Preset3SelectButton.Name = "Preset3SelectButton";
+			this.Preset3SelectButton.Size = new System.Drawing.Size(102, 32);
+			this.Preset3SelectButton.TabIndex = 4;
+			this.Preset3SelectButton.Text = "Preset 3";
+			this.Preset3SelectButton.UseVisualStyleBackColor = true;
+			// 
 			// FlameProperties
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -772,6 +1006,10 @@
 			this.ImagingTab.ResumeLayout(false);
 			this.ImagingTab.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.BackgroundPictureBox)).EndInit();
+			this.CanvasTab.ResumeLayout(false);
+			this.mSizeGroupBox.ResumeLayout(false);
+			this.mPresetGroupBox.ResumeLayout(false);
+			this.mResizeGroupBox.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -831,5 +1069,22 @@
 		public System.Windows.Forms.TabPage ImagingTab;
 		public System.Windows.Forms.TabPage PaletteTab;
 		public System.Windows.Forms.TabPage CanvasTab;
+		private System.Windows.Forms.GroupBox mPresetGroupBox;
+		private System.Windows.Forms.GroupBox mSizeGroupBox;
+		private System.Windows.Forms.GroupBox mResizeGroupBox;
+		private System.Windows.Forms.Label mWidthLabel;
+		private System.Windows.Forms.Label mHeightLabel;
+		public System.Windows.Forms.CheckBox MaintainAspectRatioCheckBox;
+		public System.Windows.Forms.CheckBox ResizeMainWindowCheckBox;
+		public System.Windows.Forms.Button ApplyButton;
+		public System.Windows.Forms.ComboBox WidthComboBox;
+		public System.Windows.Forms.ComboBox HeightComboBox;
+		public System.Windows.Forms.Button Preset1SelectButton;
+		private System.Windows.Forms.ImageList mButtonImages;
+		public System.Windows.Forms.Button Preset1SaveButton;
+		public System.Windows.Forms.Button Preset3SaveButton;
+		public System.Windows.Forms.Button Preset3SelectButton;
+		public System.Windows.Forms.Button Preset2SaveButton;
+		public System.Windows.Forms.Button Preset2SelectButton;
 	}
 }
