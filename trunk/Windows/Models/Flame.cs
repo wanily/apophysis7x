@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
@@ -301,6 +303,50 @@ namespace Xyrus.Apophysis.Models
 			return RotateVector(vector, mCosAngle, mSinAngle);
 		}
 
+		public void WriteXml([NotNull] out XElement element)
+		{
+			var plugins = Iterators
+				.SelectMany(x => x.Variations)
+				.Where(x => System.Math.Abs(x.Weight) > double.Epsilon && x is ExternalVariation)
+				.Select(x => x.Name)
+				.ToArray();
+
+			element = new XElement(XName.Get("flame"));
+
+			var iteratorElements = new Collection<XElement>();
+			XElement paletteElement;
+			
+			element.Add(new XAttribute(XName.Get("name"), CalculatedName));
+			element.Add(new XAttribute(XName.Get("version"), ApophysisSettings.FlameExportVersionString));
+			element.Add(new XAttribute(XName.Get("size"), CanvasSize.Serialize()));
+			element.Add(new XAttribute(XName.Get("center"), Origin.Serialize()));
+			element.Add(new XAttribute(XName.Get("scale"), PixelsPerUnit.Serialize()));
+			element.Add(new XAttribute(XName.Get("angle"), Angle.Serialize()));
+			element.Add(new XAttribute(XName.Get("rotate"), ((int)System.Math.Round(Angle * -180.0 / System.Math.PI)).Serialize()));
+			element.Add(new XAttribute(XName.Get("zoom"), Zoom.Serialize()));
+			element.Add(new XAttribute(XName.Get("cam_pitch"), Pitch.Serialize()));
+			element.Add(new XAttribute(XName.Get("cam_yaw"), Yaw.Serialize()));
+			element.Add(new XAttribute(XName.Get("cam_perspective"), Perspective.Serialize()));
+			element.Add(new XAttribute(XName.Get("cam_zpos"), Height.Serialize()));
+			element.Add(new XAttribute(XName.Get("cam_dof"), DepthOfField.Serialize()));
+			element.Add(new XAttribute(XName.Get("background"), Background.Serialize()));
+			element.Add(new XAttribute(XName.Get("brightness"), Brightness.Serialize()));
+			element.Add(new XAttribute(XName.Get("gamma"), Gamma.Serialize()));
+			element.Add(new XAttribute(XName.Get("vibrancy"), Vibrancy.Serialize()));
+			element.Add(new XAttribute(XName.Get("gamma_threshold"), GammaThreshold.Serialize()));
+			element.Add(new XAttribute(XName.Get("plugins"), string.Join(@" ", plugins)));
+			element.Add(new XAttribute(XName.Get("new_linear"), "1"));
+
+			Iterators.WriteXml(iteratorElements);
+			Palette.WriteXml(out paletteElement);
+
+			foreach (var iteratorElement in iteratorElements)
+			{
+				element.Add(iteratorElement);
+			}
+
+			element.Add(paletteElement);
+		}
 		public void ReadXml([NotNull] XElement element)
 		{
 			if (element == null) throw new ArgumentNullException("element");
@@ -366,14 +412,14 @@ namespace Xyrus.Apophysis.Models
 			if (pitchAttribute != null)
 			{
 				var pitch = pitchAttribute.ParseFloat();
-				mPitch = pitch * System.Math.PI / 180.0;
+				mPitch = pitch;
 			}
 
 			var yawAttribute = element.Attribute(XName.Get("cam_yaw"));
 			if (yawAttribute != null)
 			{
 				var yaw = yawAttribute.ParseFloat();
-				mYaw = yaw * System.Math.PI / 180.0;
+				mYaw = yaw;
 			}
 
 			var heightAttribute = element.Attribute(XName.Get("cam_zpos"));

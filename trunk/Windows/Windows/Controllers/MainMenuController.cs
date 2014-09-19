@@ -111,11 +111,25 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 		internal void OnSaveFlameClick(object sender, EventArgs e)
 		{
-			//todo
+			using (var dialog = new FileDialogController<SaveFileDialog>("Save flame...", FileDialogController.BatchFilesFilter, FileDialogController.AllFilesFilter))
+			{
+				var result = dialog.GetFileName();
+				if (string.IsNullOrEmpty(result))
+					return;
+
+				mParent.SaveCurrentFlame(result);
+			}
 		}
 		internal void OnSaveBatchClick(object sender, EventArgs e)
 		{
-			mParent.SaveCurrentBatch();
+			using (var dialog = new FileDialogController<SaveFileDialog>("Save batch...", FileDialogController.BatchFilesFilter, FileDialogController.AllFilesFilter))
+			{
+				var result = dialog.GetFileName();
+				if (string.IsNullOrEmpty(result))
+					return;
+
+				mParent.SaveCurrentBatch(result);
+			}
 		}
 		internal void OnPaletteFromImageClick(object sender, EventArgs e)
 		{
@@ -150,7 +164,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 		internal void OnCopyClick(object sender, EventArgs e)
 		{
-			//todo
+			mParent.WriteCurrentFlameToClipboard();
 		}
 		internal void OnPasteClick(object sender, EventArgs e)
 		{

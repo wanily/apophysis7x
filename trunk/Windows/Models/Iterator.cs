@@ -413,5 +413,47 @@ namespace Xyrus.Apophysis.Models
 
 			return true;
 		}
+		public void WriteXml([NotNull] out XElement element)
+		{
+			element = new XElement(XName.Get(GroupIndex == 0 ? "xform" : "finalxform"));
+
+			if (GroupIndex == 0)
+				element.Add(new XAttribute(XName.Get("weight"), Weight.Serialize()));
+
+			element.Add(new XAttribute(XName.Get("color"), Color.Serialize()));
+
+			if (System.Math.Abs(ColorSpeed) > double.Epsilon)
+			{
+				element.Add(new XAttribute(XName.Get("symmetry"), ColorSpeed.Serialize()));
+				element.Add(new XAttribute(XName.Get("color_speed"), ColorSpeed.Serialize()));
+			}
+
+			foreach (var variation in Variations.Where(x => System.Math.Abs(x.Weight) > double.Epsilon))
+			{
+				element.Add(new XAttribute(XName.Get(variation.Name), variation.Weight));
+
+				foreach (var variable in variation.EnumerateVariables())
+				{
+					element.Add(new XAttribute(XName.Get(variable), variation.GetVariable(variable)));
+				}
+			}
+
+			var affine = new [] { PreAffine.Matrix.X.X, -PreAffine.Matrix.X.Y, -PreAffine.Matrix.Y.X, PreAffine.Matrix.Y.Y, PreAffine.Origin.X, -PreAffine.Origin.Y };
+			var postAffine = new[] { PostAffine.Matrix.X.X, -PostAffine.Matrix.X.Y, -PostAffine.Matrix.Y.X, PostAffine.Matrix.Y.Y, PostAffine.Origin.X, -PostAffine.Origin.Y };
+
+			element.Add(new XAttribute(XName.Get("coefs"), affine.Serialize()));
+
+			if (!PostAffine.IsIdentity)
+				element.Add(new XAttribute(XName.Get("post"), postAffine.Serialize()));
+
+			if (GroupIndex == 0)
+				element.Add(new XAttribute(XName.Get("opacity"), Opacity.Serialize()));
+
+			if (!string.IsNullOrEmpty(Name) && !string.IsNullOrEmpty((Name??string.Empty).Trim()))
+				element.Add(new XAttribute(XName.Get("name"), Name ?? string.Empty));
+
+			if (System.Math.Abs(DirectColor - 1) > double.Epsilon)
+				element.Add(new XAttribute(XName.Get("var_color"), DirectColor.Serialize()));
+		}
 	}
 }

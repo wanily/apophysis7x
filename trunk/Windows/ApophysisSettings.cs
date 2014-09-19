@@ -13,6 +13,8 @@ namespace Xyrus.Apophysis
 			mSettings = Settings.Default;
 		}
 
+		public const string FlameExportVersionString = "Apophysis 7x";
+
 		public static double EditorMoveDistance
 		{
 			get { return mSettings.EditorMoveDistance; }

@@ -3,7 +3,9 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
+using System.Xml.Linq;
 
 namespace Xyrus.Apophysis.Models
 {
@@ -97,6 +99,42 @@ namespace Xyrus.Apophysis.Models
 
 				mColors[j] = color;
 			}
+		}
+		public void WriteXml([NotNull] out XElement element)
+		{
+			element = new XElement(XName.Get("palette"));
+
+			var builder = new StringBuilder();
+			var line = new StringBuilder(@"     ");
+
+			builder.AppendLine();
+
+			var colors256 = GetResizedCmap(256);
+
+			foreach (var color in colors256)
+			{
+				line.Append(color.R.ToString("X2"));
+				line.Append(color.G.ToString("X2"));
+				line.Append(color.B.ToString("X2"));
+
+				if (line.Length >= 48)
+				{
+					builder.AppendLine(line.ToString());
+					line = new StringBuilder(@"     ");
+				}
+			}
+
+			if (line.Length > 0)
+			{
+				builder.Append(line);
+			}
+
+			var hexData = builder.ToString().TrimEnd() + "\r\n";
+
+			element.Add(new XAttribute(XName.Get("count"), colors256.Length.Serialize()));
+			element.Add(new XAttribute(XName.Get("format"), "RGB"));
+
+			element.SetValue(hexData);
 		}
 
 		[NotNull]
@@ -198,6 +236,109 @@ namespace Xyrus.Apophysis.Models
 			Debug.Assert(array.All(x => x.A == 0xff), @"One or more indices were not processed when loading CMAP """ + name + @""". Please review the interpolation.");
 
 			return new Palette(name) { mColors = array };
+		}
+
+		private static Color Mix(Color operand1, Color operand2)
+		{
+			double r1 = operand1.R, r2 = operand2.R;
+			double g1 = operand1.G, g2 = operand2.G;
+			double b1 = operand1.B, b2 = operand2.B;
+
+			return Color.FromArgb(
+				(int)System.Math.Max(0, System.Math.Min(System.Math.Round(0.5 * (r1 + r2), 0), 255.0)),
+				(int)System.Math.Max(0, System.Math.Min(System.Math.Round(0.5 * (g1 + g2), 0), 255.0)),
+				(int)System.Math.Max(0, System.Math.Min(System.Math.Round(0.5 * (b1 + b2), 0), 255.0)));
+		}
+		private void Spread(int index, ref Color[] array, Color value)
+		{
+			while (index < 0) index += array.Length;
+			if (index < array.Length)
+			{
+				array[index] = value;
+			}
+			else
+			{
+				var newColors = new Color[index + 1];
+
+				if (array.Length > 0)
+				{
+					var lastColor = array[array.Length - 1];
+					
+					array.CopyTo(newColors, 0);
+
+					double r1 = lastColor.R,
+						   g1 = lastColor.G,
+						   b1 = lastColor.B;
+					double r2 = value.R,
+						   g2 = value.G,
+						   b2 = value.B;
+
+					for (int i = array.Length; i < index; i++)
+					{
+						double p = (i - array.Length) / (double)(index - array.Length);
+						newColors[i] = Color.FromArgb(
+							(int)System.Math.Max(0, System.Math.Min(System.Math.Round(r1 + (r2 - r1) * p, 0), 255.0)),
+							(int)System.Math.Max(0, System.Math.Min(System.Math.Round(g1 + (g2 - g1) * p, 0), 255.0)),
+							(int)System.Math.Max(0, System.Math.Min(System.Math.Round(b1 + (b2 - b1) * p, 0), 255.0)));
+					}
+
+					newColors[index] = value;
+					array = newColors;
+				}
+				else
+				{
+					array = new Color[index + 1];
+					for (int i = 0; i <= index; i++)
+					{
+						array[i] = value;
+					}
+				}
+			}
+		}
+
+		private Color[] GetResizedCmap(int count)
+		{
+			var oldLength = mColors.Length;
+			var newLength = count;
+
+			if (newLength <= 1) throw new ArgumentOutOfRangeException("count", "Palette size must be greater than one");
+			if (oldLength == newLength)
+				return mColors.ToArray();
+
+			var colors = new Color[1];
+
+			double r = (double)newLength / oldLength;
+			if (r < 1)
+			{
+				var preI2 = 0;
+
+				for (int i = 0; i < oldLength; i++)
+				{
+					var i2 = (int)System.Math.Max(0, System.Math.Min(System.Math.Round((r * i), 0), newLength - 1));
+
+					if (preI2 == i2)
+					{
+						Spread(i2, ref colors, Mix(colors[i2], mColors[i]));
+					}
+					else
+					{
+						Spread(i2, ref colors, this[i]);
+					}
+					preI2 = i2;
+				}
+			}
+			else
+			{
+				for (int i = 0; i < oldLength; i++)
+				{
+					double p = (double)i / (oldLength - 1);
+					var i2 = (int)System.Math.Max(0, System.Math.Min(System.Math.Round(p * (newLength - 1), 0), newLength - 1));
+
+					Spread(i2, ref colors, this[i]);
+				}
+			}
+
+			return colors;
 		}
 
 		public bool IsEqual([NotNull] Palette palette)

@@ -195,5 +195,17 @@ namespace Xyrus.Apophysis.Models
 
 			RaiseContentChanged();
 		}
+		public void WriteXml([NotNull] out XElement element)
+		{
+			element = new XElement(XName.Get("Flames"));
+			element.Add(new XAttribute(XName.Get("name"), CalculatedName));
+
+			foreach (var flame in this)
+			{
+				XElement flameElement;
+				flame.WriteXml(out flameElement);
+				element.Add(flameElement);
+			}
+		}
 	}
 }

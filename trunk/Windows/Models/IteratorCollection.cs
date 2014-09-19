@@ -207,5 +207,17 @@ namespace Xyrus.Apophysis.Models
 				}
 			}
 		}
+
+		public void WriteXml([NotNull] Collection<XElement> iteratorElements)
+		{
+			if (iteratorElements == null) throw new ArgumentNullException("iteratorElements");
+
+			foreach (var iterator in this.OrderBy(x => x.GroupIndex))
+			{
+				XElement element;
+				iterator.WriteXml(out element);
+				iteratorElements.Add(element);
+			}
+		}
 	}
 }

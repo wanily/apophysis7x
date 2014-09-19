@@ -82,6 +82,7 @@
     <Compile Include="Models\Palette.cs" />
     <Compile Include="Models\PaletteCollection.cs" />
     <Compile Include="Models\ParserExtensions.cs" />
+    <Compile Include="Models\SerializationExtensions.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

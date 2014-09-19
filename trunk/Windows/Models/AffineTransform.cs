@@ -41,6 +41,20 @@ namespace Xyrus.Apophysis.Models
 			}
 		}
 
+		public bool IsIdentity
+		{
+			get
+			{
+				return 
+					   System.Math.Abs(Matrix.X.X - 1) < double.Epsilon
+					&& System.Math.Abs(Matrix.X.Y) < double.Epsilon
+					&& System.Math.Abs(Matrix.Y.X) < double.Epsilon
+					&& System.Math.Abs(Matrix.Y.Y - 1) < double.Epsilon
+					&& System.Math.Abs(Origin.X) < double.Epsilon
+					&& System.Math.Abs(Origin.Y) < double.Epsilon;
+			}
+		}
+
 		[NotNull]
 		public Vector2 TransformPoint([NotNull] Vector2 point)
 		{

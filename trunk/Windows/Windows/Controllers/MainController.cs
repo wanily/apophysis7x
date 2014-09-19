@@ -29,6 +29,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		private readonly Lock mInitialize = new Lock();
 		private FlameCollection mFlames;
+		private string mLastBatchPath;
 		private bool mHasChanges;
 
 		public MainController()
@@ -300,6 +301,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 				Flames = batch;
 				View.Text = Application.ProductName + @" - " + path;
+				mLastBatchPath = path;
 			}
 			catch (ApophysisException exception)
 			{
@@ -336,6 +338,17 @@ namespace Xyrus.Apophysis.Windows.Controllers
 					MessageBox.Show(exception.Message, View.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 			}
+		}
+		public void WriteCurrentFlameToClipboard()
+		{
+			var flame = mBatchListController.GetSelectedFlame();
+			if (flame == null)
+				return;
+
+			XElement element; flame.WriteXml(out element);
+
+			var data = element.ToString(SaveOptions.None);
+			Clipboard.SetText(data);
 		}
 
 		public void LoadFlameAndEraseHistory([NotNull] Flame flame)
@@ -376,8 +389,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			else
 			{
 				Flames = new FlameCollection(batch);
-				View.Text = Application.ProductName + @" - " + "Random batch";
 			}
+
+			View.Text = Application.ProductName + @" - " + "Random batch";
 		}
 
 		public bool ConfirmReplaceBatch()
@@ -404,7 +418,14 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			if (save)
 			{
-				SaveCurrentBatch();
+				if (!string.IsNullOrEmpty(mLastBatchPath))
+				{
+					SaveCurrentBatch(mLastBatchPath);
+				}
+				else
+				{
+					mMenuController.OnSaveBatchClick(View, new EventArgs());
+				}
 			}
 
 			return true;
@@ -418,6 +439,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				return;
 
 			Flames = batch;
+			mLastBatchPath = null;
 		}
 		public void DeleteFlameIfPossibleWithConfirm([NotNull] Flame flame)
 		{
@@ -445,15 +467,39 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 				mBatchListController.SelectFlame(mFlames[index]);
 			}
+
+			SetDirty();
 		}
 
 		public void SetDirty()
 		{
 			mHasChanges = true;
 		}
-		public void SaveCurrentBatch()
+		public void SaveCurrentFlame(string path)
 		{
-			//todo
+			var flame = mBatchListController.GetSelectedFlame();
+			if (flame == null)
+				return;
+
+			var batch = new FlameCollection();
+			Flame.ReduceCounter();
+
+			if (File.Exists(path))
+			{
+				batch.ReadXml(XElement.Parse(File.ReadAllText(path), LoadOptions.None));
+			}
+
+			batch.Append(flame);
+
+			XElement outElement; batch.WriteXml(out outElement);
+			File.WriteAllText(path, outElement.ToString(SaveOptions.None));
+		}
+		public void SaveCurrentBatch(string path)
+		{
+			XElement outElement; Flames.WriteXml(out outElement);
+			File.WriteAllText(path, outElement.ToString(SaveOptions.None));
+
+			mLastBatchPath = path;
 		}
 
 		public void ShowEditor()
