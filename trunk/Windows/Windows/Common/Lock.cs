@@ -2,17 +2,24 @@
 
 namespace Xyrus.Apophysis.Windows
 {
-	class Lock : IDisposable
+	public class Lock : IDisposable
 	{
 		private bool mState;
 
 		public Lock Enter()
 		{
 			mState = true;
+
+			if (Engaged != null)
+				Engaged(this, new EventArgs());
+
 			return this;
 		}
 		public void Dispose()
 		{
+			if (Released != null)
+				Released(this, new EventArgs());
+
 			mState = false;
 		}
 
@@ -20,5 +27,8 @@ namespace Xyrus.Apophysis.Windows
 		{
 			get { return mState; }
 		}
+
+		public event EventHandler Engaged;
+		public event EventHandler Released;
 	}
 }

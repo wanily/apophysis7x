@@ -391,5 +391,77 @@ namespace Xyrus.Apophysis.Properties {
                 this["CameraEditUseScale"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Size SizePreset1 {
+            get {
+                return ((global::System.Drawing.Size)(this["SizePreset1"]));
+            }
+            set {
+                this["SizePreset1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Size SizePreset2 {
+            get {
+                return ((global::System.Drawing.Size)(this["SizePreset2"]));
+            }
+            set {
+                this["SizePreset2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Size SizePreset3 {
+            get {
+                return ((global::System.Drawing.Size)(this["SizePreset3"]));
+            }
+            set {
+                this["SizePreset3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SyncMainWindowWithCanvasSize {
+            get {
+                return ((bool)(this["SyncMainWindowWithCanvasSize"]));
+            }
+            set {
+                this["SyncMainWindowWithCanvasSize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool MaintainCanvasAspectRatio {
+            get {
+                return ((bool)(this["MaintainCanvasAspectRatio"]));
+            }
+            set {
+                this["MaintainCanvasAspectRatio"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowUnknownAttributesMessage {
+            get {
+                return ((bool)(this["ShowUnknownAttributesMessage"]));
+            }
+            set {
+                this["ShowUnknownAttributesMessage"] = value;
+            }
+        }
     }
 }

@@ -78,6 +78,9 @@
     <Compile Include="Calculation\VariationPriority.cs" />
     <Compile Include="Calculation\VariationRegistry.cs" />
     <Compile Include="Math\UtilityExtensions.cs" />
+    <Compile Include="Messaging\MessageCenter.cs" />
+    <Compile Include="Messaging\MessageEventArgs.cs" />
+    <Compile Include="Messaging\MessageEventHandler.cs" />
     <Compile Include="Models\FlameCollection.cs" />
     <Compile Include="Models\Palette.cs" />
     <Compile Include="Models\PaletteCollection.cs" />
@@ -107,6 +110,10 @@
     <Compile Include="Windows\Controllers\BatchListController.cs" />
     <Compile Include="Windows\Controllers\EditorController.cs" />
     <Compile Include="Windows\Controllers\EditorPreviewController.cs" />
+    <Compile Include="Windows\Controllers\FlameProperties3DCameraController.cs" />
+    <Compile Include="Windows\Controllers\FlamePropertiesCameraController.cs" />
+    <Compile Include="Windows\Controllers\FlamePropertiesCanvasController.cs" />
+    <Compile Include="Windows\Controllers\FlamePropertiesImagingController.cs" />
     <Compile Include="Windows\Controllers\FlamePropertiesToolbarController.cs" />
     <Compile Include="Windows\Controllers\FileDialogController.cs" />
     <Compile Include="Windows\Controllers\FlamePropertiesController.cs" />
@@ -228,9 +235,11 @@
     <Compile Include="Windows\Input\MouseOverOperation.cs" />
     <Compile Include="Windows\Input\MoveOperation.cs" />
     <Compile Include="Windows\Input\NativeHookManager.cs" />
+    <Compile Include="Windows\Input\PaletteEditHandler.cs" />
     <Compile Include="Windows\Input\PanOperation.cs" />
     <Compile Include="Windows\Input\RotateCanvasOperation.cs" />
     <Compile Include="Windows\Input\RotateOperation.cs" />
+    <Compile Include="Windows\Input\RotatePaletteEditHandler.cs" />
     <Compile Include="Windows\Input\RotationAxis.cs" />
     <Compile Include="Windows\Input\ScaleOperation.cs" />
     <Compile Include="Windows\Common\CanvasSnapBehavior.cs" />

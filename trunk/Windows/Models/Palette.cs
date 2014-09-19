@@ -25,6 +25,16 @@ namespace Xyrus.Apophysis.Models
 			mIndex = ++mCounter;
 		}
 
+		public Palette([NotNull] string name, [NotNull] Color[] colors) : this()
+		{
+			if (colors == null) throw new ArgumentNullException("colors");
+			if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(name.Trim())) throw new ArgumentNullException(@"name");
+			if (colors.Length < 1) throw new ArgumentOutOfRangeException("colors");
+
+			mColors = colors;
+			mName = name;
+		}
+
 		internal Palette([NotNull] string name) : this()
 		{
 			if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(name.Trim())) throw new ArgumentNullException(@"name");
@@ -64,6 +74,11 @@ namespace Xyrus.Apophysis.Models
 
 				return mName;
 			}
+		}
+
+		public void CopyTo(Array array)
+		{
+			mColors.CopyTo(array, 0);
 		}
 
 		public Color this[int index]
@@ -394,6 +409,13 @@ namespace Xyrus.Apophysis.Models
 			if (obj.GetType() != GetType()) return false;
 			
 			return IsEqual((Palette)obj);
+		}
+
+		[NotNull]
+		public Palette Resize(int length)
+		{
+			var colors = GetResizedCmap(length);
+			return new Palette(CalculatedName, colors);
 		}
 	}
 }

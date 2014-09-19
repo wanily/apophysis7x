@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using Xyrus.Apophysis.Properties;
 using Xyrus.Apophysis.Windows;
 
@@ -143,6 +144,12 @@ namespace Xyrus.Apophysis
 		public static string PluginDirectoryName
 		{
 			get { return mSettings.PluginDirectoryName; }
+		}
+
+		public static bool ShowUnknownAttributesMessage
+		{
+			get { return mSettings.ShowUnknownAttributesMessage; }
+			set { mSettings.ShowUnknownAttributesMessage = value; }
 		}
 
 		public static bool BatchListUsePreviews
@@ -309,6 +316,60 @@ namespace Xyrus.Apophysis
 		{
 			get { return (DensityLevel)mSettings.FlamePropertiesPreviewDensityLevel; }
 			set { mSettings.FlamePropertiesPreviewDensityLevel = (int)value; }
+		}
+
+		public static Size? SizePreset1
+		{
+			get { return Equals(mSettings.SizePreset1, default(Size)) ? (Size?)null : mSettings.SizePreset1; }
+			set
+			{
+				if (value.HasValue)
+				{
+					if (value.Value.Width <= 0 || value.Value.Height <= 0)
+						throw new ArgumentOutOfRangeException("value");
+				}
+
+				mSettings.SizePreset1 = value.GetValueOrDefault();
+			}
+		}
+		public static Size? SizePreset2
+		{
+			get { return Equals(mSettings.SizePreset2, default(Size)) ? (Size?)null : mSettings.SizePreset2; }
+			set
+			{
+				if (value.HasValue)
+				{
+					if (value.Value.Width <= 0 || value.Value.Height <= 0)
+						throw new ArgumentOutOfRangeException("value");
+				}
+
+				mSettings.SizePreset2 = value.GetValueOrDefault();
+			}
+		}
+		public static Size? SizePreset3
+		{
+			get { return Equals(mSettings.SizePreset3, default(Size)) ? (Size?)null : mSettings.SizePreset3; }
+			set
+			{
+				if (value.HasValue)
+				{
+					if (value.Value.Width <= 0 || value.Value.Height <= 0)
+						throw new ArgumentOutOfRangeException("value");
+				}
+
+				mSettings.SizePreset3 = value.GetValueOrDefault();
+			}
+		}
+
+		public static bool MaintainCanvasAspectRatio
+		{
+			get { return mSettings.MaintainCanvasAspectRatio; }
+			set { mSettings.MaintainCanvasAspectRatio = value; }
+		}
+		public static bool SyncMainWindowWithCanvasSize
+		{
+			get { return mSettings.SyncMainWindowWithCanvasSize; }
+			set { mSettings.SyncMainWindowWithCanvasSize = value; }
 		}
 
 		public static void Serialize()

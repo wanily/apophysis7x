@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Xml.Linq;
 using Xyrus.Apophysis.Calculation;
+using Xyrus.Apophysis.Messaging;
 
 namespace Xyrus.Apophysis.Models
 {
@@ -376,8 +377,10 @@ namespace Xyrus.Apophysis.Models
 				}
 				else
 				{
-					//todo
-					Trace.TraceError("Could not process attribute: {0}", attributeName);
+					var message = string.Format("Potentially missing variation or variable: {0}", attributeName);
+
+					Trace.TraceWarning(message);
+					MessageCenter.SendUnknownAttribute(attribute.Name);
 				}
 			}
 		}

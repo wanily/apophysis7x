@@ -7,7 +7,8 @@ using Xyrus.Apophysis.Windows.Forms;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
-	class FlamePropertiesPreviewController : Controller<FlameProperties>
+	[PublicAPI]
+	public class FlamePropertiesPreviewController : Controller<FlameProperties>
 	{
 		private FlamePropertiesController mParent;
 		private ThumbnailRenderer mRenderer;

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -280,6 +281,31 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		internal MainToolbarController ToolbarController
 		{
 			get { return mToolbarController; }
+		}
+
+		internal void ResizeWithoutUpdatingPreview()
+		{
+			var flame = mBatchListController.GetSelectedFlame();
+			if (flame == null)
+				return;
+
+			using (mInitialize.Enter())
+			{
+				var frameSize = View.PreviewPicture.Size;
+				var windowSize = View.Size;
+
+				var delta = new Point(windowSize.Width - frameSize.Width, windowSize.Height - frameSize.Height);
+				var newSize = new Size(flame.CanvasSize.Width + delta.X, flame.CanvasSize.Height + delta.Y);
+
+				var bounds = Screen.FromControl(View).WorkingArea;
+				var boundsFromPos = new Size(bounds.Width - bounds.Left, bounds.Height - bounds.Top);
+				var boundSize = new Size(
+					newSize.Width > boundsFromPos.Width ? boundsFromPos.Width : newSize.Width, 
+					newSize.Height > boundsFromPos.Height ? boundsFromPos.Height : newSize.Height);
+
+				View.Width = boundSize.Width;
+				View.Height = boundSize.Height;
+			}
 		}
 
 		public void AppendFlame([NotNull] Flame flame)

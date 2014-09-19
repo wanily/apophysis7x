@@ -1,7 +1,10 @@
 using System;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Linq;
+using System.Windows.Forms;
 using Xyrus.Apophysis.Calculation;
+using Xyrus.Apophysis.Messaging;
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Forms;
 
@@ -10,11 +13,30 @@ namespace Xyrus.Apophysis.Windows.Controllers
 	[PublicAPI]
 	public class MessagesController : Controller<Messages>
 	{
+		private Collection<string> mUnknownAttributes;
+
+		public MessagesController()
+		{
+			mUnknownAttributes = new Collection<string>();
+		}
+
 		protected override void AttachView()
 		{
+			MessageCenter.Message += OnMessage;
+			MessageCenter.FlameParsing.Engaged += OnStartParsing;
+			MessageCenter.FlameParsing.Released += OnEndParsing;
+			MessageCenter.UnknownAttribute += OnUnknownAttribute;
+
+			View.ClearMenuItem.Click += OnClearClick;
 		}
 		protected override void DetachView()
 		{
+			MessageCenter.Message -= OnMessage;
+			MessageCenter.FlameParsing.Engaged -= OnStartParsing;
+			MessageCenter.FlameParsing.Released -= OnEndParsing; 
+			MessageCenter.UnknownAttribute -= OnUnknownAttribute;
+
+			View.ClearMenuItem.Click -= OnClearClick;
 		}
 
 		public void Push(string message)
@@ -30,7 +52,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			builder.Append(message);
 
-			View.Content.Text = message;
+			View.Content.Text = builder.ToString();
 		}
 
 		public void Summarize([NotNull] Flame flame)
@@ -64,6 +86,51 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			builder.AppendLine();
 			Push(builder.ToString());
 			View.Show();
+		}
+
+		private void OnMessage(object sender, MessageEventArgs args)
+		{
+			Push(args.Message);
+		}
+		private void OnStartParsing(object sender, EventArgs e)
+		{
+			mUnknownAttributes.Clear();
+		}
+		private void OnUnknownAttribute(object sender, MessageEventArgs args)
+		{
+			mUnknownAttributes.Add(args.Message);
+		}
+		private void OnEndParsing(object sender, EventArgs e)
+		{
+			if (!ApophysisSettings.ShowUnknownAttributesMessage || mUnknownAttributes.Count == 0)
+			{
+				return;
+			}
+
+			var distinctAttributes = mUnknownAttributes.Distinct().ToList();
+			var attributes = distinctAttributes.Count > 10 ? distinctAttributes.Take(10) : distinctAttributes;
+
+			var headline = "The following attributes could not be interpreted. Maybe you miss one or more plugins?" + Environment.NewLine;
+
+			var body = string.Join(Environment.NewLine, attributes.Select(x => @"  - " + x).ToArray());
+			var fullBody = string.Join(Environment.NewLine, distinctAttributes.Select(x => @"  - " + x).ToArray());
+
+			Push(headline + fullBody);
+
+			if (distinctAttributes.Count > 10)
+			{
+				body += Environment.NewLine + @"  - ...";
+				body += Environment.NewLine + Environment.NewLine + "A full list of unknown attributes can be found in the message window (F8)";
+			}
+
+			MessageBox.Show(
+				headline + Environment.NewLine + body,
+				Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+		}
+
+		private void OnClearClick(object sender, EventArgs e)
+		{
+			View.Content.Text = string.Empty;
 		}
 	}
 }

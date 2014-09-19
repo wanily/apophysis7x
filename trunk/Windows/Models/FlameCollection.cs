@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Xml.Linq;
+using Xyrus.Apophysis.Messaging;
 
 namespace Xyrus.Apophysis.Models
 {
@@ -128,70 +129,81 @@ namespace Xyrus.Apophysis.Models
 			var elementNames = new[] { @"flame", @"flames" };
 			var flameNodes = new List<XElement>();
 
-			switch (elementName)
+			MessageCenter.FlameParsing.Enter();
+
+			try
 			{
-				case @"flame":
-					flameNodes.Add(element);
-					break;
-				case @"flames":
-					flameNodes.AddRange(element.Descendants(XName.Get(@"flame")).Where(x => x != null));
-					break;
-				default:
-					var expectedNameString = elementNames.Length == 1
-						? elementNames[0]
-						: string.Format("{0} or {1}",
-							string.Join(@", ", elementNames.Select(x => @"""" + x + @"""").Take(elementNames.Length - 2).ToArray()),
-							@"""" + elementNames.Last() + @"""");
-					throw new ApophysisException(string.Format("Expected XML node {0} but received \"{1}\"", expectedNameString, elementName));
-			}
-
-			if (!flameNodes.Any())
-			{
-				throw new ApophysisException("No flames in batch");
-			}
-
-			var nameAttribute = element.Attribute(XName.Get(@"name"));
-			Name = nameAttribute == null ? null : nameAttribute.Value;
-
-			var counter = 1;
-			var newCollection = new List<Flame>();
-
-			foreach (var flameNode in flameNodes)
-			{
-				var flameNameAttribute = flameNode.Attribute(XName.Get(@"name"));
-				var flameName = flameNameAttribute == null ? null : flameNameAttribute.Value;
-
-				if (string.IsNullOrEmpty(flameName) || string.IsNullOrEmpty(flameName.Trim()))
+				switch (elementName)
 				{
-					flameName = string.Format("Untitled flame #{0}", counter);
+					case @"flame":
+						flameNodes.Add(element);
+						break;
+					case @"flames":
+						flameNodes.AddRange(element.Descendants(XName.Get(@"flame")).Where(x => x != null));
+						break;
+					default:
+						var expectedNameString = elementNames.Length == 1
+							? elementNames[0]
+							: string.Format("{0} or {1}",
+								string.Join(@", ", elementNames.Select(x => @"""" + x + @"""").Take(elementNames.Length - 2).ToArray()),
+								@"""" + elementNames.Last() + @"""");
+						throw new ApophysisException(string.Format("Expected XML node {0} but received \"{1}\"", expectedNameString,
+							elementName));
 				}
 
-				var flame = new Flame();
-
-				try
+				if (!flameNodes.Any())
 				{
-					flame.ReadXml(flameNode);
-					newCollection.Add(flame);
+					throw new ApophysisException("No flames in batch");
+				}
 
-					if (!string.IsNullOrEmpty(flame.Name))
+				var nameAttribute = element.Attribute(XName.Get(@"name"));
+				Name = nameAttribute == null ? null : nameAttribute.Value;
+
+				var counter = 1;
+				var newCollection = new List<Flame>();
+
+				foreach (var flameNode in flameNodes)
+				{
+					var flameNameAttribute = flameNode.Attribute(XName.Get(@"name"));
+					var flameName = flameNameAttribute == null ? null : flameNameAttribute.Value;
+
+					if (string.IsNullOrEmpty(flameName) || string.IsNullOrEmpty(flameName.Trim()))
 					{
-						Flame.ReduceCounter();
+						flameName = string.Format("Untitled flame #{0}", counter);
 					}
+
+					var flame = new Flame();
+
+					try
+					{
+						flame.ReadXml(flameNode, true);
+						newCollection.Add(flame);
+
+						if (!string.IsNullOrEmpty(flame.Name))
+						{
+							Flame.ReduceCounter();
+						}
+					}
+					catch (ApophysisException exception)
+					{
+						throw new ApophysisException(string.Format("Flame \"{0}\": {1}", flameName, exception.Message), exception);
+					}
+
+					counter++;
 				}
-				catch (ApophysisException exception)
+
+				Items.Clear();
+
+				foreach (var item in newCollection)
 				{
-					throw new ApophysisException(string.Format("Flame \"{0}\": {1}", flameName, exception.Message), exception);
+					Items.Add(item);
 				}
-
-				counter++;
 			}
-
-			Items.Clear();
-
-			foreach (var item in newCollection)
+			finally
 			{
-				Items.Add(item);
+				MessageCenter.FlameParsing.Dispose();
 			}
+			
 
 			RaiseContentChanged();
 		}

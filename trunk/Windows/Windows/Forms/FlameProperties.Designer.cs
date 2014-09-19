@@ -17,12 +17,10 @@
 		{
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FlameProperties));
-			this.PreviewPicture = new System.Windows.Forms.PictureBox();
 			this.mPreviewContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.LowQualityMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.MediumQualityMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.HighQualityMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.mPictureBevel = new System.Windows.Forms.Label();
 			this.mToolbar = new System.Windows.Forms.ToolStrip();
 			this.UndoButton = new System.Windows.Forms.ToolStripButton();
 			this.RedoButton = new System.Windows.Forms.ToolStripButton();
@@ -86,29 +84,34 @@
 			this.Preset2SelectButton = new System.Windows.Forms.Button();
 			this.Preset3SaveButton = new System.Windows.Forms.Button();
 			this.Preset3SelectButton = new System.Windows.Forms.Button();
-			((System.ComponentModel.ISupportInitialize)(this.PreviewPicture)).BeginInit();
+			this.PaletteSelectComboBox = new Xyrus.Apophysis.Windows.Controls.PaletteSelectComboBox();
+			this.mPictureBevel = new System.Windows.Forms.Label();
+			this.PreviewPicture = new System.Windows.Forms.PictureBox();
+			this.PalettePicture = new System.Windows.Forms.PictureBox();
+			this.mPaletteBevel = new System.Windows.Forms.Label();
+			this.PaletteEditModeComboBox = new System.Windows.Forms.ComboBox();
+			this.RandomPresetButton = new System.Windows.Forms.Button();
+			this.PaletteEditScrollBar = new System.Windows.Forms.HScrollBar();
+			this.PaletteEditTextBox = new System.Windows.Forms.TextBox();
+			this.CopyPaletteButton = new System.Windows.Forms.Button();
+			this.PastePaletteButton = new System.Windows.Forms.Button();
+			this.PaletteFromImageButton = new System.Windows.Forms.Button();
+			this.PaletteBrowserButton = new System.Windows.Forms.Button();
+			this.PaletteResetButton = new System.Windows.Forms.Button();
 			this.mPreviewContextMenu.SuspendLayout();
 			this.mToolbar.SuspendLayout();
 			this.CameraTab.SuspendLayout();
 			this.Tabs.SuspendLayout();
 			this.ImagingTab.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.BackgroundPictureBox)).BeginInit();
+			this.PaletteTab.SuspendLayout();
 			this.CanvasTab.SuspendLayout();
 			this.mSizeGroupBox.SuspendLayout();
 			this.mPresetGroupBox.SuspendLayout();
 			this.mResizeGroupBox.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.PreviewPicture)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.PalettePicture)).BeginInit();
 			this.SuspendLayout();
-			// 
-			// PreviewPicture
-			// 
-			this.PreviewPicture.BackColor = System.Drawing.SystemColors.Control;
-			this.PreviewPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-			this.PreviewPicture.ContextMenuStrip = this.mPreviewContextMenu;
-			this.PreviewPicture.Location = new System.Drawing.Point(5, 6);
-			this.PreviewPicture.Name = "PreviewPicture";
-			this.PreviewPicture.Size = new System.Drawing.Size(255, 141);
-			this.PreviewPicture.TabIndex = 3;
-			this.PreviewPicture.TabStop = false;
 			// 
 			// mPreviewContextMenu
 			// 
@@ -137,14 +140,6 @@
 			this.HighQualityMenuItem.Name = "HighQualityMenuItem";
 			this.HighQualityMenuItem.Size = new System.Drawing.Size(158, 22);
 			this.HighQualityMenuItem.Text = "&High quality";
-			// 
-			// mPictureBevel
-			// 
-			this.mPictureBevel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.mPictureBevel.Location = new System.Drawing.Point(4, 5);
-			this.mPictureBevel.Name = "mPictureBevel";
-			this.mPictureBevel.Size = new System.Drawing.Size(257, 143);
-			this.mPictureBevel.TabIndex = 2;
 			// 
 			// mToolbar
 			// 
@@ -429,6 +424,18 @@
 			// PaletteTab
 			// 
 			this.PaletteTab.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.PaletteTab.Controls.Add(this.PaletteResetButton);
+			this.PaletteTab.Controls.Add(this.PaletteFromImageButton);
+			this.PaletteTab.Controls.Add(this.PaletteBrowserButton);
+			this.PaletteTab.Controls.Add(this.PastePaletteButton);
+			this.PaletteTab.Controls.Add(this.CopyPaletteButton);
+			this.PaletteTab.Controls.Add(this.PaletteEditTextBox);
+			this.PaletteTab.Controls.Add(this.PaletteEditScrollBar);
+			this.PaletteTab.Controls.Add(this.RandomPresetButton);
+			this.PaletteTab.Controls.Add(this.PaletteEditModeComboBox);
+			this.PaletteTab.Controls.Add(this.PalettePicture);
+			this.PaletteTab.Controls.Add(this.mPaletteBevel);
+			this.PaletteTab.Controls.Add(this.PaletteSelectComboBox);
 			this.PaletteTab.ImageIndex = 2;
 			this.PaletteTab.Location = new System.Drawing.Point(4, 23);
 			this.PaletteTab.Name = "PaletteTab";
@@ -912,6 +919,10 @@
 			this.mButtonImages.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("mButtonImages.ImageStream")));
 			this.mButtonImages.TransparentColor = System.Drawing.Color.Fuchsia;
 			this.mButtonImages.Images.SetKeyName(0, "SaveFlame.bmp");
+			this.mButtonImages.Images.SetKeyName(1, "Copy.bmp");
+			this.mButtonImages.Images.SetKeyName(2, "Paste.bmp");
+			this.mButtonImages.Images.SetKeyName(3, "PaletteBrowser.bmp");
+			this.mButtonImages.Images.SetKeyName(4, "SmoothPalette.bmp");
 			// 
 			// Preset1SaveButton
 			// 
@@ -970,6 +981,154 @@
 			this.Preset3SelectButton.Text = "Preset 3";
 			this.Preset3SelectButton.UseVisualStyleBackColor = true;
 			// 
+			// PaletteSelectComboBox
+			// 
+			this.PaletteSelectComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.PaletteSelectComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+			this.PaletteSelectComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.PaletteSelectComboBox.FormattingEnabled = true;
+			this.PaletteSelectComboBox.ItemHeight = 15;
+			this.PaletteSelectComboBox.Location = new System.Drawing.Point(132, 105);
+			this.PaletteSelectComboBox.Name = "PaletteSelectComboBox";
+			this.PaletteSelectComboBox.Size = new System.Drawing.Size(252, 21);
+			this.PaletteSelectComboBox.TabIndex = 2;
+			// 
+			// mPictureBevel
+			// 
+			this.mPictureBevel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.mPictureBevel.Location = new System.Drawing.Point(4, 5);
+			this.mPictureBevel.Name = "mPictureBevel";
+			this.mPictureBevel.Size = new System.Drawing.Size(257, 143);
+			this.mPictureBevel.TabIndex = 2;
+			// 
+			// PreviewPicture
+			// 
+			this.PreviewPicture.BackColor = System.Drawing.SystemColors.Control;
+			this.PreviewPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.PreviewPicture.ContextMenuStrip = this.mPreviewContextMenu;
+			this.PreviewPicture.Location = new System.Drawing.Point(5, 6);
+			this.PreviewPicture.Name = "PreviewPicture";
+			this.PreviewPicture.Size = new System.Drawing.Size(255, 141);
+			this.PreviewPicture.TabIndex = 3;
+			this.PreviewPicture.TabStop = false;
+			// 
+			// PalettePicture
+			// 
+			this.PalettePicture.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.PalettePicture.BackColor = System.Drawing.SystemColors.Control;
+			this.PalettePicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.PalettePicture.ContextMenuStrip = this.mPreviewContextMenu;
+			this.PalettePicture.Location = new System.Drawing.Point(6, 6);
+			this.PalettePicture.Name = "PalettePicture";
+			this.PalettePicture.Size = new System.Drawing.Size(478, 59);
+			this.PalettePicture.TabIndex = 5;
+			this.PalettePicture.TabStop = false;
+			// 
+			// mPaletteBevel
+			// 
+			this.mPaletteBevel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.mPaletteBevel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.mPaletteBevel.Location = new System.Drawing.Point(5, 5);
+			this.mPaletteBevel.Name = "mPaletteBevel";
+			this.mPaletteBevel.Size = new System.Drawing.Size(480, 61);
+			this.mPaletteBevel.TabIndex = 4;
+			// 
+			// PaletteEditModeComboBox
+			// 
+			this.PaletteEditModeComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.PaletteEditModeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.PaletteEditModeComboBox.FormattingEnabled = true;
+			this.PaletteEditModeComboBox.Location = new System.Drawing.Point(6, 78);
+			this.PaletteEditModeComboBox.Name = "PaletteEditModeComboBox";
+			this.PaletteEditModeComboBox.Size = new System.Drawing.Size(120, 21);
+			this.PaletteEditModeComboBox.TabIndex = 6;
+			// 
+			// RandomPresetButton
+			// 
+			this.RandomPresetButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.RandomPresetButton.Location = new System.Drawing.Point(6, 105);
+			this.RandomPresetButton.Name = "RandomPresetButton";
+			this.RandomPresetButton.Size = new System.Drawing.Size(120, 21);
+			this.RandomPresetButton.TabIndex = 7;
+			this.RandomPresetButton.Text = "Random preset";
+			this.RandomPresetButton.UseVisualStyleBackColor = true;
+			// 
+			// PaletteEditScrollBar
+			// 
+			this.PaletteEditScrollBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.PaletteEditScrollBar.Location = new System.Drawing.Point(132, 79);
+			this.PaletteEditScrollBar.Name = "PaletteEditScrollBar";
+			this.PaletteEditScrollBar.Size = new System.Drawing.Size(199, 20);
+			this.PaletteEditScrollBar.TabIndex = 8;
+			// 
+			// PaletteEditTextBox
+			// 
+			this.PaletteEditTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.PaletteEditTextBox.Location = new System.Drawing.Point(334, 79);
+			this.PaletteEditTextBox.Name = "PaletteEditTextBox";
+			this.PaletteEditTextBox.Size = new System.Drawing.Size(50, 20);
+			this.PaletteEditTextBox.TabIndex = 9;
+			// 
+			// CopyPaletteButton
+			// 
+			this.CopyPaletteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.CopyPaletteButton.ImageIndex = 1;
+			this.CopyPaletteButton.ImageList = this.mButtonImages;
+			this.CopyPaletteButton.Location = new System.Drawing.Point(390, 102);
+			this.CopyPaletteButton.Name = "CopyPaletteButton";
+			this.CopyPaletteButton.Size = new System.Drawing.Size(24, 24);
+			this.CopyPaletteButton.TabIndex = 10;
+			this.CopyPaletteButton.UseVisualStyleBackColor = true;
+			// 
+			// PastePaletteButton
+			// 
+			this.PastePaletteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.PastePaletteButton.ImageIndex = 2;
+			this.PastePaletteButton.ImageList = this.mButtonImages;
+			this.PastePaletteButton.Location = new System.Drawing.Point(413, 102);
+			this.PastePaletteButton.Name = "PastePaletteButton";
+			this.PastePaletteButton.Size = new System.Drawing.Size(24, 24);
+			this.PastePaletteButton.TabIndex = 11;
+			this.PastePaletteButton.UseVisualStyleBackColor = true;
+			// 
+			// PaletteFromImageButton
+			// 
+			this.PaletteFromImageButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.PaletteFromImageButton.ImageIndex = 4;
+			this.PaletteFromImageButton.ImageList = this.mButtonImages;
+			this.PaletteFromImageButton.Location = new System.Drawing.Point(460, 102);
+			this.PaletteFromImageButton.Name = "PaletteFromImageButton";
+			this.PaletteFromImageButton.Size = new System.Drawing.Size(24, 24);
+			this.PaletteFromImageButton.TabIndex = 13;
+			this.PaletteFromImageButton.UseVisualStyleBackColor = true;
+			// 
+			// PaletteBrowserButton
+			// 
+			this.PaletteBrowserButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.PaletteBrowserButton.ImageIndex = 3;
+			this.PaletteBrowserButton.ImageList = this.mButtonImages;
+			this.PaletteBrowserButton.Location = new System.Drawing.Point(437, 102);
+			this.PaletteBrowserButton.Name = "PaletteBrowserButton";
+			this.PaletteBrowserButton.Size = new System.Drawing.Size(24, 24);
+			this.PaletteBrowserButton.TabIndex = 12;
+			this.PaletteBrowserButton.UseVisualStyleBackColor = true;
+			// 
+			// PaletteResetButton
+			// 
+			this.PaletteResetButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.PaletteResetButton.Location = new System.Drawing.Point(390, 79);
+			this.PaletteResetButton.Name = "PaletteResetButton";
+			this.PaletteResetButton.Size = new System.Drawing.Size(94, 21);
+			this.PaletteResetButton.TabIndex = 14;
+			this.PaletteResetButton.Text = "Random preset";
+			this.PaletteResetButton.UseVisualStyleBackColor = true;
+			// 
 			// FlameProperties
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -996,7 +1155,6 @@
 			this.MaximizeBox = false;
 			this.Name = "FlameProperties";
 			this.Text = "Adjustment";
-			((System.ComponentModel.ISupportInitialize)(this.PreviewPicture)).EndInit();
 			this.mPreviewContextMenu.ResumeLayout(false);
 			this.mToolbar.ResumeLayout(false);
 			this.mToolbar.PerformLayout();
@@ -1006,10 +1164,14 @@
 			this.ImagingTab.ResumeLayout(false);
 			this.ImagingTab.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.BackgroundPictureBox)).EndInit();
+			this.PaletteTab.ResumeLayout(false);
+			this.PaletteTab.PerformLayout();
 			this.CanvasTab.ResumeLayout(false);
 			this.mSizeGroupBox.ResumeLayout(false);
 			this.mPresetGroupBox.ResumeLayout(false);
 			this.mResizeGroupBox.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.PreviewPicture)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.PalettePicture)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -1017,8 +1179,6 @@
 
 		#endregion
 
-		public System.Windows.Forms.PictureBox PreviewPicture;
-		private System.Windows.Forms.Label mPictureBevel;
 		private System.Windows.Forms.ContextMenuStrip mPreviewContextMenu;
 		public System.Windows.Forms.ToolStripMenuItem LowQualityMenuItem;
 		public System.Windows.Forms.ToolStripMenuItem MediumQualityMenuItem;
@@ -1086,5 +1246,19 @@
 		public System.Windows.Forms.Button Preset3SelectButton;
 		public System.Windows.Forms.Button Preset2SaveButton;
 		public System.Windows.Forms.Button Preset2SelectButton;
+		public Controls.PaletteSelectComboBox PaletteSelectComboBox;
+		public System.Windows.Forms.PictureBox PalettePicture;
+		private System.Windows.Forms.Label mPaletteBevel;
+		private System.Windows.Forms.Label mPictureBevel;
+		public System.Windows.Forms.PictureBox PreviewPicture;
+		public System.Windows.Forms.ComboBox PaletteEditModeComboBox;
+		public System.Windows.Forms.Button RandomPresetButton;
+		private System.Windows.Forms.HScrollBar PaletteEditScrollBar;
+		public System.Windows.Forms.TextBox PaletteEditTextBox;
+		public System.Windows.Forms.Button CopyPaletteButton;
+		public System.Windows.Forms.Button PastePaletteButton;
+		public System.Windows.Forms.Button PaletteFromImageButton;
+		public System.Windows.Forms.Button PaletteBrowserButton;
+		public System.Windows.Forms.Button PaletteResetButton;
 	}
 }

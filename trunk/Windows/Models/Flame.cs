@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Xml.Linq;
 using Xyrus.Apophysis.Calculation;
 using Xyrus.Apophysis.Math;
+using Xyrus.Apophysis.Messaging;
 using Xyrus.Apophysis.Variations;
 
 namespace Xyrus.Apophysis.Models
@@ -349,167 +352,7 @@ namespace Xyrus.Apophysis.Models
 		}
 		public void ReadXml([NotNull] XElement element)
 		{
-			if (element == null) throw new ArgumentNullException("element");
-
-			if ("flame" != element.Name.ToString().ToLower())
-			{
-				throw new ApophysisException("Expected XML node \"flame\" but received \"" + element.Name + "\"");
-			}
-
-			var nameAttribute = element.Attribute(XName.Get("name"));
-			Name = nameAttribute == null ? null : nameAttribute.Value;
-
-			var sizeAttribute = element.Attribute(XName.Get("size"));
-			if (sizeAttribute != null)
-			{
-				var size = sizeAttribute.ParseSize();
-				if (size.Width <= 0 || size.Height <= 0)
-				{
-					throw new ApophysisException("Size must be greater than zero in both dimensions");
-				}
-
-				mCanvasSize = size;
-			}
-			else
-			{
-				mCanvasSize = new Size(1920, 1080);
-			}
-
-			var centerAttribute = element.Attribute(XName.Get("center"));
-			if (centerAttribute != null)
-			{
-				var center = centerAttribute.ParseVector();
-				mOrigin = center;
-			}
-
-			var angleAttribute = element.Attribute(XName.Get("angle"));
-			if (angleAttribute != null)
-			{
-				var angle = angleAttribute.ParseFloat();
-				mAngle = angle;
-			}
-
-			var ppuAttribute = element.Attribute(XName.Get("scale"));
-			if (ppuAttribute != null)
-			{
-				var pixelsPerUnit = ppuAttribute.ParseFloat(50.0 * mCanvasSize.Width / 100.0);
-				if (pixelsPerUnit <= 0)
-				{
-					throw new ApophysisException("Scale must be greater than zero");
-				}
-
-				mPixelsPerUnit = pixelsPerUnit;
-			}
-
-			var zoomAttribute = element.Attribute(XName.Get("zoom"));
-			if (zoomAttribute != null)
-			{
-				var zoom = zoomAttribute.ParseFloat();
-				mZoom = zoom;
-			}
-
-			var pitchAttribute = element.Attribute(XName.Get("cam_pitch"));
-			if (pitchAttribute != null)
-			{
-				var pitch = pitchAttribute.ParseFloat();
-				mPitch = pitch;
-			}
-
-			var yawAttribute = element.Attribute(XName.Get("cam_yaw"));
-			if (yawAttribute != null)
-			{
-				var yaw = yawAttribute.ParseFloat();
-				mYaw = yaw;
-			}
-
-			var heightAttribute = element.Attribute(XName.Get("cam_zpos"));
-			if (heightAttribute != null)
-			{
-				var height = heightAttribute.ParseFloat();
-				mHeight = height;
-			}
-
-			var dofAttribute = element.Attribute(XName.Get("cam_dof"));
-			if (dofAttribute != null)
-			{
-				var dof = dofAttribute.ParseFloat();
-				if (dof < 0)
-				{
-					throw new ApophysisException("Depth of field must be greater than or equal to zero");
-				}
-				mDepthOfField = dof;
-			}
-
-			var perspectiveAttribute = element.Attribute(XName.Get("cam_perspective"));
-			if (perspectiveAttribute != null)
-			{
-				var perspective = perspectiveAttribute.ParseFloat();
-				mPerspective = perspective;
-			}
-
-			var brightnessAttribute = element.Attribute(XName.Get("brightness"));
-			if (brightnessAttribute != null)
-			{
-				var brightness = brightnessAttribute.ParseFloat();
-				if (brightness <= 0)
-				{
-					throw new ApophysisException("Brightness must be greater than zero");
-				}
-				mBrightness = brightness;
-			}
-
-			var gammaAttribute = element.Attribute(XName.Get("gamma"));
-			if (gammaAttribute != null)
-			{
-				var gamma = gammaAttribute.ParseFloat();
-				if (gamma < 0)
-				{
-					throw new ApophysisException("Gamma must be greater than or equal to one");
-				}
-				mGamma = gamma;
-			}
-
-			var gammaThresholdAttribute = element.Attribute(XName.Get("gamma_threshold"));
-			if (gammaThresholdAttribute != null)
-			{
-				var gammaThreshold = gammaThresholdAttribute.ParseFloat();
-				if (gammaThreshold < 0)
-				{
-					throw new ApophysisException("Gamma threshold must be greater than or equal to zero");
-				}
-				mGammaThreshold = gammaThreshold;
-			}
-
-			var vibrancyAttribute = element.Attribute(XName.Get("vibrancy"));
-			if (vibrancyAttribute != null)
-			{
-				var vibrancy = vibrancyAttribute.ParseFloat();
-				if (vibrancy < 0)
-				{
-					throw new ApophysisException("Vibrancy must be greater than or equal to zero");
-				}
-				mVibrancy = vibrancy;
-			}
-
-			var colorAttribute = element.Attribute(XName.Get("background"));
-			if (colorAttribute != null)
-			{
-				var background = colorAttribute.ParseColor();
-				mBackground = background;
-			}
-
-			var iterators = element.Descendants(XName.Get("xform"));
-			iterators = iterators.Concat(element.Descendants(XName.Get("finalxform")));
-			Iterators.ReadXml(iterators);
-
-			var palette = element.Descendants(XName.Get("palette")).FirstOrDefault();
-			if (palette == null)
-			{
-				throw new ApophysisException("No descendant node \"palette\" found");
-			}
-
-			Palette.ReadCondensedHexData(palette.Value);
-			UpdateCalculatedValues();
+			ReadXml(element, false);
 		}
 		public bool IsEqual([NotNull] Flame flame)
 		{
@@ -681,9 +524,208 @@ namespace Xyrus.Apophysis.Models
 				vector.X * cos - vector.Y * sin,
 				vector.X * sin + vector.Y * cos);
 		}
+
 		internal static void ReduceCounter()
 		{
 			mCounter--;
+		}
+
+		internal void ReadXml([NotNull] XElement element, bool isReadingBatch)
+		{
+			if (element == null) throw new ArgumentNullException("element");
+
+			if ("flame" != element.Name.ToString().ToLower())
+			{
+				throw new ApophysisException("Expected XML node \"flame\" but received \"" + element.Name + "\"");
+			}
+
+			if (!isReadingBatch)
+			{
+				MessageCenter.FlameParsing.Enter();
+			}
+
+			try
+			{
+				var nameAttribute = element.Attribute(XName.Get("name"));
+				Name = nameAttribute == null ? null : nameAttribute.Value;
+
+				var builder = new StringBuilder();
+				var header = string.Format("Flame \"{0}\"", CalculatedName);
+
+				builder.AppendLine();
+				builder.AppendLine(header);
+				builder.Append(new string('=', header.Length + 3));
+
+				MessageCenter.SendMessage(builder.ToString());
+
+				var sizeAttribute = element.Attribute(XName.Get("size"));
+				if (sizeAttribute != null)
+				{
+					var size = sizeAttribute.ParseSize();
+					if (size.Width <= 0 || size.Height <= 0)
+					{
+						throw new ApophysisException("Size must be greater than zero in both dimensions");
+					}
+
+					mCanvasSize = size;
+				}
+				else
+				{
+					mCanvasSize = new Size(1920, 1080);
+				}
+
+				var centerAttribute = element.Attribute(XName.Get("center"));
+				if (centerAttribute != null)
+				{
+					var center = centerAttribute.ParseVector();
+					mOrigin = center;
+				}
+
+				var angleAttribute = element.Attribute(XName.Get("angle"));
+				if (angleAttribute != null)
+				{
+					var angle = angleAttribute.ParseFloat();
+					mAngle = angle;
+				}
+
+				var ppuAttribute = element.Attribute(XName.Get("scale"));
+				if (ppuAttribute != null)
+				{
+					var pixelsPerUnit = ppuAttribute.ParseFloat(50.0 * mCanvasSize.Width / 100.0);
+					if (pixelsPerUnit <= 0)
+					{
+						throw new ApophysisException("Scale must be greater than zero");
+					}
+
+					mPixelsPerUnit = pixelsPerUnit;
+				}
+
+				var zoomAttribute = element.Attribute(XName.Get("zoom"));
+				if (zoomAttribute != null)
+				{
+					var zoom = zoomAttribute.ParseFloat();
+					mZoom = zoom;
+				}
+
+				var pitchAttribute = element.Attribute(XName.Get("cam_pitch"));
+				if (pitchAttribute != null)
+				{
+					var pitch = pitchAttribute.ParseFloat();
+					mPitch = pitch;
+				}
+
+				var yawAttribute = element.Attribute(XName.Get("cam_yaw"));
+				if (yawAttribute != null)
+				{
+					var yaw = yawAttribute.ParseFloat();
+					mYaw = yaw;
+				}
+
+				var heightAttribute = element.Attribute(XName.Get("cam_zpos"));
+				if (heightAttribute != null)
+				{
+					var height = heightAttribute.ParseFloat();
+					mHeight = height;
+				}
+
+				var dofAttribute = element.Attribute(XName.Get("cam_dof"));
+				if (dofAttribute != null)
+				{
+					var dof = dofAttribute.ParseFloat();
+					if (dof < 0)
+					{
+						throw new ApophysisException("Depth of field must be greater than or equal to zero");
+					}
+					mDepthOfField = dof;
+				}
+
+				var perspectiveAttribute = element.Attribute(XName.Get("cam_perspective"));
+				if (perspectiveAttribute != null)
+				{
+					var perspective = perspectiveAttribute.ParseFloat();
+					mPerspective = perspective;
+				}
+
+				var brightnessAttribute = element.Attribute(XName.Get("brightness"));
+				if (brightnessAttribute != null)
+				{
+					var brightness = brightnessAttribute.ParseFloat();
+					if (brightness <= 0)
+					{
+						throw new ApophysisException("Brightness must be greater than zero");
+					}
+					mBrightness = brightness;
+				}
+
+				var gammaAttribute = element.Attribute(XName.Get("gamma"));
+				if (gammaAttribute != null)
+				{
+					var gamma = gammaAttribute.ParseFloat();
+					if (gamma < 0)
+					{
+						throw new ApophysisException("Gamma must be greater than or equal to one");
+					}
+					mGamma = gamma;
+				}
+
+				var gammaThresholdAttribute = element.Attribute(XName.Get("gamma_threshold"));
+				if (gammaThresholdAttribute != null)
+				{
+					var gammaThreshold = gammaThresholdAttribute.ParseFloat();
+					if (gammaThreshold < 0)
+					{
+						throw new ApophysisException("Gamma threshold must be greater than or equal to zero");
+					}
+					mGammaThreshold = gammaThreshold;
+				}
+
+				var vibrancyAttribute = element.Attribute(XName.Get("vibrancy"));
+				if (vibrancyAttribute != null)
+				{
+					var vibrancy = vibrancyAttribute.ParseFloat();
+					if (vibrancy < 0)
+					{
+						throw new ApophysisException("Vibrancy must be greater than or equal to zero");
+					}
+					mVibrancy = vibrancy;
+				}
+
+				var colorAttribute = element.Attribute(XName.Get("background"));
+				if (colorAttribute != null)
+				{
+					var background = colorAttribute.ParseColor();
+					mBackground = background;
+				}
+
+				var iterators = element.Descendants(XName.Get("xform"));
+				iterators = iterators.Concat(element.Descendants(XName.Get("finalxform")));
+				Iterators.ReadXml(iterators);
+
+				var palette = element.Descendants(XName.Get("palette")).FirstOrDefault();
+				if (palette == null)
+				{
+					throw new ApophysisException("No descendant node \"palette\" found");
+				}
+
+				Palette.ReadCondensedHexData(palette.Value);
+				UpdateCalculatedValues();
+
+				MessageCenter.SendMessage("Done!");
+			}
+			catch (ApophysisException exception)
+			{
+				Trace.TraceError(exception.Message);
+				MessageCenter.SendMessage(string.Format("Error: {0}", exception.Message));
+
+				throw;
+			}
+			finally
+			{
+				if (!isReadingBatch)
+				{
+					MessageCenter.FlameParsing.Dispose();
+				}
+			}
 		}
 	}
 }
