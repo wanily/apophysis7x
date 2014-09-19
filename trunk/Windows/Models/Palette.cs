@@ -83,6 +83,7 @@ namespace Xyrus.Apophysis.Models
 			if (data.Length != mDefaultLength * 6) throw new FormatException(string.Format("Invalid palette format. Expected {0} bytes.", mDefaultLength * 6));
 			if (!Regex.IsMatch(data, @"[a-f0-9]+", RegexOptions.IgnoreCase)) throw new FormatException("Invalid palette format. Expected hexadecimal characters.");
 
+			var colors = new Color[mDefaultLength];
 			for (int i = 0, j = 0; i < data.Length; i += 6, j++)
 			{
 				var str = data.Substring(i, 6);
@@ -97,15 +98,17 @@ namespace Xyrus.Apophysis.Models
 
 				var color = Color.FromArgb(rgb[0], rgb[1], rgb[2]);
 
-				mColors[j] = color;
+				colors[j] = color;
 			}
+
+			mColors = colors;
 		}
 		public void WriteXml([NotNull] out XElement element)
 		{
 			element = new XElement(XName.Get("palette"));
 
 			var builder = new StringBuilder();
-			var line = new StringBuilder(@"     ");
+			var line = new StringBuilder(@"      ");
 
 			builder.AppendLine();
 
@@ -117,10 +120,10 @@ namespace Xyrus.Apophysis.Models
 				line.Append(color.G.ToString("X2"));
 				line.Append(color.B.ToString("X2"));
 
-				if (line.Length >= 48)
+				if (line.ToString().TrimStart().Length >= 48)
 				{
 					builder.AppendLine(line.ToString());
-					line = new StringBuilder(@"     ");
+					line = new StringBuilder(@"      ");
 				}
 			}
 
@@ -129,7 +132,7 @@ namespace Xyrus.Apophysis.Models
 				builder.Append(line);
 			}
 
-			var hexData = builder.ToString().TrimEnd() + "\r\n";
+			var hexData = builder.ToString().TrimEnd() + "\r\n  ";
 
 			element.Add(new XAttribute(XName.Get("count"), colors256.Length.Serialize()));
 			element.Add(new XAttribute(XName.Get("format"), "RGB"));

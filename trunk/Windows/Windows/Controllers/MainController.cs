@@ -481,15 +481,20 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			if (flame == null)
 				return;
 
-			var batch = new FlameCollection();
-			Flame.ReduceCounter();
+			FlameCollection batch;
 
 			if (File.Exists(path))
 			{
-				batch.ReadXml(XElement.Parse(File.ReadAllText(path), LoadOptions.None));
-			}
+				batch = new FlameCollection();
+				Flame.ReduceCounter();
 
-			batch.Append(flame);
+				batch.ReadXml(XElement.Parse(File.ReadAllText(path), LoadOptions.None));
+				batch.Append(flame);
+			}
+			else
+			{
+				batch = new FlameCollection(new [] {flame });
+			}
 
 			XElement outElement; batch.WriteXml(out outElement);
 			File.WriteAllText(path, outElement.ToString(SaveOptions.None));
@@ -499,6 +504,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			XElement outElement; Flames.WriteXml(out outElement);
 			File.WriteAllText(path, outElement.ToString(SaveOptions.None));
 
+			View.Text = Application.ProductName + @" - " + path;
 			mLastBatchPath = path;
 		}
 

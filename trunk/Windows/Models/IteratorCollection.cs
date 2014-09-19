@@ -27,7 +27,14 @@ namespace Xyrus.Apophysis.Models
 		}
 		public int Add(int groupIndex)
 		{
-			Items.Add(new Iterator(mFlame) { GroupIndex = groupIndex });
+			var iterator = new Iterator(mFlame) {GroupIndex = groupIndex};
+
+			if (groupIndex > 0)
+			{
+				iterator.ColorSpeed = 1;
+			}
+
+			Items.Add(iterator);
 			Items.Sort(x => x.GroupIndex, x => x.GroupItemIndex);
 
 			RaiseContentChanged();

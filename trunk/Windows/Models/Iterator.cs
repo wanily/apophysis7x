@@ -303,6 +303,10 @@ namespace Xyrus.Apophysis.Models
 
 				ColorSpeed = colorSpeed;
 			}
+			else if (colorSpeedAttribute != null && groupIndex > 0)
+			{
+				ColorSpeed = 1;
+			}
 
 			var opacityAttribute = element.Attribute(XName.Get("opacity"));
 			if (opacityAttribute != null && groupIndex == 0)
