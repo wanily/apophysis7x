@@ -42,6 +42,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.FlamePropertiesMenuItem.Click += OnFlamePropertiesClick;
 			View.PalettePropertiesMenuItem.Click += OnPalettePropertiesClick;
 			View.CanvasPropertiesMenuItem.Click += OnCanvasPropertiesClick;
+			View.MessagesMenuItem.Click += OnMessagesClick;
 			View.ShowToolBarMenuItem.Click += OnShowToolbarClick;
 			View.ShowStatusBarMenuItem.Click += OnShowStatusbarClick;
 			View.ShowBatchMenuItem.Click += OnShowBatchListClick;
@@ -49,6 +50,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			View.ResetCameraMenuItem.Click += OnResetCameraClick;
 			View.RandomizeFlameMenuItem.Click += OnRandomizeClick;
+			View.SummarizeMenuItem.Click += OnSummarizeClick;
 
 			UpdateButtonStates();
 		}
@@ -74,6 +76,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.FlamePropertiesMenuItem.Click -= OnFlamePropertiesClick;
 			View.PalettePropertiesMenuItem.Click -= OnPalettePropertiesClick;
 			View.CanvasPropertiesMenuItem.Click -= OnCanvasPropertiesClick;
+			View.MessagesMenuItem.Click -= OnMessagesClick;
 			View.ShowToolBarMenuItem.Click -= OnShowToolbarClick;
 			View.ShowStatusBarMenuItem.Click -= OnShowStatusbarClick;
 			View.ShowBatchMenuItem.Click -= OnShowBatchListClick;
@@ -81,6 +84,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			View.ResetCameraMenuItem.Click -= OnResetCameraClick;
 			View.RandomizeFlameMenuItem.Click -= OnRandomizeClick;
+			View.SummarizeMenuItem.Click -= OnSummarizeClick;
 		}
 
 		internal void OnNewFlameClick(object sender, EventArgs e)
@@ -173,6 +177,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			mParent.ShowCanvasProperties();
 		}
+		internal void OnMessagesClick(object sender, EventArgs e)
+		{
+			mParent.ShowMessages();
+		}
 		internal void OnShowToolbarClick(object sender, EventArgs e)
 		{
 			View.ShowToolBarMenuItem.Checked = !View.ShowToolBarMenuItem.Checked;
@@ -234,6 +242,14 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mParent.FlamePropertiesController.UpdateCamera();
 
 			mParent.BatchListController.UpdateSelectedPreview();
+		}
+		internal void OnSummarizeClick(object sender, EventArgs e)
+		{
+			var flame = mParent.BatchListController.GetSelectedFlame();
+			if (flame == null)
+				return;
+
+			mParent.MessagesController.Summarize(flame);
 		}
 
 		public void UpdateButtonStates()

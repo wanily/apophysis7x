@@ -128,6 +128,7 @@
     <Compile Include="Windows\Controllers\MainController.cs" />
     <Compile Include="Windows\Controllers\MainMenuController.cs" />
     <Compile Include="Windows\Controllers\MainToolbarController.cs" />
+    <Compile Include="Windows\Controllers\MessagesController.cs" />
     <Compile Include="Windows\Controllers\UndoController.cs" />
     <Compile Include="Windows\Controllers\WaitImageController.cs" />
     <Compile Include="Windows\Controls\CellValueChangedEventArgs.cs" />
@@ -202,6 +203,12 @@
     </Compile>
     <Compile Include="Windows\Forms\Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Forms\Messages.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\Forms\Messages.Designer.cs">
+      <DependentUpon>Messages.cs</DependentUpon>
     </Compile>
     <Compile Include="Windows\Input\CameraChangedEventArgs.cs" />
     <Compile Include="Windows\Input\CameraChangedEventHandler.cs" />
@@ -303,6 +310,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\Forms\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\Forms\Messages.resx">
+      <DependentUpon>Messages.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\Resources\MAINICON.ico" />
     <EmbeddedResource Include="Windows\Resources\MOVE_WHITE.cur" />

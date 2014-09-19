@@ -90,6 +90,7 @@
 			this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
 			this.ToggleTransparencyButton = new System.Windows.Forms.ToolStripButton();
 			this.ToggleGuidelinesButton = new System.Windows.Forms.ToolStripButton();
+			this.ToggleFitPreviewImage = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
 			this.PanCameraModeButton = new System.Windows.Forms.ToolStripButton();
 			this.RotateCameraModeButton = new System.Windows.Forms.ToolStripButton();
@@ -108,7 +109,8 @@
 			this.PreviewTimeRemainingLabel = new System.Windows.Forms.ToolStripStatusLabel();
 			this.FlameNameLabel = new System.Windows.Forms.ToolStripStatusLabel();
 			this.PreviewProgressBar = new System.Windows.Forms.ToolStripProgressBar();
-			this.ToggleFitPreviewImage = new System.Windows.Forms.ToolStripButton();
+			this.MessagesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.MessagesButton = new System.Windows.Forms.ToolStripButton();
 			this.mMainMenu.SuspendLayout();
 			this.ToolBar.SuspendLayout();
 			this.ClientPanel.SuspendLayout();
@@ -310,6 +312,7 @@
             this.FlamePropertiesMenuItem,
             this.PalettePropertiesMenuItem,
             this.CanvasPropertiesMenuItem,
+            this.MessagesMenuItem,
             this.toolStripMenuItem7,
             this.ShowToolBarMenuItem,
             this.ShowStatusBarMenuItem,
@@ -523,6 +526,7 @@
             this.FlamePropertiesButton,
             this.PalettePropertiesButton,
             this.CanvasPropertiesButton,
+            this.MessagesButton,
             this.OpenSettingsButton,
             this.toolStripSeparator7,
             this.ToggleTransparencyButton,
@@ -753,6 +757,15 @@
 			this.ToggleGuidelinesButton.Size = new System.Drawing.Size(23, 22);
 			this.ToggleGuidelinesButton.Text = "Show guidelines";
 			// 
+			// ToggleFitPreviewImage
+			// 
+			this.ToggleFitPreviewImage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.ToggleFitPreviewImage.Image = ((System.Drawing.Image)(resources.GetObject("ToggleFitPreviewImage.Image")));
+			this.ToggleFitPreviewImage.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.ToggleFitPreviewImage.Name = "ToggleFitPreviewImage";
+			this.ToggleFitPreviewImage.Size = new System.Drawing.Size(23, 22);
+			this.ToggleFitPreviewImage.Text = "Fit preview image";
+			// 
 			// toolStripSeparator8
 			// 
 			this.toolStripSeparator8.Name = "toolStripSeparator8";
@@ -935,14 +948,23 @@
 			this.PreviewProgressBar.Name = "PreviewProgressBar";
 			this.PreviewProgressBar.Size = new System.Drawing.Size(200, 16);
 			// 
-			// ToggleFitPreviewImage
+			// MessagesMenuItem
 			// 
-			this.ToggleFitPreviewImage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.ToggleFitPreviewImage.Image = ((System.Drawing.Image)(resources.GetObject("ToggleFitPreviewImage.Image")));
-			this.ToggleFitPreviewImage.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.ToggleFitPreviewImage.Name = "ToggleFitPreviewImage";
-			this.ToggleFitPreviewImage.Size = new System.Drawing.Size(23, 22);
-			this.ToggleFitPreviewImage.Text = "Fit preview image";
+			this.MessagesMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("MessagesMenuItem.Image")));
+			this.MessagesMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.MessagesMenuItem.Name = "MessagesMenuItem";
+			this.MessagesMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F8;
+			this.MessagesMenuItem.Size = new System.Drawing.Size(190, 22);
+			this.MessagesMenuItem.Text = "Messages";
+			// 
+			// MessagesButton
+			// 
+			this.MessagesButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.MessagesButton.Image = ((System.Drawing.Image)(resources.GetObject("MessagesButton.Image")));
+			this.MessagesButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.MessagesButton.Name = "MessagesButton";
+			this.MessagesButton.Size = new System.Drawing.Size(23, 22);
+			this.MessagesButton.Text = "Messages";
 			// 
 			// Main
 			// 
@@ -1071,5 +1093,7 @@
 		public System.Windows.Forms.Panel ClientPanel;
 		public System.Windows.Forms.Panel BottomPanel;
 		public System.Windows.Forms.ToolStripButton ToggleFitPreviewImage;
+		public System.Windows.Forms.ToolStripMenuItem MessagesMenuItem;
+		public System.Windows.Forms.ToolStripButton MessagesButton;
 	}
 }

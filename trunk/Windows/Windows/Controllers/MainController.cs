@@ -18,6 +18,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		private EditorController mEditorController;
 		private FullscreenController mFullscreenController;
 		private FlamePropertiesController mFlamePropertiesController;
+		private MessagesController mMessagesController;
 
 		private KeyboardController mKeyboardController;
 		private MainMenuController mMenuController;
@@ -37,6 +38,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mEditorController = new EditorController(this);
 			mFullscreenController = new FullscreenController(this);
 			mFlamePropertiesController = new FlamePropertiesController(this);
+			mMessagesController = new MessagesController();
 
 			mMenuController = new MainMenuController(View, this);
 			mToolbarController = new MainToolbarController(View, this);
@@ -84,6 +86,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 					mFullscreenController = null;
 				}
 
+				if (mMessagesController != null)
+				{
+					mMessagesController.Dispose();
+					mMessagesController = null;
+				}
+
 				if (mFlamePropertiesController != null)
 				{
 					mFlamePropertiesController.Dispose();
@@ -118,11 +126,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		protected override void AttachView()
 		{
-			mEditorController.View.Owner = View;
-			mFlamePropertiesController.View.Owner = View;
-
 			mEditorController.Initialize();
 			mFlamePropertiesController.Initialize();
+			mMessagesController.Initialize();
 			mFullscreenController.Initialize();
 			mMenuController.Initialize();
 			mToolbarController.Initialize();
@@ -136,9 +142,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 		protected override void DetachView()
 		{
-			mEditorController.View.Owner = null;
-			mFlamePropertiesController.View.Owner = null;
-
 			View.Load -= OnViewLoaded;
 			View.CameraEndEdit -= OnCameraEndEdit;
 			View.CameraChanged -= OnCameraChanged;
@@ -255,6 +258,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		public FlamePropertiesController FlamePropertiesController
 		{
 			get { return mFlamePropertiesController; }
+		}
+		public MessagesController MessagesController
+		{
+			get { return mMessagesController; }
 		}
 
 		internal BatchListController BatchListController
@@ -472,6 +479,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			mFlamePropertiesController.View.Show();
 			mFlamePropertiesController.View.Tabs.SelectTab(mFlamePropertiesController.View.CanvasTab);
+		}
+		public void ShowMessages()
+		{
+			mMessagesController.View.Show();
 		}
 	}
 }
