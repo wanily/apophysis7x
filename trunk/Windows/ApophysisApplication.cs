@@ -6,7 +6,6 @@ using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Calculation;
-using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Variations;
 using Xyrus.Apophysis.Windows.Controllers;
 
