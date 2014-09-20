@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
+using System.Text;
 using System.Text.RegularExpressions;
 using Xyrus.Apophysis.Properties;
 
@@ -47,7 +49,8 @@ namespace Xyrus.Apophysis.Models
 		[NotNull]
 		public static Palette GetRandomPalette([CanBeNull] Flame flame = null)
 		{
-			var rnd = new Random();
+			// ReSharper disable once ConditionIsAlwaysTrueOrFalse
+			var rnd = new Random(flame == null || flame.Palette == null ? (int)DateTime.Now.Ticks : (flame.Palette.GetHashCode() ^ (int)DateTime.Now.Ticks));
 			var palette = Flam3Palettes[rnd.Next() % Flam3Palettes.Count];
 
 			if (flame != null)
@@ -131,7 +134,7 @@ namespace Xyrus.Apophysis.Models
 		}
 
 		[NotNull]
-		internal static IEnumerable<Palette> ReadUgr([NotNull] string data)
+		public static IEnumerable<Palette> ReadUgr([NotNull] string data)
 		{
 			if (string.IsNullOrEmpty(data) || string.IsNullOrEmpty(data.Trim()))
 				throw new ArgumentNullException(@"data");
@@ -139,7 +142,45 @@ namespace Xyrus.Apophysis.Models
 			const string collectPalettes = @"([a-z0-9\-_]+)\s*{\s*((?:gradient|alpha):\s*([a-z0-9=\s\-_""]+)\s*)}";
 			var palettes = Regex.Matches(data, collectPalettes, RegexOptions.IgnoreCase).OfType<Match>();
 
-			return palettes.Select(palette => Palette.ReadCmap(palette.Groups[1].Value, palette.Groups[2].Value));
+			return palettes.Select(palette => Palette.ReadCmap(palette.Groups[1].Value, palette.Groups[2].Value).Resize(256));
+		}
+
+		[NotNull]
+		public static string WriteUgr([NotNull] IEnumerable<Palette> palettes)
+		{
+			if (palettes == null) throw new ArgumentNullException("palettes");
+
+			var list = palettes.ToList();
+			if (list.Count == 0)
+				throw new ArgumentNullException("palettes");
+
+			var builder = new StringBuilder();
+
+			foreach (var palette in list)
+			{
+				var pal400 = palette.Resize(400);
+
+				builder.AppendFormat(@"{0} {{" + Environment.NewLine, pal400.CalculatedName);
+				builder.AppendLine(@"gradient:");
+				builder.AppendFormat(@"  title=""{0}"" smooth=no" + Environment.NewLine, pal400.CalculatedName);
+
+				for (int i = 0; i < pal400.Length; i++)
+				{
+					var col = pal400[i];
+
+					var red = col.R & 0xff;
+					var green = col.G & 0xff;
+					var blue = col.B & 0xff;
+
+					var value = (blue << 16) | (green << 8) | red;
+
+					builder.AppendFormat(@"  index={0} color={1}" + Environment.NewLine, i, value);
+				}
+
+				builder.AppendLine(@"}" + Environment.NewLine);
+			}
+
+			return builder.ToString().TrimEnd();
 		}
 	}
 }

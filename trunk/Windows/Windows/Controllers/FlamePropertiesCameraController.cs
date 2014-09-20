@@ -3,11 +3,12 @@ using Xyrus.Apophysis.Windows.Forms;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
-	class FlamePropertiesCameraController : Controller<FlameProperties>
+	class FlamePropertiesCameraController : DataInputController<FlameProperties>
 	{
 		private FlamePropertiesController mParent;
 
-		public FlamePropertiesCameraController(FlameProperties view, [NotNull] FlamePropertiesController parent) : base(view)
+		public FlamePropertiesCameraController(FlameProperties view, [NotNull] FlamePropertiesController parent) 
+			: base(view, parent.Initializer)
 		{
 			if (parent == null) throw new ArgumentNullException("parent");
 			mParent = parent;
@@ -19,127 +20,48 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		protected override void AttachView()
 		{
-			View.ZoomDragPanel.ValueChanged += OnZoomChanged;
-			View.ZoomScrollBar.ValueChanged += OnZoomChanged;
-			View.XPositionDragPanel.ValueChanged += OnXPositionChanged;
-			View.XPositionScrollBar.ValueChanged += OnXPositionChanged;
-			View.YPositionDragPanel.ValueChanged += OnYPositionChanged;
-			View.YPositionScrollBar.ValueChanged += OnYPositionChanged;
-			View.RotationDragPanel.ValueChanged += OnRotationChanged;
-			View.RotationScrollBar.ValueChanged += OnRotationChanged;
-			View.ScaleDragPanel.ValueChanged += OnScaleChanged;
+			Register(View.ZoomDragPanel,
+				xx => mParent.Flame.Zoom = xx,
+				() => mParent.Flame.Zoom);
+			Register(View.XPositionDragPanel,
+				xx => mParent.Flame.Origin.X = xx,
+				() => mParent.Flame.Origin.X);
+			Register(View.YPositionDragPanel,
+				xx => mParent.Flame.Origin.Y = xx,
+				() => mParent.Flame.Origin.Y);
+			Register(View.RotationDragPanel,
+				xx => mParent.Flame.Angle = -xx * System.Math.PI / 180.0,
+				() => mParent.Flame.Angle * -180 / System.Math.PI);
+			Register(View.ScaleDragPanel,
+				xx => mParent.Flame.PixelsPerUnit = xx * mParent.Flame.CanvasSize.Width / 100,
+				() => mParent.Flame.PixelsPerUnit * 100.0 / mParent.Flame.CanvasSize.Width);
+
+
+			Register(View.ZoomScrollBar,
+				xx => mParent.Flame.Zoom = xx / 1000,
+				() => mParent.Flame.Zoom * 1000);
+			Register(View.XPositionScrollBar,
+				xx => mParent.Flame.Origin.X = xx / 1000,
+				() => mParent.Flame.Origin.X * 1000);
+			Register(View.YPositionScrollBar,
+				xx => mParent.Flame.Origin.Y = xx / 1000,
+				() => mParent.Flame.Origin.Y * 1000);
+			Register(View.RotationScrollBar,
+				xx => mParent.Flame.Angle = -xx * System.Math.PI / 180.0,
+				() => mParent.Flame.Angle * -180 / System.Math.PI);
 		}
 		protected override void DetachView()
 		{
-			View.ZoomDragPanel.ValueChanged -= OnZoomChanged;
-			View.ZoomScrollBar.ValueChanged -= OnZoomChanged;
-			View.XPositionDragPanel.ValueChanged -= OnXPositionChanged;
-			View.XPositionScrollBar.ValueChanged -= OnXPositionChanged;
-			View.YPositionDragPanel.ValueChanged -= OnYPositionChanged;
-			View.YPositionScrollBar.ValueChanged -= OnYPositionChanged;
-			View.RotationDragPanel.ValueChanged -= OnRotationChanged;
-			View.RotationScrollBar.ValueChanged -= OnRotationChanged;
-			View.ScaleDragPanel.ValueChanged -= OnScaleChanged;
+			Cleanup();
 		}
 
-		public void Update()
+		protected override void OnValueCommittedOverride(object control)
 		{
-			if (mParent.Flame == null)
-				return;
-
-			var sz = System.Math.Max(-3, System.Math.Min(mParent.Flame.Zoom, 3));
-			var sx = System.Math.Max(-10, System.Math.Min(mParent.Flame.Origin.X, 10));
-			var sy = System.Math.Max(-10, System.Math.Min(mParent.Flame.Origin.Y, 10));
-
-			View.ScaleDragPanel.Value = mParent.Flame.PixelsPerUnit * 100.0 / mParent.Flame.CanvasSize.Width;
-			View.ZoomDragPanel.Value = mParent.Flame.Zoom;
-			View.ZoomScrollBar.Value = (int)(sz * 1000);
-			View.XPositionDragPanel.Value = mParent.Flame.Origin.X;
-			View.XPositionScrollBar.Value = (int)(sx * 1000);
-			View.YPositionDragPanel.Value = mParent.Flame.Origin.Y;
-			View.YPositionScrollBar.Value = (int)(sy * 1000);
-			View.RotationDragPanel.Value = -mParent.Flame.Angle * 180 / System.Math.PI;
-			View.RotationScrollBar.Value = (int)(View.RotationDragPanel.Value);
+			mParent.CommitValue();
 		}
-
-		private void OnXPositionChanged(object sender, EventArgs e)
+		protected override void OnValueChangedOverride(object control)
 		{
-			if (mParent.Flame == null || mParent.Initializer.IsBusy)
-				return;
-
-			if (ReferenceEquals(View.XPositionScrollBar, sender))
-			{
-				using (mParent.Initializer.Enter())
-					View.XPositionDragPanel.Value = View.XPositionScrollBar.Value / 1000.0;
-			}
-			else if (ReferenceEquals(View.XPositionDragPanel, sender))
-			{
-				using (mParent.Initializer.Enter())
-					View.XPositionScrollBar.Value = (int)(View.XPositionDragPanel.Value * 1000);
-			}
-
-			mParent.Flame.Origin.X = View.XPositionDragPanel.Value;
-		}
-		private void OnYPositionChanged(object sender, EventArgs e)
-		{
-			if (mParent.Flame == null || mParent.Initializer.IsBusy)
-				return;
-
-			if (ReferenceEquals(View.YPositionScrollBar, sender))
-			{
-				using (mParent.Initializer.Enter())
-					View.YPositionDragPanel.Value = View.YPositionScrollBar.Value / 1000.0;
-			}
-			else if (ReferenceEquals(View.YPositionDragPanel, sender))
-			{
-				using (mParent.Initializer.Enter())
-					View.YPositionScrollBar.Value = (int)(View.YPositionDragPanel.Value * 1000);
-			}
-
-			mParent.Flame.Origin.Y = View.YPositionDragPanel.Value;
-		}
-		private void OnRotationChanged(object sender, EventArgs e)
-		{
-			if (mParent.Flame == null || mParent.Initializer.IsBusy)
-				return;
-
-			if (ReferenceEquals(View.RotationScrollBar, sender))
-			{
-				using (mParent.Initializer.Enter())
-					View.RotationDragPanel.Value = View.RotationScrollBar.Value;
-			}
-			else if (ReferenceEquals(View.RotationDragPanel, sender))
-			{
-				using (mParent.Initializer.Enter())
-					View.RotationScrollBar.Value = (int)(View.RotationDragPanel.Value);
-			}
-
-			mParent.Flame.Angle = (-View.RotationDragPanel.Value * System.Math.PI / 180.0);
-		}
-		private void OnZoomChanged(object sender, EventArgs e)
-		{
-			if (mParent.Flame == null || mParent.Initializer.IsBusy)
-				return;
-
-			if (ReferenceEquals(View.ZoomScrollBar, sender))
-			{
-				using (mParent.Initializer.Enter())
-					View.ZoomDragPanel.Value = View.ZoomScrollBar.Value / 1000.0;
-			}
-			else if (ReferenceEquals(View.ZoomDragPanel, sender))
-			{
-				using (mParent.Initializer.Enter())
-					View.ZoomScrollBar.Value = (int)(View.ZoomDragPanel.Value * 1000);
-			}
-
-			mParent.Flame.Zoom = View.ZoomDragPanel.Value;
-		}
-		private void OnScaleChanged(object sender, EventArgs e)
-		{
-			if (mParent.Flame == null || mParent.Initializer.IsBusy)
-				return;
-
-			mParent.Flame.PixelsPerUnit = View.ScaleDragPanel.Value * mParent.Flame.CanvasSize.Width / 100;
+			mParent.PreviewController.DelayedUpdatePreview();
 		}
 	}
 }

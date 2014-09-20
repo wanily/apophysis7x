@@ -3,12 +3,12 @@ using Xyrus.Apophysis.Windows.Forms;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
-	class FlameProperties3DCameraController : Controller<FlameProperties>
+	class FlameProperties3DCameraController : DataInputController<FlameProperties>
 	{
 		private FlamePropertiesController mParent;
 
-		public FlameProperties3DCameraController(FlameProperties view, [NotNull] FlamePropertiesController parent)
-			: base(view)
+		public FlameProperties3DCameraController(FlameProperties view, [NotNull] FlamePropertiesController parent) 
+			: base(view, parent.Initializer)
 		{
 			if (parent == null) throw new ArgumentNullException("parent");
 			mParent = parent;
@@ -20,67 +20,34 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		protected override void AttachView()
 		{
-			View.DepthBlurDragPanel.ValueChanged += OnDepthBlurChanged;
-			View.PitchDragPanel.ValueChanged += OnPitchChanged;
-			View.YawDragPanel.ValueChanged += OnYawChanged;
-			View.HeightDragPanel.ValueChanged += OnHeightChanged;
-			View.PerspectiveDragPanel.ValueChanged += OnPerspectiveChanged;
+			Register(View.DepthBlurDragPanel, 
+				xx => mParent.Flame.DepthOfField = xx, 
+				() => mParent.Flame.DepthOfField);
+			Register(View.PitchDragPanel, 
+				xx => mParent.Flame.Pitch = xx * System.Math.PI / 180.0, 
+				() => mParent.Flame.Pitch * 180.0 / System.Math.PI);
+			Register(View.YawDragPanel, 
+				xx => mParent.Flame.Yaw = xx * System.Math.PI / 180.0, 
+				() => mParent.Flame.Yaw * 180.0 / System.Math.PI);
+			Register(View.HeightDragPanel, 
+				xx => mParent.Flame.Height = xx, 
+				() => mParent.Flame.Height);
+			Register(View.PerspectiveDragPanel, 
+				xx => mParent.Flame.Perspective = xx, 
+				() => mParent.Flame.Perspective);
 		}
 		protected override void DetachView()
 		{
-			View.DepthBlurDragPanel.ValueChanged -= OnDepthBlurChanged;
-			View.PitchDragPanel.ValueChanged -= OnPitchChanged;
-			View.YawDragPanel.ValueChanged -= OnYawChanged;
-			View.HeightDragPanel.ValueChanged -= OnHeightChanged;
-			View.PerspectiveDragPanel.ValueChanged -= OnPerspectiveChanged;
+			Cleanup();
 		}
 
-		public void Update()
+		protected override void OnValueCommittedOverride(object control)
 		{
-			if (mParent.Flame == null)
-				return;
-
-			View.DepthBlurDragPanel.Value = mParent.Flame.DepthOfField;
-			View.PitchDragPanel.Value = mParent.Flame.Pitch * 180.0 / System.Math.PI;
-			View.YawDragPanel.Value = mParent.Flame.Yaw * 180.0 / System.Math.PI;
-			View.HeightDragPanel.Value = mParent.Flame.Height;
-			View.PerspectiveDragPanel.Value = mParent.Flame.Perspective;
+			mParent.CommitValue();
 		}
-
-		private void OnDepthBlurChanged(object sender, EventArgs e)
+		protected override void OnValueChangedOverride(object control)
 		{
-			if (mParent.Flame == null || mParent.Initializer.IsBusy)
-				return;
-
-			mParent.Flame.DepthOfField = View.DepthBlurDragPanel.Value;
-		}
-		private void OnPitchChanged(object sender, EventArgs e)
-		{
-			if (mParent.Flame == null || mParent.Initializer.IsBusy)
-				return;
-
-			mParent.Flame.Pitch = View.PitchDragPanel.Value * System.Math.PI / 180.0;
-		}
-		private void OnYawChanged(object sender, EventArgs e)
-		{
-			if (mParent.Flame == null || mParent.Initializer.IsBusy)
-				return;
-
-			mParent.Flame.Yaw = View.YawDragPanel.Value * System.Math.PI / 180.0;
-		}
-		private void OnHeightChanged(object sender, EventArgs e)
-		{
-			if (mParent.Flame == null || mParent.Initializer.IsBusy)
-				return;
-
-			mParent.Flame.Height = View.HeightDragPanel.Value;
-		}
-		private void OnPerspectiveChanged(object sender, EventArgs e)
-		{
-			if (mParent.Flame == null || mParent.Initializer.IsBusy)
-				return;
-
-			mParent.Flame.Perspective = View.PerspectiveDragPanel.Value;
+			mParent.PreviewController.DelayedUpdatePreview();
 		}
 	}
 }

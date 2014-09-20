@@ -24,15 +24,13 @@ namespace Xyrus.Apophysis.Calculation
 			var timer = new NativeTimer();
 
 			var bitmap = new Bitmap(size.Width, size.Height, PixelFormat.Format32bppArgb);
-			var random = new Random(flame.GetHashCode());
+			var random = new Random(flame.GetHashCode() ^ (int)DateTime.Now.Ticks);
 
 			var samples = density * size.Width * size.Height + 20;
-			var color = Color.FromArgb(random.Next()%255, random.Next()%255, random.Next()%255);
+			var color = flame.Palette[flame.Palette.Length/2]; //Color.FromArgb(random.Next()%255, random.Next()%255, random.Next()%255);
 
 			var col = color.ToArgb();
 			var icol = color.Invert().ToArgb();
-
-			random = new Random(flame.GetHashCode() ^ (int)DateTime.Now.Ticks);
 
 			if (progressCallback != null)
 			{

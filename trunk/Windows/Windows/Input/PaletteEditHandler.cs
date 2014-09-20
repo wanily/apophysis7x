@@ -43,7 +43,7 @@ namespace Xyrus.Apophysis.Windows.Input
 					throw new ArgumentNullException("value");
 				}
 
-				mInputPalette = value.Resize(256);
+				mInputPalette = value.Copy(); //value.Resize(256);
 				mValue = 0;
 				mOutputPalette = mInputPalette.Copy();
 			}
@@ -75,6 +75,8 @@ namespace Xyrus.Apophysis.Windows.Input
 			OnValueChangedOverride();
 
 			var source = new Color[InputPalette.Length];
+			InputPalette.CopyTo(source);
+
 			var data = Calculate(source, mValue);
 
 			OutputPalette = new Palette(InputPalette.CalculatedName, data);

@@ -1,21 +1,22 @@
 ﻿using System.Drawing;
+using Xyrus.Apophysis.Math;
 
 namespace Xyrus.Apophysis.Windows.Input
 {
-	class RotatePaletteEditHandler : PaletteEditHandler
+	class HuePaletteEditHandler : PaletteEditHandler
 	{
 		public override string GetDisplayName()
 		{
-			return "Rotate";
+			return "Hue";
 		}
 
 		public override int MinValue
 		{
-			get { return 0; }
+			get { return -180; }
 		}
 		public override int MaxValue
 		{
-			get { return 127; }
+			get { return 180; }
 		}
 
 		protected override Color[] Calculate(Color[] source, int value)
@@ -24,7 +25,13 @@ namespace Xyrus.Apophysis.Windows.Input
 
 			for (int i = 0; i < source.Length; i++)
 			{
-				temp[i] = source[(256 + i - value) % 256];
+				var hue = (360 + (int)source[i].GetHue() + value) % 360;
+				var sat = source[i].GetSaturation();
+				var bri = source[i].GetBrightness();
+
+				var newColor = UtilityExtensions.ColorFromAhsb(source[i].A, hue, sat, bri);
+
+				temp[i] = newColor;
 			}
 
 			return temp;

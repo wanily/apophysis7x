@@ -2,11 +2,11 @@
 
 namespace Xyrus.Apophysis.Windows.Input
 {
-	class RotatePaletteEditHandler : PaletteEditHandler
+	class FrequencyPaletteEditHandler : PaletteEditHandler
 	{
 		public override string GetDisplayName()
 		{
-			return "Rotate";
+			return "Frequency";
 		}
 
 		public override int MinValue
@@ -15,16 +15,31 @@ namespace Xyrus.Apophysis.Windows.Input
 		}
 		public override int MaxValue
 		{
-			get { return 127; }
+			get { return 9; }
 		}
 
 		protected override Color[] Calculate(Color[] source, int value)
 		{
 			var temp = new Color[source.Length];
 
-			for (int i = 0; i < source.Length; i++)
+			value++;
+			if (value == 1)
 			{
-				temp[i] = source[(256 + i - value) % 256];
+				source.CopyTo(temp, 0);
+				return temp;
+			}
+
+			var n = 256 / value;
+
+			for (int j = 0; j < value; j++)
+			{
+				for (int i = 0; i < n; i++)
+				{
+					if (j * n + i < 256)
+					{
+						temp[j * n + i] = source[i * value];
+					}
+				}
 			}
 
 			return temp;

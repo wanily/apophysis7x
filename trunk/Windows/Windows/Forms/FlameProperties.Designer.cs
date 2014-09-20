@@ -27,12 +27,16 @@
 			this.CameraTab = new System.Windows.Forms.TabPage();
 			this.RotationScrollBar = new System.Windows.Forms.HScrollBar();
 			this.RotationTextBox = new System.Windows.Forms.TextBox();
+			this.RotationDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.YPositionScrollBar = new System.Windows.Forms.HScrollBar();
 			this.YPositionTextBox = new System.Windows.Forms.TextBox();
+			this.YPositionDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.XPositionScrollBar = new System.Windows.Forms.HScrollBar();
 			this.XPositionTextBox = new System.Windows.Forms.TextBox();
+			this.XPositionDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.ZoomScrollBar = new System.Windows.Forms.HScrollBar();
 			this.ZoomTextBox = new System.Windows.Forms.TextBox();
+			this.ZoomDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.Tabs = new System.Windows.Forms.TabControl();
 			this.ImagingTab = new System.Windows.Forms.TabPage();
 			this.BackgroundPictureBox = new System.Windows.Forms.PictureBox();
@@ -44,8 +48,41 @@
 			this.BrightnessTextBox = new System.Windows.Forms.TextBox();
 			this.GammaScrollBar = new System.Windows.Forms.HScrollBar();
 			this.GammaTextBox = new System.Windows.Forms.TextBox();
+			this.GammaThresholdDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
+			this.VibrancyDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
+			this.BrightnessDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
+			this.GammaDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.PaletteTab = new System.Windows.Forms.TabPage();
+			this.PaletteResetButton = new System.Windows.Forms.Button();
+			this.PaletteFromImageButton = new System.Windows.Forms.Button();
+			this.mButtonImages = new System.Windows.Forms.ImageList(this.components);
+			this.PaletteBrowserButton = new System.Windows.Forms.Button();
+			this.PastePaletteButton = new System.Windows.Forms.Button();
+			this.CopyPaletteButton = new System.Windows.Forms.Button();
+			this.PaletteEditTextBox = new System.Windows.Forms.TextBox();
+			this.PaletteEditScrollBar = new System.Windows.Forms.HScrollBar();
+			this.RandomPresetButton = new System.Windows.Forms.Button();
+			this.PaletteEditModeComboBox = new System.Windows.Forms.ComboBox();
+			this.PalettePicture = new System.Windows.Forms.PictureBox();
+			this.mPaletteBevel = new System.Windows.Forms.Label();
+			this.PaletteSelectComboBox = new Xyrus.Apophysis.Windows.Controls.PaletteSelectComboBox();
 			this.CanvasTab = new System.Windows.Forms.TabPage();
+			this.mResizeGroupBox = new System.Windows.Forms.GroupBox();
+			this.ApplyButton = new System.Windows.Forms.Button();
+			this.ResizeMainWindowCheckBox = new System.Windows.Forms.CheckBox();
+			this.mPresetGroupBox = new System.Windows.Forms.GroupBox();
+			this.Preset3SaveButton = new System.Windows.Forms.Button();
+			this.Preset3SelectButton = new System.Windows.Forms.Button();
+			this.Preset2SaveButton = new System.Windows.Forms.Button();
+			this.Preset2SelectButton = new System.Windows.Forms.Button();
+			this.Preset1SaveButton = new System.Windows.Forms.Button();
+			this.Preset1SelectButton = new System.Windows.Forms.Button();
+			this.mSizeGroupBox = new System.Windows.Forms.GroupBox();
+			this.HeightComboBox = new System.Windows.Forms.ComboBox();
+			this.WidthComboBox = new System.Windows.Forms.ComboBox();
+			this.MaintainAspectRatioCheckBox = new System.Windows.Forms.CheckBox();
+			this.mHeightLabel = new System.Windows.Forms.Label();
+			this.mWidthLabel = new System.Windows.Forms.Label();
 			this.mTabImages = new System.Windows.Forms.ImageList(this.components);
 			this.DepthBlurTextBox = new System.Windows.Forms.TextBox();
 			this.PitchTextBox = new System.Windows.Forms.TextBox();
@@ -53,51 +90,27 @@
 			this.HeightTextBox = new System.Windows.Forms.TextBox();
 			this.PerspectiveTextBox = new System.Windows.Forms.TextBox();
 			this.ScaleTextBox = new System.Windows.Forms.TextBox();
+			this.mPictureBevel = new System.Windows.Forms.Label();
+			this.PreviewPicture = new System.Windows.Forms.PictureBox();
 			this.ScaleDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.PerspectiveDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.HeightDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.YawDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.PitchDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.DepthBlurDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
-			this.RotationDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
-			this.YPositionDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
-			this.XPositionDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
-			this.ZoomDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
-			this.GammaThresholdDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
-			this.VibrancyDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
-			this.BrightnessDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
-			this.GammaDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
-			this.mSizeGroupBox = new System.Windows.Forms.GroupBox();
-			this.mPresetGroupBox = new System.Windows.Forms.GroupBox();
-			this.mResizeGroupBox = new System.Windows.Forms.GroupBox();
-			this.mWidthLabel = new System.Windows.Forms.Label();
-			this.mHeightLabel = new System.Windows.Forms.Label();
-			this.MaintainAspectRatioCheckBox = new System.Windows.Forms.CheckBox();
-			this.ResizeMainWindowCheckBox = new System.Windows.Forms.CheckBox();
-			this.ApplyButton = new System.Windows.Forms.Button();
-			this.WidthComboBox = new System.Windows.Forms.ComboBox();
-			this.HeightComboBox = new System.Windows.Forms.ComboBox();
-			this.Preset1SelectButton = new System.Windows.Forms.Button();
-			this.mButtonImages = new System.Windows.Forms.ImageList(this.components);
-			this.Preset1SaveButton = new System.Windows.Forms.Button();
-			this.Preset2SaveButton = new System.Windows.Forms.Button();
-			this.Preset2SelectButton = new System.Windows.Forms.Button();
-			this.Preset3SaveButton = new System.Windows.Forms.Button();
-			this.Preset3SelectButton = new System.Windows.Forms.Button();
-			this.PaletteSelectComboBox = new Xyrus.Apophysis.Windows.Controls.PaletteSelectComboBox();
-			this.mPictureBevel = new System.Windows.Forms.Label();
-			this.PreviewPicture = new System.Windows.Forms.PictureBox();
-			this.PalettePicture = new System.Windows.Forms.PictureBox();
-			this.mPaletteBevel = new System.Windows.Forms.Label();
-			this.PaletteEditModeComboBox = new System.Windows.Forms.ComboBox();
-			this.RandomPresetButton = new System.Windows.Forms.Button();
-			this.PaletteEditScrollBar = new System.Windows.Forms.HScrollBar();
-			this.PaletteEditTextBox = new System.Windows.Forms.TextBox();
-			this.CopyPaletteButton = new System.Windows.Forms.Button();
-			this.PastePaletteButton = new System.Windows.Forms.Button();
-			this.PaletteFromImageButton = new System.Windows.Forms.Button();
-			this.PaletteBrowserButton = new System.Windows.Forms.Button();
-			this.PaletteResetButton = new System.Windows.Forms.Button();
+			this.mPaletteContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.RandomizePaletteMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+			this.InvertPaletteMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.ReversePaletteMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+			this.PaletteFromImageMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.PaletteBrowserMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
+			this.SavePaletteMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
+			this.CopyPaletteMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.PastePaletteMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.mPreviewContextMenu.SuspendLayout();
 			this.mToolbar.SuspendLayout();
 			this.CameraTab.SuspendLayout();
@@ -105,12 +118,13 @@
 			this.ImagingTab.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.BackgroundPictureBox)).BeginInit();
 			this.PaletteTab.SuspendLayout();
-			this.CanvasTab.SuspendLayout();
-			this.mSizeGroupBox.SuspendLayout();
-			this.mPresetGroupBox.SuspendLayout();
-			this.mResizeGroupBox.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.PreviewPicture)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.PalettePicture)).BeginInit();
+			this.CanvasTab.SuspendLayout();
+			this.mResizeGroupBox.SuspendLayout();
+			this.mPresetGroupBox.SuspendLayout();
+			this.mSizeGroupBox.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.PreviewPicture)).BeginInit();
+			this.mPaletteContextMenu.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// mPreviewContextMenu
@@ -222,6 +236,23 @@
 			this.RotationTextBox.TabIndex = 21;
 			this.RotationTextBox.Text = "0.000";
 			// 
+			// RotationDragPanel
+			// 
+			this.RotationDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.RotationDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.RotationDragPanel.Default = 0D;
+			this.RotationDragPanel.DragStepping = 5D;
+			this.RotationDragPanel.Location = new System.Drawing.Point(5, 102);
+			this.RotationDragPanel.Maximum = 360D;
+			this.RotationDragPanel.Minimum = -360D;
+			this.RotationDragPanel.Name = "RotationDragPanel";
+			this.RotationDragPanel.Size = new System.Drawing.Size(126, 21);
+			this.RotationDragPanel.TabIndex = 20;
+			this.RotationDragPanel.Text = "Rotation";
+			this.RotationDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.RotationDragPanel.TextBox = this.RotationTextBox;
+			this.RotationDragPanel.Value = 0D;
+			// 
 			// YPositionScrollBar
 			// 
 			this.YPositionScrollBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -242,6 +273,23 @@
 			this.YPositionTextBox.Size = new System.Drawing.Size(64, 20);
 			this.YPositionTextBox.TabIndex = 18;
 			this.YPositionTextBox.Text = "0.000";
+			// 
+			// YPositionDragPanel
+			// 
+			this.YPositionDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.YPositionDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.YPositionDragPanel.Default = 0D;
+			this.YPositionDragPanel.DragStepping = 0.1D;
+			this.YPositionDragPanel.Location = new System.Drawing.Point(5, 73);
+			this.YPositionDragPanel.Maximum = 1000D;
+			this.YPositionDragPanel.Minimum = -1000D;
+			this.YPositionDragPanel.Name = "YPositionDragPanel";
+			this.YPositionDragPanel.Size = new System.Drawing.Size(126, 21);
+			this.YPositionDragPanel.TabIndex = 17;
+			this.YPositionDragPanel.Text = "Y-Position";
+			this.YPositionDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.YPositionDragPanel.TextBox = this.YPositionTextBox;
+			this.YPositionDragPanel.Value = 0D;
 			// 
 			// XPositionScrollBar
 			// 
@@ -264,6 +312,23 @@
 			this.XPositionTextBox.TabIndex = 15;
 			this.XPositionTextBox.Text = "0.000";
 			// 
+			// XPositionDragPanel
+			// 
+			this.XPositionDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.XPositionDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.XPositionDragPanel.Default = 0D;
+			this.XPositionDragPanel.DragStepping = 0.1D;
+			this.XPositionDragPanel.Location = new System.Drawing.Point(5, 41);
+			this.XPositionDragPanel.Maximum = 1000D;
+			this.XPositionDragPanel.Minimum = -1000D;
+			this.XPositionDragPanel.Name = "XPositionDragPanel";
+			this.XPositionDragPanel.Size = new System.Drawing.Size(126, 21);
+			this.XPositionDragPanel.TabIndex = 14;
+			this.XPositionDragPanel.Text = "X-Position";
+			this.XPositionDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.XPositionDragPanel.TextBox = this.XPositionTextBox;
+			this.XPositionDragPanel.Value = 0D;
+			// 
 			// ZoomScrollBar
 			// 
 			this.ZoomScrollBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -284,6 +349,23 @@
 			this.ZoomTextBox.Size = new System.Drawing.Size(64, 20);
 			this.ZoomTextBox.TabIndex = 12;
 			this.ZoomTextBox.Text = "0.000";
+			// 
+			// ZoomDragPanel
+			// 
+			this.ZoomDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.ZoomDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.ZoomDragPanel.Default = 0D;
+			this.ZoomDragPanel.DragStepping = 0.1D;
+			this.ZoomDragPanel.Location = new System.Drawing.Point(5, 11);
+			this.ZoomDragPanel.Maximum = 100D;
+			this.ZoomDragPanel.Minimum = -100D;
+			this.ZoomDragPanel.Name = "ZoomDragPanel";
+			this.ZoomDragPanel.Size = new System.Drawing.Size(126, 21);
+			this.ZoomDragPanel.TabIndex = 11;
+			this.ZoomDragPanel.Text = "Zoom";
+			this.ZoomDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.ZoomDragPanel.TextBox = this.ZoomTextBox;
+			this.ZoomDragPanel.Value = 0D;
 			// 
 			// Tabs
 			// 
@@ -421,6 +503,75 @@
 			this.GammaTextBox.TabIndex = 21;
 			this.GammaTextBox.Text = "4.000";
 			// 
+			// GammaThresholdDragPanel
+			// 
+			this.GammaThresholdDragPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.GammaThresholdDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.GammaThresholdDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.GammaThresholdDragPanel.Default = 0.001D;
+			this.GammaThresholdDragPanel.DragStepping = 0.1D;
+			this.GammaThresholdDragPanel.Location = new System.Drawing.Point(290, 103);
+			this.GammaThresholdDragPanel.Maximum = 100000D;
+			this.GammaThresholdDragPanel.Minimum = 0.001D;
+			this.GammaThresholdDragPanel.Name = "GammaThresholdDragPanel";
+			this.GammaThresholdDragPanel.Size = new System.Drawing.Size(126, 21);
+			this.GammaThresholdDragPanel.TabIndex = 30;
+			this.GammaThresholdDragPanel.Text = "Gamma threshold";
+			this.GammaThresholdDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.GammaThresholdDragPanel.TextBox = this.GammaThresholdTextBox;
+			this.GammaThresholdDragPanel.Value = 0.001D;
+			// 
+			// VibrancyDragPanel
+			// 
+			this.VibrancyDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.VibrancyDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.VibrancyDragPanel.Default = 1D;
+			this.VibrancyDragPanel.DragStepping = 0.1D;
+			this.VibrancyDragPanel.Location = new System.Drawing.Point(5, 73);
+			this.VibrancyDragPanel.Maximum = 3D;
+			this.VibrancyDragPanel.Minimum = 0D;
+			this.VibrancyDragPanel.Name = "VibrancyDragPanel";
+			this.VibrancyDragPanel.Size = new System.Drawing.Size(126, 21);
+			this.VibrancyDragPanel.TabIndex = 26;
+			this.VibrancyDragPanel.Text = "Vibrancy";
+			this.VibrancyDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.VibrancyDragPanel.TextBox = this.VibrancyTextBox;
+			this.VibrancyDragPanel.Value = 1D;
+			// 
+			// BrightnessDragPanel
+			// 
+			this.BrightnessDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.BrightnessDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.BrightnessDragPanel.Default = 4D;
+			this.BrightnessDragPanel.DragStepping = 0.1D;
+			this.BrightnessDragPanel.Location = new System.Drawing.Point(5, 41);
+			this.BrightnessDragPanel.Maximum = 100D;
+			this.BrightnessDragPanel.Minimum = 0.001D;
+			this.BrightnessDragPanel.Name = "BrightnessDragPanel";
+			this.BrightnessDragPanel.Size = new System.Drawing.Size(126, 21);
+			this.BrightnessDragPanel.TabIndex = 23;
+			this.BrightnessDragPanel.Text = "Brightness";
+			this.BrightnessDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.BrightnessDragPanel.TextBox = this.BrightnessTextBox;
+			this.BrightnessDragPanel.Value = 4D;
+			// 
+			// GammaDragPanel
+			// 
+			this.GammaDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.GammaDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.GammaDragPanel.Default = 4D;
+			this.GammaDragPanel.DragStepping = 0.1D;
+			this.GammaDragPanel.Location = new System.Drawing.Point(5, 11);
+			this.GammaDragPanel.Maximum = 5D;
+			this.GammaDragPanel.Minimum = 1D;
+			this.GammaDragPanel.Name = "GammaDragPanel";
+			this.GammaDragPanel.Size = new System.Drawing.Size(126, 21);
+			this.GammaDragPanel.TabIndex = 20;
+			this.GammaDragPanel.Text = "Gamma";
+			this.GammaDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.GammaDragPanel.TextBox = this.GammaTextBox;
+			this.GammaDragPanel.Value = 4D;
+			// 
 			// PaletteTab
 			// 
 			this.PaletteTab.BackColor = System.Drawing.SystemColors.ControlLightLight;
@@ -444,6 +595,147 @@
 			this.PaletteTab.TabIndex = 2;
 			this.PaletteTab.Text = "Gradient";
 			// 
+			// PaletteResetButton
+			// 
+			this.PaletteResetButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.PaletteResetButton.Location = new System.Drawing.Point(390, 79);
+			this.PaletteResetButton.Name = "PaletteResetButton";
+			this.PaletteResetButton.Size = new System.Drawing.Size(94, 21);
+			this.PaletteResetButton.TabIndex = 14;
+			this.PaletteResetButton.Text = "Reset";
+			this.PaletteResetButton.UseVisualStyleBackColor = true;
+			// 
+			// PaletteFromImageButton
+			// 
+			this.PaletteFromImageButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.PaletteFromImageButton.ImageIndex = 4;
+			this.PaletteFromImageButton.ImageList = this.mButtonImages;
+			this.PaletteFromImageButton.Location = new System.Drawing.Point(460, 102);
+			this.PaletteFromImageButton.Name = "PaletteFromImageButton";
+			this.PaletteFromImageButton.Size = new System.Drawing.Size(24, 24);
+			this.PaletteFromImageButton.TabIndex = 13;
+			this.PaletteFromImageButton.UseVisualStyleBackColor = true;
+			// 
+			// mButtonImages
+			// 
+			this.mButtonImages.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("mButtonImages.ImageStream")));
+			this.mButtonImages.TransparentColor = System.Drawing.Color.Fuchsia;
+			this.mButtonImages.Images.SetKeyName(0, "SaveFlame.bmp");
+			this.mButtonImages.Images.SetKeyName(1, "Copy.bmp");
+			this.mButtonImages.Images.SetKeyName(2, "Paste.bmp");
+			this.mButtonImages.Images.SetKeyName(3, "PaletteBrowser.bmp");
+			this.mButtonImages.Images.SetKeyName(4, "SmoothPalette.bmp");
+			// 
+			// PaletteBrowserButton
+			// 
+			this.PaletteBrowserButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.PaletteBrowserButton.ImageIndex = 3;
+			this.PaletteBrowserButton.ImageList = this.mButtonImages;
+			this.PaletteBrowserButton.Location = new System.Drawing.Point(437, 102);
+			this.PaletteBrowserButton.Name = "PaletteBrowserButton";
+			this.PaletteBrowserButton.Size = new System.Drawing.Size(24, 24);
+			this.PaletteBrowserButton.TabIndex = 12;
+			this.PaletteBrowserButton.UseVisualStyleBackColor = true;
+			// 
+			// PastePaletteButton
+			// 
+			this.PastePaletteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.PastePaletteButton.ImageIndex = 2;
+			this.PastePaletteButton.ImageList = this.mButtonImages;
+			this.PastePaletteButton.Location = new System.Drawing.Point(413, 102);
+			this.PastePaletteButton.Name = "PastePaletteButton";
+			this.PastePaletteButton.Size = new System.Drawing.Size(24, 24);
+			this.PastePaletteButton.TabIndex = 11;
+			this.PastePaletteButton.UseVisualStyleBackColor = true;
+			// 
+			// CopyPaletteButton
+			// 
+			this.CopyPaletteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.CopyPaletteButton.ImageIndex = 1;
+			this.CopyPaletteButton.ImageList = this.mButtonImages;
+			this.CopyPaletteButton.Location = new System.Drawing.Point(390, 102);
+			this.CopyPaletteButton.Name = "CopyPaletteButton";
+			this.CopyPaletteButton.Size = new System.Drawing.Size(24, 24);
+			this.CopyPaletteButton.TabIndex = 10;
+			this.CopyPaletteButton.UseVisualStyleBackColor = true;
+			// 
+			// PaletteEditTextBox
+			// 
+			this.PaletteEditTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.PaletteEditTextBox.Location = new System.Drawing.Point(334, 79);
+			this.PaletteEditTextBox.Name = "PaletteEditTextBox";
+			this.PaletteEditTextBox.Size = new System.Drawing.Size(50, 20);
+			this.PaletteEditTextBox.TabIndex = 9;
+			this.PaletteEditTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnNumericTextBoxKeyPress);
+			// 
+			// PaletteEditScrollBar
+			// 
+			this.PaletteEditScrollBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.PaletteEditScrollBar.LargeChange = 1;
+			this.PaletteEditScrollBar.Location = new System.Drawing.Point(132, 79);
+			this.PaletteEditScrollBar.Name = "PaletteEditScrollBar";
+			this.PaletteEditScrollBar.Size = new System.Drawing.Size(199, 20);
+			this.PaletteEditScrollBar.TabIndex = 8;
+			// 
+			// RandomPresetButton
+			// 
+			this.RandomPresetButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.RandomPresetButton.Location = new System.Drawing.Point(6, 105);
+			this.RandomPresetButton.Name = "RandomPresetButton";
+			this.RandomPresetButton.Size = new System.Drawing.Size(120, 21);
+			this.RandomPresetButton.TabIndex = 7;
+			this.RandomPresetButton.Text = "Random preset";
+			this.RandomPresetButton.UseVisualStyleBackColor = true;
+			// 
+			// PaletteEditModeComboBox
+			// 
+			this.PaletteEditModeComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.PaletteEditModeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.PaletteEditModeComboBox.FormattingEnabled = true;
+			this.PaletteEditModeComboBox.Location = new System.Drawing.Point(6, 78);
+			this.PaletteEditModeComboBox.Name = "PaletteEditModeComboBox";
+			this.PaletteEditModeComboBox.Size = new System.Drawing.Size(120, 21);
+			this.PaletteEditModeComboBox.TabIndex = 6;
+			// 
+			// PalettePicture
+			// 
+			this.PalettePicture.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.PalettePicture.BackColor = System.Drawing.SystemColors.Control;
+			this.PalettePicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.PalettePicture.ContextMenuStrip = this.mPaletteContextMenu;
+			this.PalettePicture.Location = new System.Drawing.Point(6, 6);
+			this.PalettePicture.Name = "PalettePicture";
+			this.PalettePicture.Size = new System.Drawing.Size(478, 59);
+			this.PalettePicture.TabIndex = 5;
+			this.PalettePicture.TabStop = false;
+			// 
+			// mPaletteBevel
+			// 
+			this.mPaletteBevel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.mPaletteBevel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.mPaletteBevel.Location = new System.Drawing.Point(5, 5);
+			this.mPaletteBevel.Name = "mPaletteBevel";
+			this.mPaletteBevel.Size = new System.Drawing.Size(480, 61);
+			this.mPaletteBevel.TabIndex = 4;
+			// 
+			// PaletteSelectComboBox
+			// 
+			this.PaletteSelectComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.PaletteSelectComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+			this.PaletteSelectComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.PaletteSelectComboBox.FormattingEnabled = true;
+			this.PaletteSelectComboBox.ItemHeight = 15;
+			this.PaletteSelectComboBox.Location = new System.Drawing.Point(132, 105);
+			this.PaletteSelectComboBox.Name = "PaletteSelectComboBox";
+			this.PaletteSelectComboBox.Size = new System.Drawing.Size(252, 21);
+			this.PaletteSelectComboBox.TabIndex = 2;
+			// 
 			// CanvasTab
 			// 
 			this.CanvasTab.BackColor = System.Drawing.SystemColors.ControlLightLight;
@@ -457,6 +749,210 @@
 			this.CanvasTab.Size = new System.Drawing.Size(490, 132);
 			this.CanvasTab.TabIndex = 3;
 			this.CanvasTab.Text = "Image size";
+			// 
+			// mResizeGroupBox
+			// 
+			this.mResizeGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.mResizeGroupBox.Controls.Add(this.ApplyButton);
+			this.mResizeGroupBox.Controls.Add(this.ResizeMainWindowCheckBox);
+			this.mResizeGroupBox.Location = new System.Drawing.Point(375, 0);
+			this.mResizeGroupBox.Name = "mResizeGroupBox";
+			this.mResizeGroupBox.Size = new System.Drawing.Size(109, 126);
+			this.mResizeGroupBox.TabIndex = 3;
+			this.mResizeGroupBox.TabStop = false;
+			// 
+			// ApplyButton
+			// 
+			this.ApplyButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.ApplyButton.Location = new System.Drawing.Point(6, 87);
+			this.ApplyButton.Name = "ApplyButton";
+			this.ApplyButton.Size = new System.Drawing.Size(97, 32);
+			this.ApplyButton.TabIndex = 35;
+			this.ApplyButton.Text = "Apply";
+			this.ApplyButton.UseVisualStyleBackColor = true;
+			// 
+			// ResizeMainWindowCheckBox
+			// 
+			this.ResizeMainWindowCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.ResizeMainWindowCheckBox.Location = new System.Drawing.Point(6, 16);
+			this.ResizeMainWindowCheckBox.Name = "ResizeMainWindowCheckBox";
+			this.ResizeMainWindowCheckBox.Size = new System.Drawing.Size(97, 32);
+			this.ResizeMainWindowCheckBox.TabIndex = 34;
+			this.ResizeMainWindowCheckBox.Text = "Resize main window";
+			this.ResizeMainWindowCheckBox.UseVisualStyleBackColor = true;
+			// 
+			// mPresetGroupBox
+			// 
+			this.mPresetGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.mPresetGroupBox.Controls.Add(this.Preset3SaveButton);
+			this.mPresetGroupBox.Controls.Add(this.Preset3SelectButton);
+			this.mPresetGroupBox.Controls.Add(this.Preset2SaveButton);
+			this.mPresetGroupBox.Controls.Add(this.Preset2SelectButton);
+			this.mPresetGroupBox.Controls.Add(this.Preset1SaveButton);
+			this.mPresetGroupBox.Controls.Add(this.Preset1SelectButton);
+			this.mPresetGroupBox.Location = new System.Drawing.Point(222, 0);
+			this.mPresetGroupBox.Name = "mPresetGroupBox";
+			this.mPresetGroupBox.Size = new System.Drawing.Size(147, 126);
+			this.mPresetGroupBox.TabIndex = 1;
+			this.mPresetGroupBox.TabStop = false;
+			// 
+			// Preset3SaveButton
+			// 
+			this.Preset3SaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.Preset3SaveButton.ImageIndex = 0;
+			this.Preset3SaveButton.ImageList = this.mButtonImages;
+			this.Preset3SaveButton.Location = new System.Drawing.Point(109, 87);
+			this.Preset3SaveButton.Name = "Preset3SaveButton";
+			this.Preset3SaveButton.Size = new System.Drawing.Size(32, 32);
+			this.Preset3SaveButton.TabIndex = 5;
+			this.Preset3SaveButton.UseVisualStyleBackColor = true;
+			// 
+			// Preset3SelectButton
+			// 
+			this.Preset3SelectButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.Preset3SelectButton.ImageList = this.mButtonImages;
+			this.Preset3SelectButton.Location = new System.Drawing.Point(6, 87);
+			this.Preset3SelectButton.Name = "Preset3SelectButton";
+			this.Preset3SelectButton.Size = new System.Drawing.Size(102, 32);
+			this.Preset3SelectButton.TabIndex = 4;
+			this.Preset3SelectButton.Text = "Preset 3";
+			this.Preset3SelectButton.UseVisualStyleBackColor = true;
+			// 
+			// Preset2SaveButton
+			// 
+			this.Preset2SaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.Preset2SaveButton.ImageIndex = 0;
+			this.Preset2SaveButton.ImageList = this.mButtonImages;
+			this.Preset2SaveButton.Location = new System.Drawing.Point(109, 51);
+			this.Preset2SaveButton.Name = "Preset2SaveButton";
+			this.Preset2SaveButton.Size = new System.Drawing.Size(32, 32);
+			this.Preset2SaveButton.TabIndex = 3;
+			this.Preset2SaveButton.UseVisualStyleBackColor = true;
+			// 
+			// Preset2SelectButton
+			// 
+			this.Preset2SelectButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.Preset2SelectButton.ImageList = this.mButtonImages;
+			this.Preset2SelectButton.Location = new System.Drawing.Point(6, 51);
+			this.Preset2SelectButton.Name = "Preset2SelectButton";
+			this.Preset2SelectButton.Size = new System.Drawing.Size(102, 32);
+			this.Preset2SelectButton.TabIndex = 2;
+			this.Preset2SelectButton.Text = "Preset 2";
+			this.Preset2SelectButton.UseVisualStyleBackColor = true;
+			// 
+			// Preset1SaveButton
+			// 
+			this.Preset1SaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.Preset1SaveButton.ImageIndex = 0;
+			this.Preset1SaveButton.ImageList = this.mButtonImages;
+			this.Preset1SaveButton.Location = new System.Drawing.Point(109, 16);
+			this.Preset1SaveButton.Name = "Preset1SaveButton";
+			this.Preset1SaveButton.Size = new System.Drawing.Size(32, 32);
+			this.Preset1SaveButton.TabIndex = 1;
+			this.Preset1SaveButton.UseVisualStyleBackColor = true;
+			// 
+			// Preset1SelectButton
+			// 
+			this.Preset1SelectButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.Preset1SelectButton.ImageList = this.mButtonImages;
+			this.Preset1SelectButton.Location = new System.Drawing.Point(6, 16);
+			this.Preset1SelectButton.Name = "Preset1SelectButton";
+			this.Preset1SelectButton.Size = new System.Drawing.Size(102, 32);
+			this.Preset1SelectButton.TabIndex = 0;
+			this.Preset1SelectButton.Text = "Preset 1";
+			this.Preset1SelectButton.UseVisualStyleBackColor = true;
+			// 
+			// mSizeGroupBox
+			// 
+			this.mSizeGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+			this.mSizeGroupBox.Controls.Add(this.HeightComboBox);
+			this.mSizeGroupBox.Controls.Add(this.WidthComboBox);
+			this.mSizeGroupBox.Controls.Add(this.MaintainAspectRatioCheckBox);
+			this.mSizeGroupBox.Controls.Add(this.mHeightLabel);
+			this.mSizeGroupBox.Controls.Add(this.mWidthLabel);
+			this.mSizeGroupBox.Location = new System.Drawing.Point(6, 0);
+			this.mSizeGroupBox.Name = "mSizeGroupBox";
+			this.mSizeGroupBox.Size = new System.Drawing.Size(210, 126);
+			this.mSizeGroupBox.TabIndex = 0;
+			this.mSizeGroupBox.TabStop = false;
+			// 
+			// HeightComboBox
+			// 
+			this.HeightComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.HeightComboBox.FormattingEnabled = true;
+			this.HeightComboBox.Items.AddRange(new object[] {
+            "384",
+            "400",
+            "480",
+            "512",
+            "600",
+            "720",
+            "768",
+            "960",
+            "1024",
+            "1080"});
+			this.HeightComboBox.Location = new System.Drawing.Point(100, 51);
+			this.HeightComboBox.Name = "HeightComboBox";
+			this.HeightComboBox.Size = new System.Drawing.Size(104, 21);
+			this.HeightComboBox.TabIndex = 34;
+			// 
+			// WidthComboBox
+			// 
+			this.WidthComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.WidthComboBox.FormattingEnabled = true;
+			this.WidthComboBox.Items.AddRange(new object[] {
+            "512",
+            "640",
+            "800",
+            "1024",
+            "1280",
+            "1920"});
+			this.WidthComboBox.Location = new System.Drawing.Point(100, 21);
+			this.WidthComboBox.Name = "WidthComboBox";
+			this.WidthComboBox.Size = new System.Drawing.Size(104, 21);
+			this.WidthComboBox.TabIndex = 33;
+			// 
+			// MaintainAspectRatioCheckBox
+			// 
+			this.MaintainAspectRatioCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.MaintainAspectRatioCheckBox.Location = new System.Drawing.Point(6, 87);
+			this.MaintainAspectRatioCheckBox.Name = "MaintainAspectRatioCheckBox";
+			this.MaintainAspectRatioCheckBox.Size = new System.Drawing.Size(198, 32);
+			this.MaintainAspectRatioCheckBox.TabIndex = 32;
+			this.MaintainAspectRatioCheckBox.Text = "Maintain aspect ratio";
+			this.MaintainAspectRatioCheckBox.UseVisualStyleBackColor = true;
+			// 
+			// mHeightLabel
+			// 
+			this.mHeightLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.mHeightLabel.Location = new System.Drawing.Point(6, 51);
+			this.mHeightLabel.Name = "mHeightLabel";
+			this.mHeightLabel.Size = new System.Drawing.Size(97, 21);
+			this.mHeightLabel.TabIndex = 31;
+			this.mHeightLabel.Text = "Height";
+			this.mHeightLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// mWidthLabel
+			// 
+			this.mWidthLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.mWidthLabel.Location = new System.Drawing.Point(6, 21);
+			this.mWidthLabel.Name = "mWidthLabel";
+			this.mWidthLabel.Size = new System.Drawing.Size(97, 21);
+			this.mWidthLabel.TabIndex = 30;
+			this.mWidthLabel.Text = "Width";
+			this.mWidthLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// mTabImages
 			// 
@@ -527,6 +1023,25 @@
 			this.ScaleTextBox.Size = new System.Drawing.Size(115, 20);
 			this.ScaleTextBox.TabIndex = 18;
 			this.ScaleTextBox.Text = "25.000";
+			// 
+			// mPictureBevel
+			// 
+			this.mPictureBevel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.mPictureBevel.Location = new System.Drawing.Point(4, 5);
+			this.mPictureBevel.Name = "mPictureBevel";
+			this.mPictureBevel.Size = new System.Drawing.Size(257, 143);
+			this.mPictureBevel.TabIndex = 2;
+			// 
+			// PreviewPicture
+			// 
+			this.PreviewPicture.BackColor = System.Drawing.SystemColors.Control;
+			this.PreviewPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.PreviewPicture.ContextMenuStrip = this.mPreviewContextMenu;
+			this.PreviewPicture.Location = new System.Drawing.Point(5, 6);
+			this.PreviewPicture.Name = "PreviewPicture";
+			this.PreviewPicture.Size = new System.Drawing.Size(255, 141);
+			this.PreviewPicture.TabIndex = 3;
+			this.PreviewPicture.TabStop = false;
 			// 
 			// ScaleDragPanel
 			// 
@@ -630,504 +1145,101 @@
 			this.DepthBlurDragPanel.TextBox = this.DepthBlurTextBox;
 			this.DepthBlurDragPanel.Value = 0D;
 			// 
-			// RotationDragPanel
-			// 
-			this.RotationDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.RotationDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.RotationDragPanel.Default = 0D;
-			this.RotationDragPanel.DragStepping = 5D;
-			this.RotationDragPanel.Location = new System.Drawing.Point(5, 102);
-			this.RotationDragPanel.Maximum = 360D;
-			this.RotationDragPanel.Minimum = -360D;
-			this.RotationDragPanel.Name = "RotationDragPanel";
-			this.RotationDragPanel.Size = new System.Drawing.Size(126, 21);
-			this.RotationDragPanel.TabIndex = 20;
-			this.RotationDragPanel.Text = "Rotation";
-			this.RotationDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.RotationDragPanel.TextBox = this.RotationTextBox;
-			this.RotationDragPanel.Value = 0D;
-			// 
-			// YPositionDragPanel
-			// 
-			this.YPositionDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.YPositionDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.YPositionDragPanel.Default = 0D;
-			this.YPositionDragPanel.DragStepping = 0.1D;
-			this.YPositionDragPanel.Location = new System.Drawing.Point(5, 73);
-			this.YPositionDragPanel.Maximum = 1000D;
-			this.YPositionDragPanel.Minimum = -1000D;
-			this.YPositionDragPanel.Name = "YPositionDragPanel";
-			this.YPositionDragPanel.Size = new System.Drawing.Size(126, 21);
-			this.YPositionDragPanel.TabIndex = 17;
-			this.YPositionDragPanel.Text = "Y-Position";
-			this.YPositionDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.YPositionDragPanel.TextBox = this.YPositionTextBox;
-			this.YPositionDragPanel.Value = 0D;
-			// 
-			// XPositionDragPanel
-			// 
-			this.XPositionDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.XPositionDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.XPositionDragPanel.Default = 0D;
-			this.XPositionDragPanel.DragStepping = 0.1D;
-			this.XPositionDragPanel.Location = new System.Drawing.Point(5, 41);
-			this.XPositionDragPanel.Maximum = 1000D;
-			this.XPositionDragPanel.Minimum = -1000D;
-			this.XPositionDragPanel.Name = "XPositionDragPanel";
-			this.XPositionDragPanel.Size = new System.Drawing.Size(126, 21);
-			this.XPositionDragPanel.TabIndex = 14;
-			this.XPositionDragPanel.Text = "X-Position";
-			this.XPositionDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.XPositionDragPanel.TextBox = this.XPositionTextBox;
-			this.XPositionDragPanel.Value = 0D;
-			// 
-			// ZoomDragPanel
-			// 
-			this.ZoomDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.ZoomDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.ZoomDragPanel.Default = 0D;
-			this.ZoomDragPanel.DragStepping = 0.1D;
-			this.ZoomDragPanel.Location = new System.Drawing.Point(5, 11);
-			this.ZoomDragPanel.Maximum = 100D;
-			this.ZoomDragPanel.Minimum = -100D;
-			this.ZoomDragPanel.Name = "ZoomDragPanel";
-			this.ZoomDragPanel.Size = new System.Drawing.Size(126, 21);
-			this.ZoomDragPanel.TabIndex = 11;
-			this.ZoomDragPanel.Text = "Zoom";
-			this.ZoomDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.ZoomDragPanel.TextBox = this.ZoomTextBox;
-			this.ZoomDragPanel.Value = 0D;
-			// 
-			// GammaThresholdDragPanel
-			// 
-			this.GammaThresholdDragPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.GammaThresholdDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.GammaThresholdDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.GammaThresholdDragPanel.Default = 0.001D;
-			this.GammaThresholdDragPanel.DragStepping = 0.1D;
-			this.GammaThresholdDragPanel.Location = new System.Drawing.Point(290, 103);
-			this.GammaThresholdDragPanel.Maximum = 100000D;
-			this.GammaThresholdDragPanel.Minimum = 0.001D;
-			this.GammaThresholdDragPanel.Name = "GammaThresholdDragPanel";
-			this.GammaThresholdDragPanel.Size = new System.Drawing.Size(126, 21);
-			this.GammaThresholdDragPanel.TabIndex = 30;
-			this.GammaThresholdDragPanel.Text = "Gamma threshold";
-			this.GammaThresholdDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.GammaThresholdDragPanel.TextBox = this.GammaThresholdTextBox;
-			this.GammaThresholdDragPanel.Value = 0.001D;
-			// 
-			// VibrancyDragPanel
-			// 
-			this.VibrancyDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.VibrancyDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.VibrancyDragPanel.Default = 1D;
-			this.VibrancyDragPanel.DragStepping = 0.1D;
-			this.VibrancyDragPanel.Location = new System.Drawing.Point(5, 73);
-			this.VibrancyDragPanel.Maximum = 3D;
-			this.VibrancyDragPanel.Minimum = 0D;
-			this.VibrancyDragPanel.Name = "VibrancyDragPanel";
-			this.VibrancyDragPanel.Size = new System.Drawing.Size(126, 21);
-			this.VibrancyDragPanel.TabIndex = 26;
-			this.VibrancyDragPanel.Text = "Vibrancy";
-			this.VibrancyDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.VibrancyDragPanel.TextBox = this.VibrancyTextBox;
-			this.VibrancyDragPanel.Value = 1D;
-			// 
-			// BrightnessDragPanel
-			// 
-			this.BrightnessDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.BrightnessDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.BrightnessDragPanel.Default = 4D;
-			this.BrightnessDragPanel.DragStepping = 0.1D;
-			this.BrightnessDragPanel.Location = new System.Drawing.Point(5, 41);
-			this.BrightnessDragPanel.Maximum = 100D;
-			this.BrightnessDragPanel.Minimum = 0.001D;
-			this.BrightnessDragPanel.Name = "BrightnessDragPanel";
-			this.BrightnessDragPanel.Size = new System.Drawing.Size(126, 21);
-			this.BrightnessDragPanel.TabIndex = 23;
-			this.BrightnessDragPanel.Text = "Brightness";
-			this.BrightnessDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.BrightnessDragPanel.TextBox = this.BrightnessTextBox;
-			this.BrightnessDragPanel.Value = 4D;
-			// 
-			// GammaDragPanel
-			// 
-			this.GammaDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.GammaDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.GammaDragPanel.Default = 4D;
-			this.GammaDragPanel.DragStepping = 0.1D;
-			this.GammaDragPanel.Location = new System.Drawing.Point(5, 11);
-			this.GammaDragPanel.Maximum = 5D;
-			this.GammaDragPanel.Minimum = 1D;
-			this.GammaDragPanel.Name = "GammaDragPanel";
-			this.GammaDragPanel.Size = new System.Drawing.Size(126, 21);
-			this.GammaDragPanel.TabIndex = 20;
-			this.GammaDragPanel.Text = "Gamma";
-			this.GammaDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.GammaDragPanel.TextBox = this.GammaTextBox;
-			this.GammaDragPanel.Value = 4D;
-			// 
-			// mSizeGroupBox
-			// 
-			this.mSizeGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-			this.mSizeGroupBox.Controls.Add(this.HeightComboBox);
-			this.mSizeGroupBox.Controls.Add(this.WidthComboBox);
-			this.mSizeGroupBox.Controls.Add(this.MaintainAspectRatioCheckBox);
-			this.mSizeGroupBox.Controls.Add(this.mHeightLabel);
-			this.mSizeGroupBox.Controls.Add(this.mWidthLabel);
-			this.mSizeGroupBox.Location = new System.Drawing.Point(6, 0);
-			this.mSizeGroupBox.Name = "mSizeGroupBox";
-			this.mSizeGroupBox.Size = new System.Drawing.Size(210, 126);
-			this.mSizeGroupBox.TabIndex = 0;
-			this.mSizeGroupBox.TabStop = false;
-			// 
-			// mPresetGroupBox
-			// 
-			this.mPresetGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.mPresetGroupBox.Controls.Add(this.Preset3SaveButton);
-			this.mPresetGroupBox.Controls.Add(this.Preset3SelectButton);
-			this.mPresetGroupBox.Controls.Add(this.Preset2SaveButton);
-			this.mPresetGroupBox.Controls.Add(this.Preset2SelectButton);
-			this.mPresetGroupBox.Controls.Add(this.Preset1SaveButton);
-			this.mPresetGroupBox.Controls.Add(this.Preset1SelectButton);
-			this.mPresetGroupBox.Location = new System.Drawing.Point(222, 0);
-			this.mPresetGroupBox.Name = "mPresetGroupBox";
-			this.mPresetGroupBox.Size = new System.Drawing.Size(147, 126);
-			this.mPresetGroupBox.TabIndex = 1;
-			this.mPresetGroupBox.TabStop = false;
-			// 
-			// mResizeGroupBox
-			// 
-			this.mResizeGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.mResizeGroupBox.Controls.Add(this.ApplyButton);
-			this.mResizeGroupBox.Controls.Add(this.ResizeMainWindowCheckBox);
-			this.mResizeGroupBox.Location = new System.Drawing.Point(375, 0);
-			this.mResizeGroupBox.Name = "mResizeGroupBox";
-			this.mResizeGroupBox.Size = new System.Drawing.Size(109, 126);
-			this.mResizeGroupBox.TabIndex = 3;
-			this.mResizeGroupBox.TabStop = false;
-			// 
-			// mWidthLabel
-			// 
-			this.mWidthLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.mWidthLabel.Location = new System.Drawing.Point(6, 21);
-			this.mWidthLabel.Name = "mWidthLabel";
-			this.mWidthLabel.Size = new System.Drawing.Size(97, 21);
-			this.mWidthLabel.TabIndex = 30;
-			this.mWidthLabel.Text = "Width";
-			this.mWidthLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// mHeightLabel
-			// 
-			this.mHeightLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.mHeightLabel.Location = new System.Drawing.Point(6, 51);
-			this.mHeightLabel.Name = "mHeightLabel";
-			this.mHeightLabel.Size = new System.Drawing.Size(97, 21);
-			this.mHeightLabel.TabIndex = 31;
-			this.mHeightLabel.Text = "Height";
-			this.mHeightLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// MaintainAspectRatioCheckBox
-			// 
-			this.MaintainAspectRatioCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.MaintainAspectRatioCheckBox.Location = new System.Drawing.Point(6, 87);
-			this.MaintainAspectRatioCheckBox.Name = "MaintainAspectRatioCheckBox";
-			this.MaintainAspectRatioCheckBox.Size = new System.Drawing.Size(198, 32);
-			this.MaintainAspectRatioCheckBox.TabIndex = 32;
-			this.MaintainAspectRatioCheckBox.Text = "Maintain aspect ratio";
-			this.MaintainAspectRatioCheckBox.UseVisualStyleBackColor = true;
-			// 
-			// ResizeMainWindowCheckBox
-			// 
-			this.ResizeMainWindowCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.ResizeMainWindowCheckBox.Location = new System.Drawing.Point(6, 16);
-			this.ResizeMainWindowCheckBox.Name = "ResizeMainWindowCheckBox";
-			this.ResizeMainWindowCheckBox.Size = new System.Drawing.Size(97, 32);
-			this.ResizeMainWindowCheckBox.TabIndex = 34;
-			this.ResizeMainWindowCheckBox.Text = "Resize main window";
-			this.ResizeMainWindowCheckBox.UseVisualStyleBackColor = true;
-			// 
-			// ApplyButton
-			// 
-			this.ApplyButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.ApplyButton.Location = new System.Drawing.Point(6, 87);
-			this.ApplyButton.Name = "ApplyButton";
-			this.ApplyButton.Size = new System.Drawing.Size(97, 32);
-			this.ApplyButton.TabIndex = 35;
-			this.ApplyButton.Text = "Apply";
-			this.ApplyButton.UseVisualStyleBackColor = true;
-			// 
-			// WidthComboBox
-			// 
-			this.WidthComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.WidthComboBox.FormattingEnabled = true;
-			this.WidthComboBox.Items.AddRange(new object[] {
-            "512",
-            "640",
-            "800",
-            "1024",
-            "1280",
-            "1920"});
-			this.WidthComboBox.Location = new System.Drawing.Point(100, 21);
-			this.WidthComboBox.Name = "WidthComboBox";
-			this.WidthComboBox.Size = new System.Drawing.Size(104, 21);
-			this.WidthComboBox.TabIndex = 33;
-			// 
-			// HeightComboBox
-			// 
-			this.HeightComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.HeightComboBox.FormattingEnabled = true;
-			this.HeightComboBox.Items.AddRange(new object[] {
-            "384",
-            "400",
-            "480",
-            "512",
-            "600",
-            "720",
-            "768",
-            "960",
-            "1024",
-            "1080"});
-			this.HeightComboBox.Location = new System.Drawing.Point(100, 51);
-			this.HeightComboBox.Name = "HeightComboBox";
-			this.HeightComboBox.Size = new System.Drawing.Size(104, 21);
-			this.HeightComboBox.TabIndex = 34;
-			// 
-			// Preset1SelectButton
-			// 
-			this.Preset1SelectButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.Preset1SelectButton.ImageList = this.mButtonImages;
-			this.Preset1SelectButton.Location = new System.Drawing.Point(6, 16);
-			this.Preset1SelectButton.Name = "Preset1SelectButton";
-			this.Preset1SelectButton.Size = new System.Drawing.Size(102, 32);
-			this.Preset1SelectButton.TabIndex = 0;
-			this.Preset1SelectButton.Text = "Preset 1";
-			this.Preset1SelectButton.UseVisualStyleBackColor = true;
-			// 
-			// mButtonImages
-			// 
-			this.mButtonImages.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("mButtonImages.ImageStream")));
-			this.mButtonImages.TransparentColor = System.Drawing.Color.Fuchsia;
-			this.mButtonImages.Images.SetKeyName(0, "SaveFlame.bmp");
-			this.mButtonImages.Images.SetKeyName(1, "Copy.bmp");
-			this.mButtonImages.Images.SetKeyName(2, "Paste.bmp");
-			this.mButtonImages.Images.SetKeyName(3, "PaletteBrowser.bmp");
-			this.mButtonImages.Images.SetKeyName(4, "SmoothPalette.bmp");
-			// 
-			// Preset1SaveButton
-			// 
-			this.Preset1SaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.Preset1SaveButton.ImageIndex = 0;
-			this.Preset1SaveButton.ImageList = this.mButtonImages;
-			this.Preset1SaveButton.Location = new System.Drawing.Point(109, 16);
-			this.Preset1SaveButton.Name = "Preset1SaveButton";
-			this.Preset1SaveButton.Size = new System.Drawing.Size(32, 32);
-			this.Preset1SaveButton.TabIndex = 1;
-			this.Preset1SaveButton.UseVisualStyleBackColor = true;
-			// 
-			// Preset2SaveButton
-			// 
-			this.Preset2SaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.Preset2SaveButton.ImageIndex = 0;
-			this.Preset2SaveButton.ImageList = this.mButtonImages;
-			this.Preset2SaveButton.Location = new System.Drawing.Point(109, 51);
-			this.Preset2SaveButton.Name = "Preset2SaveButton";
-			this.Preset2SaveButton.Size = new System.Drawing.Size(32, 32);
-			this.Preset2SaveButton.TabIndex = 3;
-			this.Preset2SaveButton.UseVisualStyleBackColor = true;
-			// 
-			// Preset2SelectButton
-			// 
-			this.Preset2SelectButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.Preset2SelectButton.ImageList = this.mButtonImages;
-			this.Preset2SelectButton.Location = new System.Drawing.Point(6, 51);
-			this.Preset2SelectButton.Name = "Preset2SelectButton";
-			this.Preset2SelectButton.Size = new System.Drawing.Size(102, 32);
-			this.Preset2SelectButton.TabIndex = 2;
-			this.Preset2SelectButton.Text = "Preset 2";
-			this.Preset2SelectButton.UseVisualStyleBackColor = true;
-			// 
-			// Preset3SaveButton
-			// 
-			this.Preset3SaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.Preset3SaveButton.ImageIndex = 0;
-			this.Preset3SaveButton.ImageList = this.mButtonImages;
-			this.Preset3SaveButton.Location = new System.Drawing.Point(109, 87);
-			this.Preset3SaveButton.Name = "Preset3SaveButton";
-			this.Preset3SaveButton.Size = new System.Drawing.Size(32, 32);
-			this.Preset3SaveButton.TabIndex = 5;
-			this.Preset3SaveButton.UseVisualStyleBackColor = true;
-			// 
-			// Preset3SelectButton
-			// 
-			this.Preset3SelectButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.Preset3SelectButton.ImageList = this.mButtonImages;
-			this.Preset3SelectButton.Location = new System.Drawing.Point(6, 87);
-			this.Preset3SelectButton.Name = "Preset3SelectButton";
-			this.Preset3SelectButton.Size = new System.Drawing.Size(102, 32);
-			this.Preset3SelectButton.TabIndex = 4;
-			this.Preset3SelectButton.Text = "Preset 3";
-			this.Preset3SelectButton.UseVisualStyleBackColor = true;
-			// 
-			// PaletteSelectComboBox
-			// 
-			this.PaletteSelectComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.PaletteSelectComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-			this.PaletteSelectComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.PaletteSelectComboBox.FormattingEnabled = true;
-			this.PaletteSelectComboBox.ItemHeight = 15;
-			this.PaletteSelectComboBox.Location = new System.Drawing.Point(132, 105);
-			this.PaletteSelectComboBox.Name = "PaletteSelectComboBox";
-			this.PaletteSelectComboBox.Size = new System.Drawing.Size(252, 21);
-			this.PaletteSelectComboBox.TabIndex = 2;
-			// 
-			// mPictureBevel
-			// 
-			this.mPictureBevel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.mPictureBevel.Location = new System.Drawing.Point(4, 5);
-			this.mPictureBevel.Name = "mPictureBevel";
-			this.mPictureBevel.Size = new System.Drawing.Size(257, 143);
-			this.mPictureBevel.TabIndex = 2;
-			// 
-			// PreviewPicture
-			// 
-			this.PreviewPicture.BackColor = System.Drawing.SystemColors.Control;
-			this.PreviewPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-			this.PreviewPicture.ContextMenuStrip = this.mPreviewContextMenu;
-			this.PreviewPicture.Location = new System.Drawing.Point(5, 6);
-			this.PreviewPicture.Name = "PreviewPicture";
-			this.PreviewPicture.Size = new System.Drawing.Size(255, 141);
-			this.PreviewPicture.TabIndex = 3;
-			this.PreviewPicture.TabStop = false;
-			// 
-			// PalettePicture
-			// 
-			this.PalettePicture.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.PalettePicture.BackColor = System.Drawing.SystemColors.Control;
-			this.PalettePicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-			this.PalettePicture.ContextMenuStrip = this.mPreviewContextMenu;
-			this.PalettePicture.Location = new System.Drawing.Point(6, 6);
-			this.PalettePicture.Name = "PalettePicture";
-			this.PalettePicture.Size = new System.Drawing.Size(478, 59);
-			this.PalettePicture.TabIndex = 5;
-			this.PalettePicture.TabStop = false;
-			// 
-			// mPaletteBevel
-			// 
-			this.mPaletteBevel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.mPaletteBevel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.mPaletteBevel.Location = new System.Drawing.Point(5, 5);
-			this.mPaletteBevel.Name = "mPaletteBevel";
-			this.mPaletteBevel.Size = new System.Drawing.Size(480, 61);
-			this.mPaletteBevel.TabIndex = 4;
-			// 
-			// PaletteEditModeComboBox
-			// 
-			this.PaletteEditModeComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.PaletteEditModeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.PaletteEditModeComboBox.FormattingEnabled = true;
-			this.PaletteEditModeComboBox.Location = new System.Drawing.Point(6, 78);
-			this.PaletteEditModeComboBox.Name = "PaletteEditModeComboBox";
-			this.PaletteEditModeComboBox.Size = new System.Drawing.Size(120, 21);
-			this.PaletteEditModeComboBox.TabIndex = 6;
-			// 
-			// RandomPresetButton
-			// 
-			this.RandomPresetButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.RandomPresetButton.Location = new System.Drawing.Point(6, 105);
-			this.RandomPresetButton.Name = "RandomPresetButton";
-			this.RandomPresetButton.Size = new System.Drawing.Size(120, 21);
-			this.RandomPresetButton.TabIndex = 7;
-			this.RandomPresetButton.Text = "Random preset";
-			this.RandomPresetButton.UseVisualStyleBackColor = true;
-			// 
-			// PaletteEditScrollBar
-			// 
-			this.PaletteEditScrollBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.PaletteEditScrollBar.Location = new System.Drawing.Point(132, 79);
-			this.PaletteEditScrollBar.Name = "PaletteEditScrollBar";
-			this.PaletteEditScrollBar.Size = new System.Drawing.Size(199, 20);
-			this.PaletteEditScrollBar.TabIndex = 8;
-			// 
-			// PaletteEditTextBox
-			// 
-			this.PaletteEditTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.PaletteEditTextBox.Location = new System.Drawing.Point(334, 79);
-			this.PaletteEditTextBox.Name = "PaletteEditTextBox";
-			this.PaletteEditTextBox.Size = new System.Drawing.Size(50, 20);
-			this.PaletteEditTextBox.TabIndex = 9;
-			// 
-			// CopyPaletteButton
-			// 
-			this.CopyPaletteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.CopyPaletteButton.ImageIndex = 1;
-			this.CopyPaletteButton.ImageList = this.mButtonImages;
-			this.CopyPaletteButton.Location = new System.Drawing.Point(390, 102);
-			this.CopyPaletteButton.Name = "CopyPaletteButton";
-			this.CopyPaletteButton.Size = new System.Drawing.Size(24, 24);
-			this.CopyPaletteButton.TabIndex = 10;
-			this.CopyPaletteButton.UseVisualStyleBackColor = true;
-			// 
-			// PastePaletteButton
-			// 
-			this.PastePaletteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.PastePaletteButton.ImageIndex = 2;
-			this.PastePaletteButton.ImageList = this.mButtonImages;
-			this.PastePaletteButton.Location = new System.Drawing.Point(413, 102);
-			this.PastePaletteButton.Name = "PastePaletteButton";
-			this.PastePaletteButton.Size = new System.Drawing.Size(24, 24);
-			this.PastePaletteButton.TabIndex = 11;
-			this.PastePaletteButton.UseVisualStyleBackColor = true;
-			// 
-			// PaletteFromImageButton
-			// 
-			this.PaletteFromImageButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.PaletteFromImageButton.ImageIndex = 4;
-			this.PaletteFromImageButton.ImageList = this.mButtonImages;
-			this.PaletteFromImageButton.Location = new System.Drawing.Point(460, 102);
-			this.PaletteFromImageButton.Name = "PaletteFromImageButton";
-			this.PaletteFromImageButton.Size = new System.Drawing.Size(24, 24);
-			this.PaletteFromImageButton.TabIndex = 13;
-			this.PaletteFromImageButton.UseVisualStyleBackColor = true;
-			// 
-			// PaletteBrowserButton
-			// 
-			this.PaletteBrowserButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.PaletteBrowserButton.ImageIndex = 3;
-			this.PaletteBrowserButton.ImageList = this.mButtonImages;
-			this.PaletteBrowserButton.Location = new System.Drawing.Point(437, 102);
-			this.PaletteBrowserButton.Name = "PaletteBrowserButton";
-			this.PaletteBrowserButton.Size = new System.Drawing.Size(24, 24);
-			this.PaletteBrowserButton.TabIndex = 12;
-			this.PaletteBrowserButton.UseVisualStyleBackColor = true;
-			// 
-			// PaletteResetButton
-			// 
-			this.PaletteResetButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.PaletteResetButton.Location = new System.Drawing.Point(390, 79);
-			this.PaletteResetButton.Name = "PaletteResetButton";
-			this.PaletteResetButton.Size = new System.Drawing.Size(94, 21);
-			this.PaletteResetButton.TabIndex = 14;
-			this.PaletteResetButton.Text = "Random preset";
-			this.PaletteResetButton.UseVisualStyleBackColor = true;
+			// mPaletteContextMenu
+			// 
+			this.mPaletteContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.RandomizePaletteMenuItem,
+            this.toolStripMenuItem1,
+            this.InvertPaletteMenuItem,
+            this.ReversePaletteMenuItem,
+            this.toolStripMenuItem2,
+            this.PaletteFromImageMenuItem,
+            this.PaletteBrowserMenuItem,
+            this.toolStripMenuItem3,
+            this.SavePaletteMenuItem,
+            this.toolStripMenuItem4,
+            this.CopyPaletteMenuItem,
+            this.PastePaletteMenuItem});
+			this.mPaletteContextMenu.Name = "mPaletteContextMenu";
+			this.mPaletteContextMenu.Size = new System.Drawing.Size(174, 204);
+			// 
+			// RandomizePaletteMenuItem
+			// 
+			this.RandomizePaletteMenuItem.Name = "RandomizePaletteMenuItem";
+			this.RandomizePaletteMenuItem.Size = new System.Drawing.Size(173, 22);
+			this.RandomizePaletteMenuItem.Text = "&Randomize";
+			// 
+			// toolStripMenuItem1
+			// 
+			this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+			this.toolStripMenuItem1.Size = new System.Drawing.Size(170, 6);
+			// 
+			// InvertPaletteMenuItem
+			// 
+			this.InvertPaletteMenuItem.Name = "InvertPaletteMenuItem";
+			this.InvertPaletteMenuItem.Size = new System.Drawing.Size(173, 22);
+			this.InvertPaletteMenuItem.Text = "&Invert";
+			// 
+			// ReversePaletteMenuItem
+			// 
+			this.ReversePaletteMenuItem.Name = "ReversePaletteMenuItem";
+			this.ReversePaletteMenuItem.Size = new System.Drawing.Size(173, 22);
+			this.ReversePaletteMenuItem.Text = "Re&verse";
+			// 
+			// toolStripMenuItem2
+			// 
+			this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+			this.toolStripMenuItem2.Size = new System.Drawing.Size(170, 6);
+			// 
+			// PaletteFromImageMenuItem
+			// 
+			this.PaletteFromImageMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("PaletteFromImageMenuItem.Image")));
+			this.PaletteFromImageMenuItem.ImageTransparentColor = System.Drawing.Color.Fuchsia;
+			this.PaletteFromImageMenuItem.Name = "PaletteFromImageMenuItem";
+			this.PaletteFromImageMenuItem.Size = new System.Drawing.Size(173, 22);
+			this.PaletteFromImageMenuItem.Text = "&Smooth palette...";
+			// 
+			// PaletteBrowserMenuItem
+			// 
+			this.PaletteBrowserMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("PaletteBrowserMenuItem.Image")));
+			this.PaletteBrowserMenuItem.ImageTransparentColor = System.Drawing.Color.Fuchsia;
+			this.PaletteBrowserMenuItem.Name = "PaletteBrowserMenuItem";
+			this.PaletteBrowserMenuItem.Size = new System.Drawing.Size(173, 22);
+			this.PaletteBrowserMenuItem.Text = "&Gradient browser...";
+			// 
+			// toolStripMenuItem3
+			// 
+			this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+			this.toolStripMenuItem3.Size = new System.Drawing.Size(170, 6);
+			// 
+			// SavePaletteMenuItem
+			// 
+			this.SavePaletteMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("SavePaletteMenuItem.Image")));
+			this.SavePaletteMenuItem.ImageTransparentColor = System.Drawing.Color.Fuchsia;
+			this.SavePaletteMenuItem.Name = "SavePaletteMenuItem";
+			this.SavePaletteMenuItem.Size = new System.Drawing.Size(173, 22);
+			this.SavePaletteMenuItem.Text = "&Save gradient...";
+			// 
+			// toolStripMenuItem4
+			// 
+			this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+			this.toolStripMenuItem4.Size = new System.Drawing.Size(170, 6);
+			// 
+			// CopyPaletteMenuItem
+			// 
+			this.CopyPaletteMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("CopyPaletteMenuItem.Image")));
+			this.CopyPaletteMenuItem.ImageTransparentColor = System.Drawing.Color.Fuchsia;
+			this.CopyPaletteMenuItem.Name = "CopyPaletteMenuItem";
+			this.CopyPaletteMenuItem.Size = new System.Drawing.Size(173, 22);
+			this.CopyPaletteMenuItem.Text = "&Copy";
+			// 
+			// PastePaletteMenuItem
+			// 
+			this.PastePaletteMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("PastePaletteMenuItem.Image")));
+			this.PastePaletteMenuItem.ImageTransparentColor = System.Drawing.Color.Fuchsia;
+			this.PastePaletteMenuItem.Name = "PastePaletteMenuItem";
+			this.PastePaletteMenuItem.Size = new System.Drawing.Size(173, 22);
+			this.PastePaletteMenuItem.Text = "&Paste";
 			// 
 			// FlameProperties
 			// 
@@ -1166,12 +1278,13 @@
 			((System.ComponentModel.ISupportInitialize)(this.BackgroundPictureBox)).EndInit();
 			this.PaletteTab.ResumeLayout(false);
 			this.PaletteTab.PerformLayout();
-			this.CanvasTab.ResumeLayout(false);
-			this.mSizeGroupBox.ResumeLayout(false);
-			this.mPresetGroupBox.ResumeLayout(false);
-			this.mResizeGroupBox.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.PreviewPicture)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.PalettePicture)).EndInit();
+			this.CanvasTab.ResumeLayout(false);
+			this.mResizeGroupBox.ResumeLayout(false);
+			this.mPresetGroupBox.ResumeLayout(false);
+			this.mSizeGroupBox.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.PreviewPicture)).EndInit();
+			this.mPaletteContextMenu.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -1253,12 +1366,25 @@
 		public System.Windows.Forms.PictureBox PreviewPicture;
 		public System.Windows.Forms.ComboBox PaletteEditModeComboBox;
 		public System.Windows.Forms.Button RandomPresetButton;
-		private System.Windows.Forms.HScrollBar PaletteEditScrollBar;
 		public System.Windows.Forms.TextBox PaletteEditTextBox;
 		public System.Windows.Forms.Button CopyPaletteButton;
 		public System.Windows.Forms.Button PastePaletteButton;
 		public System.Windows.Forms.Button PaletteFromImageButton;
 		public System.Windows.Forms.Button PaletteBrowserButton;
 		public System.Windows.Forms.Button PaletteResetButton;
+		public System.Windows.Forms.HScrollBar PaletteEditScrollBar;
+		private System.Windows.Forms.ContextMenuStrip mPaletteContextMenu;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
+		public System.Windows.Forms.ToolStripMenuItem RandomizePaletteMenuItem;
+		public System.Windows.Forms.ToolStripMenuItem InvertPaletteMenuItem;
+		public System.Windows.Forms.ToolStripMenuItem ReversePaletteMenuItem;
+		public System.Windows.Forms.ToolStripMenuItem PaletteFromImageMenuItem;
+		public System.Windows.Forms.ToolStripMenuItem PaletteBrowserMenuItem;
+		public System.Windows.Forms.ToolStripMenuItem SavePaletteMenuItem;
+		public System.Windows.Forms.ToolStripMenuItem CopyPaletteMenuItem;
+		public System.Windows.Forms.ToolStripMenuItem PastePaletteMenuItem;
 	}
 }

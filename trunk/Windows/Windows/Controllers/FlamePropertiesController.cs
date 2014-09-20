@@ -11,7 +11,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		private MainController mParent;
 		private Flame mFlame;
 
-		private FlamePropertiesUndoController mUndoController;
 		private FlamePropertiesPreviewController mPreviewController;
 		private FlamePropertiesToolbarController mToolbarController;
 
@@ -19,25 +18,31 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		private FlamePropertiesCameraController mCameraController;
 		private FlamePropertiesImagingController mImagingController;
 		private FlamePropertiesCanvasController mCanvasController;
+		private FlamePropertiesPaletteController mPaletteController;
 
 		public FlamePropertiesController([NotNull] MainController parent)
 		{
 			if (parent == null) throw new ArgumentNullException("parent");
 			mParent = parent;
 
-			mUndoController = new FlamePropertiesUndoController(View, this);
 			mPreviewController = new FlamePropertiesPreviewController(View, this);
 			mToolbarController = new FlamePropertiesToolbarController(View, this);
-
 			m3DCameraController = new FlameProperties3DCameraController(View, this);
 			mCameraController = new FlamePropertiesCameraController(View, this);
 			mImagingController = new FlamePropertiesImagingController(View, this);
 			mCanvasController = new FlamePropertiesCanvasController(View, this);
+			mPaletteController = new FlamePropertiesPaletteController(View, this);
 		}
 		protected override void DisposeOverride(bool disposing)
 		{
 			if (disposing)
 			{
+				if (mPaletteController != null)
+				{
+					mPaletteController.Dispose();
+					mPaletteController = null;
+				}
+
 				if (mCanvasController != null)
 				{
 					mCanvasController.Dispose();
@@ -73,12 +78,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 					mPreviewController.Dispose();
 					mPreviewController = null;
 				}
-
-				if (mUndoController != null)
-				{
-					mUndoController.Dispose();
-					mUndoController = null;
-				}
 			}
 
 			mFlame = null;
@@ -89,15 +88,18 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			mPreviewController.Initialize();
 			mToolbarController.Initialize();
-			mUndoController.Initialize();
 
 			m3DCameraController.Initialize();
 			mCameraController.Initialize();
 			mImagingController.Initialize();
 			mCanvasController.Initialize();
+			mPaletteController.Initialize();
+
+			UndoController.StackChanged += OnUndoStackChanged;
 		}
 		protected override void DetachView()
 		{
+			UndoController.StackChanged -= OnUndoStackChanged;
 		}
 
 		public void UpdateToolbar()
@@ -115,6 +117,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		public void UpdateCamera()
 		{
 			mCameraController.Update();
+		}
+		public void UpdatePalette()
+		{
+			mPaletteController.Update();
 		}
 
 		[NotNull]
@@ -155,6 +161,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mCameraController.Update();
 			m3DCameraController.Update();
 			mCanvasController.Update();
+			mPaletteController.Update();
 			
 			UpdateToolbar();
 			UpdatePreview();
@@ -179,11 +186,21 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				mParent.ResizeWithoutUpdatingPreview();
 			}
 
-			mParent.UndoController.CommitChange(mFlame);
-			mParent.FlamePropertiesController.RaiseFlameChanged();
-			mParent.FlamePropertiesController.UpdateCamera();
+			CommitValue();
+			UpdateCamera();
 
 			mParent.BatchListController.UpdateSelectedPreview();
+		}
+		internal void CommitValue()
+		{
+			UndoController.CommitChange(Flame);
+			PreviewController.DelayedUpdatePreview();
+			RaiseFlameChanged();
+		}
+
+		private void OnUndoStackChanged(object sender, EventArgs e)
+		{
+			UpdateToolbar();
 		}
 	}
 }

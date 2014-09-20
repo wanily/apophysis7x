@@ -106,19 +106,21 @@
     <Compile Include="Windows\Common\Extensions.cs" />
     <Compile Include="Windows\Common\Lock.cs" />
     <Compile Include="Windows\Common\TimeLock.cs" />
+    <Compile Include="Windows\Controllers\AutosaveController.cs" />
     <Compile Include="Windows\Controllers\BannerController.cs" />
     <Compile Include="Windows\Controllers\BatchListController.cs" />
+    <Compile Include="Windows\Controllers\DataInputController.cs" />
     <Compile Include="Windows\Controllers\EditorController.cs" />
     <Compile Include="Windows\Controllers\EditorPreviewController.cs" />
     <Compile Include="Windows\Controllers\FlameProperties3DCameraController.cs" />
     <Compile Include="Windows\Controllers\FlamePropertiesCameraController.cs" />
     <Compile Include="Windows\Controllers\FlamePropertiesCanvasController.cs" />
     <Compile Include="Windows\Controllers\FlamePropertiesImagingController.cs" />
+    <Compile Include="Windows\Controllers\FlamePropertiesPaletteController.cs" />
     <Compile Include="Windows\Controllers\FlamePropertiesToolbarController.cs" />
     <Compile Include="Windows\Controllers\FileDialogController.cs" />
     <Compile Include="Windows\Controllers\FlamePropertiesController.cs" />
     <Compile Include="Windows\Controllers\FlamePropertiesPreviewController.cs" />
-    <Compile Include="Windows\Controllers\FlamePropertiesUndoController.cs" />
     <Compile Include="Windows\Controllers\FullscreenController.cs" />
     <Compile Include="Windows\Controllers\MainPreviewController.cs" />
     <Compile Include="Windows\Controllers\MainUndoController.cs" />
@@ -218,12 +220,17 @@
     <Compile Include="Windows\Forms\Messages.Designer.cs">
       <DependentUpon>Messages.cs</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Input\BlurPaletteEditHandler.cs" />
+    <Compile Include="Windows\Input\BrightnessPaletteEditHandler.cs" />
     <Compile Include="Windows\Input\CameraChangedEventArgs.cs" />
     <Compile Include="Windows\Input\CameraChangedEventHandler.cs" />
     <Compile Include="Windows\Input\CameraData.cs" />
     <Compile Include="Windows\Input\CameraEditInputHandler.cs" />
     <Compile Include="Windows\Input\CameraEndEditEventArgs.cs" />
     <Compile Include="Windows\Input\CameraEndEditEventHandler.cs" />
+    <Compile Include="Windows\Input\ContrastPaletteEditHandler.cs" />
+    <Compile Include="Windows\Input\FrequencyPaletteEditHandler.cs" />
+    <Compile Include="Windows\Input\HuePaletteEditHandler.cs" />
     <Compile Include="Windows\Input\IteratorInputOperation.cs" />
     <Compile Include="Windows\Input\MouseHookEventArgs.cs" />
     <Compile Include="Windows\Input\CameraInputOperation.cs" />
@@ -241,6 +248,7 @@
     <Compile Include="Windows\Input\RotateOperation.cs" />
     <Compile Include="Windows\Input\RotatePaletteEditHandler.cs" />
     <Compile Include="Windows\Input\RotationAxis.cs" />
+    <Compile Include="Windows\Input\SaturationPaletteEditHandler.cs" />
     <Compile Include="Windows\Input\ScaleOperation.cs" />
     <Compile Include="Windows\Common\CanvasSnapBehavior.cs" />
     <Compile Include="Models\Iterator.cs" />

@@ -54,42 +54,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			View.Activated += OnActivated;
 
-			View.DepthBlurDragPanel.ValueChanged += OnRequestCommit;
-			View.PitchDragPanel.ValueChanged += OnRequestCommit;
-			View.YawDragPanel.ValueChanged += OnRequestCommit;
-			View.HeightDragPanel.ValueChanged += OnRequestCommit;
-			View.PerspectiveDragPanel.ValueChanged += OnRequestCommit;
-			View.ScaleDragPanel.ValueChanged += OnRequestCommit;
-			View.DepthBlurTextBox.LostFocus += OnRequestCommit;
-			View.PitchTextBox.LostFocus += OnRequestCommit;
-			View.YawTextBox.LostFocus += OnRequestCommit;
-			View.HeightTextBox.LostFocus += OnRequestCommit;
-			View.PerspectiveTextBox.LostFocus += OnRequestCommit;
-			View.ScaleTextBox.LostFocus += OnRequestCommit;
-			View.ZoomDragPanel.ValueChanged += OnRequestCommit;
-			View.ZoomTextBox.LostFocus += OnRequestCommit;
-			View.ZoomScrollBar.ValueChanged += OnRequestCommit;
-			View.XPositionDragPanel.ValueChanged += OnRequestCommit;
-			View.XPositionTextBox.LostFocus += OnRequestCommit;
-			View.XPositionScrollBar.ValueChanged += OnRequestCommit;
-			View.YPositionDragPanel.ValueChanged += OnRequestCommit;
-			View.YPositionTextBox.LostFocus += OnRequestCommit;
-			View.YPositionScrollBar.ValueChanged += OnRequestCommit;
-			View.RotationDragPanel.ValueChanged += OnRequestCommit;
-			View.RotationTextBox.LostFocus += OnRequestCommit;
-			View.RotationScrollBar.ValueChanged += OnRequestCommit;
-			View.GammaDragPanel.ValueChanged += OnRequestCommit;
-			View.GammaTextBox.LostFocus += OnRequestCommit;
-			View.GammaScrollBar.ValueChanged += OnRequestCommit;
-			View.BrightnessDragPanel.ValueChanged += OnRequestCommit;
-			View.BrightnessTextBox.LostFocus += OnRequestCommit;
-			View.BrightnessScrollBar.ValueChanged += OnRequestCommit;
-			View.VibrancyDragPanel.ValueChanged += OnRequestCommit;
-			View.VibrancyTextBox.LostFocus += OnRequestCommit;
-			View.VibrancyScrollBar.ValueChanged += OnRequestCommit;
-			View.GammaThresholdDragPanel.ValueChanged += OnRequestCommit;
-			View.GammaThresholdTextBox.LostFocus += OnRequestCommit;
-
 			using (mParent.Initializer.Enter())
 			{
 				PreviewDensityLevel = ApophysisSettings.FlamePropertiesPreviewDensityLevel;
@@ -115,44 +79,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.HighQualityMenuItem.Click -= OnQualitySelect;
 
 			View.Activated -= OnActivated;
-
-			View.DepthBlurDragPanel.ValueChanged -= OnRequestCommit;
-			View.PitchDragPanel.ValueChanged -= OnRequestCommit;
-			View.YawDragPanel.ValueChanged -= OnRequestCommit;
-			View.HeightDragPanel.ValueChanged -= OnRequestCommit;
-			View.PerspectiveDragPanel.ValueChanged -= OnRequestCommit;
-			View.ScaleDragPanel.ValueChanged -= OnRequestCommit;
-			View.DepthBlurTextBox.LostFocus -= OnRequestCommit;
-			View.PitchTextBox.LostFocus -= OnRequestCommit;
-			View.YawTextBox.LostFocus -= OnRequestCommit;
-			View.HeightTextBox.LostFocus -= OnRequestCommit;
-			View.PerspectiveTextBox.LostFocus -= OnRequestCommit;
-			View.ScaleTextBox.LostFocus -= OnRequestCommit;
-			View.ZoomDragPanel.ValueChanged -= OnRequestCommit;
-			View.ZoomTextBox.LostFocus -= OnRequestCommit;
-			View.ZoomScrollBar.ValueChanged -= OnRequestCommit;
-			View.XPositionDragPanel.ValueChanged -= OnRequestCommit;
-			View.XPositionTextBox.LostFocus -= OnRequestCommit;
-			View.XPositionScrollBar.ValueChanged -= OnRequestCommit;
-			View.YPositionDragPanel.ValueChanged -= OnRequestCommit;
-			View.YPositionTextBox.LostFocus -= OnRequestCommit;
-			View.YPositionScrollBar.ValueChanged -= OnRequestCommit;
-			View.RotationDragPanel.ValueChanged -= OnRequestCommit;
-			View.RotationTextBox.LostFocus -= OnRequestCommit;
-			View.RotationScrollBar.ValueChanged -= OnRequestCommit;
-			View.GammaDragPanel.ValueChanged -= OnRequestCommit;
-			View.GammaTextBox.LostFocus -= OnRequestCommit;
-			View.GammaScrollBar.ValueChanged -= OnRequestCommit;
-			View.BrightnessDragPanel.ValueChanged -= OnRequestCommit;
-			View.BrightnessTextBox.LostFocus -= OnRequestCommit;
-			View.BrightnessScrollBar.ValueChanged -= OnRequestCommit;
-			View.VibrancyDragPanel.ValueChanged -= OnRequestCommit;
-			View.VibrancyTextBox.LostFocus -= OnRequestCommit;
-			View.VibrancyScrollBar.ValueChanged -= OnRequestCommit;
-			View.GammaThresholdDragPanel.ValueChanged -= OnRequestCommit;
-			View.GammaThresholdTextBox.LostFocus -= OnRequestCommit;
-
 			View.PreviewPicture.Image = null;
+
 			ApophysisSettings.FlamePropertiesPreviewDensityLevel = PreviewDensityLevel;
 		}
 
@@ -199,14 +127,14 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.PreviewPicture.BackgroundImage = mBitmap;
 			View.PreviewPicture.Refresh();
 		}
+		public void DelayedUpdatePreview()
+		{
+			mUpdateTimeLock.Enter();
+		}
 
 		private void OnActivated(object sender, EventArgs e)
 		{
 			UpdatePreview();
-		}
-		private void OnRequestCommit(object sender, EventArgs e)
-		{
-			mUpdateTimeLock.Enter();
 		}
 		private void OnQualitySelect(object sender, EventArgs e)
 		{

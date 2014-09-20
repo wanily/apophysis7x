@@ -73,6 +73,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 					mTextBox.TextChanged -= OnTextBoxChanged;
 					mTextBox.GotFocus -= OnTextBoxGotFocus;
 					mTextBox.LostFocus -= OnTextBoxLostFocus;
+					mTextBox.KeyUp -= OnTextBoxKeyUp;
 
 					if (!double.TryParse(mTextBox.Text, NumberStyles.Float, InputController.Culture, out oldValue))
 						oldValue = 0.0;
@@ -87,6 +88,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 					mTextBox.TextChanged += OnTextBoxChanged;
 					mTextBox.GotFocus += OnTextBoxGotFocus;
 					mTextBox.LostFocus += OnTextBoxLostFocus;
+					mTextBox.KeyUp += OnTextBoxKeyUp;
 					Value = oldValue;
 				}
 			}
@@ -101,7 +103,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 				double value;
 				if (!double.TryParse(TextBox.Text, NumberStyles.Float, InputController.Culture, out value))
-					return 0.0;
+					return Default;
 
 				return value;
 			}
@@ -193,6 +195,11 @@ namespace Xyrus.Apophysis.Windows.Controls
 		private void OnTextBoxKeyPress(object sender, KeyPressEventArgs e)
 		{
 			mInputHandler.HandleKeyPressForNumericTextBox(e);
+		}
+		private void OnTextBoxKeyUp(object sender, KeyEventArgs e)
+		{
+			if (e.KeyData == Keys.Return || e.KeyData == Keys.Enter)
+				((TextBox)sender).Parent.SelectNextControl((TextBox)sender, true, true, true, true);
 		}
 
 		protected override void OnMouseEnter(EventArgs e)

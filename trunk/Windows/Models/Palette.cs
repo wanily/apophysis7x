@@ -356,7 +356,10 @@ namespace Xyrus.Apophysis.Models
 				}
 			}
 
-			return colors;
+			var copy = new Color[newLength];
+			Array.Copy(colors, 0, copy, 0, newLength);
+
+			return copy;
 		}
 
 		public bool IsEqual([NotNull] Palette palette)

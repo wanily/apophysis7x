@@ -4,12 +4,12 @@ using Xyrus.Apophysis.Windows.Forms;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
-	class FlamePropertiesImagingController : Controller<FlameProperties>
+	class FlamePropertiesImagingController : DataInputController<FlameProperties>
 	{
 		private FlamePropertiesController mParent;
 
 		public FlamePropertiesImagingController(FlameProperties view, [NotNull] FlamePropertiesController parent)
-			: base(view)
+			: base(view, parent.Initializer)
 		{
 			if (parent == null) throw new ArgumentNullException("parent");
 			mParent = parent;
@@ -21,40 +21,46 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		protected override void AttachView()
 		{
-			View.GammaDragPanel.ValueChanged += OnGammaChanged;
-			View.GammaScrollBar.ValueChanged += OnGammaChanged;
-			View.BrightnessDragPanel.ValueChanged += OnBrightnessChanged;
-			View.BrightnessScrollBar.ValueChanged += OnBrightnessChanged;
-			View.VibrancyDragPanel.ValueChanged += OnVibrancyChanged;
-			View.VibrancyScrollBar.ValueChanged += OnVibrancyChanged;
-			View.GammaThresholdDragPanel.ValueChanged += OnGammaThresholdChanged;
 			View.BackgroundPictureBox.Click += OnRequestBackgroundChange;
+
+			Register(View.GammaDragPanel,
+				xx => mParent.Flame.Gamma = xx,
+				() => mParent.Flame.Gamma);
+			Register(View.BrightnessDragPanel,
+				xx => mParent.Flame.Brightness = xx,
+				() => mParent.Flame.Brightness);
+			Register(View.VibrancyDragPanel,
+				xx => mParent.Flame.Vibrancy = xx,
+				() => mParent.Flame.Vibrancy);
+			Register(View.GammaThresholdDragPanel,
+				xx => mParent.Flame.GammaThreshold = xx,
+				() => mParent.Flame.GammaThreshold);
+
+
+			Register(View.GammaScrollBar,
+				xx => mParent.Flame.Gamma = xx / 1000,
+				() => mParent.Flame.Gamma * 1000);
+			Register(View.BrightnessScrollBar,
+				xx => mParent.Flame.Brightness = xx / 1000,
+				() => mParent.Flame.Brightness * 1000);
+			Register(View.VibrancyScrollBar,
+				xx => mParent.Flame.Vibrancy = xx / 1000,
+				() => mParent.Flame.Vibrancy * 1000);
 		}
 		protected override void DetachView()
 		{
-			View.GammaDragPanel.ValueChanged -= OnGammaChanged;
-			View.GammaScrollBar.ValueChanged -= OnGammaChanged;
-			View.BrightnessDragPanel.ValueChanged -= OnBrightnessChanged;
-			View.BrightnessScrollBar.ValueChanged -= OnBrightnessChanged;
-			View.VibrancyDragPanel.ValueChanged -= OnVibrancyChanged;
-			View.VibrancyScrollBar.ValueChanged -= OnVibrancyChanged;
-			View.GammaThresholdDragPanel.ValueChanged -= OnGammaThresholdChanged;
 			View.BackgroundPictureBox.Click -= OnRequestBackgroundChange;
+
+			Cleanup();
 		}
 
-		public void Update()
+		protected override void OnValueCommittedOverride(object control)
 		{
-			if (mParent.Flame == null)
-				return;
-
-			View.GammaDragPanel.Value = mParent.Flame.Gamma;
-			View.GammaScrollBar.Value = (int)(mParent.Flame.Gamma * 1000);
-			View.BrightnessDragPanel.Value = mParent.Flame.Brightness;
-			View.BrightnessScrollBar.Value = (int)(mParent.Flame.Brightness * 1000);
-			View.VibrancyDragPanel.Value = mParent.Flame.Vibrancy;
-			View.VibrancyScrollBar.Value = (int)(mParent.Flame.Vibrancy * 1000);
-			View.GammaThresholdDragPanel.Value = mParent.Flame.GammaThreshold;
-			View.BackgroundPictureBox.BackColor = mParent.Flame.Background;
+			mParent.CommitValue();
+		}
+		protected override void OnValueChangedOverride(object control)
+		{
+			mParent.PreviewController.DelayedUpdatePreview();
 		}
 
 		private void OnRequestBackgroundChange(object sender, EventArgs e)
@@ -74,67 +80,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mParent.UndoController.CommitChange(mParent.Flame);
 			mParent.RaiseFlameChanged();
 			mParent.PreviewController.UpdatePreview();
-		}
-		private void OnGammaChanged(object sender, EventArgs e)
-		{
-			if (mParent.Flame == null || mParent.Initializer.IsBusy)
-				return;
-
-			if (ReferenceEquals(View.GammaScrollBar, sender))
-			{
-				using (mParent.Initializer.Enter())
-					View.GammaDragPanel.Value = View.GammaScrollBar.Value / 1000.0;
-			}
-			else if (ReferenceEquals(View.GammaDragPanel, sender))
-			{
-				using (mParent.Initializer.Enter())
-					View.GammaScrollBar.Value = (int)(View.GammaDragPanel.Value * 1000);
-			}
-
-			mParent.Flame.Gamma = View.GammaDragPanel.Value;
-		}
-		private void OnBrightnessChanged(object sender, EventArgs e)
-		{
-			if (mParent.Flame == null || mParent.Initializer.IsBusy)
-				return;
-
-			if (ReferenceEquals(View.BrightnessScrollBar, sender))
-			{
-				using (mParent.Initializer.Enter())
-					View.BrightnessDragPanel.Value = View.BrightnessScrollBar.Value / 1000.0;
-			}
-			else if (ReferenceEquals(View.BrightnessDragPanel, sender))
-			{
-				using (mParent.Initializer.Enter())
-					View.BrightnessScrollBar.Value = (int)(View.BrightnessDragPanel.Value * 1000);
-			}
-
-			mParent.Flame.Brightness = View.BrightnessDragPanel.Value;
-		}
-		private void OnVibrancyChanged(object sender, EventArgs e)
-		{
-			if (mParent.Flame == null || mParent.Initializer.IsBusy)
-				return;
-
-			if (ReferenceEquals(View.VibrancyScrollBar, sender))
-			{
-				using (mParent.Initializer.Enter())
-					View.VibrancyDragPanel.Value = View.VibrancyScrollBar.Value / 1000.0;
-			}
-			else if (ReferenceEquals(View.VibrancyDragPanel, sender))
-			{
-				using (mParent.Initializer.Enter())
-					View.VibrancyScrollBar.Value = (int)(View.VibrancyDragPanel.Value * 1000);
-			}
-
-			mParent.Flame.Vibrancy = View.VibrancyDragPanel.Value;
-		}
-		private void OnGammaThresholdChanged(object sender, EventArgs e)
-		{
-			if (mParent.Flame == null || mParent.Initializer.IsBusy)
-				return;
-
-			mParent.Flame.GammaThreshold = View.GammaThresholdDragPanel.Value;
 		}
 	}
 }

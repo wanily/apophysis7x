@@ -252,6 +252,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				UpdateWindowTitle();
 			}
 		}
+		public Iterator Iterator
+		{
+			get { return View.IteratorCanvas.SelectedIterator; }
+		}
 
 		internal event EventHandler FlameChanged;
 		internal void RaiseFlameChanged()

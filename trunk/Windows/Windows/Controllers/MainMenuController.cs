@@ -131,7 +131,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			using (var dialog = new FileDialogController<SaveFileDialog>("Save flame...", FileDialogController.BatchFilesFilter, FileDialogController.AllFilesFilter))
 			{
-				var result = dialog.GetFileName();
+				var result = dialog.GetFileName(false);
 				if (string.IsNullOrEmpty(result))
 					return;
 
@@ -142,7 +142,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			using (var dialog = new FileDialogController<SaveFileDialog>("Save batch...", FileDialogController.BatchFilesFilter, FileDialogController.AllFilesFilter))
 			{
-				var result = dialog.GetFileName();
+				var result = dialog.GetFileName(true);
 				if (string.IsNullOrEmpty(result))
 					return;
 
