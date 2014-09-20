@@ -487,5 +487,17 @@ namespace Xyrus.Apophysis.Properties {
                 this["AutosaveThreshold"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool VariationsIn15CStyle {
+            get {
+                return ((bool)(this["VariationsIn15CStyle"]));
+            }
+            set {
+                this["VariationsIn15CStyle"] = value;
+            }
+        }
     }
 }

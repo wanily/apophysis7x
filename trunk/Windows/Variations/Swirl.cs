@@ -4,6 +4,13 @@ namespace Xyrus.Apophysis.Variations
 {
 	class Swirl : Variation
 	{
+		private bool m15C;
+
+		public override void Prepare(IterationData data)
+		{
+			m15C = ApophysisSettings.VariationsIn15CStyle;
+		}
+
 		public override void Calculate(IterationData data)
 		{
 			var theta = (data.PreX * data.PreX + data.PreY * data.PreY);
@@ -13,7 +20,11 @@ namespace Xyrus.Apophysis.Variations
 
 			data.PostX += Weight * (sin * data.PreX - cos * data.PreY);
 			data.PostY += Weight * (cos * data.PreX + sin * data.PreY);
-			data.PostZ += Weight * data.PreZ;
+
+			if (m15C)
+			{
+				data.PostZ += Weight * data.PreZ;
+			}
 		}
 	}
 }

@@ -400,6 +400,12 @@ namespace Xyrus.Apophysis
 			}
 		}
 
+		public static bool VariationsIn15CStyle
+		{
+			get { return mSettings.VariationsIn15CStyle; }
+			set { mSettings.VariationsIn15CStyle = value; }
+		}
+
 		public static void Serialize()
 		{
 			mSettings.Save();
