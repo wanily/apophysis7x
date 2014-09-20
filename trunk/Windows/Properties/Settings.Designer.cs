@@ -463,5 +463,29 @@ namespace Xyrus.Apophysis.Properties {
                 this["ShowUnknownAttributesMessage"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("%UserProfile%\\ApophysisAutosave.flame")]
+        public string AutosavePath {
+            get {
+                return ((string)(this["AutosavePath"]));
+            }
+            set {
+                this["AutosavePath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("60")]
+        public int AutosaveThreshold {
+            get {
+                return ((int)(this["AutosaveThreshold"]));
+            }
+            set {
+                this["AutosaveThreshold"] = value;
+            }
+        }
     }
 }

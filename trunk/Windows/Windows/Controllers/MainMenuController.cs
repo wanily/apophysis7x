@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Models;
@@ -107,7 +108,24 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 		internal void OnRestoreAutosaveClick(object sender, EventArgs e)
 		{
-			//todo
+			var path = Environment.ExpandEnvironmentVariables(ApophysisSettings.AutosavePath);
+			if (!File.Exists(path))
+			{
+				MessageBox.Show(string.Format("Could not find autosave file. Perhaps no autosaves have been written yet."), View.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+
+			if (!mParent.ConfirmReplaceBatch())
+				return;
+
+			using (var dialog = new FileDialogController<SaveFileDialog>("Choose location to copy autosave batch to...", FileDialogController.BatchFilesFilter, FileDialogController.AllFilesFilter))
+			{
+				var result = dialog.GetFileName();
+				if (string.IsNullOrEmpty(result))
+					return;
+
+				mParent.RestoreAutosaveBatch(result);
+			}
 		}
 		internal void OnSaveFlameClick(object sender, EventArgs e)
 		{

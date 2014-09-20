@@ -113,5 +113,11 @@
     <Setting Name="ShowUnknownAttributesMessage" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="AutosavePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">%UserProfile%\ApophysisAutosave.flame</Value>
+    </Setting>
+    <Setting Name="AutosaveThreshold" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">60</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

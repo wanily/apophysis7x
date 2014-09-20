@@ -45,6 +45,7 @@
 			this.FlamePropertiesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.PalettePropertiesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.CanvasPropertiesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.MessagesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripSeparator();
 			this.ShowToolBarMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.ShowStatusBarMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -86,6 +87,7 @@
 			this.FlamePropertiesButton = new System.Windows.Forms.ToolStripButton();
 			this.PalettePropertiesButton = new System.Windows.Forms.ToolStripButton();
 			this.CanvasPropertiesButton = new System.Windows.Forms.ToolStripButton();
+			this.MessagesButton = new System.Windows.Forms.ToolStripButton();
 			this.OpenSettingsButton = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
 			this.ToggleTransparencyButton = new System.Windows.Forms.ToolStripButton();
@@ -109,8 +111,6 @@
 			this.PreviewTimeRemainingLabel = new System.Windows.Forms.ToolStripStatusLabel();
 			this.FlameNameLabel = new System.Windows.Forms.ToolStripStatusLabel();
 			this.PreviewProgressBar = new System.Windows.Forms.ToolStripProgressBar();
-			this.MessagesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.MessagesButton = new System.Windows.Forms.ToolStripButton();
 			this.mMainMenu.SuspendLayout();
 			this.ToolBar.SuspendLayout();
 			this.ClientPanel.SuspendLayout();
@@ -164,7 +164,7 @@
 			this.NewFlameMenuItem.ImageTransparentColor = System.Drawing.Color.Fuchsia;
 			this.NewFlameMenuItem.Name = "NewFlameMenuItem";
 			this.NewFlameMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-			this.NewFlameMenuItem.Size = new System.Drawing.Size(249, 22);
+			this.NewFlameMenuItem.Size = new System.Drawing.Size(233, 22);
 			this.NewFlameMenuItem.Text = "&New";
 			// 
 			// OpenBatchMenuItem
@@ -173,7 +173,7 @@
 			this.OpenBatchMenuItem.ImageTransparentColor = System.Drawing.Color.Fuchsia;
 			this.OpenBatchMenuItem.Name = "OpenBatchMenuItem";
 			this.OpenBatchMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-			this.OpenBatchMenuItem.Size = new System.Drawing.Size(249, 22);
+			this.OpenBatchMenuItem.Size = new System.Drawing.Size(233, 22);
 			this.OpenBatchMenuItem.Text = "&Open...";
 			// 
 			// RestoreAutosaveMenuItem
@@ -181,13 +181,13 @@
 			this.RestoreAutosaveMenuItem.Name = "RestoreAutosaveMenuItem";
 			this.RestoreAutosaveMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.A)));
-			this.RestoreAutosaveMenuItem.Size = new System.Drawing.Size(249, 22);
-			this.RestoreAutosaveMenuItem.Text = "&Restore last autosave";
+			this.RestoreAutosaveMenuItem.Size = new System.Drawing.Size(233, 22);
+			this.RestoreAutosaveMenuItem.Text = "&Restore autosaves";
 			// 
 			// toolStripMenuItem1
 			// 
 			this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-			this.toolStripMenuItem1.Size = new System.Drawing.Size(246, 6);
+			this.toolStripMenuItem1.Size = new System.Drawing.Size(230, 6);
 			// 
 			// SaveFlameMenuItem
 			// 
@@ -195,7 +195,7 @@
 			this.SaveFlameMenuItem.ImageTransparentColor = System.Drawing.Color.Fuchsia;
 			this.SaveFlameMenuItem.Name = "SaveFlameMenuItem";
 			this.SaveFlameMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-			this.SaveFlameMenuItem.Size = new System.Drawing.Size(249, 22);
+			this.SaveFlameMenuItem.Size = new System.Drawing.Size(233, 22);
 			this.SaveFlameMenuItem.Text = "&Save...";
 			// 
 			// SaveBatchMenuItem
@@ -203,20 +203,20 @@
 			this.SaveBatchMenuItem.Name = "SaveBatchMenuItem";
 			this.SaveBatchMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.S)));
-			this.SaveBatchMenuItem.Size = new System.Drawing.Size(249, 22);
+			this.SaveBatchMenuItem.Size = new System.Drawing.Size(233, 22);
 			this.SaveBatchMenuItem.Text = "S&ave all...";
 			// 
 			// toolStripMenuItem2
 			// 
 			this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-			this.toolStripMenuItem2.Size = new System.Drawing.Size(246, 6);
+			this.toolStripMenuItem2.Size = new System.Drawing.Size(230, 6);
 			// 
 			// PaletteFromImageMenuItem
 			// 
 			this.PaletteFromImageMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("PaletteFromImageMenuItem.Image")));
 			this.PaletteFromImageMenuItem.ImageTransparentColor = System.Drawing.Color.Fuchsia;
 			this.PaletteFromImageMenuItem.Name = "PaletteFromImageMenuItem";
-			this.PaletteFromImageMenuItem.Size = new System.Drawing.Size(249, 22);
+			this.PaletteFromImageMenuItem.Size = new System.Drawing.Size(233, 22);
 			this.PaletteFromImageMenuItem.Text = "S&mooth palette...";
 			// 
 			// BrowsePalettesMenuItem
@@ -224,30 +224,30 @@
 			this.BrowsePalettesMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("BrowsePalettesMenuItem.Image")));
 			this.BrowsePalettesMenuItem.ImageTransparentColor = System.Drawing.Color.Fuchsia;
 			this.BrowsePalettesMenuItem.Name = "BrowsePalettesMenuItem";
-			this.BrowsePalettesMenuItem.Size = new System.Drawing.Size(249, 22);
+			this.BrowsePalettesMenuItem.Size = new System.Drawing.Size(233, 22);
 			this.BrowsePalettesMenuItem.Text = "&Gradient browser...";
 			// 
 			// toolStripMenuItem3
 			// 
 			this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-			this.toolStripMenuItem3.Size = new System.Drawing.Size(246, 6);
+			this.toolStripMenuItem3.Size = new System.Drawing.Size(230, 6);
 			// 
 			// RandomBatchMenuItem
 			// 
 			this.RandomBatchMenuItem.Name = "RandomBatchMenuItem";
 			this.RandomBatchMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.B)));
-			this.RandomBatchMenuItem.Size = new System.Drawing.Size(249, 22);
+			this.RandomBatchMenuItem.Size = new System.Drawing.Size(233, 22);
 			this.RandomBatchMenuItem.Text = "Random &batch";
 			// 
 			// toolStripMenuItem4
 			// 
 			this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-			this.toolStripMenuItem4.Size = new System.Drawing.Size(246, 6);
+			this.toolStripMenuItem4.Size = new System.Drawing.Size(230, 6);
 			// 
 			// ExitMenuItem
 			// 
 			this.ExitMenuItem.Name = "ExitMenuItem";
-			this.ExitMenuItem.Size = new System.Drawing.Size(249, 22);
+			this.ExitMenuItem.Size = new System.Drawing.Size(233, 22);
 			this.ExitMenuItem.Text = "E&xit";
 			// 
 			// editToolStripMenuItem
@@ -372,6 +372,15 @@
 			this.CanvasPropertiesMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F7;
 			this.CanvasPropertiesMenuItem.Size = new System.Drawing.Size(190, 22);
 			this.CanvasPropertiesMenuItem.Text = "&Image size";
+			// 
+			// MessagesMenuItem
+			// 
+			this.MessagesMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("MessagesMenuItem.Image")));
+			this.MessagesMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.MessagesMenuItem.Name = "MessagesMenuItem";
+			this.MessagesMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F8;
+			this.MessagesMenuItem.Size = new System.Drawing.Size(190, 22);
+			this.MessagesMenuItem.Text = "Messages";
 			// 
 			// toolStripMenuItem7
 			// 
@@ -725,6 +734,15 @@
 			this.CanvasPropertiesButton.Size = new System.Drawing.Size(23, 22);
 			this.CanvasPropertiesButton.Text = "Image size";
 			// 
+			// MessagesButton
+			// 
+			this.MessagesButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.MessagesButton.Image = ((System.Drawing.Image)(resources.GetObject("MessagesButton.Image")));
+			this.MessagesButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.MessagesButton.Name = "MessagesButton";
+			this.MessagesButton.Size = new System.Drawing.Size(23, 22);
+			this.MessagesButton.Text = "Messages";
+			// 
 			// OpenSettingsButton
 			// 
 			this.OpenSettingsButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -947,24 +965,6 @@
 			// 
 			this.PreviewProgressBar.Name = "PreviewProgressBar";
 			this.PreviewProgressBar.Size = new System.Drawing.Size(200, 16);
-			// 
-			// MessagesMenuItem
-			// 
-			this.MessagesMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("MessagesMenuItem.Image")));
-			this.MessagesMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.MessagesMenuItem.Name = "MessagesMenuItem";
-			this.MessagesMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F8;
-			this.MessagesMenuItem.Size = new System.Drawing.Size(190, 22);
-			this.MessagesMenuItem.Text = "Messages";
-			// 
-			// MessagesButton
-			// 
-			this.MessagesButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.MessagesButton.Image = ((System.Drawing.Image)(resources.GetObject("MessagesButton.Image")));
-			this.MessagesButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.MessagesButton.Name = "MessagesButton";
-			this.MessagesButton.Size = new System.Drawing.Size(23, 22);
-			this.MessagesButton.Text = "Messages";
 			// 
 			// Main
 			// 

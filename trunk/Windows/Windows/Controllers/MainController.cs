@@ -15,6 +15,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 	[PublicAPI]
 	public class MainController : Controller<Main>
 	{
+		private AutosaveController mAutosaveController;
 		private UndoController mUndoController;
 		private EditorController mEditorController;
 		private FullscreenController mFullscreenController;
@@ -37,6 +38,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			mUndoController = new UndoController();
 			mKeyboardController = new KeyboardController();
+			mAutosaveController = new AutosaveController(this);
 			mEditorController = new EditorController(this);
 			mFullscreenController = new FullscreenController(this);
 			mFlamePropertiesController = new FlamePropertiesController(this);
@@ -52,6 +54,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			if (disposing)
 			{
+				if (mAutosaveController != null)
+				{
+					mAutosaveController.Dispose();
+					mAutosaveController = null;
+				}
+
 				if (mMainPreviewController != null)
 				{
 					mMainPreviewController.Dispose();
@@ -137,6 +145,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mBatchListController.Initialize();
 			mMainPreviewController.Initialize();
 			mMainUndoController.Initialize();
+			mAutosaveController.Initialize();
 
 			View.Load += OnViewLoaded;
 			View.CameraEndEdit += OnCameraEndEdit;
@@ -282,6 +291,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			get { return mToolbarController; }
 		}
+		internal AutosaveController AutosaveController
+		{
+			get { return mAutosaveController; }
+		}
 
 		internal void ResizeWithoutUpdatingPreview()
 		{
@@ -316,6 +329,18 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mBatchListController.SelectFlame(mFlames[index]);
 		}
 
+		public void RestoreAutosaveBatch(string targetPath)
+		{
+			var path = Environment.ExpandEnvironmentVariables(ApophysisSettings.AutosavePath);
+			if (!File.Exists(path))
+				throw new FileNotFoundException();
+
+			var data = File.ReadAllText(path);
+
+			File.WriteAllText(targetPath, data);
+			ReadBatchFromFile(path);
+			
+		}
 		public void ReadBatchFromFile(string path)
 		{
 			try
@@ -501,12 +526,17 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			mHasChanges = true;
 		}
-		public void SaveCurrentFlame(string path)
+		public void SaveCurrentFlame(string path, int maxBatchSize = int.MaxValue)
 		{
 			var flame = mBatchListController.GetSelectedFlame();
 			if (flame == null)
 				return;
 
+			SaveFlame(flame, path, maxBatchSize);
+		}
+		public void SaveFlame([NotNull] Flame flame, string path, int maxBatchSize = int.MaxValue, string batchName = null)
+		{
+			if (flame == null) throw new ArgumentNullException("flame");
 			FlameCollection batch;
 
 			if (File.Exists(path))
@@ -515,11 +545,16 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				Flame.ReduceCounter();
 
 				batch.ReadXml(XElement.Parse(File.ReadAllText(path), LoadOptions.None));
+				batch.Name = batchName;
+
+				for (int i = 0; i < (batch.Count + 1) - maxBatchSize; i++)
+					batch.Remove(i);
+
 				batch.Append(flame);
 			}
 			else
 			{
-				batch = new FlameCollection(new [] {flame });
+				batch = new FlameCollection(new[] { flame }) { Name = batchName };
 			}
 
 			XElement outElement; batch.WriteXml(out outElement);

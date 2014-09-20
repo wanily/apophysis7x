@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Data;
 using System.Drawing;
+using System.IO;
 using Xyrus.Apophysis.Properties;
 using Xyrus.Apophysis.Windows;
 
@@ -370,6 +372,32 @@ namespace Xyrus.Apophysis
 		{
 			get { return mSettings.SyncMainWindowWithCanvasSize; }
 			set { mSettings.SyncMainWindowWithCanvasSize = value; }
+		}
+
+		public static string AutosavePath
+		{
+			get { return mSettings.AutosavePath; }
+			set
+			{
+				if (string.IsNullOrEmpty(value) || string.IsNullOrEmpty(value.Trim()))
+					throw new ArgumentNullException("value");
+
+				if (!Directory.Exists(Path.GetDirectoryName(Environment.ExpandEnvironmentVariables(value)) ?? string.Empty))
+					throw new DirectoryNotFoundException();
+
+				mSettings.AutosavePath = value;
+			}
+		}
+		public static int AutosaveThreshold
+		{
+			get { return mSettings.AutosaveThreshold; }
+			set
+			{
+				if (value <= 0)
+					throw new ArgumentOutOfRangeException("value");
+
+				mSettings.AutosaveThreshold = value;
+			}
 		}
 
 		public static void Serialize()

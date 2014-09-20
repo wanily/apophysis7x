@@ -147,6 +147,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mParent.LoadFlameAndEraseHistory(flame);
 			mParent.EditorController.Flame = flame;
 			mParent.FlamePropertiesController.Flame = flame;
+			mParent.AutosaveController.ForceCommit(flame, flame.CalculatedName + " - selected");
 		}
 		public Flame GetSelectedFlame()
 		{

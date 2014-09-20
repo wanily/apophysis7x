@@ -243,7 +243,7 @@ namespace Xyrus.Apophysis.Models
 			var elementName = element.Name.ToString().ToLower();
 			var elementNames = new[] {"xform", "finalxform"};
 
-			string[] knownNames = { "name", "weight", "color", "symmetry", "opacity", "var_color", "coefs", "post", "chaos" };
+			string[] knownNames = { "name", "weight", "color", "symmetry", "opacity", "var_color", "coefs", "post", "chaos", "color_speed" };
 
 			int groupIndex;
 
