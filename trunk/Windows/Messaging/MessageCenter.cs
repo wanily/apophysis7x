@@ -13,12 +13,17 @@ namespace Xyrus.Apophysis.Messaging
 		static MessageCenter()
 		{
 			FlameParsing = new Lock();
+			SuspendMessaging = new Lock();
 		}
 
 		public static Lock FlameParsing { get; private set; }
+		public static Lock SuspendMessaging { get; private set; }
 
 		public static void SendUnknownAttribute(XName name)
 		{
+			if (SuspendMessaging.IsBusy)
+				return;
+
 			if (name == null)
 				return;
 
@@ -29,6 +34,9 @@ namespace Xyrus.Apophysis.Messaging
 		}
 		public static void SendMessage(string message)
 		{
+			if (SuspendMessaging.IsBusy)
+				return;
+
 			if (string.IsNullOrEmpty(message) || string.IsNullOrEmpty(message.Trim()))
 				return;
 

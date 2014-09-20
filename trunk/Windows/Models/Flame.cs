@@ -338,7 +338,9 @@ namespace Xyrus.Apophysis.Models
 			element.Add(new XAttribute(XName.Get("vibrancy"), Vibrancy.Serialize()));
 			element.Add(new XAttribute(XName.Get("gamma_threshold"), GammaThreshold.Serialize()));
 			element.Add(new XAttribute(XName.Get("plugins"), string.Join(@" ", plugins)));
-			element.Add(new XAttribute(XName.Get("new_linear"), "1"));
+
+			if (Variation.VariationsIn15CStyle)
+				element.Add(new XAttribute(XName.Get("new_linear"), "1"));
 
 			Iterators.WriteXml(iteratorElements);
 			Palette.WriteXml(out paletteElement);
@@ -557,6 +559,18 @@ namespace Xyrus.Apophysis.Models
 				builder.Append(new string('=', header.Length + 3));
 
 				MessageCenter.SendMessage(builder.ToString());
+
+				bool usesVariationsIn15CStyle = false;
+				var newLinearAttribute = element.Attribute(XName.Get("new_linear"));
+				if (newLinearAttribute != null)
+				{
+					usesVariationsIn15CStyle = System.Math.Abs(newLinearAttribute.ParseFloat()) > double.Epsilon;
+				}
+
+				if (Variation.VariationsIn15CStyle != usesVariationsIn15CStyle)
+				{
+					MessageCenter.SendMessage("The flame was created with a different version of Apophysis or a different software and might not render correctly.");
+				}
 
 				var sizeAttribute = element.Attribute(XName.Get("size"));
 				if (sizeAttribute != null)

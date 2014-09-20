@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
+using Xyrus.Apophysis.Messaging;
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Forms;
 using Xyrus.Apophysis.Windows.Input;
@@ -338,17 +339,28 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			var data = File.ReadAllText(path);
 
 			File.WriteAllText(targetPath, data);
-			ReadBatchFromFile(path);
+			ReadBatchFromFile(path, false);
 			
 		}
-		public void ReadBatchFromFile(string path)
+		public void ReadBatchFromFile(string path, bool withMessaging = true)
 		{
 			try
 			{
 				var batch = new FlameCollection();
 
 				Flame.ReduceCounter();
-				batch.ReadXml(XElement.Parse(File.ReadAllText(path), LoadOptions.None));
+
+				if (withMessaging)
+				{
+					batch.ReadXml(XElement.Parse(File.ReadAllText(path), LoadOptions.None));
+				}
+				else
+				{
+					using (MessageCenter.SuspendMessaging.Enter())
+					{
+						batch.ReadXml(XElement.Parse(File.ReadAllText(path), LoadOptions.None));
+					}
+				}
 
 				Flames = batch;
 				View.Text = Application.ProductName + @" - " + path;
@@ -544,7 +556,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				batch = new FlameCollection();
 				Flame.ReduceCounter();
 
-				batch.ReadXml(XElement.Parse(File.ReadAllText(path), LoadOptions.None));
+				using (MessageCenter.SuspendMessaging.Enter())
+				{
+					batch.ReadXml(XElement.Parse(File.ReadAllText(path), LoadOptions.None));
+				}
+
 				batch.Name = batchName;
 
 				for (int i = 0; i < (batch.Count + 1) - maxBatchSize; i++)
