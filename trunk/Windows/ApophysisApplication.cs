@@ -59,7 +59,6 @@ namespace Xyrus.Apophysis
 				//special treatment for "linear3D"
 				if (Variation.VariationsIn15CStyle && type == typeof (Linear3D))
 					continue;
-					
 
 				var method = registerMethod.MakeGenericMethod(type);
 				var result = method.Invoke(null, new object[0]) as string;
