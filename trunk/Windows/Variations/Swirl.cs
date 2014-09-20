@@ -8,7 +8,7 @@ namespace Xyrus.Apophysis.Variations
 
 		public override void Prepare(IterationData data)
 		{
-			m15C = ApophysisSettings.VariationsIn15CStyle;
+			m15C = VariationsIn15CStyle;
 		}
 
 		public override void Calculate(IterationData data)

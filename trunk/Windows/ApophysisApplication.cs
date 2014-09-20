@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Calculation;
+using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Variations;
 using Xyrus.Apophysis.Windows.Controllers;
 
@@ -46,6 +47,8 @@ namespace Xyrus.Apophysis
 		{
 			mBanner.BannerText = "Loading variations";
 
+			Variation.VariationsIn15CStyle = ApophysisSettings.VariationsIn15CStyle;
+
 			var types = typeof(Linear).Assembly.GetTypes();
 			var registerMethod = typeof(VariationRegistry).GetMethod("Register", BindingFlags.Static | BindingFlags.Public);
 
@@ -53,6 +56,11 @@ namespace Xyrus.Apophysis
 			{
 				if (!typeof(Variation).IsAssignableFrom(type) || type.IsAbstract || type == typeof(ExternalVariation))
 					continue;
+
+				//special treatment for "linear3D"
+				if (Variation.VariationsIn15CStyle && type == typeof (Linear3D))
+					continue;
+					
 
 				var method = registerMethod.MakeGenericMethod(type);
 				var result = method.Invoke(null, new object[0]) as string;

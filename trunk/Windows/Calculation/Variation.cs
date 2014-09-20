@@ -13,11 +13,16 @@ namespace Xyrus.Apophysis.Calculation
 		{
 			Dispose(false);
 		}
-
 		protected Variation()
 		{
 			mDefaultName = GetType().Name.ToLower();
 			Priority = VariationPriority.Normal;
+		}
+
+		public static bool VariationsIn15CStyle
+		{
+			get; 
+			set;
 		}
 
 		protected void Dispose(bool disposing)

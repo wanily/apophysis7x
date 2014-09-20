@@ -490,7 +490,7 @@ namespace Xyrus.Apophysis.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool VariationsIn15CStyle {
             get {
                 return ((bool)(this["VariationsIn15CStyle"]));

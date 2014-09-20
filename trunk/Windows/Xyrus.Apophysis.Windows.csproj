@@ -95,6 +95,7 @@
     <Compile Include="Threading\ThreadController.cs" />
     <Compile Include="Threading\ThreadStateToken.cs" />
     <Compile Include="Variations\Linear.cs" />
+    <Compile Include="Variations\Linear3D.cs" />
     <Compile Include="Variations\Spherical.cs" />
     <Compile Include="Variations\Swirl.cs" />
     <Compile Include="Windows\Common\CameraEditMode.cs" />
