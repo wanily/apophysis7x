@@ -30,5 +30,10 @@ namespace Xyrus.Apophysis.Settings.Providers
 				Container.Threshold = value;
 			}
 		}
+		public bool Enabled
+		{
+			get { return Container.Enabled; }
+			set { Container.Enabled = value; }
+		}
 	}
 }

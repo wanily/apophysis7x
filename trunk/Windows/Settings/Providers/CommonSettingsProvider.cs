@@ -32,9 +32,38 @@ namespace Xyrus.Apophysis.Settings.Providers
 			get { return Container.VariationsIn15CStyle; }
 			set { Container.VariationsIn15CStyle = value; }
 		}
+
 		public string FlameExportVersionString
 		{
 			get { return mFlameExportVersionString; }
+		}
+
+		public int JpegQuality
+		{
+			get { return Container.JpegQuality; }
+			set
+			{
+				if (value < 1 || value > 120)
+					throw new ArgumentOutOfRangeException(@"value");
+
+				Container.JpegQuality = value;
+			}
+		}
+		public bool EnablePngTransparency
+		{
+			get { return Container.EnablePngTransparency; }
+			set { Container.EnablePngTransparency = value; }
+		}
+
+		public bool ShowDeleteConfirmation
+		{
+			get { return Container.ShowDeleteConfirmation; }
+			set { Container.ShowDeleteConfirmation = value; }
+		}
+		public bool ShowCancelRenderConfirmation
+		{
+			get { return Container.ShowCancelRenderConfirmation; }
+			set { Container.ShowCancelRenderConfirmation = value; }
 		}
 	}
 }

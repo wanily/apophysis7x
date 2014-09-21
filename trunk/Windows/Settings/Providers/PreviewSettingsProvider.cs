@@ -128,5 +128,17 @@ namespace Xyrus.Apophysis.Settings.Providers
 				Container.SizePreset3 = value.GetValueOrDefault();
 			}
 		}
+
+		public int? ThreadCount
+		{
+			get { return Container.ThreadCount == 0 ? (int?) null : Container.ThreadCount; }
+			set
+			{
+				if (ThreadCount <= 0)
+					throw new ArgumentOutOfRangeException(@"value");
+
+				Container.ThreadCount = value.GetValueOrDefault();
+			}
+		}
 	}
 }

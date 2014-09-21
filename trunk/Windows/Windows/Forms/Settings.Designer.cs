@@ -52,7 +52,7 @@
 			this.ConfirmStopRendering = new System.Windows.Forms.CheckBox();
 			this.mAutosaveGroupBox = new System.Windows.Forms.GroupBox();
 			this.AutosavePathButton = new System.Windows.Forms.Button();
-			this.AutosavePathCheckBox = new System.Windows.Forms.TextBox();
+			this.AutosavePathTextBox = new System.Windows.Forms.TextBox();
 			this.mAutosavePathLabel = new System.Windows.Forms.Label();
 			this.AutosaveThresholdComboBox = new System.Windows.Forms.ComboBox();
 			this.mAutosaveThesholdLabel = new System.Windows.Forms.Label();
@@ -242,7 +242,7 @@
 			this.mAutosaveGroupBox.Controls.Add(this.AutosaveThresholdComboBox);
 			this.mAutosaveGroupBox.Controls.Add(this.mAutosaveThesholdLabel);
 			this.mAutosaveGroupBox.Controls.Add(this.AutosavePathButton);
-			this.mAutosaveGroupBox.Controls.Add(this.AutosavePathCheckBox);
+			this.mAutosaveGroupBox.Controls.Add(this.AutosavePathTextBox);
 			this.mAutosaveGroupBox.Controls.Add(this.mAutosavePathLabel);
 			this.mAutosaveGroupBox.Name = "mAutosaveGroupBox";
 			this.mAutosaveGroupBox.TabStop = false;
@@ -254,11 +254,11 @@
 			this.AutosavePathButton.Name = "AutosavePathButton";
 			this.AutosavePathButton.UseVisualStyleBackColor = true;
 			// 
-			// AutosavePathCheckBox
+			// AutosavePathTextBox
 			// 
-			resources.ApplyResources(this.AutosavePathCheckBox, "AutosavePathCheckBox");
-			this.AutosavePathCheckBox.Name = "AutosavePathCheckBox";
-			this.AutosavePathCheckBox.ReadOnly = true;
+			resources.ApplyResources(this.AutosavePathTextBox, "AutosavePathTextBox");
+			this.AutosavePathTextBox.Name = "AutosavePathTextBox";
+			this.AutosavePathTextBox.ReadOnly = true;
 			// 
 			// mAutosavePathLabel
 			// 
@@ -363,7 +363,7 @@
 		public System.Windows.Forms.CheckBox ConfirmStopRendering;
 		private System.Windows.Forms.GroupBox mAutosaveGroupBox;
 		public System.Windows.Forms.Button AutosavePathButton;
-		public System.Windows.Forms.TextBox AutosavePathCheckBox;
+		public System.Windows.Forms.TextBox AutosavePathTextBox;
 		private System.Windows.Forms.Label mAutosavePathLabel;
 		public System.Windows.Forms.ComboBox AutosaveThresholdComboBox;
 		private System.Windows.Forms.Label mAutosaveThesholdLabel;

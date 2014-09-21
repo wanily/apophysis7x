@@ -7,11 +7,13 @@ namespace Xyrus.Apophysis.Windows.Input
 	{
 		[NotNull]
 		public CameraData Data { get; private set; }
+		public bool EditMade { get; private set; }
 
-		public CameraEndEditEventArgs([NotNull] CameraData data)
+		public CameraEndEditEventArgs([NotNull] CameraData data, bool editMade)
 		{
 			if (data == null) throw new ArgumentNullException("data");
 			Data = data;
+			EditMade = editMade;
 		}
 	}
 }

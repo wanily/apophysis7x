@@ -48,6 +48,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		public void ForceCommit(Flame flame, string name)
 		{
+			if (!ApophysisSettings.Autosave.Enabled)
+				return;
+
 			var path = Environment.ExpandEnvironmentVariables(ApophysisSettings.Autosave.TargetPath);
 
 			flame = flame.Copy();

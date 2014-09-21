@@ -22,6 +22,7 @@ namespace Xyrus.Apophysis.Windows.Input
 		private double mDragAngleOld;
 		private double mDragScale;
 		private double mDragZoom;
+		private bool mMoved;
 
 		private static readonly double mLog2 = System.Math.Log(2);
 
@@ -41,6 +42,7 @@ namespace Xyrus.Apophysis.Windows.Input
 			mDragAngleOld = 0;
 			mDragScale = 0;
 			mDragZoom = 0;
+			mMoved = false;
 
 			mIsMouseDown = false;
 		}
@@ -80,7 +82,8 @@ namespace Xyrus.Apophysis.Windows.Input
 			mDragAngle = System.Math.Atan2(cursor.Y - AttachedControl.ClientSize.Height / 2.0, AttachedControl.ClientSize.Width / 2.0 - cursor.X);
 			mDragAngleOld = mFlame.Angle;
 			mDragScale = mFlame.PixelsPerUnit;
-			mDragZoom = mFlame.Zoom;
+			mDragZoom = mFlame.Zoom; 
+			mMoved = false;
 
 			mData = new CameraData
 			{
@@ -121,6 +124,7 @@ namespace Xyrus.Apophysis.Windows.Input
 				return false;
 
 			mInputVisual.Operation = null;
+			mMoved = true;
 
 			switch (EditMode)
 			{
@@ -290,7 +294,9 @@ namespace Xyrus.Apophysis.Windows.Input
 			mDragZoom = 0;
 
 			if (EndEdit != null)
-				EndEdit(this, new CameraEndEditEventArgs(data));
+				EndEdit(this, new CameraEndEditEventArgs(data, mMoved));
+
+			mMoved = false;
 
 			return true;
 		}

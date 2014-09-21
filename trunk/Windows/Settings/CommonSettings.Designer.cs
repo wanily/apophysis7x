@@ -67,5 +67,53 @@ namespace Xyrus.Apophysis.Settings {
                 this["VariationsIn15CStyle"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("120")]
+        public int JpegQuality {
+            get {
+                return ((int)(this["JpegQuality"]));
+            }
+            set {
+                this["JpegQuality"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool EnablePngTransparency {
+            get {
+                return ((bool)(this["EnablePngTransparency"]));
+            }
+            set {
+                this["EnablePngTransparency"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowDeleteConfirmation {
+            get {
+                return ((bool)(this["ShowDeleteConfirmation"]));
+            }
+            set {
+                this["ShowDeleteConfirmation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowCancelRenderConfirmation {
+            get {
+                return ((bool)(this["ShowCancelRenderConfirmation"]));
+            }
+            set {
+                this["ShowCancelRenderConfirmation"] = value;
+            }
+        }
     }
 }

@@ -241,7 +241,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		private void OnCameraEndEdit(object sender, CameraEndEditEventArgs e)
 		{
 			var flame = mBatchListController.GetSelectedFlame();
-			if (flame == null || Initializer.IsBusy)
+			if (flame == null || Initializer.IsBusy || !e.EditMade)
 				return;
 
 			FlamePropertiesController.UndoController.CommitChange(flame);
@@ -523,7 +523,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			if (!mFlames.Contains(flame))
 				return;
 
-			if (DialogResult.Yes == MessageBox.Show(
+			if (!ApophysisSettings.Common.ShowDeleteConfirmation || DialogResult.Yes == MessageBox.Show(
 				string.Format("Do you really want to remove \"{0}\" from the batch? This can't be undone!", flame.CalculatedName),
 				Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
 			{

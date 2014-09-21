@@ -1,20 +1,30 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-	<Settings>
-		<Setting Name="PluginDirectoryName" Type="System.String" Scope="Application">
-			<Value Profile="(Default)">Plugins</Value>
-		</Setting>
-		<Setting Name="NamePrefix" Type="System.String" Scope="User">
-			<Value Profile="(Default)">Apo7x</Value>
-		</Setting>
-		<Setting Name="ShowUnknownAttributesMessage" Type="System.Boolean" Scope="User">
-			<Value Profile="(Default)">True</Value>
-		</Setting>
-		<Setting Name="VariationsIn15CStyle" Type="System.Boolean" Scope="User">
-			<Value Profile="(Default)">True</Value>
-		</Setting>
-	</Settings>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Xyrus.Apophysis.Settings" GeneratedClassName="CommonSettings">
+  <Profiles />
+  <Settings>
+    <Setting Name="PluginDirectoryName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Plugins</Value>
+    </Setting>
+    <Setting Name="NamePrefix" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Apo7x</Value>
+    </Setting>
+    <Setting Name="ShowUnknownAttributesMessage" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="VariationsIn15CStyle" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="JpegQuality" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">120</Value>
+    </Setting>
+    <Setting Name="EnablePngTransparency" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ShowDeleteConfirmation" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ShowCancelRenderConfirmation" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>
