@@ -108,7 +108,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 		internal void OnRestoreAutosaveClick(object sender, EventArgs e)
 		{
-			var path = Environment.ExpandEnvironmentVariables(ApophysisSettings.AutosavePath);
+			var path = Environment.ExpandEnvironmentVariables(ApophysisSettings.Autosave.TargetPath);
 			if (!File.Exists(path))
 			{
 				MessageBox.Show(string.Format("Could not find autosave file. Perhaps no autosaves have been written yet."), View.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);

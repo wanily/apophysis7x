@@ -48,8 +48,6 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mToolbarSeparator7 = new System.Windows.Forms.ToolStripSeparator();
 			this.IteratorConvertToRegularButton = new System.Windows.Forms.ToolStripButton();
 			this.IteratorConvertToFinalButton = new System.Windows.Forms.ToolStripButton();
-			this.IteratorCanvas = new Xyrus.Apophysis.Windows.Controls.EditorCanvas();
-			this.mSettings = new Xyrus.Apophysis.Windows.Controls.EditorSettings();
 			this.mSidebarSplitter = new System.Windows.Forms.SplitContainer();
 			this.mPreviewPanel = new System.Windows.Forms.Panel();
 			this.PreviewPicture = new System.Windows.Forms.PictureBox();
@@ -62,14 +60,8 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.VariationsTab = new System.Windows.Forms.TabPage();
 			this.ClearVariationsButton = new System.Windows.Forms.Button();
 			this.HideUnusedVariationsCheckBox = new System.Windows.Forms.CheckBox();
-			this.VariationsGrid = new Xyrus.Apophysis.Windows.Controls.DragGrid();
-			this.dataGridViewTextBoxColumn27 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn28 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.VariablesTab = new System.Windows.Forms.TabPage();
 			this.HideUnrelatedVariablesCheckBox = new System.Windows.Forms.CheckBox();
-			this.VariablesGrid = new Xyrus.Apophysis.Windows.Controls.DragGrid();
-			this.dataGridViewTextBoxColumn29 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn30 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.PointTab = new System.Windows.Forms.TabPage();
 			this.mIteratorControlsGroupBox = new System.Windows.Forms.GroupBox();
 			this.IteratorScaleRatio = new System.Windows.Forms.ComboBox();
@@ -125,23 +117,20 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.PreviewDensityTrackBar = new System.Windows.Forms.TrackBar();
 			this.PreviewRangeTrackBar = new System.Windows.Forms.TrackBar();
 			this.mIteratorColorGroupBox = new System.Windows.Forms.GroupBox();
-			this.PaletteSelectComboBox = new Xyrus.Apophysis.Windows.Controls.PaletteSelectComboBox();
 			this.IteratorDirectColorTextBox = new System.Windows.Forms.TextBox();
-			this.IteratorDirectColorDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.IteratorOpacityTextBox = new System.Windows.Forms.TextBox();
-			this.IteratorOpacityDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.IteratorColorSpeedTextBox = new System.Windows.Forms.TextBox();
-			this.IteratorColorSpeedDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.IteratorColorScrollBar = new System.Windows.Forms.HScrollBar();
 			this.IteratorColorTextBox = new System.Windows.Forms.TextBox();
-			this.IteratorColorDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.mIteratorPropertyPanel = new System.Windows.Forms.Panel();
 			this.IteratorWeightTextBox = new System.Windows.Forms.TextBox();
-			this.IteratorWeightDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.IteratorNameTextBox = new System.Windows.Forms.TextBox();
 			this.mIteratorNameLabel = new System.Windows.Forms.Label();
-			this.IteratorSelectionComboBox = new Xyrus.Apophysis.Windows.Controls.IteratorSelectComboBox();
 			this.mIteratorSelectLabel = new System.Windows.Forms.Label();
+			this.dataGridViewTextBoxColumn27 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn28 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn29 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn30 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -169,6 +158,22 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.IteratorCanvas = new Xyrus.Apophysis.Windows.Controls.EditorCanvas();
+			this.mSettings = new Xyrus.Apophysis.Windows.Controls.EditorSettings();
+			this.VariationsGrid = new Xyrus.Apophysis.Windows.Controls.DragGrid();
+			this.dataGridViewTextBoxColumn31 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn32 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.VariablesGrid = new Xyrus.Apophysis.Windows.Controls.DragGrid();
+			this.dataGridViewTextBoxColumn33 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn34 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.PaletteSelectComboBox = new Xyrus.Apophysis.Windows.Controls.PaletteSelectComboBox();
+			this.IteratorDirectColorDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
+			this.IteratorOpacityDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
+			this.IteratorColorSpeedDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
+			this.IteratorColorDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
+			this.IteratorWeightDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
+			this.IteratorSelectionComboBox = new Xyrus.Apophysis.Windows.Controls.IteratorSelectComboBox();
+			this.ApplyPostTransformToVariationPreviewCheckBox = new System.Windows.Forms.CheckBox();
 			this.mRootSplitter.Panel1.SuspendLayout();
 			this.mRootSplitter.Panel2.SuspendLayout();
 			this.mRootSplitter.SuspendLayout();
@@ -181,9 +186,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mPreviewContextMenu.SuspendLayout();
 			this.Tabs.SuspendLayout();
 			this.VariationsTab.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.VariationsGrid)).BeginInit();
 			this.VariablesTab.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.VariablesGrid)).BeginInit();
 			this.PointTab.SuspendLayout();
 			this.mIteratorControlsGroupBox.SuspendLayout();
 			this.mPointCoordGroupBox.SuspendLayout();
@@ -196,6 +199,8 @@ namespace Xyrus.Apophysis.Windows.Forms
 			((System.ComponentModel.ISupportInitialize)(this.PreviewRangeTrackBar)).BeginInit();
 			this.mIteratorColorGroupBox.SuspendLayout();
 			this.mIteratorPropertyPanel.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.VariationsGrid)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.VariablesGrid)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// mRootSplitter
@@ -472,44 +477,6 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorConvertToFinalButton.Size = new System.Drawing.Size(23, 22);
 			this.IteratorConvertToFinalButton.Text = "Convert to final transform";
 			// 
-			// IteratorCanvas
-			// 
-			this.IteratorCanvas.ActiveMatrix = Xyrus.Apophysis.Windows.Controls.IteratorMatrix.PreAffine;
-			this.IteratorCanvas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.IteratorCanvas.BackColor = System.Drawing.Color.Black;
-			this.IteratorCanvas.BackdropColor = System.Drawing.Color.Transparent;
-			this.IteratorCanvas.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.IteratorCanvas.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.IteratorCanvas.ForeColor = System.Drawing.Color.White;
-			this.IteratorCanvas.GridLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-			this.IteratorCanvas.GridZeroLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(92)))), ((int)(((byte)(92)))), ((int)(((byte)(92)))));
-			this.IteratorCanvas.HighlightOrigin = true;
-			this.IteratorCanvas.Iterators = null;
-			this.IteratorCanvas.Location = new System.Drawing.Point(0, 24);
-			this.IteratorCanvas.Name = "IteratorCanvas";
-			this.IteratorCanvas.PreviewApplyPostTransform = false;
-			this.IteratorCanvas.PreviewDensity = 1D;
-			this.IteratorCanvas.PreviewRange = 1D;
-			this.IteratorCanvas.ReferenceColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-			this.IteratorCanvas.RulerBackdropColor = System.Drawing.Color.Transparent;
-			this.IteratorCanvas.RulerBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-			this.IteratorCanvas.RulerGridLineColor = System.Drawing.Color.Silver;
-			this.IteratorCanvas.Settings = this.mSettings;
-			this.IteratorCanvas.ShowRuler = true;
-			this.IteratorCanvas.Size = new System.Drawing.Size(711, 637);
-			this.IteratorCanvas.TabIndex = 1;
-			// 
-			// mSettings
-			// 
-			this.mSettings.AngleSnap = 15D;
-			this.mSettings.LockAxes = false;
-			this.mSettings.MoveAmount = 0.1D;
-			this.mSettings.ScaleSnap = 125D;
-			this.mSettings.ShowVariationPreview = false;
-			this.mSettings.ZoomAutomatically = false;
-			// 
 			// mSidebarSplitter
 			// 
 			this.mSidebarSplitter.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -646,48 +613,6 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.HideUnusedVariationsCheckBox.Text = "Hide unused variations";
 			this.HideUnusedVariationsCheckBox.UseVisualStyleBackColor = true;
 			// 
-			// VariationsGrid
-			// 
-			this.VariationsGrid.AllowUserToAddRows = false;
-			this.VariationsGrid.AllowUserToDeleteRows = false;
-			this.VariationsGrid.AllowUserToOrderColumns = true;
-			this.VariationsGrid.AllowUserToResizeRows = false;
-			this.VariationsGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.VariationsGrid.BackgroundColor = System.Drawing.SystemColors.Window;
-			this.VariationsGrid.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
-			this.VariationsGrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-			this.VariationsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.VariationsGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-			this.VariationsGrid.EnableHeadersVisualStyles = false;
-			this.VariationsGrid.GridColor = System.Drawing.SystemColors.ControlLight;
-			this.VariationsGrid.Location = new System.Drawing.Point(3, 3);
-			this.VariationsGrid.MultiSelect = false;
-			this.VariationsGrid.Name = "VariationsGrid";
-			this.VariationsGrid.ResetMode = Xyrus.Apophysis.Windows.Controls.DragGridResetMode.Toggle;
-			this.VariationsGrid.RowHeadersVisible = false;
-			this.VariationsGrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.VariationsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.VariationsGrid.ShowCellErrors = false;
-			this.VariationsGrid.ShowCellToolTips = false;
-			this.VariationsGrid.ShowEditingIcon = false;
-			this.VariationsGrid.ShowRowErrors = false;
-			this.VariationsGrid.Size = new System.Drawing.Size(279, 316);
-			this.VariationsGrid.TabIndex = 0;
-			// 
-			// dataGridViewTextBoxColumn27
-			// 
-			this.dataGridViewTextBoxColumn27.HeaderText = "Name";
-			this.dataGridViewTextBoxColumn27.Name = "dataGridViewTextBoxColumn27";
-			this.dataGridViewTextBoxColumn27.ReadOnly = true;
-			// 
-			// dataGridViewTextBoxColumn28
-			// 
-			this.dataGridViewTextBoxColumn28.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.dataGridViewTextBoxColumn28.HeaderText = "Value";
-			this.dataGridViewTextBoxColumn28.Name = "dataGridViewTextBoxColumn28";
-			// 
 			// VariablesTab
 			// 
 			this.VariablesTab.Controls.Add(this.HideUnrelatedVariablesCheckBox);
@@ -712,48 +637,6 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.HideUnrelatedVariablesCheckBox.TabIndex = 3;
 			this.HideUnrelatedVariablesCheckBox.Text = "Hide variables from unused variations";
 			this.HideUnrelatedVariablesCheckBox.UseVisualStyleBackColor = true;
-			// 
-			// VariablesGrid
-			// 
-			this.VariablesGrid.AllowUserToAddRows = false;
-			this.VariablesGrid.AllowUserToDeleteRows = false;
-			this.VariablesGrid.AllowUserToOrderColumns = true;
-			this.VariablesGrid.AllowUserToResizeRows = false;
-			this.VariablesGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.VariablesGrid.BackgroundColor = System.Drawing.SystemColors.Window;
-			this.VariablesGrid.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
-			this.VariablesGrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-			this.VariablesGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.VariablesGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-			this.VariablesGrid.EnableHeadersVisualStyles = false;
-			this.VariablesGrid.GridColor = System.Drawing.SystemColors.ControlLight;
-			this.VariablesGrid.Location = new System.Drawing.Point(3, 3);
-			this.VariablesGrid.MultiSelect = false;
-			this.VariablesGrid.Name = "VariablesGrid";
-			this.VariablesGrid.ResetMode = Xyrus.Apophysis.Windows.Controls.DragGridResetMode.Override;
-			this.VariablesGrid.RowHeadersVisible = false;
-			this.VariablesGrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.VariablesGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.VariablesGrid.ShowCellErrors = false;
-			this.VariablesGrid.ShowCellToolTips = false;
-			this.VariablesGrid.ShowEditingIcon = false;
-			this.VariablesGrid.ShowRowErrors = false;
-			this.VariablesGrid.Size = new System.Drawing.Size(279, 342);
-			this.VariablesGrid.TabIndex = 1;
-			// 
-			// dataGridViewTextBoxColumn29
-			// 
-			this.dataGridViewTextBoxColumn29.HeaderText = "Name";
-			this.dataGridViewTextBoxColumn29.Name = "dataGridViewTextBoxColumn29";
-			this.dataGridViewTextBoxColumn29.ReadOnly = true;
-			// 
-			// dataGridViewTextBoxColumn30
-			// 
-			this.dataGridViewTextBoxColumn30.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.dataGridViewTextBoxColumn30.HeaderText = "Value";
-			this.dataGridViewTextBoxColumn30.Name = "dataGridViewTextBoxColumn30";
 			// 
 			// PointTab
 			// 
@@ -1333,13 +1216,14 @@ namespace Xyrus.Apophysis.Windows.Forms
 			// 
 			this.mPreviewGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.mPreviewGroupBox.Controls.Add(this.ApplyPostTransformToVariationPreviewCheckBox);
 			this.mPreviewGroupBox.Controls.Add(this.mPreviewDensityLabel);
 			this.mPreviewGroupBox.Controls.Add(this.mPreviewRangeLabel);
 			this.mPreviewGroupBox.Controls.Add(this.PreviewDensityTrackBar);
 			this.mPreviewGroupBox.Controls.Add(this.PreviewRangeTrackBar);
 			this.mPreviewGroupBox.Location = new System.Drawing.Point(6, 200);
 			this.mPreviewGroupBox.Name = "mPreviewGroupBox";
-			this.mPreviewGroupBox.Size = new System.Drawing.Size(273, 127);
+			this.mPreviewGroupBox.Size = new System.Drawing.Size(273, 142);
 			this.mPreviewGroupBox.TabIndex = 1;
 			this.mPreviewGroupBox.TabStop = false;
 			this.mPreviewGroupBox.Text = "Variation preview";
@@ -1406,17 +1290,6 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mIteratorColorGroupBox.TabIndex = 0;
 			this.mIteratorColorGroupBox.TabStop = false;
 			// 
-			// PaletteSelectComboBox
-			// 
-			this.PaletteSelectComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-			this.PaletteSelectComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.PaletteSelectComboBox.FormattingEnabled = true;
-			this.PaletteSelectComboBox.ItemHeight = 15;
-			this.PaletteSelectComboBox.Location = new System.Drawing.Point(11, 62);
-			this.PaletteSelectComboBox.Name = "PaletteSelectComboBox";
-			this.PaletteSelectComboBox.Size = new System.Drawing.Size(251, 21);
-			this.PaletteSelectComboBox.TabIndex = 1;
-			// 
 			// IteratorDirectColorTextBox
 			// 
 			this.IteratorDirectColorTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -1426,25 +1299,6 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorDirectColorTextBox.Size = new System.Drawing.Size(143, 20);
 			this.IteratorDirectColorTextBox.TabIndex = 15;
 			this.IteratorDirectColorTextBox.Text = "1.000";
-			// 
-			// IteratorDirectColorDragPanel
-			// 
-			this.IteratorDirectColorDragPanel.BackColor = System.Drawing.SystemColors.Window;
-			this.IteratorDirectColorDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.IteratorDirectColorDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.IteratorDirectColorDragPanel.Default = 1D;
-			this.IteratorDirectColorDragPanel.DragStepping = 0.1D;
-			this.IteratorDirectColorDragPanel.ForeColor = System.Drawing.SystemColors.WindowText;
-			this.IteratorDirectColorDragPanel.Location = new System.Drawing.Point(11, 142);
-			this.IteratorDirectColorDragPanel.Maximum = 1D;
-			this.IteratorDirectColorDragPanel.Minimum = 0D;
-			this.IteratorDirectColorDragPanel.Name = "IteratorDirectColorDragPanel";
-			this.IteratorDirectColorDragPanel.Size = new System.Drawing.Size(107, 21);
-			this.IteratorDirectColorDragPanel.TabIndex = 14;
-			this.IteratorDirectColorDragPanel.Text = "Direct color:";
-			this.IteratorDirectColorDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.IteratorDirectColorDragPanel.TextBox = this.IteratorDirectColorTextBox;
-			this.IteratorDirectColorDragPanel.Value = 1D;
 			// 
 			// IteratorOpacityTextBox
 			// 
@@ -1456,25 +1310,6 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorOpacityTextBox.TabIndex = 13;
 			this.IteratorOpacityTextBox.Text = "1.000";
 			// 
-			// IteratorOpacityDragPanel
-			// 
-			this.IteratorOpacityDragPanel.BackColor = System.Drawing.SystemColors.Window;
-			this.IteratorOpacityDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.IteratorOpacityDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.IteratorOpacityDragPanel.Default = 1D;
-			this.IteratorOpacityDragPanel.DragStepping = 0.1D;
-			this.IteratorOpacityDragPanel.ForeColor = System.Drawing.SystemColors.WindowText;
-			this.IteratorOpacityDragPanel.Location = new System.Drawing.Point(11, 119);
-			this.IteratorOpacityDragPanel.Maximum = 1D;
-			this.IteratorOpacityDragPanel.Minimum = 0D;
-			this.IteratorOpacityDragPanel.Name = "IteratorOpacityDragPanel";
-			this.IteratorOpacityDragPanel.Size = new System.Drawing.Size(107, 21);
-			this.IteratorOpacityDragPanel.TabIndex = 12;
-			this.IteratorOpacityDragPanel.Text = "Opacity:";
-			this.IteratorOpacityDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.IteratorOpacityDragPanel.TextBox = this.IteratorOpacityTextBox;
-			this.IteratorOpacityDragPanel.Value = 1D;
-			// 
 			// IteratorColorSpeedTextBox
 			// 
 			this.IteratorColorSpeedTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -1484,25 +1319,6 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorColorSpeedTextBox.Size = new System.Drawing.Size(143, 20);
 			this.IteratorColorSpeedTextBox.TabIndex = 11;
 			this.IteratorColorSpeedTextBox.Text = "0.000";
-			// 
-			// IteratorColorSpeedDragPanel
-			// 
-			this.IteratorColorSpeedDragPanel.BackColor = System.Drawing.SystemColors.Window;
-			this.IteratorColorSpeedDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.IteratorColorSpeedDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.IteratorColorSpeedDragPanel.Default = 0D;
-			this.IteratorColorSpeedDragPanel.DragStepping = 0.1D;
-			this.IteratorColorSpeedDragPanel.ForeColor = System.Drawing.SystemColors.WindowText;
-			this.IteratorColorSpeedDragPanel.Location = new System.Drawing.Point(11, 96);
-			this.IteratorColorSpeedDragPanel.Maximum = 1D;
-			this.IteratorColorSpeedDragPanel.Minimum = -1D;
-			this.IteratorColorSpeedDragPanel.Name = "IteratorColorSpeedDragPanel";
-			this.IteratorColorSpeedDragPanel.Size = new System.Drawing.Size(107, 21);
-			this.IteratorColorSpeedDragPanel.TabIndex = 10;
-			this.IteratorColorSpeedDragPanel.Text = "Color speed:";
-			this.IteratorColorSpeedDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.IteratorColorSpeedDragPanel.TextBox = this.IteratorColorSpeedTextBox;
-			this.IteratorColorSpeedDragPanel.Value = 0D;
 			// 
 			// IteratorColorScrollBar
 			// 
@@ -1524,23 +1340,6 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorColorTextBox.Size = new System.Drawing.Size(204, 20);
 			this.IteratorColorTextBox.TabIndex = 7;
 			this.IteratorColorTextBox.Text = "0.000";
-			// 
-			// IteratorColorDragPanel
-			// 
-			this.IteratorColorDragPanel.BackColor = System.Drawing.Color.Black;
-			this.IteratorColorDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.IteratorColorDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.IteratorColorDragPanel.Default = 0D;
-			this.IteratorColorDragPanel.DragStepping = 0.1D;
-			this.IteratorColorDragPanel.Location = new System.Drawing.Point(11, 19);
-			this.IteratorColorDragPanel.Maximum = 1D;
-			this.IteratorColorDragPanel.Minimum = 0D;
-			this.IteratorColorDragPanel.Name = "IteratorColorDragPanel";
-			this.IteratorColorDragPanel.Size = new System.Drawing.Size(43, 21);
-			this.IteratorColorDragPanel.TabIndex = 6;
-			this.IteratorColorDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.IteratorColorDragPanel.TextBox = this.IteratorColorTextBox;
-			this.IteratorColorDragPanel.Value = 0D;
 			// 
 			// mIteratorPropertyPanel
 			// 
@@ -1566,25 +1365,6 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorWeightTextBox.TabIndex = 5;
 			this.IteratorWeightTextBox.Text = "0.500";
 			// 
-			// IteratorWeightDragPanel
-			// 
-			this.IteratorWeightDragPanel.BackColor = System.Drawing.SystemColors.Control;
-			this.IteratorWeightDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.IteratorWeightDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.IteratorWeightDragPanel.Default = 0.5D;
-			this.IteratorWeightDragPanel.DragStepping = 0.1D;
-			this.IteratorWeightDragPanel.ForeColor = System.Drawing.SystemColors.WindowText;
-			this.IteratorWeightDragPanel.Location = new System.Drawing.Point(3, 47);
-			this.IteratorWeightDragPanel.Maximum = 1000D;
-			this.IteratorWeightDragPanel.Minimum = 0.001D;
-			this.IteratorWeightDragPanel.Name = "IteratorWeightDragPanel";
-			this.IteratorWeightDragPanel.Size = new System.Drawing.Size(110, 21);
-			this.IteratorWeightDragPanel.TabIndex = 4;
-			this.IteratorWeightDragPanel.Text = "Weight:";
-			this.IteratorWeightDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.IteratorWeightDragPanel.TextBox = this.IteratorWeightTextBox;
-			this.IteratorWeightDragPanel.Value = 0.5D;
-			// 
 			// IteratorNameTextBox
 			// 
 			this.IteratorNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -1607,23 +1387,6 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mIteratorNameLabel.Text = "Name:";
 			this.mIteratorNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
-			// IteratorSelectionComboBox
-			// 
-			this.IteratorSelectionComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.IteratorSelectionComboBox.BackColor = System.Drawing.Color.Black;
-			this.IteratorSelectionComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-			this.IteratorSelectionComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.IteratorSelectionComboBox.Flame = null;
-			this.IteratorSelectionComboBox.ForeColor = System.Drawing.Color.White;
-			this.IteratorSelectionComboBox.FormattingEnabled = true;
-			this.IteratorSelectionComboBox.ItemHeight = 15;
-			this.IteratorSelectionComboBox.Location = new System.Drawing.Point(113, 0);
-			this.IteratorSelectionComboBox.MaxDropDownItems = 20;
-			this.IteratorSelectionComboBox.Name = "IteratorSelectionComboBox";
-			this.IteratorSelectionComboBox.Size = new System.Drawing.Size(179, 21);
-			this.IteratorSelectionComboBox.TabIndex = 1;
-			// 
 			// mIteratorSelectLabel
 			// 
 			this.mIteratorSelectLabel.BackColor = System.Drawing.SystemColors.Control;
@@ -1636,6 +1399,30 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mIteratorSelectLabel.TabIndex = 0;
 			this.mIteratorSelectLabel.Text = "Transform:";
 			this.mIteratorSelectLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// dataGridViewTextBoxColumn27
+			// 
+			this.dataGridViewTextBoxColumn27.HeaderText = "Name";
+			this.dataGridViewTextBoxColumn27.Name = "dataGridViewTextBoxColumn27";
+			this.dataGridViewTextBoxColumn27.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn28
+			// 
+			this.dataGridViewTextBoxColumn28.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.dataGridViewTextBoxColumn28.HeaderText = "Value";
+			this.dataGridViewTextBoxColumn28.Name = "dataGridViewTextBoxColumn28";
+			// 
+			// dataGridViewTextBoxColumn29
+			// 
+			this.dataGridViewTextBoxColumn29.HeaderText = "Name";
+			this.dataGridViewTextBoxColumn29.Name = "dataGridViewTextBoxColumn29";
+			this.dataGridViewTextBoxColumn29.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn30
+			// 
+			this.dataGridViewTextBoxColumn30.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.dataGridViewTextBoxColumn30.HeaderText = "Value";
+			this.dataGridViewTextBoxColumn30.Name = "dataGridViewTextBoxColumn30";
 			// 
 			// dataGridViewTextBoxColumn23
 			// 
@@ -1823,6 +1610,260 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.dataGridViewTextBoxColumn22.HeaderText = "Value";
 			this.dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
 			// 
+			// IteratorCanvas
+			// 
+			this.IteratorCanvas.ActiveMatrix = Xyrus.Apophysis.Windows.Controls.IteratorMatrix.PreAffine;
+			this.IteratorCanvas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.IteratorCanvas.BackColor = System.Drawing.Color.Black;
+			this.IteratorCanvas.BackdropColor = System.Drawing.Color.Transparent;
+			this.IteratorCanvas.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.IteratorCanvas.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.IteratorCanvas.ForeColor = System.Drawing.Color.White;
+			this.IteratorCanvas.GridLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+			this.IteratorCanvas.GridZeroLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(92)))), ((int)(((byte)(92)))), ((int)(((byte)(92)))));
+			this.IteratorCanvas.HighlightOrigin = true;
+			this.IteratorCanvas.Iterators = null;
+			this.IteratorCanvas.Location = new System.Drawing.Point(0, 24);
+			this.IteratorCanvas.Name = "IteratorCanvas";
+			this.IteratorCanvas.PreviewApplyPostTransform = false;
+			this.IteratorCanvas.PreviewDensity = 1D;
+			this.IteratorCanvas.PreviewRange = 1D;
+			this.IteratorCanvas.ReferenceColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+			this.IteratorCanvas.RulerBackdropColor = System.Drawing.Color.Transparent;
+			this.IteratorCanvas.RulerBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+			this.IteratorCanvas.RulerGridLineColor = System.Drawing.Color.Silver;
+			this.IteratorCanvas.Settings = this.mSettings;
+			this.IteratorCanvas.ShowRuler = true;
+			this.IteratorCanvas.Size = new System.Drawing.Size(711, 637);
+			this.IteratorCanvas.TabIndex = 1;
+			// 
+			// mSettings
+			// 
+			this.mSettings.AngleSnap = 15D;
+			this.mSettings.LockAxes = false;
+			this.mSettings.MoveAmount = 0.1D;
+			this.mSettings.ScaleSnap = 125D;
+			this.mSettings.ShowVariationPreview = false;
+			this.mSettings.ZoomAutomatically = false;
+			// 
+			// VariationsGrid
+			// 
+			this.VariationsGrid.AllowUserToAddRows = false;
+			this.VariationsGrid.AllowUserToDeleteRows = false;
+			this.VariationsGrid.AllowUserToOrderColumns = true;
+			this.VariationsGrid.AllowUserToResizeRows = false;
+			this.VariationsGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.VariationsGrid.BackgroundColor = System.Drawing.SystemColors.Window;
+			this.VariationsGrid.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
+			this.VariationsGrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+			this.VariationsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.VariationsGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+			this.VariationsGrid.EnableHeadersVisualStyles = false;
+			this.VariationsGrid.GridColor = System.Drawing.SystemColors.ControlLight;
+			this.VariationsGrid.Location = new System.Drawing.Point(3, 3);
+			this.VariationsGrid.MultiSelect = false;
+			this.VariationsGrid.Name = "VariationsGrid";
+			this.VariationsGrid.ResetMode = Xyrus.Apophysis.Windows.Controls.DragGridResetMode.Toggle;
+			this.VariationsGrid.RowHeadersVisible = false;
+			this.VariationsGrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.VariationsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.VariationsGrid.ShowCellErrors = false;
+			this.VariationsGrid.ShowCellToolTips = false;
+			this.VariationsGrid.ShowEditingIcon = false;
+			this.VariationsGrid.ShowRowErrors = false;
+			this.VariationsGrid.Size = new System.Drawing.Size(279, 316);
+			this.VariationsGrid.TabIndex = 0;
+			// 
+			// dataGridViewTextBoxColumn31
+			// 
+			this.dataGridViewTextBoxColumn31.HeaderText = "Name";
+			this.dataGridViewTextBoxColumn31.Name = "dataGridViewTextBoxColumn31";
+			this.dataGridViewTextBoxColumn31.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn32
+			// 
+			this.dataGridViewTextBoxColumn32.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.dataGridViewTextBoxColumn32.HeaderText = "Value";
+			this.dataGridViewTextBoxColumn32.Name = "dataGridViewTextBoxColumn32";
+			// 
+			// VariablesGrid
+			// 
+			this.VariablesGrid.AllowUserToAddRows = false;
+			this.VariablesGrid.AllowUserToDeleteRows = false;
+			this.VariablesGrid.AllowUserToOrderColumns = true;
+			this.VariablesGrid.AllowUserToResizeRows = false;
+			this.VariablesGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.VariablesGrid.BackgroundColor = System.Drawing.SystemColors.Window;
+			this.VariablesGrid.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
+			this.VariablesGrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+			this.VariablesGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.VariablesGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+			this.VariablesGrid.EnableHeadersVisualStyles = false;
+			this.VariablesGrid.GridColor = System.Drawing.SystemColors.ControlLight;
+			this.VariablesGrid.Location = new System.Drawing.Point(3, 3);
+			this.VariablesGrid.MultiSelect = false;
+			this.VariablesGrid.Name = "VariablesGrid";
+			this.VariablesGrid.ResetMode = Xyrus.Apophysis.Windows.Controls.DragGridResetMode.Override;
+			this.VariablesGrid.RowHeadersVisible = false;
+			this.VariablesGrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.VariablesGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.VariablesGrid.ShowCellErrors = false;
+			this.VariablesGrid.ShowCellToolTips = false;
+			this.VariablesGrid.ShowEditingIcon = false;
+			this.VariablesGrid.ShowRowErrors = false;
+			this.VariablesGrid.Size = new System.Drawing.Size(279, 342);
+			this.VariablesGrid.TabIndex = 1;
+			// 
+			// dataGridViewTextBoxColumn33
+			// 
+			this.dataGridViewTextBoxColumn33.HeaderText = "Name";
+			this.dataGridViewTextBoxColumn33.Name = "dataGridViewTextBoxColumn33";
+			this.dataGridViewTextBoxColumn33.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn34
+			// 
+			this.dataGridViewTextBoxColumn34.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.dataGridViewTextBoxColumn34.HeaderText = "Value";
+			this.dataGridViewTextBoxColumn34.Name = "dataGridViewTextBoxColumn34";
+			// 
+			// PaletteSelectComboBox
+			// 
+			this.PaletteSelectComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+			this.PaletteSelectComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.PaletteSelectComboBox.FormattingEnabled = true;
+			this.PaletteSelectComboBox.ItemHeight = 15;
+			this.PaletteSelectComboBox.Location = new System.Drawing.Point(11, 62);
+			this.PaletteSelectComboBox.Name = "PaletteSelectComboBox";
+			this.PaletteSelectComboBox.Size = new System.Drawing.Size(251, 21);
+			this.PaletteSelectComboBox.TabIndex = 1;
+			// 
+			// IteratorDirectColorDragPanel
+			// 
+			this.IteratorDirectColorDragPanel.BackColor = System.Drawing.SystemColors.Window;
+			this.IteratorDirectColorDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.IteratorDirectColorDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.IteratorDirectColorDragPanel.Default = 1D;
+			this.IteratorDirectColorDragPanel.DragStepping = 0.1D;
+			this.IteratorDirectColorDragPanel.ForeColor = System.Drawing.SystemColors.WindowText;
+			this.IteratorDirectColorDragPanel.Location = new System.Drawing.Point(11, 142);
+			this.IteratorDirectColorDragPanel.Maximum = 1D;
+			this.IteratorDirectColorDragPanel.Minimum = 0D;
+			this.IteratorDirectColorDragPanel.Name = "IteratorDirectColorDragPanel";
+			this.IteratorDirectColorDragPanel.Size = new System.Drawing.Size(107, 21);
+			this.IteratorDirectColorDragPanel.TabIndex = 14;
+			this.IteratorDirectColorDragPanel.Text = "Direct color:";
+			this.IteratorDirectColorDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.IteratorDirectColorDragPanel.TextBox = this.IteratorDirectColorTextBox;
+			this.IteratorDirectColorDragPanel.Value = 1D;
+			// 
+			// IteratorOpacityDragPanel
+			// 
+			this.IteratorOpacityDragPanel.BackColor = System.Drawing.SystemColors.Window;
+			this.IteratorOpacityDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.IteratorOpacityDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.IteratorOpacityDragPanel.Default = 1D;
+			this.IteratorOpacityDragPanel.DragStepping = 0.1D;
+			this.IteratorOpacityDragPanel.ForeColor = System.Drawing.SystemColors.WindowText;
+			this.IteratorOpacityDragPanel.Location = new System.Drawing.Point(11, 119);
+			this.IteratorOpacityDragPanel.Maximum = 1D;
+			this.IteratorOpacityDragPanel.Minimum = 0D;
+			this.IteratorOpacityDragPanel.Name = "IteratorOpacityDragPanel";
+			this.IteratorOpacityDragPanel.Size = new System.Drawing.Size(107, 21);
+			this.IteratorOpacityDragPanel.TabIndex = 12;
+			this.IteratorOpacityDragPanel.Text = "Opacity:";
+			this.IteratorOpacityDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.IteratorOpacityDragPanel.TextBox = this.IteratorOpacityTextBox;
+			this.IteratorOpacityDragPanel.Value = 1D;
+			// 
+			// IteratorColorSpeedDragPanel
+			// 
+			this.IteratorColorSpeedDragPanel.BackColor = System.Drawing.SystemColors.Window;
+			this.IteratorColorSpeedDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.IteratorColorSpeedDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.IteratorColorSpeedDragPanel.Default = 0D;
+			this.IteratorColorSpeedDragPanel.DragStepping = 0.1D;
+			this.IteratorColorSpeedDragPanel.ForeColor = System.Drawing.SystemColors.WindowText;
+			this.IteratorColorSpeedDragPanel.Location = new System.Drawing.Point(11, 96);
+			this.IteratorColorSpeedDragPanel.Maximum = 1D;
+			this.IteratorColorSpeedDragPanel.Minimum = -1D;
+			this.IteratorColorSpeedDragPanel.Name = "IteratorColorSpeedDragPanel";
+			this.IteratorColorSpeedDragPanel.Size = new System.Drawing.Size(107, 21);
+			this.IteratorColorSpeedDragPanel.TabIndex = 10;
+			this.IteratorColorSpeedDragPanel.Text = "Color speed:";
+			this.IteratorColorSpeedDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.IteratorColorSpeedDragPanel.TextBox = this.IteratorColorSpeedTextBox;
+			this.IteratorColorSpeedDragPanel.Value = 0D;
+			// 
+			// IteratorColorDragPanel
+			// 
+			this.IteratorColorDragPanel.BackColor = System.Drawing.Color.Black;
+			this.IteratorColorDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.IteratorColorDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.IteratorColorDragPanel.Default = 0D;
+			this.IteratorColorDragPanel.DragStepping = 0.1D;
+			this.IteratorColorDragPanel.Location = new System.Drawing.Point(11, 19);
+			this.IteratorColorDragPanel.Maximum = 1D;
+			this.IteratorColorDragPanel.Minimum = 0D;
+			this.IteratorColorDragPanel.Name = "IteratorColorDragPanel";
+			this.IteratorColorDragPanel.Size = new System.Drawing.Size(43, 21);
+			this.IteratorColorDragPanel.TabIndex = 6;
+			this.IteratorColorDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.IteratorColorDragPanel.TextBox = this.IteratorColorTextBox;
+			this.IteratorColorDragPanel.Value = 0D;
+			// 
+			// IteratorWeightDragPanel
+			// 
+			this.IteratorWeightDragPanel.BackColor = System.Drawing.SystemColors.Control;
+			this.IteratorWeightDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.IteratorWeightDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.IteratorWeightDragPanel.Default = 0.5D;
+			this.IteratorWeightDragPanel.DragStepping = 0.1D;
+			this.IteratorWeightDragPanel.ForeColor = System.Drawing.SystemColors.WindowText;
+			this.IteratorWeightDragPanel.Location = new System.Drawing.Point(3, 47);
+			this.IteratorWeightDragPanel.Maximum = 1000D;
+			this.IteratorWeightDragPanel.Minimum = 0.001D;
+			this.IteratorWeightDragPanel.Name = "IteratorWeightDragPanel";
+			this.IteratorWeightDragPanel.Size = new System.Drawing.Size(110, 21);
+			this.IteratorWeightDragPanel.TabIndex = 4;
+			this.IteratorWeightDragPanel.Text = "Weight:";
+			this.IteratorWeightDragPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.IteratorWeightDragPanel.TextBox = this.IteratorWeightTextBox;
+			this.IteratorWeightDragPanel.Value = 0.5D;
+			// 
+			// IteratorSelectionComboBox
+			// 
+			this.IteratorSelectionComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.IteratorSelectionComboBox.BackColor = System.Drawing.Color.Black;
+			this.IteratorSelectionComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+			this.IteratorSelectionComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.IteratorSelectionComboBox.Flame = null;
+			this.IteratorSelectionComboBox.ForeColor = System.Drawing.Color.White;
+			this.IteratorSelectionComboBox.FormattingEnabled = true;
+			this.IteratorSelectionComboBox.ItemHeight = 15;
+			this.IteratorSelectionComboBox.Location = new System.Drawing.Point(113, 0);
+			this.IteratorSelectionComboBox.MaxDropDownItems = 20;
+			this.IteratorSelectionComboBox.Name = "IteratorSelectionComboBox";
+			this.IteratorSelectionComboBox.Size = new System.Drawing.Size(179, 21);
+			this.IteratorSelectionComboBox.TabIndex = 1;
+			// 
+			// ApplyPostTransformToVariationPreviewCheckBox
+			// 
+			this.ApplyPostTransformToVariationPreviewCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.ApplyPostTransformToVariationPreviewCheckBox.Location = new System.Drawing.Point(13, 101);
+			this.ApplyPostTransformToVariationPreviewCheckBox.Name = "ApplyPostTransformToVariationPreviewCheckBox";
+			this.ApplyPostTransformToVariationPreviewCheckBox.Size = new System.Drawing.Size(249, 35);
+			this.ApplyPostTransformToVariationPreviewCheckBox.TabIndex = 4;
+			this.ApplyPostTransformToVariationPreviewCheckBox.Text = "Apply post-transform";
+			this.ApplyPostTransformToVariationPreviewCheckBox.UseVisualStyleBackColor = true;
+			// 
 			// Editor
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1848,10 +1889,8 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.Tabs.ResumeLayout(false);
 			this.VariationsTab.ResumeLayout(false);
 			this.VariationsTab.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.VariationsGrid)).EndInit();
 			this.VariablesTab.ResumeLayout(false);
 			this.VariablesTab.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.VariablesGrid)).EndInit();
 			this.PointTab.ResumeLayout(false);
 			this.mIteratorControlsGroupBox.ResumeLayout(false);
 			this.mPointCoordGroupBox.ResumeLayout(false);
@@ -1870,6 +1909,8 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mIteratorColorGroupBox.PerformLayout();
 			this.mIteratorPropertyPanel.ResumeLayout(false);
 			this.mIteratorPropertyPanel.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.VariationsGrid)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.VariablesGrid)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -2026,6 +2067,11 @@ namespace Xyrus.Apophysis.Windows.Forms
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn28;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn29;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn30;
+		public System.Windows.Forms.CheckBox ApplyPostTransformToVariationPreviewCheckBox;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn31;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn32;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn33;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn34;
 	}
 }
 

@@ -64,10 +64,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		protected override void AttachView()
 		{
-			View.ShowGuidelines = ApophysisSettings.MainPreviewShowGuidelines;
-			View.ShowTransparency = ApophysisSettings.MainPreviewShowTransparency;
-			View.CameraEditMode = ApophysisSettings.CameraEditMode;
-			View.CameraEditUseScale = ApophysisSettings.CameraEditUseScale;
+			View.ShowGuidelines = ApophysisSettings.View.ShowGuidelines;
+			View.ShowTransparency = ApophysisSettings.View.ShowTransparency;
+			View.CameraEditMode = ApophysisSettings.Editor.CameraEditMode;
+			View.CameraEditUseScale = ApophysisSettings.Editor.CameraEditUseScale;
 
 			View.PreviewDensityComboBox.SelectedIndexChanged += OnDensityChanged;
 			View.PreviewDensityComboBox.LostFocus += OnDensityChanged;
@@ -82,8 +82,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			using (mParent.Initializer.Enter())
 			{
-				PreviewDensity = ApophysisSettings.MainPreviewDensity;
-				FitImage = ApophysisSettings.MainPreviewFitImage;
+				PreviewDensity = (int)ApophysisSettings.Preview.MainPreviewDensity;
+				FitImage = ApophysisSettings.View.FitMainPreviewImage;
 			}
 		}
 		protected override void DetachView()
@@ -101,12 +101,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mRenderer.Progress -= OnRendererProgress;
 			mRenderer.Exit -= OnRendererExit;
 
-			ApophysisSettings.MainPreviewDensity = PreviewDensity;
-			ApophysisSettings.MainPreviewShowGuidelines = View.ShowGuidelines;
-			ApophysisSettings.MainPreviewShowTransparency = View.ShowTransparency;
-			ApophysisSettings.MainPreviewFitImage = FitImage;
-			ApophysisSettings.CameraEditMode = View.CameraEditMode;
-			ApophysisSettings.CameraEditUseScale = View.CameraEditUseScale;
+			ApophysisSettings.Preview.MainPreviewDensity = PreviewDensity;
+			ApophysisSettings.View.ShowGuidelines = View.ShowGuidelines;
+			ApophysisSettings.View.ShowTransparency = View.ShowTransparency;
+			ApophysisSettings.View.FitMainPreviewImage = FitImage;
+			ApophysisSettings.Editor.CameraEditMode = View.CameraEditMode;
+			ApophysisSettings.Editor.CameraEditUseScale = View.CameraEditUseScale;
 		}
 
 		private void SetProgress(double progress)

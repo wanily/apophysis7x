@@ -65,7 +65,7 @@ namespace Xyrus.Apophysis.Models
 				if (string.IsNullOrEmpty(mName) || string.IsNullOrEmpty(mName.Trim()))
 				{
 					var today = DateTime.Today;
-					return ApophysisSettings.NamePrefix + @"-" +
+					return ApophysisSettings.Common.NamePrefix + @"-" +
 						today.Year.ToString(CultureInfo.InvariantCulture).PadLeft(4, '0') +
 						today.Month.ToString(CultureInfo.InvariantCulture).PadLeft(2, '0') +
 						today.Day.ToString(CultureInfo.InvariantCulture).PadLeft(2, '0') + @"-" +
@@ -187,7 +187,7 @@ namespace Xyrus.Apophysis.Models
 
 			if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(name.Trim()))
 			{
-				name = ApophysisSettings.NamePrefix + @"-" +
+				name = ApophysisSettings.Common.NamePrefix + @"-" +
 					today.Year.ToString(CultureInfo.InvariantCulture).PadLeft(4, '0') +
 					today.Month.ToString(CultureInfo.InvariantCulture).PadLeft(2, '0') +
 					today.Day.ToString(CultureInfo.InvariantCulture).PadLeft(2, '0') + @"-" +

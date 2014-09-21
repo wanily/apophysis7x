@@ -332,7 +332,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		public void RestoreAutosaveBatch(string targetPath)
 		{
-			var path = Environment.ExpandEnvironmentVariables(ApophysisSettings.AutosavePath);
+			var path = Environment.ExpandEnvironmentVariables(ApophysisSettings.Autosave.TargetPath);
 			if (!File.Exists(path))
 				throw new FileNotFoundException();
 

@@ -76,8 +76,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		protected override void AttachView()
 		{
-			View.RootSplitter.SplitterDistance = ApophysisSettings.BatchListSize;
-			View.RootSplitter.Panel1Collapsed = !ApophysisSettings.IsBatchListVisible;
+			View.RootSplitter.SplitterDistance = ApophysisSettings.View.BatchListSize;
+			View.RootSplitter.Panel1Collapsed = !ApophysisSettings.View.IsBatchListVisible;
 			View.BatchListView.LargeImageList = mPreviewImages;
 
 			mParent.UndoController.CurrentReplaced += OnCurrentFlameReplaced;
@@ -89,9 +89,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			using (mParent.Initializer.Enter())
 			{
-				IsIconViewEnabled = ApophysisSettings.BatchListUsePreviews;
-				ListPreviewSize = ApophysisSettings.BatchListPreviewSize;
-				ListPreviewDensity = ApophysisSettings.BatchListPreviewDensity;
+				IsIconViewEnabled = ApophysisSettings.View.BatchListUsePreviews;
+				ListPreviewSize = ApophysisSettings.View.BatchListPreviewSize;
+				ListPreviewDensity = ApophysisSettings.Preview.BatchListPreviewDensity;
 			}
 
 			mWaitImage = WaitImageController.DrawWaitImage(new Size(mPreviewSize, mPreviewSize), Color.Black, Color.White);
@@ -107,11 +107,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.BatchListView.SizeChanged -= OnListResized;
 			View.CameraChanged -= OnCameraChanged;
 
-			ApophysisSettings.BatchListUsePreviews = mIsIconViewEnabled;
-			ApophysisSettings.BatchListPreviewSize = mPreviewSize;
-			ApophysisSettings.BatchListPreviewDensity = mPreviewDensity;
-			ApophysisSettings.IsBatchListVisible = !View.RootSplitter.Panel1Collapsed;
-			ApophysisSettings.BatchListSize = View.RootSplitter.SplitterDistance;
+			ApophysisSettings.View.BatchListUsePreviews = mIsIconViewEnabled;
+			ApophysisSettings.View.BatchListPreviewSize = mPreviewSize;
+			ApophysisSettings.Preview.BatchListPreviewDensity = mPreviewDensity;
+			ApophysisSettings.View.IsBatchListVisible = !View.RootSplitter.Panel1Collapsed;
+			ApophysisSettings.View.BatchListSize = View.RootSplitter.SplitterDistance;
 		}
 
 		public void BuildFlameList()
@@ -235,7 +235,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 					throw new ArgumentOutOfRangeException();
 
 				mPreviewDensity = value;
-				mIconUpdateTimeLock.Delay = (int) (ApophysisSettings.MiniPreviewUpdateResolution*value);
+				mIconUpdateTimeLock.Delay = (int)(ApophysisSettings.Preview.MiniPreviewUpdateResolution * value);
 
 				if (mParent.Initializer.IsBusy)
 					return;

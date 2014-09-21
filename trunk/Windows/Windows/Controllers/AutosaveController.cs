@@ -35,7 +35,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 		private void OnChangeCommitted(object sender, EventArgs e)
 		{
-			if (mTimer.GetElapsedTimeInSeconds() < ApophysisSettings.AutosaveThreshold)
+			if (mTimer.GetElapsedTimeInSeconds() < ApophysisSettings.Autosave.Threshold)
 				return;
 
 			var flame = mParent.BatchListController.GetSelectedFlame();
@@ -48,7 +48,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		public void ForceCommit(Flame flame, string name)
 		{
-			var path = Environment.ExpandEnvironmentVariables(ApophysisSettings.AutosavePath);
+			var path = Environment.ExpandEnvironmentVariables(ApophysisSettings.Autosave.TargetPath);
 
 			flame = flame.Copy();
 			flame.Name = name;

@@ -85,7 +85,7 @@ namespace Xyrus.Apophysis.Models
 				if (string.IsNullOrEmpty(mName) || string.IsNullOrEmpty(mName.Trim()))
 				{
 					var today = DateTime.Today;
-					return ApophysisSettings.NamePrefix + @"-" +
+					return ApophysisSettings.Common.NamePrefix + @"-" +
 						today.Year.ToString(CultureInfo.InvariantCulture).PadLeft(4, '0') +
 						today.Month.ToString(CultureInfo.InvariantCulture).PadLeft(2, '0') +
 						today.Day.ToString(CultureInfo.InvariantCulture).PadLeft(2, '0') + @"-" +
@@ -320,7 +320,7 @@ namespace Xyrus.Apophysis.Models
 			XElement paletteElement;
 			
 			element.Add(new XAttribute(XName.Get("name"), CalculatedName));
-			element.Add(new XAttribute(XName.Get("version"), ApophysisSettings.FlameExportVersionString));
+			element.Add(new XAttribute(XName.Get("version"), ApophysisSettings.Common.FlameExportVersionString));
 			element.Add(new XAttribute(XName.Get("size"), CanvasSize.Serialize()));
 			element.Add(new XAttribute(XName.Get("center"), Origin.Serialize()));
 			element.Add(new XAttribute(XName.Get("scale"), PixelsPerUnit.Serialize()));

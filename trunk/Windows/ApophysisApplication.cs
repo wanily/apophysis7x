@@ -46,7 +46,7 @@ namespace Xyrus.Apophysis
 		{
 			mBanner.BannerText = "Loading variations";
 
-			Variation.VariationsIn15CStyle = ApophysisSettings.VariationsIn15CStyle;
+			Variation.VariationsIn15CStyle = ApophysisSettings.Common.VariationsIn15CStyle;
 
 			var types = typeof(Linear).Assembly.GetTypes();
 			var registerMethod = typeof(VariationRegistry).GetMethod("Register", BindingFlags.Static | BindingFlags.Public);
@@ -70,7 +70,7 @@ namespace Xyrus.Apophysis
 #endif
 			}
 
-			var pluginDir = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath) ?? string.Empty, ApophysisSettings.PluginDirectoryName);
+			var pluginDir = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath) ?? string.Empty, ApophysisSettings.Common.PluginDirectoryName);
 			if (Directory.Exists(pluginDir))
 			{
 				var files = Directory.GetFiles(pluginDir);

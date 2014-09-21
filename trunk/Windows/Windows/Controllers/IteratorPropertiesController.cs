@@ -25,11 +25,13 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			View.PreviewDensityTrackBar.ValueChanged += OnDensityChanged;
 			View.PreviewRangeTrackBar.ValueChanged += OnRangeChanged;
+			View.ApplyPostTransformToVariationPreviewCheckBox.Click += OnApplyPostTransformClick;
 
 			using (mParent.Initializer.Enter())
 			{
 				View.PreviewDensityTrackBar.Value = (int)View.IteratorCanvas.PreviewDensity;
 				View.PreviewRangeTrackBar.Value = (int) View.IteratorCanvas.PreviewRange;
+				View.ApplyPostTransformToVariationPreviewCheckBox.Checked = ApophysisSettings.Editor.VariationPreviewApplyPostTransform;
 			}
 		}
 		protected override void DetachView()
@@ -39,6 +41,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			View.PreviewDensityTrackBar.ValueChanged -= OnDensityChanged;
 			View.PreviewRangeTrackBar.ValueChanged -= OnRangeChanged;
+			View.ApplyPostTransformToVariationPreviewCheckBox.Click -= OnApplyPostTransformClick;
+
+			ApophysisSettings.Editor.VariationPreviewApplyPostTransform = View.ApplyPostTransformToVariationPreviewCheckBox.Checked;
 		}
 
 		private void OnNameChanged(object sender, EventArgs e)
@@ -75,6 +80,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			if (mParent.Initializer.IsBusy)
 				return;
 			View.IteratorCanvas.PreviewRange = View.PreviewRangeTrackBar.Value;
+		}
+		private void OnApplyPostTransformClick(object sender, EventArgs e)
+		{
+			View.IteratorCanvas.PreviewApplyPostTransform = View.ApplyPostTransformToVariationPreviewCheckBox.Checked;
 		}
 	}
 }

@@ -102,7 +102,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 		private void OnEndParsing(object sender, EventArgs e)
 		{
-			if (!ApophysisSettings.ShowUnknownAttributesMessage || mUnknownAttributes.Count == 0)
+			if (!ApophysisSettings.Common.ShowUnknownAttributesMessage || mUnknownAttributes.Count == 0)
 			{
 				return;
 			}

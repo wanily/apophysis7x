@@ -28,12 +28,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		protected override void AttachView()
 		{
-			Preset1 = ApophysisSettings.SizePreset1;
-			Preset2 = ApophysisSettings.SizePreset2;
-			Preset3 = ApophysisSettings.SizePreset3;
+			Preset1 = ApophysisSettings.Preview.SizePreset1;
+			Preset2 = ApophysisSettings.Preview.SizePreset2;
+			Preset3 = ApophysisSettings.Preview.SizePreset3;
 
-			View.MaintainAspectRatioCheckBox.Checked = ApophysisSettings.MaintainCanvasAspectRatio;
-			View.ResizeMainWindowCheckBox.Checked = ApophysisSettings.SyncMainWindowWithCanvasSize;
+			View.MaintainAspectRatioCheckBox.Checked = ApophysisSettings.View.MaintainCanvasAspectRatio;
+			View.ResizeMainWindowCheckBox.Checked = ApophysisSettings.View.SyncMainWindowWithCanvasSize;
 
 			View.WidthComboBox.TextChanged += OnWidthChanged;
 			View.HeightComboBox.TextChanged += OnHeightChanged;
@@ -55,12 +55,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 		protected override void DetachView()
 		{
-			ApophysisSettings.SizePreset1 = Preset1;
-			ApophysisSettings.SizePreset2 = Preset2;
-			ApophysisSettings.SizePreset3 = Preset3;
+			ApophysisSettings.Preview.SizePreset1 = Preset1;
+			ApophysisSettings.Preview.SizePreset2 = Preset2;
+			ApophysisSettings.Preview.SizePreset3 = Preset3;
 
-			ApophysisSettings.MaintainCanvasAspectRatio = View.MaintainAspectRatioCheckBox.Checked;
-			ApophysisSettings.SyncMainWindowWithCanvasSize = View.ResizeMainWindowCheckBox.Checked;
+			ApophysisSettings.View.MaintainCanvasAspectRatio = View.MaintainAspectRatioCheckBox.Checked;
+			ApophysisSettings.View.SyncMainWindowWithCanvasSize = View.ResizeMainWindowCheckBox.Checked;
 
 			View.WidthComboBox.TextChanged -= OnWidthChanged;
 			View.HeightComboBox.TextChanged -= OnHeightChanged;

@@ -19,8 +19,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		protected override void AttachView()
 		{
-			View.ToolBar.Visible = ApophysisSettings.IsMainToolbarVisible;
-			View.BottomPanel.Visible = ApophysisSettings.IsMainStatusbarVisible;
+			View.ToolBar.Visible = ApophysisSettings.View.IsMainToolbarVisible;
+			View.BottomPanel.Visible = ApophysisSettings.View.IsMainStatusbarVisible;
 
 			View.Load += OnViewLoaded;
 
@@ -84,8 +84,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.ZoomInCameraModeButton.Click -= OnCameraModeChanged;
 			View.ZoomOutCameraModeButton.Click -= OnCameraModeChanged;
 
-			ApophysisSettings.IsMainToolbarVisible = View.ToolBar.Visible;
-			ApophysisSettings.IsMainStatusbarVisible = View.BottomPanel.Visible;
+			ApophysisSettings.View.IsMainToolbarVisible = View.ToolBar.Visible;
+			ApophysisSettings.View.IsMainStatusbarVisible = View.BottomPanel.Visible;
 		}
 
 		private void OnViewLoaded(object sender, EventArgs e)

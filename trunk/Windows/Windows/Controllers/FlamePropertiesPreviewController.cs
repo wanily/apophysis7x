@@ -56,7 +56,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			using (mParent.Initializer.Enter())
 			{
-				PreviewDensityLevel = ApophysisSettings.FlamePropertiesPreviewDensityLevel;
+				PreviewDensityLevel = ApophysisSettings.Preview.FlamePropertiesPreviewDensityLevel;
 
 				switch (PreviewDensityLevel)
 				{
@@ -81,7 +81,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.Activated -= OnActivated;
 			View.PreviewPicture.Image = null;
 
-			ApophysisSettings.FlamePropertiesPreviewDensityLevel = PreviewDensityLevel;
+			ApophysisSettings.Preview.FlamePropertiesPreviewDensityLevel = PreviewDensityLevel;
 		}
 
 		public DensityLevel PreviewDensityLevel
@@ -93,12 +93,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 				var densities = new[]
 				{
-					ApophysisSettings.PreviewLowQualityDensity,
-					ApophysisSettings.PreviewMediumQualityDensity,
-					ApophysisSettings.PreviewHighQualityDensity
+					ApophysisSettings.Preview.LowQualityDensity,
+					ApophysisSettings.Preview.MediumQualityDensity,
+					ApophysisSettings.Preview.HighQualityDensity
 				};
 
-				mUpdateTimeLock.Delay = (int)(ApophysisSettings.MiniPreviewUpdateResolution * densities[(int)value]);
+				mUpdateTimeLock.Delay = (int)(ApophysisSettings.Preview.MiniPreviewUpdateResolution * densities[(int)value]);
 				UpdatePreview();
 			}
 		}
@@ -114,9 +114,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			var densities = new[]
 			{
-				ApophysisSettings.PreviewLowQualityDensity,
-				ApophysisSettings.PreviewMediumQualityDensity,
-				ApophysisSettings.PreviewHighQualityDensity
+				ApophysisSettings.Preview.LowQualityDensity,
+				ApophysisSettings.Preview.MediumQualityDensity,
+				ApophysisSettings.Preview.HighQualityDensity
 			};
 
 			var density = densities[(int)mPreviewDensityLevel];

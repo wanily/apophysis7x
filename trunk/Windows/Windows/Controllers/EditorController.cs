@@ -127,18 +127,18 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			View.IteratorCanvas.Settings = mSettings = new EditorSettings
 			{
-				MoveAmount = ApophysisSettings.EditorMoveDistance,
-				AngleSnap = ApophysisSettings.EditorRotateAngle,
-				ScaleSnap = ApophysisSettings.EditorScaleRatio,
-				LockAxes = ApophysisSettings.EditorLockAxes,
-				ShowVariationPreview = ApophysisSettings.EditorShowVariationPreview,
-				ZoomAutomatically = ApophysisSettings.EditorAutoZoom
+				MoveAmount = ApophysisSettings.Editor.MoveDistance,
+				AngleSnap = ApophysisSettings.Editor.RotateAngle,
+				ScaleSnap = ApophysisSettings.Editor.ScaleRatio,
+				LockAxes = ApophysisSettings.Editor.LockAxes,
+				ShowVariationPreview = ApophysisSettings.Editor.ShowVariationPreview,
+				ZoomAutomatically = ApophysisSettings.Editor.AutoZoom
 			};
 
-			View.IteratorCanvas.ShowRuler = ApophysisSettings.EditorShowRulers;
-			View.IteratorCanvas.PreviewDensity = ApophysisSettings.EditorVariationPreviewDensity;
-			View.IteratorCanvas.PreviewRange = ApophysisSettings.EditorVariationPreviewRange;
-			View.IteratorCanvas.PreviewApplyPostTransform = ApophysisSettings.EditorVariationPreviewApplyPostTransform;
+			View.IteratorCanvas.ShowRuler = ApophysisSettings.Editor.ShowRulers;
+			View.IteratorCanvas.PreviewDensity = ApophysisSettings.Editor.VariationPreviewDensity;
+			View.IteratorCanvas.PreviewRange = ApophysisSettings.Editor.VariationPreviewRange;
+			View.IteratorCanvas.PreviewApplyPostTransform = ApophysisSettings.Editor.VariationPreviewApplyPostTransform;
 
 			mToolbarController.Initialize();
 			mPropertiesController.Initialize();
@@ -158,16 +158,16 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 		protected override void DetachView()
 		{
-			ApophysisSettings.EditorLockAxes = mSettings.LockAxes;
-			ApophysisSettings.EditorMoveDistance = mSettings.MoveAmount;
-			ApophysisSettings.EditorRotateAngle = mSettings.AngleSnap;
-			ApophysisSettings.EditorScaleRatio = mSettings.ScaleSnap;
-			ApophysisSettings.EditorShowRulers = View.IteratorCanvas.ShowRuler;
-			ApophysisSettings.EditorShowVariationPreview = mSettings.ShowVariationPreview;
-			ApophysisSettings.EditorAutoZoom = mSettings.ZoomAutomatically;
-			ApophysisSettings.EditorVariationPreviewDensity = View.IteratorCanvas.PreviewDensity;
-			ApophysisSettings.EditorVariationPreviewRange = View.IteratorCanvas.PreviewRange;
-			ApophysisSettings.EditorVariationPreviewApplyPostTransform = View.IteratorCanvas.PreviewApplyPostTransform;
+			ApophysisSettings.Editor.LockAxes = mSettings.LockAxes;
+			ApophysisSettings.Editor.MoveDistance = mSettings.MoveAmount;
+			ApophysisSettings.Editor.RotateAngle = mSettings.AngleSnap;
+			ApophysisSettings.Editor.ScaleRatio = mSettings.ScaleSnap;
+			ApophysisSettings.Editor.ShowRulers = View.IteratorCanvas.ShowRuler;
+			ApophysisSettings.Editor.ShowVariationPreview = mSettings.ShowVariationPreview;
+			ApophysisSettings.Editor.AutoZoom = mSettings.ZoomAutomatically;
+			ApophysisSettings.Editor.VariationPreviewDensity = View.IteratorCanvas.PreviewDensity;
+			ApophysisSettings.Editor.VariationPreviewRange = View.IteratorCanvas.PreviewRange;
+			ApophysisSettings.Editor.VariationPreviewApplyPostTransform = View.IteratorCanvas.PreviewApplyPostTransform;
 
 			ApophysisSettings.Serialize();
 

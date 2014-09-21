@@ -92,6 +92,37 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Calculation\IterationData.cs" />
+    <Compile Include="Settings\AutosaveSettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>AutosaveSettings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\CommonSettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>CommonSettings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\EditorSettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>EditorSettings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\PreviewSettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>PreviewSettings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\Providers\AutosaveSettingsProvider.cs" />
+    <Compile Include="Settings\Providers\CommonSettingsProvider.cs" />
+    <Compile Include="Settings\Providers\EditorSettingsProvider.cs" />
+    <Compile Include="Settings\Providers\PreviewSettingsProvider.cs" />
+    <Compile Include="Settings\Providers\SettingsProvider.cs" />
+    <Compile Include="Settings\Providers\ViewSettingsProvider.cs" />
+    <Compile Include="Settings\ViewSettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>ViewSettings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Threading\ThreadController.cs" />
     <Compile Include="Threading\ThreadStateToken.cs" />
     <Compile Include="Variations\Linear.cs" />
@@ -310,15 +341,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Windows\Forms\FlameProperties.resx">
@@ -414,6 +436,31 @@
     <EmbeddedResource Include="Windows\Resources\Toolbar\Editor\Undo.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Settings\AutosaveSettings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>AutosaveSettings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Settings\CommonSettings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>CommonSettings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Settings\EditorSettings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>EditorSettings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Settings\PreviewSettings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>PreviewSettings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Settings\ViewSettings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>ViewSettings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Windows\Resources\Icons\MoveDown.png" />
   </ItemGroup>
   <ItemGroup>
