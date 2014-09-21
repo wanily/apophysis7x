@@ -177,6 +177,234 @@
   <data name="&gt;&gt;OkButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>mCommonPage</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;OldVariationStyleCheckBox.Name" xml:space="preserve">
+    <value>OldVariationStyleCheckBox</value>
+  </data>
+  <data name="&gt;&gt;OldVariationStyleCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;OldVariationStyleCheckBox.Parent" xml:space="preserve">
+    <value>mCommonPage</value>
+  </data>
+  <data name="&gt;&gt;OldVariationStyleCheckBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;NamePrefixTextBox.Name" xml:space="preserve">
+    <value>NamePrefixTextBox</value>
+  </data>
+  <data name="&gt;&gt;NamePrefixTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;NamePrefixTextBox.Parent" xml:space="preserve">
+    <value>mCommonPage</value>
+  </data>
+  <data name="&gt;&gt;NamePrefixTextBox.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;mNamePrefixLabel.Name" xml:space="preserve">
+    <value>mNamePrefixLabel</value>
+  </data>
+  <data name="&gt;&gt;mNamePrefixLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mNamePrefixLabel.Parent" xml:space="preserve">
+    <value>mCommonPage</value>
+  </data>
+  <data name="&gt;&gt;mNamePrefixLabel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;mRestartNoticeLabel.Name" xml:space="preserve">
+    <value>mRestartNoticeLabel</value>
+  </data>
+  <data name="&gt;&gt;mRestartNoticeLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mRestartNoticeLabel.Parent" xml:space="preserve">
+    <value>mCommonPage</value>
+  </data>
+  <data name="&gt;&gt;mRestartNoticeLabel.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;mAutosaveGroupBox.Name" xml:space="preserve">
+    <value>mAutosaveGroupBox</value>
+  </data>
+  <data name="&gt;&gt;mAutosaveGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mAutosaveGroupBox.Parent" xml:space="preserve">
+    <value>mCommonPage</value>
+  </data>
+  <data name="&gt;&gt;mAutosaveGroupBox.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ConfirmStopRendering.Name" xml:space="preserve">
+    <value>ConfirmStopRendering</value>
+  </data>
+  <data name="&gt;&gt;ConfirmStopRendering.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ConfirmStopRendering.Parent" xml:space="preserve">
+    <value>mCommonPage</value>
+  </data>
+  <data name="&gt;&gt;ConfirmStopRendering.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;CameraEditUseScaleCheckBox.Name" xml:space="preserve">
+    <value>CameraEditUseScaleCheckBox</value>
+  </data>
+  <data name="&gt;&gt;CameraEditUseScaleCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CameraEditUseScaleCheckBox.Parent" xml:space="preserve">
+    <value>mCommonPage</value>
+  </data>
+  <data name="&gt;&gt;CameraEditUseScaleCheckBox.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;ConfirmDeleteCheckBox.Name" xml:space="preserve">
+    <value>ConfirmDeleteCheckBox</value>
+  </data>
+  <data name="&gt;&gt;ConfirmDeleteCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ConfirmDeleteCheckBox.Parent" xml:space="preserve">
+    <value>mCommonPage</value>
+  </data>
+  <data name="&gt;&gt;ConfirmDeleteCheckBox.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;WarnOnMissingPluginsCheckBox.Name" xml:space="preserve">
+    <value>WarnOnMissingPluginsCheckBox</value>
+  </data>
+  <data name="&gt;&gt;WarnOnMissingPluginsCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;WarnOnMissingPluginsCheckBox.Parent" xml:space="preserve">
+    <value>mCommonPage</value>
+  </data>
+  <data name="&gt;&gt;WarnOnMissingPluginsCheckBox.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;ThreadsComboBox.Name" xml:space="preserve">
+    <value>ThreadsComboBox</value>
+  </data>
+  <data name="&gt;&gt;ThreadsComboBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ThreadsComboBox.Parent" xml:space="preserve">
+    <value>mCommonPage</value>
+  </data>
+  <data name="&gt;&gt;ThreadsComboBox.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;mThreadsLabel.Name" xml:space="preserve">
+    <value>mThreadsLabel</value>
+  </data>
+  <data name="&gt;&gt;mThreadsLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mThreadsLabel.Parent" xml:space="preserve">
+    <value>mCommonPage</value>
+  </data>
+  <data name="&gt;&gt;mThreadsLabel.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;PngTransparencyComboBox.Name" xml:space="preserve">
+    <value>PngTransparencyComboBox</value>
+  </data>
+  <data name="&gt;&gt;PngTransparencyComboBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PngTransparencyComboBox.Parent" xml:space="preserve">
+    <value>mCommonPage</value>
+  </data>
+  <data name="&gt;&gt;PngTransparencyComboBox.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;mPngTransparencyLabel.Name" xml:space="preserve">
+    <value>mPngTransparencyLabel</value>
+  </data>
+  <data name="&gt;&gt;mPngTransparencyLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mPngTransparencyLabel.Parent" xml:space="preserve">
+    <value>mCommonPage</value>
+  </data>
+  <data name="&gt;&gt;mPngTransparencyLabel.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;JpegQualityComboBox.Name" xml:space="preserve">
+    <value>JpegQualityComboBox</value>
+  </data>
+  <data name="&gt;&gt;JpegQualityComboBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;JpegQualityComboBox.Parent" xml:space="preserve">
+    <value>mCommonPage</value>
+  </data>
+  <data name="&gt;&gt;JpegQualityComboBox.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;mJpegQualityLabel.Name" xml:space="preserve">
+    <value>mJpegQualityLabel</value>
+  </data>
+  <data name="&gt;&gt;mJpegQualityLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mJpegQualityLabel.Parent" xml:space="preserve">
+    <value>mCommonPage</value>
+  </data>
+  <data name="&gt;&gt;mJpegQualityLabel.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;PluginPathButton.Name" xml:space="preserve">
+    <value>PluginPathButton</value>
+  </data>
+  <data name="&gt;&gt;PluginPathButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PluginPathButton.Parent" xml:space="preserve">
+    <value>mCommonPage</value>
+  </data>
+  <data name="&gt;&gt;PluginPathButton.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;PluginPathTextBox.Name" xml:space="preserve">
+    <value>PluginPathTextBox</value>
+  </data>
+  <data name="&gt;&gt;PluginPathTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PluginPathTextBox.Parent" xml:space="preserve">
+    <value>mCommonPage</value>
+  </data>
+  <data name="&gt;&gt;PluginPathTextBox.ZOrder" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;mPluginPathLabel.Name" xml:space="preserve">
+    <value>mPluginPathLabel</value>
+  </data>
+  <data name="&gt;&gt;mPluginPathLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mPluginPathLabel.Parent" xml:space="preserve">
+    <value>mCommonPage</value>
+  </data>
+  <data name="&gt;&gt;mPluginPathLabel.ZOrder" xml:space="preserve">
+    <value>18</value>
+  </data>
   <data name="mCommonPage.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
@@ -204,33 +432,6 @@
   <data name="&gt;&gt;mCommonPage.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="mEditorPage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="mEditorPage.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="mEditorPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>514, 344</value>
-  </data>
-  <data name="mEditorPage.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="mEditorPage.Text" xml:space="preserve">
-    <value>Editor</value>
-  </data>
-  <data name="&gt;&gt;mEditorPage.Name" xml:space="preserve">
-    <value>mEditorPage</value>
-  </data>
-  <data name="&gt;&gt;mEditorPage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mEditorPage.Parent" xml:space="preserve">
-    <value>mTabs</value>
-  </data>
-  <data name="&gt;&gt;mEditorPage.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="mViewPage.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
@@ -253,7 +454,7 @@
     <value>mTabs</value>
   </data>
   <data name="&gt;&gt;mViewPage.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="mPreviewPage.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -277,31 +478,7 @@
     <value>mTabs</value>
   </data>
   <data name="&gt;&gt;mPreviewPage.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="mAutosavePage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="mAutosavePage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>514, 344</value>
-  </data>
-  <data name="mAutosavePage.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="mAutosavePage.Text" xml:space="preserve">
-    <value>Autosave</value>
-  </data>
-  <data name="&gt;&gt;mAutosavePage.Name" xml:space="preserve">
-    <value>mAutosavePage</value>
-  </data>
-  <data name="&gt;&gt;mAutosavePage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mAutosavePage.Parent" xml:space="preserve">
-    <value>mTabs</value>
-  </data>
-  <data name="&gt;&gt;mAutosavePage.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>2</value>
   </data>
   <data name="mTabs.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 5</value>
@@ -322,6 +499,864 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;mTabs.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="mPluginPathLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="mPluginPathLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 15</value>
+  </data>
+  <data name="mPluginPathLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 21</value>
+  </data>
+  <data name="mPluginPathLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
+  <data name="mPluginPathLabel.Text" xml:space="preserve">
+    <value>Plugin path</value>
+  </data>
+  <data name="mPluginPathLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;mPluginPathLabel.Name" xml:space="preserve">
+    <value>mPluginPathLabel</value>
+  </data>
+  <data name="&gt;&gt;mPluginPathLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mPluginPathLabel.Parent" xml:space="preserve">
+    <value>mCommonPage</value>
+  </data>
+  <data name="&gt;&gt;mPluginPathLabel.ZOrder" xml:space="preserve">
+    <value>18</value>
+  </data>
+  <data name="PluginPathTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="PluginPathTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>128, 15</value>
+  </data>
+  <data name="PluginPathTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>351, 20</value>
+  </data>
+  <data name="PluginPathTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>31</value>
+  </data>
+  <data name="&gt;&gt;PluginPathTextBox.Name" xml:space="preserve">
+    <value>PluginPathTextBox</value>
+  </data>
+  <data name="&gt;&gt;PluginPathTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PluginPathTextBox.Parent" xml:space="preserve">
+    <value>mCommonPage</value>
+  </data>
+  <data name="&gt;&gt;PluginPathTextBox.ZOrder" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="PluginPathButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="PluginPathButton.ImageIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <metadata name="mButtonImages.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="mButtonImages.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACE
+        BAAAAk1TRnQBSQFMAwEBAAEIAQABCAEAARABAAEQAQAE/wEZAQAI/wFCAU0BNgcAATYDAAEoAwABQAMA
+        ARADAAEBAQABGAYAAQz/AJMAAXUBhAGPAWYBgAGPAWABeQGHAVcBbgF7AU4BYgFvAUQBVgFhATkBSAFS
+        AS4BOgFDASUBLgE1ARsBIgEpARQBGQEeAQ4BEgEWAQ4BEwEYmQABdwGHAZIBiQGhAasBagGyAdQBAAGP
+        Ac0BAAGPAc0BAAGPAc0BBAGMAccBCAGIAb4BDwGCAbQBFQF8AakBGwF3AZ8BHwFyAZYBIgFLAVwBhwGi
+        AauWAAF6AYoBlQF+Ab4B0wGKAaQBrgF+AdwB/wFfAc8B/wFVAcsB/wFMAcQB+gFBAbwB9QE3AbMB8AEu
+        AaoB6wEkAaAB5QETAYwB1AEjAWcBgAFeAWkBbZYAAX0BjgGYAXkB0gHsAYsBpAGtAYkBwgHOAXEB2AH/
+        AWUB0wH/AVwBzgH/AVEByQH+AUkBwQH6AT8BuQH1ATQBsAHuASkBqAHpARABhQHNASIBSwFbAZgBsgG6
+        kwABgAGRAZwBgQHXAe8BfQHFAeABjAGmAbABgAHdAf4BaAHTAf8BZwHUAf8BYgHRAf8BWAHNAf8BTgHH
+        AfwBRgG+AfcBOwG2AfIBMQGsAewBJQFpAYEBegGVAaGTAAGDAZUBnwGJAdwB8QGMAeIB/wGNAagBsQGM
+        AboBxwF0AdgB/wFnAdQB/wFnAdQB/wFnAdQB/wFfAdAB/wFUAc0B/wFLAcUB/AFBAbsB9wEuAaIB2wFR
+        AWcBdAGYAbIBupAAAYYBmgGjAZIB4QHyAZgB6AH9AYABxAHeAY4BpwGwAYEB3gH9AYQB4AH/AYQB4AH/
+        AYQB4AH/AYQB4AH/AYEB3wH/AXsB3QH/AXQB2AH/AWsB1gH/AVYBqQHRAY8BmwGkkAABiAGcAaUBmgHm
+        AfMBnwHrAfsBmAHoAf4BiwGsAbkBiwGsAbkBigGqAbcBiAGmAbMBhgGjAa8BgwGfAaoBgQGaAaYBfwGV
+        AaEBfAGRAZ0BegGOAZkBeQGLAZUBdwGIAZOQAAGLAaABqAGgAeoB9gGmAe4B+QGfAesB+wGYAegB/gF6
+        AdoB/wFnAdQB/wFnAdQB/wFnAdQB/wFnAdQB/wFnAdQB/wFnAdQB/wF3AYgBk5kAAY4BogGrAacB7gH2
+        AasB8AH3AaYB7gH5AZ8B6wH7AZgB6AH9AXEB1AH7AYkBngGnAYYBmQGjAYIBlAGfAX4BkAGaAXoBjAGX
+        AXcBiAGTmQABjwGkAawBoAHSAdoBqwHwAfcBqwHwAfcBpgHuAfkBnwHrAfsBjQGhAaoBtQHLAdCoAAG9
+        Ac4B1AGPAaQBrAGPAaQBrAGPAaQBrAGPAaQBrAGPAaQBrAG1AcsB0P8A/wAtAAFCAU0BPgcAAT4DAAEo
+        AwABQAMAARADAAEBAQABAQUAAYAXAAP/AQAC/wYAAv8HAAEHBwABAwcAAQMHAAEBBwABAR8AAQcHAAEH
+        BwAB/wYAAQEB/wYAAv8GAAL/BgAL
+</value>
+  </data>
+  <data name="PluginPathButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>484, 13</value>
+  </data>
+  <data name="PluginPathButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="PluginPathButton.TabIndex" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="&gt;&gt;PluginPathButton.Name" xml:space="preserve">
+    <value>PluginPathButton</value>
+  </data>
+  <data name="&gt;&gt;PluginPathButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PluginPathButton.Parent" xml:space="preserve">
+    <value>mCommonPage</value>
+  </data>
+  <data name="&gt;&gt;PluginPathButton.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="mJpegQualityLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="mJpegQualityLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 79</value>
+  </data>
+  <data name="mJpegQualityLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 21</value>
+  </data>
+  <data name="mJpegQualityLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>33</value>
+  </data>
+  <data name="mJpegQualityLabel.Text" xml:space="preserve">
+    <value>JPEG quality</value>
+  </data>
+  <data name="mJpegQualityLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;mJpegQualityLabel.Name" xml:space="preserve">
+    <value>mJpegQualityLabel</value>
+  </data>
+  <data name="&gt;&gt;mJpegQualityLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mJpegQualityLabel.Parent" xml:space="preserve">
+    <value>mCommonPage</value>
+  </data>
+  <data name="&gt;&gt;mJpegQualityLabel.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="JpegQualityComboBox.Items" xml:space="preserve">
+    <value>60</value>
+  </data>
+  <data name="JpegQualityComboBox.Items1" xml:space="preserve">
+    <value>80</value>
+  </data>
+  <data name="JpegQualityComboBox.Items2" xml:space="preserve">
+    <value>100</value>
+  </data>
+  <data name="JpegQualityComboBox.Items3" xml:space="preserve">
+    <value>120</value>
+  </data>
+  <data name="JpegQualityComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>128, 79</value>
+  </data>
+  <data name="JpegQualityComboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 21</value>
+  </data>
+  <data name="JpegQualityComboBox.TabIndex" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="&gt;&gt;JpegQualityComboBox.Name" xml:space="preserve">
+    <value>JpegQualityComboBox</value>
+  </data>
+  <data name="&gt;&gt;JpegQualityComboBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;JpegQualityComboBox.Parent" xml:space="preserve">
+    <value>mCommonPage</value>
+  </data>
+  <data name="&gt;&gt;JpegQualityComboBox.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="PngTransparencyComboBox.Items" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="PngTransparencyComboBox.Items1" xml:space="preserve">
+    <value>Disabled</value>
+  </data>
+  <data name="PngTransparencyComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>128, 116</value>
+  </data>
+  <data name="PngTransparencyComboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 21</value>
+  </data>
+  <data name="PngTransparencyComboBox.TabIndex" type="System.Int32, mscorlib">
+    <value>36</value>
+  </data>
+  <data name="&gt;&gt;PngTransparencyComboBox.Name" xml:space="preserve">
+    <value>PngTransparencyComboBox</value>
+  </data>
+  <data name="&gt;&gt;PngTransparencyComboBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PngTransparencyComboBox.Parent" xml:space="preserve">
+    <value>mCommonPage</value>
+  </data>
+  <data name="&gt;&gt;PngTransparencyComboBox.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="mPngTransparencyLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="mPngTransparencyLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 116</value>
+  </data>
+  <data name="mPngTransparencyLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 21</value>
+  </data>
+  <data name="mPngTransparencyLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
+  <data name="mPngTransparencyLabel.Text" xml:space="preserve">
+    <value>PNG transparency</value>
+  </data>
+  <data name="mPngTransparencyLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;mPngTransparencyLabel.Name" xml:space="preserve">
+    <value>mPngTransparencyLabel</value>
+  </data>
+  <data name="&gt;&gt;mPngTransparencyLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mPngTransparencyLabel.Parent" xml:space="preserve">
+    <value>mCommonPage</value>
+  </data>
+  <data name="&gt;&gt;mPngTransparencyLabel.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="ThreadsComboBox.Items" xml:space="preserve">
+    <value>(auto)</value>
+  </data>
+  <data name="ThreadsComboBox.Items1" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ThreadsComboBox.Items2" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ThreadsComboBox.Items3" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ThreadsComboBox.Items4" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ThreadsComboBox.Items5" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="ThreadsComboBox.Items6" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="ThreadsComboBox.Items7" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="ThreadsComboBox.Items8" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="ThreadsComboBox.Items9" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="ThreadsComboBox.Items10" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="ThreadsComboBox.Items11" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="ThreadsComboBox.Items12" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="ThreadsComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>128, 154</value>
+  </data>
+  <data name="ThreadsComboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 21</value>
+  </data>
+  <data name="ThreadsComboBox.TabIndex" type="System.Int32, mscorlib">
+    <value>38</value>
+  </data>
+  <data name="&gt;&gt;ThreadsComboBox.Name" xml:space="preserve">
+    <value>ThreadsComboBox</value>
+  </data>
+  <data name="&gt;&gt;ThreadsComboBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ThreadsComboBox.Parent" xml:space="preserve">
+    <value>mCommonPage</value>
+  </data>
+  <data name="&gt;&gt;ThreadsComboBox.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="mThreadsLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="mThreadsLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 154</value>
+  </data>
+  <data name="mThreadsLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 21</value>
+  </data>
+  <data name="mThreadsLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>37</value>
+  </data>
+  <data name="mThreadsLabel.Text" xml:space="preserve">
+    <value>Max. no. of threads</value>
+  </data>
+  <data name="mThreadsLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;mThreadsLabel.Name" xml:space="preserve">
+    <value>mThreadsLabel</value>
+  </data>
+  <data name="&gt;&gt;mThreadsLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mThreadsLabel.Parent" xml:space="preserve">
+    <value>mCommonPage</value>
+  </data>
+  <data name="&gt;&gt;mThreadsLabel.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="WarnOnMissingPluginsCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="WarnOnMissingPluginsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>270, 79</value>
+  </data>
+  <data name="WarnOnMissingPluginsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>238, 19</value>
+  </data>
+  <data name="WarnOnMissingPluginsCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>39</value>
+  </data>
+  <data name="WarnOnMissingPluginsCheckBox.Text" xml:space="preserve">
+    <value>Warn on missing plugins</value>
+  </data>
+  <data name="&gt;&gt;WarnOnMissingPluginsCheckBox.Name" xml:space="preserve">
+    <value>WarnOnMissingPluginsCheckBox</value>
+  </data>
+  <data name="&gt;&gt;WarnOnMissingPluginsCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;WarnOnMissingPluginsCheckBox.Parent" xml:space="preserve">
+    <value>mCommonPage</value>
+  </data>
+  <data name="&gt;&gt;WarnOnMissingPluginsCheckBox.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="ConfirmDeleteCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="ConfirmDeleteCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="ConfirmDeleteCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>270, 104</value>
+  </data>
+  <data name="ConfirmDeleteCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>238, 19</value>
+  </data>
+  <data name="ConfirmDeleteCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>40</value>
+  </data>
+  <data name="ConfirmDeleteCheckBox.Text" xml:space="preserve">
+    <value>Confirm when deleting a flame</value>
+  </data>
+  <data name="&gt;&gt;ConfirmDeleteCheckBox.Name" xml:space="preserve">
+    <value>ConfirmDeleteCheckBox</value>
+  </data>
+  <data name="&gt;&gt;ConfirmDeleteCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ConfirmDeleteCheckBox.Parent" xml:space="preserve">
+    <value>mCommonPage</value>
+  </data>
+  <data name="&gt;&gt;ConfirmDeleteCheckBox.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="CameraEditUseScaleCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="CameraEditUseScaleCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="CameraEditUseScaleCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>270, 154</value>
+  </data>
+  <data name="CameraEditUseScaleCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>238, 19</value>
+  </data>
+  <data name="CameraEditUseScaleCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>41</value>
+  </data>
+  <data name="CameraEditUseScaleCheckBox.Text" xml:space="preserve">
+    <value>Preserve render speed when zooming</value>
+  </data>
+  <data name="&gt;&gt;CameraEditUseScaleCheckBox.Name" xml:space="preserve">
+    <value>CameraEditUseScaleCheckBox</value>
+  </data>
+  <data name="&gt;&gt;CameraEditUseScaleCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CameraEditUseScaleCheckBox.Parent" xml:space="preserve">
+    <value>mCommonPage</value>
+  </data>
+  <data name="&gt;&gt;CameraEditUseScaleCheckBox.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="ConfirmStopRendering.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="ConfirmStopRendering.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="ConfirmStopRendering.Location" type="System.Drawing.Point, System.Drawing">
+    <value>270, 129</value>
+  </data>
+  <data name="ConfirmStopRendering.Size" type="System.Drawing.Size, System.Drawing">
+    <value>238, 19</value>
+  </data>
+  <data name="ConfirmStopRendering.TabIndex" type="System.Int32, mscorlib">
+    <value>42</value>
+  </data>
+  <data name="ConfirmStopRendering.Text" xml:space="preserve">
+    <value>Confirm when stopping a render</value>
+  </data>
+  <data name="&gt;&gt;ConfirmStopRendering.Name" xml:space="preserve">
+    <value>ConfirmStopRendering</value>
+  </data>
+  <data name="&gt;&gt;ConfirmStopRendering.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ConfirmStopRendering.Parent" xml:space="preserve">
+    <value>mCommonPage</value>
+  </data>
+  <data name="&gt;&gt;ConfirmStopRendering.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="mAutosaveGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;AutosaveEnabledCheckBox.Name" xml:space="preserve">
+    <value>AutosaveEnabledCheckBox</value>
+  </data>
+  <data name="&gt;&gt;AutosaveEnabledCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;AutosaveEnabledCheckBox.Parent" xml:space="preserve">
+    <value>mAutosaveGroupBox</value>
+  </data>
+  <data name="&gt;&gt;AutosaveEnabledCheckBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;AutosaveThresholdComboBox.Name" xml:space="preserve">
+    <value>AutosaveThresholdComboBox</value>
+  </data>
+  <data name="&gt;&gt;AutosaveThresholdComboBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;AutosaveThresholdComboBox.Parent" xml:space="preserve">
+    <value>mAutosaveGroupBox</value>
+  </data>
+  <data name="&gt;&gt;AutosaveThresholdComboBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;mAutosaveThesholdLabel.Name" xml:space="preserve">
+    <value>mAutosaveThesholdLabel</value>
+  </data>
+  <data name="&gt;&gt;mAutosaveThesholdLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mAutosaveThesholdLabel.Parent" xml:space="preserve">
+    <value>mAutosaveGroupBox</value>
+  </data>
+  <data name="&gt;&gt;mAutosaveThesholdLabel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;AutosavePathButton.Name" xml:space="preserve">
+    <value>AutosavePathButton</value>
+  </data>
+  <data name="&gt;&gt;AutosavePathButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;AutosavePathButton.Parent" xml:space="preserve">
+    <value>mAutosaveGroupBox</value>
+  </data>
+  <data name="&gt;&gt;AutosavePathButton.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;AutosavePathCheckBox.Name" xml:space="preserve">
+    <value>AutosavePathCheckBox</value>
+  </data>
+  <data name="&gt;&gt;AutosavePathCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;AutosavePathCheckBox.Parent" xml:space="preserve">
+    <value>mAutosaveGroupBox</value>
+  </data>
+  <data name="&gt;&gt;AutosavePathCheckBox.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;mAutosavePathLabel.Name" xml:space="preserve">
+    <value>mAutosavePathLabel</value>
+  </data>
+  <data name="&gt;&gt;mAutosavePathLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mAutosavePathLabel.Parent" xml:space="preserve">
+    <value>mAutosaveGroupBox</value>
+  </data>
+  <data name="&gt;&gt;mAutosavePathLabel.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="mAutosaveGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 236</value>
+  </data>
+  <data name="mAutosaveGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>500, 93</value>
+  </data>
+  <data name="mAutosaveGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>43</value>
+  </data>
+  <data name="mAutosaveGroupBox.Text" xml:space="preserve">
+    <value>Autosave</value>
+  </data>
+  <data name="&gt;&gt;mAutosaveGroupBox.Name" xml:space="preserve">
+    <value>mAutosaveGroupBox</value>
+  </data>
+  <data name="&gt;&gt;mAutosaveGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mAutosaveGroupBox.Parent" xml:space="preserve">
+    <value>mCommonPage</value>
+  </data>
+  <data name="&gt;&gt;mAutosaveGroupBox.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="AutosavePathButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="AutosavePathButton.ImageIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="AutosavePathButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="AutosavePathButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>470, 25</value>
+  </data>
+  <data name="AutosavePathButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="AutosavePathButton.TabIndex" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
+  <data name="&gt;&gt;AutosavePathButton.Name" xml:space="preserve">
+    <value>AutosavePathButton</value>
+  </data>
+  <data name="&gt;&gt;AutosavePathButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;AutosavePathButton.Parent" xml:space="preserve">
+    <value>mAutosaveGroupBox</value>
+  </data>
+  <data name="&gt;&gt;AutosavePathButton.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="AutosavePathCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="AutosavePathCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>128, 27</value>
+  </data>
+  <data name="AutosavePathCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>336, 20</value>
+  </data>
+  <data name="AutosavePathCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="&gt;&gt;AutosavePathCheckBox.Name" xml:space="preserve">
+    <value>AutosavePathCheckBox</value>
+  </data>
+  <data name="&gt;&gt;AutosavePathCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;AutosavePathCheckBox.Parent" xml:space="preserve">
+    <value>mAutosaveGroupBox</value>
+  </data>
+  <data name="&gt;&gt;AutosavePathCheckBox.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="mAutosavePathLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="mAutosavePathLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 27</value>
+  </data>
+  <data name="mAutosavePathLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 21</value>
+  </data>
+  <data name="mAutosavePathLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>33</value>
+  </data>
+  <data name="mAutosavePathLabel.Text" xml:space="preserve">
+    <value>Target path</value>
+  </data>
+  <data name="mAutosavePathLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;mAutosavePathLabel.Name" xml:space="preserve">
+    <value>mAutosavePathLabel</value>
+  </data>
+  <data name="&gt;&gt;mAutosavePathLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mAutosavePathLabel.Parent" xml:space="preserve">
+    <value>mAutosaveGroupBox</value>
+  </data>
+  <data name="&gt;&gt;mAutosavePathLabel.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="AutosaveThresholdComboBox.Items" xml:space="preserve">
+    <value>30</value>
+  </data>
+  <data name="AutosaveThresholdComboBox.Items1" xml:space="preserve">
+    <value>60</value>
+  </data>
+  <data name="AutosaveThresholdComboBox.Items2" xml:space="preserve">
+    <value>90</value>
+  </data>
+  <data name="AutosaveThresholdComboBox.Items3" xml:space="preserve">
+    <value>120</value>
+  </data>
+  <data name="AutosaveThresholdComboBox.Items4" xml:space="preserve">
+    <value>300</value>
+  </data>
+  <data name="AutosaveThresholdComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>128, 61</value>
+  </data>
+  <data name="AutosaveThresholdComboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 21</value>
+  </data>
+  <data name="AutosaveThresholdComboBox.TabIndex" type="System.Int32, mscorlib">
+    <value>37</value>
+  </data>
+  <data name="&gt;&gt;AutosaveThresholdComboBox.Name" xml:space="preserve">
+    <value>AutosaveThresholdComboBox</value>
+  </data>
+  <data name="&gt;&gt;AutosaveThresholdComboBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;AutosaveThresholdComboBox.Parent" xml:space="preserve">
+    <value>mAutosaveGroupBox</value>
+  </data>
+  <data name="&gt;&gt;AutosaveThresholdComboBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="mAutosaveThesholdLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="mAutosaveThesholdLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 61</value>
+  </data>
+  <data name="mAutosaveThesholdLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 21</value>
+  </data>
+  <data name="mAutosaveThesholdLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>36</value>
+  </data>
+  <data name="mAutosaveThesholdLabel.Text" xml:space="preserve">
+    <value>Min. delay in seconds</value>
+  </data>
+  <data name="mAutosaveThesholdLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;mAutosaveThesholdLabel.Name" xml:space="preserve">
+    <value>mAutosaveThesholdLabel</value>
+  </data>
+  <data name="&gt;&gt;mAutosaveThesholdLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mAutosaveThesholdLabel.Parent" xml:space="preserve">
+    <value>mAutosaveGroupBox</value>
+  </data>
+  <data name="&gt;&gt;mAutosaveThesholdLabel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="AutosaveEnabledCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="AutosaveEnabledCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="AutosaveEnabledCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>243, 62</value>
+  </data>
+  <data name="AutosaveEnabledCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>251, 19</value>
+  </data>
+  <data name="AutosaveEnabledCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>45</value>
+  </data>
+  <data name="AutosaveEnabledCheckBox.Text" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="&gt;&gt;AutosaveEnabledCheckBox.Name" xml:space="preserve">
+    <value>AutosaveEnabledCheckBox</value>
+  </data>
+  <data name="&gt;&gt;AutosaveEnabledCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;AutosaveEnabledCheckBox.Parent" xml:space="preserve">
+    <value>mAutosaveGroupBox</value>
+  </data>
+  <data name="&gt;&gt;AutosaveEnabledCheckBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="NamePrefixTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>128, 192</value>
+  </data>
+  <data name="NamePrefixTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 20</value>
+  </data>
+  <data name="NamePrefixTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>46</value>
+  </data>
+  <data name="&gt;&gt;NamePrefixTextBox.Name" xml:space="preserve">
+    <value>NamePrefixTextBox</value>
+  </data>
+  <data name="&gt;&gt;NamePrefixTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;NamePrefixTextBox.Parent" xml:space="preserve">
+    <value>mCommonPage</value>
+  </data>
+  <data name="&gt;&gt;NamePrefixTextBox.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="mNamePrefixLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="mNamePrefixLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 192</value>
+  </data>
+  <data name="mNamePrefixLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 21</value>
+  </data>
+  <data name="mNamePrefixLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>45</value>
+  </data>
+  <data name="mNamePrefixLabel.Text" xml:space="preserve">
+    <value>Flame prefix</value>
+  </data>
+  <data name="mNamePrefixLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;mNamePrefixLabel.Name" xml:space="preserve">
+    <value>mNamePrefixLabel</value>
+  </data>
+  <data name="&gt;&gt;mNamePrefixLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mNamePrefixLabel.Parent" xml:space="preserve">
+    <value>mCommonPage</value>
+  </data>
+  <data name="&gt;&gt;mNamePrefixLabel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="OldVariationStyleCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="OldVariationStyleCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="OldVariationStyleCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>270, 179</value>
+  </data>
+  <data name="OldVariationStyleCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>238, 20</value>
+  </data>
+  <data name="OldVariationStyleCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>47</value>
+  </data>
+  <data name="OldVariationStyleCheckBox.Text" xml:space="preserve">
+    <value>Use Apophysis 7x15B-style for variations</value>
+  </data>
+  <data name="&gt;&gt;OldVariationStyleCheckBox.Name" xml:space="preserve">
+    <value>OldVariationStyleCheckBox</value>
+  </data>
+  <data name="&gt;&gt;OldVariationStyleCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;OldVariationStyleCheckBox.Parent" xml:space="preserve">
+    <value>mCommonPage</value>
+  </data>
+  <data name="&gt;&gt;OldVariationStyleCheckBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="mRestartNoticeLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="mRestartNoticeLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="mRestartNoticeLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>128, 40</value>
+  </data>
+  <data name="mRestartNoticeLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>378, 29</value>
+  </data>
+  <data name="mRestartNoticeLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>44</value>
+  </data>
+  <data name="mRestartNoticeLabel.Text" xml:space="preserve">
+    <value>Notice: You need to restart Apophysis to make a change of the plugin path effective.</value>
+  </data>
+  <data name="&gt;&gt;mRestartNoticeLabel.Name" xml:space="preserve">
+    <value>mRestartNoticeLabel</value>
+  </data>
+  <data name="&gt;&gt;mRestartNoticeLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mRestartNoticeLabel.Parent" xml:space="preserve">
+    <value>mCommonPage</value>
+  </data>
+  <data name="&gt;&gt;mRestartNoticeLabel.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="label1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>287, 200</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>215, 29</value>
+  </data>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <value>48</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>(enables linear3D and turns off Z-passthrough for built-in variations)</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>mCommonPage</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -359,6 +1394,12 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Settings</value>
+  </data>
+  <data name="&gt;&gt;mButtonImages.Name" xml:space="preserve">
+    <value>mButtonImages</value>
+  </data>
+  <data name="&gt;&gt;mButtonImages.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>Settings</value>
