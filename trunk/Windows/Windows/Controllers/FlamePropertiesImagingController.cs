@@ -75,6 +75,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 				mParent.Flame.Background = dialog.Color;
 				View.BackgroundPictureBox.BackColor = mParent.Flame.Background;
+
 			}
 
 			mParent.UndoController.CommitChange(mParent.Flame);

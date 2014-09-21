@@ -23,10 +23,12 @@ namespace Xyrus.Apophysis
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
+			Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
 
 			mBanner = new BannerController();
 			mBanner.Initialize();
-			
+
+			SetupExceptionHandler();
 			LoadVariations();
 
 			mBanner.BannerText = "Loading GUI";
@@ -102,6 +104,65 @@ namespace Xyrus.Apophysis
 						Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				}
 			}
+		}
+		static void SetupExceptionHandler()
+		{
+			mBanner.BannerText = "Initializing";
+
+#if !DEBUG
+			Application.ThreadException += OnThreadException;
+			AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
+#endif
+		}
+
+		static void HandleException(Exception exception)
+		{
+			if (exception == null)
+				return;
+
+			var timestamp = DateTime.Now;
+
+			var fullData = exception.ToString();
+			var savePath = string.Format(
+				"%userprofile%\\apophysis-exception-{0:0000}-{1:00}-{2:00}_{3:00}.{4:00}.{5:00}.txt",
+				timestamp.Year, timestamp.Month, timestamp.Day, timestamp.Hour, timestamp.Minute, timestamp.Second);
+
+			savePath = Environment.ExpandEnvironmentVariables(savePath);
+
+			var saveMessage = string.Format("The details have been written to \"{0}\"", savePath);
+
+			try
+			{
+				File.WriteAllText(savePath, fullData);
+			}
+			catch (Exception saveException)
+			{
+				saveMessage = string.Format(
+					"Sadly, the details could not be written to \"{0}\" because of the following error: {1}", savePath,
+					saveException.Message);
+			}
+
+			var locationString = "<unknown>";
+			if (exception.TargetSite != null)
+			{
+				locationString = exception.TargetSite.ToString();
+			}
+
+			var message = string.Format(
+				"Apophysis encountered an unhandled exception. {0}\r\n\r\nMessage: {1}\r\nLocation: {2}",
+				saveMessage, exception.Message, locationString);
+
+			MessageBox.Show(message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+		}
+
+		private static void OnThreadException(object sender, ThreadExceptionEventArgs e)
+		{
+			HandleException(e.Exception);
+		}
+		private static void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
+		{
+			Trace.TraceError(e.ExceptionObject.ToString());
+			HandleException(e.ExceptionObject as Exception);
 		}
 	}
 }
