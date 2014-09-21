@@ -117,13 +117,21 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="mRootSplitter.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="mRootSplitter.IsSplitterFixed" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="mRootSplitter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
   <metadata name="mToolbar.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>123, 17</value>
   </metadata>
-  <metadata name="mSettings.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ResetAllIteratorsButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -138,6 +146,18 @@
         8QhV2WqcimcAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="ResetAllIteratorsButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="ResetAllIteratorsButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="ResetAllIteratorsButton.Text" xml:space="preserve">
+    <value>Reset all transforms</value>
+  </data>
+  <data name="mToolbarSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 25</value>
+  </data>
   <data name="AddIteratorButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -150,6 +170,15 @@
         AAYGAGd8HkzKsz1TAAAAAElFTkSuQmCC
 </value>
   </data>
+  <data name="AddIteratorButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="AddIteratorButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="AddIteratorButton.Text" xml:space="preserve">
+    <value>Add transform</value>
+  </data>
   <data name="DuplicateIteratorButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -158,6 +187,15 @@
         JLtQPYQf28cT1blBmtVYJ4WX3s8J4Ieu62DsHVlhsE1LrDYHL8lzSHvBP6cizyF1vuwizyF9GC59Ooeq
         MVyYCtVDhopjIeUXlOoB5wIxkhhs/RYAAAAASUVORK5CYII=
 </value>
+  </data>
+  <data name="DuplicateIteratorButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="DuplicateIteratorButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="DuplicateIteratorButton.Text" xml:space="preserve">
+    <value>Duplicate transform</value>
   </data>
   <data name="RemoveIteratorButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -169,6 +207,18 @@
         dFGw456w9t8sVofbBQo8/f1z+HRZbo5MFrvbBAryPA/b+WWzs5kt97xOt8kCBSSNj4cTB+rGr9wTwzgD
         wdgM6/7Z/wcAAAAASUVORK5CYII=
 </value>
+  </data>
+  <data name="RemoveIteratorButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="RemoveIteratorButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="RemoveIteratorButton.Text" xml:space="preserve">
+    <value>Remove transform</value>
+  </data>
+  <data name="mToolbarSeparator2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 25</value>
   </data>
   <data name="UndoButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -183,6 +233,15 @@
         TkSuQmCC
 </value>
   </data>
+  <data name="UndoButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="UndoButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="UndoButton.Text" xml:space="preserve">
+    <value>Undo</value>
+  </data>
   <data name="RedoButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -196,12 +255,33 @@
         RU5ErkJggg==
 </value>
   </data>
+  <data name="RedoButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="RedoButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="RedoButton.Text" xml:space="preserve">
+    <value>Redo</value>
+  </data>
+  <data name="mToolbarSeparator3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 25</value>
+  </data>
   <data name="IteratorResetButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAA/SURBVDhPYyAA/kPpgQMUuwBkAEWG/A8KCqLIELBGSgyB
         ayLXEBQN+AyBCWKjcWEQgNG0A7S3gRAY/i5gYAAAnO4huzyhuUsAAAAASUVORK5CYII=
 </value>
+  </data>
+  <data name="IteratorResetButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="IteratorResetButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="IteratorResetButton.Text" xml:space="preserve">
+    <value>Reset transform</value>
   </data>
   <data name="IteratorResetOriginButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -211,6 +291,15 @@
         GyVDeHSLA7AAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="IteratorResetOriginButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="IteratorResetOriginButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="IteratorResetOriginButton.Text" xml:space="preserve">
+    <value>Reset transform origin</value>
+  </data>
   <data name="IteratorResetAngleButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -219,6 +308,15 @@
         L5zg7xuIvEEKQCfEhX38AAAAAElFTkSuQmCC
 </value>
   </data>
+  <data name="IteratorResetAngleButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="IteratorResetAngleButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="IteratorResetAngleButton.Text" xml:space="preserve">
+    <value>Reset transform angle</value>
+  </data>
   <data name="IteratorResetScaleButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -226,6 +324,18 @@
         /6CgIEoMgTidAkMQfkc1hOgwQVWIzxAYB40GKSKEyQbEacahiCKbSQP0swkXoLULGBgAoDM1XG2VDdYA
         AAAASUVORK5CYII=
 </value>
+  </data>
+  <data name="IteratorResetScaleButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="IteratorResetScaleButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="IteratorResetScaleButton.Text" xml:space="preserve">
+    <value>Reset transform scale</value>
+  </data>
+  <data name="mToolbarSeparator4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 25</value>
   </data>
   <data name="Rotate90CcwButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -236,6 +346,15 @@
         rkJggg==
 </value>
   </data>
+  <data name="Rotate90CcwButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="Rotate90CcwButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="Rotate90CcwButton.Text" xml:space="preserve">
+    <value>Rotate world 90° counter-clockwise</value>
+  </data>
   <data name="Rotate90CwButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -244,6 +363,15 @@
         90MISkCMkZxzW4/KsOvfqAGOHs45E0d1aYD+BhzV1QNKKfNa4a1PKb0D8Pa4PgFI8/bfMmYBoJJqEkIo
         ms8AAAAASUVORK5CYII=
 </value>
+  </data>
+  <data name="Rotate90CwButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="Rotate90CwButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="Rotate90CwButton.Text" xml:space="preserve">
+    <value>Rotate world 90° clockwise</value>
   </data>
   <data name="FlipAllHorizontalButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -258,6 +386,15 @@
         5UXqguA/D4fzDFlZEvnobZwEAAAAAElFTkSuQmCC
 </value>
   </data>
+  <data name="FlipAllHorizontalButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="FlipAllHorizontalButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="FlipAllHorizontalButton.Text" xml:space="preserve">
+    <value>Flip all transforms horizontally</value>
+  </data>
   <data name="FlipAllVerticalButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -271,12 +408,33 @@
         aVb/w2sMhaJ8tgaoyB6i4EnnwwWPGInkDrxiIez+nJJnAAAAAElFTkSuQmCC
 </value>
   </data>
+  <data name="FlipAllVerticalButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="FlipAllVerticalButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="FlipAllVerticalButton.Text" xml:space="preserve">
+    <value>Flip all transforms vertically</value>
+  </data>
+  <data name="mToolbarSeparator5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 25</value>
+  </data>
   <data name="ToggleRulersButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAA1SURBVDhPYxgFVALfvn37Ty6GG+Dk5PT/w/uPJNE4DUDH
         uMQxDCAVU9cAcjHYgFFACWBgAACvj/+7mBqOzgAAAABJRU5ErkJggg==
 </value>
+  </data>
+  <data name="ToggleRulersButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="ToggleRulersButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="ToggleRulersButton.Text" xml:space="preserve">
+    <value>Show ruler</value>
   </data>
   <data name="ToggleVariationPreviewButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -290,6 +448,18 @@
         G9nZeA0gHTAwAACOffGU2o3WzAAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="ToggleVariationPreviewButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="ToggleVariationPreviewButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="ToggleVariationPreviewButton.Text" xml:space="preserve">
+    <value>Show variation preview</value>
+  </data>
+  <data name="mToolbarSeparator6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 25</value>
+  </data>
   <data name="TogglePostMatrixButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -298,6 +468,15 @@
         Wvc6VQDldtoMXA0LX+DgeTPXq1OgeqaAwtd1dV4vOQIovI2t04SKsbHIlwhxAP3Q23g8RhhMAAAAAElF
         TkSuQmCC
 </value>
+  </data>
+  <data name="TogglePostMatrixButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="TogglePostMatrixButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="TogglePostMatrixButton.Text" xml:space="preserve">
+    <value>Enable / edit post-transform</value>
   </data>
   <data name="AddFinalIteratorButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -309,6 +488,18 @@
         NoW4MFQLJYCBAQCnJOkAUfIj8AAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="AddFinalIteratorButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="AddFinalIteratorButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="AddFinalIteratorButton.Text" xml:space="preserve">
+    <value>Add final transform</value>
+  </data>
+  <data name="mToolbarSeparator7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 25</value>
+  </data>
   <data name="IteratorConvertToRegularButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -316,6 +507,15 @@
         vLHr1HlYa7HvjXMO89pvk18HSH4V2MvWAZKKStkHSKjlgDhr7QIEq35CJjoEUfk8QOA0LyibHmFSww3y
         ZwGCtNaQakSSS/ihgOOl9wEC7s7gx52BV2eUf4yxFfIgrrYIBEoRAAAAAElFTkSuQmCC
 </value>
+  </data>
+  <data name="IteratorConvertToRegularButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="IteratorConvertToRegularButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="IteratorConvertToRegularButton.Text" xml:space="preserve">
+    <value>Convert to regular transform</value>
   </data>
   <data name="IteratorConvertToFinalButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -325,9 +525,435 @@
         MFQ5KsCmEBeGahkegIEBAHuFmYqDy3dSAAAAAElFTkSuQmCC
 </value>
   </data>
+  <data name="IteratorConvertToFinalButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="IteratorConvertToFinalButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="IteratorConvertToFinalButton.Text" xml:space="preserve">
+    <value>Convert to final transform</value>
+  </data>
+  <data name="mToolbar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="mToolbar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>711, 25</value>
+  </data>
+  <data name="mToolbar.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;mToolbar.Name" xml:space="preserve">
+    <value>mToolbar</value>
+  </data>
+  <data name="&gt;&gt;mToolbar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mToolbar.Parent" xml:space="preserve">
+    <value>mRootSplitter.Panel1</value>
+  </data>
+  <data name="&gt;&gt;mToolbar.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="IteratorCanvas.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="IteratorCanvas.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Consolas, 8.25pt</value>
+  </data>
+  <data name="IteratorCanvas.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 24</value>
+  </data>
+  <metadata name="mSettings.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="IteratorCanvas.Size" type="System.Drawing.Size, System.Drawing">
+    <value>711, 637</value>
+  </data>
+  <data name="IteratorCanvas.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;IteratorCanvas.Name" xml:space="preserve">
+    <value>IteratorCanvas</value>
+  </data>
+  <data name="&gt;&gt;IteratorCanvas.Type" xml:space="preserve">
+    <value>Xyrus.Apophysis.Windows.Controls.EditorCanvas, Apophysis, Version=2.20.2014.917, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;IteratorCanvas.Parent" xml:space="preserve">
+    <value>mRootSplitter.Panel1</value>
+  </data>
+  <data name="&gt;&gt;IteratorCanvas.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;mRootSplitter.Panel1.Name" xml:space="preserve">
+    <value>mRootSplitter.Panel1</value>
+  </data>
+  <data name="&gt;&gt;mRootSplitter.Panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mRootSplitter.Panel1.Parent" xml:space="preserve">
+    <value>mRootSplitter</value>
+  </data>
+  <data name="&gt;&gt;mRootSplitter.Panel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="mSidebarSplitter.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="mSidebarSplitter.IsSplitterFixed" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="mSidebarSplitter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="mSidebarSplitter.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
+    <value>Horizontal</value>
+  </data>
+  <data name="PreviewPicture.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="PreviewPicture.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Center</value>
+  </data>
   <metadata name="mPreviewContextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>370, 17</value>
   </metadata>
+  <data name="LowQualityMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>158, 22</value>
+  </data>
+  <data name="LowQualityMenuItem.Text" xml:space="preserve">
+    <value>&amp;Low quality</value>
+  </data>
+  <data name="MediumQualityMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>158, 22</value>
+  </data>
+  <data name="MediumQualityMenuItem.Text" xml:space="preserve">
+    <value>&amp;Medium quality</value>
+  </data>
+  <data name="HighQualityMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>158, 22</value>
+  </data>
+  <data name="HighQualityMenuItem.Text" xml:space="preserve">
+    <value>&amp;High quality</value>
+  </data>
+  <data name="mPreviewContextMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>159, 70</value>
+  </data>
+  <data name="&gt;&gt;mPreviewContextMenu.Name" xml:space="preserve">
+    <value>mPreviewContextMenu</value>
+  </data>
+  <data name="&gt;&gt;mPreviewContextMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="PreviewPicture.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 10</value>
+  </data>
+  <data name="PreviewPicture.Size" type="System.Drawing.Size, System.Drawing">
+    <value>287, 162</value>
+  </data>
+  <data name="PreviewPicture.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;PreviewPicture.Name" xml:space="preserve">
+    <value>PreviewPicture</value>
+  </data>
+  <data name="&gt;&gt;PreviewPicture.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PreviewPicture.Parent" xml:space="preserve">
+    <value>mPreviewPanel</value>
+  </data>
+  <data name="&gt;&gt;PreviewPicture.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="mPictureBevel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="mPictureBevel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 9</value>
+  </data>
+  <data name="mPictureBevel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>289, 165</value>
+  </data>
+  <data name="mPictureBevel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;mPictureBevel.Name" xml:space="preserve">
+    <value>mPictureBevel</value>
+  </data>
+  <data name="&gt;&gt;mPictureBevel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mPictureBevel.Parent" xml:space="preserve">
+    <value>mPreviewPanel</value>
+  </data>
+  <data name="&gt;&gt;mPictureBevel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="mPreviewPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="mPreviewPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="mPreviewPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>299, 178</value>
+  </data>
+  <data name="mPreviewPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;mPreviewPanel.Name" xml:space="preserve">
+    <value>mPreviewPanel</value>
+  </data>
+  <data name="&gt;&gt;mPreviewPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mPreviewPanel.Parent" xml:space="preserve">
+    <value>mSidebarSplitter.Panel1</value>
+  </data>
+  <data name="&gt;&gt;mPreviewPanel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;mSidebarSplitter.Panel1.Name" xml:space="preserve">
+    <value>mSidebarSplitter.Panel1</value>
+  </data>
+  <data name="&gt;&gt;mSidebarSplitter.Panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mSidebarSplitter.Panel1.Parent" xml:space="preserve">
+    <value>mSidebarSplitter</value>
+  </data>
+  <data name="&gt;&gt;mSidebarSplitter.Panel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="mSidebarSplitter.Panel1MinSize" type="System.Int32, mscorlib">
+    <value>100</value>
+  </data>
+  <data name="Tabs.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="ClearVariationsButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
+  <data name="ClearVariationsButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 351</value>
+  </data>
+  <data name="ClearVariationsButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>279, 25</value>
+  </data>
+  <data name="ClearVariationsButton.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="ClearVariationsButton.Text" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="&gt;&gt;ClearVariationsButton.Name" xml:space="preserve">
+    <value>ClearVariationsButton</value>
+  </data>
+  <data name="&gt;&gt;ClearVariationsButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ClearVariationsButton.Parent" xml:space="preserve">
+    <value>VariationsTab</value>
+  </data>
+  <data name="&gt;&gt;ClearVariationsButton.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="HideUnusedVariationsCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="HideUnusedVariationsCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="HideUnusedVariationsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 329</value>
+  </data>
+  <data name="HideUnusedVariationsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 17</value>
+  </data>
+  <data name="HideUnusedVariationsCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="HideUnusedVariationsCheckBox.Text" xml:space="preserve">
+    <value>Hide unused variations</value>
+  </data>
+  <data name="&gt;&gt;HideUnusedVariationsCheckBox.Name" xml:space="preserve">
+    <value>HideUnusedVariationsCheckBox</value>
+  </data>
+  <data name="&gt;&gt;HideUnusedVariationsCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;HideUnusedVariationsCheckBox.Parent" xml:space="preserve">
+    <value>VariationsTab</value>
+  </data>
+  <data name="&gt;&gt;HideUnusedVariationsCheckBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="VariationsGrid.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="VariationsGrid.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="VariationsGrid.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
+    <value>Vertical</value>
+  </data>
+  <data name="VariationsGrid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>279, 316</value>
+  </data>
+  <data name="VariationsGrid.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;VariationsGrid.Name" xml:space="preserve">
+    <value>VariationsGrid</value>
+  </data>
+  <data name="&gt;&gt;VariationsGrid.Type" xml:space="preserve">
+    <value>Xyrus.Apophysis.Windows.Controls.DragGrid, Apophysis, Version=2.20.2014.917, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;VariationsGrid.Parent" xml:space="preserve">
+    <value>VariationsTab</value>
+  </data>
+  <data name="&gt;&gt;VariationsGrid.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="VariationsTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="VariationsTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="VariationsTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>285, 375</value>
+  </data>
+  <data name="VariationsTab.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="VariationsTab.Text" xml:space="preserve">
+    <value>Variations</value>
+  </data>
+  <data name="&gt;&gt;VariationsTab.Name" xml:space="preserve">
+    <value>VariationsTab</value>
+  </data>
+  <data name="&gt;&gt;VariationsTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;VariationsTab.Parent" xml:space="preserve">
+    <value>Tabs</value>
+  </data>
+  <data name="&gt;&gt;VariationsTab.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="HideUnrelatedVariablesCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="HideUnrelatedVariablesCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="HideUnrelatedVariablesCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 356</value>
+  </data>
+  <data name="HideUnrelatedVariablesCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 17</value>
+  </data>
+  <data name="HideUnrelatedVariablesCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="HideUnrelatedVariablesCheckBox.Text" xml:space="preserve">
+    <value>Hide variables from unused variations</value>
+  </data>
+  <data name="&gt;&gt;HideUnrelatedVariablesCheckBox.Name" xml:space="preserve">
+    <value>HideUnrelatedVariablesCheckBox</value>
+  </data>
+  <data name="&gt;&gt;HideUnrelatedVariablesCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;HideUnrelatedVariablesCheckBox.Parent" xml:space="preserve">
+    <value>VariablesTab</value>
+  </data>
+  <data name="&gt;&gt;HideUnrelatedVariablesCheckBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="VariablesGrid.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="VariablesGrid.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="VariablesGrid.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
+    <value>Vertical</value>
+  </data>
+  <data name="VariablesGrid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>279, 342</value>
+  </data>
+  <data name="VariablesGrid.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;VariablesGrid.Name" xml:space="preserve">
+    <value>VariablesGrid</value>
+  </data>
+  <data name="&gt;&gt;VariablesGrid.Type" xml:space="preserve">
+    <value>Xyrus.Apophysis.Windows.Controls.DragGrid, Apophysis, Version=2.20.2014.917, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;VariablesGrid.Parent" xml:space="preserve">
+    <value>VariablesTab</value>
+  </data>
+  <data name="&gt;&gt;VariablesGrid.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="VariablesTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="VariablesTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="VariablesTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>285, 375</value>
+  </data>
+  <data name="VariablesTab.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="VariablesTab.Text" xml:space="preserve">
+    <value>Variables</value>
+  </data>
+  <data name="&gt;&gt;VariablesTab.Name" xml:space="preserve">
+    <value>VariablesTab</value>
+  </data>
+  <data name="&gt;&gt;VariablesTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;VariablesTab.Parent" xml:space="preserve">
+    <value>Tabs</value>
+  </data>
+  <data name="&gt;&gt;VariablesTab.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="mIteratorControlsGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="IteratorScaleRatio.Location" type="System.Drawing.Point, System.Drawing">
+    <value>71, 81</value>
+  </data>
+  <data name="IteratorScaleRatio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 21</value>
+  </data>
+  <data name="IteratorScaleRatio.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;IteratorScaleRatio.Name" xml:space="preserve">
+    <value>IteratorScaleRatio</value>
+  </data>
+  <data name="&gt;&gt;IteratorScaleRatio.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorScaleRatio.Parent" xml:space="preserve">
+    <value>mIteratorControlsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorScaleRatio.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="IteratorScaleUp.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
   <data name="IteratorScaleUp.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGOfPtRkwAAACBjSFJNAACH
@@ -379,6 +1005,30 @@
         Q3e23v88/Y1YOslqhE1hGHgfS5fXAHxCliuMD4q7o5KnyJTAzC72CM5PTBUwfXMT8OiJnwuYOmL6ZhBw
         lCBPkT2CSp4iUvAGWa4gy3nQDiNEflNl/3oXAAAAAElFTkSuQmCC
 </value>
+  </data>
+  <data name="IteratorScaleUp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>208, 79</value>
+  </data>
+  <data name="IteratorScaleUp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="IteratorScaleUp.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;IteratorScaleUp.Name" xml:space="preserve">
+    <value>IteratorScaleUp</value>
+  </data>
+  <data name="&gt;&gt;IteratorScaleUp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorScaleUp.Parent" xml:space="preserve">
+    <value>mIteratorControlsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorScaleUp.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="IteratorScaleDown.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
   </data>
   <data name="IteratorScaleDown.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -432,6 +1082,51 @@
         MFT1J+vTv90AAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="IteratorScaleDown.Location" type="System.Drawing.Point, System.Drawing">
+    <value>41, 79</value>
+  </data>
+  <data name="IteratorScaleDown.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="IteratorScaleDown.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;IteratorScaleDown.Name" xml:space="preserve">
+    <value>IteratorScaleDown</value>
+  </data>
+  <data name="&gt;&gt;IteratorScaleDown.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorScaleDown.Parent" xml:space="preserve">
+    <value>mIteratorControlsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorScaleDown.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="IteratorMoveOffset.Location" type="System.Drawing.Point, System.Drawing">
+    <value>71, 51</value>
+  </data>
+  <data name="IteratorMoveOffset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 21</value>
+  </data>
+  <data name="IteratorMoveOffset.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;IteratorMoveOffset.Name" xml:space="preserve">
+    <value>IteratorMoveOffset</value>
+  </data>
+  <data name="&gt;&gt;IteratorMoveOffset.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorMoveOffset.Parent" xml:space="preserve">
+    <value>mIteratorControlsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorMoveOffset.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="IteratorMoveLeft.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
   <data name="IteratorMoveLeft.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGOfPtRkwAAACBjSFJNAACH
@@ -483,6 +1178,30 @@
         BFAmYgiG6xpMyffZktQEOYIVP57RS3sJxATgCA0jaBjRHznnQWutKixUn6MFNmCDIoJSSmfvz2UzFUSW
         zVCwWabuAv2Ylnf+LTg+gl+Kht8v0UVKaIHxkoX5RzpBwwgavod0AVZ2nl0Z3dAtAAAAAElFTkSuQmCC
 </value>
+  </data>
+  <data name="IteratorMoveLeft.Location" type="System.Drawing.Point, System.Drawing">
+    <value>208, 49</value>
+  </data>
+  <data name="IteratorMoveLeft.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="IteratorMoveLeft.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;IteratorMoveLeft.Name" xml:space="preserve">
+    <value>IteratorMoveLeft</value>
+  </data>
+  <data name="&gt;&gt;IteratorMoveLeft.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorMoveLeft.Parent" xml:space="preserve">
+    <value>mIteratorControlsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorMoveLeft.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="IteratorMoveDown.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
   </data>
   <data name="IteratorMoveDown.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -537,6 +1256,30 @@
         hEHLLMnwKwElGVbIhIEl5SsJsEImDL/HjhNEtp5dI7heEAAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="IteratorMoveDown.Location" type="System.Drawing.Point, System.Drawing">
+    <value>41, 49</value>
+  </data>
+  <data name="IteratorMoveDown.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="IteratorMoveDown.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;IteratorMoveDown.Name" xml:space="preserve">
+    <value>IteratorMoveDown</value>
+  </data>
+  <data name="&gt;&gt;IteratorMoveDown.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorMoveDown.Parent" xml:space="preserve">
+    <value>mIteratorControlsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorMoveDown.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="IteratorMoveRight.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
   <data name="IteratorMoveRight.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGOfPtRkwAAACBjSFJNAACH
@@ -589,6 +1332,30 @@
         3kgLPH9QX5EuYEsr78i/gRnXK9hHMVhYHQMNeI9hCNjxRHcMLXCCDnfQoZ+GC0z8nl2nk3afAAAAAElF
         TkSuQmCC
 </value>
+  </data>
+  <data name="IteratorMoveRight.Location" type="System.Drawing.Point, System.Drawing">
+    <value>238, 49</value>
+  </data>
+  <data name="IteratorMoveRight.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="IteratorMoveRight.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;IteratorMoveRight.Name" xml:space="preserve">
+    <value>IteratorMoveRight</value>
+  </data>
+  <data name="&gt;&gt;IteratorMoveRight.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorMoveRight.Parent" xml:space="preserve">
+    <value>mIteratorControlsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorMoveRight.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="IteratorMoveUp.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
   </data>
   <data name="IteratorMoveUp.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -643,6 +1410,51 @@
         CHzoTjBCRgqHBsRwj4yU77HtAF68nl1LEGcYAAAAAElFTkSuQmCC
 </value>
   </data>
+  <data name="IteratorMoveUp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 49</value>
+  </data>
+  <data name="IteratorMoveUp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="IteratorMoveUp.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;IteratorMoveUp.Name" xml:space="preserve">
+    <value>IteratorMoveUp</value>
+  </data>
+  <data name="&gt;&gt;IteratorMoveUp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorMoveUp.Parent" xml:space="preserve">
+    <value>mIteratorControlsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorMoveUp.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="IteratorSnapAngle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>71, 21</value>
+  </data>
+  <data name="IteratorSnapAngle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 21</value>
+  </data>
+  <data name="IteratorSnapAngle.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;IteratorSnapAngle.Name" xml:space="preserve">
+    <value>IteratorSnapAngle</value>
+  </data>
+  <data name="&gt;&gt;IteratorSnapAngle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorSnapAngle.Parent" xml:space="preserve">
+    <value>mIteratorControlsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorSnapAngle.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="IteratorRotateCW.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
   <data name="IteratorRotateCW.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
@@ -653,6 +1465,30 @@
         TJ99xngXXnCz205NrFmfEcjP3Z7qIgpSk5yuwIRJsqLATN7pCo7zVhSg/aX/A849Ac8K+9rREzY/AAAA
         AElFTkSuQmCC
 </value>
+  </data>
+  <data name="IteratorRotateCW.Location" type="System.Drawing.Point, System.Drawing">
+    <value>208, 19</value>
+  </data>
+  <data name="IteratorRotateCW.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="IteratorRotateCW.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;IteratorRotateCW.Name" xml:space="preserve">
+    <value>IteratorRotateCW</value>
+  </data>
+  <data name="&gt;&gt;IteratorRotateCW.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorRotateCW.Parent" xml:space="preserve">
+    <value>mIteratorControlsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorRotateCW.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="IteratorRotateCCW.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
   </data>
   <data name="IteratorRotateCCW.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -709,6 +1545,30 @@
         Up7k+MT3SP+bRI/JMvF0fkqWIcoly+CePqbcJ/o67PYH6/NbiZf3vKsAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="IteratorRotateCCW.Location" type="System.Drawing.Point, System.Drawing">
+    <value>41, 19</value>
+  </data>
+  <data name="IteratorRotateCCW.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="IteratorRotateCCW.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;IteratorRotateCCW.Name" xml:space="preserve">
+    <value>IteratorRotateCCW</value>
+  </data>
+  <data name="&gt;&gt;IteratorRotateCCW.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorRotateCCW.Parent" xml:space="preserve">
+    <value>mIteratorControlsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorRotateCCW.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="IteratorRotate90CW.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
   <data name="IteratorRotate90CW.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGOfPtRkwAAACBjSFJNAACH
@@ -761,6 +1621,30 @@
         FBFJ8iXAhhVI8j8B5jPW2mH48gp8EJHuL35ELnDOgda67XHtsvPfKAloj4QQavcYt4L5DfrcJy4FMcZU
         V6Ttvfe17d1L0XIqzgKqS1C0nIo/EXCofodYXAe2F0dtkfjrfOrNAAAAAElFTkSuQmCC
 </value>
+  </data>
+  <data name="IteratorRotate90CW.Location" type="System.Drawing.Point, System.Drawing">
+    <value>238, 19</value>
+  </data>
+  <data name="IteratorRotate90CW.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="IteratorRotate90CW.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;IteratorRotate90CW.Name" xml:space="preserve">
+    <value>IteratorRotate90CW</value>
+  </data>
+  <data name="&gt;&gt;IteratorRotate90CW.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorRotate90CW.Parent" xml:space="preserve">
+    <value>mIteratorControlsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorRotate90CW.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="IteratorRotate90CCW.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
   </data>
   <data name="IteratorRotate90CCW.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -815,6 +1699,1692 @@
         Fhzxr4ADDrVQfWi8B0wr3xGR+PobO+0AAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="IteratorRotate90CCW.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 19</value>
+  </data>
+  <data name="IteratorRotate90CCW.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="IteratorRotate90CCW.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;IteratorRotate90CCW.Name" xml:space="preserve">
+    <value>IteratorRotate90CCW</value>
+  </data>
+  <data name="&gt;&gt;IteratorRotate90CCW.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorRotate90CCW.Parent" xml:space="preserve">
+    <value>mIteratorControlsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorRotate90CCW.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="mIteratorControlsGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 116</value>
+  </data>
+  <data name="mIteratorControlsGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>273, 118</value>
+  </data>
+  <data name="mIteratorControlsGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;mIteratorControlsGroupBox.Name" xml:space="preserve">
+    <value>mIteratorControlsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;mIteratorControlsGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mIteratorControlsGroupBox.Parent" xml:space="preserve">
+    <value>PointTab</value>
+  </data>
+  <data name="&gt;&gt;mIteratorControlsGroupBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="mPointCoordGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="IteratorResetPointY.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="IteratorResetPointY.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 7pt</value>
+  </data>
+  <data name="IteratorResetPointY.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 44</value>
+  </data>
+  <data name="IteratorResetPointY.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="IteratorResetPointY.Size" type="System.Drawing.Size, System.Drawing">
+    <value>20, 20</value>
+  </data>
+  <data name="IteratorResetPointY.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="IteratorResetPointY.Text" xml:space="preserve">
+    <value>Y</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPointY.Name" xml:space="preserve">
+    <value>IteratorResetPointY</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPointY.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPointY.Parent" xml:space="preserve">
+    <value>mPointCoordGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPointY.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="IteratorResetPointO.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="IteratorResetPointO.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 7pt</value>
+  </data>
+  <data name="IteratorResetPointO.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 70</value>
+  </data>
+  <data name="IteratorResetPointO.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="IteratorResetPointO.Size" type="System.Drawing.Size, System.Drawing">
+    <value>20, 20</value>
+  </data>
+  <data name="IteratorResetPointO.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="IteratorResetPointO.Text" xml:space="preserve">
+    <value>O</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPointO.Name" xml:space="preserve">
+    <value>IteratorResetPointO</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPointO.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPointO.Parent" xml:space="preserve">
+    <value>mPointCoordGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPointO.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="IteratorResetPointX.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="IteratorResetPointX.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 7pt</value>
+  </data>
+  <data name="IteratorResetPointX.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 19</value>
+  </data>
+  <data name="IteratorResetPointX.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="IteratorResetPointX.Size" type="System.Drawing.Size, System.Drawing">
+    <value>20, 20</value>
+  </data>
+  <data name="IteratorResetPointX.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="IteratorResetPointX.Text" xml:space="preserve">
+    <value>X</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPointX.Name" xml:space="preserve">
+    <value>IteratorResetPointX</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPointX.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPointX.Parent" xml:space="preserve">
+    <value>mPointCoordGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPointX.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="IteratorPointOyTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>151, 70</value>
+  </data>
+  <data name="IteratorPointOyTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 20</value>
+  </data>
+  <data name="IteratorPointOyTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;IteratorPointOyTextBox.Name" xml:space="preserve">
+    <value>IteratorPointOyTextBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorPointOyTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorPointOyTextBox.Parent" xml:space="preserve">
+    <value>mPointCoordGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorPointOyTextBox.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="IteratorPointOxTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>34, 70</value>
+  </data>
+  <data name="IteratorPointOxTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 20</value>
+  </data>
+  <data name="IteratorPointOxTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;IteratorPointOxTextBox.Name" xml:space="preserve">
+    <value>IteratorPointOxTextBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorPointOxTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorPointOxTextBox.Parent" xml:space="preserve">
+    <value>mPointCoordGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorPointOxTextBox.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="IteratorPointYyTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>151, 44</value>
+  </data>
+  <data name="IteratorPointYyTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 20</value>
+  </data>
+  <data name="IteratorPointYyTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;IteratorPointYyTextBox.Name" xml:space="preserve">
+    <value>IteratorPointYyTextBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorPointYyTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorPointYyTextBox.Parent" xml:space="preserve">
+    <value>mPointCoordGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorPointYyTextBox.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="IteratorPointYxTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>34, 44</value>
+  </data>
+  <data name="IteratorPointYxTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 20</value>
+  </data>
+  <data name="IteratorPointYxTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;IteratorPointYxTextBox.Name" xml:space="preserve">
+    <value>IteratorPointYxTextBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorPointYxTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorPointYxTextBox.Parent" xml:space="preserve">
+    <value>mPointCoordGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorPointYxTextBox.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="IteratorPointXyTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>151, 19</value>
+  </data>
+  <data name="IteratorPointXyTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 20</value>
+  </data>
+  <data name="IteratorPointXyTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;IteratorPointXyTextBox.Name" xml:space="preserve">
+    <value>IteratorPointXyTextBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorPointXyTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorPointXyTextBox.Parent" xml:space="preserve">
+    <value>mPointCoordGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorPointXyTextBox.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="IteratorPointXxTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>34, 19</value>
+  </data>
+  <data name="IteratorPointXxTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 20</value>
+  </data>
+  <data name="IteratorPointXxTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;IteratorPointXxTextBox.Name" xml:space="preserve">
+    <value>IteratorPointXxTextBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorPointXxTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorPointXxTextBox.Parent" xml:space="preserve">
+    <value>mPointCoordGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorPointXxTextBox.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="mPointCoordGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
+  </data>
+  <data name="mPointCoordGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>273, 104</value>
+  </data>
+  <data name="mPointCoordGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;mPointCoordGroupBox.Name" xml:space="preserve">
+    <value>mPointCoordGroupBox</value>
+  </data>
+  <data name="&gt;&gt;mPointCoordGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mPointCoordGroupBox.Parent" xml:space="preserve">
+    <value>PointTab</value>
+  </data>
+  <data name="&gt;&gt;mPointCoordGroupBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="PointTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="PointTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="PointTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>285, 375</value>
+  </data>
+  <data name="PointTab.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="PointTab.Text" xml:space="preserve">
+    <value>Triangle</value>
+  </data>
+  <data name="&gt;&gt;PointTab.Name" xml:space="preserve">
+    <value>PointTab</value>
+  </data>
+  <data name="&gt;&gt;PointTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PointTab.Parent" xml:space="preserve">
+    <value>Tabs</value>
+  </data>
+  <data name="&gt;&gt;PointTab.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="mIteratorPostAffineGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="IteratorResetPostAffine.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="IteratorResetPostAffine.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 97</value>
+  </data>
+  <data name="IteratorResetPostAffine.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="IteratorResetPostAffine.Size" type="System.Drawing.Size, System.Drawing">
+    <value>251, 29</value>
+  </data>
+  <data name="IteratorResetPostAffine.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="IteratorResetPostAffine.Text" xml:space="preserve">
+    <value>Reset post transform</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPostAffine.Name" xml:space="preserve">
+    <value>IteratorResetPostAffine</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPostAffine.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPostAffine.Parent" xml:space="preserve">
+    <value>mIteratorPostAffineGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPostAffine.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="IteratorResetPostAffineY.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="IteratorResetPostAffineY.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 7pt</value>
+  </data>
+  <data name="IteratorResetPostAffineY.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 44</value>
+  </data>
+  <data name="IteratorResetPostAffineY.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="IteratorResetPostAffineY.Size" type="System.Drawing.Size, System.Drawing">
+    <value>20, 20</value>
+  </data>
+  <data name="IteratorResetPostAffineY.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="IteratorResetPostAffineY.Text" xml:space="preserve">
+    <value>Y</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPostAffineY.Name" xml:space="preserve">
+    <value>IteratorResetPostAffineY</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPostAffineY.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPostAffineY.Parent" xml:space="preserve">
+    <value>mIteratorPostAffineGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPostAffineY.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="IteratorResetPostAffineO.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="IteratorResetPostAffineO.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 7pt</value>
+  </data>
+  <data name="IteratorResetPostAffineO.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 70</value>
+  </data>
+  <data name="IteratorResetPostAffineO.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="IteratorResetPostAffineO.Size" type="System.Drawing.Size, System.Drawing">
+    <value>20, 20</value>
+  </data>
+  <data name="IteratorResetPostAffineO.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="IteratorResetPostAffineO.Text" xml:space="preserve">
+    <value>O</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPostAffineO.Name" xml:space="preserve">
+    <value>IteratorResetPostAffineO</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPostAffineO.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPostAffineO.Parent" xml:space="preserve">
+    <value>mIteratorPostAffineGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPostAffineO.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="IteratorResetPostAffineX.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="IteratorResetPostAffineX.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 7pt</value>
+  </data>
+  <data name="IteratorResetPostAffineX.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 19</value>
+  </data>
+  <data name="IteratorResetPostAffineX.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="IteratorResetPostAffineX.Size" type="System.Drawing.Size, System.Drawing">
+    <value>20, 20</value>
+  </data>
+  <data name="IteratorResetPostAffineX.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="IteratorResetPostAffineX.Text" xml:space="preserve">
+    <value>X</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPostAffineX.Name" xml:space="preserve">
+    <value>IteratorResetPostAffineX</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPostAffineX.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPostAffineX.Parent" xml:space="preserve">
+    <value>mIteratorPostAffineGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPostAffineX.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="IteratorPostAffineOyTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>151, 70</value>
+  </data>
+  <data name="IteratorPostAffineOyTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 20</value>
+  </data>
+  <data name="IteratorPostAffineOyTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;IteratorPostAffineOyTextBox.Name" xml:space="preserve">
+    <value>IteratorPostAffineOyTextBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorPostAffineOyTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorPostAffineOyTextBox.Parent" xml:space="preserve">
+    <value>mIteratorPostAffineGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorPostAffineOyTextBox.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="IteratorPostAffineOxTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>34, 70</value>
+  </data>
+  <data name="IteratorPostAffineOxTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 20</value>
+  </data>
+  <data name="IteratorPostAffineOxTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;IteratorPostAffineOxTextBox.Name" xml:space="preserve">
+    <value>IteratorPostAffineOxTextBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorPostAffineOxTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorPostAffineOxTextBox.Parent" xml:space="preserve">
+    <value>mIteratorPostAffineGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorPostAffineOxTextBox.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="IteratorPostAffineYyTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>151, 44</value>
+  </data>
+  <data name="IteratorPostAffineYyTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 20</value>
+  </data>
+  <data name="IteratorPostAffineYyTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;IteratorPostAffineYyTextBox.Name" xml:space="preserve">
+    <value>IteratorPostAffineYyTextBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorPostAffineYyTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorPostAffineYyTextBox.Parent" xml:space="preserve">
+    <value>mIteratorPostAffineGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorPostAffineYyTextBox.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="IteratorPostAffineYxTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>34, 44</value>
+  </data>
+  <data name="IteratorPostAffineYxTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 20</value>
+  </data>
+  <data name="IteratorPostAffineYxTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;IteratorPostAffineYxTextBox.Name" xml:space="preserve">
+    <value>IteratorPostAffineYxTextBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorPostAffineYxTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorPostAffineYxTextBox.Parent" xml:space="preserve">
+    <value>mIteratorPostAffineGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorPostAffineYxTextBox.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="IteratorPostAffineXyTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>151, 19</value>
+  </data>
+  <data name="IteratorPostAffineXyTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 20</value>
+  </data>
+  <data name="IteratorPostAffineXyTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;IteratorPostAffineXyTextBox.Name" xml:space="preserve">
+    <value>IteratorPostAffineXyTextBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorPostAffineXyTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorPostAffineXyTextBox.Parent" xml:space="preserve">
+    <value>mIteratorPostAffineGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorPostAffineXyTextBox.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="IteratorPostAffineXxTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>34, 19</value>
+  </data>
+  <data name="IteratorPostAffineXxTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 20</value>
+  </data>
+  <data name="IteratorPostAffineXxTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;IteratorPostAffineXxTextBox.Name" xml:space="preserve">
+    <value>IteratorPostAffineXxTextBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorPostAffineXxTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorPostAffineXxTextBox.Parent" xml:space="preserve">
+    <value>mIteratorPostAffineGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorPostAffineXxTextBox.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="mIteratorPostAffineGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 148</value>
+  </data>
+  <data name="mIteratorPostAffineGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>273, 137</value>
+  </data>
+  <data name="mIteratorPostAffineGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;mIteratorPostAffineGroupBox.Name" xml:space="preserve">
+    <value>mIteratorPostAffineGroupBox</value>
+  </data>
+  <data name="&gt;&gt;mIteratorPostAffineGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mIteratorPostAffineGroupBox.Parent" xml:space="preserve">
+    <value>VectorTab</value>
+  </data>
+  <data name="&gt;&gt;mIteratorPostAffineGroupBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="mPreAffineGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="IteratorResetPreAffine.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="IteratorResetPreAffine.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 97</value>
+  </data>
+  <data name="IteratorResetPreAffine.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="IteratorResetPreAffine.Size" type="System.Drawing.Size, System.Drawing">
+    <value>251, 29</value>
+  </data>
+  <data name="IteratorResetPreAffine.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="IteratorResetPreAffine.Text" xml:space="preserve">
+    <value>Reset transform</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPreAffine.Name" xml:space="preserve">
+    <value>IteratorResetPreAffine</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPreAffine.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPreAffine.Parent" xml:space="preserve">
+    <value>mPreAffineGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPreAffine.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="IteratorResetPreAffineY.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="IteratorResetPreAffineY.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 7pt</value>
+  </data>
+  <data name="IteratorResetPreAffineY.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 44</value>
+  </data>
+  <data name="IteratorResetPreAffineY.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="IteratorResetPreAffineY.Size" type="System.Drawing.Size, System.Drawing">
+    <value>20, 20</value>
+  </data>
+  <data name="IteratorResetPreAffineY.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="IteratorResetPreAffineY.Text" xml:space="preserve">
+    <value>Y</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPreAffineY.Name" xml:space="preserve">
+    <value>IteratorResetPreAffineY</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPreAffineY.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPreAffineY.Parent" xml:space="preserve">
+    <value>mPreAffineGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPreAffineY.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="IteratorResetPreAffineO.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="IteratorResetPreAffineO.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 7pt</value>
+  </data>
+  <data name="IteratorResetPreAffineO.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 70</value>
+  </data>
+  <data name="IteratorResetPreAffineO.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="IteratorResetPreAffineO.Size" type="System.Drawing.Size, System.Drawing">
+    <value>20, 20</value>
+  </data>
+  <data name="IteratorResetPreAffineO.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="IteratorResetPreAffineO.Text" xml:space="preserve">
+    <value>O</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPreAffineO.Name" xml:space="preserve">
+    <value>IteratorResetPreAffineO</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPreAffineO.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPreAffineO.Parent" xml:space="preserve">
+    <value>mPreAffineGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPreAffineO.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="IteratorResetPreAffineX.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="IteratorResetPreAffineX.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 7pt</value>
+  </data>
+  <data name="IteratorResetPreAffineX.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 19</value>
+  </data>
+  <data name="IteratorResetPreAffineX.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="IteratorResetPreAffineX.Size" type="System.Drawing.Size, System.Drawing">
+    <value>20, 20</value>
+  </data>
+  <data name="IteratorResetPreAffineX.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="IteratorResetPreAffineX.Text" xml:space="preserve">
+    <value>X</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPreAffineX.Name" xml:space="preserve">
+    <value>IteratorResetPreAffineX</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPreAffineX.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPreAffineX.Parent" xml:space="preserve">
+    <value>mPreAffineGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetPreAffineX.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="IteratorPreAffineOyTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>151, 70</value>
+  </data>
+  <data name="IteratorPreAffineOyTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 20</value>
+  </data>
+  <data name="IteratorPreAffineOyTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;IteratorPreAffineOyTextBox.Name" xml:space="preserve">
+    <value>IteratorPreAffineOyTextBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorPreAffineOyTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorPreAffineOyTextBox.Parent" xml:space="preserve">
+    <value>mPreAffineGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorPreAffineOyTextBox.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="IteratorPreAffineOxTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>34, 70</value>
+  </data>
+  <data name="IteratorPreAffineOxTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 20</value>
+  </data>
+  <data name="IteratorPreAffineOxTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;IteratorPreAffineOxTextBox.Name" xml:space="preserve">
+    <value>IteratorPreAffineOxTextBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorPreAffineOxTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorPreAffineOxTextBox.Parent" xml:space="preserve">
+    <value>mPreAffineGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorPreAffineOxTextBox.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="IteratorPreAffineYyTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>151, 44</value>
+  </data>
+  <data name="IteratorPreAffineYyTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 20</value>
+  </data>
+  <data name="IteratorPreAffineYyTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;IteratorPreAffineYyTextBox.Name" xml:space="preserve">
+    <value>IteratorPreAffineYyTextBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorPreAffineYyTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorPreAffineYyTextBox.Parent" xml:space="preserve">
+    <value>mPreAffineGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorPreAffineYyTextBox.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="IteratorPreAffineYxTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>34, 44</value>
+  </data>
+  <data name="IteratorPreAffineYxTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 20</value>
+  </data>
+  <data name="IteratorPreAffineYxTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;IteratorPreAffineYxTextBox.Name" xml:space="preserve">
+    <value>IteratorPreAffineYxTextBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorPreAffineYxTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorPreAffineYxTextBox.Parent" xml:space="preserve">
+    <value>mPreAffineGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorPreAffineYxTextBox.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="IteratorPreAffineXyTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>151, 19</value>
+  </data>
+  <data name="IteratorPreAffineXyTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 20</value>
+  </data>
+  <data name="IteratorPreAffineXyTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;IteratorPreAffineXyTextBox.Name" xml:space="preserve">
+    <value>IteratorPreAffineXyTextBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorPreAffineXyTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorPreAffineXyTextBox.Parent" xml:space="preserve">
+    <value>mPreAffineGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorPreAffineXyTextBox.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="IteratorPreAffineXxTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>34, 19</value>
+  </data>
+  <data name="IteratorPreAffineXxTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 20</value>
+  </data>
+  <data name="IteratorPreAffineXxTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;IteratorPreAffineXxTextBox.Name" xml:space="preserve">
+    <value>IteratorPreAffineXxTextBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorPreAffineXxTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorPreAffineXxTextBox.Parent" xml:space="preserve">
+    <value>mPreAffineGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorPreAffineXxTextBox.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="mPreAffineGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
+  </data>
+  <data name="mPreAffineGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>273, 136</value>
+  </data>
+  <data name="mPreAffineGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;mPreAffineGroupBox.Name" xml:space="preserve">
+    <value>mPreAffineGroupBox</value>
+  </data>
+  <data name="&gt;&gt;mPreAffineGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mPreAffineGroupBox.Parent" xml:space="preserve">
+    <value>VectorTab</value>
+  </data>
+  <data name="&gt;&gt;mPreAffineGroupBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="VectorTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="VectorTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="VectorTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>285, 375</value>
+  </data>
+  <data name="VectorTab.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="VectorTab.Text" xml:space="preserve">
+    <value>Transform</value>
+  </data>
+  <data name="&gt;&gt;VectorTab.Name" xml:space="preserve">
+    <value>VectorTab</value>
+  </data>
+  <data name="&gt;&gt;VectorTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;VectorTab.Parent" xml:space="preserve">
+    <value>Tabs</value>
+  </data>
+  <data name="&gt;&gt;VectorTab.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="mPreviewGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="ApplyPostTransformToVariationPreviewCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="ApplyPostTransformToVariationPreviewCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 101</value>
+  </data>
+  <data name="ApplyPostTransformToVariationPreviewCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>249, 35</value>
+  </data>
+  <data name="ApplyPostTransformToVariationPreviewCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="ApplyPostTransformToVariationPreviewCheckBox.Text" xml:space="preserve">
+    <value>Apply post-transform</value>
+  </data>
+  <data name="&gt;&gt;ApplyPostTransformToVariationPreviewCheckBox.Name" xml:space="preserve">
+    <value>ApplyPostTransformToVariationPreviewCheckBox</value>
+  </data>
+  <data name="&gt;&gt;ApplyPostTransformToVariationPreviewCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ApplyPostTransformToVariationPreviewCheckBox.Parent" xml:space="preserve">
+    <value>mPreviewGroupBox</value>
+  </data>
+  <data name="&gt;&gt;ApplyPostTransformToVariationPreviewCheckBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="mPreviewDensityLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="mPreviewDensityLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 71</value>
+  </data>
+  <data name="mPreviewDensityLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 13</value>
+  </data>
+  <data name="mPreviewDensityLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="mPreviewDensityLabel.Text" xml:space="preserve">
+    <value>Density:</value>
+  </data>
+  <data name="&gt;&gt;mPreviewDensityLabel.Name" xml:space="preserve">
+    <value>mPreviewDensityLabel</value>
+  </data>
+  <data name="&gt;&gt;mPreviewDensityLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mPreviewDensityLabel.Parent" xml:space="preserve">
+    <value>mPreviewGroupBox</value>
+  </data>
+  <data name="&gt;&gt;mPreviewDensityLabel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="mPreviewRangeLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="mPreviewRangeLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 33</value>
+  </data>
+  <data name="mPreviewRangeLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>42, 13</value>
+  </data>
+  <data name="mPreviewRangeLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="mPreviewRangeLabel.Text" xml:space="preserve">
+    <value>Range:</value>
+  </data>
+  <data name="&gt;&gt;mPreviewRangeLabel.Name" xml:space="preserve">
+    <value>mPreviewRangeLabel</value>
+  </data>
+  <data name="&gt;&gt;mPreviewRangeLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mPreviewRangeLabel.Parent" xml:space="preserve">
+    <value>mPreviewGroupBox</value>
+  </data>
+  <data name="&gt;&gt;mPreviewRangeLabel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="PreviewDensityTrackBar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="PreviewDensityTrackBar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>57, 67</value>
+  </data>
+  <data name="PreviewDensityTrackBar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 45</value>
+  </data>
+  <data name="PreviewDensityTrackBar.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;PreviewDensityTrackBar.Name" xml:space="preserve">
+    <value>PreviewDensityTrackBar</value>
+  </data>
+  <data name="&gt;&gt;PreviewDensityTrackBar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PreviewDensityTrackBar.Parent" xml:space="preserve">
+    <value>mPreviewGroupBox</value>
+  </data>
+  <data name="&gt;&gt;PreviewDensityTrackBar.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="PreviewRangeTrackBar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="PreviewRangeTrackBar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>57, 29</value>
+  </data>
+  <data name="PreviewRangeTrackBar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 45</value>
+  </data>
+  <data name="PreviewRangeTrackBar.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;PreviewRangeTrackBar.Name" xml:space="preserve">
+    <value>PreviewRangeTrackBar</value>
+  </data>
+  <data name="&gt;&gt;PreviewRangeTrackBar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PreviewRangeTrackBar.Parent" xml:space="preserve">
+    <value>mPreviewGroupBox</value>
+  </data>
+  <data name="&gt;&gt;PreviewRangeTrackBar.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="mPreviewGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 200</value>
+  </data>
+  <data name="mPreviewGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>273, 142</value>
+  </data>
+  <data name="mPreviewGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="mPreviewGroupBox.Text" xml:space="preserve">
+    <value>Variation preview</value>
+  </data>
+  <data name="&gt;&gt;mPreviewGroupBox.Name" xml:space="preserve">
+    <value>mPreviewGroupBox</value>
+  </data>
+  <data name="&gt;&gt;mPreviewGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mPreviewGroupBox.Parent" xml:space="preserve">
+    <value>ColorTab</value>
+  </data>
+  <data name="&gt;&gt;mPreviewGroupBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="mIteratorColorGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="PaletteSelectComboBox.ItemHeight" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="PaletteSelectComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 62</value>
+  </data>
+  <data name="PaletteSelectComboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>251, 21</value>
+  </data>
+  <data name="PaletteSelectComboBox.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;PaletteSelectComboBox.Name" xml:space="preserve">
+    <value>PaletteSelectComboBox</value>
+  </data>
+  <data name="&gt;&gt;PaletteSelectComboBox.Type" xml:space="preserve">
+    <value>Xyrus.Apophysis.Windows.Controls.PaletteSelectComboBox, Apophysis, Version=2.20.2014.917, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;PaletteSelectComboBox.Parent" xml:space="preserve">
+    <value>mIteratorColorGroupBox</value>
+  </data>
+  <data name="&gt;&gt;PaletteSelectComboBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="IteratorDirectColorTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="IteratorDirectColorTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>117, 142</value>
+  </data>
+  <data name="IteratorDirectColorTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 20</value>
+  </data>
+  <data name="IteratorDirectColorTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="IteratorDirectColorTextBox.Text" xml:space="preserve">
+    <value>1.000</value>
+  </data>
+  <data name="&gt;&gt;IteratorDirectColorTextBox.Name" xml:space="preserve">
+    <value>IteratorDirectColorTextBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorDirectColorTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorDirectColorTextBox.Parent" xml:space="preserve">
+    <value>mIteratorColorGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorDirectColorTextBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="IteratorDirectColorDragPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 142</value>
+  </data>
+  <data name="IteratorDirectColorDragPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>107, 21</value>
+  </data>
+  <data name="IteratorDirectColorDragPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="IteratorDirectColorDragPanel.Text" xml:space="preserve">
+    <value>Direct color:</value>
+  </data>
+  <data name="IteratorDirectColorDragPanel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;IteratorDirectColorDragPanel.Name" xml:space="preserve">
+    <value>IteratorDirectColorDragPanel</value>
+  </data>
+  <data name="&gt;&gt;IteratorDirectColorDragPanel.Type" xml:space="preserve">
+    <value>Xyrus.Apophysis.Windows.Controls.DragPanel, Apophysis, Version=2.20.2014.917, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;IteratorDirectColorDragPanel.Parent" xml:space="preserve">
+    <value>mIteratorColorGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorDirectColorDragPanel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="IteratorOpacityTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="IteratorOpacityTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>117, 119</value>
+  </data>
+  <data name="IteratorOpacityTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 20</value>
+  </data>
+  <data name="IteratorOpacityTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="IteratorOpacityTextBox.Text" xml:space="preserve">
+    <value>1.000</value>
+  </data>
+  <data name="&gt;&gt;IteratorOpacityTextBox.Name" xml:space="preserve">
+    <value>IteratorOpacityTextBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorOpacityTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorOpacityTextBox.Parent" xml:space="preserve">
+    <value>mIteratorColorGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorOpacityTextBox.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="IteratorOpacityDragPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 119</value>
+  </data>
+  <data name="IteratorOpacityDragPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>107, 21</value>
+  </data>
+  <data name="IteratorOpacityDragPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="IteratorOpacityDragPanel.Text" xml:space="preserve">
+    <value>Opacity:</value>
+  </data>
+  <data name="IteratorOpacityDragPanel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;IteratorOpacityDragPanel.Name" xml:space="preserve">
+    <value>IteratorOpacityDragPanel</value>
+  </data>
+  <data name="&gt;&gt;IteratorOpacityDragPanel.Type" xml:space="preserve">
+    <value>Xyrus.Apophysis.Windows.Controls.DragPanel, Apophysis, Version=2.20.2014.917, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;IteratorOpacityDragPanel.Parent" xml:space="preserve">
+    <value>mIteratorColorGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorOpacityDragPanel.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="IteratorColorSpeedTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="IteratorColorSpeedTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>117, 96</value>
+  </data>
+  <data name="IteratorColorSpeedTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 20</value>
+  </data>
+  <data name="IteratorColorSpeedTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="IteratorColorSpeedTextBox.Text" xml:space="preserve">
+    <value>0.000</value>
+  </data>
+  <data name="&gt;&gt;IteratorColorSpeedTextBox.Name" xml:space="preserve">
+    <value>IteratorColorSpeedTextBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorColorSpeedTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorColorSpeedTextBox.Parent" xml:space="preserve">
+    <value>mIteratorColorGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorColorSpeedTextBox.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="IteratorColorSpeedDragPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 96</value>
+  </data>
+  <data name="IteratorColorSpeedDragPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>107, 21</value>
+  </data>
+  <data name="IteratorColorSpeedDragPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="IteratorColorSpeedDragPanel.Text" xml:space="preserve">
+    <value>Color speed:</value>
+  </data>
+  <data name="IteratorColorSpeedDragPanel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;IteratorColorSpeedDragPanel.Name" xml:space="preserve">
+    <value>IteratorColorSpeedDragPanel</value>
+  </data>
+  <data name="&gt;&gt;IteratorColorSpeedDragPanel.Type" xml:space="preserve">
+    <value>Xyrus.Apophysis.Windows.Controls.DragPanel, Apophysis, Version=2.20.2014.917, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;IteratorColorSpeedDragPanel.Parent" xml:space="preserve">
+    <value>mIteratorColorGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorColorSpeedDragPanel.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="IteratorColorScrollBar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="IteratorColorScrollBar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 42</value>
+  </data>
+  <data name="IteratorColorScrollBar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>251, 17</value>
+  </data>
+  <data name="IteratorColorScrollBar.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;IteratorColorScrollBar.Name" xml:space="preserve">
+    <value>IteratorColorScrollBar</value>
+  </data>
+  <data name="&gt;&gt;IteratorColorScrollBar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.HScrollBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorColorScrollBar.Parent" xml:space="preserve">
+    <value>mIteratorColorGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorColorScrollBar.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="IteratorColorTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="IteratorColorTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>58, 19</value>
+  </data>
+  <data name="IteratorColorTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>204, 20</value>
+  </data>
+  <data name="IteratorColorTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="IteratorColorTextBox.Text" xml:space="preserve">
+    <value>0.000</value>
+  </data>
+  <data name="&gt;&gt;IteratorColorTextBox.Name" xml:space="preserve">
+    <value>IteratorColorTextBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorColorTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorColorTextBox.Parent" xml:space="preserve">
+    <value>mIteratorColorGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorColorTextBox.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="IteratorColorDragPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 19</value>
+  </data>
+  <data name="IteratorColorDragPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 21</value>
+  </data>
+  <data name="IteratorColorDragPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="IteratorColorDragPanel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;IteratorColorDragPanel.Name" xml:space="preserve">
+    <value>IteratorColorDragPanel</value>
+  </data>
+  <data name="&gt;&gt;IteratorColorDragPanel.Type" xml:space="preserve">
+    <value>Xyrus.Apophysis.Windows.Controls.DragPanel, Apophysis, Version=2.20.2014.917, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;IteratorColorDragPanel.Parent" xml:space="preserve">
+    <value>mIteratorColorGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorColorDragPanel.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="mIteratorColorGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
+  </data>
+  <data name="mIteratorColorGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>273, 177</value>
+  </data>
+  <data name="mIteratorColorGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;mIteratorColorGroupBox.Name" xml:space="preserve">
+    <value>mIteratorColorGroupBox</value>
+  </data>
+  <data name="&gt;&gt;mIteratorColorGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mIteratorColorGroupBox.Parent" xml:space="preserve">
+    <value>ColorTab</value>
+  </data>
+  <data name="&gt;&gt;mIteratorColorGroupBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ColorTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="ColorTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="ColorTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>285, 375</value>
+  </data>
+  <data name="ColorTab.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="ColorTab.Text" xml:space="preserve">
+    <value>Color</value>
+  </data>
+  <data name="&gt;&gt;ColorTab.Name" xml:space="preserve">
+    <value>ColorTab</value>
+  </data>
+  <data name="&gt;&gt;ColorTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColorTab.Parent" xml:space="preserve">
+    <value>Tabs</value>
+  </data>
+  <data name="&gt;&gt;ColorTab.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="Tabs.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 75</value>
+  </data>
+  <data name="Tabs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>293, 401</value>
+  </data>
+  <data name="Tabs.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;Tabs.Name" xml:space="preserve">
+    <value>Tabs</value>
+  </data>
+  <data name="&gt;&gt;Tabs.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Tabs.Parent" xml:space="preserve">
+    <value>mSidebarSplitter.Panel2</value>
+  </data>
+  <data name="&gt;&gt;Tabs.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="IteratorWeightTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="IteratorWeightTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>113, 47</value>
+  </data>
+  <data name="IteratorWeightTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>179, 20</value>
+  </data>
+  <data name="IteratorWeightTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="IteratorWeightTextBox.Text" xml:space="preserve">
+    <value>0.500</value>
+  </data>
+  <data name="&gt;&gt;IteratorWeightTextBox.Name" xml:space="preserve">
+    <value>IteratorWeightTextBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorWeightTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorWeightTextBox.Parent" xml:space="preserve">
+    <value>mIteratorPropertyPanel</value>
+  </data>
+  <data name="&gt;&gt;IteratorWeightTextBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="IteratorWeightDragPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 47</value>
+  </data>
+  <data name="IteratorWeightDragPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 21</value>
+  </data>
+  <data name="IteratorWeightDragPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="IteratorWeightDragPanel.Text" xml:space="preserve">
+    <value>Weight:</value>
+  </data>
+  <data name="IteratorWeightDragPanel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;IteratorWeightDragPanel.Name" xml:space="preserve">
+    <value>IteratorWeightDragPanel</value>
+  </data>
+  <data name="&gt;&gt;IteratorWeightDragPanel.Type" xml:space="preserve">
+    <value>Xyrus.Apophysis.Windows.Controls.DragPanel, Apophysis, Version=2.20.2014.917, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;IteratorWeightDragPanel.Parent" xml:space="preserve">
+    <value>mIteratorPropertyPanel</value>
+  </data>
+  <data name="&gt;&gt;IteratorWeightDragPanel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="IteratorNameTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="IteratorNameTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>113, 24</value>
+  </data>
+  <data name="IteratorNameTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>179, 20</value>
+  </data>
+  <data name="IteratorNameTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;IteratorNameTextBox.Name" xml:space="preserve">
+    <value>IteratorNameTextBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorNameTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorNameTextBox.Parent" xml:space="preserve">
+    <value>mIteratorPropertyPanel</value>
+  </data>
+  <data name="&gt;&gt;IteratorNameTextBox.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="mIteratorNameLabel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="mIteratorNameLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 24</value>
+  </data>
+  <data name="mIteratorNameLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 21</value>
+  </data>
+  <data name="mIteratorNameLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="mIteratorNameLabel.Text" xml:space="preserve">
+    <value>Name:</value>
+  </data>
+  <data name="mIteratorNameLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;mIteratorNameLabel.Name" xml:space="preserve">
+    <value>mIteratorNameLabel</value>
+  </data>
+  <data name="&gt;&gt;mIteratorNameLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mIteratorNameLabel.Parent" xml:space="preserve">
+    <value>mIteratorPropertyPanel</value>
+  </data>
+  <data name="&gt;&gt;mIteratorNameLabel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="IteratorSelectionComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="IteratorSelectionComboBox.ItemHeight" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="IteratorSelectionComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>113, 0</value>
+  </data>
+  <data name="IteratorSelectionComboBox.MaxDropDownItems" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="IteratorSelectionComboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>179, 21</value>
+  </data>
+  <data name="IteratorSelectionComboBox.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;IteratorSelectionComboBox.Name" xml:space="preserve">
+    <value>IteratorSelectionComboBox</value>
+  </data>
+  <data name="&gt;&gt;IteratorSelectionComboBox.Type" xml:space="preserve">
+    <value>Xyrus.Apophysis.Windows.Controls.IteratorSelectComboBox, Apophysis, Version=2.20.2014.917, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;IteratorSelectionComboBox.Parent" xml:space="preserve">
+    <value>mIteratorPropertyPanel</value>
+  </data>
+  <data name="&gt;&gt;IteratorSelectionComboBox.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="mIteratorSelectLabel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="mIteratorSelectLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="mIteratorSelectLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 22</value>
+  </data>
+  <data name="mIteratorSelectLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="mIteratorSelectLabel.Text" xml:space="preserve">
+    <value>Transform:</value>
+  </data>
+  <data name="mIteratorSelectLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;mIteratorSelectLabel.Name" xml:space="preserve">
+    <value>mIteratorSelectLabel</value>
+  </data>
+  <data name="&gt;&gt;mIteratorSelectLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mIteratorSelectLabel.Parent" xml:space="preserve">
+    <value>mIteratorPropertyPanel</value>
+  </data>
+  <data name="&gt;&gt;mIteratorSelectLabel.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="mIteratorPropertyPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="mIteratorPropertyPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="mIteratorPropertyPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>299, 69</value>
+  </data>
+  <data name="mIteratorPropertyPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;mIteratorPropertyPanel.Name" xml:space="preserve">
+    <value>mIteratorPropertyPanel</value>
+  </data>
+  <data name="&gt;&gt;mIteratorPropertyPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mIteratorPropertyPanel.Parent" xml:space="preserve">
+    <value>mSidebarSplitter.Panel2</value>
+  </data>
+  <data name="&gt;&gt;mIteratorPropertyPanel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;mSidebarSplitter.Panel2.Name" xml:space="preserve">
+    <value>mSidebarSplitter.Panel2</value>
+  </data>
+  <data name="&gt;&gt;mSidebarSplitter.Panel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mSidebarSplitter.Panel2.Parent" xml:space="preserve">
+    <value>mSidebarSplitter</value>
+  </data>
+  <data name="&gt;&gt;mSidebarSplitter.Panel2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="mSidebarSplitter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>299, 661</value>
+  </data>
+  <data name="mSidebarSplitter.SplitterDistance" type="System.Int32, mscorlib">
+    <value>178</value>
+  </data>
+  <data name="mSidebarSplitter.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;mSidebarSplitter.Name" xml:space="preserve">
+    <value>mSidebarSplitter</value>
+  </data>
+  <data name="&gt;&gt;mSidebarSplitter.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mSidebarSplitter.Parent" xml:space="preserve">
+    <value>mRootSplitter.Panel2</value>
+  </data>
+  <data name="&gt;&gt;mSidebarSplitter.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;mRootSplitter.Panel2.Name" xml:space="preserve">
+    <value>mRootSplitter.Panel2</value>
+  </data>
+  <data name="&gt;&gt;mRootSplitter.Panel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mRootSplitter.Panel2.Parent" xml:space="preserve">
+    <value>mRootSplitter</value>
+  </data>
+  <data name="&gt;&gt;mRootSplitter.Panel2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="mRootSplitter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1014, 661</value>
+  </data>
+  <data name="mRootSplitter.SplitterDistance" type="System.Int32, mscorlib">
+    <value>711</value>
+  </data>
+  <data name="mRootSplitter.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;mRootSplitter.Name" xml:space="preserve">
+    <value>mRootSplitter</value>
+  </data>
+  <data name="&gt;&gt;mRootSplitter.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mRootSplitter.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;mRootSplitter.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn27.HeaderText" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn28.HeaderText" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn29.HeaderText" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn30.HeaderText" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn23.HeaderText" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn24.HeaderText" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn25.HeaderText" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn26.HeaderText" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn15.HeaderText" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn16.HeaderText" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn17.HeaderText" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn18.HeaderText" xml:space="preserve">
+    <value>Value</value>
+  </data>
   <metadata name="mToolbarImages.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>227, 17</value>
   </metadata>
@@ -823,7 +3393,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAu
-        MQAAAk1TRnQBSQFMAgEBGQEAAfABAwHwAQMBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        MQAAAk1TRnQBSQFMAgEBGQEAAfgBAwH4AQMBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABcAMAAQEBAAEYBgABVP8A/wD/AP8AsQADUroAA1K6AANSugADUv8A/wD/AP8A/wB1AAFjPgABY4AA
         AWM+AAFjgAABYz4AAWN6AAFjBQABYwUAAWM4AAFjfQABYwIAAWMCAAFjNQABYwUAAWMFAAFjbgABYwsA
         AWM7AAFjAgABYwIAAWMvAAFjRAABYwUAAWMCAAFjAgABYzsAAWM1AAFjNQABYwIAAWMCAAFjAgABYwIA
@@ -1035,6 +3605,81 @@
         AT0B/wENAeABfQHAAQEB8QL/AY8BxgE/AcABAQHxAv8CzwE/AcABAwHxAv8B7wL/AcABBwb/Cw==
 </value>
   </data>
+  <data name="dataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn3.HeaderText" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn4.HeaderText" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn5.HeaderText" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn6.HeaderText" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn7.HeaderText" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn8.HeaderText" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn9.HeaderText" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn10.HeaderText" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn11.HeaderText" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn12.HeaderText" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn13.HeaderText" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn14.HeaderText" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn19.HeaderText" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn20.HeaderText" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn21.HeaderText" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn22.HeaderText" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn31.HeaderText" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn32.HeaderText" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn33.HeaderText" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn34.HeaderText" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>1014, 661</value>
+  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAA
@@ -1058,5 +3703,413 @@
         AAAAAAAA//8AAP//AADH/wAAwv8AAPIHAADxhwAA8Q8AAPkDAAD4kwAA+P8AAPB/AAD8/wAA/B8AAP4f
         AAD/PwAA//8AAA==
 </value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>800, 700</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Editor</value>
+  </data>
+  <data name="&gt;&gt;ResetAllIteratorsButton.Name" xml:space="preserve">
+    <value>ResetAllIteratorsButton</value>
+  </data>
+  <data name="&gt;&gt;ResetAllIteratorsButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mToolbarSeparator1.Name" xml:space="preserve">
+    <value>mToolbarSeparator1</value>
+  </data>
+  <data name="&gt;&gt;mToolbarSeparator1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;AddIteratorButton.Name" xml:space="preserve">
+    <value>AddIteratorButton</value>
+  </data>
+  <data name="&gt;&gt;AddIteratorButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;DuplicateIteratorButton.Name" xml:space="preserve">
+    <value>DuplicateIteratorButton</value>
+  </data>
+  <data name="&gt;&gt;DuplicateIteratorButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;RemoveIteratorButton.Name" xml:space="preserve">
+    <value>RemoveIteratorButton</value>
+  </data>
+  <data name="&gt;&gt;RemoveIteratorButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mToolbarSeparator2.Name" xml:space="preserve">
+    <value>mToolbarSeparator2</value>
+  </data>
+  <data name="&gt;&gt;mToolbarSeparator2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;UndoButton.Name" xml:space="preserve">
+    <value>UndoButton</value>
+  </data>
+  <data name="&gt;&gt;UndoButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;RedoButton.Name" xml:space="preserve">
+    <value>RedoButton</value>
+  </data>
+  <data name="&gt;&gt;RedoButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mToolbarSeparator3.Name" xml:space="preserve">
+    <value>mToolbarSeparator3</value>
+  </data>
+  <data name="&gt;&gt;mToolbarSeparator3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetButton.Name" xml:space="preserve">
+    <value>IteratorResetButton</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetOriginButton.Name" xml:space="preserve">
+    <value>IteratorResetOriginButton</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetOriginButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetAngleButton.Name" xml:space="preserve">
+    <value>IteratorResetAngleButton</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetAngleButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetScaleButton.Name" xml:space="preserve">
+    <value>IteratorResetScaleButton</value>
+  </data>
+  <data name="&gt;&gt;IteratorResetScaleButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mToolbarSeparator4.Name" xml:space="preserve">
+    <value>mToolbarSeparator4</value>
+  </data>
+  <data name="&gt;&gt;mToolbarSeparator4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Rotate90CcwButton.Name" xml:space="preserve">
+    <value>Rotate90CcwButton</value>
+  </data>
+  <data name="&gt;&gt;Rotate90CcwButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Rotate90CwButton.Name" xml:space="preserve">
+    <value>Rotate90CwButton</value>
+  </data>
+  <data name="&gt;&gt;Rotate90CwButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;FlipAllHorizontalButton.Name" xml:space="preserve">
+    <value>FlipAllHorizontalButton</value>
+  </data>
+  <data name="&gt;&gt;FlipAllHorizontalButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;FlipAllVerticalButton.Name" xml:space="preserve">
+    <value>FlipAllVerticalButton</value>
+  </data>
+  <data name="&gt;&gt;FlipAllVerticalButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mToolbarSeparator5.Name" xml:space="preserve">
+    <value>mToolbarSeparator5</value>
+  </data>
+  <data name="&gt;&gt;mToolbarSeparator5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToggleRulersButton.Name" xml:space="preserve">
+    <value>ToggleRulersButton</value>
+  </data>
+  <data name="&gt;&gt;ToggleRulersButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToggleVariationPreviewButton.Name" xml:space="preserve">
+    <value>ToggleVariationPreviewButton</value>
+  </data>
+  <data name="&gt;&gt;ToggleVariationPreviewButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mToolbarSeparator6.Name" xml:space="preserve">
+    <value>mToolbarSeparator6</value>
+  </data>
+  <data name="&gt;&gt;mToolbarSeparator6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TogglePostMatrixButton.Name" xml:space="preserve">
+    <value>TogglePostMatrixButton</value>
+  </data>
+  <data name="&gt;&gt;TogglePostMatrixButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;AddFinalIteratorButton.Name" xml:space="preserve">
+    <value>AddFinalIteratorButton</value>
+  </data>
+  <data name="&gt;&gt;AddFinalIteratorButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mToolbarSeparator7.Name" xml:space="preserve">
+    <value>mToolbarSeparator7</value>
+  </data>
+  <data name="&gt;&gt;mToolbarSeparator7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorConvertToRegularButton.Name" xml:space="preserve">
+    <value>IteratorConvertToRegularButton</value>
+  </data>
+  <data name="&gt;&gt;IteratorConvertToRegularButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IteratorConvertToFinalButton.Name" xml:space="preserve">
+    <value>IteratorConvertToFinalButton</value>
+  </data>
+  <data name="&gt;&gt;IteratorConvertToFinalButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LowQualityMenuItem.Name" xml:space="preserve">
+    <value>LowQualityMenuItem</value>
+  </data>
+  <data name="&gt;&gt;LowQualityMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;MediumQualityMenuItem.Name" xml:space="preserve">
+    <value>MediumQualityMenuItem</value>
+  </data>
+  <data name="&gt;&gt;MediumQualityMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;HighQualityMenuItem.Name" xml:space="preserve">
+    <value>HighQualityMenuItem</value>
+  </data>
+  <data name="&gt;&gt;HighQualityMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn27.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn27</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn27.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn28.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn28</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn28.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn29.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn29</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn29.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn30.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn30</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn30.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn23.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn23</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn23.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn24.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn24</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn24.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn25.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn25</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn25.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn26.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn26</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn26.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn15.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn15</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn15.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn16.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn16</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn16.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn17.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn17</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn17.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn18.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn18</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn18.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mToolbarImages.Name" xml:space="preserve">
+    <value>mToolbarImages</value>
+  </data>
+  <data name="&gt;&gt;mToolbarImages.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn1.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn1</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn2.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn2</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn3.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn3</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn4.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn4</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn5.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn5</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn6.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn6</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn7.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn7</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn8.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn8</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn9.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn9</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn10.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn10</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn10.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn11.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn11</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn11.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn12.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn12</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn12.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn13.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn13</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn13.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn14.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn14</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn14.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn19.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn19</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn19.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn20.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn20</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn20.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn21.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn21</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn21.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn22.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn22</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn22.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mSettings.Name" xml:space="preserve">
+    <value>mSettings</value>
+  </data>
+  <data name="&gt;&gt;mSettings.Type" xml:space="preserve">
+    <value>Xyrus.Apophysis.Windows.Controls.EditorSettings, Apophysis, Version=2.20.2014.917, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn31.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn31</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn31.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn32.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn32</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn32.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn33.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn33</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn33.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn34.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn34</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn34.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>Editor</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

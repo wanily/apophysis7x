@@ -68,9 +68,9 @@ namespace Xyrus.Apophysis.Calculation
 
 		public void StartCreateBitmap([NotNull] Flame flame, double density, Size size, Action<Bitmap> callback)
 		{
-			if (flame == null) throw new ArgumentNullException("flame");
-			if (density <= 0) throw new ArgumentOutOfRangeException("density");
-			if (size.Width <= 0 || size.Height <= 0) throw new ArgumentOutOfRangeException("size");
+			if (flame == null) throw new ArgumentNullException(@"flame");
+			if (density <= 0) throw new ArgumentOutOfRangeException(@"density");
+			if (size.Width <= 0 || size.Height <= 0) throw new ArgumentOutOfRangeException(@"size");
 
 			mParameters = new RenderParameters(flame, density, size, true);
 			mThreadController.StartThread(CreateBitmap, callback);

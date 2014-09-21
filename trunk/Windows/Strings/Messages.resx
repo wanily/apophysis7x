@@ -117,85 +117,123 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Content.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+  <data name="TooSmallPaletteError" xml:space="preserve">
+    <value>Palette size must be greater than one</value>
   </data>
-  <metadata name="mContextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="ClearMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 22</value>
+  <data name="PluginModuleNotFoundError" xml:space="preserve">
+    <value>Module not found</value>
   </data>
-  <data name="ClearMenuItem.Text" xml:space="preserve">
-    <value>&amp;Clear</value>
+  <data name="PluginUnsupportedArchitectureError" xml:space="preserve">
+    <value>Unsupported plugin architecture ({0})</value>
   </data>
-  <data name="mContextMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 26</value>
+  <data name="PluginUnknownPeHeaderError" xml:space="preserve">
+    <value>Invalid DLL (can't find PE header)</value>
   </data>
-  <data name="&gt;&gt;mContextMenu.Name" xml:space="preserve">
-    <value>mContextMenu</value>
+  <data name="PluginUnknownArchitectureError" xml:space="preserve">
+    <value>Invalid DLL (unknown machine type)</value>
   </data>
-  <data name="&gt;&gt;mContextMenu.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="PluginMethodNotFoundError" xml:space="preserve">
+    <value>Incompatible Apophysis plugin</value>
   </data>
-  <data name="Content.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Consolas, 9.75pt</value>
+  <data name="UnexpectedXmlTagError" xml:space="preserve">
+    <value>Expected XML node "{0}" but received "{1}"</value>
   </data>
-  <data name="Content.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 6</value>
+  <data name="FlameNameMessageHeader" xml:space="preserve">
+    <value>Flame "{0}"</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Content.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="FlameVersionMismatch" xml:space="preserve">
+    <value>The flame was created with a different version of Apophysis or a different software and might not render correctly.</value>
   </data>
-  <data name="Content.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
-    <value>Vertical</value>
+  <data name="FlameSizeRangeError" xml:space="preserve">
+    <value>Size must be greater than zero in both dimensions</value>
   </data>
-  <data name="Content.Size" type="System.Drawing.Size, System.Drawing">
-    <value>534, 492</value>
+  <data name="FlamePixelsPerUnitRangeError" xml:space="preserve">
+    <value>Scale must be greater than zero</value>
   </data>
-  <data name="Content.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="FlameCameraDofRangeError" xml:space="preserve">
+    <value>Depth of field must be greater than or equal to zero</value>
   </data>
-  <data name="&gt;&gt;Content.Name" xml:space="preserve">
-    <value>Content</value>
+  <data name="FlameBrightnessRangeError" xml:space="preserve">
+    <value>Brightness must be greater than zero</value>
   </data>
-  <data name="&gt;&gt;Content.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="FlameGammaRangeError" xml:space="preserve">
+    <value>Gamma must be greater than or equal to one</value>
   </data>
-  <data name="&gt;&gt;Content.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="FlameGammaThresholdRangeError" xml:space="preserve">
+    <value>Gamma threshold must be greater than or equal to zero</value>
   </data>
-  <data name="&gt;&gt;Content.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="FlameVibrancyRangeError" xml:space="preserve">
+    <value>Vibrancy must be greater than or equal to zero</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+  <data name="FlameMissingPaletteTagError" xml:space="preserve">
+    <value>No descendant node "palette" found</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>546, 504</value>
+  <data name="FlameSuccessMessage" xml:space="preserve">
+    <value>Done!</value>
   </data>
-  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>200, 200</value>
+  <data name="FlameErrorMessage" xml:space="preserve">
+    <value>Error: {0}</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Messages</value>
+  <data name="InitializationLoadingGuiMessage" xml:space="preserve">
+    <value>Loading GUI</value>
   </data>
-  <data name="&gt;&gt;ClearMenuItem.Name" xml:space="preserve">
-    <value>ClearMenuItem</value>
+  <data name="InitializationMessage" xml:space="preserve">
+    <value>Initializing</value>
   </data>
-  <data name="&gt;&gt;ClearMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="InitializationLoadingVariationsMessage" xml:space="preserve">
+    <value>Loading variations</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>Messages</value>
+  <data name="VariationInitializationCollectiveError" xml:space="preserve">
+    <value>The following plugins could not be loaded:
+
+{0}</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="UnhandledExceptionSaveMessage" xml:space="preserve">
+    <value>The details have been written to "{0}"</value>
+  </data>
+  <data name="UnhandledExceptionSaveFailureMessage" xml:space="preserve">
+    <value>Sadly, the details could not be written to "{0}" because of the following error: {1}</value>
+  </data>
+  <data name="UnhandledExceptionMessage" xml:space="preserve">
+    <value>Apophysis encountered an unhandled exception. {0}
+
+Message: {1}
+Location: {2}</value>
+  </data>
+  <data name="EmptyFlameCollectionError" xml:space="preserve">
+    <value>Can't remove last flame from batch</value>
+  </data>
+  <data name="FlameCollectionNoChildTagsError" xml:space="preserve">
+    <value>No flames in batch</value>
+  </data>
+	<data name="FlameErrorWrapper" xml:space="preserve">
+    <value>Flame "{0}": {1}</value>
+  </data>
+	<data name="IteratorWeightRangeError" xml:space="preserve">
+    <value>Weight must not be less or equal to 0</value>
+  </data>
+	<data name="IteratorColorRangeError" xml:space="preserve">
+    <value>Color must be be in the range 0 - 1</value>
+  </data>
+	<data name="IteratorColorSpeedRangeError" xml:space="preserve">
+    <value>Color speed must be be in the range -1 - 1</value>
+  </data>
+	<data name="IteratorOpacityRangeError" xml:space="preserve">
+    <value>Opacity must be be in the range 0 - 1</value>
+  </data>
+	<data name="IteratorDirectColorRangeError" xml:space="preserve">
+    <value>DirectColor must be be in the range 0 - 1</value>
+  </data>
+	<data name="IteratorUnknownAttributeError" xml:space="preserve">
+    <value>Potentially missing variation or variable: {0}</value>
+  </data>
+	<data name="IteratorCollectionRemovingLastPrimaryIteratorError" xml:space="preserve">
+    <value>Can't remove last primary iterator of flame</value>
+  </data>
+	<data name="IteratorCollectionNoChildTagsError" xml:space="preserve">
+    <value>No transforms in flame</value>
+  </data>
+	<data name="IteratorErrorWrapper" xml:space="preserve">
+    <value>Transform #{0}: {1}</value>
   </data>
 </root>

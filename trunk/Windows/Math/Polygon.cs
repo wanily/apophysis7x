@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Xyrus.Apophysis.Properties;
 
 namespace Xyrus.Apophysis.Math
 {
@@ -11,13 +12,13 @@ namespace Xyrus.Apophysis.Math
 
 		public Polygon([NotNull] IEnumerable<Vector2> vertices)
 		{
-			if (vertices == null) throw new ArgumentNullException("vertices");
+			if (vertices == null) throw new ArgumentNullException(@"vertices");
 
 			mVertices = vertices.ToArray();
 
 			if (mVertices.Length <= 2)
 			{
-				throw new ArgumentOutOfRangeException("vertices", "A polygon must contain at least three vertices");
+				throw new ArgumentOutOfRangeException(@"vertices", Resources.InvalidPolygonError);
 			}
 		}
 

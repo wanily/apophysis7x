@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Calculation;
+using Xyrus.Apophysis.Strings;
 using Xyrus.Apophysis.Variations;
 using Xyrus.Apophysis.Windows.Controllers;
 
@@ -31,7 +32,7 @@ namespace Xyrus.Apophysis
 			SetupExceptionHandler();
 			LoadVariations();
 
-			mBanner.BannerText = "Loading GUI";
+			mBanner.BannerText = Messages.InitializationLoadingGuiMessage;
 
 			using (MainWindow = new MainController())
 			{
@@ -46,12 +47,12 @@ namespace Xyrus.Apophysis
 
 		static void LoadVariations()
 		{
-			mBanner.BannerText = "Loading variations";
+			mBanner.BannerText = Messages.InitializationLoadingVariationsMessage;
 
 			Variation.VariationsIn15CStyle = ApophysisSettings.Common.VariationsIn15CStyle;
 
 			var types = typeof(Linear).Assembly.GetTypes();
-			var registerMethod = typeof(VariationRegistry).GetMethod("Register", BindingFlags.Static | BindingFlags.Public);
+			var registerMethod = typeof(VariationRegistry).GetMethod(@"Register", BindingFlags.Static | BindingFlags.Public);
 
 			foreach (var type in types)
 			{
@@ -93,21 +94,21 @@ namespace Xyrus.Apophysis
 					}
 					catch (ApophysisException exception)
 					{
-						errorList.Add(string.Format("   - {0}: {1}", Path.GetFileName(file), exception.Message));
+						errorList.Add(string.Format(@"   - {0}: {1}", Path.GetFileName(file), exception.Message));
 					}
 				}
 
 				if (errorList.Count > 0)
 				{
 					MessageBox.Show(
-						string.Format("The following plugins could not be loaded:\r\n\r\n{0}", string.Join("\r\n", errorList.ToArray())),
+						string.Format(Messages.VariationInitializationCollectiveError, string.Join(Environment.NewLine, errorList.ToArray())),
 						Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				}
 			}
 		}
 		static void SetupExceptionHandler()
 		{
-			mBanner.BannerText = "Initializing";
+			mBanner.BannerText = Messages.InitializationMessage;
 
 #if !DEBUG
 			Application.ThreadException += OnThreadException;
@@ -124,12 +125,12 @@ namespace Xyrus.Apophysis
 
 			var fullData = exception.ToString();
 			var savePath = string.Format(
-				"%userprofile%\\apophysis-exception-{0:0000}-{1:00}-{2:00}_{3:00}.{4:00}.{5:00}.txt",
+				@"%userprofile%\\apophysis-exception-{0:0000}-{1:00}-{2:00}_{3:00}.{4:00}.{5:00}.txt",
 				timestamp.Year, timestamp.Month, timestamp.Day, timestamp.Hour, timestamp.Minute, timestamp.Second);
 
 			savePath = Environment.ExpandEnvironmentVariables(savePath);
 
-			var saveMessage = string.Format("The details have been written to \"{0}\"", savePath);
+			var saveMessage = string.Format(Messages.UnhandledExceptionSaveMessage, savePath);
 
 			try
 			{
@@ -138,18 +139,18 @@ namespace Xyrus.Apophysis
 			catch (Exception saveException)
 			{
 				saveMessage = string.Format(
-					"Sadly, the details could not be written to \"{0}\" because of the following error: {1}", savePath,
+					Messages.UnhandledExceptionSaveFailureMessage, savePath,
 					saveException.Message);
 			}
 
-			var locationString = "<unknown>";
+			var locationString = Common.UnknownPlaceholder;
 			if (exception.TargetSite != null)
 			{
 				locationString = exception.TargetSite.ToString();
 			}
 
 			var message = string.Format(
-				"Apophysis encountered an unhandled exception. {0}\r\n\r\nMessage: {1}\r\nLocation: {2}",
+				Messages.UnhandledExceptionMessage,
 				saveMessage, exception.Message, locationString);
 
 			MessageBox.Show(message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);

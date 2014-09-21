@@ -25,7 +25,7 @@ namespace Xyrus.Apophysis.Models
 			get { return mOrigin; }
 			set
 			{
-				if (value == null) throw new ArgumentNullException("value");
+				if (value == null) throw new ArgumentNullException(@"value");
 				mOrigin = value;
 			}
 		}
@@ -36,7 +36,7 @@ namespace Xyrus.Apophysis.Models
 			get { return mMatrix; }
 			set
 			{
-				if (value == null) throw new ArgumentNullException("value");
+				if (value == null) throw new ArgumentNullException(@"value");
 				mMatrix = value;
 			}
 		}
@@ -58,7 +58,7 @@ namespace Xyrus.Apophysis.Models
 		[NotNull]
 		public Vector2 TransformPoint([NotNull] Vector2 point)
 		{
-			if (point == null) throw new ArgumentNullException("point");
+			if (point == null) throw new ArgumentNullException(@"point");
 			return new Vector2
 			{
 				X = Matrix.X.X * point.X + Matrix.Y.X * point.Y + Origin.X,
@@ -116,7 +116,7 @@ namespace Xyrus.Apophysis.Models
 		}
 		public void Scale(double scale)
 		{
-			if (System.Math.Abs(scale) < double.Epsilon) throw new ArgumentOutOfRangeException("scale");
+			if (System.Math.Abs(scale) < double.Epsilon) throw new ArgumentOutOfRangeException(@"scale");
 
 			Matrix.X.X *= scale;
 			Matrix.X.Y *= scale;
@@ -126,7 +126,7 @@ namespace Xyrus.Apophysis.Models
 		}
 		public void Move([NotNull] Vector2 offset)
 		{
-			if (offset == null) throw new ArgumentNullException("offset");
+			if (offset == null) throw new ArgumentNullException(@"offset");
 
 			Origin.X += offset.X;
 			Origin.Y += offset.Y;
@@ -134,7 +134,7 @@ namespace Xyrus.Apophysis.Models
 
 		public bool IsEqual([NotNull] AffineTransform transform)
 		{
-			if (transform == null) throw new ArgumentNullException("transform");
+			if (transform == null) throw new ArgumentNullException(@"transform");
 
 			if (!Equals(mOrigin.X, transform.mOrigin.X))
 				return false;

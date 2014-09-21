@@ -123,6 +123,16 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>ViewSettings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Strings\Common.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Common.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Strings\Messages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.resx</DependentUpon>
+    </Compile>
     <Compile Include="Threading\ThreadController.cs" />
     <Compile Include="Threading\ThreadStateToken.cs" />
     <Compile Include="Variations\Linear.cs" />
@@ -177,6 +187,11 @@
     <Compile Include="Windows\Controls\CellValueChangedEventHandler.cs" />
     <Compile Include="Windows\Controls\CellValueResetEventArgs.cs" />
     <Compile Include="Windows\Controls\CellValueResetEventHandler.cs" />
+    <Compile Include="Windows\Controls\ControlResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ControlResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Controls\DragGrid.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -323,6 +338,21 @@
     <Compile Include="Windows\Visuals\PreviewGuidelinesVisual.cs" />
     <Compile Include="Windows\Visuals\PreviewImageVisual.cs" />
     <Compile Include="Windows\Visuals\PreviewInputVisual.cs" />
+    <EmbeddedResource Include="Strings\Common.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Common.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Strings\Messages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\Controls\ControlResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ControlResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\Controls\DragGrid.resx">
+      <DependentUpon>DragGrid.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Windows\Controls\DragPanel.resx">
       <DependentUpon>DragPanel.cs</DependentUpon>
     </EmbeddedResource>
@@ -334,6 +364,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\Forms\Editor.resx">
       <DependentUpon>Editor.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -351,6 +382,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\Forms\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\Forms\Messages.resx">
       <DependentUpon>Messages.cs</DependentUpon>

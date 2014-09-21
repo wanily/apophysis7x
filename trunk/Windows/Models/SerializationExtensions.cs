@@ -55,7 +55,7 @@ namespace Xyrus.Apophysis.Models
 		{
 			value = value ?? new double[0];
 
-			return string.Join(@" ", value.Select(x => Serialize((double) x)).ToArray());
+			return string.Join(@" ", value.Select(Serialize).ToArray());
 		}
 	}
 }

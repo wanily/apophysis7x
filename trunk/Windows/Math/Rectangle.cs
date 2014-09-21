@@ -10,8 +10,8 @@ namespace Xyrus.Apophysis.Math
 
 		public Rectangle([NotNull] Vector2 corner, [NotNull] Vector2 size)
 		{
-			if (corner == null) throw new ArgumentNullException("corner");
-			if (size == null) throw new ArgumentNullException("size");
+			if (corner == null) throw new ArgumentNullException(@"corner");
+			if (size == null) throw new ArgumentNullException(@"size");
 
 			mCorner = corner;
 			mSize = size;

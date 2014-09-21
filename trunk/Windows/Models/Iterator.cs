@@ -4,6 +4,8 @@ using System.Linq;
 using System.Xml.Linq;
 using Xyrus.Apophysis.Calculation;
 using Xyrus.Apophysis.Messaging;
+using Xyrus.Apophysis.Strings;
+using Xyrus.Apophysis.Variations;
 
 namespace Xyrus.Apophysis.Models
 {
@@ -16,6 +18,9 @@ namespace Xyrus.Apophysis.Models
 		private AffineTransform mPostAffine;
 
 		private readonly VariationCollection mVariations;
+		private static readonly string mDefaultVariationName = ApophysisSettings.Common.VariationsIn15CStyle
+			? VariationRegistry.GetName<Linear>()
+			: VariationRegistry.GetName<Linear3D>();
 
 		private string mName;
 		private double mWeight;
@@ -27,7 +32,7 @@ namespace Xyrus.Apophysis.Models
 
 		public Iterator([NotNull] Flame hostingFlame)
 		{
-			if (hostingFlame == null) throw new ArgumentNullException("hostingFlame");
+			if (hostingFlame == null) throw new ArgumentNullException(@"hostingFlame");
 
 			mVariations = new VariationCollection();
 			mFlame = hostingFlame;
@@ -48,7 +53,7 @@ namespace Xyrus.Apophysis.Models
 			mDirectColor = 1.0;
 
 			mVariations.ClearWeights();
-			mVariations.SetWeight("linear", 1.0);
+			mVariations.SetWeight(mDefaultVariationName, 1.0);
 		}
 
 		[NotNull]
@@ -104,7 +109,7 @@ namespace Xyrus.Apophysis.Models
 		[NotNull]
 		internal Iterator Copy([NotNull] Flame flame)
 		{
-			if (flame == null) throw new ArgumentNullException("flame");
+			if (flame == null) throw new ArgumentNullException(@"flame");
 			var copy = Copy();
 			copy.mFlame = flame;
 			return copy;
@@ -149,7 +154,7 @@ namespace Xyrus.Apophysis.Models
 			{
 				if (value < double.Epsilon)
 				{
-					throw new ArgumentOutOfRangeException("value");
+					throw new ArgumentOutOfRangeException(@"value");
 				}
 
 				mWeight = value;
@@ -162,7 +167,7 @@ namespace Xyrus.Apophysis.Models
 			{
 				if (value < 0 || value > 1)
 				{
-					throw new ArgumentOutOfRangeException("value");
+					throw new ArgumentOutOfRangeException(@"value");
 				}
 
 				mColor = value;
@@ -175,7 +180,7 @@ namespace Xyrus.Apophysis.Models
 			{
 				if (value < -1 || value > 1)
 				{
-					throw new ArgumentOutOfRangeException("value");
+					throw new ArgumentOutOfRangeException(@"value");
 				}
 
 				mColorSpeed = value;
@@ -188,7 +193,7 @@ namespace Xyrus.Apophysis.Models
 			{
 				if (value < 0 || value > 1)
 				{
-					throw new ArgumentOutOfRangeException("value");
+					throw new ArgumentOutOfRangeException(@"value");
 				}
 
 				mOpacity = value;
@@ -201,7 +206,7 @@ namespace Xyrus.Apophysis.Models
 			{
 				if (value < 0 || value > 1)
 				{
-					throw new ArgumentOutOfRangeException("value");
+					throw new ArgumentOutOfRangeException(@"value");
 				}
 
 				mDirectColor = value;
@@ -214,7 +219,7 @@ namespace Xyrus.Apophysis.Models
 			get { return mPreAffine; }
 			set
 			{
-				if (value == null) throw new ArgumentNullException("value");
+				if (value == null) throw new ArgumentNullException(@"value");
 				mPreAffine = value;
 			}
 		}
@@ -225,7 +230,7 @@ namespace Xyrus.Apophysis.Models
 			get { return mPostAffine; }
 			set
 			{
-				if (value == null) throw new ArgumentNullException("value");
+				if (value == null) throw new ArgumentNullException(@"value");
 				mPostAffine = value;
 			}
 		}
@@ -238,68 +243,68 @@ namespace Xyrus.Apophysis.Models
 
 		public void ReadXml([NotNull] XElement element)
 		{
-			if (element == null) throw new ArgumentNullException("element");
+			if (element == null) throw new ArgumentNullException(@"element");
 
 			var elementName = element.Name.ToString().ToLower();
-			var elementNames = new[] {"xform", "finalxform"};
+			var elementNames = new[] { @"xform", @"finalxform" };
 
-			string[] knownNames = { "name", "weight", "color", "symmetry", "opacity", "var_color", "coefs", "post", "chaos", "color_speed", "linear3D" };
+			string[] knownNames = { @"name", @"weight", @"color", @"symmetry", @"opacity", @"var_color", @"coefs", @"post", @"chaos", @"color_speed", @"linear3D" };
 
 			int groupIndex;
 
 			switch (elementName)
 			{
-				case "xform":
+				case @"xform":
 					groupIndex = 0;
 					break;
-				case "finalxform":
+				case @"finalxform":
 					groupIndex = 1;
 					break;
 				default:
 					var expectedNameString = elementNames.Length == 1
 						? elementNames[0]
-						: string.Format("{0} or {1}",
+						: string.Format(Common.OrConcatenation,
 							string.Join(@", ", elementNames.Select(x => @"""" + x + @"""").Take(elementNames.Length - 2).ToArray()),
 							@"""" + elementNames.Last() + @"""");
-					throw new ApophysisException(string.Format("Expected XML node {0} but received \"{1}\"", expectedNameString, elementName));
+					throw new ApophysisException(string.Format(Messages.UnexpectedXmlTagError, expectedNameString, elementName));
 			}
 
 			GroupIndex = groupIndex;
 
-			var nameAttribute = element.Attribute(XName.Get("name"));
+			var nameAttribute = element.Attribute(XName.Get(@"name"));
 			Name = nameAttribute == null ? null : nameAttribute.Value;
 
-			var weightAttribute = element.Attribute(XName.Get("weight"));
+			var weightAttribute = element.Attribute(XName.Get(@"weight"));
 			if (weightAttribute != null && groupIndex == 0)
 			{
 				var weight = weightAttribute.ParseFloat(0.5);
 				if (weight < double.Epsilon)
 				{
-					throw new ApophysisException("Weight must not be less or equal to 0");
+					throw new ApophysisException(Messages.IteratorWeightRangeError);
 				}
 
 				Weight = weight;
 			}
 
-			var colorAttribute = element.Attribute(XName.Get("color"));
+			var colorAttribute = element.Attribute(XName.Get(@"color"));
 			if (colorAttribute != null && groupIndex == 0)
 			{
 				var color = colorAttribute.ParseFloat();
 				if (color < 0 || color > 1)
 				{
-					throw new ApophysisException("Color must be be in the range 0 - 1");
+					throw new ApophysisException(Messages.IteratorColorRangeError);
 				}
 
 				Color = color;
 			}
 
-			var colorSpeedAttribute = element.Attribute(XName.Get("symmetry"));
+			var colorSpeedAttribute = element.Attribute(XName.Get(@"symmetry"));
 			if (colorSpeedAttribute != null && groupIndex == 0)
 			{
 				var colorSpeed = colorSpeedAttribute.ParseFloat();
 				if (colorSpeed < -1 || colorSpeed > 1)
 				{
-					throw new ApophysisException("Color speed must be be in the range -1 - 1");
+					throw new ApophysisException(Messages.IteratorColorSpeedRangeError);
 				}
 
 				ColorSpeed = colorSpeed;
@@ -309,31 +314,31 @@ namespace Xyrus.Apophysis.Models
 				ColorSpeed = 1;
 			}
 
-			var opacityAttribute = element.Attribute(XName.Get("opacity"));
+			var opacityAttribute = element.Attribute(XName.Get(@"opacity"));
 			if (opacityAttribute != null && groupIndex == 0)
 			{
 				var opacity = opacityAttribute.ParseFloat();
 				if (opacity < 0 || opacity > 1)
 				{
-					throw new ApophysisException("Opacity must be be in the range 0 - 1");
+					throw new ApophysisException(Messages.IteratorOpacityRangeError);
 				}
 
 				Opacity = opacity;
 			}
 
-			var directColorAttribute = element.Attribute(XName.Get("var_color"));
+			var directColorAttribute = element.Attribute(XName.Get(@"var_color"));
 			if (directColorAttribute != null)
 			{
 				var directColor = directColorAttribute.ParseFloat();
 				if (directColor < 0 || directColor > 1)
 				{
-					throw new ApophysisException("DirectColor must be be in the range 0 - 1");
+					throw new ApophysisException(Messages.IteratorDirectColorRangeError);
 				}
 
 				DirectColor = directColor;
 			}
 
-			var coefsAttribute = element.Attribute(XName.Get("coefs"));
+			var coefsAttribute = element.Attribute(XName.Get(@"coefs"));
 			if (coefsAttribute != null)
 			{
 				var vector = coefsAttribute.ParseCoefficients();
@@ -346,7 +351,7 @@ namespace Xyrus.Apophysis.Models
 				PreAffine.Origin.Y = -vector[5];
 			}
 
-			var postAttribute = element.Attribute(XName.Get("post"));
+			var postAttribute = element.Attribute(XName.Get(@"post"));
 			if (postAttribute != null)
 			{
 				var vector = postAttribute.ParseCoefficients();
@@ -377,7 +382,7 @@ namespace Xyrus.Apophysis.Models
 				}
 				else
 				{
-					var message = string.Format("Potentially missing variation or variable: {0}", attributeName);
+					var message = string.Format(Messages.IteratorUnknownAttributeError, attributeName);
 
 					Trace.TraceWarning(message);
 					MessageCenter.SendUnknownAttribute(attribute.Name);
@@ -386,7 +391,7 @@ namespace Xyrus.Apophysis.Models
 		}
 		public bool IsEqual([NotNull] Iterator iterator)
 		{
-			if (iterator == null) throw new ArgumentNullException("iterator");
+			if (iterator == null) throw new ArgumentNullException(@"iterator");
 
 			if (!Equals(mName, iterator.mName))
 				return false;
@@ -422,17 +427,17 @@ namespace Xyrus.Apophysis.Models
 		}
 		public void WriteXml([NotNull] out XElement element)
 		{
-			element = new XElement(XName.Get(GroupIndex == 0 ? "xform" : "finalxform"));
+			element = new XElement(XName.Get(GroupIndex == 0 ? @"xform" : @"finalxform"));
 
 			if (GroupIndex == 0)
-				element.Add(new XAttribute(XName.Get("weight"), Weight.Serialize()));
+				element.Add(new XAttribute(XName.Get(@"weight"), Weight.Serialize()));
 
-			element.Add(new XAttribute(XName.Get("color"), Color.Serialize()));
+			element.Add(new XAttribute(XName.Get(@"color"), Color.Serialize()));
 
 			if (System.Math.Abs(ColorSpeed) > double.Epsilon)
 			{
-				element.Add(new XAttribute(XName.Get("symmetry"), ColorSpeed.Serialize()));
-				element.Add(new XAttribute(XName.Get("color_speed"), ColorSpeed.Serialize()));
+				element.Add(new XAttribute(XName.Get(@"symmetry"), ColorSpeed.Serialize()));
+				element.Add(new XAttribute(XName.Get(@"color_speed"), ColorSpeed.Serialize()));
 			}
 
 			foreach (var variation in Variations.Where(x => System.Math.Abs(x.Weight) > double.Epsilon))
@@ -448,19 +453,19 @@ namespace Xyrus.Apophysis.Models
 			var affine = new [] { PreAffine.Matrix.X.X, -PreAffine.Matrix.X.Y, -PreAffine.Matrix.Y.X, PreAffine.Matrix.Y.Y, PreAffine.Origin.X, -PreAffine.Origin.Y };
 			var postAffine = new[] { PostAffine.Matrix.X.X, -PostAffine.Matrix.X.Y, -PostAffine.Matrix.Y.X, PostAffine.Matrix.Y.Y, PostAffine.Origin.X, -PostAffine.Origin.Y };
 
-			element.Add(new XAttribute(XName.Get("coefs"), affine.Serialize()));
+			element.Add(new XAttribute(XName.Get(@"coefs"), affine.Serialize()));
 
 			if (!PostAffine.IsIdentity)
-				element.Add(new XAttribute(XName.Get("post"), postAffine.Serialize()));
+				element.Add(new XAttribute(XName.Get(@"post"), postAffine.Serialize()));
 
 			if (GroupIndex == 0)
-				element.Add(new XAttribute(XName.Get("opacity"), Opacity.Serialize()));
+				element.Add(new XAttribute(XName.Get(@"opacity"), Opacity.Serialize()));
 
 			if (!string.IsNullOrEmpty(Name) && !string.IsNullOrEmpty((Name??string.Empty).Trim()))
-				element.Add(new XAttribute(XName.Get("name"), Name ?? string.Empty));
+				element.Add(new XAttribute(XName.Get(@"name"), Name ?? string.Empty));
 
 			if (System.Math.Abs(DirectColor - 1) > double.Epsilon)
-				element.Add(new XAttribute(XName.Get("var_color"), DirectColor.Serialize()));
+				element.Add(new XAttribute(XName.Get(@"var_color"), DirectColor.Serialize()));
 		}
 	}
 }

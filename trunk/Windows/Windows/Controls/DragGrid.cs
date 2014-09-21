@@ -48,8 +48,8 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 			Columns.AddRange(new DataGridViewColumn[]
 			{
-				new DataGridViewTextBoxColumn { HeaderText = "Name", ReadOnly = true }, 
-				new DataGridViewTextBoxColumn { HeaderText = "Value", AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill }
+				new DataGridViewTextBoxColumn { HeaderText = ControlResources.DragGridNameColumnHeader, ReadOnly = true }, 
+				new DataGridViewTextBoxColumn { HeaderText = ControlResources.DragGridValueColumnHeader, AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill }
 			});
 
 			ScrollBars = ScrollBars.Vertical;

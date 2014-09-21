@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
+using Xyrus.Apophysis.Strings;
 
 namespace Xyrus.Apophysis.Models
 {
@@ -319,7 +320,7 @@ namespace Xyrus.Apophysis.Models
 			var oldLength = mColors.Length;
 			var newLength = count;
 
-			if (newLength <= 1) throw new ArgumentOutOfRangeException("count", "Palette size must be greater than one");
+			if (newLength <= 1) throw new ArgumentOutOfRangeException("count", Messages.TooSmallPaletteError);
 			if (oldLength == newLength)
 				return mColors.ToArray();
 

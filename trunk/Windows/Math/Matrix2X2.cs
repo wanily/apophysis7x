@@ -18,7 +18,7 @@ namespace Xyrus.Apophysis.Math
 			get { return mRow0; }
 			set
 			{
-				if (value == null) throw new ArgumentNullException("value");
+				if (value == null) throw new ArgumentNullException(@"value");
 				mRow0 = value;
 			}
 		}
@@ -27,7 +27,7 @@ namespace Xyrus.Apophysis.Math
 			get { return mRow1; }
 			set
 			{
-				if (value == null) throw new ArgumentNullException("value");
+				if (value == null) throw new ArgumentNullException(@"value");
 				mRow1 = value;
 			}
 		}

@@ -134,7 +134,7 @@ namespace Xyrus.Apophysis.Math
 
 		public Vector2 Rotate(double angle, [NotNull] Vector2 origin)
 		{
-			if (origin == null) throw new ArgumentNullException("origin");
+			if (origin == null) throw new ArgumentNullException(@"origin");
 
 			if (System.Math.Abs(origin.X - X) < double.Epsilon && System.Math.Abs(origin.Y - Y) < double.Epsilon)
 				return origin.Copy();
@@ -251,7 +251,7 @@ namespace Xyrus.Apophysis.Math
 		}
 		public bool IsInProximity([NotNull] Vector2 point, double epsilon = 1)
 		{
-			if (point == null) throw new ArgumentNullException("point");
+			if (point == null) throw new ArgumentNullException(@"point");
 			return (this - point).Length < System.Math.Abs(epsilon);
 		}
 		public bool IsZero
@@ -275,7 +275,7 @@ namespace Xyrus.Apophysis.Math
 		}
 		public override string ToString()
 		{
-			return string.Format("{0}, {1}", X.ToString(CultureInfo.InvariantCulture), Y.ToString(CultureInfo.InvariantCulture));
+			return string.Format(@"{0}, {1}", X.ToString(CultureInfo.InvariantCulture), Y.ToString(CultureInfo.InvariantCulture));
 		}
 	}
 }

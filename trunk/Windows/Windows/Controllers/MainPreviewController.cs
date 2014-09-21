@@ -1,8 +1,6 @@
 using System;
 using System.Drawing;
 using System.Globalization;
-using System.IO;
-using System.Xml.Linq;
 using Xyrus.Apophysis.Calculation;
 using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Models;

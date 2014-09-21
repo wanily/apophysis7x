@@ -8,6 +8,7 @@ using System.Xml;
 using System.Xml.Linq;
 using Xyrus.Apophysis.Messaging;
 using Xyrus.Apophysis.Models;
+using Xyrus.Apophysis.Strings;
 using Xyrus.Apophysis.Windows.Forms;
 using Xyrus.Apophysis.Windows.Input;
 
@@ -454,7 +455,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				Flames = new FlameCollection(batch);
 			}
 
-			View.Text = Application.ProductName + @" - " + "Random batch";
+			View.Text = Application.ProductName + @" - " + Common.RandomBatch;
 		}
 
 		public bool ConfirmReplaceBatch()

@@ -30,22 +30,22 @@ namespace Xyrus.Apophysis.Math
 		{
 			if (0 > a || 255 < a)
 			{
-				throw new ArgumentOutOfRangeException("a");
+				throw new ArgumentOutOfRangeException(@"a");
 			}
 
 			if (0f > h || 360f < h)
 			{
-				throw new ArgumentOutOfRangeException("h");
+				throw new ArgumentOutOfRangeException(@"h");
 			}
 
 			if (0f > s || 1f < s)
 			{
-				throw new ArgumentOutOfRangeException("s");
+				throw new ArgumentOutOfRangeException(@"s");
 			}
 
 			if (0f > b || 1f < b)
 			{
-				throw new ArgumentOutOfRangeException("b");
+				throw new ArgumentOutOfRangeException(@"b");
 			}
 
 			if (System.Math.Abs(s) < float.Epsilon)

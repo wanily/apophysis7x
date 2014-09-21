@@ -28,20 +28,18 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Fullscreen));
 			this.SuspendLayout();
 			// 
 			// Fullscreen
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.Black;
-			this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-			this.ClientSize = new System.Drawing.Size(284, 261);
 			this.DoubleBuffered = true;
 			this.ForeColor = System.Drawing.Color.CornflowerBlue;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.Name = "Fullscreen";
-			this.Text = "Fullscreen";
 			this.TopMost = true;
 			this.ResumeLayout(false);
 

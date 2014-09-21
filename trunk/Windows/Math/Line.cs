@@ -11,8 +11,8 @@ namespace Xyrus.Apophysis.Math
 
 		public Line([NotNull] Vector2 a, [NotNull] Vector2 b)
 		{
-			if (a == null) throw new ArgumentNullException("a");
-			if (b == null) throw new ArgumentNullException("b");
+			if (a == null) throw new ArgumentNullException(@"a");
+			if (b == null) throw new ArgumentNullException(@"b");
 
 			mA = a;
 			mB = b;
@@ -29,7 +29,7 @@ namespace Xyrus.Apophysis.Math
 
 		public bool IsInProximity([NotNull] Vector2 point, double epsilon = 1)
 		{
-			if (point == null) throw new ArgumentNullException("point");
+			if (point == null) throw new ArgumentNullException(@"point");
 
 			var delta = B - A;
 			var deltaSq = delta*delta;

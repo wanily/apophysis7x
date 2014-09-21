@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Drawing;
@@ -10,6 +9,7 @@ using System.Xml.Linq;
 using Xyrus.Apophysis.Calculation;
 using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Messaging;
+using Xyrus.Apophysis.Strings;
 using Xyrus.Apophysis.Variations;
 
 namespace Xyrus.Apophysis.Models
@@ -102,7 +102,7 @@ namespace Xyrus.Apophysis.Models
 			get { return mOrigin; }
 			set
 			{
-				if (value == null) throw new ArgumentNullException("value");
+				if (value == null) throw new ArgumentNullException(@"value");
 				mOrigin = value;
 			}
 		}
@@ -113,7 +113,7 @@ namespace Xyrus.Apophysis.Models
 			set
 			{
 				if (value.Width <= 0 || value.Height <= 0)
-					throw new ArgumentOutOfRangeException("value");
+					throw new ArgumentOutOfRangeException(@"value");
 
 				var old = mCanvasSize;
 
@@ -138,7 +138,7 @@ namespace Xyrus.Apophysis.Models
 			set
 			{
 				if (value <= 0)
-					throw new ArgumentOutOfRangeException("value");
+					throw new ArgumentOutOfRangeException(@"value");
 
 				mPixelsPerUnit = value;
 
@@ -180,7 +180,8 @@ namespace Xyrus.Apophysis.Models
 			set
 			{
 				if (value < 0)
-					throw new ArgumentOutOfRangeException("value"); mDepthOfField = value;
+					throw new ArgumentOutOfRangeException(@"value"); 
+				mDepthOfField = value;
 			}
 		}
 		public double Brightness
@@ -189,7 +190,7 @@ namespace Xyrus.Apophysis.Models
 			set
 			{
 				if (value <= 0)
-					throw new ArgumentOutOfRangeException("value");
+					throw new ArgumentOutOfRangeException(@"value");
 				mBrightness = value;
 			}
 		}
@@ -199,7 +200,7 @@ namespace Xyrus.Apophysis.Models
 			set
 			{
 				if (value < 1)
-					throw new ArgumentOutOfRangeException("value");
+					throw new ArgumentOutOfRangeException(@"value");
 				mGamma = value;
 			}
 		}
@@ -209,7 +210,7 @@ namespace Xyrus.Apophysis.Models
 			set
 			{
 				if (value < 0)
-					throw new ArgumentOutOfRangeException("value");
+					throw new ArgumentOutOfRangeException(@"value");
 				mGammaThreshold = value;
 			}
 		}
@@ -219,7 +220,7 @@ namespace Xyrus.Apophysis.Models
 			set
 			{
 				if (value < 0)
-					throw new ArgumentOutOfRangeException("value");
+					throw new ArgumentOutOfRangeException(@"value");
 				mVibrancy = value;
 			}
 		}
@@ -244,7 +245,7 @@ namespace Xyrus.Apophysis.Models
 			get { return mPalette; }
 			set
 			{
-				if (value == null) throw new ArgumentNullException("value");
+				if (value == null) throw new ArgumentNullException(@"value");
 				mPalette = value;
 			}
 		}
@@ -314,33 +315,33 @@ namespace Xyrus.Apophysis.Models
 				.Select(x => x.Name)
 				.ToArray();
 
-			element = new XElement(XName.Get("flame"));
+			element = new XElement(XName.Get(@"flame"));
 
 			var iteratorElements = new Collection<XElement>();
 			XElement paletteElement;
-			
-			element.Add(new XAttribute(XName.Get("name"), CalculatedName));
-			element.Add(new XAttribute(XName.Get("version"), ApophysisSettings.Common.FlameExportVersionString));
-			element.Add(new XAttribute(XName.Get("size"), CanvasSize.Serialize()));
-			element.Add(new XAttribute(XName.Get("center"), Origin.Serialize()));
-			element.Add(new XAttribute(XName.Get("scale"), PixelsPerUnit.Serialize()));
-			element.Add(new XAttribute(XName.Get("angle"), Angle.Serialize()));
-			element.Add(new XAttribute(XName.Get("rotate"), ((int)System.Math.Round(Angle * -180.0 / System.Math.PI)).Serialize()));
-			element.Add(new XAttribute(XName.Get("zoom"), Zoom.Serialize()));
-			element.Add(new XAttribute(XName.Get("cam_pitch"), Pitch.Serialize()));
-			element.Add(new XAttribute(XName.Get("cam_yaw"), Yaw.Serialize()));
-			element.Add(new XAttribute(XName.Get("cam_perspective"), Perspective.Serialize()));
-			element.Add(new XAttribute(XName.Get("cam_zpos"), Height.Serialize()));
-			element.Add(new XAttribute(XName.Get("cam_dof"), DepthOfField.Serialize()));
-			element.Add(new XAttribute(XName.Get("background"), Background.Serialize()));
-			element.Add(new XAttribute(XName.Get("brightness"), Brightness.Serialize()));
-			element.Add(new XAttribute(XName.Get("gamma"), Gamma.Serialize()));
-			element.Add(new XAttribute(XName.Get("vibrancy"), Vibrancy.Serialize()));
-			element.Add(new XAttribute(XName.Get("gamma_threshold"), GammaThreshold.Serialize()));
-			element.Add(new XAttribute(XName.Get("plugins"), string.Join(@" ", plugins)));
+
+			element.Add(new XAttribute(XName.Get(@"name"), CalculatedName));
+			element.Add(new XAttribute(XName.Get(@"version"), ApophysisSettings.Common.FlameExportVersionString));
+			element.Add(new XAttribute(XName.Get(@"size"), CanvasSize.Serialize()));
+			element.Add(new XAttribute(XName.Get(@"center"), Origin.Serialize()));
+			element.Add(new XAttribute(XName.Get(@"scale"), PixelsPerUnit.Serialize()));
+			element.Add(new XAttribute(XName.Get(@"angle"), Angle.Serialize()));
+			element.Add(new XAttribute(XName.Get(@"rotate"), ((int)System.Math.Round(Angle * -180.0 / System.Math.PI)).Serialize()));
+			element.Add(new XAttribute(XName.Get(@"zoom"), Zoom.Serialize()));
+			element.Add(new XAttribute(XName.Get(@"cam_pitch"), Pitch.Serialize()));
+			element.Add(new XAttribute(XName.Get(@"cam_yaw"), Yaw.Serialize()));
+			element.Add(new XAttribute(XName.Get(@"cam_perspective"), Perspective.Serialize()));
+			element.Add(new XAttribute(XName.Get(@"cam_zpos"), Height.Serialize()));
+			element.Add(new XAttribute(XName.Get(@"cam_dof"), DepthOfField.Serialize()));
+			element.Add(new XAttribute(XName.Get(@"background"), Background.Serialize()));
+			element.Add(new XAttribute(XName.Get(@"brightness"), Brightness.Serialize()));
+			element.Add(new XAttribute(XName.Get(@"gamma"), Gamma.Serialize()));
+			element.Add(new XAttribute(XName.Get(@"vibrancy"), Vibrancy.Serialize()));
+			element.Add(new XAttribute(XName.Get(@"gamma_threshold"), GammaThreshold.Serialize()));
+			element.Add(new XAttribute(XName.Get(@"plugins"), string.Join(@" ", plugins)));
 
 			if (Variation.VariationsIn15CStyle)
-				element.Add(new XAttribute(XName.Get("new_linear"), "1"));
+				element.Add(new XAttribute(XName.Get(@"new_linear"), @"1"));
 
 			Iterators.WriteXml(iteratorElements);
 			Palette.WriteXml(out paletteElement);
@@ -358,7 +359,7 @@ namespace Xyrus.Apophysis.Models
 		}
 		public bool IsEqual([NotNull] Flame flame)
 		{
-			if (flame == null) throw new ArgumentNullException("flame");
+			if (flame == null) throw new ArgumentNullException(@"flame");
 
 			if (!Equals(mName, flame.mName))
 				return false;
@@ -534,11 +535,11 @@ namespace Xyrus.Apophysis.Models
 
 		internal void ReadXml([NotNull] XElement element, bool isReadingBatch)
 		{
-			if (element == null) throw new ArgumentNullException("element");
+			if (element == null) throw new ArgumentNullException(@"element");
 
-			if ("flame" != element.Name.ToString().ToLower())
+			if (@"flame" != element.Name.ToString().ToLower())
 			{
-				throw new ApophysisException("Expected XML node \"flame\" but received \"" + element.Name + "\"");
+				throw new ApophysisException(string.Format(Messages.UnexpectedXmlTagError, @"flame", element.Name));
 			}
 
 			if (!isReadingBatch)
@@ -548,11 +549,11 @@ namespace Xyrus.Apophysis.Models
 
 			try
 			{
-				var nameAttribute = element.Attribute(XName.Get("name"));
+				var nameAttribute = element.Attribute(XName.Get(@"name"));
 				Name = nameAttribute == null ? null : nameAttribute.Value;
 
 				var builder = new StringBuilder();
-				var header = string.Format("Flame \"{0}\"", CalculatedName);
+				var header = string.Format(Messages.FlameNameMessageHeader, CalculatedName);
 
 				builder.AppendLine();
 				builder.AppendLine(header);
@@ -561,7 +562,7 @@ namespace Xyrus.Apophysis.Models
 				MessageCenter.SendMessage(builder.ToString());
 
 				bool usesVariationsIn15CStyle = false;
-				var newLinearAttribute = element.Attribute(XName.Get("new_linear"));
+				var newLinearAttribute = element.Attribute(XName.Get(@"new_linear"));
 				if (newLinearAttribute != null)
 				{
 					usesVariationsIn15CStyle = System.Math.Abs(newLinearAttribute.ParseFloat()) > double.Epsilon;
@@ -569,16 +570,16 @@ namespace Xyrus.Apophysis.Models
 
 				if (Variation.VariationsIn15CStyle != usesVariationsIn15CStyle)
 				{
-					MessageCenter.SendMessage("The flame was created with a different version of Apophysis or a different software and might not render correctly.");
+					MessageCenter.SendMessage(Messages.FlameVersionMismatch);
 				}
 
-				var sizeAttribute = element.Attribute(XName.Get("size"));
+				var sizeAttribute = element.Attribute(XName.Get(@"size"));
 				if (sizeAttribute != null)
 				{
 					var size = sizeAttribute.ParseSize();
 					if (size.Width <= 0 || size.Height <= 0)
 					{
-						throw new ApophysisException("Size must be greater than zero in both dimensions");
+						throw new ApophysisException(Messages.FlameSizeRangeError);
 					}
 
 					mCanvasSize = size;
@@ -588,148 +589,148 @@ namespace Xyrus.Apophysis.Models
 					mCanvasSize = new Size(1920, 1080);
 				}
 
-				var centerAttribute = element.Attribute(XName.Get("center"));
+				var centerAttribute = element.Attribute(XName.Get(@"center"));
 				if (centerAttribute != null)
 				{
 					var center = centerAttribute.ParseVector();
 					mOrigin = center;
 				}
 
-				var angleAttribute = element.Attribute(XName.Get("angle"));
+				var angleAttribute = element.Attribute(XName.Get(@"angle"));
 				if (angleAttribute != null)
 				{
 					var angle = angleAttribute.ParseFloat();
 					mAngle = angle;
 				}
 
-				var ppuAttribute = element.Attribute(XName.Get("scale"));
+				var ppuAttribute = element.Attribute(XName.Get(@"scale"));
 				if (ppuAttribute != null)
 				{
 					var pixelsPerUnit = ppuAttribute.ParseFloat(50.0 * mCanvasSize.Width / 100.0);
 					if (pixelsPerUnit <= 0)
 					{
-						throw new ApophysisException("Scale must be greater than zero");
+						throw new ApophysisException(Messages.FlamePixelsPerUnitRangeError);
 					}
 
 					mPixelsPerUnit = pixelsPerUnit;
 				}
 
-				var zoomAttribute = element.Attribute(XName.Get("zoom"));
+				var zoomAttribute = element.Attribute(XName.Get(@"zoom"));
 				if (zoomAttribute != null)
 				{
 					var zoom = zoomAttribute.ParseFloat();
 					mZoom = zoom;
 				}
 
-				var pitchAttribute = element.Attribute(XName.Get("cam_pitch"));
+				var pitchAttribute = element.Attribute(XName.Get(@"cam_pitch"));
 				if (pitchAttribute != null)
 				{
 					var pitch = pitchAttribute.ParseFloat();
 					mPitch = pitch;
 				}
 
-				var yawAttribute = element.Attribute(XName.Get("cam_yaw"));
+				var yawAttribute = element.Attribute(XName.Get(@"cam_yaw"));
 				if (yawAttribute != null)
 				{
 					var yaw = yawAttribute.ParseFloat();
 					mYaw = yaw;
 				}
 
-				var heightAttribute = element.Attribute(XName.Get("cam_zpos"));
+				var heightAttribute = element.Attribute(XName.Get(@"cam_zpos"));
 				if (heightAttribute != null)
 				{
 					var height = heightAttribute.ParseFloat();
 					mHeight = height;
 				}
 
-				var dofAttribute = element.Attribute(XName.Get("cam_dof"));
+				var dofAttribute = element.Attribute(XName.Get(@"cam_dof"));
 				if (dofAttribute != null)
 				{
 					var dof = dofAttribute.ParseFloat();
 					if (dof < 0)
 					{
-						throw new ApophysisException("Depth of field must be greater than or equal to zero");
+						throw new ApophysisException(Messages.FlameCameraDofRangeError);
 					}
 					mDepthOfField = dof;
 				}
 
-				var perspectiveAttribute = element.Attribute(XName.Get("cam_perspective"));
+				var perspectiveAttribute = element.Attribute(XName.Get(@"cam_perspective"));
 				if (perspectiveAttribute != null)
 				{
 					var perspective = perspectiveAttribute.ParseFloat();
 					mPerspective = perspective;
 				}
 
-				var brightnessAttribute = element.Attribute(XName.Get("brightness"));
+				var brightnessAttribute = element.Attribute(XName.Get(@"brightness"));
 				if (brightnessAttribute != null)
 				{
 					var brightness = brightnessAttribute.ParseFloat();
 					if (brightness <= 0)
 					{
-						throw new ApophysisException("Brightness must be greater than zero");
+						throw new ApophysisException(Messages.FlameBrightnessRangeError);
 					}
 					mBrightness = brightness;
 				}
 
-				var gammaAttribute = element.Attribute(XName.Get("gamma"));
+				var gammaAttribute = element.Attribute(XName.Get(@"gamma"));
 				if (gammaAttribute != null)
 				{
 					var gamma = gammaAttribute.ParseFloat();
 					if (gamma < 0)
 					{
-						throw new ApophysisException("Gamma must be greater than or equal to one");
+						throw new ApophysisException(Messages.FlameGammaRangeError);
 					}
 					mGamma = gamma;
 				}
 
-				var gammaThresholdAttribute = element.Attribute(XName.Get("gamma_threshold"));
+				var gammaThresholdAttribute = element.Attribute(XName.Get(@"gamma_threshold"));
 				if (gammaThresholdAttribute != null)
 				{
 					var gammaThreshold = gammaThresholdAttribute.ParseFloat();
 					if (gammaThreshold < 0)
 					{
-						throw new ApophysisException("Gamma threshold must be greater than or equal to zero");
+						throw new ApophysisException(Messages.FlameGammaThresholdRangeError);
 					}
 					mGammaThreshold = gammaThreshold;
 				}
 
-				var vibrancyAttribute = element.Attribute(XName.Get("vibrancy"));
+				var vibrancyAttribute = element.Attribute(XName.Get(@"vibrancy"));
 				if (vibrancyAttribute != null)
 				{
 					var vibrancy = vibrancyAttribute.ParseFloat();
 					if (vibrancy < 0)
 					{
-						throw new ApophysisException("Vibrancy must be greater than or equal to zero");
+						throw new ApophysisException(Messages.FlameVibrancyRangeError);
 					}
 					mVibrancy = vibrancy;
 				}
 
-				var colorAttribute = element.Attribute(XName.Get("background"));
+				var colorAttribute = element.Attribute(XName.Get(@"background"));
 				if (colorAttribute != null)
 				{
 					var background = colorAttribute.ParseColor();
 					mBackground = background;
 				}
 
-				var iterators = element.Descendants(XName.Get("xform"));
-				iterators = iterators.Concat(element.Descendants(XName.Get("finalxform")));
+				var iterators = element.Descendants(XName.Get(@"xform"));
+				iterators = iterators.Concat(element.Descendants(XName.Get(@"finalxform")));
 				Iterators.ReadXml(iterators);
 
-				var palette = element.Descendants(XName.Get("palette")).FirstOrDefault();
+				var palette = element.Descendants(XName.Get(@"palette")).FirstOrDefault();
 				if (palette == null)
 				{
-					throw new ApophysisException("No descendant node \"palette\" found");
+					throw new ApophysisException(Messages.FlameMissingPaletteTagError);
 				}
 
 				Palette.ReadCondensedHexData(palette.Value);
 				UpdateCalculatedValues();
 
-				MessageCenter.SendMessage("Done!");
+				MessageCenter.SendMessage(Messages.FlameSuccessMessage);
 			}
 			catch (ApophysisException exception)
 			{
 				Trace.TraceError(exception.Message);
-				MessageCenter.SendMessage(string.Format("Error: {0}", exception.Message));
+				MessageCenter.SendMessage(string.Format(Messages.FlameErrorMessage, exception.Message));
 
 				throw;
 			}

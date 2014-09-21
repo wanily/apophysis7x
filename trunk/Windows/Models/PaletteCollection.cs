@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Text.RegularExpressions;
 using Xyrus.Apophysis.Properties;
@@ -29,7 +28,7 @@ namespace Xyrus.Apophysis.Models
 			var array = palettes.ToArray();
 			if (!array.Any())
 			{
-				throw new ArgumentException("Source enumeration of palettes can't be empty", @"palettes");
+				throw new ArgumentException(Resources.EmptyPaletteCollectionError, @"palettes");
 			}
 
 			mName = null;

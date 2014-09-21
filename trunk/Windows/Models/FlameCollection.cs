@@ -5,6 +5,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Xml.Linq;
 using Xyrus.Apophysis.Messaging;
+using Xyrus.Apophysis.Properties;
+using Xyrus.Apophysis.Strings;
 
 namespace Xyrus.Apophysis.Models
 {
@@ -22,7 +24,7 @@ namespace Xyrus.Apophysis.Models
 		{
 			if (Items.Count == 0)
 			{
-				throw new ArgumentException("Batch can't be empty", @"flames");
+				throw new ArgumentException(Resources.EmptyBatchError, @"flames");
 			}
 
 			Name = null;
@@ -66,7 +68,7 @@ namespace Xyrus.Apophysis.Models
 		public bool Remove(int index)
 		{
 			if (index < 0 || index >= Count) return false;
-			if (!CanRemove()) throw new ApophysisException("Can't remove last flame from batch");
+			if (!CanRemove()) throw new ApophysisException(Messages.EmptyFlameCollectionError);
 
 			Items.RemoveAt(index);
 			RaiseContentChanged();
@@ -76,7 +78,7 @@ namespace Xyrus.Apophysis.Models
 		public bool Remove([NotNull] Flame flame)
 		{
 			if (flame == null) throw new ArgumentNullException(@"flame");
-			if (!CanRemove()) throw new ApophysisException("Can't remove last flame from batch");
+			if (!CanRemove()) throw new ApophysisException(Messages.EmptyFlameCollectionError);
 
 			if (!Contains(flame))
 				return false;
@@ -144,16 +146,16 @@ namespace Xyrus.Apophysis.Models
 					default:
 						var expectedNameString = elementNames.Length == 1
 							? elementNames[0]
-							: string.Format("{0} or {1}",
+							: string.Format(Common.OrConcatenation,
 								string.Join(@", ", elementNames.Select(x => @"""" + x + @"""").Take(elementNames.Length - 2).ToArray()),
 								@"""" + elementNames.Last() + @"""");
-						throw new ApophysisException(string.Format("Expected XML node {0} but received \"{1}\"", expectedNameString,
+						throw new ApophysisException(string.Format(Messages.UnexpectedXmlTagError, expectedNameString,
 							elementName));
 				}
 
 				if (!flameNodes.Any())
 				{
-					throw new ApophysisException("No flames in batch");
+					throw new ApophysisException(Messages.FlameCollectionNoChildTagsError);
 				}
 
 				var nameAttribute = element.Attribute(XName.Get(@"name"));
@@ -169,7 +171,7 @@ namespace Xyrus.Apophysis.Models
 
 					if (string.IsNullOrEmpty(flameName) || string.IsNullOrEmpty(flameName.Trim()))
 					{
-						flameName = string.Format("Untitled flame #{0}", counter);
+						flameName = string.Format(Common.NumberedUntitledFlame, counter);
 					}
 
 					var flame = new Flame();
@@ -186,7 +188,7 @@ namespace Xyrus.Apophysis.Models
 					}
 					catch (ApophysisException exception)
 					{
-						throw new ApophysisException(string.Format("Flame \"{0}\": {1}", flameName, exception.Message), exception);
+						throw new ApophysisException(string.Format(Messages.FlameErrorWrapper, flameName, exception.Message), exception);
 					}
 
 					counter++;
@@ -209,8 +211,8 @@ namespace Xyrus.Apophysis.Models
 		}
 		public void WriteXml([NotNull] out XElement element)
 		{
-			element = new XElement(XName.Get("Flames"));
-			element.Add(new XAttribute(XName.Get("name"), CalculatedName));
+			element = new XElement(XName.Get(@"Flames"));
+			element.Add(new XAttribute(XName.Get(@"name"), CalculatedName));
 
 			foreach (var flame in this)
 			{

@@ -17,9 +17,9 @@ namespace Xyrus.Apophysis.Calculation
 		//todo - render real fractal ... rofl
 		public Bitmap CreateBitmap([NotNull] Flame flame, double density, Size size, bool withTransparency, Action<ProgressEventArgs> progressCallback = null, ThreadStateToken threadState = null)
 		{
-			if (flame == null) throw new ArgumentNullException("flame");
-			if (density <= 0) throw new ArgumentOutOfRangeException("density");
-			if (size.Width <= 0 || size.Height <= 0) throw new ArgumentOutOfRangeException("size");
+			if (flame == null) throw new ArgumentNullException(@"flame");
+			if (density <= 0) throw new ArgumentOutOfRangeException(@"density");
+			if (size.Width <= 0 || size.Height <= 0) throw new ArgumentOutOfRangeException(@"size");
 
 			var timer = new NativeTimer();
 

@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
+using Xyrus.Apophysis.Strings;
 
 namespace Xyrus.Apophysis.Calculation
 {
@@ -40,13 +41,13 @@ namespace Xyrus.Apophysis.Calculation
 			// ReSharper restore InconsistentNaming
 		}
 
-		[DllImport("kernel32", SetLastError = true, CharSet = CharSet.Auto)]
+		[DllImport(@"kernel32", SetLastError = true, CharSet = CharSet.Auto)]
 		private static extern IntPtr LoadLibrary(string lpFileName);
 
-		[DllImport("kernel32", CharSet = CharSet.Ansi, ExactSpelling = true, SetLastError = true)]
+		[DllImport(@"kernel32", CharSet = CharSet.Ansi, ExactSpelling = true, SetLastError = true)]
 		private static extern IntPtr GetProcAddress(IntPtr hModule, string procName);
 
-		//[DllImport("kernel32.dll", SetLastError = true)]
+		//[DllImport(@"kernel32.dll", SetLastError = true)]
 		//[return: MarshalAs(UnmanagedType.Bool)]
 		//private static extern bool FreeLibrary(IntPtr hModule);
 
@@ -128,13 +129,13 @@ namespace Xyrus.Apophysis.Calculation
 		}
 		public ExternalVariation([NotNull] string dllPath)
 		{
-			if (string.IsNullOrEmpty(dllPath)) throw new ArgumentNullException("dllPath");
-			if (!File.Exists(dllPath)) throw new FileNotFoundException("Module not found", dllPath);
+			if (string.IsNullOrEmpty(dllPath)) throw new ArgumentNullException(@"dllPath");
+			if (!File.Exists(dllPath)) throw new FileNotFoundException(Messages.PluginModuleNotFoundError, dllPath);
 
 			if (!FitsCurrentMachineType(dllPath))
 			{
 				var type = GetDllMachineType(dllPath);
-				throw new ApophysisException(string.Format("Unsupported plugin architecture ({0})", type));
+				throw new ApophysisException(string.Format(Messages.PluginUnsupportedArchitectureError, type));
 			}
 
 			mDllPath = dllPath;
@@ -143,8 +144,8 @@ namespace Xyrus.Apophysis.Calculation
 
 		public static bool FitsCurrentMachineType([NotNull] string dllPath)
 		{
-			if (string.IsNullOrEmpty(dllPath)) throw new ArgumentNullException("dllPath");
-			if (!File.Exists(dllPath)) throw new FileNotFoundException("Module not found", dllPath);
+			if (string.IsNullOrEmpty(dllPath)) throw new ArgumentNullException(@"dllPath");
+			if (!File.Exists(dllPath)) throw new FileNotFoundException(Messages.PluginModuleNotFoundError, dllPath);
 
 			var is64Bit = IntPtr.Size == 8;
 			var type = GetDllMachineType(dllPath);
@@ -168,13 +169,13 @@ namespace Xyrus.Apophysis.Calculation
 				var peHead = reader.ReadUInt32();
 
 				if (peHead != 0x00004550)
-					throw new ApophysisException(string.Format("Invalid DLL (can't find PE header)"));
+					throw new ApophysisException(string.Format(Messages.PluginUnknownPeHeaderError));
 
 				machineType = (MachineType) reader.ReadUInt16();
 			}
 			catch
 			{
-				throw new ApophysisException(string.Format("Invalid DLL (unknown machine type)"));
+				throw new ApophysisException(string.Format(Messages.PluginUnknownArchitectureError));
 			}
 			finally
 			{
@@ -235,7 +236,7 @@ namespace Xyrus.Apophysis.Calculation
 				double* vptr = &value;
 				bool result = mGetVariable(mVp, nptr, vptr);
 
-				Debug.Assert(result, "PluginVarGetVariable");
+				Debug.Assert(result, @"PluginVarGetVariable");
 
 				return value;
 			}
@@ -249,7 +250,7 @@ namespace Xyrus.Apophysis.Calculation
 				double* vptr = &value;
 				bool result = mSetVariable(mVp, nptr, vptr);
 
-				Debug.Assert(result, "PluginVarSetVariable");
+				Debug.Assert(result, @"PluginVarSetVariable");
 			}
 
 			return GetVariable(name);
@@ -339,44 +340,44 @@ namespace Xyrus.Apophysis.Calculation
 
 			mHModule = LoadLibrary(mDllPath);
 
-			mCreate = LoadProc<PluginVarCreateDelegate>(mHModule, "PluginVarCreate");
-			mDestroy = LoadProc<PluginVarDestroyDelegate>(mHModule, "PluginVarDestroy");
-			mGetVariableNameAt = LoadProc<PluginVarGetVariableNameAtDelegate>(mHModule, "PluginVarGetVariableNameAt");
-			mResetVariable = LoadProc<PluginVarResetVariableDelegate>(mHModule, "PluginVarResetVariable");
-			mGetVariable = LoadProc<PluginVarGetVariableDelegate>(mHModule, "PluginVarGetVariable");
-			mSetVariable = LoadProc<PluginVarSetVariableDelegate>(mHModule, "PluginVarSetVariable");
-			mGetName = LoadProc<PluginVarGetNameDelegate>(mHModule, "PluginVarGetName");
-			mGetNrVariables = LoadProc<PluginVarGetNrVariablesDelegate>(mHModule, "PluginVarGetNrVariables");
-			mCalculate = LoadProc<PluginVarCalculateDelegate>(mHModule, "PluginVarCalc");
-			mPrepare = LoadProc<PluginVarPrepareDelegate>(mHModule, "PluginVarPrepare");
+			mCreate = LoadProc<PluginVarCreateDelegate>(mHModule, @"PluginVarCreate");
+			mDestroy = LoadProc<PluginVarDestroyDelegate>(mHModule, @"PluginVarDestroy");
+			mGetVariableNameAt = LoadProc<PluginVarGetVariableNameAtDelegate>(mHModule, @"PluginVarGetVariableNameAt");
+			mResetVariable = LoadProc<PluginVarResetVariableDelegate>(mHModule, @"PluginVarResetVariable");
+			mGetVariable = LoadProc<PluginVarGetVariableDelegate>(mHModule, @"PluginVarGetVariable");
+			mSetVariable = LoadProc<PluginVarSetVariableDelegate>(mHModule, @"PluginVarSetVariable");
+			mGetName = LoadProc<PluginVarGetNameDelegate>(mHModule, @"PluginVarGetName");
+			mGetNrVariables = LoadProc<PluginVarGetNrVariablesDelegate>(mHModule, @"PluginVarGetNrVariables");
+			mCalculate = LoadProc<PluginVarCalculateDelegate>(mHModule, @"PluginVarCalc");
+			mPrepare = LoadProc<PluginVarPrepareDelegate>(mHModule, @"PluginVarPrepare");
 
 			if (mCreate == null || mDestroy == null || mGetVariableNameAt == null || mResetVariable == null ||
 			    mGetVariable == null || mSetVariable == null || mGetName == null || mGetNrVariables == null || 
 				mCalculate == null || mPrepare == null)
 			{
-				throw new ApophysisException("Incompatible Apophysis plugin");
+				throw new ApophysisException(Messages.PluginMethodNotFoundError);
 			}
 
 			Initialize();
 
-			var init = GetProcAddress(mHModule, "PluginVarInitDC");
+			var init = GetProcAddress(mHModule, @"PluginVarInitDC");
 			if (init != IntPtr.Zero)
 			{
 				mInit = (PluginVarInitDcDelegate) Marshal.GetDelegateForFunctionPointer(init, typeof (PluginVarInitDcDelegate));
 			}
 			else
 			{
-				init = GetProcAddress(mHModule, "PluginVarInit3D");
+				init = GetProcAddress(mHModule, @"PluginVarInit3D");
 				if (init != IntPtr.Zero)
 				{
 					mInitLegacy3D = (PluginVarInit3DDelegate) Marshal.GetDelegateForFunctionPointer(init, typeof (PluginVarInit3DDelegate));
 				}
 				else
 				{
-					mInitLegacy = (PluginVarInitDelegate) Marshal.GetDelegateForFunctionPointer(GetProcAddress(mHModule, "PluginVarInit"), typeof(PluginVarInitDelegate));
+					mInitLegacy = (PluginVarInitDelegate) Marshal.GetDelegateForFunctionPointer(GetProcAddress(mHModule, @"PluginVarInit"), typeof(PluginVarInitDelegate));
 					if (mInitLegacy == null)
 					{
-						throw new ApophysisException("Incompatible Apophysis plugin");
+						throw new ApophysisException(Messages.PluginMethodNotFoundError);
 					}
 				}
 			}
@@ -394,11 +395,12 @@ namespace Xyrus.Apophysis.Calculation
 				mVariables.Add(GetStringFromPointer(namePtr));
 			}
 
-			if (mName.ToLower().StartsWith("pre_"))
+			//hack: pretty bad but for now we clone Apophysis' behavior...
+			if (mName.ToLower().StartsWith(@"pre_"))
 			{
 				Priority = VariationPriority.Pre;
 			}
-			else if (mName.ToLower().StartsWith("post_"))
+			else if (mName.ToLower().StartsWith(@"post_"))
 			{
 				Priority = VariationPriority.Post;
 			}

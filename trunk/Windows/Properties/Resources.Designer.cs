@@ -161,6 +161,24 @@ namespace Xyrus.Apophysis.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Batch can&apos;t be empty.
+        /// </summary>
+        internal static string EmptyBatchError {
+            get {
+                return ResourceManager.GetString("EmptyBatchError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Source enumeration of palettes can&apos;t be empty.
+        /// </summary>
+        internal static string EmptyPaletteCollectionError {
+            get {
+                return ResourceManager.GetString("EmptyPaletteCollectionError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap FinalIterator {
@@ -224,6 +242,15 @@ namespace Xyrus.Apophysis.Properties {
             get {
                 object obj = ResourceManager.GetObject("FullscreenPreview", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A polygon must contain at least three vertices.
+        /// </summary>
+        internal static string InvalidPolygonError {
+            get {
+                return ResourceManager.GetString("InvalidPolygonError", resourceCulture);
             }
         }
         

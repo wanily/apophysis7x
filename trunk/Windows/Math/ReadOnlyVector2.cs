@@ -7,7 +7,7 @@ namespace Xyrus.Apophysis.Math
 	{
 		public ReadOnlyVector2([NotNull] Vector2 vector)
 		{
-			if (vector == null) throw new ArgumentNullException("vector");
+			if (vector == null) throw new ArgumentNullException(@"vector");
 
 			X = vector.X;
 			Y = vector.Y;

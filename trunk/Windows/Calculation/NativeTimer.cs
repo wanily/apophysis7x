@@ -10,11 +10,11 @@ namespace Xyrus.Apophysis.Calculation
 
 		static class NativeMethods
 		{
-			[DllImport("Kernel32", SetLastError = true)]
+			[DllImport(@"Kernel32", SetLastError = true)]
 			[return: MarshalAs(UnmanagedType.Bool)]
 			public static extern bool QueryPerformanceCounter(out long lpPerformanceCount);
 
-			[DllImport("Kernel32", SetLastError = true)]
+			[DllImport(@"Kernel32", SetLastError = true)]
 			[return: MarshalAs(UnmanagedType.Bool)]
 			public static extern bool QueryPerformanceFrequency(out long lpFrequency);
 		}
