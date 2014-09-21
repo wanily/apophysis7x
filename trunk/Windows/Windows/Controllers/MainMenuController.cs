@@ -44,6 +44,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.PalettePropertiesMenuItem.Click += OnPalettePropertiesClick;
 			View.CanvasPropertiesMenuItem.Click += OnCanvasPropertiesClick;
 			View.MessagesMenuItem.Click += OnMessagesClick;
+			View.OpenSettingsMenuItem.Click += OnSettingsClick;
 			View.ShowToolBarMenuItem.Click += OnShowToolbarClick;
 			View.ShowStatusBarMenuItem.Click += OnShowStatusbarClick;
 			View.ShowBatchMenuItem.Click += OnShowBatchListClick;
@@ -78,6 +79,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.PalettePropertiesMenuItem.Click -= OnPalettePropertiesClick;
 			View.CanvasPropertiesMenuItem.Click -= OnCanvasPropertiesClick;
 			View.MessagesMenuItem.Click -= OnMessagesClick;
+			View.OpenSettingsMenuItem.Click -= OnSettingsClick;
 			View.ShowToolBarMenuItem.Click -= OnShowToolbarClick;
 			View.ShowStatusBarMenuItem.Click -= OnShowStatusbarClick;
 			View.ShowBatchMenuItem.Click -= OnShowBatchListClick;
@@ -212,6 +214,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		internal void OnMessagesClick(object sender, EventArgs e)
 		{
 			mParent.ShowMessages();
+		}
+		internal void OnSettingsClick(object sender, EventArgs e)
+		{
+			mParent.ShowSettings();
 		}
 		internal void OnShowToolbarClick(object sender, EventArgs e)
 		{

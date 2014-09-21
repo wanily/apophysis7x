@@ -23,6 +23,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		private FullscreenController mFullscreenController;
 		private FlamePropertiesController mFlamePropertiesController;
 		private MessagesController mMessagesController;
+		private SettingsController mSettingsController;
 
 		private KeyboardController mKeyboardController;
 		private MainMenuController mMenuController;
@@ -45,6 +46,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mFullscreenController = new FullscreenController(this);
 			mFlamePropertiesController = new FlamePropertiesController(this);
 			mMessagesController = new MessagesController();
+			mSettingsController = new SettingsController(this);
 
 			mMenuController = new MainMenuController(View, this);
 			mToolbarController = new MainToolbarController(View, this);
@@ -98,6 +100,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 					mFullscreenController = null;
 				}
 
+				if (mSettingsController != null)
+				{
+					mSettingsController.Dispose();
+					mSettingsController = null;
+				}
+
 				if (mMessagesController != null)
 				{
 					mMessagesController.Dispose();
@@ -141,6 +149,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mEditorController.Initialize();
 			mFlamePropertiesController.Initialize();
 			mMessagesController.Initialize();
+			mSettingsController.Initialize();
 			mFullscreenController.Initialize();
 			mMenuController.Initialize();
 			mToolbarController.Initialize();
@@ -586,33 +595,58 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mLastBatchPath = path;
 		}
 
+		private void ShowView(Form view)
+		{
+			if (view.Visible)
+			{
+				if (view.WindowState == FormWindowState.Minimized)
+				{
+					view.WindowState = FormWindowState.Normal;
+				}
+				view.BringToFront();
+			}
+			else
+			{
+				view.Show();
+			}
+		}
+
 		public void ShowEditor()
 		{
-			mEditorController.View.Show();
+			ShowView(mEditorController.View);
 		}
 		public void ShowFlameProperties()
 		{
-			mFlamePropertiesController.View.Show();
+			ShowView(mFlamePropertiesController.View);
 			mFlamePropertiesController.View.Tabs.SelectTab(mFlamePropertiesController.View.CameraTab);
 		}
 		public void ShowImagingProperties()
 		{
-			mFlamePropertiesController.View.Show();
+			ShowView(mFlamePropertiesController.View);
 			mFlamePropertiesController.View.Tabs.SelectTab(mFlamePropertiesController.View.ImagingTab);
 		}
 		public void ShowPaletteProperties()
 		{
-			mFlamePropertiesController.View.Show();
+			ShowView(mFlamePropertiesController.View);
 			mFlamePropertiesController.View.Tabs.SelectTab(mFlamePropertiesController.View.PaletteTab);
 		}
 		public void ShowCanvasProperties()
 		{
-			mFlamePropertiesController.View.Show();
+			ShowView(mFlamePropertiesController.View);
 			mFlamePropertiesController.View.Tabs.SelectTab(mFlamePropertiesController.View.CanvasTab);
 		}
 		public void ShowMessages()
 		{
-			mMessagesController.View.Show();
+			ShowView(mMessagesController.View);
+		}
+		public void ShowSettings()
+		{
+			ShowView(mSettingsController.View);
+		}
+
+		public void ReloadSettings()
+		{
+			
 		}
 	}
 }

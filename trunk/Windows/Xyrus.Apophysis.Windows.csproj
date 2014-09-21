@@ -181,6 +181,12 @@
     <Compile Include="Windows\Controllers\MainMenuController.cs" />
     <Compile Include="Windows\Controllers\MainToolbarController.cs" />
     <Compile Include="Windows\Controllers\MessagesController.cs" />
+    <Compile Include="Windows\Controllers\SettingsAutosaveController.cs" />
+    <Compile Include="Windows\Controllers\SettingsCommonController.cs" />
+    <Compile Include="Windows\Controllers\SettingsController.cs" />
+    <Compile Include="Windows\Controllers\SettingsEditorController.cs" />
+    <Compile Include="Windows\Controllers\SettingsPreviewController.cs" />
+    <Compile Include="Windows\Controllers\SettingsViewController.cs" />
     <Compile Include="Windows\Controllers\UndoController.cs" />
     <Compile Include="Windows\Controllers\WaitImageController.cs" />
     <Compile Include="Windows\Controls\CellValueChangedEventArgs.cs" />
@@ -266,6 +272,12 @@
     </Compile>
     <Compile Include="Windows\Forms\Messages.Designer.cs">
       <DependentUpon>Messages.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Forms\Settings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\Forms\Settings.Designer.cs">
+      <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
     <Compile Include="Windows\Input\BlurPaletteEditHandler.cs" />
     <Compile Include="Windows\Input\BrightnessPaletteEditHandler.cs" />
@@ -386,6 +398,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\Forms\Messages.resx">
       <DependentUpon>Messages.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\Forms\Settings.resx">
+      <DependentUpon>Settings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\Resources\MAINICON.ico" />
     <EmbeddedResource Include="Windows\Resources\MOVE_WHITE.cur" />
@@ -523,6 +538,7 @@
     <None Include="Windows\Resources\Icons\ScaleUp.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Windows\Resources\Settings.ico" />
     <EmbeddedResource Include="Windows\Resources\SplashScreen.bmp" />
     <EmbeddedResource Include="Windows\Resources\Toolbar\Main\FitImage.bmp" />
     <EmbeddedResource Include="Windows\Resources\Toolbar\Main\About.bmp" />

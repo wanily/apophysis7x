@@ -42,6 +42,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.PalettePropertiesButton.Click += mParent.MainMenuController.OnPalettePropertiesClick;
 			View.CanvasPropertiesButton.Click += mParent.MainMenuController.OnCanvasPropertiesClick;
 			View.MessagesButton.Click += mParent.MainMenuController.OnMessagesClick;
+			View.OpenSettingsButton.Click += mParent.MainMenuController.OnSettingsClick;
 
 			View.ToggleGuidelinesButton.Click += OnToggleGuidelines;
 			View.ToggleTransparencyButton.Click += OnToggleTransparency;
@@ -74,6 +75,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.PalettePropertiesButton.Click -= mParent.MainMenuController.OnPalettePropertiesClick;
 			View.CanvasPropertiesButton.Click -= mParent.MainMenuController.OnCanvasPropertiesClick;
 			View.MessagesButton.Click -= mParent.MainMenuController.OnMessagesClick;
+			View.OpenSettingsButton.Click -= mParent.MainMenuController.OnSettingsClick;
 
 			View.ToggleGuidelinesButton.Click -= OnToggleGuidelines;
 			View.ToggleTransparencyButton.Click -= OnToggleTransparency;
