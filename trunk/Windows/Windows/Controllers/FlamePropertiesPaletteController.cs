@@ -55,16 +55,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 					mEditHandlers.Clear();
 					mEditHandlers = null;
 				}
-
-				if (mDragHandler != null)
-				{
-					mDragHandler.ValueChanged -= OnEditHandlerUpdated;
-					mDragHandler = null;
-				}
 			}
 
-			mDragPosition = 0.0;
-			mIsDragging = false;
 			mParent = null;
 		}
 
@@ -97,11 +89,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.SavePaletteMenuItem.Click += OnSaveClick;
 			View.CopyPaletteMenuItem.Click += OnCopyClick;
 			View.PastePaletteMenuItem.Click += OnPasteClick;
-
-			View.PalettePicture.MouseDown += OnPaletteMouseDown;
-			View.PalettePicture.MouseMove += OnPaletteMouseMove;
-			View.PalettePicture.MouseUp += OnPaletteMouseUp;
-			View.PalettePicture.MouseDoubleClick += OnRandomPresetClick;
 
 			using (mParent.Initializer.Enter())
 			{
@@ -142,63 +129,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.CopyPaletteMenuItem.Click -= OnCopyClick;
 			View.PastePaletteMenuItem.Click -= OnPasteClick;
 
-			View.PalettePicture.MouseDown -= OnPaletteMouseDown;
-			View.PalettePicture.MouseMove -= OnPaletteMouseMove;
-			View.PalettePicture.MouseUp -= OnPaletteMouseUp;
-			View.PalettePicture.MouseDoubleClick -= OnRandomPresetClick;
-
 			Cleanup();
-		}
-
-		private bool mIsDragging;
-		private PaletteEditHandler mDragHandler;
-		private double mDragPosition;
-
-		private void OnPaletteMouseDown(object sender, MouseEventArgs e)
-		{
-			var position = mParent.Flame.Palette.Length * e.X/(double) View.PalettePicture.ClientSize.Width;
-
-			mDragPosition = position;
-			mIsDragging = true;
-			mDragHandler = ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
-				? new RotatePaletteEditHandler()//new StretchPaletteEditHandler() { Origin = position }
-				: new RotatePaletteEditHandler();
-
-			var palette = mCurrentEditHandler.OutputPalette;
-
-			mCurrentEditValue = 0;
-			mCurrentEditHandler.Reset();
-			mCurrentEditHandler.InputPalette = palette;
-
-			base.Update();
-
-			mDragHandler.InputPalette = mParent.Flame.Palette;
-			mDragHandler.ValueChanged += OnEditHandlerUpdated;
-		}
-		private void OnPaletteMouseMove(object sender, MouseEventArgs e)
-		{
-			if (!mIsDragging || mDragHandler == null)
-				return;
-
-			var position = mParent.Flame.Palette.Length * e.X/(double) View.PalettePicture.ClientSize.Width;
-			var delta = position - mDragPosition;
-
-			mDragHandler.Value = (int)delta;
-
-			mParent.PreviewController.DelayedUpdatePreview();
-		}
-		private void OnPaletteMouseUp(object sender, MouseEventArgs e)
-		{
-			mDragPosition = 0.0;
-			mIsDragging = false;
-
-			if (mDragHandler != null)
-			{
-				mDragHandler.ValueChanged -= OnEditHandlerUpdated;
-				mDragHandler = null;
-			}
-
-			mParent.CommitValue();
 		}
 
 		protected override void OnValueCommittedOverride(object control)
@@ -212,16 +143,19 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		public override void Update()
 		{
-			using (mParent.Initializer.Enter())
+			if (!mParent.Initializer.IsBusy)
 			{
-				var index = View.PaletteSelectComboBox.Items.IndexOf(mParent.Flame.Palette);
-				if (index < 0)
+				using (mParent.Initializer.Enter())
 				{
-					View.PaletteSelectComboBox.Items.Add(mParent.Flame.Palette);
-					index = View.PaletteSelectComboBox.Items.Count - 1;
-				}
+					var index = View.PaletteSelectComboBox.Items.IndexOf(mParent.Flame.Palette);
+					if (index < 0)
+					{
+						View.PaletteSelectComboBox.Items.Add(mParent.Flame.Palette);
+						index = View.PaletteSelectComboBox.Items.Count - 1;
+					}
 
-				View.PaletteSelectComboBox.SelectedIndex = index;
+					View.PaletteSelectComboBox.SelectedIndex = index;
+				}
 			}
 
 			foreach (var handler in mEditHandlers)
@@ -301,11 +235,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 		private void OnEditHandlerUpdated(object sender, EventArgs e)
 		{
-			var editHandler = sender as PaletteEditHandler;
-			if (editHandler == null)
-				return;
-
-			mParent.Flame.Palette = editHandler.OutputPalette;
+			mParent.Flame.Palette = mCurrentEditHandler.OutputPalette;
 			View.PalettePicture.Refresh();
 		}
 
