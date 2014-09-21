@@ -642,6 +642,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		public void ShowSettings()
 		{
 			ShowView(mSettingsController.View);
+			mSettingsController.Update();
 		}
 
 		public void ReloadSettings()

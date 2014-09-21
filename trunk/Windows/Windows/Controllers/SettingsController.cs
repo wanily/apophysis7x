@@ -75,11 +75,22 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			View.OkButton.Click += OnOkClick;
 			View.CancelButton.Click += OnCancelClick;
+
+			Update();
 		}
 		protected override void DetachView()
 		{
 			View.OkButton.Click -= OnOkClick;
 			View.CancelButton.Click -= OnCancelClick;
+		}
+
+		public void Update()
+		{
+			mCommonController.Update();
+			mEditorController.Update();
+			mViewController.Update();
+			mPreviewController.Update();
+			mAutosaveController.Update();
 		}
 
 		private void OnOkClick(object sender, EventArgs e)

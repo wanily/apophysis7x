@@ -23,6 +23,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 		}
 
+		public void Update()
+		{
+			
+		}
 		public void WriteSettings()
 		{
 			
