@@ -257,6 +257,16 @@ namespace Xyrus.Apophysis.Models
 			return new Palette(name) { mColors = array };
 		}
 
+		[NotNull]
+		internal void ReplaceColors([NotNull] Color[] newColors)
+		{
+			if (newColors == null) throw new ArgumentNullException("newColors");
+			if (newColors.Length != mColors.Length) 
+				throw new ArgumentException(Messages.MismatchingPaletteArraysError, "newColors");
+
+			mColors = newColors;
+		}
+
 		private static Color Mix(Color operand1, Color operand2)
 		{
 			double r1 = operand1.R, r2 = operand2.R;

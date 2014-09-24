@@ -11,11 +11,11 @@ namespace Xyrus.Apophysis.Windows.Input
 
 		public override int MinValue
 		{
-			get { return 0; }
+			get { return -128; }
 		}
 		public override int MaxValue
 		{
-			get { return 127; }
+			get { return 128; }
 		}
 
 		protected override Color[] Calculate(Color[] source, int value)

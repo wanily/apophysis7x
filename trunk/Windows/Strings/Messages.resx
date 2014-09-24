@@ -236,4 +236,7 @@ Location: {2}</value>
 	<data name="IteratorErrorWrapper" xml:space="preserve">
     <value>Transform #{0}: {1}</value>
   </data>
+	<data name="MismatchingPaletteArraysError" xml:space="preserve">
+    <value>Mismatching palette arrays</value>
+  </data>
 </root>

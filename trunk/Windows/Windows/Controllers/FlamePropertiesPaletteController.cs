@@ -15,7 +15,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 	{
 		private FlamePropertiesController mParent;
 		private List<PaletteEditHandler> mEditHandlers;
-		private PaletteEditHandler mCurrentEditHandler;
 
 		private double mCurrentEditValue;
 
@@ -98,12 +97,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				View.PaletteEditModeComboBox.Items.AddRange(mEditHandlers.OfType<object>().ToArray());
 				View.PaletteEditModeComboBox.SelectedIndex = 0;
 
-				mCurrentEditHandler = mEditHandlers.First();
-				mCurrentEditHandler.Reset();
-
-				View.PaletteEditScrollBar.Value = (int)(mCurrentEditValue = mCurrentEditHandler.Value);
-				View.PaletteEditScrollBar.Minimum = mCurrentEditHandler.MinValue;
-				View.PaletteEditScrollBar.Maximum = mCurrentEditHandler.MaxValue;
+				UpdateViewValue();
+				UpdateBounds();
+				RedrawPalette();
 			}
 		}
 		protected override void DetachView()
@@ -143,29 +139,14 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		public override void Update()
 		{
-			if (!mParent.Initializer.IsBusy)
+			using (mParent.Initializer.Enter())
 			{
-				using (mParent.Initializer.Enter())
-				{
-					var index = View.PaletteSelectComboBox.Items.IndexOf(mParent.Flame.Palette);
-					if (index < 0)
-					{
-						View.PaletteSelectComboBox.Items.Add(mParent.Flame.Palette);
-						index = View.PaletteSelectComboBox.Items.Count - 1;
-					}
-
-					View.PaletteSelectComboBox.SelectedIndex = index;
-				}
+				SetPalettesSelectedIndex();
+				InitHandlers();
 			}
 
-			foreach (var handler in mEditHandlers)
-			{
-				handler.InputPalette = mParent.Flame.Palette;
-				handler.Reset();
-			}
-			
 			base.Update();
-			View.PalettePicture.Refresh();
+			RedrawPalette();
 		}
 
 		private double CurrentEditValue
@@ -174,8 +155,78 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			set
 			{
 				mCurrentEditValue = value;
-				mCurrentEditHandler.Value = (int)value;
+
+				var handler = GetCurrentEditHandler();
+				handler.Value = (int)value;
 			}
+		}
+		private PaletteEditHandler GetCurrentEditHandler()
+		{
+			var handler = View.PaletteEditModeComboBox.SelectedItem as PaletteEditHandler;
+			if (handler == null)
+			{
+				using (mParent.Initializer.Enter())
+				{
+					View.PaletteEditModeComboBox.SelectedIndex = 0;
+				}
+
+				return mEditHandlers.First();
+			}
+
+			return handler;
+		}
+
+		private void SetPalettesSelectedIndex()
+		{
+			var index = View.PaletteSelectComboBox.Items.IndexOf(mParent.Flame.Palette);
+			if (index < 0)
+			{
+				View.PaletteSelectComboBox.Items.Add(mParent.Flame.Palette);
+				index = View.PaletteSelectComboBox.Items.Count - 1;
+			}
+
+			View.PaletteSelectComboBox.SelectedIndex = index;
+		}
+		private void ResetAllHandlers()
+		{
+			foreach (var handler in mEditHandlers)
+			{
+				handler.Reset();
+			}
+
+			UpdateViewValue();
+			UpdateBounds();
+		}
+
+		private void UpdateViewValue(PaletteEditHandler handler = null)
+		{
+			handler = handler ?? GetCurrentEditHandler();
+			View.PaletteEditScrollBar.Value = (int)(mCurrentEditValue = handler.Value);
+		}
+		private void RedrawPalette()
+		{
+			View.PalettePicture.Refresh();
+		}
+		private void UpdateBounds()
+		{
+			var handler = GetCurrentEditHandler();
+
+			View.PaletteEditScrollBar.Minimum = handler.MinValue;
+			View.PaletteEditScrollBar.Maximum = handler.MaxValue;
+		}
+		private void InitHandlers()
+		{
+			using (mParent.Initializer.Enter())
+			{
+				foreach (var handler in mEditHandlers)
+				{
+					handler.Initialize(mParent.Flame.Palette);
+					handler.Reset();
+				}
+			}
+
+			UpdateViewValue();
+			UpdateBounds();
 		}
 
 		private void OnPalettePaint(object sender, PaintEventArgs e)
@@ -203,10 +254,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			mParent.Flame.Palette = palette;
 
-			mCurrentEditHandler.InputPalette = palette;
-			mCurrentEditHandler.Reset();
-
-			View.PalettePicture.Refresh();
+			InitHandlers();
+			RedrawPalette();
 			mParent.CommitValue();
 		}
 		private void OnEditModeSelected(object sender, EventArgs e)
@@ -214,46 +263,38 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			if (mParent.Initializer.IsBusy)
 				return;
 
-			var prevEditHandler = mCurrentEditHandler;
+			var handler = GetCurrentEditHandler();
 
-			mCurrentEditHandler = View.PaletteEditModeComboBox.SelectedItem as PaletteEditHandler;
-			if (mCurrentEditHandler == null)
-			{
-				mCurrentEditHandler = mEditHandlers.First();
-				using (mParent.Initializer.Enter())
-				{
-					View.PaletteEditModeComboBox.SelectedIndex = 0;
-				}
-			}
+			handler.Initialize(mParent.Flame.Palette);
+			handler.Reset();
 
-			mCurrentEditHandler.InputPalette = prevEditHandler.OutputPalette;
-			mCurrentEditHandler.Reset();
+			UpdateViewValue(handler);
+			UpdateBounds();
 
-			View.PaletteEditScrollBar.Value = (int)(mCurrentEditValue = mCurrentEditHandler.Value);
-			View.PaletteEditScrollBar.Minimum = mCurrentEditHandler.MinValue;
-			View.PaletteEditScrollBar.Maximum = mCurrentEditHandler.MaxValue;
+			RedrawPalette();
 		}
 		private void OnEditHandlerUpdated(object sender, EventArgs e)
 		{
-			mParent.Flame.Palette = mCurrentEditHandler.OutputPalette;
-			View.PalettePicture.Refresh();
+			var editHandler = sender as PaletteEditHandler;
+			if (editHandler == null)
+				return;
+
+			editHandler.Calculate(mParent.Flame.Palette);
+			UpdateViewValue(editHandler);
+			RedrawPalette();
 		}
 
 		private void OnRandomPresetClick(object sender, EventArgs e)
 		{
 			mParent.Flame.Palette = PaletteCollection.GetRandomPalette(mParent.Flame);
 
-			mCurrentEditHandler.Reset();
-			mCurrentEditValue = mCurrentEditHandler.Value;
-
+			InitHandlers();
 			mParent.CommitValue();
 			Update();
 		}
 		private void OnResetClick(object sender, EventArgs e)
 		{
-			mCurrentEditHandler.Reset();
-			mCurrentEditValue = mCurrentEditHandler.Value;
-
+			ResetAllHandlers();
 			mParent.CommitValue();
 			Update();
 		}
@@ -278,9 +319,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 					mParent.Flame.Palette = palette;
 
-					mCurrentEditHandler.Reset();
-					mCurrentEditValue = mCurrentEditHandler.Value;
-
+					InitHandlers();
 					mParent.CommitValue();
 					Update();
 				}
@@ -310,9 +349,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			mParent.Flame.Palette = new Palette(mParent.Flame.Palette.CalculatedName, data);
 
-			mCurrentEditHandler.Reset();
-			mCurrentEditValue = mCurrentEditHandler.Value;
-
+			InitHandlers();
 			mParent.CommitValue();
 			Update();
 		}
@@ -326,9 +363,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			mParent.Flame.Palette = new Palette(mParent.Flame.Palette.CalculatedName, data);
 
-			mCurrentEditHandler.Reset();
-			mCurrentEditValue = mCurrentEditHandler.Value;
-
+			InitHandlers();
 			mParent.CommitValue();
 			Update();
 		}

@@ -7,8 +7,7 @@ namespace Xyrus.Apophysis.Windows.Input
 	abstract class PaletteEditHandler
 	{
 		private int mValue;
-		private Palette mInputPalette;
-		private Palette mOutputPalette;
+		private Color[] mStartColors;
 
 		public event EventHandler ValueChanged;
 
@@ -32,36 +31,21 @@ namespace Xyrus.Apophysis.Windows.Input
 		public abstract int MinValue { get; }
 		public abstract int MaxValue { get; }
 
-		[NotNull]
-		public Palette InputPalette
-		{
-			get { return mInputPalette; }
-			set
-			{
-				if (value == null)
-				{
-					throw new ArgumentNullException("value");
-				}
+		public bool ViewVisible { get; set; }
 
-				mInputPalette = value.Copy(); //value.Resize(256);
-				mValue = 0;
-				mOutputPalette = mInputPalette.Copy();
-			}
+		public void Initialize([NotNull] Palette palette)
+		{
+			if (palette == null) throw new ArgumentNullException("palette");
+
+			mStartColors = new Color[palette.Length];
+			palette.CopyTo(mStartColors);
 		}
-
-		[NotNull]
-		public Palette OutputPalette
+		public void Calculate([NotNull] Palette palette)
 		{
-			get { return mOutputPalette; }
-			private set
-			{
-				if (value == null)
-				{
-					throw new ArgumentNullException("value");
-				}
+			if (palette == null) throw new ArgumentNullException(@"palette");
 
-				mOutputPalette = value;
-			}
+			var newColors = Calculate(mStartColors, mValue);
+			palette.ReplaceColors(newColors);
 		}
 
 		[NotNull]
@@ -73,13 +57,6 @@ namespace Xyrus.Apophysis.Windows.Input
 		protected void OnValueChanged()
 		{
 			OnValueChangedOverride();
-
-			var source = new Color[InputPalette.Length];
-			InputPalette.CopyTo(source);
-
-			var data = Calculate(source, mValue);
-
-			OutputPalette = new Palette(InputPalette.CalculatedName, data);
 
 			if (ValueChanged != null)
 				ValueChanged(this, new EventArgs());

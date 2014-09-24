@@ -304,6 +304,15 @@ namespace Xyrus.Apophysis.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mismatching palette arrays.
+        /// </summary>
+        internal static string MismatchingPaletteArraysError {
+            get {
+                return ResourceManager.GetString("MismatchingPaletteArraysError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Incompatible Apophysis plugin.
         /// </summary>
         internal static string PluginMethodNotFoundError {
