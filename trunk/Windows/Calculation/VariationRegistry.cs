@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using Xyrus.Apophysis.Strings;
 
 namespace Xyrus.Apophysis.Calculation
 {
@@ -18,12 +20,32 @@ namespace Xyrus.Apophysis.Calculation
 
 		public static string RegisterDll([NotNull] string dllPath)
 		{
-			var variation = new ExternalVariation(dllPath);
-			
-			mVariations.Add(variation);
-			mVariationsByName.Add(variation.Name, variation);
+			Debug.Print(@"Loading ""{0}""...", dllPath);
+			try
+			{
+				var variation = new ExternalVariation(dllPath);
 
-			return variation.Name;
+				mVariations.Add(variation);
+
+				try
+				{
+					mVariationsByName.Add(variation.Name, variation);
+				}
+				catch (ArgumentException exception)
+				{
+					variation.Dispose();
+					throw new ApophysisException(string.Format(Messages.PluginAlreadyLoadedError, variation.Name), exception);
+				}
+
+				return variation.Name;
+			}
+			catch (Exception ex)
+			{
+				if (ex is ApophysisException)
+					throw;
+
+				throw new ApophysisException(string.Format(Messages.GenericPluginError, dllPath, ex.Message), ex);
+			}
 		}
 		public static string Register<T>() where T : Variation, new()
 		{

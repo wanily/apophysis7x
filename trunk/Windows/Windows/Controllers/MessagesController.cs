@@ -28,6 +28,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			MessageCenter.UnknownAttribute += OnUnknownAttribute;
 
 			View.ClearMenuItem.Click += OnClearClick;
+
+			Push(string.Join(Environment.NewLine, MessageCenter.Log.ToArray()));
 		}
 		protected override void DetachView()
 		{
@@ -120,7 +122,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			if (distinctAttributes.Count > 10)
 			{
 				body += Environment.NewLine + @"  - ...";
-				body += Environment.NewLine + Environment.NewLine + "A full list of unknown attributes can be found in the message window (F8)";
+				body += Environment.NewLine + Environment.NewLine + Strings.Messages.GenericProblemListExceedsMaxSizeMessage;
 			}
 
 			MessageBox.Show(

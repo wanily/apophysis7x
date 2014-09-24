@@ -69,7 +69,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				() => CurrentEditValue);
 
 			View.PaletteEditModeComboBox.SelectedIndexChanged += OnEditModeSelected;
-			View.PaletteSelectComboBox.SelectedIndexChanged += OnPaletteSelected;
 			View.PalettePicture.Paint += OnPalettePaint;
 
 			View.RandomPresetButton.Click += OnRandomPresetClick;
@@ -91,21 +90,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			using (mParent.Initializer.Enter())
 			{
-				View.PaletteSelectComboBox.Items.Clear();
-				View.PaletteSelectComboBox.Items.AddRange(PaletteCollection.Flam3Palettes.OfType<object>().ToArray());
-
 				View.PaletteEditModeComboBox.Items.AddRange(mEditHandlers.OfType<object>().ToArray());
-				View.PaletteEditModeComboBox.SelectedIndex = 0;
-
-				UpdateViewValue();
-				UpdateBounds();
-				RedrawPalette();
 			}
 		}
 		protected override void DetachView()
 		{
 			View.PaletteEditModeComboBox.SelectedIndexChanged -= OnEditModeSelected;
-			View.PaletteSelectComboBox.SelectedIndexChanged -= OnPaletteSelected;
 			View.PalettePicture.Paint -= OnPalettePaint;
 
 			View.RandomPresetButton.Click -= OnRandomPresetClick;
@@ -139,14 +129,14 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		public override void Update()
 		{
-			using (mParent.Initializer.Enter())
-			{
-				SetPalettesSelectedIndex();
-				InitHandlers();
-			}
+			DrawPalettePreset(mParent.Flame.Palette);
+			UpdateViewValue();
+			UpdateBounds();
+			RedrawPalette();
+			InitHandlers();
+			RedrawPalette();
 
 			base.Update();
-			RedrawPalette();
 		}
 
 		private double CurrentEditValue
@@ -176,17 +166,32 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			return handler;
 		}
 
-		private void SetPalettesSelectedIndex()
+		private void DrawPalettePreset([NotNull] Palette preset)
 		{
-			var index = View.PaletteSelectComboBox.Items.IndexOf(mParent.Flame.Palette);
-			if (index < 0)
+			using (var graphics = View.PalettePresetPictureBox.CreateGraphics())
 			{
-				View.PaletteSelectComboBox.Items.Add(mParent.Flame.Palette);
-				index = View.PaletteSelectComboBox.Items.Count - 1;
-			}
+				var w = (float)View.PalettePicture.ClientSize.Width;
+				var h = View.PalettePicture.ClientSize.Height;
 
-			View.PaletteSelectComboBox.SelectedIndex = index;
+				var palette = mParent.Flame.Palette;
+
+				for (float pos = 0; pos < w; pos++)
+				{
+					var i = (int)System.Math.Round((palette.Length - 1) * pos / w);
+
+					using (var brush = new SolidBrush(palette[i]))
+					{
+						graphics.FillRectangle(brush, pos, 0, w - pos, h);
+					}
+				}
+			}
 		}
+		private void UpdateViewValue(PaletteEditHandler handler = null)
+		{
+			handler = handler ?? GetCurrentEditHandler();
+			View.PaletteEditScrollBar.Value = (int)(mCurrentEditValue = handler.Value);
+		}
+
 		private void ResetAllHandlers()
 		{
 			foreach (var handler in mEditHandlers)
@@ -196,12 +201,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			UpdateViewValue();
 			UpdateBounds();
-		}
-
-		private void UpdateViewValue(PaletteEditHandler handler = null)
-		{
-			handler = handler ?? GetCurrentEditHandler();
-			View.PaletteEditScrollBar.Value = (int)(mCurrentEditValue = handler.Value);
 		}
 		private void RedrawPalette()
 		{
@@ -246,13 +245,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				}
 			}
 		}
-		private void OnPaletteSelected(object sender, EventArgs e)
+		private void OnPaletteSelectClick(object sender, EventArgs e)
 		{
-			var palette = View.PaletteSelectComboBox.SelectedItem as Palette;
-			if (mParent.Initializer.IsBusy || palette == null)
-				return;
-
-			mParent.Flame.Palette = palette;
+			//todo find palette with dialog
 
 			InitHandlers();
 			RedrawPalette();

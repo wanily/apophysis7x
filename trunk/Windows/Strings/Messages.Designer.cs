@@ -61,6 +61,15 @@ namespace Xyrus.Apophysis.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The plugin file &quot;{0}&quot; caused errors when Apophysis attempted to load it. As long as this file exists, it will not be loaded again. Delete the file if you re-enable the plugin..
+        /// </summary>
+        internal static string BadPluginMessageFileContent {
+            get {
+                return ResourceManager.GetString("BadPluginMessageFileContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can&apos;t remove last flame from batch.
         /// </summary>
         internal static string EmptyFlameCollectionError {
@@ -196,6 +205,24 @@ namespace Xyrus.Apophysis.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error loading library &quot;{0}&quot;: {1}.
+        /// </summary>
+        internal static string GenericPluginError {
+            get {
+                return ResourceManager.GetString("GenericPluginError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A full list of problems can be found in the message window (F8).
+        /// </summary>
+        internal static string GenericProblemListExceedsMaxSizeMessage {
+            get {
+                return ResourceManager.GetString("GenericProblemListExceedsMaxSizeMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loading GUI.
         /// </summary>
         internal static string InitializationLoadingGuiMessage {
@@ -304,11 +331,29 @@ namespace Xyrus.Apophysis.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error loading &quot;{0}&quot;: {1}.
+        /// </summary>
+        internal static string LoadingPluginErrorLogMessage {
+            get {
+                return ResourceManager.GetString("LoadingPluginErrorLogMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mismatching palette arrays.
         /// </summary>
         internal static string MismatchingPaletteArraysError {
             get {
                 return ResourceManager.GetString("MismatchingPaletteArraysError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The plugin &quot;{0}&quot; seems to be loaded already..
+        /// </summary>
+        internal static string PluginAlreadyLoadedError {
+            get {
+                return ResourceManager.GetString("PluginAlreadyLoadedError", resourceCulture);
             }
         }
         

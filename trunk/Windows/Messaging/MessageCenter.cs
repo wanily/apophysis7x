@@ -1,4 +1,7 @@
 ﻿
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Xml.Linq;
 using Xyrus.Apophysis.Windows;
 
@@ -7,8 +10,15 @@ namespace Xyrus.Apophysis.Messaging
 	[PublicAPI]
 	public static class MessageCenter
 	{
+		private static List<string> mLog = new List<string>();
+
 		public static event MessageEventHandler Message;
 		public static event MessageEventHandler UnknownAttribute;
+
+		public static ReadOnlyCollection<String> Log
+		{
+			get { return new ReadOnlyCollection<String>(mLog); }
+		}
 
 		static MessageCenter()
 		{
@@ -39,6 +49,8 @@ namespace Xyrus.Apophysis.Messaging
 
 			if (string.IsNullOrEmpty(message) || string.IsNullOrEmpty(message.Trim()))
 				return;
+
+			mLog.Add(message);
 
 			if (Message == null)
 				return;

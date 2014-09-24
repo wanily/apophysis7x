@@ -4,28 +4,31 @@ namespace Xyrus.Apophysis.Windows
 {
 	public class Lock : IDisposable
 	{
-		private bool mState;
+		private int mState;
 
 		public Lock Enter()
 		{
-			mState = true;
-
-			if (Engaged != null)
+			if (!IsBusy && Engaged != null)
 				Engaged(this, new EventArgs());
+
+			mState++;
 
 			return this;
 		}
 		public void Dispose()
 		{
-			if (Released != null)
-				Released(this, new EventArgs());
+			if (!IsBusy)
+				return;
 
-			mState = false;
+			mState--;
+
+			if (!IsBusy && Released != null)
+				Released(this, new EventArgs());
 		}
 
 		public bool IsBusy
 		{
-			get { return mState; }
+			get { return mState > 0; }
 		}
 
 		public event EventHandler Engaged;

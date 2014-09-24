@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Calculation;
+using Xyrus.Apophysis.Messaging;
 using Xyrus.Apophysis.Strings;
 using Xyrus.Apophysis.Variations;
 using Xyrus.Apophysis.Windows.Controllers;
@@ -68,19 +70,21 @@ namespace Xyrus.Apophysis
 
 				Debug.Assert(!string.IsNullOrEmpty(result));
 				mBanner.BannerText = result;
-#if DEBUG
-				Thread.Sleep(10);
-#endif
+
+				Application.DoEvents();
 			}
 
 			var pluginDir = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath) ?? string.Empty, ApophysisSettings.Common.PluginDirectoryName);
 			if (Directory.Exists(pluginDir))
 			{
-				var files = Directory.GetFiles(pluginDir);
+				var files = Directory.GetFiles(pluginDir, "*.dll");
 				var errorList = new List<string>();
 
 				foreach (var file in files)
 				{
+					if (File.Exists(file + @".bad"))
+						continue;
+
 					try
 					{
 						if (!ExternalVariation.FitsCurrentMachineType(file))
@@ -91,17 +95,29 @@ namespace Xyrus.Apophysis
 #if DEBUG
 						Thread.Sleep(10);
 #endif
+						Application.DoEvents();
+
 					}
 					catch (ApophysisException exception)
 					{
 						errorList.Add(string.Format(@"   - {0}: {1}", Path.GetFileName(file), exception.Message));
+						MessageCenter.SendMessage(string.Format(Messages.LoadingPluginErrorLogMessage,  Path.GetFileName(file), exception.Message));
+
+						File.WriteAllText(file + @".bad", Messages.BadPluginMessageFileContent);
 					}
 				}
 
 				if (errorList.Count > 0)
 				{
+					var body = string.Join(Environment.NewLine, errorList.ToArray());
+					if (errorList.Count > 10)
+					{
+						body = string.Join(Environment.NewLine, errorList.Take(10).ToArray()) + Environment.NewLine + @"   - ...";
+						body += Environment.NewLine + Environment.NewLine + Messages.GenericProblemListExceedsMaxSizeMessage;
+					}
+
 					MessageBox.Show(
-						string.Format(Messages.VariationInitializationCollectiveError, string.Join(Environment.NewLine, errorList.ToArray())),
+						string.Format(Messages.VariationInitializationCollectiveError, body),
 						Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				}
 			}

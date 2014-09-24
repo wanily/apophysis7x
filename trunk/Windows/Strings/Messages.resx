@@ -239,4 +239,19 @@ Location: {2}</value>
 	<data name="MismatchingPaletteArraysError" xml:space="preserve">
     <value>Mismatching palette arrays</value>
   </data>
+	<data name="PluginAlreadyLoadedError" xml:space="preserve">
+    <value>The plugin "{0}" seems to be loaded already.</value>
+  </data>
+	<data name="GenericPluginError" xml:space="preserve">
+    <value>Error loading library "{0}": {1}</value>
+  </data>
+	<data name="LoadingPluginErrorLogMessage" xml:space="preserve">
+    <value>Error loading "{0}": {1}</value>
+  </data>
+	<data name="BadPluginMessageFileContent" xml:space="preserve">
+    <value>The plugin file "{0}" caused errors when Apophysis attempted to load it. As long as this file exists, it will not be loaded again. Delete the file if you re-enable the plugin.</value>
+  </data>
+	<data name="GenericProblemListExceedsMaxSizeMessage" xml:space="preserve">
+    <value>A full list of problems can be found in the message window (F8)</value>
+  </data>
 </root>

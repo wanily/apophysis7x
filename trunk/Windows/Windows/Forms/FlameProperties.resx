@@ -233,6 +233,9 @@
   <data name="RotationScrollBar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <data name="RotationScrollBar.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="RotationScrollBar.Location" type="System.Drawing.Point, System.Drawing">
     <value>134, 102</value>
   </data>
@@ -281,6 +284,9 @@
   <data name="&gt;&gt;RotationTextBox.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="RotationDragPanel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="RotationDragPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 102</value>
   </data>
@@ -310,6 +316,9 @@
   </data>
   <data name="YPositionScrollBar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
+  </data>
+  <data name="YPositionScrollBar.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="YPositionScrollBar.Location" type="System.Drawing.Point, System.Drawing">
     <value>134, 72</value>
@@ -359,6 +368,9 @@
   <data name="&gt;&gt;YPositionTextBox.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="YPositionDragPanel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="YPositionDragPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 73</value>
   </data>
@@ -388,6 +400,9 @@
   </data>
   <data name="XPositionScrollBar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
+  </data>
+  <data name="XPositionScrollBar.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="XPositionScrollBar.Location" type="System.Drawing.Point, System.Drawing">
     <value>134, 41</value>
@@ -437,6 +452,9 @@
   <data name="&gt;&gt;XPositionTextBox.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="XPositionDragPanel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="XPositionDragPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 41</value>
   </data>
@@ -466,6 +484,9 @@
   </data>
   <data name="ZoomScrollBar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
+  </data>
+  <data name="ZoomScrollBar.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="ZoomScrollBar.Location" type="System.Drawing.Point, System.Drawing">
     <value>134, 10</value>
@@ -515,6 +536,9 @@
   <data name="&gt;&gt;ZoomTextBox.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
+  <data name="ZoomDragPanel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="ZoomDragPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 11</value>
   </data>
@@ -541,9 +565,6 @@
   </data>
   <data name="&gt;&gt;ZoomDragPanel.ZOrder" xml:space="preserve">
     <value>11</value>
-  </data>
-  <data name="CameraTab.ImageIndex" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="CameraTab.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 23</value>
@@ -577,6 +598,9 @@
   </data>
   <data name="BackgroundPictureBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
+  </data>
+  <data name="BackgroundPictureBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="BackgroundPictureBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>134, 102</value>
@@ -626,6 +650,9 @@
   <data name="&gt;&gt;GammaThresholdTextBox.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="mBackgroundLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="mBackgroundLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 102</value>
   </data>
@@ -655,6 +682,9 @@
   </data>
   <data name="VibrancyScrollBar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
+  </data>
+  <data name="VibrancyScrollBar.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="VibrancyScrollBar.Location" type="System.Drawing.Point, System.Drawing">
     <value>134, 72</value>
@@ -707,6 +737,9 @@
   <data name="BrightnessScrollBar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <data name="BrightnessScrollBar.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="BrightnessScrollBar.Location" type="System.Drawing.Point, System.Drawing">
     <value>134, 41</value>
   </data>
@@ -757,6 +790,9 @@
   </data>
   <data name="GammaScrollBar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
+  </data>
+  <data name="GammaScrollBar.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="GammaScrollBar.Location" type="System.Drawing.Point, System.Drawing">
     <value>134, 10</value>
@@ -809,6 +845,9 @@
   <data name="GammaThresholdDragPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
+  <data name="GammaThresholdDragPanel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="GammaThresholdDragPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>290, 103</value>
   </data>
@@ -835,6 +874,9 @@
   </data>
   <data name="&gt;&gt;GammaThresholdDragPanel.ZOrder" xml:space="preserve">
     <value>9</value>
+  </data>
+  <data name="VibrancyDragPanel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="VibrancyDragPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 73</value>
@@ -863,6 +905,9 @@
   <data name="&gt;&gt;VibrancyDragPanel.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
+  <data name="BrightnessDragPanel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="BrightnessDragPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 41</value>
   </data>
@@ -889,6 +934,9 @@
   </data>
   <data name="&gt;&gt;BrightnessDragPanel.ZOrder" xml:space="preserve">
     <value>11</value>
+  </data>
+  <data name="GammaDragPanel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="GammaDragPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 11</value>
@@ -917,9 +965,6 @@
   <data name="&gt;&gt;GammaDragPanel.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
-  <data name="ImagingTab.ImageIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
   <data name="ImagingTab.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 23</value>
   </data>
@@ -947,14 +992,71 @@
   <data name="&gt;&gt;ImagingTab.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="PaletteSelectButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="PaletteSelectButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="PaletteSelectButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>358, 102</value>
+  </data>
+  <data name="PaletteSelectButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 24</value>
+  </data>
+  <data name="PaletteSelectButton.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="PaletteSelectButton.Text" xml:space="preserve">
+    <value>...</value>
+  </data>
+  <data name="&gt;&gt;PaletteSelectButton.Name" xml:space="preserve">
+    <value>PaletteSelectButton</value>
+  </data>
+  <data name="&gt;&gt;PaletteSelectButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PaletteSelectButton.Parent" xml:space="preserve">
+    <value>PaletteTab</value>
+  </data>
+  <data name="&gt;&gt;PaletteSelectButton.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="PalettePresetPictureBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
+  <data name="PalettePresetPictureBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>132, 102</value>
+  </data>
+  <data name="PalettePresetPictureBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>225, 24</value>
+  </data>
+  <data name="PalettePresetPictureBox.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;PalettePresetPictureBox.Name" xml:space="preserve">
+    <value>PalettePresetPictureBox</value>
+  </data>
+  <data name="&gt;&gt;PalettePresetPictureBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PalettePresetPictureBox.Parent" xml:space="preserve">
+    <value>PaletteTab</value>
+  </data>
+  <data name="&gt;&gt;PalettePresetPictureBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="PaletteResetButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
+  <data name="PaletteResetButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="PaletteResetButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>390, 79</value>
+    <value>390, 78</value>
   </data>
   <data name="PaletteResetButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 21</value>
+    <value>94, 22</value>
   </data>
   <data name="PaletteResetButton.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -972,7 +1074,7 @@
     <value>PaletteTab</value>
   </data>
   <data name="&gt;&gt;PaletteResetButton.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="PaletteFromImageButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -988,7 +1090,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAADA
-        EwAAAk1TRnQBSQFMAgEBBQEAAVABAAFQAQABEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        EwAAAk1TRnQBSQFMAgEBBQEAAXgBAAF4AQABEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABIAMAAQEBAAEYBgABGBUAAWMBSQE1AWMBSQE1AWMBSQE1AWMBSQE1AWMBSQE1AWMBSQE1AWMBSQE1
         AWMBSQE1AWMBSQE1AWMBSQE1AWMBSQE1AWMBSQE1AWMBSQE1AWMBSQE1AWMBSQE1kAABvwGqAZsB/gHw
         AegB/gHvAeYB/gHtAeMB/gHsAeEB/gHqAd8B/gHpAd0B/gHnAdsB/wHmAdkB/wHlAdcB/wHjAdUB/wHi
@@ -1075,6 +1177,9 @@
         AYACAQH/AfgBfwGAAR8G/wGAAT8L
 </value>
   </data>
+  <data name="PaletteFromImageButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="PaletteFromImageButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>460, 102</value>
   </data>
@@ -1094,13 +1199,16 @@
     <value>PaletteTab</value>
   </data>
   <data name="&gt;&gt;PaletteFromImageButton.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="PaletteBrowserButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
   <data name="PaletteBrowserButton.ImageIndex" type="System.Int32, mscorlib">
     <value>3</value>
+  </data>
+  <data name="PaletteBrowserButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="PaletteBrowserButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>437, 102</value>
@@ -1121,13 +1229,16 @@
     <value>PaletteTab</value>
   </data>
   <data name="&gt;&gt;PaletteBrowserButton.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="PastePaletteButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
   <data name="PastePaletteButton.ImageIndex" type="System.Int32, mscorlib">
     <value>2</value>
+  </data>
+  <data name="PastePaletteButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="PastePaletteButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>413, 102</value>
@@ -1148,13 +1259,16 @@
     <value>PaletteTab</value>
   </data>
   <data name="&gt;&gt;PastePaletteButton.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="CopyPaletteButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
   <data name="CopyPaletteButton.ImageIndex" type="System.Int32, mscorlib">
     <value>1</value>
+  </data>
+  <data name="CopyPaletteButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="CopyPaletteButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>390, 102</value>
@@ -1175,7 +1289,7 @@
     <value>PaletteTab</value>
   </data>
   <data name="&gt;&gt;CopyPaletteButton.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="PaletteEditTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -1199,16 +1313,19 @@
     <value>PaletteTab</value>
   </data>
   <data name="&gt;&gt;PaletteEditTextBox.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="PaletteEditScrollBar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left, Right</value>
   </data>
+  <data name="PaletteEditScrollBar.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="PaletteEditScrollBar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>132, 79</value>
+    <value>132, 78</value>
   </data>
   <data name="PaletteEditScrollBar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>199, 20</value>
+    <value>199, 21</value>
   </data>
   <data name="PaletteEditScrollBar.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -1223,16 +1340,19 @@
     <value>PaletteTab</value>
   </data>
   <data name="&gt;&gt;PaletteEditScrollBar.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="RandomPresetButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
+  <data name="RandomPresetButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="RandomPresetButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 105</value>
+    <value>6, 102</value>
   </data>
   <data name="RandomPresetButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 21</value>
+    <value>120, 24</value>
   </data>
   <data name="RandomPresetButton.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -1250,7 +1370,7 @@
     <value>PaletteTab</value>
   </data>
   <data name="&gt;&gt;RandomPresetButton.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="PaletteEditModeComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -1274,7 +1394,7 @@
     <value>PaletteTab</value>
   </data>
   <data name="&gt;&gt;PaletteEditModeComboBox.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="PalettePicture.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -1437,6 +1557,9 @@
   <data name="&gt;&gt;mPaletteContextMenu.Type" xml:space="preserve">
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="PalettePicture.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="PalettePicture.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 6</value>
   </data>
@@ -1456,10 +1579,13 @@
     <value>PaletteTab</value>
   </data>
   <data name="&gt;&gt;PalettePicture.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>11</value>
   </data>
   <data name="mPaletteBevel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="mPaletteBevel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="mPaletteBevel.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 5</value>
@@ -1480,37 +1606,7 @@
     <value>PaletteTab</value>
   </data>
   <data name="&gt;&gt;mPaletteBevel.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="PaletteSelectComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left, Right</value>
-  </data>
-  <data name="PaletteSelectComboBox.ItemHeight" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="PaletteSelectComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>132, 105</value>
-  </data>
-  <data name="PaletteSelectComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>252, 21</value>
-  </data>
-  <data name="PaletteSelectComboBox.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;PaletteSelectComboBox.Name" xml:space="preserve">
-    <value>PaletteSelectComboBox</value>
-  </data>
-  <data name="&gt;&gt;PaletteSelectComboBox.Type" xml:space="preserve">
-    <value>Xyrus.Apophysis.Windows.Controls.PaletteSelectComboBox, Apophysis, Version=2.20.2014.917, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;PaletteSelectComboBox.Parent" xml:space="preserve">
-    <value>PaletteTab</value>
-  </data>
-  <data name="&gt;&gt;PaletteSelectComboBox.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="PaletteTab.ImageIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>12</value>
   </data>
   <data name="PaletteTab.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 23</value>
@@ -1545,6 +1641,9 @@
   <data name="ApplyButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left, Right</value>
   </data>
+  <data name="ApplyButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="ApplyButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 87</value>
   </data>
@@ -1571,6 +1670,9 @@
   </data>
   <data name="ResizeMainWindowCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
+  </data>
+  <data name="ResizeMainWindowCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="ResizeMainWindowCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 16</value>
@@ -1626,6 +1728,9 @@
   <data name="Preset3SaveButton.ImageIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
+  <data name="Preset3SaveButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="Preset3SaveButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>109, 87</value>
   </data>
@@ -1649,6 +1754,9 @@
   </data>
   <data name="Preset3SelectButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
+  </data>
+  <data name="Preset3SelectButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Preset3SelectButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 87</value>
@@ -1680,6 +1788,9 @@
   <data name="Preset2SaveButton.ImageIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
+  <data name="Preset2SaveButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="Preset2SaveButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>109, 51</value>
   </data>
@@ -1703,6 +1814,9 @@
   </data>
   <data name="Preset2SelectButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
+  </data>
+  <data name="Preset2SelectButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Preset2SelectButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 51</value>
@@ -1734,6 +1848,9 @@
   <data name="Preset1SaveButton.ImageIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
+  <data name="Preset1SaveButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="Preset1SaveButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>109, 16</value>
   </data>
@@ -1757,6 +1874,9 @@
   </data>
   <data name="Preset1SelectButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
+  </data>
+  <data name="Preset1SelectButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Preset1SelectButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 16</value>
@@ -1905,6 +2025,9 @@
   <data name="MaintainAspectRatioCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left, Right</value>
   </data>
+  <data name="MaintainAspectRatioCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="MaintainAspectRatioCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 87</value>
   </data>
@@ -1928,6 +2051,9 @@
   </data>
   <data name="&gt;&gt;MaintainAspectRatioCheckBox.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="mHeightLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="mHeightLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 51</value>
@@ -1955,6 +2081,9 @@
   </data>
   <data name="&gt;&gt;mHeightLabel.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="mWidthLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="mWidthLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 21</value>
@@ -2004,9 +2133,6 @@
   <data name="&gt;&gt;mSizeGroupBox.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="CanvasTab.ImageIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
   <data name="CanvasTab.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 23</value>
   </data>
@@ -2042,7 +2168,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACe
-        DwAAAk1TRnQBSQFMAgEBBAEAAWgBAQFoAQEBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        DwAAAk1TRnQBSQFMAgEBBAEAAZABAQGQAQEBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABIAMAAQEBAAEYBgABGP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AMAAAZEBhwF9AVICUAFZAVQBUQFY
         AVIBTQFYAVABSQFYAU4BRwFXAUwBRAFWAUoBQAFYAUwBQgFLAUEBOkIAAbQCogFzAjgBdgE7ATwBYAEu
         AS9UAAGsAZoBjQP/Af0D/wH9AfcB/wH4Ae0B/gHxAeAB/QHqAdUB/AHlAcwB/wHqAc8BVwFLAUEBtwGi
@@ -2294,6 +2420,9 @@
   <data name="&gt;&gt;ScaleTextBox.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="mPictureBevel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="mPictureBevel.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 5</value>
   </data>
@@ -2318,6 +2447,9 @@
   <data name="PreviewPicture.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Center</value>
   </data>
+  <data name="PreviewPicture.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="PreviewPicture.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 6</value>
   </data>
@@ -2338,6 +2470,9 @@
   </data>
   <data name="&gt;&gt;PreviewPicture.ZOrder" xml:space="preserve">
     <value>16</value>
+  </data>
+  <data name="ScaleDragPanel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="ScaleDragPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>267, 127</value>
@@ -2366,6 +2501,9 @@
   <data name="&gt;&gt;ScaleDragPanel.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="PerspectiveDragPanel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="PerspectiveDragPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>267, 102</value>
   </data>
@@ -2392,6 +2530,9 @@
   </data>
   <data name="&gt;&gt;PerspectiveDragPanel.ZOrder" xml:space="preserve">
     <value>5</value>
+  </data>
+  <data name="HeightDragPanel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="HeightDragPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>267, 78</value>
@@ -2420,6 +2561,9 @@
   <data name="&gt;&gt;HeightDragPanel.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="YawDragPanel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="YawDragPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>267, 54</value>
   </data>
@@ -2447,6 +2591,9 @@
   <data name="&gt;&gt;YawDragPanel.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
+  <data name="PitchDragPanel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="PitchDragPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>267, 30</value>
   </data>
@@ -2473,6 +2620,9 @@
   </data>
   <data name="&gt;&gt;PitchDragPanel.ZOrder" xml:space="preserve">
     <value>11</value>
+  </data>
+  <data name="DepthBlurDragPanel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="DepthBlurDragPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>267, 6</value>
