@@ -31,8 +31,6 @@ namespace Xyrus.Apophysis.Windows.Input
 		public abstract int MinValue { get; }
 		public abstract int MaxValue { get; }
 
-		public bool ViewVisible { get; set; }
-
 		public void Initialize([NotNull] Palette palette)
 		{
 			if (palette == null) throw new ArgumentNullException("palette");

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Windows.Controllers;
 
@@ -44,6 +45,10 @@ namespace Xyrus.Apophysis.Windows.Forms
 		private void OnNumericTextBoxKeyPress(object sender, KeyPressEventArgs e)
 		{
 			mInputHandler.HandleKeyPressForNumericTextBox(e);
+		}
+		private void OnSelectPaletteEditHandlerClick(object sender, System.EventArgs e)
+		{
+			mHandlerSelectMenu.Show(PaletteEditModeButton, new Point(0, PaletteEditModeButton.Height));
 		}
 	}
 }

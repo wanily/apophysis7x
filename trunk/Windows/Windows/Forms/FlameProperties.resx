@@ -121,6 +121,15 @@
     <value>17, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="mPreviewContextMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>159, 70</value>
+  </data>
+  <data name="&gt;&gt;mPreviewContextMenu.Name" xml:space="preserve">
+    <value>mPreviewContextMenu</value>
+  </data>
+  <data name="&gt;&gt;mPreviewContextMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="LowQualityMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>158, 22</value>
   </data>
@@ -139,15 +148,6 @@
   <data name="HighQualityMenuItem.Text" xml:space="preserve">
     <value>&amp;High quality</value>
   </data>
-  <data name="mPreviewContextMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>159, 70</value>
-  </data>
-  <data name="&gt;&gt;mPreviewContextMenu.Name" xml:space="preserve">
-    <value>mPreviewContextMenu</value>
-  </data>
-  <data name="&gt;&gt;mPreviewContextMenu.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <metadata name="mToolbar.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>195, 17</value>
   </metadata>
@@ -161,6 +161,30 @@
   </data>
   <data name="mToolbar.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>None</value>
+  </data>
+  <data name="mToolbar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>456, 6</value>
+  </data>
+  <data name="mToolbar.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="mToolbar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 21</value>
+  </data>
+  <data name="mToolbar.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;mToolbar.Name" xml:space="preserve">
+    <value>mToolbar</value>
+  </data>
+  <data name="&gt;&gt;mToolbar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mToolbar.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;mToolbar.ZOrder" xml:space="preserve">
+    <value>16</value>
   </data>
   <data name="UndoButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -206,29 +230,179 @@
   <data name="RedoButton.Text" xml:space="preserve">
     <value>Redo</value>
   </data>
-  <data name="mToolbar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>456, 6</value>
+  <data name="&gt;&gt;RotationScrollBar.Name" xml:space="preserve">
+    <value>RotationScrollBar</value>
   </data>
-  <data name="mToolbar.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
+  <data name="&gt;&gt;RotationScrollBar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.HScrollBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="mToolbar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 21</value>
+  <data name="&gt;&gt;RotationScrollBar.Parent" xml:space="preserve">
+    <value>CameraTab</value>
   </data>
-  <data name="mToolbar.TabIndex" type="System.Int32, mscorlib">
+  <data name="&gt;&gt;RotationScrollBar.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;RotationTextBox.Name" xml:space="preserve">
+    <value>RotationTextBox</value>
+  </data>
+  <data name="&gt;&gt;RotationTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;RotationTextBox.Parent" xml:space="preserve">
+    <value>CameraTab</value>
+  </data>
+  <data name="&gt;&gt;RotationTextBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;RotationDragPanel.Name" xml:space="preserve">
+    <value>RotationDragPanel</value>
+  </data>
+  <data name="&gt;&gt;RotationDragPanel.Type" xml:space="preserve">
+    <value>Xyrus.Apophysis.Windows.Controls.DragPanel, Apophysis, Version=2.20.2014.917, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;RotationDragPanel.Parent" xml:space="preserve">
+    <value>CameraTab</value>
+  </data>
+  <data name="&gt;&gt;RotationDragPanel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;YPositionScrollBar.Name" xml:space="preserve">
+    <value>YPositionScrollBar</value>
+  </data>
+  <data name="&gt;&gt;YPositionScrollBar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.HScrollBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;YPositionScrollBar.Parent" xml:space="preserve">
+    <value>CameraTab</value>
+  </data>
+  <data name="&gt;&gt;YPositionScrollBar.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;YPositionTextBox.Name" xml:space="preserve">
+    <value>YPositionTextBox</value>
+  </data>
+  <data name="&gt;&gt;YPositionTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;YPositionTextBox.Parent" xml:space="preserve">
+    <value>CameraTab</value>
+  </data>
+  <data name="&gt;&gt;YPositionTextBox.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;YPositionDragPanel.Name" xml:space="preserve">
+    <value>YPositionDragPanel</value>
+  </data>
+  <data name="&gt;&gt;YPositionDragPanel.Type" xml:space="preserve">
+    <value>Xyrus.Apophysis.Windows.Controls.DragPanel, Apophysis, Version=2.20.2014.917, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;YPositionDragPanel.Parent" xml:space="preserve">
+    <value>CameraTab</value>
+  </data>
+  <data name="&gt;&gt;YPositionDragPanel.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;mToolbar.Name" xml:space="preserve">
-    <value>mToolbar</value>
+  <data name="&gt;&gt;XPositionScrollBar.Name" xml:space="preserve">
+    <value>XPositionScrollBar</value>
   </data>
-  <data name="&gt;&gt;mToolbar.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;XPositionScrollBar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.HScrollBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mToolbar.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;XPositionScrollBar.Parent" xml:space="preserve">
+    <value>CameraTab</value>
   </data>
-  <data name="&gt;&gt;mToolbar.ZOrder" xml:space="preserve">
-    <value>15</value>
+  <data name="&gt;&gt;XPositionScrollBar.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;XPositionTextBox.Name" xml:space="preserve">
+    <value>XPositionTextBox</value>
+  </data>
+  <data name="&gt;&gt;XPositionTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;XPositionTextBox.Parent" xml:space="preserve">
+    <value>CameraTab</value>
+  </data>
+  <data name="&gt;&gt;XPositionTextBox.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;XPositionDragPanel.Name" xml:space="preserve">
+    <value>XPositionDragPanel</value>
+  </data>
+  <data name="&gt;&gt;XPositionDragPanel.Type" xml:space="preserve">
+    <value>Xyrus.Apophysis.Windows.Controls.DragPanel, Apophysis, Version=2.20.2014.917, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;XPositionDragPanel.Parent" xml:space="preserve">
+    <value>CameraTab</value>
+  </data>
+  <data name="&gt;&gt;XPositionDragPanel.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;ZoomScrollBar.Name" xml:space="preserve">
+    <value>ZoomScrollBar</value>
+  </data>
+  <data name="&gt;&gt;ZoomScrollBar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.HScrollBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ZoomScrollBar.Parent" xml:space="preserve">
+    <value>CameraTab</value>
+  </data>
+  <data name="&gt;&gt;ZoomScrollBar.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;ZoomTextBox.Name" xml:space="preserve">
+    <value>ZoomTextBox</value>
+  </data>
+  <data name="&gt;&gt;ZoomTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ZoomTextBox.Parent" xml:space="preserve">
+    <value>CameraTab</value>
+  </data>
+  <data name="&gt;&gt;ZoomTextBox.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;ZoomDragPanel.Name" xml:space="preserve">
+    <value>ZoomDragPanel</value>
+  </data>
+  <data name="&gt;&gt;ZoomDragPanel.Type" xml:space="preserve">
+    <value>Xyrus.Apophysis.Windows.Controls.DragPanel, Apophysis, Version=2.20.2014.917, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ZoomDragPanel.Parent" xml:space="preserve">
+    <value>CameraTab</value>
+  </data>
+  <data name="&gt;&gt;ZoomDragPanel.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="CameraTab.ImageIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="CameraTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 23</value>
+  </data>
+  <data name="CameraTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="CameraTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>490, 132</value>
+  </data>
+  <data name="CameraTab.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="CameraTab.Text" xml:space="preserve">
+    <value>Camera</value>
+  </data>
+  <data name="&gt;&gt;CameraTab.Name" xml:space="preserve">
+    <value>CameraTab</value>
+  </data>
+  <data name="&gt;&gt;CameraTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CameraTab.Parent" xml:space="preserve">
+    <value>Tabs</value>
+  </data>
+  <data name="&gt;&gt;CameraTab.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="RotationScrollBar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -566,35 +740,861 @@
   <data name="&gt;&gt;ZoomDragPanel.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
-  <data name="CameraTab.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 23</value>
-  </data>
-  <data name="CameraTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="CameraTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>490, 132</value>
-  </data>
-  <data name="CameraTab.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="CameraTab.Text" xml:space="preserve">
-    <value>Camera</value>
-  </data>
-  <data name="&gt;&gt;CameraTab.Name" xml:space="preserve">
-    <value>CameraTab</value>
-  </data>
-  <data name="&gt;&gt;CameraTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;CameraTab.Parent" xml:space="preserve">
-    <value>Tabs</value>
-  </data>
-  <data name="&gt;&gt;CameraTab.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="Tabs.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;BackgroundPictureBox.Name" xml:space="preserve">
+    <value>BackgroundPictureBox</value>
+  </data>
+  <data name="&gt;&gt;BackgroundPictureBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BackgroundPictureBox.Parent" xml:space="preserve">
+    <value>ImagingTab</value>
+  </data>
+  <data name="&gt;&gt;BackgroundPictureBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;GammaThresholdTextBox.Name" xml:space="preserve">
+    <value>GammaThresholdTextBox</value>
+  </data>
+  <data name="&gt;&gt;GammaThresholdTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;GammaThresholdTextBox.Parent" xml:space="preserve">
+    <value>ImagingTab</value>
+  </data>
+  <data name="&gt;&gt;GammaThresholdTextBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;mBackgroundLabel.Name" xml:space="preserve">
+    <value>mBackgroundLabel</value>
+  </data>
+  <data name="&gt;&gt;mBackgroundLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mBackgroundLabel.Parent" xml:space="preserve">
+    <value>ImagingTab</value>
+  </data>
+  <data name="&gt;&gt;mBackgroundLabel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;VibrancyScrollBar.Name" xml:space="preserve">
+    <value>VibrancyScrollBar</value>
+  </data>
+  <data name="&gt;&gt;VibrancyScrollBar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.HScrollBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;VibrancyScrollBar.Parent" xml:space="preserve">
+    <value>ImagingTab</value>
+  </data>
+  <data name="&gt;&gt;VibrancyScrollBar.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;VibrancyTextBox.Name" xml:space="preserve">
+    <value>VibrancyTextBox</value>
+  </data>
+  <data name="&gt;&gt;VibrancyTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;VibrancyTextBox.Parent" xml:space="preserve">
+    <value>ImagingTab</value>
+  </data>
+  <data name="&gt;&gt;VibrancyTextBox.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;BrightnessScrollBar.Name" xml:space="preserve">
+    <value>BrightnessScrollBar</value>
+  </data>
+  <data name="&gt;&gt;BrightnessScrollBar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.HScrollBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BrightnessScrollBar.Parent" xml:space="preserve">
+    <value>ImagingTab</value>
+  </data>
+  <data name="&gt;&gt;BrightnessScrollBar.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;BrightnessTextBox.Name" xml:space="preserve">
+    <value>BrightnessTextBox</value>
+  </data>
+  <data name="&gt;&gt;BrightnessTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BrightnessTextBox.Parent" xml:space="preserve">
+    <value>ImagingTab</value>
+  </data>
+  <data name="&gt;&gt;BrightnessTextBox.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;GammaScrollBar.Name" xml:space="preserve">
+    <value>GammaScrollBar</value>
+  </data>
+  <data name="&gt;&gt;GammaScrollBar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.HScrollBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;GammaScrollBar.Parent" xml:space="preserve">
+    <value>ImagingTab</value>
+  </data>
+  <data name="&gt;&gt;GammaScrollBar.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;GammaTextBox.Name" xml:space="preserve">
+    <value>GammaTextBox</value>
+  </data>
+  <data name="&gt;&gt;GammaTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;GammaTextBox.Parent" xml:space="preserve">
+    <value>ImagingTab</value>
+  </data>
+  <data name="&gt;&gt;GammaTextBox.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;GammaThresholdDragPanel.Name" xml:space="preserve">
+    <value>GammaThresholdDragPanel</value>
+  </data>
+  <data name="&gt;&gt;GammaThresholdDragPanel.Type" xml:space="preserve">
+    <value>Xyrus.Apophysis.Windows.Controls.DragPanel, Apophysis, Version=2.20.2014.917, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;GammaThresholdDragPanel.Parent" xml:space="preserve">
+    <value>ImagingTab</value>
+  </data>
+  <data name="&gt;&gt;GammaThresholdDragPanel.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;VibrancyDragPanel.Name" xml:space="preserve">
+    <value>VibrancyDragPanel</value>
+  </data>
+  <data name="&gt;&gt;VibrancyDragPanel.Type" xml:space="preserve">
+    <value>Xyrus.Apophysis.Windows.Controls.DragPanel, Apophysis, Version=2.20.2014.917, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;VibrancyDragPanel.Parent" xml:space="preserve">
+    <value>ImagingTab</value>
+  </data>
+  <data name="&gt;&gt;VibrancyDragPanel.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;BrightnessDragPanel.Name" xml:space="preserve">
+    <value>BrightnessDragPanel</value>
+  </data>
+  <data name="&gt;&gt;BrightnessDragPanel.Type" xml:space="preserve">
+    <value>Xyrus.Apophysis.Windows.Controls.DragPanel, Apophysis, Version=2.20.2014.917, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;BrightnessDragPanel.Parent" xml:space="preserve">
+    <value>ImagingTab</value>
+  </data>
+  <data name="&gt;&gt;BrightnessDragPanel.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;GammaDragPanel.Name" xml:space="preserve">
+    <value>GammaDragPanel</value>
+  </data>
+  <data name="&gt;&gt;GammaDragPanel.Type" xml:space="preserve">
+    <value>Xyrus.Apophysis.Windows.Controls.DragPanel, Apophysis, Version=2.20.2014.917, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;GammaDragPanel.Parent" xml:space="preserve">
+    <value>ImagingTab</value>
+  </data>
+  <data name="&gt;&gt;GammaDragPanel.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="ImagingTab.ImageIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="ImagingTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 23</value>
+  </data>
+  <data name="ImagingTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="ImagingTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>490, 132</value>
+  </data>
+  <data name="ImagingTab.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="ImagingTab.Text" xml:space="preserve">
+    <value>Rendering</value>
+  </data>
+  <data name="&gt;&gt;ImagingTab.Name" xml:space="preserve">
+    <value>ImagingTab</value>
+  </data>
+  <data name="&gt;&gt;ImagingTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ImagingTab.Parent" xml:space="preserve">
+    <value>Tabs</value>
+  </data>
+  <data name="&gt;&gt;ImagingTab.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="PaletteEditModeButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="PaletteEditModeButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 75</value>
+  </data>
+  <data name="PaletteEditModeButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 24</value>
+  </data>
+  <data name="PaletteEditModeButton.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;PaletteEditModeButton.Name" xml:space="preserve">
+    <value>PaletteEditModeButton</value>
+  </data>
+  <data name="&gt;&gt;PaletteEditModeButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PaletteEditModeButton.Parent" xml:space="preserve">
+    <value>PaletteTab</value>
+  </data>
+  <data name="&gt;&gt;PaletteEditModeButton.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="PaletteSelectButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="PaletteSelectButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="PaletteSelectButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>358, 102</value>
+  </data>
+  <data name="PaletteSelectButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 24</value>
+  </data>
+  <data name="PaletteSelectButton.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="PaletteSelectButton.Text" xml:space="preserve">
+    <value>...</value>
+  </data>
+  <data name="&gt;&gt;PaletteSelectButton.Name" xml:space="preserve">
+    <value>PaletteSelectButton</value>
+  </data>
+  <data name="&gt;&gt;PaletteSelectButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PaletteSelectButton.Parent" xml:space="preserve">
+    <value>PaletteTab</value>
+  </data>
+  <data name="&gt;&gt;PaletteSelectButton.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="PalettePresetPictureBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
+  <data name="PalettePresetPictureBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>132, 102</value>
+  </data>
+  <data name="PalettePresetPictureBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>225, 24</value>
+  </data>
+  <data name="PalettePresetPictureBox.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;PalettePresetPictureBox.Name" xml:space="preserve">
+    <value>PalettePresetPictureBox</value>
+  </data>
+  <data name="&gt;&gt;PalettePresetPictureBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PalettePresetPictureBox.Parent" xml:space="preserve">
+    <value>PaletteTab</value>
+  </data>
+  <data name="&gt;&gt;PalettePresetPictureBox.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="PaletteResetButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="PaletteResetButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="PaletteResetButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>390, 75</value>
+  </data>
+  <data name="PaletteResetButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 25</value>
+  </data>
+  <data name="PaletteResetButton.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="PaletteResetButton.Text" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="&gt;&gt;PaletteResetButton.Name" xml:space="preserve">
+    <value>PaletteResetButton</value>
+  </data>
+  <data name="&gt;&gt;PaletteResetButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PaletteResetButton.Parent" xml:space="preserve">
+    <value>PaletteTab</value>
+  </data>
+  <data name="&gt;&gt;PaletteResetButton.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="PaletteFromImageButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="PaletteFromImageButton.ImageIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <metadata name="mButtonImages.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>420, 17</value>
+  </metadata>
+  <data name="mButtonImages.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAADA
+        EwAAAk1TRnQBSQFMAgEBBQEAAYABAAGAAQABEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        AwABIAMAAQEBAAEYBgABGBUAAWMBSQE1AWMBSQE1AWMBSQE1AWMBSQE1AWMBSQE1AWMBSQE1AWMBSQE1
+        AWMBSQE1AWMBSQE1AWMBSQE1AWMBSQE1AWMBSQE1AWMBSQE1AWMBSQE1AWMBSQE1kAABvwGqAZsB/gHw
+        AegB/gHvAeYB/gHtAeMB/gHsAeEB/gHqAd8B/gHpAd0B/gHnAdsB/wHmAdkB/wHlAdcB/wHjAdUB/wHi
+        AdMB/wHhAdIB/wHgAdAB/wHfAc8BYwFJATWQAAHAAasBnAH+AfEB6gMsAzwDTgNhA3YDiQOeA7EDwwPT
+        A+ID7gH/AeAB0AFjAUkBNZAAAcEBqwGcAf4B8wHsAywDPANOA2EDdgOJA54DsQPDA9MD4gPuAf8B4QHS
+        AWMBSQE1kAABwgGsAZ0B/gH0Ae4DLAM8A04DYQN2A4kDngOxA8MD0wPiA+4B/wHiAdMBYwFJATWQAAHC
+        Aa0BngH+AfYB8AMsAzwDTgNhA3YDiQOeA7EDwwPTA+ID7gH/AeMB1QFjAUkBNZAAAcMBrgGfAf0B9wHy
+        AywDPANOA2EDdgOJA54DsQPDA9MD4gPuAf8B5QHXAWMBSQE1kAABxQGvAaAB/QH4AfQDLAM8A04DYQN2
+        A4kDngOxA8MD0wPiA+4B/wHmAdkBYwFJATWQAAHGAbABoQH9AfoB9gMsAzwDTgNhA3YDiQOeA7EDwwPT
+        A+ID7gH+AecB2wFjAUkBNZAAAccBsQGiAf0B+wH4AywDPANOA2EDdgOJA54DsQPDA9MD4gPuAf4B6QHd
+        AWMBSQE1kAABxwGyAaMB/QH8AfkDLAM8A04DYQN2A4kDngOxA8MD0wPiA+4B/gHqAd8BYwFJATWQAAHI
+        AbMBpAL9AfsDLAM8A04DYQN2A4kDngOxA8MD0wPiA+4B/gHsAeEBYwFJATWQAAHJAbMBpAH9Af4B/AMs
+        AzwDTgNhA3YDiQOeA7EDwwPTA+ID7gH+Ae0B4wFjAUkBNZAAAcoBtAGlAf0B/gH9AywDPANOA2EDdgOJ
+        A54DsQPDA9MD4gPuAf4B7wHmAWMBSQE1kAABywG1AaYB/QH/Af4B/QH+Av0B/gH8Av0B+wH9AfwB+QH9
+        AfsB+AH9AfoB9gH9AfgB9AH9AfcB8gH+AfYB8AH+AfQB7gH+AfMB7AH+AfEB6gH+AfAB6AFjAUkBNZAA
+        AcsBtQGmAcsBtQGmAcoBtAGlAckBswGkAcgBswGkAccBsgGjAccBsQGiAcYBsAGhAcUBrwGgAcMBrgGf
+        AcIBrQGeAcIBrAGdAcEBqwGcAcABqwGcAb8BqgGb/wBXAAHvAc4BzwHDAWQBZQGqAVUBVgGkAVIBUwGf
+        AU8BUAGaAk0BlAJKAY8CRwGJAkQBgwJBAXgBOwE8AXgBOwE8AXICOQFuATYBN0UAAYEBaAFVASYBLwE4
+        ASYBLwE4ASYBLwE4ASYBLwE4ASYBLwE4ASYBLwE4ASYBLwE4ASYBLwE4ASYBLwE4MwABzwFrAWwB8wGO
+        AY8B5gGAAYEBqgFEASQBRwEyASEBwwG0AasBxgG7AbMBygHBAbwBzgHIAcQBVgFNAUgBngE+ATMBnAE9
+        ATYBmAE5ATEBcgI5FQABugFuAUcBqgFUASkBqgFUASkBogFQAScBmwFMASUBlgFIASMBjwFGASIBigFD
+        ASEBhgFBASADAAG8AcwB0gFkAX4BjgFPAV4BbwFFAVIBYQE3AUEBTQEmAS8BOAGJAXEBXgHoAdwB0wG3
+        AaIBkwG3AaIBkwG3AaIBkwG3AaIBkwG3AaIBkwG3AaIBkwG3AaIBkwEmAS8BOAYAAf8C9wH/AfcB7wH/
+        Ae8B5wH/Ae8B5wH/AfcB5wH/AfcB7wH/AfcB7wH/AfcB7wH/AfcB7wH/AfcB7wH/AvcMAAHRAW8BcAH/
+        AZkBmgHsAYYBhwHmAYABgQFxAVsBSwFHATwBNAGNAXgBaAHtAeAB2AHxAecB4AGPAX8BcwGjAUEBNQGi
+        AUIBPAGcAT0BNQF4ATsBPBUAAcEBeQFVAf0B+QH2Ac4BsAGcAcwBrwGbAcoBrQGaAccBrAGZAcYBqwGY
+        AcQBqQGXAYkBQwEhAwABcQF/AYsBIgG2AewBAAGPAc0BAAGPAc0BAAGPAc0BAAGPAc0BkQF5AWYB7wHm
+        AeEB6AHbAdMB4AHQAcYB2gHGAbwB1AG/AbIBzwG5AasBzAG2AagBtwGiAZMBJgEvATgGAAH/AfcB7wH/
+        Ae8B5wH/Ae8B3gH/Ae8B3gH/Ae8B5wH/Ae8B5wH/Ae8B5wH/Ae8B5wH/Ae8B5wH/Ae8B5wH/AfcB7wwA
+        AdQBdQF2Af8BnwGgAfUBkAGRAewBhgGHAXEBWwFLAwABRwE8ATQB6QHZAc4B7AHdAdQBhQF0AWcBrgFL
+        AUMBqgFJAUQBowFCATwBfQI+FQAByQGFAWQD/wHaAYwBXAHRAYMBUQHRAYMBUQHRAYMBUQHRAYMBUQHG
+        AasBmAGOAUUBIgMAAXUBhAGQAWgByAHqARABtQHwAQgBrAHrAQMBpAHjAQABlgHUAZoBggFvAfcB8QHv
+        AcMBrgGeAcMBrgGeAb0BqAGYAbcBogGTAdQBvwGyAbcBogGTAbcBogGTASYBLwE4BgAB/wH3Ae8BzgFS
+        AQgBzgFSAQgBzgFSAQgBzgFSAQgBzgFSAQgBzgFSAQgBzgFSAQgBzgFSAQgBzgFSAQgB/wHvAecMAAHX
+        AXsBfAH/AakBqgH7AZ8BoAH1AZMBlAFxAVsBSwFxAVsBSwFxAVsBSwFxAVsBSwF2AWIBUgF9AWoBWwG6
+        AVYBVAGyAU8BTAGqAUkBRAGDAkEDAAG3AaIBkwFjAUkBNQFjAUkBNQFjAUkBNQFjAUkBNQFjAUkBNQHR
+        AZIBcwP/Af4B/QL7Ae8B6gH1Ad4B0wHwAc4BvgHtAcMBrwHHAawBmQGSAUcBIwMAAXkBiQGUAXQB0AHt
+        ASgBvQHxAREBtQHwAQcBqwHqAQABnQHcAaIBigF4Af0B+wH6AfcB8gHuAe8B5gHhAegB2wHTAeAB0AHG
+        AXABWgFKAWEBUgFGAVABSAFCAT8BPQE+BgAB/wHvAecBzgFSAQgB5wFjARgB7wF7ATEB/wGlAXMB/wHW
+        AbUB/wH3Ae8BxgHvAf8BQgGtAfcBzgFSAQgB/wHvAd4MAAHbAYMBhAH/AbMBtAH/Aa0BrgH8AaMBpAH0
+        AY4BjwHsAYYBhwHmAYABgQHfAXkBegHXAXEBcgHRAWsBbAHBAV0BXAG6AVYBVAGyAVABTAGJAkQDAAG3
+        AaIBkwH4AfMB8AHqAd8B1wHmAdkBzwHhAdIBxwHdAcsBvwHYAZ8BggP/AfMBpwF/AecBlwFuAdoBjAFc
+        AdEBgwFRAdEBgwFRAcoBrgGaAZgBSgElAwABfgGOAZoBgwHZAfABRgHJAfIBLQG/AfIBFgG3AfEBAAGg
+        AeIBqQGSAYAD/wHDAa4BngHDAa4BngG9AagBmQHoAdwB0wF6AWABTQHUAcUBugFhAVIBRwkAAf8B7wHn
+        Ac4BUgEIAecBYwEYAe8BewExAf8BpQFzAf8B1gG1Af8B9wHvAcYB7wH/AUIBrQH3Ac4BUgEIAf8B5wHW
+        DAAB3wGKAYsB/wG7AbwB/wG2AbcByQFjAWABxAFeAVYBvgFYAUsBuAFSAT8BswFNATQBrQFHASgBpwFB
+        ARwBoQE7AREBwQFdAVwBugFWAVQBjwJHAwABtwGiAZMB+wH4AfcB5QGuAYEB3gGhAXMB2gGcAW4B1QGX
+        AWgB4AGqAZAJ/wH7AfQB8AH3AeQB2wHyAdMBxQHMAa4BmgGdAU0BJQMAAYIBlAGeAZEB4gHzAWYB1QH0
+        AUwBywHzATIBwgHyARUBrwHpAbABmQGIBv8B/AH7AfkB9wHxAu8B5wHhAYEBaAFWAXoBYAFNDAAB/wHv
+        Ad4BzgFSAQgB5wFjARgB7wF7ATEB/wGlAXMB/wHWAbUB/wH3Ae8BxgHvAf8BQgGtAfcBzgFSAQgB/wHn
+        AdYMAAHiAZEBkgH/Ab0BvgHMAWYBZwb/AfsB+AL2Ae4B6gHwAeUB3gHqAdsB0gHlAdEBxgHhAcoBvQGh
+        ATsBEQHCAV0BXAGUAkoDAAG7AaYBlwH+Af0B/AH7AfYB9QH2Ae8B6wHxAeYB4AHsAd4B1gHnAbUBnAP/
+        AfwBrgGKAfwBrgGKAfEB2wHSAecBjgFgAbMBVwEqAawBVAEpAaQBUAEnAwABhgGZAaIBnwHqAfYBgwHh
+        AfYBawHYAfUBUwHOAfQBDgGzAfABtgGgAY4BsAGZAYgBqQGSAYABogGKAXgBmgGCAXABkQF5AWcBiQFx
+        AV4PAAH/Ae8B3gHOAVIBCAHnAWMBGAHvAXsBMQH/AaUBcwH/AdYBtQH/AfcB7wHGAe8B/wFCAa0B9wHO
+        AVIBCAH/Ad4BzgwAAeUBlwGYAf8BvQG+AdMBbQFuCf8B+wH4AvYB7gHqAfAB5QHeAeoB2wHSAeUB0QHG
+        AacBQQEcAcwCZwGaAk0DAAHBAasBnAP/AfoBxQGfAfABuAGOAeUBrgGBAd4BoQFzAewBvQGmDP8B6gGa
+        AXIB8AHJAbIBsQFXASsB7QHXAc0DAAGKAZ4BpgGpAfAB+AGZAeoB+AGIAeMB9QFtAdEB6gETAaEB1AET
+        AaEB1AESAaAB0wENAZcBzwEHAZEBygEAAY8BzQEAAY8BzQEwATkBRA8AAf8B5wHeAc4BUgEIAecBYwEY
+        Ae8BewExAf8BpQFzAf8B1gG1Af8B9wHvAcYB7wH/AUIBrQH3Ac4BUgEIAf8B5wHWDAAB6QGeAZ8B/wG9
+        Ab4B3AF2AXcM/wH7AfgC9gHuAeoB8AHlAd4B6gHbAdIBrQFHASgB1wFxAXIBnwFPAVADAAHHAbIBowb/
+        AfwB+gH5AfgB8gHwAfMB6gHmAfABxAGuDP8B6wGnAYUBxQFlATUB8QHbAc8GAAGNAaECqgHxAfkBpwHw
+        AfkBXgF9AYoBWAFzAX8BVgFtAXoBUgFpAXcBTwFmAXMBTAFhAXABRAFaAWgBIwFvAZABAAGPAc0BPgFK
+        AVgPAAH/AecB1gHOAVIBCAHnAWMBGAHvAXsBOQH/Aa0BcwH/AdYBtQH/AfcB7wHGAe8B/wFCAa0B9wHO
+        AVIBCAH/Ae8B3gwAAe0BpgGnAf8BvQG+AeYBgAGBD/8B+wH4AvYB7gHqAfAB5QHeAbMBTQE0Ad8BeQF6
+        AaQBUgFTAwABzwG5AakE/wHaAboB/wHQAa4B8AHeAdIBtwGiAZMB8AHEAa4B7wHCAasB7wHBAaoB7wG5
+        AaAB7QGwAZIB7QGwAZIB+QHkAdkJAAGPAaQBrAGqAfEB+QGoAfEB+QFdAYYBlgGMAcYBzwGTAeQB8AF6
+        AdUB5wFiAcYB3gFPAZoBsgE+AVoBZwEcAX0BpQEAAY8BzQFLAVkBaQ8AAf8B5wHWAc4BUgEIAe8BewEx
+        Af8BlAFSAf8BvQGMAf8B5wHGA/8YAAHwAawBrQH/Ab0BvgHvAYkBihL/AfsB+AL2Ae4B6gG4AVIBPwFn
+        AjMBqgFVAVYDAAHUAb4Brwn/Af4B/QH8AbsBpgGWAdQBxQG6AY8BcgFbAeIB3QHZFQABjwGkAawBqwHw
+        AfcBqgHxAfkBpgHvAfcBcwGXAaIBoQHsAfUBZgF9AYoBeAHFAdYBTAFsAXwBNAFhAXgBXwHDAegBIgG2
+        AewBTgFeAW8PAAH/AecCzgFSAQgBzgFSAQgBzgFSAQgBzgFSAQgBzgFSAQgBzgFSAQgDAAHnAXsBQgHv
+        AZQBWg8AAfMBsgGzAf8BvQG+AfgBkgGTFf8B+wH4AfYBvgFYAUsBsAFYAVkBsAFYAVkDAAHYAcIBsgz/
+        AccBsQGiAaUBggFmAeIB3QHZGAABtwHKAc8BjwGkAawBjwGkAawBjwGkAawBWwGNAZ8BpQHoAe8BmwHo
+        AfQBjAHVAeIBRgFmAXYBcwGFAY8BegGKAZUBdQGFAZEBvQHOAdMPAAH/AecB1gH/AdYBvQH/AdYBtQH/
+        Ac4BtQH/Ac4BtQH/AdYBtQH/AdYBvQMAAfcBpQF7EgAB9QG2AbcB9QG2AbcB8wGyAbMB8QGtAa4B7gGn
+        AagB6gGhAaIB5wGaAZsB5AGTAZQB4AGOAY8B3QGHAYgB2gGAAYEB1gF6AXsB0wF0AXUB0QFvAXADAAHY
+        AcIBsgHYAcIBsgHUAb8BrgHUAb8BrgHOAbgBqQHIAbIBowHpAeIB3ioAAYYBswHDAYIBrQG9AXkBnwGw
+        AbwBzgHTGwAB/wHnAd4B/wHnAdYB/wHeAc4B/wHeAc4B/wHeAc4B/wHeAc4B/wHeAc7VAAFCAU0BPgcA
+        AT4DAAEoAwABQAMAASADAAEBAQABAQYAAQEWAAP/AQABgHgAAQEGAAj/AYABAQL/AfwBAAGAAQMBgAEB
+        AfwBAQIAAYABAwGAAQEB/AEBAgABgAEDAYABAQH8AQECAAGAAQMBgAEBAQABAQIAAYABAwGAAQEBAAEB
+        AQABAQGAAQMBgAEBAQABAQEAAQMBgAEDAYABAQEAAQEBAAEHAYABAwGAAQEBAAEBAQABBwGAAQMBgAEB
+        AQABAwEAAQcBgAEDAYABAQEAAQcBAAEHAYABAwGAAQEBAAF/AQABBwGAAQcBgAEBAQAB/wEAAQcBgAEP
+        AYACAQH/AfgBfwGAAR8G/wGAAT8L
+</value>
+  </data>
+  <data name="PaletteFromImageButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="PaletteFromImageButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>460, 102</value>
+  </data>
+  <data name="PaletteFromImageButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="PaletteFromImageButton.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;PaletteFromImageButton.Name" xml:space="preserve">
+    <value>PaletteFromImageButton</value>
+  </data>
+  <data name="&gt;&gt;PaletteFromImageButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PaletteFromImageButton.Parent" xml:space="preserve">
+    <value>PaletteTab</value>
+  </data>
+  <data name="&gt;&gt;PaletteFromImageButton.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="PaletteBrowserButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="PaletteBrowserButton.ImageIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="PaletteBrowserButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="PaletteBrowserButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>437, 102</value>
+  </data>
+  <data name="PaletteBrowserButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="PaletteBrowserButton.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;PaletteBrowserButton.Name" xml:space="preserve">
+    <value>PaletteBrowserButton</value>
+  </data>
+  <data name="&gt;&gt;PaletteBrowserButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PaletteBrowserButton.Parent" xml:space="preserve">
+    <value>PaletteTab</value>
+  </data>
+  <data name="&gt;&gt;PaletteBrowserButton.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="PastePaletteButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="PastePaletteButton.ImageIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="PastePaletteButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="PastePaletteButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>413, 102</value>
+  </data>
+  <data name="PastePaletteButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="PastePaletteButton.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;PastePaletteButton.Name" xml:space="preserve">
+    <value>PastePaletteButton</value>
+  </data>
+  <data name="&gt;&gt;PastePaletteButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PastePaletteButton.Parent" xml:space="preserve">
+    <value>PaletteTab</value>
+  </data>
+  <data name="&gt;&gt;PastePaletteButton.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="CopyPaletteButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="CopyPaletteButton.ImageIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="CopyPaletteButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="CopyPaletteButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>390, 102</value>
+  </data>
+  <data name="CopyPaletteButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="CopyPaletteButton.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;CopyPaletteButton.Name" xml:space="preserve">
+    <value>CopyPaletteButton</value>
+  </data>
+  <data name="&gt;&gt;CopyPaletteButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CopyPaletteButton.Parent" xml:space="preserve">
+    <value>PaletteTab</value>
+  </data>
+  <data name="&gt;&gt;CopyPaletteButton.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="PaletteEditTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="PaletteEditTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>334, 78</value>
+  </data>
+  <data name="PaletteEditTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="PaletteEditTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;PaletteEditTextBox.Name" xml:space="preserve">
+    <value>PaletteEditTextBox</value>
+  </data>
+  <data name="&gt;&gt;PaletteEditTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PaletteEditTextBox.Parent" xml:space="preserve">
+    <value>PaletteTab</value>
+  </data>
+  <data name="&gt;&gt;PaletteEditTextBox.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="PaletteEditScrollBar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
+  <data name="PaletteEditScrollBar.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="PaletteEditScrollBar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>132, 75</value>
+  </data>
+  <data name="PaletteEditScrollBar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>199, 24</value>
+  </data>
+  <data name="PaletteEditScrollBar.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;PaletteEditScrollBar.Name" xml:space="preserve">
+    <value>PaletteEditScrollBar</value>
+  </data>
+  <data name="&gt;&gt;PaletteEditScrollBar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.HScrollBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PaletteEditScrollBar.Parent" xml:space="preserve">
+    <value>PaletteTab</value>
+  </data>
+  <data name="&gt;&gt;PaletteEditScrollBar.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="RandomPresetButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="RandomPresetButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="RandomPresetButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 102</value>
+  </data>
+  <data name="RandomPresetButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 24</value>
+  </data>
+  <data name="RandomPresetButton.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="RandomPresetButton.Text" xml:space="preserve">
+    <value>Random preset</value>
+  </data>
+  <data name="&gt;&gt;RandomPresetButton.Name" xml:space="preserve">
+    <value>RandomPresetButton</value>
+  </data>
+  <data name="&gt;&gt;RandomPresetButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;RandomPresetButton.Parent" xml:space="preserve">
+    <value>PaletteTab</value>
+  </data>
+  <data name="&gt;&gt;RandomPresetButton.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="PalettePicture.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="PalettePicture.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <metadata name="mPaletteContextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>727, 17</value>
+  </metadata>
+  <data name="mPaletteContextMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 204</value>
+  </data>
+  <data name="&gt;&gt;mPaletteContextMenu.Name" xml:space="preserve">
+    <value>mPaletteContextMenu</value>
+  </data>
+  <data name="&gt;&gt;mPaletteContextMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="PalettePicture.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="PalettePicture.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
+  </data>
+  <data name="PalettePicture.Size" type="System.Drawing.Size, System.Drawing">
+    <value>478, 59</value>
+  </data>
+  <data name="PalettePicture.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;PalettePicture.Name" xml:space="preserve">
+    <value>PalettePicture</value>
+  </data>
+  <data name="&gt;&gt;PalettePicture.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PalettePicture.Parent" xml:space="preserve">
+    <value>PaletteTab</value>
+  </data>
+  <data name="&gt;&gt;PalettePicture.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="mPaletteBevel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="mPaletteBevel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="mPaletteBevel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 5</value>
+  </data>
+  <data name="mPaletteBevel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>480, 61</value>
+  </data>
+  <data name="mPaletteBevel.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;mPaletteBevel.Name" xml:space="preserve">
+    <value>mPaletteBevel</value>
+  </data>
+  <data name="&gt;&gt;mPaletteBevel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mPaletteBevel.Parent" xml:space="preserve">
+    <value>PaletteTab</value>
+  </data>
+  <data name="&gt;&gt;mPaletteBevel.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="PaletteTab.ImageIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="PaletteTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 23</value>
+  </data>
+  <data name="PaletteTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="PaletteTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>490, 132</value>
+  </data>
+  <data name="PaletteTab.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="PaletteTab.Text" xml:space="preserve">
+    <value>Gradient</value>
+  </data>
+  <data name="&gt;&gt;PaletteTab.Name" xml:space="preserve">
+    <value>PaletteTab</value>
+  </data>
+  <data name="&gt;&gt;PaletteTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PaletteTab.Parent" xml:space="preserve">
+    <value>Tabs</value>
+  </data>
+  <data name="&gt;&gt;PaletteTab.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;mResizeGroupBox.Name" xml:space="preserve">
+    <value>mResizeGroupBox</value>
+  </data>
+  <data name="&gt;&gt;mResizeGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mResizeGroupBox.Parent" xml:space="preserve">
+    <value>CanvasTab</value>
+  </data>
+  <data name="&gt;&gt;mResizeGroupBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;mPresetGroupBox.Name" xml:space="preserve">
+    <value>mPresetGroupBox</value>
+  </data>
+  <data name="&gt;&gt;mPresetGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mPresetGroupBox.Parent" xml:space="preserve">
+    <value>CanvasTab</value>
+  </data>
+  <data name="&gt;&gt;mPresetGroupBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;mSizeGroupBox.Name" xml:space="preserve">
+    <value>mSizeGroupBox</value>
+  </data>
+  <data name="&gt;&gt;mSizeGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mSizeGroupBox.Parent" xml:space="preserve">
+    <value>CanvasTab</value>
+  </data>
+  <data name="&gt;&gt;mSizeGroupBox.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="CanvasTab.ImageIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="CanvasTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 23</value>
+  </data>
+  <data name="CanvasTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="CanvasTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>490, 132</value>
+  </data>
+  <data name="CanvasTab.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="CanvasTab.Text" xml:space="preserve">
+    <value>Image size</value>
+  </data>
+  <data name="&gt;&gt;CanvasTab.Name" xml:space="preserve">
+    <value>CanvasTab</value>
+  </data>
+  <data name="&gt;&gt;CanvasTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CanvasTab.Parent" xml:space="preserve">
+    <value>Tabs</value>
+  </data>
+  <data name="&gt;&gt;CanvasTab.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <metadata name="mTabImages.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>299, 17</value>
+  </metadata>
+  <data name="mTabImages.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACe
+        DwAAAk1TRnQBSQFMAgEBBAEAAZgBAQGYAQEBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        AwABIAMAAQEBAAEYBgABGP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AMAAAZEBhwF9AVICUAFZAVQBUQFY
+        AVIBTQFYAVABSQFYAU4BRwFXAUwBRAFWAUoBQAFYAUwBQgFLAUEBOkIAAbQCogFzAjgBdgE7ATwBYAEu
+        AS9UAAGsAZoBjQP/Af0D/wH9AfcB/wH4Ae0B/gHxAeAB/QHqAdUB/AHlAcwB/wHqAc8BVwFLAUEBtwGi
+        AZMBYAFGATIBYwFJATUBYwFJATUBYwFJATUBYwFJATUBYwFJATUBYwFJATUBYwFJATUBYwFJATUBYwFJ
+        ATUBaAFOAToVAAGMAWMBZAF6AkQBjwFCAUMBjgJ6AY4CSwHEAWECYAItAwABtQJgAW4BNAE1AcsCqwYA
+        MP4SAAGsAZgBkAL/Af4D/wH+AfgB9AH/AfIB7QH8AesB4wH8AeYB2QH8AeABzgH/AeIBzwFXAUsBQQG9
+        AagBmQH8Af4B/AHnAeYB5AHnAeIB3AHmAdwB1AHlAdYBywHkAc8BwQHjAcoBuAHjAcUBsQHiAcIBrAHH
+        AaoBmAFoAU4BOg8AAewB2gHbAZ0BZwFoAcEBdgF3AckCewFkAi4BbQE1ATYBuwFmAWcByAFnAWYBkAJF
+        AVYBKwEsAXMBOAE5AagCUQF2ATgBOQG6ApUDAAP+AT4BNgH1ATMBLAHyASsBIgHuASQBHAHtA/4BwQEA
+        AaEBvwEAAZkBvwEAAZQBvgEAAY8D/gHzAcgBLgHyAcUBGwHzAcIBCwHzAb8BAAP+EgABqgGaAY0H/wH7
+        AfkB/gH2AfIB/AHxAewB/AHsAeIB+QHjAdYB/gHnAdUBVwFLAUEBxgGwAaEB/AH+AfwB2AHEAbkB1gHA
+        AbUB0wG8Aa8B+gHvAeYBzwGzAaUBzAGvAZ8BzAGvAZ8B9gHbAcgBxwGqAZgBaAFOAToPAAHgAb8BwAGm
+        Al4B5AKTAeACjAHLAnwBxQF1AXQB0QJ1AcwCbgHIAmcBowJTAbQBWAFXAcEBXQFcAboBWgFZAXABOAE5
+        AwAD/gFOAUcB+gFEATwB9wE4ATAB8wEuASYB8AP+AcEBAAGrAcEBAAGjAb8BAAGcAb8BAAGVA/4B8gHO
+        AUsB8wHKATgB8wHGASUB8wHCARMD/gkAAZEBhwF9AVICUAFZAVQBUQGrAZkBjAH/Af4F/wH+Af0B/wH5
+        AfgB/AHzAfAB/AHtAeYB/QHoAd0B/wHtAd8BVwFLAUEBzAG2AacB/AH+AvwB/gL8Af4B/AH7AfoB9wH7
+        AfUB7wF1AXEBbgFXAVQBUQMAAdIBwgG1AcsBsgGhAWgBTgE6DwAB5gHLAcwBygKNAbwCdQHlApMB4AKM
+        AdwChQHWAn0B0QF2AXUBzAFuAW0ByAFnAWYBwwJhAb4BXAFbAXUBOgE7AdwCwwMAA/4BWgFTAf4BUgFM
+        AfsBSQFCAfgBPgE2AfUD/gHDAQABtgHCAQABrgHBAQABpgHAAQABngP+AfIB0gFhAfIBzwFUAfIBzAFB
+        AfMByAEuA/4JAAGsAZoBjQP/Af0C/wGrAZsBjgP+Af8B/gn/Af4B/wH+AfkB/AH5AfAB/gH9AfEBVwFL
+        AUEBzAG2AacB/AH+AfwB2wHKAcAB2gHIAb0B2AHEAbkB+wH6AfcBowGdAZgB/QL+AVEBkwGpAQ4BEgEW
+        AbgBsQGoAXgBYAFNEgABqgGOAY8BswFqAWwB5QGXAZgB5QKTAcIBdAF1AaQBYAFhAaABXAFdAbkCaAHM
+        AW4BbQHHAWcBZgGlAlMBZAEwATEGAAP+AV0BVgH/AV0BVgH/AVcBTwH9AU4BRgH6A/4BxAEAAb8BwwEA
+        AbgBwgEAAbABwgEAAakD/gHyAdMBZgHyAdMBZgHyAdEBWwHyAc0BSwP+CQABrAGYAZAC/wH+A/8BqgGZ
+        AY8B+wGsAYUB7QGRAWUB4gGCAVYB3wF9AU8B2wF0AUYB2QFuAUAB1AFpATgB2QFpATYBVwFLAUEBzAG2
+        AacB/AH+AvwB/gL8Af4C/AH+AvwB/gH8AaMBnQGYAYgBtwHHAXQBzgHiAUkBmgGyAQ4BEgEWAXwBcgFm
+        DAAB2AHJAcoBtwFaAVsBrAFZAVoBtAFcAV0B7wGiAaMBwQF4AXkBhwJRAegCzQHbAbcBuAG+AYUBhgG4
+        AmcBzAFuAW0ByAFnAWYBjQI7AXABOAE5AW4BNgE3A/4BXQFWAf8BXQFWAf8BXQFWAf8BWgFUBP4BxQEA
+        AcUBxAEAAcABxAEAAboBwwEAAbMD/gHyAdMBZgHyAdMBZgHyAdMBZgHyAdIBYQP+CQABqgGaAY0G/wHF
+        AZ8BlAGqAZsBjAGxAZABeQHBAXkBWgGuAXABTwGqAWMBRwGZAVgBPgGYAVgBOwGaAVoBPAF6AU4BOwHM
+        AbYBpwH8Af4B/AHbAcoBwAHbAcoBwAHbAcoBwAH8Af4B/AHBAbkBtAFNAZwBswGMAeAB7gFiAb8B1wFJ
+        AZoBsgEOARIBFgHOAdsB3wkAAcYCsQHdAYUBhgH8AbYBuAH5AbEBsgH0AaoBqwF9Aj0BsQFxAXABzQGt
+        Aa8B5gHUAdUBsQF2AXUBmwFXAVgB0QJ1AcwBbgFtAccBZwFmAcQCYQF9AT0BPjD+AZEBhwF9AVICUAFZ
+        AVQBUQGrAZkBjAH/Af4F/wH+Af0B/wH5AfgB/AHzAfAB/AHtAeYB/QHoAd0B/wHtAd8BVwFLAUEJAAHM
+        AbYBpwH8Af4C/AH+AvwB/gL8Af4C/AH+AfwB+wH4AfMB1QHOAcgBVwGgAbUBjAHgAe4BYgG/AdcBSQGa
+        AbIBDgESARYBzgHbAd8GAAHFAbABsQHeAoYB/QHAAcEB+wG1AbYB+AGxAbIBkAJJAdoBkwGUAYIBRAFF
+        AY4BVQFWAcIBfgF/AZkBVwFYAdYBfgF9AdEBdgF1AcUBaQFqAZ4BUQFSAYABQAFBA/4BAAGwAf8BAAGq
+        Af8BAAGlAf8BAAGiAf8D/gEAAbcBNAEAAbEBMQEAAasBLgEAAaUBLAP+Ac4BKAEvAcIBHwEmAbYBFgEd
+        AasBDQEVA/4BrAGaAY0D/wH9Av8BqwGbAY4D/gH/Af4J/wH+Af8B/gH5AfwB+QHwAf4B/QHxAVcBSwFB
+        CQAB6wGsAY0B6gGqAYwB6gGpAYkB6QGiAX4B6AGZAXEB5gGPAWMB5QGHAVgB5gGSAWUBzQGpAZUBZQGm
+        AbcBjAHgAe4BYgG/AdcBSQGaAbIBDgESARYB1wHfAeIGAAHlAZkBmgHiAaMBpAHgAZUBlgH6AbQBtgHb
+        AZIBkwGpAW4BbwHnAaQBpQHkAp8BsAJ5AcABcwF0AdsBhQGEAc4CeAGjAl0BrgJ4AaYCcgP+AQABuAH/
+        AQABsgH/AQABrAH/AQABpwH/A/4BAAG/ATgBAAG5ATUBAAGyATIBAAGtATAD/gHdATQBOwHRASoBMwHF
+        ASEBKAG5ARcBHwP+AawBmAGQAv8B/gP/AaoBmQGPAfsBrAGFAe0BkQFlAeIBggFWAd8BfQFPAdsBdAFG
+        AdkBbgFAAdQBaQE4AdkBaQE2AVcBSwFBCQAB6wGsAY0B/wHDAaIB/gG/AZ0B/AG7AZgB+wG2AZIB+gGw
+        AYsB+AGrAYQB+AGmAXwB8wGmAYAB0gGwAZ4BcwGsAbkBjAHgAe4BbAHEAdkBfQKGAjUBkAG/AcIB2QkA
+        AbsBYAFhAfsBtgG3Af0BtwG4AdcBjgGPAYsBSAFJAYgBRwFIAdEBhgGHAeQCkwHgAowBwwJ1AWUBMwE0
+        BgAD/gEAAcAB/wEAAboB/wEAAbQB/wEAAa4B/wP+AQABxgE8AQABwAE5AQABuwE2AQABtQEzA/4B6wE/
+        AUYB4AE2AT4B1AEtATQBxwEjASsD/gGqAZoBjQb/AcUBnwGUAaoBmwGMAbEBkAF5AcEBeQFaAa4BcAFP
+        AaoBYwFHAZkBWAE+AZgBWAE7AZoBWgE8AXoBTgE7CQAB6wGsAY0B6gGqAYsB6gGqAYsB6gGoAYkB6QGi
+        AYEB6AGcAXcB5wGUAWsB5gGMAWAB5QGGAVUB5gGNAV8BygGZAX8BfQGwAbsBygG4AawBcwGFAdEBXgFs
+        Aa0CNQGQBgABvAJRAfgBsgGzAf8BuwG8Af0BuQG6AfwBtwG4AfkBsQGyAfQBqgGrAe4CowHoApkB5QGT
+        AZQB4AKMAb4BcQFyAXoCSAMAA/4BAAHHAf8BAAHCAf8BAAG9Af8BAAG2Af8D/gEAAc0BPgEAAcgBOwEA
+        AcIBOQEAAb0BNgP+AfcBSAFQAe0BQAFIAeMBOQFAAdcBMAE3A/4BqwGZAYwB/wH+Bf8B/gH9Af8B+QH4
+        AfwB8wHwAfwB7QHmAf0B6AHdAf8B7QHfAVcBSwFBMwAB3AHlAegBXgFsAa0BcAGPAd8BXgF2AdABXgFs
+        Aa0GAAHlAZQBkwH6AbUBtgH+AbkBugHKAnoBwwF0AXUB/AG2AbgB+QGxAbIBwAF6AXsBogFiAWMBuAFz
+        AXQB5QKTAcMCeAGlAWUBZgMAA/4BAAHMAf8BAAHIAf8BAAHEAf8BAAG/Af8D/gEAAdEBQAEAAc0BPgEA
+        AcoBPAEAAcQBOgP+Af8BTgFWAfkBSQFRAfABQwFKAeYBOwFCA/4BqwGbAY4D/gH/Af4J/wH+Af8B/gH5
+        AfwB+QHwAf4B/QHxAVcBSwFBNgAB1AHaAe4BXgFsAa0BXgFsAa0B4gHmAfIJAAHoAqIB3gGPAZADAAHP
+        AYoBjQH/AbsBvAH8AbYBtwGgAVcBWgMAAdoBrwGwAakBaQFoAaoBaQFqBgAw/gGqAZkBjwH7AawBhQHt
+        AZEBZQHiAYIBVgHfAX0BTwHbAXQBRgHZAW4BQAHUAWkBOAHZAWkBNgFXAUsBQVQAAc4BiAGJAdcBkAGR
+        Ac0BgQGCAc0BewF8QgABxQGfAZQBqgGbAYwBsQGQAXkBwQF5AVoBrgFwAU8BqgFjAUcBmQFYAT4BmAFY
+        ATsBmgFaATwBegFOATsSAAFCAU0BPgcAAT4DAAEoAwABQAMAASADAAEBAQABAQYAAQEWAAP/gQAG/wH8
+        AQAC/wH8AT8C/wH8AgABDwHgASMCAAH8AgABDwGAAQECAAH8AgABDwGAAQECAAHgAgABDwGAAQECAAHg
+        AgABDwHAAQMCAAHgAgABDwQAAeACAAEHBQABBwEAAQMFAAEHAQABAQGABAABBwIAAeABAwMAAQcCAAHA
+        AQEDAAE/Af8B4AHAAQEDAAE/Af8B8AHkASMDAAE/Av8B/AE/Av8BAAE/Cw==
+</value>
+  </data>
+  <data name="Tabs.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 153</value>
+  </data>
+  <data name="Tabs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>498, 159</value>
+  </data>
+  <data name="Tabs.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;Tabs.Name" xml:space="preserve">
+    <value>Tabs</value>
+  </data>
+  <data name="&gt;&gt;Tabs.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Tabs.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Tabs.ZOrder" xml:space="preserve">
+    <value>15</value>
   </data>
   <data name="BackgroundPictureBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -965,446 +1965,6 @@
   <data name="&gt;&gt;GammaDragPanel.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
-  <data name="ImagingTab.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 23</value>
-  </data>
-  <data name="ImagingTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="ImagingTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>490, 132</value>
-  </data>
-  <data name="ImagingTab.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="ImagingTab.Text" xml:space="preserve">
-    <value>Rendering</value>
-  </data>
-  <data name="&gt;&gt;ImagingTab.Name" xml:space="preserve">
-    <value>ImagingTab</value>
-  </data>
-  <data name="&gt;&gt;ImagingTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ImagingTab.Parent" xml:space="preserve">
-    <value>Tabs</value>
-  </data>
-  <data name="&gt;&gt;ImagingTab.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="PaletteSelectButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
-  <data name="PaletteSelectButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="PaletteSelectButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>358, 102</value>
-  </data>
-  <data name="PaletteSelectButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>26, 24</value>
-  </data>
-  <data name="PaletteSelectButton.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="PaletteSelectButton.Text" xml:space="preserve">
-    <value>...</value>
-  </data>
-  <data name="&gt;&gt;PaletteSelectButton.Name" xml:space="preserve">
-    <value>PaletteSelectButton</value>
-  </data>
-  <data name="&gt;&gt;PaletteSelectButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PaletteSelectButton.Parent" xml:space="preserve">
-    <value>PaletteTab</value>
-  </data>
-  <data name="&gt;&gt;PaletteSelectButton.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="PalettePresetPictureBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left, Right</value>
-  </data>
-  <data name="PalettePresetPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>132, 102</value>
-  </data>
-  <data name="PalettePresetPictureBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>225, 24</value>
-  </data>
-  <data name="PalettePresetPictureBox.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="&gt;&gt;PalettePresetPictureBox.Name" xml:space="preserve">
-    <value>PalettePresetPictureBox</value>
-  </data>
-  <data name="&gt;&gt;PalettePresetPictureBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PalettePresetPictureBox.Parent" xml:space="preserve">
-    <value>PaletteTab</value>
-  </data>
-  <data name="&gt;&gt;PalettePresetPictureBox.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="PaletteResetButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
-  <data name="PaletteResetButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="PaletteResetButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>390, 78</value>
-  </data>
-  <data name="PaletteResetButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 22</value>
-  </data>
-  <data name="PaletteResetButton.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="PaletteResetButton.Text" xml:space="preserve">
-    <value>Reset</value>
-  </data>
-  <data name="&gt;&gt;PaletteResetButton.Name" xml:space="preserve">
-    <value>PaletteResetButton</value>
-  </data>
-  <data name="&gt;&gt;PaletteResetButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PaletteResetButton.Parent" xml:space="preserve">
-    <value>PaletteTab</value>
-  </data>
-  <data name="&gt;&gt;PaletteResetButton.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="PaletteFromImageButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
-  <data name="PaletteFromImageButton.ImageIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <metadata name="mButtonImages.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>420, 17</value>
-  </metadata>
-  <data name="mButtonImages.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
-    <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
-        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
-        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAADA
-        EwAAAk1TRnQBSQFMAgEBBQEAAXgBAAF4AQABEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
-        AwABIAMAAQEBAAEYBgABGBUAAWMBSQE1AWMBSQE1AWMBSQE1AWMBSQE1AWMBSQE1AWMBSQE1AWMBSQE1
-        AWMBSQE1AWMBSQE1AWMBSQE1AWMBSQE1AWMBSQE1AWMBSQE1AWMBSQE1AWMBSQE1kAABvwGqAZsB/gHw
-        AegB/gHvAeYB/gHtAeMB/gHsAeEB/gHqAd8B/gHpAd0B/gHnAdsB/wHmAdkB/wHlAdcB/wHjAdUB/wHi
-        AdMB/wHhAdIB/wHgAdAB/wHfAc8BYwFJATWQAAHAAasBnAH+AfEB6gMsAzwDTgNhA3YDiQOeA7EDwwPT
-        A+ID7gH/AeAB0AFjAUkBNZAAAcEBqwGcAf4B8wHsAywDPANOA2EDdgOJA54DsQPDA9MD4gPuAf8B4QHS
-        AWMBSQE1kAABwgGsAZ0B/gH0Ae4DLAM8A04DYQN2A4kDngOxA8MD0wPiA+4B/wHiAdMBYwFJATWQAAHC
-        Aa0BngH+AfYB8AMsAzwDTgNhA3YDiQOeA7EDwwPTA+ID7gH/AeMB1QFjAUkBNZAAAcMBrgGfAf0B9wHy
-        AywDPANOA2EDdgOJA54DsQPDA9MD4gPuAf8B5QHXAWMBSQE1kAABxQGvAaAB/QH4AfQDLAM8A04DYQN2
-        A4kDngOxA8MD0wPiA+4B/wHmAdkBYwFJATWQAAHGAbABoQH9AfoB9gMsAzwDTgNhA3YDiQOeA7EDwwPT
-        A+ID7gH+AecB2wFjAUkBNZAAAccBsQGiAf0B+wH4AywDPANOA2EDdgOJA54DsQPDA9MD4gPuAf4B6QHd
-        AWMBSQE1kAABxwGyAaMB/QH8AfkDLAM8A04DYQN2A4kDngOxA8MD0wPiA+4B/gHqAd8BYwFJATWQAAHI
-        AbMBpAL9AfsDLAM8A04DYQN2A4kDngOxA8MD0wPiA+4B/gHsAeEBYwFJATWQAAHJAbMBpAH9Af4B/AMs
-        AzwDTgNhA3YDiQOeA7EDwwPTA+ID7gH+Ae0B4wFjAUkBNZAAAcoBtAGlAf0B/gH9AywDPANOA2EDdgOJ
-        A54DsQPDA9MD4gPuAf4B7wHmAWMBSQE1kAABywG1AaYB/QH/Af4B/QH+Av0B/gH8Av0B+wH9AfwB+QH9
-        AfsB+AH9AfoB9gH9AfgB9AH9AfcB8gH+AfYB8AH+AfQB7gH+AfMB7AH+AfEB6gH+AfAB6AFjAUkBNZAA
-        AcsBtQGmAcsBtQGmAcoBtAGlAckBswGkAcgBswGkAccBsgGjAccBsQGiAcYBsAGhAcUBrwGgAcMBrgGf
-        AcIBrQGeAcIBrAGdAcEBqwGcAcABqwGcAb8BqgGb/wBXAAHvAc4BzwHDAWQBZQGqAVUBVgGkAVIBUwGf
-        AU8BUAGaAk0BlAJKAY8CRwGJAkQBgwJBAXgBOwE8AXgBOwE8AXICOQFuATYBN0UAAYEBaAFVASYBLwE4
-        ASYBLwE4ASYBLwE4ASYBLwE4ASYBLwE4ASYBLwE4ASYBLwE4ASYBLwE4ASYBLwE4MwABzwFrAWwB8wGO
-        AY8B5gGAAYEBqgFEASQBRwEyASEBwwG0AasBxgG7AbMBygHBAbwBzgHIAcQBVgFNAUgBngE+ATMBnAE9
-        ATYBmAE5ATEBcgI5FQABugFuAUcBqgFUASkBqgFUASkBogFQAScBmwFMASUBlgFIASMBjwFGASIBigFD
-        ASEBhgFBASADAAG8AcwB0gFkAX4BjgFPAV4BbwFFAVIBYQE3AUEBTQEmAS8BOAGJAXEBXgHoAdwB0wG3
-        AaIBkwG3AaIBkwG3AaIBkwG3AaIBkwG3AaIBkwG3AaIBkwG3AaIBkwEmAS8BOAYAAf8C9wH/AfcB7wH/
-        Ae8B5wH/Ae8B5wH/AfcB5wH/AfcB7wH/AfcB7wH/AfcB7wH/AfcB7wH/AfcB7wH/AvcMAAHRAW8BcAH/
-        AZkBmgHsAYYBhwHmAYABgQFxAVsBSwFHATwBNAGNAXgBaAHtAeAB2AHxAecB4AGPAX8BcwGjAUEBNQGi
-        AUIBPAGcAT0BNQF4ATsBPBUAAcEBeQFVAf0B+QH2Ac4BsAGcAcwBrwGbAcoBrQGaAccBrAGZAcYBqwGY
-        AcQBqQGXAYkBQwEhAwABcQF/AYsBIgG2AewBAAGPAc0BAAGPAc0BAAGPAc0BAAGPAc0BkQF5AWYB7wHm
-        AeEB6AHbAdMB4AHQAcYB2gHGAbwB1AG/AbIBzwG5AasBzAG2AagBtwGiAZMBJgEvATgGAAH/AfcB7wH/
-        Ae8B5wH/Ae8B3gH/Ae8B3gH/Ae8B5wH/Ae8B5wH/Ae8B5wH/Ae8B5wH/Ae8B5wH/Ae8B5wH/AfcB7wwA
-        AdQBdQF2Af8BnwGgAfUBkAGRAewBhgGHAXEBWwFLAwABRwE8ATQB6QHZAc4B7AHdAdQBhQF0AWcBrgFL
-        AUMBqgFJAUQBowFCATwBfQI+FQAByQGFAWQD/wHaAYwBXAHRAYMBUQHRAYMBUQHRAYMBUQHRAYMBUQHG
-        AasBmAGOAUUBIgMAAXUBhAGQAWgByAHqARABtQHwAQgBrAHrAQMBpAHjAQABlgHUAZoBggFvAfcB8QHv
-        AcMBrgGeAcMBrgGeAb0BqAGYAbcBogGTAdQBvwGyAbcBogGTAbcBogGTASYBLwE4BgAB/wH3Ae8BzgFS
-        AQgBzgFSAQgBzgFSAQgBzgFSAQgBzgFSAQgBzgFSAQgBzgFSAQgBzgFSAQgBzgFSAQgB/wHvAecMAAHX
-        AXsBfAH/AakBqgH7AZ8BoAH1AZMBlAFxAVsBSwFxAVsBSwFxAVsBSwFxAVsBSwF2AWIBUgF9AWoBWwG6
-        AVYBVAGyAU8BTAGqAUkBRAGDAkEDAAG3AaIBkwFjAUkBNQFjAUkBNQFjAUkBNQFjAUkBNQFjAUkBNQHR
-        AZIBcwP/Af4B/QL7Ae8B6gH1Ad4B0wHwAc4BvgHtAcMBrwHHAawBmQGSAUcBIwMAAXkBiQGUAXQB0AHt
-        ASgBvQHxAREBtQHwAQcBqwHqAQABnQHcAaIBigF4Af0B+wH6AfcB8gHuAe8B5gHhAegB2wHTAeAB0AHG
-        AXABWgFKAWEBUgFGAVABSAFCAT8BPQE+BgAB/wHvAecBzgFSAQgB5wFjARgB7wF7ATEB/wGlAXMB/wHW
-        AbUB/wH3Ae8BxgHvAf8BQgGtAfcBzgFSAQgB/wHvAd4MAAHbAYMBhAH/AbMBtAH/Aa0BrgH8AaMBpAH0
-        AY4BjwHsAYYBhwHmAYABgQHfAXkBegHXAXEBcgHRAWsBbAHBAV0BXAG6AVYBVAGyAVABTAGJAkQDAAG3
-        AaIBkwH4AfMB8AHqAd8B1wHmAdkBzwHhAdIBxwHdAcsBvwHYAZ8BggP/AfMBpwF/AecBlwFuAdoBjAFc
-        AdEBgwFRAdEBgwFRAcoBrgGaAZgBSgElAwABfgGOAZoBgwHZAfABRgHJAfIBLQG/AfIBFgG3AfEBAAGg
-        AeIBqQGSAYAD/wHDAa4BngHDAa4BngG9AagBmQHoAdwB0wF6AWABTQHUAcUBugFhAVIBRwkAAf8B7wHn
-        Ac4BUgEIAecBYwEYAe8BewExAf8BpQFzAf8B1gG1Af8B9wHvAcYB7wH/AUIBrQH3Ac4BUgEIAf8B5wHW
-        DAAB3wGKAYsB/wG7AbwB/wG2AbcByQFjAWABxAFeAVYBvgFYAUsBuAFSAT8BswFNATQBrQFHASgBpwFB
-        ARwBoQE7AREBwQFdAVwBugFWAVQBjwJHAwABtwGiAZMB+wH4AfcB5QGuAYEB3gGhAXMB2gGcAW4B1QGX
-        AWgB4AGqAZAJ/wH7AfQB8AH3AeQB2wHyAdMBxQHMAa4BmgGdAU0BJQMAAYIBlAGeAZEB4gHzAWYB1QH0
-        AUwBywHzATIBwgHyARUBrwHpAbABmQGIBv8B/AH7AfkB9wHxAu8B5wHhAYEBaAFWAXoBYAFNDAAB/wHv
-        Ad4BzgFSAQgB5wFjARgB7wF7ATEB/wGlAXMB/wHWAbUB/wH3Ae8BxgHvAf8BQgGtAfcBzgFSAQgB/wHn
-        AdYMAAHiAZEBkgH/Ab0BvgHMAWYBZwb/AfsB+AL2Ae4B6gHwAeUB3gHqAdsB0gHlAdEBxgHhAcoBvQGh
-        ATsBEQHCAV0BXAGUAkoDAAG7AaYBlwH+Af0B/AH7AfYB9QH2Ae8B6wHxAeYB4AHsAd4B1gHnAbUBnAP/
-        AfwBrgGKAfwBrgGKAfEB2wHSAecBjgFgAbMBVwEqAawBVAEpAaQBUAEnAwABhgGZAaIBnwHqAfYBgwHh
-        AfYBawHYAfUBUwHOAfQBDgGzAfABtgGgAY4BsAGZAYgBqQGSAYABogGKAXgBmgGCAXABkQF5AWcBiQFx
-        AV4PAAH/Ae8B3gHOAVIBCAHnAWMBGAHvAXsBMQH/AaUBcwH/AdYBtQH/AfcB7wHGAe8B/wFCAa0B9wHO
-        AVIBCAH/Ad4BzgwAAeUBlwGYAf8BvQG+AdMBbQFuCf8B+wH4AvYB7gHqAfAB5QHeAeoB2wHSAeUB0QHG
-        AacBQQEcAcwCZwGaAk0DAAHBAasBnAP/AfoBxQGfAfABuAGOAeUBrgGBAd4BoQFzAewBvQGmDP8B6gGa
-        AXIB8AHJAbIBsQFXASsB7QHXAc0DAAGKAZ4BpgGpAfAB+AGZAeoB+AGIAeMB9QFtAdEB6gETAaEB1AET
-        AaEB1AESAaAB0wENAZcBzwEHAZEBygEAAY8BzQEAAY8BzQEwATkBRA8AAf8B5wHeAc4BUgEIAecBYwEY
-        Ae8BewExAf8BpQFzAf8B1gG1Af8B9wHvAcYB7wH/AUIBrQH3Ac4BUgEIAf8B5wHWDAAB6QGeAZ8B/wG9
-        Ab4B3AF2AXcM/wH7AfgC9gHuAeoB8AHlAd4B6gHbAdIBrQFHASgB1wFxAXIBnwFPAVADAAHHAbIBowb/
-        AfwB+gH5AfgB8gHwAfMB6gHmAfABxAGuDP8B6wGnAYUBxQFlATUB8QHbAc8GAAGNAaECqgHxAfkBpwHw
-        AfkBXgF9AYoBWAFzAX8BVgFtAXoBUgFpAXcBTwFmAXMBTAFhAXABRAFaAWgBIwFvAZABAAGPAc0BPgFK
-        AVgPAAH/AecB1gHOAVIBCAHnAWMBGAHvAXsBOQH/Aa0BcwH/AdYBtQH/AfcB7wHGAe8B/wFCAa0B9wHO
-        AVIBCAH/Ae8B3gwAAe0BpgGnAf8BvQG+AeYBgAGBD/8B+wH4AvYB7gHqAfAB5QHeAbMBTQE0Ad8BeQF6
-        AaQBUgFTAwABzwG5AakE/wHaAboB/wHQAa4B8AHeAdIBtwGiAZMB8AHEAa4B7wHCAasB7wHBAaoB7wG5
-        AaAB7QGwAZIB7QGwAZIB+QHkAdkJAAGPAaQBrAGqAfEB+QGoAfEB+QFdAYYBlgGMAcYBzwGTAeQB8AF6
-        AdUB5wFiAcYB3gFPAZoBsgE+AVoBZwEcAX0BpQEAAY8BzQFLAVkBaQ8AAf8B5wHWAc4BUgEIAe8BewEx
-        Af8BlAFSAf8BvQGMAf8B5wHGA/8YAAHwAawBrQH/Ab0BvgHvAYkBihL/AfsB+AL2Ae4B6gG4AVIBPwFn
-        AjMBqgFVAVYDAAHUAb4Brwn/Af4B/QH8AbsBpgGWAdQBxQG6AY8BcgFbAeIB3QHZFQABjwGkAawBqwHw
-        AfcBqgHxAfkBpgHvAfcBcwGXAaIBoQHsAfUBZgF9AYoBeAHFAdYBTAFsAXwBNAFhAXgBXwHDAegBIgG2
-        AewBTgFeAW8PAAH/AecCzgFSAQgBzgFSAQgBzgFSAQgBzgFSAQgBzgFSAQgBzgFSAQgDAAHnAXsBQgHv
-        AZQBWg8AAfMBsgGzAf8BvQG+AfgBkgGTFf8B+wH4AfYBvgFYAUsBsAFYAVkBsAFYAVkDAAHYAcIBsgz/
-        AccBsQGiAaUBggFmAeIB3QHZGAABtwHKAc8BjwGkAawBjwGkAawBjwGkAawBWwGNAZ8BpQHoAe8BmwHo
-        AfQBjAHVAeIBRgFmAXYBcwGFAY8BegGKAZUBdQGFAZEBvQHOAdMPAAH/AecB1gH/AdYBvQH/AdYBtQH/
-        Ac4BtQH/Ac4BtQH/AdYBtQH/AdYBvQMAAfcBpQF7EgAB9QG2AbcB9QG2AbcB8wGyAbMB8QGtAa4B7gGn
-        AagB6gGhAaIB5wGaAZsB5AGTAZQB4AGOAY8B3QGHAYgB2gGAAYEB1gF6AXsB0wF0AXUB0QFvAXADAAHY
-        AcIBsgHYAcIBsgHUAb8BrgHUAb8BrgHOAbgBqQHIAbIBowHpAeIB3ioAAYYBswHDAYIBrQG9AXkBnwGw
-        AbwBzgHTGwAB/wHnAd4B/wHnAdYB/wHeAc4B/wHeAc4B/wHeAc4B/wHeAc4B/wHeAc7VAAFCAU0BPgcA
-        AT4DAAEoAwABQAMAASADAAEBAQABAQYAAQEWAAP/AQABgHgAAQEGAAj/AYABAQL/AfwBAAGAAQMBgAEB
-        AfwBAQIAAYABAwGAAQEB/AEBAgABgAEDAYABAQH8AQECAAGAAQMBgAEBAQABAQIAAYABAwGAAQEBAAEB
-        AQABAQGAAQMBgAEBAQABAQEAAQMBgAEDAYABAQEAAQEBAAEHAYABAwGAAQEBAAEBAQABBwGAAQMBgAEB
-        AQABAwEAAQcBgAEDAYABAQEAAQcBAAEHAYABAwGAAQEBAAF/AQABBwGAAQcBgAEBAQAB/wEAAQcBgAEP
-        AYACAQH/AfgBfwGAAR8G/wGAAT8L
-</value>
-  </data>
-  <data name="PaletteFromImageButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="PaletteFromImageButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>460, 102</value>
-  </data>
-  <data name="PaletteFromImageButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 24</value>
-  </data>
-  <data name="PaletteFromImageButton.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="&gt;&gt;PaletteFromImageButton.Name" xml:space="preserve">
-    <value>PaletteFromImageButton</value>
-  </data>
-  <data name="&gt;&gt;PaletteFromImageButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PaletteFromImageButton.Parent" xml:space="preserve">
-    <value>PaletteTab</value>
-  </data>
-  <data name="&gt;&gt;PaletteFromImageButton.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="PaletteBrowserButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
-  <data name="PaletteBrowserButton.ImageIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="PaletteBrowserButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="PaletteBrowserButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>437, 102</value>
-  </data>
-  <data name="PaletteBrowserButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 24</value>
-  </data>
-  <data name="PaletteBrowserButton.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;PaletteBrowserButton.Name" xml:space="preserve">
-    <value>PaletteBrowserButton</value>
-  </data>
-  <data name="&gt;&gt;PaletteBrowserButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PaletteBrowserButton.Parent" xml:space="preserve">
-    <value>PaletteTab</value>
-  </data>
-  <data name="&gt;&gt;PaletteBrowserButton.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="PastePaletteButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
-  <data name="PastePaletteButton.ImageIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="PastePaletteButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="PastePaletteButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>413, 102</value>
-  </data>
-  <data name="PastePaletteButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 24</value>
-  </data>
-  <data name="PastePaletteButton.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;PastePaletteButton.Name" xml:space="preserve">
-    <value>PastePaletteButton</value>
-  </data>
-  <data name="&gt;&gt;PastePaletteButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PastePaletteButton.Parent" xml:space="preserve">
-    <value>PaletteTab</value>
-  </data>
-  <data name="&gt;&gt;PastePaletteButton.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="CopyPaletteButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
-  <data name="CopyPaletteButton.ImageIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="CopyPaletteButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="CopyPaletteButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>390, 102</value>
-  </data>
-  <data name="CopyPaletteButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 24</value>
-  </data>
-  <data name="CopyPaletteButton.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;CopyPaletteButton.Name" xml:space="preserve">
-    <value>CopyPaletteButton</value>
-  </data>
-  <data name="&gt;&gt;CopyPaletteButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;CopyPaletteButton.Parent" xml:space="preserve">
-    <value>PaletteTab</value>
-  </data>
-  <data name="&gt;&gt;CopyPaletteButton.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="PaletteEditTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
-  <data name="PaletteEditTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>334, 79</value>
-  </data>
-  <data name="PaletteEditTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
-  </data>
-  <data name="PaletteEditTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;PaletteEditTextBox.Name" xml:space="preserve">
-    <value>PaletteEditTextBox</value>
-  </data>
-  <data name="&gt;&gt;PaletteEditTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PaletteEditTextBox.Parent" xml:space="preserve">
-    <value>PaletteTab</value>
-  </data>
-  <data name="&gt;&gt;PaletteEditTextBox.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="PaletteEditScrollBar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left, Right</value>
-  </data>
-  <data name="PaletteEditScrollBar.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="PaletteEditScrollBar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>132, 78</value>
-  </data>
-  <data name="PaletteEditScrollBar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>199, 21</value>
-  </data>
-  <data name="PaletteEditScrollBar.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;PaletteEditScrollBar.Name" xml:space="preserve">
-    <value>PaletteEditScrollBar</value>
-  </data>
-  <data name="&gt;&gt;PaletteEditScrollBar.Type" xml:space="preserve">
-    <value>System.Windows.Forms.HScrollBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PaletteEditScrollBar.Parent" xml:space="preserve">
-    <value>PaletteTab</value>
-  </data>
-  <data name="&gt;&gt;PaletteEditScrollBar.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="RandomPresetButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
-  </data>
-  <data name="RandomPresetButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="RandomPresetButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 102</value>
-  </data>
-  <data name="RandomPresetButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 24</value>
-  </data>
-  <data name="RandomPresetButton.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="RandomPresetButton.Text" xml:space="preserve">
-    <value>Random preset</value>
-  </data>
-  <data name="&gt;&gt;RandomPresetButton.Name" xml:space="preserve">
-    <value>RandomPresetButton</value>
-  </data>
-  <data name="&gt;&gt;RandomPresetButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;RandomPresetButton.Parent" xml:space="preserve">
-    <value>PaletteTab</value>
-  </data>
-  <data name="&gt;&gt;RandomPresetButton.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="PaletteEditModeComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
-  </data>
-  <data name="PaletteEditModeComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 78</value>
-  </data>
-  <data name="PaletteEditModeComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 21</value>
-  </data>
-  <data name="PaletteEditModeComboBox.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;PaletteEditModeComboBox.Name" xml:space="preserve">
-    <value>PaletteEditModeComboBox</value>
-  </data>
-  <data name="&gt;&gt;PaletteEditModeComboBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PaletteEditModeComboBox.Parent" xml:space="preserve">
-    <value>PaletteTab</value>
-  </data>
-  <data name="&gt;&gt;PaletteEditModeComboBox.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="PalettePicture.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="PalettePicture.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Center</value>
-  </data>
-  <metadata name="mPaletteContextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 56</value>
-  </metadata>
   <data name="RandomizePaletteMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>173, 22</value>
   </data>
@@ -1548,95 +2108,53 @@
   <data name="PastePaletteMenuItem.Text" xml:space="preserve">
     <value>&amp;Paste</value>
   </data>
-  <data name="mPaletteContextMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 204</value>
-  </data>
-  <data name="&gt;&gt;mPaletteContextMenu.Name" xml:space="preserve">
-    <value>mPaletteContextMenu</value>
-  </data>
-  <data name="&gt;&gt;mPaletteContextMenu.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="PalettePicture.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="PalettePicture.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 6</value>
-  </data>
-  <data name="PalettePicture.Size" type="System.Drawing.Size, System.Drawing">
-    <value>478, 59</value>
-  </data>
-  <data name="PalettePicture.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;PalettePicture.Name" xml:space="preserve">
-    <value>PalettePicture</value>
-  </data>
-  <data name="&gt;&gt;PalettePicture.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PalettePicture.Parent" xml:space="preserve">
-    <value>PaletteTab</value>
-  </data>
-  <data name="&gt;&gt;PalettePicture.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="mPaletteBevel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="mPaletteBevel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="mPaletteBevel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 5</value>
-  </data>
-  <data name="mPaletteBevel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>480, 61</value>
-  </data>
-  <data name="mPaletteBevel.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;mPaletteBevel.Name" xml:space="preserve">
-    <value>mPaletteBevel</value>
-  </data>
-  <data name="&gt;&gt;mPaletteBevel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mPaletteBevel.Parent" xml:space="preserve">
-    <value>PaletteTab</value>
-  </data>
-  <data name="&gt;&gt;mPaletteBevel.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="PaletteTab.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 23</value>
-  </data>
-  <data name="PaletteTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="PaletteTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>490, 132</value>
-  </data>
-  <data name="PaletteTab.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="PaletteTab.Text" xml:space="preserve">
-    <value>Gradient</value>
-  </data>
-  <data name="&gt;&gt;PaletteTab.Name" xml:space="preserve">
-    <value>PaletteTab</value>
-  </data>
-  <data name="&gt;&gt;PaletteTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PaletteTab.Parent" xml:space="preserve">
-    <value>Tabs</value>
-  </data>
-  <data name="&gt;&gt;PaletteTab.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="mResizeGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Right</value>
+  </data>
+  <data name="&gt;&gt;ApplyButton.Name" xml:space="preserve">
+    <value>ApplyButton</value>
+  </data>
+  <data name="&gt;&gt;ApplyButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ApplyButton.Parent" xml:space="preserve">
+    <value>mResizeGroupBox</value>
+  </data>
+  <data name="&gt;&gt;ApplyButton.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ResizeMainWindowCheckBox.Name" xml:space="preserve">
+    <value>ResizeMainWindowCheckBox</value>
+  </data>
+  <data name="&gt;&gt;ResizeMainWindowCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ResizeMainWindowCheckBox.Parent" xml:space="preserve">
+    <value>mResizeGroupBox</value>
+  </data>
+  <data name="&gt;&gt;ResizeMainWindowCheckBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="mResizeGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>375, 0</value>
+  </data>
+  <data name="mResizeGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 126</value>
+  </data>
+  <data name="mResizeGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;mResizeGroupBox.Name" xml:space="preserve">
+    <value>mResizeGroupBox</value>
+  </data>
+  <data name="&gt;&gt;mResizeGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mResizeGroupBox.Parent" xml:space="preserve">
+    <value>CanvasTab</value>
+  </data>
+  <data name="&gt;&gt;mResizeGroupBox.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="ApplyButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left, Right</value>
@@ -1698,29 +2216,101 @@
   <data name="&gt;&gt;ResizeMainWindowCheckBox.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="mResizeGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>375, 0</value>
-  </data>
-  <data name="mResizeGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 126</value>
-  </data>
-  <data name="mResizeGroupBox.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;mResizeGroupBox.Name" xml:space="preserve">
-    <value>mResizeGroupBox</value>
-  </data>
-  <data name="&gt;&gt;mResizeGroupBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mResizeGroupBox.Parent" xml:space="preserve">
-    <value>CanvasTab</value>
-  </data>
-  <data name="&gt;&gt;mResizeGroupBox.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="mPresetGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;Preset3SaveButton.Name" xml:space="preserve">
+    <value>Preset3SaveButton</value>
+  </data>
+  <data name="&gt;&gt;Preset3SaveButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Preset3SaveButton.Parent" xml:space="preserve">
+    <value>mPresetGroupBox</value>
+  </data>
+  <data name="&gt;&gt;Preset3SaveButton.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;Preset3SelectButton.Name" xml:space="preserve">
+    <value>Preset3SelectButton</value>
+  </data>
+  <data name="&gt;&gt;Preset3SelectButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Preset3SelectButton.Parent" xml:space="preserve">
+    <value>mPresetGroupBox</value>
+  </data>
+  <data name="&gt;&gt;Preset3SelectButton.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;Preset2SaveButton.Name" xml:space="preserve">
+    <value>Preset2SaveButton</value>
+  </data>
+  <data name="&gt;&gt;Preset2SaveButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Preset2SaveButton.Parent" xml:space="preserve">
+    <value>mPresetGroupBox</value>
+  </data>
+  <data name="&gt;&gt;Preset2SaveButton.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;Preset2SelectButton.Name" xml:space="preserve">
+    <value>Preset2SelectButton</value>
+  </data>
+  <data name="&gt;&gt;Preset2SelectButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Preset2SelectButton.Parent" xml:space="preserve">
+    <value>mPresetGroupBox</value>
+  </data>
+  <data name="&gt;&gt;Preset2SelectButton.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;Preset1SaveButton.Name" xml:space="preserve">
+    <value>Preset1SaveButton</value>
+  </data>
+  <data name="&gt;&gt;Preset1SaveButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Preset1SaveButton.Parent" xml:space="preserve">
+    <value>mPresetGroupBox</value>
+  </data>
+  <data name="&gt;&gt;Preset1SaveButton.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;Preset1SelectButton.Name" xml:space="preserve">
+    <value>Preset1SelectButton</value>
+  </data>
+  <data name="&gt;&gt;Preset1SelectButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Preset1SelectButton.Parent" xml:space="preserve">
+    <value>mPresetGroupBox</value>
+  </data>
+  <data name="&gt;&gt;Preset1SelectButton.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="mPresetGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>222, 0</value>
+  </data>
+  <data name="mPresetGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>147, 126</value>
+  </data>
+  <data name="mPresetGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;mPresetGroupBox.Name" xml:space="preserve">
+    <value>mPresetGroupBox</value>
+  </data>
+  <data name="&gt;&gt;mPresetGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mPresetGroupBox.Parent" xml:space="preserve">
+    <value>CanvasTab</value>
+  </data>
+  <data name="&gt;&gt;mPresetGroupBox.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="Preset3SaveButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1902,29 +2492,89 @@
   <data name="&gt;&gt;Preset1SelectButton.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="mPresetGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>222, 0</value>
-  </data>
-  <data name="mPresetGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 126</value>
-  </data>
-  <data name="mPresetGroupBox.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;mPresetGroupBox.Name" xml:space="preserve">
-    <value>mPresetGroupBox</value>
-  </data>
-  <data name="&gt;&gt;mPresetGroupBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mPresetGroupBox.Parent" xml:space="preserve">
-    <value>CanvasTab</value>
-  </data>
-  <data name="&gt;&gt;mPresetGroupBox.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="mSizeGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left</value>
+  </data>
+  <data name="&gt;&gt;HeightComboBox.Name" xml:space="preserve">
+    <value>HeightComboBox</value>
+  </data>
+  <data name="&gt;&gt;HeightComboBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;HeightComboBox.Parent" xml:space="preserve">
+    <value>mSizeGroupBox</value>
+  </data>
+  <data name="&gt;&gt;HeightComboBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;WidthComboBox.Name" xml:space="preserve">
+    <value>WidthComboBox</value>
+  </data>
+  <data name="&gt;&gt;WidthComboBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;WidthComboBox.Parent" xml:space="preserve">
+    <value>mSizeGroupBox</value>
+  </data>
+  <data name="&gt;&gt;WidthComboBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;MaintainAspectRatioCheckBox.Name" xml:space="preserve">
+    <value>MaintainAspectRatioCheckBox</value>
+  </data>
+  <data name="&gt;&gt;MaintainAspectRatioCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;MaintainAspectRatioCheckBox.Parent" xml:space="preserve">
+    <value>mSizeGroupBox</value>
+  </data>
+  <data name="&gt;&gt;MaintainAspectRatioCheckBox.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;mHeightLabel.Name" xml:space="preserve">
+    <value>mHeightLabel</value>
+  </data>
+  <data name="&gt;&gt;mHeightLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mHeightLabel.Parent" xml:space="preserve">
+    <value>mSizeGroupBox</value>
+  </data>
+  <data name="&gt;&gt;mHeightLabel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;mWidthLabel.Name" xml:space="preserve">
+    <value>mWidthLabel</value>
+  </data>
+  <data name="&gt;&gt;mWidthLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mWidthLabel.Parent" xml:space="preserve">
+    <value>mSizeGroupBox</value>
+  </data>
+  <data name="&gt;&gt;mWidthLabel.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="mSizeGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 0</value>
+  </data>
+  <data name="mSizeGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 126</value>
+  </data>
+  <data name="mSizeGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;mSizeGroupBox.Name" xml:space="preserve">
+    <value>mSizeGroupBox</value>
+  </data>
+  <data name="&gt;&gt;mSizeGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mSizeGroupBox.Parent" xml:space="preserve">
+    <value>CanvasTab</value>
+  </data>
+  <data name="&gt;&gt;mSizeGroupBox.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="HeightComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -2112,152 +2762,6 @@
   <data name="&gt;&gt;mWidthLabel.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="mSizeGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 0</value>
-  </data>
-  <data name="mSizeGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 126</value>
-  </data>
-  <data name="mSizeGroupBox.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;mSizeGroupBox.Name" xml:space="preserve">
-    <value>mSizeGroupBox</value>
-  </data>
-  <data name="&gt;&gt;mSizeGroupBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mSizeGroupBox.Parent" xml:space="preserve">
-    <value>CanvasTab</value>
-  </data>
-  <data name="&gt;&gt;mSizeGroupBox.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="CanvasTab.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 23</value>
-  </data>
-  <data name="CanvasTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="CanvasTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>490, 132</value>
-  </data>
-  <data name="CanvasTab.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="CanvasTab.Text" xml:space="preserve">
-    <value>Image size</value>
-  </data>
-  <data name="&gt;&gt;CanvasTab.Name" xml:space="preserve">
-    <value>CanvasTab</value>
-  </data>
-  <data name="&gt;&gt;CanvasTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;CanvasTab.Parent" xml:space="preserve">
-    <value>Tabs</value>
-  </data>
-  <data name="&gt;&gt;CanvasTab.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <metadata name="mTabImages.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>299, 17</value>
-  </metadata>
-  <data name="mTabImages.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
-    <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
-        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
-        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACe
-        DwAAAk1TRnQBSQFMAgEBBAEAAZABAQGQAQEBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
-        AwABIAMAAQEBAAEYBgABGP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AMAAAZEBhwF9AVICUAFZAVQBUQFY
-        AVIBTQFYAVABSQFYAU4BRwFXAUwBRAFWAUoBQAFYAUwBQgFLAUEBOkIAAbQCogFzAjgBdgE7ATwBYAEu
-        AS9UAAGsAZoBjQP/Af0D/wH9AfcB/wH4Ae0B/gHxAeAB/QHqAdUB/AHlAcwB/wHqAc8BVwFLAUEBtwGi
-        AZMBYAFGATIBYwFJATUBYwFJATUBYwFJATUBYwFJATUBYwFJATUBYwFJATUBYwFJATUBYwFJATUBYwFJ
-        ATUBaAFOAToVAAGMAWMBZAF6AkQBjwFCAUMBjgJ6AY4CSwHEAWECYAItAwABtQJgAW4BNAE1AcsCqwYA
-        MP4SAAGsAZgBkAL/Af4D/wH+AfgB9AH/AfIB7QH8AesB4wH8AeYB2QH8AeABzgH/AeIBzwFXAUsBQQG9
-        AagBmQH8Af4B/AHnAeYB5AHnAeIB3AHmAdwB1AHlAdYBywHkAc8BwQHjAcoBuAHjAcUBsQHiAcIBrAHH
-        AaoBmAFoAU4BOg8AAewB2gHbAZ0BZwFoAcEBdgF3AckCewFkAi4BbQE1ATYBuwFmAWcByAFnAWYBkAJF
-        AVYBKwEsAXMBOAE5AagCUQF2ATgBOQG6ApUDAAP+AT4BNgH1ATMBLAHyASsBIgHuASQBHAHtA/4BwQEA
-        AaEBvwEAAZkBvwEAAZQBvgEAAY8D/gHzAcgBLgHyAcUBGwHzAcIBCwHzAb8BAAP+EgABqgGaAY0H/wH7
-        AfkB/gH2AfIB/AHxAewB/AHsAeIB+QHjAdYB/gHnAdUBVwFLAUEBxgGwAaEB/AH+AfwB2AHEAbkB1gHA
-        AbUB0wG8Aa8B+gHvAeYBzwGzAaUBzAGvAZ8BzAGvAZ8B9gHbAcgBxwGqAZgBaAFOAToPAAHgAb8BwAGm
-        Al4B5AKTAeACjAHLAnwBxQF1AXQB0QJ1AcwCbgHIAmcBowJTAbQBWAFXAcEBXQFcAboBWgFZAXABOAE5
-        AwAD/gFOAUcB+gFEATwB9wE4ATAB8wEuASYB8AP+AcEBAAGrAcEBAAGjAb8BAAGcAb8BAAGVA/4B8gHO
-        AUsB8wHKATgB8wHGASUB8wHCARMD/gkAAZEBhwF9AVICUAFZAVQBUQGrAZkBjAH/Af4F/wH+Af0B/wH5
-        AfgB/AHzAfAB/AHtAeYB/QHoAd0B/wHtAd8BVwFLAUEBzAG2AacB/AH+AvwB/gL8Af4B/AH7AfoB9wH7
-        AfUB7wF1AXEBbgFXAVQBUQMAAdIBwgG1AcsBsgGhAWgBTgE6DwAB5gHLAcwBygKNAbwCdQHlApMB4AKM
-        AdwChQHWAn0B0QF2AXUBzAFuAW0ByAFnAWYBwwJhAb4BXAFbAXUBOgE7AdwCwwMAA/4BWgFTAf4BUgFM
-        AfsBSQFCAfgBPgE2AfUD/gHDAQABtgHCAQABrgHBAQABpgHAAQABngP+AfIB0gFhAfIBzwFUAfIBzAFB
-        AfMByAEuA/4JAAGsAZoBjQP/Af0C/wGrAZsBjgP+Af8B/gn/Af4B/wH+AfkB/AH5AfAB/gH9AfEBVwFL
-        AUEBzAG2AacB/AH+AfwB2wHKAcAB2gHIAb0B2AHEAbkB+wH6AfcBowGdAZgB/QL+AVEBkwGpAQ4BEgEW
-        AbgBsQGoAXgBYAFNEgABqgGOAY8BswFqAWwB5QGXAZgB5QKTAcIBdAF1AaQBYAFhAaABXAFdAbkCaAHM
-        AW4BbQHHAWcBZgGlAlMBZAEwATEGAAP+AV0BVgH/AV0BVgH/AVcBTwH9AU4BRgH6A/4BxAEAAb8BwwEA
-        AbgBwgEAAbABwgEAAakD/gHyAdMBZgHyAdMBZgHyAdEBWwHyAc0BSwP+CQABrAGYAZAC/wH+A/8BqgGZ
-        AY8B+wGsAYUB7QGRAWUB4gGCAVYB3wF9AU8B2wF0AUYB2QFuAUAB1AFpATgB2QFpATYBVwFLAUEBzAG2
-        AacB/AH+AvwB/gL8Af4C/AH+AvwB/gH8AaMBnQGYAYgBtwHHAXQBzgHiAUkBmgGyAQ4BEgEWAXwBcgFm
-        DAAB2AHJAcoBtwFaAVsBrAFZAVoBtAFcAV0B7wGiAaMBwQF4AXkBhwJRAegCzQHbAbcBuAG+AYUBhgG4
-        AmcBzAFuAW0ByAFnAWYBjQI7AXABOAE5AW4BNgE3A/4BXQFWAf8BXQFWAf8BXQFWAf8BWgFUBP4BxQEA
-        AcUBxAEAAcABxAEAAboBwwEAAbMD/gHyAdMBZgHyAdMBZgHyAdMBZgHyAdIBYQP+CQABqgGaAY0G/wHF
-        AZ8BlAGqAZsBjAGxAZABeQHBAXkBWgGuAXABTwGqAWMBRwGZAVgBPgGYAVgBOwGaAVoBPAF6AU4BOwHM
-        AbYBpwH8Af4B/AHbAcoBwAHbAcoBwAHbAcoBwAH8Af4B/AHBAbkBtAFNAZwBswGMAeAB7gFiAb8B1wFJ
-        AZoBsgEOARIBFgHOAdsB3wkAAcYCsQHdAYUBhgH8AbYBuAH5AbEBsgH0AaoBqwF9Aj0BsQFxAXABzQGt
-        Aa8B5gHUAdUBsQF2AXUBmwFXAVgB0QJ1AcwBbgFtAccBZwFmAcQCYQF9AT0BPjD+AZEBhwF9AVICUAFZ
-        AVQBUQGrAZkBjAH/Af4F/wH+Af0B/wH5AfgB/AHzAfAB/AHtAeYB/QHoAd0B/wHtAd8BVwFLAUEJAAHM
-        AbYBpwH8Af4C/AH+AvwB/gL8Af4C/AH+AfwB+wH4AfMB1QHOAcgBVwGgAbUBjAHgAe4BYgG/AdcBSQGa
-        AbIBDgESARYBzgHbAd8GAAHFAbABsQHeAoYB/QHAAcEB+wG1AbYB+AGxAbIBkAJJAdoBkwGUAYIBRAFF
-        AY4BVQFWAcIBfgF/AZkBVwFYAdYBfgF9AdEBdgF1AcUBaQFqAZ4BUQFSAYABQAFBA/4BAAGwAf8BAAGq
-        Af8BAAGlAf8BAAGiAf8D/gEAAbcBNAEAAbEBMQEAAasBLgEAAaUBLAP+Ac4BKAEvAcIBHwEmAbYBFgEd
-        AasBDQEVA/4BrAGaAY0D/wH9Av8BqwGbAY4D/gH/Af4J/wH+Af8B/gH5AfwB+QHwAf4B/QHxAVcBSwFB
-        CQAB6wGsAY0B6gGqAYwB6gGpAYkB6QGiAX4B6AGZAXEB5gGPAWMB5QGHAVgB5gGSAWUBzQGpAZUBZQGm
-        AbcBjAHgAe4BYgG/AdcBSQGaAbIBDgESARYB1wHfAeIGAAHlAZkBmgHiAaMBpAHgAZUBlgH6AbQBtgHb
-        AZIBkwGpAW4BbwHnAaQBpQHkAp8BsAJ5AcABcwF0AdsBhQGEAc4CeAGjAl0BrgJ4AaYCcgP+AQABuAH/
-        AQABsgH/AQABrAH/AQABpwH/A/4BAAG/ATgBAAG5ATUBAAGyATIBAAGtATAD/gHdATQBOwHRASoBMwHF
-        ASEBKAG5ARcBHwP+AawBmAGQAv8B/gP/AaoBmQGPAfsBrAGFAe0BkQFlAeIBggFWAd8BfQFPAdsBdAFG
-        AdkBbgFAAdQBaQE4AdkBaQE2AVcBSwFBCQAB6wGsAY0B/wHDAaIB/gG/AZ0B/AG7AZgB+wG2AZIB+gGw
-        AYsB+AGrAYQB+AGmAXwB8wGmAYAB0gGwAZ4BcwGsAbkBjAHgAe4BbAHEAdkBfQKGAjUBkAG/AcIB2QkA
-        AbsBYAFhAfsBtgG3Af0BtwG4AdcBjgGPAYsBSAFJAYgBRwFIAdEBhgGHAeQCkwHgAowBwwJ1AWUBMwE0
-        BgAD/gEAAcAB/wEAAboB/wEAAbQB/wEAAa4B/wP+AQABxgE8AQABwAE5AQABuwE2AQABtQEzA/4B6wE/
-        AUYB4AE2AT4B1AEtATQBxwEjASsD/gGqAZoBjQb/AcUBnwGUAaoBmwGMAbEBkAF5AcEBeQFaAa4BcAFP
-        AaoBYwFHAZkBWAE+AZgBWAE7AZoBWgE8AXoBTgE7CQAB6wGsAY0B6gGqAYsB6gGqAYsB6gGoAYkB6QGi
-        AYEB6AGcAXcB5wGUAWsB5gGMAWAB5QGGAVUB5gGNAV8BygGZAX8BfQGwAbsBygG4AawBcwGFAdEBXgFs
-        Aa0CNQGQBgABvAJRAfgBsgGzAf8BuwG8Af0BuQG6AfwBtwG4AfkBsQGyAfQBqgGrAe4CowHoApkB5QGT
-        AZQB4AKMAb4BcQFyAXoCSAMAA/4BAAHHAf8BAAHCAf8BAAG9Af8BAAG2Af8D/gEAAc0BPgEAAcgBOwEA
-        AcIBOQEAAb0BNgP+AfcBSAFQAe0BQAFIAeMBOQFAAdcBMAE3A/4BqwGZAYwB/wH+Bf8B/gH9Af8B+QH4
-        AfwB8wHwAfwB7QHmAf0B6AHdAf8B7QHfAVcBSwFBMwAB3AHlAegBXgFsAa0BcAGPAd8BXgF2AdABXgFs
-        Aa0GAAHlAZQBkwH6AbUBtgH+AbkBugHKAnoBwwF0AXUB/AG2AbgB+QGxAbIBwAF6AXsBogFiAWMBuAFz
-        AXQB5QKTAcMCeAGlAWUBZgMAA/4BAAHMAf8BAAHIAf8BAAHEAf8BAAG/Af8D/gEAAdEBQAEAAc0BPgEA
-        AcoBPAEAAcQBOgP+Af8BTgFWAfkBSQFRAfABQwFKAeYBOwFCA/4BqwGbAY4D/gH/Af4J/wH+Af8B/gH5
-        AfwB+QHwAf4B/QHxAVcBSwFBNgAB1AHaAe4BXgFsAa0BXgFsAa0B4gHmAfIJAAHoAqIB3gGPAZADAAHP
-        AYoBjQH/AbsBvAH8AbYBtwGgAVcBWgMAAdoBrwGwAakBaQFoAaoBaQFqBgAw/gGqAZkBjwH7AawBhQHt
-        AZEBZQHiAYIBVgHfAX0BTwHbAXQBRgHZAW4BQAHUAWkBOAHZAWkBNgFXAUsBQVQAAc4BiAGJAdcBkAGR
-        Ac0BgQGCAc0BewF8QgABxQGfAZQBqgGbAYwBsQGQAXkBwQF5AVoBrgFwAU8BqgFjAUcBmQFYAT4BmAFY
-        ATsBmgFaATwBegFOATsSAAFCAU0BPgcAAT4DAAEoAwABQAMAASADAAEBAQABAQYAAQEWAAP/gQAG/wH8
-        AQAC/wH8AT8C/wH8AgABDwHgASMCAAH8AgABDwGAAQECAAH8AgABDwGAAQECAAHgAgABDwGAAQECAAHg
-        AgABDwHAAQMCAAHgAgABDwQAAeACAAEHBQABBwEAAQMFAAEHAQABAQGABAABBwIAAeABAwMAAQcCAAHA
-        AQEDAAE/Af8B4AHAAQEDAAE/Af8B8AHkASMDAAE/Av8B/AE/Av8BAAE/Cw==
-</value>
-  </data>
-  <data name="Tabs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 153</value>
-  </data>
-  <data name="Tabs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>498, 159</value>
-  </data>
-  <data name="Tabs.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;Tabs.Name" xml:space="preserve">
-    <value>Tabs</value>
-  </data>
-  <data name="&gt;&gt;Tabs.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Tabs.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;Tabs.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
   <data name="DepthBlurTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
@@ -2283,7 +2787,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;DepthBlurTextBox.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="PitchTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -2310,7 +2814,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;PitchTextBox.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="YawTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -2337,7 +2841,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;YawTextBox.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="HeightTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -2364,7 +2868,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;HeightTextBox.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="PerspectiveTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -2391,7 +2895,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;PerspectiveTextBox.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="ScaleTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -2418,7 +2922,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ScaleTextBox.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="mPictureBevel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2442,7 +2946,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;mPictureBevel.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>18</value>
   </data>
   <data name="PreviewPicture.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Center</value>
@@ -2469,7 +2973,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;PreviewPicture.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>17</value>
   </data>
   <data name="ScaleDragPanel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2499,7 +3003,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ScaleDragPanel.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="PerspectiveDragPanel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2529,7 +3033,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;PerspectiveDragPanel.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="HeightDragPanel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2559,7 +3063,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;HeightDragPanel.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="YawDragPanel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2589,7 +3093,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;YawDragPanel.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="PitchDragPanel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2619,7 +3123,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;PitchDragPanel.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="DepthBlurDragPanel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2649,7 +3153,67 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;DepthBlurDragPanel.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
+  </data>
+  <metadata name="mHandlerSelectMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>558, 17</value>
+  </metadata>
+  <data name="RotateHandlerMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="RotateHandlerMenuItem.Text" xml:space="preserve">
+    <value>Rotate</value>
+  </data>
+  <data name="toolStripMenuItem5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 6</value>
+  </data>
+  <data name="HueHandlerMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="HueHandlerMenuItem.Text" xml:space="preserve">
+    <value>Hue</value>
+  </data>
+  <data name="SaturationHandlerMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="SaturationHandlerMenuItem.Text" xml:space="preserve">
+    <value>Saturation</value>
+  </data>
+  <data name="BrightnessHandlerMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="BrightnessHandlerMenuItem.Text" xml:space="preserve">
+    <value>Brightness</value>
+  </data>
+  <data name="ContrastHandlerMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="ContrastHandlerMenuItem.Text" xml:space="preserve">
+    <value>Contrast</value>
+  </data>
+  <data name="toolStripMenuItem6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 6</value>
+  </data>
+  <data name="BlurHandlerMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="BlurHandlerMenuItem.Text" xml:space="preserve">
+    <value>Blur</value>
+  </data>
+  <data name="FrequencyHandlerMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="FrequencyHandlerMenuItem.Text" xml:space="preserve">
+    <value>Frequency</value>
+  </data>
+  <data name="mHandlerSelectMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>130, 170</value>
+  </data>
+  <data name="&gt;&gt;mHandlerSelectMenu.Name" xml:space="preserve">
+    <value>mHandlerSelectMenu</value>
+  </data>
+  <data name="&gt;&gt;mHandlerSelectMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -2800,6 +3364,60 @@
   </data>
   <data name="&gt;&gt;mTabImages.Type" xml:space="preserve">
     <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;RotateHandlerMenuItem.Name" xml:space="preserve">
+    <value>RotateHandlerMenuItem</value>
+  </data>
+  <data name="&gt;&gt;RotateHandlerMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem5.Name" xml:space="preserve">
+    <value>toolStripMenuItem5</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;HueHandlerMenuItem.Name" xml:space="preserve">
+    <value>HueHandlerMenuItem</value>
+  </data>
+  <data name="&gt;&gt;HueHandlerMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SaturationHandlerMenuItem.Name" xml:space="preserve">
+    <value>SaturationHandlerMenuItem</value>
+  </data>
+  <data name="&gt;&gt;SaturationHandlerMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BrightnessHandlerMenuItem.Name" xml:space="preserve">
+    <value>BrightnessHandlerMenuItem</value>
+  </data>
+  <data name="&gt;&gt;BrightnessHandlerMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ContrastHandlerMenuItem.Name" xml:space="preserve">
+    <value>ContrastHandlerMenuItem</value>
+  </data>
+  <data name="&gt;&gt;ContrastHandlerMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem6.Name" xml:space="preserve">
+    <value>toolStripMenuItem6</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BlurHandlerMenuItem.Name" xml:space="preserve">
+    <value>BlurHandlerMenuItem</value>
+  </data>
+  <data name="&gt;&gt;BlurHandlerMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;FrequencyHandlerMenuItem.Name" xml:space="preserve">
+    <value>FrequencyHandlerMenuItem</value>
+  </data>
+  <data name="&gt;&gt;FrequencyHandlerMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FlameProperties</value>

@@ -27,12 +27,16 @@
 			this.CameraTab = new System.Windows.Forms.TabPage();
 			this.RotationScrollBar = new System.Windows.Forms.HScrollBar();
 			this.RotationTextBox = new System.Windows.Forms.TextBox();
+			this.RotationDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.YPositionScrollBar = new System.Windows.Forms.HScrollBar();
 			this.YPositionTextBox = new System.Windows.Forms.TextBox();
+			this.YPositionDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.XPositionScrollBar = new System.Windows.Forms.HScrollBar();
 			this.XPositionTextBox = new System.Windows.Forms.TextBox();
+			this.XPositionDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.ZoomScrollBar = new System.Windows.Forms.HScrollBar();
 			this.ZoomTextBox = new System.Windows.Forms.TextBox();
+			this.ZoomDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.Tabs = new System.Windows.Forms.TabControl();
 			this.ImagingTab = new System.Windows.Forms.TabPage();
 			this.BackgroundPictureBox = new System.Windows.Forms.PictureBox();
@@ -44,7 +48,13 @@
 			this.BrightnessTextBox = new System.Windows.Forms.TextBox();
 			this.GammaScrollBar = new System.Windows.Forms.HScrollBar();
 			this.GammaTextBox = new System.Windows.Forms.TextBox();
+			this.GammaThresholdDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
+			this.VibrancyDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
+			this.BrightnessDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
+			this.GammaDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.PaletteTab = new System.Windows.Forms.TabPage();
+			this.PaletteSelectButton = new System.Windows.Forms.Button();
+			this.PalettePresetPictureBox = new System.Windows.Forms.PictureBox();
 			this.PaletteResetButton = new System.Windows.Forms.Button();
 			this.PaletteFromImageButton = new System.Windows.Forms.Button();
 			this.mButtonImages = new System.Windows.Forms.ImageList(this.components);
@@ -54,7 +64,6 @@
 			this.PaletteEditTextBox = new System.Windows.Forms.TextBox();
 			this.PaletteEditScrollBar = new System.Windows.Forms.HScrollBar();
 			this.RandomPresetButton = new System.Windows.Forms.Button();
-			this.PaletteEditModeComboBox = new System.Windows.Forms.ComboBox();
 			this.PalettePicture = new System.Windows.Forms.PictureBox();
 			this.mPaletteContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.RandomizePaletteMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -102,16 +111,17 @@
 			this.YawDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.PitchDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.DepthBlurDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
-			this.RotationDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
-			this.YPositionDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
-			this.XPositionDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
-			this.ZoomDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
-			this.GammaThresholdDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
-			this.VibrancyDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
-			this.BrightnessDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
-			this.GammaDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
-			this.PalettePresetPictureBox = new System.Windows.Forms.PictureBox();
-			this.PaletteSelectButton = new System.Windows.Forms.Button();
+			this.PaletteEditModeButton = new System.Windows.Forms.Button();
+			this.mHandlerSelectMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.RotateHandlerMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
+			this.HueHandlerMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.SaturationHandlerMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.BrightnessHandlerMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.ContrastHandlerMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
+			this.BlurHandlerMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.FrequencyHandlerMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.mPreviewContextMenu.SuspendLayout();
 			this.mToolbar.SuspendLayout();
 			this.CameraTab.SuspendLayout();
@@ -119,6 +129,7 @@
 			this.ImagingTab.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.BackgroundPictureBox)).BeginInit();
 			this.PaletteTab.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.PalettePresetPictureBox)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.PalettePicture)).BeginInit();
 			this.mPaletteContextMenu.SuspendLayout();
 			this.CanvasTab.SuspendLayout();
@@ -126,7 +137,7 @@
 			this.mPresetGroupBox.SuspendLayout();
 			this.mSizeGroupBox.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.PreviewPicture)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.PalettePresetPictureBox)).BeginInit();
+			this.mHandlerSelectMenu.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// mPreviewContextMenu
@@ -210,6 +221,19 @@
 			resources.ApplyResources(this.RotationTextBox, "RotationTextBox");
 			this.RotationTextBox.Name = "RotationTextBox";
 			// 
+			// RotationDragPanel
+			// 
+			this.RotationDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.RotationDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.RotationDragPanel.Default = 0D;
+			this.RotationDragPanel.DragStepping = 5D;
+			resources.ApplyResources(this.RotationDragPanel, "RotationDragPanel");
+			this.RotationDragPanel.Maximum = 360D;
+			this.RotationDragPanel.Minimum = -360D;
+			this.RotationDragPanel.Name = "RotationDragPanel";
+			this.RotationDragPanel.TextBox = this.RotationTextBox;
+			this.RotationDragPanel.Value = 0D;
+			// 
 			// YPositionScrollBar
 			// 
 			resources.ApplyResources(this.YPositionScrollBar, "YPositionScrollBar");
@@ -222,6 +246,19 @@
 			// 
 			resources.ApplyResources(this.YPositionTextBox, "YPositionTextBox");
 			this.YPositionTextBox.Name = "YPositionTextBox";
+			// 
+			// YPositionDragPanel
+			// 
+			this.YPositionDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.YPositionDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.YPositionDragPanel.Default = 0D;
+			this.YPositionDragPanel.DragStepping = 0.1D;
+			resources.ApplyResources(this.YPositionDragPanel, "YPositionDragPanel");
+			this.YPositionDragPanel.Maximum = 1000D;
+			this.YPositionDragPanel.Minimum = -1000D;
+			this.YPositionDragPanel.Name = "YPositionDragPanel";
+			this.YPositionDragPanel.TextBox = this.YPositionTextBox;
+			this.YPositionDragPanel.Value = 0D;
 			// 
 			// XPositionScrollBar
 			// 
@@ -236,6 +273,19 @@
 			resources.ApplyResources(this.XPositionTextBox, "XPositionTextBox");
 			this.XPositionTextBox.Name = "XPositionTextBox";
 			// 
+			// XPositionDragPanel
+			// 
+			this.XPositionDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.XPositionDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.XPositionDragPanel.Default = 0D;
+			this.XPositionDragPanel.DragStepping = 0.1D;
+			resources.ApplyResources(this.XPositionDragPanel, "XPositionDragPanel");
+			this.XPositionDragPanel.Maximum = 1000D;
+			this.XPositionDragPanel.Minimum = -1000D;
+			this.XPositionDragPanel.Name = "XPositionDragPanel";
+			this.XPositionDragPanel.TextBox = this.XPositionTextBox;
+			this.XPositionDragPanel.Value = 0D;
+			// 
 			// ZoomScrollBar
 			// 
 			resources.ApplyResources(this.ZoomScrollBar, "ZoomScrollBar");
@@ -248,6 +298,19 @@
 			// 
 			resources.ApplyResources(this.ZoomTextBox, "ZoomTextBox");
 			this.ZoomTextBox.Name = "ZoomTextBox";
+			// 
+			// ZoomDragPanel
+			// 
+			this.ZoomDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.ZoomDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.ZoomDragPanel.Default = 0D;
+			this.ZoomDragPanel.DragStepping = 0.1D;
+			resources.ApplyResources(this.ZoomDragPanel, "ZoomDragPanel");
+			this.ZoomDragPanel.Maximum = 100D;
+			this.ZoomDragPanel.Minimum = -100D;
+			this.ZoomDragPanel.Name = "ZoomDragPanel";
+			this.ZoomDragPanel.TextBox = this.ZoomTextBox;
+			this.ZoomDragPanel.Value = 0D;
 			// 
 			// Tabs
 			// 
@@ -339,9 +402,62 @@
 			resources.ApplyResources(this.GammaTextBox, "GammaTextBox");
 			this.GammaTextBox.Name = "GammaTextBox";
 			// 
+			// GammaThresholdDragPanel
+			// 
+			resources.ApplyResources(this.GammaThresholdDragPanel, "GammaThresholdDragPanel");
+			this.GammaThresholdDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.GammaThresholdDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.GammaThresholdDragPanel.Default = 0.001D;
+			this.GammaThresholdDragPanel.DragStepping = 0.1D;
+			this.GammaThresholdDragPanel.Maximum = 100000D;
+			this.GammaThresholdDragPanel.Minimum = 0.001D;
+			this.GammaThresholdDragPanel.Name = "GammaThresholdDragPanel";
+			this.GammaThresholdDragPanel.TextBox = this.GammaThresholdTextBox;
+			this.GammaThresholdDragPanel.Value = 0.001D;
+			// 
+			// VibrancyDragPanel
+			// 
+			this.VibrancyDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.VibrancyDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.VibrancyDragPanel.Default = 1D;
+			this.VibrancyDragPanel.DragStepping = 0.1D;
+			resources.ApplyResources(this.VibrancyDragPanel, "VibrancyDragPanel");
+			this.VibrancyDragPanel.Maximum = 3D;
+			this.VibrancyDragPanel.Minimum = 0D;
+			this.VibrancyDragPanel.Name = "VibrancyDragPanel";
+			this.VibrancyDragPanel.TextBox = this.VibrancyTextBox;
+			this.VibrancyDragPanel.Value = 1D;
+			// 
+			// BrightnessDragPanel
+			// 
+			this.BrightnessDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.BrightnessDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.BrightnessDragPanel.Default = 4D;
+			this.BrightnessDragPanel.DragStepping = 0.1D;
+			resources.ApplyResources(this.BrightnessDragPanel, "BrightnessDragPanel");
+			this.BrightnessDragPanel.Maximum = 100D;
+			this.BrightnessDragPanel.Minimum = 0.001D;
+			this.BrightnessDragPanel.Name = "BrightnessDragPanel";
+			this.BrightnessDragPanel.TextBox = this.BrightnessTextBox;
+			this.BrightnessDragPanel.Value = 4D;
+			// 
+			// GammaDragPanel
+			// 
+			this.GammaDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.GammaDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.GammaDragPanel.Default = 4D;
+			this.GammaDragPanel.DragStepping = 0.1D;
+			resources.ApplyResources(this.GammaDragPanel, "GammaDragPanel");
+			this.GammaDragPanel.Maximum = 5D;
+			this.GammaDragPanel.Minimum = 1D;
+			this.GammaDragPanel.Name = "GammaDragPanel";
+			this.GammaDragPanel.TextBox = this.GammaTextBox;
+			this.GammaDragPanel.Value = 4D;
+			// 
 			// PaletteTab
 			// 
 			this.PaletteTab.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.PaletteTab.Controls.Add(this.PaletteEditModeButton);
 			this.PaletteTab.Controls.Add(this.PaletteSelectButton);
 			this.PaletteTab.Controls.Add(this.PalettePresetPictureBox);
 			this.PaletteTab.Controls.Add(this.PaletteResetButton);
@@ -352,11 +468,24 @@
 			this.PaletteTab.Controls.Add(this.PaletteEditTextBox);
 			this.PaletteTab.Controls.Add(this.PaletteEditScrollBar);
 			this.PaletteTab.Controls.Add(this.RandomPresetButton);
-			this.PaletteTab.Controls.Add(this.PaletteEditModeComboBox);
 			this.PaletteTab.Controls.Add(this.PalettePicture);
 			this.PaletteTab.Controls.Add(this.mPaletteBevel);
 			resources.ApplyResources(this.PaletteTab, "PaletteTab");
 			this.PaletteTab.Name = "PaletteTab";
+			// 
+			// PaletteSelectButton
+			// 
+			resources.ApplyResources(this.PaletteSelectButton, "PaletteSelectButton");
+			this.PaletteSelectButton.Name = "PaletteSelectButton";
+			this.PaletteSelectButton.UseVisualStyleBackColor = true;
+			// 
+			// PalettePresetPictureBox
+			// 
+			resources.ApplyResources(this.PalettePresetPictureBox, "PalettePresetPictureBox");
+			this.PalettePresetPictureBox.BackColor = System.Drawing.Color.Black;
+			this.PalettePresetPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.PalettePresetPictureBox.Name = "PalettePresetPictureBox";
+			this.PalettePresetPictureBox.TabStop = false;
 			// 
 			// PaletteResetButton
 			// 
@@ -419,13 +548,6 @@
 			resources.ApplyResources(this.RandomPresetButton, "RandomPresetButton");
 			this.RandomPresetButton.Name = "RandomPresetButton";
 			this.RandomPresetButton.UseVisualStyleBackColor = true;
-			// 
-			// PaletteEditModeComboBox
-			// 
-			resources.ApplyResources(this.PaletteEditModeComboBox, "PaletteEditModeComboBox");
-			this.PaletteEditModeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.PaletteEditModeComboBox.FormattingEnabled = true;
-			this.PaletteEditModeComboBox.Name = "PaletteEditModeComboBox";
 			// 
 			// PalettePicture
 			// 
@@ -793,123 +915,72 @@
 			this.DepthBlurDragPanel.TextBox = this.DepthBlurTextBox;
 			this.DepthBlurDragPanel.Value = 0D;
 			// 
-			// RotationDragPanel
+			// PaletteEditModeButton
 			// 
-			this.RotationDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.RotationDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.RotationDragPanel.Default = 0D;
-			this.RotationDragPanel.DragStepping = 5D;
-			resources.ApplyResources(this.RotationDragPanel, "RotationDragPanel");
-			this.RotationDragPanel.Maximum = 360D;
-			this.RotationDragPanel.Minimum = -360D;
-			this.RotationDragPanel.Name = "RotationDragPanel";
-			this.RotationDragPanel.TextBox = this.RotationTextBox;
-			this.RotationDragPanel.Value = 0D;
+			resources.ApplyResources(this.PaletteEditModeButton, "PaletteEditModeButton");
+			this.PaletteEditModeButton.Name = "PaletteEditModeButton";
+			this.PaletteEditModeButton.UseVisualStyleBackColor = true;
+			this.PaletteEditModeButton.Click += new System.EventHandler(this.OnSelectPaletteEditHandlerClick);
 			// 
-			// YPositionDragPanel
+			// mHandlerSelectMenu
 			// 
-			this.YPositionDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.YPositionDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.YPositionDragPanel.Default = 0D;
-			this.YPositionDragPanel.DragStepping = 0.1D;
-			resources.ApplyResources(this.YPositionDragPanel, "YPositionDragPanel");
-			this.YPositionDragPanel.Maximum = 1000D;
-			this.YPositionDragPanel.Minimum = -1000D;
-			this.YPositionDragPanel.Name = "YPositionDragPanel";
-			this.YPositionDragPanel.TextBox = this.YPositionTextBox;
-			this.YPositionDragPanel.Value = 0D;
+			this.mHandlerSelectMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.RotateHandlerMenuItem,
+            this.toolStripMenuItem5,
+            this.HueHandlerMenuItem,
+            this.SaturationHandlerMenuItem,
+            this.BrightnessHandlerMenuItem,
+            this.ContrastHandlerMenuItem,
+            this.toolStripMenuItem6,
+            this.BlurHandlerMenuItem,
+            this.FrequencyHandlerMenuItem});
+			this.mHandlerSelectMenu.Name = "mHandlerSelectMenu";
+			resources.ApplyResources(this.mHandlerSelectMenu, "mHandlerSelectMenu");
 			// 
-			// XPositionDragPanel
+			// RotateHandlerMenuItem
 			// 
-			this.XPositionDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.XPositionDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.XPositionDragPanel.Default = 0D;
-			this.XPositionDragPanel.DragStepping = 0.1D;
-			resources.ApplyResources(this.XPositionDragPanel, "XPositionDragPanel");
-			this.XPositionDragPanel.Maximum = 1000D;
-			this.XPositionDragPanel.Minimum = -1000D;
-			this.XPositionDragPanel.Name = "XPositionDragPanel";
-			this.XPositionDragPanel.TextBox = this.XPositionTextBox;
-			this.XPositionDragPanel.Value = 0D;
+			this.RotateHandlerMenuItem.Name = "RotateHandlerMenuItem";
+			resources.ApplyResources(this.RotateHandlerMenuItem, "RotateHandlerMenuItem");
 			// 
-			// ZoomDragPanel
+			// toolStripMenuItem5
 			// 
-			this.ZoomDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.ZoomDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.ZoomDragPanel.Default = 0D;
-			this.ZoomDragPanel.DragStepping = 0.1D;
-			resources.ApplyResources(this.ZoomDragPanel, "ZoomDragPanel");
-			this.ZoomDragPanel.Maximum = 100D;
-			this.ZoomDragPanel.Minimum = -100D;
-			this.ZoomDragPanel.Name = "ZoomDragPanel";
-			this.ZoomDragPanel.TextBox = this.ZoomTextBox;
-			this.ZoomDragPanel.Value = 0D;
+			this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+			resources.ApplyResources(this.toolStripMenuItem5, "toolStripMenuItem5");
 			// 
-			// GammaThresholdDragPanel
+			// HueHandlerMenuItem
 			// 
-			resources.ApplyResources(this.GammaThresholdDragPanel, "GammaThresholdDragPanel");
-			this.GammaThresholdDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.GammaThresholdDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.GammaThresholdDragPanel.Default = 0.001D;
-			this.GammaThresholdDragPanel.DragStepping = 0.1D;
-			this.GammaThresholdDragPanel.Maximum = 100000D;
-			this.GammaThresholdDragPanel.Minimum = 0.001D;
-			this.GammaThresholdDragPanel.Name = "GammaThresholdDragPanel";
-			this.GammaThresholdDragPanel.TextBox = this.GammaThresholdTextBox;
-			this.GammaThresholdDragPanel.Value = 0.001D;
+			this.HueHandlerMenuItem.Name = "HueHandlerMenuItem";
+			resources.ApplyResources(this.HueHandlerMenuItem, "HueHandlerMenuItem");
 			// 
-			// VibrancyDragPanel
+			// SaturationHandlerMenuItem
 			// 
-			this.VibrancyDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.VibrancyDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.VibrancyDragPanel.Default = 1D;
-			this.VibrancyDragPanel.DragStepping = 0.1D;
-			resources.ApplyResources(this.VibrancyDragPanel, "VibrancyDragPanel");
-			this.VibrancyDragPanel.Maximum = 3D;
-			this.VibrancyDragPanel.Minimum = 0D;
-			this.VibrancyDragPanel.Name = "VibrancyDragPanel";
-			this.VibrancyDragPanel.TextBox = this.VibrancyTextBox;
-			this.VibrancyDragPanel.Value = 1D;
+			this.SaturationHandlerMenuItem.Name = "SaturationHandlerMenuItem";
+			resources.ApplyResources(this.SaturationHandlerMenuItem, "SaturationHandlerMenuItem");
 			// 
-			// BrightnessDragPanel
+			// BrightnessHandlerMenuItem
 			// 
-			this.BrightnessDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.BrightnessDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.BrightnessDragPanel.Default = 4D;
-			this.BrightnessDragPanel.DragStepping = 0.1D;
-			resources.ApplyResources(this.BrightnessDragPanel, "BrightnessDragPanel");
-			this.BrightnessDragPanel.Maximum = 100D;
-			this.BrightnessDragPanel.Minimum = 0.001D;
-			this.BrightnessDragPanel.Name = "BrightnessDragPanel";
-			this.BrightnessDragPanel.TextBox = this.BrightnessTextBox;
-			this.BrightnessDragPanel.Value = 4D;
+			this.BrightnessHandlerMenuItem.Name = "BrightnessHandlerMenuItem";
+			resources.ApplyResources(this.BrightnessHandlerMenuItem, "BrightnessHandlerMenuItem");
 			// 
-			// GammaDragPanel
+			// ContrastHandlerMenuItem
 			// 
-			this.GammaDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.GammaDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.GammaDragPanel.Default = 4D;
-			this.GammaDragPanel.DragStepping = 0.1D;
-			resources.ApplyResources(this.GammaDragPanel, "GammaDragPanel");
-			this.GammaDragPanel.Maximum = 5D;
-			this.GammaDragPanel.Minimum = 1D;
-			this.GammaDragPanel.Name = "GammaDragPanel";
-			this.GammaDragPanel.TextBox = this.GammaTextBox;
-			this.GammaDragPanel.Value = 4D;
+			this.ContrastHandlerMenuItem.Name = "ContrastHandlerMenuItem";
+			resources.ApplyResources(this.ContrastHandlerMenuItem, "ContrastHandlerMenuItem");
 			// 
-			// PalettePresetPictureBox
+			// toolStripMenuItem6
 			// 
-			resources.ApplyResources(this.PalettePresetPictureBox, "PalettePresetPictureBox");
-			this.PalettePresetPictureBox.BackColor = System.Drawing.Color.Black;
-			this.PalettePresetPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.PalettePresetPictureBox.Name = "PalettePresetPictureBox";
-			this.PalettePresetPictureBox.TabStop = false;
+			this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+			resources.ApplyResources(this.toolStripMenuItem6, "toolStripMenuItem6");
 			// 
-			// PaletteSelectButton
+			// BlurHandlerMenuItem
 			// 
-			resources.ApplyResources(this.PaletteSelectButton, "PaletteSelectButton");
-			this.PaletteSelectButton.Name = "PaletteSelectButton";
-			this.PaletteSelectButton.UseVisualStyleBackColor = true;
+			this.BlurHandlerMenuItem.Name = "BlurHandlerMenuItem";
+			resources.ApplyResources(this.BlurHandlerMenuItem, "BlurHandlerMenuItem");
+			// 
+			// FrequencyHandlerMenuItem
+			// 
+			this.FrequencyHandlerMenuItem.Name = "FrequencyHandlerMenuItem";
+			resources.ApplyResources(this.FrequencyHandlerMenuItem, "FrequencyHandlerMenuItem");
 			// 
 			// FlameProperties
 			// 
@@ -945,6 +1016,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.BackgroundPictureBox)).EndInit();
 			this.PaletteTab.ResumeLayout(false);
 			this.PaletteTab.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.PalettePresetPictureBox)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.PalettePicture)).EndInit();
 			this.mPaletteContextMenu.ResumeLayout(false);
 			this.CanvasTab.ResumeLayout(false);
@@ -952,7 +1024,7 @@
 			this.mPresetGroupBox.ResumeLayout(false);
 			this.mSizeGroupBox.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.PreviewPicture)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.PalettePresetPictureBox)).EndInit();
+			this.mHandlerSelectMenu.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -1031,7 +1103,6 @@
 		private System.Windows.Forms.Label mPaletteBevel;
 		private System.Windows.Forms.Label mPictureBevel;
 		public System.Windows.Forms.PictureBox PreviewPicture;
-		public System.Windows.Forms.ComboBox PaletteEditModeComboBox;
 		public System.Windows.Forms.Button RandomPresetButton;
 		public System.Windows.Forms.TextBox PaletteEditTextBox;
 		public System.Windows.Forms.Button CopyPaletteButton;
@@ -1055,5 +1126,16 @@
 		public System.Windows.Forms.ToolStripMenuItem PastePaletteMenuItem;
 		public System.Windows.Forms.PictureBox PalettePresetPictureBox;
 		public System.Windows.Forms.Button PaletteSelectButton;
+		public System.Windows.Forms.Button PaletteEditModeButton;
+		private System.Windows.Forms.ContextMenuStrip mHandlerSelectMenu;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem6;
+		public System.Windows.Forms.ToolStripMenuItem RotateHandlerMenuItem;
+		public System.Windows.Forms.ToolStripMenuItem HueHandlerMenuItem;
+		public System.Windows.Forms.ToolStripMenuItem SaturationHandlerMenuItem;
+		public System.Windows.Forms.ToolStripMenuItem BrightnessHandlerMenuItem;
+		public System.Windows.Forms.ToolStripMenuItem ContrastHandlerMenuItem;
+		public System.Windows.Forms.ToolStripMenuItem BlurHandlerMenuItem;
+		public System.Windows.Forms.ToolStripMenuItem FrequencyHandlerMenuItem;
 	}
 }
