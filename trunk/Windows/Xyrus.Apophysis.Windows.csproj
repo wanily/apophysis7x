@@ -243,6 +243,12 @@
     <Compile Include="Windows\Controls\IteratorSelectComboBox.Designer.cs">
       <DependentUpon>IteratorSelectComboBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Forms\About.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\Forms\About.Designer.cs">
+      <DependentUpon>About.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Forms\Banner.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -370,6 +376,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\Controls\EditorCanvas.resx">
       <DependentUpon>EditorCanvas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\Forms\About.resx">
+      <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\Forms\Banner.resx">
       <DependentUpon>Banner.cs</DependentUpon>

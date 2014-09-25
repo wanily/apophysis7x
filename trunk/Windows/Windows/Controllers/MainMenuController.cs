@@ -54,6 +54,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.RandomizeFlameMenuItem.Click += OnRandomizeClick;
 			View.SummarizeMenuItem.Click += OnSummarizeClick;
 
+			View.OpenAboutMenuItem.Click += OnAboutClick;
+
 			UpdateButtonStates();
 		}
 		protected override void DetachView()
@@ -88,6 +90,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.ResetCameraMenuItem.Click -= OnResetCameraClick;
 			View.RandomizeFlameMenuItem.Click -= OnRandomizeClick;
 			View.SummarizeMenuItem.Click -= OnSummarizeClick;
+
+			View.OpenAboutMenuItem.Click -= OnAboutClick;
 		}
 
 		internal void OnNewFlameClick(object sender, EventArgs e)
@@ -288,6 +292,15 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				return;
 
 			mParent.MessagesController.Summarize(flame);
+		}
+
+		internal void OnAboutClick(object sender, EventArgs e)
+		{
+			using (var about = new About())
+			{
+				about.Owner = ApophysisApplication.MainWindow.View;
+				about.ShowDialog();
+			}
 		}
 
 		public void UpdateButtonStates()
