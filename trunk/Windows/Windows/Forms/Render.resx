@@ -318,6 +318,9 @@
   <data name="SaveParametersCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <data name="SaveParametersCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="SaveParametersCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 58</value>
   </data>
@@ -584,7 +587,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAA+
-        CgAAAk1TRnQBSQFMAgEBAwEAAcgBAAHIAQABEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        CgAAAk1TRnQBSQFMAgEBAwEAAeABAAHgAQABEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABEAMAAQEBAAEYBgABDNUAAe8BzgHPAcMBZAFlAaoBVQFWAaQBUgFTAZ8BTwFQAZoCTQGUAkoBjwJH
         AYkCRAGDAkEBeAE7ATwBeAE7ATwBcgI5AW4BNgE3lgABzwFrAWwB8wGOAY8B5gGAAYEBqgFEASQBRwEy
         ASEBwwG0AasBxgG7AbMBygHBAbwBzgHIAcQBVgFNAUgBngE+ATMBnAE9ATYBmAE5ATEBcgI5AwABdQGE
@@ -1176,9 +1179,6 @@
   <data name="&gt;&gt;SizeGroupBox.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="SettingsTab.ImageIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="SettingsTab.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 23</value>
   </data>
@@ -1210,7 +1210,7 @@
     <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="MessagesTextBox.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Consolas, 9.75pt</value>
+    <value>Consolas, 8.25pt</value>
   </data>
   <data name="MessagesTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 6</value>
@@ -1238,9 +1238,6 @@
   </data>
   <data name="&gt;&gt;MessagesTextBox.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="MessagesTab.ImageIndex" type="System.Int32, mscorlib">
-    <value>1</value>
   </data>
   <data name="MessagesTab.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 23</value>
@@ -1277,7 +1274,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACK
-        BwAAAk1TRnQBSQFMAgEBAgEAAdABAAHQAQABEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        BwAAAk1TRnQBSQFMAgEBAgEAAegBAAHoAQABEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABEAMAAQEBAAEYBgABDP8ACQABtwGiAZMBYwFJATUBYwFJATUBYwFJATUBYwFJATUBYwFJATUBYwFJ
         ATUBYwFJATUBYwFJATUBYwFJATUBYwFJATVpAAG3AaIBkwFgAUYBMgFjAUkBNQFjAUkBNQFjAUkBNQFj
         AUkBNQFjAUkBNQFjAUkBNQFjAUkBNQFjAUkBNQFjAUkBNQFoAU4BOhIAAbcBogGTA/8BtwGiAZMBsAGe
@@ -1335,6 +1332,9 @@
   </data>
   <data name="ProgressBar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left, Right</value>
+  </data>
+  <data name="ProgressBar.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="ProgressBar.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 417</value>
@@ -1413,6 +1413,9 @@
   </data>
   <data name="CancelButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
+  </data>
+  <data name="CancelButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="CancelButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>360, 452</value>
@@ -2770,6 +2773,9 @@
         0P/Q0ND/0NDQ/9DQ0P/R0dH/1tbW/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
 </value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Render</value>

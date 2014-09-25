@@ -274,6 +274,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			{
 				View.MessagesTextBox.Text += args.Message + Environment.NewLine;
 				MessageCenter.SendMessage(args.Message);
+				View.MessagesTextBox.SelectionStart = View.MessagesTextBox.Text.Length;
 			}));
 		}
 		private void OnRenderExit(object sender, EventArgs e)

@@ -45,7 +45,6 @@
 			this.DensityComboBox = new System.Windows.Forms.ComboBox();
 			this.mDensitylabel = new System.Windows.Forms.Label();
 			this.FilterRadiusTextBox = new System.Windows.Forms.TextBox();
-			this.FilterRadiusDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.SelectFolderButton = new System.Windows.Forms.Button();
 			this.mButtonImages = new System.Windows.Forms.ImageList(this.components);
 			this.GoToFolderButton = new System.Windows.Forms.Button();
@@ -76,6 +75,7 @@
 			this.CancelButton = new System.Windows.Forms.Button();
 			this.PauseButton = new System.Windows.Forms.Button();
 			this.StartButton = new System.Windows.Forms.Button();
+			this.FilterRadiusDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.Tabs.SuspendLayout();
 			this.SettingsTab.SuspendLayout();
 			this.mCompletionGroupBox.SuspendLayout();
@@ -239,19 +239,6 @@
 			// 
 			resources.ApplyResources(this.FilterRadiusTextBox, "FilterRadiusTextBox");
 			this.FilterRadiusTextBox.Name = "FilterRadiusTextBox";
-			// 
-			// FilterRadiusDragPanel
-			// 
-			this.FilterRadiusDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.FilterRadiusDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.FilterRadiusDragPanel.Default = 0D;
-			this.FilterRadiusDragPanel.DragStepping = 5D;
-			resources.ApplyResources(this.FilterRadiusDragPanel, "FilterRadiusDragPanel");
-			this.FilterRadiusDragPanel.Maximum = 1.7976931348623157E+308D;
-			this.FilterRadiusDragPanel.Minimum = 0D;
-			this.FilterRadiusDragPanel.Name = "FilterRadiusDragPanel";
-			this.FilterRadiusDragPanel.TextBox = this.FilterRadiusTextBox;
-			this.FilterRadiusDragPanel.Value = 0D;
 			// 
 			// SelectFolderButton
 			// 
@@ -477,6 +464,19 @@
 			resources.ApplyResources(this.StartButton, "StartButton");
 			this.StartButton.Name = "StartButton";
 			this.StartButton.UseVisualStyleBackColor = true;
+			// 
+			// FilterRadiusDragPanel
+			// 
+			this.FilterRadiusDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.FilterRadiusDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.FilterRadiusDragPanel.Default = 0D;
+			this.FilterRadiusDragPanel.DragStepping = 5D;
+			resources.ApplyResources(this.FilterRadiusDragPanel, "FilterRadiusDragPanel");
+			this.FilterRadiusDragPanel.Maximum = 1.7976931348623157E+308D;
+			this.FilterRadiusDragPanel.Minimum = 0D;
+			this.FilterRadiusDragPanel.Name = "FilterRadiusDragPanel";
+			this.FilterRadiusDragPanel.TextBox = this.FilterRadiusTextBox;
+			this.FilterRadiusDragPanel.Value = 0D;
 			// 
 			// Render
 			// 
