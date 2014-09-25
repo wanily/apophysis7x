@@ -26,11 +26,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		public void Update()
 		{
-
+			View.CameraEditUseScaleCheckBox.Checked = ApophysisSettings.Editor.CameraEditUseScale;
 		}
 		public void WriteSettings()
 		{
-
+			ApophysisSettings.Editor.CameraEditUseScale = View.CameraEditUseScaleCheckBox.Checked;
 		}
 	}
 }

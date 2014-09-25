@@ -97,6 +97,15 @@ namespace Xyrus.Apophysis.Windows.Controls {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Locate plugin directory.
+        /// </summary>
+        internal static string LocatePluginDirectoryHelpString {
+            get {
+                return ResourceManager.GetString("LocatePluginDirectoryHelpString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Pause.
         /// </summary>
         internal static string Pause {
@@ -147,6 +156,15 @@ namespace Xyrus.Apophysis.Windows.Controls {
         internal static string Resume {
             get {
                 return ResourceManager.GetString("Resume", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select autosave target....
+        /// </summary>
+        internal static string SelectAutosaveTarget {
+            get {
+                return ResourceManager.GetString("SelectAutosaveTarget", resourceCulture);
             }
         }
     }

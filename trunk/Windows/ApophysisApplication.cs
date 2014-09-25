@@ -74,7 +74,14 @@ namespace Xyrus.Apophysis
 				Application.DoEvents();
 			}
 
-			var pluginDir = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath) ?? string.Empty, ApophysisSettings.Common.PluginDirectoryName);
+			var defaultPluginDir = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath) ?? string.Empty, "Plugins");
+			var pluginDir = ApophysisSettings.Common.PluginDirectoryName;
+
+			if (string.IsNullOrEmpty(pluginDir) || string.IsNullOrEmpty(pluginDir.Trim()))
+			{
+				pluginDir = ApophysisSettings.Common.PluginDirectoryName = defaultPluginDir;
+			}
+
 			if (Directory.Exists(pluginDir))
 			{
 				var files = Directory.GetFiles(pluginDir, "*.dll");

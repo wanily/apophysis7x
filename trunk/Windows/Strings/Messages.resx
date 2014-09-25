@@ -254,4 +254,13 @@ Location: {2}</value>
 	<data name="GenericProblemListExceedsMaxSizeMessage" xml:space="preserve">
     <value>A full list of problems can be found in the message window (F8)</value>
   </data>
+	<data name="DirectoryDoesntExistError" xml:space="preserve">
+    <value>Directory must exist</value>
+  </data>
+	<data name="DirectoryDoesntExistUiError" xml:space="preserve">
+    <value>The directory must exist.</value>
+  </data>
+	<data name="SettingsRequireRestartNotice" xml:space="preserve">
+    <value>Some settings will be applied once Apophysis restarted.</value>
+  </data>
 </root>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 
 namespace Xyrus.Apophysis.Math
 {
@@ -25,7 +26,6 @@ namespace Xyrus.Apophysis.Math
 		{
 			return Color.FromArgb(255 - color.R, 255 - color.G, 255 - color.B);
 		}
-
 		public static Color ColorFromAhsb(int a, float h, float s, float b)
 		{
 			if (0 > a || 255 < a)
@@ -103,6 +103,85 @@ namespace Xyrus.Apophysis.Math
 				default:
 					return Color.FromArgb(a, max, mid, min);
 			}
+		}
+
+		public static bool CheckDirectory(ref string path, bool emptyAllowed = false, bool requiresWriteAccess = false)
+		{
+			if (!emptyAllowed && (string.IsNullOrEmpty(path) || string.IsNullOrEmpty(path.Trim())))
+			{
+				return false;
+			}
+
+			var expandedPath = Environment.ExpandEnvironmentVariables(path);
+			if (!Directory.Exists(expandedPath))
+			{
+				return false;
+			}
+
+			if (requiresWriteAccess)
+			{
+				var testFilePath = Path.Combine(expandedPath, @"~" + DateTime.Now.Ticks.ToString("X8"));
+				try
+				{
+					File.WriteAllText(testFilePath, string.Empty);
+				}
+				catch (Exception)
+				{
+					return false;
+				}
+				finally
+				{
+					try
+					{
+						if (File.Exists(testFilePath))
+							File.Delete(testFilePath);
+					}
+					// ReSharper disable once EmptyGeneralCatchClause
+					catch (Exception) { }
+				}
+			}
+
+			path = expandedPath;
+			return true;
+		}
+		public static bool CheckFile(ref string path, bool emptyAllowed = false, bool requiresExist = true)
+		{
+			if (!emptyAllowed && (string.IsNullOrEmpty(path) || string.IsNullOrEmpty(path.Trim())))
+			{
+				return false;
+			}
+
+			var expandedPath = Environment.ExpandEnvironmentVariables(path);
+			if (requiresExist && !File.Exists(expandedPath))
+			{
+				return false;
+			}
+
+			if (!requiresExist)
+			{
+				var testFilePath = Path.Combine(expandedPath, @"~" + DateTime.Now.Ticks.ToString("X8"));
+				try
+				{
+					File.WriteAllText(testFilePath, string.Empty);
+				}
+				catch (Exception)
+				{
+					return false;
+				}
+				finally
+				{
+					try
+					{
+						if (File.Exists(testFilePath))
+							File.Delete(testFilePath);
+					}
+					// ReSharper disable once EmptyGeneralCatchClause
+					catch (Exception) { }
+				}
+			}
+
+			path = expandedPath;
+			return true;
 		}
 	}
 }

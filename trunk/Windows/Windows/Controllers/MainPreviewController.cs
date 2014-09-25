@@ -65,7 +65,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.ShowGuidelines = ApophysisSettings.View.ShowGuidelines;
 			View.ShowTransparency = ApophysisSettings.View.ShowTransparency;
 			View.CameraEditMode = ApophysisSettings.Editor.CameraEditMode;
-			View.CameraEditUseScale = ApophysisSettings.Editor.CameraEditUseScale;
+
+			ReloadSettings();
 
 			View.PreviewDensityComboBox.SelectedIndexChanged += OnDensityChanged;
 			View.PreviewDensityComboBox.LostFocus += OnDensityChanged;
@@ -104,7 +105,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			ApophysisSettings.View.ShowTransparency = View.ShowTransparency;
 			ApophysisSettings.View.FitMainPreviewImage = FitImage;
 			ApophysisSettings.Editor.CameraEditMode = View.CameraEditMode;
-			ApophysisSettings.Editor.CameraEditUseScale = View.CameraEditUseScale;
 		}
 
 		private void SetProgress(double progress)
@@ -287,6 +287,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			mElapsedTimer.SetStartingTime();
 			mRenderer.StartCreateBitmap(mFlame, density, renderSize, OnRendererFinished);
+		}
+		public void ReloadSettings()
+		{
+			View.CameraEditUseScale = ApophysisSettings.Editor.CameraEditUseScale;
 		}
 	}
 }

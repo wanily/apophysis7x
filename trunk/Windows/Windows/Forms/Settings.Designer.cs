@@ -34,34 +34,34 @@
 			this.OkButton = new System.Windows.Forms.Button();
 			this.mTabs = new System.Windows.Forms.TabControl();
 			this.mCommonPage = new System.Windows.Forms.TabPage();
-			this.mViewPage = new System.Windows.Forms.TabPage();
-			this.mPreviewPage = new System.Windows.Forms.TabPage();
-			this.mPluginPathLabel = new System.Windows.Forms.Label();
-			this.PluginPathTextBox = new System.Windows.Forms.TextBox();
-			this.PluginPathButton = new System.Windows.Forms.Button();
-			this.mButtonImages = new System.Windows.Forms.ImageList(this.components);
-			this.mJpegQualityLabel = new System.Windows.Forms.Label();
-			this.JpegQualityComboBox = new System.Windows.Forms.ComboBox();
-			this.PngTransparencyComboBox = new System.Windows.Forms.ComboBox();
-			this.mPngTransparencyLabel = new System.Windows.Forms.Label();
-			this.ThreadsComboBox = new System.Windows.Forms.ComboBox();
-			this.mThreadsLabel = new System.Windows.Forms.Label();
-			this.WarnOnMissingPluginsCheckBox = new System.Windows.Forms.CheckBox();
-			this.ConfirmDeleteCheckBox = new System.Windows.Forms.CheckBox();
-			this.CameraEditUseScaleCheckBox = new System.Windows.Forms.CheckBox();
-			this.ConfirmStopRendering = new System.Windows.Forms.CheckBox();
-			this.mAutosaveGroupBox = new System.Windows.Forms.GroupBox();
-			this.AutosavePathButton = new System.Windows.Forms.Button();
-			this.AutosavePathTextBox = new System.Windows.Forms.TextBox();
-			this.mAutosavePathLabel = new System.Windows.Forms.Label();
-			this.AutosaveThresholdComboBox = new System.Windows.Forms.ComboBox();
-			this.mAutosaveThesholdLabel = new System.Windows.Forms.Label();
-			this.AutosaveEnabledCheckBox = new System.Windows.Forms.CheckBox();
+			this.label1 = new System.Windows.Forms.Label();
+			this.OldVariationStyleCheckBox = new System.Windows.Forms.CheckBox();
 			this.NamePrefixTextBox = new System.Windows.Forms.TextBox();
 			this.mNamePrefixLabel = new System.Windows.Forms.Label();
-			this.OldVariationStyleCheckBox = new System.Windows.Forms.CheckBox();
 			this.mRestartNoticeLabel = new System.Windows.Forms.Label();
-			this.label1 = new System.Windows.Forms.Label();
+			this.mAutosaveGroupBox = new System.Windows.Forms.GroupBox();
+			this.AutosaveEnabledCheckBox = new System.Windows.Forms.CheckBox();
+			this.AutosaveThresholdComboBox = new System.Windows.Forms.ComboBox();
+			this.mAutosaveThesholdLabel = new System.Windows.Forms.Label();
+			this.AutosavePathButton = new System.Windows.Forms.Button();
+			this.mButtonImages = new System.Windows.Forms.ImageList(this.components);
+			this.AutosavePathTextBox = new System.Windows.Forms.TextBox();
+			this.mAutosavePathLabel = new System.Windows.Forms.Label();
+			this.ConfirmStopRendering = new System.Windows.Forms.CheckBox();
+			this.CameraEditUseScaleCheckBox = new System.Windows.Forms.CheckBox();
+			this.ConfirmDeleteCheckBox = new System.Windows.Forms.CheckBox();
+			this.WarnOnMissingPluginsCheckBox = new System.Windows.Forms.CheckBox();
+			this.ThreadsComboBox = new System.Windows.Forms.ComboBox();
+			this.mThreadsLabel = new System.Windows.Forms.Label();
+			this.PngTransparencyComboBox = new System.Windows.Forms.ComboBox();
+			this.mPngTransparencyLabel = new System.Windows.Forms.Label();
+			this.JpegQualityComboBox = new System.Windows.Forms.ComboBox();
+			this.mJpegQualityLabel = new System.Windows.Forms.Label();
+			this.PluginPathButton = new System.Windows.Forms.Button();
+			this.PluginPathTextBox = new System.Windows.Forms.TextBox();
+			this.mPluginPathLabel = new System.Windows.Forms.Label();
+			this.mViewPage = new System.Windows.Forms.TabPage();
+			this.mPreviewPage = new System.Windows.Forms.TabPage();
 			this.mTabs.SuspendLayout();
 			this.mCommonPage.SuspendLayout();
 			this.mAutosaveGroupBox.SuspendLayout();
@@ -114,36 +114,76 @@
 			resources.ApplyResources(this.mCommonPage, "mCommonPage");
 			this.mCommonPage.Name = "mCommonPage";
 			// 
-			// mViewPage
+			// label1
 			// 
-			this.mViewPage.BackColor = System.Drawing.SystemColors.ControlLightLight;
-			resources.ApplyResources(this.mViewPage, "mViewPage");
-			this.mViewPage.Name = "mViewPage";
+			resources.ApplyResources(this.label1, "label1");
+			this.label1.Name = "label1";
 			// 
-			// mPreviewPage
+			// OldVariationStyleCheckBox
 			// 
-			this.mPreviewPage.BackColor = System.Drawing.SystemColors.ControlLightLight;
-			resources.ApplyResources(this.mPreviewPage, "mPreviewPage");
-			this.mPreviewPage.Name = "mPreviewPage";
+			resources.ApplyResources(this.OldVariationStyleCheckBox, "OldVariationStyleCheckBox");
+			this.OldVariationStyleCheckBox.Name = "OldVariationStyleCheckBox";
+			this.OldVariationStyleCheckBox.UseVisualStyleBackColor = true;
 			// 
-			// mPluginPathLabel
+			// NamePrefixTextBox
 			// 
-			this.mPluginPathLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			resources.ApplyResources(this.mPluginPathLabel, "mPluginPathLabel");
-			this.mPluginPathLabel.Name = "mPluginPathLabel";
+			resources.ApplyResources(this.NamePrefixTextBox, "NamePrefixTextBox");
+			this.NamePrefixTextBox.Name = "NamePrefixTextBox";
 			// 
-			// PluginPathTextBox
+			// mNamePrefixLabel
 			// 
-			resources.ApplyResources(this.PluginPathTextBox, "PluginPathTextBox");
-			this.PluginPathTextBox.Name = "PluginPathTextBox";
-			this.PluginPathTextBox.ReadOnly = true;
+			this.mNamePrefixLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			resources.ApplyResources(this.mNamePrefixLabel, "mNamePrefixLabel");
+			this.mNamePrefixLabel.Name = "mNamePrefixLabel";
 			// 
-			// PluginPathButton
+			// mRestartNoticeLabel
 			// 
-			resources.ApplyResources(this.PluginPathButton, "PluginPathButton");
-			this.PluginPathButton.ImageList = this.mButtonImages;
-			this.PluginPathButton.Name = "PluginPathButton";
-			this.PluginPathButton.UseVisualStyleBackColor = true;
+			resources.ApplyResources(this.mRestartNoticeLabel, "mRestartNoticeLabel");
+			this.mRestartNoticeLabel.Name = "mRestartNoticeLabel";
+			// 
+			// mAutosaveGroupBox
+			// 
+			resources.ApplyResources(this.mAutosaveGroupBox, "mAutosaveGroupBox");
+			this.mAutosaveGroupBox.Controls.Add(this.AutosaveEnabledCheckBox);
+			this.mAutosaveGroupBox.Controls.Add(this.AutosaveThresholdComboBox);
+			this.mAutosaveGroupBox.Controls.Add(this.mAutosaveThesholdLabel);
+			this.mAutosaveGroupBox.Controls.Add(this.AutosavePathButton);
+			this.mAutosaveGroupBox.Controls.Add(this.AutosavePathTextBox);
+			this.mAutosaveGroupBox.Controls.Add(this.mAutosavePathLabel);
+			this.mAutosaveGroupBox.Name = "mAutosaveGroupBox";
+			this.mAutosaveGroupBox.TabStop = false;
+			// 
+			// AutosaveEnabledCheckBox
+			// 
+			resources.ApplyResources(this.AutosaveEnabledCheckBox, "AutosaveEnabledCheckBox");
+			this.AutosaveEnabledCheckBox.Name = "AutosaveEnabledCheckBox";
+			this.AutosaveEnabledCheckBox.UseVisualStyleBackColor = true;
+			// 
+			// AutosaveThresholdComboBox
+			// 
+			this.AutosaveThresholdComboBox.FormattingEnabled = true;
+			this.AutosaveThresholdComboBox.Items.AddRange(new object[] {
+            resources.GetString("AutosaveThresholdComboBox.Items"),
+            resources.GetString("AutosaveThresholdComboBox.Items1"),
+            resources.GetString("AutosaveThresholdComboBox.Items2"),
+            resources.GetString("AutosaveThresholdComboBox.Items3"),
+            resources.GetString("AutosaveThresholdComboBox.Items4")});
+			resources.ApplyResources(this.AutosaveThresholdComboBox, "AutosaveThresholdComboBox");
+			this.AutosaveThresholdComboBox.Name = "AutosaveThresholdComboBox";
+			this.AutosaveThresholdComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnNumericTextBoxKeyPress);
+			// 
+			// mAutosaveThesholdLabel
+			// 
+			this.mAutosaveThesholdLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			resources.ApplyResources(this.mAutosaveThesholdLabel, "mAutosaveThesholdLabel");
+			this.mAutosaveThesholdLabel.Name = "mAutosaveThesholdLabel";
+			// 
+			// AutosavePathButton
+			// 
+			resources.ApplyResources(this.AutosavePathButton, "AutosavePathButton");
+			this.AutosavePathButton.ImageList = this.mButtonImages;
+			this.AutosavePathButton.Name = "AutosavePathButton";
+			this.AutosavePathButton.UseVisualStyleBackColor = true;
 			// 
 			// mButtonImages
 			// 
@@ -151,38 +191,41 @@
 			this.mButtonImages.TransparentColor = System.Drawing.Color.Fuchsia;
 			this.mButtonImages.Images.SetKeyName(0, "OpenBatch.bmp");
 			// 
-			// mJpegQualityLabel
+			// AutosavePathTextBox
 			// 
-			this.mJpegQualityLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			resources.ApplyResources(this.mJpegQualityLabel, "mJpegQualityLabel");
-			this.mJpegQualityLabel.Name = "mJpegQualityLabel";
+			resources.ApplyResources(this.AutosavePathTextBox, "AutosavePathTextBox");
+			this.AutosavePathTextBox.Name = "AutosavePathTextBox";
+			this.AutosavePathTextBox.ReadOnly = true;
 			// 
-			// JpegQualityComboBox
+			// mAutosavePathLabel
 			// 
-			this.JpegQualityComboBox.FormattingEnabled = true;
-			this.JpegQualityComboBox.Items.AddRange(new object[] {
-            resources.GetString("JpegQualityComboBox.Items"),
-            resources.GetString("JpegQualityComboBox.Items1"),
-            resources.GetString("JpegQualityComboBox.Items2"),
-            resources.GetString("JpegQualityComboBox.Items3")});
-			resources.ApplyResources(this.JpegQualityComboBox, "JpegQualityComboBox");
-			this.JpegQualityComboBox.Name = "JpegQualityComboBox";
+			this.mAutosavePathLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			resources.ApplyResources(this.mAutosavePathLabel, "mAutosavePathLabel");
+			this.mAutosavePathLabel.Name = "mAutosavePathLabel";
 			// 
-			// PngTransparencyComboBox
+			// ConfirmStopRendering
 			// 
-			this.PngTransparencyComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.PngTransparencyComboBox.FormattingEnabled = true;
-			this.PngTransparencyComboBox.Items.AddRange(new object[] {
-            resources.GetString("PngTransparencyComboBox.Items"),
-            resources.GetString("PngTransparencyComboBox.Items1")});
-			resources.ApplyResources(this.PngTransparencyComboBox, "PngTransparencyComboBox");
-			this.PngTransparencyComboBox.Name = "PngTransparencyComboBox";
+			resources.ApplyResources(this.ConfirmStopRendering, "ConfirmStopRendering");
+			this.ConfirmStopRendering.Name = "ConfirmStopRendering";
+			this.ConfirmStopRendering.UseVisualStyleBackColor = true;
 			// 
-			// mPngTransparencyLabel
+			// CameraEditUseScaleCheckBox
 			// 
-			this.mPngTransparencyLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			resources.ApplyResources(this.mPngTransparencyLabel, "mPngTransparencyLabel");
-			this.mPngTransparencyLabel.Name = "mPngTransparencyLabel";
+			resources.ApplyResources(this.CameraEditUseScaleCheckBox, "CameraEditUseScaleCheckBox");
+			this.CameraEditUseScaleCheckBox.Name = "CameraEditUseScaleCheckBox";
+			this.CameraEditUseScaleCheckBox.UseVisualStyleBackColor = true;
+			// 
+			// ConfirmDeleteCheckBox
+			// 
+			resources.ApplyResources(this.ConfirmDeleteCheckBox, "ConfirmDeleteCheckBox");
+			this.ConfirmDeleteCheckBox.Name = "ConfirmDeleteCheckBox";
+			this.ConfirmDeleteCheckBox.UseVisualStyleBackColor = true;
+			// 
+			// WarnOnMissingPluginsCheckBox
+			// 
+			resources.ApplyResources(this.WarnOnMissingPluginsCheckBox, "WarnOnMissingPluginsCheckBox");
+			this.WarnOnMissingPluginsCheckBox.Name = "WarnOnMissingPluginsCheckBox";
+			this.WarnOnMissingPluginsCheckBox.UseVisualStyleBackColor = true;
 			// 
 			// ThreadsComboBox
 			// 
@@ -211,118 +254,76 @@
 			resources.ApplyResources(this.mThreadsLabel, "mThreadsLabel");
 			this.mThreadsLabel.Name = "mThreadsLabel";
 			// 
-			// WarnOnMissingPluginsCheckBox
+			// PngTransparencyComboBox
 			// 
-			resources.ApplyResources(this.WarnOnMissingPluginsCheckBox, "WarnOnMissingPluginsCheckBox");
-			this.WarnOnMissingPluginsCheckBox.Name = "WarnOnMissingPluginsCheckBox";
-			this.WarnOnMissingPluginsCheckBox.UseVisualStyleBackColor = true;
+			this.PngTransparencyComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.PngTransparencyComboBox.FormattingEnabled = true;
+			this.PngTransparencyComboBox.Items.AddRange(new object[] {
+            resources.GetString("PngTransparencyComboBox.Items"),
+            resources.GetString("PngTransparencyComboBox.Items1")});
+			resources.ApplyResources(this.PngTransparencyComboBox, "PngTransparencyComboBox");
+			this.PngTransparencyComboBox.Name = "PngTransparencyComboBox";
 			// 
-			// ConfirmDeleteCheckBox
+			// mPngTransparencyLabel
 			// 
-			resources.ApplyResources(this.ConfirmDeleteCheckBox, "ConfirmDeleteCheckBox");
-			this.ConfirmDeleteCheckBox.Name = "ConfirmDeleteCheckBox";
-			this.ConfirmDeleteCheckBox.UseVisualStyleBackColor = true;
+			this.mPngTransparencyLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			resources.ApplyResources(this.mPngTransparencyLabel, "mPngTransparencyLabel");
+			this.mPngTransparencyLabel.Name = "mPngTransparencyLabel";
 			// 
-			// CameraEditUseScaleCheckBox
+			// JpegQualityComboBox
 			// 
-			resources.ApplyResources(this.CameraEditUseScaleCheckBox, "CameraEditUseScaleCheckBox");
-			this.CameraEditUseScaleCheckBox.Name = "CameraEditUseScaleCheckBox";
-			this.CameraEditUseScaleCheckBox.UseVisualStyleBackColor = true;
+			this.JpegQualityComboBox.FormattingEnabled = true;
+			this.JpegQualityComboBox.Items.AddRange(new object[] {
+            resources.GetString("JpegQualityComboBox.Items"),
+            resources.GetString("JpegQualityComboBox.Items1"),
+            resources.GetString("JpegQualityComboBox.Items2"),
+            resources.GetString("JpegQualityComboBox.Items3")});
+			resources.ApplyResources(this.JpegQualityComboBox, "JpegQualityComboBox");
+			this.JpegQualityComboBox.Name = "JpegQualityComboBox";
+			this.JpegQualityComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnNumericTextBoxKeyPress);
 			// 
-			// ConfirmStopRendering
+			// mJpegQualityLabel
 			// 
-			resources.ApplyResources(this.ConfirmStopRendering, "ConfirmStopRendering");
-			this.ConfirmStopRendering.Name = "ConfirmStopRendering";
-			this.ConfirmStopRendering.UseVisualStyleBackColor = true;
+			this.mJpegQualityLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			resources.ApplyResources(this.mJpegQualityLabel, "mJpegQualityLabel");
+			this.mJpegQualityLabel.Name = "mJpegQualityLabel";
 			// 
-			// mAutosaveGroupBox
+			// PluginPathButton
 			// 
-			resources.ApplyResources(this.mAutosaveGroupBox, "mAutosaveGroupBox");
-			this.mAutosaveGroupBox.Controls.Add(this.AutosaveEnabledCheckBox);
-			this.mAutosaveGroupBox.Controls.Add(this.AutosaveThresholdComboBox);
-			this.mAutosaveGroupBox.Controls.Add(this.mAutosaveThesholdLabel);
-			this.mAutosaveGroupBox.Controls.Add(this.AutosavePathButton);
-			this.mAutosaveGroupBox.Controls.Add(this.AutosavePathTextBox);
-			this.mAutosaveGroupBox.Controls.Add(this.mAutosavePathLabel);
-			this.mAutosaveGroupBox.Name = "mAutosaveGroupBox";
-			this.mAutosaveGroupBox.TabStop = false;
+			resources.ApplyResources(this.PluginPathButton, "PluginPathButton");
+			this.PluginPathButton.ImageList = this.mButtonImages;
+			this.PluginPathButton.Name = "PluginPathButton";
+			this.PluginPathButton.UseVisualStyleBackColor = true;
 			// 
-			// AutosavePathButton
+			// PluginPathTextBox
 			// 
-			resources.ApplyResources(this.AutosavePathButton, "AutosavePathButton");
-			this.AutosavePathButton.ImageList = this.mButtonImages;
-			this.AutosavePathButton.Name = "AutosavePathButton";
-			this.AutosavePathButton.UseVisualStyleBackColor = true;
+			resources.ApplyResources(this.PluginPathTextBox, "PluginPathTextBox");
+			this.PluginPathTextBox.Name = "PluginPathTextBox";
+			this.PluginPathTextBox.ReadOnly = true;
 			// 
-			// AutosavePathTextBox
+			// mPluginPathLabel
 			// 
-			resources.ApplyResources(this.AutosavePathTextBox, "AutosavePathTextBox");
-			this.AutosavePathTextBox.Name = "AutosavePathTextBox";
-			this.AutosavePathTextBox.ReadOnly = true;
+			this.mPluginPathLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			resources.ApplyResources(this.mPluginPathLabel, "mPluginPathLabel");
+			this.mPluginPathLabel.Name = "mPluginPathLabel";
 			// 
-			// mAutosavePathLabel
+			// mViewPage
 			// 
-			this.mAutosavePathLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			resources.ApplyResources(this.mAutosavePathLabel, "mAutosavePathLabel");
-			this.mAutosavePathLabel.Name = "mAutosavePathLabel";
+			this.mViewPage.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			resources.ApplyResources(this.mViewPage, "mViewPage");
+			this.mViewPage.Name = "mViewPage";
 			// 
-			// AutosaveThresholdComboBox
+			// mPreviewPage
 			// 
-			this.AutosaveThresholdComboBox.FormattingEnabled = true;
-			this.AutosaveThresholdComboBox.Items.AddRange(new object[] {
-            resources.GetString("AutosaveThresholdComboBox.Items"),
-            resources.GetString("AutosaveThresholdComboBox.Items1"),
-            resources.GetString("AutosaveThresholdComboBox.Items2"),
-            resources.GetString("AutosaveThresholdComboBox.Items3"),
-            resources.GetString("AutosaveThresholdComboBox.Items4")});
-			resources.ApplyResources(this.AutosaveThresholdComboBox, "AutosaveThresholdComboBox");
-			this.AutosaveThresholdComboBox.Name = "AutosaveThresholdComboBox";
-			// 
-			// mAutosaveThesholdLabel
-			// 
-			this.mAutosaveThesholdLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			resources.ApplyResources(this.mAutosaveThesholdLabel, "mAutosaveThesholdLabel");
-			this.mAutosaveThesholdLabel.Name = "mAutosaveThesholdLabel";
-			// 
-			// AutosaveEnabledCheckBox
-			// 
-			resources.ApplyResources(this.AutosaveEnabledCheckBox, "AutosaveEnabledCheckBox");
-			this.AutosaveEnabledCheckBox.Name = "AutosaveEnabledCheckBox";
-			this.AutosaveEnabledCheckBox.UseVisualStyleBackColor = true;
-			// 
-			// NamePrefixTextBox
-			// 
-			resources.ApplyResources(this.NamePrefixTextBox, "NamePrefixTextBox");
-			this.NamePrefixTextBox.Name = "NamePrefixTextBox";
-			// 
-			// mNamePrefixLabel
-			// 
-			this.mNamePrefixLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			resources.ApplyResources(this.mNamePrefixLabel, "mNamePrefixLabel");
-			this.mNamePrefixLabel.Name = "mNamePrefixLabel";
-			// 
-			// OldVariationStyleCheckBox
-			// 
-			resources.ApplyResources(this.OldVariationStyleCheckBox, "OldVariationStyleCheckBox");
-			this.OldVariationStyleCheckBox.Name = "OldVariationStyleCheckBox";
-			this.OldVariationStyleCheckBox.UseVisualStyleBackColor = true;
-			// 
-			// mRestartNoticeLabel
-			// 
-			resources.ApplyResources(this.mRestartNoticeLabel, "mRestartNoticeLabel");
-			this.mRestartNoticeLabel.Name = "mRestartNoticeLabel";
-			// 
-			// label1
-			// 
-			resources.ApplyResources(this.label1, "label1");
-			this.label1.Name = "label1";
+			this.mPreviewPage.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			resources.ApplyResources(this.mPreviewPage, "mPreviewPage");
+			this.mPreviewPage.Name = "mPreviewPage";
 			// 
 			// Settings
 			// 
 			this.AcceptButton = this.OkButton;
 			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.CancelButton = this.CancelButton;
 			this.Controls.Add(this.mTabs);
 			this.Controls.Add(this.OkButton);
 			this.Controls.Add(this.CancelButton);

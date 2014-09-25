@@ -128,4 +128,10 @@
 	<data name="Pause" xml:space="preserve">
     <value>&amp;Pause</value>
   </data>
+	<data name="LocatePluginDirectoryHelpString" xml:space="preserve">
+    <value>Locate plugin directory</value>
+  </data>
+	<data name="SelectAutosaveTarget" xml:space="preserve">
+    <value>Select autosave target...</value>
+  </data>
 </root>

@@ -676,7 +676,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		public void ReloadSettings()
 		{
-			
+			MainPreviewController.ReloadSettings();
 		}
 	}
 }

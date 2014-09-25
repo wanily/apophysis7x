@@ -1,4 +1,6 @@
 ﻿using System;
+using Xyrus.Apophysis.Math;
+using Xyrus.Apophysis.Strings;
 
 namespace Xyrus.Apophysis.Settings.Providers
 {
@@ -20,6 +22,12 @@ namespace Xyrus.Apophysis.Settings.Providers
 		public string PluginDirectoryName
 		{
 			get { return Container.PluginDirectoryName; }
+			set
+			{
+				if (!UtilityExtensions.CheckDirectory(ref value))
+					throw new ArgumentException(Messages.DirectoryDoesntExistError, @"value");
+				Container.PluginDirectoryName = value;
+			}
 		}
 
 		public bool ShowUnknownAttributesMessage

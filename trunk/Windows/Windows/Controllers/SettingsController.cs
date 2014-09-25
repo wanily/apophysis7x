@@ -1,5 +1,6 @@
 ﻿using System;
-
+using System.Windows.Forms;
+using Xyrus.Apophysis.Strings;
 using Options = Xyrus.Apophysis.Windows.Forms.Settings;
 
 namespace Xyrus.Apophysis.Windows.Controllers
@@ -95,11 +96,20 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		private void OnOkClick(object sender, EventArgs e)
 		{
+			var shouldShowWarning =
+				!Equals(ApophysisSettings.Common.PluginDirectoryName, View.PluginPathTextBox.Text) ||
+				!Equals(ApophysisSettings.Common.VariationsIn15CStyle, !View.OldVariationStyleCheckBox.Checked);
+
 			mCommonController.WriteSettings();
 			mEditorController.WriteSettings();
 			mViewController.WriteSettings();
 			mPreviewController.WriteSettings();
 			mAutosaveController.WriteSettings();
+
+			if (shouldShowWarning)
+			{
+				MessageBox.Show(Messages.SettingsRequireRestartNotice, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+			}
 
 			mParent.ReloadSettings();
 			View.Close();
