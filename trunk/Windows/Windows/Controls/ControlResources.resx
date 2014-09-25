@@ -104,4 +104,28 @@
 	<data name="DragGridValueColumnHeader" xml:space="preserve">
     <value>Value</value>
   </data>
+	<data name="RenderSingleWindowTitleWithoutFlame" xml:space="preserve">
+    <value>Render</value>
+  </data>
+	<data name="RenderSingleWindowTitleWithFlame" xml:space="preserve">
+    <value>Render  "{0}"</value>
+  </data>
+	<data name="RenderBatchWindowTitleWithoutFlames" xml:space="preserve">
+    <value>Render all</value>
+  </data>
+	<data name="RenderBatchWindowTitleWithFlames" xml:space="preserve">
+    <value>Render all in "{0}"</value>
+  </data>
+	<data name="Cancel" xml:space="preserve">
+    <value>&amp;Cancel</value>
+  </data>
+	<data name="Close" xml:space="preserve">
+    <value>&amp;Close</value>
+  </data>
+	<data name="Resume" xml:space="preserve">
+    <value>&amp;Resume</value>
+  </data>
+	<data name="Pause" xml:space="preserve">
+    <value>&amp;Pause</value>
+  </data>
 </root>

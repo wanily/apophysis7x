@@ -31,6 +31,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.PaletteFromImageMenuItem.Click += OnPaletteFromImageClick;
 			View.BrowsePalettesMenuItem.Click += OnBrowsePalettesClick;
 			View.RandomBatchMenuItem.Click += OnRandomBatchClick;
+			View.RenderFlameMenuItem.Click += OnRenderFlameClick;
+			View.RenderBatchMenuItem.Click += OnRenderBatchClick;
 			View.ExitMenuItem.Click += OnExitClick;
 
 			View.UndoMenuItem.Click += OnUndoClick;
@@ -68,6 +70,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.PaletteFromImageMenuItem.Click -= OnPaletteFromImageClick;
 			View.BrowsePalettesMenuItem.Click -= OnBrowsePalettesClick;
 			View.RandomBatchMenuItem.Click -= OnRandomBatchClick;
+			View.RenderFlameMenuItem.Click -= OnRenderFlameClick;
+			View.RenderBatchMenuItem.Click -= OnRenderBatchClick;
 			View.ExitMenuItem.Click -= OnExitClick;
 
 			View.UndoMenuItem.Click -= OnUndoClick;
@@ -166,6 +170,14 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		internal void OnRandomBatchClick(object sender, EventArgs e)
 		{
 			mParent.GenerateRandomFlames(10);
+		}
+		internal void OnRenderFlameClick(object sender, EventArgs e)
+		{
+			mParent.ShowRender();
+		}
+		internal void OnRenderBatchClick(object sender, EventArgs e)
+		{
+			mParent.ShowRenderAll();
 		}
 		internal void OnExitClick(object sender, EventArgs e)
 		{

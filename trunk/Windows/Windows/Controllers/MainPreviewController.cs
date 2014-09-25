@@ -200,15 +200,23 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 		private void OnRendererProgress(object sender, ProgressEventArgs args)
 		{
-			SetProgress(args.Progress);
-			SetElapsed(TimeSpan.FromSeconds(mElapsedTimer.GetElapsedTimeInSeconds()));
-			SetRemaining(args.TimeRemaining);
+			try
+			{
+				SetProgress(args.Progress);
+				SetElapsed(TimeSpan.FromSeconds(mElapsedTimer.GetElapsedTimeInSeconds()));
+				SetRemaining(args.TimeRemaining);
+			}
+			catch (ObjectDisposedException) { }
 		}
 		private void OnRendererExit(object sender, EventArgs e)
 		{
-			SetProgress(0);
-			SetElapsed(TimeSpan.FromSeconds(mElapsedTimer.GetElapsedTimeInSeconds()));
-			SetRemaining(TimeSpan.FromSeconds(0));
+			try
+			{
+				SetProgress(0);
+				SetElapsed(TimeSpan.FromSeconds(mElapsedTimer.GetElapsedTimeInSeconds()));
+				SetRemaining(TimeSpan.FromSeconds(0));
+			}
+			catch (ObjectDisposedException) { }
 		}
 		private void OnCameraChanged(object sender, CameraChangedEventArgs args)
 		{

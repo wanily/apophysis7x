@@ -24,6 +24,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		private FlamePropertiesController mFlamePropertiesController;
 		private MessagesController mMessagesController;
 		private SettingsController mSettingsController;
+		private RenderController mRenderController;
 
 		private KeyboardController mKeyboardController;
 		private MainMenuController mMenuController;
@@ -47,6 +48,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mFlamePropertiesController = new FlamePropertiesController(this);
 			mMessagesController = new MessagesController();
 			mSettingsController = new SettingsController(this);
+			mRenderController = new RenderController(this);
 
 			mMenuController = new MainMenuController(View, this);
 			mToolbarController = new MainToolbarController(View, this);
@@ -100,6 +102,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 					mFullscreenController = null;
 				}
 
+				if (mRenderController != null)
+				{
+					mRenderController.Dispose();
+					mRenderController = null;
+				}
+
 				if (mSettingsController != null)
 				{
 					mSettingsController.Dispose();
@@ -150,6 +158,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mFlamePropertiesController.Initialize();
 			mMessagesController.Initialize();
 			mSettingsController.Initialize();
+			mRenderController.Initialize();
 			mFullscreenController.Initialize();
 			mMenuController.Initialize();
 			mToolbarController.Initialize();
@@ -284,6 +293,14 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		public MessagesController MessagesController
 		{
 			get { return mMessagesController; }
+		}
+		public SettingsController SettingsController
+		{
+			get { return mSettingsController; }
+		}
+		public RenderController RenderController
+		{
+			get { return mRenderController; }
 		}
 
 		internal BatchListController BatchListController
@@ -643,6 +660,18 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			ShowView(mSettingsController.View);
 			mSettingsController.Update();
+		}
+		public void ShowRender()
+		{
+			ShowView(mRenderController.View);
+			mRenderController.BatchMode = false;
+			mRenderController.Update();
+		}
+		public void ShowRenderAll()
+		{
+			ShowView(mRenderController.View);
+			mRenderController.BatchMode = true;
+			mRenderController.Update();
 		}
 
 		public void ReloadSettings()

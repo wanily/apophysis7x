@@ -105,6 +105,12 @@ namespace Xyrus.Apophysis.Calculation
 		public event ProgressEventHandler Progress;
 		public event EventHandler Exit;
 
+		public InvokeCallbackMode InvokeCallbackMode
+		{
+			get { return mThreadController.InvokeCallbackMode; }
+			set { mThreadController.InvokeCallbackMode = value; }
+		}
+
 		//todo multithreading
 		private Bitmap CreateBitmap(ThreadStateToken threadState)
 		{

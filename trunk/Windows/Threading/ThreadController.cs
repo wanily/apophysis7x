@@ -5,6 +5,7 @@ using Xyrus.Apophysis.Windows;
 
 namespace Xyrus.Apophysis.Threading
 {
+	[PublicAPI]
 	public class ThreadController : Controller
 	{
 		private volatile bool mCancel;
@@ -78,16 +79,24 @@ namespace Xyrus.Apophysis.Threading
 					result = threadAction(token);
 				}
 
-				if (!mCancel)
+				if (!mCancel && InvokeCallbackMode == InvokeCallbackMode.BeforeReset)
 				{
 					if (callback != null)
 						callback(result);
 				}
 
+				var cancelled = mCancel;
+
 				mCancel = false;
 				mSuspended = false;
 				mRunning = false;
 				mThread = null;
+
+				if (!cancelled && InvokeCallbackMode == InvokeCallbackMode.AfterReset)
+				{
+					if (callback != null)
+						callback(result);
+				}
 			}) {Priority = mPriority};
 
 			mThread.Start();
@@ -137,6 +146,12 @@ namespace Xyrus.Apophysis.Threading
 		public bool IsCancelling
 		{
 			get { return mCancel; }
+		}
+
+		public InvokeCallbackMode InvokeCallbackMode
+		{
+			get; 
+			set;
 		}
 	}
 }

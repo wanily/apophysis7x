@@ -7,7 +7,7 @@ using Xyrus.Apophysis.Windows.Controls;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
-	abstract class DataInputController<TView> : Controller<TView> where TView : Component, new()
+	public abstract class DataInputController<TView> : Controller<TView> where TView : Component, new()
 	{
 		class InputInfo
 		{

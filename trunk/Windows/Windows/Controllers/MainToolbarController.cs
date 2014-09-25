@@ -28,6 +28,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.OpenBatchButton.Click += mParent.MainMenuController.OnOpenBatchClick;
 			View.SaveFlameButton.Click += mParent.MainMenuController.OnSaveFlameClick;
 
+			View.RenderFlameButton.Click += mParent.MainMenuController.OnRenderFlameClick;
+			View.RenderBatchButton.Click += mParent.MainMenuController.OnRenderBatchClick;
+
 			View.BatchListViewButton.Click += OnBatchListViewClick;
 			View.BatchIconViewButton.Click += OnBatchIconViewClick;
 
@@ -60,6 +63,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.NewFlameButton.Click -= mParent.MainMenuController.OnNewFlameClick;
 			View.OpenBatchButton.Click -= mParent.MainMenuController.OnOpenBatchClick;
 			View.SaveFlameButton.Click -= mParent.MainMenuController.OnSaveFlameClick;
+
+			View.RenderFlameButton.Click -= mParent.MainMenuController.OnRenderFlameClick;
+			View.RenderBatchButton.Click -= mParent.MainMenuController.OnRenderBatchClick;
 
 			View.BatchListViewButton.Click -= OnBatchListViewClick;
 			View.BatchIconViewButton.Click -= OnBatchIconViewClick;
