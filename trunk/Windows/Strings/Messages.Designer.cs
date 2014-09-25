@@ -79,6 +79,15 @@ namespace Xyrus.Apophysis.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure that you want to cancel the render?.
+        /// </summary>
+        internal static string CancelRenderConfirmMessage {
+            get {
+                return ResourceManager.GetString("CancelRenderConfirmMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Directory must exist.
         /// </summary>
         internal static string DirectoryDoesntExistError {
@@ -97,11 +106,29 @@ namespace Xyrus.Apophysis.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do you want to save the current batch before loading a new one?.
+        /// </summary>
+        internal static string DiscardBatchConfirmMessage {
+            get {
+                return ResourceManager.GetString("DiscardBatchConfirmMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can&apos;t remove last flame from batch.
         /// </summary>
         internal static string EmptyFlameCollectionError {
             get {
                 return ResourceManager.GetString("EmptyFlameCollectionError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your current batch has unsaved changes. Do you want to save them before exiting Apophysis?.
+        /// </summary>
+        internal static string ExitConfirmMessage {
+            get {
+                return ResourceManager.GetString("ExitConfirmMessage", resourceCulture);
             }
         }
         
@@ -372,6 +399,15 @@ namespace Xyrus.Apophysis.Strings {
         internal static string MismatchingPaletteArraysError {
             get {
                 return ResourceManager.GetString("MismatchingPaletteArraysError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The target file already exists. Do you want to overwrite it?.
+        /// </summary>
+        internal static string OverwriteRenderTargetConfirmMessage {
+            get {
+                return ResourceManager.GetString("OverwriteRenderTargetConfirmMessage", resourceCulture);
             }
         }
         

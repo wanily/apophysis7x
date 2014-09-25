@@ -181,6 +181,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 		internal void OnExitClick(object sender, EventArgs e)
 		{
+			if (!mParent.ConfirmExit())
+				return;
+
 			View.Close();
 		}
 

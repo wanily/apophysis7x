@@ -269,4 +269,16 @@ Location: {2}</value>
 	<data name="SingleModeSelectPathHintText" xml:space="preserve">
     <value>Select target file...</value>
   </data>
+	<data name="DiscardBatchConfirmMessage" xml:space="preserve">
+    <value>Do you want to save the current batch before loading a new one?</value>
+  </data>
+	<data name="OverwriteRenderTargetConfirmMessage" xml:space="preserve">
+    <value>The target file already exists. Do you want to overwrite it?</value>
+  </data>
+	<data name="CancelRenderConfirmMessage" xml:space="preserve">
+    <value>Are you sure that you want to cancel the render?</value>
+  </data>
+	<data name="ExitConfirmMessage" xml:space="preserve">
+    <value>Your current batch has unsaved changes. Do you want to save them before exiting Apophysis?</value>
+  </data>
 </root>

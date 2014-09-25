@@ -261,11 +261,24 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 		private void OnStartClick(object sender, EventArgs e)
 		{
+			if (!mBatchMode)
+			{
+				var renderPath = View.DestinationTextBox.Text;
+				if (File.Exists(renderPath))
+				{
+					var result = MessageBox.Show(
+						string.Format(Messages.OverwriteRenderTargetConfirmMessage),
+						Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+					if (result == DialogResult.No)
+						return;
+				}
+			}
+
 			IsRendering = true;
 			mCounter = 0;
 
 			var savePath = Path.Combine(mCurrentDestination, Common.DefaultRenderBatchName + ".flame");
-
 			if (File.Exists(savePath))
 			{
 				var backupName = Path.Combine(mCurrentDestination, Common.DefaultRenderBatchName + ".bak");
@@ -306,6 +319,16 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			if (IsRendering)
 			{
+				if (ApophysisSettings.Common.ShowCancelRenderConfirmation)
+				{
+					var result = MessageBox.Show(
+						string.Format(Messages.CancelRenderConfirmMessage),
+						Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+					if (result == DialogResult.No)
+						return;
+				}
+
 				mRenderer.Cancel();
 
 				IsRendering = false;

@@ -11,6 +11,7 @@ using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Strings;
 using Xyrus.Apophysis.Windows.Forms;
 using Xyrus.Apophysis.Windows.Input;
+using Messages = Xyrus.Apophysis.Strings.Messages;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
@@ -485,13 +486,49 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.Text = Application.ProductName + @" - " + Common.RandomBatch;
 		}
 
+		public bool ConfirmExit()
+		{
+			if (!mHasChanges)
+				return true;
+
+			var result = MessageBox.Show(
+				string.Format(Messages.ExitConfirmMessage),
+				Application.ProductName, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+			bool save;
+			switch (result)
+			{
+				case DialogResult.Yes:
+					save = true;
+					break;
+				case DialogResult.No:
+					save = false;
+					break;
+				default:
+					return false;
+			}
+
+			if (save)
+			{
+				if (!string.IsNullOrEmpty(mLastBatchPath))
+				{
+					SaveCurrentBatch(mLastBatchPath);
+				}
+				else
+				{
+					mMenuController.OnSaveBatchClick(View, new EventArgs());
+				}
+			}
+
+			return true;
+		}
 		public bool ConfirmReplaceBatch()
 		{
 			if (!mHasChanges)
 				return true;
 
 			var result = MessageBox.Show(
-				string.Format("Do you want to save the current batch before loading a new one?"),
+				string.Format(Messages.DiscardBatchConfirmMessage),
 				Application.ProductName, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 
 			bool save;
