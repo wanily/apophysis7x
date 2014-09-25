@@ -1,6 +1,6 @@
 using System;
 using System.Drawing;
-using Xyrus.Apophysis.Models;
+using Xyrus.Apophysis.Strings;
 using Xyrus.Apophysis.Threading;
 
 namespace Xyrus.Apophysis.Calculation
@@ -8,30 +8,12 @@ namespace Xyrus.Apophysis.Calculation
 	[PublicAPI]
 	public class ThreadedRenderer : IDisposable
 	{
-		class RenderParameters
-		{
-			public readonly int Oversample;
-			public readonly double FilterRadius;
-			public readonly bool WithTransparency;
-			public readonly Flame Flame;
-			public readonly double Density;
-			public readonly Size Size;
-
-			public RenderParameters(Flame flame, double density, Size size, int oversample, double filterRadius, bool withTransparency)
-			{
-				Oversample = oversample;
-				FilterRadius = filterRadius;
-				WithTransparency = withTransparency;
-				Flame = flame;
-				Density = density;
-				Size = size;
-			}
-		}
-
 		private Renderer mRenderer;
 		private RenderParameters mParameters;
 		private ThreadController mThreadController;
+
 		private bool mIsDisposed;
+		private double mTotalTime;
 
 		~ThreadedRenderer()
 		{
@@ -70,14 +52,42 @@ namespace Xyrus.Apophysis.Calculation
 			GC.SuppressFinalize(this);
 		}
 
-		public void StartCreateBitmap([NotNull] Flame flame, double density, Size size, int oversample, double filterRadius, Action<Bitmap> callback, bool withTransparency = true)
+		public void StartCreateBitmap([NotNull] RenderParameters parameters, Action<Bitmap> callback)
 		{
-			if (flame == null) throw new ArgumentNullException(@"flame");
-			if (density <= 0) throw new ArgumentOutOfRangeException(@"density");
-			if (size.Width <= 0 || size.Height <= 0) throw new ArgumentOutOfRangeException(@"size");
+			if (parameters == null) throw new ArgumentNullException(@"parameters");
 
-			mParameters = new RenderParameters(flame, density, size, oversample, filterRadius, withTransparency);
-			mThreadController.StartThread(CreateBitmap, callback);
+			mParameters = parameters;
+			mThreadController.StartThread(CreateBitmap, callback, SendCompletedMessage, SendCancelledMessage);
+		}
+
+		private void SendCancelledMessage()
+		{
+			if (mParameters != null)
+			{
+				mParameters.Messenger.SendMessage(string.Format(@"{0} : {1}", DateTime.Now.ToString(@"T"), Messages.RenderTerminatedMessage));
+			}
+
+			FinalizeRender();
+		}
+
+		private void SendCompletedMessage()
+		{
+			if (mParameters != null)
+			{
+				mParameters.Messenger.SendMessage(string.Format(@"  {0}", string.Format(Messages.RenderAverageSpeedMessage, mRenderer.AverageIterationsPerSecond)));
+				mParameters.Messenger.SendMessage(string.Format(@"  {0}", string.Format(Messages.RenderPureTimeMessage, TimeSpan.FromSeconds(mRenderer.PureRenderingTime))));
+				mParameters.Messenger.SendMessage(string.Format(@"  {0}", string.Format(Messages.RenderTotalTimeMessage, TimeSpan.FromSeconds(mTotalTime))));
+			}
+
+			FinalizeRender();
+		}
+		private void FinalizeRender()
+		{
+			mParameters = null;
+			mTotalTime = 0;
+
+			if (Exit != null)
+				Exit(this, new EventArgs());
 		}
 
 		public void Suspend()
@@ -90,6 +100,10 @@ namespace Xyrus.Apophysis.Calculation
 		}
 		public void Cancel()
 		{
+			if (mParameters != null)
+			{
+				mParameters.Messenger.SendMessage(string.Format(@"{0} : {1}", DateTime.Now.ToString(@"T"), Messages.RenderTerminatingMessage));
+			}
 			mThreadController.Cancel();
 		}
 
@@ -117,12 +131,12 @@ namespace Xyrus.Apophysis.Calculation
 
 		private Bitmap CreateBitmap(ThreadStateToken threadState)
 		{
-			var result = mRenderer.CreateBitmap(mParameters.Flame, mParameters.Density, mParameters.Size, mParameters.WithTransparency, ProgressUpdate, threadState);
+			var stopwatch = new NativeTimer();
+			stopwatch.SetStartingTime();
 
-			mParameters = null;
+			var result = mRenderer.CreateBitmap(mParameters, ProgressUpdate, threadState);
 
-			if (Exit != null)
-				Exit(this, new EventArgs());
+			mTotalTime = stopwatch.GetElapsedTimeInSeconds();
 
 			return result;
 		}
@@ -134,6 +148,10 @@ namespace Xyrus.Apophysis.Calculation
 
 		public void SetThreadCount(int? threadCount)
 		{
+			if (IsRunning)
+			{
+				throw new InvalidOperationException(Messages.AttemptedThreadCountChangeWhileRendererBusyErrorMessage);
+			}
 			//todo multithreading
 		}
 	}

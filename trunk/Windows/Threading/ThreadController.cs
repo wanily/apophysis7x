@@ -60,7 +60,7 @@ namespace Xyrus.Apophysis.Threading
 		{
 			StartThread(o => threadAction(), callback);
 		}
-		public void StartThread<T>(Func<ThreadStateToken, T> threadAction, Action<T> callback = null)
+		public void StartThread<T>(Func<ThreadStateToken, T> threadAction, Action<T> callback = null, Action completionCallback = null, Action cancelledCallback = null)
 		{
 			if (mThread != null || mRunning)
 			{
@@ -97,6 +97,17 @@ namespace Xyrus.Apophysis.Threading
 					if (callback != null)
 						callback(result);
 				}
+
+				if (!cancelled && completionCallback != null)
+				{
+					completionCallback();
+				}
+
+				if (cancelled && cancelledCallback != null)
+				{
+					cancelledCallback();
+				}
+
 			}) {Priority = mPriority};
 
 			mThread.Start();

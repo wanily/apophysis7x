@@ -4,7 +4,7 @@ using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using System.Threading;
 using Xyrus.Apophysis.Math;
-using Xyrus.Apophysis.Models;
+using Xyrus.Apophysis.Strings;
 using Xyrus.Apophysis.Threading;
 using Rectangle = System.Drawing.Rectangle;
 
@@ -13,15 +13,23 @@ namespace Xyrus.Apophysis.Calculation
 	class Renderer
 	{
 		private double? mLastSecondsPerIteration;
+		private double mAverageIterationsPerSecond;
+		private double mPureRenderingTime;
 
 		//todo - render real fractal ... rofl
-		public Bitmap CreateBitmap([NotNull] Flame flame, double density, Size size, bool withTransparency, Action<ProgressEventArgs> progressCallback = null, ThreadStateToken threadState = null)
+		public Bitmap CreateBitmap([NotNull] RenderParameters parameters, Action<ProgressEventArgs> progressCallback = null, ThreadStateToken threadState = null)
 		{
-			if (flame == null) throw new ArgumentNullException(@"flame");
-			if (density <= 0) throw new ArgumentOutOfRangeException(@"density");
-			if (size.Width <= 0 || size.Height <= 0) throw new ArgumentOutOfRangeException(@"size");
+			if (parameters == null) throw new ArgumentNullException(@"parameters");
 
 			var timer = new NativeTimer();
+
+			var flame = parameters.Flame;
+			var size = parameters.Size;
+			var density = parameters.Density;
+			var withTransparency = parameters.WithTransparency;
+
+			var memory = (size.Width*size.Height*4) / (1024.0 * 1024.0);
+			parameters.Messenger.SendMessage(string.Format(@"{0} : {1}", DateTime.Now.ToString(@"T"), string.Format(Messages.RenderAllocatingMessage, memory)));
 
 			var bitmap = new Bitmap(size.Width, size.Height, PixelFormat.Format32bppArgb);
 			var random = new Random(flame.GetHashCode() ^ (int)DateTime.Now.Ticks);
@@ -50,9 +58,6 @@ namespace Xyrus.Apophysis.Calculation
 				}
 			}
 			
-
-			timer.SetStartingTime();
-
 			var data = bitmap.LockBits(new Rectangle(new Point(), bitmap.Size), ImageLockMode.WriteOnly, bitmap.PixelFormat);
 			var lastExcursion = 0;
 
@@ -63,6 +68,15 @@ namespace Xyrus.Apophysis.Calculation
 			const int gridPow = 0;
 			double grid = System.Math.Pow(10, -gridPow);
 			double gridAcc = 4 * grid/scale;
+
+			parameters.Messenger.SendMessage(string.Format(@"{0} : {1}", DateTime.Now.ToString(@"T"), Messages.RenderInProgressMessage));
+
+			mPureRenderingTime = 0;
+			mAverageIterationsPerSecond = 0;
+			timer.SetStartingTime();
+
+			var stopwatch = new NativeTimer();
+			stopwatch.SetStartingTime();
 
 			for (int i = 0; i < samples; i++)
 			{
@@ -98,10 +112,19 @@ namespace Xyrus.Apophysis.Calculation
 						progressCallback(new ProgressEventArgs(progress, TimeSpan.FromSeconds(remaining)));
 					}
 
+					var ips = (i - lastExcursion)/time;
+					if (mAverageIterationsPerSecond <= 0)
+						mAverageIterationsPerSecond = ips;
+					else mAverageIterationsPerSecond = (ips + mAverageIterationsPerSecond)*0.5;
+
 					timer.SetStartingTime();
 					lastExcursion = i;
 				}
 			}
+
+			mPureRenderingTime = stopwatch.GetElapsedTimeInSeconds();
+
+			parameters.Messenger.SendMessage(string.Format(@"{0} : {1}", DateTime.Now.ToString(@"T"), string.Format(Messages.RenderSamplingMessage, density)));
 
 			bitmap.UnlockBits(data);
 
@@ -120,6 +143,15 @@ namespace Xyrus.Apophysis.Calculation
 			}
 
 			return bitmap;
+		}
+
+		public double AverageIterationsPerSecond
+		{
+			get { return mAverageIterationsPerSecond; }
+		}
+		public double PureRenderingTime
+		{
+			get { return mPureRenderingTime; }
 		}
 	}
 }

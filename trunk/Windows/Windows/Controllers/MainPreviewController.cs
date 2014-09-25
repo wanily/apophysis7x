@@ -287,11 +287,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			mElapsedTimer.SetStartingTime();
 
+			var parameters = new RenderParameters(mFlame, density, renderSize, ApophysisSettings.Preview.Oversample, ApophysisSettings.Preview.FilterRadius);
+
 			mRenderer.SetThreadCount(ApophysisSettings.Preview.ThreadCount);
-			mRenderer.StartCreateBitmap(mFlame, density, renderSize, 
-				ApophysisSettings.Preview.Oversample,
-				ApophysisSettings.Preview.FilterRadius,
-				OnRendererFinished);
+			mRenderer.StartCreateBitmap(parameters, OnRendererFinished);
 		}
 		public void ReloadSettings()
 		{

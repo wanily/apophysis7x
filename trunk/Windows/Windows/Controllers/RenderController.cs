@@ -9,6 +9,7 @@ using System.Linq;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Calculation;
 using Xyrus.Apophysis.Math;
+using Xyrus.Apophysis.Messaging;
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Strings;
 using Xyrus.Apophysis.Threading;
@@ -27,6 +28,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		private Stack<Flame> mRenderStack;
 
 		private MainController mParent;
+		private RenderMessenger mMessenger;
+
 		private Flame mCurrentlyRenderingFlame;
 
 		private bool mBatchMode;
@@ -57,6 +60,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mElapsedTimer = new NativeTimer();
 
 			mRenderer.InvokeCallbackMode = InvokeCallbackMode.AfterReset;
+			mMessenger = new RenderMessenger();
 		}
 		protected override void DisposeOverride(bool disposing)
 		{
@@ -77,6 +81,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			mParent = null;
 			mElapsedTimer = null;
+			mMessenger = null;
 		}
 
 		protected override void AttachView()
@@ -128,6 +133,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mThreadCount = ApophysisSettings.Render.ThreadCount;
 
 			mRenderer.Progress += OnProgress;
+			mRenderer.Exit += OnRenderExit;
+			mMessenger.Message += OnMessage;
 		}
 		protected override void DetachView()
 		{
@@ -170,6 +177,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			ApophysisSettings.Render.ThreadCount = mThreadCount;
 
 			mRenderer.Progress -= OnProgress;
+			mRenderer.Exit -= OnRenderExit;
+			mMessenger.Message -= OnMessage;
 
 			Cleanup();
 		}
@@ -259,6 +268,19 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			catch (ObjectDisposedException) { }
 			
 		}
+		private void OnMessage(object sender, MessageEventArgs args)
+		{
+			View.Invoke(new Action(() =>
+			{
+				View.MessagesTextBox.Text += args.Message + Environment.NewLine;
+				MessageCenter.SendMessage(args.Message);
+			}));
+		}
+		private void OnRenderExit(object sender, EventArgs e)
+		{
+			View.Invoke(new Action(() => { View.MessagesTextBox.Text += Environment.NewLine; }));
+		}
+
 		private void OnStartClick(object sender, EventArgs e)
 		{
 			if (!mBatchMode)
@@ -551,20 +573,29 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				}
 			}));
 
+			mMessenger.SendMessage(string.Format(@"--- {0} ---", string.Format(Messages.RenderMessageHeader, CurrentlyRenderingFlame.CalculatedName)));
+			mMessenger.SendMessage(string.Format(@"  {0}", string.Format(Messages.RenderSizeMessage, mCurrentSize.Width, mCurrentSize.Height)));
+			mMessenger.SendMessage(string.Format(@"  {0}", string.Format(Messages.RenderDensityMessage, (int)mCurrentDensity)));
+			mMessenger.SendMessage(string.Format(@"  {0}", string.Format(Messages.RenderFilterMessage, mCurrentOversample, mCurrentFilterRadius)));
+
 			SetInfoString(mCurrentlyRenderingFlame.CalculatedName);
 
 			var flame = mCurrentlyRenderingFlame;
+			var parameters = new RenderParameters(
+				flame, mCurrentDensity, mCurrentSize, mCurrentOversample, mCurrentFilterRadius,
+				mFormat == TargetImageFileFormat.Png && ApophysisSettings.Common.EnablePngTransparency);
+
+			parameters.Messenger = mMessenger;
 
 			mRenderer.SetThreadCount(mThreadCount);
-			mRenderer.StartCreateBitmap(
-				flame, mCurrentDensity, mCurrentSize, 
-				mCurrentOversample, mCurrentFilterRadius, SaveBitmap,
-				mFormat == TargetImageFileFormat.Png && ApophysisSettings.Common.EnablePngTransparency);
+			mRenderer.StartCreateBitmap(parameters, SaveBitmap);
 		}
 		private void SaveBitmap(Bitmap bitmap)
 		{
 			using (bitmap)
 			{
+				mMessenger.SendMessage(string.Format(@"{0} : {1}", DateTime.Now.ToString(@"T"), Messages.RenderSavingImageMessage));
+
 				var fileName = View.DestinationTextBox.Text;
 				if (mBatchMode)
 				{

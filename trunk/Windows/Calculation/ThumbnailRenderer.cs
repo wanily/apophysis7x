@@ -14,8 +14,9 @@ namespace Xyrus.Apophysis.Calculation
 			if (size.Width <= 0 || size.Height <= 0) throw new ArgumentOutOfRangeException(@"size");
 
 			var renderer = new Renderer();
+			var parameters = new RenderParameters(flame, density, size, 1, 0.5, false);
 
-			return renderer.CreateBitmap(flame, density, size, false, null, threadState);
+			return renderer.CreateBitmap(parameters, threadState: threadState);
 		}
 	}
 }

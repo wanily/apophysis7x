@@ -281,4 +281,46 @@ Location: {2}</value>
 	<data name="ExitConfirmMessage" xml:space="preserve">
     <value>Your current batch has unsaved changes. Do you want to save them before exiting Apophysis?</value>
   </data>
+	<data name="AttemptedThreadCountChangeWhileRendererBusyErrorMessage" xml:space="preserve">
+    <value>Can't change thread count while renderer is busy</value>
+  </data>
+	<data name="RenderMessageHeader" xml:space="preserve">
+    <value>Rendering "{0}"</value>
+  </data>
+	<data name="RenderSizeMessage" xml:space="preserve">
+    <value>Size:       {0}x{1}</value>
+  </data>
+	<data name="RenderDensityMessage" xml:space="preserve">
+    <value>Density:    {0}</value>
+  </data>
+	<data name="RenderFilterMessage" xml:space="preserve">
+    <value>Oversample: {0}, Filter: {1:0.0##}</value>
+  </data>
+	<data name="RenderSavingImageMessage" xml:space="preserve">
+    <value>Saving image...</value>
+  </data>
+	<data name="RenderAllocatingMessage" xml:space="preserve">
+    <value>Allocating {0:###,###,###,##0.00} MB of memory...</value>
+  </data>
+	<data name="RenderInProgressMessage" xml:space="preserve">
+    <value>Rendering...</value>
+  </data>
+	<data name="RenderSamplingMessage" xml:space="preserve">
+    <value>Creating image with density: {0:###,###,###,##0.00}</value>
+  </data>
+	<data name="RenderTerminatedMessage" xml:space="preserve">
+    <value>Rendering terminated!</value>
+  </data>
+	<data name="RenderTerminatingMessage" xml:space="preserve">
+    <value>Terminating render...</value>
+  </data>
+	<data name="RenderTotalTimeMessage" xml:space="preserve">
+    <value>Total time: {0}</value>
+  </data>
+	<data name="RenderPureTimeMessage" xml:space="preserve">
+    <value>Pure rendering time: {0}</value>
+  </data>
+	<data name="RenderAverageSpeedMessage" xml:space="preserve">
+    <value>Average speed: {0:###,###,###,##0.00} iterations per second</value>
+  </data>
 </root>

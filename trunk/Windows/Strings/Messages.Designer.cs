@@ -61,6 +61,15 @@ namespace Xyrus.Apophysis.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t change thread count while renderer is busy.
+        /// </summary>
+        internal static string AttemptedThreadCountChangeWhileRendererBusyErrorMessage {
+            get {
+                return ResourceManager.GetString("AttemptedThreadCountChangeWhileRendererBusyErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The plugin file &quot;{0}&quot; caused errors when Apophysis attempted to load it. As long as this file exists, it will not be loaded again. Delete the file if you re-enable the plugin..
         /// </summary>
         internal static string BadPluginMessageFileContent {
@@ -462,6 +471,123 @@ namespace Xyrus.Apophysis.Strings {
         internal static string PluginUnsupportedArchitectureError {
             get {
                 return ResourceManager.GetString("PluginUnsupportedArchitectureError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Allocating {0:###,###,###,##0.00} MB of memory....
+        /// </summary>
+        internal static string RenderAllocatingMessage {
+            get {
+                return ResourceManager.GetString("RenderAllocatingMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Average speed: {0:###,###,###,##0.00} iterations per second.
+        /// </summary>
+        internal static string RenderAverageSpeedMessage {
+            get {
+                return ResourceManager.GetString("RenderAverageSpeedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Density:    {0}.
+        /// </summary>
+        internal static string RenderDensityMessage {
+            get {
+                return ResourceManager.GetString("RenderDensityMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Oversample: {0}, Filter: {1:0.0##}.
+        /// </summary>
+        internal static string RenderFilterMessage {
+            get {
+                return ResourceManager.GetString("RenderFilterMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rendering....
+        /// </summary>
+        internal static string RenderInProgressMessage {
+            get {
+                return ResourceManager.GetString("RenderInProgressMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rendering &quot;{0}&quot;.
+        /// </summary>
+        internal static string RenderMessageHeader {
+            get {
+                return ResourceManager.GetString("RenderMessageHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pure rendering time: {0}.
+        /// </summary>
+        internal static string RenderPureTimeMessage {
+            get {
+                return ResourceManager.GetString("RenderPureTimeMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Creating image with density: {0:###,###,###,##0.00}.
+        /// </summary>
+        internal static string RenderSamplingMessage {
+            get {
+                return ResourceManager.GetString("RenderSamplingMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving image....
+        /// </summary>
+        internal static string RenderSavingImageMessage {
+            get {
+                return ResourceManager.GetString("RenderSavingImageMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Size:       {0}x{1}.
+        /// </summary>
+        internal static string RenderSizeMessage {
+            get {
+                return ResourceManager.GetString("RenderSizeMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rendering terminated!.
+        /// </summary>
+        internal static string RenderTerminatedMessage {
+            get {
+                return ResourceManager.GetString("RenderTerminatedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Terminating render....
+        /// </summary>
+        internal static string RenderTerminatingMessage {
+            get {
+                return ResourceManager.GetString("RenderTerminatingMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total time: {0}.
+        /// </summary>
+        internal static string RenderTotalTimeMessage {
+            get {
+                return ResourceManager.GetString("RenderTotalTimeMessage", resourceCulture);
             }
         }
         
