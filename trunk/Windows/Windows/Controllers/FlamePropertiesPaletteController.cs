@@ -153,7 +153,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 
 		[NotNull]
-		private PaletteEditHandler CurrentHandler
+		internal PaletteEditHandler CurrentHandler
 		{
 			get { return mSelectedEditHandler; }
 			set
@@ -163,7 +163,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				View.PaletteEditModeButton.Text = value.GetDisplayName();
 			}
 		}
-		private double CurrentEditValue
+		internal double CurrentEditValue
 		{
 			get { return mCurrentEditValue; }
 			set
