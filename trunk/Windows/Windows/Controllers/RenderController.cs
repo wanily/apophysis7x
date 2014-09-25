@@ -533,27 +533,15 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			var flame = mCurrentlyRenderingFlame;
 
 			mRenderer.SetThreadCount(mThreadCount);
-			mRenderer.StartCreateBitmap(flame, mCurrentDensity, mCurrentSize, mCurrentOversample, mCurrentFilterRadius, SaveBitmap);
+			mRenderer.StartCreateBitmap(
+				flame, mCurrentDensity, mCurrentSize, 
+				mCurrentOversample, mCurrentFilterRadius, SaveBitmap,
+				mFormat == TargetImageFileFormat.Png && ApophysisSettings.Common.EnablePngTransparency);
 		}
 		private void SaveBitmap(Bitmap bitmap)
 		{
 			using (bitmap)
 			{
-				var format = ImageFormat.Bmp;
-
-				switch (mFormat)
-				{
-					case TargetImageFileFormat.Jpeg:
-						format = ImageFormat.Jpeg;
-						break;
-					case TargetImageFileFormat.Png:
-						format = ImageFormat.Png;
-						break;
-					case TargetImageFileFormat.Tiff:
-						format = ImageFormat.Tiff;
-						break;
-				}
-
 				var fileName = View.DestinationTextBox.Text;
 				if (mBatchMode)
 				{
@@ -564,10 +552,36 @@ namespace Xyrus.Apophysis.Windows.Controllers
 					fileName = Path.Combine(fileName, name);
 				}
 
-				bitmap.Save(fileName, format);
+				switch (mFormat)
+				{
+					case TargetImageFileFormat.Bitmap:
+						bitmap.Save(fileName, ImageFormat.Bmp);
+						break;
+					case TargetImageFileFormat.Jpeg:
+						var jpegEncoder = GetEncoder(ImageFormat.Jpeg);
+						var jpegQuality = Encoder.Quality;
+
+						using (var jpegQualityParam = new EncoderParameter(jpegQuality, ApophysisSettings.Common.JpegQuality))
+						using (var jpegParams = new EncoderParameters(1))
+						{
+							jpegParams.Param[0] = jpegQualityParam;
+							bitmap.Save(fileName, jpegEncoder, jpegParams);
+						}
+						break;
+					case TargetImageFileFormat.Png:
+						bitmap.Save(fileName, ImageFormat.Png);
+						break;
+					case TargetImageFileFormat.Tiff:
+						bitmap.Save(fileName, ImageFormat.Tiff);
+						break;
+				}
 			}
 
 			NextFlame();
+		}
+		private ImageCodecInfo GetEncoder(ImageFormat format)
+		{
+			return ImageCodecInfo.GetImageDecoders().FirstOrDefault(c => c.FormatID == format.Guid);
 		}
 
 		private void ResetStatus()

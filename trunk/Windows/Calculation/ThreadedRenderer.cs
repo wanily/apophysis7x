@@ -70,13 +70,13 @@ namespace Xyrus.Apophysis.Calculation
 			GC.SuppressFinalize(this);
 		}
 
-		public void StartCreateBitmap([NotNull] Flame flame, double density, Size size, int oversample, double filterRadius, Action<Bitmap> callback)
+		public void StartCreateBitmap([NotNull] Flame flame, double density, Size size, int oversample, double filterRadius, Action<Bitmap> callback, bool withTransparency = true)
 		{
 			if (flame == null) throw new ArgumentNullException(@"flame");
 			if (density <= 0) throw new ArgumentOutOfRangeException(@"density");
 			if (size.Width <= 0 || size.Height <= 0) throw new ArgumentOutOfRangeException(@"size");
 
-			mParameters = new RenderParameters(flame, density, size, oversample, filterRadius, true);
+			mParameters = new RenderParameters(flame, density, size, oversample, filterRadius, withTransparency);
 			mThreadController.StartThread(CreateBitmap, callback);
 		}
 
