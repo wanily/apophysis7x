@@ -150,7 +150,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mRenderer.Cancel();
 
 			mElapsedTimer.SetStartingTime();
-			mRenderer.StartCreateBitmap(flame, density, renderSize, OnRendererFinished);
+
+			mRenderer.SetThreadCount(ApophysisSettings.Preview.ThreadCount);
+			mRenderer.StartCreateBitmap(flame, density, renderSize, 
+				ApophysisSettings.Preview.Oversample,
+				ApophysisSettings.Preview.FilterRadius,
+				OnRendererFinished);
 			SetIsInProgress(true);
 		}
 	}

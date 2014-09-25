@@ -140,5 +140,32 @@ namespace Xyrus.Apophysis.Settings.Providers
 				Container.ThreadCount = value.GetValueOrDefault();
 			}
 		}
+
+		public double FilterRadius
+		{
+			get { return Container.FilterRadius; }
+			set
+			{
+				if (value < 0)
+				{
+					throw new ArgumentOutOfRangeException(@"value");
+				}
+
+				Container.FilterRadius = value;
+			}
+		}
+		public int Oversample
+		{
+			get { return Container.Oversample; }
+			set
+			{
+				if (value <= 0)
+				{
+					throw new ArgumentOutOfRangeException(@"value");
+				}
+
+				Container.Oversample = value;
+			}
+		}
 	}
 }

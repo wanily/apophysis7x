@@ -32,7 +32,11 @@
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Render));
 			this.Tabs = new System.Windows.Forms.TabControl();
 			this.SettingsTab = new System.Windows.Forms.TabPage();
+			this.FormatComboBox = new System.Windows.Forms.ComboBox();
+			this.FormatLabel = new System.Windows.Forms.Label();
 			this.mCompletionGroupBox = new System.Windows.Forms.GroupBox();
+			this.ThreadsComboBox = new System.Windows.Forms.ComboBox();
+			this.mThreadsLabel = new System.Windows.Forms.Label();
 			this.SaveIncompleteRendersCheckBox = new System.Windows.Forms.CheckBox();
 			this.SaveParametersCheckBox = new System.Windows.Forms.CheckBox();
 			this.PropertiesGroupBox = new System.Windows.Forms.GroupBox();
@@ -96,6 +100,8 @@
 			// SettingsTab
 			// 
 			this.SettingsTab.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.SettingsTab.Controls.Add(this.FormatComboBox);
+			this.SettingsTab.Controls.Add(this.FormatLabel);
 			this.SettingsTab.Controls.Add(this.mCompletionGroupBox);
 			this.SettingsTab.Controls.Add(this.PropertiesGroupBox);
 			this.SettingsTab.Controls.Add(this.SelectFolderButton);
@@ -106,13 +112,60 @@
 			resources.ApplyResources(this.SettingsTab, "SettingsTab");
 			this.SettingsTab.Name = "SettingsTab";
 			// 
+			// FormatComboBox
+			// 
+			resources.ApplyResources(this.FormatComboBox, "FormatComboBox");
+			this.FormatComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.FormatComboBox.FormattingEnabled = true;
+			this.FormatComboBox.Items.AddRange(new object[] {
+            resources.GetString("FormatComboBox.Items"),
+            resources.GetString("FormatComboBox.Items1"),
+            resources.GetString("FormatComboBox.Items2"),
+            resources.GetString("FormatComboBox.Items3")});
+			this.FormatComboBox.Name = "FormatComboBox";
+			// 
+			// FormatLabel
+			// 
+			this.FormatLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			resources.ApplyResources(this.FormatLabel, "FormatLabel");
+			this.FormatLabel.Name = "FormatLabel";
+			// 
 			// mCompletionGroupBox
 			// 
 			resources.ApplyResources(this.mCompletionGroupBox, "mCompletionGroupBox");
+			this.mCompletionGroupBox.Controls.Add(this.ThreadsComboBox);
+			this.mCompletionGroupBox.Controls.Add(this.mThreadsLabel);
 			this.mCompletionGroupBox.Controls.Add(this.SaveIncompleteRendersCheckBox);
 			this.mCompletionGroupBox.Controls.Add(this.SaveParametersCheckBox);
 			this.mCompletionGroupBox.Name = "mCompletionGroupBox";
 			this.mCompletionGroupBox.TabStop = false;
+			// 
+			// ThreadsComboBox
+			// 
+			this.ThreadsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.ThreadsComboBox.FormattingEnabled = true;
+			this.ThreadsComboBox.Items.AddRange(new object[] {
+            resources.GetString("ThreadsComboBox.Items"),
+            resources.GetString("ThreadsComboBox.Items1"),
+            resources.GetString("ThreadsComboBox.Items2"),
+            resources.GetString("ThreadsComboBox.Items3"),
+            resources.GetString("ThreadsComboBox.Items4"),
+            resources.GetString("ThreadsComboBox.Items5"),
+            resources.GetString("ThreadsComboBox.Items6"),
+            resources.GetString("ThreadsComboBox.Items7"),
+            resources.GetString("ThreadsComboBox.Items8"),
+            resources.GetString("ThreadsComboBox.Items9"),
+            resources.GetString("ThreadsComboBox.Items10"),
+            resources.GetString("ThreadsComboBox.Items11"),
+            resources.GetString("ThreadsComboBox.Items12")});
+			resources.ApplyResources(this.ThreadsComboBox, "ThreadsComboBox");
+			this.ThreadsComboBox.Name = "ThreadsComboBox";
+			// 
+			// mThreadsLabel
+			// 
+			this.mThreadsLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			resources.ApplyResources(this.mThreadsLabel, "mThreadsLabel");
+			this.mThreadsLabel.Name = "mThreadsLabel";
 			// 
 			// SaveIncompleteRendersCheckBox
 			// 
@@ -226,6 +279,7 @@
 			// 
 			resources.ApplyResources(this.DestinationTextBox, "DestinationTextBox");
 			this.DestinationTextBox.Name = "DestinationTextBox";
+			this.DestinationTextBox.ReadOnly = true;
 			// 
 			// DestinationLabel
 			// 
@@ -501,6 +555,10 @@
 		public System.Windows.Forms.GroupBox SizeGroupBox;
 		public System.Windows.Forms.GroupBox PropertiesGroupBox;
 		public System.Windows.Forms.Label DestinationLabel;
+		public System.Windows.Forms.Label FormatLabel;
+		public System.Windows.Forms.ComboBox FormatComboBox;
+		public System.Windows.Forms.ComboBox ThreadsComboBox;
+		private System.Windows.Forms.Label mThreadsLabel;
 
 	}
 }

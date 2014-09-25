@@ -11,6 +11,7 @@ namespace Xyrus.Apophysis
 			Preview = new PreviewSettingsProvider();
 			Autosave = new AutosaveSettingsProvider();
 			Common = new CommonSettingsProvider();
+			Render = new RenderSettingsProvider();
 		}
 
 		public static EditorSettingsProvider Editor
@@ -38,6 +39,11 @@ namespace Xyrus.Apophysis
 			get;
 			private set;
 		}
+		public static RenderSettingsProvider Render
+		{
+			get;
+			private set;
+		}
 
 		public static void Serialize()
 		{
@@ -46,6 +52,7 @@ namespace Xyrus.Apophysis
 			Preview.Serialize();
 			Autosave.Serialize();
 			Common.Serialize();
+			Render.Serialize();
 		}
 	}
 }

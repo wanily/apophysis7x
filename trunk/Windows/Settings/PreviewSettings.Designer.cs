@@ -166,5 +166,29 @@ namespace Xyrus.Apophysis.Settings {
                 this["ThreadCount"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int Oversample {
+            get {
+                return ((int)(this["Oversample"]));
+            }
+            set {
+                this["Oversample"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.5")]
+        public double FilterRadius {
+            get {
+                return ((double)(this["FilterRadius"]));
+            }
+            set {
+                this["FilterRadius"] = value;
+            }
+        }
     }
 }

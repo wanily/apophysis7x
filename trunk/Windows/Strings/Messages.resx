@@ -263,4 +263,10 @@ Location: {2}</value>
 	<data name="SettingsRequireRestartNotice" xml:space="preserve">
     <value>Some settings will be applied once Apophysis restarted.</value>
   </data>
+	<data name="BatchModeSelectPathHintText" xml:space="preserve">
+    <value>Select the folder to save the result images in</value>
+  </data>
+	<data name="SingleModeSelectPathHintText" xml:space="preserve">
+    <value>Select target file...</value>
+  </data>
 </root>

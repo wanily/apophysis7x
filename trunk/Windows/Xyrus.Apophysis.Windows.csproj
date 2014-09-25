@@ -116,8 +116,14 @@
     <Compile Include="Settings\Providers\CommonSettingsProvider.cs" />
     <Compile Include="Settings\Providers\EditorSettingsProvider.cs" />
     <Compile Include="Settings\Providers\PreviewSettingsProvider.cs" />
+    <Compile Include="Settings\Providers\RenderSettingsProvider.cs" />
     <Compile Include="Settings\Providers\SettingsProvider.cs" />
     <Compile Include="Settings\Providers\ViewSettingsProvider.cs" />
+    <Compile Include="Settings\RenderSettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>RenderSettings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Settings\ViewSettings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -189,6 +195,7 @@
     <Compile Include="Windows\Controllers\SettingsEditorController.cs" />
     <Compile Include="Windows\Controllers\SettingsPreviewController.cs" />
     <Compile Include="Windows\Controllers\SettingsViewController.cs" />
+    <Compile Include="Windows\Controllers\TargetImageFileFormat.cs" />
     <Compile Include="Windows\Controllers\UndoController.cs" />
     <Compile Include="Windows\Controllers\WaitImageController.cs" />
     <Compile Include="Windows\Controls\CellValueChangedEventArgs.cs" />
@@ -367,6 +374,7 @@
     <EmbeddedResource Include="Strings\Common.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Common.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Strings\Messages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -522,6 +530,11 @@
     <None Include="Settings\PreviewSettings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>PreviewSettings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Settings\RenderSettings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>RenderSettings.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
     <None Include="Settings\ViewSettings.settings">

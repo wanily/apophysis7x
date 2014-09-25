@@ -5,6 +5,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 {
 	public abstract class FileDialogController : Controller
 	{
+		public static readonly string ImageFilesFilter = "Image files (*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff)|*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff";
 		public static readonly string BatchFilesFilter = "Fractal Flame batches (*.flame)|*.flame";
 		public static readonly string PaletteFilesFilter = "Fractal Flame batches (*.gradient;*.ugr)|*.gradient;*.ugr";
 		public static readonly string AllFilesFilter = "All files (*.*)|*.*";

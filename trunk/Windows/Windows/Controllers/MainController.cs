@@ -447,6 +447,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			mEditorController.Flame = flame;
 			mFlamePropertiesController.Flame = flame;
+			mRenderController.UpdateSelection();
 
 			mUndoController.Reset(flame);
 

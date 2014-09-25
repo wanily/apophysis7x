@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 
 namespace Xyrus.Apophysis.Math
 {
@@ -182,6 +183,12 @@ namespace Xyrus.Apophysis.Math
 
 			path = expandedPath;
 			return true;
+		}
+
+		public static string CleanseFileName(this string text)
+		{
+			var chars = Path.GetInvalidFileNameChars();
+			return chars.Aggregate(text, (cc, c) => cc.Replace(c, '_'));
 		}
 	}
 }

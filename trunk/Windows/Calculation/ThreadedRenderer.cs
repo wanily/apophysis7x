@@ -10,13 +10,17 @@ namespace Xyrus.Apophysis.Calculation
 	{
 		class RenderParameters
 		{
+			public readonly int Oversample;
+			public readonly double FilterRadius;
 			public readonly bool WithTransparency;
 			public readonly Flame Flame;
 			public readonly double Density;
 			public readonly Size Size;
 
-			public RenderParameters(Flame flame, double density, Size size, bool withTransparency)
+			public RenderParameters(Flame flame, double density, Size size, int oversample, double filterRadius, bool withTransparency)
 			{
+				Oversample = oversample;
+				FilterRadius = filterRadius;
 				WithTransparency = withTransparency;
 				Flame = flame;
 				Density = density;
@@ -66,13 +70,13 @@ namespace Xyrus.Apophysis.Calculation
 			GC.SuppressFinalize(this);
 		}
 
-		public void StartCreateBitmap([NotNull] Flame flame, double density, Size size, Action<Bitmap> callback)
+		public void StartCreateBitmap([NotNull] Flame flame, double density, Size size, int oversample, double filterRadius, Action<Bitmap> callback)
 		{
 			if (flame == null) throw new ArgumentNullException(@"flame");
 			if (density <= 0) throw new ArgumentOutOfRangeException(@"density");
 			if (size.Width <= 0 || size.Height <= 0) throw new ArgumentOutOfRangeException(@"size");
 
-			mParameters = new RenderParameters(flame, density, size, true);
+			mParameters = new RenderParameters(flame, density, size, oversample, filterRadius, true);
 			mThreadController.StartThread(CreateBitmap, callback);
 		}
 
@@ -111,7 +115,6 @@ namespace Xyrus.Apophysis.Calculation
 			set { mThreadController.InvokeCallbackMode = value; }
 		}
 
-		//todo multithreading
 		private Bitmap CreateBitmap(ThreadStateToken threadState)
 		{
 			var result = mRenderer.CreateBitmap(mParameters.Flame, mParameters.Density, mParameters.Size, mParameters.WithTransparency, ProgressUpdate, threadState);
@@ -127,6 +130,11 @@ namespace Xyrus.Apophysis.Calculation
 		{
 			if (Progress != null)
 				Progress(this, args);
+		}
+
+		public void SetThreadCount(int? threadCount)
+		{
+			//todo multithreading
 		}
 	}
 }

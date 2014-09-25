@@ -21,6 +21,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		private readonly Dictionary<DragPanel, InputInfo> mDragPanels = new Dictionary<DragPanel, InputInfo>();
 		private readonly Dictionary<ScrollBar, InputInfo> mScrollBars = new Dictionary<ScrollBar, InputInfo>();
 		private readonly Dictionary<TextBox, InputInfo> mTextBoxes = new Dictionary<TextBox, InputInfo>();
+		private readonly Dictionary<ComboBox, InputInfo> mComboBoxes = new Dictionary<ComboBox, InputInfo>();
+		private readonly Dictionary<NumericUpDown, InputInfo> mUpDownControls = new Dictionary<NumericUpDown, InputInfo>();
 		private readonly Dictionary<TextBox, InputInfo> mDragPanelTextBoxes = new Dictionary<TextBox, InputInfo>();
 
 		protected DataInputController() { }
@@ -61,6 +63,25 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				textBox.LostFocus -= OnTextBoxLostFocus;
 			}
 			mTextBoxes.Clear();
+
+			foreach (var comboBox in mComboBoxes.Keys)
+			{
+				comboBox.TextChanged -= OnValueChanged;
+				comboBox.KeyPress -= OnComboBoxKeyPress;
+				comboBox.KeyUp -= OnComboBoxKeyUp;
+				comboBox.LostFocus -= OnComboBoxLostFocus;
+			}
+			mComboBoxes.Clear();
+
+			foreach (var upDown in mUpDownControls.Keys)
+			{
+				upDown.TextChanged -= OnValueChanged;
+				upDown.KeyPress -= OnUpDownKeyPress;
+				upDown.KeyUp -= OnUpDownKeyUp;
+				upDown.LostFocus -= OnUpDownLostFocus;
+				upDown.Scroll -= OnScrollBarScroll;
+			}
+			mUpDownControls.Clear();
 
 			foreach (var textBox in mDragPanelTextBoxes.Keys)
 			{
@@ -104,7 +125,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 		protected void Register([NotNull] TextBox textBox, [NotNull] Action<double> setter, [NotNull] Func<double> getter)
 		{
-			if (textBox == null) throw new ArgumentNullException("setter");
+			if (textBox == null) throw new ArgumentNullException("textBox");
 			if (setter == null) throw new ArgumentNullException("setter");
 			if (getter == null) throw new ArgumentNullException("getter");
 
@@ -114,12 +135,37 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			textBox.KeyUp += OnTextBoxKeyUp;
 			textBox.LostFocus += OnTextBoxLostFocus;
 		}
+		protected void Register([NotNull] ComboBox comboBox, [NotNull] Action<double> setter, [NotNull] Func<double> getter)
+		{
+			if (comboBox == null) throw new ArgumentNullException("comboBox");
+			if (setter == null) throw new ArgumentNullException("setter");
+			if (getter == null) throw new ArgumentNullException("getter");
+
+			mComboBoxes.Add(comboBox, new InputInfo { Setter = setter, Getter = getter });
+			comboBox.TextChanged += OnValueChanged;
+			comboBox.KeyPress += OnComboBoxKeyPress;
+			comboBox.KeyUp += OnComboBoxKeyUp;
+			comboBox.LostFocus += OnComboBoxLostFocus;
+		}
+		protected void Register([NotNull] NumericUpDown upDown, [NotNull] Action<double> setter, [NotNull] Func<double> getter)
+		{
+			if (upDown == null) throw new ArgumentNullException("upDown");
+			if (setter == null) throw new ArgumentNullException("setter");
+			if (getter == null) throw new ArgumentNullException("getter");
+
+			mUpDownControls.Add(upDown, new InputInfo { Setter = setter, Getter = getter });
+			upDown.KeyPress += OnUpDownKeyPress;
+			upDown.KeyUp += OnUpDownKeyUp;
+			upDown.TextChanged += OnValueChanged;
+			upDown.LostFocus += OnUpDownLostFocus;
+			upDown.Scroll += OnScrollBarScroll;
+		}
 
 		private double ConstrainScrollValue(ScrollBar scrollBar, double value)
 		{
 			return System.Math.Max(scrollBar.Minimum, System.Math.Min(value, scrollBar.Maximum));
 		}
-		private void WriteBackControlValues(bool dragPanels = true, bool scrollBars = true, bool textBoxes = true)
+		private void WriteBackControlValues(bool dragPanels = true, bool scrollBars = true, bool textBoxes = true, bool comboBoxes = true, bool upDownControls = true)
 		{
 			using (mInitializer.Enter())
 			{
@@ -134,6 +180,14 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				if (textBoxes)
 					foreach (var textBox in mTextBoxes.Keys)
 						textBox.Text = mTextBoxes[textBox].Getter().ToString(InputController.DefaultFormat, InputController.Culture);
+
+				if (comboBoxes)
+					foreach (var comboBox in mComboBoxes.Keys)
+						comboBox.Text = ((int)mComboBoxes[comboBox].Getter()).ToString(InputController.Culture);
+
+				if (upDownControls)
+					foreach (var upDown in mUpDownControls.Keys)
+						upDown.Value = (int)mUpDownControls[upDown].Getter();
 			}
 		}
 
@@ -145,6 +199,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			var isDragPanel = false;
 			var isScrollBar = false;
 			var isTextBox = false;
+			var isComboBox = false;
+			var isUpDown = false;
 
 			var dragPanel = sender as DragPanel;
 			if (dragPanel != null && mDragPanels.ContainsKey(dragPanel))
@@ -171,12 +227,52 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				isTextBox = true;
 			}
 
-			WriteBackControlValues(!isDragPanel, !isScrollBar, !isTextBox);
+			var comboBox = sender as ComboBox;
+			if (comboBox != null && mComboBoxes.ContainsKey(comboBox))
+			{
+				double value;
+				if (!double.TryParse(comboBox.Text, NumberStyles.Float, InputController.Culture, out value))
+					return;
+
+				mComboBoxes[comboBox].Setter(value);
+				isComboBox = true;
+			}
+
+			var upDown = sender as NumericUpDown;
+			if (upDown != null && mUpDownControls.ContainsKey(upDown))
+			{
+				double value;
+				if (!double.TryParse(upDown.Text, NumberStyles.Float, InputController.Culture, out value))
+					return;
+
+				mUpDownControls[upDown].Setter(value);
+				isUpDown = true;
+			}
+
+			WriteBackControlValues(!isDragPanel, !isScrollBar, !isTextBox, !isComboBox, !isUpDown);
 			OnValueChangedOverride(sender);
+		}
+		private void OnUpDownKeyPress(object sender, KeyPressEventArgs e)
+		{
+			mInputHandler.HandleKeyPressForNumericTextBox(e);
+		}
+		private void OnComboBoxKeyPress(object sender, KeyPressEventArgs e)
+		{
+			mInputHandler.HandleKeyPressForNumericTextBox(e);
 		}
 		private void OnTextBoxKeyPress(object sender, KeyPressEventArgs e)
 		{
 			mInputHandler.HandleKeyPressForNumericTextBox(e);
+		}
+		private void OnUpDownKeyUp(object sender, KeyEventArgs e)
+		{
+			if (e.KeyData == Keys.Return || e.KeyData == Keys.Enter)
+				((NumericUpDown)sender).Parent.SelectNextControl((NumericUpDown)sender, true, true, true, true);
+		}
+		private void OnComboBoxKeyUp(object sender, KeyEventArgs e)
+		{
+			if (e.KeyData == Keys.Return || e.KeyData == Keys.Enter)
+				((ComboBox)sender).Parent.SelectNextControl((ComboBox)sender, true, true, true, true);
 		}
 		private void OnTextBoxKeyUp(object sender, KeyEventArgs e)
 		{
@@ -227,6 +323,62 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			}
 
 			OnValueCommittedOverride(textBox);
+		}
+		private void OnComboBoxLostFocus(object sender, EventArgs e)
+		{
+			if (mInitializer.IsBusy)
+				return;
+
+			var comboBox = (ComboBox)sender;
+			double value;
+
+			if (!double.TryParse(comboBox.Text, NumberStyles.Float, InputController.Culture, out value))
+			{
+				using (mInitializer.Enter())
+				{
+					Func<double> getter = null;
+
+					if (mComboBoxes.ContainsKey(comboBox))
+						getter = mComboBoxes[comboBox].Getter;
+
+					if (getter != null)
+					{
+						comboBox.Text = getter().ToString(InputController.DefaultFormat, InputController.Culture);
+					}
+
+					return;
+				}
+			}
+
+			OnValueCommittedOverride(comboBox);
+		}
+		private void OnUpDownLostFocus(object sender, EventArgs e)
+		{
+			if (mInitializer.IsBusy)
+				return;
+
+			var upDown = (NumericUpDown)sender;
+			double value;
+
+			if (!double.TryParse(upDown.Text, NumberStyles.Float, InputController.Culture, out value))
+			{
+				using (mInitializer.Enter())
+				{
+					Func<double> getter = null;
+
+					if (mUpDownControls.ContainsKey(upDown))
+						getter = mUpDownControls[upDown].Getter;
+
+					if (getter != null)
+					{
+						upDown.Text = getter().ToString(InputController.DefaultFormat, InputController.Culture);
+					}
+
+					return;
+				}
+			}
+
+			OnValueCommittedOverride(upDown);
 		}
 	}
 }

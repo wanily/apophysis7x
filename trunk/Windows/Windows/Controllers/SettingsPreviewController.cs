@@ -27,9 +27,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		public void Update()
 		{
-			if (!ApophysisSettings.Preview.ThreadCount.HasValue)
-				View.ThreadsComboBox.SelectedIndex = 0;
-			else View.ThreadsComboBox.Text = ApophysisSettings.Preview.ThreadCount.GetValueOrDefault().ToString(InputController.Culture);
+			View.ThreadsComboBox.SelectedIndex = ApophysisSettings.Preview.ThreadCount.GetValueOrDefault();
 		}
 		public void WriteSettings()
 		{

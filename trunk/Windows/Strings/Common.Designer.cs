@@ -61,6 +61,15 @@ namespace Xyrus.Apophysis.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to render7x.
+        /// </summary>
+        internal static string DefaultRenderBatchName {
+            get {
+                return ResourceManager.GetString("DefaultRenderBatchName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Untitled flame #{0}.
         /// </summary>
         internal static string NumberedUntitledFlame {
