@@ -80,7 +80,6 @@
     <Compile Include="Calculation\VariationCollection.cs" />
     <Compile Include="Calculation\VariationPriority.cs" />
     <Compile Include="Calculation\VariationRegistry.cs" />
-    <Compile Include="Math\UtilityExtensions.cs" />
     <Compile Include="Messaging\MessageCenter.cs" />
     <Compile Include="Messaging\MessageEventArgs.cs" />
     <Compile Include="Messaging\MessageEventHandler.cs" />
@@ -145,6 +144,7 @@
     <Compile Include="Threading\InvokeCallbackMode.cs" />
     <Compile Include="Threading\ThreadController.cs" />
     <Compile Include="Threading\ThreadStateToken.cs" />
+    <Compile Include="UtilityExtensions.cs" />
     <Compile Include="Variations\Linear.cs" />
     <Compile Include="Variations\Linear3D.cs" />
     <Compile Include="Variations\Spherical.cs" />

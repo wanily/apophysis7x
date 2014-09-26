@@ -3,7 +3,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 
-namespace Xyrus.Apophysis.Math
+namespace Xyrus.Apophysis
 {
 	[PublicAPI]
 	public static class UtilityExtensions
