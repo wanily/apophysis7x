@@ -397,6 +397,7 @@ namespace Xyrus.Apophysis.Models
 			return copy;
 		}
 
+		/*
 		public override int GetHashCode()
 		{
 			unchecked
@@ -414,6 +415,7 @@ namespace Xyrus.Apophysis.Models
 			
 			return IsEqual((Palette)obj);
 		}
+		*/
 
 		[NotNull]
 		public Palette Resize(int length)

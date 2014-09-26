@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -70,7 +71,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				() => CurrentEditValue);
 
 			View.PalettePicture.Paint += OnPalettePaint;
-			View.PalettePresetPictureBox.Paint += OnPresetPaint;
+			View.PalettePresetPictureBox.Paint += OnPalettePaint;
 
 			View.RandomPresetButton.Click += OnRandomPresetClick;
 			View.PaletteResetButton.Click += OnResetClick;
@@ -97,12 +98,14 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.BlurHandlerMenuItem.Click += OnEditModeSelected;
 			View.FrequencyHandlerMenuItem.Click += OnEditModeSelected;
 
+			View.Load += OnViewLoaded;
+
 			CurrentHandler = mEditHandlers.First();
 		}
 		protected override void DetachView()
 		{
 			View.PalettePicture.Paint -= OnPalettePaint;
-			View.PalettePresetPictureBox.Paint -= OnPresetPaint;
+			View.PalettePresetPictureBox.Paint -= OnPalettePaint;
 
 			View.RandomPresetButton.Click -= OnRandomPresetClick;
 			View.PaletteResetButton.Click -= OnResetClick;
@@ -129,7 +132,14 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.BlurHandlerMenuItem.Click -= OnEditModeSelected;
 			View.FrequencyHandlerMenuItem.Click -= OnEditModeSelected;
 
+			View.Load -= OnViewLoaded;
+
 			Cleanup();
+		}
+
+		private void OnViewLoaded(object sender, EventArgs e)
+		{
+			RedrawPalette();
 		}
 
 		protected override void OnValueCommittedOverride(object control)
@@ -147,9 +157,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			UpdateViewValue();
 			UpdateBounds();
 			InitHandlers();
-			RedrawPalette();
 
 			base.Update();
+			RedrawPalette();
 		}
 
 		[NotNull]
@@ -195,6 +205,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 		private void RedrawPalette()
 		{
+			View.PalettePicture.Tag = mParent.Flame.Palette.Copy();
 			View.PalettePicture.Refresh();
 		}
 		private void UpdateBounds()
@@ -224,24 +235,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			var w = (float)View.PalettePicture.ClientSize.Width;
 			var h = View.PalettePicture.ClientSize.Height;
 
-			var palette = mParent.Flame.Palette;
+			var control = sender as Control;
+			if (control == null)
+				return;
 
-			for (float pos = 0; pos < w; pos++)
-			{
-				var i = (int)System.Math.Round((palette.Length - 1) * pos / w);
-
-				using (var brush = new SolidBrush(palette[i]))
-				{
-					e.Graphics.FillRectangle(brush, pos, 0, w - pos, h);
-				}
-			}
-		}
-		private void OnPresetPaint(object sender, PaintEventArgs e)
-		{
-			var w = (float)View.PalettePicture.ClientSize.Width;
-			var h = View.PalettePicture.ClientSize.Height;
-
-			var palette = View.PalettePresetPictureBox.Tag as Palette;
+			var palette = control.Tag as Palette;
 			if (palette == null)
 				return;
 
