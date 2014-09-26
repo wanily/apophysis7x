@@ -259,7 +259,7 @@ namespace Xyrus.Apophysis.Models
 		[NotNull]
 		public Flame Copy()
 		{
-			var copy = new Flame();
+			var copy = new Flame(false);
 			ReduceCounter();
 
 			copy.mIndex = mIndex;

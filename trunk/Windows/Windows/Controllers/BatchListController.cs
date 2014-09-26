@@ -272,6 +272,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		private void RedrawIcon(ListViewItem item, ThreadStateToken threadState)
 		{
+			if (item == null)
+				return;
+
 			var flame = item.Tag as Flame;
 			Debug.Assert(flame != null);
 
