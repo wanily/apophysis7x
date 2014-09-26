@@ -2,7 +2,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Models;
-using Xyrus.Apophysis.Properties;
+using Xyrus.Apophysis.Windows.Resources;
 
 namespace Xyrus.Apophysis.Windows.Controls
 {
@@ -23,33 +23,33 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 			var items = new ToolStripItem[]
 			{
-				new ToolStripButton("Reset transform", Resources.ResetIterator, OnResetIteratorClick) { ImageTransparentColor = Color.Fuchsia },
+				new ToolStripButton("Reset transform", Icons.ResetIterator, OnResetIteratorClick) { ImageTransparentColor = Color.Fuchsia },
 
 				new ToolStripSeparator(),
 
-				new ToolStripButton("Reset position", Resources.ResetIteratorOrigin, OnResetOriginClick) { ImageTransparentColor = Color.Fuchsia },
-				new ToolStripButton("Reset angle", Resources.ResetIteratorAngle, OnResetRotationClick) { ImageTransparentColor = Color.Fuchsia },
-				new ToolStripButton("Reset scale", Resources.ResetIteratorScale, OnResetScaleClick) { ImageTransparentColor = Color.Fuchsia },
+				new ToolStripButton("Reset position", Icons.ResetIteratorOrigin, OnResetOriginClick) { ImageTransparentColor = Color.Fuchsia },
+				new ToolStripButton("Reset angle", Icons.ResetIteratorAngle, OnResetRotationClick) { ImageTransparentColor = Color.Fuchsia },
+				new ToolStripButton("Reset scale", Icons.ResetIteratorScale, OnResetScaleClick) { ImageTransparentColor = Color.Fuchsia },
 
 				new ToolStripSeparator(),
 
-				new ToolStripButton("Duplicate transform", Resources.DuplicateIterator, OnDuplicateIteratorClick) { ImageTransparentColor = Color.Fuchsia },
-				mRemoveIterator = new ToolStripButton("Remove transform", Resources.RemoveIterator, OnRemoveIteratorClick) { ImageTransparentColor = Color.Fuchsia },
+				new ToolStripButton("Duplicate transform", Icons.DuplicateIterator, OnDuplicateIteratorClick) { ImageTransparentColor = Color.Fuchsia },
+				mRemoveIterator = new ToolStripButton("Remove transform", Icons.RemoveIterator, OnRemoveIteratorClick) { ImageTransparentColor = Color.Fuchsia },
 
 				new ToolStripSeparator(),
 
 				new ToolStripMenuItem("Convert to", null, new ToolStripItem[]
 					{
-						mConvertToRegular = new ToolStripButton("Transform", Resources.RegularIterator, OnConvertClick) { ImageTransparentColor = Color.Fuchsia }, 
-						mConvertToFinal = new ToolStripButton("Final transform", Resources.FinalIterator, OnConvertClick) { ImageTransparentColor = Color.Fuchsia } 
+						mConvertToRegular = new ToolStripButton("Transform", Icons.RegularIterator, OnConvertClick) { ImageTransparentColor = Color.Fuchsia }, 
+						mConvertToFinal = new ToolStripButton("Final transform", Icons.FinalIterator, OnConvertClick) { ImageTransparentColor = Color.Fuchsia } 
 					}), 
 
 				new ToolStripSeparator(), 
 
-				new ToolStripButton("Rotate 90° counter-clockwise", Resources.Rotate90CounterClockwise, OnRotate90CcwClick) { ImageTransparentColor = Color.Fuchsia },
-				new ToolStripButton("Rotate 90° clockwise", Resources.Rotate90Clockwise, OnRotate90CwClick) { ImageTransparentColor = Color.Fuchsia },
-				new ToolStripButton("Flip vertically", Resources.FlipAllVertical, OnFlipVerticallyClick) { ImageTransparentColor = Color.Fuchsia },
-				new ToolStripButton("Flip horizontally", Resources.FlipAllHorizontal, OnFlipHorizontallyClick) { ImageTransparentColor = Color.Fuchsia }
+				new ToolStripButton("Rotate 90° counter-clockwise", Icons.Rotate90CounterClockwise, OnRotate90CcwClick) { ImageTransparentColor = Color.Fuchsia },
+				new ToolStripButton("Rotate 90° clockwise", Icons.Rotate90Clockwise, OnRotate90CwClick) { ImageTransparentColor = Color.Fuchsia },
+				new ToolStripButton("Flip vertically", Icons.FlipAllVertical, OnFlipVerticallyClick) { ImageTransparentColor = Color.Fuchsia },
+				new ToolStripButton("Flip horizontally", Icons.FlipAllHorizontal, OnFlipHorizontallyClick) { ImageTransparentColor = Color.Fuchsia }
 			};
 
 			Items.AddRange(items);

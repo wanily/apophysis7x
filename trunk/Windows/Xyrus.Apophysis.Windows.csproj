@@ -88,12 +88,12 @@
     <Compile Include="Models\PaletteCollection.cs" />
     <Compile Include="Models\ParserExtensions.cs" />
     <Compile Include="Models\SerializationExtensions.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
+    <Compile Include="Calculation\IterationData.cs" />
+    <Compile Include="Windows\Resources\Icons.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
+      <DependentUpon>Icons.resx</DependentUpon>
     </Compile>
-    <Compile Include="Calculation\IterationData.cs" />
     <Compile Include="Settings\AutosaveSettings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -135,6 +135,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Common.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Embedded.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Embedded.resx</DependentUpon>
     </Compile>
     <Compile Include="Strings\Messages.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -336,6 +341,11 @@
     <Compile Include="Windows\Common\CanvasSnapBehavior.cs" />
     <Compile Include="Models\Iterator.cs" />
     <Compile Include="Windows\Input\ZoomOperation.cs" />
+    <Compile Include="Windows\Resources\Cursors.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Cursors.resx</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Visuals\CanvasVisual.cs" />
     <Compile Include="Windows\Visuals\ControlVisual.cs" />
     <Compile Include="Windows\Visuals\ControlVisualChain.cs" />
@@ -374,10 +384,18 @@
     <Compile Include="Windows\Visuals\PreviewGuidelinesVisual.cs" />
     <Compile Include="Windows\Visuals\PreviewImageVisual.cs" />
     <Compile Include="Windows\Visuals\PreviewInputVisual.cs" />
+    <EmbeddedResource Include="Windows\Resources\Icons.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Icons.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Strings\Common.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Common.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Embedded.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Embedded.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Strings\Messages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -408,11 +426,6 @@
       <DependentUpon>Editor.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <SubType>Designer</SubType>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
@@ -437,6 +450,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\Resources\MAINICON.ico" />
     <EmbeddedResource Include="Windows\Resources\MOVE_WHITE.cur" />
+    <EmbeddedResource Include="Windows\Resources\Cursors.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Cursors.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Windows\Resources\ROTATE_WHITE.cur" />
     <EmbeddedResource Include="Windows\Resources\SCALE_WHITE.cur" />
   </ItemGroup>

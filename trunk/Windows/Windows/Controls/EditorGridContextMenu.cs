@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Xyrus.Apophysis.Properties;
+using Xyrus.Apophysis.Windows.Resources;
 
 namespace Xyrus.Apophysis.Windows.Controls
 {
@@ -21,22 +21,22 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 			var items = new ToolStripItem[]
 			{
-				new ToolStripButton("New transform", Resources.NewIterator, OnNewIteratorClick) { ImageTransparentColor = Color.Fuchsia },
+				new ToolStripButton("New transform", Icons.NewIterator, OnNewIteratorClick) { ImageTransparentColor = Color.Fuchsia },
 
 				new ToolStripSeparator(),
 
-				mZoomAutomatically = new ToolStripButton("Zoom automatically", Resources.ToggleAutoZoom, OnZoomAutomaticallyClick) { Checked = editor.Settings.ZoomAutomatically, ImageTransparentColor = Color.Fuchsia },
-				mShowVariationPreview = new ToolStripButton("Show variation preview", Resources.ToggleVariationPrevie, OnShowVariationPreviewClick) { Checked = editor.Settings.ShowVariationPreview, ImageTransparentColor = Color.Fuchsia  },
+				mZoomAutomatically = new ToolStripButton("Zoom automatically", Icons.ToggleAutoZoom, OnZoomAutomaticallyClick) { Checked = editor.Settings.ZoomAutomatically, ImageTransparentColor = Color.Fuchsia },
+				mShowVariationPreview = new ToolStripButton("Show variation preview", Icons.ToggleVariationPrevie, OnShowVariationPreviewClick) { Checked = editor.Settings.ShowVariationPreview, ImageTransparentColor = Color.Fuchsia  },
 
 				new ToolStripSeparator(),
 
-				mLockAxes = new ToolStripButton("Lock transform axes", Resources.LockTransformAxes, OnLockAxesClick) { Checked = editor.Settings.LockAxes, ImageTransparentColor = Color.Fuchsia  },
-				mEditPostMatrix = new ToolStripButton("Enable / edit post-transform", Resources.TogglePostMatrix, OnTogglePostMatrixClick) { Checked = editor.ActiveMatrix == IteratorMatrix.PostAffine, ImageTransparentColor = Color.Fuchsia  },
+				mLockAxes = new ToolStripButton("Lock transform axes", Icons.LockTransformAxes, OnLockAxesClick) { Checked = editor.Settings.LockAxes, ImageTransparentColor = Color.Fuchsia  },
+				mEditPostMatrix = new ToolStripButton("Enable / edit post-transform", Icons.TogglePostMatrix, OnTogglePostMatrixClick) { Checked = editor.ActiveMatrix == IteratorMatrix.PostAffine, ImageTransparentColor = Color.Fuchsia  },
 
 				new ToolStripSeparator(),
 
-				new ToolStripButton("Flip all vertically", Resources.FlipAllVertical, OnFlipAllVerticallyClick) { ImageTransparentColor = Color.Fuchsia },
-				new ToolStripButton("Flip all horizontally", Resources.FlipAllHorizontal, OnFlipAllHorizontallyClick) { ImageTransparentColor = Color.Fuchsia }
+				new ToolStripButton("Flip all vertically", Icons.FlipAllVertical, OnFlipAllVerticallyClick) { ImageTransparentColor = Color.Fuchsia },
+				new ToolStripButton("Flip all horizontally", Icons.FlipAllHorizontal, OnFlipAllHorizontallyClick) { ImageTransparentColor = Color.Fuchsia }
 			};
 
 			Items.AddRange(items);

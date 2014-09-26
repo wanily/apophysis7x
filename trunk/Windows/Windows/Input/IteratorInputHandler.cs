@@ -5,7 +5,6 @@ using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Controls;
 using Xyrus.Apophysis.Windows.Visuals;
-using Xyrus.Apophysis.Properties;
 
 namespace Xyrus.Apophysis.Windows.Input
 {
@@ -42,9 +41,9 @@ namespace Xyrus.Apophysis.Windows.Input
 
 		static IteratorInputHandler()
 		{
-			mMoveCursor = new Cursor(new MemoryStream(Resources.Move));
-			mRotateCursor = new Cursor(new MemoryStream(Resources.Rotate));
-			mScaleCursor = new Cursor(new MemoryStream(Resources.Scale));
+			mMoveCursor = new Cursor(new MemoryStream(Resources.Cursors.Move));
+			mRotateCursor = new Cursor(new MemoryStream(Resources.Cursors.Rotate));
+			mScaleCursor = new Cursor(new MemoryStream(Resources.Cursors.Scale));
 		}
 		public IteratorInputHandler([NotNull] Control control, [NotNull] IteratorVisual visual, [NotNull] Canvas canvas, [NotNull] EditorSettings settings, IteratorMatrix activeMatrix) : base(control)
 		{

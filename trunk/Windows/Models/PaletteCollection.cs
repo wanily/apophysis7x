@@ -4,7 +4,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using Xyrus.Apophysis.Properties;
+using Xyrus.Apophysis.Resources;
+using Xyrus.Apophysis.Strings;
 
 namespace Xyrus.Apophysis.Models
 {
@@ -28,7 +29,7 @@ namespace Xyrus.Apophysis.Models
 			var array = palettes.ToArray();
 			if (!array.Any())
 			{
-				throw new ArgumentException(Resources.EmptyPaletteCollectionError, @"palettes");
+				throw new ArgumentException(Messages.EmptyPaletteCollectionError, @"palettes");
 			}
 
 			mName = null;
@@ -42,7 +43,7 @@ namespace Xyrus.Apophysis.Models
 		[NotNull]
 		public static PaletteCollection Flam3Palettes
 		{
-			get { return mFlam3Palettes ?? (mFlam3Palettes = new PaletteCollection(ReadUgr(Resources.Flam3ColorMaps).ToArray())); }
+			get { return mFlam3Palettes ?? (mFlam3Palettes = new PaletteCollection(ReadUgr(Embedded.Flam3ColorMaps).ToArray())); }
 		}
 
 		[NotNull]

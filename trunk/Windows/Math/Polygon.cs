@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Xyrus.Apophysis.Properties;
+using Xyrus.Apophysis.Strings;
 
 namespace Xyrus.Apophysis.Math
 {
@@ -18,7 +18,7 @@ namespace Xyrus.Apophysis.Math
 
 			if (mVertices.Length <= 2)
 			{
-				throw new ArgumentOutOfRangeException(@"vertices", Resources.InvalidPolygonError);
+				throw new ArgumentOutOfRangeException(@"vertices", Messages.InvalidPolygonError);
 			}
 		}
 

@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Xml.Linq;
 using Xyrus.Apophysis.Messaging;
-using Xyrus.Apophysis.Properties;
 using Xyrus.Apophysis.Strings;
 
 namespace Xyrus.Apophysis.Models
@@ -23,7 +22,7 @@ namespace Xyrus.Apophysis.Models
 		{
 			if (Items.Count == 0)
 			{
-				throw new ArgumentException(Resources.EmptyBatchError, @"flames");
+				throw new ArgumentException(Messages.EmptyBatchError, @"flames");
 			}
 
 			Name = null;

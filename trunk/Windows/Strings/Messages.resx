@@ -206,121 +206,130 @@ Location: {2}</value>
   <data name="FlameCollectionNoChildTagsError" xml:space="preserve">
     <value>No flames in batch</value>
   </data>
-	<data name="FlameErrorWrapper" xml:space="preserve">
+  <data name="FlameErrorWrapper" xml:space="preserve">
     <value>Flame "{0}": {1}</value>
   </data>
-	<data name="IteratorWeightRangeError" xml:space="preserve">
+  <data name="IteratorWeightRangeError" xml:space="preserve">
     <value>Weight must not be less or equal to 0</value>
   </data>
-	<data name="IteratorColorRangeError" xml:space="preserve">
+  <data name="IteratorColorRangeError" xml:space="preserve">
     <value>Color must be be in the range 0 - 1</value>
   </data>
-	<data name="IteratorColorSpeedRangeError" xml:space="preserve">
+  <data name="IteratorColorSpeedRangeError" xml:space="preserve">
     <value>Color speed must be be in the range -1 - 1</value>
   </data>
-	<data name="IteratorOpacityRangeError" xml:space="preserve">
+  <data name="IteratorOpacityRangeError" xml:space="preserve">
     <value>Opacity must be be in the range 0 - 1</value>
   </data>
-	<data name="IteratorDirectColorRangeError" xml:space="preserve">
+  <data name="IteratorDirectColorRangeError" xml:space="preserve">
     <value>DirectColor must be be in the range 0 - 1</value>
   </data>
-	<data name="IteratorUnknownAttributeError" xml:space="preserve">
+  <data name="IteratorUnknownAttributeError" xml:space="preserve">
     <value>Potentially missing variation or variable: {0}</value>
   </data>
-	<data name="IteratorCollectionRemovingLastPrimaryIteratorError" xml:space="preserve">
+  <data name="IteratorCollectionRemovingLastPrimaryIteratorError" xml:space="preserve">
     <value>Can't remove last primary iterator of flame</value>
   </data>
-	<data name="IteratorCollectionNoChildTagsError" xml:space="preserve">
+  <data name="IteratorCollectionNoChildTagsError" xml:space="preserve">
     <value>No transforms in flame</value>
   </data>
-	<data name="IteratorErrorWrapper" xml:space="preserve">
+  <data name="IteratorErrorWrapper" xml:space="preserve">
     <value>Transform #{0}: {1}</value>
   </data>
-	<data name="MismatchingPaletteArraysError" xml:space="preserve">
+  <data name="MismatchingPaletteArraysError" xml:space="preserve">
     <value>Mismatching palette arrays</value>
   </data>
-	<data name="PluginAlreadyLoadedError" xml:space="preserve">
+  <data name="PluginAlreadyLoadedError" xml:space="preserve">
     <value>The plugin "{0}" seems to be loaded already.</value>
   </data>
-	<data name="GenericPluginError" xml:space="preserve">
+  <data name="GenericPluginError" xml:space="preserve">
     <value>Error loading library "{0}": {1}</value>
   </data>
-	<data name="LoadingPluginErrorLogMessage" xml:space="preserve">
+  <data name="LoadingPluginErrorLogMessage" xml:space="preserve">
     <value>Error loading "{0}": {1}</value>
   </data>
-	<data name="BadPluginMessageFileContent" xml:space="preserve">
+  <data name="BadPluginMessageFileContent" xml:space="preserve">
     <value>The plugin file "{0}" caused errors when Apophysis attempted to load it. As long as this file exists, it will not be loaded again. Delete the file if you re-enable the plugin.</value>
   </data>
-	<data name="GenericProblemListExceedsMaxSizeMessage" xml:space="preserve">
+  <data name="GenericProblemListExceedsMaxSizeMessage" xml:space="preserve">
     <value>A full list of problems can be found in the message window (F8)</value>
   </data>
-	<data name="DirectoryDoesntExistError" xml:space="preserve">
+  <data name="DirectoryDoesntExistError" xml:space="preserve">
     <value>Directory must exist</value>
   </data>
-	<data name="DirectoryDoesntExistUiError" xml:space="preserve">
+  <data name="DirectoryDoesntExistUiError" xml:space="preserve">
     <value>The directory must exist.</value>
   </data>
-	<data name="SettingsRequireRestartNotice" xml:space="preserve">
+  <data name="SettingsRequireRestartNotice" xml:space="preserve">
     <value>Some settings will be applied once Apophysis restarted.</value>
   </data>
-	<data name="BatchModeSelectPathHintText" xml:space="preserve">
+  <data name="BatchModeSelectPathHintText" xml:space="preserve">
     <value>Select the folder to save the result images in</value>
   </data>
-	<data name="SingleModeSelectPathHintText" xml:space="preserve">
+  <data name="SingleModeSelectPathHintText" xml:space="preserve">
     <value>Select target file...</value>
   </data>
-	<data name="DiscardBatchConfirmMessage" xml:space="preserve">
+  <data name="DiscardBatchConfirmMessage" xml:space="preserve">
     <value>Do you want to save the current batch before loading a new one?</value>
   </data>
-	<data name="OverwriteRenderTargetConfirmMessage" xml:space="preserve">
+  <data name="OverwriteRenderTargetConfirmMessage" xml:space="preserve">
     <value>The target file already exists. Do you want to overwrite it?</value>
   </data>
-	<data name="CancelRenderConfirmMessage" xml:space="preserve">
+  <data name="CancelRenderConfirmMessage" xml:space="preserve">
     <value>Are you sure that you want to cancel the render?</value>
   </data>
-	<data name="ExitConfirmMessage" xml:space="preserve">
+  <data name="ExitConfirmMessage" xml:space="preserve">
     <value>Your current batch has unsaved changes. Do you want to save them before exiting Apophysis?</value>
   </data>
-	<data name="AttemptedThreadCountChangeWhileRendererBusyErrorMessage" xml:space="preserve">
+  <data name="AttemptedThreadCountChangeWhileRendererBusyErrorMessage" xml:space="preserve">
     <value>Can't change thread count while renderer is busy</value>
   </data>
-	<data name="RenderMessageHeader" xml:space="preserve">
+  <data name="RenderMessageHeader" xml:space="preserve">
     <value>Rendering "{0}"</value>
   </data>
-	<data name="RenderSizeMessage" xml:space="preserve">
+  <data name="RenderSizeMessage" xml:space="preserve">
     <value>Size:       {0}x{1}</value>
   </data>
-	<data name="RenderDensityMessage" xml:space="preserve">
+  <data name="RenderDensityMessage" xml:space="preserve">
     <value>Density:    {0}</value>
   </data>
-	<data name="RenderFilterMessage" xml:space="preserve">
+  <data name="RenderFilterMessage" xml:space="preserve">
     <value>Oversample: {0}, Filter: {1:0.0##}</value>
   </data>
-	<data name="RenderSavingImageMessage" xml:space="preserve">
+  <data name="RenderSavingImageMessage" xml:space="preserve">
     <value>Saving image...</value>
   </data>
-	<data name="RenderAllocatingMessage" xml:space="preserve">
+  <data name="RenderAllocatingMessage" xml:space="preserve">
     <value>Allocating {0:###,###,###,##0.00} MB of memory...</value>
   </data>
-	<data name="RenderInProgressMessage" xml:space="preserve">
+  <data name="RenderInProgressMessage" xml:space="preserve">
     <value>Rendering...</value>
   </data>
-	<data name="RenderSamplingMessage" xml:space="preserve">
+  <data name="RenderSamplingMessage" xml:space="preserve">
     <value>Creating image with density: {0:###,###,###,##0.00}</value>
   </data>
-	<data name="RenderTerminatedMessage" xml:space="preserve">
+  <data name="RenderTerminatedMessage" xml:space="preserve">
     <value>Rendering terminated!</value>
   </data>
-	<data name="RenderTerminatingMessage" xml:space="preserve">
+  <data name="RenderTerminatingMessage" xml:space="preserve">
     <value>Terminating render...</value>
   </data>
-	<data name="RenderTotalTimeMessage" xml:space="preserve">
+  <data name="RenderTotalTimeMessage" xml:space="preserve">
     <value>Total time: {0}</value>
   </data>
-	<data name="RenderPureTimeMessage" xml:space="preserve">
+  <data name="RenderPureTimeMessage" xml:space="preserve">
     <value>Pure rendering time: {0}</value>
   </data>
-	<data name="RenderAverageSpeedMessage" xml:space="preserve">
+  <data name="RenderAverageSpeedMessage" xml:space="preserve">
     <value>Average speed: {0:###,###,###,##0.00} iterations per second</value>
+  </data>
+  <data name="EmptyBatchError" xml:space="preserve">
+    <value>Batch can't be empty</value>
+  </data>
+  <data name="EmptyPaletteCollectionError" xml:space="preserve">
+    <value>Source enumeration of palettes can't be empty</value>
+  </data>
+  <data name="InvalidPolygonError" xml:space="preserve">
+    <value>A polygon must contain at least three vertices</value>
   </data>
 </root>
