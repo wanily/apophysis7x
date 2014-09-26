@@ -374,19 +374,19 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			try
 			{
-				var batch = new FlameCollection();
+				FlameCollection batch;
 
 				Flame.ReduceCounter();
 
 				if (withMessaging)
 				{
-					batch.ReadXml(XElement.Parse(File.ReadAllText(path), LoadOptions.None));
+					batch = FlameCollection.LoadFromXml(XElement.Parse(File.ReadAllText(path), LoadOptions.None));
 				}
 				else
 				{
 					using (MessageCenter.SuspendMessaging.Enter())
 					{
-						batch.ReadXml(XElement.Parse(File.ReadAllText(path), LoadOptions.None));
+						batch = FlameCollection.LoadFromXml(XElement.Parse(File.ReadAllText(path), LoadOptions.None));
 					}
 				}
 
@@ -618,12 +618,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			if (File.Exists(path))
 			{
-				batch = new FlameCollection();
-				Flame.ReduceCounter();
-
 				using (MessageCenter.SuspendMessaging.Enter())
 				{
-					batch.ReadXml(XElement.Parse(File.ReadAllText(path), LoadOptions.None));
+					batch = FlameCollection.LoadFromXml(XElement.Parse(File.ReadAllText(path), LoadOptions.None));
 				}
 
 				batch.Name = batchName;

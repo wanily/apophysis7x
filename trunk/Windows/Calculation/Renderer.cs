@@ -35,10 +35,8 @@ namespace Xyrus.Apophysis.Calculation
 			var random = new Random(flame.GetHashCode() ^ (int)DateTime.Now.Ticks);
 
 			var samples = density * size.Width * size.Height + 20;
-			var color = flame.Palette[flame.Palette.Length/2]; //Color.FromArgb(random.Next()%255, random.Next()%255, random.Next()%255);
-
-			var col = color.ToArgb();
-			var icol = color.Invert().ToArgb();
+			var col = flame.Palette[0].ToArgb();
+			var icol = flame.Palette[flame.Palette.Length - 1].ToArgb();
 
 			if (progressCallback != null)
 			{

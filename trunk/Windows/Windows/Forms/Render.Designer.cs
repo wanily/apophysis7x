@@ -36,7 +36,7 @@
 			this.FormatLabel = new System.Windows.Forms.Label();
 			this.mCompletionGroupBox = new System.Windows.Forms.GroupBox();
 			this.ThreadsComboBox = new System.Windows.Forms.ComboBox();
-			this.mThreadsLabel = new System.Windows.Forms.Label();
+			this.ThreadsLabel = new System.Windows.Forms.Label();
 			this.SaveIncompleteRendersCheckBox = new System.Windows.Forms.CheckBox();
 			this.SaveParametersCheckBox = new System.Windows.Forms.CheckBox();
 			this.PropertiesGroupBox = new System.Windows.Forms.GroupBox();
@@ -45,6 +45,7 @@
 			this.DensityComboBox = new System.Windows.Forms.ComboBox();
 			this.mDensitylabel = new System.Windows.Forms.Label();
 			this.FilterRadiusTextBox = new System.Windows.Forms.TextBox();
+			this.FilterRadiusDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.SelectFolderButton = new System.Windows.Forms.Button();
 			this.mButtonImages = new System.Windows.Forms.ImageList(this.components);
 			this.GoToFolderButton = new System.Windows.Forms.Button();
@@ -75,7 +76,6 @@
 			this.CancelButton = new System.Windows.Forms.Button();
 			this.PauseButton = new System.Windows.Forms.Button();
 			this.StartButton = new System.Windows.Forms.Button();
-			this.FilterRadiusDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.Tabs.SuspendLayout();
 			this.SettingsTab.SuspendLayout();
 			this.mCompletionGroupBox.SuspendLayout();
@@ -134,7 +134,7 @@
 			// 
 			resources.ApplyResources(this.mCompletionGroupBox, "mCompletionGroupBox");
 			this.mCompletionGroupBox.Controls.Add(this.ThreadsComboBox);
-			this.mCompletionGroupBox.Controls.Add(this.mThreadsLabel);
+			this.mCompletionGroupBox.Controls.Add(this.ThreadsLabel);
 			this.mCompletionGroupBox.Controls.Add(this.SaveIncompleteRendersCheckBox);
 			this.mCompletionGroupBox.Controls.Add(this.SaveParametersCheckBox);
 			this.mCompletionGroupBox.Name = "mCompletionGroupBox";
@@ -161,11 +161,11 @@
 			resources.ApplyResources(this.ThreadsComboBox, "ThreadsComboBox");
 			this.ThreadsComboBox.Name = "ThreadsComboBox";
 			// 
-			// mThreadsLabel
+			// ThreadsLabel
 			// 
-			this.mThreadsLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			resources.ApplyResources(this.mThreadsLabel, "mThreadsLabel");
-			this.mThreadsLabel.Name = "mThreadsLabel";
+			this.ThreadsLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			resources.ApplyResources(this.ThreadsLabel, "ThreadsLabel");
+			this.ThreadsLabel.Name = "ThreadsLabel";
 			// 
 			// SaveIncompleteRendersCheckBox
 			// 
@@ -239,6 +239,19 @@
 			// 
 			resources.ApplyResources(this.FilterRadiusTextBox, "FilterRadiusTextBox");
 			this.FilterRadiusTextBox.Name = "FilterRadiusTextBox";
+			// 
+			// FilterRadiusDragPanel
+			// 
+			this.FilterRadiusDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.FilterRadiusDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.FilterRadiusDragPanel.Default = 0D;
+			this.FilterRadiusDragPanel.DragStepping = 5D;
+			resources.ApplyResources(this.FilterRadiusDragPanel, "FilterRadiusDragPanel");
+			this.FilterRadiusDragPanel.Maximum = 1.7976931348623157E+308D;
+			this.FilterRadiusDragPanel.Minimum = 0D;
+			this.FilterRadiusDragPanel.Name = "FilterRadiusDragPanel";
+			this.FilterRadiusDragPanel.TextBox = this.FilterRadiusTextBox;
+			this.FilterRadiusDragPanel.Value = 0D;
 			// 
 			// SelectFolderButton
 			// 
@@ -465,19 +478,6 @@
 			this.StartButton.Name = "StartButton";
 			this.StartButton.UseVisualStyleBackColor = true;
 			// 
-			// FilterRadiusDragPanel
-			// 
-			this.FilterRadiusDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.FilterRadiusDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.FilterRadiusDragPanel.Default = 0D;
-			this.FilterRadiusDragPanel.DragStepping = 5D;
-			resources.ApplyResources(this.FilterRadiusDragPanel, "FilterRadiusDragPanel");
-			this.FilterRadiusDragPanel.Maximum = 1.7976931348623157E+308D;
-			this.FilterRadiusDragPanel.Minimum = 0D;
-			this.FilterRadiusDragPanel.Name = "FilterRadiusDragPanel";
-			this.FilterRadiusDragPanel.TextBox = this.FilterRadiusTextBox;
-			this.FilterRadiusDragPanel.Value = 0D;
-			// 
 			// Render
 			// 
 			this.AcceptButton = this.StartButton;
@@ -558,7 +558,7 @@
 		public System.Windows.Forms.Label FormatLabel;
 		public System.Windows.Forms.ComboBox FormatComboBox;
 		public System.Windows.Forms.ComboBox ThreadsComboBox;
-		private System.Windows.Forms.Label mThreadsLabel;
+		public System.Windows.Forms.Label ThreadsLabel;
 
 	}
 }

@@ -284,6 +284,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		private void OnStartClick(object sender, EventArgs e)
 		{
+			View.MessagesTextBox.Text = string.Empty;
+
 			if (!mBatchMode)
 			{
 				var renderPath = View.DestinationTextBox.Text;
@@ -648,7 +650,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				View.ElapsedLabel.Text = null;
 				View.InfoLabel.Text = null;
 
-				Update();
+				UpdateSelection();
 			}));
 		}
 
@@ -827,10 +829,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				View.GoToFolderButton.Enabled = !value;
 				View.FormatComboBox.Enabled = !value;
 				View.FormatLabel.Enabled = !value;
+				View.ThreadsLabel.Enabled = !value;
+				View.ThreadsComboBox.Enabled = !value;
 
 				if (!oldValue && value)
 				{
-					View.Tabs.SelectedTab = View.MessagesTab;
+					//View.Tabs.SelectedTab = View.MessagesTab;
 				}
 				else if (!value && oldValue)
 				{
@@ -876,7 +880,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			if (IsRendering)
 				return;
 
-			Update();
+			UpdateMode();
 		}
 	}
 }

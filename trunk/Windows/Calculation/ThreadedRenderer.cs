@@ -69,7 +69,6 @@ namespace Xyrus.Apophysis.Calculation
 
 			FinalizeRender();
 		}
-
 		private void SendCompletedMessage()
 		{
 			if (mParameters != null)
@@ -81,6 +80,7 @@ namespace Xyrus.Apophysis.Calculation
 
 			FinalizeRender();
 		}
+
 		private void FinalizeRender()
 		{
 			mParameters = null;

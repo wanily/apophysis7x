@@ -15,10 +15,9 @@ namespace Xyrus.Apophysis.Models
 	{
 		private EventHandler mContentChanged;
 
-		public FlameCollection() : base(new List<Flame>())
+		private FlameCollection() : base(new List<Flame>())
 		{
 			Name = null;
-			Append();
 		}
 		public FlameCollection([NotNull] IEnumerable<Flame> flames) : base(flames.ToList())
 		{
@@ -220,6 +219,13 @@ namespace Xyrus.Apophysis.Models
 				flame.WriteXml(out flameElement);
 				element.Add(flameElement);
 			}
+		}
+
+		public static FlameCollection LoadFromXml([NotNull] XElement element)
+		{
+			var collection = new FlameCollection();
+			collection.ReadXml(element);
+			return collection;
 		}
 	}
 }

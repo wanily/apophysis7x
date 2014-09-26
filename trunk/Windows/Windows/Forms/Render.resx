@@ -252,34 +252,34 @@
   <data name="&gt;&gt;ThreadsComboBox.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="mThreadsLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="ThreadsLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="mThreadsLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="ThreadsLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 26</value>
   </data>
-  <data name="mThreadsLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ThreadsLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 21</value>
   </data>
-  <data name="mThreadsLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="ThreadsLabel.TabIndex" type="System.Int32, mscorlib">
     <value>39</value>
   </data>
-  <data name="mThreadsLabel.Text" xml:space="preserve">
+  <data name="ThreadsLabel.Text" xml:space="preserve">
     <value>Max. no. of threads</value>
   </data>
-  <data name="mThreadsLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="ThreadsLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
   </data>
-  <data name="&gt;&gt;mThreadsLabel.Name" xml:space="preserve">
-    <value>mThreadsLabel</value>
+  <data name="&gt;&gt;ThreadsLabel.Name" xml:space="preserve">
+    <value>ThreadsLabel</value>
   </data>
-  <data name="&gt;&gt;mThreadsLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;ThreadsLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mThreadsLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ThreadsLabel.Parent" xml:space="preserve">
     <value>mCompletionGroupBox</value>
   </data>
-  <data name="&gt;&gt;mThreadsLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ThreadsLabel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="SaveIncompleteRendersCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -587,7 +587,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAA+
-        CgAAAk1TRnQBSQFMAgEBAwEAAeABAAHgAQABEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        CgAAAk1TRnQBSQFMAgEBAwEAAegBAAHoAQABEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABEAMAAQEBAAEYBgABDNUAAe8BzgHPAcMBZAFlAaoBVQFWAaQBUgFTAZ8BTwFQAZoCTQGUAkoBjwJH
         AYkCRAGDAkEBeAE7ATwBeAE7ATwBcgI5AW4BNgE3lgABzwFrAWwB8wGOAY8B5gGAAYEBqgFEASQBRwEy
         ASEBwwG0AasBxgG7AbMBygHBAbwBzgHIAcQBVgFNAUgBngE+ATMBnAE9ATYBmAE5ATEBcgI5AwABdQGE
@@ -1274,7 +1274,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACK
-        BwAAAk1TRnQBSQFMAgEBAgEAAegBAAHoAQABEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        BwAAAk1TRnQBSQFMAgEBAgEAAfABAAHwAQABEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABEAMAAQEBAAEYBgABDP8ACQABtwGiAZMBYwFJATUBYwFJATUBYwFJATUBYwFJATUBYwFJATUBYwFJ
         ATUBYwFJATUBYwFJATUBYwFJATUBYwFJATVpAAG3AaIBkwFgAUYBMgFjAUkBNQFjAUkBNQFjAUkBNQFj
         AUkBNQFjAUkBNQFjAUkBNQFjAUkBNQFjAUkBNQFjAUkBNQFoAU4BOhIAAbcBogGTA/8BtwGiAZMBsAGe
@@ -2773,9 +2773,6 @@
         0P/Q0ND/0NDQ/9DQ0P/R0dH/1tbW/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
 </value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Render</value>

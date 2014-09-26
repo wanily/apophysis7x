@@ -380,6 +380,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				SetItemProperties(selected, newFlame, true);
 				mParent.EditorController.Flame = newFlame;
 				mParent.FlamePropertiesController.Flame = newFlame;
+				mParent.RenderController.UpdateSelection();
 			}
 
 			mParent.UpdatePreviews();
