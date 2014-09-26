@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -137,11 +136,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			Cleanup();
 		}
 
-		private void OnViewLoaded(object sender, EventArgs e)
-		{
-			RedrawPalette();
-		}
-
 		protected override void OnValueCommittedOverride(object control)
 		{
 			mParent.CommitValue();
@@ -253,7 +247,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				}
 			}
 		}
-
 		private void OnPaletteSelectClick(object sender, EventArgs e)
 		{
 			//todo find palette with dialog
@@ -299,6 +292,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			handler.Calculate(mParent.Flame.Palette);
 			UpdateViewValue();
 			RedrawPalette();
+		}
+
+		private void OnViewLoaded(object sender, EventArgs e)
+		{
+			Update();
 		}
 
 		private void OnRandomPresetClick(object sender, EventArgs e)

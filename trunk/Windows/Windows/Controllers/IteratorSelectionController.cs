@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Forms;
 
@@ -24,16 +23,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			View.IteratorSelectionComboBox.SelectedIndexChanged += OnIteratorSelectedFromComboBox;
 			View.IteratorCanvas.SelectionChanged += OnIteratorSelectedFromCanvas;
-
-			View.PaletteSelectComboBox.Items.Clear();
-			View.PaletteSelectComboBox.Items.AddRange(PaletteCollection.Flam3Palettes.OfType<object>().ToArray());
 		}
 		protected override void DetachView()
 		{
 			View.IteratorSelectionComboBox.SelectedIndexChanged -= OnIteratorSelectedFromComboBox;
 			View.IteratorCanvas.SelectionChanged -= OnIteratorSelectedFromCanvas;
-
-			View.PaletteSelectComboBox.Items.Clear();
 		}
 
 		private void OnIteratorSelectedFromCanvas(object sender, EventArgs e)

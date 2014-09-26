@@ -53,7 +53,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.VariablesGrid.CellEndEdit += OnRequestCommit;
 			View.VariationsGrid.CellEndEdit += OnRequestCommit;
 			View.ClearVariationsButton.Click += OnRequestCommit;
-			View.PaletteSelectComboBox.SelectedIndexChanged += OnRequestCommit;
 		}
 		protected override void DetachView()
 		{
@@ -89,7 +88,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.VariablesGrid.CellEndEdit -= OnRequestCommit;
 			View.VariationsGrid.CellEndEdit -= OnRequestCommit;
 			View.ClearVariationsButton.Click -= OnRequestCommit;
-			View.PaletteSelectComboBox.SelectedIndexChanged -= OnRequestCommit;
 		}
 
 		private void OnScrollbarCommit(object sender, ScrollEventArgs e)

@@ -204,7 +204,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 		public void UpdateColor()
 		{
-			mColorController.UpdateControls();
+			mColorController.Update();
 		}
 		public void UpdateWindowTitle()
 		{

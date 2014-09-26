@@ -82,7 +82,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.VariablesGrid.CellValueChanged += OnRequestCommit;
 			View.VariationsGrid.CellValueChanged += OnRequestCommit;
 			View.ClearVariationsButton.Click += OnRequestCommit;
-			View.PaletteSelectComboBox.SelectedIndexChanged += OnRequestCommit;
 
 			using (mParent.Initializer.Enter())
 			{
@@ -139,7 +138,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.VariablesGrid.CellValueChanged -= OnRequestCommit;
 			View.VariationsGrid.CellValueChanged -= OnRequestCommit;
 			View.ClearVariationsButton.Click -= OnRequestCommit;
-			View.PaletteSelectComboBox.SelectedIndexChanged -= OnRequestCommit;
 
 			View.PreviewPicture.Image = null;
 			ApophysisSettings.Preview.EditorPreviewDensityLevel = PreviewDensityLevel;

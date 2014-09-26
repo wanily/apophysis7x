@@ -48,59 +48,28 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mToolbarSeparator7 = new System.Windows.Forms.ToolStripSeparator();
 			this.IteratorConvertToRegularButton = new System.Windows.Forms.ToolStripButton();
 			this.IteratorConvertToFinalButton = new System.Windows.Forms.ToolStripButton();
-			this.mPreviewContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.LowQualityMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.MediumQualityMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.HighQualityMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.dataGridViewTextBoxColumn27 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn28 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn29 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn30 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn26 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.mToolbarImages = new System.Windows.Forms.ImageList(this.components);
-			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.IteratorCanvas = new Xyrus.Apophysis.Windows.Controls.EditorCanvas();
 			this.mSettings = new Xyrus.Apophysis.Windows.Controls.EditorSettings();
 			this.mSidebarSplitter = new System.Windows.Forms.SplitContainer();
 			this.mPreviewPanel = new System.Windows.Forms.Panel();
 			this.PreviewPicture = new System.Windows.Forms.PictureBox();
+			this.mPreviewContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.LowQualityMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.MediumQualityMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.HighQualityMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.mPictureBevel = new System.Windows.Forms.Label();
 			this.Tabs = new System.Windows.Forms.TabControl();
 			this.VariationsTab = new System.Windows.Forms.TabPage();
 			this.ClearVariationsButton = new System.Windows.Forms.Button();
 			this.HideUnusedVariationsCheckBox = new System.Windows.Forms.CheckBox();
 			this.VariationsGrid = new Xyrus.Apophysis.Windows.Controls.DragGrid();
-			this.dataGridViewTextBoxColumn31 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn32 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn35 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn36 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.VariablesTab = new System.Windows.Forms.TabPage();
 			this.HideUnrelatedVariablesCheckBox = new System.Windows.Forms.CheckBox();
 			this.VariablesGrid = new Xyrus.Apophysis.Windows.Controls.DragGrid();
-			this.dataGridViewTextBoxColumn33 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn34 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn37 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn38 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.PointTab = new System.Windows.Forms.TabPage();
 			this.mIteratorControlsGroupBox = new System.Windows.Forms.GroupBox();
 			this.IteratorScaleRatio = new System.Windows.Forms.ComboBox();
@@ -157,7 +126,6 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.PreviewDensityTrackBar = new System.Windows.Forms.TrackBar();
 			this.PreviewRangeTrackBar = new System.Windows.Forms.TrackBar();
 			this.mIteratorColorGroupBox = new System.Windows.Forms.GroupBox();
-			this.PaletteSelectComboBox = new Xyrus.Apophysis.Windows.Controls.PaletteSelectComboBox();
 			this.IteratorDirectColorTextBox = new System.Windows.Forms.TextBox();
 			this.IteratorDirectColorDragPanel = new Xyrus.Apophysis.Windows.Controls.DragPanel();
 			this.IteratorOpacityTextBox = new System.Windows.Forms.TextBox();
@@ -174,16 +142,53 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mIteratorNameLabel = new System.Windows.Forms.Label();
 			this.IteratorSelectionComboBox = new Xyrus.Apophysis.Windows.Controls.IteratorSelectComboBox();
 			this.mIteratorSelectLabel = new System.Windows.Forms.Label();
+			this.dataGridViewTextBoxColumn27 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn28 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn29 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn30 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn26 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.mToolbarImages = new System.Windows.Forms.ImageList(this.components);
+			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn31 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn32 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn33 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn34 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.PalettePicture = new System.Windows.Forms.PictureBox();
+			this.mPaletteBevel = new System.Windows.Forms.Label();
 			this.mRootSplitter.Panel1.SuspendLayout();
 			this.mRootSplitter.Panel2.SuspendLayout();
 			this.mRootSplitter.SuspendLayout();
 			this.mToolbar.SuspendLayout();
-			this.mPreviewContextMenu.SuspendLayout();
 			this.mSidebarSplitter.Panel1.SuspendLayout();
 			this.mSidebarSplitter.Panel2.SuspendLayout();
 			this.mSidebarSplitter.SuspendLayout();
 			this.mPreviewPanel.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.PreviewPicture)).BeginInit();
+			this.mPreviewContextMenu.SuspendLayout();
 			this.Tabs.SuspendLayout();
 			this.VariationsTab.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.VariationsGrid)).BeginInit();
@@ -201,6 +206,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			((System.ComponentModel.ISupportInitialize)(this.PreviewRangeTrackBar)).BeginInit();
 			this.mIteratorColorGroupBox.SuspendLayout();
 			this.mIteratorPropertyPanel.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.PalettePicture)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// mRootSplitter
@@ -410,241 +416,6 @@ namespace Xyrus.Apophysis.Windows.Forms
 			resources.ApplyResources(this.IteratorConvertToFinalButton, "IteratorConvertToFinalButton");
 			this.IteratorConvertToFinalButton.Name = "IteratorConvertToFinalButton";
 			// 
-			// mPreviewContextMenu
-			// 
-			this.mPreviewContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.LowQualityMenuItem,
-            this.MediumQualityMenuItem,
-            this.HighQualityMenuItem});
-			this.mPreviewContextMenu.Name = "mPreviewContextMenu";
-			this.mPreviewContextMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-			resources.ApplyResources(this.mPreviewContextMenu, "mPreviewContextMenu");
-			// 
-			// LowQualityMenuItem
-			// 
-			this.LowQualityMenuItem.Name = "LowQualityMenuItem";
-			resources.ApplyResources(this.LowQualityMenuItem, "LowQualityMenuItem");
-			// 
-			// MediumQualityMenuItem
-			// 
-			this.MediumQualityMenuItem.Name = "MediumQualityMenuItem";
-			resources.ApplyResources(this.MediumQualityMenuItem, "MediumQualityMenuItem");
-			// 
-			// HighQualityMenuItem
-			// 
-			this.HighQualityMenuItem.Name = "HighQualityMenuItem";
-			resources.ApplyResources(this.HighQualityMenuItem, "HighQualityMenuItem");
-			// 
-			// dataGridViewTextBoxColumn27
-			// 
-			resources.ApplyResources(this.dataGridViewTextBoxColumn27, "dataGridViewTextBoxColumn27");
-			this.dataGridViewTextBoxColumn27.Name = "dataGridViewTextBoxColumn27";
-			this.dataGridViewTextBoxColumn27.ReadOnly = true;
-			// 
-			// dataGridViewTextBoxColumn28
-			// 
-			this.dataGridViewTextBoxColumn28.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			resources.ApplyResources(this.dataGridViewTextBoxColumn28, "dataGridViewTextBoxColumn28");
-			this.dataGridViewTextBoxColumn28.Name = "dataGridViewTextBoxColumn28";
-			// 
-			// dataGridViewTextBoxColumn29
-			// 
-			resources.ApplyResources(this.dataGridViewTextBoxColumn29, "dataGridViewTextBoxColumn29");
-			this.dataGridViewTextBoxColumn29.Name = "dataGridViewTextBoxColumn29";
-			this.dataGridViewTextBoxColumn29.ReadOnly = true;
-			// 
-			// dataGridViewTextBoxColumn30
-			// 
-			this.dataGridViewTextBoxColumn30.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			resources.ApplyResources(this.dataGridViewTextBoxColumn30, "dataGridViewTextBoxColumn30");
-			this.dataGridViewTextBoxColumn30.Name = "dataGridViewTextBoxColumn30";
-			// 
-			// dataGridViewTextBoxColumn23
-			// 
-			resources.ApplyResources(this.dataGridViewTextBoxColumn23, "dataGridViewTextBoxColumn23");
-			this.dataGridViewTextBoxColumn23.Name = "dataGridViewTextBoxColumn23";
-			this.dataGridViewTextBoxColumn23.ReadOnly = true;
-			// 
-			// dataGridViewTextBoxColumn24
-			// 
-			this.dataGridViewTextBoxColumn24.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			resources.ApplyResources(this.dataGridViewTextBoxColumn24, "dataGridViewTextBoxColumn24");
-			this.dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24";
-			// 
-			// dataGridViewTextBoxColumn25
-			// 
-			resources.ApplyResources(this.dataGridViewTextBoxColumn25, "dataGridViewTextBoxColumn25");
-			this.dataGridViewTextBoxColumn25.Name = "dataGridViewTextBoxColumn25";
-			this.dataGridViewTextBoxColumn25.ReadOnly = true;
-			// 
-			// dataGridViewTextBoxColumn26
-			// 
-			this.dataGridViewTextBoxColumn26.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			resources.ApplyResources(this.dataGridViewTextBoxColumn26, "dataGridViewTextBoxColumn26");
-			this.dataGridViewTextBoxColumn26.Name = "dataGridViewTextBoxColumn26";
-			// 
-			// dataGridViewTextBoxColumn15
-			// 
-			resources.ApplyResources(this.dataGridViewTextBoxColumn15, "dataGridViewTextBoxColumn15");
-			this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
-			this.dataGridViewTextBoxColumn15.ReadOnly = true;
-			// 
-			// dataGridViewTextBoxColumn16
-			// 
-			this.dataGridViewTextBoxColumn16.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			resources.ApplyResources(this.dataGridViewTextBoxColumn16, "dataGridViewTextBoxColumn16");
-			this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
-			// 
-			// dataGridViewTextBoxColumn17
-			// 
-			resources.ApplyResources(this.dataGridViewTextBoxColumn17, "dataGridViewTextBoxColumn17");
-			this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
-			this.dataGridViewTextBoxColumn17.ReadOnly = true;
-			// 
-			// dataGridViewTextBoxColumn18
-			// 
-			this.dataGridViewTextBoxColumn18.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			resources.ApplyResources(this.dataGridViewTextBoxColumn18, "dataGridViewTextBoxColumn18");
-			this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
-			// 
-			// mToolbarImages
-			// 
-			this.mToolbarImages.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("mToolbarImages.ImageStream")));
-			this.mToolbarImages.TransparentColor = System.Drawing.Color.Fuchsia;
-			this.mToolbarImages.Images.SetKeyName(0, "ResetAll.bmp");
-			this.mToolbarImages.Images.SetKeyName(1, "NewIterator.bmp");
-			this.mToolbarImages.Images.SetKeyName(2, "DuplicateIterator.bmp");
-			this.mToolbarImages.Images.SetKeyName(3, "RemoveIterator.bmp");
-			this.mToolbarImages.Images.SetKeyName(4, "Undo.bmp");
-			this.mToolbarImages.Images.SetKeyName(5, "Redo.bmp");
-			this.mToolbarImages.Images.SetKeyName(6, "CopyIterator.bmp");
-			this.mToolbarImages.Images.SetKeyName(7, "PasteIterator.bmp");
-			this.mToolbarImages.Images.SetKeyName(8, "SelectMode.bmp");
-			this.mToolbarImages.Images.SetKeyName(9, "MoveMode.bmp");
-			this.mToolbarImages.Images.SetKeyName(10, "RotateMode.bmp");
-			this.mToolbarImages.Images.SetKeyName(11, "ScaleMode.bmp");
-			this.mToolbarImages.Images.SetKeyName(12, "ToggleWorldPivot.bmp");
-			this.mToolbarImages.Images.SetKeyName(13, "FlipAllHorizontal.bmp");
-			this.mToolbarImages.Images.SetKeyName(14, "FlipAllVertical.bmp");
-			this.mToolbarImages.Images.SetKeyName(15, "ToggleVariationPrevie.bmp");
-			this.mToolbarImages.Images.SetKeyName(16, "TogglePostMatrix.bmp");
-			this.mToolbarImages.Images.SetKeyName(17, "ToggleFinalIterator.bmp");
-			this.mToolbarImages.Images.SetKeyName(18, "LinkIterator.bmp");
-			this.mToolbarImages.Images.SetKeyName(19, "LockTransformAxes.bmp");
-			this.mToolbarImages.Images.SetKeyName(20, "ResetIterator.bmp");
-			this.mToolbarImages.Images.SetKeyName(21, "ResetIteratorOrigin.bmp");
-			this.mToolbarImages.Images.SetKeyName(22, "ResetIteratorAngle.bmp");
-			this.mToolbarImages.Images.SetKeyName(23, "ResetIteratorScale.bmp");
-			this.mToolbarImages.Images.SetKeyName(24, "ToggleAutoZoom.bmp");
-			// 
-			// dataGridViewTextBoxColumn1
-			// 
-			resources.ApplyResources(this.dataGridViewTextBoxColumn1, "dataGridViewTextBoxColumn1");
-			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-			this.dataGridViewTextBoxColumn1.ReadOnly = true;
-			// 
-			// dataGridViewTextBoxColumn2
-			// 
-			this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			resources.ApplyResources(this.dataGridViewTextBoxColumn2, "dataGridViewTextBoxColumn2");
-			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-			// 
-			// dataGridViewTextBoxColumn3
-			// 
-			resources.ApplyResources(this.dataGridViewTextBoxColumn3, "dataGridViewTextBoxColumn3");
-			this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-			this.dataGridViewTextBoxColumn3.ReadOnly = true;
-			// 
-			// dataGridViewTextBoxColumn4
-			// 
-			this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			resources.ApplyResources(this.dataGridViewTextBoxColumn4, "dataGridViewTextBoxColumn4");
-			this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-			// 
-			// dataGridViewTextBoxColumn5
-			// 
-			resources.ApplyResources(this.dataGridViewTextBoxColumn5, "dataGridViewTextBoxColumn5");
-			this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-			this.dataGridViewTextBoxColumn5.ReadOnly = true;
-			// 
-			// dataGridViewTextBoxColumn6
-			// 
-			this.dataGridViewTextBoxColumn6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			resources.ApplyResources(this.dataGridViewTextBoxColumn6, "dataGridViewTextBoxColumn6");
-			this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-			// 
-			// dataGridViewTextBoxColumn7
-			// 
-			resources.ApplyResources(this.dataGridViewTextBoxColumn7, "dataGridViewTextBoxColumn7");
-			this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-			this.dataGridViewTextBoxColumn7.ReadOnly = true;
-			// 
-			// dataGridViewTextBoxColumn8
-			// 
-			this.dataGridViewTextBoxColumn8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			resources.ApplyResources(this.dataGridViewTextBoxColumn8, "dataGridViewTextBoxColumn8");
-			this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-			// 
-			// dataGridViewTextBoxColumn9
-			// 
-			resources.ApplyResources(this.dataGridViewTextBoxColumn9, "dataGridViewTextBoxColumn9");
-			this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-			this.dataGridViewTextBoxColumn9.ReadOnly = true;
-			// 
-			// dataGridViewTextBoxColumn10
-			// 
-			this.dataGridViewTextBoxColumn10.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			resources.ApplyResources(this.dataGridViewTextBoxColumn10, "dataGridViewTextBoxColumn10");
-			this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-			// 
-			// dataGridViewTextBoxColumn11
-			// 
-			resources.ApplyResources(this.dataGridViewTextBoxColumn11, "dataGridViewTextBoxColumn11");
-			this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-			this.dataGridViewTextBoxColumn11.ReadOnly = true;
-			// 
-			// dataGridViewTextBoxColumn12
-			// 
-			this.dataGridViewTextBoxColumn12.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			resources.ApplyResources(this.dataGridViewTextBoxColumn12, "dataGridViewTextBoxColumn12");
-			this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-			// 
-			// dataGridViewTextBoxColumn13
-			// 
-			resources.ApplyResources(this.dataGridViewTextBoxColumn13, "dataGridViewTextBoxColumn13");
-			this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
-			this.dataGridViewTextBoxColumn13.ReadOnly = true;
-			// 
-			// dataGridViewTextBoxColumn14
-			// 
-			this.dataGridViewTextBoxColumn14.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			resources.ApplyResources(this.dataGridViewTextBoxColumn14, "dataGridViewTextBoxColumn14");
-			this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
-			// 
-			// dataGridViewTextBoxColumn19
-			// 
-			resources.ApplyResources(this.dataGridViewTextBoxColumn19, "dataGridViewTextBoxColumn19");
-			this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
-			this.dataGridViewTextBoxColumn19.ReadOnly = true;
-			// 
-			// dataGridViewTextBoxColumn20
-			// 
-			this.dataGridViewTextBoxColumn20.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			resources.ApplyResources(this.dataGridViewTextBoxColumn20, "dataGridViewTextBoxColumn20");
-			this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
-			// 
-			// dataGridViewTextBoxColumn21
-			// 
-			resources.ApplyResources(this.dataGridViewTextBoxColumn21, "dataGridViewTextBoxColumn21");
-			this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
-			this.dataGridViewTextBoxColumn21.ReadOnly = true;
-			// 
-			// dataGridViewTextBoxColumn22
-			// 
-			this.dataGridViewTextBoxColumn22.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			resources.ApplyResources(this.dataGridViewTextBoxColumn22, "dataGridViewTextBoxColumn22");
-			this.dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
-			// 
 			// IteratorCanvas
 			// 
 			this.IteratorCanvas.ActiveMatrix = Xyrus.Apophysis.Windows.Controls.IteratorMatrix.PreAffine;
@@ -706,6 +477,31 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.PreviewPicture.ContextMenuStrip = this.mPreviewContextMenu;
 			this.PreviewPicture.Name = "PreviewPicture";
 			this.PreviewPicture.TabStop = false;
+			// 
+			// mPreviewContextMenu
+			// 
+			this.mPreviewContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.LowQualityMenuItem,
+            this.MediumQualityMenuItem,
+            this.HighQualityMenuItem});
+			this.mPreviewContextMenu.Name = "mPreviewContextMenu";
+			this.mPreviewContextMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+			resources.ApplyResources(this.mPreviewContextMenu, "mPreviewContextMenu");
+			// 
+			// LowQualityMenuItem
+			// 
+			this.LowQualityMenuItem.Name = "LowQualityMenuItem";
+			resources.ApplyResources(this.LowQualityMenuItem, "LowQualityMenuItem");
+			// 
+			// MediumQualityMenuItem
+			// 
+			this.MediumQualityMenuItem.Name = "MediumQualityMenuItem";
+			resources.ApplyResources(this.MediumQualityMenuItem, "MediumQualityMenuItem");
+			// 
+			// HighQualityMenuItem
+			// 
+			this.HighQualityMenuItem.Name = "HighQualityMenuItem";
+			resources.ApplyResources(this.HighQualityMenuItem, "HighQualityMenuItem");
 			// 
 			// mPictureBevel
 			// 
@@ -769,17 +565,17 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.VariationsGrid.ShowEditingIcon = false;
 			this.VariationsGrid.ShowRowErrors = false;
 			// 
-			// dataGridViewTextBoxColumn31
+			// dataGridViewTextBoxColumn35
 			// 
-			resources.ApplyResources(this.dataGridViewTextBoxColumn31, "dataGridViewTextBoxColumn31");
-			this.dataGridViewTextBoxColumn31.Name = "dataGridViewTextBoxColumn31";
-			this.dataGridViewTextBoxColumn31.ReadOnly = true;
+			resources.ApplyResources(this.dataGridViewTextBoxColumn35, "dataGridViewTextBoxColumn35");
+			this.dataGridViewTextBoxColumn35.Name = "dataGridViewTextBoxColumn35";
+			this.dataGridViewTextBoxColumn35.ReadOnly = true;
 			// 
-			// dataGridViewTextBoxColumn32
+			// dataGridViewTextBoxColumn36
 			// 
-			this.dataGridViewTextBoxColumn32.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			resources.ApplyResources(this.dataGridViewTextBoxColumn32, "dataGridViewTextBoxColumn32");
-			this.dataGridViewTextBoxColumn32.Name = "dataGridViewTextBoxColumn32";
+			this.dataGridViewTextBoxColumn36.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			resources.ApplyResources(this.dataGridViewTextBoxColumn36, "dataGridViewTextBoxColumn36");
+			this.dataGridViewTextBoxColumn36.Name = "dataGridViewTextBoxColumn36";
 			// 
 			// VariablesTab
 			// 
@@ -821,17 +617,17 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.VariablesGrid.ShowEditingIcon = false;
 			this.VariablesGrid.ShowRowErrors = false;
 			// 
-			// dataGridViewTextBoxColumn33
+			// dataGridViewTextBoxColumn37
 			// 
-			resources.ApplyResources(this.dataGridViewTextBoxColumn33, "dataGridViewTextBoxColumn33");
-			this.dataGridViewTextBoxColumn33.Name = "dataGridViewTextBoxColumn33";
-			this.dataGridViewTextBoxColumn33.ReadOnly = true;
+			resources.ApplyResources(this.dataGridViewTextBoxColumn37, "dataGridViewTextBoxColumn37");
+			this.dataGridViewTextBoxColumn37.Name = "dataGridViewTextBoxColumn37";
+			this.dataGridViewTextBoxColumn37.ReadOnly = true;
 			// 
-			// dataGridViewTextBoxColumn34
+			// dataGridViewTextBoxColumn38
 			// 
-			this.dataGridViewTextBoxColumn34.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			resources.ApplyResources(this.dataGridViewTextBoxColumn34, "dataGridViewTextBoxColumn34");
-			this.dataGridViewTextBoxColumn34.Name = "dataGridViewTextBoxColumn34";
+			this.dataGridViewTextBoxColumn38.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			resources.ApplyResources(this.dataGridViewTextBoxColumn38, "dataGridViewTextBoxColumn38");
+			this.dataGridViewTextBoxColumn38.Name = "dataGridViewTextBoxColumn38";
 			// 
 			// PointTab
 			// 
@@ -1279,7 +1075,8 @@ namespace Xyrus.Apophysis.Windows.Forms
 			// mIteratorColorGroupBox
 			// 
 			resources.ApplyResources(this.mIteratorColorGroupBox, "mIteratorColorGroupBox");
-			this.mIteratorColorGroupBox.Controls.Add(this.PaletteSelectComboBox);
+			this.mIteratorColorGroupBox.Controls.Add(this.PalettePicture);
+			this.mIteratorColorGroupBox.Controls.Add(this.mPaletteBevel);
 			this.mIteratorColorGroupBox.Controls.Add(this.IteratorDirectColorTextBox);
 			this.mIteratorColorGroupBox.Controls.Add(this.IteratorDirectColorDragPanel);
 			this.mIteratorColorGroupBox.Controls.Add(this.IteratorOpacityTextBox);
@@ -1291,14 +1088,6 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mIteratorColorGroupBox.Controls.Add(this.IteratorColorDragPanel);
 			this.mIteratorColorGroupBox.Name = "mIteratorColorGroupBox";
 			this.mIteratorColorGroupBox.TabStop = false;
-			// 
-			// PaletteSelectComboBox
-			// 
-			this.PaletteSelectComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-			this.PaletteSelectComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.PaletteSelectComboBox.FormattingEnabled = true;
-			resources.ApplyResources(this.PaletteSelectComboBox, "PaletteSelectComboBox");
-			this.PaletteSelectComboBox.Name = "PaletteSelectComboBox";
 			// 
 			// IteratorDirectColorTextBox
 			// 
@@ -1449,6 +1238,253 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mIteratorSelectLabel.ForeColor = System.Drawing.SystemColors.WindowText;
 			this.mIteratorSelectLabel.Name = "mIteratorSelectLabel";
 			// 
+			// dataGridViewTextBoxColumn27
+			// 
+			resources.ApplyResources(this.dataGridViewTextBoxColumn27, "dataGridViewTextBoxColumn27");
+			this.dataGridViewTextBoxColumn27.Name = "dataGridViewTextBoxColumn27";
+			this.dataGridViewTextBoxColumn27.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn28
+			// 
+			this.dataGridViewTextBoxColumn28.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			resources.ApplyResources(this.dataGridViewTextBoxColumn28, "dataGridViewTextBoxColumn28");
+			this.dataGridViewTextBoxColumn28.Name = "dataGridViewTextBoxColumn28";
+			// 
+			// dataGridViewTextBoxColumn29
+			// 
+			resources.ApplyResources(this.dataGridViewTextBoxColumn29, "dataGridViewTextBoxColumn29");
+			this.dataGridViewTextBoxColumn29.Name = "dataGridViewTextBoxColumn29";
+			this.dataGridViewTextBoxColumn29.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn30
+			// 
+			this.dataGridViewTextBoxColumn30.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			resources.ApplyResources(this.dataGridViewTextBoxColumn30, "dataGridViewTextBoxColumn30");
+			this.dataGridViewTextBoxColumn30.Name = "dataGridViewTextBoxColumn30";
+			// 
+			// dataGridViewTextBoxColumn23
+			// 
+			resources.ApplyResources(this.dataGridViewTextBoxColumn23, "dataGridViewTextBoxColumn23");
+			this.dataGridViewTextBoxColumn23.Name = "dataGridViewTextBoxColumn23";
+			this.dataGridViewTextBoxColumn23.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn24
+			// 
+			this.dataGridViewTextBoxColumn24.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			resources.ApplyResources(this.dataGridViewTextBoxColumn24, "dataGridViewTextBoxColumn24");
+			this.dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24";
+			// 
+			// dataGridViewTextBoxColumn25
+			// 
+			resources.ApplyResources(this.dataGridViewTextBoxColumn25, "dataGridViewTextBoxColumn25");
+			this.dataGridViewTextBoxColumn25.Name = "dataGridViewTextBoxColumn25";
+			this.dataGridViewTextBoxColumn25.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn26
+			// 
+			this.dataGridViewTextBoxColumn26.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			resources.ApplyResources(this.dataGridViewTextBoxColumn26, "dataGridViewTextBoxColumn26");
+			this.dataGridViewTextBoxColumn26.Name = "dataGridViewTextBoxColumn26";
+			// 
+			// dataGridViewTextBoxColumn15
+			// 
+			resources.ApplyResources(this.dataGridViewTextBoxColumn15, "dataGridViewTextBoxColumn15");
+			this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+			this.dataGridViewTextBoxColumn15.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn16
+			// 
+			this.dataGridViewTextBoxColumn16.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			resources.ApplyResources(this.dataGridViewTextBoxColumn16, "dataGridViewTextBoxColumn16");
+			this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
+			// 
+			// dataGridViewTextBoxColumn17
+			// 
+			resources.ApplyResources(this.dataGridViewTextBoxColumn17, "dataGridViewTextBoxColumn17");
+			this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
+			this.dataGridViewTextBoxColumn17.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn18
+			// 
+			this.dataGridViewTextBoxColumn18.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			resources.ApplyResources(this.dataGridViewTextBoxColumn18, "dataGridViewTextBoxColumn18");
+			this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
+			// 
+			// mToolbarImages
+			// 
+			this.mToolbarImages.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("mToolbarImages.ImageStream")));
+			this.mToolbarImages.TransparentColor = System.Drawing.Color.Fuchsia;
+			this.mToolbarImages.Images.SetKeyName(0, "ResetAll.bmp");
+			this.mToolbarImages.Images.SetKeyName(1, "NewIterator.bmp");
+			this.mToolbarImages.Images.SetKeyName(2, "DuplicateIterator.bmp");
+			this.mToolbarImages.Images.SetKeyName(3, "RemoveIterator.bmp");
+			this.mToolbarImages.Images.SetKeyName(4, "Undo.bmp");
+			this.mToolbarImages.Images.SetKeyName(5, "Redo.bmp");
+			this.mToolbarImages.Images.SetKeyName(6, "CopyIterator.bmp");
+			this.mToolbarImages.Images.SetKeyName(7, "PasteIterator.bmp");
+			this.mToolbarImages.Images.SetKeyName(8, "SelectMode.bmp");
+			this.mToolbarImages.Images.SetKeyName(9, "MoveMode.bmp");
+			this.mToolbarImages.Images.SetKeyName(10, "RotateMode.bmp");
+			this.mToolbarImages.Images.SetKeyName(11, "ScaleMode.bmp");
+			this.mToolbarImages.Images.SetKeyName(12, "ToggleWorldPivot.bmp");
+			this.mToolbarImages.Images.SetKeyName(13, "FlipAllHorizontal.bmp");
+			this.mToolbarImages.Images.SetKeyName(14, "FlipAllVertical.bmp");
+			this.mToolbarImages.Images.SetKeyName(15, "ToggleVariationPrevie.bmp");
+			this.mToolbarImages.Images.SetKeyName(16, "TogglePostMatrix.bmp");
+			this.mToolbarImages.Images.SetKeyName(17, "ToggleFinalIterator.bmp");
+			this.mToolbarImages.Images.SetKeyName(18, "LinkIterator.bmp");
+			this.mToolbarImages.Images.SetKeyName(19, "LockTransformAxes.bmp");
+			this.mToolbarImages.Images.SetKeyName(20, "ResetIterator.bmp");
+			this.mToolbarImages.Images.SetKeyName(21, "ResetIteratorOrigin.bmp");
+			this.mToolbarImages.Images.SetKeyName(22, "ResetIteratorAngle.bmp");
+			this.mToolbarImages.Images.SetKeyName(23, "ResetIteratorScale.bmp");
+			this.mToolbarImages.Images.SetKeyName(24, "ToggleAutoZoom.bmp");
+			// 
+			// dataGridViewTextBoxColumn1
+			// 
+			resources.ApplyResources(this.dataGridViewTextBoxColumn1, "dataGridViewTextBoxColumn1");
+			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+			this.dataGridViewTextBoxColumn1.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn2
+			// 
+			this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			resources.ApplyResources(this.dataGridViewTextBoxColumn2, "dataGridViewTextBoxColumn2");
+			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+			// 
+			// dataGridViewTextBoxColumn3
+			// 
+			resources.ApplyResources(this.dataGridViewTextBoxColumn3, "dataGridViewTextBoxColumn3");
+			this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+			this.dataGridViewTextBoxColumn3.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn4
+			// 
+			this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			resources.ApplyResources(this.dataGridViewTextBoxColumn4, "dataGridViewTextBoxColumn4");
+			this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+			// 
+			// dataGridViewTextBoxColumn5
+			// 
+			resources.ApplyResources(this.dataGridViewTextBoxColumn5, "dataGridViewTextBoxColumn5");
+			this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+			this.dataGridViewTextBoxColumn5.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn6
+			// 
+			this.dataGridViewTextBoxColumn6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			resources.ApplyResources(this.dataGridViewTextBoxColumn6, "dataGridViewTextBoxColumn6");
+			this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+			// 
+			// dataGridViewTextBoxColumn7
+			// 
+			resources.ApplyResources(this.dataGridViewTextBoxColumn7, "dataGridViewTextBoxColumn7");
+			this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+			this.dataGridViewTextBoxColumn7.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn8
+			// 
+			this.dataGridViewTextBoxColumn8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			resources.ApplyResources(this.dataGridViewTextBoxColumn8, "dataGridViewTextBoxColumn8");
+			this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+			// 
+			// dataGridViewTextBoxColumn9
+			// 
+			resources.ApplyResources(this.dataGridViewTextBoxColumn9, "dataGridViewTextBoxColumn9");
+			this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+			this.dataGridViewTextBoxColumn9.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn10
+			// 
+			this.dataGridViewTextBoxColumn10.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			resources.ApplyResources(this.dataGridViewTextBoxColumn10, "dataGridViewTextBoxColumn10");
+			this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+			// 
+			// dataGridViewTextBoxColumn11
+			// 
+			resources.ApplyResources(this.dataGridViewTextBoxColumn11, "dataGridViewTextBoxColumn11");
+			this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+			this.dataGridViewTextBoxColumn11.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn12
+			// 
+			this.dataGridViewTextBoxColumn12.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			resources.ApplyResources(this.dataGridViewTextBoxColumn12, "dataGridViewTextBoxColumn12");
+			this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+			// 
+			// dataGridViewTextBoxColumn13
+			// 
+			resources.ApplyResources(this.dataGridViewTextBoxColumn13, "dataGridViewTextBoxColumn13");
+			this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+			this.dataGridViewTextBoxColumn13.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn14
+			// 
+			this.dataGridViewTextBoxColumn14.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			resources.ApplyResources(this.dataGridViewTextBoxColumn14, "dataGridViewTextBoxColumn14");
+			this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+			// 
+			// dataGridViewTextBoxColumn19
+			// 
+			resources.ApplyResources(this.dataGridViewTextBoxColumn19, "dataGridViewTextBoxColumn19");
+			this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
+			this.dataGridViewTextBoxColumn19.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn20
+			// 
+			this.dataGridViewTextBoxColumn20.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			resources.ApplyResources(this.dataGridViewTextBoxColumn20, "dataGridViewTextBoxColumn20");
+			this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
+			// 
+			// dataGridViewTextBoxColumn21
+			// 
+			resources.ApplyResources(this.dataGridViewTextBoxColumn21, "dataGridViewTextBoxColumn21");
+			this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
+			this.dataGridViewTextBoxColumn21.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn22
+			// 
+			this.dataGridViewTextBoxColumn22.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			resources.ApplyResources(this.dataGridViewTextBoxColumn22, "dataGridViewTextBoxColumn22");
+			this.dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
+			// 
+			// dataGridViewTextBoxColumn31
+			// 
+			resources.ApplyResources(this.dataGridViewTextBoxColumn31, "dataGridViewTextBoxColumn31");
+			this.dataGridViewTextBoxColumn31.Name = "dataGridViewTextBoxColumn31";
+			this.dataGridViewTextBoxColumn31.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn32
+			// 
+			this.dataGridViewTextBoxColumn32.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			resources.ApplyResources(this.dataGridViewTextBoxColumn32, "dataGridViewTextBoxColumn32");
+			this.dataGridViewTextBoxColumn32.Name = "dataGridViewTextBoxColumn32";
+			// 
+			// dataGridViewTextBoxColumn33
+			// 
+			resources.ApplyResources(this.dataGridViewTextBoxColumn33, "dataGridViewTextBoxColumn33");
+			this.dataGridViewTextBoxColumn33.Name = "dataGridViewTextBoxColumn33";
+			this.dataGridViewTextBoxColumn33.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn34
+			// 
+			this.dataGridViewTextBoxColumn34.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			resources.ApplyResources(this.dataGridViewTextBoxColumn34, "dataGridViewTextBoxColumn34");
+			this.dataGridViewTextBoxColumn34.Name = "dataGridViewTextBoxColumn34";
+			// 
+			// PalettePicture
+			// 
+			resources.ApplyResources(this.PalettePicture, "PalettePicture");
+			this.PalettePicture.BackColor = System.Drawing.SystemColors.Control;
+			this.PalettePicture.Name = "PalettePicture";
+			this.PalettePicture.TabStop = false;
+			// 
+			// mPaletteBevel
+			// 
+			resources.ApplyResources(this.mPaletteBevel, "mPaletteBevel");
+			this.mPaletteBevel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.mPaletteBevel.Name = "mPaletteBevel";
+			// 
 			// Editor
 			// 
 			resources.ApplyResources(this, "$this");
@@ -1461,12 +1497,12 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mRootSplitter.ResumeLayout(false);
 			this.mToolbar.ResumeLayout(false);
 			this.mToolbar.PerformLayout();
-			this.mPreviewContextMenu.ResumeLayout(false);
 			this.mSidebarSplitter.Panel1.ResumeLayout(false);
 			this.mSidebarSplitter.Panel2.ResumeLayout(false);
 			this.mSidebarSplitter.ResumeLayout(false);
 			this.mPreviewPanel.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.PreviewPicture)).EndInit();
+			this.mPreviewContextMenu.ResumeLayout(false);
 			this.Tabs.ResumeLayout(false);
 			this.VariationsTab.ResumeLayout(false);
 			this.VariationsTab.PerformLayout();
@@ -1492,6 +1528,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.mIteratorColorGroupBox.PerformLayout();
 			this.mIteratorPropertyPanel.ResumeLayout(false);
 			this.mIteratorPropertyPanel.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.PalettePicture)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -1600,7 +1637,6 @@ namespace Xyrus.Apophysis.Windows.Forms
 		private System.Windows.Forms.ToolStripSeparator mToolbarSeparator7;
 		public System.Windows.Forms.ToolStripButton IteratorConvertToRegularButton;
 		public System.Windows.Forms.ToolStripButton IteratorConvertToFinalButton;
-		public PaletteSelectComboBox PaletteSelectComboBox;
 		public System.Windows.Forms.TabPage VariationsTab;
 		public System.Windows.Forms.TabPage VariablesTab;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
@@ -1653,6 +1689,12 @@ namespace Xyrus.Apophysis.Windows.Forms
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn32;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn33;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn34;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn35;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn36;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn37;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn38;
+		public System.Windows.Forms.PictureBox PalettePicture;
+		private System.Windows.Forms.Label mPaletteBevel;
 	}
 }
 

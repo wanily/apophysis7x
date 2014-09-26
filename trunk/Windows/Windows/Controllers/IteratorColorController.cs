@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using System.Windows.Forms;
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Forms;
 
@@ -27,9 +28,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.IteratorOpacityDragPanel.ValueChanged += OnOpacityChanged;
 			View.IteratorDirectColorDragPanel.ValueChanged += OnDirectColorChanged;
 			View.IteratorColorScrollBar.ValueChanged += OnColorChanged;
-			View.PaletteSelectComboBox.SelectedIndexChanged += OnPaletteSelected;
-
-			UpdateControls();
+			View.PalettePicture.Paint += OnPalettePaint;
+			View.Tabs.SelectedIndexChanged += OnTabSelected;
 		}
 		protected override void DetachView()
 		{
@@ -38,17 +38,43 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.IteratorOpacityDragPanel.ValueChanged -= OnOpacityChanged;
 			View.IteratorDirectColorDragPanel.ValueChanged -= OnDirectColorChanged;
 			View.IteratorColorScrollBar.ValueChanged -= OnColorChanged;
-			View.PaletteSelectComboBox.SelectedIndexChanged -= OnPaletteSelected;
+			View.PalettePicture.Paint -= OnPalettePaint;
+			View.Tabs.SelectedIndexChanged -= OnTabSelected;
 		}
 
-		private void OnPaletteSelected(object sender, EventArgs e)
+		private void RedrawPalette()
 		{
-			var palette = View.PaletteSelectComboBox.SelectedItem as Palette;
-			if (mParent.Initializer.IsBusy || palette == null)
+			View.PalettePicture.Tag = mParent.Flame.Palette.Copy();
+			View.PalettePicture.Refresh();
+		}
+
+		private void OnTabSelected(object sender, EventArgs e)
+		{
+			if (ReferenceEquals(View.Tabs.SelectedTab, View.ColorTab))
+				RedrawPalette();
+		}
+		private void OnPalettePaint(object sender, PaintEventArgs e)
+		{
+			var w = (float)View.PalettePicture.ClientSize.Width;
+			var h = View.PalettePicture.ClientSize.Height;
+
+			var control = sender as Control;
+			if (control == null)
 				return;
 
-			mParent.Flame.Palette.Overwrite(palette);
-			UpdateControls();
+			var palette = control.Tag as Palette;
+			if (palette == null)
+				return;
+
+			for (float pos = 0; pos < w; pos++)
+			{
+				var i = (int)System.Math.Round((palette.Length - 1) * pos / w);
+
+				using (var brush = new SolidBrush(palette[i]))
+				{
+					e.Graphics.FillRectangle(brush, pos, 0, w - pos, h);
+				}
+			}
 		}
 		private void OnColorChanged(object sender, EventArgs e)
 		{
@@ -75,6 +101,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			var color = (int)System.Math.Round(iterator.Color * (mParent.Flame.Palette.Length - 1));
 			View.IteratorColorDragPanel.BackColor = iterator.GroupIndex > 0 ? SystemColors.Control : mParent.Flame.Palette[color];
+
+			RedrawPalette();
 		}
 		private void OnColorSpeedChanged(object sender, EventArgs e)
 		{
@@ -101,24 +129,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			iterator.DirectColor = View.IteratorDirectColorDragPanel.Value;
 		}
 
-		public void UpdateControls()
+		public void Update()
 		{
-			if (!mParent.Initializer.IsBusy && mParent.Flame != null)
-			{
-				using (mParent.Initializer.Enter())
-				{
-					var index = View.PaletteSelectComboBox.Items.IndexOf(mParent.Flame.Palette);
-					if (index < 0)
-					{
-						View.PaletteSelectComboBox.Items.Add(mParent.Flame.Palette);
-						index = View.PaletteSelectComboBox.Items.Count - 1;
-					}
-
-					View.PaletteSelectComboBox.SelectedIndex = index;
-				}
-
-				OnColorChanged(null, null);
-			}
+			RedrawPalette();
 		}
 	}
 }

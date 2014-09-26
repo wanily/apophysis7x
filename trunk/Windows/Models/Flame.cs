@@ -254,11 +254,6 @@ namespace Xyrus.Apophysis.Models
 		public Palette Palette
 		{
 			get { return mPalette; }
-			/*set
-			{
-				if (value == null) throw new ArgumentNullException(@"value");
-				mPalette = value;
-			}*/
 		}
 
 		[NotNull]
