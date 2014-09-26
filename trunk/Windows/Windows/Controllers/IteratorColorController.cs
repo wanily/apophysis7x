@@ -47,7 +47,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			if (mParent.Initializer.IsBusy || palette == null)
 				return;
 
-			mParent.Flame.Palette = palette;
+			mParent.Flame.Palette.Overwrite(palette);
 			UpdateControls();
 		}
 		private void OnColorChanged(object sender, EventArgs e)

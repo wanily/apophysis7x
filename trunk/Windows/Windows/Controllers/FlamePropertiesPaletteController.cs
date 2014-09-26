@@ -305,7 +305,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		private void OnRandomPresetClick(object sender, EventArgs e)
 		{
-			mParent.Flame.Palette = PaletteCollection.GetRandomPalette(mParent.Flame);
+			mParent.Flame.Palette.Overwrite(PaletteCollection.GetRandomPalette(mParent.Flame));
 
 			InitHandlers();
 			mParent.CommitValue();
@@ -336,7 +336,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 					if (palette == null)
 						throw new ApophysisException("No gradients found in clipboard");
 
-					mParent.Flame.Palette = palette;
+					mParent.Flame.Palette.Overwrite(palette);
 
 					InitHandlers();
 					mParent.CommitValue();
@@ -366,7 +366,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				data[i] = mParent.Flame.Palette[i].Invert();
 			}
 
-			mParent.Flame.Palette = new Palette(mParent.Flame.Palette.CalculatedName, data);
+			mParent.Flame.Palette.Overwrite(data);
 
 			InitHandlers();
 			mParent.CommitValue();
@@ -380,7 +380,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				data[i] = mParent.Flame.Palette[mParent.Flame.Palette.Length - i - 1];
 			}
 
-			mParent.Flame.Palette = new Palette(mParent.Flame.Palette.CalculatedName, data);
+			mParent.Flame.Palette.Overwrite(data);
 
 			InitHandlers();
 			mParent.CommitValue();

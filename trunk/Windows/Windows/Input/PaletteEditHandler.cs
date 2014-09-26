@@ -43,7 +43,7 @@ namespace Xyrus.Apophysis.Windows.Input
 			if (palette == null) throw new ArgumentNullException(@"palette");
 
 			var newColors = Calculate(mStartColors, mValue);
-			palette.ReplaceColors(newColors);
+			palette.Overwrite(newColors);
 		}
 
 		[NotNull]

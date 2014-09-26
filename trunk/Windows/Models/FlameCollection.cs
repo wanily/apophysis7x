@@ -221,6 +221,7 @@ namespace Xyrus.Apophysis.Models
 			}
 		}
 
+		[NotNull]
 		public static FlameCollection LoadFromXml([NotNull] XElement element)
 		{
 			var collection = new FlameCollection();

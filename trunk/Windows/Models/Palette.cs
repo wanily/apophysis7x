@@ -257,16 +257,6 @@ namespace Xyrus.Apophysis.Models
 			return new Palette(name) { mColors = array };
 		}
 
-		[NotNull]
-		internal void ReplaceColors([NotNull] Color[] newColors)
-		{
-			if (newColors == null) throw new ArgumentNullException("newColors");
-			if (newColors.Length != mColors.Length) 
-				throw new ArgumentException(Messages.MismatchingPaletteArraysError, "newColors");
-
-			mColors = newColors;
-		}
-
 		private static Color Mix(Color operand1, Color operand2)
 		{
 			double r1 = operand1.R, r2 = operand2.R;
@@ -430,6 +420,25 @@ namespace Xyrus.Apophysis.Models
 		{
 			var colors = GetResizedCmap(length);
 			return new Palette(CalculatedName, colors);
+		}
+		public void Overwrite([NotNull] Palette palette)
+		{
+			if (palette == null) throw new ArgumentNullException("palette");
+
+			var length = mColors.Length;
+			var resized = palette.Resize(length);
+
+			mColors = resized.mColors;
+			mName = palette.mName;
+		}
+		public void Overwrite([NotNull] Color[] palette)
+		{
+			if (palette == null) throw new ArgumentNullException("palette");
+
+			var length = mColors.Length;
+
+			mColors = palette;
+			mColors = GetResizedCmap(length);
 		}
 	}
 }

@@ -50,9 +50,14 @@ namespace Xyrus.Apophysis.Models
 
 		private static readonly Vector2 mFlipY = new Vector2(1, -1).Freeze();
 
-		public Flame()
+		public Flame() : this(true)
+		{
+		}
+		private Flame(bool init)
 		{
 			mIndex = ++mCounter;
+			if (!init)
+				return;
 
 			mIterators = new IteratorCollection(this);
 			mPalette = PaletteCollection.GetRandomPalette(this);
@@ -82,17 +87,23 @@ namespace Xyrus.Apophysis.Models
 		{
 			get
 			{
+				var name = mName;
+
 				if (string.IsNullOrEmpty(mName) || string.IsNullOrEmpty(mName.Trim()))
 				{
 					var today = DateTime.Today;
-					return ApophysisSettings.Common.NamePrefix + @"-" +
+					name = ApophysisSettings.Common.NamePrefix + @"-" +
 						today.Year.ToString(CultureInfo.InvariantCulture).PadLeft(4, '0') +
 						today.Month.ToString(CultureInfo.InvariantCulture).PadLeft(2, '0') +
 						today.Day.ToString(CultureInfo.InvariantCulture).PadLeft(2, '0') + @"-" +
 						mIndex.ToString(CultureInfo.InvariantCulture);
 				}
 
-				return mName;
+#if DEBUG
+				name += @"#0x" + (mPalette == null ? 0 : mPalette.GetHashCode()).ToString(@"x8");
+#endif
+
+				return name;
 			}
 		}
 
@@ -243,11 +254,11 @@ namespace Xyrus.Apophysis.Models
 		public Palette Palette
 		{
 			get { return mPalette; }
-			set
+			/*set
 			{
 				if (value == null) throw new ArgumentNullException(@"value");
 				mPalette = value;
-			}
+			}*/
 		}
 
 		[NotNull]
@@ -420,7 +431,6 @@ namespace Xyrus.Apophysis.Models
 
 			return true;
 		}
-
 		public void Randomize()
 		{
 			const int minIterators = 2;
@@ -499,7 +509,7 @@ namespace Xyrus.Apophysis.Models
 
 			Angle = random.NextDouble()*System.Math.PI*2 - System.Math.PI;
 			Origin = new Vector2(random.NextDouble() * 2 - 1, random.NextDouble() * 2 - 1);
-			Palette = PaletteCollection.GetRandomPalette(this);
+			Palette.Overwrite(PaletteCollection.GetRandomPalette(this));
 		}
 
 		[NotNull]

@@ -376,8 +376,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			{
 				FlameCollection batch;
 
-				Flame.ReduceCounter();
-
 				if (withMessaging)
 				{
 					batch = FlameCollection.LoadFromXml(XElement.Parse(File.ReadAllText(path), LoadOptions.None));
