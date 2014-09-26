@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Drawing;
 using Xyrus.Apophysis.Calculation;
-using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Windows.Forms;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
+	[PublicAPI]
 	public class FullscreenController : Controller<Fullscreen>
 	{
 		private readonly Lock mHiding;
+
+		private Renderer mRenderer;
 		private NativeTimer mElapsedTimer;
-		private ThreadedRenderer mRenderer;
+		private ThreadedRenderer mThreader;
 		private MainController mParent;
 		private Bitmap mBitmap;
 
@@ -20,7 +22,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			mParent = parent;
 
-			mRenderer = new ThreadedRenderer();
+			mThreader = new ThreadedRenderer();
 			mElapsedTimer = new NativeTimer();
 			mHiding = new Lock();
 		}
@@ -28,10 +30,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			if (disposing)
 			{
-				if (mRenderer != null)
+				if (mThreader != null)
 				{
-					mRenderer.Dispose();
-					mRenderer = null;
+					mThreader.Dispose();
+					mThreader = null;
 				}
 
 				if (mBitmap != null)
@@ -47,15 +49,15 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		protected override void AttachView()
 		{
-			mRenderer.Progress += OnRendererProgress;
-			mRenderer.Exit += OnRendererExit;
+			mThreader.Progress += OnRendererProgress;
+			mThreader.Exit += OnRendererExit;
 
 			View.Hidden += OnHidden;
 		}
 		protected override void DetachView()
 		{
-			mRenderer.Progress -= OnRendererProgress;
-			mRenderer.Exit -= OnRendererExit;
+			mThreader.Progress -= OnRendererProgress;
+			mThreader.Exit -= OnRendererExit;
 
 			View.Hidden -= OnHidden;
 		}
@@ -88,7 +90,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			using (mHiding.Enter())
 			{
-				mRenderer.Cancel();
+				mThreader.Cancel();
 			}
 		}
 		private void OnRendererFinished(Bitmap bitmap)
@@ -124,6 +126,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 		private void OnRendererExit(object sender, EventArgs e)
 		{
+			mRenderer.Dispose();
 			if (mHiding.IsBusy)
 				return;
 
@@ -147,14 +150,14 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			View.BackgroundImage = WaitImageController.DrawWaitImage(renderSize, Color.Black, Color.White);
 
-			mRenderer.Cancel();
+			mThreader.Cancel();
 
 			mElapsedTimer.SetStartingTime();
 
-			var parameters = new RenderParameters(flame, density, renderSize, ApophysisSettings.Preview.Oversample, ApophysisSettings.Preview.FilterRadius);
+			mRenderer = new Renderer(flame, renderSize, density, ApophysisSettings.Preview.Oversample, ApophysisSettings.Preview.FilterRadius);
 
-			mRenderer.SetThreadCount(ApophysisSettings.Preview.ThreadCount);
-			mRenderer.StartCreateBitmap(parameters, OnRendererFinished);
+			mThreader.SetThreadCount(ApophysisSettings.Preview.ThreadCount);
+			mThreader.StartCreateBitmap(mRenderer, OnRendererFinished);
 			SetIsInProgress(true);
 		}
 	}

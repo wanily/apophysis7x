@@ -165,4 +165,20 @@ namespace Xyrus.Apophysis.Threading
 			set;
 		}
 	}
+
+	public class MultiThreadController : Controller
+	{
+		private volatile bool mCancel;
+		private volatile bool mSuspended;
+		private volatile bool mRunning;
+
+		private Thread[] mThread;
+
+		private readonly ThreadPriority mPriority;
+
+		protected override void Dispose(bool disposing)
+		{
+			
+		}
+	}
 }

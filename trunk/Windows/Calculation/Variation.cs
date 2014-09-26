@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Xyrus.Apophysis.Models;
 
 namespace Xyrus.Apophysis.Calculation
 {
@@ -63,7 +64,7 @@ namespace Xyrus.Apophysis.Calculation
 			}
 		}
 
-		public virtual void Prepare(IterationData data)
+		public virtual void Prepare(AffineTransform affineMatrix = null)
 		{
 		}
 		public abstract void Calculate(IterationData data);

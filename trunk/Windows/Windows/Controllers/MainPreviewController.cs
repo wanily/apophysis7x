@@ -2,7 +2,6 @@ using System;
 using System.Drawing;
 using System.Globalization;
 using Xyrus.Apophysis.Calculation;
-using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Forms;
 using Xyrus.Apophysis.Windows.Input;
@@ -12,7 +11,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 	class MainPreviewController : Controller<Main>
 	{
 		private NativeTimer mElapsedTimer;
-		private ThreadedRenderer mRenderer;
+		private ThreadedRenderer mThreader;
+		private Renderer mRenderer;
 		private TimeLock mPreviewTimeLock;
 		private MainController mParent;
 		private Bitmap mBitmap;
@@ -30,17 +30,17 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				Delay = 250
 			};
 
-			mRenderer = new ThreadedRenderer();
+			mThreader = new ThreadedRenderer();
 			mElapsedTimer = new NativeTimer();
 		}
 		protected override void DisposeOverride(bool disposing)
 		{
 			if (disposing)
 			{
-				if (mRenderer != null)
+				if (mThreader != null)
 				{
-					mRenderer.Dispose();
-					mRenderer = null;
+					mThreader.Dispose();
+					mThreader = null;
 				}
 
 				if (mPreviewTimeLock != null)
@@ -76,8 +76,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mParent.FlamePropertiesController.FlameChanged += OnChangeCommitted;
 			View.CameraChanged += OnCameraChanged;
 
-			mRenderer.Progress += OnRendererProgress;
-			mRenderer.Exit += OnRendererExit;
+			mThreader.Progress += OnRendererProgress;
+			mThreader.Exit += OnRendererExit;
 
 			using (mParent.Initializer.Enter())
 			{
@@ -97,8 +97,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			View.PreviewPicture.Image = null;
 
-			mRenderer.Progress -= OnRendererProgress;
-			mRenderer.Exit -= OnRendererExit;
+			mThreader.Progress -= OnRendererProgress;
+			mThreader.Exit -= OnRendererExit;
 
 			ApophysisSettings.Preview.MainPreviewDensity = PreviewDensity;
 			ApophysisSettings.View.ShowGuidelines = View.ShowGuidelines;
@@ -263,14 +263,19 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.PreviewPicture.BackColor = mFlame.Background;
 			View.PreviewedFlame = null;
 
-			mRenderer.Cancel();
+			mThreader.Cancel();
 
 			mElapsedTimer.SetStartingTime();
 
-			var parameters = new RenderParameters(mFlame, density, renderSize, ApophysisSettings.Preview.Oversample, ApophysisSettings.Preview.FilterRadius);
+			if (mRenderer != null)
+			{
+				mRenderer.Dispose();
+			}
 
-			mRenderer.SetThreadCount(ApophysisSettings.Preview.ThreadCount);
-			mRenderer.StartCreateBitmap(parameters, OnRendererFinished);
+			mRenderer = new Renderer(mFlame, renderSize, density, ApophysisSettings.Preview.Oversample, ApophysisSettings.Preview.FilterRadius);
+
+			mThreader.SetThreadCount(ApophysisSettings.Preview.ThreadCount);
+			mThreader.StartCreateBitmap(mRenderer, OnRendererFinished);
 		}
 		public void ReloadSettings()
 		{

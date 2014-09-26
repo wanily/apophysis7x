@@ -1,4 +1,5 @@
 ﻿using Xyrus.Apophysis.Calculation;
+using Xyrus.Apophysis.Models;
 
 namespace Xyrus.Apophysis.Variations
 {
@@ -6,7 +7,7 @@ namespace Xyrus.Apophysis.Variations
 	{
 		private bool m15C;
 
-		public override void Prepare(IterationData data)
+		public override void Prepare(AffineTransform affineMatrix = null)
 		{
 			m15C = VariationsIn15CStyle;
 		}

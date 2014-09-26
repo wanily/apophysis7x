@@ -515,6 +515,18 @@ namespace Xyrus.Apophysis.Models
 			return flame;
 		}
 
+		public double GetChaosCoefficient(int fromIteratorIndex, int toIteratorIndex)
+		{
+			var count = Iterators.Count(x => x.GroupIndex == 0);
+			if (fromIteratorIndex < 0 || fromIteratorIndex >= count)
+				throw new ArgumentOutOfRangeException(@"fromIteratorIndex");
+			if (toIteratorIndex < 0 || toIteratorIndex >= count)
+				throw new ArgumentOutOfRangeException(@"toIteratorIndex");
+
+			//todo xaos
+			return 1;
+		}
+
 		private void UpdateCalculatedValues()
 		{
 			mHalfSize = new Vector2(CanvasSize.Width / 2.0, CanvasSize.Height / 2.0).Freeze();
@@ -537,7 +549,6 @@ namespace Xyrus.Apophysis.Models
 		{
 			mCounter--;
 		}
-
 		internal void ReadXml([NotNull] XElement element, bool isReadingBatch)
 		{
 			if (element == null) throw new ArgumentNullException(@"element");

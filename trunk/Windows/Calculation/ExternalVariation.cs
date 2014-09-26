@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
+using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Strings;
 
 namespace Xyrus.Apophysis.Calculation
@@ -281,11 +282,16 @@ namespace Xyrus.Apophysis.Calculation
 			get { return mName; }
 		}
 
-		public override void Prepare(IterationData data)
+		public override void Prepare(AffineTransform affineMatrix = null)
 		{
+			affineMatrix = affineMatrix ?? new AffineTransform();
+
 			if (mInit != null)
 			{
-				mInit(mVp, mPostX, mPostY, mPostZ, mPreX, mPreY, mPreZ, mColor, Weight, 1, 0, 0, 1, 0, 0);
+				mInit(mVp, mPostX, mPostY, mPostZ, mPreX, mPreY, mPreZ, mColor, Weight, 
+					affineMatrix.Matrix.X.X, affineMatrix.Matrix.X.Y, 
+					affineMatrix.Matrix.Y.X, affineMatrix.Matrix.Y.Y, 
+					affineMatrix.Origin.X, affineMatrix.Origin.Y);
 			}
 			else if (mInitLegacy3D != null)
 			{

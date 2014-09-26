@@ -9,11 +9,11 @@ namespace Xyrus.Apophysis.Calculation
 	public class ThreadedRenderer : IDisposable
 	{
 		private Renderer mRenderer;
-		private RenderParameters mParameters;
 		private ThreadController mThreadController;
 
 		private bool mIsDisposed;
 		private double mTotalTime;
+		private int mThreadCount;
 
 		~ThreadedRenderer()
 		{
@@ -22,7 +22,6 @@ namespace Xyrus.Apophysis.Calculation
 		public ThreadedRenderer()
 		{
 			mThreadController = new ThreadController();
-			mRenderer = new Renderer();
 		}
 		protected void Dispose(bool disposing)
 		{
@@ -41,7 +40,7 @@ namespace Xyrus.Apophysis.Calculation
 			DisposeOverride(disposing);
 
 			mRenderer = null;
-			mParameters = null;
+			mRenderer = null;
 			mIsDisposed = true;
 		}
 		protected virtual void DisposeOverride(bool disposing)
@@ -53,30 +52,32 @@ namespace Xyrus.Apophysis.Calculation
 			GC.SuppressFinalize(this);
 		}
 
-		public void StartCreateBitmap([NotNull] RenderParameters parameters, Action<Bitmap> callback)
+		public void StartCreateBitmap([NotNull] Renderer renderer, Action<Bitmap> callback)
 		{
-			if (parameters == null) throw new ArgumentNullException(@"parameters");
+			if (renderer == null) throw new ArgumentNullException(@"renderer");
 
-			mParameters = parameters;
+			mRenderer = renderer;
+			mRenderer.Initialize();
+
 			mThreadController.StartThread(CreateBitmap, callback, SendCompletedMessage, SendCancelledMessage);
 		}
 
 		private void SendCancelledMessage()
 		{
-			if (mParameters != null)
+			if (mRenderer != null)
 			{
-				mParameters.Messenger.SendMessage(string.Format(@"{0} : {1}", DateTime.Now.ToString(@"T"), Messages.RenderTerminatedMessage));
+				mRenderer.Messenger.SendMessage(string.Format(@"{0} : {1}", DateTime.Now.ToString(@"T"), Messages.RenderTerminatedMessage));
 			}
 
 			FinalizeRender();
 		}
 		private void SendCompletedMessage()
 		{
-			if (mParameters != null)
+			if (mRenderer != null)
 			{
-				mParameters.Messenger.SendMessage(string.Format(@"  {0}", string.Format(Messages.RenderAverageSpeedMessage, mRenderer.AverageIterationsPerSecond)));
-				mParameters.Messenger.SendMessage(string.Format(@"  {0}", string.Format(Messages.RenderPureTimeMessage, TimeSpan.FromSeconds(mRenderer.PureRenderingTime))));
-				mParameters.Messenger.SendMessage(string.Format(@"  {0}", string.Format(Messages.RenderTotalTimeMessage, TimeSpan.FromSeconds(mTotalTime))));
+				mRenderer.Messenger.SendMessage(string.Format(@"  {0}", string.Format(Messages.RenderAverageSpeedMessage, mRenderer.AverageIterationsPerSecond)));
+				mRenderer.Messenger.SendMessage(string.Format(@"  {0}", string.Format(Messages.RenderPureTimeMessage, TimeSpan.FromSeconds(mRenderer.PureRenderingTime))));
+				mRenderer.Messenger.SendMessage(string.Format(@"  {0}", string.Format(Messages.RenderTotalTimeMessage, TimeSpan.FromSeconds(mTotalTime))));
 			}
 
 			FinalizeRender();
@@ -100,9 +101,9 @@ namespace Xyrus.Apophysis.Calculation
 		}
 		public void Cancel()
 		{
-			if (mParameters != null)
+			if (mRenderer != null)
 			{
-				mParameters.Messenger.SendMessage(string.Format(@"{0} : {1}", DateTime.Now.ToString(@"T"), Messages.RenderTerminatingMessage));
+				mRenderer.Messenger.SendMessage(string.Format(@"{0} : {1}", DateTime.Now.ToString(@"T"), Messages.RenderTerminatingMessage));
 			}
 			mThreadController.Cancel();
 		}
@@ -134,7 +135,15 @@ namespace Xyrus.Apophysis.Calculation
 			var stopwatch = new NativeTimer();
 			stopwatch.SetStartingTime();
 
-			var result = mRenderer.CreateBitmap(mParameters, ProgressUpdate, threadState);
+			mRenderer.Messenger.SendMessage(string.Format(@"{0} : {1}", DateTime.Now.ToString(@"T"), Messages.RenderInProgressMessage));
+			mRenderer.CalculateHistogram(0, ProgressUpdate, threadState);
+
+			if (threadState.IsCancelling)
+				return null;
+
+			mRenderer.Messenger.SendMessage(string.Format(@"{0} : {1}", DateTime.Now.ToString(@"T"), string.Format(Messages.RenderSamplingMessage, mRenderer.Data.SampleDensity)));
+
+			var result = mRenderer.Histogram.CreateBitmap(mRenderer.Data.SampleDensity);
 
 			mTotalTime = stopwatch.GetElapsedTimeInSeconds();
 
@@ -152,7 +161,9 @@ namespace Xyrus.Apophysis.Calculation
 			{
 				throw new InvalidOperationException(Messages.AttemptedThreadCountChangeWhileRendererBusyErrorMessage);
 			}
-			//todo multithreading
+
+			var defaultCount = System.Math.Max(1, Environment.ProcessorCount - 1);
+			mThreadCount = threadCount.GetValueOrDefault(defaultCount);
 		}
 	}
 }

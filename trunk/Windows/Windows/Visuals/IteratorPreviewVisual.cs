@@ -81,11 +81,9 @@ namespace Xyrus.Apophysis.Windows.Visuals
 		private void DrawModel(Graphics graphics, Iterator model)
 		{
 			var variations = model.Variations.GetOrderedForExecution().Where(x => System.Math.Abs(x.Weight) > double.Epsilon).ToArray();
-			var data = new IterationData();
-
 			foreach (var variation in variations)
 			{
-				variation.Prepare(data);
+				variation.Prepare();
 			}
 
 			var n = Range;
@@ -95,6 +93,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			var p2 = new Vector2(n, n);
 
 			var step = 1 / d1;
+			var data = new IterationData();
 
 			using (var brush = new SolidBrush(Color.FromArgb(0x80, model.GetColor())))
 			//using (var pen = new Pen(brush))
