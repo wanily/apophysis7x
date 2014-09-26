@@ -335,7 +335,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		private void OnListSelectionChanged(object sender, EventArgs e)
 		{
 			var flame = GetSelectedFlame();
-			if (flame == null)
+			if (flame == null || mParent.Initializer.IsBusy)
 				return;
 
 			mParent.LoadFlameAndEraseHistory(flame);

@@ -176,7 +176,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			View.Invoke(new Action(() =>
 			{
-				//var oldImage = View.PreviewImage;
 				var oldOutput = mBitmap;
 
 				View.PreviewedFlame = mFlame;
@@ -186,11 +185,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				{
 					oldOutput.Dispose();
 				}
-
-				/*if (oldImage != null)
-				{
-					oldImage.Dispose();
-				}*/
 			}));
 		}
 		private void OnChangeCommitted(object sender, EventArgs e)
@@ -258,7 +252,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			if (mParent.Initializer.IsBusy || flame == null)
 				return;
 
-			mFlame = flame;//.Copy();
+			mFlame = flame;
 
 			var density = (double)PreviewDensity;
 			var canvasSize = View.PreviewPicture.ClientSize;
@@ -266,22 +260,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				? canvasSize
 				: mFlame.CanvasSize.FitToFrame(canvasSize);
 
-			/*Color backgroundWait, foregroundWait;
-			if (View.ShowTransparency)
-			{
-				backgroundWait = Color.Transparent;
-				foregroundWait = Color.Black;
-			}
-			else
-			{
-				backgroundWait = Color.Transparent;
-				foregroundWait = Color.White;
-			}*/
-
 			View.PreviewPicture.BackColor = mFlame.Background;
 			View.PreviewedFlame = null;
-
-			//View.PreviewImage = WaitImageController.DrawWaitImage(renderSize, backgroundWait, foregroundWait);
 
 			mRenderer.Cancel();
 

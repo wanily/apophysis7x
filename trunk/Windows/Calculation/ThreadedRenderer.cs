@@ -41,6 +41,7 @@ namespace Xyrus.Apophysis.Calculation
 			DisposeOverride(disposing);
 
 			mRenderer = null;
+			mParameters = null;
 			mIsDisposed = true;
 		}
 		protected virtual void DisposeOverride(bool disposing)
@@ -83,7 +84,6 @@ namespace Xyrus.Apophysis.Calculation
 
 		private void FinalizeRender()
 		{
-			mParameters = null;
 			mTotalTime = 0;
 
 			if (Exit != null)
