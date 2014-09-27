@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 
@@ -116,6 +117,9 @@ namespace Xyrus.Apophysis.Calculation
 			var fw = (int)(2 * mFilterCutoff * mRenderer.Oversample * mRenderer.FilterRadius);
 			
 			FilterSize = fw + 1;
+			if ((FilterSize + mRenderer.Oversample)%2 != 0)
+				FilterSize ++;
+
 			Filter = new double[FilterSize][];
 
 			var adjust = fw > 0 ? (mFilterCutoff*FilterSize)/fw : 1;
@@ -141,10 +145,7 @@ namespace Xyrus.Apophysis.Calculation
 		}
 		private void CalculateBuffer()
 		{
-			// ReSharper disable once PossibleLossOfFraction
 			MaxGutterWidth = (mMaxFilterWidth - mRenderer.Oversample)/2;
-
-			// ReSharper disable once PossibleLossOfFraction
 			GutterWidth = (FilterSize - mRenderer.Oversample)/2;
 
 			BufferSize = new Size(
@@ -215,7 +216,7 @@ namespace Xyrus.Apophysis.Calculation
 				System.Math.Cos(mRenderer.Flame.Angle)
 			};
 
-			Rc = new[]
+			Rc = System.Math.Abs(mRenderer.Flame.Angle) < double.Epsilon ? new double[2] : new[]
 			{
 				mRenderer.Flame.Origin.X*(1 - SinCos[1]) - mRenderer.Flame.Origin.Y*SinCos[0] - Camera[0],
 				mRenderer.Flame.Origin.Y*(1 - SinCos[1]) + mRenderer.Flame.Origin.X*SinCos[0] - Camera[1]
@@ -244,6 +245,10 @@ namespace Xyrus.Apophysis.Calculation
 			};
 
 			DofCoeff = 0.1*mRenderer.Flame.DepthOfField;
+
+			Debug.Print("size {0} {1}", mRenderer.Size.Width, mRenderer.Size.Height);
+			Debug.Print("ppu {0} {1}", PointsPerUnit[0], PointsPerUnit[1]);
+			Debug.Print("rc {0} {1}", Rc[0], Rc[1]);
 		}
 		private void CalculateColorMap()
 		{

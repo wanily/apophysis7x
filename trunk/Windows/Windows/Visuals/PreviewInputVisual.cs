@@ -72,7 +72,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			var pan = mOperation as PanOperation;
 			if (pan != null)
 			{
-				var offset = System.Math.Pow(2, EditData.Zoom) * EditData.Scale * (pan.NewOffset - pan.OldOffset);
+				var offset = System.Math.Pow(2, EditData.Zoom) * EditData.Scale * (pan.OldOffset - pan.NewOffset);
 
 				x0 += offset;
 				x1 += offset;

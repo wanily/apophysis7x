@@ -131,7 +131,7 @@ namespace Xyrus.Apophysis.Windows.Input
 				case CameraEditMode.Pan:
 
 					var scale = System.Math.Pow(2, mData.Zoom) * mData.Scale;
-					var point = mDragOrigin + (cursor - mDragCursor) / scale;
+					var point = mDragOrigin + (mDragCursor - cursor) / scale;
 
 					if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
 					{

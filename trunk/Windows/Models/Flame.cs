@@ -99,10 +99,6 @@ namespace Xyrus.Apophysis.Models
 						mIndex.ToString(CultureInfo.InvariantCulture);
 				}
 
-#if DEBUG
-				name += @"#0x" + (mPalette == null ? 0 : mPalette.GetHashCode()).ToString(@"x8");
-#endif
-
 				return name;
 			}
 		}

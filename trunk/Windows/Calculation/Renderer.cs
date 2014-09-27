@@ -219,11 +219,29 @@ namespace Xyrus.Apophysis.Calculation
 					Data.Finals[j].Process(random, vector, ref color);
 				}
 
-				var camera3DProjection = vector; //todo
+				var z = vector.Z - mFlame.Height;
+				var projectionVector = new Vector3(
+					Data.Camera3D[0][0]*vector.X + Data.Camera3D[1][0]*vector.Y,
+					Data.Camera3D[0][1]*vector.X + Data.Camera3D[1][1]*vector.Y + Data.Camera3D[2][1]*z,
+					Data.Camera3D[0][2]*vector.X + Data.Camera3D[1][2]*vector.Y + Data.Camera3D[2][2]*z);
+				var zr = 1 - mFlame.Perspective*projectionVector.Z;
+				var t = random.NextDouble()*2*System.Math.PI;
+				var dsin = System.Math.Sin(t);
+				var dcos = System.Math.Cos(t);
+				var dr = random.NextDouble()*Data.DofCoeff*z;
 
-				var canvasProjection = new Vector2(
-					(camera3DProjection.X * Data.SinCos[1] + camera3DProjection.Y * Data.SinCos[0] + Data.Rc[0]),
-					(camera3DProjection.Y * Data.SinCos[1] - camera3DProjection.X * Data.SinCos[0] + Data.Rc[1]));
+				var camera3DProjection = new Vector3(
+					(projectionVector.X + dr*dcos)/zr,
+					(projectionVector.Y + dr*dsin)/zr,
+					vector.Z - mFlame.Height);
+
+				var canvasProjection = System.Math.Abs(mFlame.Angle) < double.Epsilon 
+					? new Vector2(
+						camera3DProjection.X - Data.Camera[0],
+						camera3DProjection.Y - Data.Camera[1])
+					: new Vector2(
+						(camera3DProjection.X * Data.SinCos[1] + camera3DProjection.Y * Data.SinCos[0] + Data.Rc[0]),
+						(camera3DProjection.Y * Data.SinCos[1] - camera3DProjection.X * Data.SinCos[0] + Data.Rc[1]));
 
 				if (canvasProjection.X < 0 || canvasProjection.Y < 0 || canvasProjection.X > Data.CameraSize[0] || canvasProjection.Y > Data.CameraSize[1])
 					continue;

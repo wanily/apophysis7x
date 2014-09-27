@@ -60,17 +60,18 @@ namespace Xyrus.Apophysis.Windows.Visuals
 						for (int j = 0; j <= tilesY; j++)
 						{
 							var brush = ((i + j) % 2 != 0) ? brushA : brushB;
-
-							var ii2 = System.Math.Min(offset.X + ii + 10, offset.X + size.Width);
-							var jj2 = System.Math.Min(offset.Y + jj + 10, offset.Y + size.Height);
-
-							graphics.FillRectangle(brush, new Rectangle(new Point(ii + offset.X, jj + offset.Y), new Size(ii2 - ii, jj2 - jj)));
+							graphics.FillRectangle(brush, new Rectangle(new Point(ii + offset.X, jj + offset.Y), new Size(10, 10)));
 
 							jj += 10;
 						}
 						ii += 10;
 					}
 
+					using (var brushC = new SolidBrush(AttachedControl.BackColor))
+					{
+						graphics.FillRectangle(brushC, new Rectangle(new Point(offset.X + size.Width, 0), new Size(AttachedControl.ClientSize.Width - (offset.X + size.Width), AttachedControl.ClientSize.Height)));
+						graphics.FillRectangle(brushC, new Rectangle(new Point(0, offset.Y + size.Height), new Size(AttachedControl.ClientSize.Width, AttachedControl.ClientSize.Height - (offset.Y + size.Height))));
+					}
 				}
 			}
 			else

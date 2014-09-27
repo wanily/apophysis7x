@@ -2,7 +2,6 @@ using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
-using System.Threading;
 
 namespace Xyrus.Apophysis.Calculation
 {
@@ -66,7 +65,7 @@ namespace Xyrus.Apophysis.Calculation
 			const double adjust = 2.3;
 			const double prefilterWhite = 1024;
 
-			var bitmap = new Bitmap(mSize.Width, mSize.Height, PixelFormat.Format32bppArgb);
+			var bitmap = new Bitmap(mRenderer.Size.Width, mRenderer.Size.Height, PixelFormat.Format32bppArgb);
 
 			var gamma = System.Math.Abs(mRenderer.Flame.Gamma) < double.Epsilon ? 0 : 1.0 / mRenderer.Flame.Gamma;
 			var vibrancy = (int)(mRenderer.Flame.Vibrancy * 256);
@@ -97,11 +96,6 @@ namespace Xyrus.Apophysis.Calculation
 			int x, y = 0;
 			for (int i = 0; i < mRenderer.Size.Height; i++)
 			{
-				if ((i & 0x3f) == 0)
-				{
-					Thread.Sleep(1);
-				}
-
 				x = 0;
 
 				for (int j = 0; j < mRenderer.Size.Width; j++)

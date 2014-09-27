@@ -64,20 +64,30 @@ namespace Xyrus.Apophysis.Calculation
 
 		private void SendCancelledMessage()
 		{
-			if (mRenderer != null)
+			lock (mRenderer)
 			{
-				mRenderer.Messenger.SendMessage(string.Format(@"{0} : {1}", DateTime.Now.ToString(@"T"), Messages.RenderTerminatedMessage));
+				if (mRenderer != null)
+				{
+					mRenderer.Messenger.SendMessage(string.Format(@"{0} : {1}", DateTime.Now.ToString(@"T"), Messages.RenderTerminatedMessage));
+				}
 			}
+			
 
 			FinalizeRender();
 		}
 		private void SendCompletedMessage()
 		{
-			if (mRenderer != null)
+			lock (mRenderer)
 			{
-				mRenderer.Messenger.SendMessage(string.Format(@"  {0}", string.Format(Messages.RenderAverageSpeedMessage, mRenderer.AverageIterationsPerSecond)));
-				mRenderer.Messenger.SendMessage(string.Format(@"  {0}", string.Format(Messages.RenderPureTimeMessage, TimeSpan.FromSeconds(mRenderer.PureRenderingTime))));
-				mRenderer.Messenger.SendMessage(string.Format(@"  {0}", string.Format(Messages.RenderTotalTimeMessage, TimeSpan.FromSeconds(mTotalTime))));
+				if (mRenderer != null)
+				{
+					mRenderer.Messenger.SendMessage(string.Format(@"  {0}",
+						string.Format(Messages.RenderAverageSpeedMessage, mRenderer.AverageIterationsPerSecond)));
+					mRenderer.Messenger.SendMessage(string.Format(@"  {0}",
+						string.Format(Messages.RenderPureTimeMessage, TimeSpan.FromSeconds(mRenderer.PureRenderingTime))));
+					mRenderer.Messenger.SendMessage(string.Format(@"  {0}",
+						string.Format(Messages.RenderTotalTimeMessage, TimeSpan.FromSeconds(mTotalTime))));
+				}
 			}
 
 			FinalizeRender();

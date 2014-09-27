@@ -171,7 +171,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 		private void OnRendererFinished(Bitmap bitmap)
 		{
-			if (bitmap == null)
+			if (bitmap == null || View == null)
 				return;
 
 			View.Invoke(new Action(() =>
