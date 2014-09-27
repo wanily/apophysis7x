@@ -6,7 +6,7 @@ using Xyrus.Apophysis.Threading;
 namespace Xyrus.Apophysis.Calculation
 {
 	[PublicAPI]
-	public class ThreadedRenderer : IDisposable
+	public class SimpleRenderer : IDisposable
 	{
 		private Renderer mRenderer;
 		private ThreadController mThreadController;
@@ -14,15 +14,17 @@ namespace Xyrus.Apophysis.Calculation
 		private bool mIsDisposed;
 		private double mTotalTime;
 		private int mThreadCount;
+		private double mDensity;
 
-		~ThreadedRenderer()
+		~SimpleRenderer()
 		{
 			Dispose(false);
 		}
-		public ThreadedRenderer()
+		public SimpleRenderer()
 		{
 			mThreadController = new ThreadController();
 		}
+
 		protected void Dispose(bool disposing)
 		{
 			if (mIsDisposed)
@@ -52,10 +54,11 @@ namespace Xyrus.Apophysis.Calculation
 			GC.SuppressFinalize(this);
 		}
 
-		public void StartCreateBitmap([NotNull] Renderer renderer, Action<Bitmap> callback)
+		public void StartCreateBitmap(double density, [NotNull] Renderer renderer, Action<Bitmap> callback)
 		{
 			if (renderer == null) throw new ArgumentNullException(@"renderer");
 
+			mDensity = density;
 			mRenderer = renderer;
 			mRenderer.Initialize();
 
@@ -96,6 +99,7 @@ namespace Xyrus.Apophysis.Calculation
 		private void FinalizeRender()
 		{
 			mTotalTime = 0;
+			mDensity = 0;
 
 			if (Exit != null)
 				Exit(this, new EventArgs());
@@ -143,17 +147,21 @@ namespace Xyrus.Apophysis.Calculation
 		private Bitmap CreateBitmap(ThreadStateToken threadState)
 		{
 			var stopwatch = new NativeTimer();
+			var progress = new ProgressManager(threadState);
+
+			progress.Progress += (o, e) => ProgressUpdate(e);
+
 			stopwatch.SetStartingTime();
 
 			mRenderer.Messenger.SendMessage(string.Format(@"{0} : {1}", DateTime.Now.ToString(@"T"), Messages.RenderInProgressMessage));
-			mRenderer.CalculateHistogram(0, ProgressUpdate, threadState);
+			mRenderer.Histogram.Iterate(mDensity, progress);
 
 			if (threadState.IsCancelling)
 				return null;
 
-			mRenderer.Messenger.SendMessage(string.Format(@"{0} : {1}", DateTime.Now.ToString(@"T"), string.Format(Messages.RenderSamplingMessage, mRenderer.Data.SampleDensity)));
+			mRenderer.Messenger.SendMessage(string.Format(@"{0} : {1}", DateTime.Now.ToString(@"T"), string.Format(Messages.RenderSamplingMessage, mRenderer.Histogram.CurrentDensity)));
 
-			var result = mRenderer.Histogram.CreateBitmap(mRenderer.Data.SampleDensity);
+			var result = mRenderer.Histogram.CreateBitmap();
 
 			mTotalTime = stopwatch.GetElapsedTimeInSeconds();
 

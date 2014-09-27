@@ -23,7 +23,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 	{
 		private int mCounter;
 		private NativeTimer mElapsedTimer;
-		private ThreadedRenderer mThreader;
+		private SimpleRenderer mThreader;
 		private Stack<Flame> mRenderStack;
 		private Renderer mRenderer;
 
@@ -55,7 +55,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			if (parent == null) throw new ArgumentNullException("parent");
 
 			mParent = parent;
-			mThreader = new ThreadedRenderer();
+			mThreader = new SimpleRenderer();
 			mRenderStack = new Stack<Flame>();
 			mElapsedTimer = new NativeTimer();
 
@@ -591,12 +591,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			}
 
 			mRenderer = new Renderer(
-				flame, mCurrentSize, mCurrentDensity, mCurrentOversample,
+				flame, mCurrentSize, mCurrentOversample,
 				mCurrentFilterRadius, mFormat == TargetImageFileFormat.Png && ApophysisSettings.Common.EnablePngTransparency);
 			mRenderer.Messenger = mMessenger;
 
 			mThreader.SetThreadCount(mThreadCount);
-			mThreader.StartCreateBitmap(mRenderer, SaveBitmap);
+			mThreader.StartCreateBitmap(mCurrentDensity, mRenderer, SaveBitmap);
 		}
 		private void SaveBitmap(Bitmap bitmap)
 		{

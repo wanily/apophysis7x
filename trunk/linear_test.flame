@@ -1,9 +1,9 @@
-﻿<flames name="linear_test">
-<flame name="sierpinski" version="Apophysis 7x" size="400 400" center="0.510471204188482 -0.510471204188482" scale="340" oversample="1" filter="0.2" quality="5" background="0 0 0" brightness="1" gamma="4" estimator_radius="9" estimator_minimum="0" estimator_curve="0.4" enable_de="0" plugins="" new_linear="1" curves="0 0 1 0 0 1 1 1 1 1 1 1 0 0 1 0 0 1 1 1 1 1 1 1 0 0 1 0 0 1 1 1 1 1 1 1 0 0 1 0 0 1 1 1 1 1 1 1" >
-   <xform weight="0.5" color="1" linear="0.5" coefs="1 0 0 1 0 -1" opacity="1" />
-   <xform weight="0.5" color="0" linear="0.5" coefs="1 0 0 1 0 0" opacity="1" />
-   <xform weight="0.5" color="0" linear="0.5" coefs="1 0 0 1 1 0" opacity="1" />
-   <palette count="256" format="RGB">
+<Flames name="sierpinski">
+  <flame name="sierpinski" version="Apophysis 7x" size="400 400" center="0.510471204188482 -0.510471204188482" scale="340" angle="0" rotate="0" zoom="0" cam_pitch="0" cam_yaw="0" cam_perspective="0" cam_zpos="0" cam_dof="0" background="0 0 0" brightness="1" gamma="4" vibrancy="1" gamma_threshold="0.001" plugins="" new_linear="1">
+    <xform weight="0.5" color="1" linear="0.5" coefs="1 0 0 1 0 -1" opacity="1" />
+    <xform weight="0.5" color="0" linear="0.5" coefs="1 0 0 1 0 0" opacity="1" />
+    <xform weight="0.5" color="0" linear="0.5" coefs="1 0 0 1 1 0" opacity="1" />
+    <palette count="256" format="RGB">
       60554464674F5B644D6A634479714788944F9398519E9A5B
       BFA865C8B361BEAD65B9AF70B1C273ACB784AFBF9595B184
       889C837D8B7A6B8477617766596D5C545C484B4B424F5049
@@ -36,14 +36,14 @@
       DCB23DD5A243C99532A17744BA6C5DA68A6398958C9C9EA4
       8EB4D58AB5E175BBEC5AB1E95399C96F88A4887173BB675C
       EC6443E44B30F74424F84520F1402AE94429DA4033885540
-   </palette>
-</flame>
-<flame name="quilt" version="Apophysis 7x Version 17" size="400 400" center="0.5 -0.5" scale="340" oversample="1" filter="0.2" quality="5" background="0 0 0" brightness="1" gamma="4" estimator_radius="9" estimator_minimum="0" estimator_curve="0.4" enable_de="0" plugins="" new_linear="1" curves="0 0 1 0 0 1 1 1 1 1 1 1 0 0 1 0 0 1 1 1 1 1 1 1 0 0 1 0 0 1 1 1 1 1 1 1 0 0 1 0 0 1 1 1 1 1 1 1" >
-   <xform weight="0.5" color="1" linear="0.5" coefs="1 0 0 1 0 -1" opacity="1" />
-   <xform weight="0.5" color="0" linear="0.5" coefs="1 0 0 1 0 0" opacity="1" />
-   <xform weight="0.5" color="1" linear="0.5" coefs="1 0 0 1 1 0" opacity="1" />
-   <xform weight="0.5" color="0" linear="0.5" coefs="1 0 0 1 1 -1" opacity="1" />
-   <palette count="256" format="RGB">
+  </palette>
+  </flame>
+  <flame name="quilt" version="Apophysis 7x" size="400 400" center="0.5 -0.5" scale="340" angle="0" rotate="0" zoom="0" cam_pitch="0" cam_yaw="0" cam_perspective="0" cam_zpos="0" cam_dof="0" background="0 0 0" brightness="1" gamma="4" vibrancy="1" gamma_threshold="0.001" plugins="" new_linear="1">
+    <xform weight="0.5" color="1" linear="0.5" coefs="1 0 0 1 0 -1" opacity="1" />
+    <xform weight="0.5" color="0" linear="0.5" coefs="1 0 0 1 0 0" opacity="1" />
+    <xform weight="0.5" color="1" linear="0.5" coefs="1 0 0 1 1 0" opacity="1" />
+    <xform weight="0.5" color="0" linear="0.5" coefs="1 0 0 1 1 -1" opacity="1" />
+    <palette count="256" format="RGB">
       60554464674F5B644D6A634479714788944F9398519E9A5B
       BFA865C8B361BEAD65B9AF70B1C273ACB784AFBF9595B184
       889C837D8B7A6B8477617766596D5C545C484B4B424F5049
@@ -76,6 +76,46 @@
       DCB23DD5A243C99532A17744BA6C5DA68A6398958C9C9EA4
       8EB4D58AB5E175BBEC5AB1E95399C96F88A4887173BB675C
       EC6443E44B30F74424F84520F1402AE94429DA4033885540
-   </palette>
-</flame>
-</flames>
+  </palette>
+  </flame>
+  <flame name="sierpinski_filled" version="Apophysis 7x" size="400 400" center="0.510471204188482 -0.510471204188482" scale="340" angle="0" rotate="0" zoom="0" cam_pitch="0" cam_yaw="0" cam_perspective="0" cam_zpos="0" cam_dof="0" background="0 0 0" brightness="1" gamma="4" vibrancy="1" gamma_threshold="0.001" plugins="" new_linear="1">
+    <xform weight="0.5" color="1" linear="0.5" coefs="1 0 0 1 0 -1" opacity="1" />
+    <xform weight="0.5" color="0" linear="0.5" coefs="1 0 0 1 0 0" opacity="1" />
+    <xform weight="0.5" color="1" linear="0.5" coefs="1 0 0 1 1 0" opacity="1" />
+    <xform weight="0.5" color="0.385" symmetry="0.513" color_speed="0.513" linear="0.43" coefs="-1 4.71844785465692E-16 -8.54703677624635E-16 -1 1.11333333333333 -1.12" opacity="1" />
+    <palette count="256" format="RGB">
+      60554464674F5B644D6A634479714788944F9398519E9A5B
+      BFA865C8B361BEAD65B9AF70B1C273ACB784AFBF9595B184
+      889C837D8B7A6B8477617766596D5C545C484B4B424F5049
+      4C5B494D6A5D4C656B5C796B627D777094898BAA9C96BBD5
+      90C1E691C0E492BFDEA7B4B59EB99A9DB1799BA0599EA84E
+      ACAF5DBA9E49BA9E49B59954979D58859A5B829763849362
+      7E8B697B81676A6F60545F694A515947405C4D49515A6553
+      60645A696961737261757A5F868953888A37967E346E763B
+      556B3759603C4C4C3544432548493B5A5749736B56906E4C
+      967957987B5F8B8C6A84907B8D9796A29EA0A9B2AFB9C7DA
+      BFCDDDB9CADDB9C3D4BDC590C2B188D5C45ADCB640D0A44C
+      EE6A5BEC6755F05853EF5048EF5239EC4434F6412BF53F1A
+      F44310F44E11F45217F34C17F7451CF34A1CF4482CEE5637
+      F34B3CE154479F5C617C7D677175695C71645F71656A6F71
+      6B736D6E7363757B5A777B4B867A51828047848E4B9B9B5E
+      A3A479A0989482A5A06BA3CC5EB7EB60BCEE6AB4EA7EACD1
+      7B6A3961643C5B533A464A364647353B44333B3820363D2C
+      394839434A3E51614C5F725B6D7252737154707862808362
+      82896A868E6A96976B95967295987B949C87AAA17FBC7981
+      E46564EA5C49E04239C348397941245636204B49261D2227
+      36343435393E3C4E443F454D40594954694D54725F627A6C
+      788F7D849E8A8AA5898BA2899A999FB29BA3B09A9BB79F9D
+      BBAB82A9AE8FA5B782AAAB8AAFB3819FAF7C9B9C7A8F8E6E
+      8381747D80747F7983777786737684798B857B8A7C7C8D82
+      889A8D8C949E83959E5B9BB66484AB5381B85280C15595CF
+      5DB7EC71C0F289C4ED7FBFED77BBEA72AAD66D9CC59099AD
+      9993A0A9A1A8AFB9BD9EC4E18FC1DBA1BAD6B3B9C1C7A89E
+      E17774EB6672E6646CD97078B08F938D878D7191935F8099
+      677D9270817F7A856A879461908655A38851A08F5DC6A349
+      DCB23DD5A243C99532A17744BA6C5DA68A6398958C9C9EA4
+      8EB4D58AB5E175BBEC5AB1E95399C96F88A4887173BB675C
+      EC6443E44B30F74424F84520F1402AE94429DA4033885540
+  </palette>
+  </flame>
+</Flames>

@@ -2,7 +2,8 @@
 
 namespace Xyrus.Apophysis.Threading
 {
-	public sealed class ThreadStateToken : IDisposable
+	[PublicAPI]
+	public sealed class ThreadStateToken : ThreadState, IDisposable
 	{
 		private ThreadController mController;
 
@@ -17,11 +18,11 @@ namespace Xyrus.Apophysis.Threading
 			mController = null;
 		}
 
-		public bool IsCancelling
+		public override bool IsCancelling
 		{
 			get { return mController.IsCancelling; }
 		}
-		public bool IsSuspended
+		public override bool IsSuspended
 		{
 			get { return mController.IsSuspended; }
 		}

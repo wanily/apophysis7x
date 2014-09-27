@@ -12,7 +12,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		private Renderer mRenderer;
 		private NativeTimer mElapsedTimer;
-		private ThreadedRenderer mThreader;
+		private SimpleRenderer mThreader;
 		private MainController mParent;
 		private Bitmap mBitmap;
 
@@ -22,7 +22,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			mParent = parent;
 
-			mThreader = new ThreadedRenderer();
+			mThreader = new SimpleRenderer();
 			mElapsedTimer = new NativeTimer();
 			mHiding = new Lock();
 		}
@@ -154,10 +154,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			mElapsedTimer.SetStartingTime();
 
-			mRenderer = new Renderer(flame, renderSize, density, ApophysisSettings.Preview.Oversample, ApophysisSettings.Preview.FilterRadius);
+			mRenderer = new Renderer(flame, renderSize, ApophysisSettings.Preview.Oversample, ApophysisSettings.Preview.FilterRadius);
 
 			mThreader.SetThreadCount(ApophysisSettings.Preview.ThreadCount);
-			mThreader.StartCreateBitmap(mRenderer, OnRendererFinished);
+			mThreader.StartCreateBitmap(density, mRenderer, OnRendererFinished);
 			SetIsInProgress(true);
 		}
 	}

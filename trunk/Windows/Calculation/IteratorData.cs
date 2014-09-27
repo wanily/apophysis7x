@@ -36,7 +36,7 @@ namespace Xyrus.Apophysis.Calculation
 			}
 			else
 			{
-				var terminator = new Iterator(mData.Renderer.Flame);
+				var terminator = new Iterator(mData.Flame);
 				terminator.Variations.ClearWeights();
 
 				mTerminator = new IteratorData(data, terminator, true);
@@ -134,7 +134,7 @@ namespace Xyrus.Apophysis.Calculation
 
 			var iterators = mData.Iterators;
 
-			var n = mData.Renderer.Flame.Iterators.Count;
+			var n = mData.Flame.Iterators.Count;
 			var k = mIndex;
 
 			var tp = new double[n];
@@ -144,7 +144,7 @@ namespace Xyrus.Apophysis.Calculation
 
 			for (int i = 0; i < n; i++)
 			{
-				tp[i] = mIterator.Weight * mData.Renderer.Flame.GetChaosCoefficient(k, i);
+				tp[i] = mIterator.Weight * mData.Flame.GetChaosCoefficient(k, i);
 				total += tp[i];
 			}
 
@@ -174,7 +174,7 @@ namespace Xyrus.Apophysis.Calculation
 
 		private void SetTerminalIterator()
 		{
-			for (int i = 0; i < mData.Renderer.Flame.Iterators.Count; i++)
+			for (int i = 0; i < mData.Flame.Iterators.Count; i++)
 			{
 				RefTable[i] = mTerminator;
 			}

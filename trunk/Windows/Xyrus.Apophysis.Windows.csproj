@@ -72,6 +72,7 @@
     <Compile Include="Calculation\ProgressEventHandler.cs" />
     <Compile Include="Calculation\ProgressEventArgs.cs" />
     <Compile Include="Calculation\FlameData.cs" />
+    <Compile Include="Calculation\ProgressManager.cs" />
     <Compile Include="Calculation\Renderer.cs" />
     <Compile Include="Calculation\RenderMessenger.cs" />
     <Compile Include="Calculation\RenderMessengerBase.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="Models\ParserExtensions.cs" />
     <Compile Include="Models\SerializationExtensions.cs" />
     <Compile Include="Calculation\IterationData.cs" />
+    <Compile Include="Threading\ThreadState.cs" />
     <Compile Include="Windows\Resources\Icons.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

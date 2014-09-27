@@ -11,7 +11,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 	class MainPreviewController : Controller<Main>
 	{
 		private NativeTimer mElapsedTimer;
-		private ThreadedRenderer mThreader;
+		private SimpleRenderer mThreader;
 		private Renderer mRenderer;
 		private TimeLock mPreviewTimeLock;
 		private MainController mParent;
@@ -30,7 +30,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				Delay = 250
 			};
 
-			mThreader = new ThreadedRenderer();
+			mThreader = new SimpleRenderer();
 			mElapsedTimer = new NativeTimer();
 		}
 		protected override void DisposeOverride(bool disposing)
@@ -272,10 +272,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				mRenderer.Dispose();
 			}
 
-			mRenderer = new Renderer(mFlame, renderSize, density, ApophysisSettings.Preview.Oversample, ApophysisSettings.Preview.FilterRadius);
+			mRenderer = new Renderer(mFlame, renderSize, ApophysisSettings.Preview.Oversample, ApophysisSettings.Preview.FilterRadius);
 
 			mThreader.SetThreadCount(ApophysisSettings.Preview.ThreadCount);
-			mThreader.StartCreateBitmap(mRenderer, OnRendererFinished);
+			mThreader.StartCreateBitmap(density, mRenderer, OnRendererFinished);
 		}
 		public void ReloadSettings()
 		{

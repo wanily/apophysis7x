@@ -2,6 +2,8 @@ using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
+using Xyrus.Apophysis.Math;
+using Rectangle = System.Drawing.Rectangle;
 
 namespace Xyrus.Apophysis.Calculation
 {
@@ -18,6 +20,9 @@ namespace Xyrus.Apophysis.Calculation
 		private const int mOffsG = sizeof(double);
 		private const int mOffsB = sizeof(double) * 2;
 		private const int mOffsAcc = sizeof(double) * 3;
+
+		private const double mWhite = 1024;
+		private double mDensity;
 
 		private IntPtr mData;
 		private Renderer mRenderer;
@@ -36,6 +41,14 @@ namespace Xyrus.Apophysis.Calculation
 			mSize = size;
 			mRenderer = renderer;
 			mStride = (int)GetMemorySize(new Size(size.Width, 1));
+
+			Brightness = 4;
+			Gamma = 4;
+			GammaThreshold = 0;
+			Vibrancy = 1;
+			Contrast = 1;
+			Background = Color.Black;
+			Transparent = false;
 
 			var memoryLength = GetMemorySize(size);
 			var ptr = Marshal.AllocHGlobal(new IntPtr(memoryLength));
@@ -59,145 +72,236 @@ namespace Xyrus.Apophysis.Calculation
 			IncAddr(addr, mOffsB, color[2]);
 			IncAddr(addr, mOffsAcc, 1);
 		}
-		public Bitmap CreateBitmap(double density)
+
+		private double MapScalar(double x, double density, ref double? c1, ref double? c2)
 		{
-			const double contrast = 1.0;
 			const double adjust = 2.3;
-			const double prefilterWhite = 1024;
+			
 
-			var bitmap = new Bitmap(mRenderer.Size.Width, mRenderer.Size.Height, PixelFormat.Format32bppArgb);
-
-			var gamma = System.Math.Abs(mRenderer.Flame.Gamma) < double.Epsilon ? 0 : 1.0 / mRenderer.Flame.Gamma;
-			var vibrancy = (int)(mRenderer.Flame.Vibrancy * 256);
-			var invVibrancy = 256 - vibrancy;
-			var power = System.Math.Abs(mRenderer.Flame.GammaThreshold) < double.Epsilon ? 0 : System.Math.Pow(mRenderer.Flame.GammaThreshold, gamma - 1);
-
-			var gutter = mSize.Width - mRenderer.Oversample*mRenderer.Size.Width;
-			var get = new Func<int, int, double[]>(Get);
-
-			if (mRenderer.Data.FilterSize > gutter/2)
-				get = SafeGet;
-
-			var scale = System.Math.Pow(2, mRenderer.Flame.Zoom);
-			var sampleDensity = System.Math.Max(0.001, density*scale*scale);
-
-			var logMapC1 = (contrast*adjust*mRenderer.Flame.Brightness*prefilterWhite*268)/256.0;
-			var logArea = mRenderer.Size.Width * mRenderer.Size.Height / (mRenderer.Data.PointsPerUnit[0] * mRenderer.Data.PointsPerUnit[1]);
-			var logMapC2 = (mRenderer.Oversample*mRenderer.Oversample)/(contrast*logArea*mRenderer.Data.WhiteLevel*sampleDensity);
-
-			var precalcLogMap = new double[1024];
-			for (int i = 1; i < precalcLogMap.Length; i++)
+			if (c1 == null || c2 == null)
 			{
-				precalcLogMap[i] = logMapC1 * System.Math.Log10(1 + mRenderer.Data.WhiteLevel * i * logMapC2) / (mRenderer.Data.WhiteLevel * i);
+				var logArea = mRenderer.Size.Width * mRenderer.Size.Height / (mRenderer.Data.PointsPerUnit.X * mRenderer.Data.PointsPerUnit.Y);
+
+				c1 = (Contrast * adjust * Brightness * mWhite * 268) / 256.0;
+				c2 = (mRenderer.Oversample * mRenderer.Oversample) / (Contrast * logArea * mRenderer.Data.WhiteLevel * density);
 			}
 
-			var data = bitmap.LockBits(new Rectangle(new Point(), bitmap.Size), ImageLockMode.WriteOnly, bitmap.PixelFormat);
+			return c1.Value * System.Math.Log10(1 + mRenderer.Data.WhiteLevel * x * c2.Value) / (mRenderer.Data.WhiteLevel * x);
+		}
+		private void SetBackground(ref Bitmap bitmap, Color background)
+		{
+			var newBitmap = new Bitmap(bitmap.Size.Width, bitmap.Size.Height, PixelFormat.Format24bppRgb);
 
-			int x, y = 0;
-			for (int i = 0; i < mRenderer.Size.Height; i++)
+			using (var graphics = Graphics.FromImage(newBitmap))
+			using (var brush = new SolidBrush(background))
 			{
-				x = 0;
+				graphics.FillRectangle(brush, new Rectangle(new Point(), newBitmap.Size));
+				graphics.DrawImageUnscaled(bitmap, new Point());
 
-				for (int j = 0; j < mRenderer.Size.Width; j++)
+				bitmap.Dispose();
+				bitmap = newBitmap;
+			}
+		}
+		private long Iterate(bool isContinuing, long batchSize, ProgressManager progressManager = null)
+		{
+			const int fuse = 20;
+
+			progressManager = progressManager ?? new ProgressManager();
+
+			var random = new Random(mRenderer.Data.Flame.GetHashCode() ^ (int)DateTime.Now.Ticks);
+			var iterator = mRenderer.Data.Iterators[0];
+			var vector = new Vector3(2 * random.NextDouble() - 1, 2 * random.NextDouble() - 1, 0);
+			var color = random.NextDouble();
+
+			if (!isContinuing)
+			{
+				progressManager.Reset(batchSize);
+
+				for (long i = 0; i < fuse; i++)
 				{
-					var fp = new double[4];
-					var pos = i*data.Stride + j*4;
+					iterator = iterator.Next(random);
+					iterator.Process(random, vector, ref color);
+				}
+			}
+			else
+			{
+				progressManager.Continue(batchSize);
+			}
+
+			for (long i = 0; i < batchSize; i++)
+			{
+				if (progressManager.ThreadState.IsCancelling)
+					break;
+
+				if (progressManager.ThreadState.IsSuspended)
+				{
+					progressManager.Wait(ref i);
+					continue;
+				}
+
+				progressManager.CheckSendProgressEvent(i);
+
+				iterator = iterator.Next(random);
+				if (!iterator.Process(random, vector, ref color))
+					continue;
+
+				foreach (var final in mRenderer.Data.Finals)
+				{
+					final.Process(random, vector, ref color);
+				}
+
+				var projection = vector.Copy();
+				if (!mRenderer.Data.ProjectPoint(ref projection, random))
+					continue;
+
+				if (color < 0) color = 0;
+				if (color > 1) color = 1;
+
+				var bufferLocation = new Point(
+					(int)(projection.X * mRenderer.Data.UnitToPixelFactor.X),
+					(int)(projection.Y * mRenderer.Data.UnitToPixelFactor.Y));
+				var mapColor = mRenderer.Data.ColorMap[(int)(color * mRenderer.Data.ColorMap.Length)];
+
+				Add(bufferLocation.X, bufferLocation.Y, mapColor);
+			}
+
+			progressManager.FinalizeProcess();
+
+			return batchSize;
+		}
+
+		public void Iterate(double untilDensity, ProgressManager progressManager = null)
+		{
+			if (untilDensity <= mDensity)
+				return;
+
+			if (mDensity <= 0)
+			{
+				var length = (mRenderer.Data.BufferLength*untilDensity/(mRenderer.Oversample*mRenderer.Oversample));
+
+				mDensity = Iterate(false, (long)length, progressManager) / length;
+				return;
+			}
+
+			var increment = (mRenderer.Data.BufferLength * (untilDensity - mDensity) / (mRenderer.Oversample * mRenderer.Oversample));
+
+			mDensity += Iterate(true, (long)increment , progressManager) / increment;
+		}
+		public Bitmap CreateBitmap()
+		{
+			var bitmap = new Bitmap(mRenderer.Size.Width, mRenderer.Size.Height, PixelFormat.Format32bppArgb);
+			var bitmapData = bitmap.LockBits(new Rectangle(new Point(), bitmap.Size), ImageLockMode.WriteOnly, bitmap.PixelFormat);
+
+			var gammaDenom = System.Math.Abs(Gamma) < double.Epsilon ? 0 : 1.0 / Gamma;
+
+			var scaledVibrancy = (int)(Vibrancy * 256);
+			var inverseScaledVibrancy = 256 - scaledVibrancy;
+
+			var gutter = mSize.Width - mRenderer.Oversample*mRenderer.Size.Width;
+			var getPointFunc = (mRenderer.Data.FilterSize > gutter/2) ? SafeGet : new Func<int, int, double[]>(Get);
+
+			var sampleDensity = System.Math.Max(0.001, mDensity*mRenderer.Data.TwoPowerZoom*mRenderer.Data.TwoPowerZoom);
+
+			var precalcLogMap = new double[1024];
+
+			double? logc1 = null, logc2 = null;
+			for (int i = 1; i < precalcLogMap.Length; i++)
+			{
+				precalcLogMap[i] = MapScalar(i, sampleDensity, ref logc1, ref logc2);
+			}
+			var bufferY = 0;
+
+			for (int bitmapY = 0; bitmapY < mRenderer.Size.Height; bitmapY++)
+			{
+				var bufferX = 0;
+
+				for (int bitmapX = 0; bitmapX < mRenderer.Size.Width; bitmapX++)
+				{
+					var histogramPoint = new double[4];
+					var bitmapAddress = bitmapY*bitmapData.Stride + bitmapX*4;
 
 					if (mRenderer.Data.FilterSize > 1)
 					{
 						for (int ii = 0; ii < mRenderer.Data.FilterSize; ii++)
 							for (int jj = 0; jj < mRenderer.Data.FilterSize; jj++)
 							{
-								var value = mRenderer.Data.Filter[ii][jj];
-								var point = get(x + jj, y + ii);
+								var value = mRenderer.Data.FilterKernel[ii][jj];
+								var point = getPointFunc(bufferX + jj, bufferY + ii);
 
-								double mapped;
+								var mapped = point[3] < 1024 ? precalcLogMap[(int) point[3]] : MapScalar(point[3], sampleDensity, ref logc1, ref logc2);
 
-								if (point[3] < 1024)
-								{
-									mapped = precalcLogMap[(int) point[3]];
-								}
-								else
-								{
-									mapped = (logMapC1*System.Math.Log10(1 + mRenderer.Data.WhiteLevel*point[3]*logMapC2))/(mRenderer.Data.WhiteLevel*point[3]);
-								}
-
-								fp[0] += value*mapped*point[0];
-								fp[1] += value*mapped*point[1];
-								fp[2] += value*mapped*point[2];
-								fp[3] += value*mapped*point[3];
+								histogramPoint[0] += value*mapped*point[0];
+								histogramPoint[1] += value*mapped*point[1];
+								histogramPoint[2] += value*mapped*point[2];
+								histogramPoint[3] += value*mapped*point[3];
 							}
 
-						fp[0] /= prefilterWhite;
-						fp[1] /= prefilterWhite;
-						fp[2] /= prefilterWhite;
-						fp[3] = mRenderer.Data.WhiteLevel*fp[3]/prefilterWhite;
+						histogramPoint[0] /= mWhite;
+						histogramPoint[1] /= mWhite;
+						histogramPoint[2] /= mWhite;
+						histogramPoint[3] = mRenderer.Data.WhiteLevel*histogramPoint[3]/mWhite;
 					}
 					else
 					{
-						var point = get(x, y);
-						double mapped;
+						var point = getPointFunc(bufferX, bufferY);
+						var mapped = point[3] < 1024 ? precalcLogMap[(int) point[3]] : MapScalar(point[3], sampleDensity, ref logc1, ref logc2);
 
-						if (point[3] < 1024)
-						{
-							mapped = precalcLogMap[(int)point[3]];
-						}
-						else
-						{
-							mapped = (logMapC1 * System.Math.Log10(1 + mRenderer.Data.WhiteLevel * point[3] * logMapC2)) / (mRenderer.Data.WhiteLevel * point[3]);
-						}
+						mapped /= mWhite;
 
-						mapped /= prefilterWhite;
-
-						fp[0] = mapped * point[0];
-						fp[1] = mapped * point[1];
-						fp[2] = mapped * point[2];
-						fp[3] = mapped * point[3] * mRenderer.Data.WhiteLevel;
+						histogramPoint[0] = mapped * point[0];
+						histogramPoint[1] = mapped * point[1];
+						histogramPoint[2] = mapped * point[2];
+						histogramPoint[3] = mapped * point[3] * mRenderer.Data.WhiteLevel;
 					}
 
-					x += mRenderer.Oversample;
+					bufferX += mRenderer.Oversample;
 
-					if (fp[3] > 0)
+					if (histogramPoint[3] > 0)
 					{
-						var alpha = (fp[3] < mRenderer.Flame.GammaThreshold)
-							? (1 - (fp[3] / mRenderer.Flame.GammaThreshold)) * fp[3] * power + (fp[3] / mRenderer.Flame.GammaThreshold) * System.Math.Pow(fp[3], gamma)
-							: System.Math.Pow(fp[3], gamma);
-						var multiplier = vibrancy * alpha / fp[3];
+						var power = System.Math.Abs(GammaThreshold) < double.Epsilon ? 0 : System.Math.Pow(GammaThreshold, gammaDenom - 1);
+						var alpha = (histogramPoint[3] < GammaThreshold)
+							? (1 - (histogramPoint[3] / GammaThreshold)) * histogramPoint[3] * power + (histogramPoint[3] / GammaThreshold) * System.Math.Pow(histogramPoint[3], gammaDenom)
+							: System.Math.Pow(histogramPoint[3], gammaDenom);
+						var multiplier = scaledVibrancy * alpha / histogramPoint[3];
 
-						var ri = (int)System.Math.Max(0, System.Math.Min(((invVibrancy > 0) ? (multiplier * fp[0] + invVibrancy * System.Math.Pow(fp[0], gamma)) : (multiplier * fp[0])), 255));
-						var gi = (int)System.Math.Max(0, System.Math.Min(((invVibrancy > 0) ? (multiplier * fp[1] + invVibrancy * System.Math.Pow(fp[1], gamma)) : (multiplier * fp[1])), 255));
-						var bi = (int)System.Math.Max(0, System.Math.Min(((invVibrancy > 0) ? (multiplier * fp[2] + invVibrancy * System.Math.Pow(fp[2], gamma)) : (multiplier * fp[2])), 255));
+						var ri = (int)System.Math.Max(0, System.Math.Min(((inverseScaledVibrancy > 0) ? (multiplier * histogramPoint[0] + inverseScaledVibrancy * System.Math.Pow(histogramPoint[0], gammaDenom)) : (multiplier * histogramPoint[0])), 255));
+						var gi = (int)System.Math.Max(0, System.Math.Min(((inverseScaledVibrancy > 0) ? (multiplier * histogramPoint[1] + inverseScaledVibrancy * System.Math.Pow(histogramPoint[1], gammaDenom)) : (multiplier * histogramPoint[1])), 255));
+						var bi = (int)System.Math.Max(0, System.Math.Min(((inverseScaledVibrancy > 0) ? (multiplier * histogramPoint[2] + inverseScaledVibrancy * System.Math.Pow(histogramPoint[2], gammaDenom)) : (multiplier * histogramPoint[2])), 255));
 						var ai = (int)System.Math.Max(0, System.Math.Min(alpha * 255, 255));
 
-						Marshal.WriteInt32(data.Scan0, pos, Color.FromArgb(ai, ri, gi, bi).ToArgb());
+						Marshal.WriteInt32(bitmapData.Scan0, bitmapAddress, Color.FromArgb(ai, ri, gi, bi).ToArgb());
 					}
 					else
 					{
-						Marshal.WriteInt32(data.Scan0, pos, 0);
+						Marshal.WriteInt32(bitmapData.Scan0, bitmapAddress, 0);
 					}
 				}
 
-				y += mRenderer.Oversample;
+				bufferY += mRenderer.Oversample;
 			}
 
-			bitmap.UnlockBits(data);
+			bitmap.UnlockBits(bitmapData);
 
 			if (!mRenderer.WithTransparency)
 			{
-				var newBitmap = new Bitmap(bitmap.Size.Width, bitmap.Size.Height, PixelFormat.Format24bppRgb);
-
-				using (var graphics = Graphics.FromImage(newBitmap))
-				using (var brush = new SolidBrush(mRenderer.Flame.Background))
-				{
-					graphics.FillRectangle(brush, new Rectangle(new Point(), newBitmap.Size));
-					graphics.DrawImageUnscaled(bitmap, new Point());
-
-					bitmap.Dispose();
-					bitmap = newBitmap;
-				}
+				SetBackground(ref bitmap, Background);
 			}
 
 			return bitmap;
+		}
+
+		public double Brightness { get; set; }
+		public double Gamma { get; set; }
+		public double GammaThreshold { get; set; }
+		public double Vibrancy { get; set; }
+		public double Contrast { get; set; }
+
+		public bool Transparent { get; set; }
+		public Color Background { get; set; }
+
+		public double CurrentDensity
+		{
+			get { return mDensity; }
 		}
 
 		public void Dispose()

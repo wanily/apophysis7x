@@ -13,12 +13,14 @@ namespace Xyrus.Apophysis.Calculation
 			if (density <= 0) throw new ArgumentOutOfRangeException(@"density");
 			if (size.Width <= 0 || size.Height <= 0) throw new ArgumentOutOfRangeException(@"size");
 
-			using (var renderer = new Renderer(flame, size, density, 1, 0.5, false))
+			var progress = new ProgressManager(threadState);
+
+			using (var renderer = new Renderer(flame, size, 1, 0.5, false))
 			{
 				renderer.Initialize();
-				renderer.CalculateHistogram(0, threadState: threadState);
+				renderer.Histogram.Iterate(density, progress);
 
-				return renderer.Histogram.CreateBitmap(renderer.Data.SampleDensity);
+				return renderer.Histogram.CreateBitmap();
 			}
 		}
 	}
