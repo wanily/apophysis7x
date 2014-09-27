@@ -246,7 +246,14 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 		private void OnViewLoaded(object sender, EventArgs e)
 		{
-			GenerateRandomFlames(10, false);
+			if (!string.IsNullOrEmpty(ApophysisApplication.BatchPathToOpen))
+			{
+				ReadBatchFromFile(ApophysisApplication.BatchPathToOpen);
+			}
+			else
+			{
+				GenerateRandomFlames(10, false);
+			}
 		}
 		private void OnCameraEndEdit(object sender, CameraEndEditEventArgs e)
 		{

@@ -22,6 +22,9 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			}
 		}
 
+		public Size BackgroundSize { get; set; }
+		public Color BackgroundColor { get; set; }
+
 		protected override void RegisterEvents(PictureBox control)
 		{
 		}
@@ -31,10 +34,18 @@ namespace Xyrus.Apophysis.Windows.Visuals
 
 		protected override void OnControlPaint(Graphics graphics)
 		{
+			var size = (BackgroundSize.Width <= 0 || BackgroundSize.Height <= 0) ? AttachedControl.ClientSize : BackgroundSize.FitToFrame(AttachedControl.ClientSize);
+			var offset = new Point(AttachedControl.ClientSize.Width / 2 - size.Width / 2, AttachedControl.ClientSize.Height / 2 - size.Height / 2);
+
+			using (var brush = new SolidBrush(AttachedControl.BackColor))
+			{
+				graphics.FillRectangle(brush, new Rectangle(new Point(), AttachedControl.ClientSize));
+			}
+
 			if (ShowTransparency)
 			{
-				var tilesX = (AttachedControl.ClientSize.Width + 10) / 10;
-				var tilesY = (AttachedControl.ClientSize.Height + 10) / 10;
+				var tilesX = (size.Width + 10) / 10;
+				var tilesY = (size.Height + 10) / 10;
 
 				if (tilesX % 2 != 0) tilesX++;
 				if (tilesY % 2 != 0) tilesY++;
@@ -50,7 +61,10 @@ namespace Xyrus.Apophysis.Windows.Visuals
 						{
 							var brush = ((i + j) % 2 != 0) ? brushA : brushB;
 
-							graphics.FillRectangle(brush, new Rectangle(new Point(ii, jj), new Size(10, 10)));
+							var ii2 = System.Math.Min(offset.X + ii + 10, offset.X + size.Width);
+							var jj2 = System.Math.Min(offset.Y + jj + 10, offset.Y + size.Height);
+
+							graphics.FillRectangle(brush, new Rectangle(new Point(ii + offset.X, jj + offset.Y), new Size(ii2 - ii, jj2 - jj)));
 
 							jj += 10;
 						}
@@ -61,9 +75,9 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			}
 			else
 			{
-				using (var brush = new SolidBrush(AttachedControl.BackColor))
+				using (var brush = new SolidBrush(BackgroundColor))
 				{
-					graphics.FillRectangle(brush, new Rectangle(new Point(), AttachedControl.ClientSize));
+					graphics.FillRectangle(brush, new Rectangle(offset, size));
 				}
 			}
 		}

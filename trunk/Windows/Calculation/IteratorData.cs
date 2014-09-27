@@ -94,18 +94,18 @@ namespace Xyrus.Apophysis.Calculation
 			P = new[] { new double[2], new double[2], new double[2] };
 
 			C[0][0] = mIterator.PreAffine.Matrix.X.X;
-			C[0][1] = mIterator.PreAffine.Matrix.X.Y;
-			C[1][0] = mIterator.PreAffine.Matrix.Y.X;
+			C[0][1] = -mIterator.PreAffine.Matrix.X.Y;
+			C[1][0] = -mIterator.PreAffine.Matrix.Y.X;
 			C[1][1] = mIterator.PreAffine.Matrix.Y.Y;
 			C[2][0] = mIterator.PreAffine.Origin.X;
-			C[2][1] = mIterator.PreAffine.Origin.Y;
+			C[2][1] = -mIterator.PreAffine.Origin.Y;
 
 			P[0][0] = mIterator.PostAffine.Matrix.X.X;
-			P[0][1] = mIterator.PostAffine.Matrix.X.Y;
-			P[1][0] = mIterator.PostAffine.Matrix.Y.X;
+			P[0][1] = -mIterator.PostAffine.Matrix.X.Y;
+			P[1][0] = -mIterator.PostAffine.Matrix.Y.X;
 			P[1][1] = mIterator.PostAffine.Matrix.Y.Y;
 			P[2][0] = mIterator.PostAffine.Origin.X;
-			P[2][1] = mIterator.PostAffine.Origin.Y;
+			P[2][1] = -mIterator.PostAffine.Origin.Y;
 		}
 		private void PrepareVariations()
 		{

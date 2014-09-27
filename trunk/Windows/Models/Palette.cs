@@ -382,7 +382,7 @@ namespace Xyrus.Apophysis.Models
 		[NotNull]
 		public Palette Copy()
 		{
-			var copy = new Palette(mName)
+			var copy = new Palette()
 			{
 				mColors = new Color[Length], 
 				mName = mName

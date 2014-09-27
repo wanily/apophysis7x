@@ -20,9 +20,10 @@ namespace Xyrus.Apophysis
 		private static BannerController mBanner;
 
 		public static MainController MainWindow { get; private set; }
+		public static string BatchPathToOpen { get; private set; }
 
 		[STAThread]
-		static void Main()
+		static void Main(string[] args)
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
@@ -33,6 +34,7 @@ namespace Xyrus.Apophysis
 
 			SetupExceptionHandler();
 			LoadVariations();
+			ReadCommandLine(args);
 
 			mBanner.BannerText = Messages.InitializationLoadingGuiMessage;
 
@@ -137,6 +139,22 @@ namespace Xyrus.Apophysis
 			Application.ThreadException += OnThreadException;
 			AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
 #endif
+		}
+		static void ReadCommandLine(string[] args)
+		{
+			var batchPath = args.Length == 0 ? null : args[0];
+			if (batchPath == null)
+			{
+				BatchPathToOpen = null;
+				return;
+			}
+			
+			BatchPathToOpen = batchPath;
+
+			if (string.IsNullOrEmpty(Path.GetDirectoryName(batchPath)))
+			{
+				BatchPathToOpen = Path.Combine(Environment.CurrentDirectory, batchPath);
+			}
 		}
 
 		static void HandleException(Exception exception)

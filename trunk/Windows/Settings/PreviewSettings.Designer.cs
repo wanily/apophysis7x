@@ -181,7 +181,7 @@ namespace Xyrus.Apophysis.Settings {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.5")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public double FilterRadius {
             get {
                 return ((double)(this["FilterRadius"]));

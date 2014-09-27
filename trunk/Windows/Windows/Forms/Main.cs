@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Controllers;
 using Xyrus.Apophysis.Windows.Input;
@@ -153,7 +152,9 @@ namespace Xyrus.Apophysis.Windows.Forms
 				if (mCameraEditHandler.Flame != null)
 				{
 					mInputVisual.ImageSize = mCameraEditHandler.Flame.CanvasSize;
-					mGuidelinesVisual.ImageSize = mInputVisual.ImageSize;
+					mGuidelinesVisual.ImageSize = mCameraEditHandler.Flame.CanvasSize;
+					mBackgroundVisual.BackgroundSize = mCameraEditHandler.Flame.CanvasSize;
+					mBackgroundVisual.BackgroundColor = mCameraEditHandler.Flame.Background;
 				}
 
 				UpdateGuideColor();

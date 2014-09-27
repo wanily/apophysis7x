@@ -260,7 +260,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				? canvasSize
 				: mFlame.CanvasSize.FitToFrame(canvasSize);
 
-			View.PreviewPicture.BackColor = mFlame.Background;
+			View.PreviewPicture.BackColor = SystemColors.Control;
 			View.PreviewedFlame = null;
 
 			mThreader.Cancel();

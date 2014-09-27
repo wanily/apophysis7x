@@ -155,13 +155,14 @@ namespace Xyrus.Apophysis.Calculation
 		private void CalculateCamera()
 		{
 			var scale = System.Math.Pow(2, mRenderer.Flame.Zoom);
+			var ppu = mRenderer.Flame.PixelsPerUnit * mRenderer.Size.Width / mRenderer.Flame.CanvasSize.Width;
 
 			SampleDensity = mRenderer.Density * scale * scale;
 
 			PointsPerUnit = new[]
 			{
-				mRenderer.Flame.PixelsPerUnit*scale, 
-				mRenderer.Flame.PixelsPerUnit*scale
+				ppu*scale, 
+				ppu*scale
 			};
 
 			var corner = new[]
