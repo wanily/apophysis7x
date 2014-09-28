@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using System.Threading;
 using Xyrus.Apophysis.Strings;
-using Xyrus.Apophysis.Threading;
 using ThreadState = Xyrus.Apophysis.Threading.ThreadState;
 
 namespace Xyrus.Apophysis.Calculation
