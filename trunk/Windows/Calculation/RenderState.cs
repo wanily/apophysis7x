@@ -15,7 +15,9 @@ namespace Xyrus.Apophysis.Calculation
 		public TimeSpan ElapsedTime { get; set; }
 		public TimeSpan? RemainingTime { get; set; }
 
+		public long IterationCount { get; set; }
 		public long TotalIterations { get; set; }
+
 		public bool IsBusy { get; set; }
 	}
 }

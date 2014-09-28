@@ -19,6 +19,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		private Flame mFlame;
 		private int mPreviewDensity;
 		private bool mFitImage;
+		private double mLastBitmapProgress;
+		private double mNextBitmapProgress;
 
 		public MainPreviewController([NotNull] Main view, [NotNull] MainController parent) : base(view)
 		{
@@ -132,22 +134,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			if (View == null || !View.Visible)
 				return;
 
-
-			if (mIterationManager is IProgressive)
+			View.Invoke(new Action(() =>
 			{
-				View.Invoke(new Action(() =>
-				{
-					View.PreviewProgressBar.Visible = false;
-				}));
-			}
-			else
-			{
-				View.Invoke(new Action(() =>
-				{
-					View.PreviewProgressBar.Value = (int) (progress*100);
-					View.PreviewProgressBar.Visible = true;
-				}));
-			}
+				View.PreviewProgressBar.Value = (int)(progress * 100);
+			}));
 		}
 		private void SetElapsed(TimeSpan elapsed)
 		{
@@ -161,14 +151,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			if (View == null)
 				return;
 
-			if (mIterationManager is IProgressive)
-			{
-				View.Invoke(new Action(() => View.PreviewTimeRemainingLabel.Text = null));
-			}
-			else
-			{
-				View.Invoke(new Action(() => View.PreviewTimeRemainingLabel.Text = string.Format("Remaining: {0}", remaining == null ? "calculating..." : GetTimespanString(remaining.Value))));
-			}
+			var banner = mIterationManager is IProgressive ? "Remaining until next: {0}" : "Remaining: {0}";
+
+			View.Invoke(new Action(() => View.PreviewTimeRemainingLabel.Text = string.Format(banner, remaining == null ? "calculating..." : GetTimespanString(remaining.Value))));
 		}
 		private void SetBitmap(Bitmap bitmap)
 		{
@@ -239,6 +224,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		private void OnBitmapReady(object sender, BitmapReadyEventArgs args)
 		{
 			var bitmap = mRenderer.Histogram.CreateBitmap();
+
+			mLastBitmapProgress = mIterationManager.IterationProgress;
+			mNextBitmapProgress = args.NextIssue;
 			SetBitmap(bitmap);
 		}
 		private void OnRendererProgress(object sender, ProgressEventArgs args)
@@ -249,9 +237,18 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				if (progress == null)
 					return;
 
-				SetProgress(progress.IterationProgress);
+				if (sender is IProgressive)
+				{
+					SetProgress((progress.IterationProgress - mLastBitmapProgress)/(mNextBitmapProgress - mLastBitmapProgress));
+					SetRemaining(((IProgressive)sender).TimeUntilNextBitmap);
+				}
+				else
+				{
+					SetProgress(progress.IterationProgress);
+					SetRemaining(progress.RemainingTime);
+				}
+
 				SetElapsed(TimeSpan.FromSeconds(mElapsedTimer.GetElapsedTimeInSeconds()));
-				SetRemaining(progress.RemainingTime);
 			}
 			catch (ObjectDisposedException) { }
 		}
@@ -324,6 +321,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			mIterationManager.Cancel();
 			mElapsedTimer.SetStartingTime();
+			mLastBitmapProgress = 0;
 
 			if (mRenderer != null)
 			{
@@ -363,6 +361,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		public void ReloadSettings()
 		{
 			View.CameraEditUseScale = ApophysisSettings.Editor.CameraEditUseScale;
+			UpdatePreview();
 		}
 	}
 }

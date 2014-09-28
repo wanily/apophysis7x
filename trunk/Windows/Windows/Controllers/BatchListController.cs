@@ -7,7 +7,6 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Calculation;
-using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Threading;
 using Xyrus.Apophysis.Windows.Forms;
@@ -267,7 +266,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				return;
 
 			View.BatchListView.Items[index].Selected = true;
-			View.FlameNameLabel.Text = flame.CalculatedName;
 		}
 
 		private void RedrawIcon(ListViewItem item, ThreadStateToken threadState)

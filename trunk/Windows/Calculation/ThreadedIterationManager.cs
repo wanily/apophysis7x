@@ -40,6 +40,7 @@ namespace Xyrus.Apophysis.Calculation
 			TotalIterations = mRenderStates.Sum(x => x.TotalIterations);
 			TargetDensity = mRenderStates.Sum(x => x.TargetDensity);
 			CurrentDensity = mRenderStates.Sum(x => x.CurrentDensity);
+			IterationCount = mRenderStates.Sum(x => x.IterationCount);
 
 			UpdateState(this);
 		}
@@ -54,6 +55,7 @@ namespace Xyrus.Apophysis.Calculation
 			mRenderStates[threadIndex].TotalIterations = manager.TotalIterations;
 			mRenderStates[threadIndex].TargetDensity = manager.TargetDensity;
 			mRenderStates[threadIndex].CurrentDensity = manager.CurrentDensity;
+			mRenderStates[threadIndex].IterationCount = manager.IterationCount;
 		}
 
 		protected override void UpdateState(ProgressProvider manager)

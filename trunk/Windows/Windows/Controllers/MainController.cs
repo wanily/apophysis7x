@@ -219,7 +219,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mBatchListController.SelectFlame(mFlames.First());
 			mHasChanges = false;
 
-			View.LoadingStatusLabel.Text = mFlames.CalculatedName;
+			View.LoadingStatusLabel.Text = Application.ProductName;
 		}
 		
 		public void UpdatePreviews(bool withMainPreview = true)
@@ -264,7 +264,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			FlamePropertiesController.UndoController.CommitChange(flame);
 			FlamePropertiesController.RaiseFlameChanged();
 
-			View.LoadingStatusLabel.Text = mFlames.CalculatedName;
+			View.LoadingStatusLabel.Text = Application.ProductName;
 		}
 		private void OnCameraChanged(object sender, CameraChangedEventArgs e)
 		{
@@ -453,8 +453,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			mEditorController.Flame = flame;
 			mFlamePropertiesController.Flame = flame;
-			mRenderController.UpdateSelection();
 
+			View.FlameNameLabel.Text = flame.CalculatedName;
+
+			mRenderController.UpdateSelection();
 			mUndoController.Reset(flame);
 
 			UpdatePreviews();

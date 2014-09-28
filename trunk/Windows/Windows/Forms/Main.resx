@@ -1579,7 +1579,7 @@
     <value>False</value>
   </data>
   <data name="FlameNameLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 17</value>
+    <value>298, 17</value>
   </data>
   <data name="FlameNameLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>

@@ -24,6 +24,7 @@ namespace Xyrus.Apophysis.Calculation
 		}
 
 		public event BitmapReadyEventHandler BitmapReady;
+		public TimeSpan? TimeUntilNextBitmap { get; private set; }
 
 		private void OnStarted(object sender, StartedEventArgs args)
 		{
@@ -34,14 +35,14 @@ namespace Xyrus.Apophysis.Calculation
 			{
 				if (BitmapReady != null)
 				{
-					BitmapReady(this, new BitmapReadyEventArgs());
+					var progressAtNextDensity = mNextDensity * IterationProgress/CurrentDensity;
+					BitmapReady(this, new BitmapReadyEventArgs(progressAtNextDensity));
 				}
 			});
 		}
 		private void OnProgress(object sender, ProgressEventArgs args)
 		{
 			UpdateState(mInnerIterationManager);
-			RaiseProgress();
 
 			var currentDensity = mInnerIterationManager.CurrentDensity;
 			if (currentDensity >= mNextDensity)
@@ -57,17 +58,22 @@ namespace Xyrus.Apophysis.Calculation
 						mSeriesIndex = 0;
 					}
 
+					mNextDensity = mDensitySeries[mSeriesIndex] * System.Math.Pow(10, mLogDensity);
+
 					if (BitmapReady != null)
 					{
-						BitmapReady(this, new BitmapReadyEventArgs());
+						var progressAtNextDensity = mNextDensity * IterationProgress / CurrentDensity;
+						BitmapReady(this, new BitmapReadyEventArgs(progressAtNextDensity));
 					}
-
-					mNextDensity = mDensitySeries[mSeriesIndex] * System.Math.Pow(10, mLogDensity);
 
 					Resume();
 				}
-				
 			}
+
+			var iterationsOfNextBitmap = mNextDensity*TotalIterations/TargetDensity;
+			TimeUntilNextBitmap = IterationsPerSecond <= 0 ? (TimeSpan?)null : TimeSpan.FromSeconds((iterationsOfNextBitmap - IterationCount) /IterationsPerSecond);
+
+			RaiseProgress();
 		}
 		private void OnFinished(object sender, FinishedEventArgs args)
 		{
@@ -88,6 +94,7 @@ namespace Xyrus.Apophysis.Calculation
 
 		public override void StartIterate(Histogram histogram, double maxDensity)
 		{
+			TimeUntilNextBitmap = null;
 			mSeriesIndex = 0;
 			mLogDensity = 0;
 			mNextDensity = mDensitySeries.First();
@@ -95,6 +102,7 @@ namespace Xyrus.Apophysis.Calculation
 		}
 		public override void Iterate(Histogram histogram, double maxDensity)
 		{
+			TimeUntilNextBitmap = null;
 			mSeriesIndex = 0;
 			mLogDensity = 0;
 			mNextDensity = mDensitySeries.First();

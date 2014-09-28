@@ -81,6 +81,9 @@ namespace Xyrus.Apophysis
 
 			if (string.IsNullOrEmpty(pluginDir) || string.IsNullOrEmpty(pluginDir.Trim()))
 			{
+				if (!Directory.Exists(defaultPluginDir))
+					Directory.CreateDirectory(defaultPluginDir);
+
 				pluginDir = ApophysisSettings.Common.PluginDirectoryName = defaultPluginDir;
 			}
 

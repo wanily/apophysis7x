@@ -1,6 +1,5 @@
 using System;
 using System.Threading;
-using Xyrus.Apophysis.Threading;
 using ThreadState = Xyrus.Apophysis.Threading.ThreadState;
 
 namespace Xyrus.Apophysis.Calculation
@@ -44,6 +43,7 @@ namespace Xyrus.Apophysis.Calculation
 			IterationProgress = 0;
 			CurrentDensity = 0;
 			TargetDensity = density;
+			IterationCount = 0;
 
 			mStopWatch.SetStartingTime();
 			mTicker.SetStartingTime();
@@ -96,6 +96,7 @@ namespace Xyrus.Apophysis.Calculation
 
 				var ips = (iteration - mLastExcursion) / time;
 				IterationsPerSecond = ips;
+				IterationCount += (iteration - mLastExcursion);
 
 				if (AverageIterationsPerSecond <= 0)
 					AverageIterationsPerSecond = ips;

@@ -50,6 +50,11 @@ namespace Xyrus.Apophysis.Calculation
 			get { return mRenderState.Progress; }
 			protected set { mRenderState.Progress = value; }
 		}
+		public long IterationCount
+		{
+			get { return mRenderState.IterationCount; }
+			protected set { mRenderState.IterationCount = value; }
+		}
 
 		public TimeSpan? RemainingTime
 		{

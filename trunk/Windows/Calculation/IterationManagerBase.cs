@@ -26,6 +26,7 @@ namespace Xyrus.Apophysis.Calculation
 			TotalIterations = manager.TotalIterations;
 			TargetDensity = manager.TargetDensity;
 			CurrentDensity = manager.CurrentDensity;
+			IterationCount = manager.IterationCount;
 		}
 
 		public abstract void StartIterate([NotNull] Histogram histogram, double density);
