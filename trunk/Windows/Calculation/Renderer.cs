@@ -15,7 +15,6 @@ namespace Xyrus.Apophysis.Calculation
 		private RenderMessengerBase mMessenger;
 
 		private NativeTimer mProgressTicker;
-
 		private FlameData mData;
 
 		private long mSamplingLevel;
@@ -134,7 +133,5 @@ namespace Xyrus.Apophysis.Calculation
 			get; 
 			private set;
 		}
-
-
 	}
 }

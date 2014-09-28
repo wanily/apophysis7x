@@ -11,6 +11,6 @@ namespace Xyrus.Apophysis.Calculation
 			ThreadIndex = threadIndex;
 		}
 
-		public int ThreadIndex { get; set; }
+		public int ThreadIndex { get; private set; }
 	}
 }

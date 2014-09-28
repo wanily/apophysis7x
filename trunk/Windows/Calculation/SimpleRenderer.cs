@@ -5,7 +5,7 @@ using Xyrus.Apophysis.Threading;
 
 namespace Xyrus.Apophysis.Calculation
 {
-	[PublicAPI]
+	[PublicAPI, Obsolete]
 	public class SimpleRenderer : IDisposable
 	{
 		private Renderer mRenderer;

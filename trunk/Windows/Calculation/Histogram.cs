@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using Xyrus.Apophysis.Math;
+using Xyrus.Apophysis.Windows;
 using Rectangle = System.Drawing.Rectangle;
 
 namespace Xyrus.Apophysis.Calculation
@@ -27,6 +28,8 @@ namespace Xyrus.Apophysis.Calculation
 		private IntPtr mData;
 		private Renderer mRenderer;
 		private Size mSize;
+
+		private readonly object mLock = new object();
 
 		~Histogram()
 		{
@@ -175,17 +178,32 @@ namespace Xyrus.Apophysis.Calculation
 			if (untilDensity <= mDensity)
 				return;
 
-			if (mDensity <= 0)
+			bool firstBatch;
+			lock (mLock)
+			{
+				firstBatch = (mDensity <= 0);
+			}
+
+			if (firstBatch)
 			{
 				var length = (mRenderer.Data.BufferLength*untilDensity/(mRenderer.Oversample*mRenderer.Oversample));
+				var newDensity = Iterate(false, (long)length, progressManager) / length;
 
-				mDensity = Iterate(false, (long)length, progressManager) / length;
+				lock (mLock)
+				{
+					mDensity = newDensity;
+				}
+
 				return;
 			}
 
 			var increment = (mRenderer.Data.BufferLength * (untilDensity - mDensity) / (mRenderer.Oversample * mRenderer.Oversample));
+			var densityIncrement = Iterate(true, (long)increment , progressManager) / increment;
 
-			mDensity += Iterate(true, (long)increment , progressManager) / increment;
+			lock (mLock)
+			{
+				mDensity += densityIncrement;
+			}
 		}
 		public Bitmap CreateBitmap()
 		{

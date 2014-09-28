@@ -6,26 +6,20 @@ using ThreadState = Xyrus.Apophysis.Threading.ThreadState;
 namespace Xyrus.Apophysis.Calculation
 {
 	[PublicAPI]
-	public class ProgressManager
+	public class ProgressManager : ProgressProvider
 	{
 		private readonly NativeTimer mTicker = new NativeTimer();
 		private readonly NativeTimer mStopWatch = new NativeTimer();
 
 		private ThreadState mThreadState;
-
+		
 		private double? mLastSecondsPerIteration;
 		private long mLastExcursion;
-
-		private double mAverageIterationsPerSecond;
-		private double mPureRenderingTime;
-		private long mTotalIterations;
 
 		public ProgressManager(ThreadStateToken stateToken = null)
 		{
 			mThreadState = stateToken ?? new ThreadState();
 		}
-
-		public event ProgressEventHandler Progress;
 
 		[NotNull]
 		public ThreadState ThreadState
@@ -38,49 +32,39 @@ namespace Xyrus.Apophysis.Calculation
 			}
 		}
 
-		public long TotalIterations
-		{
-			get { return mTotalIterations; }
-		}
-		public double AverageIterationsPerSecond
-		{
-			get { return mAverageIterationsPerSecond; }
-		}
-		public double PureRenderingTime
-		{
-			get { return mPureRenderingTime; }
-		}
-
 		public void Reset(long iterations)
 		{
 			mLastExcursion = 0L;
 			mLastSecondsPerIteration = null;
-			mAverageIterationsPerSecond = 0;
-			mPureRenderingTime = 0;
-			mTotalIterations = iterations;
+
+			AverageIterationsPerSecond = 0;
+			PureRenderingTime = 0;
+			TotalIterations = iterations;
+			RemainingTime = null;
+			IterationProgress = 0;
 
 			mStopWatch.SetStartingTime();
 			mTicker.SetStartingTime();
 
-			if (Progress != null && !ThreadState.IsCancelling)
-			{
-				Progress(this, new ProgressEventArgs(0));
-			}
+			IsBusy = true;
+
+			RaiseStarted();
+			RaiseProgress();
 		}
 		public void Continue(long iterations)
 		{
-			mTotalIterations += iterations;
+			TotalIterations += iterations;
+
+			RemainingTime = TimeSpan.FromSeconds(mLastSecondsPerIteration.GetValueOrDefault() * (TotalIterations - mLastExcursion));
+			IterationProgress = TotalIterations == 0 ? 1 : (double)mLastExcursion / TotalIterations;
 
 			mStopWatch.SetStartingTime();
 			mTicker.SetStartingTime();
 
-			if (Progress != null && !ThreadState.IsCancelling)
-			{
-				var remaining = mLastSecondsPerIteration.GetValueOrDefault() * (TotalIterations - mLastExcursion);
-				var progress = TotalIterations == 0 ? 1 : (double)mLastExcursion / TotalIterations;
+			IsBusy = true;
 
-				Progress(this, new ProgressEventArgs(progress, TimeSpan.FromSeconds(remaining)));
-			}
+			RaiseStarted();
+			RaiseProgress();
 		}
 		public void Wait(ref long iteration)
 		{
@@ -90,22 +74,24 @@ namespace Xyrus.Apophysis.Calculation
 		public void CheckSendProgressEvent(long iteration)
 		{
 			var time = mTicker.GetElapsedTimeInSeconds();
-			if (time > 1)
+			if (time > ProgressThreshold)
 			{
 				mLastSecondsPerIteration = (time / (iteration - mLastExcursion));
 
 				var remaining = mLastSecondsPerIteration.Value * (TotalIterations - iteration);
 				var progress = TotalIterations == 0 ? 1 : (double)iteration / TotalIterations;
 
-				if (Progress != null)
-				{
-					Progress(this, new ProgressEventArgs(progress, TimeSpan.FromSeconds(remaining)));
-				}
+				IterationProgress = progress;
+				RemainingTime = TimeSpan.FromSeconds(remaining);
+
+				RaiseProgress();
 
 				var ips = (iteration - mLastExcursion) / time;
+				IterationsPerSecond = ips;
+
 				if (AverageIterationsPerSecond <= 0)
-					mAverageIterationsPerSecond = ips;
-				else mAverageIterationsPerSecond = (ips + AverageIterationsPerSecond) * 0.5;
+					AverageIterationsPerSecond = ips;
+				else AverageIterationsPerSecond = (ips + AverageIterationsPerSecond) * 0.5;
 
 				mTicker.SetStartingTime();
 				mLastExcursion = iteration;
@@ -113,12 +99,18 @@ namespace Xyrus.Apophysis.Calculation
 		}
 		public void FinalizeProcess()
 		{
-			mPureRenderingTime += mStopWatch.GetElapsedTimeInSeconds();
+			PureRenderingTime += mStopWatch.GetElapsedTimeInSeconds();
+			RemainingTime = TimeSpan.FromSeconds(0);
+			IterationProgress = 1;
 
-			if (Progress != null && !ThreadState.IsCancelling)
+			if (!ThreadState.IsCancelling)
 			{
-				Progress(this, new ProgressEventArgs(1, TimeSpan.FromSeconds(0)));
+				RaiseProgress();
 			}
+
+			IsBusy = false;
+
+			RaiseFinished(ThreadState.IsCancelling);
 		}
 	}
 }
