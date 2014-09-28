@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
@@ -164,17 +163,14 @@ namespace Xyrus.Apophysis.Calculation
 					continue;
 
 				if (color < 0) color = 0;
-				if (color > 1) color = 1;
+				else if (color > 1) color = 1;
 
 				var bufferLocation = new Point(
 					(int)(projection.X * mRenderer.Data.UnitToPixelFactor.X),
 					(int)(projection.Y * mRenderer.Data.UnitToPixelFactor.Y));
 				var mapColor = mRenderer.Data.ColorMap[(int)(color * mRenderer.Data.ColorMap.Length)];
 
-				lock (mLock)
-				{
-					Add(bufferLocation.X, bufferLocation.Y, mapColor);
-				}
+				Add(bufferLocation.X, bufferLocation.Y, mapColor);
 			}
 
 			progressManager.FinalizeProcess();
@@ -221,7 +217,6 @@ namespace Xyrus.Apophysis.Calculation
 			var getPointFunc = (mRenderer.Data.FilterSize > gutter/2) ? SafeGet : new Func<int, int, double[]>(Get);
 
 			var sampleDensity = System.Math.Max(0.001, mDensity*mRenderer.Data.TwoPowerZoom*mRenderer.Data.TwoPowerZoom);
-			Debug.Print(mDensity.ToString());
 
 			var precalcLogMap = new double[1024];
 
