@@ -271,6 +271,10 @@ namespace Xyrus.Apophysis.Calculation
 			vector = canvasProjection;
 			return true;
 		}
+		public void AdjustPixelsPerUnit(Size size)
+		{
+			AdjustedPixelsPerUnit = mFlame.PixelsPerUnit * size.Width / mFlame.CanvasSize.Width;
+		}
 
 		private void CalculateFilterKernel()
 		{
@@ -315,8 +319,38 @@ namespace Xyrus.Apophysis.Calculation
 		}
 		private void CalculateCamera()
 		{
+			if (AdjustedPixelsPerUnit <= 0)
+			{
+				AdjustPixelsPerUnit(mRenderer.Size);
+			}
+
+			UpdateCamera();
+		}
+		private void CalculateColorMap()
+		{
+			var colors = mFlame.Palette;
+			ColorMap = new double[colors.Length][];
+
+			for (int i = 0; i < colors.Length; i++)
+			{
+				ColorMap[i] = new double[3];
+				ColorMap[i][0] = (colors[i].R * mWhiteLevel) / 256.0;
+				ColorMap[i][1] = (colors[i].G * mWhiteLevel) / 256.0;
+				ColorMap[i][2] = (colors[i].B * mWhiteLevel) / 256.0;
+			}
+		}
+
+		private void PrepareIterators()
+		{
+			Iterators = mFlame.Iterators.Where(x => x.GroupIndex == 0).Select(x => new IteratorData(this, x)).ToArray();
+			Finals = mFlame.Iterators.Where(x => x.GroupIndex == 1).Select(x => new IteratorData(this, x)).ToArray();
+
+			foreach (var iterator in Iterators.Concat(Finals))
+				iterator.Initialize();
+		}
+		private void UpdateCamera()
+		{
 			TwoPowerZoom = System.Math.Pow(2, mFlame.Zoom);
-			AdjustedPixelsPerUnit = mFlame.PixelsPerUnit * mRenderer.Size.Width / mFlame.CanvasSize.Width;
 
 			PointsPerUnit = new Vector2
 			{
@@ -326,8 +360,8 @@ namespace Xyrus.Apophysis.Calculation
 
 			var corner = new Vector2
 			{
-				X = mFlame.Origin.X - mRenderer.Size.Width/PointsPerUnit.X/2.0,
-				Y = mFlame.Origin.Y - mRenderer.Size.Height/PointsPerUnit.Y/2.0
+				X = mFlame.Origin.X - mRenderer.Size.Width / PointsPerUnit.X / 2.0,
+				Y = mFlame.Origin.Y - mRenderer.Size.Height / PointsPerUnit.Y / 2.0
 			};
 
 			var t = new[]
@@ -339,15 +373,15 @@ namespace Xyrus.Apophysis.Calculation
 			};
 
 			CameraRectangle = new Rectangle(
-				corner - new Vector2(t[0], t[1]), 
+				corner - new Vector2(t[0], t[1]),
 				new Vector2(
-					mRenderer.Size.Width/PointsPerUnit.X + t[2] - t[0], 
-					mRenderer.Size.Height/PointsPerUnit.Y + t[3] - t[1]));
+					mRenderer.Size.Width / PointsPerUnit.X + t[2] - t[0],
+					mRenderer.Size.Height / PointsPerUnit.Y + t[3] - t[1]));
 
 			UnitToPixelFactor = new Vector2
 			{
-				X = (HistogramSize.Width - 0.5)*((System.Math.Abs(CameraRectangle.Size.X) > double.Epsilon) ? 1.0/CameraRectangle.Size.X : 1),
-				Y = (HistogramSize.Height - 0.5)*((System.Math.Abs(CameraRectangle.Size.Y) > double.Epsilon) ? 1.0/CameraRectangle.Size.Y : 1)
+				X = (HistogramSize.Width - 0.5) * ((System.Math.Abs(CameraRectangle.Size.X) > double.Epsilon) ? 1.0 / CameraRectangle.Size.X : 1),
+				Y = (HistogramSize.Height - 0.5) * ((System.Math.Abs(CameraRectangle.Size.Y) > double.Epsilon) ? 1.0 / CameraRectangle.Size.Y : 1)
 			};
 
 			SinAngle = System.Math.Sin(mFlame.Angle);
@@ -381,29 +415,7 @@ namespace Xyrus.Apophysis.Calculation
 				}
 			};
 
-			DofCoeff = 0.1*mFlame.DepthOfField;
-		}
-		private void CalculateColorMap()
-		{
-			var colors = mFlame.Palette;
-			ColorMap = new double[colors.Length][];
-
-			for (int i = 0; i < colors.Length; i++)
-			{
-				ColorMap[i] = new double[3];
-				ColorMap[i][0] = (colors[i].R * mWhiteLevel) / 256.0;
-				ColorMap[i][1] = (colors[i].G * mWhiteLevel) / 256.0;
-				ColorMap[i][2] = (colors[i].B * mWhiteLevel) / 256.0;
-			}
-		}
-
-		private void PrepareIterators()
-		{
-			Iterators = mFlame.Iterators.Where(x => x.GroupIndex == 0).Select(x => new IteratorData(this, x)).ToArray();
-			Finals = mFlame.Iterators.Where(x => x.GroupIndex == 1).Select(x => new IteratorData(this, x)).ToArray();
-
-			foreach (var iterator in Iterators.Concat(Finals))
-				iterator.Initialize();
+			DofCoeff = 0.1 * mFlame.DepthOfField;
 		}
 
 		private void Project3DWithPitchYawDof(ref Vector3 vector, Random random)

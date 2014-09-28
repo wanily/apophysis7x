@@ -62,6 +62,11 @@ namespace Xyrus.Apophysis.Calculation
 				Transparent = WithTransparency
 			};
 		}
+		public void AdjustPixelsPerUnit(Size size)
+		{
+			Data.AdjustPixelsPerUnit(size);
+		}
+
 		public void Dispose()
 		{
 			Dispose(true);

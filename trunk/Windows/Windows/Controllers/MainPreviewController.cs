@@ -283,6 +283,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			}
 
 			mRenderer = new Renderer(mFlame, renderSize, ApophysisSettings.Preview.Oversample, ApophysisSettings.Preview.FilterRadius);
+
+			if (FitImage)
+			{
+				mRenderer.AdjustPixelsPerUnit(mFlame.CanvasSize.FitToFrame(canvasSize));
+			}
+
 			mRenderer.Initialize();
 
 			UpdateThreadCount();
