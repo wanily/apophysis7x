@@ -129,6 +129,13 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			ApophysisSettings.Editor.CameraEditMode = View.CameraEditMode;
 		}
 
+		private void SetSpeed(double? speed)
+		{
+			if (View == null)
+				return;
+
+			View.Invoke(new Action(() => View.IterationsPerSecondLabel.Text = speed.HasValue ? string.Format("{0:###,###,###,##0.00} i/s", speed) : null));
+		}
 		private void SetProgress(double progress)
 		{
 			if (View == null || !View.Visible)
@@ -248,6 +255,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 					SetRemaining(progress.RemainingTime);
 				}
 
+				SetSpeed(mIterationManager.IterationsPerSecond <= 0 ? (double?)null : mIterationManager.IterationsPerSecond);
 				SetElapsed(TimeSpan.FromSeconds(mElapsedTimer.GetElapsedTimeInSeconds()));
 			}
 			catch (ObjectDisposedException) { }
@@ -262,6 +270,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 					SetBitmap(bitmap);
 				}
 
+				SetSpeed(null);
 				SetProgress(0);
 				SetElapsed(TimeSpan.FromSeconds(mElapsedTimer.GetElapsedTimeInSeconds()));
 				SetRemaining(TimeSpan.FromSeconds(0));

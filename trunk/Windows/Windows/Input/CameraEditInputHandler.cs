@@ -233,7 +233,7 @@ namespace Xyrus.Apophysis.Windows.Input
 
 						Debug.Print("{0} | {1}", outerRectangle, size);
 
-						mData.Origin = new Vector2(mDragOrigin.X + cos * x - sin * y, mDragOrigin.Y + sin * x + cos * y);
+						mData.Origin = new Vector2(mDragOrigin.X - cos * x + sin * y, mDragOrigin.Y - sin * x - cos * y);
 
 						if (UseScale)
 						{
@@ -260,7 +260,7 @@ namespace Xyrus.Apophysis.Windows.Input
 						var x = ((outerRectangle.Left + outerRectangle.Right) / 2.0 - size.Width / 2.0) / newppu;
 						var y = ((outerRectangle.Top + outerRectangle.Bottom) / 2.0 - size.Height / 2.0) / newppu;
 
-						mData.Origin = new Vector2(mDragOrigin.X - cos * x + sin * y, mDragOrigin.Y - sin * x - cos * y);
+						mData.Origin = new Vector2(mDragOrigin.X + cos * x - sin * y, mDragOrigin.Y + sin * x + cos * y);
 					}
 
 					mInputVisual.Operation = new ZoomOperation(UseScale ? mDragScale : mDragZoom, UseScale ? mData.Scale : mData.Zoom, innerRectangle, outerRectangle, UseScale);

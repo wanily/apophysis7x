@@ -111,6 +111,7 @@
 			this.PreviewTimeRemainingLabel = new System.Windows.Forms.ToolStripStatusLabel();
 			this.FlameNameLabel = new System.Windows.Forms.ToolStripStatusLabel();
 			this.PreviewProgressBar = new System.Windows.Forms.ToolStripProgressBar();
+			this.IterationsPerSecondLabel = new System.Windows.Forms.ToolStripStatusLabel();
 			this.mMainMenu.SuspendLayout();
 			this.ToolBar.SuspendLayout();
 			this.ClientPanel.SuspendLayout();
@@ -720,6 +721,7 @@
             this.PreviewTimeElapsedLabel,
             this.PreviewTimeRemainingLabel,
             this.FlameNameLabel,
+            this.IterationsPerSecondLabel,
             this.PreviewProgressBar});
 			resources.ApplyResources(this.StatusBar, "StatusBar");
 			this.StatusBar.Name = "StatusBar";
@@ -755,6 +757,11 @@
 			// 
 			this.PreviewProgressBar.Name = "PreviewProgressBar";
 			resources.ApplyResources(this.PreviewProgressBar, "PreviewProgressBar");
+			// 
+			// IterationsPerSecondLabel
+			// 
+			resources.ApplyResources(this.IterationsPerSecondLabel, "IterationsPerSecondLabel");
+			this.IterationsPerSecondLabel.Name = "IterationsPerSecondLabel";
 			// 
 			// Main
 			// 
@@ -881,5 +888,6 @@
 		public System.Windows.Forms.ToolStripButton ToggleFitPreviewImage;
 		public System.Windows.Forms.ToolStripMenuItem MessagesMenuItem;
 		public System.Windows.Forms.ToolStripButton MessagesButton;
+		public System.Windows.Forms.ToolStripStatusLabel IterationsPerSecondLabel;
 	}
 }

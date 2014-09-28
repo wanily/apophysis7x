@@ -1579,10 +1579,19 @@
     <value>False</value>
   </data>
   <data name="FlameNameLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>298, 17</value>
+    <value>148, 17</value>
   </data>
   <data name="FlameNameLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
+  </data>
+  <data name="IterationsPerSecondLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="IterationsPerSecondLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 17</value>
+  </data>
+  <data name="IterationsPerSecondLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
   </data>
   <data name="PreviewProgressBar.Size" type="System.Drawing.Size, System.Drawing">
     <value>200, 16</value>
@@ -3420,6 +3429,12 @@
   </data>
   <data name="&gt;&gt;PreviewProgressBar.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripProgressBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IterationsPerSecondLabel.Name" xml:space="preserve">
+    <value>IterationsPerSecondLabel</value>
+  </data>
+  <data name="&gt;&gt;IterationsPerSecondLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>Main</value>
