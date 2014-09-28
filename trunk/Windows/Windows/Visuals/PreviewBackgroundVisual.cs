@@ -6,6 +6,9 @@ namespace Xyrus.Apophysis.Windows.Visuals
 	class PreviewBackgroundVisual : ControlVisual<PictureBox>
 	{
 		private bool mShowTransparency;
+		private bool mFitImage;
+		private Size mBackgroundSize;
+		private Color mBackgroundColor;
 
 		public PreviewBackgroundVisual([NotNull] PictureBox control)
 			: base(control)
@@ -21,9 +24,34 @@ namespace Xyrus.Apophysis.Windows.Visuals
 				InvalidateControl();
 			}
 		}
+		public bool FitImage
+		{
+			get { return mFitImage; }
+			set
+			{
+				mFitImage = value;
+				InvalidateControl();
+			}
+		}
 
-		public Size BackgroundSize { get; set; }
-		public Color BackgroundColor { get; set; }
+		public Size BackgroundSize
+		{
+			get { return mBackgroundSize; }
+			set
+			{
+				mBackgroundSize = value;
+				InvalidateControl();
+			}
+		}
+		public Color BackgroundColor
+		{
+			get { return mBackgroundColor; }
+			set
+			{
+				mBackgroundColor = value;
+				InvalidateControl();
+			}
+		}
 
 		protected override void RegisterEvents(PictureBox control)
 		{
@@ -34,7 +62,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 
 		protected override void OnControlPaint(Graphics graphics)
 		{
-			var size = (BackgroundSize.Width <= 0 || BackgroundSize.Height <= 0) ? AttachedControl.ClientSize : BackgroundSize.FitToFrame(AttachedControl.ClientSize);
+			var size = (BackgroundSize.Width <= 0 || BackgroundSize.Height <= 0 || FitImage) ? AttachedControl.ClientSize : BackgroundSize.FitToFrame(AttachedControl.ClientSize);
 			var offset = new Point(AttachedControl.ClientSize.Width / 2 - size.Width / 2, AttachedControl.ClientSize.Height / 2 - size.Height / 2);
 
 			using (var brush = new SolidBrush(AttachedControl.BackColor))

@@ -11,7 +11,6 @@ using Xyrus.Apophysis.Calculation;
 using Xyrus.Apophysis.Messaging;
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Strings;
-using Xyrus.Apophysis.Threading;
 using Xyrus.Apophysis.Windows.Controls;
 using Xyrus.Apophysis.Windows.Forms;
 using Messages = Xyrus.Apophysis.Strings.Messages;
@@ -23,7 +22,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 	{
 		private int mCounter;
 		private NativeTimer mElapsedTimer;
-		private SimpleRenderer mThreader;
+		private IterationManagerBase mIterationManager;
 		private Stack<Flame> mRenderStack;
 		private Renderer mRenderer;
 
@@ -55,21 +54,20 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			if (parent == null) throw new ArgumentNullException("parent");
 
 			mParent = parent;
-			mThreader = new SimpleRenderer();
+			mIterationManager = new ThreadedIterationManager();
 			mRenderStack = new Stack<Flame>();
 			mElapsedTimer = new NativeTimer();
 
-			mThreader.InvokeCallbackMode = InvokeCallbackMode.AfterReset;
 			mMessenger = new RenderMessenger();
 		}
 		protected override void DisposeOverride(bool disposing)
 		{
 			if (disposing)
 			{
-				if (mThreader != null)
+				if (mRenderer != null)
 				{
-					mThreader.Dispose();
-					mThreader = null;
+					mRenderer.Dispose();
+					mRenderer = null;
 				}
 
 				if (mRenderStack != null)
@@ -82,6 +80,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mParent = null;
 			mElapsedTimer = null;
 			mMessenger = null;
+			mIterationManager = null;
 		}
 
 		protected override void AttachView()
@@ -132,8 +131,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mFormat = ApophysisSettings.Render.DestinationFormat;
 			mThreadCount = ApophysisSettings.Render.ThreadCount;
 
-			mThreader.Progress += OnProgress;
-			mThreader.Exit += OnRenderExit;
+			mIterationManager.Progress += OnProgress;
+			mIterationManager.Finished += OnRenderExit;
 			mMessenger.Message += OnMessage;
 		}
 		protected override void DetachView()
@@ -176,8 +175,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			ApophysisSettings.Render.DestinationFormat = mFormat;
 			ApophysisSettings.Render.ThreadCount = mThreadCount;
 
-			mThreader.Progress -= OnProgress;
-			mThreader.Exit -= OnRenderExit;
+			mIterationManager.Progress -= OnProgress;
+			mIterationManager.Finished -= OnRenderExit;
 			mMessenger.Message -= OnMessage;
 
 			Cleanup();
@@ -277,8 +276,14 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				View.MessagesTextBox.SelectionStart = View.MessagesTextBox.Text.Length;
 			}));
 		}
-		private void OnRenderExit(object sender, EventArgs e)
+		private void OnRenderExit(object sender, FinishedEventArgs e)
 		{
+			if (!e.Cancelled)
+			{
+				var bitmap = mRenderer.Histogram.CreateBitmap();
+				SaveBitmap(bitmap);
+			}
+
 			View.Invoke(new Action(() => { View.MessagesTextBox.Text += Environment.NewLine; }));
 		}
 
@@ -333,11 +338,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			if (IsPaused)
 			{
-				mThreader.Suspend();
+				mIterationManager.Suspend();
 			}
 			else
 			{
-				mThreader.Resume();
+				mIterationManager.Resume();
 			}
 		}
 		private void OnCancelClick(object sender, EventArgs e)
@@ -354,7 +359,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 						return;
 				}
 
-				mThreader.Cancel();
+				mIterationManager.Cancel();
 
 				IsRendering = false;
 				CurrentlyRenderingFlame = null;
@@ -594,9 +599,15 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				flame, mCurrentSize, mCurrentOversample,
 				mCurrentFilterRadius, mFormat == TargetImageFileFormat.Png && ApophysisSettings.Common.EnablePngTransparency);
 			mRenderer.Messenger = mMessenger;
+			mRenderer.Initialize();
 
-			mThreader.SetThreadCount(mThreadCount);
-			mThreader.StartCreateBitmap(mCurrentDensity, mRenderer, SaveBitmap);
+			var threaded = mIterationManager as ThreadedIterationManager;
+			if (threaded != null)
+			{
+				threaded.SetThreadCount(mThreadCount);
+			}
+
+			mIterationManager.StartIterate(mRenderer.Histogram, mCurrentDensity);
 		}
 		private void SaveBitmap(Bitmap bitmap)
 		{

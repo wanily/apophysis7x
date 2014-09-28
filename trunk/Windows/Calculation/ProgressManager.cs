@@ -16,7 +16,7 @@ namespace Xyrus.Apophysis.Calculation
 		private double? mLastSecondsPerIteration;
 		private long mLastExcursion;
 
-		public ProgressManager(ThreadStateToken stateToken = null)
+		public ProgressManager(ThreadState stateToken = null)
 		{
 			mThreadState = stateToken ?? new ThreadState();
 		}

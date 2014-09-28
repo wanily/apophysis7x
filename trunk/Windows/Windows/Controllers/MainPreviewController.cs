@@ -11,7 +11,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 	class MainPreviewController : Controller<Main>
 	{
 		private NativeTimer mElapsedTimer;
-		private SimpleRenderer mThreader;
+		private IterationManagerBase mIterationManager;
 		private Renderer mRenderer;
 		private TimeLock mPreviewTimeLock;
 		private MainController mParent;
@@ -30,17 +30,17 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				Delay = 250
 			};
 
-			mThreader = new SimpleRenderer();
+			mIterationManager = new ThreadedIterationManager();
 			mElapsedTimer = new NativeTimer();
 		}
 		protected override void DisposeOverride(bool disposing)
 		{
 			if (disposing)
 			{
-				if (mThreader != null)
+				if (mRenderer != null)
 				{
-					mThreader.Dispose();
-					mThreader = null;
+					mRenderer.Dispose();
+					mRenderer = null;
 				}
 
 				if (mPreviewTimeLock != null)
@@ -58,6 +58,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			mParent = null;
 			mElapsedTimer = null;
+			mIterationManager = null;
 		}
 
 		protected override void AttachView()
@@ -76,14 +77,16 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mParent.FlamePropertiesController.FlameChanged += OnChangeCommitted;
 			View.CameraChanged += OnCameraChanged;
 
-			mThreader.Progress += OnRendererProgress;
-			mThreader.Exit += OnRendererExit;
+			mIterationManager.Progress += OnRendererProgress;
+			mIterationManager.Finished += OnRendererFinished;
 
 			using (mParent.Initializer.Enter())
 			{
 				PreviewDensity = (int)ApophysisSettings.Preview.MainPreviewDensity;
 				FitImage = ApophysisSettings.View.FitMainPreviewImage;
 			}
+
+			UpdateThreadCount();
 		}
 		protected override void DetachView()
 		{
@@ -97,8 +100,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			View.PreviewPicture.Image = null;
 
-			mThreader.Progress -= OnRendererProgress;
-			mThreader.Exit -= OnRendererExit;
+			mIterationManager.Progress -= OnRendererProgress;
+			mIterationManager.Finished -= OnRendererFinished;
 
 			ApophysisSettings.Preview.MainPreviewDensity = PreviewDensity;
 			ApophysisSettings.View.ShowGuidelines = View.ShowGuidelines;
@@ -128,6 +131,25 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			View.Invoke(new Action(() => View.PreviewTimeRemainingLabel.Text = string.Format("Remaining: {0}", remaining == null ? "calculating..." : GetTimespanString(remaining.Value))));
 		}
+		private void SetBitmap(Bitmap bitmap)
+		{
+			if (bitmap == null || View == null)
+				return;
+
+			View.Invoke(new Action(() =>
+			{
+				var oldOutput = mBitmap;
+
+				View.PreviewedFlame = mFlame;
+				View.PreviewImage = mBitmap = bitmap;
+
+				if (oldOutput != null)
+				{
+					oldOutput.Dispose();
+				}
+			}));
+		}
+
 		private string GetTimespanString(TimeSpan time)
 		{
 			return string.Format("{0}:{1}:{2}",
@@ -169,24 +191,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			UpdatePreview();
 		}
-		private void OnRendererFinished(Bitmap bitmap)
-		{
-			if (bitmap == null || View == null)
-				return;
-
-			View.Invoke(new Action(() =>
-			{
-				var oldOutput = mBitmap;
-
-				View.PreviewedFlame = mFlame;
-				View.PreviewImage = mBitmap = bitmap;
-
-				if (oldOutput != null)
-				{
-					oldOutput.Dispose();
-				}
-			}));
-		}
+		
 		private void OnChangeCommitted(object sender, EventArgs e)
 		{
 			UpdatePreview();
@@ -202,10 +207,16 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			}
 			catch (ObjectDisposedException) { }
 		}
-		private void OnRendererExit(object sender, EventArgs e)
+		private void OnRendererFinished(object sender, FinishedEventArgs e)
 		{
 			try
 			{
+				if (!e.Cancelled)
+				{
+					var bitmap = mRenderer.Histogram.CreateBitmap();
+					SetBitmap(bitmap);
+				}
+
 				SetProgress(0);
 				SetElapsed(TimeSpan.FromSeconds(mElapsedTimer.GetElapsedTimeInSeconds()));
 				SetRemaining(TimeSpan.FromSeconds(0));
@@ -263,8 +274,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.PreviewPicture.BackColor = SystemColors.Control;
 			View.PreviewedFlame = null;
 
-			mThreader.Cancel();
-
+			mIterationManager.Cancel();
 			mElapsedTimer.SetStartingTime();
 
 			if (mRenderer != null)
@@ -273,13 +283,24 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			}
 
 			mRenderer = new Renderer(mFlame, renderSize, ApophysisSettings.Preview.Oversample, ApophysisSettings.Preview.FilterRadius);
+			mRenderer.Initialize();
 
-			mThreader.SetThreadCount(ApophysisSettings.Preview.ThreadCount);
-			mThreader.StartCreateBitmap(density, mRenderer, OnRendererFinished);
+			UpdateThreadCount();
+			mIterationManager.StartIterate(mRenderer.Histogram, density);
 		}
+		public void UpdateThreadCount()
+		{
+			var threaded = mIterationManager as ThreadedIterationManager;
+			if (threaded != null)
+			{
+				threaded.SetThreadCount(ApophysisSettings.Preview.ThreadCount);
+			}
+		}
+
 		public void ReloadSettings()
 		{
 			View.CameraEditUseScale = ApophysisSettings.Editor.CameraEditUseScale;
+			UpdateThreadCount();
 		}
 	}
 }

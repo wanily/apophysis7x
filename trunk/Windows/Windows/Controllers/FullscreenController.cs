@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using Xyrus.Apophysis.Calculation;
+using Xyrus.Apophysis.Threading;
 using Xyrus.Apophysis.Windows.Forms;
 
 namespace Xyrus.Apophysis.Windows.Controllers
@@ -11,8 +12,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		private readonly Lock mHiding;
 
 		private Renderer mRenderer;
+		private IterationManagerBase mIterationManager;
 		private NativeTimer mElapsedTimer;
-		private SimpleRenderer mThreader;
+
 		private MainController mParent;
 		private Bitmap mBitmap;
 
@@ -22,7 +24,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			mParent = parent;
 
-			mThreader = new SimpleRenderer();
+			mIterationManager = new ThreadedIterationManager();
 			mElapsedTimer = new NativeTimer();
 			mHiding = new Lock();
 		}
@@ -30,10 +32,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			if (disposing)
 			{
-				if (mThreader != null)
+				if (mRenderer != null)
 				{
-					mThreader.Dispose();
-					mThreader = null;
+					mRenderer.Dispose();
+					mRenderer = null;
 				}
 
 				if (mBitmap != null)
@@ -45,55 +47,27 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			mParent = null;
 			mElapsedTimer = null;
+			mIterationManager = null;
 		}
 
 		protected override void AttachView()
 		{
-			mThreader.Progress += OnRendererProgress;
-			mThreader.Exit += OnRendererExit;
+			mIterationManager.Progress += OnRendererProgress;
+			mIterationManager.Finished += OnRendererFinished;
 
 			View.Hidden += OnHidden;
+
+			UpdateThreadCount();
 		}
 		protected override void DetachView()
 		{
-			mThreader.Progress -= OnRendererProgress;
-			mThreader.Exit -= OnRendererExit;
+			mIterationManager.Progress -= OnRendererProgress;
+			mIterationManager.Finished -= OnRendererFinished;
 
 			View.Hidden -= OnHidden;
 		}
 
-		private void SetIsInProgress(bool isInProgress)
-		{
-			View.Invoke(new Action(() => View.IsInProgress = isInProgress));
-		}
-		private void SetProgress(double progress)
-		{
-			View.Invoke(new Action(() => View.Progress = (int)(progress * 100)));
-		}
-		private void SetElapsed(TimeSpan elapsed)
-		{
-			View.Invoke(new Action(() => View.TimeElapsed = string.Format("Elapsed: {0}", GetTimespanString(elapsed))));
-		}
-		private void SetRemaining(TimeSpan? remaining)
-		{
-			View.Invoke(new Action(() => View.TimeRemaining = string.Format("Remaining: {0}", remaining == null ? "calculating..." : GetTimespanString(remaining.Value))));
-		}
-		private string GetTimespanString(TimeSpan time)
-		{
-			return string.Format("{0}:{1}:{2}",
-				time.Hours.ToString("#0", InputController.Culture).PadLeft(2, '0'),
-				time.Minutes.ToString("#0", InputController.Culture).PadLeft(2, '0'),
-				time.Seconds.ToString("#0", InputController.Culture).PadLeft(2, '0'));
-		}
-
-		private void OnHidden(object sender, EventArgs e)
-		{
-			using (mHiding.Enter())
-			{
-				mThreader.Cancel();
-			}
-		}
-		private void OnRendererFinished(Bitmap bitmap)
+		private void SetBitmap(Bitmap bitmap)
 		{
 			if (bitmap == null)
 				return;
@@ -118,14 +92,52 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				}
 			}));
 		}
+		private void SetIsInProgress(bool isInProgress)
+		{
+			View.Invoke(new Action(() => View.IsInProgress = isInProgress));
+		}
+		private void SetProgress(double progress)
+		{
+			View.Invoke(new Action(() => View.Progress = (int)(progress * 100)));
+		}
+		private void SetElapsed(TimeSpan elapsed)
+		{
+			View.Invoke(new Action(() => View.TimeElapsed = string.Format("Elapsed: {0}", GetTimespanString(elapsed))));
+		}
+		private void SetRemaining(TimeSpan? remaining)
+		{
+			View.Invoke(new Action(() => View.TimeRemaining = string.Format("Remaining: {0}", remaining == null ? "calculating..." : GetTimespanString(remaining.Value))));
+		}
+
+		private string GetTimespanString(TimeSpan time)
+		{
+			return string.Format("{0}:{1}:{2}",
+				time.Hours.ToString("#0", InputController.Culture).PadLeft(2, '0'),
+				time.Minutes.ToString("#0", InputController.Culture).PadLeft(2, '0'),
+				time.Seconds.ToString("#0", InputController.Culture).PadLeft(2, '0'));
+		}
+
+		private void OnHidden(object sender, EventArgs e)
+		{
+			using (mHiding.Enter())
+			{
+				mIterationManager.Cancel();
+			}
+		}
 		private void OnRendererProgress(object sender, ProgressEventArgs args)
 		{
 			SetProgress(args.Progress);
 			SetElapsed(TimeSpan.FromSeconds(mElapsedTimer.GetElapsedTimeInSeconds()));
 			SetRemaining(args.TimeRemaining);
 		}
-		private void OnRendererExit(object sender, EventArgs e)
+		private void OnRendererFinished(object sender, FinishedEventArgs e)
 		{
+			if (!e.Cancelled)
+			{
+				var bitmap = mRenderer.Histogram.CreateBitmap();
+				SetBitmap(bitmap);
+			}
+
 			mRenderer.Dispose();
 			if (mHiding.IsBusy)
 				return;
@@ -150,15 +162,23 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			View.BackgroundImage = WaitImageController.DrawWaitImage(renderSize, Color.Black, Color.White);
 
-			mThreader.Cancel();
-
+			mIterationManager.Cancel();
 			mElapsedTimer.SetStartingTime();
 
 			mRenderer = new Renderer(flame, renderSize, ApophysisSettings.Preview.Oversample, ApophysisSettings.Preview.FilterRadius);
+			mRenderer.Initialize();
 
-			mThreader.SetThreadCount(ApophysisSettings.Preview.ThreadCount);
-			mThreader.StartCreateBitmap(density, mRenderer, OnRendererFinished);
+			UpdateThreadCount();
+			mIterationManager.StartIterate(mRenderer.Histogram, density);
 			SetIsInProgress(true);
+		}
+		public void UpdateThreadCount()
+		{
+			var threaded = mIterationManager as ThreadedIterationManager;
+			if (threaded != null)
+			{
+				threaded.SetThreadCount(ApophysisSettings.Preview.ThreadCount);
+			}
 		}
 	}
 }

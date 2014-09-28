@@ -1,49 +1,31 @@
 using System;
 using System.Linq;
 using System.Threading;
+using Xyrus.Apophysis.Strings;
 using Xyrus.Apophysis.Threading;
+using ThreadState = Xyrus.Apophysis.Threading.ThreadState;
 
 namespace Xyrus.Apophysis.Calculation
 {
 	[PublicAPI]
-	public class ThreadedIterationManager : ProgressProvider
+	public class ThreadedIterationManager : IterationManagerBase
 	{
 		private readonly NativeTimer mTicker;
-		private readonly Histogram mHistogram;
 
 		private bool mCanProgress;
-		private readonly int mThreadCount;
+		private int mThreadCount;
 
-		private readonly ThreadStartedEventHandler[] mThreadStartedHandler;
-		private readonly ThreadProgressEventHandler[] mThreadProgressHandler;
-		private readonly ThreadFinishedEventHandler[] mThreadFinishedHandler;
-		private readonly RenderState[] mRenderStates;
+		private ThreadStartedEventHandler[] mThreadStartedHandler;
+		private ThreadProgressEventHandler[] mThreadProgressHandler;
+		private ThreadFinishedEventHandler[] mThreadFinishedHandler;
+		private RenderState[] mRenderStates;
 
 		private readonly object mLock = new object();
 
-		public ThreadedIterationManager([NotNull] Histogram histogram, int threadCount)
+		public ThreadedIterationManager()
 		{
-			if (histogram == null) throw new ArgumentNullException(@"histogram");
-			if (threadCount <= 0) throw new ArgumentOutOfRangeException(@"threadCount");
-
-			mHistogram = histogram;
-			mThreadCount = threadCount;
-
-			mThreadStartedHandler = new ThreadStartedEventHandler[mThreadCount];
-			mThreadProgressHandler = new ThreadProgressEventHandler[mThreadCount];
-			mThreadFinishedHandler = new ThreadFinishedEventHandler[mThreadCount];
-			mRenderStates = new RenderState[mThreadCount];
-
 			mTicker = new NativeTimer();
-
-			for (int i = 0; i < mThreadCount; i++)
-			{
-				mThreadStartedHandler[i] = (o, e) => OnThreadStarted((ProgressManager) o, e);
-				mThreadProgressHandler[i] = (o, e) => OnThreadProgress((ProgressManager)o, e);
-				mThreadFinishedHandler[i] = (o, e) => OnThreadFinished((ProgressManager)o, e);
-
-				mRenderStates[i] = new RenderState();
-			}
+			SetThreadCount(null);
 		}
 
 		private void UpdateState()
@@ -125,20 +107,64 @@ namespace Xyrus.Apophysis.Calculation
 			}
 		}
 
-		public void StartIterate(double density, ThreadStateToken token = null)
+		public void SetThreadCount(int? threadCount)
 		{
+			if (threadCount.HasValue && threadCount.Value <= 0) throw new ArgumentOutOfRangeException(@"threadCount");
+
+			if (IsBusy)
+			{
+				throw new InvalidOperationException(Messages.AttemptedThreadCountChangeWhileRendererBusyErrorMessage);
+			}
+
+			var defaultCount = System.Math.Max(1, Environment.ProcessorCount - 1);
+
+			mThreadCount = threadCount.GetValueOrDefault(defaultCount);
+			mThreadStartedHandler = new ThreadStartedEventHandler[mThreadCount];
+			mThreadProgressHandler = new ThreadProgressEventHandler[mThreadCount];
+			mThreadFinishedHandler = new ThreadFinishedEventHandler[mThreadCount];
+			mRenderStates = new RenderState[mThreadCount];
+
+			for (int i = 0; i < mThreadCount; i++)
+			{
+				mThreadStartedHandler[i] = (o, e) => OnThreadStarted((ProgressManager)o, e);
+				mThreadProgressHandler[i] = (o, e) => OnThreadProgress((ProgressManager)o, e);
+				mThreadFinishedHandler[i] = (o, e) => OnThreadFinished((ProgressManager)o, e);
+
+				mRenderStates[i] = new RenderState();
+			}
+		}
+
+		public override void StartIterate(Histogram histogram, double density)
+		{
+			if (histogram == null) throw new ArgumentNullException("histogram");
+
 			mCanProgress = false;
+			StateReset();
 
 			var threadDensity = System.Math.Ceiling(density / mThreadCount);
 			for (int i = 0; i < mThreadCount; i++)
 			{
-				StartIterate(i, threadDensity, token);
+				ThreadStartIterate(histogram, i, threadDensity, new IterationThreadStateToken(this));
 			}
 		}
-		private void StartIterate(int threadIndex, double threadDensity, ThreadStateToken token)
+		public override void Iterate(Histogram histogram, double density)
+		{
+			if (histogram == null) throw new ArgumentNullException("histogram");
+
+			StartIterate(histogram, density);
+
+			while (!IsBusy)
+			{
+				Thread.Sleep(10);
+			}
+
+			Wait();
+		}
+
+		private void ThreadStartIterate([NotNull] Histogram histogram, int threadIndex, double threadDensity, ThreadState token)
 		{
 			var progress = new ProgressManager(token);
-			var thread = new Thread(() => mHistogram.Iterate(threadDensity, progress));
+			var thread = new Thread(() => histogram.Iterate(threadDensity, progress));
 
 			progress.Started += (o, e) => mThreadStartedHandler[threadIndex](o, new ThreadStartedEventArgs(threadIndex));
 			progress.Progress += (o, e) => mThreadProgressHandler[threadIndex](o, new ThreadProgressEventArgs(threadIndex, e.Progress, e.TimeRemaining));

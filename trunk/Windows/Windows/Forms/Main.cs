@@ -138,6 +138,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			get { return mInputVisual.FitFrame; }
 			set
 			{
+				mBackgroundVisual.FitImage = value;
 				mInputVisual.FitFrame = value;
 			}
 		}

@@ -69,6 +69,9 @@
     <Compile Include="Calculation\ExternalVariation.cs" />
     <Compile Include="Calculation\FinishedEventArgs.cs" />
     <Compile Include="Calculation\FinishedEventHandler.cs" />
+    <Compile Include="Calculation\IterationManager.cs" />
+    <Compile Include="Calculation\IterationManagerBase.cs" />
+    <Compile Include="Calculation\IterationThreadStateToken.cs" />
     <Compile Include="Calculation\IteratorData.cs" />
     <Compile Include="Calculation\NativeTimer.cs" />
     <Compile Include="Calculation\ProgressEventHandler.cs" />
@@ -81,7 +84,6 @@
     <Compile Include="Calculation\RenderMessengerBase.cs" />
     <Compile Include="Calculation\Histogram.cs" />
     <Compile Include="Calculation\RenderState.cs" />
-    <Compile Include="Calculation\SimpleRenderer.cs" />
     <Compile Include="Calculation\StartedEventArgs.cs" />
     <Compile Include="Calculation\StartedEventHandler.cs" />
     <Compile Include="Calculation\ThreadedIterationManager.cs" />
