@@ -7,7 +7,7 @@ using ThreadState = Xyrus.Apophysis.Threading.ThreadState;
 namespace Xyrus.Apophysis.Calculation
 {
 	[PublicAPI]
-	public class ThreadedIterationManager : IterationManagerBase
+	public class ThreadedIterationManager : IterationManagerBase, IThreaded
 	{
 		private readonly NativeTimer mTicker;
 
@@ -36,8 +36,12 @@ namespace Xyrus.Apophysis.Calculation
 			IterationProgress = mRenderStates.Sum(x => x.Progress * x.TotalIterations) / mRenderStates.Sum(x => x.TotalIterations);
 			RemainingTime = timeRemainingThreads.Any() ? TimeSpan.FromSeconds(timeRemainingThreads.Max(x => x.TotalSeconds)) : (TimeSpan?)null;
 			AverageIterationsPerSecond = mRenderStates.Sum(x => x.AverageIterationsPerSecond);
-			PureRenderingTime = mRenderStates.Max(x => x.PureRenderingTime);
+			ElapsedTime = mRenderStates.Max(x => x.ElapsedTime);
 			TotalIterations = mRenderStates.Sum(x => x.TotalIterations);
+			TargetDensity = mRenderStates.Sum(x => x.TargetDensity);
+			CurrentDensity = mRenderStates.Sum(x => x.CurrentDensity);
+
+			UpdateState(this);
 		}
 		private void UpdateThreadState(ProgressManager manager, int threadIndex)
 		{
@@ -46,8 +50,14 @@ namespace Xyrus.Apophysis.Calculation
 			mRenderStates[threadIndex].Progress = manager.IterationProgress;
 			mRenderStates[threadIndex].RemainingTime = manager.RemainingTime;
 			mRenderStates[threadIndex].AverageIterationsPerSecond = manager.AverageIterationsPerSecond;
-			mRenderStates[threadIndex].PureRenderingTime = manager.PureRenderingTime;
+			mRenderStates[threadIndex].ElapsedTime = manager.ElapsedTime;
 			mRenderStates[threadIndex].TotalIterations = manager.TotalIterations;
+			mRenderStates[threadIndex].TargetDensity = manager.TargetDensity;
+			mRenderStates[threadIndex].CurrentDensity = manager.CurrentDensity;
+		}
+
+		protected override void UpdateState(ProgressProvider manager)
+		{
 		}
 
 		private void OnStarted()
@@ -138,7 +148,7 @@ namespace Xyrus.Apophysis.Calculation
 			if (histogram == null) throw new ArgumentNullException("histogram");
 
 			mCanProgress = false;
-			StateReset();
+			ResetState();
 
 			var threadDensity = System.Math.Ceiling(density / mThreadCount);
 			for (int i = 0; i < mThreadCount; i++)
@@ -166,7 +176,7 @@ namespace Xyrus.Apophysis.Calculation
 			var thread = new Thread(() => histogram.Iterate(threadDensity, progress));
 
 			progress.Started += (o, e) => mThreadStartedHandler[threadIndex](o, new ThreadStartedEventArgs(threadIndex));
-			progress.Progress += (o, e) => mThreadProgressHandler[threadIndex](o, new ThreadProgressEventArgs(threadIndex, e.Progress, e.TimeRemaining));
+			progress.Progress += (o, e) => mThreadProgressHandler[threadIndex](o, new ThreadProgressEventArgs(threadIndex));
 			progress.Finished += (o, e) => mThreadFinishedHandler[threadIndex](o, new ThreadFinishedEventArgs(threadIndex, e.Cancelled));
 
 			thread.Start();

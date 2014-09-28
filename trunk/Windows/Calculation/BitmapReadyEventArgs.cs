@@ -3,7 +3,7 @@
 namespace Xyrus.Apophysis.Calculation
 {
 	[PublicAPI]
-	public class ProgressEventArgs : EventArgs
+	public class BitmapReadyEventArgs : EventArgs
 	{
 	}
 }

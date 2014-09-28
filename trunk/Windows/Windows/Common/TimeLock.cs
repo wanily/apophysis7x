@@ -1,5 +1,6 @@
 using System;
-using System.Windows.Forms;
+using System.Threading;
+using Timer = System.Windows.Forms.Timer;
 
 namespace Xyrus.Apophysis.Windows
 {
@@ -84,6 +85,17 @@ namespace Xyrus.Apophysis.Windows
 		{
 			Dispose(true);
 			GC.SuppressFinalize(this);
+		}
+
+		public static void RunAfter(double seconds, Action action)
+		{
+			var thread = new Thread(() =>
+			{
+				Thread.Sleep((int)(seconds * 1000));
+				action();
+			});
+
+			thread.Start();
 		}
 	}
 }

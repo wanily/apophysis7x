@@ -30,13 +30,19 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				Delay = 250
 			};
 
-			mIterationManager = new ThreadedIterationManager();
+			mIterationManager = new ProgressiveIterationManager();
 			mElapsedTimer = new NativeTimer();
 		}
 		protected override void DisposeOverride(bool disposing)
 		{
 			if (disposing)
 			{
+				if (mIterationManager != null)
+				{
+					mIterationManager.Dispose();
+					mIterationManager = null;
+				}
+
 				if (mRenderer != null)
 				{
 					mRenderer.Dispose();
@@ -58,7 +64,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			mParent = null;
 			mElapsedTimer = null;
-			mIterationManager = null;
 		}
 
 		protected override void AttachView()
@@ -79,6 +84,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			mIterationManager.Progress += OnRendererProgress;
 			mIterationManager.Finished += OnRendererFinished;
+
+			var progressive = mIterationManager as IProgressive;
+			if (progressive != null)
+			{
+				progressive.BitmapReady += OnBitmapReady;
+			}
 
 			using (mParent.Initializer.Enter())
 			{
@@ -103,6 +114,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mIterationManager.Progress -= OnRendererProgress;
 			mIterationManager.Finished -= OnRendererFinished;
 
+			var progressive = mIterationManager as IProgressive;
+			if (progressive != null)
+			{
+				progressive.BitmapReady -= OnBitmapReady;
+			}
+
 			ApophysisSettings.Preview.MainPreviewDensity = PreviewDensity;
 			ApophysisSettings.View.ShowGuidelines = View.ShowGuidelines;
 			ApophysisSettings.View.ShowTransparency = View.ShowTransparency;
@@ -112,10 +129,25 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		private void SetProgress(double progress)
 		{
-			if (View == null)
+			if (View == null || !View.Visible)
 				return;
 
-			View.Invoke(new Action(() => View.PreviewProgressBar.Value = (int)(progress * 100)));
+
+			if (mIterationManager is IProgressive)
+			{
+				View.Invoke(new Action(() =>
+				{
+					View.PreviewProgressBar.Visible = false;
+				}));
+			}
+			else
+			{
+				View.Invoke(new Action(() =>
+				{
+					View.PreviewProgressBar.Value = (int) (progress*100);
+					View.PreviewProgressBar.Visible = true;
+				}));
+			}
 		}
 		private void SetElapsed(TimeSpan elapsed)
 		{
@@ -129,7 +161,14 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			if (View == null)
 				return;
 
-			View.Invoke(new Action(() => View.PreviewTimeRemainingLabel.Text = string.Format("Remaining: {0}", remaining == null ? "calculating..." : GetTimespanString(remaining.Value))));
+			if (mIterationManager is IProgressive)
+			{
+				View.Invoke(new Action(() => View.PreviewTimeRemainingLabel.Text = null));
+			}
+			else
+			{
+				View.Invoke(new Action(() => View.PreviewTimeRemainingLabel.Text = string.Format("Remaining: {0}", remaining == null ? "calculating..." : GetTimespanString(remaining.Value))));
+			}
 		}
 		private void SetBitmap(Bitmap bitmap)
 		{
@@ -197,13 +236,22 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			UpdatePreview();
 			mParent.BatchListController.UpdateSelectedPreview();
 		}
+		private void OnBitmapReady(object sender, BitmapReadyEventArgs args)
+		{
+			var bitmap = mRenderer.Histogram.CreateBitmap();
+			SetBitmap(bitmap);
+		}
 		private void OnRendererProgress(object sender, ProgressEventArgs args)
 		{
 			try
 			{
-				SetProgress(args.Progress);
+				var progress = sender as ProgressProvider;
+				if (progress == null)
+					return;
+
+				SetProgress(progress.IterationProgress);
 				SetElapsed(TimeSpan.FromSeconds(mElapsedTimer.GetElapsedTimeInSeconds()));
-				SetRemaining(args.TimeRemaining);
+				SetRemaining(progress.RemainingTime);
 			}
 			catch (ObjectDisposedException) { }
 		}
@@ -292,11 +340,20 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mRenderer.Initialize();
 
 			UpdateThreadCount();
-			mIterationManager.StartIterate(mRenderer.Histogram, density);
+
+			var progressive = mIterationManager as IProgressive;
+			if (progressive != null)
+			{
+				progressive.StartIterate(mRenderer.Histogram);
+			}
+			else
+			{
+				mIterationManager.StartIterate(mRenderer.Histogram, density);
+			}
 		}
 		public void UpdateThreadCount()
 		{
-			var threaded = mIterationManager as ThreadedIterationManager;
+			var threaded = mIterationManager as IThreaded;
 			if (threaded != null)
 			{
 				threaded.SetThreadCount(ApophysisSettings.Preview.ThreadCount);
@@ -306,7 +363,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		public void ReloadSettings()
 		{
 			View.CameraEditUseScale = ApophysisSettings.Editor.CameraEditUseScale;
-			UpdateThreadCount();
 		}
 	}
 }

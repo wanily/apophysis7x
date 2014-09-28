@@ -1,4 +1,5 @@
 using System;
+using System.Security.Permissions;
 
 namespace Xyrus.Apophysis.Calculation
 {
@@ -22,32 +23,43 @@ namespace Xyrus.Apophysis.Calculation
 			get { return mRenderState.TotalIterations; }
 			protected set { mRenderState.TotalIterations = value; }
 		}
+		public double TargetDensity
+		{
+			get { return mRenderState.TargetDensity; }
+			protected set { mRenderState.TargetDensity = value; }
+		}
 
 		public double AverageIterationsPerSecond
 		{
 			get { return mRenderState.AverageIterationsPerSecond; }
 			protected set { mRenderState.AverageIterationsPerSecond = value; }
 		}
-		public double PureRenderingTime
-		{
-			get { return mRenderState.PureRenderingTime; }
-			protected set { mRenderState.PureRenderingTime = value; }
-		}
-
 		public double IterationsPerSecond
 		{
 			get { return mRenderState.IterationsPerSecond; }
 			protected set { mRenderState.IterationsPerSecond = value; }
+		}
+		
+		public double CurrentDensity
+		{
+			get { return mRenderState.CurrentDensity; }
+			protected set { mRenderState.CurrentDensity = value; }
 		}
 		public double IterationProgress
 		{
 			get { return mRenderState.Progress; }
 			protected set { mRenderState.Progress = value; }
 		}
+
 		public TimeSpan? RemainingTime
 		{
 			get { return mRenderState.RemainingTime; }
 			protected set { mRenderState.RemainingTime = value; }
+		}
+		public TimeSpan ElapsedTime
+		{
+			get { return mRenderState.ElapsedTime; }
+			protected set { mRenderState.ElapsedTime = value; }
 		}
 
 		public bool IsBusy
@@ -73,7 +85,7 @@ namespace Xyrus.Apophysis.Calculation
 			if (Progress == null)
 				return;
 
-			Progress(this, new ProgressEventArgs(IterationProgress, RemainingTime));
+			Progress(this, new ProgressEventArgs());
 		}
 		protected void RaiseFinished(bool cancelled)
 		{

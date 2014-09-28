@@ -64,6 +64,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			if (disposing)
 			{
+				if (mIterationManager != null)
+				{
+					mIterationManager.Dispose();
+					mIterationManager = null;
+				}
+
 				if (mRenderer != null)
 				{
 					mRenderer.Dispose();
@@ -80,7 +86,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mParent = null;
 			mElapsedTimer = null;
 			mMessenger = null;
-			mIterationManager = null;
 		}
 
 		protected override void AttachView()
@@ -260,9 +265,13 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			try
 			{
-				SetProgress(args.Progress);
-				SetRemaining(args.TimeRemaining);
+				var progress = sender as ProgressProvider;
+				if (progress == null)
+					return;
+
+				SetProgress(progress.IterationProgress);
 				SetElapsed(TimeSpan.FromSeconds(mElapsedTimer.GetElapsedTimeInSeconds()));
+				SetRemaining(progress.RemainingTime);
 			}
 			catch (ObjectDisposedException) { }
 			
@@ -601,7 +610,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mRenderer.Messenger = mMessenger;
 			mRenderer.Initialize();
 
-			var threaded = mIterationManager as ThreadedIterationManager;
+			var threaded = mIterationManager as IThreaded;
 			if (threaded != null)
 			{
 				threaded.SetThreadCount(mThreadCount);

@@ -32,16 +32,18 @@ namespace Xyrus.Apophysis.Calculation
 			}
 		}
 
-		public void Reset(long iterations)
+		public void Reset(long iterations, double density)
 		{
 			mLastExcursion = 0L;
 			mLastSecondsPerIteration = null;
 
 			AverageIterationsPerSecond = 0;
-			PureRenderingTime = 0;
+			ElapsedTime = TimeSpan.Zero;
 			TotalIterations = iterations;
 			RemainingTime = null;
 			IterationProgress = 0;
+			CurrentDensity = 0;
+			TargetDensity = density;
 
 			mStopWatch.SetStartingTime();
 			mTicker.SetStartingTime();
@@ -51,12 +53,13 @@ namespace Xyrus.Apophysis.Calculation
 			RaiseStarted();
 			RaiseProgress();
 		}
-		public void Continue(long iterations)
+		public void Continue(long iterations, double densityIncrement)
 		{
 			TotalIterations += iterations;
 
 			RemainingTime = TimeSpan.FromSeconds(mLastSecondsPerIteration.GetValueOrDefault() * (TotalIterations - mLastExcursion));
 			IterationProgress = TotalIterations == 0 ? 1 : (double)mLastExcursion / TotalIterations;
+			TargetDensity += densityIncrement;
 
 			mStopWatch.SetStartingTime();
 			mTicker.SetStartingTime();
@@ -81,7 +84,12 @@ namespace Xyrus.Apophysis.Calculation
 				var remaining = mLastSecondsPerIteration.Value * (TotalIterations - iteration);
 				var progress = TotalIterations == 0 ? 1 : (double)iteration / TotalIterations;
 
+				CurrentDensity = progress*TargetDensity;
 				IterationProgress = progress;
+
+				if (remaining >= TimeSpan.MaxValue.TotalSeconds / 2)
+					remaining = TimeSpan.MaxValue.TotalSeconds / 2;
+
 				RemainingTime = TimeSpan.FromSeconds(remaining);
 
 				RaiseProgress();
@@ -99,7 +107,7 @@ namespace Xyrus.Apophysis.Calculation
 		}
 		public void FinalizeProcess()
 		{
-			PureRenderingTime += mStopWatch.GetElapsedTimeInSeconds();
+			ElapsedTime = ElapsedTime.Add(TimeSpan.FromSeconds(mStopWatch.GetElapsedTimeInSeconds()));
 			RemainingTime = TimeSpan.FromSeconds(0);
 			IterationProgress = 1;
 

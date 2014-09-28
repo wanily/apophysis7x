@@ -5,8 +5,7 @@ namespace Xyrus.Apophysis.Calculation
 	[PublicAPI]
 	public class ThreadProgressEventArgs : ProgressEventArgs
 	{
-		public ThreadProgressEventArgs(int threadIndex, double progress, TimeSpan? timeRemaining = null)
-			: base(progress, timeRemaining)
+		public ThreadProgressEventArgs(int threadIndex)
 		{
 			ThreadIndex = threadIndex;
 		}

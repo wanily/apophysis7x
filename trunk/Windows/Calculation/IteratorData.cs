@@ -116,7 +116,7 @@ namespace Xyrus.Apophysis.Calculation
 			}
 
 			Variations = mIterator.Variations
-				.Where(x => System.Math.Abs((double) x.Weight) > double.Epsilon)
+				.Where(x => System.Math.Abs(x.Weight) > double.Epsilon)
 				.OrderBy(x => x.Priority)
 				.ThenBy(x => x.Name)
 				.ToArray();

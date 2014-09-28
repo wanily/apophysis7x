@@ -6,17 +6,6 @@ namespace Xyrus.Apophysis.Calculation
 	[PublicAPI]
 	public class IterationManager : IterationManagerBase
 	{
-		private void UpdateState(ProgressManager manager)
-		{
-			IsBusy = manager.IsBusy;
-			IterationsPerSecond = manager.IterationsPerSecond;
-			IterationProgress = manager.IterationProgress;
-			RemainingTime = manager.RemainingTime;
-			AverageIterationsPerSecond = manager.AverageIterationsPerSecond;
-			PureRenderingTime = manager.PureRenderingTime;
-			TotalIterations = manager.TotalIterations;
-		}
-
 		private void OnStarted(object sender, StartedEventArgs e)
 		{
 			UpdateState((ProgressManager)sender);
@@ -39,7 +28,7 @@ namespace Xyrus.Apophysis.Calculation
 		{
 			if (histogram == null) throw new ArgumentNullException("histogram");
 
-			StateReset();
+			ResetState();
 
 			var progress = new ProgressManager(new IterationThreadStateToken(this));
 			var thread = new Thread(() => histogram.Iterate(density, progress));
@@ -54,7 +43,7 @@ namespace Xyrus.Apophysis.Calculation
 		{
 			if (histogram == null) throw new ArgumentNullException("histogram");
 
-			StateReset();
+			ResetState();
 
 			var progress = new ProgressManager(new IterationThreadStateToken(this));
 

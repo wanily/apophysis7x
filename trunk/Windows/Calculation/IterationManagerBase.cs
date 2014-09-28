@@ -1,24 +1,37 @@
+using System;
 using System.Threading;
 using System.Windows.Forms;
 
 namespace Xyrus.Apophysis.Calculation
 {
 	[PublicAPI]
-	public abstract class IterationManagerBase : ProgressProvider
+	public abstract class IterationManagerBase : ProgressProvider, IDisposable
 	{
 		private bool mSuspended;
 		private bool mCancel;
 
-		protected void StateReset()
+		protected void ResetState()
 		{
 			mSuspended = false;
 			mCancel = false;
+		}
+		protected virtual void UpdateState(ProgressProvider manager)
+		{
+			IsBusy = manager.IsBusy;
+			IterationsPerSecond = manager.IterationsPerSecond;
+			IterationProgress = manager.IterationProgress;
+			RemainingTime = manager.RemainingTime;
+			AverageIterationsPerSecond = manager.AverageIterationsPerSecond;
+			ElapsedTime = manager.ElapsedTime;
+			TotalIterations = manager.TotalIterations;
+			TargetDensity = manager.TargetDensity;
+			CurrentDensity = manager.CurrentDensity;
 		}
 
 		public abstract void StartIterate([NotNull] Histogram histogram, double density);
 		public abstract void Iterate([NotNull] Histogram histogram, double density);
 
-		public void Wait()
+		public virtual void Wait()
 		{
 			while (IsBusy)
 			{
@@ -26,21 +39,21 @@ namespace Xyrus.Apophysis.Calculation
 				Application.DoEvents();
 			}
 		}
-		public void Suspend()
+		public virtual void Suspend()
 		{
 			if (!IsBusy || mSuspended)
 				return;
 
 			mSuspended = true;
 		}
-		public void Resume()
+		public virtual void Resume()
 		{
 			if (!IsBusy || !mSuspended)
 				return;
 
 			mSuspended = false;
 		}
-		public void Cancel()
+		public virtual void Cancel()
 		{
 			if (!IsBusy)
 				return;
@@ -52,13 +65,18 @@ namespace Xyrus.Apophysis.Calculation
 			Wait();
 		}
 
-		public bool IsSuspended
+		public virtual bool IsSuspended
 		{
 			get { return mSuspended; }
 		}
-		public bool IsCancelling
+		public virtual bool IsCancelling
 		{
 			get { return mCancel; }
+		}
+
+		public void Dispose()
+		{
+			Cancel();
 		}
 	}
 }

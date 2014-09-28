@@ -1,9 +1,9 @@
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using Xyrus.Apophysis.Math;
-using Xyrus.Apophysis.Windows;
 using Rectangle = System.Drawing.Rectangle;
 
 namespace Xyrus.Apophysis.Calculation
@@ -105,7 +105,7 @@ namespace Xyrus.Apophysis.Calculation
 				bitmap = newBitmap;
 			}
 		}
-		private long Iterate(bool isContinuing, long batchSize, ProgressManager progressManager = null)
+		private long Iterate(bool isContinuing, long batchSize, double density, ProgressManager progressManager = null)
 		{
 			const int fuse = 20;
 
@@ -118,7 +118,7 @@ namespace Xyrus.Apophysis.Calculation
 
 			if (!isContinuing)
 			{
-				progressManager.Reset(batchSize);
+				progressManager.Reset(batchSize, density);
 
 				for (long i = 0; i < fuse; i++)
 				{
@@ -128,9 +128,10 @@ namespace Xyrus.Apophysis.Calculation
 			}
 			else
 			{
-				progressManager.Continue(batchSize);
+				progressManager.Continue(batchSize, density);
 			}
 
+			var densityStep = (1.0 / batchSize) * progressManager.TargetDensity;
 			for (long i = 0; i < batchSize; i++)
 			{
 				if (progressManager.ThreadState.IsCancelling)
@@ -153,6 +154,11 @@ namespace Xyrus.Apophysis.Calculation
 					final.Process(random, vector, ref color);
 				}
 
+				lock (mLock)
+				{
+					mDensity += densityStep;
+				}
+
 				var projection = vector.Copy();
 				if (!mRenderer.Data.ProjectPoint(ref projection, random))
 					continue;
@@ -165,7 +171,10 @@ namespace Xyrus.Apophysis.Calculation
 					(int)(projection.Y * mRenderer.Data.UnitToPixelFactor.Y));
 				var mapColor = mRenderer.Data.ColorMap[(int)(color * mRenderer.Data.ColorMap.Length)];
 
-				Add(bufferLocation.X, bufferLocation.Y, mapColor);
+				lock (mLock)
+				{
+					Add(bufferLocation.X, bufferLocation.Y, mapColor);
+				}
 			}
 
 			progressManager.FinalizeProcess();
@@ -175,35 +184,28 @@ namespace Xyrus.Apophysis.Calculation
 
 		public void Iterate(double untilDensity, ProgressManager progressManager = null)
 		{
-			if (untilDensity <= mDensity)
-				return;
-
 			bool firstBatch;
+			double startDensity;
+
 			lock (mLock)
 			{
+				if (untilDensity <= mDensity)
+					return;
+
+				startDensity = mDensity;
 				firstBatch = (mDensity <= 0);
 			}
 
 			if (firstBatch)
 			{
 				var length = (mRenderer.Data.BufferLength*untilDensity/(mRenderer.Oversample*mRenderer.Oversample));
-				var newDensity = Iterate(false, (long)length, progressManager) / length;
-
-				lock (mLock)
-				{
-					mDensity = newDensity;
-				}
+				Iterate(false, (long)length, untilDensity, progressManager);
 
 				return;
 			}
 
-			var increment = (mRenderer.Data.BufferLength * (untilDensity - mDensity) / (mRenderer.Oversample * mRenderer.Oversample));
-			var densityIncrement = Iterate(true, (long)increment , progressManager) / increment;
-
-			lock (mLock)
-			{
-				mDensity += densityIncrement;
-			}
+			var increment = (mRenderer.Data.BufferLength * (untilDensity - startDensity) / (mRenderer.Oversample * mRenderer.Oversample));
+			Iterate(true, (long)increment, (untilDensity - startDensity), progressManager);
 		}
 		public Bitmap CreateBitmap()
 		{
@@ -219,6 +221,7 @@ namespace Xyrus.Apophysis.Calculation
 			var getPointFunc = (mRenderer.Data.FilterSize > gutter/2) ? SafeGet : new Func<int, int, double[]>(Get);
 
 			var sampleDensity = System.Math.Max(0.001, mDensity*mRenderer.Data.TwoPowerZoom*mRenderer.Data.TwoPowerZoom);
+			Debug.Print(mDensity.ToString());
 
 			var precalcLogMap = new double[1024];
 
