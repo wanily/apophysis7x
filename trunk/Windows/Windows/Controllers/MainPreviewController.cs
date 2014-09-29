@@ -131,14 +131,14 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		private void SetSpeed(double? speed)
 		{
-			if (View == null)
+			if (IsViewDisposed)
 				return;
 
 			View.Invoke(new Action(() => View.IterationsPerSecondLabel.Text = speed.HasValue ? string.Format("{0:###,###,###,##0.00} i/s", speed) : null));
 		}
 		private void SetProgress(double progress)
 		{
-			if (View == null || !View.Visible)
+			if (IsViewDisposed)
 				return;
 
 			View.Invoke(new Action(() =>
@@ -148,14 +148,14 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 		private void SetElapsed(TimeSpan elapsed)
 		{
-			if (View == null)
+			if (IsViewDisposed)
 				return;
 
 			View.Invoke(new Action(() => View.PreviewTimeElapsedLabel.Text = string.Format("Elapsed: {0}", GetTimespanString(elapsed))));
 		}
 		private void SetRemaining(TimeSpan? remaining)
 		{
-			if (View == null)
+			if (IsViewDisposed)
 				return;
 
 			var banner = mIterationManager is IProgressive ? "Remaining until next: {0}" : "Remaining: {0}";
@@ -164,7 +164,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 		private void SetBitmap(Bitmap bitmap)
 		{
-			if (bitmap == null || View == null)
+			if (bitmap == null || IsViewDisposed)
 				return;
 
 			View.Invoke(new Action(() =>

@@ -1075,8 +1075,14 @@
   <data name="PreviewDensityComboBox.ToolTipText" xml:space="preserve">
     <value>Density</value>
   </data>
+  <data name="PreviewDensityComboBox.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 25</value>
+  </data>
+  <data name="toolStripSeparator6.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="EditorButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1579,7 +1585,7 @@
     <value>False</value>
   </data>
   <data name="FlameNameLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 17</value>
+    <value>179, 17</value>
   </data>
   <data name="FlameNameLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -3424,17 +3430,17 @@
   <data name="&gt;&gt;FlameNameLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;PreviewProgressBar.Name" xml:space="preserve">
-    <value>PreviewProgressBar</value>
-  </data>
-  <data name="&gt;&gt;PreviewProgressBar.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripProgressBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;IterationsPerSecondLabel.Name" xml:space="preserve">
     <value>IterationsPerSecondLabel</value>
   </data>
   <data name="&gt;&gt;IterationsPerSecondLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PreviewProgressBar.Name" xml:space="preserve">
+    <value>PreviewProgressBar</value>
+  </data>
+  <data name="&gt;&gt;PreviewProgressBar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripProgressBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>Main</value>

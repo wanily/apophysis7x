@@ -559,7 +559,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		private void NextFlame()
 		{
-			if (View == null)
+			if (IsViewDisposed)
 				return;
 
 			if (mRenderStack.Count == 0)
@@ -681,28 +681,28 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		private void SetProgress(double progress)
 		{
-			if (View == null)
+			if (IsViewDisposed)
 				return;
 
 			View.Invoke(new Action(() => View.ProgressBar.Value = (int)(progress * 100)));
 		}
 		private void SetElapsed(TimeSpan elapsed)
 		{
-			if (View == null)
+			if (IsViewDisposed)
 				return;
 
 			View.Invoke(new Action(() => View.ElapsedLabel.Text = string.Format("Elapsed: {0}", GetTimespanString(elapsed))));
 		}
 		private void SetRemaining(TimeSpan? remaining)
 		{
-			if (View == null)
+			if (IsViewDisposed)
 				return;
 
 			View.Invoke(new Action(() => View.RemainingLabel.Text = string.Format("Remaining: {0}", remaining == null ? "calculating..." : GetTimespanString(remaining.Value))));
 		}
 		private void SetInfoString(string info)
 		{
-			if (View == null)
+			if (IsViewDisposed)
 				return;
 
 			View.Invoke(new Action(() => View.InfoLabel.Text = info));

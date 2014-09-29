@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace Xyrus.Apophysis.Windows
 {
@@ -67,6 +68,21 @@ namespace Xyrus.Apophysis.Windows
 		}
 		protected virtual void DisposeOverride(bool disposing)
 		{
+		}
+
+		protected bool IsViewDisposed
+		{
+			get
+			{
+				if (View == null)
+					return true;
+
+				var window = View as Form;
+				if (window == null)
+					return false;
+
+				return window.IsDisposed;
+			}
 		}
 
 		protected abstract void AttachView();
