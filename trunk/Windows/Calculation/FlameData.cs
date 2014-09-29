@@ -16,6 +16,12 @@ namespace Xyrus.Apophysis.Calculation
 		private const int mMaxFilterWidth = 25;
 		private const double mFilterCutoff = 1.8;
 
+		private delegate void Project3D(ref Vector3 vector, Random random);
+		private delegate void CanvasTransform(ref Vector3 vector);
+
+		private Project3D mProjection;
+		private CanvasTransform mTransform;
+
 		~FlameData()
 		{
 			Dispose(false);
@@ -251,24 +257,18 @@ namespace Xyrus.Apophysis.Calculation
 
 		public bool ProjectPoint(ref Vector3 vector, Random random)
 		{
-			Project3DWithPitchYawDof(ref vector, random);
+			var temp = vector;
 
-			var canvasProjection = System.Math.Abs(mFlame.Angle) < double.Epsilon
-				? new Vector3(
-					vector.X - CameraRectangle.TopLeft.X,
-					vector.Y - CameraRectangle.TopLeft.Y,
-					0)
-				: new Vector3(
-					(vector.X * CosAngle + vector.Y * SinAngle + ZeroPoint.X),
-					(vector.Y * CosAngle - vector.X * SinAngle + ZeroPoint.Y),
-					0);
+			mProjection(ref temp, random);
+			mTransform(ref temp);
 
-			if (canvasProjection.X < 0 || canvasProjection.Y < 0 || 
-				canvasProjection.X > CameraRectangle.Size.X ||
-			    canvasProjection.Y > CameraRectangle.Size.Y)
+			if (temp.X < 0 || temp.Y < 0 ||
+				temp.X > CameraRectangle.Size.X ||
+				temp.Y > CameraRectangle.Size.Y)
 				return false;
 
-			vector = canvasProjection;
+			vector = temp;
+
 			return true;
 		}
 		public void AdjustPixelsPerUnit(Size size)
@@ -393,6 +393,15 @@ namespace Xyrus.Apophysis.Calculation
 				Y = mFlame.Origin.Y * (1 - CosAngle) + mFlame.Origin.X * SinAngle - CameraRectangle.TopLeft.Y
 			};
 
+			if (System.Math.Abs(mFlame.Angle) < double.Epsilon)
+			{
+				mTransform = CanvasTransformSimple;
+			}
+			else
+			{
+				mTransform = CanvasTransformAngle;
+			}
+
 			Camera3D = new[]
 			{
 				new[]
@@ -416,27 +425,69 @@ namespace Xyrus.Apophysis.Calculation
 			};
 
 			DofCoeff = 0.1 * mFlame.DepthOfField;
+
+			if (System.Math.Abs(DofCoeff) < double.Epsilon)
+			{
+				mProjection = Project3DWithPitchYaw;
+			}
+			else
+			{
+				mProjection = Project3DWithPitchYawDof;
+			}
 		}
 
+		private void Project3DWithPitchYaw(ref Vector3 vector, [UsedImplicitly] Random random)
+		{
+			vector.Z -= mFlame.Height;
+
+			var transformed = new Vector3(
+				Camera3D[0][0] * vector.X + Camera3D[1][0] * vector.Y,
+				Camera3D[0][1] * vector.X + Camera3D[1][1] * vector.Y + Camera3D[2][1] * vector.Z,
+				Camera3D[0][2] * vector.X + Camera3D[1][2] * vector.Y + Camera3D[2][2] * vector.Z);
+
+			var perspective = 1 - mFlame.Perspective * transformed.Z;
+
+			vector = new Vector3(
+				(transformed.X) / perspective,
+				(transformed.Y) / perspective,
+				(transformed.Z));
+		}
 		private void Project3DWithPitchYawDof(ref Vector3 vector, Random random)
 		{
-			var z = vector.Z - mFlame.Height;
-			var projectionVector = new Vector3(
+			vector.Z -= mFlame.Height;
+
+			var transformed = new Vector3(
 				Camera3D[0][0] * vector.X + Camera3D[1][0] * vector.Y,
-				Camera3D[0][1] * vector.X + Camera3D[1][1] * vector.Y + Camera3D[2][1] * z,
-				Camera3D[0][2] * vector.X + Camera3D[1][2] * vector.Y + Camera3D[2][2] * z);
-			var zr = 1 - mFlame.Perspective * projectionVector.Z;
-			var t = random.NextDouble() * 2 * System.Math.PI;
-			var dsin = System.Math.Sin(t);
-			var dcos = System.Math.Cos(t);
-			var dr = random.NextDouble() * DofCoeff * z;
+				Camera3D[0][1] * vector.X + Camera3D[1][1] * vector.Y + Camera3D[2][1] * vector.Z,
+				Camera3D[0][2] * vector.X + Camera3D[1][2] * vector.Y + Camera3D[2][2] * vector.Z);
 
-			var camera3DProjection = new Vector3(
-				(projectionVector.X + dr * dcos) / zr,
-				(projectionVector.Y + dr * dsin) / zr,
-				vector.Z - mFlame.Height);
+			var perspective = 1 - mFlame.Perspective * transformed.Z;
+			var randomAngle = random.NextDouble() * 2 * System.Math.PI;
 
-			vector = camera3DProjection;
+			var sin = System.Math.Sin(randomAngle);
+			var cos = System.Math.Cos(randomAngle);
+
+			var randomDistance = random.NextDouble() * DofCoeff * transformed.Z;
+
+			vector = new Vector3(
+				(transformed.X + randomDistance * cos) / perspective,
+				(transformed.Y + randomDistance * sin) / perspective,
+				(transformed.Z));
+		}
+
+		private void CanvasTransformAngle(ref Vector3 vector)
+		{
+			vector = new Vector3(
+				(vector.X * CosAngle + vector.Y * SinAngle + ZeroPoint.X),
+				(vector.Y * CosAngle - vector.X * SinAngle + ZeroPoint.Y),
+				0);
+		}
+		private void CanvasTransformSimple(ref Vector3 vector)
+		{
+			vector = new Vector3(
+				vector.X - CameraRectangle.TopLeft.X,
+				vector.Y - CameraRectangle.TopLeft.Y,
+				0);
 		}
 	}
 }
