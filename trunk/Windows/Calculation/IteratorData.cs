@@ -126,7 +126,7 @@ namespace Xyrus.Apophysis.Calculation
 		}
 		private void PrepareRefTable()
 		{
-			if (mIsTerminal)
+			if (mIsTerminal || mIterator.GroupIndex != 0)
 			{
 				SetTerminalIterator();
 				return;
@@ -134,7 +134,7 @@ namespace Xyrus.Apophysis.Calculation
 
 			var iterators = mData.Iterators;
 
-			var n = mData.Flame.Iterators.Count;
+			var n = mData.Flame.Iterators.Count(x => x.GroupIndex == 0);
 			var k = mIndex;
 
 			var tp = new double[n];
@@ -174,7 +174,10 @@ namespace Xyrus.Apophysis.Calculation
 
 		private void SetTerminalIterator()
 		{
-			for (int i = 0; i < mData.Flame.Iterators.Count; i++)
+			if (RefTable == null)
+				return;
+
+			for (int i = 0; i < mData.Flame.Iterators.Count(x => x.GroupIndex == 0); i++)
 			{
 				RefTable[i] = mTerminator;
 			}

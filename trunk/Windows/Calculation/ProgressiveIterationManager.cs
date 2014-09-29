@@ -84,12 +84,12 @@ namespace Xyrus.Apophysis.Calculation
 		public void StartIterate(Histogram histogram)
 		{
 			if (histogram == null) throw new ArgumentNullException(@"histogram");
-			StartIterate(histogram, 10e10);
+			StartIterate(histogram, 10e6);
 		}
 		public void Iterate(Histogram histogram)
 		{
 			if (histogram == null) throw new ArgumentNullException("histogram");
-			Iterate(histogram, 10e10);
+			Iterate(histogram, 10e6);
 		}
 
 		public override void StartIterate(Histogram histogram, double maxDensity)
