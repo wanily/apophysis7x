@@ -57,7 +57,7 @@ uses
 procedure TVariationPreSpherical.CalcFunction;
 var r: double;
 begin
-  r := vvar / (sqr(FTx^) + sqr(FTy^) + 10e-6);
+  r := vvar / (sqr(FTx^) + sqr(FTy^) + 10e-300);
   FTx^ := FTx^ * r;
   FTy^ := FTy^ * r;
   FTz^ := VVAR * FTz^;
