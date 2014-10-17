@@ -1,0 +1,41 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings>
+	  <Setting Name="BatchListUsePreviews" Type="System.Boolean" Scope="User">
+		  <Value Profile="(Default)">False</Value>
+	  </Setting>
+	  <Setting Name="BatchListPreviewSize" Type="System.Int32" Scope="User">
+		  <Value Profile="(Default)">120</Value>
+	  </Setting>
+	  <Setting Name="IsMainToolbarVisible" Type="System.Boolean" Scope="User">
+		  <Value Profile="(Default)">True</Value>
+	  </Setting>
+	  <Setting Name="IsMainStatusbarVisible" Type="System.Boolean" Scope="User">
+		  <Value Profile="(Default)">True</Value>
+	  </Setting>
+	  <Setting Name="BatchListSize" Type="System.Int32" Scope="User">
+		  <Value Profile="(Default)">230</Value>
+	  </Setting>
+	  <Setting Name="IsBatchListVisible" Type="System.Boolean" Scope="User">
+		  <Value Profile="(Default)">True</Value>
+	  </Setting>
+	  <Setting Name="ShowGuidelines" Type="System.Boolean" Scope="User">
+		  <Value Profile="(Default)">False</Value>
+	  </Setting>
+	  <Setting Name="ShowTransparency" Type="System.Boolean" Scope="User">
+		  <Value Profile="(Default)">False</Value>
+	  </Setting>
+	  <Setting Name="SyncMainWindowWithCanvasSize" Type="System.Boolean" Scope="User">
+		  <Value Profile="(Default)">False</Value>
+	  </Setting>
+	  <Setting Name="FitMainPreviewImage" Type="System.Boolean" Scope="User">
+		  <Value Profile="(Default)">False</Value>
+	  </Setting>
+	  <Setting Name="MaintainCanvasAspectRatio" Type="System.Boolean" Scope="User">
+		  <Value Profile="(Default)">True</Value>
+	  </Setting>
+  </Settings>
+</SettingsFile>
