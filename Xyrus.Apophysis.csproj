@@ -661,6 +661,10 @@
     <EmbeddedResource Include="Windows\Resources\Toolbar\Editor\RegularIterator.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>IF EXIST "$(SolutionDir)..\..\Out\$(PlatformName)" COPY /Y "$(TargetDir)*.*" "$(SolutionDir)..\..\Out\$(PlatformName)\"
+IF EXIST "$(SolutionDir)..\..\Out\$(PlatformName)" DEL /Q "$(SolutionDir)..\..\Out\$(PlatformName)\*.vshost.*"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
