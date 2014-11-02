@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
+using Microsoft.Practices.Unity;
 using Xyrus.Apophysis.Calculation;
 using Xyrus.Apophysis.Messaging;
 using Xyrus.Apophysis.Strings;
@@ -18,6 +19,12 @@ namespace Xyrus.Apophysis
 	public static class ApophysisApplication
 	{
 		private static BannerController mBanner;
+		private static UnityContainer mContainer;
+
+		static ApophysisApplication()
+		{
+			mContainer = new UnityContainer();
+		}
 
 		public static MainController MainWindow { get; private set; }
 		public static string BatchPathToOpen { get; private set; }
@@ -49,6 +56,10 @@ namespace Xyrus.Apophysis
 			}
 		}
 
+		static void LoadBusiness()
+		{
+			// todo register business classes
+		}
 		static void LoadVariations()
 		{
 			mBanner.BannerText = Messages.InitializationLoadingVariationsMessage;
@@ -198,6 +209,17 @@ namespace Xyrus.Apophysis
 				saveMessage, exception.Message, locationString);
 
 			MessageBox.Show(message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+		}
+
+		internal static UnityContainer Container
+		{
+			get { return mContainer; }
+		}
+
+		public static void ResetDependencies()
+		{
+			mContainer.Dispose();
+			mContainer = new UnityContainer();
 		}
 
 		private static void OnThreadException(object sender, ThreadExceptionEventArgs e)

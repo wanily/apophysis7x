@@ -117,48 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="&gt;&gt;mBannerPicture.Name" xml:space="preserve">
-    <value>mBannerPicture</value>
-  </data>
-  <data name="&gt;&gt;mBannerPicture.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mBannerPicture.Parent" xml:space="preserve">
-    <value>mBannerPanel</value>
-  </data>
-  <data name="&gt;&gt;mBannerPicture.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="mBannerPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="mBannerPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="mBannerPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>615, 120</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="mBannerPanel.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;mBannerPanel.Name" xml:space="preserve">
-    <value>mBannerPanel</value>
-  </data>
-  <data name="&gt;&gt;mBannerPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mBannerPanel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;mBannerPanel.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
   <data name="mBannerPicture.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="mBannerPicture.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         Qk12fgUAAAAAADYAAAAoAAAAkAEAACwBAAABABgAAAAAAAAAAAASCwAAEgsAAAAAAAAAAAAAj4+PioqK
@@ -6176,6 +6139,7 @@
   <data name="mBannerPicture.Size" type="System.Drawing.Size, System.Drawing">
     <value>629, 430</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="mBannerPicture.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
@@ -6190,6 +6154,30 @@
   </data>
   <data name="&gt;&gt;mBannerPicture.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="mBannerPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="mBannerPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="mBannerPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>615, 120</value>
+  </data>
+  <data name="mBannerPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;mBannerPanel.Name" xml:space="preserve">
+    <value>mBannerPanel</value>
+  </data>
+  <data name="&gt;&gt;mBannerPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mBannerPanel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;mBannerPanel.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="mClientPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -6207,15 +6195,13 @@
     <value>13, 59</value>
   </data>
   <data name="mInfoLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>601, 89</value>
+    <value>601, 42</value>
   </data>
   <data name="mInfoLabel.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="mInfoLabel.Text" xml:space="preserve">
-    <value>This program is a .NET portation of the free, open source software Apophysis (http://apophysis.org/)
-
-Due to legal and technical reasons, this portation contains no portions of the original software written in Delphi. It was written from ground up, solely aiming to mimic the behavior of the original software.</value>
+    <value>This program is a .NET portation of the free, open source software Apophysis 7x (http://apophysis-7x.org/)</value>
   </data>
   <data name="&gt;&gt;mInfoLabel.Name" xml:space="preserve">
     <value>mInfoLabel</value>
@@ -6299,7 +6285,7 @@ Due to legal and technical reasons, this portation contains no portions of the o
     <value>-8, 116</value>
   </data>
   <data name="mClientPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>629, 157</value>
+    <value>629, 108</value>
   </data>
   <data name="mClientPanel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -6318,264 +6304,6 @@ Due to legal and technical reasons, this portation contains no portions of the o
   </data>
   <data name="mCreditsPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
-  </data>
-  <data name="&gt;&gt;label2.Name" xml:space="preserve">
-    <value>label2</value>
-  </data>
-  <data name="&gt;&gt;label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
-    <value>mCreditsPanel</value>
-  </data>
-  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;mFlamesCreditsHeader.Name" xml:space="preserve">
-    <value>mFlamesCreditsHeader</value>
-  </data>
-  <data name="&gt;&gt;mFlamesCreditsHeader.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mFlamesCreditsHeader.Parent" xml:space="preserve">
-    <value>mCreditsPanel</value>
-  </data>
-  <data name="&gt;&gt;mFlamesCreditsHeader.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
-  </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>mCreditsPanel</value>
-  </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;mDeveloperHeader.Name" xml:space="preserve">
-    <value>mDeveloperHeader</value>
-  </data>
-  <data name="&gt;&gt;mDeveloperHeader.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mDeveloperHeader.Parent" xml:space="preserve">
-    <value>mCreditsPanel</value>
-  </data>
-  <data name="&gt;&gt;mDeveloperHeader.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;mOriginalCreditsLabel.Name" xml:space="preserve">
-    <value>mOriginalCreditsLabel</value>
-  </data>
-  <data name="&gt;&gt;mOriginalCreditsLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mOriginalCreditsLabel.Parent" xml:space="preserve">
-    <value>mCreditsPanel</value>
-  </data>
-  <data name="&gt;&gt;mOriginalCreditsLabel.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;mCreditsHeader.Name" xml:space="preserve">
-    <value>mCreditsHeader</value>
-  </data>
-  <data name="&gt;&gt;mCreditsHeader.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mCreditsHeader.Parent" xml:space="preserve">
-    <value>mCreditsPanel</value>
-  </data>
-  <data name="&gt;&gt;mCreditsHeader.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="mCreditsPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>-8, 272</value>
-  </data>
-  <data name="mCreditsPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>629, 170</value>
-  </data>
-  <data name="mCreditsPanel.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;mCreditsPanel.Name" xml:space="preserve">
-    <value>mCreditsPanel</value>
-  </data>
-  <data name="&gt;&gt;mCreditsPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mCreditsPanel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;mCreditsPanel.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="mCreditsHeader.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="mCreditsHeader.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9.75pt</value>
-  </data>
-  <data name="mCreditsHeader.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="mCreditsHeader.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 11</value>
-  </data>
-  <data name="mCreditsHeader.Size" type="System.Drawing.Size, System.Drawing">
-    <value>601, 22</value>
-  </data>
-  <data name="mCreditsHeader.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="mCreditsHeader.Text" xml:space="preserve">
-    <value>Contributors to the original Apophysis:</value>
-  </data>
-  <data name="&gt;&gt;mCreditsHeader.Name" xml:space="preserve">
-    <value>mCreditsHeader</value>
-  </data>
-  <data name="&gt;&gt;mCreditsHeader.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mCreditsHeader.Parent" xml:space="preserve">
-    <value>mCreditsPanel</value>
-  </data>
-  <data name="&gt;&gt;mCreditsHeader.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="mOriginalCreditsLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="mOriginalCreditsLabel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9.75pt</value>
-  </data>
-  <data name="mOriginalCreditsLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="mOriginalCreditsLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>33, 33</value>
-  </data>
-  <data name="mOriginalCreditsLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>581, 22</value>
-  </data>
-  <data name="mOriginalCreditsLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="mOriginalCreditsLabel.Text" xml:space="preserve">
-    <value>Mark Townsend, Ronald Hordijk, Peter Sbodnov, Piotr Borys, Georg Kiehne</value>
-  </data>
-  <data name="&gt;&gt;mOriginalCreditsLabel.Name" xml:space="preserve">
-    <value>mOriginalCreditsLabel</value>
-  </data>
-  <data name="&gt;&gt;mOriginalCreditsLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mOriginalCreditsLabel.Parent" xml:space="preserve">
-    <value>mCreditsPanel</value>
-  </data>
-  <data name="&gt;&gt;mOriginalCreditsLabel.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="mDeveloperHeader.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="mDeveloperHeader.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9.75pt</value>
-  </data>
-  <data name="mDeveloperHeader.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="mDeveloperHeader.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 55</value>
-  </data>
-  <data name="mDeveloperHeader.Size" type="System.Drawing.Size, System.Drawing">
-    <value>601, 22</value>
-  </data>
-  <data name="mDeveloperHeader.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="mDeveloperHeader.Text" xml:space="preserve">
-    <value>Contributors to this portation:</value>
-  </data>
-  <data name="&gt;&gt;mDeveloperHeader.Name" xml:space="preserve">
-    <value>mDeveloperHeader</value>
-  </data>
-  <data name="&gt;&gt;mDeveloperHeader.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mDeveloperHeader.Parent" xml:space="preserve">
-    <value>mCreditsPanel</value>
-  </data>
-  <data name="&gt;&gt;mDeveloperHeader.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="label1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="label1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9.75pt</value>
-  </data>
-  <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>33, 77</value>
-  </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>581, 22</value>
-  </data>
-  <data name="label1.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Georg Kiehne</value>
-  </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
-  </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>mCreditsPanel</value>
-  </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="mFlamesCreditsHeader.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="mFlamesCreditsHeader.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9.75pt</value>
-  </data>
-  <data name="mFlamesCreditsHeader.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="mFlamesCreditsHeader.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 99</value>
-  </data>
-  <data name="mFlamesCreditsHeader.Size" type="System.Drawing.Size, System.Drawing">
-    <value>601, 22</value>
-  </data>
-  <data name="mFlamesCreditsHeader.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="mFlamesCreditsHeader.Text" xml:space="preserve">
-    <value>Algorithm used:</value>
-  </data>
-  <data name="&gt;&gt;mFlamesCreditsHeader.Name" xml:space="preserve">
-    <value>mFlamesCreditsHeader</value>
-  </data>
-  <data name="&gt;&gt;mFlamesCreditsHeader.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mFlamesCreditsHeader.Parent" xml:space="preserve">
-    <value>mCreditsPanel</value>
-  </data>
-  <data name="&gt;&gt;mFlamesCreditsHeader.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -6611,11 +6339,197 @@ Copyright © 1992 Scott Draves</value>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="mFlamesCreditsHeader.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="mFlamesCreditsHeader.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9.75pt</value>
+  </data>
+  <data name="mFlamesCreditsHeader.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="mFlamesCreditsHeader.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 99</value>
+  </data>
+  <data name="mFlamesCreditsHeader.Size" type="System.Drawing.Size, System.Drawing">
+    <value>601, 22</value>
+  </data>
+  <data name="mFlamesCreditsHeader.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="mFlamesCreditsHeader.Text" xml:space="preserve">
+    <value>Algorithm used:</value>
+  </data>
+  <data name="&gt;&gt;mFlamesCreditsHeader.Name" xml:space="preserve">
+    <value>mFlamesCreditsHeader</value>
+  </data>
+  <data name="&gt;&gt;mFlamesCreditsHeader.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mFlamesCreditsHeader.Parent" xml:space="preserve">
+    <value>mCreditsPanel</value>
+  </data>
+  <data name="&gt;&gt;mFlamesCreditsHeader.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="label1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="label1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9.75pt</value>
+  </data>
+  <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>33, 77</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>581, 22</value>
+  </data>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Georg Kiehne</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>mCreditsPanel</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="mDeveloperHeader.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="mDeveloperHeader.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9.75pt</value>
+  </data>
+  <data name="mDeveloperHeader.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="mDeveloperHeader.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 55</value>
+  </data>
+  <data name="mDeveloperHeader.Size" type="System.Drawing.Size, System.Drawing">
+    <value>601, 22</value>
+  </data>
+  <data name="mDeveloperHeader.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="mDeveloperHeader.Text" xml:space="preserve">
+    <value>Contributors to this portation:</value>
+  </data>
+  <data name="&gt;&gt;mDeveloperHeader.Name" xml:space="preserve">
+    <value>mDeveloperHeader</value>
+  </data>
+  <data name="&gt;&gt;mDeveloperHeader.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mDeveloperHeader.Parent" xml:space="preserve">
+    <value>mCreditsPanel</value>
+  </data>
+  <data name="&gt;&gt;mDeveloperHeader.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="mOriginalCreditsLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="mOriginalCreditsLabel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9.75pt</value>
+  </data>
+  <data name="mOriginalCreditsLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="mOriginalCreditsLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>33, 33</value>
+  </data>
+  <data name="mOriginalCreditsLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>581, 22</value>
+  </data>
+  <data name="mOriginalCreditsLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="mOriginalCreditsLabel.Text" xml:space="preserve">
+    <value>Mark Townsend, Ronald Hordijk, Peter Sbodnov, Piotr Borys, Georg Kiehne</value>
+  </data>
+  <data name="&gt;&gt;mOriginalCreditsLabel.Name" xml:space="preserve">
+    <value>mOriginalCreditsLabel</value>
+  </data>
+  <data name="&gt;&gt;mOriginalCreditsLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mOriginalCreditsLabel.Parent" xml:space="preserve">
+    <value>mCreditsPanel</value>
+  </data>
+  <data name="&gt;&gt;mOriginalCreditsLabel.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="mCreditsHeader.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="mCreditsHeader.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9.75pt</value>
+  </data>
+  <data name="mCreditsHeader.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="mCreditsHeader.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 11</value>
+  </data>
+  <data name="mCreditsHeader.Size" type="System.Drawing.Size, System.Drawing">
+    <value>601, 22</value>
+  </data>
+  <data name="mCreditsHeader.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="mCreditsHeader.Text" xml:space="preserve">
+    <value>Contributors to the original Apophysis:</value>
+  </data>
+  <data name="&gt;&gt;mCreditsHeader.Name" xml:space="preserve">
+    <value>mCreditsHeader</value>
+  </data>
+  <data name="&gt;&gt;mCreditsHeader.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mCreditsHeader.Parent" xml:space="preserve">
+    <value>mCreditsPanel</value>
+  </data>
+  <data name="&gt;&gt;mCreditsHeader.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="mCreditsPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>-8, 221</value>
+  </data>
+  <data name="mCreditsPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>629, 189</value>
+  </data>
+  <data name="mCreditsPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;mCreditsPanel.Name" xml:space="preserve">
+    <value>mCreditsPanel</value>
+  </data>
+  <data name="&gt;&gt;mCreditsPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mCreditsPanel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;mCreditsPanel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="mCloseButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
   <data name="mCloseButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>517, 453</value>
+    <value>517, 416</value>
   </data>
   <data name="mCloseButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 28</value>
@@ -6645,7 +6559,7 @@ Copyright © 1992 Scott Draves</value>
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>615, 489</value>
+    <value>615, 452</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>

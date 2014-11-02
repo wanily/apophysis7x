@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using Microsoft.Practices.Unity;
 
 namespace Xyrus.Apophysis
 {
@@ -189,6 +190,18 @@ namespace Xyrus.Apophysis
 		{
 			var chars = Path.GetInvalidFileNameChars();
 			return chars.Aggregate(text, (cc, c) => cc.Replace(c, '_'));
+		}
+
+		public static void RegisterInContainer<T>(this T instance)
+		{
+			ApophysisApplication.Container.RegisterInstance(instance);
+		}
+		public static void RegisterInContainer([NotNull] this Type @interface, [NotNull] Type @as)
+		{
+			if (@interface == null) throw new ArgumentNullException(@"interface");
+			if (@as == null) throw new ArgumentNullException(@"as");
+
+			ApophysisApplication.Container.RegisterType(@interface, @as);
 		}
 	}
 }

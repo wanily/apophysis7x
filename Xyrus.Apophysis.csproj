@@ -37,6 +37,15 @@
     <ApplicationIcon>Windows\Resources\MAINICON.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>packages\Unity.2.1.505.2\lib\NET35\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration">
+      <HintPath>packages\Unity.2.1.505.2\lib\NET35\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -103,6 +112,7 @@
     <Compile Include="Calculation\VariationCollection.cs" />
     <Compile Include="Calculation\VariationPriority.cs" />
     <Compile Include="Calculation\VariationRegistry.cs" />
+    <Compile Include="LazyResolver.cs" />
     <Compile Include="Math\Vector3.cs" />
     <Compile Include="Messaging\MessageCenter.cs" />
     <Compile Include="Messaging\MessageEventArgs.cs" />
@@ -558,6 +568,7 @@
     <EmbeddedResource Include="Windows\Resources\Toolbar\Editor\Undo.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Settings\AutosaveSettings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>AutosaveSettings.Designer.cs</LastGenOutput>
@@ -659,6 +670,9 @@
     <EmbeddedResource Include="Windows\Resources\Toolbar\Editor\AddFinalIterator.bmp" />
     <EmbeddedResource Include="Windows\Resources\Toolbar\Editor\FinalIterator.bmp" />
     <EmbeddedResource Include="Windows\Resources\Toolbar\Editor\RegularIterator.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

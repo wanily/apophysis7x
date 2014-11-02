@@ -32,16 +32,16 @@
 			this.mBannerPanel = new System.Windows.Forms.Panel();
 			this.mBannerPicture = new System.Windows.Forms.PictureBox();
 			this.mClientPanel = new System.Windows.Forms.Panel();
-			this.mVersionLabel = new System.Windows.Forms.Label();
-			this.mCopyright = new System.Windows.Forms.Label();
 			this.mInfoLabel = new System.Windows.Forms.Label();
+			this.mCopyright = new System.Windows.Forms.Label();
+			this.mVersionLabel = new System.Windows.Forms.Label();
 			this.mCreditsPanel = new System.Windows.Forms.Panel();
-			this.mCreditsHeader = new System.Windows.Forms.Label();
-			this.mOriginalCreditsLabel = new System.Windows.Forms.Label();
-			this.mDeveloperHeader = new System.Windows.Forms.Label();
-			this.label1 = new System.Windows.Forms.Label();
-			this.mFlamesCreditsHeader = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
+			this.mFlamesCreditsHeader = new System.Windows.Forms.Label();
+			this.label1 = new System.Windows.Forms.Label();
+			this.mDeveloperHeader = new System.Windows.Forms.Label();
+			this.mOriginalCreditsLabel = new System.Windows.Forms.Label();
+			this.mCreditsHeader = new System.Windows.Forms.Label();
 			this.mCloseButton = new System.Windows.Forms.Button();
 			this.mBannerPanel.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.mBannerPicture)).BeginInit();
@@ -70,20 +70,20 @@
 			this.mClientPanel.Controls.Add(this.mVersionLabel);
 			this.mClientPanel.Name = "mClientPanel";
 			// 
-			// mVersionLabel
+			// mInfoLabel
 			// 
-			resources.ApplyResources(this.mVersionLabel, "mVersionLabel");
-			this.mVersionLabel.Name = "mVersionLabel";
+			resources.ApplyResources(this.mInfoLabel, "mInfoLabel");
+			this.mInfoLabel.Name = "mInfoLabel";
 			// 
 			// mCopyright
 			// 
 			resources.ApplyResources(this.mCopyright, "mCopyright");
 			this.mCopyright.Name = "mCopyright";
 			// 
-			// mInfoLabel
+			// mVersionLabel
 			// 
-			resources.ApplyResources(this.mInfoLabel, "mInfoLabel");
-			this.mInfoLabel.Name = "mInfoLabel";
+			resources.ApplyResources(this.mVersionLabel, "mVersionLabel");
+			this.mVersionLabel.Name = "mVersionLabel";
 			// 
 			// mCreditsPanel
 			// 
@@ -97,35 +97,35 @@
 			this.mCreditsPanel.Controls.Add(this.mCreditsHeader);
 			this.mCreditsPanel.Name = "mCreditsPanel";
 			// 
-			// mCreditsHeader
+			// label2
 			// 
-			resources.ApplyResources(this.mCreditsHeader, "mCreditsHeader");
-			this.mCreditsHeader.Name = "mCreditsHeader";
-			// 
-			// mOriginalCreditsLabel
-			// 
-			resources.ApplyResources(this.mOriginalCreditsLabel, "mOriginalCreditsLabel");
-			this.mOriginalCreditsLabel.Name = "mOriginalCreditsLabel";
-			// 
-			// mDeveloperHeader
-			// 
-			resources.ApplyResources(this.mDeveloperHeader, "mDeveloperHeader");
-			this.mDeveloperHeader.Name = "mDeveloperHeader";
-			// 
-			// label1
-			// 
-			resources.ApplyResources(this.label1, "label1");
-			this.label1.Name = "label1";
+			resources.ApplyResources(this.label2, "label2");
+			this.label2.Name = "label2";
 			// 
 			// mFlamesCreditsHeader
 			// 
 			resources.ApplyResources(this.mFlamesCreditsHeader, "mFlamesCreditsHeader");
 			this.mFlamesCreditsHeader.Name = "mFlamesCreditsHeader";
 			// 
-			// label2
+			// label1
 			// 
-			resources.ApplyResources(this.label2, "label2");
-			this.label2.Name = "label2";
+			resources.ApplyResources(this.label1, "label1");
+			this.label1.Name = "label1";
+			// 
+			// mDeveloperHeader
+			// 
+			resources.ApplyResources(this.mDeveloperHeader, "mDeveloperHeader");
+			this.mDeveloperHeader.Name = "mDeveloperHeader";
+			// 
+			// mOriginalCreditsLabel
+			// 
+			resources.ApplyResources(this.mOriginalCreditsLabel, "mOriginalCreditsLabel");
+			this.mOriginalCreditsLabel.Name = "mOriginalCreditsLabel";
+			// 
+			// mCreditsHeader
+			// 
+			resources.ApplyResources(this.mCreditsHeader, "mCreditsHeader");
+			this.mCreditsHeader.Name = "mCreditsHeader";
 			// 
 			// mCloseButton
 			// 
