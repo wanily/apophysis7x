@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Xyrus.Apophysis</RootNamespace>
     <AssemblyName>Apophysis</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -22,6 +23,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,6 +34,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Windows\Resources\MAINICON.ico</ApplicationIcon>
@@ -123,6 +126,24 @@
     <Compile Include="Models\ParserExtensions.cs" />
     <Compile Include="Models\SerializationExtensions.cs" />
     <Compile Include="Calculation\IterationData.cs" />
+    <Compile Include="Numerics\Resources\Strings.Designer.cs" />
+    <Compile Include="Numerics\System\Numerics\ConstantHelper.cs" />
+    <Compile Include="Numerics\System\Numerics\HashCodeHelper.cs" />
+    <Compile Include="Numerics\System\Numerics\JitIntrinsicAttribute.cs" />
+    <Compile Include="Numerics\System\Numerics\Matrix3x2.cs" />
+    <Compile Include="Numerics\System\Numerics\Matrix4x4.cs" />
+    <Compile Include="Numerics\System\Numerics\Plane.cs" />
+    <Compile Include="Numerics\System\Numerics\Quaternion.cs" />
+    <Compile Include="Numerics\System\Numerics\Register.cs" />
+    <Compile Include="Numerics\System\Numerics\SR.cs" />
+    <Compile Include="Numerics\System\Numerics\Vector.cs" />
+    <Compile Include="Numerics\System\Numerics\Vector2.cs" />
+    <Compile Include="Numerics\System\Numerics\Vector2_Intrinsics.cs" />
+    <Compile Include="Numerics\System\Numerics\Vector3.cs" />
+    <Compile Include="Numerics\System\Numerics\Vector3_Intrinsics.cs" />
+    <Compile Include="Numerics\System\Numerics\Vector4.cs" />
+    <Compile Include="Numerics\System\Numerics\Vector4_Intrinsics.cs" />
+    <Compile Include="Numerics\System\Numerics\Vector_Operations.cs" />
     <Compile Include="Threading\ThreadState.cs" />
     <Compile Include="Windows\Resources\Icons.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -419,6 +440,7 @@
     <Compile Include="Windows\Visuals\PreviewGuidelinesVisual.cs" />
     <Compile Include="Windows\Visuals\PreviewImageVisual.cs" />
     <Compile Include="Windows\Visuals\PreviewInputVisual.cs" />
+    <EmbeddedResource Include="Numerics\Resources\Strings.resx" />
     <EmbeddedResource Include="Windows\Resources\Icons.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Icons.Designer.cs</LastGenOutput>
