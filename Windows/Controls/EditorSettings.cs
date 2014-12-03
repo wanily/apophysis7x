@@ -11,9 +11,9 @@ namespace Xyrus.Apophysis.Windows.Controls
 		private bool mZoomAutomatically;
 		private bool mShowVariationPreview;
 		private bool mLockAxes;
-		private double mMoveAmount;
-		private double mAngleSnap;
-		private double mScaleSnap;
+		private float mMoveAmount;
+		private float mAngleSnap;
+		private float mScaleSnap;
 
 		protected override void Dispose(bool disposing)
 		{
@@ -37,7 +37,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 			mContextMenu = null;
 		}
 
-		public double MoveAmount
+		public float MoveAmount
 		{
 			get { return mMoveAmount; }
 			set
@@ -46,7 +46,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 				RaiseSettingsChanged();
 			}
 		}
-		public double AngleSnap
+		public float AngleSnap
 		{
 			get { return mAngleSnap; }
 			set
@@ -55,7 +55,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 				RaiseSettingsChanged();
 			}
 		}
-		public double ScaleSnap
+		public float ScaleSnap
 		{
 			get { return mScaleSnap; }
 			set

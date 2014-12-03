@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
+using System.Numerics;
 using System.Windows.Forms;
-using Xyrus.Apophysis.Math;
 using Rectangle = Xyrus.Apophysis.Math.Rectangle;
 
 namespace Xyrus.Apophysis.Windows.Visuals
@@ -15,13 +15,13 @@ namespace Xyrus.Apophysis.Windows.Visuals
 
 		private void DrawBackground(Graphics g, Vector2 scale, Brush brush)
 		{
-			var step = (scale * Canvas.Ratio).Abs();
+			var step = Vector2.Abs(scale * Canvas.Ratio);
 			var bounds = GetCanvasBounds(scale);
-			var invScale = 1.0 / scale;
+			var invScale = new Vector2(1.0f / scale.X, 1.0f / scale.Y);
 
-			for (double y = bounds.TopLeft.Y; y <= bounds.BottomRight.Y; y += step.Y)
+			for (float y = bounds.TopLeft.Y; y <= bounds.BottomRight.Y; y += step.Y)
 			{
-				for (double x = bounds.TopLeft.X; x <= bounds.BottomRight.X; x += step.X)
+				for (float x = bounds.TopLeft.X; x <= bounds.BottomRight.X; x += step.X)
 				{
 					var xy = new Vector2(x, y);
 					var uv = Canvas.CanvasToWorld(xy * invScale);
@@ -38,15 +38,15 @@ namespace Xyrus.Apophysis.Windows.Visuals
 		}
 		private void DrawGridLines(Graphics g, Vector2 scale, Pen pen)
 		{
-			var step = (scale * Canvas.Ratio).Abs();
+			var step = Vector2.Abs(scale * Canvas.Ratio);
 			var bounds = GetCanvasBounds(scale);
 
-			for (double y = bounds.TopLeft.Y; y <= bounds.BottomRight.Y; y += step.Y)
+			for (float y = bounds.TopLeft.Y; y <= bounds.BottomRight.Y; y += step.Y)
 			{
 				g.DrawLine(pen, new Point((int)bounds.TopLeft.X, (int)y), new Point((int)bounds.BottomRight.X, (int)y));
 			}
 
-			for (double x = bounds.TopLeft.X; x <= bounds.BottomRight.X; x += step.X)
+			for (float x = bounds.TopLeft.X; x <= bounds.BottomRight.X; x += step.X)
 			{
 				g.DrawLine(pen, new Point((int)x, (int)bounds.TopLeft.Y), new Point((int)x, (int)bounds.BottomRight.Y));
 			}
@@ -77,14 +77,14 @@ namespace Xyrus.Apophysis.Windows.Visuals
 
 				DrawBackground(graphics, scale, backdropBrush);
 				DrawGridLines(graphics, scale, gridlinePen);
-				DrawGridLines(graphics, scale * 0.1, gridlinePenHalf);
+				DrawGridLines(graphics, scale * 0.1f, gridlinePenHalf);
 
 				if (HighlightOrigin)
 				{
 					var line0 = Canvas.WorldToCanvas(new Vector2());
 					var world = new Rectangle(new Vector2(), Canvas.Size);
 
-					if (world.IsOnSurface(new Vector2(line0.X, Canvas.Size.Y / 2.0)))
+					if (world.IsOnSurface(new Vector2(line0.X, Canvas.Size.Y / 2.0f)))
 					{
 						var x0 = new Point((int)line0.X, 0);
 						var x1 = new Point((int)line0.X, (int)Canvas.Size.Y);
@@ -92,7 +92,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 						graphics.DrawLine(gridlinePenZero, x0, x1);
 					}
 
-					if (world.IsOnSurface(new Vector2(Canvas.Size.X / 2.0, line0.Y)))
+					if (world.IsOnSurface(new Vector2(Canvas.Size.X / 2.0f, line0.Y)))
 					{
 						var y0 = new Point(0, (int)line0.Y);
 						var y1 = new Point((int)Canvas.Size.X, (int)line0.Y);

@@ -5,7 +5,7 @@ namespace Xyrus.Apophysis.Settings.Providers
 {
 	public class EditorSettingsProvider : SettingsProvider<EditorSettings>
 	{
-		public double MoveDistance
+		public float MoveDistance
 		{
 			get { return Container.MoveDistance; }
 			set
@@ -18,12 +18,12 @@ namespace Xyrus.Apophysis.Settings.Providers
 				Container.MoveDistance = value;
 			}
 		}
-		public double RotateAngle
+		public float RotateAngle
 		{
 			get { return Container.RotateAngle; }
 			set
 			{
-				if (value < double.Epsilon || value > 360)
+				if (value < float.Epsilon || value > 360)
 				{
 					throw new ArgumentOutOfRangeException(@"value");
 				}
@@ -31,7 +31,7 @@ namespace Xyrus.Apophysis.Settings.Providers
 				Container.RotateAngle = value;
 			}
 		}
-		public double ScaleRatio
+		public float ScaleRatio
 		{
 			get { return Container.ScaleRatio; }
 			set
@@ -78,7 +78,7 @@ namespace Xyrus.Apophysis.Settings.Providers
 			}
 		}
 
-		public double VariationPreviewRange
+		public float VariationPreviewRange
 		{
 			get { return Container.VariationPreviewRange; }
 			set
@@ -91,7 +91,7 @@ namespace Xyrus.Apophysis.Settings.Providers
 				Container.VariationPreviewRange = value;
 			}
 		}
-		public double VariationPreviewDensity
+		public float VariationPreviewDensity
 		{
 			get { return Container.VariationPreviewDensity; }
 			set

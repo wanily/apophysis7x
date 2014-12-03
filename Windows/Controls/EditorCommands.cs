@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel;
 using System.Linq;
-using Xyrus.Apophysis.Math;
+using System.Numerics;
 using Xyrus.Apophysis.Models;
 
 namespace Xyrus.Apophysis.Windows.Controls
@@ -158,10 +158,10 @@ namespace Xyrus.Apophysis.Windows.Controls
 			switch (mEditor.ActiveMatrix)
 			{
 				case IteratorMatrix.PreAffine:
-					getOrigin = t => t.PreAffine.Origin;
+					getOrigin = t => new Vector2(t.PreAffine.M31, t.PreAffine.M32);
 					break;
 				case IteratorMatrix.PostAffine:
-					getOrigin = t => t.PostAffine.Origin;
+					getOrigin = t => new Vector2(t.PostAffine.M31, t.PostAffine.M32);
 					break;
 				default:
 					throw new ArgumentOutOfRangeException();
@@ -185,12 +185,17 @@ namespace Xyrus.Apophysis.Windows.Controls
 		{
 			if (iterator == null) throw new ArgumentNullException("iterator");
 
-			var matrix = mEditor.ActiveMatrix == IteratorMatrix.PostAffine ? iterator.PostAffine : iterator.PreAffine;
-			
 			mEditor.RaiseBeginEdit();
 
-			matrix.Matrix.X.X *= -1;
-			matrix.Matrix.Y.X *= -1;
+			switch (mEditor.ActiveMatrix)
+			{
+				case IteratorMatrix.PreAffine:
+					iterator.PreAffine = iterator.PreAffine.Alter(iterator.PreAffine.M11 * -1, m21: iterator.PreAffine.M21 * -1);
+					break;
+				case IteratorMatrix.PostAffine:
+					iterator.PostAffine = iterator.PostAffine.Alter(iterator.PostAffine.M11 * -1, m21: iterator.PostAffine.M21 * -1);
+					break;
+			}
 
 			mEditor.RaiseEdit();
 			mEditor.RaiseEndEdit();
@@ -205,10 +210,10 @@ namespace Xyrus.Apophysis.Windows.Controls
 			switch (mEditor.ActiveMatrix)
 			{
 				case IteratorMatrix.PreAffine:
-					getOrigin = t => t.PreAffine.Origin;
+					getOrigin = t => new Vector2(t.PreAffine.M31, t.PreAffine.M32);
 					break;
 				case IteratorMatrix.PostAffine:
-					getOrigin = t => t.PostAffine.Origin;
+					getOrigin = t => new Vector2(t.PostAffine.M31, t.PostAffine.M32);
 					break;
 				default:
 					throw new ArgumentOutOfRangeException();
@@ -232,12 +237,17 @@ namespace Xyrus.Apophysis.Windows.Controls
 		{
 			if (iterator == null) throw new ArgumentNullException("iterator");
 
-			var matrix = mEditor.ActiveMatrix == IteratorMatrix.PostAffine ? iterator.PostAffine : iterator.PreAffine;
-			
 			mEditor.RaiseBeginEdit();
 
-			matrix.Matrix.X.Y *= -1;
-			matrix.Matrix.Y.Y *= -1;
+			switch (mEditor.ActiveMatrix)
+			{
+				case IteratorMatrix.PreAffine:
+					iterator.PreAffine = iterator.PreAffine.Alter(m12: iterator.PreAffine.M12 * -1, m22: iterator.PreAffine.M22 * -1);
+					break;
+				case IteratorMatrix.PostAffine:
+					iterator.PostAffine = iterator.PostAffine.Alter(m12: iterator.PostAffine.M12 * -1, m22: iterator.PostAffine.M22 * -1);
+					break;
+			}
 
 			mEditor.RaiseEdit();
 			mEditor.RaiseEndEdit();
@@ -246,16 +256,21 @@ namespace Xyrus.Apophysis.Windows.Controls
 			mEditor.Refresh();
 		}
 
-		public void RotateIterator([NotNull] Iterator iterator, double angle)
+		public void RotateIterator([NotNull] Iterator iterator, float angle)
 		{
 			if (iterator == null) throw new ArgumentNullException("iterator");
-			var matrix = mEditor.ActiveMatrix == IteratorMatrix.PostAffine
-				? iterator.PostAffine
-				: iterator.PreAffine;
 
 			mEditor.RaiseBeginEdit();
 
-			matrix.Rotate(angle);
+			switch (mEditor.ActiveMatrix)
+			{
+				case IteratorMatrix.PreAffine:
+					iterator.PreAffine = iterator.PreAffine.Rotate(angle);
+					break;
+				case IteratorMatrix.PostAffine:
+					iterator.PostAffine = iterator.PostAffine.Rotate(angle);
+					break;
+			}
 
 			mEditor.RaiseEdit();
 			mEditor.RaiseEndEdit();
@@ -263,23 +278,28 @@ namespace Xyrus.Apophysis.Windows.Controls
 			CorrectZoomIfSettingEnabled();
 			mEditor.Refresh();
 		}
-		public void RotateSelectedIterator(double angle)
+		public void RotateSelectedIterator(float angle)
 		{
 			if (mEditor.SelectedIterator == null)
 				return;
 
 			RotateIterator(mEditor.SelectedIterator, angle);
 		}
-		public void ScaleIterator([NotNull] Iterator iterator, double ratio)
+		public void ScaleIterator([NotNull] Iterator iterator, float ratio)
 		{
 			if (iterator == null) throw new ArgumentNullException("iterator");
-			var matrix = mEditor.ActiveMatrix == IteratorMatrix.PostAffine
-				? iterator.PostAffine
-				: iterator.PreAffine;
 
 			mEditor.RaiseBeginEdit();
 
-			matrix.Scale(ratio);
+			switch (mEditor.ActiveMatrix)
+			{
+				case IteratorMatrix.PreAffine:
+					iterator.PreAffine = iterator.PreAffine.Scale(ratio);
+					break;
+				case IteratorMatrix.PostAffine:
+					iterator.PostAffine = iterator.PostAffine.Scale(ratio);
+					break;
+			}
 
 			mEditor.RaiseEdit();
 			mEditor.RaiseEndEdit();
@@ -287,7 +307,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 			CorrectZoomIfSettingEnabled();
 			mEditor.Refresh();
 		}
-		public void ScaleSelectedIterator(double ratio)
+		public void ScaleSelectedIterator(float ratio)
 		{
 			if (mEditor.SelectedIterator == null)
 				return;
@@ -297,13 +317,18 @@ namespace Xyrus.Apophysis.Windows.Controls
 		public void MoveIterator([NotNull] Iterator iterator, Vector2 offset)
 		{
 			if (iterator == null) throw new ArgumentNullException("iterator");
-			var matrix = mEditor.ActiveMatrix == IteratorMatrix.PostAffine
-				? iterator.PostAffine
-				: iterator.PreAffine;
 
 			mEditor.RaiseBeginEdit();
 
-			matrix.Move(offset);
+			switch (mEditor.ActiveMatrix)
+			{
+				case IteratorMatrix.PreAffine:
+					iterator.PreAffine = iterator.PreAffine.Move(offset);
+					break;
+				case IteratorMatrix.PostAffine:
+					iterator.PostAffine = iterator.PostAffine.Move(offset);
+					break;
+			}
 			
 			mEditor.RaiseEdit();
 			mEditor.RaiseEndEdit();
@@ -340,14 +365,15 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 			mEditor.RaiseBeginEdit();
 
-			var matrix = mEditor.ActiveMatrix == IteratorMatrix.PostAffine ? iterator.PostAffine : iterator.PreAffine;
-
-			matrix.Origin.X = 0;
-			matrix.Origin.Y = 0;
-			matrix.Matrix.X.X = 1;
-			matrix.Matrix.X.Y = 0;
-			matrix.Matrix.Y.X = 0;
-			matrix.Matrix.Y.Y = 1;
+			switch (mEditor.ActiveMatrix)
+			{
+				case IteratorMatrix.PreAffine:
+					iterator.PreAffine = new Matrix3x2(1, 0, 0, 1, 0, 0);
+					break;
+				case IteratorMatrix.PostAffine:
+					iterator.PostAffine = new Matrix3x2(1, 0, 0, 1, 0, 0);
+					break;
+			}
 
 			mEditor.RaiseEdit();
 			mEditor.RaiseEndEdit();
@@ -368,10 +394,15 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 			mEditor.RaiseBeginEdit();
 
-			var matrix = mEditor.ActiveMatrix == IteratorMatrix.PostAffine ? iterator.PostAffine : iterator.PreAffine;
-
-			matrix.Origin.X = 0;
-			matrix.Origin.Y = 0;
+			switch (mEditor.ActiveMatrix)
+			{
+				case IteratorMatrix.PreAffine:
+					iterator.PreAffine = iterator.PreAffine.Alter(m31: 0, m32: 0);
+					break;
+				case IteratorMatrix.PostAffine:
+					iterator.PostAffine = iterator.PostAffine.Alter(m31: 0, m32: 0);
+					break;
+			}
 
 			mEditor.RaiseEdit();
 			mEditor.RaiseEndEdit();
@@ -393,22 +424,33 @@ namespace Xyrus.Apophysis.Windows.Controls
 			mEditor.RaiseBeginEdit();
 
 			var matrix = mEditor.ActiveMatrix == IteratorMatrix.PostAffine ? iterator.PostAffine : iterator.PreAffine;
-			var scale = new Vector2(matrix.Matrix.X.Length, matrix.Matrix.Y.Length);
+			var @mx = new Vector2(matrix.M11, matrix.M12);
+			var @my = new Vector2(matrix.M21, matrix.M22);
 
-			var handle = matrix.Matrix.X;
+
+			var scale = new Vector2(@mx.Length(), @my.Length());
+
+			var handle = @mx;
 			var axis = new Vector2(1, 0);
 
-			var delta = System.Math.Atan2(matrix.Matrix.X.Y, matrix.Matrix.X.X) - System.Math.Atan2(matrix.Matrix.Y.Y, matrix.Matrix.Y.X);
-			var angle = System.Math.Atan2(handle.Y, handle.X) - System.Math.Atan2(axis.Y, axis.X) * 180.0 / System.Math.PI;
-			var newAngle = System.Math.Round(angle / 90) * System.Math.PI / 2.0;
+			var delta = Float.Atan2(@mx.Y, @mx.X) - Float.Atan2(@my.Y, @my.X);
+			var angle = Float.Atan2(handle.Y, handle.X) - Float.Atan2(axis.Y, axis.X) * 180.0f / Float.Pi;
+			var newAngle = Float.Round(angle / 90) * Float.Pi / 2.0f;
 
-			var x = axis.Rotate(newAngle, new Vector2()) * scale.X;
-			var y = x.Direction.Rotate(-delta, new Vector2()) * scale.Y;
+			var x = axis.Rotate(newAngle) * scale.X;
+			var y = x.Normal().Rotate(-delta) * scale.Y;
 
-			matrix.Matrix.X.X = x.X;
-			matrix.Matrix.X.Y = x.Y;
-			matrix.Matrix.Y.X = y.X;
-			matrix.Matrix.Y.Y = y.Y;
+			matrix = matrix.Alter(x.X, x.Y, y.X, y.Y);
+
+			switch (mEditor.ActiveMatrix)
+			{
+				case IteratorMatrix.PreAffine:
+					iterator.PreAffine = matrix;
+					break;
+				case IteratorMatrix.PostAffine:
+					iterator.PostAffine = matrix;
+					break;
+			}
 
 			mEditor.RaiseEdit();
 			mEditor.RaiseEndEdit();
@@ -431,13 +473,20 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 			var matrix = mEditor.ActiveMatrix == IteratorMatrix.PostAffine ? iterator.PostAffine : iterator.PreAffine;
 
-			var x = matrix.Matrix.X.Direction;
-			var y = matrix.Matrix.Y.Direction;
+			var l0 = new Vector2(matrix.M11, matrix.M12).Length();
+			var l1 = new Vector2(matrix.M21, matrix.M22).Length();
 
-			matrix.Matrix.X.X = x.X;
-			matrix.Matrix.X.Y = x.Y;
-			matrix.Matrix.Y.X = y.X;
-			matrix.Matrix.Y.Y = y.Y;
+			matrix = new Matrix3x2(matrix.M11 / l0, matrix.M12 / l0, matrix.M21 / l1, matrix.M22 / l1, matrix.M31, matrix.M32);
+
+			switch (mEditor.ActiveMatrix)
+			{
+				case IteratorMatrix.PreAffine:
+					iterator.PreAffine = matrix;
+					break;
+				case IteratorMatrix.PostAffine:
+					iterator.PostAffine = matrix;
+					break;
+			}
 
 			mEditor.RaiseEdit();
 			mEditor.RaiseEndEdit();
@@ -453,7 +502,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 			ResetIteratorScale(mEditor.SelectedIterator);
 		}
 
-		public void RotateWorld(double angle)
+		public void RotateWorld(float angle)
 		{
 			var origin = new Vector2(0, 0);
 
@@ -463,23 +512,25 @@ namespace Xyrus.Apophysis.Windows.Controls
 			{
 				var matrices = new[] {iterator.PreAffine, iterator.PostAffine};
 
-				foreach (var matrix in matrices)
+				for (var i = 0; i < matrices.Length; i++)
 				{
-					var o = matrix.Origin;
-					var x = matrix.Matrix.X + o;
-					var y = matrix.Matrix.Y + o;
+					var matrix = matrices[i];
+
+					var o = new Vector2(matrix.M31, matrix.M32);
+					var x = new Vector2(matrix.M11, matrix.M12) + o;
+					var y = new Vector2(matrix.M21, matrix.M22) + o;
 
 					o = o.Rotate(angle, origin);
 					x = x.Rotate(angle, origin);
 					y = y.Rotate(angle, origin);
 
-					matrix.Origin.X = System.Math.Round(o.X, 6);
-					matrix.Origin.Y = System.Math.Round(o.Y, 6);
-					matrix.Matrix.X.X = System.Math.Round(x.X - o.X, 6);
-					matrix.Matrix.X.Y = System.Math.Round(x.Y - o.Y, 6);
-					matrix.Matrix.Y.X = System.Math.Round(y.X - o.X, 6);
-					matrix.Matrix.Y.Y = System.Math.Round(y.Y - o.Y, 6);
+					matrices[i] = new Matrix3x2(
+						Float.Round(x.X - o.X, 6), Float.Round(x.Y - o.Y, 6), Float.Round(y.X - o.X, 6), 
+						Float.Round(y.Y - o.Y, 6), Float.Round(o.X, 6), Float.Round(o.Y, 6));
 				}
+
+				iterator.PreAffine = matrices[0];
+				iterator.PostAffine = matrices[1];
 			}
 
 			mEditor.RaiseEdit();

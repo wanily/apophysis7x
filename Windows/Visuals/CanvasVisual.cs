@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
+using System.Numerics;
 using System.Windows.Forms;
-using Xyrus.Apophysis.Math;
 using Rectangle = Xyrus.Apophysis.Math.Rectangle;
 
 namespace Xyrus.Apophysis.Windows.Visuals

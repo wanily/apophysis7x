@@ -14,16 +14,16 @@
     <Setting Name="MainPreviewDensity" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">5</Value>
     </Setting>
-    <Setting Name="BatchListPreviewDensity" Type="System.Double" Scope="User">
+    <Setting Name="BatchListPreviewDensity" Type="System.Single" Scope="User">
       <Value Profile="(Default)">2</Value>
     </Setting>
-    <Setting Name="LowQualityDensity" Type="System.Double" Scope="User">
+    <Setting Name="LowQualityDensity" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0.1</Value>
     </Setting>
-    <Setting Name="MediumQualityDensity" Type="System.Double" Scope="User">
+    <Setting Name="MediumQualityDensity" Type="System.Single" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="HighQualityDensity" Type="System.Double" Scope="User">
+    <Setting Name="HighQualityDensity" Type="System.Single" Scope="User">
       <Value Profile="(Default)">5</Value>
     </Setting>
     <Setting Name="SizePreset1" Type="System.Drawing.Size" Scope="User">
@@ -41,7 +41,7 @@
     <Setting Name="Oversample" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="FilterRadius" Type="System.Double" Scope="User">
+    <Setting Name="FilterRadius" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
   </Settings>

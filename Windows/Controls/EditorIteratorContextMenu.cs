@@ -97,14 +97,14 @@ namespace Xyrus.Apophysis.Windows.Controls
 			if (mIterator == null)
 				return;
 
-			mEditor.Commands.RotateIterator(mIterator, System.Math.PI / 2.0);
+			mEditor.Commands.RotateIterator(mIterator, Float.Pi / 2);
 		}
 		private void OnRotate90CwClick(object sender, EventArgs e)
 		{
 			if (mIterator == null)
 				return;
 
-			mEditor.Commands.RotateIterator(mIterator, -System.Math.PI / 2.0);
+			mEditor.Commands.RotateIterator(mIterator, -Float.Pi / 2);
 		}
 		private void OnFlipVerticallyClick(object sender, EventArgs e)
 		{

@@ -17,9 +17,9 @@ namespace Xyrus.Apophysis
 			if (canvasSize.Width <= 0 || canvasSize.Height <= 0)
 				return canvasSize;
 
-			var outputSize = (double)size.Width / size.Height > (double)canvasSize.Width / canvasSize.Height 
-				? new Size(canvasSize.Width, (int)(canvasSize.Width * (double)size.Height / size.Width)) 
-				: new Size((int)(canvasSize.Height * (double)size.Width / size.Height), canvasSize.Height);
+			var outputSize = (float)size.Width / size.Height > (float)canvasSize.Width / canvasSize.Height
+				? new Size(canvasSize.Width, (int)(canvasSize.Width * (float)size.Height / size.Width))
+				: new Size((int)(canvasSize.Height * (float)size.Width / size.Height), canvasSize.Height);
 
 			return outputSize;
 		}
@@ -202,6 +202,14 @@ namespace Xyrus.Apophysis
 			if (@as == null) throw new ArgumentNullException(@"as");
 
 			ApophysisApplication.Container.RegisterType(@interface, @as);
+		}
+
+		public static float NextFloat([NotNull] this Random r)
+		{
+			if (r == null) throw new ArgumentNullException("r");
+
+			//todo x: who needs control over entropy anyway! no seriously, there's gotta be a better way ;)
+			return (float) r.NextDouble();
 		}
 	}
 }

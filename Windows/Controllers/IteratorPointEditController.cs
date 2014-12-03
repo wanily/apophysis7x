@@ -1,8 +1,8 @@
 using System;
 using System.Globalization;
 using System.Linq;
+using System.Numerics;
 using System.Windows.Forms;
-using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Windows.Controls;
 using Xyrus.Apophysis.Windows.Forms;
 
@@ -10,9 +10,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 {
 	class IteratorPointEditController : Controller<Editor>
 	{
-		private static readonly double[] mMoveOffsetOptions = { 1.0, 0.5, 0.25, 0.1, 0.05, 0.025, 0.01 };
-		private static readonly double[] mSnapAngleOptions = { 5.0, 15.0, 30.0, 45.0, 60.0, 90.0, 120.0, 180.0 };
-		private static readonly double[] mScaleRatioOptions = { 110.0, 125.0, 150.0, 175.0, 200.0 };
+		private static readonly float[] mMoveOffsetOptions = { 1.0f, 0.5f, 0.25f, 0.1f, 0.05f, 0.025f, 0.01f };
+		private static readonly float[] mSnapAngleOptions = { 5.0f, 15.0f, 30.0f, 45.0f, 60.0f, 90.0f, 120.0f, 180.0f };
+		private static readonly float[] mScaleRatioOptions = { 110.0f, 125.0f, 150.0f, 175.0f, 200.0f };
 
 		private EditorController mParent;
 		private TextBox[] mPointTextBoxes;
@@ -111,7 +111,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		private void OnIteratorRotateClick(object sender, EventArgs e)
 		{
-			double angle;
+			float angle;
 
 			if (ReferenceEquals(sender, View.IteratorRotate90CCW))
 			{
@@ -139,12 +139,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				angle = 360 + angle;
 			}
 
-			View.IteratorCanvas.Commands.RotateSelectedIterator(-angle * System.Math.PI / 180.0);
+			View.IteratorCanvas.Commands.RotateSelectedIterator(-angle * Float.Pi / 180.0f);
 		}
 		private void OnSnapAngleChanged(object sender, EventArgs e)
 		{
-			double value;
-			if (!double.TryParse(View.IteratorSnapAngle.Text, NumberStyles.Float, InputController.Culture, out value))
+			float value;
+			if (!float.TryParse(View.IteratorSnapAngle.Text, NumberStyles.Float, InputController.Culture, out value))
 			{
 				value = View.IteratorCanvas.Settings.AngleSnap;
 			}
@@ -181,8 +181,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 		private void OnMoveOffsetChanged(object sender, EventArgs e)
 		{
-			double value;
-			if (!double.TryParse(View.IteratorMoveOffset.Text, NumberStyles.Float, InputController.Culture, out value))
+			float value;
+			if (!float.TryParse(View.IteratorMoveOffset.Text, NumberStyles.Float, InputController.Culture, out value))
 			{
 				value = View.IteratorCanvas.Settings.MoveAmount;
 			}
@@ -192,15 +192,15 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		private void OnIteratorScaleClick(object sender, EventArgs e)
 		{
-			double ratio;
+			float ratio;
 
 			if (ReferenceEquals(sender, View.IteratorScaleDown))
 			{
-				ratio = 100.0 / View.IteratorCanvas.Settings.ScaleSnap;
+				ratio = 100.0f / View.IteratorCanvas.Settings.ScaleSnap;
 			}
 			else if (ReferenceEquals(sender, View.IteratorScaleUp))
 			{
-				ratio = View.IteratorCanvas.Settings.ScaleSnap / 100.0;
+				ratio = View.IteratorCanvas.Settings.ScaleSnap / 100.0f;
 			}
 			else
 			{
@@ -211,8 +211,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 		private void OnScaleRatioChanged(object sender, EventArgs e)
 		{
-			double value;
-			if (!double.TryParse(View.IteratorScaleRatio.Text, NumberStyles.Float, InputController.Culture, out value))
+			float value;
+			if (!float.TryParse(View.IteratorScaleRatio.Text, NumberStyles.Float, InputController.Culture, out value))
 			{
 				value = View.IteratorCanvas.Settings.ScaleSnap;
 			}
@@ -230,18 +230,25 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			if (ReferenceEquals(sender, View.IteratorResetPointO))
 			{
-				matrix.Origin.X = 0;
-				matrix.Origin.Y = 0;
+				matrix = matrix.Alter(m31: 0, m32: 0);
 			}
 			else if (ReferenceEquals(sender, View.IteratorResetPointX))
 			{
-				matrix.Matrix.X.X = 1;
-				matrix.Matrix.X.Y = 0;
+				matrix = matrix.Alter(1, 0);
 			}
 			else if (ReferenceEquals(sender, View.IteratorResetPointY))
 			{
-				matrix.Matrix.Y.X = 0;
-				matrix.Matrix.Y.Y = 1;
+				matrix = matrix.Alter(m21: 0, m22: 1);
+			}
+
+			switch (View.IteratorCanvas.ActiveMatrix)
+			{
+				case IteratorMatrix.PreAffine:
+					iterator.PreAffine = matrix;
+					break;
+				case IteratorMatrix.PostAffine:
+					iterator.PostAffine = matrix;
+					break;
 			}
 
 			View.IteratorCanvas.Refresh();
@@ -255,24 +262,27 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			var iterator = View.IteratorCanvas.SelectedIterator;
 			var matrix = View.IteratorCanvas.ActiveMatrix == IteratorMatrix.PostAffine ? iterator.PostAffine : iterator.PreAffine;
 
-			double ox, oy, xx, xy, yx, yy;
+			float ox, oy, xx, xy, yx, yy;
 
 			using (mParent.Initializer.Enter())
 			{
-				if (!double.TryParse(View.IteratorPointOxTextBox.Text, NumberStyles.Float, InputController.Culture, out ox)) ox = matrix.Origin.X;
-				if (!double.TryParse(View.IteratorPointOyTextBox.Text, NumberStyles.Float, InputController.Culture, out oy)) oy = matrix.Origin.Y;
-				if (!double.TryParse(View.IteratorPointXxTextBox.Text, NumberStyles.Float, InputController.Culture, out xx)) xx = matrix.Matrix.X.X + ox;
-				if (!double.TryParse(View.IteratorPointXyTextBox.Text, NumberStyles.Float, InputController.Culture, out xy)) xy = matrix.Matrix.X.Y + oy;
-				if (!double.TryParse(View.IteratorPointYxTextBox.Text, NumberStyles.Float, InputController.Culture, out yx)) yx = matrix.Matrix.Y.X + ox;
-				if (!double.TryParse(View.IteratorPointYyTextBox.Text, NumberStyles.Float, InputController.Culture, out yy)) yy = matrix.Matrix.Y.Y + oy;
+				if (!float.TryParse(View.IteratorPointOxTextBox.Text, NumberStyles.Float, InputController.Culture, out ox)) ox = matrix.M31;
+				if (!float.TryParse(View.IteratorPointOyTextBox.Text, NumberStyles.Float, InputController.Culture, out oy)) oy = matrix.M32;
+				if (!float.TryParse(View.IteratorPointXxTextBox.Text, NumberStyles.Float, InputController.Culture, out xx)) xx = matrix.M11 + ox;
+				if (!float.TryParse(View.IteratorPointXyTextBox.Text, NumberStyles.Float, InputController.Culture, out xy)) xy = matrix.M12 + oy;
+				if (!float.TryParse(View.IteratorPointYxTextBox.Text, NumberStyles.Float, InputController.Culture, out yx)) yx = matrix.M21 + ox;
+				if (!float.TryParse(View.IteratorPointYyTextBox.Text, NumberStyles.Float, InputController.Culture, out yy)) yy = matrix.M22 + oy;
 			}
 
-			matrix.Origin.X = ox;
-			matrix.Origin.Y = oy;
-			matrix.Matrix.X.X = xx - ox;
-			matrix.Matrix.X.Y = xy - oy;
-			matrix.Matrix.Y.X = yx - ox;
-			matrix.Matrix.Y.Y = yy - oy;
+			switch (View.IteratorCanvas.ActiveMatrix)
+			{
+				case IteratorMatrix.PreAffine:
+					iterator.PreAffine = new Matrix3x2(xx - ox, xy - oy, yx - ox, yy - oy, ox, oy);
+					break;
+				case IteratorMatrix.PostAffine:
+					iterator.PostAffine = new Matrix3x2(xx - ox, xy - oy, yx - ox, yy - oy, ox, oy);
+					break;
+			}
 
 			View.IteratorCanvas.Refresh();
 		}
@@ -286,9 +296,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			var iterator = View.IteratorCanvas.SelectedIterator;
 			var matrix = View.IteratorCanvas.ActiveMatrix == IteratorMatrix.PostAffine ? iterator.PostAffine : iterator.PreAffine;
 
-			var o = matrix.Origin;
-			var x = matrix.Matrix.X + o;
-			var y = matrix.Matrix.Y + o;
+			var o = new Vector2(matrix.M31, matrix.M32);
+			var x = new Vector2(matrix.M11, matrix.M12) + o;
+			var y = new Vector2(matrix.M21, matrix.M22) + o;
 
 			using (mParent.Initializer.Enter())
 			{
@@ -314,9 +324,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			var iterator = View.IteratorCanvas.SelectedIterator;
 			var matrix = View.IteratorCanvas.ActiveMatrix == IteratorMatrix.PostAffine ? iterator.PostAffine : iterator.PreAffine;
 
-			var o = matrix.Origin;
-			var x = matrix.Matrix.X + o;
-			var y = matrix.Matrix.Y + o;
+			var o = new Vector2(matrix.M31, matrix.M32);
+			var x = new Vector2(matrix.M11, matrix.M12) + o;
+			var y = new Vector2(matrix.M21, matrix.M22) + o;
 
 			using (mParent.Initializer.Enter())
 			{

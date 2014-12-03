@@ -29,8 +29,8 @@ namespace Xyrus.Apophysis.Calculation
 			IterationCount = manager.IterationCount;
 		}
 
-		public abstract void StartIterate([NotNull] Histogram histogram, double density);
-		public abstract void Iterate([NotNull] Histogram histogram, double density);
+		public abstract void StartIterate([NotNull] Histogram histogram, float density);
+		public abstract void Iterate([NotNull] Histogram histogram, float density);
 
 		public virtual void Wait()
 		{

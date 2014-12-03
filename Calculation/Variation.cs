@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Xyrus.Apophysis.Models;
+using System.Numerics;
 
 namespace Xyrus.Apophysis.Calculation
 {
@@ -44,7 +44,7 @@ namespace Xyrus.Apophysis.Calculation
 		{
 			get { return mDefaultName; }
 		}
-		public double Weight
+		public float Weight
 		{
 			get; 
 			set;
@@ -64,7 +64,7 @@ namespace Xyrus.Apophysis.Calculation
 			}
 		}
 
-		public virtual void Prepare(AffineTransform affineMatrix = null)
+		public virtual void Prepare(Matrix3x2? affineMatrix = null)
 		{
 		}
 		public abstract void Calculate(IterationData data);
@@ -74,17 +74,17 @@ namespace Xyrus.Apophysis.Calculation
 			GC.SuppressFinalize(this);
 		}
 
-		public virtual double GetVariable([NotNull] string name)
+		public virtual float GetVariable([NotNull] string name)
 		{
-			return 0.0;
+			return 0.0f;
 		}
-		public virtual double SetVariable([NotNull] string name, double value)
+		public virtual float SetVariable([NotNull] string name, float value)
 		{
-			return 0.0;
+			return 0.0f;
 		}
-		public virtual double ResetVariable([NotNull] string name)
+		public virtual float ResetVariable([NotNull] string name)
 		{
-			return 0.0;
+			return 0.0f;
 		}
 
 		public virtual int GetVariableCount()

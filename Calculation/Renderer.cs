@@ -9,7 +9,7 @@ namespace Xyrus.Apophysis.Calculation
 	public class Renderer : IDisposable
 	{
 		private const int mFuse = 20;
-		private const double mNotifyThreshold = 1.0;
+		private const float mNotifyThreshold = 1.0f;
 
 		private readonly RenderMessengerBase mNullMessenger = new RenderMessengerBase();
 		private RenderMessengerBase mMessenger;
@@ -18,15 +18,15 @@ namespace Xyrus.Apophysis.Calculation
 		private FlameData mData;
 
 		private long mSamplingLevel;
-		private double? mLastSecondsPerIteration;
-		private double mAverageIterationsPerSecond;
-		private double mPureRenderingTime;
+		private float? mLastSecondsPerIteration;
+		private float mAverageIterationsPerSecond;
+		private float mPureRenderingTime;
 
 		~Renderer()
 		{
 			Dispose(false);
 		}
-		public Renderer([NotNull] Flame flame, Size size, int oversample = 1, double filterRadius = 0, bool withTransparency = true)
+		public Renderer([NotNull] Flame flame, Size size, int oversample = 1, float filterRadius = 0, bool withTransparency = true)
 		{
 			if (flame == null) throw new ArgumentNullException("flame");
 			if (oversample <= 0) throw new ArgumentOutOfRangeException(@"oversample");
@@ -97,15 +97,15 @@ namespace Xyrus.Apophysis.Calculation
 		}
 
 		public Size Size { get; private set; }
-		public double FilterRadius { get; private set; }
+		public float FilterRadius { get; private set; }
 		public int Oversample { get; private set; }
 		public bool WithTransparency { get; private set; }
 
-		public double AverageIterationsPerSecond
+		public float AverageIterationsPerSecond
 		{
 			get { return mAverageIterationsPerSecond; }
 		}
-		public double PureRenderingTime
+		public float PureRenderingTime
 		{
 			get { return mPureRenderingTime; }
 		}

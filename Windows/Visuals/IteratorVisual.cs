@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using System.Numerics;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Models;
@@ -28,7 +29,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 		protected override void OnControlPaint(Graphics graphics)
 		{
 			const int vertexRadius = 3;
-			const double handleSize = 0.2;
+			const float handleSize = 0.2f;
 			const int distLabel = 4;
 
 			const string lo = "O";
@@ -40,12 +41,12 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			var xy = GetEdgeXy();
 
 			var fo = Origin;
-			var fx = Matrix.X;
-			var fy = Matrix.Y;
+			var fx = X;
+			var fy = Y;
 
-			var ao = AlternativeOrigin;
-			var ax = AlternativeMatrix.X;
-			var ay = AlternativeMatrix.Y;
+			var ao = InactiveOrigin;
+			var ax = InactiveX;
+			var ay = InactiveY;
 
 			var apx = Canvas.WorldToCanvas(ao + ax);
 			var apy = Canvas.WorldToCanvas(ao + ay);
@@ -107,7 +108,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 				dashLinePen.DashPattern = new[] { 6.0f, 4.0f };
 				dashWidgetPen.DashPattern = new[] { 6.0f, 4.0f };
 
-				if (!AlternativeOrigin.IsZero || !AlternativeMatrix.IsLinear || mActiveMatrix == IteratorMatrix.PostAffine)
+				if (!InactiveMatrix.IsIdentity || mActiveMatrix == IteratorMatrix.PostAffine)
 				{
 					graphics.DrawLine(widgetPen, apxn.ToPoint(), apx.ToPoint());
 					graphics.DrawLine(widgetPen, apyn.ToPoint(), apy.ToPoint());
@@ -177,11 +178,11 @@ namespace Xyrus.Apophysis.Windows.Visuals
 		}
 		public Vector2 GetVertexX()
 		{
-			return Canvas.WorldToCanvas(Origin + Matrix.X);
+			return Canvas.WorldToCanvas(Origin + X);
 		}
 		public Vector2 GetVertexY()
 		{
-			return Canvas.WorldToCanvas(Origin + Matrix.Y);
+			return Canvas.WorldToCanvas(Origin + Y);
 		}
 
 		public Line GetEdgeOx()
@@ -204,26 +205,77 @@ namespace Xyrus.Apophysis.Windows.Visuals
 				switch (mActiveMatrix)
 				{
 					case IteratorMatrix.PreAffine:
-						return Model.PreAffine.Origin;
+						return new Vector2(Model.PreAffine.M31, Model.PreAffine.M32);
 					case IteratorMatrix.PostAffine:
-						return Model.PostAffine.Origin;
+						return new Vector2(Model.PostAffine.M31, Model.PostAffine.M32);
 					default:
 						throw new ArgumentOutOfRangeException();
 				}
 			}
+			set
+			{
+				switch (mActiveMatrix)
+				{
+					case IteratorMatrix.PreAffine:
+						Model.PreAffine = Model.PreAffine.Alter(m31: value.X, m32: value.Y);
+						break;
+					case IteratorMatrix.PostAffine:
+						Model.PostAffine = Model.PostAffine.Alter(m31: value.X, m32: value.Y);
+						break;
+				}
+			}
 		}
-		public Matrix2X2 Matrix
+		public Vector2 X
 		{
 			get
 			{
 				switch (mActiveMatrix)
 				{
 					case IteratorMatrix.PreAffine:
-						return Model.PreAffine.Matrix;
+						return new Vector2(Model.PreAffine.M11, Model.PreAffine.M12);
 					case IteratorMatrix.PostAffine:
-						return Model.PostAffine.Matrix;
+						return new Vector2(Model.PostAffine.M11, Model.PostAffine.M12);
 					default:
 						throw new ArgumentOutOfRangeException();
+				}
+			}
+			set
+			{
+				switch (mActiveMatrix)
+				{
+					case IteratorMatrix.PreAffine:
+						Model.PreAffine = Model.PreAffine.Alter(value.X, value.Y);
+						break;
+					case IteratorMatrix.PostAffine:
+						Model.PostAffine = Model.PostAffine.Alter(value.X, value.Y);
+						break;
+				}
+			}
+		}
+		public Vector2 Y
+		{
+			get
+			{
+				switch (mActiveMatrix)
+				{
+					case IteratorMatrix.PreAffine:
+						return new Vector2(Model.PreAffine.M21, Model.PreAffine.M22);
+					case IteratorMatrix.PostAffine:
+						return new Vector2(Model.PostAffine.M21, Model.PostAffine.M22);
+					default:
+						throw new ArgumentOutOfRangeException();
+				}
+			}
+			set
+			{
+				switch (mActiveMatrix)
+				{
+					case IteratorMatrix.PreAffine:
+						Model.PreAffine = Model.PreAffine.Alter(m21: value.X, m22: value.Y);
+						break;
+					case IteratorMatrix.PostAffine:
+						Model.PostAffine = Model.PostAffine.Alter(m21: value.X, m22: value.Y);
+						break;
 				}
 			}
 		}
@@ -232,31 +284,62 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			get { return mIterator; }
 		}
 
-		public Vector2 AlternativeOrigin
+
+		public Matrix3x2 InactiveMatrix
 		{
 			get
 			{
 				switch (mActiveMatrix)
 				{
 					case IteratorMatrix.PreAffine:
-						return Model.PostAffine.Origin;
+						return Model.PostAffine;
 					case IteratorMatrix.PostAffine:
-						return Model.PreAffine.Origin;
+						return Model.PreAffine;
 					default:
 						throw new ArgumentOutOfRangeException();
 				}
 			}
 		}
-		public Matrix2X2 AlternativeMatrix
+		public Vector2 InactiveOrigin
 		{
 			get
 			{
 				switch (mActiveMatrix)
 				{
 					case IteratorMatrix.PreAffine:
-						return Model.PostAffine.Matrix;
+						return new Vector2(Model.PostAffine.M31, Model.PostAffine.M32);
 					case IteratorMatrix.PostAffine:
-						return Model.PreAffine.Matrix;
+						return new Vector2(Model.PreAffine.M31, Model.PreAffine.M32);
+					default:
+						throw new ArgumentOutOfRangeException();
+				}
+			}
+		}
+		public Vector2 InactiveX
+		{
+			get
+			{
+				switch (mActiveMatrix)
+				{
+					case IteratorMatrix.PreAffine:
+						return new Vector2(Model.PostAffine.M11, Model.PostAffine.M12);
+					case IteratorMatrix.PostAffine:
+						return new Vector2(Model.PreAffine.M11, Model.PreAffine.M12);
+					default:
+						throw new ArgumentOutOfRangeException();
+				}
+			}
+		}
+		public Vector2 InactiveY
+		{
+			get
+			{
+				switch (mActiveMatrix)
+				{
+					case IteratorMatrix.PreAffine:
+						return new Vector2(Model.PostAffine.M21, Model.PostAffine.M22);
+					case IteratorMatrix.PostAffine:
+						return new Vector2(Model.PreAffine.M21, Model.PreAffine.M22);
 					default:
 						throw new ArgumentOutOfRangeException();
 				}
@@ -285,8 +368,8 @@ namespace Xyrus.Apophysis.Windows.Visuals
 
 		public Math.Rectangle GetBounds()
 		{
-			var fx = Canvas.WorldToCanvas(Matrix.X + Origin);
-			var fy = Canvas.WorldToCanvas(Matrix.Y + Origin);
+			var fx = Canvas.WorldToCanvas(X + Origin);
+			var fy = Canvas.WorldToCanvas(Y + Origin);
 
 			var cornerTopLeft = new Vector2(System.Math.Min(fx.X, fy.X), System.Math.Min(fx.Y, fy.Y));
 			var cornerBottomRight = new Vector2(System.Math.Max(fx.X, fy.X), System.Math.Max(fx.Y, fy.Y));

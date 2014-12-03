@@ -24,7 +24,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		private Bitmap mWaitImage;
 		private ImageList mPreviewImages;
 		private int mPreviewSize;
-		private double mPreviewDensity;
+		private float mPreviewDensity;
 
 		public BatchListController([NotNull] Main view, [NotNull] MainController parent) : base(view)
 		{
@@ -220,7 +220,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				}
 			}
 		}
-		public double ListPreviewDensity
+		public float ListPreviewDensity
 		{
 			get { return mPreviewDensity; }
 			set

@@ -5,11 +5,11 @@ namespace Xyrus.Apophysis.Calculation
 	[PublicAPI]
 	public class BitmapReadyEventArgs : EventArgs
 	{
-		public BitmapReadyEventArgs(double nextIssue)
+		public BitmapReadyEventArgs(float nextIssue)
 		{
 			NextIssue = nextIssue;
 		}
 
-		public double NextIssue { get; private set; }
+		public float NextIssue { get; private set; }
 	}
 }

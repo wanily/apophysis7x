@@ -225,14 +225,14 @@
 			// 
 			this.RotationDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.RotationDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.RotationDragPanel.Default = 0D;
-			this.RotationDragPanel.DragStepping = 5D;
+			this.RotationDragPanel.Default = 0F;
+			this.RotationDragPanel.DragStepping = 5F;
 			resources.ApplyResources(this.RotationDragPanel, "RotationDragPanel");
-			this.RotationDragPanel.Maximum = 360D;
-			this.RotationDragPanel.Minimum = -360D;
+			this.RotationDragPanel.Maximum = 360F;
+			this.RotationDragPanel.Minimum = -360F;
 			this.RotationDragPanel.Name = "RotationDragPanel";
 			this.RotationDragPanel.TextBox = this.RotationTextBox;
-			this.RotationDragPanel.Value = 0D;
+			this.RotationDragPanel.Value = 0F;
 			// 
 			// YPositionScrollBar
 			// 
@@ -251,14 +251,14 @@
 			// 
 			this.YPositionDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.YPositionDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.YPositionDragPanel.Default = 0D;
-			this.YPositionDragPanel.DragStepping = 0.1D;
+			this.YPositionDragPanel.Default = 0F;
+			this.YPositionDragPanel.DragStepping = 0.1F;
 			resources.ApplyResources(this.YPositionDragPanel, "YPositionDragPanel");
-			this.YPositionDragPanel.Maximum = 1000D;
-			this.YPositionDragPanel.Minimum = -1000D;
+			this.YPositionDragPanel.Maximum = 1000F;
+			this.YPositionDragPanel.Minimum = -1000F;
 			this.YPositionDragPanel.Name = "YPositionDragPanel";
 			this.YPositionDragPanel.TextBox = this.YPositionTextBox;
-			this.YPositionDragPanel.Value = 0D;
+			this.YPositionDragPanel.Value = 0F;
 			// 
 			// XPositionScrollBar
 			// 
@@ -277,14 +277,14 @@
 			// 
 			this.XPositionDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.XPositionDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.XPositionDragPanel.Default = 0D;
-			this.XPositionDragPanel.DragStepping = 0.1D;
+			this.XPositionDragPanel.Default = 0F;
+			this.XPositionDragPanel.DragStepping = 0.1F;
 			resources.ApplyResources(this.XPositionDragPanel, "XPositionDragPanel");
-			this.XPositionDragPanel.Maximum = 1000D;
-			this.XPositionDragPanel.Minimum = -1000D;
+			this.XPositionDragPanel.Maximum = 1000F;
+			this.XPositionDragPanel.Minimum = -1000F;
 			this.XPositionDragPanel.Name = "XPositionDragPanel";
 			this.XPositionDragPanel.TextBox = this.XPositionTextBox;
-			this.XPositionDragPanel.Value = 0D;
+			this.XPositionDragPanel.Value = 0F;
 			// 
 			// ZoomScrollBar
 			// 
@@ -303,14 +303,14 @@
 			// 
 			this.ZoomDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.ZoomDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.ZoomDragPanel.Default = 0D;
-			this.ZoomDragPanel.DragStepping = 0.1D;
+			this.ZoomDragPanel.Default = 0F;
+			this.ZoomDragPanel.DragStepping = 0.1F;
 			resources.ApplyResources(this.ZoomDragPanel, "ZoomDragPanel");
-			this.ZoomDragPanel.Maximum = 100D;
-			this.ZoomDragPanel.Minimum = -100D;
+			this.ZoomDragPanel.Maximum = 100F;
+			this.ZoomDragPanel.Minimum = -100F;
 			this.ZoomDragPanel.Name = "ZoomDragPanel";
 			this.ZoomDragPanel.TextBox = this.ZoomTextBox;
-			this.ZoomDragPanel.Value = 0D;
+			this.ZoomDragPanel.Value = 0F;
 			// 
 			// Tabs
 			// 
@@ -407,52 +407,52 @@
 			resources.ApplyResources(this.GammaThresholdDragPanel, "GammaThresholdDragPanel");
 			this.GammaThresholdDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.GammaThresholdDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.GammaThresholdDragPanel.Default = 0.001D;
-			this.GammaThresholdDragPanel.DragStepping = 0.1D;
-			this.GammaThresholdDragPanel.Maximum = 100000D;
-			this.GammaThresholdDragPanel.Minimum = 0.001D;
+			this.GammaThresholdDragPanel.Default = 0.001F;
+			this.GammaThresholdDragPanel.DragStepping = 0.1F;
+			this.GammaThresholdDragPanel.Maximum = 100000F;
+			this.GammaThresholdDragPanel.Minimum = 0.001F;
 			this.GammaThresholdDragPanel.Name = "GammaThresholdDragPanel";
 			this.GammaThresholdDragPanel.TextBox = this.GammaThresholdTextBox;
-			this.GammaThresholdDragPanel.Value = 0.001D;
+			this.GammaThresholdDragPanel.Value = 0.001F;
 			// 
 			// VibrancyDragPanel
 			// 
 			this.VibrancyDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.VibrancyDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.VibrancyDragPanel.Default = 1D;
-			this.VibrancyDragPanel.DragStepping = 0.1D;
+			this.VibrancyDragPanel.Default = 1F;
+			this.VibrancyDragPanel.DragStepping = 0.1F;
 			resources.ApplyResources(this.VibrancyDragPanel, "VibrancyDragPanel");
-			this.VibrancyDragPanel.Maximum = 3D;
-			this.VibrancyDragPanel.Minimum = 0D;
+			this.VibrancyDragPanel.Maximum = 3F;
+			this.VibrancyDragPanel.Minimum = 0F;
 			this.VibrancyDragPanel.Name = "VibrancyDragPanel";
 			this.VibrancyDragPanel.TextBox = this.VibrancyTextBox;
-			this.VibrancyDragPanel.Value = 1D;
+			this.VibrancyDragPanel.Value = 1F;
 			// 
 			// BrightnessDragPanel
 			// 
 			this.BrightnessDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.BrightnessDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.BrightnessDragPanel.Default = 4D;
-			this.BrightnessDragPanel.DragStepping = 0.1D;
+			this.BrightnessDragPanel.Default = 4F;
+			this.BrightnessDragPanel.DragStepping = 0.1F;
 			resources.ApplyResources(this.BrightnessDragPanel, "BrightnessDragPanel");
-			this.BrightnessDragPanel.Maximum = 100D;
-			this.BrightnessDragPanel.Minimum = 0.001D;
+			this.BrightnessDragPanel.Maximum = 100F;
+			this.BrightnessDragPanel.Minimum = 0.001F;
 			this.BrightnessDragPanel.Name = "BrightnessDragPanel";
 			this.BrightnessDragPanel.TextBox = this.BrightnessTextBox;
-			this.BrightnessDragPanel.Value = 4D;
+			this.BrightnessDragPanel.Value = 4F;
 			// 
 			// GammaDragPanel
 			// 
 			this.GammaDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.GammaDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.GammaDragPanel.Default = 4D;
-			this.GammaDragPanel.DragStepping = 0.1D;
+			this.GammaDragPanel.Default = 4F;
+			this.GammaDragPanel.DragStepping = 0.1F;
 			resources.ApplyResources(this.GammaDragPanel, "GammaDragPanel");
-			this.GammaDragPanel.Maximum = 5D;
-			this.GammaDragPanel.Minimum = 1D;
+			this.GammaDragPanel.Maximum = 5F;
+			this.GammaDragPanel.Minimum = 1F;
 			this.GammaDragPanel.Name = "GammaDragPanel";
 			this.GammaDragPanel.TextBox = this.GammaTextBox;
-			this.GammaDragPanel.Value = 4D;
+			this.GammaDragPanel.Value = 4F;
 			// 
 			// PaletteTab
 			// 
@@ -841,79 +841,79 @@
 			// 
 			this.ScaleDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.ScaleDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.ScaleDragPanel.Default = 25D;
-			this.ScaleDragPanel.DragStepping = 10D;
+			this.ScaleDragPanel.Default = 25F;
+			this.ScaleDragPanel.DragStepping = 10F;
 			resources.ApplyResources(this.ScaleDragPanel, "ScaleDragPanel");
-			this.ScaleDragPanel.Maximum = 1000D;
-			this.ScaleDragPanel.Minimum = 0.1D;
+			this.ScaleDragPanel.Maximum = 1000F;
+			this.ScaleDragPanel.Minimum = 0.1F;
 			this.ScaleDragPanel.Name = "ScaleDragPanel";
 			this.ScaleDragPanel.TextBox = this.ScaleTextBox;
-			this.ScaleDragPanel.Value = 25D;
+			this.ScaleDragPanel.Value = 25F;
 			// 
 			// PerspectiveDragPanel
 			// 
 			this.PerspectiveDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.PerspectiveDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.PerspectiveDragPanel.Default = 0D;
-			this.PerspectiveDragPanel.DragStepping = 0.1D;
+			this.PerspectiveDragPanel.Default = 0F;
+			this.PerspectiveDragPanel.DragStepping = 0.1F;
 			resources.ApplyResources(this.PerspectiveDragPanel, "PerspectiveDragPanel");
-			this.PerspectiveDragPanel.Maximum = 1.7976931348623157E+308D;
-			this.PerspectiveDragPanel.Minimum = -1.7976931348623157E+308D;
+			this.PerspectiveDragPanel.Maximum = float.MaxValue;
+			this.PerspectiveDragPanel.Minimum = -float.MaxValue;
 			this.PerspectiveDragPanel.Name = "PerspectiveDragPanel";
 			this.PerspectiveDragPanel.TextBox = this.PerspectiveTextBox;
-			this.PerspectiveDragPanel.Value = 0D;
+			this.PerspectiveDragPanel.Value = 0F;
 			// 
 			// HeightDragPanel
 			// 
 			this.HeightDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.HeightDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.HeightDragPanel.Default = 0D;
-			this.HeightDragPanel.DragStepping = 0.1D;
+			this.HeightDragPanel.Default = 0F;
+			this.HeightDragPanel.DragStepping = 0.1F;
 			resources.ApplyResources(this.HeightDragPanel, "HeightDragPanel");
-			this.HeightDragPanel.Maximum = 1.7976931348623157E+308D;
-			this.HeightDragPanel.Minimum = -1.7976931348623157E+308D;
+			this.HeightDragPanel.Maximum = float.MaxValue;
+			this.HeightDragPanel.Minimum = -float.MaxValue;
 			this.HeightDragPanel.Name = "HeightDragPanel";
 			this.HeightDragPanel.TextBox = this.HeightTextBox;
-			this.HeightDragPanel.Value = 0D;
+			this.HeightDragPanel.Value = 0F;
 			// 
 			// YawDragPanel
 			// 
 			this.YawDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.YawDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.YawDragPanel.Default = 0D;
-			this.YawDragPanel.DragStepping = 5D;
+			this.YawDragPanel.Default = 0F;
+			this.YawDragPanel.DragStepping = 5F;
 			resources.ApplyResources(this.YawDragPanel, "YawDragPanel");
-			this.YawDragPanel.Maximum = 1.7976931348623157E+308D;
-			this.YawDragPanel.Minimum = -1.7976931348623157E+308D;
+			this.YawDragPanel.Maximum = float.MaxValue;
+			this.YawDragPanel.Minimum = -float.MaxValue;
 			this.YawDragPanel.Name = "YawDragPanel";
 			this.YawDragPanel.TextBox = this.YawTextBox;
-			this.YawDragPanel.Value = 0D;
+			this.YawDragPanel.Value = 0F;
 			// 
 			// PitchDragPanel
 			// 
 			this.PitchDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.PitchDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.PitchDragPanel.Default = 0D;
-			this.PitchDragPanel.DragStepping = 5D;
+			this.PitchDragPanel.Default = 0F;
+			this.PitchDragPanel.DragStepping = 5F;
 			resources.ApplyResources(this.PitchDragPanel, "PitchDragPanel");
-			this.PitchDragPanel.Maximum = 1.7976931348623157E+308D;
-			this.PitchDragPanel.Minimum = -1.7976931348623157E+308D;
+			this.PitchDragPanel.Maximum = float.MaxValue;
+			this.PitchDragPanel.Minimum = -float.MaxValue;
 			this.PitchDragPanel.Name = "PitchDragPanel";
 			this.PitchDragPanel.TextBox = this.PitchTextBox;
-			this.PitchDragPanel.Value = 0D;
+			this.PitchDragPanel.Value = 0F;
 			// 
 			// DepthBlurDragPanel
 			// 
 			this.DepthBlurDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.DepthBlurDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.DepthBlurDragPanel.Default = 0D;
-			this.DepthBlurDragPanel.DragStepping = 0.01D;
+			this.DepthBlurDragPanel.Default = 0F;
+			this.DepthBlurDragPanel.DragStepping = 0.01F;
 			resources.ApplyResources(this.DepthBlurDragPanel, "DepthBlurDragPanel");
-			this.DepthBlurDragPanel.Maximum = 1.7976931348623157E+308D;
-			this.DepthBlurDragPanel.Minimum = 0D;
+			this.DepthBlurDragPanel.Maximum = float.MaxValue;
+			this.DepthBlurDragPanel.Minimum = 0F;
 			this.DepthBlurDragPanel.Name = "DepthBlurDragPanel";
 			this.DepthBlurDragPanel.TextBox = this.DepthBlurTextBox;
-			this.DepthBlurDragPanel.Value = 0D;
+			this.DepthBlurDragPanel.Value = 0F;
 			// 
 			// PaletteEditModeButton
 			// 

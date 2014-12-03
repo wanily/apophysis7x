@@ -4,10 +4,10 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Xml.Linq;
 using Xyrus.Apophysis.Calculation;
-using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Messaging;
 using Xyrus.Apophysis.Strings;
 using Xyrus.Apophysis.Variations;
@@ -24,31 +24,31 @@ namespace Xyrus.Apophysis.Models
 		private int mIndex;
 		private string mName;
 		private Size mCanvasSize;
-		private double mPixelsPerUnit;
-		private double mZoom;
-		private double mVibrancy;
-		private double mGammaThreshold;
-		private double mGamma;
-		private double mBrightness;
-		private double mDepthOfField;
-		private double mHeight;
-		private double mPerspective;
-		private double mYaw;
-		private double mPitch;
+		private float mPixelsPerUnit;
+		private float mZoom;
+		private float mVibrancy;
+		private float mGammaThreshold;
+		private float mGamma;
+		private float mBrightness;
+		private float mDepthOfField;
+		private float mHeight;
+		private float mPerspective;
+		private float mYaw;
+		private float mPitch;
 		private Color mBackground;
 		private Vector2 mOrigin;
-		private double mAngle;
+		private float mAngle;
 
 		private Vector2 mHalfSize;
-		private double mScaleFactor;
+		private float mScaleFactor;
 		private Vector2 mScaleVector;
 		private Vector2 mScaleVectorInv;
-		private double mSinAngle;
-		private double mCosAngle;
-		private double mSinAngleInv;
-		private double mCosAngleInv;
+		private float mSinAngle;
+		private float mCosAngle;
+		private float mSinAngleInv;
+		private float mCosAngleInv;
 
-		private static readonly Vector2 mFlipY = new Vector2(1, -1).Freeze();
+		private static readonly Vector2 mFlipY = new Vector2(1, -1);
 
 		public Flame() : this(true)
 		{
@@ -65,10 +65,10 @@ namespace Xyrus.Apophysis.Models
 			mOrigin = new Vector2();
 			mAngle = 0;
 			mCanvasSize = new Size(1920, 1080);
-			mPixelsPerUnit = 25.0 * mCanvasSize.Width / 100.0;
+			mPixelsPerUnit = 25.0f * mCanvasSize.Width / 100.0f;
 			mBrightness = 4;
 			mGamma = 4;
-			mGammaThreshold = 0.001;
+			mGammaThreshold = 0.001f;
 			mVibrancy = 1;
 			mBackground = Color.Black;
 
@@ -103,7 +103,6 @@ namespace Xyrus.Apophysis.Models
 			}
 		}
 
-		[NotNull]
 		public Vector2 Origin
 		{
 			get { return mOrigin; }
@@ -130,7 +129,7 @@ namespace Xyrus.Apophysis.Models
 				UpdateCalculatedValues();
 			}
 		}
-		public double Angle
+		public float Angle
 		{
 			get { return mAngle; }
 			set
@@ -139,7 +138,7 @@ namespace Xyrus.Apophysis.Models
 				UpdateCalculatedValues();
 			}
 		}
-		public double PixelsPerUnit
+		public float PixelsPerUnit
 		{
 			get { return mPixelsPerUnit; }
 			set
@@ -152,7 +151,7 @@ namespace Xyrus.Apophysis.Models
 				UpdateCalculatedValues();
 			}
 		}
-		public double Zoom
+		public float Zoom
 		{
 			get { return mZoom; }
 			set
@@ -161,27 +160,27 @@ namespace Xyrus.Apophysis.Models
 				UpdateCalculatedValues();
 			}
 		}
-		public double Pitch
+		public float Pitch
 		{
 			get { return mPitch; }
 			set { mPitch = value; }
 		}
-		public double Yaw
+		public float Yaw
 		{
 			get { return mYaw; }
 			set { mYaw = value; }
 		}
-		public double Perspective
+		public float Perspective
 		{
 			get { return mPerspective; }
 			set { mPerspective = value; }
 		}
-		public double Height
+		public float Height
 		{
 			get { return mHeight; }
 			set { mHeight = value; }
 		}
-		public double DepthOfField
+		public float DepthOfField
 		{
 			get { return mDepthOfField; }
 			set
@@ -191,7 +190,7 @@ namespace Xyrus.Apophysis.Models
 				mDepthOfField = value;
 			}
 		}
-		public double Brightness
+		public float Brightness
 		{
 			get { return mBrightness; }
 			set
@@ -201,7 +200,7 @@ namespace Xyrus.Apophysis.Models
 				mBrightness = value;
 			}
 		}
-		public double Gamma
+		public float Gamma
 		{
 			get { return mGamma; }
 			set
@@ -211,7 +210,7 @@ namespace Xyrus.Apophysis.Models
 				mGamma = value;
 			}
 		}
-		public double GammaThreshold
+		public float GammaThreshold
 		{
 			get { return mGammaThreshold; }
 			set
@@ -221,7 +220,7 @@ namespace Xyrus.Apophysis.Models
 				mGammaThreshold = value;
 			}
 		}
-		public double Vibrancy
+		public float Vibrancy
 		{
 			get { return mVibrancy; }
 			set
@@ -262,7 +261,7 @@ namespace Xyrus.Apophysis.Models
 			copy.Name = mName;
 			copy.mIterators = mIterators.Copy(copy);
 			copy.mPalette = mPalette.Copy();
-			copy.mOrigin = mOrigin.Copy();
+			copy.mOrigin = mOrigin;
 			copy.mAngle = mAngle;
 			copy.mCanvasSize = mCanvasSize;
 			copy.mPixelsPerUnit = mPixelsPerUnit;
@@ -283,8 +282,7 @@ namespace Xyrus.Apophysis.Models
 			return copy;
 		}
 
-		[NotNull]
-		public Vector2 CanvasToWorld(Vector2 canvas, Vector2 center = null, Vector2 scale = null)
+		public Vector2 CanvasToWorld(Vector2 canvas, Vector2? center = null, Vector2? scale = null)
 		{
 			var c = center ?? mHalfSize;
 			var s = scale ?? mScaleVectorInv;
@@ -296,8 +294,7 @@ namespace Xyrus.Apophysis.Models
 			return RotateVector(vector, mCosAngleInv, mSinAngleInv);
 		}
 
-		[NotNull]
-		public Vector2 WorldToCanvas(Vector2 world, Vector2 center = null, Vector2 scale = null)
+		public Vector2 WorldToCanvas(Vector2 world, Vector2? center = null, Vector2? scale = null)
 		{
 			var c = center ?? mHalfSize;
 			var s = scale ?? mScaleVector;
@@ -313,7 +310,7 @@ namespace Xyrus.Apophysis.Models
 		{
 			var plugins = Iterators
 				.SelectMany(x => x.Variations)
-				.Where(x => System.Math.Abs(x.Weight) > double.Epsilon && x is ExternalVariation)
+				.Where(x => System.Math.Abs(x.Weight) > float.Epsilon && x is ExternalVariation)
 				.Select(x => x.Name)
 				.ToArray();
 
@@ -443,35 +440,35 @@ namespace Xyrus.Apophysis.Models
 
 				if (random.Next()%10 < 9)
 				{
-					iterator.PreAffine.Origin.X = -1;
+					iterator.PreAffine = iterator.PreAffine.Alter(m31: -1);
 				}
 
-				iterator.Color = random.NextDouble();
-				iterator.ColorSpeed = random.NextDouble()*2 - 1;
-				
-				iterator.PreAffine.Move(new Vector2(random.NextDouble() * 2 - 1, random.NextDouble() * 2 - 1));
-				iterator.PreAffine.Rotate(random.NextDouble() * System.Math.PI * 2 - System.Math.PI);
-				iterator.PreAffine.Scale(i > 0 ? (random.NextDouble() * 0.8 + 0.2) : (random.NextDouble() * 0.4 + 0.6));
+				iterator.Color = random.NextFloat();
+				iterator.ColorSpeed = random.NextFloat() * 2 - 1;
+
+				iterator.PreAffine = iterator.PreAffine.Move(new Vector2(random.NextFloat() * 2 - 1, random.NextFloat() * 2 - 1));
+				iterator.PreAffine = iterator.PreAffine.Rotate(random.NextFloat() * Float.Pi * 2 - Float.Pi);
+				iterator.PreAffine = iterator.PreAffine.Scale(i > 0 ? (random.NextFloat() * 0.8f + 0.2f) : (random.NextFloat() * 0.4f + 0.6f));
 
 				if (random.Next()%2 > 0)
 				{
-					iterator.PreAffine.MatrixTransform(new Matrix2X2 { X = new Vector2(1, random.NextDouble() - 0.5), Y = new Vector2(random.NextDouble() - 0.5, 1)});
+					iterator.PreAffine = iterator.PreAffine.Transform(new Matrix3x2(1, random.NextFloat() - 0.5f, random.NextFloat() - 0.5f, 1, 0, 0));
 				}
 
-				iterator.Variations.SetWeight(VariationRegistry.GetName<Linear>(), random.NextDouble()*0.5 + 0.5);
+				iterator.Variations.SetWeight(VariationRegistry.GetName<Linear>(), random.NextFloat()*0.5f + 0.5f);
 			}
 
 			if (random.Next()%2 > 0)
 			{
-				var totalArea = 0.0;
+				var totalArea = 0.0f;
 				for (int i = 0; i < numIterators; i++)
 				{
 					var matrix = Iterators[i].PreAffine;
-					var tri = new[] {matrix.Matrix.X, matrix.Matrix.Y};
-					var angle = System.Math.Atan2(tri[1].Y, tri[1].X) - System.Math.Atan2(tri[0].Y, tri[0].X);
-					var area = tri[1].Length*tri[0].Length*System.Math.Sin(angle)*0.5;
+					var tri = new[] {new Vector2(matrix.M11, matrix.M12), new Vector2(matrix.M21, matrix.M22) };
+					var angle = Float.Atan2(tri[1].Y, tri[1].X) - Float.Atan2(tri[0].Y, tri[0].X);
+					var area = tri[1].Length() * tri[0].Length() * Float.Sin(angle) * 0.5f;
 
-					Iterators[i].Weight = System.Math.Abs(area);
+					Iterators[i].Weight = Float.Abs(area);
 					totalArea += Iterators[i].Weight;
 				}
 
@@ -486,20 +483,20 @@ namespace Xyrus.Apophysis.Models
 			{
 				for (int i = 0; i < numIterators; i++)
 				{
-					Iterators[i].Weight = 1.0 / numIterators;
+					Iterators[i].Weight = 1.0f / numIterators;
 				}
 			}
 
 			Brightness = 4;
 			Gamma = 4;
-			GammaThreshold = 0.001;
+			GammaThreshold = 0.001f;
 			Vibrancy = 1;
 			Background = Color.Black;
 			Zoom = 0;
-			PixelsPerUnit = 25.0 * mCanvasSize.Width / 100.0;
+			PixelsPerUnit = 25.0f * mCanvasSize.Width / 100.0f;
 
-			Angle = random.NextDouble()*System.Math.PI*2 - System.Math.PI;
-			Origin = new Vector2(random.NextDouble() * 2 - 1, random.NextDouble() * 2 - 1);
+			Angle = random.NextFloat() * Float.Pi * 2 - Float.Pi;
+			Origin = new Vector2(random.NextFloat() * 2 - 1, random.NextFloat() * 2 - 1);
 			Palette.Overwrite(PaletteCollection.GetRandomPalette(this));
 		}
 
@@ -511,7 +508,7 @@ namespace Xyrus.Apophysis.Models
 			return flame;
 		}
 
-		public double GetChaosCoefficient(int fromIteratorIndex, int toIteratorIndex)
+		public float GetChaosCoefficient(int fromIteratorIndex, int toIteratorIndex)
 		{
 			var count = Iterators.Count(x => x.GroupIndex == 0);
 			if (fromIteratorIndex < 0 || fromIteratorIndex >= count)
@@ -525,16 +522,16 @@ namespace Xyrus.Apophysis.Models
 
 		private void UpdateCalculatedValues()
 		{
-			mHalfSize = new Vector2(CanvasSize.Width / 2.0, CanvasSize.Height / 2.0).Freeze();
-			mScaleFactor = (System.Math.Pow(2, mZoom) * mPixelsPerUnit);
+			mHalfSize = new Vector2(CanvasSize.Width / 2.0f, CanvasSize.Height / 2.0f);
+			mScaleFactor = (Float.Power(2, mZoom) * mPixelsPerUnit);
 			mScaleVector = mScaleFactor * mFlipY;
-			mScaleVectorInv = (1.0 / mScaleFactor) * mFlipY;
-			mSinAngle = System.Math.Sin(mAngle);
-			mCosAngle = System.Math.Cos(mAngle);
-			mSinAngleInv = System.Math.Sin(-mAngle);
-			mCosAngleInv = System.Math.Cos(-mAngle);
+			mScaleVectorInv = (1.0f / mScaleFactor) * mFlipY;
+			mSinAngle = Float.Sin(mAngle);
+			mCosAngle = Float.Cos(mAngle);
+			mSinAngleInv = Float.Sin(-mAngle);
+			mCosAngleInv = Float.Cos(-mAngle);
 		}
-		private static Vector2 RotateVector(Vector2 vector, double cos, double sin)
+		private static Vector2 RotateVector(Vector2 vector, float cos, float sin)
 		{
 			return new Vector2(
 				vector.X * cos - vector.Y * sin,
@@ -577,7 +574,7 @@ namespace Xyrus.Apophysis.Models
 				var newLinearAttribute = element.Attribute(XName.Get(@"new_linear"));
 				if (newLinearAttribute != null)
 				{
-					usesVariationsIn15CStyle = System.Math.Abs(newLinearAttribute.ParseFloat()) > double.Epsilon;
+					usesVariationsIn15CStyle = System.Math.Abs(newLinearAttribute.ParseFloat()) > float.Epsilon;
 				}
 
 				if (Variation.VariationsIn15CStyle != usesVariationsIn15CStyle)
@@ -618,7 +615,7 @@ namespace Xyrus.Apophysis.Models
 				var ppuAttribute = element.Attribute(XName.Get(@"scale"));
 				if (ppuAttribute != null)
 				{
-					var pixelsPerUnit = ppuAttribute.ParseFloat(50.0 * mCanvasSize.Width / 100.0);
+					var pixelsPerUnit = ppuAttribute.ParseFloat(50.0f * mCanvasSize.Width / 100.0f);
 					if (pixelsPerUnit <= 0)
 					{
 						throw new ApophysisException(Messages.FlamePixelsPerUnitRangeError);

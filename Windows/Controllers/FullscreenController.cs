@@ -17,8 +17,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		private MainController mParent;
 		private Bitmap mBitmap;
 
-		private double mLastBitmapProgress;
-		private double mNextBitmapProgress;
+		private float mLastBitmapProgress;
+		private float mNextBitmapProgress;
 
 		public FullscreenController([NotNull] MainController parent)
 		{
@@ -118,7 +118,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			View.Invoke(new Action(() => View.IsInProgress = isInProgress));
 		}
-		private void SetProgress(double progress)
+		private void SetProgress(float progress)
 		{
 			if (IsViewDisposed)
 				return;
@@ -209,7 +209,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			if (flame == null)
 				return;
 
-			var density = (double)mParent.MainPreviewController.PreviewDensity;
+			var density = (float)mParent.MainPreviewController.PreviewDensity;
 			var canvasSize = View.ClientSize;
 			var renderSize = flame.CanvasSize.FitToFrame(canvasSize);
 

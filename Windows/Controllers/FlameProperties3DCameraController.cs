@@ -24,11 +24,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				xx => mParent.Flame.DepthOfField = xx, 
 				() => mParent.Flame.DepthOfField);
 			Register(View.PitchDragPanel, 
-				xx => mParent.Flame.Pitch = xx * System.Math.PI / 180.0, 
-				() => mParent.Flame.Pitch * 180.0 / System.Math.PI);
-			Register(View.YawDragPanel, 
-				xx => mParent.Flame.Yaw = xx * System.Math.PI / 180.0, 
-				() => mParent.Flame.Yaw * 180.0 / System.Math.PI);
+				xx => mParent.Flame.Pitch = xx * Float.Pi / 180.0f,
+				() => mParent.Flame.Pitch * 180.0f / Float.Pi);
+			Register(View.YawDragPanel,
+				xx => mParent.Flame.Yaw = xx * Float.Pi / 180.0f,
+				() => mParent.Flame.Yaw * 180.0f / Float.Pi);
 			Register(View.HeightDragPanel, 
 				xx => mParent.Flame.Height = xx, 
 				() => mParent.Flame.Height);

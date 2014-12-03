@@ -1,4 +1,5 @@
 using System;
+using System.Numerics;
 
 namespace Xyrus.Apophysis.Math
 {
@@ -7,9 +8,8 @@ namespace Xyrus.Apophysis.Math
 	{
 		private readonly Vector2 mA;
 		private readonly Vector2 mB;
-		private const double mEps = 1e-300;
 
-		public Line([NotNull] Vector2 a, [NotNull] Vector2 b)
+		public Line(Vector2 a, Vector2 b)
 		{
 			if (a == null) throw new ArgumentNullException(@"a");
 			if (b == null) throw new ArgumentNullException(@"b");
@@ -27,7 +27,16 @@ namespace Xyrus.Apophysis.Math
 			get { return mB; }
 		}
 
-		public bool IsInProximity([NotNull] Vector2 point, double epsilon = 1)
+		public Vector2 NormalVector
+		{
+			get
+			{
+				var d = B - A;
+				return new Vector2(-d.Y, d.X).Normal();
+			}
+		}
+
+		public bool IsInProximity(Vector2 point, float epsilon = 1)
 		{
 			if (point == null) throw new ArgumentNullException(@"point");
 
@@ -38,9 +47,9 @@ namespace Xyrus.Apophysis.Math
 			var p0 = point - A;
 			var p1 = point - B;
 
-			double dist;
+			float dist;
 
-			if (denom > mEps)
+			if (denom > float.Epsilon)
 			{
 				var t = (p0.X*delta.X + p0.Y*delta.Y)/denom;
 
@@ -64,12 +73,6 @@ namespace Xyrus.Apophysis.Math
 			}
 
 			return System.Math.Sqrt(dist) < epsilon;
-		}
-
-		public Vector2 GetNormal()
-		{
-			var d = B - A;
-			return new Vector2(-d.Y, d.X).Direction;
 		}
 	}
 }

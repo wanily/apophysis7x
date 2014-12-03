@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Drawing;
+using System.Numerics;
 using System.Windows.Forms;
-using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Visuals;
 using Rectangle = System.Drawing.Rectangle;
@@ -15,16 +14,16 @@ namespace Xyrus.Apophysis.Windows.Input
 		private Flame mFlame;
 
 		private CameraData mData;
-		private double mDragAngle;
-		private Vector2 mDragOrigin;
-		private Vector2 mDragCursor;
+		private float mDragAngle;
+		private Vector2? mDragOrigin;
+		private Vector2? mDragCursor;
 		private bool mIsMouseDown;
-		private double mDragAngleOld;
-		private double mDragScale;
-		private double mDragZoom;
+		private float mDragAngleOld;
+		private float mDragScale;
+		private float mDragZoom;
 		private bool mMoved;
 
-		private static readonly double mLog2 = System.Math.Log(2);
+		private static readonly float mLog2 = Float.LogN(2);
 
 		public CameraEditInputHandler([NotNull] Control control, [NotNull] PreviewInputVisual inputVisual) : base(control)
 		{
@@ -65,7 +64,7 @@ namespace Xyrus.Apophysis.Windows.Input
 		{
 			return false;
 		}
-		protected override bool OnAttachedControlMouseWheel(double delta, MouseButtons button)
+		protected override bool OnAttachedControlMouseWheel(float delta, MouseButtons button)
 		{
 			return false;
 		}
@@ -78,8 +77,8 @@ namespace Xyrus.Apophysis.Windows.Input
 			mIsMouseDown = true;
 
 			mDragCursor = cursor;
-			mDragOrigin = mFlame.Origin.Copy();
-			mDragAngle = System.Math.Atan2(cursor.Y - AttachedControl.ClientSize.Height / 2.0, AttachedControl.ClientSize.Width / 2.0 - cursor.X);
+			mDragOrigin = mFlame.Origin;
+			mDragAngle = Float.Atan2(cursor.Y - AttachedControl.ClientSize.Height / 2.0f, AttachedControl.ClientSize.Width / 2.0f - cursor.X);
 			mDragAngleOld = mFlame.Angle;
 			mDragScale = mFlame.PixelsPerUnit;
 			mDragZoom = mFlame.Zoom; 
@@ -87,7 +86,7 @@ namespace Xyrus.Apophysis.Windows.Input
 
 			mData = new CameraData
 			{
-				Origin = mDragOrigin,
+				Origin = mDragOrigin.Value,
 				Angle = mDragAngleOld,
 				Scale = mFlame.PixelsPerUnit,
 				Zoom = mFlame.Zoom
@@ -98,7 +97,7 @@ namespace Xyrus.Apophysis.Windows.Input
 			switch (EditMode)
 			{
 				case CameraEditMode.Pan:
-					mInputVisual.Operation = new PanOperation(mDragOrigin, mDragOrigin);
+					mInputVisual.Operation = new PanOperation(mDragOrigin.Value, mDragOrigin.Value);
 					break;
 				case CameraEditMode.Rotate:
 					mInputVisual.Operation = new RotateCanvasOperation(mDragAngleOld, mDragAngleOld);
@@ -107,8 +106,8 @@ namespace Xyrus.Apophysis.Windows.Input
 				case CameraEditMode.ZoomOut:
 					var value = UseScale ? mDragScale : mDragZoom;
 					mInputVisual.Operation = new ZoomOperation(value, value, 
-						new Rectangle(mDragCursor.ToPoint(), new Size(1,1)), 
-						new Rectangle(mDragCursor.ToPoint(), new Size(1,1)),
+						new Rectangle(mDragCursor.Value.ToPoint(), new Size(1,1)), 
+						new Rectangle(mDragCursor.Value.ToPoint(), new Size(1,1)),
 						UseScale);
 					break;
 			}
@@ -130,33 +129,34 @@ namespace Xyrus.Apophysis.Windows.Input
 			{
 				case CameraEditMode.Pan:
 
-					var scale = System.Math.Pow(2, mData.Zoom) * mData.Scale;
-					var point = mDragOrigin + (mDragCursor - cursor) / scale;
+					var scale = Float.Power(2, mData.Zoom) * mData.Scale;
+					var point = mDragOrigin + (mDragCursor - cursor).Value / scale;
 
 					if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
 					{
-						var d = (cursor - mDragCursor).Abs();
-						if (d.X > d.Y) point.Y = mDragOrigin.Y / scale;
-						else point.X = mDragOrigin.X / scale;
+						var d = Vector2.Abs((cursor - mDragCursor).Value);
+						point = d.X > d.Y 
+							? new Vector2(point.Value.X, mDragOrigin.GetValueOrDefault().Y / scale) 
+							: new Vector2(mDragOrigin.GetValueOrDefault().X / scale, point.Value.Y);
 					}
 
-					mData.Origin = point;
-					mInputVisual.Operation = new PanOperation(point, mDragOrigin);
+					mData.Origin = point.Value;
+					mInputVisual.Operation = new PanOperation(point.Value, mDragOrigin.GetValueOrDefault());
 
 					break;
 				case CameraEditMode.Rotate:
 
-					var angle = System.Math.Atan2(
-						cursor.Y - AttachedControl.ClientSize.Height / 2.0, 
-						AttachedControl.ClientSize.Width / 2.0 - cursor.X) -
+					var angle = Float.Atan2(
+						cursor.Y - AttachedControl.ClientSize.Height / 2.0f, 
+						AttachedControl.ClientSize.Width / 2.0f - cursor.X) -
 						mDragAngle;
 
 					if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
 					{
-						var ang = angle * 180 / System.Math.PI;
-						var snapped = System.Math.Round(ang / 15) * 15;
+						var ang = angle * 180 / Float.Pi;
+						var snapped = Float.Round(ang / 15) * 15;
 
-						angle = snapped * System.Math.PI / 180.0;
+						angle = snapped * Float.Pi / 180.0f;
 					}
 
 					mData.Angle = (mDragAngleOld + angle);
@@ -166,32 +166,37 @@ namespace Xyrus.Apophysis.Windows.Input
 				case CameraEditMode.ZoomIn:
 				case CameraEditMode.ZoomOut:
 					
-					Rectangle innerRectangle = new Rectangle(mDragCursor.ToPoint(), new Size((int)(cursor.X - mDragCursor.X), (int)(cursor.Y - mDragCursor.Y))), outerRectangle;
+					Rectangle innerRectangle = new Rectangle(
+						mDragCursor.GetValueOrDefault().ToPoint(), 
+						new Size(
+							(int)(cursor.X - mDragCursor.GetValueOrDefault().X), 
+							(int)(cursor.Y - mDragCursor.GetValueOrDefault().Y))), 
+							outerRectangle;
 
-					var dx = (double)innerRectangle.Width;
-					var dy = (double)innerRectangle.Height;
+					var dx = (float)innerRectangle.Width;
+					var dy = (float)innerRectangle.Height;
 
 					var size = mInputVisual.FitFrame ? AttachedControl.ClientSize : mFlame.CanvasSize.FitToFrame(AttachedControl.ClientSize);
 
 					if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
 					{
-						if (System.Math.Abs(dy) < double.Epsilon || System.Math.Abs(dx/dy) >= (double) size.Width/size.Height)
+						if (System.Math.Abs(dy) < float.Epsilon || System.Math.Abs(dx / dy) >= (float)size.Width / size.Height)
 						{
-							dy = System.Math.Round(dx/size.Width*size.Height);
+							dy = Float.Round(dx/size.Width*size.Height);
 						}
 						else
 						{
-							dx = System.Math.Round(dy/size.Height*size.Width);
+							dx = Float.Round(dy/size.Height*size.Width);
 						}
 
 						outerRectangle = new Rectangle(innerRectangle.Left - (int)dx, innerRectangle.Top - (int)dy, (int)dx * 2, (int)dy * 2);
 					}
 					else if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
 					{
-						Point p1 = mDragCursor.ToPoint(), p2;
+						Point p1 = mDragCursor.GetValueOrDefault().ToPoint(), p2;
 						var sign = dx * dy >= 0 ? 1 : -1;
 
-						if (System.Math.Abs(dy) < double.Epsilon || System.Math.Abs(dx/dy) >= (double) size.Width/size.Height)
+						if (System.Math.Abs(dy) < float.Epsilon || System.Math.Abs(dx / dy) >= (float)size.Width / size.Height)
 						{
 							p2 = new Point((int) cursor.X, p1.Y + sign*(int) System.Math.Round(dx/size.Width*size.Height));
 						}
@@ -205,35 +210,35 @@ namespace Xyrus.Apophysis.Windows.Input
 					else
 					{
 						var sign = dx * dy >= 0 ? 1 : -1;
+						var dc = mDragCursor.GetValueOrDefault();
 
-						if (System.Math.Abs(dy) < double.Epsilon || System.Math.Abs(dx / dy) >= (double)size.Width / size.Height)
+						if (System.Math.Abs(dy) < float.Epsilon || System.Math.Abs(dx / dy) >= (float)size.Width / size.Height)
 						{
-							var y1 = (int)((cursor.Y + mDragCursor.Y) / 2) - sign * (int)System.Math.Round(dx / 2 / size.Width * size.Height);
-							var y2 = (int)((cursor.Y + mDragCursor.Y) / 2) + sign * (int)System.Math.Round(dx / 2 / size.Width * size.Height);
-							outerRectangle = new Rectangle((int)mDragCursor.X, y1, innerRectangle.Width, y2 - y1);
+							var y1 = (int)((cursor.Y + dc.Y) / 2) - sign * (int)System.Math.Round(dx / 2 / size.Width * size.Height);
+							var y2 = (int)((cursor.Y + dc.Y) / 2) + sign * (int)System.Math.Round(dx / 2 / size.Width * size.Height);
+							outerRectangle = new Rectangle((int)dc.X, y1, innerRectangle.Width, y2 - y1);
 						}
 						else
 						{
-							var x1 = (int)((cursor.X + mDragCursor.X) / 2) - sign * (int)System.Math.Round(dy / 2 / size.Height * size.Width);
-							var x2 = (int)((cursor.X + mDragCursor.X) / 2) + sign * (int)System.Math.Round(dy / 2 / size.Height * size.Width);
-							outerRectangle = new Rectangle(x1, (int)mDragCursor.Y, x2 - x1, innerRectangle.Height);
+							var x1 = (int)((cursor.X + dc.X) / 2) - sign * (int)System.Math.Round(dy / 2 / size.Height * size.Width);
+							var x2 = (int)((cursor.X + dc.X) / 2) + sign * (int)System.Math.Round(dy / 2 / size.Height * size.Width);
+							outerRectangle = new Rectangle(x1, (int)dc.Y, x2 - x1, innerRectangle.Height);
 						}
 					}
 
-					var oldZoom = System.Math.Pow(2, mDragZoom);
-					var cos = System.Math.Cos(mDragAngle);
-					var sin = System.Math.Sin(mDragAngle);
+					var oldZoom = Float.Power(2, mDragZoom);
+					var cos = Float.Cos(mDragAngle);
+					var sin = Float.Sin(mDragAngle);
 
 					if (EditMode == CameraEditMode.ZoomIn)
 					{
+						var doc = mDragOrigin.GetValueOrDefault();
 						var oldppu = mDragScale * oldZoom;
 
-						var x = ((outerRectangle.Left + outerRectangle.Right) / 2.0 - size.Width / 2.0) / oldppu;
-						var y = ((outerRectangle.Top + outerRectangle.Bottom) / 2.0 - size.Height / 2.0) / oldppu;
+						var x = ((outerRectangle.Left + outerRectangle.Right) / 2.0f - size.Width / 2.0f) / oldppu;
+						var y = ((outerRectangle.Top + outerRectangle.Bottom) / 2.0f - size.Height / 2.0f) / oldppu;
 
-						Debug.Print("{0} | {1}", outerRectangle, size);
-
-						mData.Origin = new Vector2(mDragOrigin.X - cos * x + sin * y, mDragOrigin.Y - sin * x - cos * y);
+						mData.Origin = new Vector2(doc.X - cos * x + sin * y, doc.Y - sin * x - cos * y);
 
 						if (UseScale)
 						{
@@ -241,26 +246,28 @@ namespace Xyrus.Apophysis.Windows.Input
 						}
 						else
 						{
-							mData.Zoom = System.Math.Log(oldZoom * ((double)size.Width / (System.Math.Abs(outerRectangle.Right - outerRectangle.Left) + 1))) / mLog2;
+							mData.Zoom = Float.LogN(oldZoom * (size.Width / (Float.Abs(outerRectangle.Right - outerRectangle.Left) + 1))) / mLog2;
 						}
 					}
 					else
 					{
+						var doc = mDragOrigin.GetValueOrDefault();
+
 						if (UseScale)
 						{
 							mData.Scale = mDragScale / size.Width * (System.Math.Abs(outerRectangle.Right - outerRectangle.Left)); 
 						}
 						else
 						{
-							mData.Zoom = System.Math.Log(oldZoom / ((double)size.Width / (System.Math.Abs(outerRectangle.Right - outerRectangle.Left) + 1))) / mLog2;
+							mData.Zoom = Float.LogN(oldZoom / (size.Width / (Float.Abs(outerRectangle.Right - outerRectangle.Left) + 1))) / mLog2;
 						}
 
-						var newppu = mData.Scale * System.Math.Pow(2, mData.Zoom);
+						var newppu = mData.Scale * Float.Power(2, mData.Zoom);
 
-						var x = ((outerRectangle.Left + outerRectangle.Right) / 2.0 - size.Width / 2.0) / newppu;
-						var y = ((outerRectangle.Top + outerRectangle.Bottom) / 2.0 - size.Height / 2.0) / newppu;
+						var x = ((outerRectangle.Left + outerRectangle.Right) / 2.0f - size.Width / 2.0f) / newppu;
+						var y = ((outerRectangle.Top + outerRectangle.Bottom) / 2.0f - size.Height / 2.0f) / newppu;
 
-						mData.Origin = new Vector2(mDragOrigin.X + cos * x - sin * y, mDragOrigin.Y + sin * x + cos * y);
+						mData.Origin = new Vector2(doc.X + cos * x - sin * y, doc.Y + sin * x + cos * y);
 					}
 
 					mInputVisual.Operation = new ZoomOperation(UseScale ? mDragScale : mDragZoom, UseScale ? mData.Scale : mData.Zoom, innerRectangle, outerRectangle, UseScale);

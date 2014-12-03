@@ -5,10 +5,10 @@ namespace Xyrus.Apophysis.Windows.Input
 	[PublicAPI]
 	public class RotateCanvasOperation : CameraInputOperation
 	{
-		public double NewAngle { get; private set; }
-		public double OldAngle { get; private set; }
+		public float NewAngle { get; private set; }
+		public float OldAngle { get; private set; }
 
-		public RotateCanvasOperation(double newAngle, double oldAngle)
+		public RotateCanvasOperation(float newAngle, float oldAngle)
 		{
 			NewAngle = newAngle;
 			OldAngle = oldAngle;
@@ -16,7 +16,7 @@ namespace Xyrus.Apophysis.Windows.Input
 
 		public override string ToString()
 		{
-			var angle = NewAngle * 180.0 / System.Math.PI;
+			var angle = NewAngle * 180.0f / Float.Pi;
 			if (angle < 0)
 			{
 				angle = 360 + angle;

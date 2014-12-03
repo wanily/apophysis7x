@@ -1,5 +1,5 @@
-﻿using Xyrus.Apophysis.Calculation;
-using Xyrus.Apophysis.Models;
+﻿using System.Numerics;
+using Xyrus.Apophysis.Calculation;
 
 namespace Xyrus.Apophysis.Variations
 {
@@ -7,7 +7,7 @@ namespace Xyrus.Apophysis.Variations
 	{
 		private bool m15C;
 
-		public override void Prepare(AffineTransform affineMatrix = null)
+		public override void Prepare(Matrix3x2? affineMatrix = null)
 		{
 			m15C = VariationsIn15CStyle;
 		}
@@ -16,8 +16,8 @@ namespace Xyrus.Apophysis.Variations
 		{
 			var theta = (data.PreX * data.PreX + data.PreY * data.PreY);
 
-			var sin = System.Math.Sin(theta);
-			var cos = System.Math.Cos(theta);
+			var sin = Float.Sin(theta);
+			var cos = Float.Cos(theta);
 
 			data.PostX += Weight * (sin * data.PreX - cos * data.PreY);
 			data.PostY += Weight * (cos * data.PreX + sin * data.PreY);

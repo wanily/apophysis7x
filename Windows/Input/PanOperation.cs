@@ -1,5 +1,5 @@
 using System;
-using Xyrus.Apophysis.Math;
+using System.Numerics;
 using Xyrus.Apophysis.Windows.Controllers;
 
 namespace Xyrus.Apophysis.Windows.Input
@@ -7,13 +7,10 @@ namespace Xyrus.Apophysis.Windows.Input
 	[PublicAPI]
 	public class PanOperation : CameraInputOperation
 	{
-		[NotNull]
 		public Vector2 NewOffset { get; private set; }
-
-		[NotNull]
 		public Vector2 OldOffset { get; private set; }
 
-		public PanOperation([NotNull] Vector2 newOffset, [NotNull] Vector2 oldOffset)
+		public PanOperation(Vector2 newOffset, Vector2 oldOffset)
 		{
 			if (newOffset == null) throw new ArgumentNullException("newOffset");
 			if (oldOffset == null) throw new ArgumentNullException("oldOffset");

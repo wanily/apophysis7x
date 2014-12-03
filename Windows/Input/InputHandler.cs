@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Numerics;
 using System.Windows.Forms;
-using Xyrus.Apophysis.Math;
 
 namespace Xyrus.Apophysis.Windows.Input
 {
@@ -12,10 +12,10 @@ namespace Xyrus.Apophysis.Windows.Input
 
 		protected abstract bool OnAttachedControlKeyPress(Keys key, Keys modifiers);
 
-		protected abstract bool OnAttachedControlMouseMove([NotNull] Vector2 cursor, MouseButtons button);
-		protected abstract bool OnAttachedControlMouseWheel(double delta, MouseButtons button);
+		protected abstract bool OnAttachedControlMouseMove(Vector2 cursor, MouseButtons button);
+		protected abstract bool OnAttachedControlMouseWheel(float delta, MouseButtons button);
 
-		protected abstract bool OnAttachedControlMouseDown([NotNull] Vector2 cursor);
+		protected abstract bool OnAttachedControlMouseDown(Vector2 cursor);
 		protected abstract bool OnAttachedControlMouseUp();
 
 		protected abstract bool OnAttachedControlMouseDoubleClick();
@@ -32,7 +32,7 @@ namespace Xyrus.Apophysis.Windows.Input
 			return OnAttachedControlKeyPress(key, modifiers);
 		}
 
-		public bool HandleMouseDown([NotNull] Vector2 cursor)
+		public bool HandleMouseDown(Vector2 cursor)
 		{
 			if (cursor == null) throw new ArgumentNullException("cursor");
 			return OnAttachedControlMouseDown(cursor);
@@ -42,12 +42,12 @@ namespace Xyrus.Apophysis.Windows.Input
 			return OnAttachedControlMouseUp();
 		}
 
-		public bool HandleMouseMove([NotNull] Vector2 cursor, MouseButtons button)
+		public bool HandleMouseMove(Vector2 cursor, MouseButtons button)
 		{
 			if (cursor == null) throw new ArgumentNullException("cursor");
 			return OnAttachedControlMouseMove(cursor, button);
 		}
-		public bool HandleMouseWheel(double delta, MouseButtons button)
+		public bool HandleMouseWheel(float delta, MouseButtons button)
 		{
 			return OnAttachedControlMouseWheel(delta, button);
 		}

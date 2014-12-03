@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Numerics;
 using Xyrus.Apophysis.Windows.Forms;
 
 namespace Xyrus.Apophysis.Windows.Controllers
@@ -24,31 +25,31 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				xx => mParent.Flame.Zoom = xx,
 				() => mParent.Flame.Zoom);
 			Register(View.XPositionDragPanel,
-				xx => mParent.Flame.Origin.X = xx,
+				xx => mParent.Flame.Origin = new Vector2(xx, mParent.Flame.Origin.Y),
 				() => mParent.Flame.Origin.X);
 			Register(View.YPositionDragPanel,
-				xx => mParent.Flame.Origin.Y = xx,
+				xx => mParent.Flame.Origin = new Vector2(mParent.Flame.Origin.X, xx),
 				() => mParent.Flame.Origin.Y);
 			Register(View.RotationDragPanel,
-				xx => mParent.Flame.Angle = -xx * System.Math.PI / 180.0,
-				() => mParent.Flame.Angle * -180 / System.Math.PI);
+				xx => mParent.Flame.Angle = -xx * Float.Pi / 180.0f,
+				() => mParent.Flame.Angle * -180 / Float.Pi);
 			Register(View.ScaleDragPanel,
 				xx => mParent.Flame.PixelsPerUnit = xx * mParent.Flame.CanvasSize.Width / 100,
-				() => mParent.Flame.PixelsPerUnit * 100.0 / mParent.Flame.CanvasSize.Width);
+				() => mParent.Flame.PixelsPerUnit * 100.0f / mParent.Flame.CanvasSize.Width);
 
 
 			Register(View.ZoomScrollBar,
 				xx => mParent.Flame.Zoom = xx / 1000,
 				() => mParent.Flame.Zoom * 1000);
 			Register(View.XPositionScrollBar,
-				xx => mParent.Flame.Origin.X = xx / 1000,
+				xx => mParent.Flame.Origin = new Vector2(xx/1000, mParent.Flame.Origin.Y),
 				() => mParent.Flame.Origin.X * 1000);
 			Register(View.YPositionScrollBar,
-				xx => mParent.Flame.Origin.Y = xx / 1000,
+				xx => mParent.Flame.Origin = new Vector2(mParent.Flame.Origin.X, xx/1000),
 				() => mParent.Flame.Origin.Y * 1000);
 			Register(View.RotationScrollBar,
-				xx => mParent.Flame.Angle = -xx * System.Math.PI / 180.0,
-				() => mParent.Flame.Angle * -180 / System.Math.PI);
+				xx => mParent.Flame.Angle = -xx * Float.Pi / 180.0f,
+				() => mParent.Flame.Angle * -180 / Float.Pi);
 		}
 		protected override void DetachView()
 		{

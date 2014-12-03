@@ -87,7 +87,7 @@ namespace Xyrus.Apophysis.Windows
 			GC.SuppressFinalize(this);
 		}
 
-		public static void RunAfter(double seconds, Action action)
+		public static void RunAfter(float seconds, Action action)
 		{
 			var thread = new Thread(() =>
 			{

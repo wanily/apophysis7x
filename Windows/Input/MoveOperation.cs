@@ -1,4 +1,5 @@
 using System;
+using System.Numerics;
 using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Controllers;
@@ -7,33 +8,30 @@ namespace Xyrus.Apophysis.Windows.Input
 {
 	class MoveOperation : IteratorInputOperation
 	{
-		public MoveOperation([NotNull] Iterator iterator, [NotNull] Vector2 origin, [NotNull] Vector2 current) : base(iterator)
+		public MoveOperation([NotNull] Iterator iterator, Vector2 origin, Vector2 current) : base(iterator)
 		{
 			if (origin == null) throw new ArgumentNullException("origin");
 			if (current == null) throw new ArgumentNullException("current");
 
-			Origin = origin.Freeze();
-			Current = current.Freeze();
+			Origin = origin;
+			Current = current;
 		}
 
-		[NotNull]
-		public ReadOnlyVector2 Origin
+		public Vector2 Origin
 		{
 			get; 
 			private set;
 		}
 
-		[NotNull]
-		public ReadOnlyVector2 Current
+		public Vector2 Current
 		{
 			get;
 			private set;
 		}
 
-		[NotNull]
-		public ReadOnlyVector2 Delta
+		public Vector2 Delta
 		{
-			get { return (Current - Origin).Freeze(); }
+			get { return (Current - Origin); }
 		}
 
 		protected override string GetInfoString()

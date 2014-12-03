@@ -14,7 +14,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 		private readonly InputController mInputHandler;
 		private readonly Lock mInternalEdit;
 
-		private double mStart, mLastValue;
+		private float mStart, mLastValue;
 		private Point mCursorStart;
 		private bool mIsDragging;
 		private bool mIsMouseOver;
@@ -76,16 +76,16 @@ namespace Xyrus.Apophysis.Windows.Controls
 			get { return base.Rows; }
 		}
 
-		public double this[int row]
+		public float this[int row]
 		{
 			get
 			{
 				if (row < 0)
 					return 0;
 
-				double value;
-				if (!double.TryParse(Rows[row].Cells[1].Value as string ?? string.Empty, NumberStyles.Float, InputController.Culture, out value))
-					value = 0.0;
+				float value;
+				if (!float.TryParse(Rows[row].Cells[1].Value as string ?? string.Empty, NumberStyles.Float, InputController.Culture, out value))
+					value = 0.0f;
 
 				return value;
 			}
@@ -164,7 +164,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 				CellValueReset(this, args);
 			}
 
-			if (ResetMode == DragGridResetMode.Toggle && System.Math.Abs(args.Value - value) < double.Epsilon)
+			if (ResetMode == DragGridResetMode.Toggle && Float.Abs(args.Value - value) < float.Epsilon)
 			{
 				value = 0;
 			}
@@ -259,8 +259,8 @@ namespace Xyrus.Apophysis.Windows.Controls
 				return;
 
 			var pos = MouseInputManager.GetPosition();
-			var delta = pos.X - (double)mCursorStart.X;
-			var multiplier = 1000.0;
+			var delta = pos.X - (float)mCursorStart.X;
+			var multiplier = 1000.0f;
 
 			if (KeyboardInputManager.GetKeyState(Keys.Menu))
 				multiplier = 100000;
@@ -275,7 +275,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 				KeyboardInputManager.GetKeyState(Keys.RShiftKey)
 			) multiplier = 100;
 
-			this[mDragRow] = System.Math.Round(mStart + delta / multiplier, 3);
+			this[mDragRow] = Float.Round(mStart + delta / multiplier, 3);
 		}
 		private void OnCellGlobalMouseUp(MouseHookEventArgs e)
 		{
@@ -284,7 +284,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 			Cursor.Current = mIsMouseOver ? Cursors.Hand : null;
 			mIsDragging = false;
-			mStart = 0.0;
+			mStart = 0.0f;
 			mDragColumn = 0;
 			mDragRow = 0;
 

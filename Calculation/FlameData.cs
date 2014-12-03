@@ -1,7 +1,7 @@
 using System;
 using System.Drawing;
 using System.Linq;
-using Xyrus.Apophysis.Math;
+using System.Numerics;
 using Xyrus.Apophysis.Models;
 using Rectangle = Xyrus.Apophysis.Math.Rectangle;
 
@@ -12,9 +12,9 @@ namespace Xyrus.Apophysis.Calculation
 		private Renderer mRenderer;
 		private Flame mFlame;
 
-		private const double mWhiteLevel = 200;
+		private const float mWhiteLevel = 200;
 		private const int mMaxFilterWidth = 25;
-		private const double mFilterCutoff = 1.8;
+		private const float mFilterCutoff = 1.8f;
 
 		private delegate void Project3D(ref Vector3 vector, Random random);
 		private delegate void CanvasTransform(ref Vector3 vector);
@@ -84,7 +84,7 @@ namespace Xyrus.Apophysis.Calculation
 		/// <summary>
 		/// 2 ^ zoom
 		/// </summary>
-		public double TwoPowerZoom
+		public float TwoPowerZoom
 		{
 			get; 
 			private set;
@@ -94,7 +94,7 @@ namespace Xyrus.Apophysis.Calculation
 		/// Points per pixel ("scale") adjusted to the output size
 		/// flame_ppu * render_width / flame_canvas_width
 		/// </summary>
-		public double AdjustedPixelsPerUnit
+		public float AdjustedPixelsPerUnit
 		{
 			get; 
 			private set;
@@ -103,7 +103,7 @@ namespace Xyrus.Apophysis.Calculation
 		/// <summary>
 		/// Color map as a 2D array
 		/// </summary>
-		public double[][] ColorMap
+		public float[][] ColorMap
 		{
 			get; 
 			private set;
@@ -113,7 +113,6 @@ namespace Xyrus.Apophysis.Calculation
 		/// AdjustedPixelsPerUnit * TwoPowerZoom
 		/// 2 ^ zoom * flame_ppu * render_width / flame_canvas_width
 		/// </summary>
-		[NotNull]
 		public Vector2 PointsPerUnit
 		{
 			get; 
@@ -174,7 +173,7 @@ namespace Xyrus.Apophysis.Calculation
 		/// <summary>
 		/// The filter kernel to blur the result image after oversampling
 		/// </summary>
-		public double[][] FilterKernel
+		public float[][] FilterKernel
 		{
 			get; 
 			private set;
@@ -210,7 +209,7 @@ namespace Xyrus.Apophysis.Calculation
 		/// <summary>
 		/// The cosine of the rotation angle
 		/// </summary>
-		public double CosAngle
+		public float CosAngle
 		{
 			get; 
 			private set;
@@ -219,7 +218,7 @@ namespace Xyrus.Apophysis.Calculation
 		/// <summary>
 		/// The sine of the rotation angle
 		/// </summary>
-		public double SinAngle
+		public float SinAngle
 		{
 			get;
 			private set;
@@ -228,19 +227,19 @@ namespace Xyrus.Apophysis.Calculation
 		/// <summary>
 		/// The 3D camera matrix (3x3)
 		/// </summary>
-		public double[][] Camera3D { get; private set; }
+		public float[][] Camera3D { get; private set; }
 
 		/// <summary>
 		/// The coefficient at which the blur strength of the depth of field effect is scaled
 		/// 0.1 * dof
 		/// </summary>
-		public double DofCoeff { get; private set; }
+		public float DofCoeff { get; private set; }
 
 		/// <summary>
 		/// The value above which a point is considered "white" 
 		/// constant at 200
 		/// </summary>
-		public double WhiteLevel
+		public float WhiteLevel
 		{
 			get { return mWhiteLevel; }
 		}
@@ -284,20 +283,20 @@ namespace Xyrus.Apophysis.Calculation
 			if ((FilterSize + mRenderer.Oversample)%2 != 0)
 				FilterSize ++;
 
-			FilterKernel = new double[FilterSize][];
+			FilterKernel = new float[FilterSize][];
 
 			var adjust = fw > 0 ? (mFilterCutoff*FilterSize)/fw : 1;
-			var total = 0.0;
+			var total = 0.0f;
 
 			for (int i = 0; i < FilterSize; i++)
 			{
-				FilterKernel[i] = new double[FilterSize];
+				FilterKernel[i] = new float[FilterSize];
 				for (int j = 0; j < FilterSize; j++)
 				{
-					var ii = ((2.0 * i + 1) / FilterSize - 1) * adjust;
-					var jj = ((2.0 * j + 1) / FilterSize - 1) * adjust;
+					var ii = ((2.0f * i + 1) / FilterSize - 1) * adjust;
+					var jj = ((2.0f * j + 1) / FilterSize - 1) * adjust;
 
-					FilterKernel[i][j] = System.Math.Exp(-2.0*(ii*ii + jj*jj));
+					FilterKernel[i][j] = Float.Exp(-2.0f*(ii*ii + jj*jj));
 					total += FilterKernel[i][j];
 				}
 			}
@@ -329,14 +328,14 @@ namespace Xyrus.Apophysis.Calculation
 		private void CalculateColorMap()
 		{
 			var colors = mFlame.Palette;
-			ColorMap = new double[colors.Length][];
+			ColorMap = new float[colors.Length][];
 
 			for (int i = 0; i < colors.Length; i++)
 			{
-				ColorMap[i] = new double[3];
-				ColorMap[i][0] = (colors[i].R * mWhiteLevel) / 256.0;
-				ColorMap[i][1] = (colors[i].G * mWhiteLevel) / 256.0;
-				ColorMap[i][2] = (colors[i].B * mWhiteLevel) / 256.0;
+				ColorMap[i] = new float[3];
+				ColorMap[i][0] = (colors[i].R * mWhiteLevel) / 256.0f;
+				ColorMap[i][1] = (colors[i].G * mWhiteLevel) / 256.0f;
+				ColorMap[i][2] = (colors[i].B * mWhiteLevel) / 256.0f;
 			}
 		}
 
@@ -350,7 +349,7 @@ namespace Xyrus.Apophysis.Calculation
 		}
 		private void UpdateCamera()
 		{
-			TwoPowerZoom = System.Math.Pow(2, mFlame.Zoom);
+			TwoPowerZoom = Float.Power(2, mFlame.Zoom);
 
 			PointsPerUnit = new Vector2
 			{
@@ -360,8 +359,8 @@ namespace Xyrus.Apophysis.Calculation
 
 			var corner = new Vector2
 			{
-				X = mFlame.Origin.X - mRenderer.Size.Width / PointsPerUnit.X / 2.0,
-				Y = mFlame.Origin.Y - mRenderer.Size.Height / PointsPerUnit.Y / 2.0
+				X = mFlame.Origin.X - mRenderer.Size.Width / PointsPerUnit.X / 2.0f,
+				Y = mFlame.Origin.Y - mRenderer.Size.Height / PointsPerUnit.Y / 2.0f
 			};
 
 			var t = new[]
@@ -380,20 +379,20 @@ namespace Xyrus.Apophysis.Calculation
 
 			UnitToPixelFactor = new Vector2
 			{
-				X = (HistogramSize.Width - 0.5) * ((System.Math.Abs(CameraRectangle.Size.X) > double.Epsilon) ? 1.0 / CameraRectangle.Size.X : 1),
-				Y = (HistogramSize.Height - 0.5) * ((System.Math.Abs(CameraRectangle.Size.Y) > double.Epsilon) ? 1.0 / CameraRectangle.Size.Y : 1)
+				X = (HistogramSize.Width - 0.5f) * ((Float.Abs(CameraRectangle.Size.X) > float.Epsilon) ? 1.0f / CameraRectangle.Size.X : 1),
+				Y = (HistogramSize.Height - 0.5f) * ((Float.Abs(CameraRectangle.Size.Y) > float.Epsilon) ? 1.0f / CameraRectangle.Size.Y : 1)
 			};
 
-			SinAngle = System.Math.Sin(mFlame.Angle);
-			CosAngle = System.Math.Cos(mFlame.Angle);
+			SinAngle = Float.Sin(mFlame.Angle);
+			CosAngle = Float.Cos(mFlame.Angle);
 
-			ZeroPoint = System.Math.Abs(mFlame.Angle) < double.Epsilon ? new Vector2() : new Vector2
+			ZeroPoint = System.Math.Abs(mFlame.Angle) < float.Epsilon ? new Vector2() : new Vector2
 			{
 				X = mFlame.Origin.X * (1 - CosAngle) - mFlame.Origin.Y * SinAngle - CameraRectangle.TopLeft.X,
 				Y = mFlame.Origin.Y * (1 - CosAngle) + mFlame.Origin.X * SinAngle - CameraRectangle.TopLeft.Y
 			};
 
-			if (System.Math.Abs(mFlame.Angle) < double.Epsilon)
+			if (System.Math.Abs(mFlame.Angle) < float.Epsilon)
 			{
 				mTransform = CanvasTransformSimple;
 			}
@@ -406,27 +405,27 @@ namespace Xyrus.Apophysis.Calculation
 			{
 				new[]
 				{
-					System.Math.Cos(-mFlame.Yaw), 
-					-System.Math.Sin(-mFlame.Yaw), 
+					Float.Cos(-mFlame.Yaw), 
+					-Float.Sin(-mFlame.Yaw), 
 					0
 				},
 				new[]
 				{
-					System.Math.Cos(mFlame.Pitch) * System.Math.Sin(-mFlame.Yaw), 
-					System.Math.Cos(mFlame.Pitch) * System.Math.Cos(-mFlame.Yaw), 
-					-System.Math.Sin(mFlame.Pitch)
+					Float.Cos(mFlame.Pitch) * Float.Sin(-mFlame.Yaw), 
+					Float.Cos(mFlame.Pitch) * Float.Cos(-mFlame.Yaw), 
+					-Float.Sin(mFlame.Pitch)
 				},
 				new[]
 				{
-					System.Math.Sin(mFlame.Pitch) * System.Math.Sin(-mFlame.Yaw), 
-					System.Math.Sin(mFlame.Pitch) * System.Math.Cos(-mFlame.Yaw), 
-					System.Math.Cos(mFlame.Pitch)
+					Float.Sin(mFlame.Pitch) * Float.Sin(-mFlame.Yaw), 
+					Float.Sin(mFlame.Pitch) * Float.Cos(-mFlame.Yaw), 
+					Float.Cos(mFlame.Pitch)
 				}
 			};
 
-			DofCoeff = 0.1 * mFlame.DepthOfField;
+			DofCoeff = 0.1f * mFlame.DepthOfField;
 
-			if (System.Math.Abs(DofCoeff) < double.Epsilon)
+			if (System.Math.Abs(DofCoeff) < float.Epsilon)
 			{
 				mProjection = Project3DWithPitchYaw;
 			}
@@ -462,12 +461,12 @@ namespace Xyrus.Apophysis.Calculation
 				Camera3D[0][2] * vector.X + Camera3D[1][2] * vector.Y + Camera3D[2][2] * vector.Z);
 
 			var perspective = 1 - mFlame.Perspective * transformed.Z;
-			var randomAngle = random.NextDouble() * 2 * System.Math.PI;
+			var randomAngle = random.NextFloat() * 2 * Float.Pi;
 
-			var sin = System.Math.Sin(randomAngle);
-			var cos = System.Math.Cos(randomAngle);
+			var sin = Float.Sin(randomAngle);
+			var cos = Float.Cos(randomAngle);
 
-			var randomDistance = random.NextDouble() * DofCoeff * transformed.Z;
+			var randomDistance = random.NextFloat() * DofCoeff * transformed.Z;
 
 			vector = new Vector3(
 				(transformed.X + randomDistance * cos) / perspective,

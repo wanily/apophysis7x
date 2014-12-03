@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Numerics;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Calculation;
-using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Models;
 
 namespace Xyrus.Apophysis.Windows.Visuals
@@ -12,8 +12,8 @@ namespace Xyrus.Apophysis.Windows.Visuals
 	class IteratorPreviewVisual : CanvasVisual<Canvas>
 	{
 		private IEnumerable<IteratorVisual> mCollection;
-		private double mRange;
-		private double mDensity;
+		private float mRange;
+		private float mDensity;
 		private bool mApplyPostTransform;
 
 		public IteratorPreviewVisual([NotNull] Control control, [NotNull] Canvas canvas, [NotNull] IEnumerable<IteratorVisual> collection) : base(control, canvas)
@@ -30,7 +30,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			mCollection = null;
 		}
 
-		public double Range
+		public float Range
 		{
 			get { return mRange; }
 			set
@@ -39,7 +39,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 				mRange = value;
 			}
 		}
-		public double Density
+		public float Density
 		{
 			get { return mDensity; }
 			set
@@ -56,7 +56,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 
 		private Vector2 IterateSample(Iterator model, Vector2 point, IEnumerable<Variation> variations, IterationData data)
 		{
-			point = model.PreAffine.TransformPoint(point);
+			point = model.PreAffine.Transform(point);
 
 			data.PreX = point.X;
 			data.PreY = point.Y;
@@ -74,13 +74,13 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			point.Y = data.PostY;
 
 			if (mApplyPostTransform)
-				point = model.PostAffine.TransformPoint(point);
+				point = model.PostAffine.Transform(point);
 
 			return point;
 		}
 		private void DrawModel(Graphics graphics, Iterator model)
 		{
-			var variations = model.Variations.GetOrderedForExecution().Where(x => System.Math.Abs(x.Weight) > double.Epsilon).ToArray();
+			var variations = model.Variations.GetOrderedForExecution().Where(x => System.Math.Abs(x.Weight) > float.Epsilon).ToArray();
 			foreach (var variation in variations)
 			{
 				variation.Prepare();
@@ -100,7 +100,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			{
 				//Vector2 lastPoint = null;
 
-				var plot = new Action<double, double>((x, y) =>
+				var plot = new Action<float, float>((x, y) =>
 				{
 					var vout = IterateSample(model, new Vector2(x, y), variations, data);
 					var pos = Canvas.WorldToCanvas(vout);
@@ -116,11 +116,11 @@ namespace Xyrus.Apophysis.Windows.Visuals
 					//lastPoint = pos;
 				});
 
-				for (double y = p1.Y; y <= p2.Y; y += step)
+				for (float y = p1.Y; y <= p2.Y; y += step)
 				{
 					//lastPoint = null;
 
-					for (double x = p1.X; x <= p2.X; x += step)
+					for (float x = p1.X; x <= p2.X; x += step)
 					{
 						plot(x, y);
 					}

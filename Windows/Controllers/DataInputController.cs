@@ -11,8 +11,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 	{
 		class InputInfo
 		{
-			public Func<double> Getter;
-			public Action<double> Setter;
+			public Func<float> Getter;
+			public Action<float> Setter;
 		}
 
 		private readonly InputController mInputHandler = new InputController();
@@ -97,7 +97,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 		}
 
-		protected void Register([NotNull] DragPanel dragPanel, [NotNull] Action<double> setter, [NotNull] Func<double> getter)
+		protected void Register([NotNull] DragPanel dragPanel, [NotNull] Action<float> setter, [NotNull] Func<float> getter)
 		{
 			if (dragPanel == null) throw new ArgumentNullException("dragPanel");
 			if (setter == null) throw new ArgumentNullException("setter");
@@ -113,7 +113,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				dragPanel.TextBox.LostFocus += OnTextBoxLostFocus;
 			}
 		}
-		protected void Register([NotNull] ScrollBar scrollBar, [NotNull] Action<double> setter, [NotNull] Func<double> getter)
+		protected void Register([NotNull] ScrollBar scrollBar, [NotNull] Action<float> setter, [NotNull] Func<float> getter)
 		{
 			if (scrollBar == null) throw new ArgumentNullException("scrollBar");
 			if (setter == null) throw new ArgumentNullException("setter");
@@ -123,7 +123,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			scrollBar.ValueChanged += OnValueChanged;
 			scrollBar.Scroll += OnScrollBarScroll;
 		}
-		protected void Register([NotNull] TextBox textBox, [NotNull] Action<double> setter, [NotNull] Func<double> getter)
+		protected void Register([NotNull] TextBox textBox, [NotNull] Action<float> setter, [NotNull] Func<float> getter)
 		{
 			if (textBox == null) throw new ArgumentNullException("textBox");
 			if (setter == null) throw new ArgumentNullException("setter");
@@ -135,7 +135,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			textBox.KeyUp += OnTextBoxKeyUp;
 			textBox.LostFocus += OnTextBoxLostFocus;
 		}
-		protected void Register([NotNull] ComboBox comboBox, [NotNull] Action<double> setter, [NotNull] Func<double> getter)
+		protected void Register([NotNull] ComboBox comboBox, [NotNull] Action<float> setter, [NotNull] Func<float> getter)
 		{
 			if (comboBox == null) throw new ArgumentNullException("comboBox");
 			if (setter == null) throw new ArgumentNullException("setter");
@@ -147,7 +147,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			comboBox.KeyUp += OnComboBoxKeyUp;
 			comboBox.LostFocus += OnComboBoxLostFocus;
 		}
-		protected void Register([NotNull] NumericUpDown upDown, [NotNull] Action<double> setter, [NotNull] Func<double> getter)
+		protected void Register([NotNull] NumericUpDown upDown, [NotNull] Action<float> setter, [NotNull] Func<float> getter)
 		{
 			if (upDown == null) throw new ArgumentNullException("upDown");
 			if (setter == null) throw new ArgumentNullException("setter");
@@ -161,9 +161,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			upDown.Scroll += OnScrollBarScroll;
 		}
 
-		private double ConstrainScrollValue(ScrollBar scrollBar, double value)
+		private float ConstrainScrollValue(ScrollBar scrollBar, float value)
 		{
-			return System.Math.Max(scrollBar.Minimum, System.Math.Min(value, scrollBar.Maximum));
+			return Float.Range(value, scrollBar.Minimum, scrollBar.Maximum);
 		}
 		private void WriteBackControlValues(bool dragPanels = true, bool scrollBars = true, bool textBoxes = true, bool comboBoxes = true, bool upDownControls = true)
 		{
@@ -219,8 +219,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			var textBox = sender as TextBox;
 			if (textBox != null && mTextBoxes.ContainsKey(textBox))
 			{
-				double value;
-				if (!double.TryParse(textBox.Text, NumberStyles.Float, InputController.Culture, out value))
+				float value;
+				if (!float.TryParse(textBox.Text, NumberStyles.Float, InputController.Culture, out value))
 					return;
 
 				mTextBoxes[textBox].Setter(value);
@@ -230,8 +230,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			var comboBox = sender as ComboBox;
 			if (comboBox != null && mComboBoxes.ContainsKey(comboBox))
 			{
-				double value;
-				if (!double.TryParse(comboBox.Text, NumberStyles.Float, InputController.Culture, out value))
+				float value;
+				if (!float.TryParse(comboBox.Text, NumberStyles.Float, InputController.Culture, out value))
 					return;
 
 				mComboBoxes[comboBox].Setter(value);
@@ -241,8 +241,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			var upDown = sender as NumericUpDown;
 			if (upDown != null && mUpDownControls.ContainsKey(upDown))
 			{
-				double value;
-				if (!double.TryParse(upDown.Text, NumberStyles.Float, InputController.Culture, out value))
+				float value;
+				if (!float.TryParse(upDown.Text, NumberStyles.Float, InputController.Culture, out value))
 					return;
 
 				mUpDownControls[upDown].Setter(value);
@@ -300,13 +300,13 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				return;
 
 			var textBox = (TextBox) sender;
-			double value;
+			float value;
 
-			if (!double.TryParse(textBox.Text, NumberStyles.Float, InputController.Culture, out value))
+			if (!float.TryParse(textBox.Text, NumberStyles.Float, InputController.Culture, out value))
 			{
 				using (mInitializer.Enter())
 				{
-					Func<double> getter = null;
+					Func<float> getter = null;
 
 					if (mTextBoxes.ContainsKey(textBox))
 						getter = mTextBoxes[textBox].Getter;
@@ -330,13 +330,13 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				return;
 
 			var comboBox = (ComboBox)sender;
-			double value;
+			float value;
 
-			if (!double.TryParse(comboBox.Text, NumberStyles.Float, InputController.Culture, out value))
+			if (!float.TryParse(comboBox.Text, NumberStyles.Float, InputController.Culture, out value))
 			{
 				using (mInitializer.Enter())
 				{
-					Func<double> getter = null;
+					Func<float> getter = null;
 
 					if (mComboBoxes.ContainsKey(comboBox))
 						getter = mComboBoxes[comboBox].Getter;
@@ -358,13 +358,13 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				return;
 
 			var upDown = (NumericUpDown)sender;
-			double value;
+			float value;
 
-			if (!double.TryParse(upDown.Text, NumberStyles.Float, InputController.Culture, out value))
+			if (!float.TryParse(upDown.Text, NumberStyles.Float, InputController.Culture, out value))
 			{
 				using (mInitializer.Enter())
 				{
-					Func<double> getter = null;
+					Func<float> getter = null;
 
 					if (mUpDownControls.ContainsKey(upDown))
 						getter = mUpDownControls[upDown].Getter;

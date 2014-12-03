@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Text;
-using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Strings;
 
 namespace Xyrus.Apophysis.Calculation
@@ -227,7 +227,7 @@ namespace Xyrus.Apophysis.Calculation
 			return Encoding.ASCII.GetBytes(str);
 		}
 
-		public override double GetVariable(string name)
+		public override float GetVariable(string name)
 		{
 			double value = 0;
 			byte[] nbytes = GetArrayFromString(name);
@@ -239,16 +239,17 @@ namespace Xyrus.Apophysis.Calculation
 
 				Debug.Assert(result, @"PluginVarGetVariable");
 
-				return value;
+				return (float)value;
 			}
 		}
-		public override double SetVariable(string name, double value)
+		public override float SetVariable(string name, float value)
 		{
 			byte[] nbytes = GetArrayFromString(name);
+			double dvalue = value;
 
 			fixed(byte* nptr = &nbytes[0])
 			{
-				double* vptr = &value;
+				double* vptr = &dvalue;
 				bool result = mSetVariable(mVp, nptr, vptr);
 
 				Debug.Assert(result, @"PluginVarSetVariable");
@@ -256,7 +257,7 @@ namespace Xyrus.Apophysis.Calculation
 
 			return GetVariable(name);
 		}
-		public override double ResetVariable(string name)
+		public override float ResetVariable(string name)
 		{
 			byte[] nbytes = GetArrayFromString(name);
 
@@ -282,16 +283,16 @@ namespace Xyrus.Apophysis.Calculation
 			get { return mName; }
 		}
 
-		public override void Prepare(AffineTransform affineMatrix = null)
+		public override void Prepare(Matrix3x2? affineMatrix = null)
 		{
-			affineMatrix = affineMatrix ?? new AffineTransform();
+			affineMatrix = affineMatrix ?? new Matrix3x2(1,0,0,1,0,0);
 
 			if (mInit != null)
 			{
-				mInit(mVp, mPostX, mPostY, mPostZ, mPreX, mPreY, mPreZ, mColor, Weight, 
-					affineMatrix.Matrix.X.X, affineMatrix.Matrix.X.Y, 
-					affineMatrix.Matrix.Y.X, affineMatrix.Matrix.Y.Y, 
-					affineMatrix.Origin.X, affineMatrix.Origin.Y);
+				mInit(mVp, mPostX, mPostY, mPostZ, mPreX, mPreY, mPreZ, mColor, Weight,
+					affineMatrix.Value.M11, affineMatrix.Value.M12,
+					affineMatrix.Value.M21, affineMatrix.Value.M22,
+					affineMatrix.Value.M31, affineMatrix.Value.M32);
 			}
 			else if (mInitLegacy3D != null)
 			{
@@ -318,15 +319,16 @@ namespace Xyrus.Apophysis.Calculation
 
 			mCalculate(mVp);
 
-			data.PreX = *mPreX;
-			data.PreY = *mPreY;
-			data.PreZ = *mPreZ;
+			//todo x: probably not good but the plugin interface is all 64 bit float! leave it be until PI is updated
+			data.PreX = (float)*mPreX;
+			data.PreY = (float)*mPreY;
+			data.PreZ = (float)*mPreZ;
 
-			data.PostX = *mPostX;
-			data.PostY = *mPostY;
-			data.PostZ = *mPostZ;
+			data.PostX = (float)*mPostX;
+			data.PostY = (float)*mPostY;
+			data.PostZ = (float)*mPostZ;
 
-			data.Color = *mColor;
+			data.Color = (float)*mColor;
 		}
 
 		private T LoadProc<T>(IntPtr hModule, string name)

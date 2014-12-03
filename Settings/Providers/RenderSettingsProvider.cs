@@ -79,7 +79,7 @@ namespace Xyrus.Apophysis.Settings.Providers
 				Container.Size = value.GetValueOrDefault();
 			}
 		}
-		public double Density
+		public float Density
 		{
 			get { return Container.Density; }
 			set
@@ -92,7 +92,7 @@ namespace Xyrus.Apophysis.Settings.Providers
 				Container.Density = value;
 			}
 		}
-		public double FilterRadius
+		public float FilterRadius
 		{
 			get { return Container.FilterRadius; }
 			set

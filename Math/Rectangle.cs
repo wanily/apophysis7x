@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Numerics;
 
 namespace Xyrus.Apophysis.Math
 {
@@ -8,7 +9,7 @@ namespace Xyrus.Apophysis.Math
 		private readonly Vector2 mCorner;
 		private readonly Vector2 mSize;
 
-		public Rectangle([NotNull] Vector2 corner, [NotNull] Vector2 size)
+		public Rectangle(Vector2 corner, Vector2 size)
 		{
 			if (corner == null) throw new ArgumentNullException(@"corner");
 			if (size == null) throw new ArgumentNullException(@"size");

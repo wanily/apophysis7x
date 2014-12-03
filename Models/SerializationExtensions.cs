@@ -2,7 +2,7 @@ using System;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
-using Xyrus.Apophysis.Math;
+using System.Numerics;
 
 namespace Xyrus.Apophysis.Models
 {
@@ -17,7 +17,7 @@ namespace Xyrus.Apophysis.Models
 		}
 
 		[NotNull]
-		public static string Serialize([NotNull] this Vector2 value)
+		public static string Serialize(this Vector2 value)
 		{
 			if (value == null) throw new ArgumentNullException("value");
 			return string.Format(@"{0} {1}",
@@ -45,15 +45,15 @@ namespace Xyrus.Apophysis.Models
 		}
 
 		[NotNull]
-		public static string Serialize(this double value)
+		public static string Serialize(this float value)
 		{
 			return value.ToString(CultureInfo.InvariantCulture);
 		}
 
 		[NotNull]
-		public static string Serialize([CanBeNull] this double[] value)
+		public static string Serialize([CanBeNull] this float[] value)
 		{
-			value = value ?? new double[0];
+			value = value ?? new float[0];
 
 			return string.Join(@" ", value.Select(Serialize).ToArray());
 		}

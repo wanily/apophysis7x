@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Numerics;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Models;
@@ -142,12 +143,12 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			}
 		}
 
-		public double PreviewRange
+		public float PreviewRange
 		{
 			get { return mPreviewVisual.Range; }
 			set { mPreviewVisual.Range = value; }
 		}
-		public double PreviewDensity
+		public float PreviewDensity
 		{
 			get { return mPreviewVisual.Density; }
 			set { mPreviewVisual.Density = value; }

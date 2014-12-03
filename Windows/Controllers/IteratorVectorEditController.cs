@@ -1,5 +1,6 @@
 using System;
 using System.Globalization;
+using System.Numerics;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Windows.Forms;
 
@@ -81,34 +82,28 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			if (ReferenceEquals(sender, View.IteratorResetPreAffineO) || ReferenceEquals(sender, View.IteratorResetPreAffine))
 			{
-				iterator.PreAffine.Origin.X = 0;
-				iterator.PreAffine.Origin.Y = 0;
+				iterator.PreAffine = iterator.PreAffine.Alter(m31: 0, m32: 0);
 			}
 			if (ReferenceEquals(sender, View.IteratorResetPreAffineX) || ReferenceEquals(sender, View.IteratorResetPreAffine))
 			{
-				iterator.PreAffine.Matrix.X.X = 1;
-				iterator.PreAffine.Matrix.X.Y = 0;
+				iterator.PreAffine = iterator.PreAffine.Alter(1, 0);
 			}
 			if (ReferenceEquals(sender, View.IteratorResetPreAffineY) || ReferenceEquals(sender, View.IteratorResetPreAffine))
 			{
-				iterator.PreAffine.Matrix.Y.X = 0;
-				iterator.PreAffine.Matrix.Y.Y = 1;
+				iterator.PreAffine = iterator.PreAffine.Alter(m21: 0, m22: 1);
 			}
 
 			if (ReferenceEquals(sender, View.IteratorResetPostAffineO) || ReferenceEquals(sender, View.IteratorResetPostAffine))
 			{
-				iterator.PostAffine.Origin.X = 0;
-				iterator.PostAffine.Origin.Y = 0;
+				iterator.PostAffine = iterator.PostAffine.Alter(m31: 0, m32: 0);
 			}
 			if (ReferenceEquals(sender, View.IteratorResetPostAffineX) || ReferenceEquals(sender, View.IteratorResetPostAffine))
 			{
-				iterator.PostAffine.Matrix.X.X = 1;
-				iterator.PostAffine.Matrix.X.Y = 0;
+				iterator.PostAffine = iterator.PostAffine.Alter(1, 0);
 			}
 			if (ReferenceEquals(sender, View.IteratorResetPostAffineY) || ReferenceEquals(sender, View.IteratorResetPostAffine))
 			{
-				iterator.PostAffine.Matrix.Y.X = 0;
-				iterator.PostAffine.Matrix.Y.Y = 1;
+				iterator.PostAffine = iterator.PostAffine.Alter(m21: 0, m22: 1);
 			}
 
 			View.IteratorCanvas.Refresh();
@@ -123,41 +118,31 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			var pre = iterator.PreAffine;
 			var post = iterator.PostAffine;
 
-			double ox, oy, xx, xy, yx, yy;
+			float ox, oy, xx, xy, yx, yy;
 
 			using (mParent.Initializer.Enter())
 			{
-				if (!double.TryParse(View.IteratorPreAffineOxTextBox.Text, NumberStyles.Float, InputController.Culture, out ox)) ox = pre.Origin.X;
-				if (!double.TryParse(View.IteratorPreAffineOyTextBox.Text, NumberStyles.Float, InputController.Culture, out oy)) oy = pre.Origin.Y;
-				if (!double.TryParse(View.IteratorPreAffineXxTextBox.Text, NumberStyles.Float, InputController.Culture, out xx)) xx = pre.Matrix.X.X;
-				if (!double.TryParse(View.IteratorPreAffineXyTextBox.Text, NumberStyles.Float, InputController.Culture, out xy)) xy = pre.Matrix.X.Y;
-				if (!double.TryParse(View.IteratorPreAffineYxTextBox.Text, NumberStyles.Float, InputController.Culture, out yx)) yx = pre.Matrix.Y.X;
-				if (!double.TryParse(View.IteratorPreAffineYyTextBox.Text, NumberStyles.Float, InputController.Culture, out yy)) yy = pre.Matrix.Y.Y;
+				if (!float.TryParse(View.IteratorPreAffineOxTextBox.Text, NumberStyles.Float, InputController.Culture, out ox)) ox = pre.M31;
+				if (!float.TryParse(View.IteratorPreAffineOyTextBox.Text, NumberStyles.Float, InputController.Culture, out oy)) oy = pre.M32;
+				if (!float.TryParse(View.IteratorPreAffineXxTextBox.Text, NumberStyles.Float, InputController.Culture, out xx)) xx = pre.M11;
+				if (!float.TryParse(View.IteratorPreAffineXyTextBox.Text, NumberStyles.Float, InputController.Culture, out xy)) xy = pre.M12;
+				if (!float.TryParse(View.IteratorPreAffineYxTextBox.Text, NumberStyles.Float, InputController.Culture, out yx)) yx = pre.M21;
+				if (!float.TryParse(View.IteratorPreAffineYyTextBox.Text, NumberStyles.Float, InputController.Culture, out yy)) yy = pre.M22;
 			}
 
-			pre.Origin.X = ox;
-			pre.Origin.Y = oy;
-			pre.Matrix.X.X = xx;
-			pre.Matrix.X.Y = xy;
-			pre.Matrix.Y.X = yx;
-			pre.Matrix.Y.Y = yy;
+			iterator.PreAffine = new Matrix3x2(xx, xy, yx, yy, ox, oy);
 
 			using (mParent.Initializer.Enter())
 			{
-				if (!double.TryParse(View.IteratorPostAffineOxTextBox.Text, NumberStyles.Float, InputController.Culture, out ox)) ox = post.Origin.X;
-				if (!double.TryParse(View.IteratorPostAffineOyTextBox.Text, NumberStyles.Float, InputController.Culture, out oy)) oy = post.Origin.Y;
-				if (!double.TryParse(View.IteratorPostAffineXxTextBox.Text, NumberStyles.Float, InputController.Culture, out xx)) xx = post.Matrix.X.X;
-				if (!double.TryParse(View.IteratorPostAffineXyTextBox.Text, NumberStyles.Float, InputController.Culture, out xy)) xy = post.Matrix.X.Y;
-				if (!double.TryParse(View.IteratorPostAffineYxTextBox.Text, NumberStyles.Float, InputController.Culture, out yx)) yx = post.Matrix.Y.X;
-				if (!double.TryParse(View.IteratorPostAffineYyTextBox.Text, NumberStyles.Float, InputController.Culture, out yy)) yy = post.Matrix.Y.Y;
+				if (!float.TryParse(View.IteratorPostAffineOxTextBox.Text, NumberStyles.Float, InputController.Culture, out ox)) ox = post.M31;
+				if (!float.TryParse(View.IteratorPostAffineOyTextBox.Text, NumberStyles.Float, InputController.Culture, out oy)) oy = post.M32;
+				if (!float.TryParse(View.IteratorPostAffineXxTextBox.Text, NumberStyles.Float, InputController.Culture, out xx)) xx = post.M11;
+				if (!float.TryParse(View.IteratorPostAffineXyTextBox.Text, NumberStyles.Float, InputController.Culture, out xy)) xy = post.M12;
+				if (!float.TryParse(View.IteratorPostAffineYxTextBox.Text, NumberStyles.Float, InputController.Culture, out yx)) yx = post.M21;
+				if (!float.TryParse(View.IteratorPostAffineYyTextBox.Text, NumberStyles.Float, InputController.Culture, out yy)) yy = post.M22;
 			}
 
-			post.Origin.X = ox;
-			post.Origin.Y = oy;
-			post.Matrix.X.X = xx;
-			post.Matrix.X.Y = xy;
-			post.Matrix.Y.X = yx;
-			post.Matrix.Y.Y = yy;
+			iterator.PostAffine = new Matrix3x2(xx, xy, yx, yy, ox, oy);
 
 			View.IteratorCanvas.Refresh();
 		}
@@ -170,13 +155,13 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			var iterator = View.IteratorCanvas.SelectedIterator;
 
-			var preo = iterator.PreAffine.Origin;
-			var prex = iterator.PreAffine.Matrix.X;
-			var prey = iterator.PreAffine.Matrix.Y;
+			var preo = new Vector2(iterator.PreAffine.M31, iterator.PreAffine.M32);
+			var prex = new Vector2(iterator.PreAffine.M11, iterator.PreAffine.M12);
+			var prey = new Vector2(iterator.PreAffine.M21, iterator.PreAffine.M22);
 
-			var posto = iterator.PostAffine.Origin;
-			var postx = iterator.PostAffine.Matrix.X;
-			var posty = iterator.PostAffine.Matrix.Y;
+			var posto = new Vector2(iterator.PostAffine.M31, iterator.PostAffine.M32);
+			var postx = new Vector2(iterator.PostAffine.M11, iterator.PostAffine.M12);
+			var posty = new Vector2(iterator.PostAffine.M21, iterator.PostAffine.M22);
 
 			using (mParent.Initializer.Enter())
 			{
@@ -208,13 +193,13 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			var iterator = View.IteratorCanvas.SelectedIterator;
 
-			var preo = iterator.PreAffine.Origin;
-			var prex = iterator.PreAffine.Matrix.X;
-			var prey = iterator.PreAffine.Matrix.Y;
+			var preo = new Vector2(iterator.PreAffine.M31, iterator.PreAffine.M32);
+			var prex = new Vector2(iterator.PreAffine.M11, iterator.PreAffine.M12);
+			var prey = new Vector2(iterator.PreAffine.M21, iterator.PreAffine.M22);
 
-			var posto = iterator.PostAffine.Origin;
-			var postx = iterator.PostAffine.Matrix.X;
-			var posty = iterator.PostAffine.Matrix.Y;
+			var posto = new Vector2(iterator.PostAffine.M31, iterator.PostAffine.M32);
+			var postx = new Vector2(iterator.PostAffine.M11, iterator.PostAffine.M12);
+			var posty = new Vector2(iterator.PostAffine.M21, iterator.PostAffine.M22);
 
 			using (mParent.Initializer.Enter())
 			{

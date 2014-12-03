@@ -23,10 +23,10 @@
     <Setting Name="Size" Type="System.Drawing.Size" Scope="User">
       <Value Profile="(Default)">0, 0</Value>
     </Setting>
-    <Setting Name="Density" Type="System.Double" Scope="User">
+    <Setting Name="Density" Type="System.Single" Scope="User">
       <Value Profile="(Default)">1000</Value>
     </Setting>
-    <Setting Name="FilterRadius" Type="System.Double" Scope="User">
+    <Setting Name="FilterRadius" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0.1</Value>
     </Setting>
     <Setting Name="Oversample" Type="System.Int32" Scope="User">

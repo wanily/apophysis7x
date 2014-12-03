@@ -244,14 +244,14 @@
 			// 
 			this.FilterRadiusDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.FilterRadiusDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.FilterRadiusDragPanel.Default = 0D;
-			this.FilterRadiusDragPanel.DragStepping = 5D;
+			this.FilterRadiusDragPanel.Default = 0F;
+			this.FilterRadiusDragPanel.DragStepping = 5F;
 			resources.ApplyResources(this.FilterRadiusDragPanel, "FilterRadiusDragPanel");
-			this.FilterRadiusDragPanel.Maximum = 1.7976931348623157E+308D;
-			this.FilterRadiusDragPanel.Minimum = 0D;
+			this.FilterRadiusDragPanel.Maximum = float.MaxValue;
+			this.FilterRadiusDragPanel.Minimum = 0F;
 			this.FilterRadiusDragPanel.Name = "FilterRadiusDragPanel";
 			this.FilterRadiusDragPanel.TextBox = this.FilterRadiusTextBox;
-			this.FilterRadiusDragPanel.Value = 0D;
+			this.FilterRadiusDragPanel.Value = 0F;
 			// 
 			// SelectFolderButton
 			// 

@@ -70,7 +70,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			builder.AppendFormat("Number of transforms: {0}\r\n", flame.Iterators.Count(x => x.GroupIndex == 0));
 			builder.AppendFormat("Number of final transforms: {0}\r\n", flame.Iterators.Count(x => x.GroupIndex == 1));
 
-			var externalVariations = flame.Iterators.SelectMany(x => x.Variations).Where(x => x is ExternalVariation && System.Math.Abs(x.Weight) > double.Epsilon).ToList();
+			var externalVariations = flame.Iterators.SelectMany(x => x.Variations).Where(x => x is ExternalVariation && System.Math.Abs(x.Weight) > float.Epsilon).ToList();
 
 			if (externalVariations.Count > 0)
 			{

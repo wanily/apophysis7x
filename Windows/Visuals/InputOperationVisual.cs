@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Numerics;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Models;
@@ -52,7 +53,6 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			}
 		}
 
-		[NotNull]
 		public Vector2 CursorPosition
 		{
 			get { return mCursorPosition; }
@@ -73,44 +73,53 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			set;
 		}
 
-		protected virtual Matrix2X2 GetMatrix([NotNull] Iterator iterator)
+		private Vector2 Origin(Iterator iterator)
 		{
-			if (iterator == null)
-			{
-				throw new ArgumentNullException("iterator");
-			}
-
 			switch (ActiveMatrix)
 			{
 				case IteratorMatrix.PreAffine:
-					return iterator.PreAffine.Matrix;
+					return new Vector2(iterator.PreAffine.M31, iterator.PreAffine.M32);
 				case IteratorMatrix.PostAffine:
-					return iterator.PostAffine.Matrix;
+					return new Vector2(iterator.PostAffine.M31, iterator.PostAffine.M32);
 				default:
 					throw new ArgumentOutOfRangeException();
 			}
 		}
-		protected virtual Vector2 GetOrigin([NotNull] Iterator iterator)
+		private Vector2 AxisX(Iterator iterator)
 		{
-			if (iterator == null)
-			{
-				throw new ArgumentNullException("iterator");
-			}
-
 			switch (ActiveMatrix)
 			{
 				case IteratorMatrix.PreAffine:
-					return iterator.PreAffine.Origin;
+					return new Vector2(iterator.PreAffine.M11, iterator.PreAffine.M12);
 				case IteratorMatrix.PostAffine:
-					return iterator.PostAffine.Origin;
+					return new Vector2(iterator.PostAffine.M11, iterator.PostAffine.M12);
 				default:
 					throw new ArgumentOutOfRangeException();
 			}
 		}
-
+		private Vector2 AxisY(Iterator iterator)
+		{
+			switch (ActiveMatrix)
+			{
+				case IteratorMatrix.PreAffine:
+					return new Vector2(iterator.PreAffine.M21, iterator.PreAffine.M22);
+				case IteratorMatrix.PostAffine:
+					return new Vector2(iterator.PostAffine.M21, iterator.PostAffine.M22);
+				default:
+					throw new ArgumentOutOfRangeException();
+			}
+		}
+		
 		protected override void OnControlPaint(Graphics graphics)
 		{
 			var lines = new List<ColoredString>();
+
+			if (mOperation == null)
+				return;
+
+			var ax = AxisX(mOperation.Iterator);
+			var ay = AxisY(mOperation.Iterator);
+			var oo = Origin(mOperation.Iterator);
 
 			using (var referenceBrush = new SolidBrush(ReferenceColor))
 			using (var referencePen = new Pen(referenceBrush))
@@ -143,18 +152,15 @@ namespace Xyrus.Apophysis.Windows.Visuals
 				var rotate = mOperation as RotateOperation;
 				if (rotate != null)
 				{
-					var matrix = GetMatrix(rotate.Iterator);
-					var origin = GetOrigin(rotate.Iterator);
-
-					var originCanvas = Canvas.WorldToCanvas(origin);
-					var x = Canvas.WorldToCanvas((rotate.Axis == RotationAxis.X ? matrix.X : matrix.Y) + origin);
+					var originCanvas = Canvas.WorldToCanvas(oo);
+					var x = Canvas.WorldToCanvas((rotate.Axis == RotationAxis.X ? ax : ay) + oo);
 
 					var farRadius = System.Math.Max(Canvas.Size.X, Canvas.Size.Y);
-					var radius = System.Math.Max(matrix.X.Length, matrix.Y.Length) * (Canvas.Ratio.X + Canvas.Ratio.Y) * 0.5;
+					var radius = System.Math.Max(ax.Length(), ay.Length()) * (Canvas.Ratio.X + Canvas.Ratio.Y) * 0.5f;
 					var rect = new Rectangle((int)(originCanvas.X - radius), (int)(originCanvas.Y - radius), (int)(radius * 2), (int)(radius * 2));
 
-					var lh = new Line((x - originCanvas).Direction * -farRadius + originCanvas, (x - originCanvas).Direction * farRadius + originCanvas);
-					var lv = new Line(lh.GetNormal() * -radius + originCanvas, lh.GetNormal() * radius + originCanvas);
+					var lh = new Line((x - originCanvas).Normal() * -farRadius + originCanvas, (x - originCanvas).Normal() * farRadius + originCanvas);
+					var lv = new Line(lh.NormalVector * -radius + originCanvas, lh.NormalVector * radius + originCanvas);
 
 					var loh = new Line(new Vector2(0, originCanvas.Y), new Vector2(Canvas.Size.X, originCanvas.Y));
 					var lov = new Line(new Vector2(originCanvas.X, 0), new Vector2(originCanvas.X, Canvas.Size.Y));
@@ -177,17 +183,14 @@ namespace Xyrus.Apophysis.Windows.Visuals
 				var scale = mOperation as ScaleOperation;
 				if (scale != null)
 				{
-					var matrix = GetMatrix(scale.Iterator);
-					var origin = GetOrigin(scale.Iterator);
-
-					var originCanvas = Canvas.WorldToCanvas(origin);
-					var x = Canvas.WorldToCanvas(matrix.X + origin);
-					var y = Canvas.WorldToCanvas(matrix.Y + origin);
+					var originCanvas = Canvas.WorldToCanvas(oo);
+					var x = Canvas.WorldToCanvas(ax + oo);
+					var y = Canvas.WorldToCanvas(ay + oo);
 
 					var farRadius = System.Math.Max(Canvas.Size.X, Canvas.Size.Y);
 
-					var lx = new Line((x - originCanvas).Direction * -farRadius + originCanvas, (x - originCanvas).Direction * farRadius + originCanvas);
-					var ly = new Line((y - originCanvas).Direction * -farRadius + originCanvas, (y - originCanvas).Direction * farRadius + originCanvas);
+					var lx = new Line((x - originCanvas).Normal() * -farRadius + originCanvas, (x - originCanvas).Normal() * farRadius + originCanvas);
+					var ly = new Line((y - originCanvas).Normal() * -farRadius + originCanvas, (y - originCanvas).Normal() * farRadius + originCanvas);
 
 					var loh = new Line(new Vector2(0, originCanvas.Y), new Vector2(Canvas.Size.X, originCanvas.Y));
 					var lov = new Line(new Vector2(originCanvas.X, 0), new Vector2(originCanvas.X, Canvas.Size.Y));
@@ -208,7 +211,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 				if (mOperation != null)
 				{
 					var text = new MouseOverOperation(mOperation.Iterator).ToString();
-					foreach (var variation in mOperation.Iterator.Variations.Where(x => System.Math.Abs(x.Weight) > double.Epsilon))
+					foreach (var variation in mOperation.Iterator.Variations.Where(x => System.Math.Abs(x.Weight) > float.Epsilon))
 					{
 						text += Environment.NewLine + 
 							variation.Name + " = " + 

@@ -61,7 +61,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			foreach (var variation in View.IteratorCanvas.SelectedIterator.Variations)
 			{
-				if (View.HideUnrelatedVariablesCheckBox.Checked && System.Math.Abs(variation.Weight) < double.Epsilon)
+				if (View.HideUnrelatedVariablesCheckBox.Checked && System.Math.Abs(variation.Weight) < float.Epsilon)
 				{
 					continue;
 				}

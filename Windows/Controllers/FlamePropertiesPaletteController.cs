@@ -4,7 +4,6 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Forms;
 using Xyrus.Apophysis.Windows.Input;
@@ -17,7 +16,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		private List<PaletteEditHandler> mEditHandlers;
 		private PaletteEditHandler mSelectedEditHandler;
 
-		private double mCurrentEditValue;
+		private float mCurrentEditValue;
 
 		public FlamePropertiesPaletteController(FlameProperties view, [NotNull] FlamePropertiesController parent) : base(view, parent.Initializer)
 		{
@@ -167,7 +166,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				View.PaletteEditModeButton.Text = value.GetDisplayName();
 			}
 		}
-		internal double CurrentEditValue
+		internal float CurrentEditValue
 		{
 			get { return mCurrentEditValue; }
 			set

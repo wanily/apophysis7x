@@ -178,7 +178,7 @@ namespace Xyrus.Apophysis.Models
 				if (steps == 0)
 					return a;
 
-				var f = i / (double)steps;
+				var f = i / (float)steps;
 				var c = (int)System.Math.Round(a + (b - a) * f);
 
 				return c;
@@ -259,14 +259,14 @@ namespace Xyrus.Apophysis.Models
 
 		private static Color Mix(Color operand1, Color operand2)
 		{
-			double r1 = operand1.R, r2 = operand2.R;
-			double g1 = operand1.G, g2 = operand2.G;
-			double b1 = operand1.B, b2 = operand2.B;
+			float r1 = operand1.R, r2 = operand2.R;
+			float g1 = operand1.G, g2 = operand2.G;
+			float b1 = operand1.B, b2 = operand2.B;
 
 			return Color.FromArgb(
-				(int)System.Math.Max(0, System.Math.Min(System.Math.Round(0.5 * (r1 + r2), 0), 255.0)),
-				(int)System.Math.Max(0, System.Math.Min(System.Math.Round(0.5 * (g1 + g2), 0), 255.0)),
-				(int)System.Math.Max(0, System.Math.Min(System.Math.Round(0.5 * (b1 + b2), 0), 255.0)));
+				(int)Float.Range(Float.Round(0.5f * (r1 + r2), 0), 0, 255),
+				(int)Float.Range(Float.Round(0.5f * (g1 + g2), 0), 0, 255),
+				(int)Float.Range(Float.Round(0.5f * (b1 + b2), 0), 0, 255));
 		}
 		private void Spread(int index, ref Color[] array, Color value)
 		{
@@ -285,20 +285,20 @@ namespace Xyrus.Apophysis.Models
 					
 					array.CopyTo(newColors, 0);
 
-					double r1 = lastColor.R,
+					float r1 = lastColor.R,
 						   g1 = lastColor.G,
 						   b1 = lastColor.B;
-					double r2 = value.R,
+					float r2 = value.R,
 						   g2 = value.G,
 						   b2 = value.B;
 
 					for (int i = array.Length; i < index; i++)
 					{
-						double p = (i - array.Length) / (double)(index - array.Length);
+						float p = (i - array.Length) / (float)(index - array.Length);
 						newColors[i] = Color.FromArgb(
-							(int)System.Math.Max(0, System.Math.Min(System.Math.Round(r1 + (r2 - r1) * p, 0), 255.0)),
-							(int)System.Math.Max(0, System.Math.Min(System.Math.Round(g1 + (g2 - g1) * p, 0), 255.0)),
-							(int)System.Math.Max(0, System.Math.Min(System.Math.Round(b1 + (b2 - b1) * p, 0), 255.0)));
+							(int)Float.Range(Float.Round(r1 + (r2 - r1) * p, 0), 0, 255),
+							(int)Float.Range(Float.Round(g1 + (g2 - g1) * p, 0), 0, 255),
+							(int)Float.Range(Float.Round(b1 + (b2 - b1) * p, 0), 0, 255));
 					}
 
 					newColors[index] = value;
@@ -326,7 +326,7 @@ namespace Xyrus.Apophysis.Models
 
 			var colors = new Color[1];
 
-			double r = (double)newLength / oldLength;
+			float r = (float)newLength / oldLength;
 			if (r < 1)
 			{
 				var preI2 = 0;
@@ -350,8 +350,8 @@ namespace Xyrus.Apophysis.Models
 			{
 				for (int i = 0; i < oldLength; i++)
 				{
-					double p = (double)i / (oldLength - 1);
-					var i2 = (int)System.Math.Max(0, System.Math.Min(System.Math.Round(p * (newLength - 1), 0), newLength - 1));
+					float p = (float)i / (oldLength - 1);
+					var i2 = (int)Float.Range(Float.Round(p * (newLength - 1), 0), 0, newLength - 1);
 
 					Spread(i2, ref colors, this[i]);
 				}
@@ -382,7 +382,7 @@ namespace Xyrus.Apophysis.Models
 		[NotNull]
 		public Palette Copy()
 		{
-			var copy = new Palette()
+			var copy = new Palette
 			{
 				mColors = new Color[Length], 
 				mName = mName
@@ -396,26 +396,6 @@ namespace Xyrus.Apophysis.Models
 
 			return copy;
 		}
-
-		/*
-		public override int GetHashCode()
-		{
-			unchecked
-			{
-				// ReSharper disable NonReadonlyFieldInGetHashCode
-				return ((mColors != null ? mColors.GetHashCode() : 0) * 397) ^ (mName != null ? mName.GetHashCode() : 0);
-				// ReSharper restore NonReadonlyFieldInGetHashCode
-			}
-		}
-		public override bool Equals(object obj)
-		{
-			if (ReferenceEquals(null, obj)) return false;
-			if (ReferenceEquals(this, obj)) return true;
-			if (obj.GetType() != GetType()) return false;
-			
-			return IsEqual((Palette)obj);
-		}
-		*/
 
 		[NotNull]
 		public Palette Resize(int length)

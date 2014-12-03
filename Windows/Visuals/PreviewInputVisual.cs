@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Numerics;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Windows.Input;
@@ -72,7 +73,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			var pan = mOperation as PanOperation;
 			if (pan != null)
 			{
-				var offset = System.Math.Pow(2, EditData.Zoom) * EditData.Scale * (pan.OldOffset - pan.NewOffset);
+				var offset = Float.Power(2, EditData.Zoom) * EditData.Scale * (pan.OldOffset - pan.NewOffset);
 
 				x0 += offset;
 				x1 += offset;
@@ -85,10 +86,10 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			var rotate = mOperation as RotateCanvasOperation;
 			if (rotate != null)
 			{
-				var o = new Vector2(AttachedControl.ClientSize.Width/2.0, AttachedControl.ClientSize.Height/2.0);
+				var o = new Vector2(AttachedControl.ClientSize.Width/2.0f, AttachedControl.ClientSize.Height/2.0f);
 
-				var cos = System.Math.Cos(rotate.NewAngle - rotate.OldAngle);
-				var sin = System.Math.Sin(rotate.NewAngle - rotate.OldAngle);
+				var cos = Float.Cos(rotate.NewAngle - rotate.OldAngle);
+				var sin = Float.Sin(rotate.NewAngle - rotate.OldAngle);
 
 				x0 = new Vector2((x0.X - o.X) * cos + (x0.Y - o.Y) * sin + o.X, (x0.Y - o.Y) * cos - (x0.X - o.X) * sin + o.Y);
 				x1 = new Vector2((x1.X - o.X) * cos + (x1.Y - o.Y) * sin + o.X, (x1.Y - o.Y) * cos - (x1.X - o.X) * sin + o.Y);

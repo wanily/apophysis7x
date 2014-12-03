@@ -46,7 +46,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			var s = AttachedControl;
 
 			Point p1, p2;
-			const double ratio = 0.61803399;
+			const float ratio = 0.61803399f;
 
 			p1 = new Point(s.Width / 2, 0);
 			p2 = new Point(p1.X, s.Height);

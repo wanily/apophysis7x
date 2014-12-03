@@ -6,15 +6,15 @@ namespace Xyrus.Apophysis.Windows.Input
 	[PublicAPI]
 	public class ZoomOperation : CameraInputOperation
 	{
-		public double NewFactor { get; private set; }
-		public double OldFactor { get; private set; }
+		public float NewFactor { get; private set; }
+		public float OldFactor { get; private set; }
 
 		public Rectangle InnerRect { get; private set; }
 		public Rectangle OuterRect { get; private set; }
 
 		public bool UseScale { get; private set; }
 
-		public ZoomOperation(double newFactor, double oldFactor, Rectangle innerRect, Rectangle outerRect, bool useScale)
+		public ZoomOperation(float newFactor, float oldFactor, Rectangle innerRect, Rectangle outerRect, bool useScale)
 		{
 			NewFactor = newFactor;
 			OldFactor = oldFactor;

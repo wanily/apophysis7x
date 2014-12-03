@@ -1,5 +1,5 @@
 using System;
-using Xyrus.Apophysis.Math;
+using System.Numerics;
 
 namespace Xyrus.Apophysis.Windows.Input
 {
@@ -8,7 +8,6 @@ namespace Xyrus.Apophysis.Windows.Input
 	{
 		private Vector2 mOrigin;
 
-		[NotNull]
 		public Vector2 Origin
 		{
 			get { return mOrigin; }
@@ -19,8 +18,8 @@ namespace Xyrus.Apophysis.Windows.Input
 			}
 		}
 
-		public double Angle { get; set; }
-		public double Zoom { get; set; }
-		public double Scale { get; set; }
+		public float Angle { get; set; }
+		public float Zoom { get; set; }
+		public float Scale { get; set; }
 	}
 }

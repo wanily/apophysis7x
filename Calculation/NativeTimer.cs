@@ -29,10 +29,10 @@ namespace Xyrus.Apophysis.Calculation
 		{
 			NativeMethods.QueryPerformanceCounter(out mStartTime);
 		}
-		public double GetElapsedTimeInSeconds()
+		public float GetElapsedTimeInSeconds()
 		{
 			long time; NativeMethods.QueryPerformanceCounter(out time);
-			double delta = (time - mStartTime) / (double)mFreq;
+			float delta = (time - mStartTime) / (float)mFreq;
 			return delta;
 		}
 	}

@@ -1,5 +1,5 @@
-﻿using System.Windows.Forms;
-using Xyrus.Apophysis.Math;
+﻿using System.Numerics;
+using System.Windows.Forms;
 
 namespace Xyrus.Apophysis.Windows.Input
 {
@@ -18,7 +18,7 @@ namespace Xyrus.Apophysis.Windows.Input
 			}
 		}
 
-		private void OnAttachedControlMouseMove([NotNull] Vector2 cursor, MouseButtons button)
+		private void OnAttachedControlMouseMove(Vector2 cursor, MouseButtons button)
 		{
 			foreach (var item in GetChainItems())
 			{
@@ -26,7 +26,7 @@ namespace Xyrus.Apophysis.Windows.Input
 					break;
 			}
 		}
-		private void OnAttachedControlMouseWheel(double delta, MouseButtons button)
+		private void OnAttachedControlMouseWheel(float delta, MouseButtons button)
 		{
 			foreach (var item in GetChainItems())
 			{
@@ -35,7 +35,7 @@ namespace Xyrus.Apophysis.Windows.Input
 			}
 		}
 
-		private void OnAttachedControlMouseDown([NotNull] Vector2 cursor)
+		private void OnAttachedControlMouseDown(Vector2 cursor)
 		{
 			foreach (var item in GetChainItems())
 			{

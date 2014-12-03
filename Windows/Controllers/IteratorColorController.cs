@@ -92,7 +92,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			}
 			else if (ReferenceEquals(sender, View.IteratorColorScrollBar))
 			{
-				iterator.Color = View.IteratorColorScrollBar.Value / 1000.0;
+				iterator.Color = View.IteratorColorScrollBar.Value / 1000.0f;
 				using (mParent.Initializer.Enter())
 				{
 					View.IteratorColorDragPanel.Value = iterator.Color;

@@ -5,13 +5,13 @@ namespace Xyrus.Apophysis.Windows.Input
 {
 	class ScaleOperation : IteratorInputOperation
 	{
-		public ScaleOperation([NotNull] Iterator iterator, double scaleFactor)
+		public ScaleOperation([NotNull] Iterator iterator, float scaleFactor)
 			: base(iterator)
 		{
 			ScaleFactor = scaleFactor;
 		}
 
-		public double ScaleFactor 
+		public float ScaleFactor 
 		{ 
 			get; 
 			private set; 

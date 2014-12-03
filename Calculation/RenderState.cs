@@ -5,12 +5,12 @@ namespace Xyrus.Apophysis.Calculation
 	[PublicAPI]
 	public class RenderState
 	{
-		public double AverageIterationsPerSecond { get; set; }
-		public double IterationsPerSecond { get; set; }
-		public double Progress { get; set; }
+		public float AverageIterationsPerSecond { get; set; }
+		public float IterationsPerSecond { get; set; }
+		public float Progress { get; set; }
 
-		public double CurrentDensity { get; set; }
-		public double TargetDensity { get; set; }
+		public float CurrentDensity { get; set; }
+		public float TargetDensity { get; set; }
 
 		public TimeSpan ElapsedTime { get; set; }
 		public TimeSpan? RemainingTime { get; set; }

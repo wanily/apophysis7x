@@ -26,9 +26,9 @@ namespace Xyrus.Apophysis.Settings {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0.5")]
-        public double MoveDistance {
+        public float MoveDistance {
             get {
-                return ((double)(this["MoveDistance"]));
+                return ((float)(this["MoveDistance"]));
             }
             set {
                 this["MoveDistance"] = value;
@@ -38,9 +38,9 @@ namespace Xyrus.Apophysis.Settings {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("15")]
-        public double RotateAngle {
+        public float RotateAngle {
             get {
-                return ((double)(this["RotateAngle"]));
+                return ((float)(this["RotateAngle"]));
             }
             set {
                 this["RotateAngle"] = value;
@@ -50,9 +50,9 @@ namespace Xyrus.Apophysis.Settings {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("125")]
-        public double ScaleRatio {
+        public float ScaleRatio {
             get {
-                return ((double)(this["ScaleRatio"]));
+                return ((float)(this["ScaleRatio"]));
             }
             set {
                 this["ScaleRatio"] = value;
@@ -110,9 +110,9 @@ namespace Xyrus.Apophysis.Settings {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public double VariationPreviewDensity {
+        public float VariationPreviewDensity {
             get {
-                return ((double)(this["VariationPreviewDensity"]));
+                return ((float)(this["VariationPreviewDensity"]));
             }
             set {
                 this["VariationPreviewDensity"] = value;
@@ -122,9 +122,9 @@ namespace Xyrus.Apophysis.Settings {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public double VariationPreviewRange {
+        public float VariationPreviewRange {
             get {
-                return ((double)(this["VariationPreviewRange"]));
+                return ((float)(this["VariationPreviewRange"]));
             }
             set {
                 this["VariationPreviewRange"] = value;

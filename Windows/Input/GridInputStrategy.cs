@@ -1,6 +1,5 @@
-﻿using System;
+﻿using System.Numerics;
 using System.Windows.Forms;
-using Xyrus.Apophysis.Math;
 
 namespace Xyrus.Apophysis.Windows.Input
 {
@@ -17,11 +16,7 @@ namespace Xyrus.Apophysis.Windows.Input
 
 			Canvas.Pan(GetNextOffset(cursor));
 		}
-		public override void NavigateRotate(Vector2 cursor)
-		{
-			throw new NotSupportedException("Rotation is not supported on a grid canvas");
-		}
-		public override void NavigateZoom(double delta)
+		public override void NavigateZoom(float delta)
 		{
 			Canvas.Zoom(delta);
 		}

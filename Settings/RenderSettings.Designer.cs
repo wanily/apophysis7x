@@ -110,9 +110,9 @@ namespace Xyrus.Apophysis.Settings {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1000")]
-        public double Density {
+        public float Density {
             get {
-                return ((double)(this["Density"]));
+                return ((float)(this["Density"]));
             }
             set {
                 this["Density"] = value;
@@ -122,9 +122,9 @@ namespace Xyrus.Apophysis.Settings {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0.1")]
-        public double FilterRadius {
+        public float FilterRadius {
             get {
-                return ((double)(this["FilterRadius"]));
+                return ((float)(this["FilterRadius"]));
             }
             set {
                 this["FilterRadius"] = value;

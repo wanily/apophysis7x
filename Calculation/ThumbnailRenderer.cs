@@ -7,7 +7,7 @@ namespace Xyrus.Apophysis.Calculation
 {
 	public class ThumbnailRenderer
 	{
-		public Bitmap CreateBitmap([NotNull] Flame flame, double density, Size size, ThreadStateToken threadState = null)
+		public Bitmap CreateBitmap([NotNull] Flame flame, float density, Size size, ThreadStateToken threadState = null)
 		{
 			if (flame == null) throw new ArgumentNullException(@"flame");
 			if (density <= 0) throw new ArgumentOutOfRangeException(@"density");
@@ -15,7 +15,7 @@ namespace Xyrus.Apophysis.Calculation
 
 			var progress = new ProgressManager(threadState);
 
-			using (var renderer = new Renderer(flame, size, 1, 0.5, false))
+			using (var renderer = new Renderer(flame, size, 1, 0.5f, false))
 			{
 				renderer.Initialize();
 				renderer.Histogram.Iterate(density, progress);

@@ -1,7 +1,7 @@
 using System;
 using System.IO;
+using System.Numerics;
 using System.Windows.Forms;
-using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Controls;
 using Xyrus.Apophysis.Windows.Visuals;
@@ -27,8 +27,8 @@ namespace Xyrus.Apophysis.Windows.Input
 		private IteratorVisual mVisual;
 		private Canvas mCanvas;
 
-		private Vector2 mDragCursor, mDragOrigin;
-		private Vector2 mDragX, mDragY;
+		private Vector2? mDragCursor, mDragOrigin;
+		private Vector2? mDragX, mDragY;
 
 		private HitTestResult mLastHitTestResult;
 		private bool mIsMouseDown;
@@ -91,8 +91,8 @@ namespace Xyrus.Apophysis.Windows.Input
 			var x = ox.B;
 			var y = oy.B;
 
-			const double edgeProximityThreshold = 4;
-			const double vertexProximityThreshold = 4;
+			const float edgeProximityThreshold = 4;
+			const float vertexProximityThreshold = 4;
 
 			if (y.IsInProximity(cursor, vertexProximityThreshold)) return HitTestResult.Y;
 			if (x.IsInProximity(cursor, vertexProximityThreshold)) return HitTestResult.X;
@@ -112,119 +112,117 @@ namespace Xyrus.Apophysis.Windows.Input
 			if (button != MouseButtons.Left)
 				return;
 
+			var @do = mDragOrigin.GetValueOrDefault();
+			var @dx = mDragX.GetValueOrDefault();
+			var @dy = mDragY.GetValueOrDefault();
+
 			var c = mCanvas.CanvasToWorld(cursor);
-			var c0 = mCanvas.CanvasToWorld(mDragCursor);
+			var c0 = mCanvas.CanvasToWorld(mDragCursor.GetValueOrDefault());
 
 			switch (hitTest)
 			{
 				case HitTestResult.Surface:
 				case HitTestResult.O:
 
-					var o = c - c0 + mDragOrigin;
+					var o = c - c0 + @do;
 
 					if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
 					{
-						var d = (c - c0).Abs();
-						if (d.X > d.Y) o.Y = mDragOrigin.Y;
-						else o.X = mDragOrigin.X;
+						var d = Vector2.Abs(c - c0);
+						if (d.X > d.Y) o.Y = @do.Y;
+						else o.X = @do.X;
 					}
 
-					Origin.X = o.X;
-					Origin.Y = o.Y;
-
-					mOperation = new MoveOperation(Model, mDragOrigin, o);
-
+					mOperation = new MoveOperation(Model, @do, Origin = o);
 					break;
 
 				case HitTestResult.X:
 
-					var x = c - c0 + (mDragOrigin + mDragX);
+					var x = c - c0 + (@do + @dx);
 
 					if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
 					{
-						var d = (c - c0).Abs();
-						if (d.X > d.Y) x.Y = mDragX.Y;
-						else x.X = mDragX.X;
+						var d = Vector2.Abs(c - c0);
+						x = d.X > d.Y ? new Vector2(x.X, @dx.Y) : new Vector2(@dx.X, x.Y);
 					}
 
-					Matrix.X.X = x.X - mDragOrigin.X;
-					Matrix.X.Y = x.Y - mDragOrigin.Y;
-
-					mOperation = new MoveOperation(Model, mDragX, x);
+					X = x - @do;
+					mOperation = new MoveOperation(Model, @dx, x);
 
 					break;
 
 				case HitTestResult.Y:
-					
-					var y = c - c0 + (mDragOrigin + mDragY);
+
+					var y = c - c0 + (@do + @dy);
 
 					if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
 					{
-						var d = (c - c0).Abs();
-						if (d.X > d.Y) y.Y = mDragY.Y;
-						else y.X = mDragY.X;
+						var d = Vector2.Abs(c - c0);
+						y = d.X > d.Y ? new Vector2(y.X, @dy.Y) : new Vector2(@dy.X, y.Y);
 					}
 
-					Matrix.Y.X = y.X - mDragOrigin.X;
-					Matrix.Y.Y = y.Y - mDragOrigin.Y;
-
-					mOperation = new MoveOperation(Model, mDragY, y);
+					Y = y - @do;
+					mOperation = new MoveOperation(Model, @dy, y);
 
 					break;
 
 				case HitTestResult.Ox:
 				case HitTestResult.Oy:
 
-					var primary = hitTest == HitTestResult.Ox ? mDragX : mDragY;
-					var secondary = hitTest == HitTestResult.Ox ? mDragY : mDragX;
+					var primary = hitTest == HitTestResult.Ox ? @dx : @dy;
+					var secondary = hitTest == HitTestResult.Ox ? @dy : @dx;
 
-					var normalX = primary.Direction;
-					var normalY = secondary.Direction;
+					var normalX = primary.Normal();
+					var normalY = secondary.Normal();
 
-					var deltaOrigin = c - mDragOrigin;
-					var angleBetweenOxAndOy = System.Math.Atan2(normalY.Y, normalY.X) - System.Math.Atan2(normalX.Y, normalX.X);
-					var angleBetweenOxAndDelta = System.Math.Atan2(deltaOrigin.Y, deltaOrigin.X) - System.Math.Atan2(normalX.Y, normalX.X);
+					var deltaOrigin = c - @do;
+					var angleBetweenOxAndOy = Float.Atan2(normalY.Y, normalY.X) - Float.Atan2(normalX.Y, normalX.X);
+					var angleBetweenOxAndDelta = Float.Atan2(deltaOrigin.Y, deltaOrigin.X) - Float.Atan2(normalX.Y, normalX.X);
 
 					if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
 					{
-						var ang = angleBetweenOxAndDelta * 180 / System.Math.PI;
-						var snapped = System.Math.Round(ang / mSettings.AngleSnap) * mSettings.AngleSnap;
+						var ang = angleBetweenOxAndDelta * 180 / Float.Pi;
+						var snapped = Float.Round(ang / mSettings.AngleSnap) * mSettings.AngleSnap;
 
-						angleBetweenOxAndDelta = snapped * System.Math.PI / 180.0;
+						angleBetweenOxAndDelta = snapped * Float.Pi / 180.0f;
 					}
 
-					var cos0 = System.Math.Cos(angleBetweenOxAndOy);
-					var cos1 = System.Math.Cos(angleBetweenOxAndDelta);
+					var cos0 = Float.Cos(angleBetweenOxAndOy);
+					var cos1 = Float.Cos(angleBetweenOxAndDelta);
 
-					var sin0 = System.Math.Sin(angleBetweenOxAndOy);
-					var sin1 = System.Math.Sin(angleBetweenOxAndDelta);
+					var sin0 = Float.Sin(angleBetweenOxAndOy);
+					var sin1 = Float.Sin(angleBetweenOxAndDelta);
 
 					if (hitTest == HitTestResult.Ox)
 					{
-						Matrix.X.X = cos1 * primary.X - sin1 * primary.Y;
-						Matrix.X.Y = sin1 * primary.X + cos1 * primary.Y;
+						X = new Vector2(
+							cos1 * primary.X - sin1 * primary.Y,
+							sin1 * primary.X + cos1 * primary.Y);
 
 						if (mSettings.LockAxes)
 						{
-							var newNormal = Matrix.X.Direction;
-							var length = Matrix.Y.Length;
+							var newNormal = X.Normal();
+							var length = Y.Length();
 
-							Matrix.Y.X = length * (cos0 * newNormal.X - sin0 * newNormal.Y);
-							Matrix.Y.Y = length * (sin0 * newNormal.X + cos0 * newNormal.Y);
+							Y = new Vector2(
+								length * (cos0 * newNormal.X - sin0 * newNormal.Y),
+								length * (sin0 * newNormal.X + cos0 * newNormal.Y));
 						}
 					}
 					else if (hitTest == HitTestResult.Oy)
 					{
-						Matrix.Y.X = cos1 * primary.X - sin1 * primary.Y;
-						Matrix.Y.Y = sin1 * primary.X + cos1 * primary.Y;
+						Y = new Vector2(
+							cos1 * primary.X - sin1 * primary.Y,
+							sin1 * primary.X + cos1 * primary.Y);
 
 						if (mSettings.LockAxes)
 						{
-							var newNormal = Matrix.Y.Direction;
-							var length = Matrix.X.Length;
+							var newNormal = Y.Normal();
+							var length = X.Length();
 
-							Matrix.X.X = length * (cos0 * newNormal.X - sin0 * newNormal.Y);
-							Matrix.X.Y = length * (sin0 * newNormal.X + cos0 * newNormal.Y);
+							X = new Vector2(
+								length * (cos0 * newNormal.X - sin0 * newNormal.Y),
+								length * (sin0 * newNormal.X + cos0 * newNormal.Y));
 						}
 					}
 
@@ -234,37 +232,31 @@ namespace Xyrus.Apophysis.Windows.Input
 
 				case HitTestResult.Xy:
 
-					var c0dO = c0 - mDragOrigin;
+					var c0dO = c0 - @do;
 
-					var vX = (mDragOrigin + mDragX);
-					var vY = (mDragOrigin + mDragY);
+					var vX = (@do + @dx);
+					var vY = (@do + @dy);
 
-					var denom = c0dO.Length;
-					if (System.Math.Abs(denom) < double.Epsilon)
+					var denom = c0dO.Length();
+					if (Float.Abs(denom) < float.Epsilon)
 						break;
 
-					var scale = (c0dO.X * (c.X - mDragOrigin.X) + c0dO.Y * (c.Y - mDragOrigin.Y)) / (denom * denom);
-					if (System.Math.Abs(scale) < double.Epsilon)
-						scale = double.Epsilon;
+					var scale = (c0dO.X * (c.X - @do.X) + c0dO.Y * (c.Y - @do.Y)) / (denom * denom);
+					if (Float.Abs(scale) < float.Epsilon)
+						scale = float.Epsilon;
 
 					if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
 					{
-						var snap = System.Math.Abs(scale) < 1 ? (100 * 100 / mSettings.ScaleSnap) : mSettings.ScaleSnap;
+						var snap = Float.Abs(scale) < 1 ? (100 * 100 / mSettings.ScaleSnap) : mSettings.ScaleSnap;
 
 						var ratio = scale * 100;
-						var snapped = System.Math.Round(ratio / snap) * snap;
+						var snapped = Float.Round(ratio / snap) * snap;
 
-						scale = snapped / 100.0;
+						scale = snapped / 100.0f;
 					}
 
-					var vXOut = scale * (vX - mDragOrigin);
-					var vYOut = scale * (vY - mDragOrigin);
-
-					Matrix.X.X = vXOut.X;
-					Matrix.X.Y = vXOut.Y;
-
-					Matrix.Y.X = vYOut.X;
-					Matrix.Y.Y = vYOut.Y;
+					X = scale * (vX - @do);
+					Y = scale * (vY - @do);
 
 					mOperation = new ScaleOperation(Model, scale);
 
@@ -278,14 +270,14 @@ namespace Xyrus.Apophysis.Windows.Input
 			{
 				if (key == Keys.Left)
 				{
-					Origin.X -= mSettings.MoveAmount;
+					Origin = new Vector2(Origin.X - mSettings.MoveAmount, Origin.Y);
 					InvalidateControl();
 					return true;
 				}
 
 				if (key == Keys.Right)
 				{
-					Origin.X += mSettings.MoveAmount;
+					Origin = new Vector2(Origin.X + mSettings.MoveAmount, Origin.Y);
 					InvalidateControl();
 					InvalidateControl();
 					return true;
@@ -293,7 +285,7 @@ namespace Xyrus.Apophysis.Windows.Input
 
 				if (key == Keys.Up)
 				{
-					Origin.Y += mSettings.MoveAmount;
+					Origin = new Vector2(Origin.X, Origin.Y + mSettings.MoveAmount);
 					InvalidateControl();
 					InvalidateControl();
 					return true;
@@ -301,55 +293,53 @@ namespace Xyrus.Apophysis.Windows.Input
 
 				if (key == Keys.Down)
 				{
-					Origin.Y -= mSettings.MoveAmount;
+					Origin = new Vector2(Origin.X, Origin.Y - mSettings.MoveAmount);
 					InvalidateControl();
 					return true;
 				}
 
 				if (key == Keys.Add)
 				{
-					Matrix.X.X *= mSettings.ScaleSnap / 100.0;
-					Matrix.X.Y *= mSettings.ScaleSnap / 100.0;
-					Matrix.Y.X *= mSettings.ScaleSnap / 100.0;
-					Matrix.Y.Y *= mSettings.ScaleSnap / 100.0;
+					X = X * (mSettings.ScaleSnap / 100);
+					Y = Y * (mSettings.ScaleSnap / 100);
 					InvalidateControl();
 					return true;
 				}
 
 				if (key == Keys.Subtract)
 				{
-					Matrix.X.X /= mSettings.ScaleSnap / 100.0;
-					Matrix.X.Y /= mSettings.ScaleSnap / 100.0;
-					Matrix.Y.X /= mSettings.ScaleSnap / 100.0;
-					Matrix.Y.Y /= mSettings.ScaleSnap / 100.0;
+					X = X / (mSettings.ScaleSnap / 100);
+					Y = Y / (mSettings.ScaleSnap / 100);
 					InvalidateControl();
 					return true;
 				}
 
 				if (key == Keys.Multiply || key == Keys.Divide)
 				{
-					var normalX = Matrix.X.Direction;
-					var normalY = Matrix.Y.Direction;
+					var normalX = X.Normal();
+					var normalY = Y.Normal();
 
-					var angleBetweenOxAndOy = System.Math.Atan2(normalY.Y, normalY.X) - System.Math.Atan2(normalX.Y, normalX.X);
-					var angle = mSettings.AngleSnap * (key == Keys.Multiply ? -1 : 1) * System.Math.PI / 180.0;
+					var angleBetweenOxAndOy = Float.Atan2(normalY.Y, normalY.X) - Float.Atan2(normalX.Y, normalX.X);
+					var angle = mSettings.AngleSnap * (key == Keys.Multiply ? -1 : 1) * Float.Pi / 180.0f;
 
-					var cos0 = System.Math.Cos(angleBetweenOxAndOy);
-					var cos1 = System.Math.Cos(angle);
+					var cos0 = Float.Cos(angleBetweenOxAndOy);
+					var cos1 = Float.Cos(angle);
 
-					var sin0 = System.Math.Sin(angleBetweenOxAndOy);
-					var sin1 = System.Math.Sin(angle);
+					var sin0 = Float.Sin(angleBetweenOxAndOy);
+					var sin1 = Float.Sin(angle);
 
-					var original = Matrix.X.Copy();
+					var original = X;
 
-					Matrix.X.X = cos1 * original.X - sin1 * original.Y;
-					Matrix.X.Y = sin1 * original.X + cos1 * original.Y;
+					X = new Vector2(
+						cos1 * original.X - sin1 * original.Y,
+						sin1 * original.X + cos1 * original.Y);
 
-					var newNormal = Matrix.X.Direction;
-					var length = Matrix.Y.Length;
+					var newNormal = X.Normal();
+					var length = Y.Length();
 
-					Matrix.Y.X = length * (cos0 * newNormal.X - sin0 * newNormal.Y);
-					Matrix.Y.Y = length * (sin0 * newNormal.X + cos0 * newNormal.Y);
+					Y = new Vector2(
+						length * (cos0 * newNormal.X - sin0 * newNormal.Y),
+						length * (sin0 * newNormal.X + cos0 * newNormal.Y));
 
 					InvalidateControl();
 					return true;
@@ -407,7 +397,7 @@ namespace Xyrus.Apophysis.Windows.Input
 
 			return hitTest != HitTestResult.None;
 		}
-		protected override bool OnAttachedControlMouseWheel(double delta, MouseButtons button)
+		protected override bool OnAttachedControlMouseWheel(float delta, MouseButtons button)
 		{
 			return false;
 		}
@@ -421,28 +411,28 @@ namespace Xyrus.Apophysis.Windows.Input
 				mIsMouseDown = true;
 
 				mDragCursor = cursor;
-				mDragOrigin = Origin.Copy();
-				mDragX = Matrix.X.Copy();
-				mDragY = Matrix.Y.Copy();
+				mDragOrigin = Origin;
+				mDragX = X;
+				mDragY = Y;
 
 				switch (hitTest)
 				{
 					case HitTestResult.Surface:
 					case HitTestResult.O:
-						mOperation = new MoveOperation(mVisual.Model, mDragOrigin, mDragOrigin);
+						mOperation = new MoveOperation(mVisual.Model, mDragOrigin.Value, mDragOrigin.Value);
 						break;
 					case HitTestResult.X:
-						mOperation = new MoveOperation(mVisual.Model, mDragX, mDragX);
+						mOperation = new MoveOperation(mVisual.Model, mDragX.Value, mDragX.Value);
 						break;
 					case HitTestResult.Y:
-						mOperation = new MoveOperation(mVisual.Model, mDragY, mDragY);
+						mOperation = new MoveOperation(mVisual.Model, mDragY.Value, mDragY.Value);
 						break;
 					case HitTestResult.Ox:
 					case HitTestResult.Oy:
-						mOperation = new RotateOperation(mVisual.Model, 2.0 * System.Math.PI, hitTest == HitTestResult.Ox ? RotationAxis.X : RotationAxis.Y);
+						mOperation = new RotateOperation(mVisual.Model, 2.0f * Float.Pi, hitTest == HitTestResult.Ox ? RotationAxis.X : RotationAxis.Y);
 						break;
 					case HitTestResult.Xy:
-						mOperation = new ScaleOperation(mVisual.Model, 1.0);
+						mOperation = new ScaleOperation(mVisual.Model, 1.0f);
 						break;
 					default:
 						mOperation = null;
@@ -495,26 +485,77 @@ namespace Xyrus.Apophysis.Windows.Input
 				switch (mActiveMatrix)
 				{
 					case IteratorMatrix.PreAffine:
-						return Model.PreAffine.Origin;
+						return new Vector2(Model.PreAffine.M31, Model.PreAffine.M32);
 					case IteratorMatrix.PostAffine:
-						return Model.PostAffine.Origin;
+						return new Vector2(Model.PostAffine.M31, Model.PostAffine.M32);
 					default:
 						throw new ArgumentOutOfRangeException();
 				}
 			}
+			set
+			{
+				switch (mActiveMatrix)
+				{
+					case IteratorMatrix.PreAffine:
+						Model.PreAffine = Model.PreAffine.Alter(m31: value.X, m32: value.Y);
+						break;
+					case IteratorMatrix.PostAffine:
+						Model.PostAffine = Model.PostAffine.Alter(m31: value.X, m32: value.Y);
+						break;
+				}
+			}
 		}
-		public Matrix2X2 Matrix
+		public Vector2 X
 		{
 			get
 			{
 				switch (mActiveMatrix)
 				{
 					case IteratorMatrix.PreAffine:
-						return Model.PreAffine.Matrix;
+						return new Vector2(Model.PreAffine.M11, Model.PreAffine.M12);
 					case IteratorMatrix.PostAffine:
-						return Model.PostAffine.Matrix;
+						return new Vector2(Model.PostAffine.M11, Model.PostAffine.M12);
 					default:
 						throw new ArgumentOutOfRangeException();
+				}
+			}
+			set
+			{
+				switch (mActiveMatrix)
+				{
+					case IteratorMatrix.PreAffine:
+						Model.PreAffine = Model.PreAffine.Alter(value.X, value.Y);
+						break;
+					case IteratorMatrix.PostAffine:
+						Model.PostAffine = Model.PostAffine.Alter(value.X, value.Y);
+						break;
+				}
+			}
+		}
+		public Vector2 Y
+		{
+			get
+			{
+				switch (mActiveMatrix)
+				{
+					case IteratorMatrix.PreAffine:
+						return new Vector2(Model.PreAffine.M21, Model.PreAffine.M22);
+					case IteratorMatrix.PostAffine:
+						return new Vector2(Model.PostAffine.M21, Model.PostAffine.M22);
+					default:
+						throw new ArgumentOutOfRangeException();
+				}
+			}
+			set
+			{
+				switch (mActiveMatrix)
+				{
+					case IteratorMatrix.PreAffine:
+						Model.PreAffine = Model.PreAffine.Alter(m21: value.X, m22: value.Y);
+						break;
+					case IteratorMatrix.PostAffine:
+						Model.PostAffine = Model.PostAffine.Alter(m21: value.X, m22: value.Y);
+						break;
 				}
 			}
 		}

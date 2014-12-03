@@ -1,39 +1,40 @@
-﻿using Xyrus.Apophysis.Math;
+﻿using System.Numerics;
+using Xyrus.Apophysis.Math;
 
 namespace Xyrus.Apophysis.Windows
 {
 	[PublicAPI]
 	public class Grid : Canvas
 	{
-		private const double mBaseUnitToPixelRatio = 150.0;
+		private const float mBaseUnitToPixelRatio = 150.0f;
 
-		private const double mZoomStepPositive = 1.25;
-		private const double mZoomStepNegative = 0.8;
-		private const double mZoomConstraint = 12;
+		private const float mZoomStepPositive = 1.25f;
+		private const float mZoomStepNegative = 0.8f;
+		private const float mZoomConstraint = 12;
 
-		private double mZoom = 1.0;
-		private ReadOnlyVector2 mBase, mPan;
+		private float mZoom = 1.0f;
+		private Vector2 mBase, mPan;
 
 		public Grid(Vector2 size) : base(size)
 		{
-			mPan = new ReadOnlyVector2(new Vector2());
+			mPan = new Vector2();
 			ResizeOverride(size);
 		}
 
-		public ReadOnlyVector2 Offset
+		public Vector2 Offset
 		{
 			get { return mPan; }
 		}
-		public override double Scale
+		public override float Scale
 		{
-			get { return System.Math.Pow(10, -System.Math.Round(System.Math.Log10(mZoom))); }
+			get { return Float.Power(10, -Float.Round(Float.Log(mZoom))); }
 		}
 		public override Vector2 Ratio
 		{
 			get
 			{
 				var ratio = mBaseUnitToPixelRatio*mZoom;
-				return new Vector2 { X = ratio, Y = ratio };
+				return new Vector2(ratio, ratio);
 			}
 		}
 
@@ -58,18 +59,18 @@ namespace Xyrus.Apophysis.Windows
 
 		protected override sealed void ResizeOverride(Vector2 newSize)
 		{
-			mBase = (newSize/2.0).Freeze();
+			mBase = (newSize/2.0f);
 		}
 
 		public override void BringIntoView(Rectangle rectangle)
 		{
 			var length = new Vector2(1, -1) * (rectangle.Size / Ratio);
 			var corner = CanvasToWorld(rectangle.Corner);
-			var center = corner + length * 0.5;
+			var center = corner + length * 0.5f;
 
-			mPan = (new Vector2(1, -1) * center).Freeze();
+			mPan = (new Vector2(1, -1) * center);
 
-			var abs  = rectangle.Size.Abs();
+			var abs = Vector2.Abs(rectangle.Size);
 			if (abs.X > abs.Y)
 			{
 				mZoom *= Size.X / rectangle.Size.X;
@@ -81,7 +82,7 @@ namespace Xyrus.Apophysis.Windows
 
 			Zoom(-1);
 		}
-		public void Zoom(double delta)
+		public void Zoom(float delta)
 		{
 			var stepUp = mZoom*mZoomStepPositive;
 			var stepDown = mZoom*mZoomStepNegative;
@@ -97,12 +98,12 @@ namespace Xyrus.Apophysis.Windows
 		}
 		public void Pan(Vector2 offset)
 		{
-			mPan = offset.Freeze();
+			mPan = offset;
 		}
 		public void Reset()
 		{
-			mPan = new ReadOnlyVector2(new Vector2());
-			mZoom = 1.0;
+			mPan = new Vector2();
+			mZoom = 1.0f;
 		}
 	}
 }

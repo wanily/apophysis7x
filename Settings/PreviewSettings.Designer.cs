@@ -74,9 +74,9 @@ namespace Xyrus.Apophysis.Settings {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("2")]
-        public double BatchListPreviewDensity {
+        public float BatchListPreviewDensity {
             get {
-                return ((double)(this["BatchListPreviewDensity"]));
+                return ((float)(this["BatchListPreviewDensity"]));
             }
             set {
                 this["BatchListPreviewDensity"] = value;
@@ -86,9 +86,9 @@ namespace Xyrus.Apophysis.Settings {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0.1")]
-        public double LowQualityDensity {
+        public float LowQualityDensity {
             get {
-                return ((double)(this["LowQualityDensity"]));
+                return ((float)(this["LowQualityDensity"]));
             }
             set {
                 this["LowQualityDensity"] = value;
@@ -98,9 +98,9 @@ namespace Xyrus.Apophysis.Settings {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public double MediumQualityDensity {
+        public float MediumQualityDensity {
             get {
-                return ((double)(this["MediumQualityDensity"]));
+                return ((float)(this["MediumQualityDensity"]));
             }
             set {
                 this["MediumQualityDensity"] = value;
@@ -110,9 +110,9 @@ namespace Xyrus.Apophysis.Settings {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("5")]
-        public double HighQualityDensity {
+        public float HighQualityDensity {
             get {
-                return ((double)(this["HighQualityDensity"]));
+                return ((float)(this["HighQualityDensity"]));
             }
             set {
                 this["HighQualityDensity"] = value;
@@ -182,9 +182,9 @@ namespace Xyrus.Apophysis.Settings {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double FilterRadius {
+        public float FilterRadius {
             get {
-                return ((double)(this["FilterRadius"]));
+                return ((float)(this["FilterRadius"]));
             }
             set {
                 this["FilterRadius"] = value;

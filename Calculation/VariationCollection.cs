@@ -37,17 +37,17 @@ namespace Xyrus.Apophysis.Calculation
 			}
 		}
 
-		public double GetWeight(string name)
+		public float GetWeight(string name)
 		{
 			return mVariationInstances[name].Weight;
 		}
-		public double SetWeight(string name, double value)
+		public float SetWeight(string name, float value)
 		{
 			mVariationInstances[name].Weight = value;
 			return mVariationInstances[name].Weight;
 		}
 
-		public double GetVariable(string name)
+		public float GetVariable(string name)
 		{
 			var variationName = VariationRegistry.GetVariationNameForVariable(name);
 			if (string.IsNullOrEmpty(variationName))
@@ -57,7 +57,7 @@ namespace Xyrus.Apophysis.Calculation
 
 			return mVariationInstances[variationName].GetVariable(name);
 		}
-		public double ResetVariable(string name)
+		public float ResetVariable(string name)
 		{
 			var variationName = VariationRegistry.GetVariationNameForVariable(name);
 			if (string.IsNullOrEmpty(variationName))
@@ -67,7 +67,7 @@ namespace Xyrus.Apophysis.Calculation
 
 			return mVariationInstances[variationName].ResetVariable(name);
 		}
-		public double SetVariable(string name, double value)
+		public float SetVariable(string name, float value)
 		{
 			var variationName = VariationRegistry.GetVariationNameForVariable(name);
 			if (string.IsNullOrEmpty(variationName))

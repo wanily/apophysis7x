@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using Xyrus.Apophysis.Math;
+using System.Numerics;
 using Xyrus.Apophysis.Models;
 
 namespace Xyrus.Apophysis.Calculation
@@ -74,38 +74,38 @@ namespace Xyrus.Apophysis.Calculation
 			mIterator = null;
 		}
 
-		public double[][] C { get; private set; }
-		public double[][] P { get; private set; }
+		public float[][] C { get; private set; }
+		public float[][] P { get; private set; }
 
 		public Variation[] Variations { get; private set; }
 		public IteratorData[] RefTable { get; private set; }
 
-		public double ColorC1 { get; private set; }
-		public double ColorC2 { get; private set; }
+		public float ColorC1 { get; private set; }
+		public float ColorC2 { get; private set; }
 
 		private void PrepareColors()
 		{
-			ColorC1 = (1 + mIterator.ColorSpeed)*0.5;
-			ColorC2 = mIterator.Color*(1 - mIterator.ColorSpeed)*0.5;
+			ColorC1 = (1 + mIterator.ColorSpeed)*0.5f;
+			ColorC2 = mIterator.Color*(1 - mIterator.ColorSpeed)*0.5f;
 		}
 		private void PrepareMatrices()
 		{
-			C = new[] { new double[2], new double[2], new double[2] };
-			P = new[] { new double[2], new double[2], new double[2] };
+			C = new[] { new float[2], new float[2], new float[2] };
+			P = new[] { new float[2], new float[2], new float[2] };
 
-			C[0][0] = mIterator.PreAffine.Matrix.X.X;
-			C[0][1] = -mIterator.PreAffine.Matrix.X.Y;
-			C[1][0] = -mIterator.PreAffine.Matrix.Y.X;
-			C[1][1] = mIterator.PreAffine.Matrix.Y.Y;
-			C[2][0] = mIterator.PreAffine.Origin.X;
-			C[2][1] = -mIterator.PreAffine.Origin.Y;
+			C[0][0] = mIterator.PreAffine.M11;
+			C[0][1] = -mIterator.PreAffine.M12;
+			C[1][0] = -mIterator.PreAffine.M21;
+			C[1][1] = mIterator.PreAffine.M22;
+			C[2][0] = mIterator.PreAffine.M31;
+			C[2][1] = -mIterator.PreAffine.M32;
 
-			P[0][0] = mIterator.PostAffine.Matrix.X.X;
-			P[0][1] = -mIterator.PostAffine.Matrix.X.Y;
-			P[1][0] = -mIterator.PostAffine.Matrix.Y.X;
-			P[1][1] = mIterator.PostAffine.Matrix.Y.Y;
-			P[2][0] = mIterator.PostAffine.Origin.X;
-			P[2][1] = -mIterator.PostAffine.Origin.Y;
+			P[0][0] = mIterator.PostAffine.M11;
+			P[0][1] = -mIterator.PostAffine.M12;
+			P[1][0] = -mIterator.PostAffine.M21;
+			P[1][1] = mIterator.PostAffine.M22;
+			P[2][0] = mIterator.PostAffine.M31;
+			P[2][1] = -mIterator.PostAffine.M32;
 		}
 		private void PrepareVariations()
 		{
@@ -116,7 +116,7 @@ namespace Xyrus.Apophysis.Calculation
 			}
 
 			Variations = mIterator.Variations
-				.Where(x => System.Math.Abs(x.Weight) > double.Epsilon)
+				.Where(x => System.Math.Abs(x.Weight) > float.Epsilon)
 				.OrderBy(x => x.Priority)
 				.ThenBy(x => x.Name)
 				.ToArray();
@@ -137,8 +137,8 @@ namespace Xyrus.Apophysis.Calculation
 			var n = mData.Flame.Iterators.Count(x => x.GroupIndex == 0);
 			var k = mIndex;
 
-			var tp = new double[n];
-			var total = 0.0;
+			var tp = new float[n];
+			var total = 0.0f;
 
 			RefTable = new IteratorData[mRefTableSize];
 
@@ -150,10 +150,10 @@ namespace Xyrus.Apophysis.Calculation
 
 			if (total > 0)
 			{
-				var loop = 0.0;
+				var loop = 0.0f;
 				for (int i = 0; i < mRefTableSize; i++)
 				{
-					var sum = 0.0;
+					var sum = 0.0f;
 					var j = -1;
 
 					do
@@ -187,7 +187,7 @@ namespace Xyrus.Apophysis.Calculation
 		{
 			return RefTable[random.Next()%mRefTableSize];
 		}
-		public bool Process(Random random, Vector3 vector, ref double color)
+		public bool Process(Random random, Vector3 vector, ref float color)
 		{
 			var spreadColor = color*ColorC1 + ColorC2;
 
@@ -220,7 +220,7 @@ namespace Xyrus.Apophysis.Calculation
 			vector.Y = postTransformedVector.Y;
 			vector.Z = postTransformedVector.Z;
 
-			return random.NextDouble() < mIterator.Opacity;
+			return random.NextFloat() < mIterator.Opacity;
 		}
 	}
 }

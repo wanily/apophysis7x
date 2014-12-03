@@ -19,8 +19,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		private Flame mFlame;
 		private int mPreviewDensity;
 		private bool mFitImage;
-		private double mLastBitmapProgress;
-		private double mNextBitmapProgress;
+		private float mLastBitmapProgress;
+		private float mNextBitmapProgress;
 
 		public MainPreviewController([NotNull] Main view, [NotNull] MainController parent) : base(view)
 		{
@@ -129,16 +129,19 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			ApophysisSettings.Editor.CameraEditMode = View.CameraEditMode;
 		}
 
-		private void SetSpeed(double? speed)
+		private void SetSpeed(float? speed)
 		{
 			if (IsViewDisposed)
 				return;
 
 			View.Invoke(new Action(() => View.IterationsPerSecondLabel.Text = speed.HasValue ? string.Format("{0:###,###,###,##0.00} i/s", speed) : null));
 		}
-		private void SetProgress(double progress)
+		private void SetProgress(float progress)
 		{
 			if (IsViewDisposed)
+				return;
+
+			if (View.IsDisposed || float.IsInfinity(progress))
 				return;
 
 			View.Invoke(new Action(() =>
@@ -165,6 +168,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		private void SetBitmap(Bitmap bitmap)
 		{
 			if (bitmap == null || IsViewDisposed)
+				return;
+
+			if (View.IsDisposed)
 				return;
 
 			View.Invoke(new Action(() =>
@@ -255,7 +261,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 					SetRemaining(progress.RemainingTime);
 				}
 
-				SetSpeed(mIterationManager.IterationsPerSecond <= 0 ? (double?)null : mIterationManager.IterationsPerSecond);
+				SetSpeed(mIterationManager.IterationsPerSecond <= 0 ? (float?)null : mIterationManager.IterationsPerSecond);
 				SetElapsed(TimeSpan.FromSeconds(mElapsedTimer.GetElapsedTimeInSeconds()));
 			}
 			catch (ObjectDisposedException) { }
@@ -319,7 +325,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			mFlame = flame;
 
-			var density = (double)PreviewDensity;
+			var density = (float)PreviewDensity;
 			var canvasSize = View.PreviewPicture.ClientSize;
 			var renderSize = FitImage
 				? canvasSize

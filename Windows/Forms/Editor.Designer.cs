@@ -430,8 +430,8 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorCanvas.Iterators = null;
 			this.IteratorCanvas.Name = "IteratorCanvas";
 			this.IteratorCanvas.PreviewApplyPostTransform = false;
-			this.IteratorCanvas.PreviewDensity = 1D;
-			this.IteratorCanvas.PreviewRange = 1D;
+			this.IteratorCanvas.PreviewDensity = 1F;
+			this.IteratorCanvas.PreviewRange = 1F;
 			this.IteratorCanvas.ReferenceColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
 			this.IteratorCanvas.RulerBackdropColor = System.Drawing.Color.Transparent;
 			this.IteratorCanvas.RulerBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
@@ -441,10 +441,10 @@ namespace Xyrus.Apophysis.Windows.Forms
 			// 
 			// mSettings
 			// 
-			this.mSettings.AngleSnap = 15D;
+			this.mSettings.AngleSnap = 15F;
 			this.mSettings.LockAxes = false;
-			this.mSettings.MoveAmount = 0.1D;
-			this.mSettings.ScaleSnap = 125D;
+			this.mSettings.MoveAmount = 0.1F;
+			this.mSettings.ScaleSnap = 125F;
 			this.mSettings.ShowVariationPreview = false;
 			this.mSettings.ZoomAutomatically = false;
 			// 
@@ -1099,15 +1099,15 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorDirectColorDragPanel.BackColor = System.Drawing.SystemColors.Window;
 			this.IteratorDirectColorDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.IteratorDirectColorDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.IteratorDirectColorDragPanel.Default = 1D;
-			this.IteratorDirectColorDragPanel.DragStepping = 0.1D;
+			this.IteratorDirectColorDragPanel.Default = 1F;
+			this.IteratorDirectColorDragPanel.DragStepping = 0.1F;
 			this.IteratorDirectColorDragPanel.ForeColor = System.Drawing.SystemColors.WindowText;
 			resources.ApplyResources(this.IteratorDirectColorDragPanel, "IteratorDirectColorDragPanel");
-			this.IteratorDirectColorDragPanel.Maximum = 1D;
-			this.IteratorDirectColorDragPanel.Minimum = 0D;
+			this.IteratorDirectColorDragPanel.Maximum = 1F;
+			this.IteratorDirectColorDragPanel.Minimum = 0F;
 			this.IteratorDirectColorDragPanel.Name = "IteratorDirectColorDragPanel";
 			this.IteratorDirectColorDragPanel.TextBox = this.IteratorDirectColorTextBox;
-			this.IteratorDirectColorDragPanel.Value = 1D;
+			this.IteratorDirectColorDragPanel.Value = 1F;
 			// 
 			// IteratorOpacityTextBox
 			// 
@@ -1119,15 +1119,15 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorOpacityDragPanel.BackColor = System.Drawing.SystemColors.Window;
 			this.IteratorOpacityDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.IteratorOpacityDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.IteratorOpacityDragPanel.Default = 1D;
-			this.IteratorOpacityDragPanel.DragStepping = 0.1D;
+			this.IteratorOpacityDragPanel.Default = 1F;
+			this.IteratorOpacityDragPanel.DragStepping = 0.1F;
 			this.IteratorOpacityDragPanel.ForeColor = System.Drawing.SystemColors.WindowText;
 			resources.ApplyResources(this.IteratorOpacityDragPanel, "IteratorOpacityDragPanel");
-			this.IteratorOpacityDragPanel.Maximum = 1D;
-			this.IteratorOpacityDragPanel.Minimum = 0D;
+			this.IteratorOpacityDragPanel.Maximum = 1F;
+			this.IteratorOpacityDragPanel.Minimum = 0F;
 			this.IteratorOpacityDragPanel.Name = "IteratorOpacityDragPanel";
 			this.IteratorOpacityDragPanel.TextBox = this.IteratorOpacityTextBox;
-			this.IteratorOpacityDragPanel.Value = 1D;
+			this.IteratorOpacityDragPanel.Value = 1F;
 			// 
 			// IteratorColorSpeedTextBox
 			// 
@@ -1139,15 +1139,15 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorColorSpeedDragPanel.BackColor = System.Drawing.SystemColors.Window;
 			this.IteratorColorSpeedDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.IteratorColorSpeedDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.IteratorColorSpeedDragPanel.Default = 0D;
-			this.IteratorColorSpeedDragPanel.DragStepping = 0.1D;
+			this.IteratorColorSpeedDragPanel.Default = 0F;
+			this.IteratorColorSpeedDragPanel.DragStepping = 0.1F;
 			this.IteratorColorSpeedDragPanel.ForeColor = System.Drawing.SystemColors.WindowText;
 			resources.ApplyResources(this.IteratorColorSpeedDragPanel, "IteratorColorSpeedDragPanel");
-			this.IteratorColorSpeedDragPanel.Maximum = 1D;
-			this.IteratorColorSpeedDragPanel.Minimum = -1D;
+			this.IteratorColorSpeedDragPanel.Maximum = 1F;
+			this.IteratorColorSpeedDragPanel.Minimum = -1F;
 			this.IteratorColorSpeedDragPanel.Name = "IteratorColorSpeedDragPanel";
 			this.IteratorColorSpeedDragPanel.TextBox = this.IteratorColorSpeedTextBox;
-			this.IteratorColorSpeedDragPanel.Value = 0D;
+			this.IteratorColorSpeedDragPanel.Value = 0F;
 			// 
 			// IteratorColorScrollBar
 			// 
@@ -1166,14 +1166,14 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorColorDragPanel.BackColor = System.Drawing.Color.Black;
 			this.IteratorColorDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.IteratorColorDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.IteratorColorDragPanel.Default = 0D;
-			this.IteratorColorDragPanel.DragStepping = 0.1D;
+			this.IteratorColorDragPanel.Default = 0F;
+			this.IteratorColorDragPanel.DragStepping = 0.1F;
 			resources.ApplyResources(this.IteratorColorDragPanel, "IteratorColorDragPanel");
-			this.IteratorColorDragPanel.Maximum = 1D;
-			this.IteratorColorDragPanel.Minimum = 0D;
+			this.IteratorColorDragPanel.Maximum = 1F;
+			this.IteratorColorDragPanel.Minimum = 0F;
 			this.IteratorColorDragPanel.Name = "IteratorColorDragPanel";
 			this.IteratorColorDragPanel.TextBox = this.IteratorColorTextBox;
-			this.IteratorColorDragPanel.Value = 0D;
+			this.IteratorColorDragPanel.Value = 0F;
 			// 
 			// mIteratorPropertyPanel
 			// 
@@ -1196,15 +1196,15 @@ namespace Xyrus.Apophysis.Windows.Forms
 			this.IteratorWeightDragPanel.BackColor = System.Drawing.SystemColors.Control;
 			this.IteratorWeightDragPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.IteratorWeightDragPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.IteratorWeightDragPanel.Default = 0.5D;
-			this.IteratorWeightDragPanel.DragStepping = 0.1D;
+			this.IteratorWeightDragPanel.Default = 0.5F;
+			this.IteratorWeightDragPanel.DragStepping = 0.1F;
 			this.IteratorWeightDragPanel.ForeColor = System.Drawing.SystemColors.WindowText;
 			resources.ApplyResources(this.IteratorWeightDragPanel, "IteratorWeightDragPanel");
-			this.IteratorWeightDragPanel.Maximum = 1000D;
-			this.IteratorWeightDragPanel.Minimum = 0.001D;
+			this.IteratorWeightDragPanel.Maximum = 1000F;
+			this.IteratorWeightDragPanel.Minimum = 0.001F;
 			this.IteratorWeightDragPanel.Name = "IteratorWeightDragPanel";
 			this.IteratorWeightDragPanel.TextBox = this.IteratorWeightTextBox;
-			this.IteratorWeightDragPanel.Value = 0.5D;
+			this.IteratorWeightDragPanel.Value = 0.5F;
 			// 
 			// IteratorNameTextBox
 			// 

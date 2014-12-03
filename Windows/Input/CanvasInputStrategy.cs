@@ -1,14 +1,14 @@
 ﻿using System;
+using System.Numerics;
 using System.Windows.Forms;
-using Xyrus.Apophysis.Math;
 
 namespace Xyrus.Apophysis.Windows.Input
 {
 	abstract class CanvasInputStrategy<T> : InputHandler where T : Canvas
 	{
 		private T mCanvas;
-		private Vector2 mNavigationOrigin;
-		private Vector2 mNavigationOffset;
+		private Vector2? mNavigationOrigin;
+		private Vector2? mNavigationOffset;
 		private bool mIsNavigating;
 
 		protected CanvasInputStrategy([NotNull] Control control, [NotNull] T canvas) : base(control)
@@ -22,10 +22,10 @@ namespace Xyrus.Apophysis.Windows.Input
 			mCanvas = null;
 		}
 
-		[NotNull] protected abstract Vector2 GetCurrentOffset();
-		[NotNull] protected Vector2 GetNextOffset([NotNull] Vector2 cursor)
+		protected abstract Vector2 GetCurrentOffset();
+		protected Vector2 GetNextOffset(Vector2 cursor)
 		{
-			return (mNavigationOffset - cursor + mNavigationOrigin)/Canvas.Ratio;
+			return (mNavigationOffset.GetValueOrDefault() - cursor + mNavigationOrigin.GetValueOrDefault())/Canvas.Ratio;
 		}
 
 		public T Canvas
@@ -52,9 +52,8 @@ namespace Xyrus.Apophysis.Windows.Input
 			mIsNavigating = false;
 		}
 
-		public abstract void NavigateOffset([NotNull] Vector2 cursor);
-		public abstract void NavigateRotate([NotNull] Vector2 cursor);
-		public abstract void NavigateZoom(double delta);
+		public abstract void NavigateOffset(Vector2 cursor);
+		public abstract void NavigateZoom(float delta);
 		public abstract void NavigateReset();
 
 		protected override bool OnAttachedControlKeyPress(Keys key, Keys modifiers)
@@ -122,7 +121,7 @@ namespace Xyrus.Apophysis.Windows.Input
 
 			return false;
 		}
-		protected override bool OnAttachedControlMouseWheel(double delta, MouseButtons button)
+		protected override bool OnAttachedControlMouseWheel(float delta, MouseButtons button)
 		{
 			if (button == MouseButtons.None)
 			{

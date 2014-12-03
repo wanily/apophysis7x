@@ -5,14 +5,14 @@ namespace Xyrus.Apophysis.Windows.Input
 {
 	class RotateOperation : IteratorInputOperation
 	{
-		public RotateOperation([NotNull] Iterator iterator, double rotationAngle, RotationAxis axis)
+		public RotateOperation([NotNull] Iterator iterator, float rotationAngle, RotationAxis axis)
 			: base(iterator)
 		{
 			RotationAngle = rotationAngle;
 			Axis = axis;
 		}
 
-		public double RotationAngle
+		public float RotationAngle
 		{
 			get;
 			private set;
@@ -25,7 +25,7 @@ namespace Xyrus.Apophysis.Windows.Input
 
 		protected override string GetInfoString()
 		{
-			var angle = RotationAngle * 180.0 / System.Math.PI;
+			var angle = RotationAngle * 180.0f / Float.Pi;
 			if (angle < 0)
 			{
 				angle = 360 + angle;

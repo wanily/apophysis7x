@@ -24,7 +24,7 @@ namespace Xyrus.Apophysis.Calculation
 			RaiseFinished(manager.ThreadState.IsCancelling);
 		}
 
-		public override void StartIterate(Histogram histogram, double density)
+		public override void StartIterate(Histogram histogram, float density)
 		{
 			if (histogram == null) throw new ArgumentNullException("histogram");
 
@@ -39,7 +39,7 @@ namespace Xyrus.Apophysis.Calculation
 
 			thread.Start();
 		}
-		public override void Iterate(Histogram histogram, double density)
+		public override void Iterate(Histogram histogram, float density)
 		{
 			if (histogram == null) throw new ArgumentNullException("histogram");
 

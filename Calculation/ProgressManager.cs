@@ -11,8 +11,8 @@ namespace Xyrus.Apophysis.Calculation
 		private readonly NativeTimer mStopWatch = new NativeTimer();
 
 		private ThreadState mThreadState;
-		
-		private double? mLastSecondsPerIteration;
+
+		private float? mLastSecondsPerIteration;
 		private long mLastExcursion;
 
 		public ProgressManager(ThreadState stateToken = null)
@@ -31,7 +31,7 @@ namespace Xyrus.Apophysis.Calculation
 			}
 		}
 
-		public void Reset(long iterations, double density)
+		public void Reset(long iterations, float density)
 		{
 			mLastExcursion = 0L;
 			mLastSecondsPerIteration = null;
@@ -53,12 +53,12 @@ namespace Xyrus.Apophysis.Calculation
 			RaiseStarted();
 			RaiseProgress();
 		}
-		public void Continue(long iterations, double densityIncrement)
+		public void Continue(long iterations, float densityIncrement)
 		{
 			TotalIterations += iterations;
 
 			RemainingTime = TimeSpan.FromSeconds(mLastSecondsPerIteration.GetValueOrDefault() * (TotalIterations - mLastExcursion));
-			IterationProgress = TotalIterations == 0 ? 1 : (double)mLastExcursion / TotalIterations;
+			IterationProgress = TotalIterations == 0 ? 1 : (float)mLastExcursion / TotalIterations;
 			TargetDensity += densityIncrement;
 
 			mStopWatch.SetStartingTime();
@@ -76,19 +76,19 @@ namespace Xyrus.Apophysis.Calculation
 		}
 		public void CheckSendProgressEvent(long iteration)
 		{
-			var time = mTicker.GetElapsedTimeInSeconds();
+			var time = (float)mTicker.GetElapsedTimeInSeconds();
 			if (time > ProgressThreshold)
 			{
 				mLastSecondsPerIteration = (time / (iteration - mLastExcursion));
 
 				var remaining = mLastSecondsPerIteration.Value * (TotalIterations - iteration);
-				var progress = TotalIterations == 0 ? 1 : (double)iteration / TotalIterations;
+				var progress = TotalIterations == 0 ? 1 : (float)iteration / TotalIterations;
 
 				CurrentDensity = progress*TargetDensity;
 				IterationProgress = progress;
 
 				if (remaining >= TimeSpan.MaxValue.TotalSeconds / 2)
-					remaining = TimeSpan.MaxValue.TotalSeconds / 2;
+					remaining = (float)TimeSpan.MaxValue.TotalSeconds / 2;
 
 				RemainingTime = TimeSpan.FromSeconds(remaining);
 
@@ -100,7 +100,7 @@ namespace Xyrus.Apophysis.Calculation
 
 				if (AverageIterationsPerSecond <= 0)
 					AverageIterationsPerSecond = ips;
-				else AverageIterationsPerSecond = (ips + AverageIterationsPerSecond) * 0.5;
+				else AverageIterationsPerSecond = (ips + AverageIterationsPerSecond) * 0.5f;
 
 				mTicker.SetStartingTime();
 				mLastExcursion = iteration;

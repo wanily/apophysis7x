@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Numerics;
 using System.Xml.Linq;
 using Xyrus.Apophysis.Calculation;
 using Xyrus.Apophysis.Messaging;
@@ -14,8 +15,8 @@ namespace Xyrus.Apophysis.Models
 	{
 		private Flame mFlame;
 
-		private AffineTransform mPreAffine;
-		private AffineTransform mPostAffine;
+		private Matrix3x2 mPreAffine;
+		private Matrix3x2 mPostAffine;
 
 		private readonly VariationCollection mVariations;
 		private static readonly string mDefaultVariationName = ApophysisSettings.Common.VariationsIn15CStyle
@@ -23,11 +24,11 @@ namespace Xyrus.Apophysis.Models
 			: VariationRegistry.GetName<Linear3D>();
 
 		private string mName;
-		private double mWeight;
-		private double mColor;
-		private double mColorSpeed;
-		private double mOpacity;
-		private double mDirectColor;
+		private float mWeight;
+		private float mColor;
+		private float mColorSpeed;
+		private float mOpacity;
+		private float mDirectColor;
 		private int mGroupIndex;
 
 		public Iterator([NotNull] Flame hostingFlame)
@@ -42,18 +43,18 @@ namespace Xyrus.Apophysis.Models
 
 		public void Reset()
 		{
-			mPreAffine = new AffineTransform();
-			mPostAffine = new AffineTransform();
+			mPreAffine = new Matrix3x2(1,0,0,1,0,0);
+			mPostAffine = new Matrix3x2(1,0,0,1,0,0);
 
 			mName = null;
-			mWeight= 0.5;
-			mColor = 0.0;
-			mColorSpeed = 0.0;
-			mOpacity = 1.0;
-			mDirectColor = 1.0;
+			mWeight= 0.5f;
+			mColor = 0.0f;
+			mColorSpeed = 0.0f;
+			mOpacity = 1.0f;
+			mDirectColor = 1.0f;
 
 			mVariations.ClearWeights();
-			mVariations.SetWeight(mDefaultVariationName, 1.0);
+			mVariations.SetWeight(mDefaultVariationName, 1.0f);
 		}
 
 		[NotNull]
@@ -67,25 +68,13 @@ namespace Xyrus.Apophysis.Models
 				mColorSpeed = mColorSpeed,
 				mOpacity = mOpacity,
 				mDirectColor = mDirectColor,
-				mGroupIndex = mGroupIndex
+				mGroupIndex = mGroupIndex,
+				mPreAffine = mPreAffine,
+				mPostAffine = mPostAffine
 			};
 
-			copy.PreAffine.Origin.X = PreAffine.Origin.X;
-			copy.PreAffine.Origin.Y = PreAffine.Origin.Y;
-			copy.PreAffine.Matrix.X.X = PreAffine.Matrix.X.X;
-			copy.PreAffine.Matrix.X.Y = PreAffine.Matrix.X.Y;
-			copy.PreAffine.Matrix.Y.X = PreAffine.Matrix.Y.X;
-			copy.PreAffine.Matrix.Y.Y = PreAffine.Matrix.Y.Y;
-
-			copy.PostAffine.Origin.X = PostAffine.Origin.X;
-			copy.PostAffine.Origin.Y = PostAffine.Origin.Y;
-			copy.PostAffine.Matrix.X.X = PostAffine.Matrix.X.X;
-			copy.PostAffine.Matrix.X.Y = PostAffine.Matrix.X.Y;
-			copy.PostAffine.Matrix.Y.X = PostAffine.Matrix.Y.X;
-			copy.PostAffine.Matrix.Y.Y = PostAffine.Matrix.Y.Y;
-
 			copy.mVariations.ClearWeights();
-			foreach (var variation in mVariations.Where(x => System.Math.Abs(x.Weight) > double.Epsilon))
+			foreach (var variation in mVariations.Where(x => System.Math.Abs(x.Weight) > float.Epsilon))
 			{
 				copy.mVariations.SetWeight(variation.Name, variation.Weight);
 
@@ -147,12 +136,12 @@ namespace Xyrus.Apophysis.Models
 			}
 		}
 
-		public double Weight
+		public float Weight
 		{
 			get { return mWeight; }
 			set
 			{
-				if (value < double.Epsilon)
+				if (value < float.Epsilon)
 				{
 					throw new ArgumentOutOfRangeException(@"value");
 				}
@@ -160,7 +149,7 @@ namespace Xyrus.Apophysis.Models
 				mWeight = value;
 			}
 		}
-		public double Color
+		public float Color
 		{
 			get { return mColor; }
 			set
@@ -173,7 +162,7 @@ namespace Xyrus.Apophysis.Models
 				mColor = value;
 			}
 		}
-		public double ColorSpeed
+		public float ColorSpeed
 		{
 			get { return mColorSpeed; }
 			set
@@ -186,7 +175,7 @@ namespace Xyrus.Apophysis.Models
 				mColorSpeed = value;
 			}
 		}
-		public double Opacity
+		public float Opacity
 		{
 			get { return mOpacity; }
 			set
@@ -199,7 +188,7 @@ namespace Xyrus.Apophysis.Models
 				mOpacity = value;
 			}
 		}
-		public double DirectColor
+		public float DirectColor
 		{
 			get { return mDirectColor; }
 			set
@@ -213,8 +202,7 @@ namespace Xyrus.Apophysis.Models
 			}
 		}
 
-		[NotNull]
-		public AffineTransform PreAffine
+		public Matrix3x2 PreAffine
 		{
 			get { return mPreAffine; }
 			set
@@ -224,8 +212,7 @@ namespace Xyrus.Apophysis.Models
 			}
 		}
 
-		[NotNull]
-		public AffineTransform PostAffine
+		public Matrix3x2 PostAffine
 		{
 			get { return mPostAffine; }
 			set
@@ -277,8 +264,8 @@ namespace Xyrus.Apophysis.Models
 			var weightAttribute = element.Attribute(XName.Get(@"weight"));
 			if (weightAttribute != null && groupIndex == 0)
 			{
-				var weight = weightAttribute.ParseFloat(0.5);
-				if (weight < double.Epsilon)
+				var weight = weightAttribute.ParseFloat(0.5f);
+				if (weight < float.Epsilon)
 				{
 					throw new ApophysisException(Messages.IteratorWeightRangeError);
 				}
@@ -342,26 +329,14 @@ namespace Xyrus.Apophysis.Models
 			if (coefsAttribute != null)
 			{
 				var vector = coefsAttribute.ParseCoefficients();
-
-				PreAffine.Matrix.X.X = vector[0];
-				PreAffine.Matrix.X.Y = -vector[1];
-				PreAffine.Matrix.Y.X = -vector[2];
-				PreAffine.Matrix.Y.Y = vector[3];
-				PreAffine.Origin.X = vector[4];
-				PreAffine.Origin.Y = -vector[5];
+				PreAffine = new Matrix3x2(vector[0], -vector[1], -vector[2], vector[3], vector[4], vector[5]);
 			}
 
 			var postAttribute = element.Attribute(XName.Get(@"post"));
 			if (postAttribute != null)
 			{
 				var vector = postAttribute.ParseCoefficients();
-
-				PostAffine.Matrix.X.X = vector[0];
-				PostAffine.Matrix.X.Y = -vector[1];
-				PostAffine.Matrix.Y.X = -vector[2];
-				PostAffine.Matrix.Y.Y = vector[3];
-				PostAffine.Origin.X = vector[4];
-				PostAffine.Origin.Y = -vector[5];
+				PreAffine = new Matrix3x2(vector[0], -vector[1], -vector[2], vector[3], vector[4], vector[5]);
 			}
 
 			Variations.ClearWeights();
@@ -414,10 +389,10 @@ namespace Xyrus.Apophysis.Models
 			if (!Equals(mGroupIndex, iterator.mGroupIndex))
 				return false;
 
-			if (!mPreAffine.IsEqual(iterator.mPreAffine))
+			if (mPreAffine != iterator.mPreAffine)
 				return false;
 
-			if (!mPostAffine.IsEqual(iterator.mPostAffine))
+			if (mPostAffine != iterator.mPostAffine)
 				return false;
 
 			if (!mVariations.IsEqual(iterator.mVariations))
@@ -434,13 +409,13 @@ namespace Xyrus.Apophysis.Models
 
 			element.Add(new XAttribute(XName.Get(@"color"), Color.Serialize()));
 
-			if (System.Math.Abs(ColorSpeed) > double.Epsilon)
+			if (System.Math.Abs(ColorSpeed) > float.Epsilon)
 			{
 				element.Add(new XAttribute(XName.Get(@"symmetry"), ColorSpeed.Serialize()));
 				element.Add(new XAttribute(XName.Get(@"color_speed"), ColorSpeed.Serialize()));
 			}
 
-			foreach (var variation in Variations.Where(x => System.Math.Abs(x.Weight) > double.Epsilon))
+			foreach (var variation in Variations.Where(x => System.Math.Abs(x.Weight) > float.Epsilon))
 			{
 				element.Add(new XAttribute(XName.Get(variation.Name), variation.Weight));
 
@@ -450,8 +425,8 @@ namespace Xyrus.Apophysis.Models
 				}
 			}
 
-			var affine = new [] { PreAffine.Matrix.X.X, -PreAffine.Matrix.X.Y, -PreAffine.Matrix.Y.X, PreAffine.Matrix.Y.Y, PreAffine.Origin.X, -PreAffine.Origin.Y };
-			var postAffine = new[] { PostAffine.Matrix.X.X, -PostAffine.Matrix.X.Y, -PostAffine.Matrix.Y.X, PostAffine.Matrix.Y.Y, PostAffine.Origin.X, -PostAffine.Origin.Y };
+			var affine = new [] { PreAffine.M11, -PreAffine.M12, -PreAffine.M21, PreAffine.M22, PreAffine.M31, -PreAffine.M32 };
+			var postAffine = new[] { PostAffine.M11, -PostAffine.M12, -PostAffine.M21, PostAffine.M22, PostAffine.M31, -PostAffine.M32 };
 
 			element.Add(new XAttribute(XName.Get(@"coefs"), affine.Serialize()));
 
@@ -464,7 +439,7 @@ namespace Xyrus.Apophysis.Models
 			if (!string.IsNullOrEmpty(Name) && !string.IsNullOrEmpty((Name??string.Empty).Trim()))
 				element.Add(new XAttribute(XName.Get(@"name"), Name ?? string.Empty));
 
-			if (System.Math.Abs(DirectColor - 1) > double.Epsilon)
+			if (System.Math.Abs(DirectColor - 1) > float.Epsilon)
 				element.Add(new XAttribute(XName.Get(@"var_color"), DirectColor.Serialize()));
 		}
 	}

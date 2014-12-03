@@ -275,9 +275,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			using (mFlamePropertiesController.Initializer.Enter())
 			{
 				flame.Angle = e.Data.Angle;
-				flame.Origin = e.Data.Origin.Copy();
+				flame.Origin = e.Data.Origin;
 				flame.Zoom = e.Data.Zoom;
-				flame.PixelsPerUnit = e.Data.Scale <= 0 ? 0.01 : e.Data.Scale;
+				flame.PixelsPerUnit = e.Data.Scale <= 0 ? 0.01f : e.Data.Scale;
 				mFlamePropertiesController.UpdateCamera();
 			}
 		}

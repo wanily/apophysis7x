@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Numerics;
 using Xyrus.Apophysis.Math;
 
 namespace Xyrus.Apophysis.Windows
@@ -11,7 +12,7 @@ namespace Xyrus.Apophysis.Windows
 		protected Canvas(Vector2 size)
 		{
 			if (size == null) throw new ArgumentNullException("size");
-			if (size.IsNaN || size.X <= 0 || size.Y <= 0)
+			if (size.X <= 0 || size.Y <= 0)
 				throw new ArgumentOutOfRangeException("size");
 
 			mSize = size;
@@ -21,9 +22,9 @@ namespace Xyrus.Apophysis.Windows
 		{
 			get { return mSize; }
 		}
-		public virtual double Scale
+		public virtual float Scale
 		{
-			get { return 1.0; }
+			get { return 1.0f; }
 		}
 		public abstract Vector2 Ratio
 		{
@@ -35,18 +36,18 @@ namespace Xyrus.Apophysis.Windows
 			if (point == null) throw new ArgumentNullException("point");
 			if (gridSize == null) throw new ArgumentNullException("gridSize");
 
-			Func<double, double> funcX, funcY;
+			Func<float, float> funcX, funcY;
 
 			switch (snapBehaviorX)
 			{
 				case CanvasSnapBehavior.Round:
-					funcX = System.Math.Round;
+					funcX = Float.Round;
 					break;
 				case CanvasSnapBehavior.Floor:
-					funcX = System.Math.Floor;
+					funcX = Float.Floor;
 					break;
 				case CanvasSnapBehavior.Ceil:
-					funcX = System.Math.Ceiling;
+					funcX = Float.Ceiling;
 					break;
 				default:
 					throw new ArgumentOutOfRangeException("snapBehaviorX");
@@ -55,13 +56,13 @@ namespace Xyrus.Apophysis.Windows
 			switch (snapBehaviorY)
 			{
 				case CanvasSnapBehavior.Round:
-					funcY = System.Math.Round;
+					funcY = Float.Round;
 					break;
 				case CanvasSnapBehavior.Floor:
-					funcY = System.Math.Floor;
+					funcY = Float.Floor;
 					break;
 				case CanvasSnapBehavior.Ceil:
-					funcY = System.Math.Ceiling;
+					funcY = Float.Ceiling;
 					break;
 				default:
 					throw new ArgumentOutOfRangeException("snapBehaviorY");
@@ -70,12 +71,12 @@ namespace Xyrus.Apophysis.Windows
 			var x = funcX(point.X / gridSize.X) * gridSize.X;
 			var y = funcY(point.Y / gridSize.Y) * gridSize.Y;
 
-			return new Vector2 { X = x, Y = y};
+			return new Vector2(x, y);
 		}
 		public void Resize(Vector2 newSize)
 		{
 			if (newSize == null) throw new ArgumentNullException("newSize");
-			if (newSize.IsNaN || newSize.X <= 0 || newSize.Y <= 0)
+			if (newSize.X <= 0 || newSize.Y <= 0)
 				throw new ArgumentOutOfRangeException("newSize");
 
 			mSize = newSize;

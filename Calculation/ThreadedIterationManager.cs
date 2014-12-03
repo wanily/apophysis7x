@@ -145,20 +145,20 @@ namespace Xyrus.Apophysis.Calculation
 			}
 		}
 
-		public override void StartIterate(Histogram histogram, double density)
+		public override void StartIterate(Histogram histogram, float density)
 		{
 			if (histogram == null) throw new ArgumentNullException("histogram");
 
 			mCanProgress = false;
 			ResetState();
 
-			var threadDensity = System.Math.Ceiling(density / mThreadCount);
+			var threadDensity = Float.Ceiling(density / mThreadCount);
 			for (int i = 0; i < mThreadCount; i++)
 			{
 				ThreadStartIterate(histogram, i, threadDensity, new IterationThreadStateToken(this));
 			}
 		}
-		public override void Iterate(Histogram histogram, double density)
+		public override void Iterate(Histogram histogram, float density)
 		{
 			if (histogram == null) throw new ArgumentNullException("histogram");
 
@@ -172,7 +172,7 @@ namespace Xyrus.Apophysis.Calculation
 			Wait();
 		}
 
-		private void ThreadStartIterate([NotNull] Histogram histogram, int threadIndex, double threadDensity, ThreadState token)
+		private void ThreadStartIterate([NotNull] Histogram histogram, int threadIndex, float threadDensity, ThreadState token)
 		{
 			var progress = new ProgressManager(token);
 			var thread = new Thread(() => histogram.Iterate(threadDensity, progress));

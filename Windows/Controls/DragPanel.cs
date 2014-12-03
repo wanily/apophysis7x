@@ -14,22 +14,22 @@ namespace Xyrus.Apophysis.Windows.Controls
 		private TextBox mTextBox;
 		private bool mIsMouseOver;
 
-		private double mStart;
+		private float mStart;
 		private Point mCursorStart;
 		private bool mIsDragging;
-		private double mDefault;
-		private double mMinimum;
-		private double mMaximum;
-		private double mDragStepping;
+		private float mDefault;
+		private float mMinimum;
+		private float mMaximum;
+		private float mDragStepping;
 
 		public DragPanel()
 		{
 			InitializeComponent();
 
 			mDefault = 0;
-			mMinimum = double.MinValue;
-			mMaximum = double.MaxValue;
-			mDragStepping = 0.1;
+			mMinimum = float.MinValue;
+			mMaximum = float.MaxValue;
+			mDragStepping = 0.1f;
 
 			Cursor = Cursors.Hand;
 
@@ -65,7 +65,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 			get { return mTextBox; }
 			set
 			{
-				double oldValue;
+				float oldValue;
 
 				if (mTextBox != null)
 				{
@@ -75,10 +75,10 @@ namespace Xyrus.Apophysis.Windows.Controls
 					mTextBox.LostFocus -= OnTextBoxLostFocus;
 					mTextBox.KeyUp -= OnTextBoxKeyUp;
 
-					if (!double.TryParse(mTextBox.Text, NumberStyles.Float, InputController.Culture, out oldValue))
-						oldValue = 0.0;
+					if (!float.TryParse(mTextBox.Text, NumberStyles.Float, InputController.Culture, out oldValue))
+						oldValue = 0.0f;
 				}
-				else oldValue = 0.0;
+				else oldValue = 0.0f;
 				
 				mTextBox = value;
 
@@ -94,15 +94,15 @@ namespace Xyrus.Apophysis.Windows.Controls
 			}
 		}
 
-		public Double Value
+		public float Value
 		{
 			get
 			{
 				if (TextBox == null)
-					return 0.0;
+					return 0.0f;
 
-				double value;
-				if (!double.TryParse(TextBox.Text, NumberStyles.Float, InputController.Culture, out value))
+				float value;
+				if (!float.TryParse(TextBox.Text, NumberStyles.Float, InputController.Culture, out value))
 					return Default;
 
 				return value;
@@ -116,7 +116,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 				TextBox.Refresh();
 			}
 		}
-		public Double Default
+		public float Default
 		{
 			get { return mDefault; }
 			set
@@ -128,7 +128,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 				Value = value;
 			}
 		}
-		public Double Minimum
+		public float Minimum
 		{
 			get { return mMinimum; }
 			set
@@ -140,7 +140,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 				ConstrainValue(value, mMaximum);
 			}
 		}
-		public Double Maximum
+		public float Maximum
 		{
 			get { return mMaximum; }
 			set
@@ -152,20 +152,20 @@ namespace Xyrus.Apophysis.Windows.Controls
 				ConstrainValue(mMinimum, value);
 			}
 		}
-		public Double DragStepping
+		public float DragStepping
 		{
 			get { return mDragStepping; }
 			set { mDragStepping = value; }
 		}
 
-		private void ConstrainValue(double min, double max, bool withEvents = true)
+		private void ConstrainValue(float min, float max, bool withEvents = true)
 		{
 			var value = Value;
 			if (value < min || value > max)
 			{
 				if (withEvents && BeginEdit != null) BeginEdit(this, new EventArgs());
 
-				Value = System.Math.Max(min, System.Math.Min(value, max));
+				Value = Float.Range(value, min, max);
 
 				if (withEvents && ValueChanged != null) ValueChanged(this, new EventArgs());
 				if (withEvents && EndEdit != null) EndEdit(this, new EventArgs());
@@ -232,8 +232,8 @@ namespace Xyrus.Apophysis.Windows.Controls
 			if (mIsDragging)
 			{
 				var pos = MouseInputManager.GetPosition();
-				var delta = pos.X - (double)mCursorStart.X;
-				var multiplier = 1000.0;
+				var delta = pos.X - (float)mCursorStart.X;
+				var multiplier = 1000.0f;
 
 				if (KeyboardInputManager.GetKeyState(Keys.Menu))
 					multiplier = 100000;
@@ -250,7 +250,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 
 				multiplier /= (10 * mDragStepping);
 
-				var newValue = System.Math.Round(mStart + delta / multiplier, 3);
+				var newValue = Float.Round(mStart + delta / multiplier, 3);
 
 				//var screen = Screen.FromPoint(pos);
 				//var newPos = new Point(System.Math.Max(screen.Bounds.Left, System.Math.Min(pos.X + delta < 0 ? -1 : 1, screen.Bounds.Right)),pos.Y);

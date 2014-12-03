@@ -5,7 +5,7 @@ namespace Xyrus.Apophysis.Windows.Input
 {
 	sealed class MouseHookEventArgs : EventArgs
     {
-		public MouseHookEventArgs(int x, int y, MouseButtons button, double delta)
+		public MouseHookEventArgs(int x, int y, MouseButtons button, float delta)
         {
             Button = button;
             X = x;
@@ -23,7 +23,7 @@ namespace Xyrus.Apophysis.Windows.Input
             get;
             private set;
         }
-        public double Delta
+		public float Delta
         {
             get;
             private set;

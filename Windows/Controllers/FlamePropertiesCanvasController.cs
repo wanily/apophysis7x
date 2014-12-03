@@ -164,7 +164,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			if (View.MaintainAspectRatioCheckBox.Checked)
 			{
-				var aspect = (double)mCurrentSize.Height / mCurrentSize.Width;
+				var aspect = (float)mCurrentSize.Height / mCurrentSize.Width;
 				var size = new Size(value, (int) (aspect*value));
 
 				mCurrentSize = size;
@@ -194,7 +194,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			if (View.MaintainAspectRatioCheckBox.Checked)
 			{
-				var aspect = (double)mCurrentSize.Width / mCurrentSize.Height;
+				var aspect = (float)mCurrentSize.Width / mCurrentSize.Height;
 				var size = new Size((int)(aspect * value), value);
 
 				mCurrentSize = size;

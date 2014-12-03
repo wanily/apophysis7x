@@ -132,10 +132,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 		private void OnRotateClick(object sender, EventArgs e)
 		{
-			double angle = 0;
+			float angle = 0;
 
-			if (ReferenceEquals(sender, View.Rotate90CcwButton)) angle = System.Math.PI / 2.0;
-			if (ReferenceEquals(sender, View.Rotate90CwButton)) angle = -System.Math.PI / 2.0;
+			if (ReferenceEquals(sender, View.Rotate90CcwButton)) angle = Float.Pi / 2;
+			if (ReferenceEquals(sender, View.Rotate90CwButton)) angle = -Float.Pi / 2;
 
 			View.IteratorCanvas.Commands.RotateWorld(angle);
 		}

@@ -1,12 +1,11 @@
 using System;
-using System.Security.Permissions;
 
 namespace Xyrus.Apophysis.Calculation
 {
 	[PublicAPI]
 	public abstract class ProgressProvider
 	{
-		private const double mProgressThreshold = 1;
+		private const float mProgressThreshold = 1;
 		private readonly RenderState mRenderState;
 
 		protected ProgressProvider()
@@ -23,29 +22,29 @@ namespace Xyrus.Apophysis.Calculation
 			get { return mRenderState.TotalIterations; }
 			protected set { mRenderState.TotalIterations = value; }
 		}
-		public double TargetDensity
+		public float TargetDensity
 		{
 			get { return mRenderState.TargetDensity; }
 			protected set { mRenderState.TargetDensity = value; }
 		}
 
-		public double AverageIterationsPerSecond
+		public float AverageIterationsPerSecond
 		{
 			get { return mRenderState.AverageIterationsPerSecond; }
 			protected set { mRenderState.AverageIterationsPerSecond = value; }
 		}
-		public double IterationsPerSecond
+		public float IterationsPerSecond
 		{
 			get { return mRenderState.IterationsPerSecond; }
 			protected set { mRenderState.IterationsPerSecond = value; }
 		}
-		
-		public double CurrentDensity
+
+		public float CurrentDensity
 		{
 			get { return mRenderState.CurrentDensity; }
 			protected set { mRenderState.CurrentDensity = value; }
 		}
-		public double IterationProgress
+		public float IterationProgress
 		{
 			get { return mRenderState.Progress; }
 			protected set { mRenderState.Progress = value; }
@@ -73,7 +72,7 @@ namespace Xyrus.Apophysis.Calculation
 			protected set { mRenderState.IsBusy = value; }
 		}
 
-		protected static double ProgressThreshold
+		protected static float ProgressThreshold
 		{
 			get { return mProgressThreshold; }
 		}

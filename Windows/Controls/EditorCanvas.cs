@@ -1,8 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Numerics;
 using System.Windows.Forms;
-using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Visuals;
 using Xyrus.Apophysis.Windows.Input;
@@ -34,8 +34,8 @@ namespace Xyrus.Apophysis.Windows.Controls
 		private bool mIsDisposed;
 		private bool mShowRulers;
 
-		private double mPreviewRange;
-		private double mPreviewDensity;
+		private float mPreviewRange;
+		private float mPreviewDensity;
 		private bool mPreviewApplyPostTransform;
 
 		public EditorCanvas()
@@ -221,7 +221,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 			set { mGridPainter.HighlightOrigin = value; }
 		}
 
-		public double PreviewRange
+		public float PreviewRange
 		{
 			get { return mPreviewRange; }
 			set
@@ -231,7 +231,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 				Refresh();
 			}
 		}
-		public double PreviewDensity
+		public float PreviewDensity
 		{
 			get { return mPreviewDensity; }
 			set

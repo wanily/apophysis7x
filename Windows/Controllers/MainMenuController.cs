@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Numerics;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Models;
@@ -278,7 +279,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			flame.Angle = 0;
 			flame.Origin = new Vector2();
 			flame.Zoom = 0;
-			flame.PixelsPerUnit = 25 * flame.CanvasSize.Width / 100.0;
+			flame.PixelsPerUnit = 25 * flame.CanvasSize.Width / 100.0f;
 
 			mParent.UndoController.CommitChange(flame);
 			mParent.FlamePropertiesController.RaiseFlameChanged();

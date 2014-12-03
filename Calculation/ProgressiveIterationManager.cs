@@ -7,12 +7,12 @@ namespace Xyrus.Apophysis.Calculation
 	[PublicAPI]
 	public class ProgressiveIterationManager : IterationManagerBase, IThreaded, IProgressive
 	{
-		private static readonly double[] mDensitySeries = { 1, 5 };
+		private static readonly float[] mDensitySeries = { 1, 5 };
 		private readonly ThreadedIterationManager mInnerIterationManager;
 
 		private readonly object mLock = new object();
 
-		private double mNextDensity, mLogDensity;
+		private float mNextDensity, mLogDensity;
 		private int mSeriesIndex;
 
 		public ProgressiveIterationManager()
@@ -31,7 +31,7 @@ namespace Xyrus.Apophysis.Calculation
 			UpdateState(mInnerIterationManager);
 			RaiseStarted();
 
-			TimeLock.RunAfter(0.1, () =>
+			TimeLock.RunAfter(0.1f, () =>
 			{
 				if (BitmapReady != null)
 				{
@@ -58,7 +58,7 @@ namespace Xyrus.Apophysis.Calculation
 						mSeriesIndex = 0;
 					}
 
-					mNextDensity = mDensitySeries[mSeriesIndex] * System.Math.Pow(10, mLogDensity);
+					mNextDensity = mDensitySeries[mSeriesIndex] * Float.Power(10, mLogDensity);
 
 					if (BitmapReady != null)
 					{
@@ -84,15 +84,15 @@ namespace Xyrus.Apophysis.Calculation
 		public void StartIterate(Histogram histogram)
 		{
 			if (histogram == null) throw new ArgumentNullException(@"histogram");
-			StartIterate(histogram, 10e6);
+			StartIterate(histogram, 10e6f);
 		}
 		public void Iterate(Histogram histogram)
 		{
 			if (histogram == null) throw new ArgumentNullException("histogram");
-			Iterate(histogram, 10e6);
+			Iterate(histogram, 10e6f);
 		}
 
-		public override void StartIterate(Histogram histogram, double maxDensity)
+		public override void StartIterate(Histogram histogram, float maxDensity)
 		{
 			TimeUntilNextBitmap = null;
 			mSeriesIndex = 0;
@@ -100,7 +100,7 @@ namespace Xyrus.Apophysis.Calculation
 			mNextDensity = mDensitySeries.First();
 			mInnerIterationManager.StartIterate(histogram, maxDensity);
 		}
-		public override void Iterate(Histogram histogram, double maxDensity)
+		public override void Iterate(Histogram histogram, float maxDensity)
 		{
 			TimeUntilNextBitmap = null;
 			mSeriesIndex = 0;

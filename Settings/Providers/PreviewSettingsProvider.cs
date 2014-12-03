@@ -31,7 +31,7 @@ namespace Xyrus.Apophysis.Settings.Providers
 			}
 		}
 
-		public double MainPreviewDensity
+		public float MainPreviewDensity
 		{
 			get { return Container.MainPreviewDensity; }
 			set
@@ -44,7 +44,7 @@ namespace Xyrus.Apophysis.Settings.Providers
 				Container.MainPreviewDensity = (int)value;
 			}
 		}
-		public double BatchListPreviewDensity
+		public float BatchListPreviewDensity
 		{
 			get { return Container.BatchListPreviewDensity; }
 			set
@@ -58,7 +58,7 @@ namespace Xyrus.Apophysis.Settings.Providers
 			}
 		}
 
-		public double LowQualityDensity
+		public float LowQualityDensity
 		{
 			get { return Container.LowQualityDensity; }
 			set
@@ -67,7 +67,7 @@ namespace Xyrus.Apophysis.Settings.Providers
 				Container.LowQualityDensity = value;
 			}
 		}
-		public double MediumQualityDensity
+		public float MediumQualityDensity
 		{
 			get { return Container.MediumQualityDensity; }
 			set
@@ -76,7 +76,7 @@ namespace Xyrus.Apophysis.Settings.Providers
 				Container.MediumQualityDensity = value;
 			}
 		}
-		public double HighQualityDensity
+		public float HighQualityDensity
 		{
 			get { return Container.HighQualityDensity; }
 			set
@@ -141,7 +141,7 @@ namespace Xyrus.Apophysis.Settings.Providers
 			}
 		}
 
-		public double FilterRadius
+		public float FilterRadius
 		{
 			get { return Container.FilterRadius; }
 			set

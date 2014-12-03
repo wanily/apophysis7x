@@ -1,8 +1,8 @@
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Numerics;
 using System.Runtime.InteropServices;
-using Xyrus.Apophysis.Math;
 using Rectangle = System.Drawing.Rectangle;
 
 namespace Xyrus.Apophysis.Calculation
@@ -15,14 +15,14 @@ namespace Xyrus.Apophysis.Calculation
 
 		private readonly int mStride;
 
-		private const int mQuadDouble = sizeof (double)*4;
+		private const int mQuadFloat = sizeof(float) * 4;
 		private const int mOffsR = 0;
-		private const int mOffsG = sizeof(double);
-		private const int mOffsB = sizeof(double) * 2;
-		private const int mOffsAcc = sizeof(double) * 3;
+		private const int mOffsG = sizeof(float);
+		private const int mOffsB = sizeof(float) * 2;
+		private const int mOffsAcc = sizeof(float) * 3;
 
-		private const double mWhite = 1024;
-		private double mDensity;
+		private const float mWhite = 1024;
+		private float mDensity;
 
 		private IntPtr mData;
 		private Renderer mRenderer;
@@ -62,12 +62,12 @@ namespace Xyrus.Apophysis.Calculation
 
 		public static long GetMemorySize(Size size)
 		{
-			return size.Width*size.Height*4*sizeof (double);
+			return size.Width * size.Height * 4 * sizeof(float);
 		}
 
-		public void Add(int x, int y, [NotNull] double[] color)
+		public void Add(int x, int y, [NotNull] float[] color)
 		{
-			var addr = y * mStride + x * mQuadDouble;
+			var addr = y * mStride + x * mQuadFloat;
 
 			IncAddr(addr, mOffsR, color[0]);
 			IncAddr(addr, mOffsG, color[1]);
@@ -75,20 +75,19 @@ namespace Xyrus.Apophysis.Calculation
 			IncAddr(addr, mOffsAcc, 1);
 		}
 
-		private double MapScalar(double x, double density, ref double? c1, ref double? c2)
+		private float MapScalar(float x, float density, ref float? c1, ref float? c2)
 		{
-			const double adjust = 2.3;
+			const float adjust = 2.3f;
 			
-
 			if (c1 == null || c2 == null)
 			{
 				var logArea = mRenderer.Size.Width * mRenderer.Size.Height / (mRenderer.Data.PointsPerUnit.X * mRenderer.Data.PointsPerUnit.Y);
 
-				c1 = (Contrast * adjust * Brightness * mWhite * 268) / 256.0;
+				c1 = (Contrast * adjust * Brightness * mWhite * 268) / 256.0f;
 				c2 = (mRenderer.Oversample * mRenderer.Oversample) / (Contrast * logArea * mRenderer.Data.WhiteLevel * density);
 			}
 
-			return c1.Value * System.Math.Log10(1 + mRenderer.Data.WhiteLevel * x * c2.Value) / (mRenderer.Data.WhiteLevel * x);
+			return c1.Value * Float.Log(1 + mRenderer.Data.WhiteLevel * x * c2.Value) / (mRenderer.Data.WhiteLevel * x);
 		}
 		private void SetBackground(ref Bitmap bitmap, Color background)
 		{
@@ -104,7 +103,7 @@ namespace Xyrus.Apophysis.Calculation
 				bitmap = newBitmap;
 			}
 		}
-		private long Iterate(bool isContinuing, long batchSize, double density, ProgressManager progressManager = null)
+		private long Iterate(bool isContinuing, long batchSize, float density, ProgressManager progressManager = null)
 		{
 			const int fuse = 20;
 
@@ -112,8 +111,8 @@ namespace Xyrus.Apophysis.Calculation
 
 			var random = new Random(mRenderer.Data.Flame.GetHashCode() ^ (int)DateTime.Now.Ticks);
 			var iterator = mRenderer.Data.Iterators[0];
-			var vector = new Vector3(2 * random.NextDouble() - 1, 2 * random.NextDouble() - 1, 0);
-			var color = random.NextDouble();
+			var vector = new Vector3(2 * random.NextFloat() - 1, 2 * random.NextFloat() - 1, 0);
+			var color = random.NextFloat();
 
 			if (!isContinuing)
 			{
@@ -130,7 +129,7 @@ namespace Xyrus.Apophysis.Calculation
 				progressManager.Continue(batchSize, density);
 			}
 
-			var densityStep = (1.0 / batchSize) * progressManager.TargetDensity;
+			var densityStep = (1.0f / batchSize) * progressManager.TargetDensity;
 			for (long i = 0; i < batchSize; i++)
 			{
 				if (progressManager.ThreadState.IsCancelling)
@@ -158,7 +157,7 @@ namespace Xyrus.Apophysis.Calculation
 					mDensity += densityStep;
 				}
 
-				var projection = vector.Copy();
+				var projection = vector;
 				if (!mRenderer.Data.ProjectPoint(ref projection, random))
 					continue;
 
@@ -178,10 +177,10 @@ namespace Xyrus.Apophysis.Calculation
 			return batchSize;
 		}
 
-		public void Iterate(double untilDensity, ProgressManager progressManager = null)
+		public void Iterate(float untilDensity, ProgressManager progressManager = null)
 		{
 			bool firstBatch;
-			double startDensity;
+			float startDensity;
 
 			lock (mLock)
 			{
@@ -208,19 +207,19 @@ namespace Xyrus.Apophysis.Calculation
 			var bitmap = new Bitmap(mRenderer.Size.Width, mRenderer.Size.Height, PixelFormat.Format32bppArgb);
 			var bitmapData = bitmap.LockBits(new Rectangle(new Point(), bitmap.Size), ImageLockMode.WriteOnly, bitmap.PixelFormat);
 
-			var gammaDenom = System.Math.Abs(Gamma) < double.Epsilon ? 0 : 1.0 / Gamma;
+			var gammaDenom = System.Math.Abs(Gamma) < float.Epsilon ? 0 : 1.0 / Gamma;
 
 			var scaledVibrancy = (int)(Vibrancy * 256);
 			var inverseScaledVibrancy = 256 - scaledVibrancy;
 
 			var gutter = mSize.Width - mRenderer.Oversample*mRenderer.Size.Width;
-			var getPointFunc = (mRenderer.Data.FilterSize > gutter/2) ? SafeGet : new Func<int, int, double[]>(Get);
+			var getPointFunc = (mRenderer.Data.FilterSize > gutter / 2) ? SafeGet : new Func<int, int, float[]>(Get);
 
-			var sampleDensity = System.Math.Max(0.001, mDensity*mRenderer.Data.TwoPowerZoom*mRenderer.Data.TwoPowerZoom);
+			var sampleDensity = System.Math.Max(0.001f, mDensity*mRenderer.Data.TwoPowerZoom*mRenderer.Data.TwoPowerZoom);
 
-			var precalcLogMap = new double[1024];
+			var precalcLogMap = new float[1024];
 
-			double? logc1 = null, logc2 = null;
+			float? logc1 = null, logc2 = null;
 			for (int i = 1; i < precalcLogMap.Length; i++)
 			{
 				precalcLogMap[i] = MapScalar(i, sampleDensity, ref logc1, ref logc2);
@@ -233,7 +232,7 @@ namespace Xyrus.Apophysis.Calculation
 
 				for (int bitmapX = 0; bitmapX < mRenderer.Size.Width; bitmapX++)
 				{
-					var histogramPoint = new double[4];
+					var histogramPoint = new float[4];
 					var bitmapAddress = bitmapY*bitmapData.Stride + bitmapX*4;
 
 					if (mRenderer.Data.FilterSize > 1)
@@ -274,7 +273,7 @@ namespace Xyrus.Apophysis.Calculation
 
 					if (histogramPoint[3] > 0)
 					{
-						var power = System.Math.Abs(GammaThreshold) < double.Epsilon ? 0 : System.Math.Pow(GammaThreshold, gammaDenom - 1);
+						var power = System.Math.Abs(GammaThreshold) < float.Epsilon ? 0 : System.Math.Pow(GammaThreshold, gammaDenom - 1);
 						var alpha = (histogramPoint[3] < GammaThreshold)
 							? (1 - (histogramPoint[3] / GammaThreshold)) * histogramPoint[3] * power + (histogramPoint[3] / GammaThreshold) * System.Math.Pow(histogramPoint[3], gammaDenom)
 							: System.Math.Pow(histogramPoint[3], gammaDenom);
@@ -306,16 +305,16 @@ namespace Xyrus.Apophysis.Calculation
 			return bitmap;
 		}
 
-		public double Brightness { get; set; }
-		public double Gamma { get; set; }
-		public double GammaThreshold { get; set; }
-		public double Vibrancy { get; set; }
-		public double Contrast { get; set; }
+		public float Brightness { get; set; }
+		public float Gamma { get; set; }
+		public float GammaThreshold { get; set; }
+		public float Vibrancy { get; set; }
+		public float Contrast { get; set; }
 
 		public bool Transparent { get; set; }
 		public Color Background { get; set; }
 
-		public double CurrentDensity
+		public float CurrentDensity
 		{
 			get { return mDensity; }
 		}
@@ -339,32 +338,41 @@ namespace Xyrus.Apophysis.Calculation
 			mRenderer = null;
 		}
 
-		private double[] Get(int x, int y)
+		private float[] Get(int x, int y)
 		{
-			var addr = y * mStride + x * mQuadDouble;
+			var addr = y * mStride + x * mQuadFloat;
 
 			return new[]
 			{
-				BitConverter.Int64BitsToDouble(Marshal.ReadInt64(mData, addr + mOffsR)),
-				BitConverter.Int64BitsToDouble(Marshal.ReadInt64(mData, addr + mOffsG)),
-				BitConverter.Int64BitsToDouble(Marshal.ReadInt64(mData, addr + mOffsB)),
-				BitConverter.Int64BitsToDouble(Marshal.ReadInt64(mData, addr + mOffsAcc))
+				Int32BitsToFloat(Marshal.ReadInt32(mData, addr + mOffsR)),
+				Int32BitsToFloat(Marshal.ReadInt32(mData, addr + mOffsG)),
+				Int32BitsToFloat(Marshal.ReadInt32(mData, addr + mOffsB)),
+				Int32BitsToFloat(Marshal.ReadInt32(mData, addr + mOffsAcc))
 			};
 		}
-		private double[] SafeGet(int x, int y)
+		private float[] SafeGet(int x, int y)
 		{
 			if (x < 0 || y < 0 || x >= mSize.Width || y >= mSize.Height)
-				return new double[4];
+				return new float[4];
 
 			return Get(x, y);
 		}
 
-		private void IncAddr(int address, int offset, double value)
+		private static unsafe int FloatToInt32Bits(float f)
 		{
-			var mem = Marshal.ReadInt64(mData, address + offset);
-			var newValue = BitConverter.Int64BitsToDouble(mem) + value;
+			return *((int*)&f);
+		}
+		private static unsafe float Int32BitsToFloat(int a)
+		{
+			return *((float*)&a);
+		}
 
-			mem = BitConverter.DoubleToInt64Bits(newValue);
+		private void IncAddr(int address, int offset, float value)
+		{
+			var mem = Marshal.ReadInt32(mData, address + offset);
+			var newValue = Int32BitsToFloat(mem) + value;
+
+			mem = FloatToInt32Bits(newValue);
 			Marshal.WriteInt64(mData, address + offset, mem);
 		}
 	}

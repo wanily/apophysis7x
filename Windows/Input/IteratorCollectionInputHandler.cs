@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Models;
@@ -33,7 +34,7 @@ namespace Xyrus.Apophysis.Windows.Input
 			mVisualCollection = visualCollection;
 			mCanvas = canvas;
 
-			mDefaultSettings = new EditorSettings { MoveAmount = 0.5, AngleSnap = 15, ScaleSnap = 125 };
+			mDefaultSettings = new EditorSettings { MoveAmount = 0.5f, AngleSnap = 15, ScaleSnap = 125 };
 			mSettings = mDefaultSettings;
 
 			mVisualCollection.ContentChanged += OnCollectionChanged;
@@ -179,15 +180,12 @@ namespace Xyrus.Apophysis.Windows.Input
 				}
 			}
 
-			foreach (var handler in mHandlers)
+			if (mHandlers.Any(handler => handler.HandleKeyPress(key, modifiers)))
 			{
-				if (handler.HandleKeyPress(key, modifiers))
-				{
-					RaiseBeginEdit();
-					RaiseEdit();
-					RaiseEndEdit();
-					return true;
-				}
+				RaiseBeginEdit();
+				RaiseEdit();
+				RaiseEndEdit();
+				return true;
 			}
 
 			return false;
@@ -235,18 +233,9 @@ namespace Xyrus.Apophysis.Windows.Input
 			mVisualCollection.CurrentOperation = null;
 			return false;
 		}
-		protected override bool OnAttachedControlMouseWheel(double delta, MouseButtons button)
+		protected override bool OnAttachedControlMouseWheel(float delta, MouseButtons button)
 		{
-			if (mHandlers == null)
-				return false;
-
-			foreach (var handler in mHandlers)
-			{
-				if (handler.HandleMouseWheel(delta, button))
-					return true;
-			}
-
-			return false;
+			return mHandlers != null && mHandlers.Any(handler => handler.HandleMouseWheel(delta, button));
 		}
 
 		protected override bool OnAttachedControlMouseDown(Vector2 cursor)
@@ -283,14 +272,11 @@ namespace Xyrus.Apophysis.Windows.Input
 
 			SetOperation(null);
 
-			foreach (var handler in mHandlers)
+			if (mHandlers.Any(handler => handler.HandleMouseUp()))
 			{
-				if (handler.HandleMouseUp())
-				{
-					InvalidateControl();
-					RaiseEndEdit();
-					return true;
-				}
+				InvalidateControl();
+				RaiseEndEdit();
+				return true;
 			}
 
 			return false;
@@ -301,10 +287,9 @@ namespace Xyrus.Apophysis.Windows.Input
 			if (mHandlers == null)
 				return false;
 
-			foreach (var handler in mHandlers)
+			if (mHandlers.Any(handler => handler.HandleMouseDoubleClick()))
 			{
-				if (handler.HandleMouseDoubleClick())
-					return true;
+				return true;
 			}
 
 			ZoomOptimally();
@@ -363,14 +348,9 @@ namespace Xyrus.Apophysis.Windows.Input
 
 		public Iterator HitTestIterator(Vector2 cursor)
 		{
-			foreach (var handler in mHandlers)
-			{
-				if (handler.PerformHitTest(cursor))
-					return handler.Model;
-			}
-
-			return null;
+			return (from handler in mHandlers where handler.PerformHitTest(cursor) select handler.Model).FirstOrDefault();
 		}
+
 		public Iterator GetSelectedIterator()
 		{
 			var visual = mVisualCollection == null ? null : mVisualCollection.FirstOrDefault(x => x.IsSelected);

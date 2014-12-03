@@ -94,7 +94,7 @@ namespace Xyrus.Apophysis.Models
 			var copy = iterator.Copy();
 
 			copy.GroupIndex = groupIndex;
-			copy.Weight = groupIndex == 1 ? 0.5 : copy.Weight;
+			copy.Weight = groupIndex == 1 ? 0.5f : copy.Weight;
 			copy.ColorSpeed = groupIndex == 1 ? 0 : copy.ColorSpeed;
 			copy.Opacity = groupIndex == 1 ? 1 : copy.Opacity;
 

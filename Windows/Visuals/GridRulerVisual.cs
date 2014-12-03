@@ -1,8 +1,7 @@
-using System;
 using System.Drawing;
 using System.Globalization;
+using System.Numerics;
 using System.Windows.Forms;
-using Xyrus.Apophysis.Math;
 
 namespace Xyrus.Apophysis.Windows.Visuals
 {
@@ -10,7 +9,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 	{
 		private bool mShowHorizontal;
 		private bool mShowVertical;
-		private int mRulerSize;
+		private readonly int mRulerSize;
 		private Color mBackgroundColor;
 		private bool mShowLabels;
 
@@ -42,11 +41,13 @@ namespace Xyrus.Apophysis.Windows.Visuals
 		public int RulerSize
 		{
 			get { return mRulerSize; }
+/*
 			set
 			{
 				if (value <= 1) throw new ArgumentOutOfRangeException("value");
 				mRulerSize = value;
 			}
+*/
 		}
 		public Color BackgroundColor
 		{
@@ -67,7 +68,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 			}
 		}
 
-		private string GetMarkerString(double unit)
+		private string GetMarkerString(float unit)
 		{
 			var scale = Canvas.Scale;
 			var digits = scale > 1 ? 0 : (int)-System.Math.Ceiling(System.Math.Log10(scale));
@@ -86,10 +87,10 @@ namespace Xyrus.Apophysis.Windows.Visuals
 
 		private void DrawBackgroundHorizontal(Graphics g, Vector2 scale, Brush brush)
 		{
-			var step = (scale * Canvas.Ratio).Abs();
+			var step = Vector2.Abs(scale * Canvas.Ratio);
 			var bounds = GetCanvasBounds(scale);
 
-			for (double x = bounds.TopLeft.X; x <= bounds.BottomRight.X; x += step.X)
+			for (float x = bounds.TopLeft.X; x <= bounds.BottomRight.X; x += step.X)
 			{
 				var cell = (int)System.Math.Round(Canvas.CanvasToWorld(new Vector2(x, 0)).X / scale.X);
 				if (cell % 2 != 0)
@@ -98,15 +99,15 @@ namespace Xyrus.Apophysis.Windows.Visuals
 				var capped = System.Math.Max(ShowVertical ? RulerSize : 0, x);
 				var delta = System.Math.Abs(capped - x);
 
-				g.FillRectangle(brush, new System.Drawing.Rectangle((int)capped, 0, (int)step.X - (int)delta, RulerSize));
+				g.FillRectangle(brush, new Rectangle((int)capped, 0, (int)step.X - (int)delta, RulerSize));
 			}
 		}
 		private void DrawBackgroundVertical(Graphics g, Vector2 scale, Brush brush)
 		{
-			var step = (scale * Canvas.Ratio).Abs();
+			var step = Vector2.Abs(scale * Canvas.Ratio);
 			var bounds = GetCanvasBounds(scale);
 
-			for (double y = bounds.TopLeft.Y; y <= bounds.BottomRight.Y; y += step.Y)
+			for (float y = bounds.TopLeft.Y; y <= bounds.BottomRight.Y; y += step.Y)
 			{
 				var cell = (int)System.Math.Round(Canvas.CanvasToWorld(new Vector2(0, y)).Y / scale.Y);
 				if (cell % 2 != 0) 
@@ -115,16 +116,16 @@ namespace Xyrus.Apophysis.Windows.Visuals
 				var capped = System.Math.Max(ShowHorizontal ? RulerSize : 0, y);
 				var delta = System.Math.Abs(capped - y);
 
-				g.FillRectangle(brush, new System.Drawing.Rectangle(0, (int)capped, RulerSize, (int)step.Y - (int)delta));
+				g.FillRectangle(brush, new Rectangle(0, (int)capped, RulerSize, (int)step.Y - (int)delta));
 			}
 		}
 
 		private void DrawGridLinesHorizontal(Graphics g, Vector2 scale, Pen pen)
 		{
-			var step = (scale * Canvas.Ratio).Abs();
+			var step = Vector2.Abs(scale * Canvas.Ratio);
 			var bounds = GetCanvasBounds(scale);
 
-			for (double x = bounds.TopLeft.X; x <= bounds.BottomRight.X; x += step.X)
+			for (float x = bounds.TopLeft.X; x <= bounds.BottomRight.X; x += step.X)
 			{
 				var capped = System.Math.Max(ShowVertical ? RulerSize : 0, x);
 
@@ -133,10 +134,10 @@ namespace Xyrus.Apophysis.Windows.Visuals
 		}
 		private void DrawGridLinesVertical(Graphics g, Vector2 scale, Pen pen)
 		{
-			var step = (scale * Canvas.Ratio).Abs();
+			var step = Vector2.Abs(scale * Canvas.Ratio);
 			var bounds = GetCanvasBounds(scale);
 
-			for (double y = bounds.TopLeft.Y; y <= bounds.BottomRight.Y; y += step.Y)
+			for (float y = bounds.TopLeft.Y; y <= bounds.BottomRight.Y; y += step.Y)
 			{
 				var capped = System.Math.Max(ShowHorizontal ? RulerSize : 0, y);
 
@@ -146,17 +147,17 @@ namespace Xyrus.Apophysis.Windows.Visuals
 
 		private void DrawGridMarkersHorizontal(Graphics g, Vector2 scale, Brush background, Pen pen)
 		{
-			var step = (scale * Canvas.Ratio).Abs();
+			var step = Vector2.Abs(scale * Canvas.Ratio);
 			var bounds = GetCanvasBounds(scale);
 			var markerFont = AttachedControl.Font;
 
-			for (double x = bounds.TopLeft.X; x <= bounds.BottomRight.X; x += step.X)
+			for (float x = bounds.TopLeft.X; x <= bounds.BottomRight.X; x += step.X)
 			{
 				var unit = Canvas.CanvasToWorld(new Vector2(x, 0)).X;
 				var markerString = GetMarkerString(unit);
 				var offset = g.MeasureString(markerString, markerFont);
 				var position = new Point((int)(x - offset.Width / 2.0), RulerSize + 8);
-				var frame = new System.Drawing.Rectangle(new Point(position.X - 2, position.Y - 2), new Size((int) offset.Width + 4, (int) offset.Height + 4));
+				var frame = new Rectangle(new Point(position.X - 2, position.Y - 2), new Size((int) offset.Width + 4, (int) offset.Height + 4));
 
 				if (position.X < RulerSize + 16 + offset.Height || (position.X + offset.Width + 8) > Canvas.Size.X)
 					continue;
@@ -168,17 +169,17 @@ namespace Xyrus.Apophysis.Windows.Visuals
 		}
 		private void DrawGridMarkersVertical(Graphics g, Vector2 scale, Brush background, Pen pen)
 		{
-			var step = (scale * Canvas.Ratio).Abs();
+			var step = Vector2.Abs(scale * Canvas.Ratio);
 			var bounds = GetCanvasBounds(scale);
 			var markerFont = AttachedControl.Font;
 
-			for (double y = bounds.TopLeft.Y; y <= bounds.BottomRight.Y; y += step.Y)
+			for (float y = bounds.TopLeft.Y; y <= bounds.BottomRight.Y; y += step.Y)
 			{
 				var unit = Canvas.CanvasToWorld(new Vector2(0, y)).Y;
 				var markerString = GetMarkerString(unit);
 				var offset = g.MeasureString(markerString, markerFont);
 				var position = new Point(RulerSize + 8, (int)(y - offset.Height / 2.0));
-				var frame = new System.Drawing.Rectangle(new Point(position.X - 2, position.Y - 2), new Size((int)offset.Width + 4, (int)offset.Height + 4));
+				var frame = new Rectangle(new Point(position.X - 2, position.Y - 2), new Size((int)offset.Width + 4, (int)offset.Height + 4));
 
 				if (position.Y < RulerSize + 16 + offset.Height || (position.Y + offset.Height + 8) > Canvas.Size.Y)
 					continue;
@@ -203,7 +204,7 @@ namespace Xyrus.Apophysis.Windows.Visuals
 
 				if (ShowHorizontal && ShowVertical)
 				{
-					graphics.FillRectangle(backgroundBrush, new System.Drawing.Rectangle(0, 0, RulerSize, RulerSize));
+					graphics.FillRectangle(backgroundBrush, new Rectangle(0, 0, RulerSize, RulerSize));
 				}
 
 				if (ShowHorizontal && ShowLabels)
@@ -218,22 +219,22 @@ namespace Xyrus.Apophysis.Windows.Visuals
 
 				if (ShowHorizontal)
 				{
-					graphics.FillRectangle(backgroundBrush, new System.Drawing.Rectangle(ShowVertical ? RulerSize : 0, 0, (int)Canvas.Size.X - (ShowVertical ? RulerSize : 0), RulerSize));
+					graphics.FillRectangle(backgroundBrush, new Rectangle(ShowVertical ? RulerSize : 0, 0, (int)Canvas.Size.X - (ShowVertical ? RulerSize : 0), RulerSize));
 
 					DrawBackgroundHorizontal(graphics, scale, backdropBrush);
 					DrawGridLinesHorizontal(graphics, scale, gridlinePen);
-					DrawGridLinesHorizontal(graphics, scale * 0.1, gridlinePenHalf);
+					DrawGridLinesHorizontal(graphics, scale * 0.1f, gridlinePenHalf);
 
 					graphics.DrawLine(gridlinePen, ShowVertical ? RulerSize : 0, RulerSize, (int)Canvas.Size.X, RulerSize);
 				}
 
 				if (ShowVertical)
 				{
-					graphics.FillRectangle(backgroundBrush, new System.Drawing.Rectangle(0, ShowHorizontal ? RulerSize : 0, RulerSize, (int)Canvas.Size.Y - (ShowHorizontal ? RulerSize : 0)));
+					graphics.FillRectangle(backgroundBrush, new Rectangle(0, ShowHorizontal ? RulerSize : 0, RulerSize, (int)Canvas.Size.Y - (ShowHorizontal ? RulerSize : 0)));
 
 					DrawBackgroundVertical(graphics, scale, backdropBrush);
 					DrawGridLinesVertical(graphics, scale, gridlinePen);
-					DrawGridLinesVertical(graphics, scale * 0.1, gridlinePenHalf);
+					DrawGridLinesVertical(graphics, scale * 0.1f, gridlinePenHalf);
 
 					graphics.DrawLine(gridlinePen, RulerSize, ShowHorizontal ? RulerSize : 0, RulerSize, (int)Canvas.Size.Y);
 				}
