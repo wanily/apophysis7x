@@ -7,11 +7,12 @@ using Xyrus.Apophysis.Calculation;
 using Xyrus.Apophysis.Messaging;
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Forms;
+using Xyrus.Apophysis.Windows.Interfaces;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
 	[PublicAPI]
-	public class MessagesController : Controller<Messages>
+	public class MessagesController : Controller<Messages>, IMessagesController
 	{
 		private Collection<string> mUnknownAttributes;
 

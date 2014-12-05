@@ -192,24 +192,12 @@ namespace Xyrus.Apophysis
 			return chars.Aggregate(text, (cc, c) => cc.Replace(c, '_'));
 		}
 
-		public static void RegisterInContainer<T>(this T instance)
-		{
-			ApophysisApplication.Container.RegisterInstance(instance);
-		}
-		public static void RegisterInContainer([NotNull] this Type @interface, [NotNull] Type @as)
+		public static void RegisterInContainer([NotNull] this Type @interface, [NotNull] Type @as, bool singleton = false)
 		{
 			if (@interface == null) throw new ArgumentNullException(@"interface");
 			if (@as == null) throw new ArgumentNullException(@"as");
 
 			ApophysisApplication.Container.RegisterType(@interface, @as);
-		}
-
-		public static float NextFloat([NotNull] this Random r)
-		{
-			if (r == null) throw new ArgumentNullException("r");
-
-			//todo x: who needs control over entropy anyway! no seriously, there's gotta be a better way ;)
-			return (float) r.NextDouble();
 		}
 	}
 }

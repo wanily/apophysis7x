@@ -3,11 +3,12 @@ using System.Linq;
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Controls;
 using Xyrus.Apophysis.Windows.Forms;
+using Xyrus.Apophysis.Windows.Interfaces;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
 	[PublicAPI]
-	public class EditorController : Controller<Editor>
+	public class EditorController : Controller<Editor>, IEditorController
 	{
 		private MainController mParent;
 
@@ -224,10 +225,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			UpdatePreview();
 		}
 		
-		public UndoController UndoController
+		public IUndoController UndoController
 		{
 			get { return mParent.UndoController; }
 		}
+
 		public Flame Flame
 		{
 			get { return mFlame; }
@@ -255,10 +257,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		public Iterator Iterator
 		{
 			get { return View.IteratorCanvas.SelectedIterator; }
+			set { View.IteratorCanvas.SelectedIterator = value; }
 		}
 
-		internal event EventHandler FlameChanged;
-		internal void RaiseFlameChanged()
+		public event EventHandler FlameChanged;
+		public void RaiseFlameChanged()
 		{
 			if (FlameChanged != null)
 				FlameChanged(this, new EventArgs());

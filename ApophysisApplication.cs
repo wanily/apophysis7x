@@ -12,6 +12,8 @@ using Xyrus.Apophysis.Messaging;
 using Xyrus.Apophysis.Strings;
 using Xyrus.Apophysis.Variations;
 using Xyrus.Apophysis.Windows.Controllers;
+using Xyrus.Apophysis.Windows.Interfaces;
+using Messages = Xyrus.Apophysis.Strings.Messages;
 
 namespace Xyrus.Apophysis
 {
@@ -26,7 +28,7 @@ namespace Xyrus.Apophysis
 			mContainer = new UnityContainer();
 		}
 
-		public static MainController MainWindow { get; private set; }
+		public static IMainController MainWindow { get; private set; }
 		public static string BatchPathToOpen { get; private set; }
 
 		[STAThread]
@@ -35,6 +37,9 @@ namespace Xyrus.Apophysis
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 			Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
+
+			RegisterSingletons();
+			RegisterTypes();
 
 			mBanner = new BannerController();
 			mBanner.Initialize();
@@ -45,21 +50,40 @@ namespace Xyrus.Apophysis
 
 			mBanner.BannerText = Messages.InitializationLoadingGuiMessage;
 
-			using (MainWindow = new MainController())
+			using (MainWindow = Container.Resolve<IMainController>())
 			{
 				MainWindow.Initialize();
 
 				mBanner.Dispose();
 				mBanner = null;
 
-				Application.Run(MainWindow.View);
+				Application.Run((Form)MainWindow.View);
 			}
 		}
 
-		static void LoadBusiness()
+		static void RegisterTypes()
 		{
-			// todo register business classes
+			Container.RegisterType<NativeTimer, NativeTimer>();
+
+			Container.RegisterType<IAutosaveController, AutosaveController>();
+			Container.RegisterType<IBatchListController, BatchListController>();
+			Container.RegisterType<IEditorController, EditorController>();
+			Container.RegisterType<IFlamePropertiesController, FlamePropertiesController>();
+			Container.RegisterType<IFullscreenController, FullscreenController>();
+			Container.RegisterType<IMainMenuController, MainMenuController>();
+			Container.RegisterType<IMainPreviewController, MainPreviewController>();
+			Container.RegisterType<IMainToolbarController, MainToolbarController>();
+			Container.RegisterType<IMessagesController, MessagesController>();
+			Container.RegisterType<IRenderController, RenderController>();
+			Container.RegisterType<ISettingsController, SettingsController>();
+			Container.RegisterType<IUndoController, UndoController>();
+
 		}
+		static void RegisterSingletons()
+		{
+			Container.RegisterType<IMainController, MainController>(Singleton());
+		}
+
 		static void LoadVariations()
 		{
 			mBanner.BannerText = Messages.InitializationLoadingVariationsMessage;
@@ -210,14 +234,25 @@ namespace Xyrus.Apophysis
 
 			MessageBox.Show(message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
 		}
+		
+		internal static LifetimeManager Singleton()
+		{
+			return new ContainerControlledLifetimeManager();
+		}
 
-		internal static UnityContainer Container
+		public static UnityContainer Container
 		{
 			get { return mContainer; }
 		}
 
-		public static void ResetDependencies()
+		public static void Reset()
 		{
+			if (MainWindow != null)
+			{
+				MainWindow.Dispose();
+				MainWindow = null;
+			}
+
 			mContainer.Dispose();
 			mContainer = new UnityContainer();
 		}

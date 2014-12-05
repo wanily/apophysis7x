@@ -2,11 +2,12 @@
 using System.Drawing;
 using Xyrus.Apophysis.Calculation;
 using Xyrus.Apophysis.Windows.Forms;
+using Xyrus.Apophysis.Windows.Interfaces;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
 	[PublicAPI]
-	public class FullscreenController : Controller<Fullscreen>
+	public class FullscreenController : Controller<Fullscreen>, IFullscreenController
 	{
 		private readonly Lock mHiding;
 

@@ -11,10 +11,11 @@ using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Threading;
 using Xyrus.Apophysis.Windows.Forms;
 using Xyrus.Apophysis.Windows.Input;
+using Xyrus.Apophysis.Windows.Interfaces;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
-	class BatchListController : Controller<Main>
+	public class BatchListController : Controller<Main>, IBatchListController
 	{
 		private TimeLock mIconUpdateTimeLock;
 		private ThreadController mPreviewThreadController;

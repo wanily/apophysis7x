@@ -1,11 +1,12 @@
 ﻿using System;
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Forms;
+using Xyrus.Apophysis.Windows.Interfaces;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
 	[PublicAPI]
-	public class FlamePropertiesController : Controller<FlameProperties>
+	public class FlamePropertiesController : Controller<FlameProperties>, IFlamePropertiesController
 	{
 		private readonly Lock mInitialize = new Lock();
 		private MainController mParent;
@@ -133,7 +134,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			get { return mPreviewController; }
 		}
-		public UndoController UndoController
+		public IUndoController UndoController
 		{
 			get { return mParent.UndoController; }
 		}
@@ -167,14 +168,14 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			UpdatePreview();
 		}
 
-		internal event EventHandler FlameChanged;
-		internal void RaiseFlameChanged()
+		public event EventHandler FlameChanged;
+		public void RaiseFlameChanged()
 		{
 			if (FlameChanged != null)
 				FlameChanged(this, new EventArgs());
 		}
 
-		internal void ApplyCanvas(bool withResize)
+		public void ApplyCanvas(bool withResize)
 		{
 			if (mFlame == null)
 				return;
@@ -191,7 +192,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			mParent.BatchListController.UpdateSelectedPreview();
 		}
-		internal void CommitValue()
+		public void CommitValue()
 		{
 			UndoController.CommitChange(Flame);
 			PreviewController.DelayedUpdatePreview();

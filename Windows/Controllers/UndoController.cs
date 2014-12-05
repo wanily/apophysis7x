@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
 using Xyrus.Apophysis.Models;
+using Xyrus.Apophysis.Windows.Interfaces;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
 	[PublicAPI]
-	public class UndoController : Controller
+	public class UndoController : Controller, IUndoController
 	{
 		private Stack<Flame> mUndoStack;
 		private Stack<Flame> mRedoStack;
@@ -29,7 +30,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mCurrent = null;
 		}
 
-		public void Reset([NotNull] Flame flame)
+		public void Reset(Flame flame)
 		{
 			if (flame == null) throw new ArgumentNullException("flame");
 
@@ -38,7 +39,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mRedoStack = new Stack<Flame>();
 		}
 
-		public void CommitChange([NotNull] Flame flame)
+		public void CommitChange(Flame flame)
 		{
 			if (flame == null) throw new ArgumentNullException("flame");
 			if (flame.IsEqual(mCurrent))

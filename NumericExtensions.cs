@@ -116,5 +116,14 @@ namespace Xyrus.Apophysis
 		{
 			return v/v.Length();
 		}
+
+		[Pure]
+		public static float NextFloat([NotNull] this Random r)
+		{
+			if (r == null) throw new ArgumentNullException("r");
+
+			//todo x: who needs control over entropy anyway! no seriously, there's gotta be a better way ;)
+			return (float)r.NextDouble();
+		}
 	}
 }

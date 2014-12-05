@@ -5,10 +5,11 @@ using Xyrus.Apophysis.Calculation;
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Forms;
 using Xyrus.Apophysis.Windows.Input;
+using Xyrus.Apophysis.Windows.Interfaces;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
-	class MainPreviewController : Controller<Main>
+	public class MainPreviewController : Controller<Main>, IMainPreviewController
 	{
 		private NativeTimer mElapsedTimer;
 		private IterationManagerBase mIterationManager;

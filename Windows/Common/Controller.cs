@@ -1,11 +1,12 @@
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using Xyrus.Apophysis.Windows.Interfaces;
 
 namespace Xyrus.Apophysis.Windows
 {
 	[PublicAPI]
-	public abstract class Controller : IDisposable
+	public abstract class Controller : IController
 	{
 		~Controller()
 		{
@@ -20,7 +21,7 @@ namespace Xyrus.Apophysis.Windows
 	}
 
 	[PublicAPI]
-	public abstract class Controller<TView> : Controller where TView : Component, new()
+	public abstract class Controller<TView> : Controller, IViewController where TView : Component, new()
 	{
 		private TView mView;
 		private bool mDisposed;
@@ -94,6 +95,10 @@ namespace Xyrus.Apophysis.Windows
 			{
 				return mView;
 			}
+		}
+		object IViewController.View
+		{
+			get { return View; }
 		}
 	}
 }

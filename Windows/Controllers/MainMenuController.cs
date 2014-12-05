@@ -2,13 +2,13 @@ using System;
 using System.IO;
 using System.Numerics;
 using System.Windows.Forms;
-using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Forms;
+using Xyrus.Apophysis.Windows.Interfaces;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
-	class MainMenuController : Controller<Main>
+	public class MainMenuController : Controller<Main>, IMainMenuController
 	{
 		private MainController mParent;
 
@@ -99,11 +99,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.OpenAboutMenuItem.Click -= OnAboutClick;
 		}
 
-		internal void OnNewFlameClick(object sender, EventArgs e)
+		public void OnNewFlameClick(object sender, EventArgs e)
 		{
 			mParent.AppendFlame(new Flame());
 		}
-		internal void OnOpenBatchClick(object sender, EventArgs e)
+		public void OnOpenBatchClick(object sender, EventArgs e)
 		{
 			if (!mParent.ConfirmReplaceBatch())
 				return;
@@ -117,7 +117,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				mParent.ReadBatchFromFile(result);
 			}
 		}
-		internal void OnRestoreAutosaveClick(object sender, EventArgs e)
+		public void OnRestoreAutosaveClick(object sender, EventArgs e)
 		{
 			var path = Environment.ExpandEnvironmentVariables(ApophysisSettings.Autosave.TargetPath);
 			if (!File.Exists(path))
@@ -138,7 +138,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				mParent.RestoreAutosaveBatch(result);
 			}
 		}
-		internal void OnSaveFlameClick(object sender, EventArgs e)
+		public void OnSaveFlameClick(object sender, EventArgs e)
 		{
 			using (var dialog = new FileDialogController<SaveFileDialog>("Save flame...", FileDialogController.BatchFilesFilter, FileDialogController.AllFilesFilter))
 			{
@@ -149,7 +149,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				mParent.SaveCurrentFlame(result);
 			}
 		}
-		internal void OnSaveBatchClick(object sender, EventArgs e)
+		public void OnSaveBatchClick(object sender, EventArgs e)
 		{
 			using (var dialog = new FileDialogController<SaveFileDialog>("Save batch...", FileDialogController.BatchFilesFilter, FileDialogController.AllFilesFilter))
 			{
@@ -160,27 +160,27 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				mParent.SaveCurrentBatch(result);
 			}
 		}
-		internal void OnPaletteFromImageClick(object sender, EventArgs e)
+		public void OnPaletteFromImageClick(object sender, EventArgs e)
 		{
 			//todo
 		}
-		internal void OnBrowsePalettesClick(object sender, EventArgs e)
+		public void OnBrowsePalettesClick(object sender, EventArgs e)
 		{
 			//todo
 		}
-		internal void OnRandomBatchClick(object sender, EventArgs e)
+		public void OnRandomBatchClick(object sender, EventArgs e)
 		{
 			mParent.GenerateRandomFlames(10);
 		}
-		internal void OnRenderFlameClick(object sender, EventArgs e)
+		public void OnRenderFlameClick(object sender, EventArgs e)
 		{
 			mParent.ShowRender();
 		}
-		internal void OnRenderBatchClick(object sender, EventArgs e)
+		public void OnRenderBatchClick(object sender, EventArgs e)
 		{
 			mParent.ShowRenderAll();
 		}
-		internal void OnExitClick(object sender, EventArgs e)
+		public void OnExitClick(object sender, EventArgs e)
 		{
 			if (!mParent.ConfirmExit())
 				return;
@@ -188,77 +188,77 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			View.Close();
 		}
 
-		internal void OnUndoClick(object sender, EventArgs e)
+		public void OnUndoClick(object sender, EventArgs e)
 		{
 			if (mParent.UndoController.CanUndo)
 			{
 				mParent.UndoController.Undo();
 			}
 		}
-		internal void OnRedoClick(object sender, EventArgs e)
+		public void OnRedoClick(object sender, EventArgs e)
 		{
 			if (mParent.UndoController.CanRedo)
 			{
 				mParent.UndoController.Redo();
 			}
 		}
-		internal void OnCopyClick(object sender, EventArgs e)
+		public void OnCopyClick(object sender, EventArgs e)
 		{
 			mParent.WriteCurrentFlameToClipboard();
 		}
-		internal void OnPasteClick(object sender, EventArgs e)
+		public void OnPasteClick(object sender, EventArgs e)
 		{
 			mParent.ReadFlameFromClipboard();
 		}
 
-		internal void OnFullscreenClick(object sender, EventArgs e)
+		public void OnFullscreenClick(object sender, EventArgs e)
 		{
 			mParent.FullscreenController.EnterFullscreen();
 		}
-		internal void OnEditorClick(object sender, EventArgs e)
+		public void OnEditorClick(object sender, EventArgs e)
 		{
 			mParent.ShowEditor();
 		}
-		internal void OnFlamePropertiesClick(object sender, EventArgs e)
+		public void OnFlamePropertiesClick(object sender, EventArgs e)
 		{
 			mParent.ShowFlameProperties();
 		}
-		internal void OnPalettePropertiesClick(object sender, EventArgs e)
+		public void OnPalettePropertiesClick(object sender, EventArgs e)
 		{
 			mParent.ShowPaletteProperties();
 		}
-		internal void OnCanvasPropertiesClick(object sender, EventArgs e)
+		public void OnCanvasPropertiesClick(object sender, EventArgs e)
 		{
 			mParent.ShowCanvasProperties();
 		}
-		internal void OnMessagesClick(object sender, EventArgs e)
+		public void OnMessagesClick(object sender, EventArgs e)
 		{
 			mParent.ShowMessages();
 		}
-		internal void OnSettingsClick(object sender, EventArgs e)
+		public void OnSettingsClick(object sender, EventArgs e)
 		{
 			mParent.ShowSettings();
 		}
-		internal void OnShowToolbarClick(object sender, EventArgs e)
+		public void OnShowToolbarClick(object sender, EventArgs e)
 		{
 			View.ShowToolBarMenuItem.Checked = !View.ShowToolBarMenuItem.Checked;
 			View.ToolBar.Visible = View.ShowToolBarMenuItem.Checked;
 
 			mParent.ToolbarController.UpdateRootPanelSize();
 		}
-		internal void OnShowStatusbarClick(object sender, EventArgs e)
+		public void OnShowStatusbarClick(object sender, EventArgs e)
 		{
 			View.ShowStatusBarMenuItem.Checked = !View.ShowStatusBarMenuItem.Checked;
 			View.BottomPanel.Visible = View.ShowStatusBarMenuItem.Checked;
 
 			mParent.ToolbarController.UpdateRootPanelSize();
 		}
-		internal void OnShowBatchListClick(object sender, EventArgs e)
+		public void OnShowBatchListClick(object sender, EventArgs e)
 		{
 			View.ShowBatchMenuItem.Checked = !View.ShowBatchMenuItem.Checked;
 			View.RootSplitter.Panel1Collapsed = !View.ShowBatchMenuItem.Checked;
 		}
-		internal void OnResetLayoutClick(object sender, EventArgs e)
+		public void OnResetLayoutClick(object sender, EventArgs e)
 		{
 			View.RootSplitter.SplitterDistance = 230;
 			View.BottomPanel.Visible = true;
@@ -270,7 +270,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			UpdateButtonStates();
 		}
 
-		internal void OnResetCameraClick(object sender, EventArgs e)
+		public void OnResetCameraClick(object sender, EventArgs e)
 		{
 			var flame = mParent.BatchListController.GetSelectedFlame();
 			if (flame == null)
@@ -287,7 +287,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			mParent.BatchListController.UpdateSelectedPreview();
 		}
-		internal void OnRandomizeClick(object sender, EventArgs e)
+		public void OnRandomizeClick(object sender, EventArgs e)
 		{
 			var flame = mParent.BatchListController.GetSelectedFlame();
 			if (flame == null)
@@ -301,7 +301,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			mParent.BatchListController.UpdateSelectedPreview();
 		}
-		internal void OnSummarizeClick(object sender, EventArgs e)
+		public void OnSummarizeClick(object sender, EventArgs e)
 		{
 			var flame = mParent.BatchListController.GetSelectedFlame();
 			if (flame == null)
@@ -310,11 +310,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mParent.MessagesController.Summarize(flame);
 		}
 
-		internal void OnAboutClick(object sender, EventArgs e)
+		public void OnAboutClick(object sender, EventArgs e)
 		{
 			using (var about = new About())
 			{
-				about.Owner = ApophysisApplication.MainWindow.View;
+				about.Owner = ApophysisApplication.MainWindow.View as Form;
 				about.ShowDialog();
 			}
 		}

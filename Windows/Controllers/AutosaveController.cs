@@ -1,21 +1,15 @@
 using System;
 using Xyrus.Apophysis.Calculation;
 using Xyrus.Apophysis.Models;
+using Xyrus.Apophysis.Windows.Interfaces;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
-	class AutosaveController : Controller
+	public class AutosaveController : Controller, IAutosaveController
 	{
-		private NativeTimer mTimer;
-		private MainController mParent;
+		private LazyResolver<NativeTimer> mTimer;
+		private LazyResolver<IMainController> mParent;
 		private bool mIsDisposed;
-
-		public AutosaveController([NotNull] MainController parent)
-		{
-			if (parent == null) throw new ArgumentNullException("parent");
-			mParent = parent;
-			mTimer = new NativeTimer();
-		}
 
 		protected override void Dispose(bool disposing)
 		{
@@ -24,21 +18,18 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			if (disposing)
 			{
-				mParent.EditorController.FlameChanged -= OnChangeCommitted;
-				mParent.FlamePropertiesController.FlameChanged -= OnChangeCommitted;
+				mParent.Object.EditorController.FlameChanged -= OnChangeCommitted;
+				mParent.Object.FlamePropertiesController.FlameChanged -= OnChangeCommitted;
 			}
-
-			mTimer = null;
-			mParent = null;
 
 			mIsDisposed = true;
 		}
 		private void OnChangeCommitted(object sender, EventArgs e)
 		{
-			if (mTimer.GetElapsedTimeInSeconds() < ApophysisSettings.Autosave.Threshold)
+			if (mTimer.Object.GetElapsedTimeInSeconds() < ApophysisSettings.Autosave.Threshold)
 				return;
 
-			var flame = mParent.BatchListController.GetSelectedFlame();
+			var flame = mParent.Object.BatchListController.GetSelectedFlame();
 			if (flame == null)
 				return;
 
@@ -56,15 +47,15 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			flame = flame.Copy();
 			flame.Name = name;
 
-			mParent.SaveFlame(flame, path, 50, "autosave");
-			mTimer.SetStartingTime();
+			mParent.Object.SaveFlame(flame, path, 50, "autosave");
+			mTimer.Object.SetStartingTime();
 		}
 		public void Initialize()
 		{
-			mParent.EditorController.FlameChanged += OnChangeCommitted;
-			mParent.FlamePropertiesController.FlameChanged += OnChangeCommitted;
+			mParent.Object.EditorController.FlameChanged += OnChangeCommitted;
+			mParent.Object.FlamePropertiesController.FlameChanged += OnChangeCommitted;
 
-			mTimer.SetStartingTime();
+			mTimer.Object.SetStartingTime();
 		}
 	}
 }

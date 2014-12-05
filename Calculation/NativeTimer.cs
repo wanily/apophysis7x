@@ -25,11 +25,11 @@ namespace Xyrus.Apophysis.Calculation
 			if (NativeMethods.QueryPerformanceFrequency(out mFreq) == false)
 				throw new NotSupportedException();
 		}
-		public void SetStartingTime()
+		public virtual void SetStartingTime()
 		{
 			NativeMethods.QueryPerformanceCounter(out mStartTime);
 		}
-		public float GetElapsedTimeInSeconds()
+		public virtual float GetElapsedTimeInSeconds()
 		{
 			long time; NativeMethods.QueryPerformanceCounter(out time);
 			float delta = (time - mStartTime) / (float)mFreq;

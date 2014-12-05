@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Strings;
+using Xyrus.Apophysis.Windows.Interfaces;
 using Options = Xyrus.Apophysis.Windows.Forms.Settings;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
 	[PublicAPI]
-	public class SettingsController : Controller<Options>
+	public class SettingsController : Controller<Options>, ISettingsController
 	{
 		private MainController mParent;
 

@@ -11,12 +11,13 @@ using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Strings;
 using Xyrus.Apophysis.Windows.Forms;
 using Xyrus.Apophysis.Windows.Input;
+using Xyrus.Apophysis.Windows.Interfaces;
 using Messages = Xyrus.Apophysis.Strings.Messages;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
 	[PublicAPI]
-	public class MainController : Controller<Main>
+	public class MainController : Controller<Main>, IMainController
 	{
 		private AutosaveController mAutosaveController;
 		private UndoController mUndoController;
@@ -43,7 +44,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			mUndoController = new UndoController();
 			mKeyboardController = new KeyboardController();
-			mAutosaveController = new AutosaveController(this);
+			mAutosaveController = new AutosaveController();
 			mEditorController = new EditorController(this);
 			mFullscreenController = new FullscreenController(this);
 			mFlamePropertiesController = new FlamePropertiesController(this);
@@ -180,16 +181,16 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 
 		[NotNull]
-		internal Lock Initializer
+		public Lock Initializer
 		{
 			get { return mInitialize; }
 		}
 
-		internal void UpdateToolbar()
+		public void UpdateToolbar()
 		{
 			mToolbarController.UpdateButtonStates();
 		}
-		internal void UpdateMenu()
+		public void UpdateMenu()
 		{
 			mMenuController.UpdateButtonStates();
 		}
@@ -282,57 +283,56 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			}
 		}
 
-		public UndoController UndoController
+		public IUndoController UndoController
 		{
 			get { return mUndoController; }
 		}
-		public EditorController EditorController
+		public IEditorController EditorController
 		{
 			get { return mEditorController; }
 		}
-		public FullscreenController FullscreenController
+		public IFullscreenController FullscreenController
 		{
 			get { return mFullscreenController; }
 		}
-		public FlamePropertiesController FlamePropertiesController
+		public IFlamePropertiesController FlamePropertiesController
 		{
 			get { return mFlamePropertiesController; }
 		}
-		public MessagesController MessagesController
+		public IMessagesController MessagesController
 		{
 			get { return mMessagesController; }
 		}
-		public SettingsController SettingsController
+		public ISettingsController SettingsController
 		{
 			get { return mSettingsController; }
 		}
-		public RenderController RenderController
+		public IRenderController RenderController
 		{
 			get { return mRenderController; }
 		}
-
-		internal BatchListController BatchListController
+		public IBatchListController BatchListController
 		{
 			get { return mBatchListController; }
 		}
-		internal MainMenuController MainMenuController
+		public IMainMenuController MainMenuController
 		{
 			get { return mMenuController; }
 		}
-		internal MainPreviewController MainPreviewController
+		public IMainPreviewController MainPreviewController
 		{
 			get { return mMainPreviewController; }
 		}
-		internal MainToolbarController ToolbarController
+		public IMainToolbarController ToolbarController
 		{
 			get { return mToolbarController; }
 		}
-		internal AutosaveController AutosaveController
+		public IAutosaveController AutosaveController
 		{
 			get { return mAutosaveController; }
 		}
 
-		internal void ResizeWithoutUpdatingPreview()
+		public void ResizeWithoutUpdatingPreview()
 		{
 			var flame = mBatchListController.GetSelectedFlame();
 			if (flame == null)

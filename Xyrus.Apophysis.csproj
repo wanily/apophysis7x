@@ -146,6 +146,22 @@
     <Compile Include="Numerics\System\Numerics\Vector4_Intrinsics.cs" />
     <Compile Include="Numerics\System\Numerics\Vector_Operations.cs" />
     <Compile Include="Threading\ThreadState.cs" />
+    <Compile Include="Windows\Interfaces\IAutosaveController.cs" />
+    <Compile Include="Windows\Interfaces\IBatchListController.cs" />
+    <Compile Include="Windows\Interfaces\IController.cs" />
+    <Compile Include="Windows\Interfaces\IDataInputController.cs" />
+    <Compile Include="Windows\Interfaces\IEditorController.cs" />
+    <Compile Include="Windows\Interfaces\IFlamePropertiesController.cs" />
+    <Compile Include="Windows\Interfaces\IFullscreenController.cs" />
+    <Compile Include="Windows\Interfaces\IMainController.cs" />
+    <Compile Include="Windows\Interfaces\IMainMenuController.cs" />
+    <Compile Include="Windows\Interfaces\IMainPreviewController.cs" />
+    <Compile Include="Windows\Interfaces\IMainToolbarController.cs" />
+    <Compile Include="Windows\Interfaces\IMessagesController.cs" />
+    <Compile Include="Windows\Interfaces\IRenderController.cs" />
+    <Compile Include="Windows\Interfaces\ISettingsController.cs" />
+    <Compile Include="Windows\Interfaces\IUndoController.cs" />
+    <Compile Include="Windows\Interfaces\IViewController.cs" />
     <Compile Include="Windows\Resources\Icons.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

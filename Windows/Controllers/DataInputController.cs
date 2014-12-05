@@ -4,10 +4,11 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Windows.Controls;
+using Xyrus.Apophysis.Windows.Interfaces;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
-	public abstract class DataInputController<TView> : Controller<TView> where TView : Component, new()
+	public abstract class DataInputController<TView> : Controller<TView>, IDataInputController where TView : Component, new()
 	{
 		class InputInfo
 		{

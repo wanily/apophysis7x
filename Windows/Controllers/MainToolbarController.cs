@@ -1,9 +1,10 @@
 using System;
 using Xyrus.Apophysis.Windows.Forms;
+using Xyrus.Apophysis.Windows.Interfaces;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
-	class MainToolbarController : Controller<Main>
+	public class MainToolbarController : Controller<Main>, IMainToolbarController
 	{
 		private MainController mParent;
 
