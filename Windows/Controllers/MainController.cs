@@ -11,13 +11,14 @@ using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Strings;
 using Xyrus.Apophysis.Windows.Forms;
 using Xyrus.Apophysis.Windows.Input;
-using Xyrus.Apophysis.Windows.Interfaces;
+using Xyrus.Apophysis.Windows.Interfaces.Controllers;
+using Xyrus.Apophysis.Windows.Interfaces.Views;
 using Messages = Xyrus.Apophysis.Strings.Messages;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
 	[PublicAPI]
-	public class MainController : Controller<Main>, IMainController
+	public class MainController : Controller<IMainView>, IMainController
 	{
 		private AutosaveController mAutosaveController;
 		private UndoController mUndoController;

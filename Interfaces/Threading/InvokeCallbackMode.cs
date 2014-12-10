@@ -1,4 +1,4 @@
-﻿namespace Xyrus.Apophysis.Threading
+﻿namespace Xyrus.Apophysis.Interfaces.Threading
 {
 	[PublicAPI]
 	public enum InvokeCallbackMode

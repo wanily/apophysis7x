@@ -1,7 +1,7 @@
 using System;
 using Xyrus.Apophysis.Models;
 
-namespace Xyrus.Apophysis.Windows.Interfaces
+namespace Xyrus.Apophysis.Windows.Interfaces.Controllers
 {
 	public interface IEditorController : IViewController
 	{

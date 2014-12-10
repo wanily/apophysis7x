@@ -4,11 +4,12 @@ using System.Windows.Forms;
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Controllers;
 using Xyrus.Apophysis.Windows.Input;
+using Xyrus.Apophysis.Windows.Interfaces.Views;
 using Xyrus.Apophysis.Windows.Visuals;
 
 namespace Xyrus.Apophysis.Windows.Forms
 {
-	public partial class Main : Form
+	public partial class Main : Form, IMainView
 	{
 		private ControlVisualChain<PictureBox> mPainter;
 		private InputHandlerChain mInput;
@@ -20,7 +21,8 @@ namespace Xyrus.Apophysis.Windows.Forms
 		private CameraEditInputHandler mCameraEditHandler;
 
 		private InputController mInputController;
-
+		private FlameListView mFlameList;
+		
 		private bool mShowGuidelines;
 		private bool mShowTransparency;
 
@@ -45,13 +47,22 @@ namespace Xyrus.Apophysis.Windows.Forms
 			mCameraEditHandler.CameraChanged += OnCameraChanged;
 			mCameraEditHandler.EndEdit += OnCameraEndEdit;
 
+			mFlameList = new FlameListView(this);
+
 			// hack http://stackoverflow.com/questions/2646606/c-sharp-winforms-statusstrip-how-do-i-reclaim-the-space-from-the-grip
 			StatusBar.Padding = new Padding(StatusBar.Padding.Left, StatusBar.Padding.Top, StatusBar.Padding.Left, StatusBar.Padding.Bottom);
 		}
+
 		protected override void Dispose(bool disposing)
 		{
 			if (disposing)
 			{
+				if (mFlameList != null)
+				{
+					mFlameList.Dispose();
+					mFlameList = null;
+				}
+
 				if (mCameraEditHandler != null)
 				{
 					mCameraEditHandler.BeginEdit -= OnCameraBeginEdit;
@@ -86,15 +97,15 @@ namespace Xyrus.Apophysis.Windows.Forms
 			mInputVisual = null;
 			mCameraEditHandler = null;
 		}
-
 		protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
 		{
 			InputController.HandleKeyboardInput(this, keyData);
 			return base.ProcessCmdKey(ref msg, keyData);
 		}
+
 		private void OnWindowLoaded(object sender, EventArgs e)
 		{
-			UpdateBatchListColumnSize();
+			mFlameList.UpdateColumnSize();
 		}
 		private void OnDensityKeyPress(object sender, KeyPressEventArgs e)
 		{
@@ -104,6 +115,8 @@ namespace Xyrus.Apophysis.Windows.Forms
 		{
 			if (CameraChanged != null)
 				CameraChanged(this, args);
+
+			mFlameList.UpdateCurrentFlameWithTimer();
 		}
 		private void OnCameraBeginEdit(object sender, EventArgs e)
 		{
@@ -114,6 +127,16 @@ namespace Xyrus.Apophysis.Windows.Forms
 		{
 			if (CameraEndEdit != null)
 				CameraEndEdit(this, e);
+		}
+		
+		private void UpdateGuideColor()
+		{
+			mInputVisual.GuideColor = ShowTransparency ? Color.Black : PreviewedFlame == null ? Color.White : PreviewedFlame.Background.Invert();
+		}
+
+		public IFlameListView FlameListView
+		{
+			get { return mFlameList; }
 		}
 
 		public bool ShowGuidelines
@@ -175,6 +198,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			get { return mCameraEditMode; }
 			set { mCameraEditHandler.EditMode = mCameraEditMode = value; }
 		}
+
 		public bool CameraEditUseScale
 		{
 			get { return mCameraEditUseScale; }
@@ -184,15 +208,5 @@ namespace Xyrus.Apophysis.Windows.Forms
 		public event EventHandler CameraBeginEdit;
 		public event CameraEndEditEventHandler CameraEndEdit;
 		public event CameraChangedEventHandler CameraChanged;
-
-		private void UpdateGuideColor()
-		{
-			mInputVisual.GuideColor = ShowTransparency ? Color.Black : PreviewedFlame == null ? Color.White : PreviewedFlame.Background.Invert();
-		}
-
-		internal void UpdateBatchListColumnSize()
-		{
-			BatchListView.Columns[0].Width = BatchListView.ClientSize.Width - 3;
-		}
 	}
 }

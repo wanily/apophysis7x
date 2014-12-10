@@ -1,9 +1,10 @@
 ﻿using System;
+using Xyrus.Apophysis.Interfaces.Threading;
 
 namespace Xyrus.Apophysis.Threading
 {
 	[PublicAPI]
-	public sealed class ThreadStateToken : ThreadState, IDisposable
+	public sealed class ThreadStateToken : ThreadState, IThreadStateToken
 	{
 		private ThreadController mController;
 

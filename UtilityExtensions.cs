@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -198,6 +200,30 @@ namespace Xyrus.Apophysis
 			if (@as == null) throw new ArgumentNullException(@"as");
 
 			ApophysisApplication.Container.RegisterType(@interface, @as);
+		}
+
+		public static IList<T> CastOrEnumerateToList<T>(this IEnumerable instance)
+		{
+			if (instance == null)
+			{
+				return new List<T>();
+			}
+
+			return CastOrEnumerateToList(instance.OfType<T>());
+		}
+		public static IList<T> CastOrEnumerateToList<T>(this IEnumerable<T> instance)
+		{
+			if (instance == null)
+			{
+				return new List<T>();
+			}
+
+			if (instance is IList<T>)
+			{
+				return (IList<T>) instance;
+			}
+
+			return instance.ToList();
 		}
 	}
 }

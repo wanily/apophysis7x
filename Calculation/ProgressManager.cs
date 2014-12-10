@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using Xyrus.Apophysis.Interfaces.Threading;
 using ThreadState = Xyrus.Apophysis.Threading.ThreadState;
 
 namespace Xyrus.Apophysis.Calculation
@@ -10,18 +11,18 @@ namespace Xyrus.Apophysis.Calculation
 		private readonly NativeTimer mTicker = new NativeTimer();
 		private readonly NativeTimer mStopWatch = new NativeTimer();
 
-		private ThreadState mThreadState;
+		private IThreadState mThreadState;
 
 		private float? mLastSecondsPerIteration;
 		private long mLastExcursion;
 
-		public ProgressManager(ThreadState stateToken = null)
+		public ProgressManager(IThreadState stateToken = null)
 		{
 			mThreadState = stateToken ?? new ThreadState();
 		}
 
 		[NotNull]
-		public ThreadState ThreadState
+		public IThreadState ThreadState
 		{
 			get { return mThreadState; }
 			set
@@ -76,7 +77,7 @@ namespace Xyrus.Apophysis.Calculation
 		}
 		public void CheckSendProgressEvent(long iteration)
 		{
-			var time = (float)mTicker.GetElapsedTimeInSeconds();
+			var time = mTicker.GetElapsedTimeInSeconds();
 			if (time > ProgressThreshold)
 			{
 				mLastSecondsPerIteration = (time / (iteration - mLastExcursion));

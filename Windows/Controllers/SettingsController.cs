@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Strings;
-using Xyrus.Apophysis.Windows.Interfaces;
+using Xyrus.Apophysis.Windows.Interfaces.Controllers;
 using Options = Xyrus.Apophysis.Windows.Forms.Settings;
 
 namespace Xyrus.Apophysis.Windows.Controllers

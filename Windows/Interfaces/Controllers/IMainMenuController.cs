@@ -1,6 +1,6 @@
 using System;
 
-namespace Xyrus.Apophysis.Windows.Interfaces
+namespace Xyrus.Apophysis.Windows.Interfaces.Controllers
 {
 	public interface IMainMenuController : IViewController
 	{

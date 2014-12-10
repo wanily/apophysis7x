@@ -7,7 +7,7 @@ using Xyrus.Apophysis.Calculation;
 using Xyrus.Apophysis.Messaging;
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Forms;
-using Xyrus.Apophysis.Windows.Interfaces;
+using Xyrus.Apophysis.Windows.Interfaces.Controllers;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {

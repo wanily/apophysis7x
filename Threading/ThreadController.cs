@@ -1,30 +1,40 @@
 ﻿using System;
 using System.Threading;
 using System.Windows.Forms;
+using Xyrus.Apophysis.Interfaces.Threading;
 using Xyrus.Apophysis.Windows;
 
 namespace Xyrus.Apophysis.Threading
 {
 	[PublicAPI]
-	public class ThreadController : Controller
+	public class ThreadController : Controller, IThreadController
 	{
 		private volatile bool mCancel;
 		private volatile bool mSuspended;
 		private volatile bool mRunning;
 
 		private Thread mThread;
+		private ThreadPriority mPriority = ThreadPriority.Normal;
 
-		private readonly ThreadPriority mPriority;
-
-		public ThreadController(ThreadPriority priority = ThreadPriority.Normal)
-		{
-			mPriority = priority;
-		}
 		protected override void Dispose(bool disposing)
 		{
 			if (disposing && mThread != null)
 			{
 				Cancel();
+			}
+		}
+
+		public ThreadPriority Priority
+		{
+			get { return mPriority; }
+			set
+			{
+				if (mThread != null || mRunning)
+				{
+					throw new InvalidOperationException("Thread is busy");
+				}
+
+				mPriority = value;
 			}
 		}
 
@@ -42,7 +52,7 @@ namespace Xyrus.Apophysis.Threading
 						callback();
 				});
 		}
-		public void StartThread(Action<ThreadStateToken> threadAction, Action callback = null)
+		public void StartThread(Action<IThreadStateToken> threadAction, Action callback = null)
 		{
 			StartThread<object>(
 				o => 
@@ -60,7 +70,7 @@ namespace Xyrus.Apophysis.Threading
 		{
 			StartThread(o => threadAction(), callback);
 		}
-		public void StartThread<T>(Func<ThreadStateToken, T> threadAction, Action<T> callback = null, Action completionCallback = null, Action cancelledCallback = null)
+		public void StartThread<T>(Func<IThreadStateToken, T> threadAction, Action<T> callback = null, Action completionCallback = null, Action cancelledCallback = null)
 		{
 			if (mThread != null || mRunning)
 			{
@@ -163,22 +173,6 @@ namespace Xyrus.Apophysis.Threading
 		{
 			get; 
 			set;
-		}
-	}
-
-	public class MultiThreadController : Controller
-	{
-		private volatile bool mCancel;
-		private volatile bool mSuspended;
-		private volatile bool mRunning;
-
-		private Thread[] mThread;
-
-		private readonly ThreadPriority mPriority;
-
-		protected override void Dispose(bool disposing)
-		{
-			
 		}
 	}
 }

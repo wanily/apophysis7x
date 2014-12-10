@@ -1,7 +1,7 @@
 using System;
 using Xyrus.Apophysis.Calculation;
 using Xyrus.Apophysis.Models;
-using Xyrus.Apophysis.Windows.Interfaces;
+using Xyrus.Apophysis.Windows.Interfaces.Controllers;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
@@ -9,6 +9,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 	{
 		private LazyResolver<NativeTimer> mTimer;
 		private LazyResolver<IMainController> mParent;
+
 		private bool mIsDisposed;
 
 		protected override void Dispose(bool disposing)

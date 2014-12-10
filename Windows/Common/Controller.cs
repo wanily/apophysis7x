@@ -1,7 +1,8 @@
 using System;
-using System.ComponentModel;
 using System.Windows.Forms;
-using Xyrus.Apophysis.Windows.Interfaces;
+using Microsoft.Practices.Unity;
+using Xyrus.Apophysis.Windows.Interfaces.Controllers;
+using Xyrus.Apophysis.Windows.Interfaces.Views;
 
 namespace Xyrus.Apophysis.Windows
 {
@@ -21,7 +22,7 @@ namespace Xyrus.Apophysis.Windows
 	}
 
 	[PublicAPI]
-	public abstract class Controller<TView> : Controller, IViewController where TView : Component, new()
+	public abstract class Controller<TView> : Controller, IViewController where TView : class, IView
 	{
 		private TView mView;
 		private bool mDisposed;
@@ -29,7 +30,7 @@ namespace Xyrus.Apophysis.Windows
 
 		protected Controller()
 		{
-			mView = new TView();
+			mView = ApophysisApplication.Container.Resolve<TView>();
 		}
 		protected Controller([NotNull] TView view)
 		{

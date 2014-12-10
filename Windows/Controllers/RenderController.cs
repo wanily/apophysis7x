@@ -13,7 +13,7 @@ using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Strings;
 using Xyrus.Apophysis.Windows.Controls;
 using Xyrus.Apophysis.Windows.Forms;
-using Xyrus.Apophysis.Windows.Interfaces;
+using Xyrus.Apophysis.Windows.Interfaces.Controllers;
 using Messages = Xyrus.Apophysis.Strings.Messages;
 
 namespace Xyrus.Apophysis.Windows.Controllers

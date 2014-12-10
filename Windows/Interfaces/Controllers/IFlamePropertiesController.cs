@@ -2,7 +2,7 @@
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Controllers;
 
-namespace Xyrus.Apophysis.Windows.Interfaces
+namespace Xyrus.Apophysis.Windows.Interfaces.Controllers
 {
 	public interface IFlamePropertiesController : IViewController
 	{

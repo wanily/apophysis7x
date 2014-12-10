@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Windows.Controllers;
+using Xyrus.Apophysis.Windows.Interfaces.Views;
 
 namespace Xyrus.Apophysis.Windows.Forms
 {
-	public partial class Editor : Form
+	public partial class Editor : Form, IEditorView
 	{
 		private readonly InputController mInputHandler;
 

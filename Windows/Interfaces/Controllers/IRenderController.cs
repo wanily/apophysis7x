@@ -1,7 +1,7 @@
 using System.Drawing;
 using Xyrus.Apophysis.Models;
 
-namespace Xyrus.Apophysis.Windows.Interfaces
+namespace Xyrus.Apophysis.Windows.Interfaces.Controllers
 {
 	public interface IRenderController : IDataInputController
 	{

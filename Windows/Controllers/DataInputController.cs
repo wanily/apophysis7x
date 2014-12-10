@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Windows.Controls;
-using Xyrus.Apophysis.Windows.Interfaces;
+using Xyrus.Apophysis.Windows.Interfaces.Controllers;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Xyrus.Apophysis.Models;
-using Xyrus.Apophysis.Windows.Interfaces;
+using Xyrus.Apophysis.Windows.Interfaces.Controllers;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
