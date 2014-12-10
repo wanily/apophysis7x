@@ -25,16 +25,24 @@ namespace Xyrus.Apophysis
 				return mResolved;
 			}
 		}
-		public void Reset()
+		public void Reset(bool dispose = true)
 		{
+			if (!mIsResolved)
+				return;
+
 			var disposable = mResolved as IDisposable;
-			if (disposable != null)
+			if (dispose && disposable != null)
 			{
 				disposable.Dispose();
 			}
 
 			mIsResolved = false;
 			mResolved = default(T);
+		}
+
+		public bool IsResolved
+		{
+			get { return mIsResolved; }
 		}
 	}
 }

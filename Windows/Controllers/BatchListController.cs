@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using Xyrus.Apophysis.Interfaces.Threading;
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Interfaces.Controllers;
@@ -16,16 +15,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		private IFlameListView mFlameList;
 
-		protected override void DisposeOverride(bool disposing)
-		{
-			if (!disposing) 
-				return;
-
-			mListPreviewThreadController.Reset();
-			mWaitImageController.Reset();
-		}
-
-		protected override void AttachView()
+		public BatchListController()
 		{
 			mMainController.Object.UndoController.CurrentReplaced += OnCurrentFlameReplaced;
 
@@ -39,20 +29,31 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			mFlameList.LoadSettings();
 		}
-		protected override void DetachView()
+
+		protected override void DisposeOverride(bool disposing)
 		{
-			mMainController.Object.UndoController.CurrentReplaced -= OnCurrentFlameReplaced;
-
-			if (mFlameList != null)
+			if (disposing)
 			{
-				mFlameList.FlameSelected -= OnListSelectionChanged;
-				mFlameList.FlameRenamed -= OnListLabelEdited;
+				if (mMainController.IsResolved)
+				{
+					mMainController.Object.UndoController.CurrentReplaced -= OnCurrentFlameReplaced;
+				}
 
-				mFlameList.SaveSettings();
-				mFlameList.Dispose();
+				if (mFlameList != null)
+				{
+					mFlameList.FlameSelected -= OnListSelectionChanged;
+					mFlameList.FlameRenamed -= OnListLabelEdited;
 
-				mFlameList = null;
+					mFlameList.SaveSettings();
+					mFlameList.Dispose();
+				}
+
+				mListPreviewThreadController.Reset();
+				mWaitImageController.Reset();
+				mMainController.Reset(false);
 			}
+
+			mFlameList = null;
 		}
 
 		public IEnumerable<Flame> Flames

@@ -87,8 +87,17 @@ namespace Xyrus.Apophysis.Windows
 			}
 		}
 
-		protected abstract void AttachView();
-		protected abstract void DetachView();
+		/// <summary>
+		/// DO NOT OVERRIDE ANYMORE!
+		/// </summary>
+		[Obsolete]
+		protected virtual void AttachView() { }
+
+		/// <summary>
+		/// DO NOT OVERRIDE ANYMORE!
+		/// </summary>
+		[Obsolete]
+		protected virtual void DetachView() { }
 
 		public TView View
 		{
