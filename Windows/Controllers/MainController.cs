@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -720,6 +721,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		public void ReloadSettings()
 		{
 			MainPreviewController.ReloadSettings();
+		}
+
+		public IComponent GetWindow()
+		{
+			return View;
 		}
 	}
 }

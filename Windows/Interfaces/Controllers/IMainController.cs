@@ -1,3 +1,6 @@
+using System;
+using System.ComponentModel;
+using System.Windows.Forms;
 using Xyrus.Apophysis.Models;
 
 namespace Xyrus.Apophysis.Windows.Interfaces.Controllers
@@ -62,5 +65,10 @@ namespace Xyrus.Apophysis.Windows.Interfaces.Controllers
 		void ShowRenderAll();
 
 		void ReloadSettings();
+
+		IComponent GetWindow();
+
+		[Obsolete]
+		void Initialize();
 	}
 }

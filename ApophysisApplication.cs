@@ -61,7 +61,7 @@ namespace Xyrus.Apophysis
 				mBanner.Dispose();
 				mBanner = null;
 
-				Application.Run((Form)MainWindow.View);
+				Application.Run(MainWindow.GetWindow() as Form);
 			}
 		}
 

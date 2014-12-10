@@ -32,12 +32,22 @@ namespace Xyrus.Apophysis.Windows
 		{
 			mView = ApophysisApplication.Container.Resolve<TView>();
 		}
+
+		/// <summary>
+		/// DO NOT USE ANYMORE!
+		/// </summary>
+		/// <param name="view"></param>
+		[Obsolete]
 		protected Controller([NotNull] TView view)
 		{
 			if (view == null) throw new ArgumentNullException("view");
 			mView = view;
 		}
 
+		/// <summary>
+		/// DO NOT USE ANYMORE!
+		/// </summary>
+		[Obsolete]
 		public void Initialize()
 		{
 			if (mInitialized)
@@ -58,7 +68,6 @@ namespace Xyrus.Apophysis.Windows
 			{
 				if (mView != null)
 				{
-					DetachView();
 					mView.Dispose();
 					mView = null;
 				}
@@ -105,10 +114,6 @@ namespace Xyrus.Apophysis.Windows
 			{
 				return mView;
 			}
-		}
-		object IViewController.View
-		{
-			get { return View; }
 		}
 	}
 }
