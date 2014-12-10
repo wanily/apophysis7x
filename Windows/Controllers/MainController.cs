@@ -57,7 +57,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mMenuController = new MainMenuController(View, this);
 			mToolbarController = new MainToolbarController(View, this);
 			mMainUndoController = new MainUndoController(View, this);
-			mBatchListController = new BatchListController(View, this);
+			mBatchListController = new BatchListController();
 			mMainPreviewController = new MainPreviewController(View, this);
 		}
 		protected override void DisposeOverride(bool disposing)
@@ -218,8 +218,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 		private void AfterReset()
 		{
-			mBatchListController.BuildFlameList();
-			mBatchListController.SelectFlame(mFlames.First());
+			mBatchListController.Flames = Flames;
+			mBatchListController.SelectedFlame = Flames.First();
 			mHasChanges = false;
 
 			View.LoadingStatusLabel.Text = Application.ProductName;
@@ -242,10 +242,10 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			if (mInitialize.IsBusy)
 				return;
 
-			var selection = mBatchListController.GetSelectedFlame();
+			var selection = mBatchListController.SelectedFlame;
 
-			mBatchListController.BuildFlameList();
-			mBatchListController.SelectFlame(selection ?? mFlames.First());
+			mBatchListController.Flames = Flames;
+			mBatchListController.SelectedFlame = selection;
 		}
 		private void OnViewLoaded(object sender, EventArgs e)
 		{
@@ -260,8 +260,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 		private void OnCameraEndEdit(object sender, CameraEndEditEventArgs e)
 		{
-			var flame = mBatchListController.GetSelectedFlame();
-			if (flame == null || Initializer.IsBusy || !e.EditMade)
+			var flame = mBatchListController.SelectedFlame;
+			if (Initializer.IsBusy || !e.EditMade)
 				return;
 
 			FlamePropertiesController.UndoController.CommitChange(flame);
@@ -271,8 +271,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 		private void OnCameraChanged(object sender, CameraChangedEventArgs e)
 		{
-			var flame = mBatchListController.GetSelectedFlame();
-			if (flame == null || Initializer.IsBusy)
+			var flame = mBatchListController.SelectedFlame;
+			if (Initializer.IsBusy)
 				return;
 
 			using (mFlamePropertiesController.Initializer.Enter())
@@ -336,9 +336,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		public void ResizeWithoutUpdatingPreview()
 		{
-			var flame = mBatchListController.GetSelectedFlame();
-			if (flame == null)
-				return;
+			var flame = mBatchListController.SelectedFlame;
 
 			using (mInitialize.Enter())
 			{
@@ -359,12 +357,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			}
 		}
 
-		public void AppendFlame([NotNull] Flame flame)
+		public void AppendFlame(Flame flame)
 		{
 			if (flame == null) throw new ArgumentNullException("flame");
 
 			var index = mFlames.Append(flame);
-			mBatchListController.SelectFlame(mFlames[index]);
+			mBatchListController.SelectedFlame = (mFlames[index]);
 		}
 
 		public void RestoreAutosaveBatch(string targetPath)
@@ -439,9 +437,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 		public void WriteCurrentFlameToClipboard()
 		{
-			var flame = mBatchListController.GetSelectedFlame();
-			if (flame == null)
-				return;
+			var flame = mBatchListController.SelectedFlame;
 
 			XElement element; flame.WriteXml(out element);
 
@@ -449,7 +445,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			Clipboard.SetText(data);
 		}
 
-		public void LoadFlameAndEraseHistory([NotNull] Flame flame)
+		public void LoadFlameAndEraseHistory(Flame flame)
 		{
 			if (flame == null) throw new ArgumentNullException("flame");
 
@@ -568,7 +564,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			return true;
 		}
 
-		public void ReplaceBatchWithConfirm([NotNull] FlameCollection batch)
+		public void ReplaceBatchWithConfirm(FlameCollection batch)
 		{
 			if (batch == null) throw new ArgumentNullException("batch");
 
@@ -578,7 +574,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			Flames = batch;
 			mLastBatchPath = null;
 		}
-		public void DeleteFlameIfPossibleWithConfirm([NotNull] Flame flame)
+		public void DeleteFlameIfPossibleWithConfirm(Flame flame)
 		{
 			if (flame == null) throw new ArgumentNullException("flame");
 			if (!mFlames.CanRemove())
@@ -591,8 +587,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				string.Format("Do you really want to remove \"{0}\" from the batch? This can't be undone!", flame.CalculatedName),
 				Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
 			{
-				var selection = mBatchListController.GetSelectedFlame();
-				var index = selection == null ? 0 : mFlames.IndexOf(selection);
+				var selection = mBatchListController.SelectedFlame;
+				var index = mFlames.IndexOf(selection);
 
 				if (index < 0)
 					index = 0;
@@ -602,7 +598,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				if (index >= mFlames.Count)
 					index = mFlames.Count - 1;
 
-				mBatchListController.SelectFlame(mFlames[index]);
+				mBatchListController.SelectedFlame = (mFlames[index]);
 			}
 
 			SetDirty();
@@ -614,9 +610,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 		public void SaveCurrentFlame(string path, int maxBatchSize = int.MaxValue)
 		{
-			var flame = mBatchListController.GetSelectedFlame();
-			if (flame == null)
-				return;
+			var flame = mBatchListController.SelectedFlame;
 
 			SaveFlame(flame, path, maxBatchSize);
 		}

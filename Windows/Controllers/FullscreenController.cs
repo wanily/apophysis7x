@@ -9,6 +9,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 	[PublicAPI]
 	public class FullscreenController : Controller<Fullscreen>, IFullscreenController
 	{
+		private LazyResolver<IWaitImageController> mWaitImageController;
+
 		private readonly Lock mHiding;
 
 		private Renderer mRenderer;
@@ -206,15 +208,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		private void UpdatePreview()
 		{
-			var flame = mParent.BatchListController.GetSelectedFlame();
-			if (flame == null)
-				return;
-
+			var flame = mParent.BatchListController.SelectedFlame;
 			var density = (float)mParent.MainPreviewController.PreviewDensity;
 			var canvasSize = View.ClientSize;
 			var renderSize = flame.CanvasSize.FitToFrame(canvasSize);
 
-			View.BackgroundImage = WaitImageController.DrawWaitImage(renderSize, Color.Black, Color.White);
+			View.BackgroundImage = mWaitImageController.Object.DrawWaitImage(renderSize, Color.Black, Color.White);
 
 			mIterationManager.Cancel();
 			mElapsedTimer.SetStartingTime();

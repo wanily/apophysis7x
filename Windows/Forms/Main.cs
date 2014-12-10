@@ -116,7 +116,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 			if (CameraChanged != null)
 				CameraChanged(this, args);
 
-			mFlameList.UpdateCurrentFlameWithTimer();
+			mFlameList.UpdateCurrentWithTimer();
 		}
 		private void OnCameraBeginEdit(object sender, EventArgs e)
 		{

@@ -108,6 +108,12 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			}
 		}
 
+		public void UpdateSelectedPreview()
+		{
+			mFlameList.UpdateCurrent();
+		}
+
+
 		private void OnListSelectionChanged(object sender, FlameSelectEventArgs e)
 		{
 			mMainController.Object.LoadFlameAndEraseHistory(e.Flame);

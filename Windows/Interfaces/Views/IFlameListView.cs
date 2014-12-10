@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.ComponentModel;
 using Xyrus.Apophysis.Interfaces.Threading;
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Interfaces.Controllers;
@@ -26,5 +25,8 @@ namespace Xyrus.Apophysis.Windows.Interfaces.Views
 		event FlameSelectEventHandler FlameSelected;
 
 		void ReplaceCurrent(Flame newFlame);
+
+		void UpdateCurrent();
+		void UpdateCurrentWithTimer();
 	}
 }

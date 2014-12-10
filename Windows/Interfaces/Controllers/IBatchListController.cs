@@ -12,5 +12,7 @@ namespace Xyrus.Apophysis.Windows.Interfaces.Controllers
 		[NotNull]
 		Flame SelectedFlame { get; set; }
 		IEnumerable<Flame> Flames { get; set; }
+
+		void UpdateSelectedPreview();
 	}
 }

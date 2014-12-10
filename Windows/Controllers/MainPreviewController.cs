@@ -320,8 +320,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		public void UpdatePreview()
 		{
-			var flame = mParent.BatchListController.GetSelectedFlame();
-			if (mParent.Initializer.IsBusy || flame == null)
+			var flame = mParent.BatchListController.SelectedFlame;
+			if (mParent.Initializer.IsBusy)
 				return;
 
 			mFlame = flame;

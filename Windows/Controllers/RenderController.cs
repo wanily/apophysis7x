@@ -334,7 +334,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			}
 			else
 			{
-				mRenderStack.Push(mParent.BatchListController.GetSelectedFlame());
+				mRenderStack.Push(mParent.BatchListController.SelectedFlame);
 			}
 
 			NextFlame();
@@ -528,7 +528,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			}
 			else
 			{
-				SetSingleMode(mParent.BatchListController.GetSelectedFlame());
+				SetSingleMode(mParent.BatchListController.SelectedFlame);
 			}
 		}
 		private void UpdateSizeControls()
@@ -546,8 +546,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				}
 				else
 				{
-					var flame = mParent.BatchListController.GetSelectedFlame();
-					var name = (flame == null ? Common.DefaultRenderBatchName : flame.CalculatedName).CleanseFileName();
+					var flame = mParent.BatchListController.SelectedFlame;
+					var name = flame.CalculatedName.CleanseFileName();
 
 					name += '.' + GetExtension(mFormat);
 

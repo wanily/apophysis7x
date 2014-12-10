@@ -52,7 +52,7 @@ namespace Xyrus.Apophysis.Windows.Forms
 				ImageSize = new Size(120, 120),
 			};
 
-			mIconUpdateTimeLock = new TimeLock(UpdateSelectedPreview);
+			mIconUpdateTimeLock = new TimeLock(UpdateCurrent);
 			mListSelectionLock = new Lock();
 		}
 
@@ -125,10 +125,6 @@ namespace Xyrus.Apophysis.Windows.Forms
 			{
 				RedrawIcon(item, null);
 			}
-		}
-		private void UpdateSelectedPreview()
-		{
-			RedrawIcon(mForm.BatchListView.Items.OfType<ListViewItem>().FirstOrDefault(x => x.Selected), null);
 		}
 
 		public void RedrawIcon(ListViewItem item, IThreadStateToken threadState)
@@ -353,7 +349,6 @@ namespace Xyrus.Apophysis.Windows.Forms
 				RedrawIcons();
 			}
 		}
-
 		public Flame SelectedFlame
 		{
 			get
@@ -394,8 +389,11 @@ namespace Xyrus.Apophysis.Windows.Forms
 		{
 			SetItemProperties(mForm.BatchListView.Items.OfType<ListViewItem>().FirstOrDefault(x => x.Selected), newFlame, true);
 		}
-
-		public void UpdateCurrentFlameWithTimer()
+		public void UpdateCurrent()
+		{
+			RedrawIcon(mForm.BatchListView.Items.OfType<ListViewItem>().FirstOrDefault(x => x.Selected), null);
+		}
+		public void UpdateCurrentWithTimer()
 		{
 			mIconUpdateTimeLock.Enter();
 		}

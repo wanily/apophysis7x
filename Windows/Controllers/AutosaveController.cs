@@ -30,10 +30,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			if (mTimer.Object.GetElapsedTimeInSeconds() < ApophysisSettings.Autosave.Threshold)
 				return;
 
-			var flame = mParent.Object.BatchListController.GetSelectedFlame();
-			if (flame == null)
-				return;
-
+			var flame = mParent.Object.BatchListController.SelectedFlame;
 			var time = DateTime.Now;
 			ForceCommit(flame, string.Format("{5} - {0:0000}-{1:00}-{2:00} {3:00}.{4:00}", time.Year, time.Month, time.Day, time.Hour, time.Minute, flame.CalculatedName));
 		}
