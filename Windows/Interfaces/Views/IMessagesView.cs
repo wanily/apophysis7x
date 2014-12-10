@@ -1,6 +1,6 @@
 ﻿namespace Xyrus.Apophysis.Windows.Interfaces.Views
 {
-	public interface IMessagesView : IView
+	public interface IMessagesView : IWindow
 	{
 	}
 }

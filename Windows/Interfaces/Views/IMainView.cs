@@ -5,7 +5,7 @@ using Xyrus.Apophysis.Windows.Input;
 
 namespace Xyrus.Apophysis.Windows.Interfaces.Views
 {
-	public interface IMainView : IView
+	public interface IMainView : IWindow
 	{
 		bool CameraEditUseScale { get; set; }
 		bool ShowGuidelines { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace Xyrus.Apophysis.Windows.Interfaces.Views
 {
-	public interface IRenderView : IView
+	public interface IRenderView : IWindow
 	{
 	}
 }

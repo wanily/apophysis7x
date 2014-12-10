@@ -2,7 +2,7 @@
 
 namespace Xyrus.Apophysis.Windows.Interfaces.Views
 {
-	public interface IFullscreenView : IView
+	public interface IFullscreenView : IWindow
 	{
 		int Progress { get; set; }
 		string TimeElapsed { get; set; }

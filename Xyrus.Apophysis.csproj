@@ -185,6 +185,7 @@
     <Compile Include="Windows\Interfaces\Views\IRenderView.cs" />
     <Compile Include="Windows\Interfaces\Views\ISettingsView.cs" />
     <Compile Include="Windows\Interfaces\Views\IView.cs" />
+    <Compile Include="Windows\Interfaces\Views\IWindow.cs" />
     <Compile Include="Windows\Resources\Icons.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

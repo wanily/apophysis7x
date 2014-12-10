@@ -22,7 +22,7 @@ namespace Xyrus.Apophysis.Windows
 	}
 
 	[PublicAPI]
-	public abstract class Controller<TView> : Controller, IViewController where TView : class, IView
+	public abstract class Controller<TView> : Controller, IViewController where TView : class, IWindow
 	{
 		private TView mView;
 		private bool mDisposed;

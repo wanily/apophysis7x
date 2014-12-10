@@ -6,7 +6,7 @@ using Xyrus.Apophysis.Windows.Interfaces.Controllers;
 
 namespace Xyrus.Apophysis.Windows.Interfaces.Views
 {
-	public interface IFlameListView : IComponent
+	public interface IFlameListView : IView
 	{
 		void LoadSettings();
 		void SaveSettings();
