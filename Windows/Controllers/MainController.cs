@@ -216,6 +216,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				View.Text = string.Format("Apophysis - {0}", mFlames.CalculatedName);
 			}
 		}
+		public Flame Flame
+		{
+			get { return BatchListController.SelectedFlame; }
+		}
+
 		private void AfterReset()
 		{
 			mBatchListController.Flames = Flames;
@@ -715,6 +720,23 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		public void ReloadSettings()
 		{
 			MainPreviewController.ReloadSettings();
+		}
+
+		public event EventHandler FlameChanged;
+		public void RaiseFlameChanged()
+		{
+			if (FlameChanged != null)
+				FlameChanged(this, new EventArgs());
+		}
+
+		public event EventHandler UndoEvent;
+		public void RaiseUndoEvent()
+		{
+			if (UndoEvent != null)
+				UndoEvent(this, new EventArgs());
+		
+			mParent.Object.UndoController.CommitChange(Flame);
+			mParent.Object.UpdatePreviews();
 		}
 
 		public IComponent GetWindow()

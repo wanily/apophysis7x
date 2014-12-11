@@ -36,6 +36,8 @@ namespace Xyrus.Apophysis.Windows.Controls
 					.Select(x => x.GetDisplayName())
 					.OfType<object>()
 					.ToArray());
+
+				SelectedIndex = 0;
 			}
 		}
 

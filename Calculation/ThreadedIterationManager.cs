@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Threading;
+using Xyrus.Apophysis.Interfaces.Calculation;
 using Xyrus.Apophysis.Strings;
 using ThreadState = Xyrus.Apophysis.Threading.ThreadState;
 

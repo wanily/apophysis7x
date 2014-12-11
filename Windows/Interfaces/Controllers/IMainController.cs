@@ -23,7 +23,10 @@ namespace Xyrus.Apophysis.Windows.Interfaces.Controllers
 		[NotNull]
 		Lock Initializer { get; }
 
-		FlameCollection Flames { get; set; }
+		FlameCollection Flames { get; }
+
+		[NotNull]
+		Flame Flame { get; }
 
 		void UpdateToolbar();
 		void UpdateMenu();
@@ -70,5 +73,11 @@ namespace Xyrus.Apophysis.Windows.Interfaces.Controllers
 
 		[Obsolete]
 		void Initialize();
+
+		event EventHandler FlameChanged;
+		event EventHandler UndoEvent;
+
+		void RaiseFlameChanged();
+		void RaiseUndoEvent();
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using Xyrus.Apophysis.Calculation;
+using Xyrus.Apophysis.Interfaces.Calculation;
 using Xyrus.Apophysis.Windows.Forms;
 using Xyrus.Apophysis.Windows.Interfaces.Controllers;
 
@@ -9,7 +10,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 	[PublicAPI]
 	public class FullscreenController : Controller<Fullscreen>, IFullscreenController
 	{
-		private LazyResolver<IWaitImageController> mWaitImageController;
+		private Resolver<IWaitImageController> mWaitImageController;
 
 		private readonly Lock mHiding;
 

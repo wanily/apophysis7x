@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Xyrus.Apophysis.Interfaces.Calculation;
 using Xyrus.Apophysis.Windows;
 
 namespace Xyrus.Apophysis.Calculation

@@ -7,7 +7,7 @@ namespace Xyrus.Apophysis
 	/// WARNING: do not use this as a readonly field! It will break the lazy-loading mechanism.
 	/// http://blogs.msdn.com/b/ericlippert/archive/2008/05/14/mutating-readonly-structs.aspx
 	/// </summary>
-	public struct LazyResolver<T>
+	public struct Resolver<T>
 	{
 		private T mResolved;
 		private bool mIsResolved;
@@ -18,12 +18,17 @@ namespace Xyrus.Apophysis
 			{
 				if (!mIsResolved)
 				{
-					mResolved = ApophysisApplication.Container.Resolve<T>();
-					mIsResolved = true;
+					Resolve();
 				}
 
 				return mResolved;
 			}
+		}
+
+		public void Resolve()
+		{
+			mResolved = ApophysisApplication.Container.Resolve<T>();
+			mIsResolved = true;
 		}
 		public void Reset(bool dispose = true)
 		{

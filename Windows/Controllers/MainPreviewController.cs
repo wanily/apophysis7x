@@ -2,6 +2,7 @@ using System;
 using System.Drawing;
 using System.Globalization;
 using Xyrus.Apophysis.Calculation;
+using Xyrus.Apophysis.Interfaces.Calculation;
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Forms;
 using Xyrus.Apophysis.Windows.Input;

@@ -8,6 +8,7 @@ using System.Threading;
 using System.Windows.Forms;
 using Microsoft.Practices.Unity;
 using Xyrus.Apophysis.Calculation;
+using Xyrus.Apophysis.Interfaces.Calculation;
 using Xyrus.Apophysis.Interfaces.Threading;
 using Xyrus.Apophysis.Messaging;
 using Xyrus.Apophysis.Strings;
@@ -24,7 +25,7 @@ namespace Xyrus.Apophysis
 	[PublicAPI]
 	public static class ApophysisApplication
 	{
-		private static BannerController mBanner;
+		private static IBannerController mBanner;
 		private static UnityContainer mContainer;
 
 		static ApophysisApplication()
@@ -45,8 +46,7 @@ namespace Xyrus.Apophysis
 			RegisterSingletons();
 			RegisterTypes();
 
-			mBanner = new BannerController();
-			mBanner.Initialize();
+			mBanner = Container.Resolve<IBannerController>();
 
 			SetupExceptionHandler();
 			LoadVariations();
@@ -67,12 +67,13 @@ namespace Xyrus.Apophysis
 
 		static void RegisterTypes()
 		{
-			Container.RegisterType<NativeTimer, NativeTimer>();
+			Container.RegisterType<INativeTimer, NativeTimer>();
 
 			Container.RegisterType<IThreadController, ThreadController>();
 			Container.RegisterType<IWaitImageController, WaitImageController>();
 
 			Container.RegisterType<IAutosaveController, AutosaveController>();
+			Container.RegisterType<IBannerController, BannerController>();
 			Container.RegisterType<IBatchListController, BatchListController>();
 			Container.RegisterType<IEditorController, EditorController>();
 			Container.RegisterType<IFlamePropertiesController, FlamePropertiesController>();

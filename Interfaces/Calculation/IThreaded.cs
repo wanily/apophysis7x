@@ -1,4 +1,4 @@
-namespace Xyrus.Apophysis.Calculation
+namespace Xyrus.Apophysis.Interfaces.Calculation
 {
 	[PublicAPI]
 	public interface IThreaded

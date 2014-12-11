@@ -1,6 +1,7 @@
 using System;
+using Xyrus.Apophysis.Calculation;
 
-namespace Xyrus.Apophysis.Calculation
+namespace Xyrus.Apophysis.Interfaces.Calculation
 {
 	[PublicAPI]
 	public interface IProgressive

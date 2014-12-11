@@ -1,10 +1,11 @@
 using System;
 using Xyrus.Apophysis.Windows.Controls;
 using Xyrus.Apophysis.Windows.Forms;
+using Xyrus.Apophysis.Windows.Interfaces.Controllers;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
-	class IteratorVariablesController : Controller<Editor>
+	public class IteratorVariablesController : Controller<Editor>, IIteratorVariablesController
 	{
 		public IteratorVariablesController([NotNull] Editor view) : base(view)
 		{

@@ -3,6 +3,7 @@ using System.Numerics;
 using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Controllers;
+using Iterator = Xyrus.Apophysis.Models.Iterator;
 
 namespace Xyrus.Apophysis.Windows.Input
 {

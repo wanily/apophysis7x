@@ -3,10 +3,11 @@ using System.Drawing;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Forms;
+using Xyrus.Apophysis.Windows.Interfaces.Controllers;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
-	class IteratorColorController : Controller<Editor>
+	public class IteratorColorController : Controller<Editor>, IIteratorColorController
 	{
 		private EditorController mParent;
 

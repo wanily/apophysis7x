@@ -5,10 +5,11 @@ using System.Numerics;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Windows.Controls;
 using Xyrus.Apophysis.Windows.Forms;
+using Xyrus.Apophysis.Windows.Interfaces.Controllers;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
-	class IteratorPointEditController : Controller<Editor>
+	public class IteratorPointEditController : Controller<Editor>, IIteratorPointEditController
 	{
 		private static readonly float[] mMoveOffsetOptions = { 1.0f, 0.5f, 0.25f, 0.1f, 0.05f, 0.025f, 0.01f };
 		private static readonly float[] mSnapAngleOptions = { 5.0f, 15.0f, 30.0f, 45.0f, 60.0f, 90.0f, 120.0f, 180.0f };

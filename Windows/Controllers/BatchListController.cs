@@ -9,15 +9,16 @@ namespace Xyrus.Apophysis.Windows.Controllers
 {
 	public class BatchListController : Controller<IMainView>, IBatchListController
 	{
-		private LazyResolver<IWaitImageController> mWaitImageController;
-		private LazyResolver<IThreadController> mListPreviewThreadController;
-		private LazyResolver<IMainController> mMainController;
+		private Resolver<IWaitImageController> mWaitImageController;
+		private Resolver<IThreadController> mListPreviewThreadController;
+		private Resolver<IMainController> mMainController;
 
 		private IFlameListView mFlameList;
+		private Lock mReplaceLock;
 
 		public BatchListController()
 		{
-			mMainController.Object.UndoController.CurrentReplaced += OnCurrentFlameReplaced;
+			mMainController.Object.FlameChanged += OnCurrentFlameReplaced;
 
 			mFlameList = View.FlameListView;
 
@@ -28,6 +29,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mFlameList.WaitImageController = mWaitImageController.Object;
 
 			mFlameList.LoadSettings();
+
+			mReplaceLock = new Lock();
 		}
 
 		protected override void DisposeOverride(bool disposing)
@@ -36,7 +39,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			{
 				if (mMainController.IsResolved)
 				{
-					mMainController.Object.UndoController.CurrentReplaced -= OnCurrentFlameReplaced;
+					mMainController.Object.FlameChanged -= OnCurrentFlameReplaced;
 				}
 
 				if (mFlameList != null)
@@ -48,12 +51,19 @@ namespace Xyrus.Apophysis.Windows.Controllers
 					mFlameList.Dispose();
 				}
 
+				if (mReplaceLock != null)
+				{
+					mReplaceLock.Dispose();
+				}
+
 				mListPreviewThreadController.Reset();
 				mWaitImageController.Reset();
+
 				mMainController.Reset(false);
 			}
 
 			mFlameList = null;
+			mReplaceLock = null;
 		}
 
 		public IEnumerable<Flame> Flames
@@ -113,7 +123,6 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			mFlameList.UpdateCurrent();
 		}
 
-
 		private void OnListSelectionChanged(object sender, FlameSelectEventArgs e)
 		{
 			mMainController.Object.LoadFlameAndEraseHistory(e.Flame);
@@ -121,6 +130,11 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 			mMainController.Object.UpdateToolbar();
 			mMainController.Object.UpdateMenu();
+
+			using (mReplaceLock.Enter())
+			{
+				mMainController.Object.RaiseFlameChanged();
+			}
 		}
 		private void OnListLabelEdited(object sender, FlameRenameEventArgs e)
 		{
@@ -138,17 +152,15 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 		private void OnCurrentFlameReplaced(object sender, EventArgs e)
 		{
-			using (mMainController.Object.Initializer.Enter())
-			{
-				var newFlame = mMainController.Object.UndoController.RequestCurrent();
+			if (mReplaceLock.IsBusy)
+				return;
 
-				mMainController.Object.Flames.Replace(mFlameList.SelectedFlame, newFlame);
-				mMainController.Object.EditorController.Flame = newFlame;
-				mMainController.Object.FlamePropertiesController.Flame = newFlame;
-				mMainController.Object.RenderController.UpdateSelection();
+			var newFlame = mMainController.Object.UndoController.RequestCurrent();
 
-				mFlameList.ReplaceCurrent(newFlame);
-			}
+			mMainController.Object.Flames.Replace(mFlameList.SelectedFlame, newFlame);
+			mMainController.Object.RenderController.UpdateSelection();
+
+			mFlameList.ReplaceCurrent(newFlame);
 
 			mMainController.Object.UpdatePreviews();
 		}

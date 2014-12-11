@@ -3,10 +3,11 @@ using System.Drawing;
 using Xyrus.Apophysis.Calculation;
 using Xyrus.Apophysis.Windows.Controls;
 using Xyrus.Apophysis.Windows.Forms;
+using Xyrus.Apophysis.Windows.Interfaces.Controllers;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
-	class IteratorVariationsController : Controller<Editor>
+	public class IteratorVariationsController : Controller<Editor>, IIteratorVariationsController
 	{
 		private EditorController mParent;
 

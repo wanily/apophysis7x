@@ -3,10 +3,11 @@ using System.Globalization;
 using System.Numerics;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Windows.Forms;
+using Xyrus.Apophysis.Windows.Interfaces.Controllers;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
-	class IteratorVectorEditController : Controller<Editor>
+	public class IteratorVectorEditController : Controller<Editor>, IIteratorVectorEditController
 	{
 		private EditorController mParent;
 		private TextBox[] mVectorTextBoxes;
