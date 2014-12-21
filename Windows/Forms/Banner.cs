@@ -1,10 +1,9 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
-using Xyrus.Apophysis.Windows.Interfaces.Views;
 
 namespace Xyrus.Apophysis.Windows.Forms
 {
-	public sealed partial class Banner : Form, IBannerView
+	public sealed partial class Banner : Form
 	{
 		private string mBannerText;
 

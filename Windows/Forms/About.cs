@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
-using Xyrus.Apophysis.Windows.Interfaces.Views;
 
 namespace Xyrus.Apophysis.Windows.Forms
 {
-	public partial class About : Form, IAboutView
+	public partial class About : Form
 	{
 		public About()
 		{

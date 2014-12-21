@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Xyrus.Apophysis.Windows.Interfaces.Views;
 
 namespace Xyrus.Apophysis.Windows.Forms
 {
-	public partial class Fullscreen : Form, IFullscreenView
+	public partial class Fullscreen : Form
 	{
 		private int mProgress;
 		private string mTimeElapsed;

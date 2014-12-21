@@ -4,11 +4,10 @@ using System.Windows.Forms;
 using Xyrus.Apophysis.Calculation;
 using Xyrus.Apophysis.Math;
 using Xyrus.Apophysis.Windows.Forms;
-using Xyrus.Apophysis.Windows.Interfaces.Controllers;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
-	public class EditorPreviewController : Controller<Editor>, IEditorPreviewController
+	class EditorPreviewController : Controller<Editor>
 	{
 		private EditorController mParent;
 		private ThumbnailRenderer mRenderer;

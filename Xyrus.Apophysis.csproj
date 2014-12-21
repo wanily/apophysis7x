@@ -83,10 +83,12 @@
     <Compile Include="Calculation\ExternalVariation.cs" />
     <Compile Include="Calculation\FinishedEventArgs.cs" />
     <Compile Include="Calculation\FinishedEventHandler.cs" />
+    <Compile Include="Calculation\IProgressive.cs" />
     <Compile Include="Calculation\IterationManager.cs" />
     <Compile Include="Calculation\IterationManagerBase.cs" />
     <Compile Include="Calculation\IterationThreadStateToken.cs" />
     <Compile Include="Calculation\IteratorData.cs" />
+    <Compile Include="Calculation\IThreaded.cs" />
     <Compile Include="Calculation\NativeTimer.cs" />
     <Compile Include="Calculation\ProgressEventHandler.cs" />
     <Compile Include="Calculation\ProgressEventArgs.cs" />
@@ -114,14 +116,7 @@
     <Compile Include="Calculation\VariationPriority.cs" />
     <Compile Include="Calculation\VariationRegistry.cs" />
     <Compile Include="Float.cs" />
-    <Compile Include="Interfaces\Calculation\INativeTimer.cs" />
-    <Compile Include="Interfaces\Calculation\IProgressive.cs" />
-    <Compile Include="Interfaces\Calculation\IThreaded.cs" />
-    <Compile Include="Interfaces\Threading\InvokeCallbackMode.cs" />
-    <Compile Include="Interfaces\Threading\IThreadController.cs" />
-    <Compile Include="Interfaces\Threading\IThreadState.cs" />
-    <Compile Include="Interfaces\Threading\IThreadStateToken.cs" />
-    <Compile Include="Resolver.cs" />
+    <Compile Include="LazyResolver.cs" />
     <Compile Include="Messaging\MessageCenter.cs" />
     <Compile Include="Messaging\MessageEventArgs.cs" />
     <Compile Include="Messaging\MessageEventHandler.cs" />
@@ -151,52 +146,22 @@
     <Compile Include="Numerics\System\Numerics\Vector4_Intrinsics.cs" />
     <Compile Include="Numerics\System\Numerics\Vector_Operations.cs" />
     <Compile Include="Threading\ThreadState.cs" />
-    <Compile Include="Windows\Forms\FlameListView.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Windows\Interfaces\Controllers\IAutosaveController.cs" />
-    <Compile Include="Windows\Interfaces\Controllers\IBannerController.cs" />
-    <Compile Include="Windows\Interfaces\Controllers\IBatchListController.cs" />
-    <Compile Include="Windows\Interfaces\Controllers\IController.cs" />
-    <Compile Include="Windows\Interfaces\Controllers\IDataInputController.cs" />
-    <Compile Include="Windows\Interfaces\Controllers\IEditorController.cs" />
-    <Compile Include="Windows\Interfaces\Controllers\IEditorPreviewController.cs" />
-    <Compile Include="Windows\Interfaces\Controllers\IEditorToolbarController.cs" />
-    <Compile Include="Windows\Interfaces\Controllers\IFlamePropertiesController.cs" />
-    <Compile Include="Windows\Interfaces\Controllers\IFullscreenController.cs" />
-    <Compile Include="Windows\Interfaces\Controllers\IIteratorColorController.cs" />
-    <Compile Include="Windows\Interfaces\Controllers\IIteratorPointEditController.cs" />
-    <Compile Include="Windows\Interfaces\Controllers\IIteratorController.cs" />
-    <Compile Include="Windows\Interfaces\Controllers\IIteratorVariablesController.cs" />
-    <Compile Include="Windows\Interfaces\Controllers\IIteratorVariationsController.cs" />
-    <Compile Include="Windows\Interfaces\Controllers\IIteratorVectorEditController.cs" />
-    <Compile Include="Windows\Interfaces\Controllers\IMainController.cs" />
-    <Compile Include="Windows\Interfaces\Controllers\IMainMenuController.cs" />
-    <Compile Include="Windows\Interfaces\Controllers\IMainPreviewController.cs" />
-    <Compile Include="Windows\Interfaces\Controllers\IMainToolbarController.cs" />
-    <Compile Include="Windows\Interfaces\Controllers\IMessagesController.cs" />
-    <Compile Include="Windows\Interfaces\Controllers\IRenderController.cs" />
-    <Compile Include="Windows\Interfaces\Controllers\ISettingsController.cs" />
-    <Compile Include="Windows\Interfaces\Controllers\IUndoController.cs" />
-    <Compile Include="Windows\Interfaces\Controllers\IViewController.cs" />
-    <Compile Include="Windows\Interfaces\Controllers\IWaitImageController.cs" />
-    <Compile Include="Windows\Interfaces\Views\FlameRenameEventArgs.cs" />
-    <Compile Include="Windows\Interfaces\Views\FlameRenameEventHandler.cs" />
-    <Compile Include="Windows\Interfaces\Views\FlameSelectEventArgs.cs" />
-    <Compile Include="Windows\Interfaces\Views\FlameSelectEventHandler.cs" />
-    <Compile Include="Windows\Interfaces\Views\IAboutView.cs" />
-    <Compile Include="Windows\Interfaces\Views\IBannerView.cs" />
-    <Compile Include="Windows\Interfaces\Views\IEditorView.cs" />
-    <Compile Include="Windows\Interfaces\Views\IFlameListView.cs" />
-    <Compile Include="Windows\Interfaces\Views\IFlamePropertiesView.cs" />
-    <Compile Include="Windows\Interfaces\Views\IFullscreenView.cs" />
-    <Compile Include="Windows\Interfaces\Views\IIteratorCanvasView.cs" />
-    <Compile Include="Windows\Interfaces\Views\IMainView.cs" />
-    <Compile Include="Windows\Interfaces\Views\IMessagesView.cs" />
-    <Compile Include="Windows\Interfaces\Views\IRenderView.cs" />
-    <Compile Include="Windows\Interfaces\Views\ISettingsView.cs" />
-    <Compile Include="Windows\Interfaces\Views\IView.cs" />
-    <Compile Include="Windows\Interfaces\Views\IWindow.cs" />
+    <Compile Include="Windows\Interfaces\IAutosaveController.cs" />
+    <Compile Include="Windows\Interfaces\IBatchListController.cs" />
+    <Compile Include="Windows\Interfaces\IController.cs" />
+    <Compile Include="Windows\Interfaces\IDataInputController.cs" />
+    <Compile Include="Windows\Interfaces\IEditorController.cs" />
+    <Compile Include="Windows\Interfaces\IFlamePropertiesController.cs" />
+    <Compile Include="Windows\Interfaces\IFullscreenController.cs" />
+    <Compile Include="Windows\Interfaces\IMainController.cs" />
+    <Compile Include="Windows\Interfaces\IMainMenuController.cs" />
+    <Compile Include="Windows\Interfaces\IMainPreviewController.cs" />
+    <Compile Include="Windows\Interfaces\IMainToolbarController.cs" />
+    <Compile Include="Windows\Interfaces\IMessagesController.cs" />
+    <Compile Include="Windows\Interfaces\IRenderController.cs" />
+    <Compile Include="Windows\Interfaces\ISettingsController.cs" />
+    <Compile Include="Windows\Interfaces\IUndoController.cs" />
+    <Compile Include="Windows\Interfaces\IViewController.cs" />
     <Compile Include="Windows\Resources\Icons.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -254,6 +219,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
+    <Compile Include="Threading\InvokeCallbackMode.cs" />
     <Compile Include="Threading\ThreadController.cs" />
     <Compile Include="Threading\ThreadStateToken.cs" />
     <Compile Include="UtilityExtensions.cs" />
@@ -290,10 +256,12 @@
     <Compile Include="Windows\Controllers\MainUndoController.cs" />
     <Compile Include="Windows\Controllers\KeyboardController.cs" />
     <Compile Include="Windows\Controllers\EditorToolbarController.cs" />
+    <Compile Include="Windows\Controllers\EditorUndoController.cs" />
     <Compile Include="Windows\Controllers\InputController.cs" />
     <Compile Include="Windows\Controllers\IteratorColorController.cs" />
     <Compile Include="Windows\Controllers\IteratorPointEditController.cs" />
-    <Compile Include="Windows\Controllers\IteratorController.cs" />
+    <Compile Include="Windows\Controllers\IteratorPropertiesController.cs" />
+    <Compile Include="Windows\Controllers\IteratorSelectionController.cs" />
     <Compile Include="Windows\Controllers\IteratorVariablesController.cs" />
     <Compile Include="Windows\Controllers\IteratorVariationsController.cs" />
     <Compile Include="Windows\Controllers\IteratorVectorEditController.cs" />

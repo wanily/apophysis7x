@@ -1,13 +1,12 @@
 ﻿using System.ComponentModel;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Windows.Controllers;
-using Xyrus.Apophysis.Windows.Interfaces.Views;
 
 namespace Xyrus.Apophysis.Windows.Forms
 {
-	public partial class Settings : Form, ISettingsView
+	public partial class Settings : Form
 	{
-		private readonly InputController mInputHandler;
+		private InputController mInputHandler;
 
 		public Settings()
 		{

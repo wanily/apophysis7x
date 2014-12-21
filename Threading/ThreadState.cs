@@ -1,9 +1,7 @@
-﻿using Xyrus.Apophysis.Interfaces.Threading;
-
-namespace Xyrus.Apophysis.Threading
+﻿namespace Xyrus.Apophysis.Threading
 {
 	[PublicAPI]
-	public class ThreadState : IThreadState
+	public class ThreadState
 	{
 		public virtual bool IsCancelling { get { return false; } }
 		public virtual bool IsSuspended { get { return false; } }

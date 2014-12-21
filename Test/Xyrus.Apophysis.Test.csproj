@@ -69,8 +69,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="AutosaveControllerTest.cs" />
-    <Compile Include="MainControllerTest.cs" />
+    <Compile Include="MainController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\MockChain.cs" />
     <Compile Include="Utilities\MockScope.cs" />

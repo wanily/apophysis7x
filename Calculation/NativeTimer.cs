@@ -1,10 +1,9 @@
 using System;
 using System.Runtime.InteropServices;
-using Xyrus.Apophysis.Interfaces.Calculation;
 
 namespace Xyrus.Apophysis.Calculation
 {
-	public class NativeTimer : INativeTimer
+	class NativeTimer
 	{
 		long mStartTime;
 		readonly long mFreq;

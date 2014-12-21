@@ -4,7 +4,7 @@ using System.Numerics;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Forms;
-using Xyrus.Apophysis.Windows.Interfaces.Controllers;
+using Xyrus.Apophysis.Windows.Interfaces;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
@@ -272,7 +272,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		public void OnResetCameraClick(object sender, EventArgs e)
 		{
-			var flame = mParent.BatchListController.SelectedFlame;
+			var flame = mParent.BatchListController.GetSelectedFlame();
+			if (flame == null)
+				return;
 
 			flame.Angle = 0;
 			flame.Origin = new Vector2();
@@ -287,7 +289,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 		public void OnRandomizeClick(object sender, EventArgs e)
 		{
-			var flame = mParent.BatchListController.SelectedFlame;
+			var flame = mParent.BatchListController.GetSelectedFlame();
+			if (flame == null)
+				return;
 			
 			flame.Randomize();
 
@@ -299,7 +303,9 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		}
 		public void OnSummarizeClick(object sender, EventArgs e)
 		{
-			var flame = mParent.BatchListController.SelectedFlame;
+			var flame = mParent.BatchListController.GetSelectedFlame();
+			if (flame == null)
+				return;
 
 			mParent.MessagesController.Summarize(flame);
 		}
@@ -308,7 +314,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		{
 			using (var about = new About())
 			{
-				about.Owner = ApophysisApplication.MainWindow.GetWindow() as Form;
+				about.Owner = ApophysisApplication.MainWindow.View as Form;
 				about.ShowDialog();
 			}
 		}

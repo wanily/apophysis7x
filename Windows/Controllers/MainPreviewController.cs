@@ -2,11 +2,10 @@ using System;
 using System.Drawing;
 using System.Globalization;
 using Xyrus.Apophysis.Calculation;
-using Xyrus.Apophysis.Interfaces.Calculation;
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Forms;
 using Xyrus.Apophysis.Windows.Input;
-using Xyrus.Apophysis.Windows.Interfaces.Controllers;
+using Xyrus.Apophysis.Windows.Interfaces;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
@@ -321,8 +320,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 
 		public void UpdatePreview()
 		{
-			var flame = mParent.BatchListController.SelectedFlame;
-			if (mParent.Initializer.IsBusy)
+			var flame = mParent.BatchListController.GetSelectedFlame();
+			if (mParent.Initializer.IsBusy || flame == null)
 				return;
 
 			mFlame = flame;

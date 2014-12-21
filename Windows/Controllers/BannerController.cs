@@ -1,21 +1,16 @@
-﻿using Xyrus.Apophysis.Windows.Interfaces.Controllers;
-using Xyrus.Apophysis.Windows.Interfaces.Views;
+﻿using Xyrus.Apophysis.Windows.Forms;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
 	[PublicAPI]
-	public class BannerController : Controller<IBannerView>, IBannerController
+	public class BannerController : Controller<Banner>
 	{
-		public BannerController()
+		protected override void AttachView()
 		{
 			View.Show();
 		}
-
-		protected override void DisposeOverride(bool disposing)
+		protected override void DetachView()
 		{
-			if (!disposing) 
-				return;
-
 			View.Close();
 		}
 

@@ -11,15 +11,11 @@ namespace Xyrus.Apophysis.Test.Utilities
 		public MockScope(MockBehavior behavior = MockBehavior.Strict)
 		{
 			mMock = new Mock<T>(behavior);
-			ApophysisApplication.Container.RegisterInstance(mMock.Object);
+			ApophysisApplication.Container.RegisterInstance(typeof (T), mMock.Object, new PerResolveLifetimeManager());
 		}
 		public Mock<T> Mock
 		{
 			get { return mMock; }
-		}
-		public T Object
-		{
-			get { return mMock.Object; }
 		}
 		public void Dispose()
 		{

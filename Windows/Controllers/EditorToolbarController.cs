@@ -1,11 +1,10 @@
 using System;
 using Xyrus.Apophysis.Windows.Controls;
 using Xyrus.Apophysis.Windows.Forms;
-using Xyrus.Apophysis.Windows.Interfaces.Controllers;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
-	public class EditorToolbarController : Controller<Editor>, IEditorToolbarController
+	class EditorToolbarController : Controller<Editor>
 	{
 		private EditorController mParent;
 

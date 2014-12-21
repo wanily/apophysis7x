@@ -1,13 +1,12 @@
 using System.Drawing;
-using Xyrus.Apophysis.Windows.Interfaces.Controllers;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
-	public class WaitImageController : IWaitImageController
+	static class WaitImageController
 	{
 		private const char mWaitGlyph = '6';
 
-		public Bitmap DrawWaitImage(Size size, Color backgroundColor, Color glyphColor, float glyphFontSize = 50.0f)
+		public static Bitmap DrawWaitImage(Size size, Color backgroundColor, Color glyphColor, float glyphFontSize = 50.0f)
 		{
 			var bitmap = new Bitmap(size.Width, size.Height);
 

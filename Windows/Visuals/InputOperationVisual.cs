@@ -10,7 +10,6 @@ using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Windows.Controllers;
 using Xyrus.Apophysis.Windows.Controls;
 using Xyrus.Apophysis.Windows.Input;
-using Iterator = Xyrus.Apophysis.Models.Iterator;
 using Rectangle = System.Drawing.Rectangle;
 
 namespace Xyrus.Apophysis.Windows.Visuals

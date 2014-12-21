@@ -8,13 +8,12 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Calculation;
-using Xyrus.Apophysis.Interfaces.Calculation;
 using Xyrus.Apophysis.Messaging;
 using Xyrus.Apophysis.Models;
 using Xyrus.Apophysis.Strings;
 using Xyrus.Apophysis.Windows.Controls;
 using Xyrus.Apophysis.Windows.Forms;
-using Xyrus.Apophysis.Windows.Interfaces.Controllers;
+using Xyrus.Apophysis.Windows.Interfaces;
 using Messages = Xyrus.Apophysis.Strings.Messages;
 
 namespace Xyrus.Apophysis.Windows.Controllers
@@ -335,7 +334,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			}
 			else
 			{
-				mRenderStack.Push(mParent.BatchListController.SelectedFlame);
+				mRenderStack.Push(mParent.BatchListController.GetSelectedFlame());
 			}
 
 			NextFlame();
@@ -529,7 +528,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 			}
 			else
 			{
-				SetSingleMode(mParent.BatchListController.SelectedFlame);
+				SetSingleMode(mParent.BatchListController.GetSelectedFlame());
 			}
 		}
 		private void UpdateSizeControls()
@@ -547,8 +546,8 @@ namespace Xyrus.Apophysis.Windows.Controllers
 				}
 				else
 				{
-					var flame = mParent.BatchListController.SelectedFlame;
-					var name = flame.CalculatedName.CleanseFileName();
+					var flame = mParent.BatchListController.GetSelectedFlame();
+					var name = (flame == null ? Common.DefaultRenderBatchName : flame.CalculatedName).CleanseFileName();
 
 					name += '.' + GetExtension(mFormat);
 

@@ -1,8 +1,7 @@
 using System;
+using System.ComponentModel;
 using System.Windows.Forms;
-using Microsoft.Practices.Unity;
-using Xyrus.Apophysis.Windows.Interfaces.Controllers;
-using Xyrus.Apophysis.Windows.Interfaces.Views;
+using Xyrus.Apophysis.Windows.Interfaces;
 
 namespace Xyrus.Apophysis.Windows
 {
@@ -22,7 +21,7 @@ namespace Xyrus.Apophysis.Windows
 	}
 
 	[PublicAPI]
-	public abstract class Controller<TView> : Controller, IViewController where TView : class, IWindow
+	public abstract class Controller<TView> : Controller, IViewController where TView : Component, new()
 	{
 		private TView mView;
 		private bool mDisposed;
@@ -30,24 +29,14 @@ namespace Xyrus.Apophysis.Windows
 
 		protected Controller()
 		{
-			mView = ApophysisApplication.Container.Resolve<TView>();
+			mView = new TView();
 		}
-
-		/// <summary>
-		/// DO NOT USE ANYMORE!
-		/// </summary>
-		/// <param name="view"></param>
-		[Obsolete]
 		protected Controller([NotNull] TView view)
 		{
 			if (view == null) throw new ArgumentNullException("view");
 			mView = view;
 		}
 
-		/// <summary>
-		/// DO NOT USE ANYMORE!
-		/// </summary>
-		[Obsolete]
 		public void Initialize()
 		{
 			if (mInitialized)
@@ -68,6 +57,7 @@ namespace Xyrus.Apophysis.Windows
 			{
 				if (mView != null)
 				{
+					DetachView();
 					mView.Dispose();
 					mView = null;
 				}
@@ -96,17 +86,8 @@ namespace Xyrus.Apophysis.Windows
 			}
 		}
 
-		/// <summary>
-		/// DO NOT OVERRIDE ANYMORE!
-		/// </summary>
-		[Obsolete]
-		protected virtual void AttachView() { }
-
-		/// <summary>
-		/// DO NOT OVERRIDE ANYMORE!
-		/// </summary>
-		[Obsolete]
-		protected virtual void DetachView() { }
+		protected abstract void AttachView();
+		protected abstract void DetachView();
 
 		public TView View
 		{
@@ -114,6 +95,10 @@ namespace Xyrus.Apophysis.Windows
 			{
 				return mView;
 			}
+		}
+		object IViewController.View
+		{
+			get { return View; }
 		}
 	}
 }

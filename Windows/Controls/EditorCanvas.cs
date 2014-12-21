@@ -1,18 +1,16 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.Linq;
 using System.Numerics;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Models;
-using Xyrus.Apophysis.Windows.Interfaces.Views;
 using Xyrus.Apophysis.Windows.Visuals;
 using Xyrus.Apophysis.Windows.Input;
 using Rectangle = System.Drawing.Rectangle;
 
 namespace Xyrus.Apophysis.Windows.Controls
 {
-	public partial class EditorCanvas : UserControl, IIteratorCanvasView
+	public partial class EditorCanvas : UserControl
 	{
 		private ControlVisualChain mVisual;
 		private InputHandlerChain mInteraction;
@@ -147,11 +145,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 			get { return mIteratorPainter.Collection; }
 			set
 			{
-				if (value == null) 
-					throw new ArgumentNullException("value");
-
 				mIteratorPainter.Collection = value;
-				SelectedIterator = value.First();
 			}
 		}
 
@@ -292,11 +286,13 @@ namespace Xyrus.Apophysis.Windows.Controls
 			}
 		}
 
-		[Browsable(false)]
+		[NotNull, Browsable(false)]
 		public EditorCommands Commands
 		{
 			get { return mCommands; }
 		}
+
+		[NotNull]
 		public EditorSettings Settings
 		{
 			get { return mIteratorInteraction.Settings; }
@@ -324,7 +320,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 		{
 			RaiseBeginEdit();
 		}
-		public void RaiseBeginEdit()
+		internal void RaiseBeginEdit()
 		{
 			if (mBeginEdit != null)
 				mBeginEdit(this, new EventArgs());
@@ -334,7 +330,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 		{
 			RaiseEdit();
 		}
-		public void RaiseEdit()
+		internal void RaiseEdit()
 		{
 			if (mEdit != null)
 				mEdit(this, new EventArgs());
@@ -344,7 +340,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 		{
 			RaiseEndEdit();
 		}
-		public void RaiseEndEdit()
+		internal void RaiseEndEdit()
 		{
 			if (mEndEdit != null)
 				mEndEdit(this, new EventArgs());
@@ -354,7 +350,7 @@ namespace Xyrus.Apophysis.Windows.Controls
 		{
 			RaiseSelectionChanged();
 		}
-		public void RaiseSelectionChanged()
+		internal void RaiseSelectionChanged()
 		{
 			if (mSelectionChanged != null)
 				mSelectionChanged(this, new EventArgs());
@@ -385,37 +381,6 @@ namespace Xyrus.Apophysis.Windows.Controls
 		{
 			add { mActiveMatrixChanged += value; }
 			remove { mActiveMatrixChanged -= value; }
-		}
-
-		public void LoadSettings()
-		{
-			Settings = new EditorSettings
-			{
-				MoveAmount = ApophysisSettings.Editor.MoveDistance,
-				AngleSnap = ApophysisSettings.Editor.RotateAngle,
-				ScaleSnap = ApophysisSettings.Editor.ScaleRatio,
-				LockAxes = ApophysisSettings.Editor.LockAxes,
-				ShowVariationPreview = ApophysisSettings.Editor.ShowVariationPreview,
-				ZoomAutomatically = ApophysisSettings.Editor.AutoZoom
-			};
-
-			ShowRuler = ApophysisSettings.Editor.ShowRulers;
-			PreviewDensity = ApophysisSettings.Editor.VariationPreviewDensity;
-			PreviewRange = ApophysisSettings.Editor.VariationPreviewRange;
-			PreviewApplyPostTransform = ApophysisSettings.Editor.VariationPreviewApplyPostTransform;
-		}
-		public void SaveSettings()
-		{
-			ApophysisSettings.Editor.LockAxes = Settings.LockAxes;
-			ApophysisSettings.Editor.MoveDistance = Settings.MoveAmount;
-			ApophysisSettings.Editor.RotateAngle = Settings.AngleSnap;
-			ApophysisSettings.Editor.ScaleRatio = Settings.ScaleSnap;
-			ApophysisSettings.Editor.ShowRulers = ShowRuler;
-			ApophysisSettings.Editor.ShowVariationPreview = Settings.ShowVariationPreview;
-			ApophysisSettings.Editor.AutoZoom = Settings.ZoomAutomatically;
-			ApophysisSettings.Editor.VariationPreviewDensity = PreviewDensity;
-			ApophysisSettings.Editor.VariationPreviewRange = PreviewRange;
-			ApophysisSettings.Editor.VariationPreviewApplyPostTransform = PreviewApplyPostTransform;
 		}
 
 		private void OnSettingsChanged(object sender, EventArgs e)

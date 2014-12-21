@@ -1,14 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.Windows.Forms;
 using Xyrus.Apophysis.Windows.Controls;
-using Xyrus.Apophysis.Windows.Interfaces.Controllers;
-using Xyrus.Apophysis.Windows.Interfaces.Views;
+using Xyrus.Apophysis.Windows.Interfaces;
 
 namespace Xyrus.Apophysis.Windows.Controllers
 {
-	public abstract class DataInputController<TView> : Controller<TView>, IDataInputController where TView : class, IWindow
+	public abstract class DataInputController<TView> : Controller<TView>, IDataInputController where TView : Component, new()
 	{
 		class InputInfo
 		{
@@ -27,11 +27,7 @@ namespace Xyrus.Apophysis.Windows.Controllers
 		private readonly Dictionary<TextBox, InputInfo> mDragPanelTextBoxes = new Dictionary<TextBox, InputInfo>();
 
 		protected DataInputController() { }
-
-		[Obsolete]
 		protected DataInputController([NotNull] TView view) : base(view) { }
-
-		[Obsolete]
 		protected DataInputController([NotNull] TView view, [NotNull] Lock initializeLock)
 			: base(view)
 		{

@@ -8,16 +8,11 @@ using System.Threading;
 using System.Windows.Forms;
 using Microsoft.Practices.Unity;
 using Xyrus.Apophysis.Calculation;
-using Xyrus.Apophysis.Interfaces.Calculation;
-using Xyrus.Apophysis.Interfaces.Threading;
 using Xyrus.Apophysis.Messaging;
 using Xyrus.Apophysis.Strings;
-using Xyrus.Apophysis.Threading;
 using Xyrus.Apophysis.Variations;
 using Xyrus.Apophysis.Windows.Controllers;
-using Xyrus.Apophysis.Windows.Forms;
-using Xyrus.Apophysis.Windows.Interfaces.Controllers;
-using Xyrus.Apophysis.Windows.Interfaces.Views;
+using Xyrus.Apophysis.Windows.Interfaces;
 using Messages = Xyrus.Apophysis.Strings.Messages;
 
 namespace Xyrus.Apophysis
@@ -25,7 +20,7 @@ namespace Xyrus.Apophysis
 	[PublicAPI]
 	public static class ApophysisApplication
 	{
-		private static IBannerController mBanner;
+		private static BannerController mBanner;
 		private static UnityContainer mContainer;
 
 		static ApophysisApplication()
@@ -46,7 +41,8 @@ namespace Xyrus.Apophysis
 			RegisterSingletons();
 			RegisterTypes();
 
-			mBanner = Container.Resolve<IBannerController>();
+			mBanner = new BannerController();
+			mBanner.Initialize();
 
 			SetupExceptionHandler();
 			LoadVariations();
@@ -61,19 +57,15 @@ namespace Xyrus.Apophysis
 				mBanner.Dispose();
 				mBanner = null;
 
-				Application.Run(MainWindow.GetWindow() as Form);
+				Application.Run((Form)MainWindow.View);
 			}
 		}
 
 		static void RegisterTypes()
 		{
-			Container.RegisterType<INativeTimer, NativeTimer>();
-
-			Container.RegisterType<IThreadController, ThreadController>();
-			Container.RegisterType<IWaitImageController, WaitImageController>();
+			Container.RegisterType<NativeTimer, NativeTimer>();
 
 			Container.RegisterType<IAutosaveController, AutosaveController>();
-			Container.RegisterType<IBannerController, BannerController>();
 			Container.RegisterType<IBatchListController, BatchListController>();
 			Container.RegisterType<IEditorController, EditorController>();
 			Container.RegisterType<IFlamePropertiesController, FlamePropertiesController>();
@@ -85,19 +77,10 @@ namespace Xyrus.Apophysis
 			Container.RegisterType<IRenderController, RenderController>();
 			Container.RegisterType<ISettingsController, SettingsController>();
 			Container.RegisterType<IUndoController, UndoController>();
+
 		}
 		static void RegisterSingletons()
 		{
-			Container.RegisterType<IAboutView, About>(Singleton());
-			Container.RegisterType<IBannerView, Banner>(Singleton());
-			Container.RegisterType<IEditorView, Editor>(Singleton());
-			Container.RegisterType<IFlamePropertiesView, FlameProperties>(Singleton());
-			Container.RegisterType<IFullscreenView, Fullscreen>(Singleton());
-			Container.RegisterType<IMainView, Main>(Singleton());
-			Container.RegisterType<IMessagesView, Windows.Forms.Messages>(Singleton());
-			Container.RegisterType<IRenderView, Render>(Singleton());
-			Container.RegisterType<ISettingsView, Windows.Forms.Settings>(Singleton());
-
 			Container.RegisterType<IMainController, MainController>(Singleton());
 		}
 
@@ -252,7 +235,7 @@ namespace Xyrus.Apophysis
 			MessageBox.Show(message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
 		}
 		
-		private static LifetimeManager Singleton()
+		internal static LifetimeManager Singleton()
 		{
 			return new ContainerControlledLifetimeManager();
 		}
@@ -260,10 +243,6 @@ namespace Xyrus.Apophysis
 		public static UnityContainer Container
 		{
 			get { return mContainer; }
-		}
-		public static void ClearContainer()
-		{
-			mContainer = new UnityContainer();
 		}
 
 		public static void Reset()
@@ -275,7 +254,7 @@ namespace Xyrus.Apophysis
 			}
 
 			mContainer.Dispose();
-			ClearContainer();
+			mContainer = new UnityContainer();
 		}
 
 		private static void OnThreadException(object sender, ThreadExceptionEventArgs e)
