@@ -240,6 +240,9 @@
         <DCCReference Include="Forms\LoadTracker.pas">
             <Form>LoadForm</Form>
         </DCCReference>
+        <DCCReference Include="Forms\Mutate.pas">
+            <Form>MutateForm</Form>
+        </DCCReference>
         <DCCReference Include="Forms\Options.pas">
             <Form>OptionsForm</Form>
         </DCCReference>

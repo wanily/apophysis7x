@@ -20,7 +20,7 @@
      along with this program; if not, write to the Free Software
      Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 }
-
+{$Include 'delphiversion.pas'}
 unit varWedge;
 
 interface
@@ -77,7 +77,9 @@ begin
   r := vvar * (r + wedge_hole);
   FPx^ := FPx^ + r * cosa;
   FPy^ := FPy^ + r * sina;
+    {$ifndef Pre15c}
   FPz^ := FPz^ + VVAR * FTz^;
+  {$endif}
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -179,5 +181,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationWedge), true, false);
+  RegisterVariation(TVariationClassLoader.Create(TVariationWedge), false, false);
 end.

@@ -206,6 +206,7 @@ type
     mnuManual: TMenuItem;
     N17: TMenuItem;
     mnuTrace: TMenuItem;
+    mnuSmoothPalette: TMenuItem;
     procedure mnuManualClick(Sender: TObject);
     procedure mnuReportFlameClick(Sender: TObject);
     procedure mnuTurnFlameToScriptClick(Sender: TObject);
@@ -253,6 +254,7 @@ type
     procedure mnuExportBitmapClick(Sender: TObject);
     procedure mnuFullScreenClick(Sender: TObject);
     procedure mnuRenderClick(Sender: TObject);
+    procedure mnuMutateClick(Sender: TObject);
     procedure mnuAdjustClick(Sender: TObject);
     procedure mnuResetLocationClick(Sender: TObject);
     procedure mnuAboutClick(Sender: TObject);
@@ -318,6 +320,7 @@ type
     procedure ToolButton19Click(Sender: TObject);
     procedure mnuTraceClick(Sender: TObject);
     procedure ToolButton23Click(Sender: TObject);
+    procedure mnuSmoothPaletteClick(Sender: TObject);
 
   private
     SubstSource: TStringList;
@@ -459,7 +462,7 @@ implementation
 
 uses
   Editor, Options, Settings, Template,
-  FullScreen, FormRender, Adjust, Browser, Save, About, CmapData,
+  FullScreen, FormRender, Mutate, Adjust, Browser, Save, About, CmapData,
   {$ifdef DisableScripting}
   {$else}
     ScriptForm, FormFavorites,
@@ -3388,6 +3391,7 @@ begin
   if EditForm.visible then EditForm.Close;
   if AdjustForm.visible then AdjustForm.close;
   if GradientBrowser.visible then GradientBrowser.close;
+  if MutateForm.visible then MutateForm.Close;
 //  if GradientForm.visible then GradientForm.Close;
 {$ifdef DisableScripting}
 {$else}
@@ -3743,6 +3747,7 @@ procedure TMainForm.UpdateWindows;
 begin
   if AdjustForm.visible then AdjustForm.UpdateDisplay;
   if EditForm.visible then EditForm.UpdateDisplay;
+  if MutateForm.visible then MutateForm.UpdateDisplay;
   if CurvesForm.Visible then CurvesForm.SetCp(MainCp);
   
 end;
@@ -3885,6 +3890,7 @@ end;
 procedure TMainForm.mnuGradClick(Sender: TObject);
 begin
   AdjustForm.UpdateDisplay;
+  AdjustForm.PageControl.TabIndex:=2;
   AdjustForm.Show;
 end;
 
@@ -3918,6 +3924,11 @@ begin
 end;
 
 procedure TMainForm.mnuSmoothGradientClick(Sender: TObject);
+begin
+  SmoothPalette;
+end;
+
+procedure TMainForm.mnuSmoothPaletteClick(Sender: TObject);
 begin
   SmoothPalette;
 end;
@@ -4069,6 +4080,7 @@ begin
         AdjustForm.UpdateDisplay;
 
         if EditForm.Visible then EditForm.UpdateDisplay;
+        if MutateForm.Visible then MutateForm.UpdateDisplay;
         RedrawTimer.enabled := true;
 
       end;
@@ -4270,9 +4282,16 @@ begin
   RenderForm.Show;
 end;
 
+procedure TMainForm.mnuMutateClick(Sender: TObject);
+begin
+  MutateForm.Show;
+  MutateForm.UpdateDisplay;
+end;
+
 procedure TMainForm.mnuAdjustClick(Sender: TObject);
 begin
   AdjustForm.UpdateDisplay;
+  AdjustForm.PageControl.TabIndex := 0;
   AdjustForm.Show;
 end;
 
@@ -4506,6 +4525,7 @@ procedure TMainForm.mnuImageSizeClick(Sender: TObject);
 begin
 //  SizeTool.Show;
   AdjustForm.UpdateDisplay;
+  AdjustForm.PageControl.TabIndex:=3;
   AdjustForm.Show;
 end;
 
@@ -5059,6 +5079,7 @@ begin
         end;
       end;
 
+      {$ifndef Pre15c}
       // tricky: attempt to convert parameters to 15C+-format if necessary
       if (ParseCp.noLinearFix) then
         for i := 0 to 1 do
@@ -5073,6 +5094,7 @@ begin
         SetVariation(0, linear_val(Attributes));
         SetVariation(1, flatten_val(Attributes));
       end;
+      {$endif}
 
       // now parse the rest of the variations...as usual
       for i := 2 to NRVAR - 1 do
@@ -5971,6 +5993,7 @@ end;
 procedure TMainForm.ToolButton19Click(Sender: TObject);
 begin
   AdjustForm.UpdateDisplay;
+  AdjustForm.PageControl.TabIndex:=4;
   AdjustForm.Show;
 end;
 
@@ -6203,6 +6226,7 @@ begin
   {if EditForm.Active then HelpTopic := 'Transform editor.htm'
 //  else if GradientForm.Active then HelpTopic := 'Gradient window.htm'
   else if AdjustForm.Active then HelpTopic := 'Adjust window.htm'
+  else if MutateForm.Active then HelpTopic := 'Mutation window.htm'
   else if RenderForm.Active then HelpTopic := 'Render window.htm';
   HtmlHelp(0, nil, HH_CLOSE_ALL, 0);
   URL := AppPath + 'Apophysis 2.0.chm';

@@ -20,7 +20,7 @@
      along with this program; if not, write to the Free Software
      Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 }
-
+{$Include 'delphiversion.pas'}
 unit varFoci;
 
 interface
@@ -68,7 +68,9 @@ begin
   FPx^ := FPx^ + (expx - expnx) * tmp;
   FPy^ := FPy^ + siny * tmp;
 
+{$ifndef Pre15c}
   FPz^ := FPz^ + vvar * FTz^;
+{$endif}
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -114,5 +116,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationFoci), true, false);
+  RegisterVariation(TVariationClassLoader.Create(TVariationFoci), false, false);
 end.

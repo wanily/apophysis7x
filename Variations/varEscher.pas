@@ -20,7 +20,7 @@
      along with this program; if not, write to the Free Software
      Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 }
-
+{$Include 'delphiversion.pas'}
 unit varEscher;
 
 interface
@@ -75,7 +75,9 @@ begin
     FPx^ := FPx^ + m * cs;
     FPy^ := FPy^ + m * sn;
 
+  {$ifndef Pre15c}
   FPz^ := FPz^ + vvar * FTz^;
+{$endif}
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -143,5 +145,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationEscher), true, false);
+  RegisterVariation(TVariationClassLoader.Create(TVariationEscher), false, false);
 end.

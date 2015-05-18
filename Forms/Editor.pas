@@ -556,7 +556,7 @@ function ScaleTrianglePoint(t: TTriangle; x, y, scale: double): TTriangle;
 implementation
 
 uses
-  Main, Global, Adjust, XformMan;
+  Main, Global, Adjust, Mutate, XformMan;
 
 {$R *.DFM}
 
@@ -1106,6 +1106,7 @@ begin
       MainForm.center[1] := cp.center[1];
     end;
     if AdjustForm.Visible then AdjustForm.UpdateDisplay;
+    if MutateForm.Visible then MutateForm.UpdateDisplay;
     if CurvesForm.Visible then CurvesForm.SetCp(MainCp);
     MainForm.RedrawTimer.enabled := true;
   end;

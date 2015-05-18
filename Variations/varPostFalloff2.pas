@@ -344,5 +344,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationPostFalloff2), true, false);
+  RegisterVariation(TVariationClassLoader.Create(TVariationPostFalloff2), true, true);
 end.

@@ -20,7 +20,7 @@
      along with this program; if not, write to the Free Software
      Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 }
-
+{$Include 'delphiversion.pas'}
 unit varJuliaScope;
 
 interface
@@ -118,7 +118,9 @@ begin
   r := vvar * Math.Power(sqr(FTx^) + sqr(FTy^), cn);
   FPx^ := FPx^ + r * cosa;
   FPy^ := FPy^ + r * sina;
+{$ifndef Pre15c}
   FPz^ := FPz^ + vvar * FTz^;
+{$endif}
 end;
 
 procedure TVariationJuliaScope.CalcPower2;
@@ -135,7 +137,9 @@ begin
 
   FPx^ := FPx^ + r * cosa;
   FPy^ := FPy^ + r * sina;
+{$ifndef Pre15c}
   FPz^ := FPz^ + vvar * FTz^;
+{$endif}
 end;
 
 procedure TVariationJuliaScope.CalcPowerMinus2;
@@ -151,14 +155,18 @@ begin
 
   FPx^ := FPx^ + r * cosa;
   FPy^ := FPy^ - r * sina;
+{$ifndef Pre15c}
   FPz^ := FPz^ + vvar * FTz^;
+{$endif}
 end;
 
 procedure TVariationJuliaScope.CalcPower1;
 begin
   FPx^ := FPx^ + vvar * FTx^;
   FPy^ := FPy^ + vvar * FTy^;
+{$ifndef Pre15c}
   FPz^ := FPz^ + vvar * FTz^;
+{$endif}
 end;
 
 procedure TVariationJuliaScope.CalcPowerMinus1;
@@ -169,7 +177,9 @@ begin
 
   FPx^ := FPx^ + r * FTx^;
   FPy^ := FPy^ - r * FTy^;
+{$ifndef Pre15c}
   FPz^ := FPz^ + vvar * FTz^;
+{$endif}
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -247,5 +257,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationJuliaScope), true, false);
+  RegisterVariation(TVariationClassLoader.Create(TVariationJuliaScope), false, false);
 end.

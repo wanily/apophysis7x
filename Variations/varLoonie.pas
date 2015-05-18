@@ -20,7 +20,7 @@
      along with this program; if not, write to the Free Software
      Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 }
-
+{$Include 'delphiversion.pas'}
 unit varLoonie;
 
 interface
@@ -75,7 +75,9 @@ begin
 		FPy^ := FPy^ + VVAR * FTy^;
 	end;
 
+{$ifndef Pre15c}
   FPz^ := FPz^ + vvar * FTz^;
+{$endif}
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -127,5 +129,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationLoonie), true, false);
+  RegisterVariation(TVariationClassLoader.Create(TVariationLoonie), false, false);
 end.

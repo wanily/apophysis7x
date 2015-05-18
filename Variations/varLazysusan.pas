@@ -20,7 +20,7 @@
      along with this program; if not, write to the Free Software
      Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 }
-
+{$Include 'delphiversion.pas'}
 unit varLazysusan;
 
 interface
@@ -79,7 +79,9 @@ begin
     FPy^ := FPy^ + VVAR * (r*y - lazysusan_y);
   end;
 
-  FPz^ := FPz^ + VVAR * FTz^;
+{$ifndef Pre15c}
+  FPz^ := FPz^ + vvar * FTz^;
+{$endif}
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -191,5 +193,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationLazysusan), true, false);
+  RegisterVariation(TVariationClassLoader.Create(TVariationLazysusan), false, false);
 end.

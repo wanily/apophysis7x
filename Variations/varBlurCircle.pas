@@ -20,7 +20,7 @@
      along with this program; if not, write to the Free Software
      Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 }
-
+{$Include 'delphiversion.pas'}
 unit varBlurCircle;
 
 interface
@@ -90,7 +90,9 @@ begin
 
   FPx^ := FPx^ + r * cosa;
   FPy^ := FPy^ + r * sina;
+{$ifndef Pre15c}
   FPz^ := FPz^ + vvar * FTz^;
+{$endif}
 end;
 
 
@@ -137,5 +139,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationBlurCircle), true, false);
+  RegisterVariation(TVariationClassLoader.Create(TVariationBlurCircle), false, false);
 end.

@@ -21,6 +21,8 @@
      Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 }
 
+{$Include 'delphiversion.pas'}
+
 unit XFormMan;
 
 interface
@@ -90,6 +92,37 @@ end;
 procedure VarSupports(index : integer; var supports3D : boolean; var supportsDC : boolean);
 const
   supports3D_arr: array[0..NRLOCVAR-1] of boolean = (
+  {$ifdef Pre15c}
+    true, //'linear3D',
+    false,//'linear',
+    false, //'sinusoidal',
+    false, //'spherical',
+    false, //'swirl',
+    false, //'horseshoe',
+    false, //'polar',
+    false, //'disc',
+    false, //'spiral',
+    false, //'hyperbolic',
+    false, //'diamond',
+    false, //'eyefish',
+    true, //'bubble',
+    true, //'cylinder',
+    false, //'noise',
+    false, //'blur',
+    false, //'gaussian_blur',
+    true, //'zblur',
+    true, //'blur3D',
+    true, //'pre_blur',
+    true, //'pre_zscale',
+    true, //'pre_ztranslate',
+    true, //'pre_rotate_x',
+    true, //'pre_rotate_y',
+    true, //'zscale',
+    true, //'ztranslate',
+    true, //'zcone',
+    true, //'post_rotate_x',
+    true //'post_rotate_y',
+  {$else}
     true, //'linear',
     true, //'flatten',
     true, //'sinusoidal',
@@ -119,32 +152,20 @@ const
     true, //'zcone',
     true, //'post_rotate_x',
     true //'post_rotate_y',
+  {$endif}
     );
  supportsDC_arr: array[0..NRLOCVAR-1] of boolean = (
-    false, //'linear3D',
-    false, //'linear',
+    false, //'linear3D/linear',
+    false, //'linear/flatten',
     false, //'sinusoidal',
     false, //'spherical',
     false, //'swirl',
     false, //'horseshoe',
     false, //'polar',
-//  false, //  'handkerchief',
-//  false, //  'heart',
     false, //'disc',
     false, //'spiral',
     false, //'hyperbolic',
     false, //'diamond',
-//  false, //  'ex',
-//  false, //  'julia',
-//  false, //  'bent',
-//  false, //  'waves',
-//  false, //  'fisheye',
-//  false, //  'popcorn',
-//  false, //  'exponential',
-//  false, //  'power',
-//  false, //  'cosine',
-//  false, //  'rings',
-//  false, //  'fan',
     false, //'eyefish',
     false, //'bubble',
     false, //'cylinder',
@@ -214,8 +235,13 @@ end;
 function Varnames(const index: integer): String;
 const
   cvarnames: array[0..NRLOCVAR-1] of string = (
+{$ifdef Pre15c}
+    'linear3D',
+    'linear',
+{$else}
     'linear',
     'flatten',
+{$endif}
     'sinusoidal',
     'spherical',
     'swirl',

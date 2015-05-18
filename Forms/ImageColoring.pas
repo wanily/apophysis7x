@@ -71,7 +71,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Main, Editor, GradientHlpr;
+  Main, Editor, Mutate, GradientHlpr;
 
 { TfrmImageColoring }
 
@@ -100,6 +100,7 @@ begin
   MainCp.cmap := FPal1;
 
   if EditForm.visible then EditForm.UpdateDisplay;
+  if MutateForm.Visible then MutateForm.UpdateDisplay;
 
   MainForm.RedrawTimer.enabled := true;
 end;

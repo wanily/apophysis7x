@@ -1,3 +1,5 @@
+
+{$Include 'delphiversion.pas'}
 unit varEpispiral; // <-- JK Changed unit name to avoid clobbering original
 //by Joel Faber  (adapted for plugin example by Jed Kelsey (JK)
 interface
@@ -69,6 +71,10 @@ begin
       FPx^ := FPx^ + vvar*t*cos(theta);
       FPy^ := FPy^ + vvar*t*sin(theta);
     end;
+
+    {$ifndef Pre15c}
+  FPz^ := FPz^ + vvar * FTz^;
+{$endif}
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -154,6 +160,6 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationEpispiral), true, false);  // <-- JK Plugin manager does this
+  RegisterVariation(TVariationClassLoader.Create(TVariationEpispiral), false, false);  // <-- JK Plugin manager does this
 end.
 

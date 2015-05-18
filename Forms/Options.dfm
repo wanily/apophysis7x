@@ -240,7 +240,7 @@ object OptionsForm: TOptionsForm
     Top = 49
     Width = 475
     Height = 396
-    ActivePage = GeneralPage
+    ActivePage = PathsPage
     Anchors = [akLeft, akRight, akBottom]
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText

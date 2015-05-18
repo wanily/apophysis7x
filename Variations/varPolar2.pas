@@ -20,7 +20,7 @@
      along with this program; if not, write to the Free Software
      Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 }
-
+{$Include 'delphiversion.pas'}
 unit varPolar2;
 
 interface
@@ -64,7 +64,9 @@ procedure TVariationPolar2.CalcFunction;
 begin
   FPy^ := FPy^ + p2vv2 * Ln(sqr(FTx^) + sqr(FTy^));
   FPx^ := FPx^ + p2vv * ArcTan2(FTx^, FTy^);
+{$ifndef Pre15c}
   FPz^ := FPz^ + vvar * FTz^;
+{$endif}
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -110,5 +112,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationPolar2), true, false);
+  RegisterVariation(TVariationClassLoader.Create(TVariationPolar2), false, false);
 end.

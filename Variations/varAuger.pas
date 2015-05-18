@@ -20,7 +20,7 @@
      along with this program; if not, write to the Free Software
      Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 }
-
+{$Include 'delphiversion.pas'}
 unit varAuger;
 
 interface
@@ -74,7 +74,9 @@ begin
 
   FPx^ := FPx^ + VVAR * (x + auger_sym * (dx - x));
   FPy^ := FPy^ + VVAR * dy;
-  FPz^ := FPz^ + VVAR * FTz^;
+{$ifndef Pre15c}
+  FPz^ := FPz^ + vvar * FTz^;
+{$endif}
 end;
 
 ///////////////////////////////////////////////////////////////////////////////

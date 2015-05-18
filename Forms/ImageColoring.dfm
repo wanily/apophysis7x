@@ -1,9 +1,9 @@
 object frmImageColoring: TfrmImageColoring
   Left = 419
   Top = 408
+  Width = 581
+  Height = 365
   Caption = 'Image coloring'
-  ClientHeight = 326
-  ClientWidth = 565
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText

@@ -148,8 +148,11 @@ type
     procedure PreZTranslate;
     procedure PreRotateX;
     procedure PreRotateY;
-
+{$ifdef Pre15c}
+    procedure Linear;
+{$else}
     procedure Flatten;
+{$endif}
     procedure ZScale;
     procedure ZTranslate;
     procedure ZCone;
@@ -261,9 +264,9 @@ begin
   p[2, 0] := 0;
   p[2, 1] := 0;
 
-  vars[0] := 1;
-  for i := 1 to High(vars) do
+  for i := 0 to High(vars) do
     vars[i] := 0;
+  vars[0] := 1;
 
   for i := 0 to NXFORMS do
     modWeights[i] := 1;
@@ -531,77 +534,40 @@ asm
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
+{$ifdef Pre15c}
+procedure TXForm.Linear;
+begin
+  FPx := FPx + vars[1] * FTx;
+  FPy := FPy + vars[1] * FTy;
+end;
+{$else}
 procedure TXForm.Flatten;
 begin
   FPz := 0;
 end;
+{$endif}
 
 //--1--////////////////////////////////////////////////////////////////////////
 procedure TXForm.Sinusoidal;
-{$ifndef _ASM_}
 begin
   FPx := FPx + vars[2] * sin(FTx);
   FPy := FPy + vars[2] * sin(FTy);
+  {$ifndef Pre15c}
   FPz := FPz + FTz * vars[2];
-{$else}
-asm
-    mov     edx, [eax + vars]
-    fld     qword ptr [edx + 2*8]
-    fld     qword ptr [eax + FTz]
-    fmul    st, st(1)
-    fadd    qword ptr [eax + FPz]
-    fstp    qword ptr [eax + FPz]
-    fld     qword ptr [eax + FTx]
-    fsin
-    fmul    st, st(1)
-    fadd    qword ptr [eax + FPx]
-    fstp    qword ptr [eax + FPx]
-    fld     qword ptr [eax + FTy]
-    fsin
-    fmulp
-    fadd    qword ptr [eax + FPy]
-    fstp    qword ptr [eax + FPy]
-    fwait
-{$endif}
+  {$endif}
 end;
 
 //--2--////////////////////////////////////////////////////////////////////////
 procedure TXForm.Spherical;
-{$ifndef _ASM_}
 var
   r: double;
 begin
   r := vars[3] / (sqr(FTx) + sqr(FTy) + EPS);
   FPx := FPx + FTx * r;
   FPy := FPy + FTy * r;
+  {$ifndef Pre15c}
   FPz := FPz + FTz * vars[3];
-{$else}
-asm
-    mov     edx, [eax + vars]
-    fld     qword ptr [edx + 3*8]
-    fld     qword ptr [eax + FTz]
-    fmul    st, st(1)
-    fadd    qword ptr [eax + FPz]
-    fstp    qword ptr [eax + FPz]
-    fstp    st
-
-    fld     qword ptr [eax + FTy]
-    fld     qword ptr [eax + FTx]
-    fld     st(1)
-    fmul    st, st
-    fld     st(1)
-    fmul    st, st
-    faddp
-    fadd    qword ptr [EPS]
-    fdivr   qword ptr [edx + 3*8]
-    fmul    st(2), st
-    fmulp
-    fadd    qword ptr [eax + FPx]
-    fstp    qword ptr [eax + FPx]
-    fadd    qword ptr [eax + FPy]
-    fstp    qword ptr [eax + FPy]
-    fwait
-{$endif}
+  {$endif}
 end;
 
 //--3--////////////////////////////////////////////////////////////////////////
@@ -612,7 +578,9 @@ begin
   SinCos(sqr(FTx) + sqr(FTy), sinr, cosr);
   FPx := FPx + vars[4] * (sinr * FTx - cosr * FTy);
   FPy := FPy + vars[4] * (cosr * FTx + sinr * FTy);
+  {$ifndef Pre15c}
   FPz := FPz + FTz * vars[4];
+  {$endif}
 end;
 
 //--4--////////////////////////////////////////////////////////////////////////
@@ -623,7 +591,9 @@ begin
   r := vars[5] / (sqrt(sqr(FTx) + sqr(FTy)) + EPS);
   FPx := FPx + (FTx - FTy) * (FTx + FTy) * r;
   FPy := FPy + (2*FTx*FTy) * r;
+  {$ifndef Pre15c}
   FPz := FPz + FTz * vars[5];
+  {$endif}
 end;
 
 //--5--////////////////////////////////////////////////////////////////////////
@@ -631,12 +601,13 @@ procedure TXForm.Polar;
 begin
   FPx := FPx + polar_vpi * FAngle; //vars[5] * FAngle / PI;
   FPy := FPy + vars[6] * (sqrt(sqr(FTx) + sqr(FTy)) - 1.0);
+  {$ifndef Pre15c}
   FPz := FPz + FTz * vars[6];
+  {$endif}
 end;
 
 //--6--////////////////////////////////////////////////////////////////////////
 procedure TXForm.Disc;
-{$ifndef _ASM_}
 var
   r, sinr, cosr: double;
 begin
@@ -644,36 +615,9 @@ begin
   r := disc_vpi * FAngle; //vars[7] * FAngle / PI;
   FPx := FPx + sinr * r;
   FPy := FPy + cosr * r;
+  {$ifndef Pre15c}
   FPz := FPz + FTz * vars[7];
-{$else}
-asm
-    mov     edx, [eax + vars]
-    fld     qword ptr [edx + 7*8]
-    fld     qword ptr [eax + FTz]
-    fmul    st, st(1)
-    fadd    qword ptr [eax + FPz]
-    fstp    qword ptr [eax + FPz]
-    fstp    st
-
-    fld     qword ptr [eax + disc_vpi]
-    fmul    qword ptr [eax + FAngle]
-    fld     qword ptr [eax + FTx]
-    fmul    st, st
-    fld     qword ptr [eax + FTy]
-    fmul    st, st
-    faddp
-    fsqrt
-    fldpi
-    fmulp
-    fsincos
-    fmul    st, st(2)
-    fadd    qword ptr [eax + FPy]
-    fstp    qword ptr [eax + FPy]
-    fmulp
-    fadd    qword ptr [eax + FPx]
-    fstp    qword ptr [eax + FPx]
-    fwait
-{$endif}
+  {$endif}
 end;
 
 //--7--////////////////////////////////////////////////////////////////////////
@@ -686,7 +630,9 @@ begin
   r := vars[8] / r;
   FPx := FPx + (FCosA + sinr) * r;
   FPy := FPy + (FsinA - cosr) * r;
+  {$ifndef Pre15c}
   FPz := FPz + FTz * vars[8];
+  {$endif}
 end;
 
 //--10--///////////////////////////////////////////////////////////////////////
@@ -694,7 +640,9 @@ procedure TXForm.Hyperbolic;
 begin
   FPx := FPx + vars[9] * FTx / (sqr(FTx) + sqr(FTy) + EPS);
   FPy := FPy + vars[9] * FTy;
+  {$ifndef Pre15c}
   FPz := FPz + FTz * vars[9];
+  {$endif}
 end;
 
 //--11--///////////////////////////////////////////////////////////////////////
@@ -705,7 +653,9 @@ begin
   SinCos(FLength, sinr, cosr);
   FPx := FPx + vars[10] * FSinA * cosr;
   FPy := FPy + vars[10] * FCosA * sinr;
+  {$ifndef Pre15c}
   FPz := FPz + FTz * vars[10];
+  {$endif};
 end;
 
 //--12--///////////////////////////////////////////////////////////////////////
@@ -716,7 +666,9 @@ begin
   r := 2 * vars[11] / (sqrt(sqr(FTx) + sqr(FTy)) + 1);
   FPx := FPx + r * FTx;
   FPy := FPy + r * FTy;
+  {$ifndef Pre15c}
   FPz := FPz + FTz * vars[11];
+  {$endif}
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -802,15 +754,20 @@ end;
 ///////////////////////////////////////////////////////////////////////////////
 procedure TXForm.Noise;
 var
-  r, s, sinr, cosr: double;
+  r, sinr, cosr: double;
 begin
+  {$IfDef RandomizeInVarsHack}
   // Randomize here = HACK! Fix me...
-  Randomize; SinCos(random * 2*pi, sinr, cosr);
-  s := vars[14];
-  r := s * random;
+  Randomize;
+  {$EndIf}
+
+  SinCos(random * 2*pi, sinr, cosr);
+  r := vars[14] * random;
   FPx := FPx + FTx * r * cosr;
   FPy := FPy + FTy * r * sinr;
-  FPz := FPz + FTz * s;
+  {$ifndef Pre15c}
+  FPz := FPz + FTz * r;
+  {$endif}
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -818,13 +775,17 @@ procedure TXForm.Blur;
 var
   r, s, z, sina, cosa: double;
 begin
+  {$IfDef RandomizeInVarsHack}
   // Randomize here = HACK! Fix me...
-  Randomize; SinCos(random * 2*pi, sina, cosa);
-  s := vars[15]; z := FTz;
-  r := s * random;
+  Randomize;
+  {$EndIf}
+  SinCos(random * 2*pi, sina, cosa);
+  r := vars[15] * random;
   FPx := FPx + r * cosa;
   FPy := FPy + r * sina;
-  FPz := FPz + s * z;
+  {$ifndef Pre15c}
+  FPz := FPz + FTz * r;
+  {$endif}
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -832,16 +793,21 @@ procedure TXForm.Gaussian;
 var
   r, s, z, sina, cosa: double;
 begin
+  {$IfDef RandomizeInVarsHack}
   // Randomize here = HACK! Fix me...
-  Randomize; SinCos(random * 2*pi, sina, cosa);
-  s := vars[16]; z := FTz;
-  r := s * (gauss_rnd[0] + gauss_rnd[1] + gauss_rnd[2] + gauss_rnd[3] - 2);
+  Randomize;
+  {$EndIf}
+
+  SinCos(random * 2*pi, sina, cosa);
+  r := vars[16] * (gauss_rnd[0] + gauss_rnd[1] + gauss_rnd[2] + gauss_rnd[3] - 2);
   gauss_rnd[gauss_N] := random;
   gauss_N := (gauss_N+1) and $3;
 
   FPx := FPx + r * cosa;
   FPy := FPy + r * sina;
-  FPz := FPz + s * z;
+  {$ifndef Pre15c}
+  FPz := FPz + vars[16] * FTz;
+  {$endif}
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -857,8 +823,12 @@ procedure TXForm.Blur3D;
 var
   r, sina, cosa, sinb, cosb: double;
 begin
+  {$IfDef RandomizeInVarsHack}
   // Randomize here = HACK! Fix me...
-  Randomize; SinCos(random * 2*pi, sina, cosa);
+  Randomize;
+  {$EndIf}
+
+  SinCos(random * 2*pi, sina, cosa);
   r := vars[18] * (gauss_rnd[0] + gauss_rnd[1] + gauss_rnd[2] + gauss_rnd[3] - 2);
   gauss_rnd[gauss_N] := random;
   gauss_N := (gauss_N+1) and $3;
@@ -874,8 +844,12 @@ procedure TXForm.PreBlur;
 var
   r, sina, cosa: double;
 begin
+  {$IfDef RandomizeInVarsHack}
   // Randomize here = HACK! Fix me...
-  Randomize; SinCos(random * 2*pi, sina, cosa);
+  Randomize;
+  {$EndIf}
+
+  SinCos(random * 2*pi, sina, cosa);
   r := vars[19] * (gauss_rnd[0] + gauss_rnd[1] + gauss_rnd[2] + gauss_rnd[3] - 2);
   gauss_rnd[gauss_N] := random;
   gauss_N := (gauss_N+1) and $3;
@@ -1241,7 +1215,11 @@ begin
 
   //fixed
   FFunctionList[0] := Linear3D;
+{$ifdef Pre15c}
+  FFunctionList[1] := Linear;
+{$else}
   FFunctionList[1] := Flatten;
+{$endif}
   FFunctionList[2] := Sinusoidal;
   FFunctionList[3] := Spherical;
   FFunctionList[4] := Swirl;

@@ -2327,7 +2327,9 @@ begin
               (p[0,0]<>1) or (p[0,1]<>0) or (p[1,0]<>0) or (p[1,1]<>1) or (p[2,0]<>0) or (p[2,1]<>0) or
               (symmetry <> 1) or (GetVariation(0) <> 1);
     if Result = false then
+    begin
       for i := 1 to NRVAR-1 do Result := Result or (GetVariation(i) <> 0);
+    end;
   end;
 end;
 

@@ -20,7 +20,7 @@
      along with this program; if not, write to the Free Software
      Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 }
-
+{$Include 'delphiversion.pas'}
 unit varCurl;
 
 interface
@@ -127,7 +127,9 @@ begin
 
   FPx^ := FPx^  + (FTx^*re + FTy^*im) * r;
   FPy^ := FPy^  + (FTy^*re - FTx^*im) * r;
-  FPz^ := FPz^  + vvar * FTz^;
+{$ifndef Pre15c}
+  FPz^ := FPz^ + vvar * FTz^;
+{$endif}
 end;
 
 procedure TVariationCurl.CalcZeroC2;
@@ -241,5 +243,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationCurl), true, false);
+  RegisterVariation(TVariationClassLoader.Create(TVariationCurl), false, false);
 end.

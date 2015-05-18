@@ -234,5 +234,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationBwraps), true, false);
+  RegisterVariation(TVariationClassLoader.Create(TVariationBwraps), false, false);
 end.

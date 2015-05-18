@@ -20,7 +20,7 @@
      along with this program; if not, write to the Free Software
      Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 }
-
+{$Include 'delphiversion.pas'}
 unit varElliptic;
 
 interface
@@ -77,7 +77,9 @@ begin
 	a := FTx^ / xmax;
 	b := sqrt_safe(1.0 - sqr(a));
 
+  {$ifndef Pre15c}
   FPz^ := FPz^ + vvar * FTz^;
+{$endif}
   FPx^ := FPx^ + v * ArcTan2(a, b);
   
   if (FTy^ > 0) then FPy^ := FPy^ + v * Ln(xmax + sqrt_safe(xmax - 1.0))
@@ -127,5 +129,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationElliptic), true, false);
+  RegisterVariation(TVariationClassLoader.Create(TVariationElliptic), false, false);
 end.

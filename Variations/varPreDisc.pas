@@ -20,7 +20,7 @@
      along with this program; if not, write to the Free Software
      Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 }
-
+{$Include 'delphiversion.pas'}
 unit varPreDisc;
 
 interface
@@ -69,7 +69,10 @@ begin
   r := vvar_by_pi * arctan2(FTx^, FTy^);
   FTx^ := sinr * r;
   FTy^ := cosr * r;
-  FTz^ := VVAR * FTz^;
+  {$ifndef Pre15c}
+    FTz^ := VVAR * FTz^;
+{$endif}
+
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -115,5 +118,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationPreDisc), true, false);
+  RegisterVariation(TVariationClassLoader.Create(TVariationPreDisc), false, false);
 end.

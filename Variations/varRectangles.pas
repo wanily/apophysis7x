@@ -23,7 +23,7 @@
 {
      This variation was started by Michael Faber
 }
-
+{$Include 'delphiversion.pas'}
 unit varRectangles;
 
 interface
@@ -81,28 +81,36 @@ procedure TVariationRectangles.CalcFunction;
 begin
   FPx^ := FPx^ + vvar * ((2*floor(FTx^/FRectanglesX) + 1)*FRectanglesX - FTx^);
   FPy^ := FPy^ + vvar * ((2*floor(FTy^/FRectanglesY) + 1)*FRectanglesY - FTy^);
+{$ifndef Pre15c}
   FPz^ := FPz^ + vvar * FTz^;
+{$endif}
 end;
 
 procedure TVariationRectangles.CalcZeroX;
 begin
   FPx^ := FPx^ + vvar * FTx^;
   FPy^ := FPy^ + vvar * ((2*floor(FTy^/FRectanglesY) + 1)*FRectanglesY - FTy^);
+{$ifndef Pre15c}
   FPz^ := FPz^ + vvar * FTz^;
+{$endif}
 end;
 
 procedure TVariationRectangles.CalcZeroY;
 begin
   FPx^ := FPx^ + vvar * ((2*floor(FTx^/FRectanglesX) + 1)*FRectanglesX - FTx^);
   FPy^ := FPy^ + vvar * FTy^;
+{$ifndef Pre15c}
   FPz^ := FPz^ + vvar * FTz^;
+{$endif}
 end;
 
 procedure TVariationRectangles.CalcZeroXY;
 begin
   FPx^ := FPx^ + vvar * FTx^;
   FPy^ := FPy^ + vvar * FTy^;
+{$ifndef Pre15c}
   FPz^ := FPz^ + vvar * FTz^;
+{$endif}
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -171,5 +179,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationRectangles), true, false);
+  RegisterVariation(TVariationClassLoader.Create(TVariationRectangles), false, false);
 end.

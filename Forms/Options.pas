@@ -633,6 +633,7 @@ begin
   grpEditorColors.Caption := TextByKey('editor-tab-color-title');
   cbMultithreadedPreview.Caption := TextByKey('options-tab-general-multithreadedpreview');
   cbMultithreadedPreviewWarning.Caption := TextByKey('options-tab-general-multithreadedpreview-warning');
+  panel50.Caption := TextByKey('options-tab-environment-pluginfolder');
 end;
 
 procedure TOptionsForm.pnlCenterLineClick(Sender: TObject);

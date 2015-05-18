@@ -20,7 +20,7 @@
      along with this program; if not, write to the Free Software
      Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 }
-
+{$Include 'delphiversion.pas'}
 unit varPreSinusoidal;
 
 interface
@@ -57,7 +57,9 @@ procedure TVariationPreSinusoidal.CalcFunction;
 begin
   FTx^ := vvar * sin(FTx^);
   FTy^ := vvar * sin(FTy^);
-  FTz^ := VVAR * FTz^;
+  {$ifndef Pre15c}
+    FTz^ := VVAR * FTz^;
+{$endif}
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -103,5 +105,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationPreSinusoidal), true, false);
+  RegisterVariation(TVariationClassLoader.Create(TVariationPreSinusoidal), false, false);
 end.

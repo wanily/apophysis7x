@@ -6,3 +6,6 @@
 // REMOVE COMMENT TO COMPILE T-500
 //{$define T500}
 //{$define Light}
+
+{$Define Pre15c}
+//{$Define RandomizeInVarsHack}

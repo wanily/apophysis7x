@@ -20,7 +20,7 @@
      along with this program; if not, write to the Free Software
      Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 }
-
+{$Include 'delphiversion.pas'}
 unit varWaves2;
 
 interface
@@ -65,7 +65,9 @@ procedure TVariationWaves2.CalcFunction;
 begin
   FPx^ := FPx^ + VVAR * (FTx^ + waves2_scalex * sin(FTy^ * waves2_freqx));
   FPy^ := FPy^ + VVAR * (FTy^ + waves2_scaley * sin(FTx^ * waves2_freqy));
+  {$ifndef Pre15c}
   FPz^ := FPz^ + VVAR * (FTz^ + waves2_scalez * sin(sqrt(sqr(FTx^)+sqr(FTy^)) * waves2_freqz));
+{$endif}
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -92,12 +94,19 @@ end;
 function TVariationWaves2.GetVariableNameAt(const Index: integer): string;
 begin
   case Index Of
+  {$ifndef Pre15c}
   0: Result := 'waves2_freqx';
   1: Result := 'waves2_freqy';
   2: Result := 'waves2_freqz';
   3: Result := 'waves2_scalex';
   4: Result := 'waves2_scaley';
   5: Result := 'waves2_scalez';
+  {$else}
+  0: Result := 'waves2_freqx';
+  1: Result := 'waves2_freqy';
+  2: Result := 'waves2_scalex';
+  3: Result := 'waves2_scaley';
+  {$endif}
   else
     Result := '';
   end
@@ -113,18 +122,22 @@ begin
   end else if Name = 'waves2_freqy' then begin
     waves2_freqy := Value;
     Result := True;
+ {$ifndef Pre15c}
   end else if Name = 'waves2_freqz' then begin
     waves2_freqz := Value;
     Result := True;
+ {$endif}
   end else if Name = 'waves2_scalex' then begin
     waves2_scalex := Value;
     Result := True;
   end else if Name = 'waves2_scaley' then begin
     waves2_scaley := Value;
     Result := True;
+  {$ifndef Pre15c}
   end else if Name = 'waves2_scalez' then begin
     waves2_scalez := Value;
     Result := True;
+  {$endif}
   end
 end;
 function TVariationWaves2.ResetVariable(const Name: string): boolean;
@@ -136,25 +149,33 @@ begin
   end else if Name = 'waves2_freqy' then begin
     waves2_freqy := 2;
     Result := True;
+ {$ifndef Pre15c}
   end else if Name = 'waves2_freqz' then begin
     waves2_freqz := 0;
     Result := True;
+ {$endif}
   end else if Name = 'waves2_scalex' then begin
     waves2_scalex := 1;
     Result := True;
   end else if Name = 'waves2_scaley' then begin
     waves2_scaley := 1;
     Result := True;
+  {$ifndef Pre15c}
   end else if Name = 'waves2_scalez' then begin
     waves2_scalez := 0;
     Result := True;
+  {$endif}
   end
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
 function TVariationWaves2.GetNrVariables: integer;
 begin
+  {$ifndef Pre15c}
   Result := 6
+{$else}
+  Result := 4
+  {$endif}
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -167,22 +188,26 @@ begin
   end else if Name = 'waves2_freqy' then begin
     Value := waves2_freqy;
     Result := True;
+    {$ifndef Pre15c}
   end else if Name = 'waves2_freqz' then begin
     Value := waves2_freqz;
     Result := True;
+  {$endif}
   end else if Name = 'waves2_scalex' then begin
     Value := waves2_scalex;
     Result := True;
   end else if Name = 'waves2_scaley' then begin
     Value := waves2_scaley;
     Result := True;
+      {$ifndef Pre15c}
   end else if Name = 'waves2_scalez' then begin
     Value := waves2_scalez;
     Result := True;
+  {$endif}
   end
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationWaves2), true, false);
+  RegisterVariation(TVariationClassLoader.Create(TVariationWaves2), false, false);
 end.

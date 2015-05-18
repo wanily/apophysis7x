@@ -141,6 +141,7 @@ uses
   FormRender in 'Forms\FormRender.pas' {RenderForm},
   Fullscreen in 'Forms\Fullscreen.pas' {FullscreenForm},
   LoadTracker in 'Forms\LoadTracker.pas' {LoadForm},
+  Mutate in 'Forms\Mutate.pas' {MutateForm},
   Options in 'Forms\Options.pas' {OptionsForm},
   Save in 'Forms\Save.pas' {SaveForm},
   Template in 'Forms\Template.pas' {TemplateForm},
@@ -177,6 +178,7 @@ begin
   Application.CreateForm(TRenderForm, RenderForm);
   Application.CreateForm(TFullscreenForm, FullscreenForm);
   Application.CreateForm(TLoadForm, LoadForm);
+  Application.CreateForm(TMutateForm, MutateForm);
   Application.CreateForm(TOptionsForm, OptionsForm);
   Application.CreateForm(TSaveForm, SaveForm);
   Application.CreateForm(TTemplateForm, TemplateForm);

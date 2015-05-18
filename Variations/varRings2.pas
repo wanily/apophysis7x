@@ -20,7 +20,7 @@
      along with this program; if not, write to the Free Software
      Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 }
-
+{$Include 'delphiversion.pas'}
 unit varRings2;
 
 interface
@@ -84,7 +84,9 @@ begin
 
   FPx^ := FPx^ + r * FTx^;
   FPy^ := FPy^ + r * FTy^;
+{$ifndef Pre15c}
   FPz^ := FPz^ + vvar * FTz^;
+{$endif}
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -143,5 +145,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationRings2), true, false);
+  RegisterVariation(TVariationClassLoader.Create(TVariationRings2), false, false);
 end.

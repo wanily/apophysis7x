@@ -398,7 +398,7 @@ begin
 	Add('options-tab-general-confirmrenderstop', 'Confirm stop rendering ');
 	Add('options-tab-general-oldgradientformat', 'Use old gradient format ');
 	Add('options-tab-general-alwaysblankflame', 'Disable templates ');
-	Add('options-tab-general-enablemissingpluginswarning', 'Warn on missing plugins ');
+	Add('options-tab-general-enablemissingpluginswarning', 'Warn on missing extensions ');
 	Add('options-tab-general-enablethumbnailembedding', 'Enable thumbnail embedding ');
 	Add('options-tab-general-rotatemode', 'Rotate mode ');
 	Add('options-tab-general-rotateimage', 'Rotate image ');
@@ -412,7 +412,7 @@ begin
 	Add('options-tab-general-guidethirdscolor', 'Thirds ');
 	Add('options-tab-general-guidegoldenratiocolor', 'Golden ratio ');
   Add('options-tab-general-singleprecision', 'Use single-precision buffers ');
-  Add('options-tab-general-pluginpath', 'Plugin folder ');
+  Add('options-tab-general-pluginpath', 'Extension folder ');
   Add('options-tab-general-multithreadedpreview', 'Multithreaded preview (experimental!)');
   Add('options-tab-general-multithreadedpreview-warning', 'WARNING: multithreaded previews are an experimental and might cause problems while using Apophysis 7X. Please disable this setting in case of problems.');
 	Add('options-tab-editor-title', 'Editor ');
@@ -448,6 +448,7 @@ begin
 	Add('options-tab-environment-functionlib', 'Scripting function library ');
 	Add('options-tab-environment-helpfile', 'Help file ');
 	Add('options-tab-environment-rememberlastopen', 'Remember last open parameters ');
+	Add('options-tab-environment-pluginfolder', 'Extension folder ');
 	Add('options-tab-environment-autosave', 'Enable autosave ');
 	Add('options-tab-environment-savefrequency', 'Save frequency ');
 	Add('preview-title', 'Preview');
@@ -533,15 +534,15 @@ begin
 	Add('main-status-calculatingpalette', 'Calculating palette (%d%)...');
 	Add('main-status-nohelpfile', 'Please specify a help file path in the options dialog first.');
 	Add('main-status-variationsorvariables', 'variations or variables');
-	Add('main-status-plugins', 'plugins');
-  Add('main-status-pluginpath-ioerror', 'Failed to write the setting for the plugin directory. Apophysis will use the default setting.');
+	Add('main-status-plugins', 'extensions');
+  Add('main-status-pluginpath-ioerror', 'Failed to write the setting for the extension directory. Apophysis will use the default setting.');
 	Add('main-status-noloadingerrors', 'Flame loaded without errors');
 	Add('main-status-loadingerrorcount', '%d errors in flame');
 	Add('main-status-morepluginsneeded', 'The flame "%s" requires the following additional %s:');
   Add('main-status-noautosave', 'No autosave present.');
 	Add('main-report-transformcount', 'Transform count: %d');
 	Add('main-report-finaltransform', 'Has final transform: %s');
-	Add('main-report-usedplugins', 'Used plugins:');
+	Add('main-report-usedplugins', 'Used variations:');
 	Add('main-report-noplugins', '(none)');
   Add('selecttransform-title', 'Select transforms');
   Add('selecttransform-included', 'Transforms to link');

@@ -20,7 +20,7 @@
      along with this program; if not, write to the Free Software
      Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 }
-
+{$Include 'delphiversion.pas'}
 unit varFan2;
 
 interface
@@ -101,7 +101,9 @@ begin
   r := vvar * sqrt(sqr(FTx^) + sqr(FTy^));
   FPx^ := FPx^ + r * cosr;
   FPy^ := FPy^ + r * sinr;
-  FPz^ := FPz^  + vvar * FTz^;
+ {$ifndef Pre15c}
+  FPz^ := FPz^ + vvar * FTz^;
+{$endif}
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -168,5 +170,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationFan2), true, false);
+  RegisterVariation(TVariationClassLoader.Create(TVariationFan2), false, false);
 end.

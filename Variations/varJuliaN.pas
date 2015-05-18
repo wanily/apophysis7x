@@ -1,3 +1,5 @@
+
+{$Include 'delphiversion.pas'}
 unit varJuliaN;
 
 interface
@@ -93,7 +95,9 @@ begin
 
   FPx^ := FPx^ + r * cosa;
   FPy^ := FPy^ + r * sina;
+{$ifndef Pre15c}
   FPz^ := FPz^ + vvar * FTz^;
+{$endif}
 end;
 
 procedure TVariationJulian.CalcPower2;
@@ -110,7 +114,9 @@ begin
     FPx^ := FPx^ - vvar2 * d;
     FPy^ := FPy^ - vvar2 / d * FTy^;
   end;
+{$ifndef Pre15c}
   FPz^ := FPz^ + vvar * FTz^;
+{$endif}
 end;
 
 procedure TVariationJulian.CalcPowerMinus2;
@@ -131,14 +137,18 @@ begin
     FPx^ := FPx^ - r * xd;
     FPy^ := FPy^ + r * FTy^;
   end;
+{$ifndef Pre15c}
   FPz^ := FPz^ + vvar * FTz^;
+{$endif}
 end;
 
 procedure TVariationJulian.CalcPower1;
 begin
   FPx^ := FPx^ + vvar * FTx^;
   FPy^ := FPy^ + vvar * FTy^;
+{$ifndef Pre15c}
   FPz^ := FPz^ + vvar * FTz^;
+{$endif}
 end;
 
 procedure TVariationJulian.CalcPowerMinus1;
@@ -149,7 +159,9 @@ begin
 
   FPx^ := FPx^ + r * FTx^;
   FPy^ := FPy^ - r * FTy^;
+{$ifndef Pre15c}
   FPz^ := FPz^ + vvar * FTz^;
+{$endif}
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -227,6 +239,6 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationJulian), true, false);
+  RegisterVariation(TVariationClassLoader.Create(TVariationJulian), false, false);
 end.
 

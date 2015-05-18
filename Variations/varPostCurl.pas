@@ -20,7 +20,7 @@
      along with this program; if not, write to the Free Software
      Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 }
-
+{$Include 'delphiversion.pas'}
 unit varPostCurl;
 
 interface
@@ -79,6 +79,9 @@ begin
   r := sqr(re) + sqr(im);
   FPx^ := (x * re + y * im) / r;
   FPy^ := (y * re - x * im) / r;
+  {$ifndef Pre15c}
+  FPz^ := FPz^ + vvar * FPz^;
+{$endif}
 end;
 ///////////////////////////////////////////////////////////////////////////////
 class function TVariationPostCurl.GetInstance: TBaseVariation;
@@ -152,5 +155,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationPostCurl), true, false);
+  RegisterVariation(TVariationClassLoader.Create(TVariationPostCurl), false, false);
 end.

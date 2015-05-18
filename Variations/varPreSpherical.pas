@@ -20,7 +20,7 @@
      along with this program; if not, write to the Free Software
      Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 }
-
+{$Include 'delphiversion.pas'}
 unit varPreSpherical;
 
 interface
@@ -60,7 +60,9 @@ begin
   r := vvar / (sqr(FTx^) + sqr(FTy^) + 10e-300);
   FTx^ := FTx^ * r;
   FTy^ := FTy^ * r;
-  FTz^ := VVAR * FTz^;
+{$ifndef Pre15c}
+    FTz^ := VVAR * FTz^;
+{$endif}
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -106,5 +108,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationPreSpherical), true, false);
+  RegisterVariation(TVariationClassLoader.Create(TVariationPreSpherical), false, false);
 end.
