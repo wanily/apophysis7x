@@ -22,18 +22,9 @@
 }
 unit RenderingImplementation;
 
-{$ifdef Apo7X64}
-{$else}
-//  {$define _ASM_}
-{$endif}
-
 interface
 
 uses
-{$ifndef _ASM_}
-{$else}
-AsmRandom,
-{$endif}
   Windows, Classes, Forms, Graphics, Global,
   RenderingInterface, Xform, Math, Translation,
   RenderingCommon, ControlPoint, Sysutils,
