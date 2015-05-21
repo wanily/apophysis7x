@@ -94,7 +94,7 @@ function CreatePalette(strng: string): TColorMap;
 
 implementation
 
-uses Main, Options, Editor, {Gradient,} Registry, Adjust, Mutate;
+uses Main, Options, Editor, {Gradient,} Registry, Adjust;
 
 {$R *.DFM}
 
@@ -492,7 +492,6 @@ begin
   MainCP.cmapindex := -1;
   if EditForm.Visible then EditForm.UpdateDisplay;
   if AdjustForm.Visible then AdjustForm.UpdateDisplay;
-  if MutateForm.Visible then MutateForm.UpdateDisplay;
   MainForm.RedrawTimer.enabled := true;
 end;
 

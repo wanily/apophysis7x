@@ -1,26 +1,3 @@
-{
-     Apophysis Copyright (C) 2001-2004 Mark Townsend
-     Apophysis Copyright (C) 2005-2006 Ronald Hordijk, Piotr Borys, Peter Sdobnov
-     Apophysis Copyright (C) 2007-2008 Piotr Borys, Peter Sdobnov
-     
-     Apophysis "3D hack" Copyright (C) 2007-2008 Peter Sdobnov
-     Apophysis "7X" Copyright (C) 2009-2010 Georg Kiehne
-
-     This program is free software; you can redistribute it and/or modify
-     it under the terms of the GNU General Public License as published by
-     the Free Software Foundation; either version 2 of the License, or
-     (at your option) any later version.
-
-     This program is distributed in the hope that it will be useful,
-     but WITHOUT ANY WARRANTY; without even the implied warranty of
-     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-     GNU General Public License for more details.
-
-     You should have received a copy of the GNU General Public License
-     along with this program; if not, write to the Free Software
-     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
-}
-
 unit Global;
 
 interface
@@ -31,156 +8,136 @@ uses
 
 type
   EFormatInvalid = class(Exception);
-  TIntegerArray = array[0..9] of Integer;
+  TIntegerArray = array [0 .. 9] of Integer;
 
-{ Weight manipulation }
-{ Triangle transformations }
 function triangle_area(t: TTriangle): double;
-function transform_affine(const t: TTriangle; const Triangles: TTriangles): boolean;
+function transform_affine(const t: TTriangle;
+  const Triangles: TTriangles): boolean;
 function line_dist(x, y, x1, y1, x2, y2: double): double;
 function dist(x1, y1, x2, y2: double): double;
-{ Parsing functions }
 function GetVal(token: string): string;
 function ReplaceTabs(str: string): string;
-{ Palette and gradient functions }
-//function GetGradient(FileName, Entry: string): string;
-{ Misc }
 function det(a, b, c, d: double): double;
 function solve3(x1, x2, x1h, y1, y2, y1h, z1, z2, z1h: double;
   var a, b, e: double): double;
 function OpenSaveFileDialog(Parent: TWinControl;
-                            const DefExt,
-                            Filter,
-                            InitialDir,
-                            Title: string;
-                            var FileName: string;
-                            MustExist,
-                            OverwritePrompt,
-                            NoChangeDir,
-                            DoOpen: Boolean): Boolean;
-procedure LoadThumbnailPlaceholder(ThumbnailSize : integer);
+  const DefExt, Filter, InitialDir, Title: string; var FileName: string;
+  MustExist, OverwritePrompt, NoChangeDir, DoOpen: boolean): boolean;
+procedure LoadThumbnailPlaceholder(ThumbnailSize: Integer);
 function GetEnvVarValue(const VarName: string): string;
-
 
 const
   APP_NAME: string = 'Apophysis/XW';
   APP_VERSION: string = 'Version 3.00.7621';
-  {$ifdef Apo7X64}
+{$IFDEF Apo7X64}
   APP_BUILD: string = ' - 64 bit';
-  {$else}
+{$ELSE}
   APP_BUILD: string = ' - 32 bit';
-  {$endif}
-  MAX_TRANSFORMS: integer = 100;
-  prefilter_white: integer = 1024;
+{$ENDIF}
+  MAX_TRANSFORMS: Integer = 100;
+  prefilter_white: Integer = 1024;
   eps: double = 1E-10;
   White_level = 200;
   clyellow1 = TColor($17FCFF);
   clplum2 = TColor($ECA9E6);
   clSlateGray = TColor($837365);
-  FT_BMP = 1; FT_PNG = 2; FT_JPG = 3;
+  FT_BMP = 1;
+  FT_PNG = 2;
+  FT_JPG = 3;
 
 const
-  crEditArrow  = 20;
-  crEditMove   = 21;
+  crEditArrow = 20;
+  crEditMove = 21;
   crEditRotate = 22;
-  crEditScale  = 23;
+  crEditScale = 23;
 
 const
-  SingleBuffer : boolean =
-  {$ifdef Apo7X64}
+  SingleBuffer: boolean =
+{$IFDEF Apo7X64}
     false
-  {$else}
+{$ELSE}
     true
-  {$endif};
-  
+{$ENDIF};
+
 var
-  MainSeed: integer;
+  MainSeed: Integer;
   MainTriangles: TTriangles;
-  Transforms: integer; // Count of Tranforms
+  Transforms: Integer;
   EnableFinalXform: boolean;
-  AppPath: string; // Path of applicatio file
-  OpenFile: string; // Name of currently open file
+  AppPath: string;
+  OpenFile: string;
   CanDrawOnResize: boolean;
   PreserveWeights: boolean;
-  AlwaysCreateBlankFlame : boolean;
-  StartupCheckForUpdates : boolean;
-  TBWidth1 : integer;
-  TBWidth2 : integer;
-  TBWidth3 : integer;
-  TBWidth4 : integer;
-  TBWidth5 : integer;
-  ThumbnailPlaceholder : TBitmap;
-  WarnOnMissingPlugin : boolean;
-  EmbedThumbnails : boolean;
-  LanguageFile : string;
-  AvailableLanguages : TStringList;
-  PluginPath : string;
+  AlwaysCreateBlankFlame: boolean;
+  StartupCheckForUpdates: boolean;
+  TBWidth1: Integer;
+  TBWidth2: Integer;
+  TBWidth3: Integer;
+  TBWidth4: Integer;
+  TBWidth5: Integer;
+  ThumbnailPlaceholder: TBitmap;
+  WarnOnMissingPlugin: boolean;
+  LanguageFile: string;
+  AvailableLanguages: TStringList;
+  PluginPath: string;
   MultithreadedPreview: boolean;
-  cmap_index: integer;
+  cmap_index: Integer;
   ImageFolder: string;
-
-  { Editor }
 
   UseFlameBackground, UseTransformColors: boolean;
   HelpersEnabled: boolean;
-  EditorBkgColor, ReferenceTriangleColor: integer;
-  GridColor1, GridColor2, HelpersColor: integer;
+  EditorBkgColor, ReferenceTriangleColor: Integer;
+  GridColor1, GridColor2, HelpersColor: Integer;
   ExtEditEnabled, TransformAxisLock, RebuildXaosLinks: boolean;
   ShowAllXforms: boolean;
-  EditorPreviewTransparency: integer;
+  EditorPreviewTransparency: Integer;
   EnableEditorPreview: boolean;
 
-  { Display }
-
-  defSampleDensity, defPreviewDensity: Double;
-  defGamma, defBrightness, defVibrancy,
-  defFilterRadius, defGammaThreshold: Double;
-  defOversample: integer;
-
-  { Render }
+  defSampleDensity, defPreviewDensity: double;
+  defGamma, defBrightness, defVibrancy, defFilterRadius,
+    defGammaThreshold: double;
+  defOversample: Integer;
 
   renderDensity, renderFilterRadius: double;
-  renderOversample, renderWidth, renderHeight: integer;
-  renderBitsPerSample: integer;
+  renderOversample, renderWidth, renderHeight: Integer;
+  renderBitsPerSample: Integer;
   renderPath: string;
-  JPEGQuality: integer;
-  renderFileFormat: integer;
-  InternalBitsPerSample: integer;
+  JPEGQuality: Integer;
+  renderFileFormat: Integer;
+  InternalBitsPerSample: Integer;
 
   NrTreads: Integer;
-  UseNrThreads: integer;
+  UseNrThreads: Integer;
 
-  PNGTransparency: integer;
+  PNGTransparency: Integer;
   ShowTransparency: boolean;
 
   MainPreviewScale: double;
   ExtendMainPreview: boolean;
 
-  StoreEXIF : boolean;
-  StoreParamsEXIF : boolean;
-  ExifAuthor : string;
-
-  { Defaults }
+  StoreEXIF: boolean;
+  StoreParamsEXIF: boolean;
+  ExifAuthor: string;
 
   LastOpenFile: string;
-  LastOpenFileEntry: integer;
+  LastOpenFileEntry: Integer;
   RememberLastOpenFile: boolean;
   UseSmallThumbnails: boolean;
   ClassicListMode: boolean;
-  ConfirmDelete: boolean; // Flag confirmation of entry deletion
+  ConfirmDelete: boolean;
   ConfirmExit: boolean;
   ConfirmStopRender: boolean;
   SavePath, SmoothPalettePath: string;
   RandomPrefix, RandomDate: string;
-  RandomIndex: integer;
+  RandomIndex: Integer;
   FlameFile, GradientFile, GradientEntry, FlameEntry: string;
   ParamFolder: string;
   prevLowQuality, prevMediumQuality, prevHighQuality: double;
   defSmoothPaletteFile: string;
-  BrowserPath: string; // Stored path of browser open dialog
+  BrowserPath: string;
   EditPrevQual, MutatePrevQual, AdjustPrevQual: Integer;
-  randMinTransforms, randMaxTransforms: integer;
-  mutantMinTransforms, mutantMaxTransforms: integer;
+  randMinTransforms, randMaxTransforms: Integer;
+  mutantMinTransforms, mutantMaxTransforms: Integer;
   KeepBackground: boolean;
   defFlameFile: string;
   HelpPath: string;
@@ -192,13 +149,12 @@ var
   ShowRenderStats: boolean;
   LowerRenderPriority: boolean;
 
-  SymmetryType: integer;
-  SymmetryOrder: integer;
-  SymmetryNVars: integer;
+  SymmetryType: Integer;
+  SymmetryOrder: Integer;
+  SymmetryNVars: Integer;
   Variations: array of boolean;
-  //VariationOptions: int64;
 
-  MainForm_RotationMode: integer;
+  MainForm_RotationMode: Integer;
   PreserveQuality: boolean;
 
   BatchSize: Integer;
@@ -206,21 +162,21 @@ var
   Script: string;
   ScriptPath: string;
   OpenFileType: TFileType;
-//  ResizeOnLoad: Boolean;
-  ShowProgress: Boolean;
+
+  ShowProgress: boolean;
   defLibrary: string;
-  LimitVibrancy: Boolean;
+  LimitVibrancy: boolean;
   DefaultPalette: TColorMap;
 
-  AutoOpenLog: Boolean;
-  AutoSaveEnabled: Boolean;
-  AutoSaveFreq: integer;
+  AutoOpenLog: boolean;
+  AutoSaveEnabled: boolean;
+  AutoSaveFreq: Integer;
   AutoSavePath: string;
 
-  LineCenterColor : integer;
-  LineThirdsColor : integer;
-  LineGRColor : integer;
-  EnableGuides : boolean;
+  LineCenterColor: Integer;
+  LineThirdsColor: Integer;
+  LineGRColor: Integer;
+  EnableGuides: boolean;
 
 function Round6(x: double): double;
 
@@ -228,24 +184,19 @@ implementation
 
 function GetEnvVarValue(const VarName: string): string;
 var
-  BufSize: Integer;  // buffer size required for value
+  BufSize: Integer;
 begin
-  // Get required buffer size (inc. terminal #0)
-  BufSize := GetEnvironmentVariable(
-    PChar(VarName), nil, 0);
+  BufSize := GetEnvironmentVariable(PChar(VarName), nil, 0);
   if BufSize > 0 then
   begin
-    // Read env var value into result string
     SetLength(Result, BufSize - 1);
-    GetEnvironmentVariable(PChar(VarName),
-      PChar(Result), BufSize);
+    GetEnvironmentVariable(PChar(VarName), PChar(Result), BufSize);
   end
   else
-    // No such environment variable
     Result := '';
 end;
 
-procedure LoadThumbnailPlaceholder(ThumbnailSize : integer);
+procedure LoadThumbnailPlaceholder(ThumbnailSize: Integer);
 var
   placeholder: TBitmap;
   placeholderIcon: TBitmap;
@@ -262,30 +213,25 @@ begin
   placeholder.Width := ThumbnailSize;
   placeholder.Height := ThumbnailSize;
 
-  with placeholder.Canvas do begin
+  with placeholder.Canvas do
+  begin
     Brush.Color := $000000;
     FillRect(Rect(0, 0, placeholder.Width, placeholder.Height));
-    Draw(round(ThumbnailSize / 2 - pi_width / 2), round(ThumbnailSize / 2 - pi_height / 2), placeholderIcon);
+    Draw(round(ThumbnailSize / 2 - pi_width / 2),
+      round(ThumbnailSize / 2 - pi_height / 2), placeholderIcon);
   end;
 
   placeholderIcon.Free;
   ThumbnailPlaceholder := placeholder;
 end;
 
-{ IFS }
-
 function det(a, b, c, d: double): double;
 begin
   Result := (a * d - b * c);
 end;
 
-
 function Round6(x: double): double;
-// Really ugly, but it works
 begin
-  // --Z-- this is ridiculous:
-  //   Result := StrToFloat(Format('%.6f', [x]));
-  // and yes, this is REALLY ugly :-\
   Result := RoundTo(x, -6);
 end;
 
@@ -294,8 +240,8 @@ function solve3(x1, x2, x1h, y1, y2, y1h, z1, z2, z1h: double;
 var
   det1: double;
 begin
-  det1 := x1 * det(y2, 1.0, z2, 1.0) - x2 * det(y1, 1.0, z1, 1.0)
-    + 1 * det(y1, y2, z1, z2);
+  det1 := x1 * det(y2, 1.0, z2, 1.0) - x2 * det(y1, 1.0, z1, 1.0) + 1 *
+    det(y1, y2, z1, z2);
   if (det1 = 0.0) then
   begin
     Result := det1;
@@ -303,12 +249,12 @@ begin
   end
   else
   begin
-    a := (x1h * det(y2, 1.0, z2, 1.0) - x2 * det(y1h, 1.0, z1h, 1.0)
-      + 1 * det(y1h, y2, z1h, z2)) / det1;
-    b := (x1 * det(y1h, 1.0, z1h, 1.0) - x1h * det(y1, 1.0, z1, 1.0)
-      + 1 * det(y1, y1h, z1, z1h)) / det1;
-    e := (x1 * det(y2, y1h, z2, z1h) - x2 * det(y1, y1h, z1, z1h)
-      + x1h * det(y1, y2, z1, z2)) / det1;
+    a := (x1h * det(y2, 1.0, z2, 1.0) - x2 * det(y1h, 1.0, z1h, 1.0) + 1 *
+      det(y1h, y2, z1h, z2)) / det1;
+    b := (x1 * det(y1h, 1.0, z1h, 1.0) - x1h * det(y1, 1.0, z1, 1.0) + 1 *
+      det(y1, y1h, z1, z1h)) / det1;
+    e := (x1 * det(y2, y1h, z2, z1h) - x2 * det(y1, y1h, z1, z1h) + x1h *
+      det(y1, y2, z1, z2)) / det1;
     a := Round6(a);
     b := Round6(b);
     e := Round6(e);
@@ -317,26 +263,8 @@ begin
 end;
 
 function dist(x1, y1, x2, y2: double): double;
-//var
-//  d2: double;
 begin
-(*
-  { From FDesign source
-  { float pt_pt_distance(float x1, float y1, float x2, float y2) }
-  d2 := (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2);
-  if (d2 = 0.0) then
-  begin
-    Result := 0.0;
-    exit;
-  end
-  else
-    Result := sqrt(d2);
-*)
-
-  // --Z-- This is just amazing... :-\
-  // Someone needed an 'FDesign source' -  to compute distance between two points??!?
-
-  Result := Hypot(x2-x1, y2-y1);
+  Result := Hypot(x2 - x1, y2 - y1);
 end;
 
 function line_dist(x, y, x1, y1, x2, y2: double): double;
@@ -371,64 +299,62 @@ begin
     Result := a;
 end;
 
-function transform_affine(const t: TTriangle; const Triangles: TTriangles): boolean;
+function transform_affine(const t: TTriangle;
+  const Triangles: TTriangles): boolean;
 var
   ra, rb, rc, a, b, c: double;
 begin
-  Result := True;
-  ra := dist(Triangles[-1].y[0], Triangles[-1].x[0],
-    Triangles[-1].y[1], Triangles[-1].x[1]);
-  rb := dist(Triangles[-1].y[1], Triangles[-1].x[1],
-    Triangles[-1].y[2], Triangles[-1].x[2]);
-  rc := dist(Triangles[-1].y[2], Triangles[-1].x[2],
-    Triangles[-1].y[0], Triangles[-1].x[0]);
+  Result := true;
+  ra := dist(Triangles[-1].y[0], Triangles[-1].x[0], Triangles[-1].y[1],
+    Triangles[-1].x[1]);
+  rb := dist(Triangles[-1].y[1], Triangles[-1].x[1], Triangles[-1].y[2],
+    Triangles[-1].x[2]);
+  rc := dist(Triangles[-1].y[2], Triangles[-1].x[2], Triangles[-1].y[0],
+    Triangles[-1].x[0]);
   a := dist(t.y[0], t.x[0], t.y[1], t.x[1]);
   b := dist(t.y[1], t.x[1], t.y[2], t.x[2]);
   c := dist(t.y[2], t.x[2], t.y[0], t.x[0]);
   if (a > ra) then
-    Result := False
+    Result := false
   else if (b > rb) then
-    Result := False
+    Result := false
   else if (c > rc) then
-    Result := False
+    Result := false
   else if ((a = ra) and (b = rb) and (c = rc)) then
-    Result := False;
+    Result := false;
 end;
 
 function triangle_area(t: TTriangle): double;
 var
-  base, height: double;
+  base, Height: double;
 begin
   try
     base := dist(t.x[0], t.y[0], t.x[1], t.y[1]);
-    height := line_dist(t.x[2], t.y[2], t.x[1], t.y[1],
-      t.x[0], t.y[0]);
+    Height := line_dist(t.x[2], t.y[2], t.x[1], t.y[1], t.x[0], t.y[0]);
     if (base < 1.0) then
-      Result := height
-    else if (height < 1.0) then
+      Result := Height
+    else if (Height < 1.0) then
       Result := base
     else
-      Result := 0.5 * base * height;
-  except on E: EMathError do
+      Result := 0.5 * base * Height;
+  except
+    on e: EMathError do
       Result := 0;
   end;
 end;
 
-{ Parse }
-
 function GetVal(token: string): string;
 var
-  p: integer;
+  p: Integer;
 begin
   p := Pos('=', token);
-  Delete(Token, 1, p);
-  Result := Token;
+  Delete(token, 1, p);
+  Result := token;
 end;
 
 function ReplaceTabs(str: string): string;
-{Changes tab characters in a string to spaces}
 var
-  i: integer;
+  i: Integer;
 begin
   for i := 1 to Length(str) do
   begin
@@ -441,168 +367,72 @@ begin
   Result := str;
 end;
 
-(*
-{ Palette and gradient functions }
-
-function RGBToColor(Pal: TMapPalette; index: integer): Tcolor;
+function ReplaceStr(str, SearchStr, ReplaceStr: string): string;
 begin
-  { Converts the RGB values from a palette index to the TColor type ...
-    could maybe change it to SHLs }
-  Result := (Pal.Blue[index] * 65536) + (Pal.Green[index] * 256)
-    + Pal.Red[index];
-end;
-
-procedure rgb2hsv(const rgb: array of double; out hsv: array of double);
-var
-  maxval, minval: double;
-  del: double;
-begin
-  Maxval := Max(rgb[0], Max(rgb[1], rgb[2]));
-  Minval := Min(rgb[0], Min(rgb[1], rgb[2]));
-
-  hsv[2] := maxval; // v
-
-  if (Maxval > 0) and (maxval <> minval) then begin
-    del := maxval - minval;
-    hsv[1] := del / Maxval; //s
-
-    hsv[0] := 0;
-    if (rgb[0] > rgb[1]) and (rgb[0] > rgb[2]) then begin
-      hsv[0] := (rgb[1] - rgb[2]) / del;
-    end else if (rgb[1] > rgb[2]) then begin
-      hsv[0] := 2 + (rgb[2] - rgb[0]) / del;
-    end else begin
-      hsv[0] := 4 + (rgb[0] - rgb[1]) / del;
-    end;
-
-    if hsv[0] < 0 then
-      hsv[0] := hsv[0] + 6;
-
-  end else begin
-    hsv[0] := 0;
-    hsv[1] := 0;
-  end;
-end;
-
-procedure hsv2rgb(const hsv: array of double; out rgb: array of double);
-var
-  j: integer;
-  f, p, q, t, v: double;
-begin
-  j := floor(hsv[0]);
-  f := hsv[0] - j;
-  v := hsv[2];
-  p := hsv[2] * (1 - hsv[1]);
-  q := hsv[2] * (1 - hsv[1] * f);
-  t := hsv[2] * (1 - hsv[1] * (1 - f));
-
-  case j of
-    0: begin rgb[0] := v; rgb[1] := t; rgb[2] := p; end;
-    1: begin rgb[0] := q; rgb[1] := v; rgb[2] := p; end;
-    2: begin rgb[0] := p; rgb[1] := v; rgb[2] := t; end;
-    3: begin rgb[0] := p; rgb[1] := q; rgb[2] := v; end;
-    4: begin rgb[0] := t; rgb[1] := p; rgb[2] := v; end;
-    5: begin rgb[0] := v; rgb[1] := p; rgb[2] := t; end;
-  end;
-end;
-
-function GetGradient(FileName, Entry: string): string;
-var
-  FileStrings: TStringList;
-  GradStrings: TStringList;
-  i: integer;
-begin
-  FileStrings := TStringList.Create;
-  GradStrings := TStringList.Create;
-  try
-    try
-      FileStrings.LoadFromFile(FileName);
-      for i := 0 to FileStrings.count - 1 do
-        if Pos(Entry + ' ', Trim(FileStrings[i])) = 1 then break;
-      GradStrings.Add(FileStrings[i]);
-      repeat
-        inc(i);
-        GradStrings.Add(FileStrings[i]);
-      until Pos('}', FileStrings[i]) <> 0;
-      GetGradient := GradStrings.Text;
-    except on exception do
-        Result := '';
-    end;
-  finally
-    GradStrings.Free;
-    FileStrings.Free;
-  end;
-end;
-*)
-
-function ReplaceStr(Str, SearchStr, ReplaceStr: string): string;
-begin
-  while Pos(SearchStr, Str) <> 0 do
+  while Pos(SearchStr, str) <> 0 do
   begin
-    Insert(ReplaceStr, Str, Pos(SearchStr, Str));
-    system.Delete(Str, Pos(SearchStr, Str), Length(SearchStr));
+    Insert(ReplaceStr, str, Pos(SearchStr, str));
+    system.Delete(str, Pos(SearchStr, str), Length(SearchStr));
   end;
-  Result := Str;
+  Result := str;
 end;
 
-function SplitFilter(const fText: String; const fSep: Char; fTrim: Boolean=false; fQuotes: Boolean=false):TStringList;
-var vI: Integer;
-    vBuffer: String;
-    vOn: Boolean;
+function SplitFilter(const fText: String; const fSep: Char;
+  fTrim: boolean = false; fQuotes: boolean = false): TStringList;
+var
+  vI: Integer;
+  vBuffer: String;
+  vOn: boolean;
 begin
-  Result:=TStringList.Create;
-  vBuffer:='';
-  vOn:=true;
-  for vI:=1 to Length(fText) do
+  Result := TStringList.Create;
+  vBuffer := '';
+  vOn := true;
+  for vI := 1 to Length(fText) do
   begin
-    if (fQuotes and(fText[vI]=fSep)and vOn)or(Not(fQuotes) and (fText[vI]=fSep)) then
+    if (fQuotes and (fText[vI] = fSep) and vOn) or
+      (Not(fQuotes) and (fText[vI] = fSep)) then
     begin
-      if fTrim then vBuffer:=Trim(vBuffer);
-      if vBuffer='' then vBuffer:=fSep; // !!! e.g. split(',**',',')...
-      if vBuffer[1]=fSep then
-        vBuffer:=Copy(vBuffer,2,Length(vBuffer));
+      if fTrim then
+        vBuffer := Trim(vBuffer);
+      if vBuffer = '' then
+        vBuffer := fSep;
+      if vBuffer[1] = fSep then
+        vBuffer := Copy(vBuffer, 2, Length(vBuffer));
       Result.Add(vBuffer);
-      vBuffer:='';
+      vBuffer := '';
     end;
     if fQuotes then
     begin
-      if fText[vI]='"' then
+      if fText[vI] = '"' then
       begin
-        vOn:=Not(vOn);
+        vOn := Not(vOn);
         Continue;
       end;
-      if (fText[vI]<>fSep)or((fText[vI]=fSep)and(vOn=false)) then
-        vBuffer:=vBuffer+fText[vI];
-    end else
-      if fText[vI]<>fSep then
-        vBuffer:=vBuffer+fText[vI];
+      if (fText[vI] <> fSep) or ((fText[vI] = fSep) and (vOn = false)) then
+        vBuffer := vBuffer + fText[vI];
+    end
+    else if fText[vI] <> fSep then
+      vBuffer := vBuffer + fText[vI];
   end;
-  if vBuffer<>'' then
+  if vBuffer <> '' then
   begin
-    if fTrim then vBuffer:=Trim(vBuffer);
+    if fTrim then
+      vBuffer := Trim(vBuffer);
     Result.Add(vBuffer);
   end;
 end;
 
 function OpenSaveFileDialog(Parent: TWinControl;
-                            const DefExt,
-                            Filter,
-                            InitialDir,
-                            Title: string;
-                            var FileName: string;
-                            MustExist,
-                            OverwritePrompt,
-                            NoChangeDir,
-                            DoOpen: Boolean): Boolean;
-// uses commdlg
+  const DefExt, Filter, InitialDir, Title: string; var FileName: string;
+  MustExist, OverwritePrompt, NoChangeDir, DoOpen: boolean): boolean;
 var
   ofn: TOpenFileName;
-  szFile: array[0..260] of Char;
+  szFile: array [0 .. 260] of Char;
   fa, fa2: TStringList;
-  h,i,j,k,c : integer;
-  cs, s : string;
+  h, i, j, k, c: Integer;
+  cs, s: string;
 begin
-  Result := False;
+  Result := false;
   FillChar(ofn, SizeOf(TOpenFileName), 0);
   with ofn do
   begin
@@ -615,19 +445,22 @@ begin
     if (InitialDir <> '') then
       lpstrInitialDir := PChar(InitialDir);
     StrPCopy(lpstrFile, FileName);
-    lpstrFilter := PChar(ReplaceStr(Filter, '|', #0)+#0#0);
-    fa := splitFilter(Filter, '|');
+    lpstrFilter := PChar(ReplaceStr(Filter, '|', #0) + #0#0);
+    fa := SplitFilter(Filter, '|');
 
     k := 0;
     c := (fa.Count div 2);
-    for i := 0 to c - 1 do begin
+    for i := 0 to c - 1 do
+    begin
       j := 2 * i + 1;
       cs := LowerCase(fa.Strings[j]);
-      fa2 := splitFilter(cs, ';');
-      for h := 0 to fa2.Count - 1 do begin
+      fa2 := SplitFilter(cs, ';');
+      for h := 0 to fa2.Count - 1 do
+      begin
         cs := fa2.Strings[h];
         s := '*.' + LowerCase(DefExt);
-        if (cs = s) then k := i;
+        if (cs = s) then
+          k := i;
       end;
     end;
 
@@ -636,15 +469,18 @@ begin
       lpstrDefExt := PChar(DefExt);
   end;
 
-  if MustExist then ofn.Flags := ofn.Flags or OFN_FILEMUSTEXIST;
-  if OverwritePrompt then ofn.Flags := ofn.Flags or OFN_OVERWRITEPROMPT;
-  if NoChangeDir then ofn.Flags := ofn.Flags or OFN_NOCHANGEDIR;
+  if MustExist then
+    ofn.Flags := ofn.Flags or OFN_FILEMUSTEXIST;
+  if OverwritePrompt then
+    ofn.Flags := ofn.Flags or OFN_OVERWRITEPROMPT;
+  if NoChangeDir then
+    ofn.Flags := ofn.Flags or OFN_NOCHANGEDIR;
 
   if DoOpen then
   begin
     if GetOpenFileName(ofn) then
     begin
-      Result := True;
+      Result := true;
       FileName := StrPas(szFile);
     end;
   end
@@ -652,11 +488,10 @@ begin
   begin
     if GetSaveFileName(ofn) then
     begin
-      Result := True;
+      Result := true;
       FileName := StrPas(szFile);
     end;
   end
-end; // function OpenSaveFileDialog
+end;
 
 end.
-

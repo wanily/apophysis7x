@@ -26,7 +26,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, ExtCtrls, ComCtrls, Buttons, Menus, AppEvnts, CurvesControl,
+  StdCtrls, ExtCtrls, ComCtrls, Buttons, Menus, AppEvnts,
   ControlPoint, Cmap, RenderingInterface, Translation;
 
 const
@@ -157,15 +157,6 @@ type
     pnlWidth: TPanel;
     pnlHeight: TPanel;
     pnlBackground: TPanel;
-    TabSheet6: TTabSheet;
-    CurvesPanel: TPanel;
-    tbWeightLeft: TScrollBar;
-    tbWeightRight: TScrollBar;
-    Panel3: TPanel;
-    Panel4: TPanel;
-    Panel5: TPanel;
-    cbChannel: TComboBox;
-    btnResetCurves: TButton;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormDestroy(Sender: TObject);
@@ -316,12 +307,8 @@ type
     procedure txtValExit(Sender: TObject);
     procedure WeightScroll(Sender: TObject; ScrollCode: TScrollCode;
       var ScrollPos: Integer);
-    procedure WeightChange(Sender: TObject);
-    procedure curveChange(Sender: TObject);
-    procedure btnResetCurvesClick(Sender: TObject);
 
   private
-    CurvesControl: TCurvesControl;
     Resetting: boolean;
     Render: TRenderer;
     bm: TBitmap;
@@ -351,7 +338,6 @@ type
     oldpos, offset: integer; // for display...? :-\
 
     procedure Apply;
-    procedure SetCurvesCp(ccp: TControlPoint);
     function Blur(const radius: integer; const pal: TColorMap): TColorMap;
     function Frequency(const times: Integer; const pal: TColorMap): TColorMap;
     procedure SaveMap(FileName: string);
@@ -393,15 +379,9 @@ implementation
 //uses Main, Global, Registry, Mutate, Editor, Save, Browser;
 uses
   RndFlame, Main, cmapdata, Math, Browser, Editor, Global,
-  Save, Mutate, ClipBrd, GradientHlpr, Registry, Curves;
+  Save, ClipBrd, GradientHlpr, Registry;
 
 {$R *.DFM}
-
-procedure TAdjustForm.SetCurvesCp(ccp: TControlPoint);
-begin
-  if CurvesControl = nil then Exit;
-  CurvesControl.SetCp(ccp);
-end;
 
 procedure TAdjustForm.UpdateDisplay(PreviewOnly: boolean = false);
 var
@@ -409,10 +389,6 @@ var
   r: double;
 begin
   cp.copy(MainCp);
-  SetCurvesCp(MainCp);
-
-  tbWeightLeft.Position := Round(CurvesControl.WeightLeft * 10);
-  tbWeightRight.Position := Round(CurvesControl.WeightRight * 10);
 
   pw := PrevPnl.Width -2;
   ph := PrevPnl.Height -2;
@@ -489,11 +465,8 @@ begin
     MainForm.StopThread;
   MainForm.UpdateUndo;
   MainCp.Copy(cp, true);
-  SetCurvesCp(cp);
 
   if EditForm.Visible then EditForm.UpdateDisplay;
-  if MutateForm.Visible then MutateForm.UpdateDisplay;
-  if CurvesForm.Visible then CurvesForm.SetCp(cp);
 
   if bBgOnly then
     MainForm.tbShowAlphaClick(Self)
@@ -615,14 +588,7 @@ begin
 	btnPreset1.Caption := TextByKey('adjustment-tab-size-preset');
 	btnPreset2.Caption := TextByKey('adjustment-tab-size-preset');
 	btnPreset3.Caption := TextByKey('adjustment-tab-size-preset');
-  TabSheet6.Caption := TextByKey('adjustment-tab-curves-title');
-  btnResetCurves.Caption := TextByKey('adjustment-tab-curves-reset');
-  Panel5.Caption := TextByKey('adjustment-tab-curves-selected');
-  cbChannel.Items[0] := TextByKey('adjustment-tab-curves-overall');
-  cbChannel.Items[1] := TextByKey('adjustment-tab-curves-red');
-  cbChannel.Items[2] := TextByKey('adjustment-tab-curves-green');
-  cbChannel.Items[3] := TextByKey('adjustment-tab-curves-blue');
-	chkResizeMain.Caption := TextByKey('adjustment-tab-size-resizemain');
+  	chkResizeMain.Caption := TextByKey('adjustment-tab-size-resizemain');
 	mnuInstantPreview.Caption := TextByKey('adjustment-popup-quality-instantpreview');
 	mnuRandomize.Caption := TextByKey('adjustment-popup-gradient-randomize');
 	mnuInvert.Caption := TextByKey('adjustment-popup-gradient-invert');
@@ -635,18 +601,6 @@ begin
 	SaveasMapfile1.Caption := TextByKey('adjustment-popup-gradient-saveasmap');
 	mnuSaveAsDefault.Caption := TextByKey('adjustment-popup-gradient-saveasdefault');
   btnMenu.Caption := TextByKey('adjustment-tab-gradient-moderotate');
-
-  cbChannel.ItemIndex := 0;
-
-  if not (assigned(curvesControl)) then
-  begin
-    CurvesControl := TCurvesControl.Create(self);
-    CurvesControl.Align := alClient;
-    CurvesControl.Parent := CurvesPanel;
-  end;
-
-  tbWeightLeft.Position := Round(CurvesControl.WeightLeft * 10);
-  tbWeightRight.Position := Round(CurvesControl.WeightRight * 10);
 
   bm := TbitMap.Create;
   cp := TControlPoint.Create;
@@ -667,7 +621,6 @@ begin
   end;
 
   Sendmessage(cmbPalette.Handle, CB_SETDROPPEDWIDTH , cmbPalette.width * 2, 0);
-  SetCurvesCp(MainCp);
 end;
 
 procedure TAdjustForm.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -1091,14 +1044,6 @@ begin
   end;
 end;
 
-procedure TAdjustForm.curveChange(Sender: TObject);
-begin
-  if CurvesControl = nil then Exit;
-  CurvesControl.ActiveChannel := TCurvesChannel(cbChannel.ItemIndex);
-  tbWeightLeft.Position := Round(cp.curveWeights[cbChannel.ItemIndex][1] * 10); //Round(CurvesControl.WeightLeft * 10);
-  tbWeightRight.Position := Round(cp.curveWeights[cbChannel.ItemIndex][2] * 10); //Round(CurvesControl.WeightRight * 10);
-end;
-
 procedure TAdjustForm.scrollContrastScroll(Sender: TObject;
   ScrollCode: TScrollCode; var ScrollPos: Integer);
 begin
@@ -1168,11 +1113,8 @@ begin
 
   MainCp.CmapIndex := cmbPalette.ItemIndex;
   MainCp.cmap := Palette;
-  SetCurvesCp(MainCp);
 
   if EditForm.visible then EditForm.UpdateDisplay;
-  if MutateForm.Visible then MutateForm.UpdateDisplay;
-  if CurvesForm.Visible then CurvesForm.SetCp(MainCp);
 
   if mnuInstantPreview.Checked then DrawPreview;
 
@@ -1912,17 +1854,6 @@ begin
   SetMainWindowSize;
 end;
 
-procedure TAdjustForm.WeightChange(Sender: TObject);
-begin
-  CurvesControl.WeightLeft := tbWeightLeft.Position / 10.0;
-  CurvesControl.WeightRight := tbWeightRight.Position / 10.0;
-
-  cp.curveWeights[cbChannel.ItemIndex][1] := tbWeightLeft.Position / 10.0;
-  cp.curveWeights[cbChannel.ItemIndex][2] := tbWeightRight.Position / 10.0;
-
-  DrawPreview;
-end;
-
 procedure TAdjustForm.WeightScroll(Sender: TObject; ScrollCode: TScrollCode;
   var ScrollPos: Integer);
 begin
@@ -1933,8 +1864,6 @@ begin
   MainCp.Copy(cp, true);
 
   if EditForm.Visible then EditForm.UpdateDisplay;
-  if MutateForm.Visible then MutateForm.UpdateDisplay;
-  if CurvesForm.Visible then CurvesForm.SetCp(cp);
 
   MainForm.RedrawTimer.enabled := true;
 {  if ScrollCode = scEndScroll then
@@ -2695,25 +2624,6 @@ end;
 procedure TAdjustForm.btnResetClick(Sender: TObject);
 begin
   ScrollBar.Position := 0;
-end;
-
-procedure TAdjustForm.btnResetCurvesClick(Sender: TObject);
-var i: integer;
-begin
-  tbWeightLeft.Position := 10;
-  tbWeightRight.Position := 10;
-
-  with cp do for i := 0 to 3 do
-  begin
-    curvePoints[i][0].x := 0.00; curvePoints[i][0].y := 0.00; curveWeights[i][0] := 1;
-    curvePoints[i][1].x := 0.00; curvePoints[i][1].y := 0.00; curveWeights[i][1] := 1;
-    curvePoints[i][2].x := 1.00; curvePoints[i][2].y := 1.00; curveWeights[i][2] := 1;
-    curvePoints[i][3].x := 1.00; curvePoints[i][3].y := 1.00; curveWeights[i][3] := 1;
-  end;
-  MainCp.Copy(cp, true);
-  SetCurvesCp(MainCp);
-
-  Apply;
 end;
 
 procedure TAdjustForm.txtValKeyPress(Sender: TObject; var Key: Char);

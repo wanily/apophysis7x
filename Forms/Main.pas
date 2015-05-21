@@ -33,12 +33,12 @@ uses
   Windows, Forms, Dialogs, Menus, Controls, ComCtrls,
   ToolWin, StdCtrls, Classes, Messages, ExtCtrls, ImgList,
   Jpeg, SyncObjs, SysUtils, ClipBrd, Graphics, Math,
-  ExtDlgs, AppEvnts, ShellAPI, Registry, Curves,
+  ExtDlgs, AppEvnts, ShellAPI, Registry,
   Global, Xform, XFormMan, ControlPoint, CMap,
   RenderThread, RenderingCommon, RenderingInterface, (*ParameterIO,*)
   LibXmlParser, LibXmlComps, PngImage, XPMan,
   StrUtils, LoadTracker, CheckLst,
-  CommandLine, RegularExpressionsCore, MissingPlugin, Base64, Translation,
+  CommandLine, RegularExpressionsCore, MissingPlugin, Translation,
   RegexHelper;//, WinInet;
 
 const
@@ -254,7 +254,6 @@ type
     procedure mnuExportBitmapClick(Sender: TObject);
     procedure mnuFullScreenClick(Sender: TObject);
     procedure mnuRenderClick(Sender: TObject);
-    procedure mnuMutateClick(Sender: TObject);
     procedure mnuAdjustClick(Sender: TObject);
     procedure mnuResetLocationClick(Sender: TObject);
     procedure mnuAboutClick(Sender: TObject);
@@ -462,7 +461,7 @@ implementation
 
 uses
   Editor, Options, Settings, Template,
-  FullScreen, FormRender, Mutate, Adjust, Browser, Save, About, CmapData,
+  FullScreen, FormRender, Adjust, Browser, Save, About, CmapData,
   {$ifdef DisableScripting}
   {$else}
     ScriptForm, FormFavorites,
@@ -1508,7 +1507,7 @@ var
   FileList: TStringList;
   x, y: double;
   parameters: string;
-  curves, str: string;
+  str: string;
 begin
   FileList := TStringList.create;
   x := cp1.center[0];
@@ -1582,28 +1581,6 @@ begin
     end;
     parameters := parameters + format('plugins="%s" new_linear="1" ', [str]);
 
-    for i := 0 to 3 do
-    begin
-      curves := curves + FloatToStr(cp1.curvePoints[i][0].x) + ' ';
-      curves := curves + FloatToStr(cp1.curvePoints[i][0].y) + ' ';
-      curves := curves + FloatToStr(cp1.curveWeights[i][0]) + ' ';
-
-      curves := curves + FloatToStr(cp1.curvePoints[i][1].x) + ' ';
-      curves := curves + FloatToStr(cp1.curvePoints[i][1].y) + ' ';
-      curves := curves + FloatToStr(cp1.curveWeights[i][1]) + ' ';
-
-      curves := curves + FloatToStr(cp1.curvePoints[i][2].x) + ' ';
-      curves := curves + FloatToStr(cp1.curvePoints[i][2].y) + ' ';
-      curves := curves + FloatToStr(cp1.curveWeights[i][2]) + ' ';
-
-      curves := curves + FloatToStr(cp1.curvePoints[i][3].x) + ' ';
-      curves := curves + FloatToStr(cp1.curvePoints[i][3].y) + ' ';
-      curves := curves + FloatToStr(cp1.curveWeights[i][3]) + ' ';
-    end;
-
-    curves := trim(curves);
-    parameters := parameters + format('curves="%s" ', [curves]);
-
     FileList.Add('<flame name="' + title + '" ' + parameters + '>');
    { Write transform parameters }
     t := cp1.NumXForms;
@@ -1628,75 +1605,17 @@ begin
   end;
 end;
 
-function GetThumbnailBase64(const cp1: TControlPoint) : string;
-var
-  st: TMemoryStream;
-  tempcp : TControlPoint;
-  render : TRenderer;
-  buffer : array of byte;
-  base64 : string;
-  size   : integer;
-  bmp    : TJPegImage;
-  w, h, r: double;
-begin
-  w := cp1.Width; h := cp1.Height; r := w / h;
-  if (w < h) then begin
-    w := r * ThumbnailSize;
-    h := ThumbnailSize;
-  end else if (w > h) then begin
-    h := ThumbnailSize / r;
-    w := ThumbnailSize;
-  end else begin
-    w := ThumbnailSize;
-    h := ThumbnailSize;
-  end;
-
-  render := TRenderer.Create;
-  tempcp := TControlPoint.create;
-  tempcp.Copy(cp1);
-
-  tempcp.AdjustScale(round(w), round(h));
-  tempcp.Width := round(w);
-  tempcp.Height := round(h);
-  tempcp.spatial_oversample := defOversample;
-  tempcp.spatial_filter_radius := defFilterRadius;
-  tempcp.sample_density := 10;
-
-  render.SetCP(tempcp);
-  render.Render;
-
-  st := TMemoryStream.Create;
-  bmp := TJpegImage.Create;
-  bmp.Assign(render.GetImage);
-  bmp.SaveToStream(st);
-  size := st.Size;
-  SetLength(buffer, size);
-  st.Seek(0, soBeginning);
-
-  st.ReadBuffer(buffer[0], length(buffer));
-  base64 := B64Encode(TBinArray(buffer), length(buffer));
-
-  tempcp.Free;
-  render.Free;
-  st.Free;
-  bmp.Free;
-
-  result := base64;
-end;
-
 function FlameToXML(const cp1: TControlPoint; exporting, embedthumb: boolean): String;
 var
   t, i{, j}, pos: integer;
   FileList: TStringList;
   x, y: double;
   parameters: string;
-  curves, str, buf, xdata: string;
+  str, buf, xdata: string;
 begin
   FileList := TStringList.create;
   x := cp1.center[0];
   y := cp1.center[1];
-
-//  if cp1.cmapindex >= 0 then pal := pal + 'gradient="' + IntToStr(cp1.cmapindex) + '" ';
 
   try
     parameters := 'version="' + AppVersionString + '" ';
@@ -1767,28 +1686,6 @@ begin
     end;
     parameters := parameters + format('plugins="%s" new_linear="1" ', [str]);
 
-    for i := 0 to 3 do
-    begin
-      curves := curves + FloatToStr(cp1.curvePoints[i][0].x) + ' ';
-      curves := curves + FloatToStr(cp1.curvePoints[i][0].y) + ' ';
-      curves := curves + FloatToStr(cp1.curveWeights[i][0]) + ' ';
-
-      curves := curves + FloatToStr(cp1.curvePoints[i][1].x) + ' ';
-      curves := curves + FloatToStr(cp1.curvePoints[i][1].y) + ' ';
-      curves := curves + FloatToStr(cp1.curveWeights[i][1]) + ' ';
-
-      curves := curves + FloatToStr(cp1.curvePoints[i][2].x) + ' ';
-      curves := curves + FloatToStr(cp1.curvePoints[i][2].y) + ' ';
-      curves := curves + FloatToStr(cp1.curveWeights[i][2]) + ' ';
-
-      curves := curves + FloatToStr(cp1.curvePoints[i][3].x) + ' ';
-      curves := curves + FloatToStr(cp1.curvePoints[i][3].y) + ' ';
-      curves := curves + FloatToStr(cp1.curveWeights[i][3]) + ' ';
-    end;
-
-    curves := trim(curves);
-    parameters := parameters + format('curves="%s" ', [curves]);
-
     FileList.Add('<flame name="' + CleanXMLName(cp1.name) + '" ' + parameters + '>');
    { Write transform parameters }
     t := cp1.NumXForms;
@@ -1798,19 +1695,6 @@ begin
     begin
       // 'enabled' flag disabled in this release
       FileList.Add(cp1.xform[t].FinalToXMLString(cp1.finalXformEnabled));
-    end;
-
-    if (embedthumb and EmbedThumbnails) then begin
-      xdata := GetThumbnailBase64(cp1);
-      buf := '';
-      for i := 1 to length(xdata) do begin
-        buf := buf + xdata[i];
-        if (length(buf) = 150) then begin
-          FileList.Add('   <xdata content="' + buf + '" />');
-          buf := '';
-        end;
-      end;
-      if (Length(buf) > 0) then FileList.Add('   <xdata content="' + buf + '" />');
     end;
 
     { Write palette data }
@@ -3391,7 +3275,6 @@ begin
   if EditForm.visible then EditForm.Close;
   if AdjustForm.visible then AdjustForm.close;
   if GradientBrowser.visible then GradientBrowser.close;
-  if MutateForm.visible then MutateForm.Close;
 //  if GradientForm.visible then GradientForm.Close;
 {$ifdef DisableScripting}
 {$else}
@@ -3747,8 +3630,6 @@ procedure TMainForm.UpdateWindows;
 begin
   if AdjustForm.visible then AdjustForm.UpdateDisplay;
   if EditForm.visible then EditForm.UpdateDisplay;
-  if MutateForm.visible then MutateForm.UpdateDisplay;
-  if CurvesForm.Visible then CurvesForm.SetCp(MainCp);
   
 end;
 
@@ -4080,7 +3961,6 @@ begin
         AdjustForm.UpdateDisplay;
 
         if EditForm.Visible then EditForm.UpdateDisplay;
-        if MutateForm.Visible then MutateForm.UpdateDisplay;
         RedrawTimer.enabled := true;
 
       end;
@@ -4280,12 +4160,6 @@ begin
     if Assigned(RenderForm.Renderer) then RenderForm.Renderer.WaitFor; // hmm #2
   end;
   RenderForm.Show;
-end;
-
-procedure TMainForm.mnuMutateClick(Sender: TObject);
-begin
-  MutateForm.Show;
-  MutateForm.UpdateDisplay;
 end;
 
 procedure TMainForm.mnuAdjustClick(Sender: TObject);
@@ -4818,28 +4692,6 @@ begin
     if (v = '1') then Parsecp.noLinearFix := true
     else ParseCp.noLinearFix := false;
 
-    v := Attributes.Value('curves');
-    if (v <> '') then begin
-      GetTokens(String(v), tokens);
-      ParsePos := -1;
-      for i := 0 to 3 do
-      begin
-        Inc(ParsePos);ParseCp.curvePoints[i][0].x := StrToFloat(Tokens[ParsePos]);
-        Inc(ParsePos);ParseCp.curvePoints[i][0].y := StrToFloat(Tokens[ParsePos]);
-        Inc(ParsePos);ParseCp.curveWeights[i][0] := StrToFloat(Tokens[ParsePos]);
-        Inc(ParsePos);ParseCp.curvePoints[i][1].x := StrToFloat(Tokens[ParsePos]);
-        Inc(ParsePos);ParseCp.curvePoints[i][1].y := StrToFloat(Tokens[ParsePos]);
-        Inc(ParsePos);ParseCp.curveWeights[i][1] := StrToFloat(Tokens[ParsePos]);
-        Inc(ParsePos);ParseCp.curvePoints[i][2].x := StrToFloat(Tokens[ParsePos]);
-        Inc(ParsePos);ParseCp.curvePoints[i][2].y := StrToFloat(Tokens[ParsePos]);
-        Inc(ParsePos);ParseCp.curveWeights[i][2] := StrToFloat(Tokens[ParsePos]);
-        Inc(ParsePos);ParseCp.curvePoints[i][3].x := StrToFloat(Tokens[ParsePos]);
-        Inc(ParsePos);ParseCp.curvePoints[i][3].y := StrToFloat(Tokens[ParsePos]);
-        Inc(ParsePos);ParseCp.curveWeights[i][3] := StrToFloat(Tokens[ParsePos]);
-      end;
-
-    end;
-
     try
       v := Attributes.Value('center');
       GetTokens(String(v), tokens);
@@ -5097,7 +4949,7 @@ begin
       {$endif}
 
       // now parse the rest of the variations...as usual
-      for i := 2 to NRVAR - 1 do
+      for i := {$ifndef Pre15c}2{$else}0{$endif} to NRVAR - 1 do
       begin
         SetVariation(i, 0);
         v := TStringType(ReadWithSubst(Attributes, varnames(i)));
@@ -6021,7 +5873,6 @@ begin
     MainCp.cmapIndex := ci;
 
     if AdjustForm.Visible then AdjustForm.UpdateDisplay;
-    if CurvesForm.Visible then CurvesForm.SetCp(MainCp);
     if EditForm.Visible then EditForm.UpdateDisplay;
     
     RedrawTimer.enabled := true;
@@ -6344,9 +6195,6 @@ var
   w, h, r : double;
   i : integer;
 
-  stored_thumb : TJPegImage;
-  stored_thumb_data : TBinArray;
-  stored_thumb_size : integer;
   memstream : TMemoryStream;
 begin
   Inherited;
@@ -6360,77 +6208,43 @@ begin
     flameXML := LoadXMLFlameText(filename, Flames[i]);
     MainForm.ParseXML(cp, PCHAR(flameXML), true);
 
-    if (cp.xdata <> '') then begin
-      stored_thumb := TJPegImage.Create;
-      B64Decode(cp.xdata, stored_thumb_data, stored_thumb_size);
-      memstream := TMemoryStream.Create;
-      memstream.Size := stored_thumb_size;
-      stored_thumb_size := Length(stored_thumb_data);
-      memstream.WriteBuffer(stored_thumb_data[0], stored_thumb_size);
-      memstream.Seek(0, soBeginning);
-      //-X- test thumbnail integrity...memstream.SaveToFile('C:\Test.jpg');
-      stored_thumb.LoadFromStream(memstream);
-      memstream.Free;
-
-      w := stored_thumb.Width; h := stored_thumb.Height;
-
-      Thumbnail := TBitmap.Create;
-      Thumbnail.PixelFormat := pf24bit;
-      Thumbnail.HandleType := bmDIB;
-      Thumbnail.Width := ThumbnailSize;
-      Thumbnail.Height := ThumbnailSize;
-      Thumbnail.Canvas.Brush.Color := GetSysColor(5);
-      Thumbnail.Canvas.FillRect(Rect(0, 0, ThumbnailSize, ThumbnailSize));
-      Thumbnail.Canvas.Draw(round(ThumbnailSize / 2 - w / 2), round(ThumbnailSize / 2 - h / 2), stored_thumb);
-
-      MainForm.UsedThumbnails.Add(Thumbnail, nil);
-      MainForm.ListView1.Items[i].ImageIndex := MainForm.UsedThumbnails.Count - 1;
-
-      Thumbnail.Free;
-      Thumbnail := nil;
-
-      MainForm.ListView1.Refresh;
-
-      stored_thumb.Free;
+    w := cp.Width; h := cp.Height; r := w / h;
+    if (w < h) then begin
+      w := r * ThumbnailSize;
+      h := ThumbnailSize;
+    end else if (w > h) then begin
+      h := ThumbnailSize / r;
+      w := ThumbnailSize;
     end else begin
-      w := cp.Width; h := cp.Height; r := w / h;
-      if (w < h) then begin
-        w := r * ThumbnailSize;
-        h := ThumbnailSize;
-      end else if (w > h) then begin
-        h := ThumbnailSize / r;
-        w := ThumbnailSize;
-      end else begin
-        w := ThumbnailSize;
-        h := ThumbnailSize;
-      end;
-      cp.AdjustScale(round(w), round(h));
-      cp.Width := round(w);
-      cp.Height := round(h);
-      cp.spatial_oversample := defOversample;
-      cp.spatial_filter_radius := defFilterRadius;
-      cp.sample_density := 3;
-
-      Thumbnail := nil;
-      Renderer.SetCP(cp);
-      Renderer.Render;
-
-      Thumbnail := TBitmap.Create;
-      Thumbnail.PixelFormat := pf24bit;
-      Thumbnail.HandleType := bmDIB;
-      Thumbnail.Width := ThumbnailSize;
-      Thumbnail.Height := ThumbnailSize;
-      Thumbnail.Canvas.Brush.Color := GetSysColor(5);
-      Thumbnail.Canvas.FillRect(Rect(0, 0, ThumbnailSize, ThumbnailSize));
-      Thumbnail.Canvas.Draw(round(ThumbnailSize / 2 - w / 2), round(ThumbnailSize / 2 - h / 2), renderer.GetImage);
-
-      MainForm.UsedThumbnails.Add(Thumbnail, nil);
-      MainForm.ListView1.Items[i].ImageIndex := MainForm.UsedThumbnails.Count - 1;
-
-      Thumbnail.Free;
-      Thumbnail := nil;
-      MainForm.ListView1.Refresh;
+      w := ThumbnailSize;
+      h := ThumbnailSize;
     end;
+    cp.AdjustScale(round(w), round(h));
+    cp.Width := round(w);
+    cp.Height := round(h);
+    cp.spatial_oversample := defOversample;
+    cp.spatial_filter_radius := defFilterRadius;
+    cp.sample_density := 3;
+
+    Thumbnail := nil;
+    Renderer.SetCP(cp);
+    Renderer.Render;
+
+    Thumbnail := TBitmap.Create;
+    Thumbnail.PixelFormat := pf24bit;
+    Thumbnail.HandleType := bmDIB;
+    Thumbnail.Width := ThumbnailSize;
+    Thumbnail.Height := ThumbnailSize;
+    Thumbnail.Canvas.Brush.Color := GetSysColor(5);
+    Thumbnail.Canvas.FillRect(Rect(0, 0, ThumbnailSize, ThumbnailSize));
+    Thumbnail.Canvas.Draw(round(ThumbnailSize / 2 - w / 2), round(ThumbnailSize / 2 - h / 2), renderer.GetImage);
+
+    MainForm.UsedThumbnails.Add(Thumbnail, nil);
+    MainForm.ListView1.Items[i].ImageIndex := MainForm.UsedThumbnails.Count - 1;
+
+    Thumbnail.Free;
+    Thumbnail := nil;
+    MainForm.ListView1.Refresh;
   end;
   //MainForm.ListView1.Items.EndUpdate;
 

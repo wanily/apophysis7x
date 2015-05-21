@@ -178,6 +178,10 @@ object AdjustForm: TAdjustForm
     object TabSheet1: TTabSheet
       Caption = 'Camera'
       ImageIndex = 18
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         443
         101)
@@ -362,6 +366,10 @@ object AdjustForm: TAdjustForm
     object TabSheet2: TTabSheet
       Caption = 'Rendering'
       ImageIndex = 35
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         443
         101)
@@ -577,6 +585,10 @@ object AdjustForm: TAdjustForm
     object TabSheet3: TTabSheet
       Caption = 'Gradient'
       ImageIndex = 11
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         443
         101)
@@ -590,7 +602,7 @@ object AdjustForm: TAdjustForm
       end
       object btnMenu: TSpeedButton
         Left = 4
-        Top = 39
+        Top = 37
         Width = 109
         Height = 21
         Hint = 'Click for menu'
@@ -641,7 +653,7 @@ object AdjustForm: TAdjustForm
       end
       object btnOpen: TSpeedButton
         Left = 396
-        Top = 64
+        Top = 62
         Width = 23
         Height = 21
         Hint = 'Open Gradient Browser'
@@ -681,7 +693,7 @@ object AdjustForm: TAdjustForm
       end
       object btnSmoothPalette: TSpeedButton
         Left = 419
-        Top = 64
+        Top = 62
         Width = 23
         Height = 21
         Hint = 'Smooth Palette'
@@ -721,7 +733,7 @@ object AdjustForm: TAdjustForm
       end
       object btnPaste: TSpeedButton
         Left = 373
-        Top = 64
+        Top = 62
         Width = 23
         Height = 21
         Hint = 'Paste gradient from clipboard'
@@ -761,7 +773,7 @@ object AdjustForm: TAdjustForm
       end
       object btnCopy: TSpeedButton
         Left = 350
-        Top = 64
+        Top = 62
         Width = 23
         Height = 21
         Hint = 'Copy gradient to clipboard'
@@ -801,7 +813,7 @@ object AdjustForm: TAdjustForm
       end
       object btnColorPreset: TSpeedButton
         Left = 4
-        Top = 65
+        Top = 63
         Width = 109
         Height = 21
         Hint = 'Click to choose random preset'
@@ -816,7 +828,7 @@ object AdjustForm: TAdjustForm
         Left = 0
         Top = 0
         Width = 443
-        Height = 36
+        Height = 34
         Align = alTop
         Anchors = [akLeft, akTop, akRight, akBottom]
         BevelInner = bvRaised
@@ -824,11 +836,12 @@ object AdjustForm: TAdjustForm
         BorderStyle = bsSingle
         Color = clAppWorkSpace
         TabOrder = 0
+        ExplicitHeight = 35
         object GradientImage: TImage
           Left = 2
           Top = 2
           Width = 435
-          Height = 28
+          Height = 27
           Cursor = crHandPoint
           Align = alClient
           PopupMenu = GradientPopup
@@ -842,7 +855,7 @@ object AdjustForm: TAdjustForm
       end
       object ScrollBar: TScrollBar
         Left = 120
-        Top = 42
+        Top = 40
         Width = 179
         Height = 15
         Anchors = [akLeft, akRight, akBottom]
@@ -853,10 +866,11 @@ object AdjustForm: TAdjustForm
         TabOrder = 1
         OnChange = ScrollBarChange
         OnScroll = ScrollBarScroll
+        ExplicitTop = 41
       end
       object cmbPalette: TComboBox
         Left = 120
-        Top = 65
+        Top = 63
         Width = 227
         Height = 21
         BevelInner = bvLowered
@@ -962,10 +976,11 @@ object AdjustForm: TAdjustForm
           'picasso.jfille-chevre.ppm'
           'pollock.lavender-mist.ppm'
           'yngpaint.ppm')
+        ExplicitTop = 64
       end
       object txtVal: TEdit
         Left = 306
-        Top = 39
+        Top = 37
         Width = 49
         Height = 21
         Anchors = [akRight, akBottom]
@@ -973,21 +988,27 @@ object AdjustForm: TAdjustForm
         Text = '0'
         OnExit = txtValExit
         OnKeyPress = txtValKeyPress
+        ExplicitTop = 38
       end
       object btnReset: TButton
         Left = 363
-        Top = 39
+        Top = 37
         Width = 79
         Height = 21
         Anchors = [akRight, akBottom]
         Caption = 'Reset'
         TabOrder = 4
         OnClick = btnResetClick
+        ExplicitTop = 38
       end
     end
     object TabSheet4: TTabSheet
       Caption = 'Image Size'
       ImageIndex = 51
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         443
         101)
@@ -1002,7 +1023,7 @@ object AdjustForm: TAdjustForm
         Left = 184
         Top = 4
         Width = 138
-        Height = 90
+        Height = 88
         Anchors = [akLeft, akTop, akRight, akBottom]
         Shape = bsFrame
         ExplicitHeight = 94
@@ -1202,7 +1223,7 @@ object AdjustForm: TAdjustForm
         Left = 336
         Top = 10
         Width = 99
-        Height = 37
+        Height = 35
         Alignment = taLeftJustify
         Anchors = [akLeft, akTop, akRight, akBottom]
         Caption = 'Resize Main Window'
@@ -1210,6 +1231,7 @@ object AdjustForm: TAdjustForm
         State = cbChecked
         TabOrder = 7
         WordWrap = True
+        ExplicitHeight = 36
       end
       object pnlWidth: TPanel
         Left = 12
@@ -1279,134 +1301,6 @@ object AdjustForm: TAdjustForm
           '800'
           '1024'
           '1280')
-      end
-    end
-    object TabSheet6: TTabSheet
-      Caption = 'Curves'
-      ImageIndex = 69
-      object CurvesPanel: TPanel
-        Left = 3
-        Top = 1
-        Width = 323
-        Height = 97
-        BevelOuter = bvLowered
-        Color = clBlack
-        ParentBackground = False
-        TabOrder = 0
-      end
-      object tbWeightLeft: TScrollBar
-        Left = 111
-        Top = 67
-        Width = 75
-        Height = 15
-        Max = 160
-        PageSize = 0
-        Position = 10
-        TabOrder = 1
-        Visible = False
-        OnChange = WeightChange
-        OnScroll = WeightScroll
-      end
-      object tbWeightRight: TScrollBar
-        Left = 111
-        Top = 83
-        Width = 129
-        Height = 15
-        Max = 160
-        PageSize = 0
-        Position = 10
-        TabOrder = 2
-        Visible = False
-        OnChange = WeightChange
-        OnScroll = WeightScroll
-      end
-      object Panel3: TPanel
-        Left = 111
-        Top = 88
-        Width = 121
-        Height = 21
-        Cursor = crHandPoint
-        BevelOuter = bvLowered
-        Caption = ' First CP weight:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 3
-        Visible = False
-      end
-      object Panel4: TPanel
-        Left = 119
-        Top = 88
-        Width = 121
-        Height = 21
-        Cursor = crHandPoint
-        BevelOuter = bvLowered
-        Caption = ' Second CP weight:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 4
-        Visible = False
-      end
-      object Panel5: TPanel
-        Left = 332
-        Top = 3
-        Width = 108
-        Height = 21
-        Cursor = crHandPoint
-        Alignment = taLeftJustify
-        BevelOuter = bvNone
-        Caption = ' Selected curve:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 5
-      end
-      object cbChannel: TComboBox
-        Left = 332
-        Top = 30
-        Width = 107
-        Height = 21
-        Style = csDropDownList
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ItemIndex = 0
-        ParentFont = False
-        TabOrder = 6
-        Text = 'Overall'
-        OnChange = curveChange
-        Items.Strings = (
-          'Overall'
-          'Red'
-          'Green'
-          'Blue')
-      end
-      object btnResetCurves: TButton
-        Left = 332
-        Top = 75
-        Width = 107
-        Height = 21
-        Caption = 'Reset'
-        TabOrder = 7
-        OnClick = btnResetCurvesClick
       end
     end
   end

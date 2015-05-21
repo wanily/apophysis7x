@@ -26,20 +26,11 @@ unit varJulia3Djf; // original variation code by Joel Faber, modified & optimize
 interface
 
 uses
-{$ifdef Apo7X64}
-{$else}
-AsmRandom,
-{$endif}
   BaseVariation, XFormMan;
 
 const
   var_name = 'julia3D';
   var_n_name='julia3D_power';
-
-{$ifdef Apo7X64}
-{$else}
-  {$define _ASM_}
-{$endif}
 
 type
   TVariationJulia3DJF = class(TBaseVariation)
@@ -104,7 +95,6 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 procedure TVariationJulia3DJF.CalcFunction;
-{$ifndef _ASM_}
 var
   r, r2d, z, tmp: double;
   sina, cosa: extended;
@@ -120,71 +110,9 @@ begin
 
   FPx^ := FPx^ + tmp * cosa;
   FPy^ := FPy^ + tmp * sina;
-{$else}
-asm
-    mov     edx, [eax + FTx]
-    fld     qword ptr [edx + 32] // FTz
-    fidiv   dword ptr [eax + absN]
-    fld     qword ptr [edx]      // FTx
-    fld     qword ptr [edx + 8]  // FTy
-    fld     st(1)
-    fmul    st, st
-    fld     st(1)
-    fmul    st, st
-    faddp
-    fld     qword ptr [eax + cN]
-    fld     st(4)
-    fmul    st, st
-    fadd    st, st(2)
-//  ---  x^y = 2^(y*log2(x))
-    fyl2x
-    fld     st
-    frndint
-    fsub    st(1), st
-    fxch    st(1)
-    f2xm1
-    fld1
-    fadd
-    fscale
-    fstp    st(1)
-//  ---
-    fmul    qword ptr [eax + vvar]
-
-    fmul    st(4), st
-    fxch    st(1)
-    fsqrt
-    fmulp
-
-    fxch    st(2)
-    fpatan
-    mov     ecx, eax
-    mov     eax, dword ptr [eax + absN]
-    call    AsmRandInt
-    push    eax
-    fild    dword ptr [esp]
-    add     esp, 4
-    fldpi
-    fadd    st, st
-    fmulp
-    faddp
-    fidiv   dword ptr [ecx + N]
-
-    fsincos
-    mov     edx, [ecx + FPx]
-    fmul    st, st(2)
-    fadd    qword ptr [edx] // FPx
-    fstp    qword ptr [edx]
-    fmulp
-    fadd    qword ptr [edx + 8] // FPy
-    fstp    qword ptr [edx + 8]
-    fadd    qword ptr [edx + $18] // FPz
-    fstp    qword ptr [edx + $18]
-    fwait
-{$endif}
 end;
 
 procedure TVariationJulia3DJF.CalcPower2;
-{$ifndef _ASM_}
 var
   r, r2d, z, tmp: double;
   sina, cosa: extended;
@@ -200,62 +128,9 @@ begin
 
   FPx^ := FPx^ + tmp * cosa;
   FPy^ := FPy^ + tmp * sina;
-{$else}
-asm
-    mov     edx, [eax + FTx]
-    fld     qword ptr [edx + 32] // FTz
-    fld1
-    fadd    st, st
-    fdiv    st(1), st
-    fld     qword ptr [edx + 8]  // FTy
-    fld     qword ptr [edx]      // FTx
-    fld     st(1)
-    fld     st(1)
-    fpatan
-    fdivrp  st(3), st
-
-    fmul    st, st
-    fxch    st(1)
-    fmul    st, st
-    faddp
-    fld     st(2)
-    fmul    st, st
-    fadd    st, st(1)
-    fsqrt
-    fsqrt
-    fdivr   qword ptr [eax + vvar]
-    fmul    st(3), st
-
-    fxch    st(1)
-    fsqrt
-    fmulp
-    fxch    st(1)
-
-    mov     ecx, eax
-    mov     eax, 2
-    call    AsmRandInt
-    fldpi
-    push    eax
-    fimul   dword ptr [esp]
-    add     esp, 4
-    faddp
-
-    fsincos
-    mov     edx, [ecx + FPx]
-    fmul    st, st(2)
-    fadd    qword ptr [edx] // FPx
-    fstp    qword ptr [edx]
-    fmulp
-    fadd    qword ptr [edx + 8] // FPy
-    fstp    qword ptr [edx + 8]
-    fadd    qword ptr [edx + $18] // FPz
-    fstp    qword ptr [edx + $18]
-    fwait
-{$endif}
 end;
 
 procedure TVariationJulia3DJF.CalcPowerMinus2;
-{$ifndef _ASM_}
 var
   r, r2d, r3d, z, tmp: double;
   sina, cosa: extended;
@@ -272,92 +147,16 @@ begin
 
   FPx^ := FPx^ + tmp * cosa;
   FPy^ := FPy^ - tmp * sina;
-{$else}
-asm
-    mov     edx, [eax + FTx]
-    fld     qword ptr [edx + 32] // FTz
-    fld1
-    fadd    st, st
-    fdiv    st(1), st
-    fld     qword ptr [edx + 8]  // FTy
-    fld     qword ptr [edx]      // FTx
-    fld     st(1)
-    fld     st(1)
-    fpatan
-    fdivrp  st(3), st
-
-    fmul    st, st
-    fxch    st(1)
-    fmul    st, st
-    faddp
-    fld     st(2)
-    fmul    st, st
-    fadd    st, st(1)
-    fsqrt
-    fld     st
-    fsqrt
-    fmulp
-    fdivr   qword ptr [eax + vvar]
-    fmul    st(3), st
-
-    fxch    st(1)
-    fsqrt
-    fmulp
-    fxch    st(1)
-
-    mov     ecx, eax
-    mov     eax, 2
-    call    AsmRandInt
-    fldpi
-    push    eax
-    fimul   dword ptr [esp]
-    add     esp, 4
-    faddp
-
-    fsincos
-    mov     edx, [ecx + FPx]
-    fmul    st, st(2)
-    fadd    qword ptr [edx] // FPx
-    fstp    qword ptr [edx]
-    fmulp
-    fsubr   qword ptr [edx + 8] // FPy
-    fstp    qword ptr [edx + 8]
-    fadd    qword ptr [edx + $18] // FPz
-    fstp    qword ptr [edx + $18]
-    fwait
-{$endif}
 end;
 
 procedure TVariationJulia3DJF.CalcPower1;
-{$ifndef _ASM_}
 begin
   FPx^ := FPx^ + vvar * FTx^;
   FPy^ := FPy^ + vvar * FTy^;
   FPz^ := FPz^ + vvar * FTz^;
-{$else}
-asm
-    fld     qword ptr [eax + vvar]
-    mov     edx, [eax + FTx]
-    fld     qword ptr [edx]      // FTx
-    fmul    st, st(1)
-    fadd    qword ptr [edx + 16] // FPx
-    fstp    qword ptr [edx + 16]
-
-    fld     qword ptr [edx + 8]  // FTy
-    fmul    st, st(1)
-    fadd    qword ptr [edx + 24] // FPy
-    fstp    qword ptr [edx + 24]
-
-    fmul    qword ptr [edx + 32] // FTz
-    fadd    qword ptr [edx + 40] // FPz
-    fstp    qword ptr [edx + 40]
-
-    fwait
-{$endif}
 end;
 
 procedure TVariationJulia3DJF.CalcPowerMinus1;
-{$ifndef _ASM_}
 var
   r: double;
 begin
@@ -366,33 +165,6 @@ begin
   FPx^ := FPx^ + r * FTx^;
   FPy^ := FPy^ - r * FTy^;
   FPz^ := FPz^ + r * FTz^;
-{$else}
-asm
-    mov     edx, [eax + FTx]
-    fld     qword ptr [edx + 32] // FTz
-    fld     qword ptr [edx + 8]  // FTy
-    fld     qword ptr [edx]      // FTx
-    fld     st(2)
-    fmul    st, st
-    fld     st(2)
-    fmul    st, st
-    faddp
-    fld     st(1)
-    fmul    st, st
-    faddp
-    fdivr   qword ptr [eax + vvar]
-
-    fmul    st(3), st
-    fmul    st(2), st
-    fmulp
-    fadd    qword ptr [edx + 16] // FPx
-    fstp    qword ptr [edx + 16]
-    fsubr   qword ptr [edx + 24] // FPy
-    fstp    qword ptr [edx + 24]
-    fadd    qword ptr [edx + 40] // FPz
-    fstp    qword ptr [edx + 40]
-    fwait
-{$endif}
 end;
 
 ///////////////////////////////////////////////////////////////////////////////

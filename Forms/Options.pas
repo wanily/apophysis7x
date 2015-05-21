@@ -51,7 +51,6 @@ type
     chkConfirmStopRender: TCheckBox;
     cbUseTemplate: TCheckBox;
     cbMissingPlugin: TCheckBox;
-    cbEmbedThumbs: TCheckBox;
     chkShowRenderStats: TCheckBox;
     pnlMultithreading: TPanel;
     cbNrTheads: TComboBox;
@@ -291,7 +290,6 @@ begin
   chkUseSmallThumbs.Checked := UseSmallThumbnails;
   cbUseTemplate.Checked := AlwaysCreateBlankFlame;
   cbMissingPlugin.Checked := WarnOnMissingPlugin;
-  cbEmbedThumbs.Checked := EmbedThumbnails;
   cbMultithreadedPreview.Checked := MultithreadedPreview;
   cbMultithreadedPreviewClick(cbMultithreadedPreview);
 
@@ -402,7 +400,6 @@ begin
   RememberLastOpenFile := chkRememberLastOpen.Checked;
   UseSmallThumbnails := chkUseSmallThumbs.Checked;
   AlwaysCreateBlankFlame := cbUseTemplate.Checked;
-  EmbedThumbnails := cbEmbedThumbs.Checked;
   WarnOnMissingPlugin := cbMissingPlugin.Checked;
   LanguageFile := AvailableLanguages.Strings[txtLanguageFile.ItemIndex];
   MultithreadedPreview := cbMultithreadedPreview.Checked;
@@ -584,7 +581,6 @@ begin
 	chkconfirmStopRender.Caption := TextByKey('options-tab-general-confirmrenderstop');
 	cbUseTemplate.Caption := TextByKey('options-tab-general-alwaysblankflame');
 	cbMissingplugin.Caption := TextByKey('options-tab-general-enablemissingpluginswarning');
-	cbEmbedThumbs.Caption := TextByKey('options-tab-general-enablethumbnailembedding');
 	rgRotationMode.Caption := TextByKey('options-tab-general-rotatemode');
 	rgRotationMode.Items[0] := TextByKey('options-tab-general-rotateimage');
 	rgRotationMode.Items[1] := TextByKey('options-tab-general-rotateframe');

@@ -32,7 +32,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   ExtCtrls, StdCtrls, ComCtrls, Math, Menus, ToolWin, Registry,
-  Grids, ValEdit, Buttons, ImgList, Types,  StrUtils , Curves,
+  Grids, ValEdit, Buttons, ImgList, Types,  StrUtils,
   ControlPoint, XForm, cmap, CustomDrawControl, TransformSelection,
   RenderingInterface, Translation, RenderThread;
 
@@ -556,7 +556,7 @@ function ScaleTrianglePoint(t: TTriangle; x, y, scale: double): TTriangle;
 implementation
 
 uses
-  Main, Global, Adjust, Mutate, XformMan;
+  Main, Global, Adjust, XformMan;
 
 {$R *.DFM}
 
@@ -1106,8 +1106,6 @@ begin
       MainForm.center[1] := cp.center[1];
     end;
     if AdjustForm.Visible then AdjustForm.UpdateDisplay;
-    if MutateForm.Visible then MutateForm.UpdateDisplay;
-    if CurvesForm.Visible then CurvesForm.SetCp(MainCp);
     MainForm.RedrawTimer.enabled := true;
   end;
 

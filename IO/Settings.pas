@@ -1,25 +1,3 @@
-{
-     Apophysis Copyright (C) 2001-2004 Mark Townsend
-     Apophysis Copyright (C) 2005-2006 Ronald Hordijk, Piotr Borys, Peter Sdobnov
-     Apophysis Copyright (C) 2007-2008 Piotr Borys, Peter Sdobnov
-     
-     Apophysis "3D hack" Copyright (C) 2007-2008 Peter Sdobnov
-     Apophysis "7X" Copyright (C) 2009-2010 Georg Kiehne
-
-     This program is free software; you can redistribute it and/or modify
-     it under the terms of the GNU General Public License as published by
-     the Free Software Foundation; either version 2 of the License, or
-     (at your option) any later version.
-
-     This program is distributed in the hope that it will be useful,
-     but WITHOUT ANY WARRANTY; without even the implied warranty of
-     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-     GNU General Public License for more details.
-
-     You should have received a copy of the GNU General Public License
-     along with this program; if not, write to the Free Software
-     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
-}
 unit Settings;
 
 interface
@@ -32,30 +10,21 @@ procedure SaveSettings;
 
 implementation
 
-uses Windows, Classes, SysUtils, StrUtils, Forms, Registry, Global, Dialogs, XFormMan;
-
-(*
-procedure UnpackVariations(v: int64);
-{ Unpacks the variation options form an integer }
-var
-  i: integer;
-begin
-  for i := 0 to NRVAR - 1 do
-    Variations[i] := boolean(v shr i and 1);
-end;
-*)
+uses Windows, Classes, SysUtils, StrUtils, Forms, Registry, Global, Dialogs,
+  XFormMan;
 
 function ReadPluginDir: string;
 var
   settingFileName: string;
-  sl : TStringList;
+  sl: TStringList;
 begin
   sl := TStringList.Create;
 
   settingFileName := ExtractFilePath(Application.ExeName) + 'ApoPluginSrc.dat';
   if FileExists(settingFileName) then
     sl.LoadFromFile(settingFileName)
-  else begin
+  else
+  begin
     settingFileName := GetEnvVarValue('APPDATA') + '\ApoPluginSrc.dat';
 
     if FileExists(settingFileName) then
@@ -77,7 +46,7 @@ end;
 procedure SavePluginDir(data: string);
 var
   settingFileName: string;
-  sl : TStringList;
+  sl: TStringList;
 begin
   settingFileName := ExtractFilePath(Application.ExeName) + 'ApoPluginSrc.dat';
   sl := TStringList.Create;
@@ -106,7 +75,8 @@ var
   i, maxVars: integer;
   VariationOptions: int64;
 begin
-  DefaultPath := GetEnvVarValue('USERPROFILE');///ExtractFilePath(Application.Exename);
+  DefaultPath := GetEnvVarValue('USERPROFILE');
+  /// ExtractFilePath(Application.Exename);
   Registry := TRegistry.Create;
   try
     Registry.RootKey := HKEY_CURRENT_USER;
@@ -117,7 +87,8 @@ begin
       begin
         defFlameFile := Registry.ReadString('DefaultFlameFile3D');
       end
-      else begin
+      else
+      begin
         if Registry.ValueExists('DefaultFlameFile') then
           defFlameFile := Registry.ReadString('DefaultFlameFile')
         else
@@ -130,7 +101,7 @@ begin
       end
       else
       begin
-        AlwaysCreateBlankFlame := false;
+        AlwaysCreateBlankFlame := False;
       end;
 
       if Registry.ValueExists('GradientFile') then
@@ -146,36 +117,34 @@ begin
       begin
         SavePath := Registry.ReadString('SavePath3D');
       end
-      else begin
+      else
+      begin
         if Registry.ValueExists('SavePath') then
           SavePath := Registry.ReadString('SavePath')
         else
           SavePath := DefaultPath + '\Flames.flame';
       end;
 
-      if Registry.ValueExists('EmbedThumbnails') then
-      begin
-        EmbedThumbnails := Registry.ReadBool('EmbedThumbnails');
-      end
-      else EmbedThumbnails := false;
-
       if Registry.ValueExists('WarnOnMissingPlugin') then
       begin
         WarnOnMissingPlugin := Registry.ReadBool('WarnOnMissingPlugin');
       end
-      else WarnOnMissingPlugin := true;
+      else
+        WarnOnMissingPlugin := true;
 
       if Registry.ValueExists('MultithreadedPreview') then
       begin
         MultithreadedPreview := Registry.ReadBool('MultithreadedPreview');
       end
-      else MultithreadedPreview := false;
+      else
+        MultithreadedPreview := False;
 
       if Registry.ValueExists('LanguageFile') then
       begin
         LanguageFile := Registry.ReadString('LanguageFile');
       end
-      else LanguageFile := '';
+      else
+        LanguageFile := '';
 
       if Registry.ValueExists('SmoothPaletteFile') then
       begin
@@ -187,22 +156,24 @@ begin
       end;
 
       if Registry.ValueExists('PlaySoundOnRenderComplete') then
-        PlaySoundOnRenderComplete := Registry.ReadBool('PlaySoundOnRenderComplete')
+        PlaySoundOnRenderComplete :=
+          Registry.ReadBool('PlaySoundOnRenderComplete')
       else
-        PlaySoundOnRenderComplete := false;
+        PlaySoundOnRenderComplete := False;
       if Registry.ValueExists('RenderCompleteSoundFile') then
-        RenderCompleteSoundFile := Registry.ReadString('RenderCompleteSoundFile')
+        RenderCompleteSoundFile :=
+          Registry.ReadString('RenderCompleteSoundFile')
       else
         RenderCompleteSoundFile := '';
 
       if Registry.ValueExists('ConfirmDelete') then
         ConfirmDelete := Registry.ReadBool('ConfirmDelete')
       else
-        ConfirmDelete := True;
+        ConfirmDelete := true;
       if Registry.ValueExists('ConfirmExit') then
         ConfirmExit := Registry.ReadBool('ConfirmExit')
       else
-        ConfirmExit := True;
+        ConfirmExit := true;
 
       if Registry.ValueExists('PreserveQuality') then
       begin
@@ -225,7 +196,8 @@ begin
       if Registry.ValueExists('MinTransforms') then
       begin
         randMinTransforms := Registry.ReadInteger('MinTransforms');
-        if randMinTransforms <= 0 then randMinTransforms := 2;
+        if randMinTransforms <= 0 then
+          randMinTransforms := 2;
       end
       else
       begin
@@ -234,7 +206,8 @@ begin
       if Registry.ValueExists('MaxTransforms') then
       begin
         randMaxTransforms := Registry.ReadInteger('MaxTransforms');
-        if randMaxTransforms < randMinTransforms then randMaxTransforms := randMinTransforms;
+        if randMaxTransforms < randMinTransforms then
+          randMaxTransforms := randMinTransforms;
       end
       else
       begin
@@ -244,7 +217,8 @@ begin
       if Registry.ValueExists('MutationMinTransforms') then
       begin
         mutantMinTransforms := Registry.ReadInteger('MutationMinTransforms');
-        if mutantMinTransforms <= 0 then mutantMinTransforms := 2;
+        if mutantMinTransforms <= 0 then
+          mutantMinTransforms := 2;
       end
       else
       begin
@@ -253,7 +227,8 @@ begin
       if Registry.ValueExists('MutationMaxTransforms') then
       begin
         mutantMaxTransforms := Registry.ReadInteger('MutationMaxTransforms');
-        if mutantMaxTransforms < mutantMinTransforms then mutantMinTransforms := mutantMinTransforms;
+        if mutantMaxTransforms < mutantMinTransforms then
+          mutantMinTransforms := mutantMinTransforms;
       end
       else
       begin
@@ -264,8 +239,7 @@ begin
       begin
         ParamFolder := Registry.ReadString('ParameterFolder3D');
       end
-      else
-      if Registry.ValueExists('ParameterFolder') then
+      else if Registry.ValueExists('ParameterFolder') then
       begin
         ParamFolder := Registry.ReadString('ParameterFolder');
       end
@@ -276,14 +250,14 @@ begin
 
       if Registry.ValueExists('UPRPath') then
 
-      if Registry.ValueExists('BrowserPath') then
-      begin
-        BrowserPath := Registry.ReadString('BrowserPath');
-      end
-      else
-      begin
-        BrowserPath := DefaultPath + '\';
-      end;
+        if Registry.ValueExists('BrowserPath') then
+        begin
+          BrowserPath := Registry.ReadString('BrowserPath');
+        end
+        else
+        begin
+          BrowserPath := DefaultPath + '\';
+        end;
       if Registry.ValueExists('EditPreviewQaulity') then
       begin
         EditPrevQual := Registry.ReadInteger('EditPreviewQaulity');
@@ -295,7 +269,8 @@ begin
       if Registry.ValueExists('MutatePreviewQaulity') then
       begin
         MutatePrevQual := Registry.ReadInteger('MutatePreviewQaulity');
-        if MutatePrevQual <= 0 then MutatePrevQual := 1;
+        if MutatePrevQual <= 0 then
+          MutatePrevQual := 1;
       end
       else
       begin
@@ -304,7 +279,8 @@ begin
       if Registry.ValueExists('AdjustPreviewQaulity') then
       begin
         AdjustPrevQual := Registry.ReadInteger('AdjustPreviewQaulity');
-        if AdjustPrevQual <= 0 then AdjustPrevQual := 1;
+        if AdjustPrevQual <= 0 then
+          AdjustPrevQual := 1;
       end
       else
       begin
@@ -369,12 +345,14 @@ begin
       end;
       if Registry.ValueExists('VariationOptions2') then
       begin
-        VariationOptions := VariationOptions or (int64(Registry.ReadInteger('VariationOptions2')) shl 32);
+        VariationOptions := VariationOptions or
+          (int64(Registry.ReadInteger('VariationOptions2')) shl 32);
       end;
 
       if Registry.ValueExists('RotationMode') then
         MainForm_RotationMode := Registry.ReadInteger('RotationMode')
-      else MainForm_RotationMode := 0;
+      else
+        MainForm_RotationMode := 0;
 
       if Registry.ValueExists('ScriptPath') then
       begin
@@ -392,170 +370,246 @@ begin
       begin
         defLibrary := ExtractFilePath(Application.ExeName) + 'Functions.asc';
       end;
-      
+
       if Registry.ValueExists('ShowProgress') then
       begin
         ShowProgress := Registry.ReadBool('ShowProgress');
-      end else begin
+      end
+      else
+      begin
         ShowProgress := true;
       end;
       if Registry.ValueExists('ToolBarWidth1') then
       begin
         TBWidth1 := Registry.ReadInteger('ToolBarWidth1');
-      end else begin
+      end
+      else
+      begin
         TBWidth1 := 0;
       end;
       if Registry.ValueExists('ToolBarWidth2') then
       begin
         TBWidth2 := Registry.ReadInteger('ToolBarWidth2');
-      end else begin
+      end
+      else
+      begin
         TBWidth2 := 0;
       end;
       if Registry.ValueExists('ToolBarWidth3') then
       begin
         TBWidth3 := Registry.ReadInteger('ToolBarWidth3');
-      end else begin
+      end
+      else
+      begin
         TBWidth3 := 0;
       end;
       if Registry.ValueExists('ToolBarWidth4') then
       begin
         TBWidth4 := Registry.ReadInteger('ToolBarWidth4');
-      end else begin
+      end
+      else
+      begin
         TBWidth4 := 0;
       end;
       if Registry.ValueExists('ToolBarWidth5') then
       begin
         TBWidth5 := Registry.ReadInteger('ToolBarWidth5');
-      end else begin
+      end
+      else
+      begin
         TBWidth5 := 0;
       end;
 
       if Registry.ValueExists('LineCenterColor') then
       begin
         LineCenterColor := Registry.ReadInteger('LineCenterColor');
-      end else begin
+      end
+      else
+      begin
         LineCenterColor := $FFFFFF;
       end;
       if Registry.ValueExists('LineThirdsColor') then
       begin
         LineThirdsColor := Registry.ReadInteger('LineThirdsColor');
-      end else begin
+      end
+      else
+      begin
         LineThirdsColor := $0000FF;
       end;
       if Registry.ValueExists('LineGRColor') then
       begin
         LineGRColor := Registry.ReadInteger('LineGRColor');
-      end else begin
+      end
+      else
+      begin
         LineGRColor := $00FF00;
       end;
       if Registry.ValueExists('EnableGuides') then
       begin
         EnableGuides := Registry.ReadBool('EnableGuides');
-      end else begin
-        EnableGuides := false;
+      end
+      else
+      begin
+        EnableGuides := False;
       end;
 
       { FormRender }
-      if Registry.ValueExists('SaveIncompleteRenders') then begin
+      if Registry.ValueExists('SaveIncompleteRenders') then
+      begin
         SaveIncompleteRenders := Registry.ReadBool('SaveIncompleteRenders');
-      end else begin
-        SaveIncompleteRenders := false;
+      end
+      else
+      begin
+        SaveIncompleteRenders := False;
       end;
-      if Registry.ValueExists('ShowRenderStats') then begin
+      if Registry.ValueExists('ShowRenderStats') then
+      begin
         ShowRenderStats := Registry.ReadBool('ShowRenderStats');
-      end else begin
-        ShowRenderStats := false;
+      end
+      else
+      begin
+        ShowRenderStats := False;
       end;
-      if Registry.ValueExists('LowerRenderPriority') then begin
+      if Registry.ValueExists('LowerRenderPriority') then
+      begin
         LowerRenderPriority := Registry.ReadBool('LowerRenderPriority');
-      end else begin
-        LowerRenderPriority := false;
+      end
+      else
+      begin
+        LowerRenderPriority := False;
       end;
 
-      if Registry.ValueExists('PNGTransparency') then begin
+      if Registry.ValueExists('PNGTransparency') then
+      begin
         PNGTransparency := Registry.ReadInteger('PNGTransparency');
 
-      if PNGTransparency > 1 then PNGTransparency := 1; // tmp
+        if PNGTransparency > 1 then
+          PNGTransparency := 1; // tmp
 
-      end else begin
+      end
+      else
+      begin
         PNGTransparency := 1
       end;
-      if Registry.ValueExists('ShowTransparency') then begin
+      if Registry.ValueExists('ShowTransparency') then
+      begin
         ShowTransparency := Registry.ReadBool('ShowTransparency');
-      end else begin
+      end
+      else
+      begin
         ShowTransparency := False;
       end;
-      if Registry.ValueExists('ExtendMainPreview') then begin
+      if Registry.ValueExists('ExtendMainPreview') then
+      begin
         ExtendMainPreview := Registry.ReadBool('ExtendMainPreview');
-      end else begin
+      end
+      else
+      begin
         ExtendMainPreview := true;
       end;
-      if Registry.ValueExists('MainPreviewScale') then begin
+      if Registry.ValueExists('MainPreviewScale') then
+      begin
         MainPreviewScale := Registry.ReadFloat('MainPreviewScale');
-        if MainPreviewScale < 1 then MainPreviewScale := 1
-        else if MainPreviewScale > 3 then MainPreviewScale := 3;
-      end else begin
+        if MainPreviewScale < 1 then
+          MainPreviewScale := 1
+        else if MainPreviewScale > 3 then
+          MainPreviewScale := 3;
+      end
+      else
+      begin
         MainPreviewScale := 1.2;
       end;
 
-      if Registry.ValueExists('NrTreads') then begin
+      if Registry.ValueExists('NrTreads') then
+      begin
         NrTreads := Registry.ReadInteger('NrTreads');
-        if NrTreads <= 0 then NrTreads := 1;
-      end else begin
+        if NrTreads <= 0 then
+          NrTreads := 1;
+      end
+      else
+      begin
         NrTreads := 1;
       end;
-      if Registry.ValueExists('UseNrThreads') then begin
+      if Registry.ValueExists('UseNrThreads') then
+      begin
         UseNrThreads := Registry.ReadInteger('UseNrThreads');
-        if UseNrThreads <= 0 then UseNrThreads := 1;
-      end else begin
+        if UseNrThreads <= 0 then
+          UseNrThreads := 1;
+      end
+      else
+      begin
         UseNrThreads := 1;
       end;
 
-      if Registry.ValueExists('InternalBitsPerSample') then begin
+      if Registry.ValueExists('InternalBitsPerSample') then
+      begin
         InternalBitsPerSample := Registry.ReadInteger('InternalBitsPerSample');
-      end else begin
+      end
+      else
+      begin
         InternalBitsPerSample := 0;
       end;
 
-      if Registry.ValueExists('AutoOpenLog') then begin
+      if Registry.ValueExists('AutoOpenLog') then
+      begin
         AutoOpenLog := Registry.ReadBool('AutoOpenLog');
-      end else begin
-        AutoOpenLog := false;
+      end
+      else
+      begin
+        AutoOpenLog := False;
       end;
 
-      if Registry.ValueExists('StartupCheckForUpdates') then begin
+      if Registry.ValueExists('StartupCheckForUpdates') then
+      begin
         StartupCheckForUpdates := Registry.ReadBool('StartupCheckForUpdates');
-      end else begin
+      end
+      else
+      begin
         StartupCheckForUpdates := true;
       end;
 
-      if Registry.ValueExists('ClassicListMode') then begin
+      if Registry.ValueExists('ClassicListMode') then
+      begin
         ClassicListMode := Registry.ReadBool('ClassicListMode');
-      end else begin
+      end
+      else
+      begin
         ClassicListMode := true;
       end;
 
-      if Registry.ValueExists('LastOpenFile') then begin
+      if Registry.ValueExists('LastOpenFile') then
+      begin
         LastOpenFile := Registry.ReadString('LastOpenFile');
-      end else begin
+      end
+      else
+      begin
         LastOpenFile := '';
       end;
 
-      if Registry.ValueExists('LastOpenFileEntry') then begin
+      if Registry.ValueExists('LastOpenFileEntry') then
+      begin
         LastOpenFileEntry := Registry.ReadInteger('LastOpenFileEntry');
-      end else begin
+      end
+      else
+      begin
         LastOpenFileEntry := 1;
       end;
 
-      if Registry.ValueExists('RememberLastOpenFile') then begin
+      if Registry.ValueExists('RememberLastOpenFile') then
+      begin
         RememberLastOpenFile := Registry.ReadBool('RememberLastOpenFile');
-      end else begin
-        RememberLastOpenFile := false;
+      end
+      else
+      begin
+        RememberLastOpenFile := False;
       end;
 
-      if Registry.ValueExists('UseSmallThumbnails') then begin
+      if Registry.ValueExists('UseSmallThumbnails') then
+      begin
         UseSmallThumbnails := Registry.ReadBool('UseSmallThumbnails');
-      end else begin
+      end
+      else
+      begin
         UseSmallThumbnails := true;
       end;
 
@@ -563,7 +617,7 @@ begin
     else
     begin
       StartupCheckForUpdates := true;
-      AlwaysCreateBlankFlame := false;
+      AlwaysCreateBlankFlame := False;
       MainForm_RotationMode := 0;
       EditPrevQual := 1;
       MutatePrevQual := 1;
@@ -571,18 +625,17 @@ begin
       GradientFile := '';
       defFlameFile := '';
       SavePath := DefaultPath + '\Flames.flame';
-      EmbedThumbnails := false;
       WarnOnMissingPlugin := true;
-      MultithreadedPreview := false;
+      MultithreadedPreview := False;
       LanguageFile := '';
       defSmoothPaletteFile := DefaultPath + '\SmoothPalette.ugr';
-      ConfirmDelete := True;
-      ConfirmExit := True;
+      ConfirmDelete := true;
+      ConfirmExit := true;
       randMinTransforms := 2;
       randMaxTransforms := 3;
       mutantMinTransforms := 2;
       mutantMaxTransforms := 6;
-      PreserveQuality := false;
+      PreserveQuality := False;
       KeepBackground := False;
       ParamFolder := DefaultPath + '\';
       RandomPrefix := 'Apo7X-';
@@ -595,9 +648,9 @@ begin
       ScriptPath := DefaultPath + '\';
       defLibrary := ExtractFilePath(Application.ExeName) + 'Functions.asc';
       ShowProgress := true;
-      SaveIncompleteRenders := false;
-      LowerRenderPriority := false;
-      ShowRenderStats := false;
+      SaveIncompleteRenders := False;
+      LowerRenderPriority := False;
+      ShowRenderStats := False;
       PNGTransparency := 1;
       ShowTransparency := False;
       MainPreviewScale := 1.2;
@@ -605,11 +658,11 @@ begin
       NrTreads := 1;
       UseNrThreads := 1;
       InternalBitsPerSample := 0;
-      AutoOpenLog := false;
+      AutoOpenLog := False;
       ClassicListMode := true;
       LastOpenFile := '';
       LastOpenFileEntry := 1;
-      RememberLastOpenFile := false;
+      RememberLastOpenFile := False;
       UseSmallThumbnails := true;
       TBWidth1 := 0;
       TBWidth2 := 0;
@@ -619,23 +672,27 @@ begin
       LineCenterColor := $FFFFFF;
       LineThirdsColor := $0000FF;
       LineGRColor := $00FF00;
-      EnableGuides := false;
+      EnableGuides := False;
     end;
     Registry.CloseKey;
 
     SetLength(Variations, NRVAR);
     if Registry.OpenKey('Software\' + APP_NAME + '\Variations', False) then
     begin
-      for i := 0 to NRVAR-1 do begin
-      if Registry.ValueExists(Varnames(i)) then
-        Variations[i] := Registry.ReadBool(Varnames(i))
-      else
-        Variations[i] := false;
+      for i := 0 to NRVAR - 1 do
+      begin
+        if Registry.ValueExists(Varnames(i)) then
+          Variations[i] := Registry.ReadBool(Varnames(i))
+        else
+          Variations[i] := False;
       end;
     end
-    else begin
-      if NRVAR >= 64 then maxVars := 63
-      else maxVars := NRVAR-1;
+    else
+    begin
+      if NRVAR >= 64 then
+        maxVars := 63
+      else
+        maxVars := NRVAR - 1;
       for i := 0 to maxVars do
         Variations[i] := boolean(VariationOptions shr i and 1);
     end;
@@ -659,9 +716,10 @@ begin
       if Registry.ValueExists('EnableEditorPreview') then
         EnableEditorPreview := Registry.ReadBool('EnableEditorPreview')
       else
-        EnableEditorPreview := false;
+        EnableEditorPreview := False;
       if Registry.ValueExists('EditorPreviewTransparency') then
-        EditorPreviewTransparency := Registry.ReadInteger('EditorPreviewTransparency')
+        EditorPreviewTransparency :=
+          Registry.ReadInteger('EditorPreviewTransparency')
       else
         EditorPreviewTransparency := 192;
 
@@ -684,22 +742,26 @@ begin
       if Registry.ValueExists('ReferenceTriangleColor') then
         ReferenceTriangleColor := Registry.ReadInteger('ReferenceTriangleColor')
       else
-        ReferenceTriangleColor := $7f7f7f;
+        ReferenceTriangleColor := $7F7F7F;
       if Registry.ValueExists('ExtendedEdit') then
         ExtEditEnabled := Registry.ReadBool('ExtendedEdit')
-      else ExtEditEnabled := true;
+      else
+        ExtEditEnabled := true;
       if Registry.ValueExists('LockTransformAxis') then
         TransformAxisLock := Registry.ReadBool('LockTransformAxis')
-      else TransformAxisLock := true;
+      else
+        TransformAxisLock := true;
       if Registry.ValueExists('RebuildXaosLinks') then
         RebuildXaosLinks := Registry.ReadBool('RebuildXaosLinks')
-      else RebuildXaosLinks := true;
+      else
+        RebuildXaosLinks := true;
     end
-    else begin
-      UseTransformColors := false;
+    else
+    begin
+      UseTransformColors := False;
       HelpersEnabled := true;
       ShowAllXforms := true;
-      EnableEditorPreview := false;
+      EnableEditorPreview := False;
       EditorPreviewTransparency := 192;
       EditorBkgColor := $000000;
       GridColor1 := $444444;
@@ -788,19 +850,28 @@ begin
         renderBitsPerSample := 0;
       end;
 
-      if Registry.ValueExists('StoreEXIF') then begin
+      if Registry.ValueExists('StoreEXIF') then
+      begin
         StoreEXIF := Registry.ReadBool('StoreEXIF');
-      end else begin
-        StoreEXIF := false;
+      end
+      else
+      begin
+        StoreEXIF := False;
       end;
-      if Registry.ValueExists('StoreParamsEXIF') then begin
+      if Registry.ValueExists('StoreParamsEXIF') then
+      begin
         StoreParamsEXIF := Registry.ReadBool('StoreParamsEXIF');
-      end else begin
-        StoreParamsEXIF := false;
+      end
+      else
+      begin
+        StoreParamsEXIF := False;
       end;
-      if Registry.ValueExists('ExifAuthor') then begin
+      if Registry.ValueExists('ExifAuthor') then
+      begin
         ExifAuthor := Registry.ReadString('ExifAuthor');
-      end else begin
+      end
+      else
+      begin
         ExifAuthor := '';
       end;
 
@@ -809,16 +880,16 @@ begin
     begin
       renderFileFormat := 2;
       JPEGQuality := 100;
-      renderPath := DefaultPath + '\';
+      RenderPath := DefaultPath + '\';
       renderDensity := 200;
       renderOversample := 2;
       renderFilterRadius := 0.4;
       renderWidth := 1024;
       renderHeight := 768;
       renderBitsPerSample := 0;
-      StoreEXIF := false;
+      StoreEXIF := False;
       ExifAuthor := '';
-      StoreParamsEXIF := false;
+      StoreParamsEXIF := False;
     end;
     Registry.CloseKey;
 
@@ -937,7 +1008,7 @@ begin
       end
       else
       begin
-        AutoSaveEnabled := false;
+        AutoSaveEnabled := False;
       end;
       if Registry.ValueExists('AutoSaveFreq') then
       begin
@@ -955,8 +1026,10 @@ begin
       begin
         AutoSavePath := GetEnvVarValue('USERPROFILE') + '\autosave.flame';
       end;
-    end else begin
-      AutoSaveEnabled := false;
+    end
+    else
+    begin
+      AutoSaveEnabled := False;
       AutoSaveFreq := 2;
       AutoSavePath := GetEnvVarValue('USERPROFILE') + '\autosave.flame';
     end;
@@ -979,16 +1052,16 @@ begin
   try
     Registry.RootKey := HKEY_CURRENT_USER;
     { Defaults }
-    if Registry.OpenKey('\Software\' + APP_NAME + '\Defaults', True) then
+    if Registry.OpenKey('\Software\' + APP_NAME + '\Defaults', true) then
     begin
       Registry.WriteBool('StartupCheckForUpdates', StartupCheckForUpdates);
       Registry.WriteBool('AlwaysCreateBlankFlame', AlwaysCreateBlankFlame);
       Registry.WriteString('GradientFile', GradientFile);
-      Registry.WriteBool('PlaySoundOnRenderComplete', PlaySoundOnRenderComplete);
+      Registry.WriteBool('PlaySoundOnRenderComplete',
+        PlaySoundOnRenderComplete);
       Registry.WriteString('RenderCompleteSoundFile', RenderCompleteSoundFile);
       Registry.WriteBool('AutoOpenLog', AutoOpenLog);
       Registry.WriteBool('ClassicListMode', ClassicListMode);
-      Registry.WriteBool('EmbedThumbnails', EmbedThumbnails);
       Registry.WriteBool('WarnOnMissingPlugin', WarnOnMissingPlugin);
       Registry.WriteBool('MultithreadedPreview', MultithreadedPreview);
       Registry.WriteString('LanguageFile', LanguageFile);
@@ -1027,9 +1100,9 @@ begin
       Registry.WriteInteger('SymmetryType', SymmetryType);
       Registry.WriteInteger('SymmetryOrder', SymmetryOrder);
       Registry.WriteInteger('SymmetryNVars', SymmetryNVars);
-//      Registry.WriteInteger('VariationOptions', VariationOptions);
-//      Registry.WriteInteger('VariationOptions2', VariationOptions shr 32);
-//      Registry.WriteInteger('ReferenceMode', ReferenceMode);
+      // Registry.WriteInteger('VariationOptions', VariationOptions);
+      // Registry.WriteInteger('VariationOptions2', VariationOptions shr 32);
+      // Registry.WriteInteger('ReferenceMode', ReferenceMode);
       Registry.WriteInteger('RotationMode', MainForm_RotationMode);
       Registry.WriteString('ScriptPath', ScriptPath);
       Registry.WriteBool('ShowProgress', ShowProgress);
@@ -1052,9 +1125,10 @@ begin
     end;
     Registry.CloseKey;
 
-    if Registry.OpenKey('\Software\' + APP_NAME + '\Variations', True) then
+    if Registry.OpenKey('\Software\' + APP_NAME + '\Variations', true) then
     begin
-      for i := 0 to NRVAR-1 do begin
+      for i := 0 to NRVAR - 1 do
+      begin
         if Registry.ValueExists(Varnames(i)) then
           if Registry.ReadBool(Varnames(i)) = Variations[i] then
             continue;
@@ -1064,13 +1138,14 @@ begin
     Registry.CloseKey;
 
     { Editor }
-    if Registry.OpenKey('\Software\' + APP_NAME + '\Forms\Editor', True) then
+    if Registry.OpenKey('\Software\' + APP_NAME + '\Forms\Editor', true) then
     begin
       Registry.WriteBool('UseTransformColors', UseTransformColors);
       Registry.WriteBool('HelpersEnabled', HelpersEnabled);
       Registry.WriteBool('ShowAllXforms', ShowAllXforms);
       Registry.WriteBool('EnableEditorPreview', EnableEditorPreview);
-      Registry.WriteInteger('EditorPreviewTransparency', EditorPreviewTransparency);
+      Registry.WriteInteger('EditorPreviewTransparency',
+        EditorPreviewTransparency);
       Registry.WriteInteger('BackgroundColor', EditorBkgColor);
       Registry.WriteInteger('GridColor1', GridColor1);
       Registry.WriteInteger('GridColor2', GridColor2);
@@ -1083,7 +1158,7 @@ begin
     Registry.CloseKey;
 
     { Display }
-    if Registry.OpenKey('\Software\' + APP_NAME + '\Display', True) then
+    if Registry.OpenKey('\Software\' + APP_NAME + '\Display', true) then
     begin
       Registry.WriteFloat('SampleDensity', defSampleDensity);
       Registry.WriteFloat('Gamma', defGamma);
@@ -1099,9 +1174,9 @@ begin
     end;
     Registry.CloseKey;
 
-    if Registry.OpenKey('\Software\' + APP_NAME + '\Render', True) then
+    if Registry.OpenKey('\Software\' + APP_NAME + '\Render', true) then
     begin
-      Registry.WriteString('Path', renderPath);
+      Registry.WriteString('Path', RenderPath);
       Registry.WriteFloat('SampleDensity', renderDensity);
       Registry.WriteInteger('Oversample', renderOversample);
       Registry.WriteFloat('FilterRadius', renderFilterRadius);
@@ -1116,7 +1191,7 @@ begin
     end;
     Registry.CloseKey;
 
-    if Registry.OpenKey('\Software\' + APP_NAME + '\Autosave', True) then
+    if Registry.OpenKey('\Software\' + APP_NAME + '\Autosave', true) then
     begin
       Registry.WriteBool('AutoSaveEnabled', AutoSaveEnabled);
       Registry.WriteInteger('AutoSaveFreq', AutoSaveFreq);
@@ -1129,4 +1204,3 @@ begin
 end;
 
 end.
-

@@ -36,7 +36,7 @@ AsmRandom,
 {$endif}
   Windows, Classes, Forms, Graphics, Global,
   RenderingInterface, Xform, Math, Translation,
-  Binary, RenderingCommon, ControlPoint, Sysutils,
+  RenderingCommon, ControlPoint, Sysutils,
   BucketFillerThread;
 
 type

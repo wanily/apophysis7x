@@ -292,7 +292,7 @@ implementation
 uses
   Math, SysUtils, Forms,
   RenderingImplementation,
-  Binary, Global;
+  Global;
 
 ///////////////////////////////////////////////////////////////////////////////
 //

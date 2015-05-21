@@ -1,22 +1,3 @@
-{
-     Apophysis Copyright (C) 2001-2004 Mark Townsend
-     Apophysis Copyright (C) 2005-2006 Ronald Hordijk, Piotr Borys, Peter Sdobnov
-     Apophysis "3D hack" Copyright (C) 2007-2008 Peter Sdobnov
-
-     This program is free software; you can redistribute it and/or modify
-     it under the terms of the GNU General Public License as published by
-     the Free Software Foundation; either version 2 of the License, or
-     (at your option) any later version.
-
-     This program is distributed in the hope that it will be useful,
-     but WITHOUT ANY WARRANTY; without even the implied warranty of
-     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-     GNU General Public License for more details.
-
-     You should have received a copy of the GNU General Public License
-     along with this program; if not, write to the Free Software
-     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
-}
 program Apophysis7X;
 
 {%ToDo 'Assets\Apophysis7X.todo'}
@@ -30,21 +11,12 @@ uses
   FastMM4 in 'System\FastMM4.pas',
   FastMM4Messages in 'System\FastMM4Messages.pas',
   Forms, Dialogs, SysUtils,
-  Binary in 'IO\Binary.pas',
-  Base64 in 'IO\Base64.pas',
   sdStringTable in 'System\sdStringTable.pas',
   CustomDrawControl in 'System\CustomDrawControl.pas',
   LibXmlComps in 'System\LibXmlComps.pas',
   LibXmlParser in 'System\LibXmlParser.pas',
   Windows7 in 'System\Windows7.pas',
   RegexHelper in 'System\RegexHelper.pas',
-  CurvesControl in 'System\CurvesControl.pas',
-
-  {$ifdef Apo7X64}
-  // if on x64, we don't use assembler
-  {$else}
-  AsmRandom in 'System\AsmRandom.pas',
-  {$endif}
 
 {-- CORE --}
   Global in 'Core\Global.pas',
@@ -53,7 +25,6 @@ uses
   Settings in 'IO\Settings.pas',
   Translation in 'Core\Translation.pas',
   ParameterIO in 'IO\ParameterIO.pas',
-  Bezier in 'Core\Bezier.pas',
 
 {-- FLAME --}
   RndFlame in 'Flame\RndFlame.pas',
@@ -141,11 +112,9 @@ uses
   FormRender in 'Forms\FormRender.pas' {RenderForm},
   Fullscreen in 'Forms\Fullscreen.pas' {FullscreenForm},
   LoadTracker in 'Forms\LoadTracker.pas' {LoadForm},
-  Mutate in 'Forms\Mutate.pas' {MutateForm},
   Options in 'Forms\Options.pas' {OptionsForm},
   Save in 'Forms\Save.pas' {SaveForm},
   Template in 'Forms\Template.pas' {TemplateForm},
-  Curves in 'Forms\Curves.pas' {CurvesForm},
   TransformSelection in 'Forms\TransformSelection.pas' {TransformSelectionForm}
 
   {$ifdef DisableScripting};
@@ -178,11 +147,9 @@ begin
   Application.CreateForm(TRenderForm, RenderForm);
   Application.CreateForm(TFullscreenForm, FullscreenForm);
   Application.CreateForm(TLoadForm, LoadForm);
-  Application.CreateForm(TMutateForm, MutateForm);
   Application.CreateForm(TOptionsForm, OptionsForm);
   Application.CreateForm(TSaveForm, SaveForm);
   Application.CreateForm(TTemplateForm, TemplateForm);
-  Application.CreateForm(TCurvesForm, CurvesForm);
   Application.CreateForm(TTransformSelectionForm, TransformSelectionForm);
 
   {$ifdef DisableScripting}
@@ -202,5 +169,6 @@ begin
   {$endif}
   Application.Run;
 end.
+
 
 
