@@ -2416,9 +2416,6 @@ object MainForm: TMainForm
     Color = clAppWorkSpace
     TabOrder = 0
     OnResize = BackPanelResize
-    ExplicitTop = 22
-    ExplicitWidth = 835
-    ExplicitHeight = 750
     object Image: TImage
       Left = 1
       Top = 1
@@ -2450,8 +2447,6 @@ object MainForm: TMainForm
     Ctl3D = True
     ParentCtl3D = False
     TabOrder = 1
-    ExplicitTop = 22
-    ExplicitHeight = 750
     object Shape1: TShape
       Left = 1
       Top = 1
@@ -2481,7 +2476,6 @@ object MainForm: TMainForm
       OnChange = ListViewChange
       OnEdited = ListViewEdited
       OnInfoTip = ListViewInfoTip
-      ExplicitHeight = 748
     end
     object ListView: TListView
       Left = 23
@@ -2517,7 +2511,6 @@ object MainForm: TMainForm
     FixedSize = True
     FixedOrder = True
     ParentColor = False
-    ExplicitWidth = 1000
     object ToolBar: TToolBar
       Left = 2
       Top = 0
@@ -2848,8 +2841,6 @@ object MainForm: TMainForm
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 3
-    ExplicitTop = 772
-    ExplicitWidth = 1000
     object StatusBar: TStatusBar
       Left = 0
       Top = 0
@@ -2869,7 +2860,6 @@ object MainForm: TMainForm
         item
           Width = 50
         end>
-      ExplicitWidth = 803
     end
     object pnlLSPFrame: TPanel
       Left = 910
@@ -2879,7 +2869,6 @@ object MainForm: TMainForm
       Align = alRight
       BevelOuter = bvNone
       TabOrder = 1
-      ExplicitLeft = 803
       object LoadSaveProgress: TProgressBar
         Left = 2
         Top = 0
@@ -5269,9 +5258,6 @@ object MainForm: TMainForm
         Caption = 'Start'
         Page = StartRibbonPage
       end>
-    ExplicitLeft = 8
-    ExplicitTop = -16
-    ExplicitWidth = 1000
     DesignSize = (
       1107
       143)
@@ -5283,7 +5269,6 @@ object MainForm: TMainForm
       Height = 93
       Caption = 'Start'
       Index = 0
-      ExplicitWidth = 999
       object FileMenuGroup: TRibbonGroup
         Left = 4
         Top = 3
@@ -5305,7 +5290,7 @@ object MainForm: TMainForm
         KeyTip = 'E'
       end
       object ToolsMenuGroup: TRibbonGroup
-        Left = 464
+        Left = 465
         Top = 3
         Width = 300
         Height = 86
@@ -5315,7 +5300,7 @@ object MainForm: TMainForm
         KeyTip = 'T'
       end
       object ViewMenuGroup: TRibbonGroup
-        Left = 973
+        Left = 974
         Top = 3
         Width = 68
         Height = 86
@@ -5327,7 +5312,7 @@ object MainForm: TMainForm
       object RenderMenuGroup: TRibbonGroup
         Left = 361
         Top = 3
-        Width = 101
+        Width = 102
         Height = 86
         ActionManager = ApoActionManager
         Caption = 'Render'
@@ -5335,7 +5320,7 @@ object MainForm: TMainForm
         KeyTip = 'R'
       end
       object ScriptMenuGroup: TRibbonGroup
-        Left = 766
+        Left = 767
         Top = 3
         Width = 205
         Height = 86
@@ -7869,7 +7854,7 @@ object MainForm: TMainForm
     Left = 24
     Top = 224
     Bitmap = {
-      494C010101004400940010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010101004400980010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -8325,6 +8310,7 @@ object MainForm: TMainForm
           item
             ChangesAllowed = []
             Action = ManageScriptFavoritesAction
+            Caption = '&Manage favorites'
             ImageIndex = 21
             KeyTip = 'SF'
           end>
