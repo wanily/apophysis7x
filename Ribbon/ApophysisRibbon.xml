@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Application xmlns="http://schemas.microsoft.com/windows/2009/Ribbon">
+  <Application.Commands>
+    <Command Name="ApplicationMenu" LabelTitle="Apophysis"/>
+    <Command Name="StartMenu" LabelTitle="Start"/>
+    <Command Name="FileMenuGroup" LabelTitle="File"/>
+    <Command Name="NewFlameCommand" LabelTitle="New flame" LabelDescription="Creates a new flame and loads it in the workspace." TooltipTitle="New flame" TooltipDescription="Creates a new flame and loads it in the workspace." Keytip="FN">
+      <Command.SmallImages>
+        <Image>Res/document_color_blue-add.bmp</Image>
+      </Command.SmallImages>
+      <Command.LargeImages>
+        <Image>Res/document_color_blue-add.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="OpenBatchCommand" LabelTitle="Open batch" LabelDescription="Opens a batch from disk and loads its first flame in the workspace." TooltipTitle="Open batch" TooltipDescription="Opens a batch from disk and loads its first flame in the workspace." Keytip="FO">
+      <Command.SmallImages>
+        <Image>Res/folder_open.bmp</Image>
+      </Command.SmallImages>
+      <Command.LargeImages>
+        <Image>Res/folder_open.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="SaveFlameCommand" LabelTitle="Save flame" LabelDescription="Saves the flame in the current workspace to the currently opened batch." TooltipTitle="Save flame" TooltipDescription="Saves the flame in the current workspace to the currently opened batch." Keytip="FS">
+      <Command.SmallImages>
+        <Image>Res/save.bmp</Image>
+      </Command.SmallImages>
+      <Command.LargeImages>
+        <Image>Res/save.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="SaveBatchCommand" LabelTitle="Save batch" LabelDescription="Saves the currently opened batch to disk." TooltipTitle="Save batch" TooltipDescription="Saves the currently opened batch to disk." Keytip="FB">
+      <Command.SmallImages>
+        <Image>Res/save_all.bmp</Image>
+      </Command.SmallImages>
+      <Command.LargeImages>
+        <Image>Res/save_all.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="RestoreLastAutosaveCommand" LabelTitle="Restore last autosave" LabelDescription="Loads the last automatically saved flame in the workspace." TooltipTitle="Restore last autosave" TooltipDescription="Loads the last automatically saved flame in the workspace." Keytip="FA">
+      <Command.SmallImages>
+        <Image>Res/history.bmp</Image>
+      </Command.SmallImages>
+      <Command.LargeImages>
+        <Image>Res/history.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="EditMenuGroup" LabelTitle="Edit"/>
+    <Command Name="CopyCommand" LabelTitle="Copy" LabelDescription="Copies the flame in the current workspace to the clipboard." TooltipTitle="Copy" TooltipDescription="Copies the flame in the current workspace to the clipboard." Keytip="EC">
+      <Command.SmallImages>
+        <Image>Res/clipboard_copy.bmp</Image>
+      </Command.SmallImages>
+      <Command.LargeImages>
+        <Image>Res/clipboard_copy.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="PasteCommand" LabelTitle="Paste" LabelDescription="Pastes the flame in the clipboard to the workspace." TooltipTitle="Paste" TooltipDescription="Pastes the flame in the clipboard to the workspace." Keytip="EP">
+      <Command.SmallImages>
+        <Image>Res/clipboard_paste.bmp</Image>
+      </Command.SmallImages>
+      <Command.LargeImages>
+        <Image>Res/clipboard_paste.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="UndoCommand" LabelTitle="Undo" LabelDescription="Reverts the last committed action." TooltipTitle="Undo" TooltipDescription="Reverts the last committed action." Keytip="EU">
+      <Command.SmallImages>
+        <Image>Res/undo.bmp</Image>
+      </Command.SmallImages>
+      <Command.LargeImages>
+        <Image>Res/undo.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="RedoCommand" LabelTitle="Redo" LabelDescription="Commits the last reverted action again." TooltipTitle="Redo" TooltipDescription="Commits the last reverted action again." Keytip="ER">
+      <Command.SmallImages>
+        <Image>Res/redo.bmp</Image>
+      </Command.SmallImages>
+      <Command.LargeImages>
+        <Image>Res/redo.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="RenderMenuGroup" LabelTitle="Render"/>
+    <Command Name="RenderFlameCommand" LabelTitle="Render flame" LabelDescription="Renders the flame in the workspace to disk." TooltipTitle="Render flame" TooltipDescription="Renders the flame in the workspace to disk." Keytip="RF">
+      <Command.SmallImages>
+        <Image>Res/gear.bmp</Image>
+      </Command.SmallImages>
+      <Command.LargeImages>
+        <Image>Res/gear.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="RenderBatchCommand" LabelTitle="Render batch" LabelDescription="Renders all flames in the currently opened batch to disk sequentially." TooltipTitle="Render batch" TooltipDescription="Renders all flames in the currently opened batch to disk sequentially." Keytip="RB">
+      <Command.SmallImages>
+        <Image>Res/gears.bmp</Image>
+      </Command.SmallImages>
+      <Command.LargeImages>
+        <Image>Res/gears.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="ToolsMenuGroup" LabelTitle="Tools"/>
+    <Command Name="FullscreenPreviewCommand" LabelTitle="Fullscreen preview" LabelDescription="Starts a preview render and displays the result in full screen mode." TooltipTitle="Fullscreen preview" TooltipDescription="Starts a preview render and displays the result in full screen mode." Keytip="TF">
+      <Command.SmallImages>
+        <Image>Res/full_screen.bmp</Image>
+      </Command.SmallImages>
+      <Command.LargeImages>
+        <Image>Res/full_screen.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="ShowEditorCommand" LabelTitle="Editor" LabelDescription="Shows the transform editor window." TooltipTitle="Editor" TooltipDescription="Shows the transform editor window." Keytip="TE">
+      <Command.SmallImages>
+        <Image>Res/tool_ruler2.bmp</Image>
+      </Command.SmallImages>
+      <Command.LargeImages>
+        <Image>Res/tool_ruler2.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="ShowAdjustmentCommand" LabelTitle="Camera" LabelDescription="Shows the camera editor window." TooltipTitle="Camera" TooltipDescription="Shows the camera editor window." Keytip="TA">
+      <Command.SmallImages>
+        <Image MinDPI="192">Res/Projectors.bmp</Image>
+      </Command.SmallImages>
+      <Command.LargeImages>
+        <Image MinDPI="144">Res/Projectors.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="ShowOutputPropertiesCommand" LabelTitle="Output properties" LabelDescription="Shows the output properties window." TooltipTitle="Output properties" TooltipDescription="Shows the output properties window." Keytip="TO">
+      <Command.SmallImages>
+        <Image>Res/settings_options.bmp</Image>
+      </Command.SmallImages>
+      <Command.LargeImages>
+        <Image>Res/settings_options.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="ShowPaletteCommand" LabelTitle="Palette" LabelDescription="Shows the palette editor window." TooltipTitle="Palette" TooltipDescription="Shows the palette editor window." Keytip="TP">
+      <Command.SmallImages>
+        <Image>Res/tool_brush.bmp</Image>
+      </Command.SmallImages>
+      <Command.LargeImages>
+        <Image>Res/tool_brush.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="ShowCanvasCommand" LabelTitle="Canvas size" LabelDescription="Shows the canvas size editor window." TooltipTitle="Canvas size" TooltipDescription="Shows the canvas size editor window." Keytip="TC">
+      <Command.SmallImages>
+        <Image>Res/screen-edit.bmp</Image>
+      </Command.SmallImages>
+      <Command.LargeImages>
+        <Image>Res/screen-edit.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="PaletteFromImageCommand" LabelTitle="Palette from image" LabelDescription="Loads an image from the disk and uses its colors for the flame in the workspace." TooltipTitle="Palette from image" TooltipDescription="Loads an image from the disk and uses its colors for the flame in the workspace." Keytip="TI">
+      <Command.SmallImages>
+        <Image>Res/picture-gear.bmp</Image>
+      </Command.SmallImages>
+      <Command.LargeImages>
+        <Image>Res/picture-gear.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="ScriptMenuGroup" LabelTitle="Script"/>
+    <Command Name="RunScriptCommand" LabelTitle="Run" LabelDescription="Runs the currently opened script." TooltipTitle="Run" TooltipDescription="Runs the currently opened script." Keytip="SR">
+      <Command.SmallImages>
+        <Image>Res/execute.bmp</Image>
+      </Command.SmallImages>
+      <Command.LargeImages>
+        <Image>Res/execute.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="StopScriptCommand" LabelTitle="Stop" LabelDescription="Stops the currently running script." TooltipTitle="Stop" TooltipDescription="Stops the currently running script." Keytip="SS">
+      <Command.SmallImages>
+        <Image>Res/stop.bmp</Image>
+      </Command.SmallImages>
+      <Command.LargeImages>
+        <Image>Res/stop.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="OpenScriptCommand" LabelTitle="Open script" LabelDescription="Opens a script from the disk." TooltipTitle="Open script" TooltipDescription="Opens a script from the disk." Keytip="SO">
+      <Command.SmallImages>
+        <Image>Res/folder_open-execute.bmp</Image>
+      </Command.SmallImages>
+      <Command.LargeImages>
+        <Image>Res/folder_open-execute.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="EditScriptCommand" LabelTitle="Edit script" LabelDescription="Shows the script editor with the currently opened script." TooltipTitle="Edit script" TooltipDescription="Shows the script editor with the currently opened script." Keytip="SE">
+      <Command.SmallImages>
+        <Image>Res/document_text-edit.bmp</Image>
+      </Command.SmallImages>
+      <Command.LargeImages>
+        <Image>Res/document_text-edit.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="ManageScriptFavoritesCommand" LabelTitle="Manage favorites" LabelDescription="Shows the favorite script list editor." TooltipTitle="Manage favorites" TooltipDescription="Shows the favorite script list editor." Keytip="SF">
+      <Command.SmallImages>
+        <Image>Res/favorite.bmp</Image>
+      </Command.SmallImages>
+      <Command.LargeImages>
+        <Image>Res/favorite.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="ViewMenuGroup" LabelTitle="View"/>
+    <Command Name="ViewSampleDensity" LabelTitle="Density" LabelDescription="Specifies how dense the preview of the flame in the workspace should be rendered (in samples / pixel)" TooltipTitle="Density" TooltipDescription="Specifies how dense the preview of the flame in the workspace should be rendered (in samples / pixel)" Keytip="VD">
+      <Command.SmallImages>
+        <Image>Res/stats.bmp</Image>
+      </Command.SmallImages>
+      <Command.LargeImages>
+        <Image>Res/stats.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="PanModeCommand" LabelTitle="Pan mode" LabelDescription="The cursor will move (pan) the camera." TooltipTitle="Pan mode" TooltipDescription="The cursor will move (pan) the camera." Keytip="VP">
+      <Command.SmallImages>
+        <Image>Res/select.bmp</Image>
+      </Command.SmallImages>
+      <Command.LargeImages>
+        <Image>Res/select.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="RotateModeCommand" LabelTitle="Rotate mode" LabelDescription="The cursor will rotate the camera." TooltipTitle="Rotate mode" TooltipDescription="The cursor will rotate the camera." Keytip="VR">
+      <Command.SmallImages>
+        <Image>Res/reload_rotate.bmp</Image>
+      </Command.SmallImages>
+      <Command.LargeImages>
+        <Image>Res/reload_rotate.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="ZoomInCommand" LabelTitle="Zoom in mode" LabelDescription="The cursor will zoom the camera in." TooltipTitle="Zoom in mode" TooltipDescription="The cursor will zoom the camera in." Keytip="VU">
+      <Command.SmallImages>
+        <Image>Res/zoom_in.bmp</Image>
+      </Command.SmallImages>
+      <Command.LargeImages>
+        <Image>Res/zoom_in.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="ZoomOutCommand" LabelTitle="Zoom out mode" LabelDescription="The cursor will zoom the camera out." TooltipTitle="Zoom out mode" TooltipDescription="The cursor will zoom the camera out." Keytip="VD">
+      <Command.SmallImages>
+        <Image>Res/zoom_out.bmp</Image>
+      </Command.SmallImages>
+      <Command.LargeImages>
+        <Image>Res/zoom_out.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="ViewDensity5" LabelTitle="5"/>
+    <Command Name="ViewDensity10" LabelTitle="10"/>
+    <Command Name="ViewDensity15" LabelTitle="15"/>
+    <Command Name="ViewDensity25" LabelTitle="25"/>
+    <Command Name="ViewDensity50" LabelTitle="50"/>
+    <Command Name="ViewDensity100" LabelTitle="100"/>
+    <Command Name="ViewDensity150" LabelTitle="150"/>
+    <Command Name="ViewDensity250" LabelTitle="250"/>
+    <Command Name="ViewDensity500" LabelTitle="500"/>
+    <Command Name="ViewDensity1000" LabelTitle="1000"/>
+    <Command Name="RecentItemsCommand" LabelTitle="Recent batches"/>
+    <Command Name="ShowSettingsCommand" LabelTitle="Settings" LabelDescription="Shows the settings window." TooltipTitle="Settings" TooltipDescription="Shows the settings window." Keytip="O">
+      <Command.SmallImages>
+        <Image>Res/tools.bmp</Image>
+      </Command.SmallImages>
+      <Command.LargeImages>
+        <Image>Res/tools.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="ExitCommand" LabelTitle="Exit" LabelDescription="Exits Apophysis." TooltipTitle="Exit" TooltipDescription="Exits Apophysis." Keytip="X">
+      <Command.SmallImages>
+        <Image>Res/close_window.bmp</Image>
+      </Command.SmallImages>
+      <Command.LargeImages>
+        <Image>Res/close_window.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="AboutCommand" LabelTitle="About" LabelDescription="Shows information about Apophysis." TooltipTitle="About" TooltipDescription="Shows information about Apophysis." Keytip="A">
+      <Command.SmallImages>
+        <Image>Res/info.bmp</Image>
+      </Command.SmallImages>
+      <Command.LargeImages>
+        <Image>Res/info.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="HelpCommand" LabelTitle="Help" LabelDescription="Shows the Apophysis help file." TooltipTitle="Help" TooltipDescription="Shows the Apophysis help file." Keytip="H">
+      <Command.SmallImages>
+        <Image>Res/help.bmp</Image>
+      </Command.SmallImages>
+      <Command.LargeImages>
+        <Image>Res/help.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="FractalFlameSpecsCommand" LabelTitle="Fractal flames" LabelDescription="Shows the publication about Fractal Flames." TooltipTitle="Fractal flames" TooltipDescription="Shows the publication about Fractal Flames.">
+      <Command.SmallImages>
+        <Image>Res/list-internet.bmp</Image>
+      </Command.SmallImages>
+      <Command.LargeImages>
+        <Image>Res/list-internet.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="DonateCommand" LabelTitle="Donate" LabelDescription="Shows the donation website." TooltipTitle="Donate" TooltipDescription="Shows the donation website.">
+      <Command.SmallImages>
+        <Image>Res/favorite2.bmp</Image>
+      </Command.SmallImages>
+      <Command.LargeImages>
+        <Image>Res/favorite2.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="ShowTransparencyCommand" LabelTitle="Show transparency" LabelDescription="Toggles the display of image transparency on/off." TooltipTitle="Show transparency" TooltipDescription="Toggles the display of image transparency on/off." Keytip="VT">
+      <Command.SmallImages>
+        <Image>Res/select_invert.bmp</Image>
+      </Command.SmallImages>
+    </Command>
+    <Command Name="ShowGuidelinesCommand" LabelTitle="Show guidelines" LabelDescription="Toggles the display of guidelines on/off." TooltipTitle="Show guidelines" TooltipDescription="Toggles the display of guidelines on/off." Keytip="VG">
+      <Command.SmallImages>
+        <Image>Res/tool_ruler.bmp</Image>
+      </Command.SmallImages>
+    </Command>
+    <Command Name="ShowIconsCommand" LabelTitle="Show icons in batch list" LabelDescription="Toggles the display of icons in the batch list view on/off." TooltipTitle="Show icons in batch list" TooltipDescription="Toggles the display of icons in the batch list view on/off." Keytip="VI">
+      <Command.SmallImages>
+        <Image>Res/application-control_stop.bmp</Image>
+      </Command.SmallImages>
+    </Command>
+  </Application.Commands>
+  <Application.Views>
+    <Ribbon>
+      <Ribbon.ApplicationMenu>
+        <ApplicationMenu CommandName="ApplicationMenu">
+          <ApplicationMenu.RecentItems>
+            <RecentItems CommandName="RecentItemsCommand" MaxCount="9"/>
+          </ApplicationMenu.RecentItems>
+          <MenuGroup>
+            <Button CommandName="HelpCommand"/>
+            <Button CommandName="FractalFlameSpecsCommand"/>
+            <Button CommandName="DonateCommand"/>
+            <Button CommandName="AboutCommand"/>
+          </MenuGroup>
+          <MenuGroup>
+            <Button CommandName="ShowSettingsCommand"/>
+            <Button CommandName="ExitCommand"/>
+          </MenuGroup>
+        </ApplicationMenu>
+      </Ribbon.ApplicationMenu>
+      <Ribbon.QuickAccessToolbar>
+        <QuickAccessToolbar/>
+      </Ribbon.QuickAccessToolbar>
+      <Ribbon.Tabs>
+        <Tab CommandName="StartMenu">
+          <Tab.ScalingPolicy>
+            <ScalingPolicy>
+              <ScalingPolicy.IdealSizes>
+                <Scale Group="FileMenuGroup" Size="Medium"/>
+                <Scale Group="EditMenuGroup" Size="Medium"/>
+                <Scale Group="RenderMenuGroup" Size="Medium"/>
+                <Scale Group="ToolsMenuGroup" Size="Medium"/>
+                <Scale Group="ScriptMenuGroup" Size="Medium"/>
+                <Scale Group="ViewMenuGroup" Size="Medium"/>
+              </ScalingPolicy.IdealSizes>
+            </ScalingPolicy>
+          </Tab.ScalingPolicy>
+          <Group CommandName="FileMenuGroup" SizeDefinition="FiveButtons">
+            <Button CommandName="NewFlameCommand"/>
+            <Button CommandName="OpenBatchCommand"/>
+            <Button CommandName="SaveFlameCommand"/>
+            <Button CommandName="SaveBatchCommand"/>
+            <Button CommandName="RestoreLastAutosaveCommand"/>
+          </Group>
+          <Group CommandName="EditMenuGroup" SizeDefinition="FourButtons">
+            <Button CommandName="UndoCommand"/>
+            <Button CommandName="RedoCommand"/>
+            <Button CommandName="CopyCommand"/>
+            <Button CommandName="PasteCommand"/>
+          </Group>
+          <Group CommandName="RenderMenuGroup" SizeDefinition="TwoButtons">
+            <Button CommandName="RenderFlameCommand"/>
+            <Button CommandName="RenderBatchCommand"/>
+          </Group>
+          <Group CommandName="ViewMenuGroup" SizeDefinition="EightButtons">
+            <DropDownButton CommandName="ViewSampleDensity">
+              <Button CommandName="ViewDensity5"/>
+              <Button CommandName="ViewDensity10"/>
+              <Button CommandName="ViewDensity15"/>
+              <Button CommandName="ViewDensity25"/>
+              <Button CommandName="ViewDensity50"/>
+              <Button CommandName="ViewDensity100"/>
+              <Button CommandName="ViewDensity150"/>
+              <Button CommandName="ViewDensity250"/>
+              <Button CommandName="ViewDensity500"/>
+              <Button CommandName="ViewDensity1000"/>
+            </DropDownButton>
+            <Button CommandName="PanModeCommand"/>
+            <Button CommandName="RotateModeCommand"/>
+            <Button CommandName="ZoomInCommand"/>
+            <Button CommandName="ZoomOutCommand"/>
+            <Button CommandName="ShowGuidelinesCommand"/>
+            <Button CommandName="ShowTransparencyCommand"/>
+            <Button CommandName="ShowIconsCommand"/>
+          </Group>
+          <Group CommandName="ToolsMenuGroup" SizeDefinition="SevenButtons">
+            <Button CommandName="ShowEditorCommand"/>
+            <Button CommandName="ShowAdjustmentCommand"/>
+            <Button CommandName="ShowOutputPropertiesCommand"/>
+            <Button CommandName="ShowPaletteCommand"/>
+            <Button CommandName="ShowCanvasCommand"/>
+            <Button CommandName="FullscreenPreviewCommand"/>
+            <Button CommandName="PaletteFromImageCommand"/>
+          </Group>
+          <Group CommandName="ScriptMenuGroup" ApplicationModes="1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31" SizeDefinition="FiveButtons">
+            <Button CommandName="RunScriptCommand"/>
+            <Button CommandName="StopScriptCommand"/>
+            <Button CommandName="OpenScriptCommand"/>
+            <Button CommandName="EditScriptCommand"/>
+            <Button CommandName="ManageScriptFavoritesCommand"/>
+          </Group>
+        </Tab>
+      </Ribbon.Tabs>
+    </Ribbon>
+    <ContextPopup/>
+  </Application.Views>
+</Application>

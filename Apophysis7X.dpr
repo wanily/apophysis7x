@@ -1,8 +1,11 @@
 program Apophysis7X;
 
 {%ToDo 'Assets\Apophysis7X.todo'}
+
 {$R 'Resources\Apophysis7X.res'}
+{$R 'System\UIRibbon.res'}
 {$R *.dres}
+
 {$SetPEFlags $20}
 {$Include 'delphiversion.pas'}
 
@@ -26,6 +29,14 @@ uses
   LibXmlParser in 'System\LibXmlParser.pas',
   Windows7 in 'System\Windows7.pas',
   RegexHelper in 'System\RegexHelper.pas',
+  ApophysisRibbon in 'Ribbon\ApophysisRibbon.pas',
+  UIRibbon in 'System\UIRibbon.pas',
+  UIRibbonForm in 'System\UIRibbonForm.pas',
+  UIRibbonUtils in 'System\UIRibbonUtils.pas',
+  UIRibbonApi in 'System\UIRibbonApi.pas',
+  UIRibbonCommands in 'System\UIRibbonCommands.pas',
+  UIRibbonActions in 'System\UIRibbonActions.pas',
+  WinApiEx in 'System\WinApiEx.pas',
 
 {-- CORE --}
   Global in 'Core\Global.pas',
@@ -139,7 +150,7 @@ begin
   InitializePlugins;
 
   Application.Initialize;
-  TStyleManager.TrySetStyle('Carbon');
+  //TStyleManager.TrySetStyle('Carbon');
 
   {$ifdef Apo7X64}
   Application.Title := 'Apophysis 7x (64 bit)';
@@ -179,6 +190,8 @@ begin
   {$endif}
   Application.Run;
 end.
+
+
 
 
 

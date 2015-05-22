@@ -43,7 +43,7 @@ uses
   Vcl.PlatformDefaultStyleActnCtrls, System.Actions, Vcl.ActnList, Vcl.ActnMan,
   Vcl.RibbonSilverStyleActnCtrls, Vcl.ActnCtrls, Vcl.ActnMenus,
   Vcl.RibbonActnMenus, Vcl.StdActns, System.ImageList,
-  Vcl.RibbonObsidianStyleActnCtrls;//, WinInet;
+  Vcl.RibbonObsidianStyleActnCtrls, UIRibbonForm, UIRibbon, UIRibbonCommands;//, WinInet;
 
 const
   PixelCountMax = 32768;
@@ -84,7 +84,7 @@ type
   TRGBTripleArray = array[0..PixelCountMax - 1] of TRGBTriple;
   TMatrix = array[0..1, 0..1] of double;
 
-  TMainForm = class(TForm)
+  TMainForm = class(TUIRibbonForm)
     Buttons: TImageList;
     SmallImages: TImageList;
     OpenDialog: TOpenDialog;
@@ -110,56 +110,14 @@ type
     Shape1: TShape;
     ListView: TListView;
     ListView1: TListView;
-    cbMain: TCoolBar;
-    ToolBar: TToolBar;
-    ToolButton8: TToolButton;
-    btnOpen: TToolButton;
-    btnSave: TToolButton;
-    ToolButton10: TToolButton;
-    btnRender: TToolButton;
-    tbRenderAll: TToolButton;
-    ToolButton9: TToolButton;
-    btnViewList: TToolButton;
-    btnViewIcons: TToolButton;
-    ToolButton2: TToolButton;
-    btnUndo: TToolButton;
-    btnRedo: TToolButton;
-    ToolButton1: TToolButton;
-    btnReset: TToolButton;
-    btnFullScreen: TToolButton;
-    ToolButton3: TToolButton;
-    tbQualityBox: TComboBoxEx;
     ColorDialog: TColorDialog;
-    ToolButton4: TToolButton;
-    ToolButton5: TToolButton;
-    ToolButton6: TToolButton;
-    ToolButton13: TToolButton;
-    ToolButton14: TToolButton;
-    ToolButton15: TToolButton;
-    tbShowAlpha: TToolButton;
-    ToolButton16: TToolButton;
-    ToolButton17: TToolButton;
-    btnRunScript: TToolButton;
-    btnStopScript: TToolButton;
-    ToolButton18: TToolButton;
-    tbDraw: TToolButton;
-    ToolButton20: TToolButton;
-    ToolButton21: TToolButton;
-    ToolButton22: TToolButton;
     AutoSaveTimer: TTimer;
-    tbGuides: TToolButton;
     BottomDock: TPanel;
     StatusBar: TStatusBar;
     Image: TImage;
     pnlLSPFrame: TPanel;
     LoadSaveProgress: TProgressBar;
-    ApophysisRibbon: TRibbon;
-    StartRibbonPage: TRibbonPage;
     ApoActionManager: TActionManager;
-    FileMenuGroup: TRibbonGroup;
-    EditMenuGroup: TRibbonGroup;
-    ToolsMenuGroup: TRibbonGroup;
-    ViewMenuGroup: TRibbonGroup;
     NewFlameAction: TAction;
     OpenBatchAction: TAction;
     SaveFlameAction: TAction;
@@ -178,8 +136,6 @@ type
     ShowCanvasSizeAction: TAction;
     ShowOutputPropertiesAction: TAction;
     ShowSettingsAction: TAction;
-    RenderMenuGroup: TRibbonGroup;
-    ScriptMenuGroup: TRibbonGroup;
     RenderFlameAction: TAction;
     RenderBatchAction: TAction;
     RunScriptAction: TAction;
@@ -187,6 +143,7 @@ type
     OpenScriptAction: TAction;
     EditScriptAction: TAction;
     ManageScriptFavoritesAction: TAction;
+    procedure RibbonLoaded; override;
     procedure mnuManualClick(Sender: TObject);
     procedure mnuReportFlameClick(Sender: TObject);
     procedure mnuTurnFlameToScriptClick(Sender: TObject);
@@ -224,7 +181,6 @@ type
     procedure mnuOpenClick(Sender: TObject);
     procedure mnuGradClick(Sender: TObject);
     procedure mnuSmoothGradientClick(Sender: TObject);
-    procedure mnuToolbarClick(Sender: TObject);
     procedure mnuStatusBarClick(Sender: TObject);
     procedure mnuFileContentsClick(Sender: TObject);
     procedure mnuUndoClick(Sender: TObject);
@@ -291,7 +247,6 @@ type
     procedure ToolButton7Click(Sender: TObject);
     procedure RebuildListView();
     procedure ToolButton8Click(Sender: TObject);
-    procedure FormResize(Sender: TObject);
     procedure mnuResetUIClick(Sender: TObject);
     procedure AutoSaveTimerTimer(Sender: TObject);
     procedure Restorelastautosave1Click(Sender: TObject);
@@ -450,6 +405,7 @@ uses
   RndFlame, Tracer, Types, varGenericPlugin;
 
 {$R *.DFM}
+{$R 'Ribbon\ApophysisRibbon.res'}
 
 procedure AssignBitmapProperly(var Bitmap:TBitmap; Source:TBitmap);
 begin
@@ -635,76 +591,76 @@ end;
 
 procedure TMainForm.InsertStrings;
 begin
-  CopyAction.Caption := TextByKey('common-copy');
-	PasteAction.Caption := TextByKey('common-paste');
-	mnuItemDelete.Caption := TextByKey('common-delete');
-	mnuListRename.Caption := TextByKey('common-rename');
-	UndoAction.Caption := TextByKey('common-undo');
-	mnuPopUndo.Caption := TextByKey('common-undo');
-	btnUndo.Hint := TextByKey('common-undo');
-	RedoAction.Caption := TextByKey('common-redo');
-	mnuPopRedo.Caption := TextByKey('common-redo');
-	btnRedo.Hint := TextByKey('common-redo');
-	FileMenuGroup.Caption := TextByKey('main-menu-file-title');
-	NewFlameAction.Caption := TextByKey('main-menu-file-new');
-	ToolButton8.Hint := TextByKey('main-menu-file-new');
-	OpenBatchAction.Caption := TextByKey('main-menu-file-open');
-	btnOpen.Hint := TextByKey('main-menu-file-open');
-	RestoreAutosaveAction.Caption := TextByKey('main-menu-file-restoreautosave');
-	SaveFlameAction.Caption := TextByKey('main-menu-file-saveparams');
-	btnSave.Hint := TextByKey('main-menu-file-saveparams');
-	SaveBatchAction.Caption := TextByKey('main-menu-file-saveallparams');
-	//mnuExit.Caption := TextByKey('main-menu-file-exit');
-	EditMenuGroup.Caption := TextByKey('main-menu-edit-title');
-	ViewMenuGroup.Caption := TextByKey('main-menu-view-title');
-	FullScreenPreviewAction.Caption := TextByKey('main-menu-view-fullscreen');
-	mnuPopFullscreen.Caption := TextByKey('main-menu-view-fullscreen');
-	btnFullScreen.Hint := TextByKey('main-menu-view-fullscreen');
-	ShowEditorAction.Caption := TextByKey('main-menu-view-editor');
-	ToolButton5.Hint := TextByKey('main-menu-view-editor');
-	ShowAdjustmentAction.Caption := TextByKey('main-menu-view-adjustment');
-	ToolButton6.Hint := TextByKey('main-menu-view-adjustment');
-	//mnuMessages.Caption := TextByKey('main-menu-view-messages');
-	toolButton13.Hint := TextByKey('main-menu-view-messages');
-	//mnuResetLocation.Caption := TextByKey('main-menu-flame-reset');
-	mnuPopResetLocation.Caption := TextByKey('main-menu-flame-reset');
-	btnReset.Hint := TextByKey('main-menu-flame-reset');
-	RenderFlameAction.Caption := TextByKey('main-menu-flame-rendertodisk');
-	btnRender.Hint := TextByKey('main-menu-flame-rendertodisk');
-	RenderBatchAction.Caption := TextByKey('main-menu-flame-renderallflames');
-	tbRenderAll.Hint := TextByKey('main-menu-flame-renderallflames');
-	//mnuReportFlame.Caption := TextByKey('main-menu-flame-generatereport');
-	ScriptMenuGroup.Caption := TextByKey('main-menu-script-title');
-	RunScriptAction.Caption := TextByKey('main-menu-script-run');
-	btnRunScript.Hint := TextByKey('main-menu-script-run');
-	StopScriptAction.Caption := TextByKey('main-menu-script-stop');
-	btnStopScript.Hint := TextByKey('main-menu-script-stop');
-	OpenScriptAction.Caption := TextByKey('main-menu-script-open');
-	EditScriptAction.Caption := TextByKey('main-menu-script-edit');
-	ToolButton17.Hint := TextByKey('main-menu-script-edit');
-	ManageScriptFavoritesAction.Caption := TextByKey('main-menu-script-managefaves');
-	//mnuTurnFlameToScript.Caption := TextByKey('main-menu-script-flametoscript');
-	ToolsMenuGroup.Caption := TextByKey('main-menu-options-title');
-	//mnuToolbar.Caption := TextByKey('main-menu-options-togglemaintoolbar');
-	//mnuStatusBar.Caption := TextByKey('main-menu-options-togglestatusbar');
-	//mnuFileContents.Caption := TextByKey('main-menu-options-togglefilelist');
-	//mnuResetUI.Caption := TextByKey('main-menu-options-resetfilelistwidth');
-	ShowSettingsAction.Caption := TextByKey('main-menu-options-showoptions');
-	ToolButton14.Hint := TextByKey('main-menu-options-showoptions');
-	//MainHelp.Caption := TextByKey('main-menu-help-title');
-	//mnuHelpTopics.Caption := TextByKey('main-menu-help-contents');
-	//mnuFlamePDF.Caption := TextByKey('main-menu-help-aboutalgorithm');
-	//mnuAbout.Caption := TextByKey('main-menu-help-aboutapophysis');
-	btnViewList.Hint := TextByKey('main-toolbar-listviewmode-classic');
-	btnViewIcons.Hint := TextByKey('main-toolbar-listviewmode-icons');
-	tbShowAlpha.Hint := TextByKey('main-toolbar-togglealpha');
-	tbGuides.Hint := TextByKey('main-toolbar-toggleguides');
-	tbDraw.Hint := TextByKey('main-toolbar-modemove');
-	ToolButton20.Hint := TextByKey('main-toolbar-moderotate');
-	ToolButton21.Hint := TextByKey('main-toolbar-modezoomin');
-	ToolButton22.Hint := TextByKey('main-toolbar-modezoomout');
-  ListView1.Columns[0].Caption := TextByKey('save-name');
-  //mnuResumeRender.Caption := TextByKey('main-menu-flame-resumeunfinished');
+//  CopyAction.Caption := TextByKey('common-copy');
+//	PasteAction.Caption := TextByKey('common-paste');
+//	mnuItemDelete.Caption := TextByKey('common-delete');
+//	mnuListRename.Caption := TextByKey('common-rename');
+//	UndoAction.Caption := TextByKey('common-undo');
+//	mnuPopUndo.Caption := TextByKey('common-undo');
+//	btnUndo.Hint := TextByKey('common-undo');
+//	RedoAction.Caption := TextByKey('common-redo');
+//	mnuPopRedo.Caption := TextByKey('common-redo');
+//	btnRedo.Hint := TextByKey('common-redo');
+//	FileMenuGroup.Caption := TextByKey('main-menu-file-title');
+//	NewFlameAction.Caption := TextByKey('main-menu-file-new');
+//	ToolButton8.Hint := TextByKey('main-menu-file-new');
+//	OpenBatchAction.Caption := TextByKey('main-menu-file-open');
+//	btnOpen.Hint := TextByKey('main-menu-file-open');
+//	RestoreAutosaveAction.Caption := TextByKey('main-menu-file-restoreautosave');
+//	SaveFlameAction.Caption := TextByKey('main-menu-file-saveparams');
+//	btnSave.Hint := TextByKey('main-menu-file-saveparams');
+//	SaveBatchAction.Caption := TextByKey('main-menu-file-saveallparams');
+//	//mnuExit.Caption := TextByKey('main-menu-file-exit');
+//	EditMenuGroup.Caption := TextByKey('main-menu-edit-title');
+//	ViewMenuGroup.Caption := TextByKey('main-menu-view-title');
+//	FullScreenPreviewAction.Caption := TextByKey('main-menu-view-fullscreen');
+//	mnuPopFullscreen.Caption := TextByKey('main-menu-view-fullscreen');
+//	btnFullScreen.Hint := TextByKey('main-menu-view-fullscreen');
+//	ShowEditorAction.Caption := TextByKey('main-menu-view-editor');
+//	ToolButton5.Hint := TextByKey('main-menu-view-editor');
+//	ShowAdjustmentAction.Caption := TextByKey('main-menu-view-adjustment');
+//	ToolButton6.Hint := TextByKey('main-menu-view-adjustment');
+//	//mnuMessages.Caption := TextByKey('main-menu-view-messages');
+//	toolButton13.Hint := TextByKey('main-menu-view-messages');
+//	//mnuResetLocation.Caption := TextByKey('main-menu-flame-reset');
+//	mnuPopResetLocation.Caption := TextByKey('main-menu-flame-reset');
+//	btnReset.Hint := TextByKey('main-menu-flame-reset');
+//	RenderFlameAction.Caption := TextByKey('main-menu-flame-rendertodisk');
+//	btnRender.Hint := TextByKey('main-menu-flame-rendertodisk');
+//	RenderBatchAction.Caption := TextByKey('main-menu-flame-renderallflames');
+//	tbRenderAll.Hint := TextByKey('main-menu-flame-renderallflames');
+//	//mnuReportFlame.Caption := TextByKey('main-menu-flame-generatereport');
+//	ScriptMenuGroup.Caption := TextByKey('main-menu-script-title');
+//	RunScriptAction.Caption := TextByKey('main-menu-script-run');
+//	btnRunScript.Hint := TextByKey('main-menu-script-run');
+//	StopScriptAction.Caption := TextByKey('main-menu-script-stop');
+//	btnStopScript.Hint := TextByKey('main-menu-script-stop');
+//	OpenScriptAction.Caption := TextByKey('main-menu-script-open');
+//	EditScriptAction.Caption := TextByKey('main-menu-script-edit');
+//	ToolButton17.Hint := TextByKey('main-menu-script-edit');
+//	ManageScriptFavoritesAction.Caption := TextByKey('main-menu-script-managefaves');
+//	//mnuTurnFlameToScript.Caption := TextByKey('main-menu-script-flametoscript');
+//	ToolsMenuGroup.Caption := TextByKey('main-menu-options-title');
+//	//mnuToolbar.Caption := TextByKey('main-menu-options-togglemaintoolbar');
+//	//mnuStatusBar.Caption := TextByKey('main-menu-options-togglestatusbar');
+//	//mnuFileContents.Caption := TextByKey('main-menu-options-togglefilelist');
+//	//mnuResetUI.Caption := TextByKey('main-menu-options-resetfilelistwidth');
+//	ShowSettingsAction.Caption := TextByKey('main-menu-options-showoptions');
+//	ToolButton14.Hint := TextByKey('main-menu-options-showoptions');
+//	//MainHelp.Caption := TextByKey('main-menu-help-title');
+//	//mnuHelpTopics.Caption := TextByKey('main-menu-help-contents');
+//	//mnuFlamePDF.Caption := TextByKey('main-menu-help-aboutalgorithm');
+//	//mnuAbout.Caption := TextByKey('main-menu-help-aboutapophysis');
+//	btnViewList.Hint := TextByKey('main-toolbar-listviewmode-classic');
+//	btnViewIcons.Hint := TextByKey('main-toolbar-listviewmode-icons');
+//	tbShowAlpha.Hint := TextByKey('main-toolbar-togglealpha');
+//	tbGuides.Hint := TextByKey('main-toolbar-toggleguides');
+//	tbDraw.Hint := TextByKey('main-toolbar-modemove');
+//	ToolButton20.Hint := TextByKey('main-toolbar-moderotate');
+//	ToolButton21.Hint := TextByKey('main-toolbar-modezoomin');
+//	ToolButton22.Hint := TextByKey('main-toolbar-modezoomout');
+//  ListView1.Columns[0].Caption := TextByKey('save-name');
+//  //mnuResumeRender.Caption := TextByKey('main-menu-flame-resumeunfinished');
 end;
 
 procedure TMainForm.InvokeLoadXML(xmltext:string);
@@ -1070,8 +1026,6 @@ begin
   mnuPopUndo.Enabled := True;
   RedoAction.Enabled := false;
   mnuPopRedo.Enabled := false;
-  btnUndo.enabled := true;
-  btnRedo.Enabled := false;
   EditForm.mnuUndo.Enabled := True;
   EditForm.mnuRedo.Enabled := false;
   EditForm.tbUndo.enabled := true;
@@ -2582,8 +2536,8 @@ begin
   // --Z--
   StopThread;
   RedrawTimer.Enabled := True;
-  tbQualityBox.Text := FloatToStr(defSampleDensity);
-  tbShowAlpha.Down := ShowTransparency;
+  //RIBBONTODO  tbQualityBox.Text := FloatToStr(defSampleDensity);
+  //RIBBONTODO  tbShowAlpha.Down := ShowTransparency;
   DrawImageView;
   UpdateWindows;
 end;
@@ -2881,6 +2835,20 @@ begin
   *)
 end;
 
+procedure TMainForm.RibbonLoaded;
+begin
+  {$ifdef DisableScripting}
+  self.Ribbon.SetApplicationModes(0);
+  {btnRunScript.Visible := false;
+  btnStopScript.Visible := false;
+  ToolButton17.Visible := false;
+  ToolButton18.Visible := false;}
+  TbBreakWidth := TbBreakWidth - (3 * 26 + 1 * 8);
+  {$else}
+  self.Ribbon.SetApplicationModes(1);
+  {$endif}
+end;
+
 procedure TMainForm.FormCreate(Sender: TObject);
 var
   dte: string;
@@ -2896,20 +2864,6 @@ begin
 
   CreateSubstMap;
   TbBreakWidth := 802;
-
-  {$ifdef DisableScripting}
-  ScriptMenuGroup.Visible := false;
-  {btnRunScript.Visible := false;
-  btnStopScript.Visible := false;
-  ToolButton17.Visible := false;
-  ToolButton18.Visible := false;}
-
-  ToolBar.Perform(CM_CONTROLCHANGE, WPARAM(btnRunScript), 0);
-  ToolBar.Perform(CM_CONTROLCHANGE, WPARAM(btnStopScript), 0);
-  ToolBar.Perform(CM_CONTROLCHANGE, WPARAM(ToolButton17), 0);
-  ToolBar.Perform(CM_CONTROLCHANGE, WPARAM(ToolButton18), 0);
-  TbBreakWidth := TbBreakWidth - (3 * 26 + 1 * 8);
-  {$endif}
 
   ListXmlScanner := TEasyXmlScanner.Create(nil);
   XmlScanner := TXmlScanner.Create(nil);
@@ -2970,8 +2924,8 @@ begin
   RandomDate := Dte;
   //mnuExit.ShortCut := TextToShortCut('Alt+F4');
 
-  tbQualityBox.Text := FloatToStr(defSampleDensity);
-  tbShowAlpha.Down := ShowTransparency;
+  //RIBBONTODO  tbQualityBox.Text := FloatToStr(defSampleDensity);
+  //RIBBONTODO  tbShowAlpha.Down := ShowTransparency;
   DrawSelection := true;
   FViewScale := 1;
   ThumbnailSize := 128;
@@ -2994,9 +2948,8 @@ begin
     btnViewIconsClick(nil);
   end else begin
   ListView1.ViewStyle := vsReport;
-  ToolBar.Perform(CM_CONTROLCHANGE, WPARAM(btnViewList), 0);
-  ToolBar.Perform(CM_CONTROLCHANGE, WPARAM(btnViewIcons), 0);
-  ToolBar.Perform(CM_CONTROLCHANGE, WPARAM(ToolButton9), 0);
+  //RIBBONTODO  ToolBar.Perform(CM_CONTROLCHANGE, WPARAM(btnViewList), 0);
+  //RIBBONTODO  ToolBar.Perform(CM_CONTROLCHANGE, WPARAM(btnViewIcons), 0);
   TbBreakWidth := TbBreakWidth - (2 * 26 + 1 * 8);
   end;
 
@@ -3014,7 +2967,7 @@ var
   fn, flameXML : string;
   openScript : string;
 begin
-  tbGuides.Down := EnableGuides;
+  //RIBBONTODO  tbGuides.Down := EnableGuides;
   DoNotAskAboutChange := true;
   { Read position from registry }
   Registry := TRegistry.Create;
@@ -3424,8 +3377,6 @@ begin
     EditForm.tbRedo.enabled := false;
     AdjustForm.btnUndo.enabled := false;
     AdjustForm.btnRedo.enabled := false;
-    btnUndo.Enabled := false;
-    btnRedo.enabled := false;
 
     Transforms := MainCp.TrianglesFromCP(MainTriangles);
 
@@ -3587,8 +3538,6 @@ begin
         EditForm.tbRedo.enabled := false;
         AdjustForm.btnUndo.enabled := false;
         AdjustForm.btnRedo.enabled := false;
-        btnUndo.Enabled := false;
-        btnRedo.enabled := false;
         Transforms := MainCp.TrianglesFromCP(MainTriangles);
       // Fix Apophysis 1.0 parameters with negative color parameteres!
         for i := 0 to Transforms - 1 do
@@ -3963,12 +3912,6 @@ begin
   end;
 end;
 
-procedure TMainForm.mnuToolbarClick(Sender: TObject);
-begin
-  Toolbar.Visible := not Toolbar.Visible;
-  //mnuToolbar.Checked := Toolbar.visible;
-end;
-
 procedure TMainForm.mnuTraceClick(Sender: TObject);
 begin
   TraceForm.Show;
@@ -3997,14 +3940,12 @@ begin
   LoadUndoFlame(UndoIndex, GetEnvVarValue('APPDATA') + '\' + undoFilename);
   RedoAction.Enabled := True;
   mnuPopRedo.Enabled := True;
-  btnRedo.Enabled := True;
   EditForm.mnuRedo.Enabled := True;
   EditForm.tbRedo.enabled := true;
   AdjustForm.btnRedo.enabled := true;
   if UndoIndex = 0 then begin
     UndoAction.Enabled := false;
     mnuPopUndo.Enabled := false;
-    btnUndo.Enabled := false;
     EditForm.mnuUndo.Enabled := false;
     EditForm.tbUndo.enabled := false;
     AdjustForm.btnUndo.enabled := false;
@@ -4027,14 +3968,12 @@ begin
   LoadUndoFlame(UndoIndex, GetEnvVarValue('APPDATA') + '\' + undoFilename);
   UndoAction.Enabled := True;
   mnuPopUndo.Enabled := True;
-  btnUndo.Enabled := True;
   EditForm.mnuUndo.Enabled := True;
   EditForm.tbUndo.enabled := true;
   AdjustForm.btnUndo.enabled := true;
   if UndoIndex = UndoMax then begin
     RedoAction.Enabled := false;
     mnuPopRedo.Enabled := false;
-    btnRedo.Enabled := false;
     EditForm.mnuRedo.Enabled := false;
     EditForm.tbRedo.enabled := false;
     AdjustForm.btnRedo.enabled := false;
@@ -5626,7 +5565,7 @@ begin
     tbQualityBoxSet(Sender);
     key := #0;
   end
-  else if key = #27 then tbQualityBox.Text := FloatToStr(defSampleDensity);
+    //RIBBONTODO else if key = #27 then tbQualityBox.Text := FloatToStr(defSampleDensity);
 end;
 
 procedure TMainForm.tbQualityBoxSet(Sender: TObject);
@@ -5634,7 +5573,8 @@ var
   q: double;
 begin
   try
-    q := StrToFloat(tbQualityBox.Text);
+  exit;
+  //RIBBONTODO q := StrToFloat(tbQualityBox.Text);
   except
     exit;
   end;
@@ -5664,7 +5604,7 @@ end;
 procedure TMainForm.tbShowAlphaClick(Sender: TObject);
 begin
   //tbShowAlpha.Down := not tbShowAlpha.Down;
-  ShowTransparency := tbShowAlpha.Down;
+  //RIBBONTODO  ShowTransparency := tbShowAlpha.Down;
 
   DrawImageView;
 end;
@@ -5806,8 +5746,8 @@ end;
 procedure TMainForm.btnViewIconsClick(Sender: TObject);
 begin
   ListView1.ViewStyle := vsIcon;
-  btnViewList.Down := false;
-  btnViewIcons.Down := true;
+  //RIBBONTODO  btnViewList.Down := false;
+  //RIBBONTODO  btnViewIcons.Down := true;
   ClassicListMode := false;
 
   if (OpenFile <> '') then
@@ -5817,8 +5757,8 @@ end;
 procedure TMainForm.btnViewListClick(Sender: TObject);
 begin
   ListView1.ViewStyle := vsReport;
-  btnViewList.Down := true;
-  btnViewIcons.Down := false;
+  //RIBBONTODO  btnViewList.Down := true;
+  //RIBBONTODO  btnViewIcons.Down := false;
   ClassicListMode := true;
 end;
 
@@ -5872,13 +5812,6 @@ begin
     RedrawTimer.enabled := true;
   end
   else TemplateForm.Show;
-end;
-
-procedure TMainForm.FormResize(Sender: TObject);
-begin
-  if (MainForm.Width <= TbBreakWidth) then
-    Toolbar.Height := 26 * 2 + 8
-  else Toolbar.Height := 26;
 end;
 
 function Split(const fText: String; const fSep: Char; fTrim: Boolean=false; fQuotes: Boolean=false):TStringList;
@@ -6094,7 +6027,7 @@ end;
 procedure TMainForm.tbGuidesClick(Sender: TObject);
 begin
 //  tbGuides.Down := not tbGuides.Down;
-  EnableGuides := tbGuides.Down;
+  //RIBBONTODO  EnableGuides := tbGuides.Down;
   DrawImageView;
 end;
 

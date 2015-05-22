@@ -1,0 +1,1089 @@
+// ******************************************************************************
+// * This is an automatically generated file containing the ribbon resource for *
+// * your application.                                                          *
+// ******************************************************************************
+
+#include ".\ApophysisRibbon.h"
+
+STRINGTABLE 
+BEGIN
+    ApplicationMenu_LabelTitle_RESID L"Apophysis" /* LabelTitle ApplicationMenu_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    StartMenu_LabelTitle_RESID L"Start" /* LabelTitle StartMenu_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    FileMenuGroup_LabelTitle_RESID L"File" /* LabelTitle FileMenuGroup_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    NewFlameCommand_LabelTitle_RESID L"New flame" /* LabelTitle NewFlameCommand_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    NewFlameCommand_LabelDescription_RESID L"Creates a new flame and loads it in the workspace." /* LabelDescription NewFlameCommand_LabelDescription_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    NewFlameCommand_Keytip_RESID L"FN" /* Keytip NewFlameCommand_Keytip_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    NewFlameCommand_TooltipTitle_RESID L"New flame" /* TooltipTitle NewFlameCommand_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    NewFlameCommand_TooltipDescription_RESID L"Creates a new flame and loads it in the workspace." /* TooltipDescription NewFlameCommand_TooltipDescription_RESID: (null) */
+END
+
+NewFlameCommand_SmallImages_RESID    BITMAP    "Res\\document_color_blue-add.bmp" /* SmallImages NewFlameCommand_SmallImages_RESID: (null) */
+NewFlameCommand_LargeImages_RESID    BITMAP    "Res\\document_color_blue-add.bmp" /* LargeImages NewFlameCommand_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    OpenBatchCommand_LabelTitle_RESID L"Open batch" /* LabelTitle OpenBatchCommand_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    OpenBatchCommand_LabelDescription_RESID L"Opens a batch from disk and loads its first flame in the workspace." /* LabelDescription OpenBatchCommand_LabelDescription_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    OpenBatchCommand_Keytip_RESID L"FO" /* Keytip OpenBatchCommand_Keytip_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    OpenBatchCommand_TooltipTitle_RESID L"Open batch" /* TooltipTitle OpenBatchCommand_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    OpenBatchCommand_TooltipDescription_RESID L"Opens a batch from disk and loads its first flame in the workspace." /* TooltipDescription OpenBatchCommand_TooltipDescription_RESID: (null) */
+END
+
+OpenBatchCommand_SmallImages_RESID    BITMAP    "Res\\folder_open.bmp" /* SmallImages OpenBatchCommand_SmallImages_RESID: (null) */
+OpenBatchCommand_LargeImages_RESID    BITMAP    "Res\\folder_open.bmp" /* LargeImages OpenBatchCommand_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    SaveFlameCommand_LabelTitle_RESID L"Save flame" /* LabelTitle SaveFlameCommand_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    SaveFlameCommand_LabelDescription_RESID L"Saves the flame in the current workspace to the currently opened batch." /* LabelDescription SaveFlameCommand_LabelDescription_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    SaveFlameCommand_Keytip_RESID L"FS" /* Keytip SaveFlameCommand_Keytip_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    SaveFlameCommand_TooltipTitle_RESID L"Save flame" /* TooltipTitle SaveFlameCommand_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    SaveFlameCommand_TooltipDescription_RESID L"Saves the flame in the current workspace to the currently opened batch." /* TooltipDescription SaveFlameCommand_TooltipDescription_RESID: (null) */
+END
+
+SaveFlameCommand_SmallImages_RESID    BITMAP    "Res\\save.bmp" /* SmallImages SaveFlameCommand_SmallImages_RESID: (null) */
+SaveFlameCommand_LargeImages_RESID    BITMAP    "Res\\save.bmp" /* LargeImages SaveFlameCommand_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    SaveBatchCommand_LabelTitle_RESID L"Save batch" /* LabelTitle SaveBatchCommand_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    SaveBatchCommand_LabelDescription_RESID L"Saves the currently opened batch to disk." /* LabelDescription SaveBatchCommand_LabelDescription_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    SaveBatchCommand_Keytip_RESID L"FB" /* Keytip SaveBatchCommand_Keytip_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    SaveBatchCommand_TooltipTitle_RESID L"Save batch" /* TooltipTitle SaveBatchCommand_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    SaveBatchCommand_TooltipDescription_RESID L"Saves the currently opened batch to disk." /* TooltipDescription SaveBatchCommand_TooltipDescription_RESID: (null) */
+END
+
+SaveBatchCommand_SmallImages_RESID    BITMAP    "Res\\save_all.bmp" /* SmallImages SaveBatchCommand_SmallImages_RESID: (null) */
+SaveBatchCommand_LargeImages_RESID    BITMAP    "Res\\save_all.bmp" /* LargeImages SaveBatchCommand_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    RestoreLastAutosaveCommand_LabelTitle_RESID L"Restore last autosave" /* LabelTitle RestoreLastAutosaveCommand_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    RestoreLastAutosaveCommand_LabelDescription_RESID L"Loads the last automatically saved flame in the workspace." /* LabelDescription RestoreLastAutosaveCommand_LabelDescription_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    RestoreLastAutosaveCommand_Keytip_RESID L"FA" /* Keytip RestoreLastAutosaveCommand_Keytip_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    RestoreLastAutosaveCommand_TooltipTitle_RESID L"Restore last autosave" /* TooltipTitle RestoreLastAutosaveCommand_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    RestoreLastAutosaveCommand_TooltipDescription_RESID L"Loads the last automatically saved flame in the workspace." /* TooltipDescription RestoreLastAutosaveCommand_TooltipDescription_RESID: (null) */
+END
+
+RestoreLastAutosaveCommand_SmallImages_RESID    BITMAP    "Res\\history.bmp" /* SmallImages RestoreLastAutosaveCommand_SmallImages_RESID: (null) */
+RestoreLastAutosaveCommand_LargeImages_RESID    BITMAP    "Res\\history.bmp" /* LargeImages RestoreLastAutosaveCommand_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    EditMenuGroup_LabelTitle_RESID L"Edit" /* LabelTitle EditMenuGroup_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    CopyCommand_LabelTitle_RESID L"Copy" /* LabelTitle CopyCommand_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    CopyCommand_LabelDescription_RESID L"Copies the flame in the current workspace to the clipboard." /* LabelDescription CopyCommand_LabelDescription_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    CopyCommand_Keytip_RESID L"EC" /* Keytip CopyCommand_Keytip_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    CopyCommand_TooltipTitle_RESID L"Copy" /* TooltipTitle CopyCommand_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    CopyCommand_TooltipDescription_RESID L"Copies the flame in the current workspace to the clipboard." /* TooltipDescription CopyCommand_TooltipDescription_RESID: (null) */
+END
+
+CopyCommand_SmallImages_RESID    BITMAP    "Res\\clipboard_copy.bmp" /* SmallImages CopyCommand_SmallImages_RESID: (null) */
+CopyCommand_LargeImages_RESID    BITMAP    "Res\\clipboard_copy.bmp" /* LargeImages CopyCommand_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    PasteCommand_LabelTitle_RESID L"Paste" /* LabelTitle PasteCommand_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    PasteCommand_LabelDescription_RESID L"Pastes the flame in the clipboard to the workspace." /* LabelDescription PasteCommand_LabelDescription_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    PasteCommand_Keytip_RESID L"EP" /* Keytip PasteCommand_Keytip_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    PasteCommand_TooltipTitle_RESID L"Paste" /* TooltipTitle PasteCommand_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    PasteCommand_TooltipDescription_RESID L"Pastes the flame in the clipboard to the workspace." /* TooltipDescription PasteCommand_TooltipDescription_RESID: (null) */
+END
+
+PasteCommand_SmallImages_RESID    BITMAP    "Res\\clipboard_paste.bmp" /* SmallImages PasteCommand_SmallImages_RESID: (null) */
+PasteCommand_LargeImages_RESID    BITMAP    "Res\\clipboard_paste.bmp" /* LargeImages PasteCommand_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    UndoCommand_LabelTitle_RESID L"Undo" /* LabelTitle UndoCommand_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    UndoCommand_LabelDescription_RESID L"Reverts the last committed action." /* LabelDescription UndoCommand_LabelDescription_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    UndoCommand_Keytip_RESID L"EU" /* Keytip UndoCommand_Keytip_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    UndoCommand_TooltipTitle_RESID L"Undo" /* TooltipTitle UndoCommand_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    UndoCommand_TooltipDescription_RESID L"Reverts the last committed action." /* TooltipDescription UndoCommand_TooltipDescription_RESID: (null) */
+END
+
+UndoCommand_SmallImages_RESID    BITMAP    "Res\\undo.bmp" /* SmallImages UndoCommand_SmallImages_RESID: (null) */
+UndoCommand_LargeImages_RESID    BITMAP    "Res\\undo.bmp" /* LargeImages UndoCommand_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    RedoCommand_LabelTitle_RESID L"Redo" /* LabelTitle RedoCommand_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    RedoCommand_LabelDescription_RESID L"Commits the last reverted action again." /* LabelDescription RedoCommand_LabelDescription_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    RedoCommand_Keytip_RESID L"ER" /* Keytip RedoCommand_Keytip_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    RedoCommand_TooltipTitle_RESID L"Redo" /* TooltipTitle RedoCommand_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    RedoCommand_TooltipDescription_RESID L"Commits the last reverted action again." /* TooltipDescription RedoCommand_TooltipDescription_RESID: (null) */
+END
+
+RedoCommand_SmallImages_RESID    BITMAP    "Res\\redo.bmp" /* SmallImages RedoCommand_SmallImages_RESID: (null) */
+RedoCommand_LargeImages_RESID    BITMAP    "Res\\redo.bmp" /* LargeImages RedoCommand_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    RenderMenuGroup_LabelTitle_RESID L"Render" /* LabelTitle RenderMenuGroup_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    RenderFlameCommand_LabelTitle_RESID L"Render flame" /* LabelTitle RenderFlameCommand_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    RenderFlameCommand_LabelDescription_RESID L"Renders the flame in the workspace to disk." /* LabelDescription RenderFlameCommand_LabelDescription_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    RenderFlameCommand_Keytip_RESID L"RF" /* Keytip RenderFlameCommand_Keytip_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    RenderFlameCommand_TooltipTitle_RESID L"Render flame" /* TooltipTitle RenderFlameCommand_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    RenderFlameCommand_TooltipDescription_RESID L"Renders the flame in the workspace to disk." /* TooltipDescription RenderFlameCommand_TooltipDescription_RESID: (null) */
+END
+
+RenderFlameCommand_SmallImages_RESID    BITMAP    "Res\\gear.bmp" /* SmallImages RenderFlameCommand_SmallImages_RESID: (null) */
+RenderFlameCommand_LargeImages_RESID    BITMAP    "Res\\gear.bmp" /* LargeImages RenderFlameCommand_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    RenderBatchCommand_LabelTitle_RESID L"Render batch" /* LabelTitle RenderBatchCommand_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    RenderBatchCommand_LabelDescription_RESID L"Renders all flames in the currently opened batch to disk sequentially." /* LabelDescription RenderBatchCommand_LabelDescription_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    RenderBatchCommand_Keytip_RESID L"RB" /* Keytip RenderBatchCommand_Keytip_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    RenderBatchCommand_TooltipTitle_RESID L"Render batch" /* TooltipTitle RenderBatchCommand_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    RenderBatchCommand_TooltipDescription_RESID L"Renders all flames in the currently opened batch to disk sequentially." /* TooltipDescription RenderBatchCommand_TooltipDescription_RESID: (null) */
+END
+
+RenderBatchCommand_SmallImages_RESID    BITMAP    "Res\\gears.bmp" /* SmallImages RenderBatchCommand_SmallImages_RESID: (null) */
+RenderBatchCommand_LargeImages_RESID    BITMAP    "Res\\gears.bmp" /* LargeImages RenderBatchCommand_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ToolsMenuGroup_LabelTitle_RESID L"Tools" /* LabelTitle ToolsMenuGroup_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    FullscreenPreviewCommand_LabelTitle_RESID L"Fullscreen preview" /* LabelTitle FullscreenPreviewCommand_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    FullscreenPreviewCommand_LabelDescription_RESID L"Starts a preview render and displays the result in full screen mode." /* LabelDescription FullscreenPreviewCommand_LabelDescription_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    FullscreenPreviewCommand_Keytip_RESID L"TF" /* Keytip FullscreenPreviewCommand_Keytip_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    FullscreenPreviewCommand_TooltipTitle_RESID L"Fullscreen preview" /* TooltipTitle FullscreenPreviewCommand_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    FullscreenPreviewCommand_TooltipDescription_RESID L"Starts a preview render and displays the result in full screen mode." /* TooltipDescription FullscreenPreviewCommand_TooltipDescription_RESID: (null) */
+END
+
+FullscreenPreviewCommand_SmallImages_RESID    BITMAP    "Res\\full_screen.bmp" /* SmallImages FullscreenPreviewCommand_SmallImages_RESID: (null) */
+FullscreenPreviewCommand_LargeImages_RESID    BITMAP    "Res\\full_screen.bmp" /* LargeImages FullscreenPreviewCommand_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ShowEditorCommand_LabelTitle_RESID L"Editor" /* LabelTitle ShowEditorCommand_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ShowEditorCommand_LabelDescription_RESID L"Shows the transform editor window." /* LabelDescription ShowEditorCommand_LabelDescription_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ShowEditorCommand_Keytip_RESID L"TE" /* Keytip ShowEditorCommand_Keytip_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ShowEditorCommand_TooltipTitle_RESID L"Editor" /* TooltipTitle ShowEditorCommand_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ShowEditorCommand_TooltipDescription_RESID L"Shows the transform editor window." /* TooltipDescription ShowEditorCommand_TooltipDescription_RESID: (null) */
+END
+
+ShowEditorCommand_SmallImages_RESID    BITMAP    "Res\\tool_ruler2.bmp" /* SmallImages ShowEditorCommand_SmallImages_RESID: (null) */
+ShowEditorCommand_LargeImages_RESID    BITMAP    "Res\\tool_ruler2.bmp" /* LargeImages ShowEditorCommand_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ShowAdjustmentCommand_LabelTitle_RESID L"Camera" /* LabelTitle ShowAdjustmentCommand_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ShowAdjustmentCommand_LabelDescription_RESID L"Shows the camera editor window." /* LabelDescription ShowAdjustmentCommand_LabelDescription_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ShowAdjustmentCommand_Keytip_RESID L"TA" /* Keytip ShowAdjustmentCommand_Keytip_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ShowAdjustmentCommand_TooltipTitle_RESID L"Camera" /* TooltipTitle ShowAdjustmentCommand_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ShowAdjustmentCommand_TooltipDescription_RESID L"Shows the camera editor window." /* TooltipDescription ShowAdjustmentCommand_TooltipDescription_RESID: (null) */
+END
+
+ShowAdjustmentCommand_SmallImages_192__RESID    BITMAP    "Res\\Projectors.bmp" /* SmallImages ShowAdjustmentCommand_SmallImages_192__RESID: (null) */
+ShowAdjustmentCommand_LargeImages_144__RESID    BITMAP    "Res\\Projectors.bmp" /* LargeImages ShowAdjustmentCommand_LargeImages_144__RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ShowOutputPropertiesCommand_LabelTitle_RESID L"Output properties" /* LabelTitle ShowOutputPropertiesCommand_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ShowOutputPropertiesCommand_LabelDescription_RESID L"Shows the output properties window." /* LabelDescription ShowOutputPropertiesCommand_LabelDescription_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ShowOutputPropertiesCommand_Keytip_RESID L"TO" /* Keytip ShowOutputPropertiesCommand_Keytip_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ShowOutputPropertiesCommand_TooltipTitle_RESID L"Output properties" /* TooltipTitle ShowOutputPropertiesCommand_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ShowOutputPropertiesCommand_TooltipDescription_RESID L"Shows the output properties window." /* TooltipDescription ShowOutputPropertiesCommand_TooltipDescription_RESID: (null) */
+END
+
+ShowOutputPropertiesCommand_SmallImages_RESID    BITMAP    "Res\\settings_options.bmp" /* SmallImages ShowOutputPropertiesCommand_SmallImages_RESID: (null) */
+ShowOutputPropertiesCommand_LargeImages_RESID    BITMAP    "Res\\settings_options.bmp" /* LargeImages ShowOutputPropertiesCommand_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ShowPaletteCommand_LabelTitle_RESID L"Palette" /* LabelTitle ShowPaletteCommand_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ShowPaletteCommand_LabelDescription_RESID L"Shows the palette editor window." /* LabelDescription ShowPaletteCommand_LabelDescription_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ShowPaletteCommand_Keytip_RESID L"TP" /* Keytip ShowPaletteCommand_Keytip_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ShowPaletteCommand_TooltipTitle_RESID L"Palette" /* TooltipTitle ShowPaletteCommand_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ShowPaletteCommand_TooltipDescription_RESID L"Shows the palette editor window." /* TooltipDescription ShowPaletteCommand_TooltipDescription_RESID: (null) */
+END
+
+ShowPaletteCommand_SmallImages_RESID    BITMAP    "Res\\tool_brush.bmp" /* SmallImages ShowPaletteCommand_SmallImages_RESID: (null) */
+ShowPaletteCommand_LargeImages_RESID    BITMAP    "Res\\tool_brush.bmp" /* LargeImages ShowPaletteCommand_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ShowCanvasCommand_LabelTitle_RESID L"Canvas size" /* LabelTitle ShowCanvasCommand_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ShowCanvasCommand_LabelDescription_RESID L"Shows the canvas size editor window." /* LabelDescription ShowCanvasCommand_LabelDescription_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ShowCanvasCommand_Keytip_RESID L"TC" /* Keytip ShowCanvasCommand_Keytip_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ShowCanvasCommand_TooltipTitle_RESID L"Canvas size" /* TooltipTitle ShowCanvasCommand_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ShowCanvasCommand_TooltipDescription_RESID L"Shows the canvas size editor window." /* TooltipDescription ShowCanvasCommand_TooltipDescription_RESID: (null) */
+END
+
+ShowCanvasCommand_SmallImages_RESID    BITMAP    "Res\\screen-edit.bmp" /* SmallImages ShowCanvasCommand_SmallImages_RESID: (null) */
+ShowCanvasCommand_LargeImages_RESID    BITMAP    "Res\\screen-edit.bmp" /* LargeImages ShowCanvasCommand_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    PaletteFromImageCommand_LabelTitle_RESID L"Palette from image" /* LabelTitle PaletteFromImageCommand_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    PaletteFromImageCommand_LabelDescription_RESID L"Loads an image from the disk and uses its colors for the flame in the workspace." /* LabelDescription PaletteFromImageCommand_LabelDescription_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    PaletteFromImageCommand_Keytip_RESID L"TI" /* Keytip PaletteFromImageCommand_Keytip_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    PaletteFromImageCommand_TooltipTitle_RESID L"Palette from image" /* TooltipTitle PaletteFromImageCommand_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    PaletteFromImageCommand_TooltipDescription_RESID L"Loads an image from the disk and uses its colors for the flame in the workspace." /* TooltipDescription PaletteFromImageCommand_TooltipDescription_RESID: (null) */
+END
+
+PaletteFromImageCommand_SmallImages_RESID    BITMAP    "Res\\picture-gear.bmp" /* SmallImages PaletteFromImageCommand_SmallImages_RESID: (null) */
+PaletteFromImageCommand_LargeImages_RESID    BITMAP    "Res\\picture-gear.bmp" /* LargeImages PaletteFromImageCommand_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ScriptMenuGroup_LabelTitle_RESID L"Script" /* LabelTitle ScriptMenuGroup_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    RunScriptCommand_LabelTitle_RESID L"Run" /* LabelTitle RunScriptCommand_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    RunScriptCommand_LabelDescription_RESID L"Runs the currently opened script." /* LabelDescription RunScriptCommand_LabelDescription_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    RunScriptCommand_Keytip_RESID L"SR" /* Keytip RunScriptCommand_Keytip_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    RunScriptCommand_TooltipTitle_RESID L"Run" /* TooltipTitle RunScriptCommand_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    RunScriptCommand_TooltipDescription_RESID L"Runs the currently opened script." /* TooltipDescription RunScriptCommand_TooltipDescription_RESID: (null) */
+END
+
+RunScriptCommand_SmallImages_RESID    BITMAP    "Res\\execute.bmp" /* SmallImages RunScriptCommand_SmallImages_RESID: (null) */
+RunScriptCommand_LargeImages_RESID    BITMAP    "Res\\execute.bmp" /* LargeImages RunScriptCommand_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    StopScriptCommand_LabelTitle_RESID L"Stop" /* LabelTitle StopScriptCommand_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    StopScriptCommand_LabelDescription_RESID L"Stops the currently running script." /* LabelDescription StopScriptCommand_LabelDescription_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    StopScriptCommand_Keytip_RESID L"SS" /* Keytip StopScriptCommand_Keytip_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    StopScriptCommand_TooltipTitle_RESID L"Stop" /* TooltipTitle StopScriptCommand_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    StopScriptCommand_TooltipDescription_RESID L"Stops the currently running script." /* TooltipDescription StopScriptCommand_TooltipDescription_RESID: (null) */
+END
+
+StopScriptCommand_SmallImages_RESID    BITMAP    "Res\\stop.bmp" /* SmallImages StopScriptCommand_SmallImages_RESID: (null) */
+StopScriptCommand_LargeImages_RESID    BITMAP    "Res\\stop.bmp" /* LargeImages StopScriptCommand_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    OpenScriptCommand_LabelTitle_RESID L"Open script" /* LabelTitle OpenScriptCommand_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    OpenScriptCommand_LabelDescription_RESID L"Opens a script from the disk." /* LabelDescription OpenScriptCommand_LabelDescription_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    OpenScriptCommand_Keytip_RESID L"SO" /* Keytip OpenScriptCommand_Keytip_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    OpenScriptCommand_TooltipTitle_RESID L"Open script" /* TooltipTitle OpenScriptCommand_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    OpenScriptCommand_TooltipDescription_RESID L"Opens a script from the disk." /* TooltipDescription OpenScriptCommand_TooltipDescription_RESID: (null) */
+END
+
+OpenScriptCommand_SmallImages_RESID    BITMAP    "Res\\folder_open-execute.bmp" /* SmallImages OpenScriptCommand_SmallImages_RESID: (null) */
+OpenScriptCommand_LargeImages_RESID    BITMAP    "Res\\folder_open-execute.bmp" /* LargeImages OpenScriptCommand_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    EditScriptCommand_LabelTitle_RESID L"Edit script" /* LabelTitle EditScriptCommand_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    EditScriptCommand_LabelDescription_RESID L"Shows the script editor with the currently opened script." /* LabelDescription EditScriptCommand_LabelDescription_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    EditScriptCommand_Keytip_RESID L"SE" /* Keytip EditScriptCommand_Keytip_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    EditScriptCommand_TooltipTitle_RESID L"Edit script" /* TooltipTitle EditScriptCommand_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    EditScriptCommand_TooltipDescription_RESID L"Shows the script editor with the currently opened script." /* TooltipDescription EditScriptCommand_TooltipDescription_RESID: (null) */
+END
+
+EditScriptCommand_SmallImages_RESID    BITMAP    "Res\\document_text-edit.bmp" /* SmallImages EditScriptCommand_SmallImages_RESID: (null) */
+EditScriptCommand_LargeImages_RESID    BITMAP    "Res\\document_text-edit.bmp" /* LargeImages EditScriptCommand_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ManageScriptFavoritesCommand_LabelTitle_RESID L"Manage favorites" /* LabelTitle ManageScriptFavoritesCommand_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ManageScriptFavoritesCommand_LabelDescription_RESID L"Shows the favorite script list editor." /* LabelDescription ManageScriptFavoritesCommand_LabelDescription_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ManageScriptFavoritesCommand_Keytip_RESID L"SF" /* Keytip ManageScriptFavoritesCommand_Keytip_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ManageScriptFavoritesCommand_TooltipTitle_RESID L"Manage favorites" /* TooltipTitle ManageScriptFavoritesCommand_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ManageScriptFavoritesCommand_TooltipDescription_RESID L"Shows the favorite script list editor." /* TooltipDescription ManageScriptFavoritesCommand_TooltipDescription_RESID: (null) */
+END
+
+ManageScriptFavoritesCommand_SmallImages_RESID    BITMAP    "Res\\favorite.bmp" /* SmallImages ManageScriptFavoritesCommand_SmallImages_RESID: (null) */
+ManageScriptFavoritesCommand_LargeImages_RESID    BITMAP    "Res\\favorite.bmp" /* LargeImages ManageScriptFavoritesCommand_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ViewMenuGroup_LabelTitle_RESID L"View" /* LabelTitle ViewMenuGroup_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ViewSampleDensity_LabelTitle_RESID L"Density" /* LabelTitle ViewSampleDensity_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ViewSampleDensity_LabelDescription_RESID L"Specifies how dense the preview of the flame in the workspace should be rendered (in samples / pixel)" /* LabelDescription ViewSampleDensity_LabelDescription_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ViewSampleDensity_Keytip_RESID L"VD" /* Keytip ViewSampleDensity_Keytip_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ViewSampleDensity_TooltipTitle_RESID L"Density" /* TooltipTitle ViewSampleDensity_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ViewSampleDensity_TooltipDescription_RESID L"Specifies how dense the preview of the flame in the workspace should be rendered (in samples / pixel)" /* TooltipDescription ViewSampleDensity_TooltipDescription_RESID: (null) */
+END
+
+ViewSampleDensity_SmallImages_RESID    BITMAP    "Res\\stats.bmp" /* SmallImages ViewSampleDensity_SmallImages_RESID: (null) */
+ViewSampleDensity_LargeImages_RESID    BITMAP    "Res\\stats.bmp" /* LargeImages ViewSampleDensity_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    PanModeCommand_LabelTitle_RESID L"Pan mode" /* LabelTitle PanModeCommand_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    PanModeCommand_LabelDescription_RESID L"The cursor will move (pan) the camera." /* LabelDescription PanModeCommand_LabelDescription_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    PanModeCommand_Keytip_RESID L"VP" /* Keytip PanModeCommand_Keytip_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    PanModeCommand_TooltipTitle_RESID L"Pan mode" /* TooltipTitle PanModeCommand_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    PanModeCommand_TooltipDescription_RESID L"The cursor will move (pan) the camera." /* TooltipDescription PanModeCommand_TooltipDescription_RESID: (null) */
+END
+
+PanModeCommand_SmallImages_RESID    BITMAP    "Res\\select.bmp" /* SmallImages PanModeCommand_SmallImages_RESID: (null) */
+PanModeCommand_LargeImages_RESID    BITMAP    "Res\\select.bmp" /* LargeImages PanModeCommand_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    RotateModeCommand_LabelTitle_RESID L"Rotate mode" /* LabelTitle RotateModeCommand_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    RotateModeCommand_LabelDescription_RESID L"The cursor will rotate the camera." /* LabelDescription RotateModeCommand_LabelDescription_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    RotateModeCommand_Keytip_RESID L"VR" /* Keytip RotateModeCommand_Keytip_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    RotateModeCommand_TooltipTitle_RESID L"Rotate mode" /* TooltipTitle RotateModeCommand_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    RotateModeCommand_TooltipDescription_RESID L"The cursor will rotate the camera." /* TooltipDescription RotateModeCommand_TooltipDescription_RESID: (null) */
+END
+
+RotateModeCommand_SmallImages_RESID    BITMAP    "Res\\reload_rotate.bmp" /* SmallImages RotateModeCommand_SmallImages_RESID: (null) */
+RotateModeCommand_LargeImages_RESID    BITMAP    "Res\\reload_rotate.bmp" /* LargeImages RotateModeCommand_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ZoomInCommand_LabelTitle_RESID L"Zoom in mode" /* LabelTitle ZoomInCommand_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ZoomInCommand_LabelDescription_RESID L"The cursor will zoom the camera in." /* LabelDescription ZoomInCommand_LabelDescription_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ZoomInCommand_Keytip_RESID L"VU" /* Keytip ZoomInCommand_Keytip_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ZoomInCommand_TooltipTitle_RESID L"Zoom in mode" /* TooltipTitle ZoomInCommand_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ZoomInCommand_TooltipDescription_RESID L"The cursor will zoom the camera in." /* TooltipDescription ZoomInCommand_TooltipDescription_RESID: (null) */
+END
+
+ZoomInCommand_SmallImages_RESID    BITMAP    "Res\\zoom_in.bmp" /* SmallImages ZoomInCommand_SmallImages_RESID: (null) */
+ZoomInCommand_LargeImages_RESID    BITMAP    "Res\\zoom_in.bmp" /* LargeImages ZoomInCommand_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ZoomOutCommand_LabelTitle_RESID L"Zoom out mode" /* LabelTitle ZoomOutCommand_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ZoomOutCommand_LabelDescription_RESID L"The cursor will zoom the camera out." /* LabelDescription ZoomOutCommand_LabelDescription_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ZoomOutCommand_Keytip_RESID L"VD" /* Keytip ZoomOutCommand_Keytip_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ZoomOutCommand_TooltipTitle_RESID L"Zoom out mode" /* TooltipTitle ZoomOutCommand_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ZoomOutCommand_TooltipDescription_RESID L"The cursor will zoom the camera out." /* TooltipDescription ZoomOutCommand_TooltipDescription_RESID: (null) */
+END
+
+ZoomOutCommand_SmallImages_RESID    BITMAP    "Res\\zoom_out.bmp" /* SmallImages ZoomOutCommand_SmallImages_RESID: (null) */
+ZoomOutCommand_LargeImages_RESID    BITMAP    "Res\\zoom_out.bmp" /* LargeImages ZoomOutCommand_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ViewDensity5_LabelTitle_RESID L"5" /* LabelTitle ViewDensity5_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ViewDensity10_LabelTitle_RESID L"10" /* LabelTitle ViewDensity10_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ViewDensity15_LabelTitle_RESID L"15" /* LabelTitle ViewDensity15_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ViewDensity25_LabelTitle_RESID L"25" /* LabelTitle ViewDensity25_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ViewDensity50_LabelTitle_RESID L"50" /* LabelTitle ViewDensity50_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ViewDensity100_LabelTitle_RESID L"100" /* LabelTitle ViewDensity100_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ViewDensity150_LabelTitle_RESID L"150" /* LabelTitle ViewDensity150_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ViewDensity250_LabelTitle_RESID L"250" /* LabelTitle ViewDensity250_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ViewDensity500_LabelTitle_RESID L"500" /* LabelTitle ViewDensity500_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ViewDensity1000_LabelTitle_RESID L"1000" /* LabelTitle ViewDensity1000_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    RecentItemsCommand_LabelTitle_RESID L"Recent batches" /* LabelTitle RecentItemsCommand_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ShowSettingsCommand_LabelTitle_RESID L"Settings" /* LabelTitle ShowSettingsCommand_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ShowSettingsCommand_LabelDescription_RESID L"Shows the settings window." /* LabelDescription ShowSettingsCommand_LabelDescription_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ShowSettingsCommand_Keytip_RESID L"O" /* Keytip ShowSettingsCommand_Keytip_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ShowSettingsCommand_TooltipTitle_RESID L"Settings" /* TooltipTitle ShowSettingsCommand_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ShowSettingsCommand_TooltipDescription_RESID L"Shows the settings window." /* TooltipDescription ShowSettingsCommand_TooltipDescription_RESID: (null) */
+END
+
+ShowSettingsCommand_SmallImages_RESID    BITMAP    "Res\\tools.bmp" /* SmallImages ShowSettingsCommand_SmallImages_RESID: (null) */
+ShowSettingsCommand_LargeImages_RESID    BITMAP    "Res\\tools.bmp" /* LargeImages ShowSettingsCommand_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ExitCommand_LabelTitle_RESID L"Exit" /* LabelTitle ExitCommand_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ExitCommand_LabelDescription_RESID L"Exits Apophysis." /* LabelDescription ExitCommand_LabelDescription_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ExitCommand_Keytip_RESID L"X" /* Keytip ExitCommand_Keytip_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ExitCommand_TooltipTitle_RESID L"Exit" /* TooltipTitle ExitCommand_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ExitCommand_TooltipDescription_RESID L"Exits Apophysis." /* TooltipDescription ExitCommand_TooltipDescription_RESID: (null) */
+END
+
+ExitCommand_SmallImages_RESID    BITMAP    "Res\\close_window.bmp" /* SmallImages ExitCommand_SmallImages_RESID: (null) */
+ExitCommand_LargeImages_RESID    BITMAP    "Res\\close_window.bmp" /* LargeImages ExitCommand_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    AboutCommand_LabelTitle_RESID L"About" /* LabelTitle AboutCommand_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    AboutCommand_LabelDescription_RESID L"Shows information about Apophysis." /* LabelDescription AboutCommand_LabelDescription_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    AboutCommand_Keytip_RESID L"A" /* Keytip AboutCommand_Keytip_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    AboutCommand_TooltipTitle_RESID L"About" /* TooltipTitle AboutCommand_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    AboutCommand_TooltipDescription_RESID L"Shows information about Apophysis." /* TooltipDescription AboutCommand_TooltipDescription_RESID: (null) */
+END
+
+AboutCommand_SmallImages_RESID    BITMAP    "Res\\info.bmp" /* SmallImages AboutCommand_SmallImages_RESID: (null) */
+AboutCommand_LargeImages_RESID    BITMAP    "Res\\info.bmp" /* LargeImages AboutCommand_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    HelpCommand_LabelTitle_RESID L"Help" /* LabelTitle HelpCommand_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    HelpCommand_LabelDescription_RESID L"Shows the Apophysis help file." /* LabelDescription HelpCommand_LabelDescription_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    HelpCommand_Keytip_RESID L"H" /* Keytip HelpCommand_Keytip_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    HelpCommand_TooltipTitle_RESID L"Help" /* TooltipTitle HelpCommand_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    HelpCommand_TooltipDescription_RESID L"Shows the Apophysis help file." /* TooltipDescription HelpCommand_TooltipDescription_RESID: (null) */
+END
+
+HelpCommand_SmallImages_RESID    BITMAP    "Res\\help.bmp" /* SmallImages HelpCommand_SmallImages_RESID: (null) */
+HelpCommand_LargeImages_RESID    BITMAP    "Res\\help.bmp" /* LargeImages HelpCommand_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    FractalFlameSpecsCommand_LabelTitle_RESID L"Fractal flames" /* LabelTitle FractalFlameSpecsCommand_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    FractalFlameSpecsCommand_LabelDescription_RESID L"Shows the publication about Fractal Flames." /* LabelDescription FractalFlameSpecsCommand_LabelDescription_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    FractalFlameSpecsCommand_TooltipTitle_RESID L"Fractal flames" /* TooltipTitle FractalFlameSpecsCommand_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    FractalFlameSpecsCommand_TooltipDescription_RESID L"Shows the publication about Fractal Flames." /* TooltipDescription FractalFlameSpecsCommand_TooltipDescription_RESID: (null) */
+END
+
+FractalFlameSpecsCommand_SmallImages_RESID    BITMAP    "Res\\list-internet.bmp" /* SmallImages FractalFlameSpecsCommand_SmallImages_RESID: (null) */
+FractalFlameSpecsCommand_LargeImages_RESID    BITMAP    "Res\\list-internet.bmp" /* LargeImages FractalFlameSpecsCommand_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    DonateCommand_LabelTitle_RESID L"Donate" /* LabelTitle DonateCommand_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    DonateCommand_LabelDescription_RESID L"Shows the donation website." /* LabelDescription DonateCommand_LabelDescription_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    DonateCommand_TooltipTitle_RESID L"Donate" /* TooltipTitle DonateCommand_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    DonateCommand_TooltipDescription_RESID L"Shows the donation website." /* TooltipDescription DonateCommand_TooltipDescription_RESID: (null) */
+END
+
+DonateCommand_SmallImages_RESID    BITMAP    "Res\\favorite2.bmp" /* SmallImages DonateCommand_SmallImages_RESID: (null) */
+DonateCommand_LargeImages_RESID    BITMAP    "Res\\favorite2.bmp" /* LargeImages DonateCommand_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ShowTransparencyCommand_LabelTitle_RESID L"Show transparency" /* LabelTitle ShowTransparencyCommand_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ShowTransparencyCommand_LabelDescription_RESID L"Toggles the display of image transparency on/off." /* LabelDescription ShowTransparencyCommand_LabelDescription_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ShowTransparencyCommand_Keytip_RESID L"VT" /* Keytip ShowTransparencyCommand_Keytip_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ShowTransparencyCommand_TooltipTitle_RESID L"Show transparency" /* TooltipTitle ShowTransparencyCommand_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ShowTransparencyCommand_TooltipDescription_RESID L"Toggles the display of image transparency on/off." /* TooltipDescription ShowTransparencyCommand_TooltipDescription_RESID: (null) */
+END
+
+ShowTransparencyCommand_SmallImages_RESID    BITMAP    "Res\\select_invert.bmp" /* SmallImages ShowTransparencyCommand_SmallImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ShowGuidelinesCommand_LabelTitle_RESID L"Show guidelines" /* LabelTitle ShowGuidelinesCommand_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ShowGuidelinesCommand_LabelDescription_RESID L"Toggles the display of guidelines on/off." /* LabelDescription ShowGuidelinesCommand_LabelDescription_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ShowGuidelinesCommand_Keytip_RESID L"VG" /* Keytip ShowGuidelinesCommand_Keytip_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ShowGuidelinesCommand_TooltipTitle_RESID L"Show guidelines" /* TooltipTitle ShowGuidelinesCommand_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ShowGuidelinesCommand_TooltipDescription_RESID L"Toggles the display of guidelines on/off." /* TooltipDescription ShowGuidelinesCommand_TooltipDescription_RESID: (null) */
+END
+
+ShowGuidelinesCommand_SmallImages_RESID    BITMAP    "Res\\tool_ruler.bmp" /* SmallImages ShowGuidelinesCommand_SmallImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ShowIconsCommand_LabelTitle_RESID L"Show icons in batch list" /* LabelTitle ShowIconsCommand_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ShowIconsCommand_LabelDescription_RESID L"Toggles the display of icons in the batch list view on/off." /* LabelDescription ShowIconsCommand_LabelDescription_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ShowIconsCommand_Keytip_RESID L"VI" /* Keytip ShowIconsCommand_Keytip_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ShowIconsCommand_TooltipTitle_RESID L"Show icons in batch list" /* TooltipTitle ShowIconsCommand_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ShowIconsCommand_TooltipDescription_RESID L"Toggles the display of icons in the batch list view on/off." /* TooltipDescription ShowIconsCommand_TooltipDescription_RESID: (null) */
+END
+
+ShowIconsCommand_SmallImages_RESID    BITMAP    "Res\\application-control_stop.bmp" /* SmallImages ShowIconsCommand_SmallImages_RESID: (null) */
+APPLICATION_RIBBON    UIFILE    "F:\\Code\\Xyrus.EU\\apophysis\\Source\\xwoss-apomain\\Ribbon\\ApophysisRibbon.bml"
