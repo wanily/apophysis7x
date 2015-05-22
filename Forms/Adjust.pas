@@ -1649,7 +1649,7 @@ begin
     btnPaste.enabled := true;
     mnuPaste.enabled := true;
 //z    MainForm.btnPaste.enabled := False;
-    MainForm.mnuPaste.enabled := False;
+    MainForm.PasteAction.enabled := False;
   finally
     gradstr.free
   end;

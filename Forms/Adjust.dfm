@@ -171,17 +171,13 @@ object AdjustForm: TAdjustForm
     Top = 157
     Width = 451
     Height = 130
-    ActivePage = TabSheet1
+    ActivePage = TabSheet3
     Anchors = [akLeft, akTop, akRight, akBottom]
     Images = MainForm.Buttons
     TabOrder = 1
     object TabSheet1: TTabSheet
       Caption = 'Camera'
       ImageIndex = 18
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       DesignSize = (
         443
         101)
@@ -366,10 +362,6 @@ object AdjustForm: TAdjustForm
     object TabSheet2: TTabSheet
       Caption = 'Rendering'
       ImageIndex = 35
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       DesignSize = (
         443
         101)
@@ -585,10 +577,6 @@ object AdjustForm: TAdjustForm
     object TabSheet3: TTabSheet
       Caption = 'Gradient'
       ImageIndex = 11
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       DesignSize = (
         443
         101)
@@ -602,7 +590,7 @@ object AdjustForm: TAdjustForm
       end
       object btnMenu: TSpeedButton
         Left = 4
-        Top = 37
+        Top = 36
         Width = 109
         Height = 21
         Hint = 'Click for menu'
@@ -653,7 +641,7 @@ object AdjustForm: TAdjustForm
       end
       object btnOpen: TSpeedButton
         Left = 396
-        Top = 62
+        Top = 61
         Width = 23
         Height = 21
         Hint = 'Open Gradient Browser'
@@ -693,7 +681,7 @@ object AdjustForm: TAdjustForm
       end
       object btnSmoothPalette: TSpeedButton
         Left = 419
-        Top = 62
+        Top = 61
         Width = 23
         Height = 21
         Hint = 'Smooth Palette'
@@ -733,7 +721,7 @@ object AdjustForm: TAdjustForm
       end
       object btnPaste: TSpeedButton
         Left = 373
-        Top = 62
+        Top = 61
         Width = 23
         Height = 21
         Hint = 'Paste gradient from clipboard'
@@ -773,7 +761,7 @@ object AdjustForm: TAdjustForm
       end
       object btnCopy: TSpeedButton
         Left = 350
-        Top = 62
+        Top = 61
         Width = 23
         Height = 21
         Hint = 'Copy gradient to clipboard'
@@ -813,7 +801,7 @@ object AdjustForm: TAdjustForm
       end
       object btnColorPreset: TSpeedButton
         Left = 4
-        Top = 63
+        Top = 62
         Width = 109
         Height = 21
         Hint = 'Click to choose random preset'
@@ -828,7 +816,7 @@ object AdjustForm: TAdjustForm
         Left = 0
         Top = 0
         Width = 443
-        Height = 34
+        Height = 33
         Align = alTop
         Anchors = [akLeft, akTop, akRight, akBottom]
         BevelInner = bvRaised
@@ -836,12 +824,11 @@ object AdjustForm: TAdjustForm
         BorderStyle = bsSingle
         Color = clAppWorkSpace
         TabOrder = 0
-        ExplicitHeight = 35
         object GradientImage: TImage
           Left = 2
           Top = 2
           Width = 435
-          Height = 27
+          Height = 25
           Cursor = crHandPoint
           Align = alClient
           PopupMenu = GradientPopup
@@ -855,7 +842,7 @@ object AdjustForm: TAdjustForm
       end
       object ScrollBar: TScrollBar
         Left = 120
-        Top = 40
+        Top = 39
         Width = 179
         Height = 15
         Anchors = [akLeft, akRight, akBottom]
@@ -866,11 +853,10 @@ object AdjustForm: TAdjustForm
         TabOrder = 1
         OnChange = ScrollBarChange
         OnScroll = ScrollBarScroll
-        ExplicitTop = 41
       end
       object cmbPalette: TComboBox
         Left = 120
-        Top = 63
+        Top = 62
         Width = 227
         Height = 21
         BevelInner = bvLowered
@@ -976,11 +962,10 @@ object AdjustForm: TAdjustForm
           'picasso.jfille-chevre.ppm'
           'pollock.lavender-mist.ppm'
           'yngpaint.ppm')
-        ExplicitTop = 64
       end
       object txtVal: TEdit
         Left = 306
-        Top = 37
+        Top = 36
         Width = 49
         Height = 21
         Anchors = [akRight, akBottom]
@@ -988,27 +973,21 @@ object AdjustForm: TAdjustForm
         Text = '0'
         OnExit = txtValExit
         OnKeyPress = txtValKeyPress
-        ExplicitTop = 38
       end
       object btnReset: TButton
         Left = 363
-        Top = 37
+        Top = 36
         Width = 79
         Height = 21
         Anchors = [akRight, akBottom]
         Caption = 'Reset'
         TabOrder = 4
         OnClick = btnResetClick
-        ExplicitTop = 38
       end
     end
     object TabSheet4: TTabSheet
       Caption = 'Image Size'
       ImageIndex = 51
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       DesignSize = (
         443
         101)
@@ -1023,7 +1002,7 @@ object AdjustForm: TAdjustForm
         Left = 184
         Top = 4
         Width = 138
-        Height = 88
+        Height = 87
         Anchors = [akLeft, akTop, akRight, akBottom]
         Shape = bsFrame
         ExplicitHeight = 94
@@ -1223,7 +1202,7 @@ object AdjustForm: TAdjustForm
         Left = 336
         Top = 10
         Width = 99
-        Height = 35
+        Height = 34
         Alignment = taLeftJustify
         Anchors = [akLeft, akTop, akRight, akBottom]
         Caption = 'Resize Main Window'
@@ -1231,7 +1210,6 @@ object AdjustForm: TAdjustForm
         State = cbChecked
         TabOrder = 7
         WordWrap = True
-        ExplicitHeight = 36
       end
       object pnlWidth: TPanel
         Left = 12

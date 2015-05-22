@@ -256,7 +256,7 @@ begin
   RenderStop.Enabled := false;
   RenderMore.Enabled := false;
 
-  MainForm.mnuFullScreen.enabled := true;
+  MainForm.FullScreenPreviewAction.enabled := true;
   HideTaskbar;
 
   if calculate then
