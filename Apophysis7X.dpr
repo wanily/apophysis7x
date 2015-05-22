@@ -2,15 +2,24 @@ program Apophysis7X;
 
 {%ToDo 'Assets\Apophysis7X.todo'}
 {$R 'Resources\Apophysis7X.res'}
+{$R *.dres}
 {$SetPEFlags $20}
 {$Include 'delphiversion.pas'}
 
 uses
 
 {-- BASIC --}
-  FastMM4 in 'System\FastMM4.pas',
-  FastMM4Messages in 'System\FastMM4Messages.pas',
-  Forms, Dialogs, SysUtils,
+  {$IfDef UseFastMM}
+    FastMM4 in 'System\FastMM4.pas',
+    FastMM4Messages in 'System\FastMM4Messages.pas',
+  {$EndIf }
+
+  Forms,
+  Dialogs,
+  SysUtils,
+  Themes,
+  Styles,
+
   sdStringTable in 'System\sdStringTable.pas',
   CustomDrawControl in 'System\CustomDrawControl.pas',
   LibXmlComps in 'System\LibXmlComps.pas',
@@ -118,18 +127,19 @@ uses
   TransformSelection in 'Forms\TransformSelection.pas' {TransformSelectionForm}
 
   {$ifdef DisableScripting};
-  // if scripting is disabled, don't import the scripting form units
+    // if scripting is disabled, don't import the scripting form units
   {$else},
-  Preview in 'Forms\Preview.pas' {PreviewForm},
-  FormFavorites in 'Forms\FormFavorites.pas' {FavoritesForm},
-  ScriptForm in 'Forms\ScriptForm.pas' {ScriptEditor},
-  ScriptRender in 'Forms\ScriptRender.pas'; {ScriptRenderForm}
+    Preview in 'Forms\Preview.pas' {PreviewForm},
+    FormFavorites in 'Forms\FormFavorites.pas' {FavoritesForm},
+    ScriptForm in 'Forms\ScriptForm.pas' {ScriptEditor},
+    ScriptRender in 'Forms\ScriptRender.pas'; {ScriptRenderForm}
   {$endif}
 
 begin
   InitializePlugins;
 
   Application.Initialize;
+  TStyleManager.TrySetStyle('Carbon');
 
   {$ifdef Apo7X64}
   Application.Title := 'Apophysis 7x (64 bit)';

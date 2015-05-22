@@ -42,7 +42,8 @@ uses
   RegexHelper, Vcl.RibbonLunaStyleActnCtrls, Vcl.Ribbon,
   Vcl.PlatformDefaultStyleActnCtrls, System.Actions, Vcl.ActnList, Vcl.ActnMan,
   Vcl.RibbonSilverStyleActnCtrls, Vcl.ActnCtrls, Vcl.ActnMenus,
-  Vcl.RibbonActnMenus, Vcl.StdActns;//, WinInet;
+  Vcl.RibbonActnMenus, Vcl.StdActns, System.ImageList,
+  Vcl.RibbonObsidianStyleActnCtrls;//, WinInet;
 
 const
   PixelCountMax = 32768;
