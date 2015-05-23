@@ -378,9 +378,9 @@
             <Button CommandName="RotateModeCommand"/>
             <Button CommandName="ZoomInCommand"/>
             <Button CommandName="ZoomOutCommand"/>
-            <Button CommandName="ShowGuidelinesCommand"/>
-            <Button CommandName="ShowTransparencyCommand"/>
-            <Button CommandName="ShowIconsCommand"/>
+            <ToggleButton CommandName="ShowGuidelinesCommand"/>
+            <ToggleButton CommandName="ShowTransparencyCommand"/>
+            <ToggleButton CommandName="ShowIconsCommand"/>
           </Group>
           <Group CommandName="ToolsMenuGroup" SizeDefinition="SevenButtons">
             <Button CommandName="ShowEditorCommand"/>

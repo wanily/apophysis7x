@@ -252,13 +252,13 @@ type
     EditScriptCommand: TUICommandAction;
     ManageScriptFavoritesCommand: TUICommandAction;
 
-    PanModeCommand: TUICommandAction;
-    RotateModeCommand: TUICommandAction;
-    ZoomInCommand: TUICommandAction;
-    ZoomOutCommand: TUICommandAction;
-    ShowTransparencyCommand: TUICommandAction;
-    ShowGuidelinesCommand: TUICommandAction;
-    ShowIconsInListViewCommand: TUICommandAction;
+    PanModeCommand: TUICommandBoolean;
+    RotateModeCommand: TUICommandBoolean;
+    ZoomInCommand: TUICommandBoolean;
+    ZoomOutCommand: TUICommandBoolean;
+    ShowTransparencyCommand: TUICommandBoolean;
+    ShowGuidelinesCommand: TUICommandBoolean;
+    ShowIconsInListViewCommand: TUICommandBoolean;
 
     Density5Command: TUICommandAction;
     Density10Command: TUICommandAction;

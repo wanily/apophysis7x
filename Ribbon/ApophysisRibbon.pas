@@ -14,7 +14,7 @@ const
   StartMenu_LabelTitle_RESID = 60002;
   FileMenuGroup = 4;
   FileMenuGroup_LabelTitle_RESID = 60003;
-  NewFlameCommand_Id =5;
+  NewFlameCommand_Id = 5;
   NewFlameCommand_LabelTitle_RESID = 60004;
   NewFlameCommand_LabelDescription_RESID = 60005;
   NewFlameCommand_Keytip_RESID = 60006;
@@ -22,7 +22,7 @@ const
   NewFlameCommand_TooltipDescription_RESID = 60008;
   NewFlameCommand_SmallImages_RESID = 60009;
   NewFlameCommand_LargeImages_RESID = 60010;
-  OpenBatchCommand_Id =6;
+  OpenBatchCommand_Id = 6;
   OpenBatchCommand_LabelTitle_RESID = 60011;
   OpenBatchCommand_LabelDescription_RESID = 60012;
   OpenBatchCommand_Keytip_RESID = 60013;
@@ -30,7 +30,7 @@ const
   OpenBatchCommand_TooltipDescription_RESID = 60015;
   OpenBatchCommand_SmallImages_RESID = 60016;
   OpenBatchCommand_LargeImages_RESID = 60017;
-  SaveFlameCommand_Id =7;
+  SaveFlameCommand_Id = 7;
   SaveFlameCommand_LabelTitle_RESID = 60018;
   SaveFlameCommand_LabelDescription_RESID = 60019;
   SaveFlameCommand_Keytip_RESID = 60020;
@@ -38,7 +38,7 @@ const
   SaveFlameCommand_TooltipDescription_RESID = 60022;
   SaveFlameCommand_SmallImages_RESID = 60023;
   SaveFlameCommand_LargeImages_RESID = 60024;
-  SaveBatchCommand_Id =8;
+  SaveBatchCommand_Id = 8;
   SaveBatchCommand_LabelTitle_RESID = 60025;
   SaveBatchCommand_LabelDescription_RESID = 60026;
   SaveBatchCommand_Keytip_RESID = 60027;
@@ -46,7 +46,7 @@ const
   SaveBatchCommand_TooltipDescription_RESID = 60029;
   SaveBatchCommand_SmallImages_RESID = 60030;
   SaveBatchCommand_LargeImages_RESID = 60031;
-  RestoreLastAutosaveCommand_Id =9;
+  RestoreLastAutosaveCommand_Id = 9;
   RestoreLastAutosaveCommand_LabelTitle_RESID = 60032;
   RestoreLastAutosaveCommand_LabelDescription_RESID = 60033;
   RestoreLastAutosaveCommand_Keytip_RESID = 60034;
@@ -56,7 +56,7 @@ const
   RestoreLastAutosaveCommand_LargeImages_RESID = 60038;
   EditMenuGroup = 10;
   EditMenuGroup_LabelTitle_RESID = 60039;
-  CopyCommand_Id =11;
+  CopyCommand_Id = 11;
   CopyCommand_LabelTitle_RESID = 60040;
   CopyCommand_LabelDescription_RESID = 60041;
   CopyCommand_Keytip_RESID = 60042;
@@ -64,7 +64,7 @@ const
   CopyCommand_TooltipDescription_RESID = 60044;
   CopyCommand_SmallImages_RESID = 60045;
   CopyCommand_LargeImages_RESID = 60046;
-  PasteCommand_Id =12;
+  PasteCommand_Id = 12;
   PasteCommand_LabelTitle_RESID = 60047;
   PasteCommand_LabelDescription_RESID = 60048;
   PasteCommand_Keytip_RESID = 60049;
@@ -72,7 +72,7 @@ const
   PasteCommand_TooltipDescription_RESID = 60051;
   PasteCommand_SmallImages_RESID = 60052;
   PasteCommand_LargeImages_RESID = 60053;
-  UndoCommand_Id =13;
+  UndoCommand_Id = 13;
   UndoCommand_LabelTitle_RESID = 60054;
   UndoCommand_LabelDescription_RESID = 60055;
   UndoCommand_Keytip_RESID = 60056;
@@ -80,7 +80,7 @@ const
   UndoCommand_TooltipDescription_RESID = 60058;
   UndoCommand_SmallImages_RESID = 60059;
   UndoCommand_LargeImages_RESID = 60060;
-  RedoCommand_Id =14;
+  RedoCommand_Id = 14;
   RedoCommand_LabelTitle_RESID = 60061;
   RedoCommand_LabelDescription_RESID = 60062;
   RedoCommand_Keytip_RESID = 60063;
@@ -90,7 +90,7 @@ const
   RedoCommand_LargeImages_RESID = 60067;
   RenderMenuGroup = 15;
   RenderMenuGroup_LabelTitle_RESID = 60068;
-  RenderFlameCommand_Id =16;
+  RenderFlameCommand_Id = 16;
   RenderFlameCommand_LabelTitle_RESID = 60069;
   RenderFlameCommand_LabelDescription_RESID = 60070;
   RenderFlameCommand_Keytip_RESID = 60071;
@@ -98,7 +98,7 @@ const
   RenderFlameCommand_TooltipDescription_RESID = 60073;
   RenderFlameCommand_SmallImages_RESID = 60074;
   RenderFlameCommand_LargeImages_RESID = 60075;
-  RenderBatchCommand_Id =17;
+  RenderBatchCommand_Id = 17;
   RenderBatchCommand_LabelTitle_RESID = 60076;
   RenderBatchCommand_LabelDescription_RESID = 60077;
   RenderBatchCommand_Keytip_RESID = 60078;
@@ -108,7 +108,7 @@ const
   RenderBatchCommand_LargeImages_RESID = 60082;
   ToolsMenuGroup = 18;
   ToolsMenuGroup_LabelTitle_RESID = 60083;
-  FullscreenPreviewCommand_Id =19;
+  FullscreenPreviewCommand_Id = 19;
   FullscreenPreviewCommand_LabelTitle_RESID = 60084;
   FullscreenPreviewCommand_LabelDescription_RESID = 60085;
   FullscreenPreviewCommand_Keytip_RESID = 60086;
@@ -116,7 +116,7 @@ const
   FullscreenPreviewCommand_TooltipDescription_RESID = 60088;
   FullscreenPreviewCommand_SmallImages_RESID = 60089;
   FullscreenPreviewCommand_LargeImages_RESID = 60090;
-  ShowEditorCommand_Id =20;
+  ShowEditorCommand_Id = 20;
   ShowEditorCommand_LabelTitle_RESID = 60091;
   ShowEditorCommand_LabelDescription_RESID = 60092;
   ShowEditorCommand_Keytip_RESID = 60093;
@@ -124,7 +124,7 @@ const
   ShowEditorCommand_TooltipDescription_RESID = 60095;
   ShowEditorCommand_SmallImages_RESID = 60096;
   ShowEditorCommand_LargeImages_RESID = 60097;
-  ShowAdjustmentCommand_Id =21;
+  ShowAdjustmentCommand_Id = 21;
   ShowAdjustmentCommand_LabelTitle_RESID = 60098;
   ShowAdjustmentCommand_LabelDescription_RESID = 60099;
   ShowAdjustmentCommand_Keytip_RESID = 60100;
@@ -132,7 +132,7 @@ const
   ShowAdjustmentCommand_TooltipDescription_RESID = 60102;
   ShowAdjustmentCommand_SmallImages_192__RESID = 60103;
   ShowAdjustmentCommand_LargeImages_144__RESID = 60104;
-  ShowOutputPropertiesCommand_Id =22;
+  ShowOutputPropertiesCommand_Id = 22;
   ShowOutputPropertiesCommand_LabelTitle_RESID = 60105;
   ShowOutputPropertiesCommand_LabelDescription_RESID = 60106;
   ShowOutputPropertiesCommand_Keytip_RESID = 60107;
@@ -140,7 +140,7 @@ const
   ShowOutputPropertiesCommand_TooltipDescription_RESID = 60109;
   ShowOutputPropertiesCommand_SmallImages_RESID = 60110;
   ShowOutputPropertiesCommand_LargeImages_RESID = 60111;
-  ShowPaletteCommand_Id =23;
+  ShowPaletteCommand_Id = 23;
   ShowPaletteCommand_LabelTitle_RESID = 60112;
   ShowPaletteCommand_LabelDescription_RESID = 60113;
   ShowPaletteCommand_Keytip_RESID = 60114;
@@ -148,7 +148,7 @@ const
   ShowPaletteCommand_TooltipDescription_RESID = 60116;
   ShowPaletteCommand_SmallImages_RESID = 60117;
   ShowPaletteCommand_LargeImages_RESID = 60118;
-  ShowCanvasCommand_Id =24;
+  ShowCanvasCommand_Id = 24;
   ShowCanvasCommand_LabelTitle_RESID = 60119;
   ShowCanvasCommand_LabelDescription_RESID = 60120;
   ShowCanvasCommand_Keytip_RESID = 60121;
@@ -156,7 +156,7 @@ const
   ShowCanvasCommand_TooltipDescription_RESID = 60123;
   ShowCanvasCommand_SmallImages_RESID = 60124;
   ShowCanvasCommand_LargeImages_RESID = 60125;
-  PaletteFromImageCommand_Id =25;
+  PaletteFromImageCommand_Id = 25;
   PaletteFromImageCommand_LabelTitle_RESID = 60126;
   PaletteFromImageCommand_LabelDescription_RESID = 60127;
   PaletteFromImageCommand_Keytip_RESID = 60128;
@@ -166,7 +166,7 @@ const
   PaletteFromImageCommand_LargeImages_RESID = 60132;
   ScriptMenuGroup = 26;
   ScriptMenuGroup_LabelTitle_RESID = 60133;
-  RunScriptCommand_Id =27;
+  RunScriptCommand_Id = 27;
   RunScriptCommand_LabelTitle_RESID = 60134;
   RunScriptCommand_LabelDescription_RESID = 60135;
   RunScriptCommand_Keytip_RESID = 60136;
@@ -174,7 +174,7 @@ const
   RunScriptCommand_TooltipDescription_RESID = 60138;
   RunScriptCommand_SmallImages_RESID = 60139;
   RunScriptCommand_LargeImages_RESID = 60140;
-  StopScriptCommand_Id =28;
+  StopScriptCommand_Id = 28;
   StopScriptCommand_LabelTitle_RESID = 60141;
   StopScriptCommand_LabelDescription_RESID = 60142;
   StopScriptCommand_Keytip_RESID = 60143;
@@ -182,7 +182,7 @@ const
   StopScriptCommand_TooltipDescription_RESID = 60145;
   StopScriptCommand_SmallImages_RESID = 60146;
   StopScriptCommand_LargeImages_RESID = 60147;
-  OpenScriptCommand_Id =29;
+  OpenScriptCommand_Id = 29;
   OpenScriptCommand_LabelTitle_RESID = 60148;
   OpenScriptCommand_LabelDescription_RESID = 60149;
   OpenScriptCommand_Keytip_RESID = 60150;
@@ -190,7 +190,7 @@ const
   OpenScriptCommand_TooltipDescription_RESID = 60152;
   OpenScriptCommand_SmallImages_RESID = 60153;
   OpenScriptCommand_LargeImages_RESID = 60154;
-  EditScriptCommand_Id =30;
+  EditScriptCommand_Id = 30;
   EditScriptCommand_LabelTitle_RESID = 60155;
   EditScriptCommand_LabelDescription_RESID = 60156;
   EditScriptCommand_Keytip_RESID = 60157;
@@ -198,7 +198,7 @@ const
   EditScriptCommand_TooltipDescription_RESID = 60159;
   EditScriptCommand_SmallImages_RESID = 60160;
   EditScriptCommand_LargeImages_RESID = 60161;
-  ManageScriptFavoritesCommand_Id =31;
+  ManageScriptFavoritesCommand_Id = 31;
   ManageScriptFavoritesCommand_LabelTitle_RESID = 60162;
   ManageScriptFavoritesCommand_LabelDescription_RESID = 60163;
   ManageScriptFavoritesCommand_Keytip_RESID = 60164;
@@ -216,7 +216,7 @@ const
   ViewSampleDensity_TooltipDescription_RESID = 60174;
   ViewSampleDensity_SmallImages_RESID = 60175;
   ViewSampleDensity_LargeImages_RESID = 60176;
-  PanModeCommand_Id =34;
+  PanModeCommand_Id = 34;
   PanModeCommand_LabelTitle_RESID = 60177;
   PanModeCommand_LabelDescription_RESID = 60178;
   PanModeCommand_Keytip_RESID = 60179;
@@ -224,7 +224,7 @@ const
   PanModeCommand_TooltipDescription_RESID = 60181;
   PanModeCommand_SmallImages_RESID = 60182;
   PanModeCommand_LargeImages_RESID = 60183;
-  RotateModeCommand_Id =35;
+  RotateModeCommand_Id = 35;
   RotateModeCommand_LabelTitle_RESID = 60184;
   RotateModeCommand_LabelDescription_RESID = 60185;
   RotateModeCommand_Keytip_RESID = 60186;
@@ -232,7 +232,7 @@ const
   RotateModeCommand_TooltipDescription_RESID = 60188;
   RotateModeCommand_SmallImages_RESID = 60189;
   RotateModeCommand_LargeImages_RESID = 60190;
-  ZoomInCommand_Id =36;
+  ZoomInCommand_Id = 36;
   ZoomInCommand_LabelTitle_RESID = 60191;
   ZoomInCommand_LabelDescription_RESID = 60192;
   ZoomInCommand_Keytip_RESID = 60193;
@@ -240,7 +240,7 @@ const
   ZoomInCommand_TooltipDescription_RESID = 60195;
   ZoomInCommand_SmallImages_RESID = 60196;
   ZoomInCommand_LargeImages_RESID = 60197;
-  ZoomOutCommand_Id =37;
+  ZoomOutCommand_Id = 37;
   ZoomOutCommand_LabelTitle_RESID = 60198;
   ZoomOutCommand_LabelDescription_RESID = 60199;
   ZoomOutCommand_Keytip_RESID = 60200;
@@ -268,9 +268,9 @@ const
   ViewDensity500_LabelTitle_RESID = 60213;
   ViewDensity1000 = 47;
   ViewDensity1000_LabelTitle_RESID = 60214;
-  RecentItemsCommand_Id =48;
+  RecentItemsCommand_Id = 48;
   RecentItemsCommand_LabelTitle_RESID = 60215;
-  ShowSettingsCommand_Id =49;
+  ShowSettingsCommand_Id = 49;
   ShowSettingsCommand_LabelTitle_RESID = 60216;
   ShowSettingsCommand_LabelDescription_RESID = 60217;
   ShowSettingsCommand_Keytip_RESID = 60218;
@@ -278,7 +278,7 @@ const
   ShowSettingsCommand_TooltipDescription_RESID = 60220;
   ShowSettingsCommand_SmallImages_RESID = 60221;
   ShowSettingsCommand_LargeImages_RESID = 60222;
-  ExitCommand_Id =50;
+  ExitCommand_Id = 50;
   ExitCommand_LabelTitle_RESID = 60223;
   ExitCommand_LabelDescription_RESID = 60224;
   ExitCommand_Keytip_RESID = 60225;
@@ -286,7 +286,7 @@ const
   ExitCommand_TooltipDescription_RESID = 60227;
   ExitCommand_SmallImages_RESID = 60228;
   ExitCommand_LargeImages_RESID = 60229;
-  AboutCommand_Id =51;
+  AboutCommand_Id = 51;
   AboutCommand_LabelTitle_RESID = 60230;
   AboutCommand_LabelDescription_RESID = 60231;
   AboutCommand_Keytip_RESID = 60232;
@@ -294,7 +294,7 @@ const
   AboutCommand_TooltipDescription_RESID = 60234;
   AboutCommand_SmallImages_RESID = 60235;
   AboutCommand_LargeImages_RESID = 60236;
-  HelpCommand_Id =52;
+  HelpCommand_Id = 52;
   HelpCommand_LabelTitle_RESID = 60237;
   HelpCommand_LabelDescription_RESID = 60238;
   HelpCommand_Keytip_RESID = 60239;
@@ -302,35 +302,35 @@ const
   HelpCommand_TooltipDescription_RESID = 60241;
   HelpCommand_SmallImages_RESID = 60242;
   HelpCommand_LargeImages_RESID = 60243;
-  FractalFlameSpecsCommand_Id =53;
+  FractalFlameSpecsCommand_Id = 53;
   FractalFlameSpecsCommand_LabelTitle_RESID = 60244;
   FractalFlameSpecsCommand_LabelDescription_RESID = 60245;
   FractalFlameSpecsCommand_TooltipTitle_RESID = 60246;
   FractalFlameSpecsCommand_TooltipDescription_RESID = 60247;
   FractalFlameSpecsCommand_SmallImages_RESID = 60248;
   FractalFlameSpecsCommand_LargeImages_RESID = 60249;
-  DonateCommand_Id =54;
+  DonateCommand_Id = 54;
   DonateCommand_LabelTitle_RESID = 60250;
   DonateCommand_LabelDescription_RESID = 60251;
   DonateCommand_TooltipTitle_RESID = 60252;
   DonateCommand_TooltipDescription_RESID = 60253;
   DonateCommand_SmallImages_RESID = 60254;
   DonateCommand_LargeImages_RESID = 60255;
-  ShowTransparencyCommand_Id =55;
+  ShowTransparencyCommand_Id = 55;
   ShowTransparencyCommand_LabelTitle_RESID = 60256;
   ShowTransparencyCommand_LabelDescription_RESID = 60257;
   ShowTransparencyCommand_Keytip_RESID = 60258;
   ShowTransparencyCommand_TooltipTitle_RESID = 60259;
   ShowTransparencyCommand_TooltipDescription_RESID = 60260;
   ShowTransparencyCommand_SmallImages_RESID = 60261;
-  ShowGuidelinesCommand_Id =56;
+  ShowGuidelinesCommand_Id = 56;
   ShowGuidelinesCommand_LabelTitle_RESID = 60262;
   ShowGuidelinesCommand_LabelDescription_RESID = 60263;
   ShowGuidelinesCommand_Keytip_RESID = 60264;
   ShowGuidelinesCommand_TooltipTitle_RESID = 60265;
   ShowGuidelinesCommand_TooltipDescription_RESID = 60266;
   ShowGuidelinesCommand_SmallImages_RESID = 60267;
-  ShowIconsCommand_Id =57;
+  ShowIconsCommand_Id = 57;
   ShowIconsCommand_LabelTitle_RESID = 60268;
   ShowIconsCommand_LabelDescription_RESID = 60269;
   ShowIconsCommand_Keytip_RESID = 60270;
