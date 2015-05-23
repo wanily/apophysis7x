@@ -3,7 +3,7 @@ unit Global;
 interface
 
 uses
-  Windows, SysUtils, Classes, SyncObjs, Controls, Graphics, Math,
+  Windows, Forms, ShellApi, SysUtils, Classes, SyncObjs, Controls, Graphics, Math,
   cmap, ControlPoint, Xform, CommDlg;
 
 type
@@ -24,6 +24,8 @@ function OpenSaveFileDialog(Parent: TWinControl;
   const DefExt, Filter, InitialDir, Title: string; var FileName: string;
   MustExist, OverwritePrompt, NoChangeDir, DoOpen: boolean): boolean;
 function GetEnvVarValue(const VarName: string): string;
+function GradientString(c: TColorMap): string;
+function WinShellOpen(const AssociatedFile: string): boolean;
 
 const
   APP_NAME: string = 'Apophysis/XW';
@@ -158,7 +160,6 @@ var
   Favorites: TStringList;
   Script: string;
   ScriptPath: string;
-  OpenFileType: TFileType;
 
   ShowProgress: boolean;
   defLibrary: string;
@@ -178,6 +179,57 @@ var
 function Round6(x: double): double;
 
 implementation
+
+function WinShellExecute(const Operation, AssociatedFile: string): Boolean;
+var
+  a1: string;
+  r: Cardinal;
+begin
+  a1 := Operation;
+  if a1 = '' then
+    a1 := 'open';
+
+  r := ShellExecute(
+    application.handle
+    , pchar(a1)
+    , pchar(AssociatedFile)
+    , ''
+    , ''
+    , SW_SHOWNORMAL
+    );
+  if (r > 32) then WinShellExecute := true
+  else WinShellExecute := false;
+end;
+
+function WinShellOpen(const AssociatedFile: string): boolean;
+begin
+  Result := WinShellExecute('open', AssociatedFile);
+end;
+
+function GradientString(c: TColorMap): string;
+var
+  strings: TStringList;
+  i, j, cl: integer;
+begin
+  strings := TStringList.Create;
+  for i := 0 to 255 do
+  begin
+    j := round(i * (399 / 255));
+    cl := (c[i][2] shl 16) + (c[i][1] shl 8) + (c[i][0]);
+    strings.Add(' index=' + IntToStr(j) + ' color=' + intToStr(cl));
+  end;
+  Result := Strings.Text;
+  strings.Free;
+end;
+
+
+function GradTitle(str: string): string;
+var
+  p: integer;
+begin
+  p := pos('{', str);
+  GradTitle := Trim(copy(str, 1, p - 1));
+end;
 
 function GetEnvVarValue(const VarName: string): string;
 var

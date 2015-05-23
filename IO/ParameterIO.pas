@@ -27,9 +27,12 @@ type
 
       procedure LoadControlPoint(i: integer; var cp: TControlPoint);
       procedure StoreControlPoint(i: integer; cp: TControlPoint);
+      procedure AppendControlPoint(cp: TControlPoint);
 
       procedure SaveFlame(i: integer; filePath: string);
       procedure SaveBatch(filePath: string);
+
+      procedure RemoveAt(i: integer);
   end;
 
 function IsRegisteredVariation(name: string): boolean;
@@ -70,6 +73,21 @@ var
 begin
   SaveCpToXmlCompatible(xml, cp);
   mData[i] := xml;
+end;
+
+procedure TBatch.AppendControlPoint(cp: TControlPoint);
+var
+  xml: string;
+begin
+  SaveCpToXmlCompatible(xml, cp);
+  mData.Add(xml);
+  mNames.Add(cp.Name);
+end;
+
+procedure TBatch.RemoveAt(i: Integer);
+begin
+  mData.Delete(i);
+  mNames.Delete(i);
 end;
 
 procedure TBatch.SaveFlame(i: Integer; filePath: string);

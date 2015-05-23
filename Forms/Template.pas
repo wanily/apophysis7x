@@ -28,7 +28,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Translation,
   Dialogs, StdCtrls, ComCtrls, ImgList, ControlPoint, cmap, RenderingInterface, Main,
-  Global, Adjust, System.ImageList;
+  Global, Adjust, System.ImageList, ParameterIo;
 
 type
   TTemplateForm = class(TForm)
@@ -109,7 +109,7 @@ end;
 
 procedure DropBlank();
 var
-  flameXML: string;
+  flameXML, status: string;
   cp: TControlPoint;
   bm: TBitmap;
   cmap: TColorMap;
@@ -126,7 +126,7 @@ begin
 
   cp.Clear;
   flameXML := BlankXML;
-  MainForm.ParseXML(cp, PCHAR(flameXML), true);
+  LoadCpFromXmlCompatible(flameXml, cp, status);
   cp.AdjustScale(TemplateForm.UsedThumbnails.Width, TemplateForm.UsedThumbnails.Height);
 
   //Clipboard.SetTextBuf(PChar(Trim(flameXML)));
@@ -159,7 +159,7 @@ end;
 
 procedure DropListItem(FileName: string; FlameName: string);
 var
-  flameXML: string;
+  flameXML, status: string;
   cp: TControlPoint;
   bm: TBitmap;
   cmap: TColorMap;
@@ -175,8 +175,8 @@ begin
   bm := TBitmap.Create;
 
   cp.Clear;
-  flameXML := LoadXMLFlameText(filename, FlameName);
-  MainForm.ParseXML(cp, PCHAR(flameXML), true);
+  //-x- todo flameXML := LoadXMLFlameText(filename, FlameName);
+  LoadCpFromXmlCompatible(flameXml, cp, status);
   cp.AdjustScale(TemplateForm.UsedThumbnails.Width, TemplateForm.UsedThumbnails.Height);
 
   //Clipboard.SetTextBuf(PChar(Trim(flameXML)));
@@ -208,46 +208,13 @@ begin
 end;
 
 procedure ListTemplateByFileName(filename:string);
-{ List .flame file }
 var
-  sel:integer;
-  i, p, img: integer;
-  Title: string;
-  ListItem: TListItem;
-  FStrings: TStringList;
-  bm: TBitmap;
+  batch: TBatch;
+  I: Integer;
 begin
-  sel := 0;
-  if not FileExists(FileName) then exit;
-  FStrings := TStringList.Create;
-  FStrings.LoadFromFile(FileName);
-  try
-    if (Pos('<flame ', Lowercase(FStrings.Text)) <> 0) then
-    begin
-      for i := 0 to FStrings.Count - 1 do
-      begin
-        p := Pos('<flame ', LowerCase(FStrings[i]));
-        if (p <> 0) then
-        begin
-          MainForm.ListXMLScanner.LoadFromBuffer(PAnsiChar(AnsiString(FSTrings[i])));
-          MainForm.ListXMLScanner.Execute;
-
-          if Length(pname) = 0 then
-            Title := '*untitled ' + ptime
-          else
-            Title := Trim(pname);
-          if Title <> '' then
-          begin { Otherwise bad format }
-            //ListItem := MainForm.ListView.Items.Add;
-            //Listitem.Caption := Title;
-            DropListItem(FileName, Title);
-          end;
-        end;
-      end;
-    end;
-  finally
-    FStrings.Free;
-  end;
+  batch := TBatch.Create(fileName);
+  for I := 0 to batch.Count do
+    DropListItem(fileName, Batch.GetFlameNameAt(i));
 end;
 
 procedure ListTemplate;
@@ -316,7 +283,7 @@ begin
   else flameXML := LoadXMLFlameText(fn, TemplateList.Selected.Caption);
   MainForm.UpdateUndo;
   MainForm.StopThread;
-  MainForm.InvokeLoadXML(flameXML);
+  //-x- todo MainForm.InvokeLoadXML(flameXML);
   Transforms := MainCp.TrianglesFromCP(MainTriangles);
   MainForm.Statusbar.Panels[3].Text := MainCp.name;
   {if ResizeOnLoad then}

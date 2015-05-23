@@ -137,7 +137,6 @@ uses
   LoadTracker in 'Forms\LoadTracker.pas' {LoadForm},
   Options in 'Forms\Options.pas' {OptionsForm},
   Save in 'Forms\Save.pas' {SaveForm},
-  Template in 'Forms\Template.pas' {TemplateForm},
   TransformSelection in 'Forms\TransformSelection.pas' {TransformSelectionForm}
 
   {$ifdef DisableScripting};
@@ -173,7 +172,6 @@ begin
   Application.CreateForm(TLoadForm, LoadForm);
   Application.CreateForm(TOptionsForm, OptionsForm);
   Application.CreateForm(TSaveForm, SaveForm);
-  Application.CreateForm(TTemplateForm, TemplateForm);
   Application.CreateForm(TTransformSelectionForm, TransformSelectionForm);
 
   {$ifdef DisableScripting}

@@ -2439,17 +2439,6 @@ object MainForm: TMainForm
     Ctl3D = True
     ParentCtl3D = False
     TabOrder = 1
-    object ListViewPanelStyleShape: TShape
-      Left = 0
-      Top = 0
-      Width = 161
-      Height = 792
-      Align = alClient
-      Brush.Color = clWindow
-      Pen.Color = clWindow
-      ExplicitLeft = -2
-      ExplicitTop = -6
-    end
     object ListView: TListView
       Left = 0
       Top = 0
@@ -2458,6 +2447,9 @@ object MainForm: TMainForm
       Align = alClient
       BorderStyle = bsNone
       Columns = <>
+      DoubleBuffered = True
+      FlatScrollBars = True
+      ParentDoubleBuffered = False
       TabOrder = 0
     end
   end
@@ -2489,7 +2481,7 @@ object MainForm: TMainForm
           Width = 50
         end>
     end
-    object pnlLSPFrame: TPanel
+    object StatusProgressBarPanel: TPanel
       Left = 910
       Top = 0
       Width = 197
@@ -2509,17 +2501,9 @@ object MainForm: TMainForm
       end
     end
   end
-  object OpenDialog: TOpenDialog
-    Filter = 
-      'Apophysis Parameter Files (*.apo)|*.apo|Apophysis 1.0 Parameters' +
-      ' (*fla)|*.fla|IFS Files (*.ifs)|*.ifs'
-    Options = [ofHideReadOnly, ofPathMustExist, ofFileMustExist, ofEnableSizing]
-    Left = 344
-    Top = 16
-  end
   object ListViewPopupMenu: TPopupMenu
-    Left = 264
-    Top = 16
+    Left = 224
+    Top = 224
     object ListViewMenuDeleteItem: TMenuItem
       Caption = '&Delete'
       Hint = 'Deletes the selected IFS from the file.'
@@ -2534,8 +2518,8 @@ object MainForm: TMainForm
     end
   end
   object PreviewPanelPopupMenu: TPopupMenu
-    Left = 192
-    Top = 16
+    Left = 224
+    Top = 168
     object PreviewPanelMenuUndoItem: TMenuItem
       Caption = 'Undo'
       Enabled = False
@@ -2573,44 +2557,18 @@ object MainForm: TMainForm
     Enabled = False
     Interval = 50
     OnTimer = PreviewRedrawDelayTimerCallback
-    Left = 1016
-    Top = 80
-  end
-  object SaveDialog: TSaveDialog
-    DefaultExt = 'bmp'
-    Filter = 'Bitmap Files|*.bmp'
-    Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    Left = 424
-    Top = 16
+    Left = 224
+    Top = 64
   end
   object ClipboardWatcherEvents: TApplicationEvents
     OnActivate = ClipboardWatcherEventsCallback
-    Left = 1016
-    Top = 16
-  end
-  object LargeFlameThumbnailsList: TImageList
-    Height = 128
-    Masked = False
-    Width = 128
-    Left = 192
-    Top = 136
-  end
-  object SmallFlameThumbnailsList: TImageList
-    Height = 96
-    Masked = False
-    Width = 96
-    Left = 192
-    Top = 80
-  end
-  object ColorDialog: TColorDialog
-    Options = [cdFullOpen]
-    Left = 504
+    Left = 224
     Top = 16
   end
   object AutoSaveTimer: TTimer
     Enabled = False
     OnTimer = AutoSaveTimerCallback
-    Left = 1016
-    Top = 142
+    Left = 224
+    Top = 118
   end
 end

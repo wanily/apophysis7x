@@ -62,11 +62,14 @@ type
       mShowThumbnails: boolean;
       mIsUpdating: boolean;
       mIsSelecting: boolean;
+      mThumbnailSize: integer;
 
       function GetSelectedIndex: integer;
+      function GetThumbnailSize: integer;
 
       procedure SetBatch(value: TBatch);
       procedure SetShowThumbnails(value: boolean);
+      procedure SetThumbnailSize(value: integer);
 
       procedure OnThumbnailCompleted(index: integer);
       procedure OnListSelectionChanged(sender: TObject; item: TListItem; selected: boolean);
@@ -82,6 +85,10 @@ type
       procedure SelectIndex(i: integer);
 
       procedure Refresh(newSelection: integer);
+
+      property ThumbnailSize: integer
+        read GetThumbnailSize
+        write SetThumbnailSize;
 
       property Batch: TBatch
         read mBatch
@@ -258,6 +265,19 @@ begin
   mList.OnSelectItem := OnListSelectionChanged;
 end;
 
+function TFlameListView.GetThumbnailSize;
+begin
+  Result := mThumbnailSize;
+end;
+
+procedure TFlameListView.SetThumbnailSize(value: Integer);
+begin
+  mThumbnailSize := value;
+
+  if Assigned(mThumbnails) then
+     mThumbnails.ThumbnailSize := value;
+end;
+
 procedure TFlameListView.OnListSelectionChanged(sender: TObject; item: TListItem; selected: boolean);
 begin
   if mIsSelecting then
@@ -295,7 +315,7 @@ begin
 
   mThumbnails := TFlameListThumbnailThread.Create;
   mThumbnails.ThumbnailCompleted := OnThumbnailCompleted;
-  mThumbnails.ThumbnailSize := 120;
+  mThumbnails.ThumbnailSize := mThumbnailSize;
 
   mThumbnails.Batch := mBatch;
   mList.LargeImages := mThumbnails.Images;
