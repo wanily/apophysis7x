@@ -2459,10 +2459,6 @@ object MainForm: TMainForm
       BorderStyle = bsNone
       Columns = <>
       TabOrder = 0
-      ExplicitLeft = -1
-      ExplicitTop = 224
-      ExplicitWidth = 160
-      ExplicitHeight = 150
     end
   end
   object StatusPanel: TPanel

@@ -2,30 +2,20 @@ unit FlameListView;
 
 interface
 
-uses Classes, ComCtrls, Controls, SysUtils, StrUtils, ParameterIO, rkView;
+uses
+  Classes,
+  Windows,
+  Graphics,
+  Controls,
+  ComCtrls,
+  SysUtils,
+  StrUtils,
+  RenderingInterface,
+  RenderingImplementation,
+  ControlPoint,
+  ParameterIO;
 
 type
-
-  TBatch = class
-    private
-
-      mNames: TStringList;
-      mData: TStringList;
-
-      procedure Parse(const path: string);
-      function CountFlames: integer;
-
-    public
-
-      constructor Create(const path: string);
-      destructor Destroy; override;
-
-      property Count: integer read CountFlames;
-
-      function GetFlameNameAt(i: integer): string;
-      function GetFlameXmlAt(i: integer): string;
-
-  end;
 
   TFlameListThumbnailThread = class(TThread)
     private
@@ -33,6 +23,7 @@ type
       mBatch: TBatch;
       mImages: TImageList;
       mThumbnailSize: integer;
+      mPlaceholder: TBitmap;
 
       procedure SetBatch(value: TBatch);
       procedure SetThumbnailSize(value: integer);
@@ -42,6 +33,8 @@ type
       procedure Execute; override;
 
     public
+
+      ThumbnailCompleted: procedure(index: integer) of object;
 
       constructor Create;
       destructor Destroy;
@@ -68,21 +61,27 @@ type
       mBatch: TBatch;
       mShowThumbnails: boolean;
       mIsUpdating: boolean;
+      mIsSelecting: boolean;
 
       function GetSelectedIndex: integer;
 
       procedure SetBatch(value: TBatch);
       procedure SetShowThumbnails(value: boolean);
 
-      procedure OnThumbnailsChange(sender: TObject);
+      procedure OnThumbnailCompleted(index: integer);
+      procedure OnListSelectionChanged(sender: TObject; item: TListItem; selected: boolean);
 
     public
+
+      SelectedIndexChanged: procedure(index: integer) of object;
 
       constructor Create(list: TListView);
       destructor Destroy;
 
       procedure RemoveItemAt(i: integer);
       procedure SelectIndex(i: integer);
+
+      procedure Refresh(newSelection: integer);
 
       property Batch: TBatch
         read mBatch
@@ -100,68 +99,33 @@ type
 
 implementation
 
-uses Windows, RenderingInterface, RenderingImplementation, ControlPoint, Graphics;
-
-//-- TBatch
-constructor TBatch.Create(const path: string);
-begin
-  if not FileExists(path) then
-    raise Exception.Create('Could not find file: "' + path + '"');
-
-  mNames := TStringList.Create;
-  mData := TStringList.Create;
-
-  Parse(path);
-end;
-
-procedure TBatch.Parse(const path: string);
+function LoadThumbnailPlaceholder(ThumbnailSize: Integer): TBitmap;
 var
-  fileContent: TStringList;
-  flames: TStringList;
-
-  i: integer;
-  name: string;
+  placeholder: TBitmap;
+  placeholderIcon: TBitmap;
+const
+  pi_width = 48;
+  pi_height = 48;
 begin
-  fileContent := TStringList.Create;
-  fileContent.LoadFromFile(path, TEncoding.Default);  // -x- todo: evaluate effects of using UTF8
+  placeholder := TBitmap.Create;
+  placeholderIcon := TBitmap.Create;
 
-  flames := TStringList.Create;
-  EnumParameters(fileContent.Text, flames);
+  placeholderIcon.Handle := LoadBitmap(hInstance, 'THUMB_PLACEHOLDER');
+  placeholder.PixelFormat := pf32bit;
+  placeholder.HandleType := bmDIB;
+  placeholder.Width := ThumbnailSize;
+  placeholder.Height := ThumbnailSize;
 
-  mNames.Clear;
-  mData.Clear;
-
-  for i := 0 to flames.Count - 1 do
+  with placeholder.Canvas do
   begin
-    name := NameOf(flames[i]);
-    mNames.Add(name);
-    mData.Add(flames[i]);
+    Brush.Color := $000000;
+    FillRect(Rect(0, 0, placeholder.Width, placeholder.Height));
+    Draw(round(ThumbnailSize / 2 - pi_width / 2),
+      round(ThumbnailSize / 2 - pi_height / 2), placeholderIcon);
   end;
 
-  flames.Destroy;
-  fileContent.Destroy;
-end;
-
-function TBatch.CountFlames: integer;
-begin
-  Assert(mNames.Count = mData.Count);
-  Result := mNames.Count;
-end;
-
-function TBatch.GetFlameNameAt(i: Integer): string;
-begin
-  Result := mNames[i];
-end;
-
-function TBatch.GetFlameXmlAt(i: Integer): string;
-begin
-  Result := mData[i];
-end;
-
-destructor TBatch.Destroy;
-begin
-  mNames.Destroy;
-  mData.Destroy;
+  placeholderIcon.Free;
+  Result := placeholder;
 end;
 
 //-- TFlameListThumbnailThread
@@ -185,6 +149,12 @@ begin
   mImages.Clear;
   mImages.Width := value;
   mImages.Height := value;
+
+  if Assigned(mPlaceholder) then
+    mPlaceholder.Free;
+
+  mPlaceholder := LoadThumbnailPlaceholder(value);
+  mImages.Add(mPlaceholder, nil);
 end;
 
 procedure TFlameListThumbnailThread.SetBatch(value: TBatch);
@@ -199,7 +169,6 @@ var
   Flame : TControlPoint;
   Thumbnail : TBitmap;
 
-  xml : string;
   width, height, ratio : double;
   status: string;
   i : integer;
@@ -218,19 +187,17 @@ begin
     end;
 
     Flame := TControlPoint.Create;
-
-    xml := mBatch.GetFlameXmlAt(i);
-    LoadCpFromXmlCompatible(xml, Flame, status);
+    mBatch.LoadControlPoint(i, Flame);
 
     width := Flame.Width;
     height := Flame.Height;
     ratio := width / height;
 
     if (width < height) then begin
-      width := ratio * ThumbnailSize;
+      width := (*ratio * *)ThumbnailSize;
       height := ThumbnailSize;
     end else if (width > height) then begin
-      height := ThumbnailSize / ratio;
+      height := ThumbnailSize(* / ratio*);
       width := ThumbnailSize;
     end else begin
       width := ThumbnailSize;
@@ -248,15 +215,18 @@ begin
     Renderer.Render;
 
     Thumbnail := TBitmap.Create;
-    Thumbnail.PixelFormat := pf24bit;
+    Thumbnail.PixelFormat := pf32bit;
     Thumbnail.HandleType := bmDIB;
     Thumbnail.Width := ThumbnailSize;
     Thumbnail.Height := ThumbnailSize;
-    Thumbnail.Canvas.Brush.Color := GetSysColor(5);
+    //Thumbnail.Canvas.Brush.Color := GetSysColor(5);
     Thumbnail.Canvas.FillRect(Rect(0, 0, ThumbnailSize, ThumbnailSize));
     Thumbnail.Canvas.Draw(round(ThumbnailSize / 2 - width / 2), round(ThumbnailSize / 2 - height / 2), renderer.GetImage);
 
     mImages.Add(Thumbnail, nil);
+
+    if Assigned(ThumbnailCompleted) then
+      ThumbnailCompleted(i);
 
     Thumbnail.Free;
     Thumbnail := nil;
@@ -285,8 +255,52 @@ end;
 constructor TFlameListView.Create(list: TListView);
 begin
   mList := list;
+  mList.OnSelectItem := OnListSelectionChanged;
+end;
+
+procedure TFlameListView.OnListSelectionChanged(sender: TObject; item: TListItem; selected: boolean);
+begin
+  if mIsSelecting then
+    exit;
+
+  if Assigned(SelectedIndexChanged) then
+    SelectedIndexChanged(SelectedIndex);
+end;
+
+procedure TFlameListView.Refresh(newSelection: Integer);
+var
+  i, oldSelection: integer;
+begin
+  oldSelection := SelectedIndex;
+
+  mIsUpdating := true;
+  mList.Items.Clear;
+
+  for i := 0 to mBatch.Count - 1 do
+  begin
+    mList.AddItem(mBatch.GetFlameNameAt(i), nil);
+    mList.Items[i].ImageIndex := 0;
+  end;
+
+  mIsUpdating := false;
+
+  if newSelection < 0 then
+    newSelection := oldSelection;
+
+  mList.Refresh;
+  SelectedIndex := newSelection;
+
+  if Assigned(mThumbnails) then
+    mThumbnails.Destroy;
+
   mThumbnails := TFlameListThumbnailThread.Create;
-  mThumbnails.Images.OnChange := OnThumbnailsChange;
+  mThumbnails.ThumbnailCompleted := OnThumbnailCompleted;
+  mThumbnails.ThumbnailSize := 120;
+
+  mThumbnails.Batch := mBatch;
+  mList.LargeImages := mThumbnails.Images;
+
+  mThumbnails.Start;
 end;
 
 procedure TFlameListView.SetBatch(value: TBatch);
@@ -294,21 +308,7 @@ var
   i: Integer;
 begin
   mBatch := value;
-  mThumbnails.Batch := value;
-
-  mIsUpdating := true;
-  mList.Items.Clear;
-
-  for i := 0 to value.Count - 1 do
-  begin
-    mList.AddItem(value.GetFlameNameAt(i), nil);
-    mList.Items[i].ImageIndex := i;
-  end;
-
-  mIsUpdating := false;
-  mList.Refresh;
-
-  mThumbnails.Start;
+  Refresh(SelectedIndex);
 end;
 
 procedure TFlameListView.RemoveItemAt(i: integer);
@@ -324,16 +324,12 @@ procedure TFlameListView.SetShowThumbnails(value: boolean);
 begin
   mShowThumbnails := value;
 
-  mIsUpdating := true;
-  mThumbnails.Images.Clear;
-  mIsUpdating := false;
-  mList.Refresh;
-end;
-
-procedure TFlameListView.OnThumbnailsChange(sender: TObject);
-begin
-  if mIsUpdating then exit;
-  mList.Refresh;
+  if value then
+  begin
+    mList.ViewStyle := vsIcon;
+  end else begin
+    mList.ViewStyle := vsList;
+  end;
 end;
 
 function TFlameListView.GetSelectedIndex;
@@ -349,13 +345,28 @@ end;
 
 procedure TFlameListView.SelectIndex(i: Integer);
 begin
+  mIsSelecting := true;
+
   mList.Selected := mList.Items[i];
+  if Assigned(SelectedIndexChanged) then
+    SelectedIndexChanged(SelectedIndex);
+
+  mIsSelecting := false;
+end;
+
+procedure TFlameListView.OnThumbnailCompleted(index: Integer);
+begin
+  mList.Items[index].ImageIndex := index;
 end;
 
 destructor TFlameListView.Destroy;
 begin
-  mThumbnails.Destroy;
+  mList.LargeImages := nil;
+  mList := nil;
   mBatch := nil;
+
+  if Assigned(mThumbnails) then
+    mThumbnails.Destroy;
 
   inherited Destroy;
 end;

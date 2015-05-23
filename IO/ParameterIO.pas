@@ -5,6 +5,33 @@ interface
 uses Global, SysUtils, StrUtils, ControlPoint, XForm, cmap,
   XFormMan, RegularExpressionsCore, RegexHelper, Classes;
 
+type
+  TBatch = class
+    private
+
+      mNames: TStringList;
+      mData: TStringList;
+
+      procedure Parse(const path: string);
+      function CountFlames: integer;
+
+    public
+
+      constructor Create(const path: string);
+      destructor Destroy; override;
+
+      property Count: integer read CountFlames;
+
+      function GetFlameNameAt(i: integer): string;
+      function GetFlameXmlAt(i: integer): string;
+
+      procedure LoadControlPoint(i: integer; var cp: TControlPoint);
+      procedure StoreControlPoint(i: integer; cp: TControlPoint);
+
+      procedure SaveFlame(i: integer; filePath: string);
+      procedure SaveBatch(filePath: string);
+  end;
+
 function IsRegisteredVariation(name: string): boolean;
 function IsRegisteredVariable(name: string): boolean;
 
@@ -13,14 +40,135 @@ function NameOf(xml: string): string;
 function FindFlameInBatch(xml, name: string): string;
 
 procedure LoadPaletteFromXmlCompatible(xml: Utf8String; var cp: TControlPoint);
-procedure LoadXFormFromXmlCompatible(xml: Utf8String; isFinalXForm: boolean;
-  var xf: TXForm; var enabled: boolean);
-function LoadCpFromXmlCompatible(xml: string; var cp: TControlPoint;
-  var statusOutput: string): boolean;
-function SaveCpToXmlCompatible(var xml: string;
-  const cp1: TControlPoint): boolean;
+procedure LoadXFormFromXmlCompatible(xml: Utf8String; isFinalXForm: boolean; var xf: TXForm; var enabled: boolean);
+function LoadCpFromXmlCompatible(xml: string; var cp: TControlPoint; var statusOutput: string): boolean;
+function SaveCpToXmlCompatible(var xml: string; const cp1: TControlPoint): boolean;
 
 implementation
+
+constructor TBatch.Create(const path: string);
+begin
+  if not FileExists(path) then
+    raise Exception.Create('Could not find file: "' + path + '"');
+
+  mNames := TStringList.Create;
+  mData := TStringList.Create;
+
+  Parse(path);
+end;
+
+procedure TBatch.LoadControlPoint(i: Integer; var cp: TControlPoint);
+var
+  str: string;
+begin
+  LoadCpFromXmlCompatible(self.GetFlameXmlAt(i), cp, str);
+end;
+
+procedure TBatch.StoreControlPoint(i: Integer; cp: TControlPoint);
+var
+  xml: string;
+begin
+  SaveCpToXmlCompatible(xml, cp);
+  mData[i] := xml;
+end;
+
+procedure TBatch.SaveFlame(i: Integer; filePath: string);
+var
+  fileList: TStringList;
+  tempBatch: TBatch;
+begin
+  if FileExists(filePath) then
+  begin
+    tempBatch := TBatch.Create(filePath);
+    tempBatch.mNames.Add(mNames[i]);
+    tempBatch.mData.Add(mData[i]);
+    tempBatch.SaveBatch(filePath);
+    tempBatch.Destroy;
+  end else begin
+    fileList := TStringList.Create;
+    fileList.Text := mData[i];
+    fileList.Insert(0, '<flames name="' + mNames[i] + '">');
+    fileList.Add('</flames>');
+    fileList.SaveToFile(filePath);
+    fileList.Destroy;
+  end;
+end;
+
+procedure TBatch.SaveBatch(filePath: string);
+var
+  fileList: TStringList;
+  flameList: TStringList;
+  i, j: Integer;
+begin
+
+  fileList := TStringList.Create;
+  fileList.Add('<flames name="' + mNames[0] + '">');
+
+  for i := 0 to Count - 1 do
+  begin
+    flameList := TStringList.Create;
+    flameList.Text := mData[i];
+
+    for j := 0 to flameList.Count do
+      fileList.Add(flameList[j]);
+
+    flameList.Destroy;
+  end;
+
+  fileList.Add('</flames>');
+  fileList.SaveToFile(filePath);
+  fileList.Destroy;
+end;
+
+procedure TBatch.Parse(const path: string);
+var
+  fileContent: TStringList;
+  flames: TStringList;
+
+  i: integer;
+  name: string;
+begin
+  fileContent := TStringList.Create;
+  fileContent.LoadFromFile(path, TEncoding.Default);  // -x- todo: evaluate effects of using UTF8
+
+  flames := TStringList.Create;
+  EnumParameters(fileContent.Text, flames);
+
+  mNames.Clear;
+  mData.Clear;
+
+  for i := 0 to flames.Count - 1 do
+  begin
+    name := NameOf(flames[i]);
+    mNames.Add(name);
+    mData.Add(flames[i]);
+  end;
+
+  flames.Destroy;
+  fileContent.Destroy;
+end;
+
+function TBatch.CountFlames: integer;
+begin
+  Assert(mNames.Count = mData.Count);
+  Result := mNames.Count;
+end;
+
+function TBatch.GetFlameNameAt(i: Integer): string;
+begin
+  Result := mNames[i];
+end;
+
+function TBatch.GetFlameXmlAt(i: Integer): string;
+begin
+  Result := mData[i];
+end;
+
+destructor TBatch.Destroy;
+begin
+  mNames.Destroy;
+  mData.Destroy;
+end;
 
 (* *************************** Validation functions ***************************** *)
 function IsRegisteredVariation(name: string): boolean;

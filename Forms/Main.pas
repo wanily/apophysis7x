@@ -35,7 +35,7 @@ uses
   Jpeg, SyncObjs, SysUtils, ClipBrd, Graphics, Math,
   ExtDlgs, AppEvnts, ShellAPI, Registry,
   Global, Xform, XFormMan, ControlPoint, CMap,
-  RenderThread, RenderingCommon, RenderingInterface, (*ParameterIO,*)
+  RenderThread, RenderingCommon, RenderingInterface,
   LibXmlParser, LibXmlComps, PngImage, XPMan,
   StrUtils, LoadTracker, CheckLst,
   CommandLine, RegularExpressionsCore, MissingPlugin, Translation,
@@ -44,7 +44,7 @@ uses
   Vcl.RibbonSilverStyleActnCtrls, Vcl.ActnCtrls, Vcl.ActnMenus,
   Vcl.RibbonActnMenus, Vcl.StdActns, System.ImageList,
   Vcl.RibbonObsidianStyleActnCtrls, UIRibbonForm, UIRibbon, UIRibbonCommands,
-  ApophysisRibbon, FlameListView;//, WinInet;
+  ApophysisRibbon, FlameListView, ParameterIO;//, WinInet;
 
 const
   PixelCountMax = 32768;
@@ -134,8 +134,7 @@ type
     procedure OnFormClosed(Sender: TObject; var Action: TCloseAction);
     procedure OnFormDestroyed(Sender: TObject);
 
-    procedure OnListViewSelectedItemChanging(Sender: TObject; Item: TListItem; Change: TItemChange; var AllowChangeListViewItem: Boolean);
-    procedure OnListViewSelectedItemChanged(Sender: TObject; Item: TListItem; Change: TItemChange);
+    procedure OnListViewSelectedItemChanged(index: integer);
     procedure OnListViewEditCompleted(Sender: TObject; Item: TListItem; var S: string);
     procedure OnListViewMenuRenameClick(Sender: TObject);
     procedure OnListViewMenuDeleteClick(Sender: TObject);
@@ -268,11 +267,9 @@ type
     MainZoom: double;
     StartTime: TDateTime;
     AnimPal: TColorMap;
-    PrevListItem: TListItem;
     LockListChangeUpdate: boolean;
     CurrentFileName: string;
     UsedThumbnails: TImageList;
-    IsLoadingBatch : boolean;
     SurpressHandleMissingPlugins : boolean;
     SelectedFlameNameMemento, FocusedFlameNameMemento: string;
     AllowChangeListViewItemMemento: boolean;
@@ -343,7 +340,6 @@ type
 
     function ReadWithSubst(Attributes: TAttrList; attrname: string): string;
     procedure InvokeLoadXML(xmltext:string);
-    procedure LoadXMLFlame(filename, name: string);
     procedure DisableFavorites;
     procedure EnableFavorites;
     procedure ParseXML(var cp1: TControlPoint; const params: string; const ignoreErrors : boolean);
@@ -2483,10 +2479,8 @@ begin
 end;
 
 procedure TMainForm.SaveBatchToDisk;
-{ Save all parameters to a file }
 var
-  i, current: integer;
-  currentXML : string;
+  i: integer;
 begin
   SaveForm.SaveType := stSaveAllParameters;
   SaveForm.Filename := SavePath;
@@ -2494,27 +2488,14 @@ begin
   if SaveForm.ShowModal = mrOK then
   begin
     SavePath := SaveForm.Filename;
-    if ExtractFileExt(SavePath) = '' then 
+
+    if ExtractFileExt(SavePath) = '' then
       SavePath := SavePath + '.flame';
-    current := ListViewManager.SelectedIndex;
-    currentXML := Trim(FlameToXML(Maincp, false, true));
-    for i := 0 to Batch.Count-1 do
-    begin
 
-      // -x- wtf?
-      if (i = current) then begin
-        ParseXML(maincp, PCHAR(currentXML), true);
-        SaveXMLFlame(maincp, maincp.name, SavePath);
-      end else begin
-        LoadXMLFlame(OpenFile, Batch.GetFlameNameAt(i));
-        SaveXMLFlame(maincp, maincp.name, SavePath);
-      end;
-
-    end;
-
-    ListXML(SavePath, 2);
-    if (current < 0) then current := 0;
-    LoadXMLFlame(SavePath, Batch.GetFlameNameAt(ListViewManager.SelectedIndex));
+    i := ListViewManager.SelectedIndex;
+    Batch.StoreControlPoint(i, MainCp);
+    Batch.SaveBatch(SavePath);
+    ListViewManager.Refresh(-1);
   end;
 end;
 
@@ -2918,6 +2899,7 @@ begin
   MainForm.XmlScanner.OnStartTag := OnFlameReaderTagEncountered;
 
   ListViewManager := TFlameListView.Create(ListView);
+  ListViewManager.SelectedIndexChanged := OnListViewSelectedItemChanged;
 
   ReadSettings;
 
@@ -2976,8 +2958,6 @@ begin
     ThumbnailSize := 96;
     UsedThumbnails := SmallFlameThumbnailsList;
   end;
-
-  LoadThumbnailPlaceholder(ThumbnailSize);
 
   ListViewPanel.Width := ThumbnailSize + 90;
   BetweenListAndPreviewPanelSplitter.Left := ListViewPanel.Width;
@@ -3072,12 +3052,10 @@ begin
 
   if ((openFile = '') or (not FileExists(openFile))) and (RememberLastOpenFile) then begin
     openFile := LastOpenFile;
-    index := LastOpenFileEntry;
   end;
 
   if FileExists(openFile) and ((LowerCase(ExtractFileExt(OpenFile)) <> '.asc') or (LowerCase(ExtractFileExt(OpenFile)) <> '.aposcript')) then begin
     LastOpenFile := openFile;
-    LastOpenFileEntry := index;
   end;
 
   if (openFile = '') or (not FileExists(openFile)) and ((LowerCase(ExtractFileExt(OpenFile)) <> '.asc') or (LowerCase(ExtractFileExt(OpenFile)) <> '.aposcript')) then
@@ -3335,100 +3313,6 @@ begin
   DrawImageView;
 end;
 
-procedure TMainForm.LoadXMLFlame(filename, name: string);
-var
-  i, p: integer;
-  FileStrings: TStringList;
-  ParamStrings: TStringList;
-  Tokens: TStringList;
-  time: integer;
-  ax,bx,cx,dx:integer;
-  hwn,hr:cardinal;
-  px:pansichar;
-begin
-  time := -1;
-  FileStrings := TStringList.Create;
-  ParamStrings := TStringList.Create;
-
-  if pos('*untitled', name) <> 0 then
-  begin
-    Tokens := TStringList.Create;
-    GetTokens(name, tokens);
-    time := StrToInt(tokens[1]);
-    Tokens.free;
-  end;
-  try
-    FileStrings.LoadFromFile(filename);
-    for i := 0 to FileStrings.Count - 1 do
-    begin
-      pname := '';
-      ptime := '';
-      p := Pos('<flame ', LowerCase(FileStrings[i]));
-      if (p <> 0) then
-      begin
-        MainForm.ListXMLScanner.LoadFromBuffer(TCharType(TStringType(FileStrings[i])));
-        MainForm.ListXMLScanner.Execute;
-        if pname <> '' then
-        begin
-          if (Trim(pname) = Trim(name)) then
-          begin
-            ParamStrings.Add(FileStrings[i]);
-            Break;
-          end;
-        end
-        else
-        begin
-          if ptime='' then ptime:='0'; //hack
-          if StrToInt(ptime) = time then
-          begin
-            ParamStrings.Add(FileStrings[i]);
-            Break;
-          end;
-        end;
-      end;
-    end;
-    repeat
-      inc(i);
-      ParamStrings.Add(FileStrings[i]);
-    until pos('</flame>', Lowercase(FileStrings[i])) <> 0;
-
-{$ifdef DisableScripting}
-{$else}
-  ScriptEditor.Stopped := True;
-{$endif}
-    StopThread;
-    ParseXML(MainCp,PAramStrings.Text, true);
-
-    SetCanUndo(false);
-    PreviewPanelMenuUndoItem.Enabled := False;
-    SetCanRedo(false);
-    PreviewPanelMenuRedoItem.enabled := False;
-    EditForm.mnuUndo.Enabled := False;
-    EditForm.mnuRedo.enabled := False;
-    EditForm.tbUndo.enabled := false;
-    EditForm.tbRedo.enabled := false;
-    AdjustForm.btnUndo.enabled := false;
-    AdjustForm.btnRedo.enabled := false;
-
-    Transforms := MainCp.TrianglesFromCP(MainTriangles);
-
-    UndoIndex := 0;
-    UndoMax := 0;
-    if fileExists(GetEnvVarValue('APPDATA') + '\' + undoFilename) then
-      DeleteFile(GetEnvVarValue('APPDATA') + '\' + undoFilename);
-    Statusbar.Panels[3].Text := Maincp.name;
-    PreviewRedrawDelayTimer.Enabled := True;
-    Application.ProcessMessages;
-
-    EditForm.SelectedTriangle := 0; // (?)
-
-    UpdateWindows;
-  finally
-    FileStrings.free;
-    ParamStrings.free;
-  end;
-end;
-
 procedure TMainForm.ResizeImage;
 var
   pw, ph: integer;
@@ -3456,19 +3340,37 @@ begin
   //MainCP.AdjustScale(Image.Width, Image.Height);
 end;
 
-procedure TMainForm.OnListViewSelectedItemChanged(Sender: TObject; Item: TListItem; Change: TItemChange);
+procedure TMainForm.OnListViewSelectedItemChanged(index: integer);
 begin
-  if (ListViewManager.SelectedIndex >= 0) and (Trim(Batch.GetFlameNameAt(ListViewManager.SelectedIndex)) <> Trim(maincp.name)) then
+  if (index >= 0) and (Trim(Batch.GetFlameNameAt(index)) <> Trim(maincp.name)) then
   begin
-    LastOpenFileEntry := ListViewManager.SelectedIndex + 1;
-    PreviewRedrawDelayTimer.Enabled := False;
     StopThread;
 
-    IsLoadingBatch := false;
-    LoadXMLFlame(OpenFile, Batch.GetFlameNameAt(ListViewManager.SelectedIndex));
-    NotifyMissingPlugin;
+    StopThread;
+    Batch.LoadControlPoint(index, MainCp);
+
+    UndoIndex := 0;
+    UndoMax := 0;
+
+    SetCanUndo(false);
+    SetCanRedo(false);
+
+    {$ifndef DisableScripting}
+      ScriptEditor.Stopped := True;
+    {$endif}
+
+    if fileExists(GetEnvVarValue('APPDATA') + '\' + undoFilename) then
+      DeleteFile(GetEnvVarValue('APPDATA') + '\' + undoFilename);
+
+    Transforms := MainCp.TrianglesFromCP(MainTriangles);
+    EditForm.SelectedTriangle := 0;
+
+    Statusbar.Panels[3].Text := Maincp.name;
+
+    Application.ProcessMessages;
+    self.BeginUpdatePreview;
+    UpdateWindows;
     ResizeImage;
-    PrevListItem := Item;
   end;
 end;
 
@@ -5376,12 +5278,23 @@ procedure TMainForm.SetCanUndo(value: boolean);
 begin
   if Assigned(UndoCommand) then
     UndoCommand.Enabled := value;
+
+  PreviewPanelMenuUndoItem.Enabled := value;
+  EditForm.mnuUndo.Enabled := value;
+  EditForm.tbUndo.enabled := value;
+  AdjustForm.btnUndo.enabled := value;
 end;
 
 procedure TMainForm.SetCanRedo(value: boolean);
 begin
   if Assigned(RedoCommand) then
     RedoCommand.Enabled := value;
+
+  PreviewPanelMenuRedoItem.Enabled := value;
+  EditForm.mnuRedo.enabled := value;
+  EditForm.tbRedo.enabled := value;
+  AdjustForm.btnRedo.enabled := value;
+
 end;
 
 procedure TMainForm.SetCanPaste(value: boolean);
@@ -5469,68 +5382,6 @@ begin
     end
     else FShiftState := Shift;
   end;
-end;
-
-procedure TMainForm.OnListViewSelectedItemChanging(Sender: TObject; Item: TListItem; Change: TItemChange; var AllowChangeListViewItem: Boolean);
-var
-  selectedFlameName, focusedFlameName: string;
-begin
-  if (Item = nil) then exit;
-  if (DoNotAskAboutChange = true)then exit;
-
-  selectedFlameName := '';
-  focusedFlameName := '';
-  (*
-  if (currentListView.Selected <> nil) then selectedFlameName := currentListView.Selected.Caption;
-  if (currentListView.ItemFocused <> nil) then focusedFlameName := currentListView.ItemFocused.Caption;
-
-  if (Trim(Item.Caption) = Trim(maincp.name)) and (Item.Selected) and (Item.Selected) and (Change = ctState) then
-  begin
-    if (UndoIndex <> 0) then
-    begin
-      if (SelectedFlameNameMemento = selectedFlameName) and (FocusedFlameNameMemento = focusedFlameName) then
-      begin
-        AllowChangeListViewItem := AllowChangeListViewItemMemento;
-
-        // -x- good lord, give me strength!
-        if Not AllowChangeListViewItem then begin
-          currentListView.OnChange := nil;
-          currentListView.OnChanging := nil;
-
-          currentListView.Selected := Item;
-          currentListView.ItemFocused := Item;
-
-          currentListView.OnChanging := OnListViewSelectedItemChanging;
-          currentListView.OnChange := OnListViewSelectedItemChanged;
-        end;
-
-        Exit;
-      end;
-
-      SelectedFlameNameMemento := selectedFlameName;
-      FocusedFlameNameMemento := focusedFlameName;
-
-      if Application.MessageBox('Do you really want to open another flame? All changes made to the current flame will be lost.', 'Apophysis', MB_ICONWARNING or MB_YESNO) <> IDYES then
-      begin
-        AllowChangeListViewItem := false;
-
-        // -x- good lord, give me strength again!
-        currentListView.OnChange := nil;
-        currentListView.OnChanging := nil;
-
-        currentListView.Selected := Item;
-        currentListView.ItemFocused := Item;
-
-        currentListView.OnChanging := OnListViewSelectedItemChanging;
-        currentListView.OnChange := OnListViewSelectedItemChanged;
-      end else begin
-        AllowChangeListViewItem := true;
-      end;
-
-      AllowChangeListViewItemMemento := AllowChangeListViewItem;
-    end;
-  end;
-  *)
 end;
 
 procedure TMainForm.SetShowIconsInListView(const Args: TUiCommandBooleanEventArgs);
@@ -5807,20 +5658,15 @@ end;
 
 procedure ListXML(FileName: string; sel: integer);
 begin
-  MainForm.IsLoadingBatch := true;
-
   MainForm.Batch := TBatch.Create(FileName);
   MainForm.ListViewManager.Batch := MainForm.Batch;
 
-  (*
   case sel of
-    0: MainForm.ListView.Selected := MainForm.ListView.Items.Count - 1;
-    1: MainForm.ListView.Selected := 0;
+    0: MainForm.ListViewManager.SelectedIndex := MainForm.ListView.Items.Count - 1;
+    1: MainForm.ListViewManager.SelectedIndex := 0;
     2: // do nothing
   end;
-  *)
 
-  MainForm.IsLoadingBatch := false;
 end;
 
 procedure TMainForm.OpenManual;

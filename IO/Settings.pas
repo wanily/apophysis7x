@@ -577,15 +577,6 @@ begin
         LastOpenFile := '';
       end;
 
-      if Registry.ValueExists('LastOpenFileEntry') then
-      begin
-        LastOpenFileEntry := Registry.ReadInteger('LastOpenFileEntry');
-      end
-      else
-      begin
-        LastOpenFileEntry := 1;
-      end;
-
       if Registry.ValueExists('RememberLastOpenFile') then
       begin
         RememberLastOpenFile := Registry.ReadBool('RememberLastOpenFile');
@@ -651,7 +642,6 @@ begin
       InternalBitsPerSample := 0;
       AutoOpenLog := False;
       LastOpenFile := '';
-      LastOpenFileEntry := 1;
       RememberLastOpenFile := False;
       UseSmallThumbnails := true;
       TBWidth1 := 0;
@@ -1055,7 +1045,6 @@ begin
       Registry.WriteBool('MultithreadedPreview', MultithreadedPreview);
       Registry.WriteString('LanguageFile', LanguageFile);
       Registry.WriteString('LastOpenFile', LastOpenFile);
-      Registry.WriteInteger('LastOpenFileEntry', LastOpenFileEntry);
       Registry.WriteBool('RememberLastOpenFile', RememberLastOpenFile);
       Registry.WriteBool('UseSmallThumbnails', UseSmallThumbnails);
       Registry.WriteInteger('ToolBarWidth1', TBWidth1);

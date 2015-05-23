@@ -23,7 +23,6 @@ function solve3(x1, x2, x1h, y1, y2, y1h, z1, z2, z1h: double;
 function OpenSaveFileDialog(Parent: TWinControl;
   const DefExt, Filter, InitialDir, Title: string; var FileName: string;
   MustExist, OverwritePrompt, NoChangeDir, DoOpen: boolean): boolean;
-procedure LoadThumbnailPlaceholder(ThumbnailSize: Integer);
 function GetEnvVarValue(const VarName: string): string;
 
 const
@@ -120,7 +119,6 @@ var
   ExifAuthor: string;
 
   LastOpenFile: string;
-  LastOpenFileEntry: Integer;
   RememberLastOpenFile: boolean;
   UseSmallThumbnails: boolean;
   ConfirmDelete: boolean;
@@ -193,35 +191,6 @@ begin
   end
   else
     Result := '';
-end;
-
-procedure LoadThumbnailPlaceholder(ThumbnailSize: Integer);
-var
-  placeholder: TBitmap;
-  placeholderIcon: TBitmap;
-const
-  pi_width = 48;
-  pi_height = 48;
-begin
-  placeholder := TBitmap.Create;
-  placeholderIcon := TBitmap.Create;
-
-  placeholderIcon.Handle := LoadBitmap(hInstance, 'THUMB_PLACEHOLDER');
-  placeholder.PixelFormat := pf32bit;
-  placeholder.HandleType := bmDIB;
-  placeholder.Width := ThumbnailSize;
-  placeholder.Height := ThumbnailSize;
-
-  with placeholder.Canvas do
-  begin
-    Brush.Color := $000000;
-    FillRect(Rect(0, 0, placeholder.Width, placeholder.Height));
-    Draw(round(ThumbnailSize / 2 - pi_width / 2),
-      round(ThumbnailSize / 2 - pi_height / 2), placeholderIcon);
-  end;
-
-  placeholderIcon.Free;
-  ThumbnailPlaceholder := placeholder;
 end;
 
 function det(a, b, c, d: double): double;
