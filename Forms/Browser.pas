@@ -28,7 +28,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   ExtCtrls, ComCtrls, ControlPoint, ToolWin, ImgList, StdCtrls,
   Cmap, Menus, Global, Buttons, Translation,
-  RenderingInterface;
+  RenderingInterface, System.ImageList;
 
 const
   PixelCountMax = 32768;
@@ -492,7 +492,7 @@ begin
   MainCP.cmapindex := -1;
   if EditForm.Visible then EditForm.UpdateDisplay;
   if AdjustForm.Visible then AdjustForm.UpdateDisplay;
-  MainForm.RedrawTimer.enabled := true;
+  MainForm.PreviewRedrawDelayTimer.enabled := true;
 end;
 
 procedure TGradientBrowser.SpeedButton1Click(Sender: TObject);

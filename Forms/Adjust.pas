@@ -27,7 +27,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, ExtCtrls, ComCtrls, Buttons, Menus, AppEvnts,
-  ControlPoint, Cmap, RenderingInterface, Translation;
+  ControlPoint, Cmap, RenderingInterface, Translation, UiRibbonCommands;
 
 const
   WM_UPDATE_PARAMS = WM_APP + 5439;
@@ -469,9 +469,9 @@ begin
   if EditForm.Visible then EditForm.UpdateDisplay;
 
   if bBgOnly then
-    MainForm.tbShowAlphaClick(Self)
+    MainForm.SetShowTransparencyInPreview(ShowTransparency)
   else
-    MainForm.RedrawTimer.enabled := true;
+    MainForm.PreviewRedrawDelayTimer.enabled := true;
 end;
 
 procedure TAdjustForm.DrawPreview;
@@ -1118,7 +1118,7 @@ begin
 
   if mnuInstantPreview.Checked then DrawPreview;
 
-  MainForm.RedrawTimer.enabled := true;
+  MainForm.PreviewRedrawDelayTimer.enabled := true;
 end;
 
 procedure TAdjustForm.SaveMap(FileName: string);
@@ -1649,7 +1649,7 @@ begin
     btnPaste.enabled := true;
     mnuPaste.enabled := true;
 //z    MainForm.btnPaste.enabled := False;
-    MainForm.PasteAction.enabled := False;
+    MainForm.SetCanPaste(false);
   finally
     gradstr.free
   end;
@@ -1865,7 +1865,7 @@ begin
 
   if EditForm.Visible then EditForm.UpdateDisplay;
 
-  MainForm.RedrawTimer.enabled := true;
+  MainForm.PreviewRedrawDelayTimer.enabled := true;
 {  if ScrollCode = scEndScroll then
     CurvesControl.UpdateFlame; }
 end;
@@ -1962,8 +1962,8 @@ begin
   if chkResizeMain.Checked then begin
     l := MainForm.Left;
     t := MainForm.Top;
-    w := ImageWidth + MainForm.Width - (MainForm.BackPanel.Width - 2);
-    h := ImageHeight + MainForm.Height - (MainForm.BackPanel.Height - 2);
+    w := ImageWidth + MainForm.Width - (MainForm.PreviewPanel.Width - 2);
+    h := ImageHeight + MainForm.Height - (MainForm.PreviewPanel.Height - 2);
     if w > Screen.Width then
     begin
       l := 0;
@@ -1977,7 +1977,7 @@ begin
 
     MainForm.SetBounds(l, t, w, h);
   end;
-  MainForm.RedrawTimer.Enabled := true;
+  MainForm.PreviewRedrawDelayTimer.Enabled := true;
 end;
 
 procedure TAdjustForm.GetMainWindowSize;
@@ -2052,12 +2052,12 @@ end;
 
 procedure TAdjustForm.btnUndoClick(Sender: TObject);
 begin
-  MainForm.Undo;
+  MainForm.Undo(TUiCommandAction.DefaultArgs);
 end;
 
 procedure TAdjustForm.btnRedoClick(Sender: TObject);
 begin
-  MainForm.Redo;
+  MainForm.Redo(TUiCommandAction.DefaultArgs);
 end;
 
 procedure TAdjustForm.btnColorPresetClick(Sender: TObject);

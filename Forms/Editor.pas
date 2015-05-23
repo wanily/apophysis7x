@@ -34,7 +34,8 @@ uses
   ExtCtrls, StdCtrls, ComCtrls, Math, Menus, ToolWin, Registry,
   Grids, ValEdit, Buttons, ImgList, Types,  StrUtils,
   ControlPoint, XForm, cmap, CustomDrawControl, TransformSelection,
-  RenderingInterface, Translation, RenderThread;
+  RenderingInterface, Translation, RenderThread, System.ImageList,
+  UiRibbonCommands;
 
 type
   TEditForm = class(TForm)
@@ -1106,7 +1107,7 @@ begin
       MainForm.center[1] := cp.center[1];
     end;
     if AdjustForm.Visible then AdjustForm.UpdateDisplay;
-    MainForm.RedrawTimer.enabled := true;
+    MainForm.PreviewRedrawDelayTimer.enabled := true;
   end;
 
   chkCollapseVariablesClick(nil);
@@ -3086,12 +3087,12 @@ end;
 
 procedure TEditForm.mnuUndoClick(Sender: TObject);
 begin
-  MainForm.Undo;
+  MainForm.Undo(TUiCommandAction.DefaultArgs);
 end;
 
 procedure TEditForm.mnuRedoClick(Sender: TObject);
 begin
-  MainForm.Redo;
+  MainForm.Redo(TUiCommandAction.DefaultArgs);
 end;
 
 procedure TEditForm.mnuLowQualityClick(Sender: TObject);
@@ -4486,7 +4487,7 @@ end;
 
 procedure TEditForm.tbFullViewClick(Sender: TObject);
 begin
-  MainForm.mnuFullScreenClick(Sender);
+  MainForm.ShowFullscreenPreviewWindow(TUiCommandAction.DefaultArgs);
 end;
 
 //-- Variable List -------------------------------------------------------------

@@ -568,15 +568,6 @@ begin
         StartupCheckForUpdates := true;
       end;
 
-      if Registry.ValueExists('ClassicListMode') then
-      begin
-        ClassicListMode := Registry.ReadBool('ClassicListMode');
-      end
-      else
-      begin
-        ClassicListMode := true;
-      end;
-
       if Registry.ValueExists('LastOpenFile') then
       begin
         LastOpenFile := Registry.ReadString('LastOpenFile');
@@ -659,7 +650,6 @@ begin
       UseNrThreads := 1;
       InternalBitsPerSample := 0;
       AutoOpenLog := False;
-      ClassicListMode := true;
       LastOpenFile := '';
       LastOpenFileEntry := 1;
       RememberLastOpenFile := False;
@@ -1061,7 +1051,6 @@ begin
         PlaySoundOnRenderComplete);
       Registry.WriteString('RenderCompleteSoundFile', RenderCompleteSoundFile);
       Registry.WriteBool('AutoOpenLog', AutoOpenLog);
-      Registry.WriteBool('ClassicListMode', ClassicListMode);
       Registry.WriteBool('WarnOnMissingPlugin', WarnOnMissingPlugin);
       Registry.WriteBool('MultithreadedPreview', MultithreadedPreview);
       Registry.WriteString('LanguageFile', LanguageFile);

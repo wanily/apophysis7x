@@ -171,16 +171,19 @@ object AdjustForm: TAdjustForm
     Top = 157
     Width = 451
     Height = 130
-    ActivePage = TabSheet3
+    ActivePage = TabSheet1
     Anchors = [akLeft, akTop, akRight, akBottom]
-    Images = MainForm.Buttons
     TabOrder = 1
     object TabSheet1: TTabSheet
       Caption = 'Camera'
       ImageIndex = 18
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         443
-        101)
+        102)
       object scrollZoom: TScrollBar
         Left = 112
         Top = 7
@@ -362,9 +365,13 @@ object AdjustForm: TAdjustForm
     object TabSheet2: TTabSheet
       Caption = 'Rendering'
       ImageIndex = 35
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         443
-        101)
+        102)
       object pnlGamma: TPanel
         Left = 4
         Top = 4
@@ -577,9 +584,13 @@ object AdjustForm: TAdjustForm
     object TabSheet3: TTabSheet
       Caption = 'Gradient'
       ImageIndex = 11
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         443
-        101)
+        102)
       object lblVal: TLabel
         Left = 430
         Top = 79
@@ -988,9 +999,13 @@ object AdjustForm: TAdjustForm
     object TabSheet4: TTabSheet
       Caption = 'Image Size'
       ImageIndex = 51
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         443
-        101)
+        102)
       object Bevel2: TBevel
         Left = 4
         Top = 4
@@ -1485,7 +1500,6 @@ object AdjustForm: TAdjustForm
     OnKeyPress = txtCamDofKeyPress
   end
   object QualityPopup: TPopupMenu
-    Images = MainForm.Buttons
     Left = 168
     Top = 16
     object mnuLowQuality: TMenuItem
@@ -1519,7 +1533,6 @@ object AdjustForm: TAdjustForm
     Top = 16
   end
   object GradientPopup: TPopupMenu
-    Images = MainForm.Buttons
     Left = 168
     Top = 56
     object mnuRandomize: TMenuItem

@@ -123,7 +123,6 @@ var
   LastOpenFileEntry: Integer;
   RememberLastOpenFile: boolean;
   UseSmallThumbnails: boolean;
-  ClassicListMode: boolean;
   ConfirmDelete: boolean;
   ConfirmExit: boolean;
   ConfirmStopRender: boolean;

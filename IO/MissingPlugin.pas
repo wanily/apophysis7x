@@ -18,7 +18,7 @@ var
 procedure BeginParsing;
 procedure CheckAttribute(attr: string);
 function EndParsing(cp: TControlPoint; var statusPanelText: string): boolean;
-procedure AnnoyUser;
+procedure NotifyMissingPlugin;
 
 implementation
 
@@ -84,7 +84,7 @@ begin
   MissingPluginList.Free;
 end;
 
-procedure AnnoyUser;
+procedure NotifyMissingPlugin;
 begin
   if (ErrorMessageString = '') or (not WarnOnMissingPlugin) then
     exit;

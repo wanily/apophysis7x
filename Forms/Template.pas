@@ -28,7 +28,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Translation,
   Dialogs, StdCtrls, ComCtrls, ImgList, ControlPoint, cmap, RenderingInterface, Main,
-  Global, Adjust;
+  Global, Adjust, System.ImageList;
 
 type
   TTemplateForm = class(TForm)
@@ -321,7 +321,7 @@ begin
   MainForm.Statusbar.Panels[3].Text := MainCp.name;
   {if ResizeOnLoad then}
   MainForm.ResizeImage;
-  MainForm.RedrawTimer.Enabled := True;
+  MainForm.BeginUpdatePreview;
   Application.ProcessMessages;
   MainForm.UpdateWindows;
   ci := Random(256); //Random(NRCMAPS);

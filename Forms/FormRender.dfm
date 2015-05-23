@@ -64,16 +64,18 @@ object RenderForm: TRenderForm
     Height = 313
     ActivePage = TabSettings
     Anchors = [akLeft, akTop, akRight, akBottom]
-    Images = MainForm.Buttons
     TabOrder = 3
     ExplicitHeight = 373
     object TabSettings: TTabSheet
       Caption = 'Settings'
       ImageIndex = 18
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
       ExplicitHeight = 344
       DesignSize = (
         473
-        284)
+        285)
       object btnBrowse: TSpeedButton
         Left = 416
         Top = 11
@@ -535,6 +537,9 @@ object RenderForm: TRenderForm
     object TabOutput: TTabSheet
       Caption = 'Output'
       ImageIndex = 38
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
       ExplicitHeight = 344
       object Output: TMemo
         Left = 0

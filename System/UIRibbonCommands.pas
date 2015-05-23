@@ -352,6 +352,7 @@ type
     function CreateActionLink: TActionLink; override;
   {$ENDREGION 'Internal Declarations'}
   public
+    class var DefaultArgs: TUICommandActionEventArgs;
     class function CommandType: TUICommandType; override;
     function HandleShortCut(const ShortCut: TShortCut): Boolean; override;
 
