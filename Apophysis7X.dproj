@@ -150,6 +150,11 @@
         <DCCReference Include="System\UIRibbonCommands.pas"/>
         <DCCReference Include="System\UIRibbonActions.pas"/>
         <DCCReference Include="System\WinApiEx.pas"/>
+        <DCCReference Include="System\rkIntegerList.pas"/>
+        <DCCReference Include="System\rkView.pas"/>
+        <DCCReference Include="System\FlameListView.pas">
+            <Form>-- CORE --</Form>
+        </DCCReference>
         <DCCReference Include="Core\Global.pas"/>
         <DCCReference Include="IO\CommandLine.pas"/>
         <DCCReference Include="IO\MissingPlugin.pas"/>
@@ -741,13 +746,13 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
-                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
             </Deployment>
         </BorlandProject>
         <ProjectFileVersion>12</ProjectFileVersion>

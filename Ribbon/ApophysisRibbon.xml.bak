@@ -374,10 +374,10 @@
               <Button CommandName="ViewDensity500"/>
               <Button CommandName="ViewDensity1000"/>
             </DropDownButton>
-            <Button CommandName="PanModeCommand"/>
-            <Button CommandName="RotateModeCommand"/>
-            <Button CommandName="ZoomInCommand"/>
-            <Button CommandName="ZoomOutCommand"/>
+            <ToggleButton CommandName="PanModeCommand"/>
+            <ToggleButton CommandName="RotateModeCommand"/>
+            <ToggleButton CommandName="ZoomInCommand"/>
+            <ToggleButton CommandName="ZoomOutCommand"/>
             <ToggleButton CommandName="ShowGuidelinesCommand"/>
             <ToggleButton CommandName="ShowTransparencyCommand"/>
             <ToggleButton CommandName="ShowIconsCommand"/>

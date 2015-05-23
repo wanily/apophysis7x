@@ -460,6 +460,8 @@ begin
 end;
 
 procedure TAdjustForm.UpdateFlame(bBgOnly: boolean = false);
+var
+  stArgs: TUiCommandBooleanEventArgs;
 begin
   if not bBgOnly then
     MainForm.StopThread;
@@ -468,8 +470,11 @@ begin
 
   if EditForm.Visible then EditForm.UpdateDisplay;
 
+  stArgs.Command := MainForm.ShowTransparencyCommand;
+  stArgs.Checked := ShowTransparency;
+
   if bBgOnly then
-    MainForm.SetShowTransparencyInPreview(ShowTransparency)
+    MainForm.SetShowTransparencyInPreview(stArgs)
   else
     MainForm.PreviewRedrawDelayTimer.enabled := true;
 end;
@@ -1557,7 +1562,7 @@ end;
 
 procedure TAdjustForm.mnuSmoothPaletteClick(Sender: TObject);
 begin
-  MainForm.SmoothPalette;
+  MainForm.CreatePaletteFromImage(TuiCommandAction.DefaultArgs);
 end;
 
 procedure TAdjustForm.SaveGradient1Click(Sender: TObject);

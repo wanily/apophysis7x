@@ -1,9 +1,9 @@
 object TraceForm: TTraceForm
   Left = 36
   Top = 159
-  Width = 411
-  Height = 527
   Caption = 'Trace'
+  ClientHeight = 489
+  ClientWidth = 395
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -59,22 +59,27 @@ object TraceForm: TTraceForm
   OnClose = FormClose
   OnCreate = FormCreate
   DesignSize = (
-    403
-    500)
+    395
+    489)
   PixelsPerInch = 96
   TextHeight = 13
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 403
-    Height = 500
+    Width = 395
+    Height = 489
     ActivePage = TabMain
     Align = alClient
-    Images = MainForm.Buttons
     TabOrder = 0
+    ExplicitWidth = 403
+    ExplicitHeight = 500
     object TabMain: TTabSheet
       Caption = 'Main'
       ImageIndex = 47
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object MainTrace: TMemo
         Left = 0
         Top = 0
@@ -96,6 +101,10 @@ object TraceForm: TTraceForm
     object TabFullscreen: TTabSheet
       Caption = 'Fullscreen'
       ImageIndex = 52
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object FullscreenTrace: TMemo
         Left = 0
         Top = 0
@@ -122,7 +131,6 @@ object TraceForm: TTraceForm
     Height = 21
     Style = csDropDownList
     Anchors = [akTop, akRight]
-    ItemHeight = 13
     TabOrder = 1
     OnSelect = cbTraceLevelSelect
     Items.Strings = (

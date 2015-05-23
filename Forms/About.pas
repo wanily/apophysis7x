@@ -54,6 +54,7 @@ type
     Label5: TLabel;
     Label20: TLabel;
     Image1: TImage;
+    Label1: TLabel;
     procedure btnOKClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure lblCreditClick(Sender: TObject);

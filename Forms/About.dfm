@@ -1777,6 +1777,22 @@ object AboutForm: TAboutForm
     Height = 13
     AutoSize = False
   end
+  object Label1: TLabel
+    Left = 247
+    Top = 220
+    Width = 32
+    Height = 13
+    Cursor = crHandPoint
+    Hint = 'http://rmklever.com/'
+    Caption = 'rkView'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlue
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsUnderline]
+    ParentFont = False
+    OnClick = DevelopersClick
+  end
   object btnOK: TButton
     Left = 320
     Top = 310

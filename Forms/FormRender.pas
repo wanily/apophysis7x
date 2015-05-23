@@ -618,9 +618,9 @@ begin
       Renderer := nil;
     end;
 
-    for iCurrFlame := 0 to MainForm.ListView.Items.Count-1 do
+    for iCurrFlame := 0 to MainForm.Batch.Count-1 do
     begin
-      MainForm.ListView.ItemIndex := iCurrFlame;
+      //MainForm.ListView.Selected := iCurrFlame;
       cp.Free;
       cp := TControlPoint.Create;
       cp.Copy(MainCP);
@@ -671,7 +671,7 @@ begin
        try
 
         if not bRenderAll then exit;
-        if iCurrFlame = MainForm.ListView.Items.Count-1 then bRenderAll := false;
+        if iCurrFlame = MainForm.Batch.Count-1 then bRenderAll := false;
 
         Renderer := TRenderThread.Create;
         assert(Renderer <> nil);

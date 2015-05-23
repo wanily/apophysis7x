@@ -2447,10 +2447,8 @@ object MainForm: TMainForm
       Align = alClient
       Brush.Color = clWindow
       Pen.Color = clWindow
-      ExplicitLeft = 1
-      ExplicitTop = 1
-      ExplicitWidth = 159
-      ExplicitHeight = 748
+      ExplicitLeft = -2
+      ExplicitTop = -6
     end
     object ListView: TListView
       Left = 0
@@ -2459,27 +2457,12 @@ object MainForm: TMainForm
       Height = 792
       Align = alClient
       BorderStyle = bsNone
-      Columns = <
-        item
-          Caption = 'Title'
-          Width = 160
-        end>
-      FlatScrollBars = True
-      LargeImages = LargeFlameThumbnailsList
-      PopupMenu = ListViewPopupMenu
-      SmallImages = SmallFlameThumbnailsList
-      TabOrder = 1
-      OnChange = OnListViewSelectedItemChanged
-      OnEdited = OnListViewEditCompleted
-    end
-    object ListViewWithoutThumbnails: TListView
-      Left = 23
-      Top = 94
-      Width = 33
-      Height = 33
       Columns = <>
       TabOrder = 0
-      Visible = False
+      ExplicitLeft = -1
+      ExplicitTop = 224
+      ExplicitWidth = 160
+      ExplicitHeight = 150
     end
   end
   object StatusPanel: TPanel

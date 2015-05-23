@@ -44,7 +44,7 @@ uses
   Vcl.RibbonSilverStyleActnCtrls, Vcl.ActnCtrls, Vcl.ActnMenus,
   Vcl.RibbonActnMenus, Vcl.StdActns, System.ImageList,
   Vcl.RibbonObsidianStyleActnCtrls, UIRibbonForm, UIRibbon, UIRibbonCommands,
-  ApophysisRibbon;//, WinInet;
+  ApophysisRibbon, FlameListView;//, WinInet;
 
 const
   PixelCountMax = 32768;
@@ -65,20 +65,6 @@ type
 
 type
   TWin32Version = (wvUnknown, wvWin95, wvWin98, wvWinNT, wvWin2000, wvWinXP, wvWinVista, wvWin7, wvWinFutureFromOuterSpace);
-
-type
-  TThumbnailThread = class(TThread)
-    private
-      ThumbnailSize : integer;
-      Flames : TStringList;
-      FileName : string;
-      Initialized : boolean;
-      
-    public
-      constructor Create(SourceFile : string; FlameNames : TstringList);
-      destructor Destroy; override;
-      procedure Execute; override;
-  end;
 
 type
   pRGBTripleArray = ^TRGBTripleArray;
@@ -129,13 +115,10 @@ type
 
    // Internals
     procedure BeginUpdatePreview;
-    procedure BeginCreatePaletteFromImage(Sender: TObject);
 
     procedure AutoSaveTimerCallback(Sender: TObject);
     procedure PreviewRedrawDelayTimerCallback(Sender: TObject);
     procedure ClipboardWatcherEventsCallback(Sender: TObject);
-
-    procedure RebuildListView();
 
    // Ribbon infrastructure
     procedure RibbonLoaded; override;
@@ -174,6 +157,8 @@ type
     procedure OnFlameReaderClosingTagEncountered(Sender: TObject; TagName: String);
 
   private
+  
+   // Fields
     PreviewThreadCount: integer;
     PreviewThreadChangingContext: boolean;
     TransparentPreviewImage: TPngObject;
@@ -221,9 +206,11 @@ type
     procedure HandleThreadTermination(var Message: TMessage);
       message WM_THREAD_TERMINATE;
 
+    procedure UpdateCursorModeCommandStates;
+
   public
 
-  // Commands
+   // Commands
     NewFlameCommand: TUICommandAction;
     OpenBatchCommand: TUICommandAction;
     SaveFlameCommand: TUICommandAction;
@@ -254,22 +241,11 @@ type
 
     PanModeCommand: TUICommandBoolean;
     RotateModeCommand: TUICommandBoolean;
-    ZoomInCommand: TUICommandBoolean;
-    ZoomOutCommand: TUICommandBoolean;
+    ZoomInModeCommand: TUICommandBoolean;
+    ZoomOutModeCommand: TUICommandBoolean;
     ShowTransparencyCommand: TUICommandBoolean;
     ShowGuidelinesCommand: TUICommandBoolean;
     ShowIconsInListViewCommand: TUICommandBoolean;
-
-    Density5Command: TUICommandAction;
-    Density10Command: TUICommandAction;
-    Density15Command: TUICommandAction;
-    Density25Command: TUICommandAction;
-    Density50Command: TUICommandAction;
-    Density100Command: TUICommandAction;
-    Density150Command: TUICommandAction;
-    Density250Command: TUICommandAction;
-    Density500Command: TUICommandAction;
-    Density1000Command: TUICommandAction;
 
     AboutCommand: TUICommandAction;
     HelpCommand: TUICommandAction;
@@ -278,11 +254,13 @@ type
     RecentItems: TUICommandAction;
     ShowSettingsCommand: TUICommandAction;
     ExitCommand: TUICommandAction;
+  
 
   // Fields
-
     CommandLine : TCommandLine;
     Renderer: TRenderThread;
+    ListViewManager: TFlameListView;
+    Batch: TBatch;
 
      { Public declarations }
     UndoIndex, UndoMax: integer;
@@ -311,10 +289,11 @@ type
     procedure OpenManual(const args : TUiCommandActionEventArgs);
     procedure OpenHelp(const args : TUiCommandActionEventArgs);
 
-    procedure SetCursorModePan(const args : TUiCommandActionEventArgs);
-    procedure SetCursorModeRotate(const args : TUiCommandActionEventArgs);
-    procedure SetCursorModeZoomIn(const args : TUiCommandActionEventArgs);
-    procedure SetCursorModeZoomOut(const args : TUiCommandActionEventArgs);
+    procedure SetCursorMode(const args : TUiCommandBooleanEventArgs);
+    procedure SetCursorModePan;
+    procedure SetCursorModeRotate;
+    procedure SetCursorModeZoomIn;
+    procedure SetCursorModeZoomOut;
 
     procedure SetCanUndo(value: boolean);
     procedure SetCanRedo(value: boolean);
@@ -337,12 +316,14 @@ type
     procedure StopCurrentScript(const args : TUiCommandActionEventArgs);
     procedure OpenScriptFromDisk(const args : TUiCommandActionEventArgs);
 
-    procedure SetShowGuidelinesInPreview(value: boolean);
-    procedure SetShowTransparencyInPreview(value: boolean);
-    procedure SetShowIconsInListView(value: boolean);
-    procedure SetListViewVisibility(value: boolean);
-    procedure SetPreviewDensity(density: double);
-    procedure SavePreviewImageToDisk;
+    procedure CreatePaletteFromImage(const Args: TUiCommandActionEventArgs);
+
+    procedure SetShowGuidelinesInPreview(const Args: TUiCommandBooleanEventArgs);
+    procedure SetShowTransparencyInPreview(const Args: TUiCommandBooleanEventArgs);
+    procedure SetShowIconsInListView(const Args: TUiCommandBooleanEventArgs);
+    procedure SetListViewVisibility(const Args: TUiCommandBooleanEventArgs);
+    procedure SetPreviewDensity(const Args: TUiCommandActionEventArgs);
+    procedure SavePreviewImageToDisk(const Args: TUiCommandActionEventArgs);
 
     procedure ShowFullscreenPreviewWindow(const args : TUiCommandActionEventArgs);
     procedure ShowEditorWindow(const args : TUiCommandActionEventArgs);
@@ -350,7 +331,7 @@ type
     procedure ShowPaletteWindow(const args : TUiCommandActionEventArgs);
     procedure ShowOutputPropertiesWindow(const args : TUiCommandActionEventArgs);
     procedure ShowCanvasSizeWindow(const args : TUiCommandActionEventArgs);
-    procedure ShowScriptEditor(const args : TUiCommandActionEventArgs);
+    procedure ShowScriptEditorWindow(const args : TUiCommandActionEventArgs);
     procedure ShowScriptFavoritesWindow(const args : TUiCommandActionEventArgs);
     procedure ShowOptionsWindow(const args : TUiCommandActionEventArgs);
     procedure ShowTraceWindow(const args : TUiCommandActionEventArgs);
@@ -376,7 +357,6 @@ type
     procedure UpdateUndo;
     procedure LoadUndoFlame(index: integer; filename: string);
     procedure ClearCp(var cp: TControlPoint);
-    procedure SmoothPalette;
     procedure RandomizeCP(var cp1: TControlPoint; alg: integer = 0);
     function SaveGradient(Gradient, Title, FileName: string): boolean;
     function GradientFromPalette(const pal: TColorMap; const title: string): string;
@@ -594,32 +574,6 @@ begin
   Popup.pszFont := '';
   HtmlHelp(0, PChar(AppPath + 'Apophysis7x.chm::/Popups.txt'), HH_DISPLAY_TEXT_POPUP, DWORD(@Popup));
   *)
-end;
-
-procedure TMainForm.RebuildListView;
-var
-  i:integer;
-  item: TListItem;
-  flameList: TStringList;
-begin
-    flameList := TStringList.Create;
-    flameList.Clear;
-
-    for i := 0 to ListView.Items.Count-1 do begin
-      flameList.Add(ListView.Items[i].Caption);
-    end;
-
-    ListView.Items.Clear;
-
-    for i := 0 to flameList.Count-1 do begin
-      item := ListView.Items.Add;
-      item.Caption := FlameList[i];
-
-      if (ListView.ViewStyle = vsIcon) then
-        item.ImageIndex := i;
-    end;
-
-    flameList.Destroy;
 end;
 
 procedure TMainForm.InsertStrings;
@@ -2426,47 +2380,31 @@ end;
 
 procedure TMainForm.OnListViewMenuRenameClick(Sender: TObject);
 begin
-  if ListView.SelCount <> 0 then
-    ListView.Items[ListView.Selected.Index].EditCaption;
+  //Ribbontodo
+(*  if ListView.SelCount <> 0 then
+    ListView.Items[ListView.Selected].EditCaption;*)
 end;
 
 procedure TMainForm.DeleteSelectedFlame;
 var
   c: boolean;
 begin
-  if ListView.SelCount <> 0 then
+  if ListViewManager.SelectedIndex >= 0 then
   begin
     if ConfirmDelete then
       c := Application.MessageBox(
-        PChar(Format(TextByKey('common-confirmdelete'), [ListView.Selected.Caption])),
+        PChar(Format(TextByKey('common-confirmdelete'), [Batch.GetFlameNameAt(ListViewManager.SelectedIndex)])),
         'Apophysis',
         36) = IDYES
     else
       c := True;
 
     if c then
-      if (ListView.SelCount <> 0) then
-      begin
-        Application.ProcessMessages;
-
-        if OpenFileType = ftXML then
-          DeleteXMLEntry(ListView.Selected.Caption, OpenFile)
-        else
-          DeleteEntry(ListView.Selected.Caption, OpenFile);
-
-        if (ListView.Selected.Index >= 0)
-          and (ListView.Selected.Index < UsedThumbnails.Count)
-          and (ListView.ViewStyle <> vsIcon)
-        then
-          UsedThumbnails.Delete(ListView.Selected.Index);
-
-        ListView.Items.Delete(ListView.Selected.Index);
-
-        Application.ProcessMessages; // again?
-
-        ListView.Selected := ListView.ItemFocused;
-        ListXML(OpenFile, ListView.ItemIndex);
-      end;
+    begin
+      DeleteXMLEntry(Batch.GetFlameNameAt(ListViewManager.SelectedIndex), OpenFile);
+      ListViewManager.RemoveItemAt(ListViewManager.SelectedIndex);
+//    ListXML(OpenFile, ListView.Selected);
+    end;
   end;
 end;
 
@@ -2552,28 +2490,31 @@ var
 begin
   SaveForm.SaveType := stSaveAllParameters;
   SaveForm.Filename := SavePath;
+
   if SaveForm.ShowModal = mrOK then
   begin
     SavePath := SaveForm.Filename;
     if ExtractFileExt(SavePath) = '' then 
       SavePath := SavePath + '.flame';
-    current := ListView.ItemIndex;
+    current := ListViewManager.SelectedIndex;
     currentXML := Trim(FlameToXML(Maincp, false, true));
-    for i := 0 to ListView.Items.Count-1 do
+    for i := 0 to Batch.Count-1 do
     begin
-      // -X- what if there are unsaved changes at the current CP?
+
+      // -x- wtf?
       if (i = current) then begin
         ParseXML(maincp, PCHAR(currentXML), true);
         SaveXMLFlame(maincp, maincp.name, SavePath);
       end else begin
-        LoadXMLFlame(OpenFile, ListView.Items.Item[i].Caption);
+        LoadXMLFlame(OpenFile, Batch.GetFlameNameAt(i));
         SaveXMLFlame(maincp, maincp.name, SavePath);
       end;
+
     end;
+
     ListXML(SavePath, 2);
     if (current < 0) then current := 0;
-    ListView.Selected := ListView.Items[current];
-    LoadXMLFlame(SavePath, ListView.Selected.caption);
+    LoadXMLFlame(SavePath, Batch.GetFlameNameAt(ListViewManager.SelectedIndex));
   end;
 end;
 
@@ -2753,6 +2694,8 @@ begin
 end;
 
 procedure TMainForm.CommandCreated(const Sender: TUIRibbon; const Command: TUICommand);
+var
+  densityCommand: TUiCommandAction;
 begin
   inherited;
   case Command.CommandId of
@@ -2786,13 +2729,170 @@ begin
         RestoreLastAutosaveCommand.SetShortCut([ssCtrl, ssAlt], 'A');
         RestoreLastAutosaveCommand.OnExecute := OpenLastAutomaticallySavedBatch;
       end;
+
+    UndoCommand_Id:
+      begin
+        UndoCommand := Command as TUICommandAction;
+        UndoCommand.SetShortCut([ssCtrl], 'Z');
+        UndoCommand.OnExecute := Undo;
+      end;
+    RedoCommand_Id:
+      begin
+        RedoCommand := Command as TUICommandAction;
+        RedoCommand.SetShortCut([ssCtrl], 'Y');
+        RedoCommand.OnExecute := Redo;      
+      end;
+    CopyCommand_Id:
+      begin
+        CopyCommand := Command as TUICommandAction;
+        CopyCommand.SetShortCut([ssCtrl], 'C');
+        CopyCommand.OnExecute := CopySelectedFlameToClipboard;       
+      end;
+    PasteCommand_Id:
+      begin
+        PasteCommand := Command as TUICommandAction;
+        PasteCommand.SetShortCut([ssCtrl], 'V');
+        PasteCommand.OnExecute := ReplaceSelectedFlameWithClipboard;       
+      end;
+      
+    RenderFlameCommand_Id:
+      begin
+        RenderFlameCommand := Command as TUICommandAction;
+        RenderFlameCommand.SetShortCut([ssCtrl], 'R');
+        RenderFlameCommand.OnExecute := RenderSelectedFlame;       
+      end;
+    RenderBatchCommand_Id:
+      begin
+        RenderBatchCommand := Command as TUICommandAction;
+        RenderBatchCommand.SetShortCut([ssCtrl, ssAlt], 'R');
+        RenderBatchCommand.OnExecute := RenderBatch;       
+      end;
+
+    FullscreenPreviewCommand_Id:
+      begin
+        FullscreenPreviewCommand := Command as TUICommandAction;
+        FullscreenPreviewCommand.SetShortCut([], VK_F3);
+        FullscreenPreviewCommand.OnExecute := ShowFullscreenPreviewWindow;       
+      end;
+    ShowEditorCommand_Id:
+      begin
+        ShowEditorCommand := Command as TUICommandAction;
+        ShowEditorCommand.SetShortCut([], VK_F4);
+        ShowEditorCommand.OnExecute := ShowEditorWindow; 
+      end;
+    ShowAdjustmentCommand_Id:
+      begin
+        ShowCameraEditorCommand := Command as TUICommandAction;
+        ShowCameraEditorCommand.SetShortCut([], VK_F5);
+        ShowCameraEditorCommand.OnExecute := ShowCameraWindow;  
+      end;
+    ShowOutputPropertiesCommand_Id:
+      begin
+        ShowOutputPropertiesCommand := Command as TUICommandAction;
+        ShowOutputPropertiesCommand.SetShortCut([], VK_F6);
+        ShowOutputPropertiesCommand.OnExecute := ShowOutputPropertiesWindow;  
+      end;
+    ShowPaletteCommand_Id:
+      begin
+        ShowPaletteCommand := Command as TUICommandAction;
+        ShowPaletteCommand.SetShortCut([], VK_F7);
+        ShowPaletteCommand.OnExecute := ShowPaletteWindow;
+      end;
+    ShowCanvasCommand_Id:
+      begin
+        ShowPaletteCommand := Command as TUICommandAction;
+        ShowPaletteCommand.SetShortCut([], VK_F8);
+        ShowPaletteCommand.OnExecute := ShowCanvasSizeWindow;
+      end;
+    PaletteFromImageCommand_Id:
+      begin
+        PaletteFromImageCommand := Command as TUICommandAction;
+        PaletteFromImageCommand.OnExecute := CreatePaletteFromImage;
+      end;
+
+    {$IfNDef DisableScripts}
+    RunScriptCommand_Id:
+      begin
+        RunScriptCommand := Command as TUICommandAction;
+        RunScriptCommand.SetShortCut([], VK_F9);
+        RunScriptCommand.OnExecute := RunCurrentScript;
+      end;
+    StopScriptCommand_Id:
+      begin
+        StopScriptCommand := Command as TUICommandAction;
+        StopScriptCommand.SetShortCut([ssShift], VK_F2);
+        StopScriptCommand.OnExecute := StopCurrentScript;
+      end;
+    OpenScriptCommand_Id:
+      begin
+        OpenScriptCommand := Command as TUICommandAction;
+        OpenScriptCommand.OnExecute := OpenScriptFromDisk;
+      end;
+    EditScriptCommand_Id:
+      begin
+        EditScriptCommand := Command as TUICommandAction;
+        EditScriptCommand.OnExecute := ShowScriptEditorWindow;
+      end;
+    ManageScriptFavoritesCommand_Id:
+      begin
+        ManageScriptFavoritesCommand := Command as TUICommandAction;
+        ManageScriptFavoritesCommand.OnExecute := ShowScriptFavoritesWindow;
+      end;
+    {$EndIf}
+
+    PanModeCommand_Id:
+      begin
+        PanModeCommand := Command as TUICommandBoolean;
+        PanModeCommand.OnToggle := SetCursorMode;
+        PanModeCommand.Checked := true;
+      end;
+    RotateModeCommand_Id:
+      begin
+        RotateModeCommand := Command as TUICommandBoolean;
+        RotateModeCommand.OnToggle := SetCursorMode;
+      end;
+    ZoomInCommand_Id:
+      begin
+        ZoomInModeCommand := Command as TUICommandBoolean;
+        ZoomInModeCommand.OnToggle := SetCursorMode;
+      end;
+    ZoomOutCommand_Id:
+      begin
+        ZoomOutModeCommand := Command as TUICommandBoolean;
+        ZoomOutModeCommand.OnToggle := SetCursorMode;
+      end;
+
+    ShowGuidelinesCommand_Id:
+      begin
+        ShowGuidelinesCommand := Command as TUICommandBoolean;
+        ShowGuidelinesCommand.OnToggle := SetShowGuidelinesInPreview;  
+      end;
+    ShowTransparencyCommand_Id:
+      begin
+        ShowTransparencyCommand := Command as TUICommandBoolean;
+        ShowTransparencyCommand.OnToggle := SetShowTransparencyInPreview;      
+      end;
+    ShowIconsCommand_Id:
+      begin
+        ShowIconsInListViewCommand := Command as TUICommandBoolean;
+        ShowIconsInListViewCommand.OnToggle := SetShowIconsInListView;      
+      end;
+
+    ViewDensity5, ViewDensity10, ViewDensity15, ViewDensity25, 
+    ViewDensity50, ViewDensity100, ViewDensity150, ViewDensity250,
+    ViewDensity500, ViewDensity1000:
+      begin
+        densityCommand := Command as TUICommandAction;
+        densityCommand.OnExecute := SetPreviewDensity;      
+      end;
+    
   end;
 end;
 
 procedure TMainForm.OnFormCreated(Sender: TObject);
 var
   dte: string;
-
+  showListIconsArgs: TUiCommandBooleanEventArgs;
 begin
   //KnownPlugins := TList.Create;
 
@@ -2816,6 +2916,8 @@ begin
   MainForm.XmlScanner.OnEmptyTag := OnFlameReaderEmptyTagEncountered;
   MainForm.XmlScanner.OnEndTag := OnFlameReaderClosingTagEncountered;
   MainForm.XmlScanner.OnStartTag := OnFlameReaderTagEncountered;
+
+  ListViewManager := TFlameListView.Create(ListView);
 
   ReadSettings;
 
@@ -2877,11 +2979,12 @@ begin
 
   LoadThumbnailPlaceholder(ThumbnailSize);
 
-  ListView.LargeImages := UsedThumbnails;
   ListViewPanel.Width := ThumbnailSize + 90;
   BetweenListAndPreviewPanelSplitter.Left := ListViewPanel.Width;
 
-  SetShowIconsInListView(not CommandLine.Lite);
+  showListIconsArgs.Command := ShowIconsInListViewCommand;
+  showListIconsArgs.Checked := not CommandLine.Lite;
+  SetShowIconsInListView(showListIconsArgs);
 
 end;
 
@@ -3008,7 +3111,6 @@ begin
     end else begin
       ListXML(OpenFile, index);
       OpenFileType := ftXML;
-      MainForm.ListView.Selected := MainForm.ListView.Items[index - 1];
     end;
     if APP_BUILD = '' then MainForm.Caption := AppVersionString + ' - ' + openFile
     else MainForm.Caption := AppVersionString + ' ' + APP_BUILD + ' - ' + openFile;
@@ -3355,143 +3457,16 @@ begin
 end;
 
 procedure TMainForm.OnListViewSelectedItemChanged(Sender: TObject; Item: TListItem; Change: TItemChange);
-var
-  FStrings: TStringList;
-  IFSStrings: TStringList;
-  EntryStrings, Tokens: TStringList;
-  SavedPal: Boolean;
-  i, j: integer;
-  floatcolor: double;
-  s: string;
-  Palette: TcolorMap;
-  name:string;
 begin
-  if (ListView.SelCount <> 0) and
-    (Trim(ListView.Selected.Caption) <> Trim(maincp.name)) then
+  if (ListViewManager.SelectedIndex >= 0) and (Trim(Batch.GetFlameNameAt(ListViewManager.SelectedIndex)) <> Trim(maincp.name)) then
   begin
-    LastOpenFileEntry := ListView.Selected.Index + 1;
+    LastOpenFileEntry := ListViewManager.SelectedIndex + 1;
     PreviewRedrawDelayTimer.Enabled := False;
     StopThread;
 
-    if OpenFileType = ftXML then
-    begin
-      name:=ListView.Selected.caption;
-      IsLoadingBatch := false;
-      LoadXMLFlame(OpenFile, name);
-      NotifyMissingPlugin;
-    end
-    else
-    begin
-
-      SavedPal := false;
-
-      {$ifdef DisableScripting}
-      {$else}
-        ScriptEditor.Stopped := True;
-      {$endif}
-
-      FStrings := TStringList.Create;
-      IFSStrings := TStringList.Create;
-      Tokens := TStringList.Create;
-      EntryStrings := TStringList.Create;
-
-      try
-        FStrings.LoadFromFile(OpenFile);
-        for i := 0 to FStrings.count - 1 do
-          if Pos(ListView.Selected.Caption + ' {', Trim(FStrings[i])) = 1 then
-            break;
-        IFSStrings.Add(FStrings[i]);
-        repeat
-          inc(i);
-          IFSStrings.Add(FStrings[i]);
-        until Pos('}', FStrings[i]) <> 0;
-        maincp.Clear; // initialize control point for new flame;
-        maincp.background[0] := 0;
-        maincp.background[1] := 0;
-        maincp.background[2] := 0;
-        maincp.sample_density := defSampleDensity;
-        maincp.spatial_oversample := defOversample;
-        maincp.spatial_filter_radius := defFilterRadius;
-        if OpenFileType = ftFla then
-        begin
-          for i := 0 to FStrings.count - 1 do
-          begin
-            if Pos(ListView.Selected.Caption + ' {', Trim(FStrings[i])) = 1 then
-              break;
-          end;
-          inc(i);
-          while (Pos('}', FStrings[i]) = 0) and (Pos('palette:', FStrings[i]) = 0) do
-          begin
-            EntryStrings.Add(FStrings[i]);
-            inc(i);
-          end;
-          if Pos('palette:', FStrings[i]) = 1 then
-          begin
-            SavedPal := True;
-            inc(i);
-            for j := 0 to 255 do begin
-              s := FStrings[i];
-              GetTokens(s, tokens);
-              floatcolor := StrToFloat(Tokens[0]);
-              Palette[j][0] := round(floatcolor);
-              floatcolor := StrToFloat(Tokens[1]);
-              Palette[j][1] := round(floatcolor);
-              floatcolor := StrToFloat(Tokens[2]);
-              Palette[j][2] := round(floatcolor);
-              inc(i);
-            end;
-          end;
-          FlameString := EntryStrings.Text;
-          maincp.ParseString(FlameString);
-          Transforms := MainCP.NumXForms;
-        end
-        else
-        begin
-        { Open *.ifs File }
-          VarMenus[0].Checked := True;
-          StringToIFS(IFSStrings.Text);
-          for j := 0 to NRVAR - 1 do
-            maincp.xform[i].SetVariation(j, 0);
-          maincp.xform[i].SetVariation(integer(vLinear), 1);
-          maincp.CalcBoundBox;
-        end;
-//        Zoom := maincp.zoom;
-        Center[0] := maincp.Center[0];
-        Center[1] := maincp.Center[1];
-//        MainCP.NormalizeWeights;
-        //mnuSaveUndo.Enabled := false;
-        SetCanUndo(false);
-        PreviewPanelMenuUndoItem.Enabled := False;
-        SetCanRedo(false);
-        PreviewPanelMenuRedoItem.enabled := False;
-        EditForm.mnuUndo.Enabled := False;
-        EditForm.mnuRedo.enabled := False;
-        EditForm.tbUndo.enabled := false;
-        EditForm.tbRedo.enabled := false;
-        AdjustForm.btnUndo.enabled := false;
-        AdjustForm.btnRedo.enabled := false;
-        Transforms := MainCp.TrianglesFromCP(MainTriangles);
-      // Fix Apophysis 1.0 parameters with negative color parameteres!
-        for i := 0 to Transforms - 1 do
-          if maincp.xform[i].color < 0 then maincp.xform[i].color := 0;
-        if SavedPal then maincp.cmap := Palette;
-        UndoIndex := 0;
-        UndoMax := 0;
-        if fileExists(GetEnvVarValue('APPDATA') + '\' + undoFilename) then
-          DeleteFile(GetEnvVarValue('APPDATA') + '\' + undoFilename);
-        maincp.name := ListView.Selected.Caption;
-        Statusbar.Panels[3].Text := maincp.name;
-        PreviewRedrawDelayTimer.Enabled := True;
-        Application.ProcessMessages;
-        UpdateWindows;
-      finally
-        IFSStrings.Free;
-        FStrings.Free;
-        Tokens.free;
-        EntryStrings.free;
-      end;
-    end;
-    {if ResizeOnLoad then}
+    IsLoadingBatch := false;
+    LoadXMLFlame(OpenFile, Batch.GetFlameNameAt(ListViewManager.SelectedIndex));
+    NotifyMissingPlugin;
     ResizeImage;
     PrevListItem := Item;
   end;
@@ -3657,12 +3632,7 @@ begin
     abs((b1 - b2) * (b1 - b2));
 end;
 
-procedure TMainForm.BeginCreatePaletteFromImage(Sender: TObject);
-begin
-  SmoothPalette;
-end;
-
-procedure TMainForm.SmoothPalette;
+procedure TMainForm.CreatePaletteFromImage(const Args: TUiCommandActionEventArgs);
 { From Draves' Smooth palette Gimp plug-in }
 var
   Bitmap: TBitMap;
@@ -3821,8 +3791,14 @@ begin
   end;
 end;
 
-procedure TMainForm.SetListViewVisibility(value: boolean);
+procedure TMainForm.SetListViewVisibility(const Args: TUiCommandBooleanEventArgs);
+var value: boolean;
 begin
+  if not Assigned(args.Command) then exit;
+
+  value := Args.Checked;
+  Args.Command.Checked := value;
+  
   ListViewPanel.Visible := value;
   if value then
     BetweenListAndPreviewPanelSplitter.Width := 4
@@ -3892,7 +3868,7 @@ begin
 
 end;
 
-procedure TMainForm.SavePreviewImageToDisk;
+procedure TMainForm.SavePreviewImageToDisk(const Args: TUiCommandActionEventArgs);
 begin
   SaveDialog.DefaultExt := 'bmp';
   SaveDialog.Filter := Format('%s|*.bmp;*.dib|%s|*.*', [TextByKey('common-filter-bitmap'), TextBykey('common-filter-allfiles')]);
@@ -4056,7 +4032,7 @@ begin
 end;
 
 
-procedure TMainForm.ShowScriptEditor;
+procedure TMainForm.ShowScriptEditorWindow;
 begin
 {$ifdef DisableScripting}
 {$else}
@@ -5352,45 +5328,87 @@ begin
   bkuPen.Free;
 end;
 
+procedure TMainForm.SetCursorMode(const args : TUiCommandBooleanEventArgs);
+begin
+  if not assigned(args.Command) then exit;
+  
+  case args.Command.CommandId of
+    PanModeCommand_Id: SetCursorModePan;  
+    RotateModeCommand_Id: SetCursorModeRotate;
+    ZoomInCommand_Id: SetCursorModeZoomIn;
+    ZoomOutCommand_Id: SetCursorModeZoomOut;
+  end;
+end;
+
+procedure TMainForm.UpdateCursorModeCommandStates;
+begin
+  if Assigned(PanModeCommand) then PanModeCommand.Checked := CurrentCursorMode=msDrag;
+  if Assigned(RotateModeCommand) then RotateModeCommand.Checked := CurrentCursorMode=msRotate; 
+  if Assigned(ZoomInModeCommand) then ZoomInModeCommand.Checked := CurrentCursorMode=msZoomWindow;
+  if Assigned(ZoomOutModeCommand) then ZoomOutModeCommand.Checked := CurrentCursorMode=msZoomOutWindow;
+end;
+
 procedure TMainForm.SetCursorModePan;
 begin
   CurrentCursorMode := msDrag;
+  UpdateCursorModeCommandStates;
 end;
 
 procedure TMainForm.SetCursorModeRotate;
 begin
   CurrentCursorMode := msRotate;
+  UpdateCursorModeCommandStates;
 end;
 
 procedure TMainForm.SetCursorModeZoomIn;
 begin
   CurrentCursorMode := msZoomWindow;
+  UpdateCursorModeCommandStates;
 end;
 
 procedure TMainForm.SetCursorModeZoomOut;
 begin
   CurrentCursorMode := msZoomOutWindow;
+  UpdateCursorModeCommandStates;
 end;
 
 procedure TMainForm.SetCanUndo(value: boolean);
 begin
-//
+  if Assigned(UndoCommand) then
+    UndoCommand.Enabled := value;
 end;
 
 procedure TMainForm.SetCanRedo(value: boolean);
 begin
-//
+  if Assigned(RedoCommand) then
+    RedoCommand.Enabled := value;
 end;
 
 procedure TMainForm.SetCanPaste(value: boolean);
 begin
-//
+  if Assigned(PasteCommand) then
+    PasteCommand.Enabled := value;
 end;
 
-procedure TMainForm.SetPreviewDensity(density: double);
+procedure TMainForm.SetPreviewDensity(const Args: TUiCommandActionEventArgs);
+var value: double;
 begin
-  defSampleDensity := density;
+  if not Assigned(args.Command) then exit;
 
+  case args.Command.CommandId of
+    ViewDensity5: value := 5.0;
+    ViewDensity10: value := 10.0;
+    ViewDensity15: value := 15.0;
+    ViewDensity25: value := 25.0;
+    ViewDensity50: value := 50.0;
+    ViewDensity100: value := 100.0;
+    ViewDensity150: value := 150.0;
+    ViewDensity250: value := 250.0;
+    ViewDensity500: value := 500.0;
+    ViewDensity1000: value := 1000.0;
+  end;
+  
+  defSampleDensity := value;
   StopThread;
   PreviewRedrawDelayTimer.Enabled := True;
   UpdateWindows;
@@ -5411,8 +5429,14 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-procedure TMainForm.SetShowTransparencyInPreview(value: boolean);
+procedure TMainForm.SetShowTransparencyInPreview(const Args: TUiCommandBooleanEventArgs);
+var value: boolean;
 begin
+  if not Assigned(args.Command) then exit;
+
+  value := Args.Checked;
+  Args.Command.Checked := value;
+  
   ShowTransparency := value;
   DrawImageView;
 end;
@@ -5450,15 +5474,13 @@ end;
 procedure TMainForm.OnListViewSelectedItemChanging(Sender: TObject; Item: TListItem; Change: TItemChange; var AllowChangeListViewItem: Boolean);
 var
   selectedFlameName, focusedFlameName: string;
-  currentListView: TListView;
 begin
   if (Item = nil) then exit;
   if (DoNotAskAboutChange = true)then exit;
 
-  currentListView := ListView;
   selectedFlameName := '';
   focusedFlameName := '';
-
+  (*
   if (currentListView.Selected <> nil) then selectedFlameName := currentListView.Selected.Caption;
   if (currentListView.ItemFocused <> nil) then focusedFlameName := currentListView.ItemFocused.Caption;
 
@@ -5508,18 +5530,19 @@ begin
       AllowChangeListViewItemMemento := AllowChangeListViewItem;
     end;
   end;
+  *)
 end;
 
-procedure TMainForm.SetShowIconsInListView(value: boolean);
+procedure TMainForm.SetShowIconsInListView(const Args: TUiCommandBooleanEventArgs);
+var 
+  value: boolean;
 begin
-  if value then
-  begin
-    ListView.ViewStyle := vsIcon;
-    if (OpenFile <> '') then
-      ListXML(OpenFile, 1)
-  end else
-    ListView.ViewStyle := vsReport;
+  if not Assigned(args.Command) then exit;
 
+  value := Args.Checked;
+  Args.Command.Checked := value;
+
+  ListViewManager.ShowThumbnails := value;
 end;
 
 procedure TMainForm.OnFlameReaderClosingTagEncountered(Sender: TObject; TagName: String);
@@ -5742,8 +5765,14 @@ begin
     Result := FlameToXML(cp, false, false);
 end;
 
-procedure TMainForm.SetShowGuidelinesInPreview(value: boolean);
+procedure TMainForm.SetShowGuidelinesInPreview(const Args: TUiCommandBooleanEventArgs);
+var value: boolean;
 begin
+  if not Assigned(args.Command) then exit;
+
+  value := Args.Checked;
+  Args.Command.Checked := value;
+  
   EnableGuides := value;
   DrawImageView;
 end;
@@ -5776,250 +5805,20 @@ begin
   end;
 end;
 
-constructor TThumbnailThread.Create(SourceFile : string; FlameNames : TstringList);
-var
-  i : integer;
-  ListItem : TListItem;
-begin
-  ThumbnailSize := MainForm.UsedThumbnails.Width;
-  Flames := FlameNames;
-  FileName := SourceFile;
-
-  MainForm.UsedThumbnails.Clear;
-  MainForm.UsedThumbnails.Add(ThumbnailPlaceholder, nil);
-
-  MainForm.ListView.Items.BeginUpdate;
-  MainForm.ListView.Items.Clear;
-
-  for i := 0 to FlameNames.Count - 1 do begin
-    ListItem := MainForm.ListView.Items.Add;
-    ListItem.Caption := FlameNames[i];
-    ListItem.ImageIndex := 0;
-  end;
-
-  MainForm.ListView.Items.EndUpdate;
-  initialized := true;
-  
-  inherited create(True);
-end;
-
-destructor TThumbnailThread.Destroy;
-begin
-  if (Initialized) then begin
-    ThumbnailSize := 0;
-    FileName := '';
-    if (Flames <> nil) then begin
-      Flames.Free;
-      Flames := nil;
-    end;
-    Initialized := false;
-    inherited destroy;
-  end;
-end;
-
-procedure TThumbnailThread.Execute;
-var
-  Renderer : TRenderer;
-  cp : TControlPoint;
-  Thumbnail : TBitmap;
-
-  flameXML : string;
-  w, h, r : double;
-  i : integer;
-
-  memstream : TMemoryStream;
-begin
-  Inherited;
-
-  Renderer := TRenderer.Create;
-  cp := TControlPoint.Create;
-
-  //MainForm.ListView1.Items.BeginUpdate;
-  for i := 0 to Flames.Count - 1 do begin
-    cp.Clear;
-    flameXML := LoadXMLFlameText(filename, Flames[i]);
-    MainForm.ParseXML(cp, PCHAR(flameXML), true);
-
-    w := cp.Width; h := cp.Height; r := w / h;
-    if (w < h) then begin
-      w := r * ThumbnailSize;
-      h := ThumbnailSize;
-    end else if (w > h) then begin
-      h := ThumbnailSize / r;
-      w := ThumbnailSize;
-    end else begin
-      w := ThumbnailSize;
-      h := ThumbnailSize;
-    end;
-    cp.AdjustScale(round(w), round(h));
-    cp.Width := round(w);
-    cp.Height := round(h);
-    cp.spatial_oversample := defOversample;
-    cp.spatial_filter_radius := defFilterRadius;
-    cp.sample_density := 3;
-
-    Thumbnail := nil;
-    Renderer.SetCP(cp);
-    Renderer.Render;
-
-    Thumbnail := TBitmap.Create;
-    Thumbnail.PixelFormat := pf24bit;
-    Thumbnail.HandleType := bmDIB;
-    Thumbnail.Width := ThumbnailSize;
-    Thumbnail.Height := ThumbnailSize;
-    Thumbnail.Canvas.Brush.Color := GetSysColor(5);
-    Thumbnail.Canvas.FillRect(Rect(0, 0, ThumbnailSize, ThumbnailSize));
-    Thumbnail.Canvas.Draw(round(ThumbnailSize / 2 - w / 2), round(ThumbnailSize / 2 - h / 2), renderer.GetImage);
-
-    MainForm.UsedThumbnails.Add(Thumbnail, nil);
-    MainForm.ListView.Items[i].ImageIndex := MainForm.UsedThumbnails.Count - 1;
-
-    Thumbnail.Free;
-    Thumbnail := nil;
-    MainForm.ListView.Refresh;
-  end;
-  //MainForm.ListView1.Items.EndUpdate;
-
-  cp.Free;
-  Renderer.Free;
-  ThumbnailSize := 0;
-  FileName := '';
-  if (Flames <> nil) then begin
-    Flames.Free;
-    Flames := nil;
-  end;
-end;
-
-procedure ListXMLSimple(FileName: string; sel: integer);
-var
-  FStrings : TStringList;
-  i, p, n  : integer;
-  title    : string;
-  item     : TListItem;
-begin
-
-  FStrings := TStringList.Create;
-  FStrings.LoadFromFile(FileName);
-  //MainForm.pnlLSPFrame.Visible := true;
-  MainForm.ListView.Items.BeginUpdate;
-  MainForm.ListView.Items.Clear;
-
-  try
-    if (Pos('<flame ', Lowercase(FStrings.Text)) <> 0) then
-    begin
-      for i := 0 to FStrings.Count - 1 do
-      begin
-        p := Pos('<flame ', LowerCase(FStrings[i]));
-        if (p <> 0) then
-        begin
-          MainForm.ListXMLScanner.LoadFromBuffer(TCharType(TStringType(FSTrings[i])));
-          MainForm.ListXMLScanner.Execute;
-
-          if Trim(pname) = '' then
-            Title := '*untitled ' + ptime
-          else
-            Title := Trim(pname);
-          if Title <> '' then
-          begin
-            if ((i mod 5) = 0) then MainForm.StatusProgressBar.Position := round(100*i/FStrings.Count);
-            item := MainForm.ListView.Items.Add; item.Caption := Title; item.ImageIndex := -1;
-            (*Inc(n); if (n > BatchSize) and not brk then begin
-              if (ID_NO = Application.MessageBox(PAnsiChar('WARNING! The currently loading batch contains more than ' +
-                inttostr(BatchSize) + ' flames. Do you want to continue loading it?'), PAnsiChar('Apophysis'),
-                MB_ICONQUESTION or MB_YESNO)) then break else brk := true;
-            end; *)
-          end;
-        end;
-      end;
-    end;
-  finally
-    FStrings.Free;
-  end;
-
-  //MainForm.pnlLSPFrame.Visible := false;
-  MainForm.StatusProgressBar.Position := 0;
-  MainForm.ListView.Items.EndUpdate;
-
-  case sel of
-    0: MainForm.ListView.Selected := MainForm.ListView.Items[MainForm.ListView.Items.Count - 1];
-    1: MainForm.ListView.Selected := MainForm.ListView.Items[0];
-    2: // do nothing
-  end;
-
-end;
-
-procedure ListXMLThumbnails(FileName: string; sel: integer);
-var
-  FStrings : TStringList;
-  FFlames  : TStringList;
-  i, p, n  : integer;
-  title    : string;
-  thread   : TThumbnailThread;
-  brk      : boolean;
-begin
-
-  FStrings := TStringList.Create;
-  FFlames  := TStringList.Create;
-
-  FStrings.LoadFromFile(FileName);
-
-  for i := 0 to MainForm.ListView.Items.Count - 1 do begin
-    MainForm.ListView.Items[i].ImageIndex := -1;
-  end;
-
-  //MainForm.pnlLSPFrame.Visible := true;
-  try
-    if (Pos('<flame ', Lowercase(FStrings.Text)) <> 0) then
-    begin
-      for i := 0 to FStrings.Count - 1 do
-      begin
-        p := Pos('<flame ', LowerCase(FStrings[i]));
-        if (p <> 0) then
-        begin
-          MainForm.ListXMLScanner.LoadFromBuffer(TCharType(TStringType(FSTrings[i])));
-          MainForm.ListXMLScanner.Execute;
-
-          if Trim(pname) = '' then
-            Title := '*untitled ' + ptime
-          else
-            Title := Trim(pname);
-          if Title <> '' then
-          begin
-            if ((i mod 5) = 0) then MainForm.StatusProgressBar.Position := round(100*i/FStrings.Count);
-            FFlames.Add(Title);
-            (*Inc(n); if (n > BatchSize) and not brk then begin
-              if (ID_NO = Application.MessageBox(PAnsiChar('WARNING! The currently loading batch contains more than ' +
-                inttostr(BatchSize) + ' flames. Do you want to continue loading it?'), PAnsiChar('Apophysis'),
-                MB_ICONQUESTION or MB_YESNO)) then break else brk := true;
-            end; *)
-          end;
-        end;
-      end;
-    end;
-  finally
-    FStrings.Free;
-  end;
-  //MainForm.pnlLSPFrame.Visible := false;
-  MainForm.StatusProgressBar.Position := 0;
-
-  thread := TThumbnailThread.Create(FileName, FFlames);
-  case sel of
-    0: MainForm.ListView.Selected := MainForm.ListView.Items[MainForm.ListView.Items.Count - 1];
-    1: MainForm.ListView.Selected := MainForm.ListView.Items[0];
-    2: // do nothing
-  end;
-
-  thread.Resume;
-end;
-
 procedure ListXML(FileName: string; sel: integer);
 begin
   MainForm.IsLoadingBatch := true;
 
-  if (MainForm.ListView.ViewStyle <> vsIcon) or MainForm.CommandLine.Lite
-  then
-    ListXmlSimple(FileName, sel)
-  else ListXmlThumbnails(FileName, sel);
+  MainForm.Batch := TBatch.Create(FileName);
+  MainForm.ListViewManager.Batch := MainForm.Batch;
+
+  (*
+  case sel of
+    0: MainForm.ListView.Selected := MainForm.ListView.Items.Count - 1;
+    1: MainForm.ListView.Selected := 0;
+    2: // do nothing
+  end;
+  *)
 
   MainForm.IsLoadingBatch := false;
 end;

@@ -37,6 +37,9 @@ uses
   UIRibbonCommands in 'System\UIRibbonCommands.pas',
   UIRibbonActions in 'System\UIRibbonActions.pas',
   WinApiEx in 'System\WinApiEx.pas',
+  rkIntegerList in 'System\rkIntegerList.pas',
+  rkView in 'System\rkView.pas',
+  FlameListView in 'System\FlameListView.pas',
 
 {-- CORE --}
   Global in 'Core\Global.pas',
