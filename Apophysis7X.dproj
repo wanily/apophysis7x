@@ -135,6 +135,7 @@
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
         <DCCReference Include="System\FastMM4.pas"/>
+        <DCCReference Include="System\FastMM4Messages.pas"/>
         <DCCReference Include="System\sdStringTable.pas"/>
         <DCCReference Include="System\CustomDrawControl.pas"/>
         <DCCReference Include="System\LibXmlComps.pas"/>

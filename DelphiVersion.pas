@@ -7,4 +7,3 @@
 {$Define Pre15c}
 //{$Define RandomizeInVarsHack}
 //{$Define GAUSSIAN_DOF}
-//{$Define UseFastMM}

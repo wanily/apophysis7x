@@ -1,28 +1,11 @@
 program Apophysis7X;
 
-{%ToDo 'Assets\Apophysis7X.todo'}
-
-{$R 'Resources\Apophysis7X.res'}
-{$R 'System\UIRibbon.res'}
-{$R *.dres}
 
 {$SetPEFlags $20}
-{$Include 'delphiversion.pas'}
 
 uses
-
-{-- BASIC --}
-  {$IfDef UseFastMM}
-    FastMM4 in 'System\FastMM4.pas',
-    FastMM4Messages in 'System\FastMM4Messages.pas',
-  {$EndIf }
-
-  Forms,
-  Dialogs,
-  SysUtils,
-  Themes,
-  Styles,
-
+  FastMM4 in 'System\FastMM4.pas',
+  FastMM4Messages in 'System\FastMM4Messages.pas',
   sdStringTable in 'System\sdStringTable.pas',
   CustomDrawControl in 'System\CustomDrawControl.pas',
   LibXmlComps in 'System\LibXmlComps.pas',
@@ -38,14 +21,10 @@ uses
   UIRibbonActions in 'System\UIRibbonActions.pas',
   WinApiEx in 'System\WinApiEx.pas',
   FlameListView in 'System\FlameListView.pas',
-
-{-- CORE --}
   Global in 'Core\Global.pas',
   Settings in 'IO\Settings.pas',
   Translation in 'Core\Translation.pas',
   ParameterIO in 'IO\ParameterIO.pas',
-
-{-- FLAME --}
   RndFlame in 'Flame\RndFlame.pas',
   ControlPoint in 'Flame\ControlPoint.pas',
   cmapdata in 'ColorMap\cmapdata.pas',
@@ -54,16 +33,12 @@ uses
   XFormMan in 'Core\XFormMan.pas',
   XForm in 'Flame\XForm.pas',
   BaseVariation in 'Core\BaseVariation.pas',
-
-{-- RENDERER --}
   RenderingCommon in 'Rendering\RenderingCommon.pas',
   RenderingInterface in 'Rendering\RenderingInterface.pas',
   RenderingImplementation in 'Rendering\RenderingImplementation.pas',
   BucketFillerThread in 'Rendering\BucketFillerThread.pas',
   RenderThread in 'Rendering\RenderThread.pas',
   ImageMaker in 'Rendering\ImageMaker.pas',
-
-{-- VARIATIONS --}
   varHemisphere in 'Variations\varHemisphere.pas',
   varLog in 'Variations\varLog.pas',
   varPolar2 in 'Variations\varPolar2.pas',
@@ -97,31 +72,21 @@ uses
   varLazysusan in 'Variations\varLazysusan.pas',
   varMobius in 'Variations\varMobius.pas',
   varCrop in 'Variations\varCrop.pas',
-  // circlecrop
   varElliptic in 'Variations\varElliptic.pas',
   varWaves2 in 'Variations\varWaves2.pas',
   varAuger in 'Variations\varAuger.pas',
-  // glynnsim2
-  // flux
-  // boarders2
   varPreSpherical in 'Variations\varPreSpherical.pas',
   varPreSinusoidal in 'Variations\varPreSinusoidal.pas',
   varPreDisc in 'Variations\varPreDisc.pas',
-  // pre_boarders2
   varPreBwraps in 'Variations\varPreBwraps.pas',
   varPreCrop in 'Variations\varPreCrop.pas',
-  // pre_circlecrop
   varPreFalloff2 in 'Variations\varPreFalloff2.pas',
-  // post_boarders2
   varPostBwraps in 'Variations\varPostBwraps.pas',
   varPostCurl in 'Variations\varPostCurl.pas',
   varPostCurl3D in 'Variations\varPostCurl3D.pas',
   varPostCrop in 'Variations\varPostCrop.pas',
-  // post_circlecrop
   varPostFalloff2 in 'Variations\varPostFalloff2.pas',
   varGenericPlugin in 'Variations\varGenericPlugin.pas',
-
-{-- GUI --}
   Main in 'Forms\Main.pas' {MainForm},
   Tracer in 'Forms\Tracer.pas' {TraceForm},
   About in 'Forms\About.pas' {AboutForm},
@@ -133,7 +98,8 @@ uses
   LoadTracker in 'Forms\LoadTracker.pas' {LoadForm},
   Options in 'Forms\Options.pas' {OptionsForm},
   Save in 'Forms\Save.pas' {SaveForm},
-  TransformSelection in 'Forms\TransformSelection.pas'; {TransformSelectionForm}
+  TransformSelection in 'Forms\TransformSelection.pas' {TransformSelectionForm},
+  Vcl.Forms;
 
 begin
   Application.Initialize;
@@ -150,7 +116,6 @@ begin
   Application.CreateForm(TOptionsForm, OptionsForm);
   Application.CreateForm(TSaveForm, SaveForm);
   Application.CreateForm(TTransformSelectionForm, TransformSelectionForm);
-
   Application.Run;
 end.
 

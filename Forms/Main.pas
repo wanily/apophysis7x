@@ -275,6 +275,7 @@ uses
   About, CmapData, RndFlame, Tracer, Types, varGenericPlugin;
 
 {$R *.dfm}
+{$R 'System\UIRibbon.res'}
 {$R 'Ribbon\ApophysisRibbon.res'}
 
 procedure TMainForm.Trace1(const str: string);
