@@ -8,7 +8,7 @@ uses
   ShellAPI, Registry, System.ImageList,
 
   Global, Xform, XFormMan, ControlPoint, CMap, RenderThread, RenderingCommon, RenderingInterface,
-  PngImage, StrUtils, LoadTracker, CommandLine, Translation, UIRibbonForm, UIRibbon, UIRibbonCommands,
+  PngImage, StrUtils, LoadTracker, Translation, UIRibbonForm, UIRibbon, UIRibbonCommands,
   ApophysisRibbon, FlameListView, ParameterIO;
 
 const
@@ -185,7 +185,6 @@ type
     ExitCommand: TUICommandAction;
 
    // Public fields
-    CommandLine : TCommandLine;
     Renderer: TRenderThread;
     ListViewManager: TFlameListView;
     Batch: TBatch;
@@ -273,11 +272,7 @@ implementation
 
 uses
   Editor, Options, Settings, FullScreen, FormRender, Adjust, Browser, Save,
-  About, CmapData, RndFlame, Tracer, Types, varGenericPlugin
-  {$ifndef DisableScripting}
-    , ScriptForm
-    , FormFavorites
-  {$endif};
+  About, CmapData, RndFlame, Tracer, Types, varGenericPlugin;
 
 {$R *.dfm}
 {$R 'Ribbon\ApophysisRibbon.res'}
@@ -836,10 +831,6 @@ begin
     exit;
   end;
 
-  {$ifndef DisableScripting}
-    ScriptEditor.Stopped := True;
-  {$endif}
-
   autoSaveBatch.LoadControlPoint(autoSaveBatch.Count - 1, MainCp);
   autoSaveBatch.Destroy;
 end;
@@ -848,10 +839,6 @@ procedure TMainForm.ExecuteOpenBatchFromDisk;
 var
   fileName, filter, directory: string;
 begin
-  {$ifndef DisableScripting}
-    ScriptEditor.Stopped := True;
-  {$endif}
-
   filter := TextByKey('common-filter-flamefiles') + '|*.flame;*.xml|' + TextByKey('common-filter-allfiles') + '|*.*';
   directory := ParamFolder;
 
@@ -954,10 +941,6 @@ begin
   if Clipboard.HasFormat(CF_TEXT) then begin
     PushWorkspaceToUndoStack;
 
-    {$ifndef DisableScripting}
-      ScriptEditor.Stopped := True;
-    {$endif}
-
     StopPreviewRenderThread;
 
     LoadCpFromXmlCompatible(Clipboard.AsText, MainCp, status);
@@ -1035,9 +1018,6 @@ end;
 
 procedure TMainForm.ExecuteClose;
 begin
-  {$ifndef DisableScripting}
-    ScriptEditor.Stopped := True;
-  {$endif}
   ExecuteClose(TUiCommandAction.DefaultArgs);
 end;
 
@@ -1064,12 +1044,7 @@ end;
 procedure TMainForm.RibbonLoaded;
 var settingsFile: string;
 begin
-  {$ifdef DisableScripting}
-    Ribbon.SetApplicationModes(0);
-  {$else}
-    Ribbon.SetApplicationModes(1);
-  {$endif}
-
+  Ribbon.SetApplicationModes(0);
   settingsFile:= GetEnvVarValue('APPDATA') + '\apophysis-ribbon.dat';
   if FileExists(settingsFile) then
     Ribbon.LoadSettings(settingsFile);
@@ -1276,6 +1251,24 @@ var
   dte: string;
   showListIconsArgs: TUiCommandBooleanEventArgs;
 begin
+  InitializePlugins;
+
+  {$ifdef Apo7X64}
+  Application.Title := 'Apophysis 7x (64 bit)';
+  {$else}
+  Application.Title := 'Apophysis 7x (32 bit)';
+  {$endif}
+
+  Application.HelpFile := 'Apophysis7x.chm';
+  Application.UpdateFormatSettings := False;
+
+  {$ifdef UseFormatSettings}
+    FormatSettings.DecimalSeparator := '.';
+  {$else}
+    DecimalSeparator := '.';
+  {$endif}
+
+
   ApophysisVersion := APP_NAME + ' ' + APP_VERSION;
   Caption := ApophysisVersion + APP_BUILD;
 
@@ -1298,9 +1291,6 @@ begin
   AvailableLanguages := TStringList.Create;
   AvailableLanguages.Add('');
   ListLanguages;
-
-  CommandLine := TCommandLine.Create;
-  CommandLine.Load;
 
   Screen.Cursors[crEditArrow]  := LoadCursor(HInstance, 'ARROW_WHITE');
   Screen.Cursors[crEditMove]   := LoadCursor(HInstance, 'MOVE_WB');
@@ -1333,7 +1323,7 @@ begin
   BetweenListAndPreviewPanelSplitter.Left := ListViewPanel.Width;
 
   showListIconsArgs.Command := ShowIconsInListViewCommand;
-  showListIconsArgs.Checked := not CommandLine.Lite;
+  showListIconsArgs.Checked := true;
   ExecuteSetShowIconsInListView(showListIconsArgs);
 
 end;
@@ -1346,7 +1336,6 @@ var
   hnd,hr:Cardinal;
   index: integer;
   mins:integer;
-  cmdl : TCommandLine;
   fn, flameXML : string;
   openScript : string;
 begin
@@ -1407,9 +1396,6 @@ begin
 
   if FileExists(GetEnvVarValue('APPDATA') + '\' + randFilename) then
     DeleteFile(GetEnvVarValue('APPDATA') + '\' + randFilename);
-
-  cmdl := TCommandLine.Create;
-  cmdl.Load;
 
   openFile := '';
 
@@ -1480,20 +1466,12 @@ begin
       exit;
     end;
 
-{$ifdef DisableScripting}
-{$else}
-  ScriptEditor.Stopped := True;
-{$endif}
   HtmlHelp(0, nil, HH_CLOSE_ALL, 0);
   { To capture secondary window positions }
   if EditForm.visible then EditForm.Close;
   if AdjustForm.visible then AdjustForm.close;
   if GradientBrowser.visible then GradientBrowser.close;
 //  if GradientForm.visible then GradientForm.Close;
-{$ifdef DisableScripting}
-{$else}
-  if ScriptEditor.visible then ScriptEditor.Close;
-{$endif}
 
   { Stop the render thread }
   if RenderForm.Visible then RenderForm.Close;
@@ -1559,10 +1537,6 @@ begin
     end;
     DrawImageView;
   end;
-{$ifdef DisableScripting}
-{$else}
-  ScriptEditor.Stopped := True;
-{$endif}
 end;
 
 { ****************************** Misc controls ****************************** }
@@ -1619,10 +1593,6 @@ begin
     SetCanUndo(false);
     SetCanRedo(false);
 
-    {$ifndef DisableScripting}
-      ScriptEditor.Stopped := True;
-    {$endif}
-
     if fileExists(GetEnvVarValue('APPDATA') + '\' + undoFilename) then
       DeleteFile(GetEnvVarValue('APPDATA') + '\' + undoFilename);
 
@@ -1654,10 +1624,6 @@ var
   s: string;
   Palette: TColorMap;
 begin
-{$ifdef DisableScripting}
-{$else}
-  ScriptEditor.Stopped := True;
-{$endif}
   FStrings := TStringList.Create;
   IFSStrings := TStringList.Create;
   Tokens := TStringList.Create;
@@ -2264,61 +2230,22 @@ end;
 
 procedure TMainForm.ExecuteShowScriptEditorWindow;
 begin
-{$ifdef DisableScripting}
-{$else}
-  ScriptEditor.Show;
-{$endif}
 end;
 
 procedure TMainForm.ExecuteRunCurrentScript;
 begin
-  {$ifdef DisableScripting}
-{$else}
-  ScriptEditor.RunScript;
-{$endif}
 end;
 
 procedure TMainForm.ExecuteOpenScriptFromDisk;
 begin
-{$ifdef DisableScripting}
-{$else}
-  ScriptEditor.OpenScript;
-{$endif}
 end;
 
 procedure TMainForm.ExecuteStopCurrentScript;
 begin
-{$ifdef DisableScripting}
-{$else}
-  ScriptEditor.Stopped := True;
-{$endif}
 end;
 
 procedure TMainForm.ExecuteShowScriptFavoritesWindow;
-var
-  MenuItem: TMenuItem;
-  i: integer;
-  s: string;
 begin
-{$ifdef DisableScripting}
-{$else}
-  if FavoritesForm.ShowModal = mrOK then
-  begin
-    if favorites.count <> 0 then
-    begin
-      mnuScript.Items[7].free; // remember to increment if add any items above
-      for i := 0 to Favorites.Count - 1 do
-      begin
-        s := ExtractFileName(Favorites[i]);
-        s := Copy(s, 0, length(s) - Length(ExtractFileExt(s)));
-        MenuItem := mnuScript.Find(s);
-        if MenuItem <> nil then
-          MenuItem.Free;
-      end
-    end;
-    GetScripts;
-  end;
-{$endif}
 end;
 
 procedure TMainForm.ExecuteShowCanvasSizeWindow;

@@ -37,7 +37,7 @@ type
       ThumbnailCompleted: procedure(index: integer) of object;
 
       constructor Create;
-      destructor Destroy;
+      destructor Destroy; override;
 
       property Batch: TBatch
         read mBatch
@@ -79,7 +79,7 @@ type
       SelectedIndexChanged: procedure(index: integer) of object;
 
       constructor Create(list: TListView);
-      destructor Destroy;
+      destructor Destroy; override;
 
       procedure RemoveItemAt(i: integer);
       procedure SelectIndex(i: integer);

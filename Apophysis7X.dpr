@@ -37,14 +37,10 @@ uses
   UIRibbonCommands in 'System\UIRibbonCommands.pas',
   UIRibbonActions in 'System\UIRibbonActions.pas',
   WinApiEx in 'System\WinApiEx.pas',
-  rkIntegerList in 'System\rkIntegerList.pas',
-  rkView in 'System\rkView.pas',
   FlameListView in 'System\FlameListView.pas',
 
 {-- CORE --}
   Global in 'Core\Global.pas',
-  CommandLine in 'IO\CommandLine.pas',
-  MissingPlugin in 'IO\MissingPlugin.pas',
   Settings in 'IO\Settings.pas',
   Translation in 'Core\Translation.pas',
   ParameterIO in 'IO\ParameterIO.pas',
@@ -137,29 +133,10 @@ uses
   LoadTracker in 'Forms\LoadTracker.pas' {LoadForm},
   Options in 'Forms\Options.pas' {OptionsForm},
   Save in 'Forms\Save.pas' {SaveForm},
-  TransformSelection in 'Forms\TransformSelection.pas' {TransformSelectionForm}
-
-  {$ifdef DisableScripting};
-    // if scripting is disabled, don't import the scripting form units
-  {$else},
-    Preview in 'Forms\Preview.pas' {PreviewForm},
-    FormFavorites in 'Forms\FormFavorites.pas' {FavoritesForm},
-    ScriptForm in 'Forms\ScriptForm.pas' {ScriptEditor},
-    ScriptRender in 'Forms\ScriptRender.pas'; {ScriptRenderForm}
-  {$endif}
+  TransformSelection in 'Forms\TransformSelection.pas'; {TransformSelectionForm}
 
 begin
-  InitializePlugins;
-
   Application.Initialize;
-  //TStyleManager.TrySetStyle('Carbon');
-
-  {$ifdef Apo7X64}
-  Application.Title := 'Apophysis 7x (64 bit)';
-  {$else}
-  Application.Title := 'Apophysis 7x (32 bit)';
-  {$endif}
-  Application.HelpFile := 'Apophysis7x.chm';
 
   Application.CreateForm(TMainForm, MainForm);
   Application.CreateForm(TTraceForm, TraceForm);
@@ -174,21 +151,6 @@ begin
   Application.CreateForm(TSaveForm, SaveForm);
   Application.CreateForm(TTransformSelectionForm, TransformSelectionForm);
 
-  {$ifdef DisableScripting}
-  // if scripting is disabled, don't create the scripting forms
-  {$else}
-  Application.CreateForm(TPreviewForm, PreviewForm);
-  Application.CreateForm(TFavoritesForm, FavoritesForm);
-  Application.CreateForm(TScriptEditor, ScriptEditor);
-  Application.CreateForm(TScriptRenderForm, ScriptRenderForm);
-  {$endif}
-
-  Application.UpdateFormatSettings := False;
-  {$ifdef UseFormatSettings}
-    FormatSettings.DecimalSeparator := '.';
-  {$else}
-    DecimalSeparator := '.';
-  {$endif}
   Application.Run;
 end.
 

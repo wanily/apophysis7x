@@ -53,7 +53,6 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
         <SanitizedProjectName>Apophysis7X</SanitizedProjectName>
-        <VCL_Custom_Styles>Carbon|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\16.0\Styles\Carbon.vsf;Light|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\16.0\Styles\Light.vsf</VCL_Custom_Styles>
         <VerInfo_Keys>CompanyName=XyrusWorx;FileDescription=Apophysis 7x;FileVersion=3.00.7621.0;InternalName=ApophysisXW;LegalCopyright=XyrusWorx;LegalTrademarks=;OriginalFilename=Apophysis7x.exe;ProductName=Apophysis 7x;ProductVersion=3.0.0.0</VerInfo_Keys>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <DCC_IOChecking>false</DCC_IOChecking>
@@ -150,14 +149,10 @@
         <DCCReference Include="System\UIRibbonCommands.pas"/>
         <DCCReference Include="System\UIRibbonActions.pas"/>
         <DCCReference Include="System\WinApiEx.pas"/>
-        <DCCReference Include="System\rkIntegerList.pas"/>
-        <DCCReference Include="System\rkView.pas"/>
         <DCCReference Include="System\FlameListView.pas">
             <Form>-- CORE --</Form>
         </DCCReference>
         <DCCReference Include="Core\Global.pas"/>
-        <DCCReference Include="IO\CommandLine.pas"/>
-        <DCCReference Include="IO\MissingPlugin.pas"/>
         <DCCReference Include="IO\Settings.pas"/>
         <DCCReference Include="Core\Translation.pas"/>
         <DCCReference Include="IO\ParameterIO.pas"/>
@@ -261,16 +256,6 @@
         </DCCReference>
         <None Include="Apophysis7X.todo"/>
         <None Include="ModelSupport_Apophysis7X\default.txaPackage"/>
-        <RcItem Include="Forms\Carbon.vsf">
-            <ContainerId>ResourceItem</ContainerId>
-            <ResourceType>VCLSTYLE</ResourceType>
-            <ResourceId>CARBON</ResourceId>
-        </RcItem>
-        <RcItem Include="Forms\Light.vsf">
-            <ContainerId>ResourceItem</ContainerId>
-            <ResourceType>VCLSTYLE</ResourceType>
-            <ResourceId>LIGHT</ResourceId>
-        </RcItem>
         <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -331,12 +316,6 @@
             </Platforms>
             <ModelSupport>True</ModelSupport>
             <Deployment Version="1">
-                <DeployFile LocalName="Forms\Light.vsf" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="Win64">
-                        <RemoteDir>.\</RemoteDir>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName="..\..\Out\x64\Apophysis7X.rsm" Configuration="Debug" Class="DebugSymbols">
                     <Platform Name="Win64">
                         <RemoteName>Apophysis7X.rsm</RemoteName>
@@ -358,12 +337,6 @@
                 <DeployFile LocalName="..\..\Out\x64\Apophysis7X.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win64">
                         <RemoteName>Apophysis7X.exe</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="Forms\Carbon.vsf" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="Win64">
-                        <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -743,12 +716,12 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
-                <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
             </Deployment>
         </BorlandProject>

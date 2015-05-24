@@ -1,6 +1,5 @@
 (* These are global flags which should be enabled or disabled depending on the version of Delphi *)
 {$if (compilerversion >= 24.0)}
-  {$Define DisableScripting}
   {$Define UseFormatSettings}
 {$endif}
 
