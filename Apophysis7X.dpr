@@ -20,7 +20,7 @@ uses
   UIRibbonCommands in 'System\UIRibbonCommands.pas',
   UIRibbonActions in 'System\UIRibbonActions.pas',
   WinApiEx in 'System\WinApiEx.pas',
-  FlameListView in 'System\FlameListView.pas',
+  FlameListView in 'System\FlameListView.pas' {-- CORE --},
   Global in 'Core\Global.pas',
   Settings in 'IO\Settings.pas',
   Translation in 'Core\Translation.pas',
@@ -99,7 +99,8 @@ uses
   Options in 'Forms\Options.pas' {OptionsForm},
   Save in 'Forms\Save.pas' {SaveForm},
   TransformSelection in 'Forms\TransformSelection.pas' {TransformSelectionForm},
-  Vcl.Forms;
+  Vcl.Forms,
+  ApophysisCommandManager in 'Gui\ApophysisCommandManager.pas';
 
 begin
   Application.Initialize;

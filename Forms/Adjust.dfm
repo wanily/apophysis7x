@@ -99,6 +99,10 @@ object AdjustForm: TAdjustForm
     object TabSheet1: TTabSheet
       Caption = 'Camera'
       ImageIndex = 18
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         443
         102)
@@ -283,6 +287,10 @@ object AdjustForm: TAdjustForm
     object TabSheet2: TTabSheet
       Caption = 'Rendering'
       ImageIndex = 35
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         443
         102)
@@ -498,6 +506,10 @@ object AdjustForm: TAdjustForm
     object TabSheet3: TTabSheet
       Caption = 'Gradient'
       ImageIndex = 11
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         443
         102)
@@ -829,6 +841,10 @@ object AdjustForm: TAdjustForm
     object TabSheet4: TTabSheet
       Caption = 'Image Size'
       ImageIndex = 51
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         443
         102)

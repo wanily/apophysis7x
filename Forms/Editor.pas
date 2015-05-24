@@ -3087,12 +3087,12 @@ end;
 
 procedure TEditForm.mnuUndoClick(Sender: TObject);
 begin
-  MainForm.ExecuteUndo(TUiCommandAction.DefaultArgs);
+  MainForm.RevertLastAction;
 end;
 
 procedure TEditForm.mnuRedoClick(Sender: TObject);
 begin
-  MainForm.ExecuteRedo(TUiCommandAction.DefaultArgs);
+  MainForm.CommitLastRevertedAction;
 end;
 
 procedure TEditForm.mnuLowQualityClick(Sender: TObject);
@@ -4487,7 +4487,7 @@ end;
 
 procedure TEditForm.tbFullViewClick(Sender: TObject);
 begin
-  MainForm.ExecuteShowFullscreenPreviewWindow(TUiCommandAction.DefaultArgs);
+  MainForm.OpenPreviewInFullscreenMode;
 end;
 
 //-- Variable List -------------------------------------------------------------

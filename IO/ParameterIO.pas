@@ -17,7 +17,7 @@ type
 
     public
 
-      constructor Create(const path: string);
+      constructor LoadBatch(const path: string);
       destructor Destroy; override;
 
       property Count: integer read CountFlames;
@@ -29,12 +29,13 @@ type
       procedure StoreControlPoint(i: integer; cp: TControlPoint);
       procedure AppendControlPoint(cp: TControlPoint);
 
-      procedure SaveFlame(i: integer; filePath: string);
+      procedure AppendFlameAndSaveBatch(i: integer; filePath: string);
       procedure SaveBatch(filePath: string);
 
       procedure RemoveAt(i: integer);
 
       class procedure SaveControlPointToFile(cp: TControlPoint; filePath: string);
+      class function CreateBatch(filePath: string): TBatch;
   end;
 
 function IsRegisteredVariation(name: string): boolean;
@@ -51,7 +52,7 @@ function SaveCpToXmlCompatible(var xml: string; const cp1: TControlPoint): boole
 
 implementation
 
-constructor TBatch.Create(const path: string);
+constructor TBatch.LoadBatch(const path: string);
 begin
   if not FileExists(path) then
     raise Exception.Create('Could not find file: "' + path + '"');
@@ -92,14 +93,14 @@ begin
   mNames.Delete(i);
 end;
 
-procedure TBatch.SaveFlame(i: Integer; filePath: string);
+procedure TBatch.AppendFlameAndSaveBatch(i: Integer; filePath: string);
 var
   fileList: TStringList;
   tempBatch: TBatch;
 begin
   if FileExists(filePath) then
   begin
-    tempBatch := TBatch.Create(filePath);
+    tempBatch := TBatch.LoadBatch(filePath);
     tempBatch.mNames.Add(mNames[i]);
     tempBatch.mData.Add(mData[i]);
     tempBatch.SaveBatch(filePath);
@@ -140,6 +141,19 @@ begin
   fileList.Destroy;
 end;
 
+class function TBatch.CreateBatch(filePath: string): TBatch;
+var
+  fileList: TStringList;
+begin
+  fileList := TStringList.Create;
+  fileList.Add('<flames name="' + ChangeFileExt(ExtractFileName(filePath), '') + '">');
+  fileList.Add('</flames>');
+  fileList.SaveToFile(filePath);
+  fileList.Destroy;
+
+  Result := TBatch.LoadBatch(filePath);
+end;
+
 class procedure TBatch.SaveControlPointToFile(cp: TControlPoint; filePath: string);
 var
   fileList: TStringList;
@@ -150,7 +164,7 @@ begin
 
   if FileExists(filePath) then
   begin
-    tempBatch := TBatch.Create(filePath);
+    tempBatch := TBatch.LoadBatch(filePath);
     tempBatch.mNames.Add(cp.name);
     tempBatch.mData.Add(xml);
     tempBatch.SaveBatch(filePath);

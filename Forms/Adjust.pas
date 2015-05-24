@@ -452,21 +452,17 @@ begin
 end;
 
 procedure TAdjustForm.UpdateFlame(bBgOnly: boolean = false);
-var
-  stArgs: TUiCommandBooleanEventArgs;
 begin
   if not bBgOnly then
     MainForm.StopPreviewRenderThread;
+
   MainForm.PushWorkspaceToUndoStack;
   MainCp.Copy(cp, true);
 
   if EditForm.Visible then EditForm.UpdateDisplay;
 
-  stArgs.Command := MainForm.ShowTransparencyCommand;
-  stArgs.Checked := ShowTransparency;
-
   if bBgOnly then
-    MainForm.ExecuteSetShowTransparencyInPreview(stArgs)
+    MainForm.SetShowTransparencyInPreview(ShowTransparency)
   else
     MainForm.PreviewRedrawDelayTimer.enabled := true;
 end;
@@ -1549,8 +1545,32 @@ begin
 end;
 
 procedure TAdjustForm.mnuSmoothPaletteClick(Sender: TObject);
+var
+  openDialog: TFileOpenDialog;
 begin
-  MainForm.ExecuteCreatePaletteFromImage(TuiCommandAction.DefaultArgs);
+  openDialog := TFileOpenDialog.Create(MainForm);
+  openDialog.DefaultFolder := Global.ParamFolder;
+
+  with openDialog.FileTypes.Add do
+  begin
+    DisplayName := 'Images (*.bmp; *.jpg; *.jpeg; *.dib)';
+    FileMask := '*.bmp;*.jpg;*.jpeg;*.dib';
+  end;
+
+  with openDialog.FileTypes.Add do
+  begin
+    DisplayName := 'All Files (*.*)';
+    FileMask := '*.*';
+  end;
+
+  openDialog.DefaultExtension := 'jpg';
+
+  if (openDialog.Execute) then
+  begin
+    MainForm.CreatePaletteFromImageAndApplyToFlameInWorkspace(openDialog.FileName);
+  end;
+
+  openDialog.Destroy;
 end;
 
 procedure TAdjustForm.SaveGradient1Click(Sender: TObject);
