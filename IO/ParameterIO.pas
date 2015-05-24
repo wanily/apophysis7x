@@ -33,6 +33,8 @@ type
       procedure SaveBatch(filePath: string);
 
       procedure RemoveAt(i: integer);
+
+      class procedure SaveControlPointToFile(cp: TControlPoint; filePath: string);
   end;
 
 function IsRegisteredVariation(name: string): boolean;
@@ -105,7 +107,7 @@ begin
   end else begin
     fileList := TStringList.Create;
     fileList.Text := mData[i];
-    fileList.Insert(0, '<flames name="' + mNames[i] + '">');
+    fileList.Insert(0, '<flames name="' + ChangeFileExt(ExtractFileName(filePath), '') + '">');
     fileList.Add('</flames>');
     fileList.SaveToFile(filePath);
     fileList.Destroy;
@@ -136,6 +138,31 @@ begin
   fileList.Add('</flames>');
   fileList.SaveToFile(filePath);
   fileList.Destroy;
+end;
+
+class procedure TBatch.SaveControlPointToFile(cp: TControlPoint; filePath: string);
+var
+  fileList: TStringList;
+  tempBatch: TBatch;
+  xml: string;
+begin
+  SaveCpToXmlCompatible(xml, cp);
+
+  if FileExists(filePath) then
+  begin
+    tempBatch := TBatch.Create(filePath);
+    tempBatch.mNames.Add(cp.name);
+    tempBatch.mData.Add(xml);
+    tempBatch.SaveBatch(filePath);
+    tempBatch.Destroy;
+  end else begin
+    fileList := TStringList.Create;
+    fileList.Text := xml;
+    fileList.Insert(0, '<flames name="' + ChangeFileExt(ExtractFileName(filePath), '') + '">');
+    fileList.Add('</flames>');
+    fileList.SaveToFile(filePath);
+    fileList.Destroy;
+  end;
 end;
 
 procedure TBatch.Parse(const path: string);

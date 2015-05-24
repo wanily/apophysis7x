@@ -1164,10 +1164,6 @@ object EditForm: TEditForm
           end
           object tabXForm: TTabSheet
             Caption = 'Transform'
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object ScrollBox1: TScrollBox
               Left = 0
               Top = 0
@@ -1458,10 +1454,6 @@ object EditForm: TEditForm
           object tabColors: TTabSheet
             Caption = 'Colors'
             ImageIndex = 3
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object GroupBox4: TGroupBox
               Left = 8
               Top = 336
@@ -1755,10 +1747,6 @@ object EditForm: TEditForm
           end
           object tabVariations: TTabSheet
             Caption = 'Variations'
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             DesignSize = (
               290
               420)
@@ -1884,10 +1872,6 @@ object EditForm: TEditForm
           object TabChaos: TTabSheet
             Caption = 'Xaos'
             ImageIndex = 5
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             DesignSize = (
               290
               420)
@@ -2184,7 +2168,7 @@ object EditForm: TEditForm
     Left = 313
     Top = 40
     Bitmap = {
-      494C010121003000480010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101210030004C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000009000000001002000000000000090
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

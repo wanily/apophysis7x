@@ -28,7 +28,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, ComCtrls, Math, Buttons, Registry, ExtCtrls, MMSystem, Windows7, 
   ControlPoint, RenderThread, cmap, RenderingCommon, RenderingInterface,
-  ShellAPI, Translation, ActiveX, ComObj;
+  ShellAPI, Translation, ActiveX, ComObj, ParameterIo;
 
 type
   TRenderForm = class(TForm)
@@ -626,8 +626,8 @@ begin
       cp.Copy(MainCP);
       cp.cmap := maincp.cmap;
       zoom := maincp.zoom;
-      Center[0] := MainForm.center[0];
-      Center[1] := MainForm.center[1];
+      Center[0] := MainForm.CameraCenter[0];
+      Center[1] := MainForm.CameraCenter[1];
       FileName := path + cp.name + ext;
       Output.Lines.Add('--- ' + Format(TextByKey('render-status-log-title'), [ExtractFileName(FileName)]) + ' ---');
       Output.Lines.Add('  ' + Format(TextByKey('render-status-log-size'), [ImageWidth, ImageHeight]));
@@ -661,7 +661,7 @@ begin
         cp.Transparency := (PNGTransparency <> 0) and (UpperCase(ExtractFileExt(FileName)) = '.PNG');
         renderPath := ExtractFilePath(Filename);
         if chkSave.checked then
-          MainForm.SaveXMLFlame(cp, ExtractFileName(FileName), renderPath + 'renders7X.flame');
+          TBatch.SaveControlPointToFile(cp, renderPath + 'renders7X.flame');
 
         oldProg:=0;
         oldElapsed:=0;
@@ -744,7 +744,7 @@ begin
       cp.Transparency := (PNGTransparency <> 0) and (UpperCase(ExtractFileExt(FileName)) = '.PNG');
       renderPath := ExtractFilePath(Filename);
       if chkSave.checked then
-        MainForm.SaveXMLFlame(cp, ExtractFileName(FileName), renderPath + 'renders7X.flame');
+        TBatch.SaveControlPointToFile(cp, renderPath + 'renders7X.flame');
 
       oldProg:=0;
       oldElapsed:=0;

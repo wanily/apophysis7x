@@ -1096,15 +1096,15 @@ begin
   ShowSelectedInfo;
   TriangleView.Refresh;
   if DrawMain then begin
-    MainForm.StopThread;
+    MainForm.StopPreviewRenderThread;
 
     MainCp.Copy(cp, true);
 
     MainCp.cmap := cmap;
     if mnuResetLoc.checked then begin
       MainCp.zoom := 0;
-      MainForm.center[0] := cp.center[0];
-      MainForm.center[1] := cp.center[1];
+      MainForm.CameraCenter[0] := cp.center[0];
+      MainForm.CameraCenter[1] := cp.center[1];
     end;
     if AdjustForm.Visible then AdjustForm.UpdateDisplay;
     MainForm.PreviewRedrawDelayTimer.enabled := true;
@@ -1152,7 +1152,7 @@ begin
   if (t = Transforms) then
   begin
     assert(cp.HasFinalXForm or EnableFinalXform);
-    MainForm.UpdateUndo;
+    MainForm.PushWorkspaceToUndoStack;
     EnableFinalXform := false;
     cp.finalXformEnabled := false;
     cp.xform[Transforms].Clear;
@@ -1165,7 +1165,7 @@ begin
   else
   if (Transforms <= 1) then exit
   else begin
-    MainForm.UpdateUndo;
+    MainForm.PushWorkspaceToUndoStack;
 
     if RebuildXaosLinks then begin
       // check for single "to" links
@@ -2695,7 +2695,7 @@ begin
 
     if HasChanged then
     begin
-      MainForm.UpdateUndo;
+      MainForm.PushWorkspaceToUndoStack;
       UpdateFlame(true);
       HasChanged := False;
     end;
@@ -2801,7 +2801,7 @@ procedure TEditForm.mnuAddClick(Sender: TObject);
 begin
   if Transforms < NXFORMS then
   begin
-    MainForm.UpdateUndo;
+    MainForm.PushWorkspaceToUndoStack;
     MainTriangles[Transforms+1] := MainTriangles[Transforms];
     cp.xform[Transforms+1].Assign(cp.xform[Transforms]);
     MainTriangles[Transforms] := MainTriangles[-1];
@@ -2822,7 +2822,7 @@ var
 begin
   if Transforms < NXFORMS then
   begin
-    MainForm.UpdateUndo;
+    MainForm.PushWorkspaceToUndoStack;
     MainTriangles[Transforms+1] := MainTriangles[Transforms];
     cp.xform[Transforms+1].Assign(cp.xform[Transforms]);
     if SelectedTriangle <> Transforms then
@@ -2910,7 +2910,7 @@ begin
       cp.xform[SelectedTriangle].density := StrToFloat(TEdit(Sender).Text);
       TEdit(Sender).Text := Format('%.6g', [cp.xform[SelectedTriangle].density]);
     end;
-    MainForm.UpdateUndo;
+    MainForm.PushWorkspaceToUndoStack;
     UpdateFlame(True);
   end;
 
@@ -2973,7 +2973,7 @@ begin
         cp.xform[SelectedTriangle].density := StrToFloat(TEdit(Sender).Text);
         TEdit(Sender).Text := Format('%.6g', [cp.xform[SelectedTriangle].density]);
       end;
-      MainForm.UpdateUndo;
+      MainForm.PushWorkspaceToUndoStack;
       UpdateFlame(True);
     end;
   end;
@@ -3010,7 +3010,7 @@ begin
     TEdit(Sender).Text := Format('%.6g', [NewVal]);
     if (OldVal <> NewVal) and Allow then
     begin
-      MainForm.UpdateUndo;
+      MainForm.PushWorkspaceToUndoStack;
       cp.xform[SelectedTriangle].density := NewVal;
       //ReadjustWeights(cp);
       UpdateFlame(True);
@@ -3043,7 +3043,7 @@ begin
   TEdit(Sender).Text := Format('%.6g', [NewVal]);
   if (OldVal <> NewVal) and Allow then
   begin
-    MainForm.UpdateUndo;
+    MainForm.PushWorkspaceToUndoStack;
     cp.xform[SelectedTriangle].density := NewVal;
     //ReadjustWeights(cp);
     UpdateFlame(True);
@@ -3087,12 +3087,12 @@ end;
 
 procedure TEditForm.mnuUndoClick(Sender: TObject);
 begin
-  MainForm.Undo(TUiCommandAction.DefaultArgs);
+  MainForm.ExecuteUndo(TUiCommandAction.DefaultArgs);
 end;
 
 procedure TEditForm.mnuRedoClick(Sender: TObject);
 begin
-  MainForm.Redo(TUiCommandAction.DefaultArgs);
+  MainForm.ExecuteRedo(TUiCommandAction.DefaultArgs);
 end;
 
 procedure TEditForm.mnuLowQualityClick(Sender: TObject);
@@ -3152,7 +3152,7 @@ procedure TEditForm.mnuFlipAllVClick(Sender: TObject);
 var
   i: integer;
 begin
-  MainForm.UpdateUndo;
+  MainForm.PushWorkspaceToUndoStack;
   for i := -1 to Transforms do
   begin
     MainTriangles[i] := FlipTriangleVertical(MainTriangles[i]);
@@ -3167,7 +3167,7 @@ procedure TEditForm.mnuFlipAllHClick(Sender: TObject);
 var
   i: integer;
 begin
-  MainForm.UpdateUndo;
+  MainForm.PushWorkspaceToUndoStack;
   for i := -1 to Transforms do
   begin
     MainTriangles[i] := FlipTriangleHorizontal(MainTriangles[i]);
@@ -3182,7 +3182,7 @@ procedure TEditForm.mnuFlipVerticalClick(Sender: TObject);
 var
   p: double;
 begin
-  MainForm.UpdateUndo;
+  MainForm.PushWorkspaceToUndoStack;
   with MainTriangles[SelectedTriangle] do
   begin
     p := GetPivot.y * 2;
@@ -3198,7 +3198,7 @@ procedure TEditForm.mnuFlipHorizontalClick(Sender: TObject);
 var
   p: double;
 begin
-  MainForm.UpdateUndo;
+  MainForm.PushWorkspaceToUndoStack;
   with MainTriangles[SelectedTriangle] do
   begin
     p := GetPivot.x * 2;
@@ -3285,7 +3285,7 @@ begin
 
   //TEdit(Sender).Text := Format('%.6g', [NewVal]);
 
-  MainForm.UpdateUndo; // TODO - prevent unnecessary UpdateUndo...
+  MainForm.PushWorkspaceToUndoStack; // TODO - prevent unnecessary UpdateUndo...
  with cp.xform[SelectedTriangle] do
  begin
   if btnCoefsRect.Down = true then
@@ -3349,7 +3349,7 @@ procedure TEditForm.scrlXFormColorScroll(Sender: TObject;
   ScrollCode: TScrollCode; var ScrollPos: Integer);
 begin
   if (ScrollCode = scEndScroll) and HasChanged then begin
-    MainForm.UpdateUndo;
+    MainForm.PushWorkspaceToUndoStack;
     UpdateFlame(True);
   end;
 end;
@@ -3406,7 +3406,7 @@ begin
   begin
     updating := true;
     scrlXFormColor.Position := round(v * scrlXFormColor.Max);
-    MainForm.UpdateUndo;
+    MainForm.PushWorkspaceToUndoStack;
     cp.xform[SelectedTriangle].color := v;
     updating := false;
     UpdateFlame(true);
@@ -3446,7 +3446,7 @@ begin
   TEdit(Sender).Text := Format('%.6g', [NewVal]);
   if (OldVal <> NewVal) and Allow then
   begin
-    MainForm.UpdateUndo;
+    MainForm.PushWorkspaceToUndoStack;
     cp.xform[SelectedTriangle].transOpacity := NewVal;
     UpdateFlame(True);
   end;
@@ -3476,7 +3476,7 @@ begin
   TEdit(Sender).Text := Format('%.6g', [NewVal]);
   if (OldVal <> NewVal) and Allow then
   begin
-    MainForm.UpdateUndo;
+    MainForm.PushWorkspaceToUndoStack;
     cp.xform[SelectedTriangle].pluginColor := NewVal;
     UpdateFlame(True);
   end;
@@ -3506,7 +3506,7 @@ begin
   TEdit(Sender).Text := Format('%.6g', [NewVal]);
   if (OldVal <> NewVal) and Allow then
   begin
-    MainForm.UpdateUndo;
+    MainForm.PushWorkspaceToUndoStack;
     cp.xform[SelectedTriangle].symmetry := NewVal;
     UpdateFlame(True);
   end;
@@ -3540,7 +3540,7 @@ begin
     TEdit(Sender).Text := Format('%.6g', [NewVal]);
     if (OldVal <> NewVal) and Allow then
     begin
-      MainForm.UpdateUndo;
+      MainForm.PushWorkspaceToUndoStack;
       cp.xform[SelectedTriangle].transOpacity := NewVal;
       UpdateFlame(True);
     end;
@@ -3575,7 +3575,7 @@ begin
     TEdit(Sender).Text := Format('%.6g', [NewVal]);
     if (OldVal <> NewVal) and Allow then
     begin
-      MainForm.UpdateUndo;
+      MainForm.PushWorkspaceToUndoStack;
       cp.xform[SelectedTriangle].pluginColor := NewVal;
       UpdateFlame(True);
     end;
@@ -3610,7 +3610,7 @@ begin
     TEdit(Sender).Text := Format('%.6g', [NewVal]);
     if (OldVal <> NewVal) and Allow then
     begin
-      MainForm.UpdateUndo;
+      MainForm.PushWorkspaceToUndoStack;
       cp.xform[SelectedTriangle].symmetry := NewVal;
       UpdateFlame(True);
     end;
@@ -3634,7 +3634,7 @@ begin
   end;
   if (NewVal <> OldVal) then
   begin
-    MainForm.UpdateUndo;
+    MainForm.PushWorkspaceToUndoStack;
     cp.xform[SelectedTriangle].SetVariation(i, NewVal);
     VEVars.Values[VarNames(i)] := Format('%.6g', [NewVal]);
     ShowSelectedInfo;
@@ -3819,7 +3819,7 @@ begin
 
     if HasChanged then
     begin
-      MainForm.UpdateUndo;
+      MainForm.PushWorkspaceToUndoStack;
 
       UpdateFlame(true);
       HasChanged := False;
@@ -3883,7 +3883,7 @@ begin
     end else changed := false;
   end;
 
-  if changed then MainForm.UpdateUndo;
+  if changed then MainForm.PushWorkspaceToUndoStack;
   UpdateFlame(true);
 end;
 
@@ -3967,7 +3967,7 @@ begin
   if GetKeyState(VK_CONTROL) < 0 then angle := angle/6.0
   else if GetKeyState(VK_SHIFT) < 0 then angle := angle*6.0;
 
-  MainForm.UpdateUndo;
+  MainForm.PushWorkspaceToUndoStack;
   MainTriangles[SelectedTriangle] :=
     RotateTrianglePoint(MainTriangles[SelectedTriangle], GetPivot.x, GetPivot.y, (PI/180)*angle);
   HasChanged := True;
@@ -3976,7 +3976,7 @@ end;
 
 procedure TEditForm.btTrgRotateLeft90Click(Sender: TObject);
 begin
-  MainForm.UpdateUndo;
+  MainForm.PushWorkspaceToUndoStack;
   MainTriangles[SelectedTriangle] :=
     RotateTrianglePoint(MainTriangles[SelectedTriangle], GetPivot.x, GetPivot.y, PI/2);
   HasChanged := True;
@@ -3998,7 +3998,7 @@ begin
   if GetKeyState(VK_CONTROL) < 0 then angle := angle/6.0
   else if GetKeyState(VK_SHIFT) < 0 then angle := angle*6.0;
 
-  MainForm.UpdateUndo;
+  MainForm.PushWorkspaceToUndoStack;
   MainTriangles[SelectedTriangle] :=
     RotateTrianglePoint(MainTriangles[SelectedTriangle], GetPivot.x, GetPivot.y, -(PI/180)*angle);
   HasChanged := True;
@@ -4007,7 +4007,7 @@ end;
 
 procedure TEditForm.btTrgRotateRight90Click(Sender: TObject);
 begin
-  MainForm.UpdateUndo;
+  MainForm.PushWorkspaceToUndoStack;
   MainTriangles[SelectedTriangle] :=
     RotateTrianglePoint(MainTriangles[SelectedTriangle], GetPivot.x, GetPivot.y, -PI/2);
   HasChanged := True;
@@ -4036,7 +4036,7 @@ begin
   if GetKeyState(VK_CONTROL) < 0 then offset := offset/10.0
   else if GetKeyState(VK_SHIFT) < 0 then offset := offset*10.0;
 
-  MainForm.UpdateUndo;
+  MainForm.PushWorkspaceToUndoStack;
   for i := 0 to 2 do begin
     MainTriangles[SelectedTriangle].x[i] :=
                   MainTriangles[SelectedTriangle].x[i] + dx*offset;
@@ -4104,7 +4104,7 @@ begin
   if GetKeyState(VK_CONTROL) < 0 then scale := sqrt(scale)
   else if GetKeyState(VK_SHIFT) < 0 then scale := scale*scale;
 
-  MainForm.UpdateUndo;
+  MainForm.PushWorkspaceToUndoStack;
   MainTriangles[SelectedTriangle] :=
     ScaleTrianglePoint(MainTriangles[SelectedTriangle], GetPivot.x, GetPivot.y, scale);
   HasChanged := True;
@@ -4126,7 +4126,7 @@ begin
   if GetKeyState(VK_CONTROL) < 0 then scale := sqrt(scale)
   else if GetKeyState(VK_SHIFT) < 0 then scale := scale*scale;
 
-  MainForm.UpdateUndo;
+  MainForm.PushWorkspaceToUndoStack;
   MainTriangles[SelectedTriangle] :=
     ScaleTrianglePoint(MainTriangles[SelectedTriangle], GetPivot.x, GetPivot.y, scale);
   HasChanged := True;
@@ -4487,7 +4487,7 @@ end;
 
 procedure TEditForm.tbFullViewClick(Sender: TObject);
 begin
-  MainForm.ShowFullscreenPreviewWindow(TUiCommandAction.DefaultArgs);
+  MainForm.ExecuteShowFullscreenPreviewWindow(TUiCommandAction.DefaultArgs);
 end;
 
 //-- Variable List -------------------------------------------------------------
@@ -4515,7 +4515,7 @@ begin
   if (NewVal <> OldVal) then
   begin
     vleVariables.Cells[1,i];
-    MainForm.UpdateUndo;
+    MainForm.PushWorkspaceToUndoStack;
 
     cp.xform[SelectedTriangle].SetVariable(vleVariables.Keys[i], NewVal);
     vleVariables.Values[vleVariables.Keys[i]] := Format('%.6g', [NewVal]);
@@ -4611,7 +4611,7 @@ begin
      (MainTriangles[SelectedTriangle].y[2] = MainTriangles[-1].y[2])
     then exit;
 
-  MainForm.UpdateUndo;
+  MainForm.PushWorkspaceToUndoStack;
   MainTriangles[SelectedTriangle] := MainTriangles[-1];
   UpdateFlame(True);
 {
@@ -4638,7 +4638,7 @@ procedure TEditForm.mnuResetAllClick(Sender: TObject);
 var
   i: integer;
 begin
-  MainForm.UpdateUndo;
+  MainForm.PushWorkspaceToUndoStack;
   for i := 0 to Transforms do cp.xform[i].Clear;
   cp.xform[0].SetVariation(0, 1);
   cp.xform[0].density := 0.5;
@@ -4675,7 +4675,7 @@ begin
   begin
     if (c[0][0] = 1) and (c[0][1] = 0) then exit;
 
-    MainForm.UpdateUndo;
+    MainForm.PushWorkspaceToUndoStack;
     c[0][0] := 1;
     c[0][1] := 0;
   end;
@@ -4688,7 +4688,7 @@ begin
   if (cp.xform[SelectedTriangle].c[1][0] = 0) and
      (cp.xform[SelectedTriangle].c[1][1] = 1) then exit;
 
-  MainForm.UpdateUndo;
+  MainForm.PushWorkspaceToUndoStack;
   cp.xform[SelectedTriangle].c[1][0] := 0;
   cp.xform[SelectedTriangle].c[1][1] := 1;
 
@@ -4707,7 +4707,7 @@ begin
   if (cp.xform[SelectedTriangle].c[2][0] = 0) and
      (cp.xform[SelectedTriangle].c[2][1] = 0) then exit;
 
-  MainForm.UpdateUndo;
+  MainForm.PushWorkspaceToUndoStack;
   cp.xform[SelectedTriangle].c[2][0] := 0;
   cp.xform[SelectedTriangle].c[2][1] := 0;
 
@@ -4751,7 +4751,7 @@ begin
   begin
     if (p[0][0] = 1) and (p[0][1] = 0) then exit;
 
-    MainForm.UpdateUndo;
+    MainForm.PushWorkspaceToUndoStack;
     p[0][0] := 1;
     p[0][1] := 0;
   end;
@@ -4764,7 +4764,7 @@ begin
   if (cp.xform[SelectedTriangle].p[1][0] = 0) and
      (cp.xform[SelectedTriangle].p[1][1] = 1) then exit;
 
-  MainForm.UpdateUndo;
+  MainForm.PushWorkspaceToUndoStack;
   cp.xform[SelectedTriangle].p[1][0] := 0;
   cp.xform[SelectedTriangle].p[1][1] := 1;
   cp.TrianglesFromCP(MainTriangles);
@@ -4776,7 +4776,7 @@ begin
   if (cp.xform[SelectedTriangle].p[2][0] = 0) and
      (cp.xform[SelectedTriangle].p[2][1] = 0) then exit;
 
-  MainForm.UpdateUndo;
+  MainForm.PushWorkspaceToUndoStack;
   cp.xform[SelectedTriangle].p[2][0] := 0;
   cp.xform[SelectedTriangle].p[2][1] := 0;
   cp.TrianglesFromCP(MainTriangles);
@@ -4806,7 +4806,7 @@ begin
     end;
   end;
 
-  MainForm.UpdateUndo; // TODO - prevent unnecessary UpdateUndo...
+  MainForm.PushWorkspaceToUndoStack; // TODO - prevent unnecessary UpdateUndo...
  with cp.xform[SelectedTriangle] do
  begin
   if btnCoefsRect.Down = true then
@@ -4870,7 +4870,7 @@ begin
  begin
   if (c[0,0]<>1) or (c[0,1]<>0) or(c[1,0]<>0) or (c[1,1]<>1) or (c[2,0]<>0) or (c[2,1]<>0) then
   begin
-    MainForm.UpdateUndo;
+    MainForm.PushWorkspaceToUndoStack;
     c[0, 0] := 1;
     c[0, 1] := 0;
     c[1, 0] := 0;
@@ -4890,7 +4890,7 @@ begin
  begin
   if (p[0,0]<>1) or (p[0,1]<>0) or(p[1,0]<>0) or (p[1,1]<>1) or (p[2,0]<>0) or (p[2,1]<>0) then
   begin
-    MainForm.UpdateUndo;
+    MainForm.PushWorkspaceToUndoStack;
     p[0, 0] := 1;
     p[0, 1] := 0;
     p[1, 0] := 0;
@@ -5052,7 +5052,7 @@ end;
 
 procedure TEditForm.tbEnableFinalXformClick(Sender: TObject);
 begin
-  MainForm.UpdateUndo;
+  MainForm.PushWorkspaceToUndoStack;
   EnableFinalXform := tbEnableFinalXform.Down;
   if (cp.HasFinalXForm = false) then
   begin
@@ -5210,7 +5210,7 @@ begin
 
     if HasChanged then
     begin
-      MainForm.UpdateUndo;
+      MainForm.PushWorkspaceToUndoStack;
 
       UpdateFlame(true);
       HasChanged := False;
@@ -5278,7 +5278,7 @@ begin
     exit;
   end;
 
-  MainForm.UpdateUndo;
+  MainForm.PushWorkspaceToUndoStack;
   pEdit^.Text := FloatToStr(pValue^);
   UpdateFlame(true);
 end;
@@ -5308,7 +5308,7 @@ begin
     nx2 := x[1] + dy*cos(ay*pi/2);
     ny2 := y[1] + dy*sin(ay*pi/2);
     if (x[0] = nx0) and (y[0] = ny0) and (x[2] = nx2) and (y[2] = ny2) then exit;
-    MainForm.UpdateUndo;
+    MainForm.PushWorkspaceToUndoStack;
     x[0] := nx0;
     y[0] := ny0;
     x[2] := nx2;
@@ -5347,7 +5347,7 @@ begin
       ny2 := y[1] + 1;
     end;
     if (x[0] = nx0) and (y[0] = ny0) and (x[2] = nx2) and (y[2] = ny2) then exit;
-    MainForm.UpdateUndo;
+    MainForm.PushWorkspaceToUndoStack;
     x[0] := nx0;
     y[0] := ny0;
     x[2] := nx2;
@@ -5372,7 +5372,7 @@ begin
       nx := d*cos(a*pi/2);
       ny := d*sin(a*pi/2);
       if (x[1] = nx) and (y[1] = ny) then exit;
-      MainForm.UpdateUndo;
+      MainForm.PushWorkspaceToUndoStack;
       x[1] := nx;
       y[1] := ny;
       x[0] := x[1] + xx;
@@ -5389,7 +5389,7 @@ begin
       nx := x[1] + d*cos(a*pi/2);
       ny := y[1] + d*sin(a*pi/2);
       if (x[n] = nx) and (y[n] = ny) then exit;
-      MainForm.UpdateUndo;
+      MainForm.PushWorkspaceToUndoStack;
       x[n] := nx;
       y[n] := ny;
       UpdateFlame(True);
@@ -5411,7 +5411,7 @@ begin
       nx := x[1]/d;
       ny := y[1]/d;
       if (x[1] = nx) and (y[1] = ny) then exit;
-      MainForm.UpdateUndo;
+      MainForm.PushWorkspaceToUndoStack;
       x[1] := nx;
       y[1] := ny;
       x[0] := x[1] + xx;
@@ -5433,7 +5433,7 @@ begin
         ny := y[1] + ifthen(n=2, 1, 0);
       end;
       if (x[n] = nx) and (y[n] = ny) then exit;
-      MainForm.UpdateUndo;
+      MainForm.PushWorkspaceToUndoStack;
       x[n] := nx;
       y[n] := ny;
       UpdateFlame(True);
@@ -5479,7 +5479,7 @@ begin
      (MainTriangles[SelectedTriangle].y[1] <> MemTriangle.y[1]) or
      (MainTriangles[SelectedTriangle].y[2] <> MemTriangle.y[2]) then
   begin
-    MainForm.UpdateUndo;
+    MainForm.PushWorkspaceToUndoStack;
     MainTriangles[SelectedTriangle] := MemTriangle;
     UpdateFlame(True);
   end;
@@ -5487,7 +5487,7 @@ end;
 
 procedure TEditForm.chkAutoZscaleClick(Sender: TObject);
 begin
-  MainForm.UpdateUndo;
+  MainForm.PushWorkspaceToUndoStack;
   cp.xform[SelectedTriangle].autoZscale := chkAutoZscale.Checked;
   UpdateFlame(True);
 end;
@@ -5514,7 +5514,7 @@ begin
   end;
   if (NewVal <> OldVal) then
   begin
-    MainForm.UpdateUndo;
+    MainForm.PushWorkspaceToUndoStack;
 
     if mnuChaosViewTo.Checked then
       cp.xform[SelectedTriangle].modWeights[i] := NewVal
@@ -5634,7 +5634,7 @@ begin
     end;
   if noEdit then exit;
 
-  Mainform.UpdateUndo;
+  Mainform.PushWorkspaceToUndoStack;
   for i := 1 to cp.NumXForms do
     if mnuChaosViewTo.Checked then
       cp.xform[SelectedTriangle].modWeights[i-1] := 0
@@ -5664,7 +5664,7 @@ begin
     end;
   if noEdit then exit;
 
-  Mainform.UpdateUndo;
+  Mainform.PushWorkspaceToUndoStack;
   for i := 1 to cp.NumXForms do
     if mnuChaosViewTo.Checked then
       cp.xform[SelectedTriangle].modWeights[i-1] := 1
@@ -5687,7 +5687,7 @@ begin
     begin
       incl := TransformSelectionForm.IncludedIndices;
 
-      MainForm.UpdateUndo;
+      MainForm.PushWorkspaceToUndoStack;
 
       MainTriangles[Transforms+1] := MainTriangles[Transforms];
       cp.xform[Transforms+1].Assign(cp.xform[Transforms]);
@@ -5810,7 +5810,7 @@ begin
     cp.xform[SelectedTriangle].SetVariation(i, 0);
   end;
 
-  if changed then MainForm.UpdateUndo;
+  if changed then MainForm.PushWorkspaceToUndoStack;
   UpdateFlame(true);
 end;
 
@@ -5872,7 +5872,7 @@ begin
   newval := txtName.Text;
 
   if (oldval <> newval) then begin
-    MainForm.UpdateUndo;
+    MainForm.PushWorkspaceToUndoStack;
     cp.xform[SelectedTriangle].TransformName := newval;
     n := SelectedTriangle + 1;
     if (cp.xform[SelectedTriangle].TransformName <> '') then

@@ -61,6 +61,25 @@ uses Main, Global, cmap;
 
 {$R *.DFM}
 
+function XMLEntryExists(title, filename: string): boolean;
+var
+  FileList: TStringList;
+begin
+
+  Result := false;
+  if FileExists(filename) then
+  begin
+    FileList := TStringList.Create;
+    try
+      FileList.LoadFromFile(filename);
+      if pos('<flame name="' + title + '"', FileList.Text) <> 0 then Result := true;
+    finally
+      FileList.Free;
+    end
+  end else
+    result := false;
+end;
+
 function EntryExists(En, Fl: string): boolean;
 { Searches for existing identifier in parameter files }
 var

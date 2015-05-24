@@ -3,12 +3,12 @@ object SaveForm: TSaveForm
   Top = 432
   BorderStyle = bsDialog
   Caption = 'Save Parameters'
-  ClientHeight = 153
-  ClientWidth = 517
+  ClientHeight = 122
+  ClientWidth = 414
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -14
+  Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
@@ -16,21 +16,25 @@ object SaveForm: TSaveForm
   OnCreate = FormCreate
   OnShow = FormShow
   DesignSize = (
-    517
-    153)
-  PixelsPerInch = 120
-  TextHeight = 16
+    414
+    122)
+  PixelsPerInch = 96
+  TextHeight = 13
   object btnDefGradient: TSpeedButton
-    Left = 480
-    Top = 9
-    Width = 30
-    Height = 29
+    Left = 384
+    Top = 7
+    Width = 24
+    Height = 23
     Hint = 'Browse...'
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
     Anchors = [akTop, akRight]
     Flat = True
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
-    Font.Height = -15
+    Font.Height = -12
     Font.Name = 'Arial'
     Font.Style = [fsBold]
     Glyph.Data = {
@@ -66,10 +70,14 @@ object SaveForm: TSaveForm
     OnClick = btnDefGradientClick
   end
   object btnSave: TButton
-    Left = 322
-    Top = 116
-    Width = 93
-    Height = 30
+    Left = 258
+    Top = 93
+    Width = 74
+    Height = 24
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
     Anchors = [akRight, akBottom]
     Caption = '&Save'
     Default = True
@@ -77,21 +85,29 @@ object SaveForm: TSaveForm
     OnClick = btnSaveClick
   end
   object btnCancel: TButton
-    Left = 421
-    Top = 116
-    Width = 92
-    Height = 30
+    Left = 337
+    Top = 93
+    Width = 73
+    Height = 24
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
     Anchors = [akRight, akBottom]
     Caption = 'Cancel'
     TabOrder = 3
     OnClick = btnCancelClick
   end
   object pnlTarget: TPanel
-    Left = 10
-    Top = 10
-    Width = 124
-    Height = 26
+    Left = 8
+    Top = 8
+    Width = 99
+    Height = 21
     Cursor = crArrow
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
     BevelOuter = bvLowered
     Caption = 'Destination'
     ParentShowHint = False
@@ -99,11 +115,15 @@ object SaveForm: TSaveForm
     TabOrder = 4
   end
   object pnlName: TPanel
-    Left = 10
-    Top = 39
-    Width = 124
-    Height = 26
+    Left = 8
+    Top = 31
+    Width = 99
+    Height = 21
     Cursor = crArrow
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
     BevelOuter = bvLowered
     Caption = 'Name'
     ParentShowHint = False
@@ -111,28 +131,40 @@ object SaveForm: TSaveForm
     TabOrder = 5
   end
   object txtFilename: TEdit
-    Left = 128
-    Top = 10
-    Width = 353
+    Left = 102
+    Top = 8
+    Width = 283
     Height = 24
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 0
     Text = 'txtFilename'
   end
   object txtTitle: TEdit
-    Left = 128
-    Top = 39
-    Width = 383
+    Left = 102
+    Top = 31
+    Width = 307
     Height = 24
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 1
     Text = 'txtTitle'
   end
   object optUseOldFormat: TRadioButton
-    Left = 10
-    Top = 79
-    Width = 304
-    Height = 21
+    Left = 8
+    Top = 63
+    Width = 243
+    Height = 17
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
     Anchors = [akLeft, akTop, akRight]
     Caption = 'Use classic flame format'
     Checked = True
@@ -140,10 +172,14 @@ object SaveForm: TSaveForm
     TabStop = True
   end
   object optUseNewFormat: TRadioButton
-    Left = 10
-    Top = 101
-    Width = 304
-    Height = 21
+    Left = 8
+    Top = 81
+    Width = 243
+    Height = 17
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
     Anchors = [akLeft, akTop, akRight]
     Caption = 'Use new flame format'
     Enabled = False

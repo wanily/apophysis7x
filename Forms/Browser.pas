@@ -486,8 +486,8 @@ end;
 
 procedure TGradientBrowser.Apply;
 begin
-  MainForm.StopThread;
-  MainForm.UpdateUndo;
+  MainForm.StopPreviewRenderThread;
+  MainForm.PushWorkspaceToUndoStack;
   MainCp.cmap := Palette;
   MainCP.cmapindex := -1;
   if EditForm.Visible then EditForm.UpdateDisplay;

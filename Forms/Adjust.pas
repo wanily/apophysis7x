@@ -74,8 +74,6 @@ type
     btnMenu: TSpeedButton;
     btnOpen: TSpeedButton;
     btnSmoothPalette: TSpeedButton;
-    btnPaste: TSpeedButton;
-    btnCopy: TSpeedButton;
     cmbPalette: TComboBox;
     GradientPopup: TPopupMenu;
     mnuRandomize: TMenuItem;
@@ -142,8 +140,6 @@ type
     txtGammaThreshold: TEdit;
     Panel1: TPanel;
     Label1: TLabel;
-    btnUndo: TSpeedButton;
-    btnRedo: TSpeedButton;
     pnlDOF: TPanel;
     txtDOF: TEdit;
     btnSet1: TSpeedButton;
@@ -234,8 +230,6 @@ type
       Rect: TRect; State: TOwnerDrawState);
     procedure ScrollBarScroll(Sender: TObject; ScrollCode: TScrollCode;
       var ScrollPos: Integer);
-    procedure btnCopyClick(Sender: TObject);
-    procedure btnPasteClick(Sender: TObject);
     procedure ApplicationEventsActivate(Sender: TObject);
     procedure mnuSaveasDefaultClick(Sender: TObject);
     procedure mnuRandomizeClick(Sender: TObject);
@@ -261,8 +255,6 @@ type
     procedure chkMaintainClick(Sender: TObject);
     procedure SetMainWindowSize;
     procedure GetMainWindowSize;
-    procedure btnUndoClick(Sender: TObject);
-    procedure btnRedoClick(Sender: TObject);
     procedure GradientImageDblClick(Sender: TObject);
     procedure btnColorPresetClick(Sender: TObject);
     procedure btnApplySizeClick(Sender: TObject);
@@ -464,8 +456,8 @@ var
   stArgs: TUiCommandBooleanEventArgs;
 begin
   if not bBgOnly then
-    MainForm.StopThread;
-  MainForm.UpdateUndo;
+    MainForm.StopPreviewRenderThread;
+  MainForm.PushWorkspaceToUndoStack;
   MainCp.Copy(cp, true);
 
   if EditForm.Visible then EditForm.UpdateDisplay;
@@ -474,7 +466,7 @@ begin
   stArgs.Checked := ShowTransparency;
 
   if bBgOnly then
-    MainForm.SetShowTransparencyInPreview(stArgs)
+    MainForm.ExecuteSetShowTransparencyInPreview(stArgs)
   else
     MainForm.PreviewRedrawDelayTimer.enabled := true;
 end;
@@ -534,10 +526,6 @@ begin
 	mnuLowQuality.Caption := TextByKey('common-lowquality');
 	mnuMediumQuality.Caption := TextByKey('common-mediumquality');
 	mnuHighQuality.Caption := TextByKey('common-highquality');
-	btnCopy.Hint := TextByKey('common-copy');
-	btnPaste.Hint := TextByKey('common-paste');
-	btnUndo.Hint := TextByKey('common-undo');
-	btnRedo.Hint := TextByKey('common-redo');
 	pnlWidth.Caption := TextByKey('common-width');
 	pnlHeight.Caption := TextByKey('common-height');
 	Label7.Caption := TextByKey('common-pixels');
@@ -1113,8 +1101,8 @@ end;
 
 procedure TAdjustForm.Apply;
 begin
-  MainForm.StopThread;
-  MainForm.UpdateUndo;
+  MainForm.StopPreviewRenderThread;
+  MainForm.PushWorkspaceToUndoStack;
 
   MainCp.CmapIndex := cmbPalette.ItemIndex;
   MainCp.cmap := Palette;
@@ -1562,7 +1550,7 @@ end;
 
 procedure TAdjustForm.mnuSmoothPaletteClick(Sender: TObject);
 begin
-  MainForm.CreatePaletteFromImage(TuiCommandAction.DefaultArgs);
+  MainForm.ExecuteCreatePaletteFromImage(TuiCommandAction.DefaultArgs);
 end;
 
 procedure TAdjustForm.SaveGradient1Click(Sender: TObject);
@@ -1577,9 +1565,9 @@ begin
     if SaveForm.ShowModal = mrOK then
     begin
       gradstr.add(CleanIdentifier(SaveForm.Title) + ' {');
-      gradstr.add(MainForm.GradientFromPalette(Palette, SaveForm.Title));
+      gradstr.add(MainForm.SerializeColorMapToPaletteString(Palette, SaveForm.Title));
       gradstr.add('}');
-      if MainForm.SaveGradient(gradstr.text, SaveForm.Title, SaveForm.Filename) then
+      if MainForm.SavePaletteString(gradstr.text, SaveForm.Title, SaveForm.Filename) then
         GradientFile := SaveForm.FileName;
     end;
   finally
@@ -1639,37 +1627,6 @@ begin
   BitMap.Free;
 end;
 
-procedure TAdjustForm.btnCopyClick(Sender: TObject);
-var
-  gradstr: TStringList;
-begin
-  gradstr := TStringList.Create;
-  try
-    gradstr.add(CleanIdentifier(MainCp.name) + ' {');
-    gradstr.add('gradient:');
-    gradstr.add(' title="' + MainCp.name + '" smooth=no');
-    gradstr.add(GradientString(Palette));
-    gradstr.add('}');
-    Clipboard.SetTextBuf(PChar(gradstr.text));
-    btnPaste.enabled := true;
-    mnuPaste.enabled := true;
-//z    MainForm.btnPaste.enabled := False;
-    MainForm.SetCanPaste(false);
-  finally
-    gradstr.free
-  end;
-end;
-
-procedure TAdjustForm.btnPasteClick(Sender: TObject);
-begin
-  if Clipboard.HasFormat(CF_TEXT) then
-  begin
-    UpdateGradient(CreatePalette(Clipboard.AsText));
-//    MainForm.UpdateUndo;
-    Apply;
-  end;
-end;
-
 function GradientInClipboard: boolean;
 var
   gradstr: TStringList;
@@ -1703,12 +1660,10 @@ procedure TAdjustForm.ApplicationEventsActivate(Sender: TObject);
 begin
   if GradientInClipboard then begin
     mnuPaste.enabled := true;
-    btnPaste.enabled := true;
   end
   else
   begin
     mnuPaste.enabled := false;
-    btnPaste.enabled := false;
   end;
 end;
 
@@ -1864,8 +1819,8 @@ procedure TAdjustForm.WeightScroll(Sender: TObject; ScrollCode: TScrollCode;
 begin
   if ScrollCode <> scEndScroll then Exit;
 
-  MainForm.StopThread;
-  MainForm.UpdateUndo;
+  MainForm.StopPreviewRenderThread;
+  MainForm.PushWorkspaceToUndoStack;
   MainCp.Copy(cp, true);
 
   if EditForm.Visible then EditForm.UpdateDisplay;
@@ -1962,7 +1917,7 @@ var
   l, t, w, h: integer;
 begin
   MainCp.AdjustScale(ImageWidth, ImageHeight);
-  MainForm.ResizeImage; //?
+  MainForm.FitPreviewImageSize; //?
 
   if chkResizeMain.Checked then begin
     l := MainForm.Left;
@@ -2055,16 +2010,6 @@ begin
   end;
 end;
 
-procedure TAdjustForm.btnUndoClick(Sender: TObject);
-begin
-  MainForm.Undo(TUiCommandAction.DefaultArgs);
-end;
-
-procedure TAdjustForm.btnRedoClick(Sender: TObject);
-begin
-  MainForm.Redo(TUiCommandAction.DefaultArgs);
-end;
-
 procedure TAdjustForm.btnColorPresetClick(Sender: TObject);
 begin
   cmbPalette.ItemIndex := Random(NRCMAPS);
@@ -2101,7 +2046,7 @@ begin
   end;
   v := v/100*PreviewImage.Width;
   if (v > 0) and (cp.pixels_per_unit <> v) then begin
-    MainForm.UpdateUndo;
+    MainForm.PushWorkspaceToUndoStack;
     cp.pixels_per_unit := v;
     UpdateFlame;
   end;
@@ -2594,7 +2539,7 @@ begin
   end;
   if v < 0 then v := 0;
   if v <> cp.gammaThreshRelative then begin
-    MainForm.UpdateUndo;
+    MainForm.PushWorkspaceToUndoStack;
     cp.gammaThreshRelative := v;
     txtGammaThreshold.Text := FloatToStr(cp.gammaThreshRelative);
     UpdateFlame;

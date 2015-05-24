@@ -10,6 +10,9 @@ type
   EFormatInvalid = class(Exception);
   TIntegerArray = array [0 .. 9] of Integer;
 
+type
+  TWin32Version = (wvUnknown, wvWin95, wvWin98, wvWinNT, wvWin2000, wvWinXP, wvWinVista, wvWin7, wvWinFutureFromOuterSpace);
+
 function triangle_area(t: TTriangle): double;
 function transform_affine(const t: TTriangle;
   const Triangles: TTriangles): boolean;
@@ -26,6 +29,16 @@ function OpenSaveFileDialog(Parent: TWinControl;
 function GetEnvVarValue(const VarName: string): string;
 function GradientString(c: TColorMap): string;
 function WinShellOpen(const AssociatedFile: string): boolean;
+function GetWinVersion: TWin32Version;
+function CleanIdentifier(ident: string): string;
+function CleanUPRTitle(ident: string): string;
+function EntryExists(En, Fl: string): boolean;
+function DeleteEntry(Entry, FileName: string): boolean;
+procedure swapcolor(var clist: array of cardinal; i, j: integer);
+function diffcolor(clist: array of cardinal; i, j: integer): cardinal;
+function ScaleRect(r: TRect; scale: double): TSRect;
+function WinExecAndWait32(FileName: string): integer;
+
 
 const
   APP_NAME: string = 'Apophysis/XW';
@@ -179,6 +192,173 @@ var
 function Round6(x: double): double;
 
 implementation
+
+function WinExecAndWait32(FileName: string): integer;
+var
+  zAppName: array[0..1024] of Char;
+  zCurDir: array[0..255] of Char;
+  WorkDir: string;
+  StartupInfo: TStartupInfo;
+  ProcessInfo: TProcessInformation;
+  r : dword;
+begin
+  StrPCopy(zAppName, FileName);
+  GetDir(0, WorkDir);
+  StrPCopy(zCurDir, WorkDir);
+  FillChar(StartupInfo, Sizeof(StartupInfo), #0);
+  StartupInfo.cb := Sizeof(StartupInfo);
+
+  StartupInfo.dwFlags := STARTF_USESHOWWINDOW;
+  StartupInfo.wShowWindow := 0;
+  if (not CreateProcess(nil, zAppName, nil, nil, false, CREATE_NEW_CONSOLE or NORMAL_PRIORITY_CLASS, nil, nil, StartupInfo, ProcessInfo)) then
+    Result := -1
+  else begin
+    WaitforSingleObject(ProcessInfo.hProcess, INFINITE);
+    GetExitCodeProcess(ProcessInfo.hProcess, r);
+    result := r;
+    CloseHandle(ProcessInfo.hProcess);
+    CloseHandle(ProcessInfo.hThread);
+  end;
+end;
+
+function ScaleRect(r: TRect; scale: double): TSRect;
+begin
+  Result.Left := r.Left * scale;
+  Result.Top := r.Top * scale;
+  Result.Right := r.Right * scale;
+  Result.Bottom := r.Bottom * scale;
+end;
+
+procedure swapcolor(var clist: array of cardinal; i, j: integer);
+var
+  t: cardinal;
+begin
+  t := clist[j];
+  clist[j] := clist[i];
+  clist[i] := t;
+end;
+
+function diffcolor(clist: array of cardinal; i, j: integer): cardinal;
+var
+  r1, g1, b1, r2, g2, b2: byte;
+begin
+  r1 := clist[j] and 255;
+  g1 := clist[j] shr 8 and 255;
+  b1 := clist[j] shr 16 and 255;
+  r2 := clist[i] and 255;
+  g2 := clist[i] shr 8 and 255;
+  b2 := clist[i] shr 16 and 255;
+  Result := abs((r1 - r2) * (r1 - r2)) + abs((g1 - g2) * (g1 - g2)) +
+    abs((b1 - b2) * (b1 - b2));
+end;
+
+function EntryExists(En, Fl: string): boolean;
+{ Searches for existing identifier in parameter files }
+var
+  FStrings: TStringList;
+  i: integer;
+begin
+  Result := False;
+  if FileExists(Fl) then
+  begin
+    FStrings := TStringList.Create;
+    try
+      FStrings.LoadFromFile(Fl);
+      for i := 0 to FStrings.Count - 1 do
+        if Pos(LowerCase(En) + ' {', Lowercase(FStrings[i])) <> 0 then
+          Result := True;
+    finally
+      FStrings.Free;
+    end
+  end
+  else
+    Result := False;
+end;
+
+function DeleteEntry(Entry, FileName: string): boolean;
+{ Deletes an entry from a multi-entry file }
+var
+  Strings: TStringList;
+  p, i: integer;
+begin
+  Result := True;
+  Strings := TStringList.Create;
+  try
+    i := 0;
+    Strings.LoadFromFile(FileName);
+    while Pos(Entry + ' ', Trim(Strings[i])) <> 1 do
+    begin
+      inc(i);
+    end;
+    repeat
+      p := Pos('}', Strings[i]);
+      Strings.Delete(i);
+    until p <> 0;
+    if (i < Strings.Count) and (Trim(Strings[i]) = '') then Strings.Delete(i);
+    Strings.SaveToFile(FileName);
+  finally
+    Strings.Free;
+  end;
+end;
+
+function CleanUPRTitle(ident: string): string;
+{ Strips braces but leave spaces }
+var
+  i: integer;
+begin
+  for i := 1 to Length(ident) do
+  begin
+    if ident[i] = '}' then
+      ident[i] := '_'
+    else if ident[i] = '{' then
+      ident[i] := '_';
+  end;
+  Result := ident;
+end;
+
+
+function CleanIdentifier(ident: string): string;
+{ Strips unwanted characters from an identifier}
+var
+  i: integer;
+begin
+  for i := 0 to Length(ident) do
+  begin
+    if ident[i] = #32 then
+      ident[i] := '_'
+    else if ident[i] = '}' then
+      ident[i] := '_'
+    else if ident[i] = '{' then
+      ident[i] := '_';
+  end;
+  Result := ident;
+end;
+
+function GetWinVersion: TWin32Version;
+{ Returns current version of a host Win32 platform }
+begin
+  Result := wvUnknown;
+  if Win32Platform = VER_PLATFORM_WIN32_WINDOWS then
+    if (Win32MajorVersion > 4) or ((Win32MajorVersion = 4) and (Win32MinorVersion > 0)) then
+      Result := wvWin98
+    else
+      Result := wvWin95
+  else
+    if Win32MajorVersion <= 4 then
+      Result := wvWinNT
+    else if Win32MajorVersion = 5 then
+      if Win32MinorVersion = 0 then
+        Result := wvWin2000
+      else if Win32MinorVersion >= 1 then
+        Result := wvWinXP
+    else if Win32MajorVersion = 6 then
+      if Win32MinorVersion = 0 then
+        Result := wvWinVista
+      else if Win32MinorVersion >= 1 then
+        Result := wvWin7
+    else if Win32MajorVersion >= 7 then
+      Result := wvWinFutureFromOuterSpace;
+end;
 
 function WinShellExecute(const Operation, AssociatedFile: string): Boolean;
 var
