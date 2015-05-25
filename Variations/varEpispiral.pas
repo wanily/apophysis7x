@@ -1,11 +1,11 @@
-
 {$Include 'delphiversion.pas'}
+
 unit varEpispiral; // <-- JK Changed unit name to avoid clobbering original
 //by Joel Faber  (adapted for plugin example by Jed Kelsey (JK)
 interface
 
 uses
-  Variation, XFormMan;  // <-- JK Removed some (unnecessary?) units
+  Variation, VariationPoolManager;  // <-- JK Removed some (unnecessary?) units
 
 const
   EPS: double = 1E-6;
@@ -159,7 +159,5 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-initialization
-  RegisterVariation(TIntegratedVariationLoader.Create(TVariationEpispiral), false, false);  // <-- JK Plugin manager does this
-end.
+initialization RegisterVariation(TIntegratedVariationLoader.Create(TVariationEpispiral, {$ifndef Pre15c}false{$else}true{$endif}, false)) end.
 

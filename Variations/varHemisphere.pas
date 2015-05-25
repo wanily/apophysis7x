@@ -26,7 +26,7 @@ unit varHemisphere;
 interface
 
 uses
-  Variation, XFormMan;
+  Variation, VariationPoolManager;
 
 const
   var_name = 'hemisphere';
@@ -92,6 +92,4 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-initialization
-  RegisterVariation(TIntegratedVariationLoader.Create(TVariationHemisphere), true, false);
-end.
+initialization RegisterVariation(TIntegratedVariationLoader.Create(TVariationHemisphere, true, false)) end.

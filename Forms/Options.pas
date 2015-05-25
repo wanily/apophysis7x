@@ -215,7 +215,7 @@ implementation
 {$R *.DFM}
 
 uses
-  Main, Global, Editor, ControlPoint, XFormMan, Adjust;
+  Main, Global, Editor, ControlPoint, VariationPoolManager, Adjust;
 
 procedure TOptionsForm.btnCancelClick(Sender: TObject);
 begin

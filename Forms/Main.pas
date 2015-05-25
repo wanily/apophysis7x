@@ -1171,13 +1171,15 @@ begin
       Caption := ApophysisVersion + ' ' + APP_BUILD + ' - ' + openFile;
 
     Batch := TBatch.LoadBatch(openFile);
-    ListViewManager.Batch := MainForm.Batch;
-    ListViewManager.SelectedIndex := 0;
-  end else EmptyBatch;
-
-  if (openFile = '') or (not FileExists(openFile)) and (RememberLastOpenFile) then begin
-    openFile := LastOpenFile;
+  end else begin
+    Batch := TBatch.CreateVolatileBatch;
+    CreateNewFlameInWorkspace;
+    StopPreviewRenderThread;
+    Batch.AppendControlPoint(FlameInWorkspace);
   end;
+
+  ListViewManager.Batch := MainForm.Batch;
+  ListViewManager.SelectedIndex := 0;
 
   //ListView.SetFocus;
   CanDrawOnResize := True;
@@ -2597,7 +2599,7 @@ begin
   SaveCpToXmlCompatible(xml, cp);
   cp.Destroy;
 
-  self.LoadFlameXmlIntoWorkspace(xml);
+  LoadFlameXmlIntoWorkspace(xml);
 end;
 
 procedure TMainForm.AutoSaveTimerCallback(Sender: TObject);

@@ -69,6 +69,9 @@ type TVariationPluginLoader = class (TVariationLoader)
     function GetNrVariables: integer; override;
     function GetVariableNameAt(const Index: integer): string; override;
 
+    function Supports3D: boolean; override;
+    function SupportsDC: boolean; override;
+
   private
 
     mData : TPluginData;
@@ -80,7 +83,7 @@ procedure InitializePlugins;
 implementation uses
   Windows,
   Global,
-  XFormMan,
+  VariationPoolManager,
   Settings,
   SysUtils,
   Forms,
@@ -89,6 +92,16 @@ implementation uses
 constructor TVariationPluginLoader.Create(varData : TPluginData);
 begin
   mData := varData;
+end;
+
+function TVariationPluginLoader.Supports3D;
+begin
+  with mData do Result := @PluginVarInit3D <> nil;
+end;
+
+function TVariationPluginLoader.SupportsDC;
+begin
+  with mData do Result := @PluginVarInitDC <> nil;
 end;
 
 destructor TVariationPluginLoader.Destroy;
@@ -236,7 +249,6 @@ var
   errno:integer;
   errstr:string;
 begin
-  NumBuiltinVars := NRLOCVAR + GetNrRegisteredVariations;
   PluginPath := ReadPluginDir;
 
   // Try to find regular files matching *.dll in the plugins dir
@@ -260,7 +272,7 @@ begin
             continue;
           end;
           name := String(PluginVarGetName);
-          if GetVariationIndex(name) >= 0 then begin
+          if GetVariationIndexByName(name) >= 0 then begin
             FreeLibrary(PluginHandle);
             msg := msg + 'Cannot load plugin from ' + searchResult.Name + ': variation "' + name + '" already exists!' + #13#10;
           end
@@ -279,8 +291,7 @@ begin
             @PluginVarSetVariable       := GetProcAddress(PluginHandle,'PluginVarSetVariable');
             @PluginVarResetVariable     := GetProcAddress(PluginHandle,'PluginVarResetVariable');
 
-            RegisterVariation(TVariationPluginLoader.Create(PluginData), @PluginVarInit3D <> nil, @PluginVarInitDC <> nil);
-            RegisterVariationFile(ExtractFilePath(Application.ExeName) + 'Plugins\' + searchResult.Name, name);
+            RegisterVariation(TVariationPluginLoader.Create(PluginData));
           end;
         end else begin
           errno := GetLastError;

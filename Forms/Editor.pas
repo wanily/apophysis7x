@@ -557,7 +557,7 @@ function ScaleTrianglePoint(t: TTriangle; x, y, scale: double): TTriangle;
 implementation
 
 uses
-  Main, Global, Adjust, XformMan;
+  Main, Global, Adjust, VariationPoolManager;
 
 {$R *.DFM}
 
@@ -966,25 +966,25 @@ begin
     txtXFormColor.Text := Format('%1.3f', [color]);
     scrlXFormcolor.Position := Trunc(color * scrlXFormColor.Max);
 
-   for i := 0 to NRVAR-1 do begin
+   for i := 0 to GetTotalVariationCount-1 do begin
        v := GetVariation(i);
       if v <> VarsCache[i] then
       begin
         VarsCache[i]:=v;
-        VEVars.Values[VarNames(i)] := Format('%.6g', [v]);
+        VEVars.Values[GetVariationNameByIndex(i)] := Format('%.6g', [v]);
       end;
     end;
 
-    for i:= 0 to GetNrVariableNames - 1 do begin
+    for i:= 0 to GetTotalVariableCount - 1 do begin
 {$ifndef VAR_STR}
-      GetVariable(GetVariableNameAt(i), v);
+      GetVariable(GetVariableNameByGlobalVariableIndex(i), v);
       strval := Format('%.6g', [v]);
 {$else}
       strval := GetVariableStr(GetVariableNameAt(i));
 {$endif}
        // kinda funny, but it really helped...
-      if vleVariables.Values[GetVariableNameAt(i)] <> strval then
-        vleVariables.Values[GetVariableNameAt(i)] := strval;
+      if vleVariables.Values[GetVariableNameByGlobalVariableIndex(i)] <> strval then
+        vleVariables.Values[GetVariableNameByGlobalVariableIndex(i)] := strval;
     end;
 
     //Assert(vleChaos.RowCount = Transforms+1);
@@ -1743,10 +1743,10 @@ begin
           font.Color := GetTriangleColor(mouseOverTriangle);
           brush.Style := bsClear;
           ay := Height-foc_ofs*2 + font.Height; // font.height < 0
-          for i:= NRVAR - 1 downto 0 do
+          for i:= GetTotalVariationCount - 1 downto 0 do
             if cp.xform[mouseOverTriangle].GetVariation(i) <> 0 then
             begin
-              vvstr := Varnames(i) + Format(' = %.6g', [cp.xform[mouseOverTriangle].GetVariation(i)]);
+              vvstr := GetVariationNameByIndex(i) + Format(' = %.6g', [cp.xform[mouseOverTriangle].GetVariation(i)]);
               ax := Width-foc_ofs*2 - TextWidth(vvstr);
               TextOut(ax, ay, vvstr);
               Inc(ay, font.Height);
@@ -2034,12 +2034,12 @@ begin
   TriangleView.OnExit       := TriangleViewExit;
   TriangleView.OnMouseLeave := TriangleViewmouseLeave;
 
-  for i:= 0 to NRVAR - 1 do begin
-    vn := Varnames(i);
+  for i:= 0 to GetTotalVariationCount - 1 do begin
+    vn := GetVariationNameByIndex(i);
     VEVars.InsertRow(vn, '0', True);
   end;
-  for i:= 0 to GetNrVariableNames - 1 do begin
-    vn := GetVariableNameAt(i);
+  for i:= 0 to GetTotalVariableCount - 1 do begin
+    vn := GetVariableNameByGlobalVariableIndex(i);
     vleVariables.InsertRow(vn, '0', True);
   end;
 
@@ -2090,7 +2090,7 @@ begin
   MemTriangle.x[2] := 0;
   MemTriangle.y[2] := 1;
 
-  for i := 0 to NRVAR-1 do
+  for i := 0 to GetTotalVariationCount-1 do
     VarsCache[i] := MinDouble;
 
 end;
@@ -3629,16 +3629,16 @@ begin
   i := VEVars.Row - 1;
   OldVal := Round6(cp.xform[SelectedTriangle].GetVariation(i));
   try
-    NewVal := Round6(StrToFloat(VEVars.Values[VarNames(i)]));
+    NewVal := Round6(StrToFloat(VEVars.Values[GetVariationNameByIndex(i)]));
   except
-      VEVars.Values[VarNames(i)] := Format('%.6g', [OldVal]);
+      VEVars.Values[GetVariationNameByIndex(i)] := Format('%.6g', [OldVal]);
       exit;
   end;
   if (NewVal <> OldVal) then
   begin
     MainForm.PushWorkspaceToUndoStack;
     cp.xform[SelectedTriangle].SetVariation(i, NewVal);
-    VEVars.Values[VarNames(i)] := Format('%.6g', [NewVal]);
+    VEVars.Values[GetVariationNameByIndex(i)] := Format('%.6g', [NewVal]);
     ShowSelectedInfo;
     UpdateFlame(True);
   end;
@@ -3791,7 +3791,7 @@ begin
     if Sender = VEVars then
     begin
       cp.xform[SelectedTriangle].SetVariation(varDragIndex, v);
-      VEVars.Values[VarNames(varDragIndex)] := FloatToStr(v); //Format('%.6g', [v]);
+      VEVars.Values[GetVariationNameByIndex(varDragIndex)] := FloatToStr(v); //Format('%.6g', [v]);
     end
     else if Sender = vleVariables then begin
       cp.xform[SelectedTriangle].SetVariable(vleVariables.Keys[varDragIndex+1], v);
@@ -5014,9 +5014,9 @@ var
   supports3D, supportsDC : boolean;
   col : TColor; frect : TRect;
 begin
-  if (ARow > NRLOCVAR) and not (gdSelected in	State) then
+  if (ARow > GetCoreVariationCount) and not (gdSelected in	State) then
   begin
-    if Arow > NumBuiltinVars then
+    if Arow > (GetCoreVariationCount + GetIntegratedNonCoreVariationCount) then
       col := $e0ffff
     else
       col := $ffe0e0;
@@ -5028,7 +5028,7 @@ begin
     VEVars.Canvas.Font.Name := 'Arial';
     VEVars.Canvas.Font.Size := 5;
 
-    VarSupports(Arow - 1, supports3D, supportsDC);
+    GetVariationSupportFlagsByIndex(Arow - 1, supports3D, supportsDC);
 
     frect.Left := Rect.Right - 12;
     frect.Right := Rect.Right;
@@ -5775,7 +5775,7 @@ var
 begin
   for i := 1 to vleVariables.RowCount - 1 do
   begin
-    vari := GetVariationIndexFromVariableNameIndex(i-1);
+    vari := GetVariationIndexByVariableIndex(i-1);
     if ( (vari = -1) or
          ((Assigned(cp)) and (cp.xform[SelectedTriangle].GetVariation(vari) = 0)) ) then
       vleVariables.RowHeights[i] := -1

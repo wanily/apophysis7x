@@ -4,7 +4,7 @@ unit XForm;
 interface
 
 uses
-  XFormMan, Variation;
+  VariationPoolManager, Variation;
 
 const
   MAX_WEIGHT = 1000.0;
@@ -61,38 +61,6 @@ type
     PropTable: array of TXForm;
 
     Orientationtype: integer;
-  private
-    vars: array of double;
-    varprops: TVarPropsList;
-
-    FNrFunctions: integer;
-    FFunctionList: array of TCalcFunction;
-    FCalcFunctionList: array of TCalcFunction;
-
-    FTx, FTy: double; // must remain in this order
-    FPx, FPy: double; // some asm code relies on this
-    FTz, FPz: double;
-
-    FAngle: double;
-    FSinA: double;
-    FCosA: double;
-    FLength: double;
-    colorC1, colorC2: double;
-    polar_vpi, disc_vpi: double;
-
-    gauss_rnd: array [0 .. 3] of double;
-    gauss_N: integer;
-
-    rx_sin, rx_cos, ry_sin, ry_cos: double;
-    px_sin, px_cos, py_sin, py_cos: double;
-
-    FRegVariations: array of TVariation;
-
-    procedure PrecalcAngle;
-    procedure PrecalcSinCos;
-    procedure PrecalcAll;
-    procedure DoPostTransform;
-    procedure DoInvalidOperation;
 
     procedure Linear3D;
     procedure Sinusoidal;
@@ -129,6 +97,38 @@ type
 
     procedure PostRotateX;
     procedure PostRotateY;
+
+  private
+    vars: array of double;
+
+    FNrFunctions: integer;
+    FFunctionList: array of TCalcFunction;
+    FCalcFunctionList: array of TCalcFunction;
+
+    FTx, FTy: double; // must remain in this order
+    FPx, FPy: double; // some asm code relies on this
+    FTz, FPz: double;
+
+    FAngle: double;
+    FSinA: double;
+    FCosA: double;
+    FLength: double;
+    colorC1, colorC2: double;
+    polar_vpi, disc_vpi: double;
+
+    gauss_rnd: array [0 .. 3] of double;
+    gauss_N: integer;
+
+    rx_sin, rx_cos, ry_sin, ry_cos: double;
+    px_sin, px_cos, py_sin, py_cos: double;
+
+    FRegVariations: array of TVariation;
+
+    procedure PrecalcAngle;
+    procedure PrecalcSinCos;
+    procedure PrecalcAll;
+    procedure DoPostTransform;
+    procedure DoInvalidOperation;
 
     function Mul33(const M1, M2: TMatrix): TMatrix;
     function Identity: TMatrix;
@@ -207,8 +207,7 @@ constructor TXForm.Create;
 begin
   AddRegVariations;
   BuildFunctionlist;
-  SetLength(vars, NRLOCVAR + length(FRegVariations));
-  varprops := GetVarProps;
+  SetLength(vars, GetCoreVariationCount + length(FRegVariations));
 
   Clear;
 end;
@@ -243,9 +242,6 @@ begin
 
   for i := 0 to NXFORMS do
     modWeights[i] := 1;
-
-  SetLength(varprops, 0);
-  varprops := GetVarProps;
 
   transOpacity := 1;
   pluginColor := 1;
@@ -285,21 +281,21 @@ begin
     FRegVariations[i].color := @vc;
     FRegVariations[i].opacity := @vo;
 
-    FRegVariations[i].vvar := vars[i + NRLOCVAR];
+    FRegVariations[i].vvar := vars[i + GetCoreVariationCount];
     FRegVariations[i].Prepare;
-    FRegVariations[i].ObtainCalculateFunctionPtr(FFunctionList[NRLOCVAR + i]);
+    FRegVariations[i].ObtainCalculateFunctionPtr(FFunctionList[GetCoreVariationCount + i]);
   end;
 
-  SetLength(FCalcFunctionList, NrVar + 2);
+  SetLength(FCalcFunctionList, GetTotalVariationCount + 2);
 
   CalculateAngle := (vars[6] <> 0.0) or (vars[7] <> 0.0);
   // CalculateLength := False;
   CalculateSinCos := (vars[8] <> 0.0) or (vars[10] <> 0.0);
 
   // Pre- variations
-  for i := 0 to NrVar - 1 do
+  for i := 0 to GetTotalVariationCount - 1 do
   begin
-    if (vars[i] <> 0.0) and (varprops[i].Priority = 0) then
+    if (vars[i] <> 0.0) and (GetVariationPriorityByIndex(i) = vpPre) then
     begin
       FCalcFunctionList[FNrFunctions] := FFunctionList[i];
       Inc(FNrFunctions);
@@ -319,11 +315,11 @@ begin
   end;
 
   // Normal variations
-  for i := 0 to NrVar - 1 do
+  for i := 0 to GetTotalVariationCount - 1 do
   begin
     if (vars[i] <> 0.0) then
     begin
-      if (varprops[i].Priority <> 1) then
+      if (GetVariationPriorityByIndex(i) = vpRegular) then
         continue;
 
       FCalcFunctionList[FNrFunctions] := FFunctionList[i];
@@ -332,9 +328,9 @@ begin
   end;
 
   // Post- variations
-  for i := 0 to NrVar - 1 do
+  for i := 0 to GetTotalVariationCount - 1 do
   begin
-    if (vars[i] <> 0.0) and (varprops[i].Priority = 2) then
+    if (vars[i] <> 0.0) and (GetVariationPriorityByIndex(i) = vpPost) then
     begin
       FCalcFunctionList[FNrFunctions] := FFunctionList[i];
       Inc(FNrFunctions);
@@ -342,9 +338,9 @@ begin
   end;
 
   // flatten ;-)
-  for i := 0 to NrVar - 1 do
+  for i := 0 to GetTotalVariationCount - 1 do
   begin
-    if (vars[i] <> 0.0) and (varprops[i].Priority = 3) then
+    if (vars[i] <> 0.0) and (GetVariationPriorityByIndex(i) = vpSuperior) then
     begin
       FCalcFunctionList[FNrFunctions] := FFunctionList[i];
       Inc(FNrFunctions);
@@ -1083,7 +1079,7 @@ end;
 
 procedure TXForm.BuildFunctionlist;
 begin
-  SetLength(FFunctionList, NrVar + length(FRegVariations));
+  SetLength(FFunctionList, GetTotalVariationCount + length(FRegVariations));
 
   FFunctionList[0] := Linear3D;
 {$IFDEF Pre15c}
@@ -1127,8 +1123,8 @@ procedure TXForm.AddRegVariations;
 var
   i: integer;
 begin
-  SetLength(FRegVariations, GetNrRegisteredVariations);
-  for i := 0 to GetNrRegisteredVariations - 1 do
+  SetLength(FRegVariations, GetIntegratedNonCoreVariationCount);
+  for i := 0 to GetIntegratedNonCoreVariationCount - 1 do
   begin
     FRegVariations[i] := GetRegisteredVariation(i).GetInstance;
   end;
@@ -1186,10 +1182,10 @@ begin
   if symmetry <> 0 then
     Result := Result + Format('symmetry="%g" ', [symmetry]);
 
-  for i := 0 to NrVar - 1 do
+  for i := 0 to GetTotalVariationCount - 1 do
   begin
     if vars[i] <> 0 then
-      Result := Result + varnames(i) + Format('="%g" ', [vars[i]]);
+      Result := Result + GetVariationNameByIndex(i) + Format('="%g" ', [vars[i]]);
   end;
   Result := Result + Format('coefs="%g %g %g %g %g %g" ',
     [c[0, 0], c[0, 1], c[1, 0], c[1, 1], c[2, 0], c[2, 1]]);
@@ -1200,7 +1196,7 @@ begin
 
   for i := 0 to High(FRegVariations) do
   begin
-    if vars[i + NRLOCVAR] <> 0 then
+    if vars[i + GetCoreVariationCount] <> 0 then
       for j := 0 to FRegVariations[i].GetNrVariables - 1 do
       begin
         Name := FRegVariations[i].GetVariableNameAt(j);
@@ -1245,10 +1241,10 @@ begin
   if symmetry <> 0 then
     Result := Result + Format('symmetry="%g" ', [symmetry]);
 
-  for i := 0 to NrVar - 1 do
+  for i := 0 to GetTotalVariationCount - 1 do
   begin
     if vars[i] <> 0 then
-      Result := Result + varnames(i) + Format('="%g" ', [vars[i]]);
+      Result := Result + GetVariationNameByIndex(i) + Format('="%g" ', [vars[i]]);
   end;
   Result := Result + Format('coefs="%g %g %g %g %g %g" ',
     [c[0, 0], c[0, 1], c[1, 0], c[1, 1], c[2, 0], c[2, 1]]);
@@ -1261,7 +1257,7 @@ begin
 
   for i := 0 to High(FRegVariations) do
   begin
-    if vars[i + NRLOCVAR] <> 0 then
+    if vars[i + GetCoreVariationCount] <> 0 then
       for j := 0 to FRegVariations[i].GetNrVariables - 1 do
       begin
         Name := FRegVariations[i].GetVariableNameAt(j);

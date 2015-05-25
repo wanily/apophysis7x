@@ -28,7 +28,7 @@ uses
   RndFlame in 'Flame\RndFlame.pas',
   ControlPoint in 'Flame\ControlPoint.pas',
   PaletteIO in 'IO\PaletteIO.pas',
-  XFormMan in 'Core\XFormMan.pas',
+  VariationPoolManager in 'Core\VariationPoolManager.pas',
   XForm in 'Flame\XForm.pas',
   Variation in 'Flame\Variation.pas',
   RenderingCommon in 'Rendering\RenderingCommon.pas',
@@ -46,7 +46,7 @@ uses
   varWedge in 'Variations\varWedge.pas',
   varEpispiral in 'Variations\varEpispiral.pas',
   varBwraps in 'Variations\varBwraps.pas',
-  varPDJ in 'Variations\varpdj.pas',
+  varpdj in 'Variations\varpdj.pas',
   varJuliaN in 'Variations\varJuliaN.pas',
   varJuliaScope in 'Variations\varJuliaScope.pas',
   varJulia3Djf in 'Variations\varJulia3Djf.pas',
@@ -99,7 +99,8 @@ uses
   TransformSelection in 'Forms\TransformSelection.pas' {TransformSelectionForm},
   Vcl.Forms,
   ApophysisCommandManager in 'Gui\ApophysisCommandManager.pas',
-  ThumbnailThread in 'Gui\ThumbnailThread.pas';
+  ThumbnailThread in 'Gui\ThumbnailThread.pas',
+  CoreVariation in 'Flame\CoreVariation.pas';
 
 begin
   Application.Initialize;

@@ -3,7 +3,7 @@ unit ParameterIO;
 interface
 
 uses Global, SysUtils, StrUtils, ControlPoint, XForm, PaletteIO,
-  XFormMan, RegularExpressionsCore, RegexHelper, Classes;
+  VariationPoolManager, RegularExpressionsCore, RegexHelper, Classes;
 
 type
   TBatch = class
@@ -17,6 +17,7 @@ type
 
     public
 
+      constructor CreateVolatileBatch;
       constructor LoadBatch(const path: string);
       destructor Destroy; override;
 
@@ -35,6 +36,7 @@ type
       procedure RemoveAt(i: integer);
 
       class procedure SaveControlPointToFile(cp: TControlPoint; filePath: string);
+
       class function CreateBatch(filePath: string): TBatch;
   end;
 
@@ -61,6 +63,12 @@ begin
   mData := TStringList.Create;
 
   Parse(path);
+end;
+
+constructor TBatch.CreateVolatileBatch;
+begin
+  mNames := TStringList.Create;
+  mData := TStringList.Create;
 end;
 
 procedure TBatch.LoadControlPoint(i: Integer; var cp: TControlPoint);
@@ -238,10 +246,10 @@ var
 begin
   xf := TXForm.Create;
   xf.Destroy;
-  count := NrVar;
+  count := GetTotalVariationCount;
   for i := 0 to count - 1 do
   begin
-    vname := VarNames(i);
+    vname := GetVariationNameByIndex(i);
     if (lowercase(vname) = lowercase(name)) then
     begin
       Result := true;
@@ -255,10 +263,10 @@ function IsRegisteredVariable(name: string): boolean;
 var
   i, count: integer;
 begin
-  count := GetNrVariableNames;
+  count := GetTotalVariableCount;
   for i := 0 to count - 1 do
   begin
-    if (lowercase(GetVariableNameAt(i)) = lowercase(name)) then
+    if (lowercase(GetVariableNameByGlobalVariableIndex(i)) = lowercase(name)) then
     begin
       Result := true;
       exit;
@@ -643,7 +651,7 @@ begin
   find_attribs.Subject := (xform_attribs);
   found_attrib := find_attribs.Match;
 
-  for i := 0 to NrVar - 1 do
+  for i := 0 to GetTotalVariationCount - 1 do
     xf.SetVariation(i, 0);
 
   while found_attrib do
@@ -724,9 +732,9 @@ begin
       end
       else if (IsRegisteredVariation(String(attrib_name))) then
       begin
-        for i := 0 to NrVar - 1 do
+        for i := 0 to GetTotalVariationCount - 1 do
         begin
-          if lowercase(VarNames(i)) = lowercase(String(attrib_name)) then
+          if lowercase(GetVariationNameByIndex(i)) = lowercase(String(attrib_name)) then
           begin
             xf.SetVariation(i, GetFloatPart(String(attrib_match),
               re_attrib, 2, 0));

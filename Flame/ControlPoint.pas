@@ -3,7 +3,7 @@ unit ControlPoint;
 interface
 
 uses
-  Classes, Windows, PaletteIO, XForm, XFormMan,
+  Classes, Windows, PaletteIO, XForm, VariationPoolManager,
   SysUtils, math, ZLib;
 
 const
@@ -237,15 +237,15 @@ begin
   for i := 0 to min(NumXForms + f, NXFORMS) do
     with XForm[i] do
     begin
-      for j := 0 to NRVAR - 1 do
+      for j := 0 to GetTotalVariationCount - 1 do
       begin
         v := self.XForm[i].GetVariation(j);
         if (v <> 0) and
-          (used_plugins.IndexOf(Varnames(j)) < 0)
+          (used_plugins.IndexOf(GetVariationNameByIndex(j)) < 0)
         then
         begin
-          used_plugins.Add(Varnames(j));
-          s := s + Varnames(j) + ' on TX #' + IntToStr(i + 1) + #13#10;
+          used_plugins.Add(GetVariationNameByIndex(j));
+          s := s + GetVariationNameByIndex(j) + ' on TX #' + IntToStr(i + 1) + #13#10;
         end;
       end;
     end;
@@ -1031,7 +1031,7 @@ begin
     end
     else if AnsiCompareText(CurrentToken, 'vars') = 0 then
     begin
-      for i := 0 to NRVAR - 1 do
+      for i := 0 to GetTotalVariationCount - 1 do
       begin
         XForm[CurrentXForm].SetVariation(i, 0.0);
       end;
@@ -1052,9 +1052,9 @@ begin
     end
     else if AnsiCompareText(CurrentToken, 'variables') = 0 then
     begin
-      for i := 0 to GetNrVariableNames - 1 do
+      for i := 0 to GetTotalVariableCount - 1 do
       begin
-        XForm[CurrentXForm].ResetVariable(GetVariableNameAt(i));
+        XForm[CurrentXForm].ResetVariable(GetVariableNameByGlobalVariableIndex(i));
       end;
 
       i := 0;
@@ -1068,7 +1068,7 @@ begin
 
         inc(ParsePos);
         v := StrToFloat(ParseValues[ParsePos]);
-        XForm[CurrentXForm].SetVariable(GetVariableNameAt(i), v);
+        XForm[CurrentXForm].SetVariable(GetVariableNameByGlobalVariableIndex(i), v);
         inc(i);
       end;
 
@@ -1129,7 +1129,7 @@ var
 begin
   FillVarDisturb;
   VarPossible := false;
-  for j := 0 to NRVAR - 1 do
+  for j := 0 to GetTotalVariationCount - 1 do
   begin
     VarPossible := VarPossible or Variations[j];
   end;
@@ -1147,7 +1147,7 @@ begin
 
   for i := 0 to NXFORMS - 1 do
   begin
-    for j := 0 to NRVAR - 1 do
+    for j := 0 to GetTotalVariationCount - 1 do
     begin
       XForm[i].SetVariation(j, 0.0);
     end;
@@ -1195,7 +1195,7 @@ begin
 
   FillVarDisturb;
   VarPossible := false;
-  for j := 0 to NRVAR - 1 do
+  for j := 0 to GetTotalVariationCount - 1 do
   begin
     VarPossible := VarPossible or Variations[j];
   end;
@@ -1228,12 +1228,12 @@ begin
     XForm[i].c[2][0] := 4 * random - 2;
     XForm[i].c[2][1] := 4 * random - 2;
 
-    for j := 0 to NRVAR - 1 do
+    for j := 0 to GetTotalVariationCount - 1 do
     begin
       XForm[i].SetVariation(j, 0);
     end;
 
-    for j := 0 to NRVAR - 1 do
+    for j := 0 to GetTotalVariationCount - 1 do
     begin
       XForm[i].SetVariation(j, 0);
     end;
@@ -1268,7 +1268,7 @@ begin
   RandomCP;
   for i := 0 to NXFORMS - 1 do
   begin
-    for j := 0 to NRVAR - 1 do
+    for j := 0 to GetTotalVariationCount - 1 do
     begin
       XForm[i].SetVariation(j, 0);
     end;
@@ -1598,16 +1598,16 @@ begin
       sl.Add(format('xform %d density %g color %g symmetry %g',
         [i, density, color, symmetry]));
       s := 'vars';
-      for j := 0 to NRVAR - 1 do
+      for j := 0 to GetTotalVariationCount - 1 do
       begin
         s := format('%s %g', [s, GetVariation(j)]);
       end;
       sl.Add(s);
       s := 'variables';
-      for j := 0 to GetNrVariableNames - 1 do
+      for j := 0 to GetTotalVariableCount - 1 do
       begin
 {$IFNDEF VAR_STR}
-        GetVariable(GetVariableNameAt(j), v);
+        GetVariable(GetVariableNameByGlobalVariableIndex(j), v);
         s := format('%s %g', [s, v]);
 {$ELSE}
         s := s + ' ' + GetVariableStr(GetVariableNameAt(j));
@@ -1776,7 +1776,7 @@ begin
       (p[2, 1] <> 0) or (symmetry <> 1) or (GetVariation(0) <> 1);
     if Result = false then
     begin
-      for i := 1 to NRVAR - 1 do
+      for i := 1 to GetTotalVariationCount - 1 do
         Result := Result or (GetVariation(i) <> 0);
     end;
   end;
@@ -1822,7 +1822,7 @@ begin
     cp.XForm[i].density := 1.0;
     cp.XForm[i].symmetry := 1;
     cp.XForm[i].SetVariation(0, 1.0);
-    for j := 1 to NRVAR - 1 do
+    for j := 1 to GetTotalVariationCount - 1 do
       cp.XForm[i].SetVariation(j, 0.0);
     cp.XForm[i].color := 1.0;
     cp.XForm[i].c[0][0] := -1.0;
@@ -1846,7 +1846,7 @@ begin
     cp.XForm[i].density := 1.0;
     cp.XForm[i].SetVariation(0, 1);
     cp.XForm[i].symmetry := 1;
-    for j := 1 to NRVAR - 1 do
+    for j := 1 to GetTotalVariationCount - 1 do
       cp.XForm[i].SetVariation(j, 0);
     if sym < 3 then
       cp.XForm[i].color := 0
@@ -1996,8 +1996,8 @@ begin
   if vdfilled then
     exit;
 
-  SetLength(var_distrib, NRVAR + 19);
-  SetLength(mixed_var_distrib, NRVAR + 9);
+  SetLength(var_distrib, GetTotalVariationCount + 19);
+  SetLength(mixed_var_distrib, GetTotalVariationCount + 9);
 
   for i := 0 to High(startvar_distrib) do
     var_distrib[i] := startvar_distrib[i];

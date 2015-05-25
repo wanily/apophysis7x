@@ -160,7 +160,7 @@
         <DCCReference Include="Flame\RndFlame.pas"/>
         <DCCReference Include="Flame\ControlPoint.pas"/>
         <DCCReference Include="IO\PaletteIO.pas"/>
-        <DCCReference Include="Core\XFormMan.pas"/>
+        <DCCReference Include="Core\VariationPoolManager.pas"/>
         <DCCReference Include="Flame\XForm.pas"/>
         <DCCReference Include="Flame\Variation.pas"/>
         <DCCReference Include="Rendering\RenderingCommon.pas"/>
@@ -255,6 +255,7 @@
         </DCCReference>
         <DCCReference Include="Gui\ApophysisCommandManager.pas"/>
         <DCCReference Include="Gui\ThumbnailThread.pas"/>
+        <DCCReference Include="Flame\CoreVariation.pas"/>
         <None Include="Apophysis7X.todo"/>
         <None Include="ModelSupport_Apophysis7X\default.txaPackage"/>
         <BuildConfiguration Include="Debug">
@@ -729,13 +730,13 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
-                <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
             </Deployment>
         </BorlandProject>
         <ProjectFileVersion>12</ProjectFileVersion>

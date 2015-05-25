@@ -41,7 +41,8 @@ interface
 
     public
 
-      Supports3D, SupportsDC: boolean;
+      function Supports3D: boolean; virtual; abstract;
+      function SupportsDC: boolean; virtual; abstract;
 
       function GetName: string; virtual; abstract;
       function GetInstance: TVariation; virtual; abstract;
@@ -55,16 +56,20 @@ interface
 
     public
 
-      constructor Create(varClass: TIntegratedVariation);
+      constructor Create(varClass: TIntegratedVariation; supports3D, supportsDC: boolean);
 
       function GetName: string; override;
       function GetInstance: TVariation; override;
       function GetNrVariables: integer; override;
       function GetVariableNameAt(const Index: integer): string; override;
 
+      function Supports3D: boolean; override;
+      function SupportsDC: boolean; override;
+
     private
 
       mImplementation: TIntegratedVariation;
+      mSupports3D, mSupportsDC: boolean;
 
   end;
 
@@ -75,14 +80,12 @@ begin
   Result := 0;
 end;
 
-function TVariation.GetVariable(const Name: string;
-  var Value: double): boolean;
+function TVariation.GetVariable(const Name: string; var Value: double): boolean;
 begin
   Result := False;
 end;
 
-function TVariation.SetVariable(const Name: string;
-  var Value: double): boolean;
+function TVariation.SetVariable(const Name: string; var Value: double): boolean;
 begin
   Result := False;
 end;
@@ -138,9 +141,11 @@ begin
   target := CalcFunction;
 end;
 
-constructor TIntegratedVariationLoader.Create(varClass: TIntegratedVariation);
+constructor TIntegratedVariationLoader.Create(varClass: TIntegratedVariation; supports3D, supportsDC: boolean);
 begin
   mImplementation := varClass;
+  mSupports3D := supports3D;
+  mSupportsDC := supportsDC;
 end;
 
 function TIntegratedVariationLoader.GetName: string;
@@ -169,6 +174,16 @@ begin
   hack := GetInstance();
   Result := hack.GetVariableNameAt(Index);
   hack.Free();
+end;
+
+function TIntegratedVariationLoader.Supports3D;
+begin
+  Result := self.mSupports3D;
+end;
+
+function TIntegratedVariationLoader.SupportsDC;
+begin
+  Result := self.mSupportsDC;
 end;
 
 end.

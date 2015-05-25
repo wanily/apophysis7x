@@ -260,6 +260,10 @@ object OptionsForm: TOptionsForm
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         467
         368)
@@ -635,6 +639,10 @@ object OptionsForm: TOptionsForm
     object EditorPage: TTabSheet
       Caption = 'Editor'
       ImageIndex = 8
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         467
         368)
@@ -928,6 +936,10 @@ object OptionsForm: TOptionsForm
     end
     object DisplayPage: TTabSheet
       Caption = 'Display'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         467
         368)
@@ -1222,6 +1234,10 @@ object OptionsForm: TOptionsForm
     object PathsPage: TTabSheet
       Caption = 'Environment'
       ImageIndex = 7
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         467
         368)

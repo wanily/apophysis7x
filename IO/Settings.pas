@@ -10,8 +10,7 @@ procedure SaveSettings;
 
 implementation
 
-uses Windows, Classes, SysUtils, StrUtils, Forms, Registry, Global, Dialogs,
-  XFormMan;
+uses Windows, Classes, SysUtils, StrUtils, Forms, Registry, Global, Dialogs, VariationPoolManager;
 
 function ReadPluginDir: string;
 var
@@ -656,23 +655,23 @@ begin
     end;
     Registry.CloseKey;
 
-    SetLength(Variations, NRVAR);
+    SetLength(Variations, GetTotalVariationCount);
     if Registry.OpenKey('Software\' + APP_NAME + '\Variations', False) then
     begin
-      for i := 0 to NRVAR - 1 do
+      for i := 0 to GetTotalVariationCount - 1 do
       begin
-        if Registry.ValueExists(Varnames(i)) then
-          Variations[i] := Registry.ReadBool(Varnames(i))
+        if Registry.ValueExists(GetVariationNameByIndex(i)) then
+          Variations[i] := Registry.ReadBool(GetVariationNameByIndex(i))
         else
           Variations[i] := False;
       end;
     end
     else
     begin
-      if NRVAR >= 64 then
+      if GetTotalVariationCount >= 64 then
         maxVars := 63
       else
-        maxVars := NRVAR - 1;
+        maxVars := GetTotalVariationCount - 1;
       for i := 0 to maxVars do
         Variations[i] := boolean(VariationOptions shr i and 1);
     end;
@@ -1105,12 +1104,12 @@ begin
 
     if Registry.OpenKey('\Software\' + APP_NAME + '\Variations', true) then
     begin
-      for i := 0 to NRVAR - 1 do
+      for i := 0 to GetTotalVariationCount - 1 do
       begin
-        if Registry.ValueExists(Varnames(i)) then
-          if Registry.ReadBool(Varnames(i)) = Variations[i] then
+        if Registry.ValueExists(GetVariationNameByIndex(i)) then
+          if Registry.ReadBool(GetVariationNameByIndex(i)) = Variations[i] then
             continue;
-        Registry.WriteBool(Varnames(i), Variations[i]);
+        Registry.WriteBool(GetVariationNameByIndex(i), Variations[i]);
       end;
     end;
     Registry.CloseKey;

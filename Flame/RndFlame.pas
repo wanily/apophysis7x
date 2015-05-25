@@ -11,7 +11,7 @@ function RandomFlame(SourceCP: TControlPoint = nil; algorithm: integer = 0)
 implementation
 
 uses
-  SysUtils, Global, PaletteIO, XFormMan, Classes;
+  SysUtils, Global, PaletteIO, VariationPoolManager, Classes;
 
 procedure RGBBlend(a, b: integer; var Palette: TColorMap);
 var
@@ -180,24 +180,24 @@ begin
   RandSeed := MainSeed;
 
   VarPossible := false;
-  for j := 0 to NRVAR - 1 do
+  for j := 0 to GetTotalVariationCount - 1 do
   begin
     VarPossible := VarPossible or Variations[j];
   end;
 
   for i := 0 to cp.NumXForms - 1 do
   begin
-    for j := 0 to NRVAR - 1 do
+    for j := 0 to GetTotalVariationCount - 1 do
       cp.Xform[i].SetVariation(j, 0);
 
     if VarPossible then
     begin
       repeat
-        a := Random(NRVAR);
+        a := Random(GetTotalVariationCount);
       until Variations[a];
 
       repeat
-        b := Random(NRVAR);
+        b := Random(GetTotalVariationCount);
       until Variations[b];
     end
     else
@@ -329,7 +329,7 @@ begin
               Result.Xform[i].color := 0;
               Result.Xform[i].symmetry := 0;
               Result.Xform[i].SetVariation(0, 1);
-              for j := 1 to NRVAR - 1 do
+              for j := 1 to GetTotalVariationCount - 1 do
                 Result.Xform[i].SetVariation(j, 0);
               Result.Xform[i].Translate(Random * 2 - 1, Random * 2 - 1);
               Result.Xform[i].Rotate(Random * 360);

@@ -1,11 +1,11 @@
-
 {$Include 'delphiversion.pas'}
+
 unit varJuliaN;
 
 interface
 
 uses
-  Variation, XFormMan;
+  Variation, VariationPoolManager;
 
 const
   var_name = 'julian';
@@ -233,7 +233,5 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-initialization
-  RegisterVariation(TIntegratedVariationLoader.Create(TVariationJulian), false, false);
-end.
+initialization RegisterVariation(TIntegratedVariationLoader.Create(TVariationJulian, {$ifndef Pre15c}false{$else}true{$endif}, false)) end.
 
