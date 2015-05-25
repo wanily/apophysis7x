@@ -26,10 +26,10 @@ unit varPreBwraps;
 interface
 
 uses
-  BaseVariation, XFormMan;
+  Variation, XFormMan;
 
 type
-  TVariationPreBwraps = class(TBaseVariation)
+  TVariationPreBwraps = class(TVariation)
   private
     pre_bwraps_cellsize, pre_bwraps_space, pre_bwraps_gain,
     pre_bwraps_inner_twist, pre_bwraps_outer_twist,
@@ -38,7 +38,7 @@ type
     constructor Create;
 
     class function GetName: string; override;
-    class function GetInstance: TBaseVariation; override;
+    class function GetInstance: TVariation; override;
 
     function GetNrVariables: integer; override;
     function GetVariableNameAt(const Index: integer): string; override;
@@ -125,7 +125,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-class function TVariationPreBwraps.GetInstance: TBaseVariation;
+class function TVariationPreBwraps.GetInstance: TVariation;
 begin
   Result := TVariationPreBwraps.Create;
 end;
@@ -223,5 +223,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationPreBwraps), true, false);
+  RegisterVariation(TIntegratedVariationLoader.Create(TVariationPreBwraps), true, false);
 end.

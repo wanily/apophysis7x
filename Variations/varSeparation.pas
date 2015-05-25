@@ -26,10 +26,10 @@ unit varSeparation;
 interface
 
 uses
-  BaseVariation, XFormMan;
+  Variation, XFormMan;
 
 type
-  TVariationSeparation = class(TBaseVariation)
+  TVariationSeparation = class(TVariation)
   private
     separation_x, separation_y: double;
     separation_xinside, separation_yinside: double;
@@ -37,7 +37,7 @@ type
     constructor Create;
 
     class function GetName: string; override;
-    class function GetInstance: TBaseVariation; override;
+    class function GetInstance: TVariation; override;
 
     function GetNrVariables: integer; override;
     function GetVariableNameAt(const Index: integer): string; override;
@@ -86,7 +86,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-class function TVariationSeparation.GetInstance: TBaseVariation;
+class function TVariationSeparation.GetInstance: TVariation;
 begin
   Result := TVariationSeparation.Create;
 end;
@@ -173,5 +173,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationSeparation), false, false);
+  RegisterVariation(TIntegratedVariationLoader.Create(TVariationSeparation), false, false);
 end.

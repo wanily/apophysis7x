@@ -26,10 +26,10 @@ unit varElliptic;
 interface
 
 uses
-  BaseVariation, XFormMan;
+  Variation, XFormMan;
 
 type
-  TVariationElliptic = class(TBaseVariation)
+  TVariationElliptic = class(TVariation)
   private
 	v: double;
 	
@@ -37,7 +37,7 @@ type
     constructor Create;
 
     class function GetName: string; override;
-    class function GetInstance: TBaseVariation; override;
+    class function GetInstance: TVariation; override;
 
     function GetNrVariables: integer; override;
     function GetVariableNameAt(const Index: integer): string; override;
@@ -92,7 +92,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-class function TVariationElliptic.GetInstance: TBaseVariation;
+class function TVariationElliptic.GetInstance: TVariation;
 begin
   Result := TVariationElliptic.Create;
 end;
@@ -129,5 +129,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationElliptic), false, false);
+  RegisterVariation(TIntegratedVariationLoader.Create(TVariationElliptic), false, false);
 end.

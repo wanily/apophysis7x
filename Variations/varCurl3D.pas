@@ -26,7 +26,7 @@ unit varCurl3D;
 interface
 
 uses
-  BaseVariation, XFormMan;
+  Variation, XFormMan;
 
 const
   variation_name = 'curl3D';
@@ -36,7 +36,7 @@ const
   var_cz_name = 'curl3D_cz';
 
 type
-  TVariationCurl3D = class(TBaseVariation)
+  TVariationCurl3D = class(TVariation)
   private
     cx, cy, cz: double;
 
@@ -52,7 +52,7 @@ type
     constructor Create;
 
     class function GetName: string; override;
-    class function GetInstance: TBaseVariation; override;
+    class function GetInstance: TVariation; override;
 
     function GetNrVariables: integer; override;
     function GetVariableNameAt(const Index: integer): string; override;
@@ -63,7 +63,7 @@ type
 
     procedure Prepare; override;
     procedure CalcFunction; override;
-    procedure GetCalcFunction(var f: TCalcFunction); override;
+    procedure ObtainCalculateFunctionPtr(out f: TCalcFunction); override;
   end;
 
 implementation
@@ -103,7 +103,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-procedure TVariationCurl3D.GetCalcFunction(var f: TCalcFunction);
+procedure TVariationCurl3D.ObtainCalculateFunctionPtr(out f: TCalcFunction);
 begin
 {
   if IsZero(cx) and IsZero(cy) and IsZero(cz) then f := CalcLinear
@@ -207,7 +207,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-class function TVariationCurl3D.GetInstance: TBaseVariation;
+class function TVariationCurl3D.GetInstance: TVariation;
 begin
   Result := TVariationCurl3D.Create;
 end;
@@ -291,5 +291,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationCurl3D), true, false);
+  RegisterVariation(TIntegratedVariationLoader.Create(TVariationCurl3D), true, false);
 end.

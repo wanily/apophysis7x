@@ -26,15 +26,15 @@ unit varCross;
 interface
 
 uses
-  BaseVariation, XFormMan;
+  Variation, XFormMan;
 
 type
-  TVariationCross = class(TBaseVariation)
+  TVariationCross = class(TVariation)
   public
     constructor Create;
 
     class function GetName: string; override;
-    class function GetInstance: TBaseVariation; override;
+    class function GetInstance: TVariation; override;
 
     function GetNrVariables: integer; override;
     function GetVariableNameAt(const Index: integer): string; override;
@@ -72,7 +72,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-class function TVariationCross.GetInstance: TBaseVariation;
+class function TVariationCross.GetInstance: TVariation;
 begin
   Result := TVariationCross.Create;
 end;
@@ -109,5 +109,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationCross), false, false);
+  RegisterVariation(TIntegratedVariationLoader.Create(TVariationCross), false, false);
 end.

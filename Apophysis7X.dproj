@@ -162,7 +162,7 @@
         <DCCReference Include="IO\PaletteIO.pas"/>
         <DCCReference Include="Core\XFormMan.pas"/>
         <DCCReference Include="Flame\XForm.pas"/>
-        <DCCReference Include="Core\BaseVariation.pas"/>
+        <DCCReference Include="Core\Variation.pas"/>
         <DCCReference Include="Rendering\RenderingCommon.pas"/>
         <DCCReference Include="Rendering\RenderingInterface.pas"/>
         <DCCReference Include="Rendering\RenderingImplementation.pas"/>
@@ -178,7 +178,7 @@
         <DCCReference Include="Variations\varWedge.pas"/>
         <DCCReference Include="Variations\varEpispiral.pas"/>
         <DCCReference Include="Variations\varBwraps.pas"/>
-        <DCCReference Include="Variations\varPDJ.pas"/>
+        <DCCReference Include="Variations\varpdj.pas"/>
         <DCCReference Include="Variations\varJuliaN.pas"/>
         <DCCReference Include="Variations\varJuliaScope.pas"/>
         <DCCReference Include="Variations\varJulia3Djf.pas"/>
@@ -216,7 +216,7 @@
         <DCCReference Include="Variations\varPostCurl3D.pas"/>
         <DCCReference Include="Variations\varPostCrop.pas"/>
         <DCCReference Include="Variations\varPostFalloff2.pas"/>
-        <DCCReference Include="Variations\varGenericPlugin.pas"/>
+        <DCCReference Include="Variations\PluginVariation.pas"/>
         <DCCReference Include="Forms\Main.pas">
             <Form>MainForm</Form>
         </DCCReference>
@@ -729,13 +729,13 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
-                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
             </Deployment>
         </BorlandProject>
         <ProjectFileVersion>12</ProjectFileVersion>

@@ -26,10 +26,10 @@ unit varAuger;
 interface
 
 uses
-  BaseVariation, XFormMan;
+  Variation, XFormMan;
 
 type
-  TVariationAuger = class(TBaseVariation)
+  TVariationAuger = class(TVariation)
   private
     auger_freq, auger_weight, auger_scale, auger_sym: double;
 
@@ -37,7 +37,7 @@ type
     constructor Create;
 
     class function GetName: string; override;
-    class function GetInstance: TBaseVariation; override;
+    class function GetInstance: TVariation; override;
 
     function GetNrVariables: integer; override;
     function GetVariableNameAt(const Index: integer): string; override;
@@ -87,7 +87,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-class function TVariationAuger.GetInstance: TBaseVariation;
+class function TVariationAuger.GetInstance: TVariation;
 begin
   Result := TVariationAuger.Create;
 end;
@@ -174,5 +174,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationAuger), true, false);
+  RegisterVariation(TIntegratedVariationLoader.Create(TVariationAuger), true, false);
 end.

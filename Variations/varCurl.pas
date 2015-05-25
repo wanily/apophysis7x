@@ -26,7 +26,7 @@ unit varCurl;
 interface
 
 uses
-  BaseVariation, XFormMan;
+  Variation, XFormMan;
 
 const
   variation_name = 'curl';
@@ -41,7 +41,7 @@ const
 //                        c2*(z^2) + c1*z + 1
 
 type
-  TVariationCurl = class(TBaseVariation)
+  TVariationCurl = class(TVariation)
   private
     c2, c1: double;
 
@@ -55,7 +55,7 @@ type
     constructor Create;
 
     class function GetName: string; override;
-    class function GetInstance: TBaseVariation; override;
+    class function GetInstance: TVariation; override;
 
     function GetNrVariables: integer; override;
     function GetVariableNameAt(const Index: integer): string; override;
@@ -66,7 +66,7 @@ type
 
     procedure Prepare; override;
     procedure CalcFunction; override;
-    procedure GetCalcFunction(var f: TCalcFunction); override;
+    procedure ObtainCalculateFunctionPtr(out f: TCalcFunction); override;
   end;
 
 implementation
@@ -98,7 +98,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-procedure TVariationCurl.GetCalcFunction(var f: TCalcFunction);
+procedure TVariationCurl.ObtainCalculateFunctionPtr(out f: TCalcFunction);
 begin
   if IsZero(c1) then begin
     if IsZero(c2) then
@@ -172,7 +172,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-class function TVariationCurl.GetInstance: TBaseVariation;
+class function TVariationCurl.GetInstance: TVariation;
 begin
   Result := TVariationCurl.Create;
 end;
@@ -243,5 +243,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationCurl), false, false);
+  RegisterVariation(TIntegratedVariationLoader.Create(TVariationCurl), false, false);
 end.

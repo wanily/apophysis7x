@@ -26,10 +26,10 @@ unit varPreFalloff2;
 interface
 
 uses
-  BaseVariation, XFormMan;
+  Variation, XFormMan;
 
 type
-  TVariationPreFalloff2 = class(TBaseVariation)
+  TVariationPreFalloff2 = class(TVariation)
   const
     n_scatter : string = 'pre_falloff2_scatter';
     n_mindist : string = 'pre_falloff2_mindist';
@@ -54,7 +54,7 @@ type
     constructor Create;
 
     class function GetName: string; override;
-    class function GetInstance: TBaseVariation; override;
+    class function GetInstance: TVariation; override;
 
     function GetNrVariables: integer; override;
     function GetVariableNameAt(const Index: integer): string; override;
@@ -67,7 +67,7 @@ type
     procedure CalcFunction; override;
     procedure CalcFunctionRadial;
     procedure CalcFunctionGaussian;
-    procedure GetCalcFunction(var f: TCalcFunction); override;
+    procedure ObtainCalculateFunctionPtr(out f: TCalcFunction); override;
   end;
 
 implementation
@@ -81,7 +81,7 @@ begin
   rmax := 0.04 * scatter;
 end;
 
-procedure TVariationPreFalloff2.GetCalcFunction(var f: TCalcFunction);
+procedure TVariationPreFalloff2.ObtainCalculateFunctionPtr(out f: TCalcFunction);
 begin
   if blurtype = 1 then f := CalcFunctionRadial
   else if blurtype = 2 then f := CalcFunctionGaussian
@@ -173,7 +173,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-class function TVariationPreFalloff2.GetInstance: TBaseVariation;
+class function TVariationPreFalloff2.GetInstance: TVariation;
 begin
   Result := TVariationPreFalloff2.Create;
 end;
@@ -344,5 +344,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationPreFalloff2), true, true);
+  RegisterVariation(TIntegratedVariationLoader.Create(TVariationPreFalloff2), true, true);
 end.

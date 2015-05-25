@@ -29,17 +29,17 @@ unit varRectangles;
 interface
 
 uses
-  BaseVariation, XFormMan;
+  Variation, XFormMan;
 
 type
-  TVariationRectangles = class(TBaseVariation)
+  TVariationRectangles = class(TVariation)
   private
     FRectanglesX, FRectanglesY: double;
   public
     constructor Create;
 
     class function GetName: string; override;
-    class function GetInstance: TBaseVariation; override;
+    class function GetInstance: TVariation; override;
 
     function GetNrVariables: integer; override;
     function GetVariableNameAt(const Index: integer): string; override;
@@ -47,7 +47,7 @@ type
     function SetVariable(const Name: string; var value: double): boolean; override;
     function GetVariable(const Name: string; var value: double): boolean; override;
 
-    procedure GetCalcFunction(var f: TCalcFunction); override;
+    procedure ObtainCalculateFunctionPtr(out f: TCalcFunction); override;
     procedure CalcFunction; override;
     procedure CalcZeroX;
     procedure CalcZeroY;
@@ -64,7 +64,7 @@ uses
 
 ///////////////////////////////////////////////////////////////////////////////
 
-procedure TVariationRectangles.GetCalcFunction(var f: TCalcFunction);
+procedure TVariationRectangles.ObtainCalculateFunctionPtr(out f: TCalcFunction);
 begin
   if IsZero(FRectanglesX) then begin
     if IsZero(FRectanglesY) then
@@ -172,12 +172,12 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-class function TVariationRectangles.GetInstance: TBaseVariation;
+class function TVariationRectangles.GetInstance: TVariation;
 begin
   Result := TVariationRectangles.Create;
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationRectangles), false, false);
+  RegisterVariation(TIntegratedVariationLoader.Create(TVariationRectangles), false, false);
 end.

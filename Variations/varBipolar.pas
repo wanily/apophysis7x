@@ -26,17 +26,17 @@ unit varBipolar;
 interface
 
 uses
-  BaseVariation, XFormMan;
+  Variation, XFormMan;
 
 type
-  TVariationBipolar = class(TBaseVariation)
+  TVariationBipolar = class(TVariation)
   private
     bipolar_shift, v_4, v, s: double;
   public
     constructor Create;
 
     class function GetName: string; override;
-    class function GetInstance: TBaseVariation; override;
+    class function GetInstance: TVariation; override;
 
     function GetNrVariables: integer; override;
     function GetVariableNameAt(const Index: integer): string; override;
@@ -99,7 +99,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-class function TVariationBipolar.GetInstance: TBaseVariation;
+class function TVariationBipolar.GetInstance: TVariation;
 begin
   Result := TVariationBipolar.Create;
 end;
@@ -159,5 +159,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationBipolar), false, false);
+  RegisterVariation(TIntegratedVariationLoader.Create(TVariationBipolar), false, false);
 end.

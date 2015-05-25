@@ -26,17 +26,17 @@ unit varEscher;
 interface
 
 uses
-  BaseVariation, XFormMan;
+  Variation, XFormMan;
 
 type
-  TVariationEscher = class(TBaseVariation)
+  TVariationEscher = class(TVariation)
   private
     escher_beta, c, d: double;
   public
     constructor Create;
 
     class function GetName: string; override;
-    class function GetInstance: TBaseVariation; override;
+    class function GetInstance: TVariation; override;
 
     function GetNrVariables: integer; override;
     function GetVariableNameAt(const Index: integer): string; override;
@@ -87,7 +87,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-class function TVariationEscher.GetInstance: TBaseVariation;
+class function TVariationEscher.GetInstance: TVariation;
 begin
   Result := TVariationEscher.Create;
 end;
@@ -145,5 +145,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationEscher), false, false);
+  RegisterVariation(TIntegratedVariationLoader.Create(TVariationEscher), false, false);
 end.

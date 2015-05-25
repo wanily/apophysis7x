@@ -26,7 +26,7 @@ unit varHemisphere;
 interface
 
 uses
-  BaseVariation, XFormMan;
+  Variation, XFormMan;
 
 const
   var_name = 'hemisphere';
@@ -34,14 +34,14 @@ const
 {$define _ASM_}
 
 type
-  TVariationHemisphere = class(TBaseVariation)
+  TVariationHemisphere = class(TVariation)
   private
 
   public
     constructor Create;
 
     class function GetName: string; override;
-    class function GetInstance: TBaseVariation; override;
+    class function GetInstance: TVariation; override;
 
     function GetNrVariables: integer; override;
 
@@ -74,7 +74,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-class function TVariationHemisphere.GetInstance: TBaseVariation;
+class function TVariationHemisphere.GetInstance: TVariation;
 begin
   Result := TVariationHemisphere.Create;
 end;
@@ -93,5 +93,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationHemisphere), true, false);
+  RegisterVariation(TIntegratedVariationLoader.Create(TVariationHemisphere), true, false);
 end.

@@ -26,19 +26,19 @@ unit varPDJ;
 interface
 
 uses
-  BaseVariation, XFormMan;
+  Variation, XFormMan;
 
 {$define _ASM_}
 
 type
-  TVariationPDJ = class(TBaseVariation)
+  TVariationPDJ = class(TVariation)
   private
     FA,FB,FC,FD: double;
   public
     constructor Create;
 
     class function GetName: string; override;
-    class function GetInstance: TBaseVariation; override;
+    class function GetInstance: TVariation; override;
 
     function GetNrVariables: integer; override;
     function GetVariableNameAt(const Index: integer): string; override;
@@ -77,7 +77,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-class function TVariationPDJ.GetInstance: TBaseVariation;
+class function TVariationPDJ.GetInstance: TVariation;
 begin
   Result := TVariationPDJ.Create;
 end;
@@ -147,5 +147,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationPDJ), false, false);
+  RegisterVariation(TIntegratedVariationLoader.Create(TVariationPDJ), false, false);
 end.

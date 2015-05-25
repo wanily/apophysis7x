@@ -26,10 +26,10 @@ unit varWedge;
 interface
 
 uses
-  BaseVariation, XFormMan;
+  Variation, XFormMan;
 
 type
-  TVariationWedge = class(TBaseVariation)
+  TVariationWedge = class(TVariation)
   private
     wedge_angle, wedge_hole, wedge_swirl: double;
     wedge_count : integer;
@@ -38,7 +38,7 @@ type
     constructor Create;
 
     class function GetName: string; override;
-    class function GetInstance: TBaseVariation; override;
+    class function GetInstance: TVariation; override;
 
     function GetNrVariables: integer; override;
     function GetVariableNameAt(const Index: integer): string; override;
@@ -92,7 +92,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-class function TVariationWedge.GetInstance: TBaseVariation;
+class function TVariationWedge.GetInstance: TVariation;
 begin
   Result := TVariationWedge.Create;
 end;
@@ -181,5 +181,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationWedge), false, false);
+  RegisterVariation(TIntegratedVariationLoader.Create(TVariationWedge), false, false);
 end.

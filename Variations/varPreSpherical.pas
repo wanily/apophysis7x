@@ -26,15 +26,15 @@ unit varPreSpherical;
 interface
 
 uses
-  BaseVariation, XFormMan;
+  Variation, XFormMan;
 
 type
-  TVariationPreSpherical = class(TBaseVariation)
+  TVariationPreSpherical = class(TVariation)
   public
     constructor Create;
 
     class function GetName: string; override;
-    class function GetInstance: TBaseVariation; override;
+    class function GetInstance: TVariation; override;
 
     function GetNrVariables: integer; override;
     function GetVariableNameAt(const Index: integer): string; override;
@@ -71,7 +71,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-class function TVariationPreSpherical.GetInstance: TBaseVariation;
+class function TVariationPreSpherical.GetInstance: TVariation;
 begin
   Result := TVariationPreSpherical.Create;
 end;
@@ -108,5 +108,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationPreSpherical), false, false);
+  RegisterVariation(TIntegratedVariationLoader.Create(TVariationPreSpherical), false, false);
 end.

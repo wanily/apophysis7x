@@ -26,14 +26,14 @@ unit varJulia3Djf; // original variation code by Joel Faber, modified & optimize
 interface
 
 uses
-  BaseVariation, XFormMan;
+  Variation, XFormMan;
 
 const
   var_name = 'julia3D';
   var_n_name='julia3D_power';
 
 type
-  TVariationJulia3DJF = class(TBaseVariation)
+  TVariationJulia3DJF = class(TVariation)
   private
     N: integer;
 
@@ -49,7 +49,7 @@ type
     constructor Create;
 
     class function GetName: string; override;
-    class function GetInstance: TBaseVariation; override;
+    class function GetInstance: TVariation; override;
 
     function GetNrVariables: integer; override;
     function GetVariableNameAt(const Index: integer): string; override;
@@ -60,7 +60,7 @@ type
 
     procedure Prepare; override;
     procedure CalcFunction; override;
-    procedure GetCalcFunction(var f: TCalcFunction); override;
+    procedure ObtainCalculateFunctionPtr(out f: TCalcFunction); override;
   end;
 
 implementation
@@ -84,7 +84,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-procedure TVariationJulia3DJF.GetCalcFunction(var f: TCalcFunction);
+procedure TVariationJulia3DJF.ObtainCalculateFunctionPtr(out f: TCalcFunction);
 begin
   if N = 2 then f := CalcPower2
   else if N = -2 then f := CalcPowerMinus2
@@ -168,7 +168,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-class function TVariationJulia3DJF.GetInstance: TBaseVariation;
+class function TVariationJulia3DJF.GetInstance: TVariation;
 begin
   Result := TVariationJulia3DJF.Create;
 end;
@@ -229,6 +229,6 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationJulia3DJF), true, false);
+  RegisterVariation(TIntegratedVariationLoader.Create(TVariationJulia3DJF), true, false);
 end.
 

@@ -26,17 +26,17 @@ unit varScry;
 interface
 
 uses
-  BaseVariation, XFormMan;
+  Variation, XFormMan;
 
 type
-  TVariationScry = class(TBaseVariation)
+  TVariationScry = class(TVariation)
   private
     v: double;
   public
     constructor Create;
 
     class function GetName: string; override;
-    class function GetInstance: TBaseVariation; override;
+    class function GetInstance: TVariation; override;
 
     function GetNrVariables: integer; override;
     function GetVariableNameAt(const Index: integer): string; override;
@@ -83,7 +83,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-class function TVariationScry.GetInstance: TBaseVariation;
+class function TVariationScry.GetInstance: TVariation;
 begin
   Result := TVariationScry.Create;
 end;
@@ -125,5 +125,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationScry), false, false);
+  RegisterVariation(TIntegratedVariationLoader.Create(TVariationScry), false, false);
 end.

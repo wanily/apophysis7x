@@ -26,10 +26,10 @@ unit varWaves2;
 interface
 
 uses
-  BaseVariation, XFormMan;
+  Variation, XFormMan;
 
 type
-  TVariationWaves2 = class(TBaseVariation)
+  TVariationWaves2 = class(TVariation)
   private
     waves2_freqx, waves2_freqy, waves2_freqz: double;
     waves2_scalex, waves2_scaley, waves2_scalez: double;
@@ -38,7 +38,7 @@ type
     constructor Create;
 
     class function GetName: string; override;
-    class function GetInstance: TBaseVariation; override;
+    class function GetInstance: TVariation; override;
 
     function GetNrVariables: integer; override;
     function GetVariableNameAt(const Index: integer): string; override;
@@ -79,7 +79,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-class function TVariationWaves2.GetInstance: TBaseVariation;
+class function TVariationWaves2.GetInstance: TVariation;
 begin
   Result := TVariationWaves2.Create;
 end;
@@ -209,5 +209,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationWaves2), false, false);
+  RegisterVariation(TIntegratedVariationLoader.Create(TVariationWaves2), false, false);
 end.

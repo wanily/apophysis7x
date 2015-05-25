@@ -26,10 +26,10 @@ unit varCrop;
 interface
 
 uses
-  BaseVariation, XFormMan;
+  Variation, XFormMan;
 
 type
-  TVariationCrop = class(TBaseVariation)
+  TVariationCrop = class(TVariation)
   const
     n_x0 : string = 'crop_left';
     n_y0 : string = 'crop_top';
@@ -48,7 +48,7 @@ type
     constructor Create;
 
     class function GetName: string; override;
-    class function GetInstance: TBaseVariation; override;
+    class function GetInstance: TVariation; override;
 
     function GetNrVariables: integer; override;
     function GetVariableNameAt(const Index: integer): string; override;
@@ -117,7 +117,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-class function TVariationCrop.GetInstance: TBaseVariation;
+class function TVariationCrop.GetInstance: TVariation;
 begin
   Result := TVariationCrop.Create;
 end;
@@ -228,5 +228,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationCrop), true, false);
+  RegisterVariation(TIntegratedVariationLoader.Create(TVariationCrop), true, false);
 end.

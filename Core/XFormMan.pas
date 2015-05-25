@@ -4,7 +4,7 @@ unit XFormMan;
 interface
 
 uses
-  BaseVariation, SysUtils, Forms, Windows, StrUtils;
+  Variation, SysUtils, Forms, Windows, StrUtils;
 
 const
   NRLOCVAR = 29;

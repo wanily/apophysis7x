@@ -26,19 +26,19 @@ unit varPostCurl;
 interface
 
 uses
-  BaseVariation, XFormMan;
+  Variation, XFormMan;
 
 const
   variation_name = 'post_curl';
   num_vars = 2;
 
 type
-  TVariationPostCurl = class(TBaseVariation)
+  TVariationPostCurl = class(TVariation)
   private
     c1, c2, c22: double;
   public
     class function GetName: string; override;
-    class function GetInstance: TBaseVariation; override;
+    class function GetInstance: TVariation; override;
 
     function GetNrVariables: integer; override;
     function GetVariableNameAt(const Index: integer): string; override;
@@ -84,7 +84,7 @@ begin
 {$endif}
 end;
 ///////////////////////////////////////////////////////////////////////////////
-class function TVariationPostCurl.GetInstance: TBaseVariation;
+class function TVariationPostCurl.GetInstance: TVariation;
 begin
   Result := TVariationPostCurl.Create;
 end;
@@ -155,5 +155,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationPostCurl), false, false);
+  RegisterVariation(TIntegratedVariationLoader.Create(TVariationPostCurl), false, false);
 end.

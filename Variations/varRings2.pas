@@ -26,17 +26,17 @@ unit varRings2;
 interface
 
 uses
-  BaseVariation, XFormMan;
+  Variation, XFormMan;
 
 type
-  TVariationRings2 = class(TBaseVariation)
+  TVariationRings2 = class(TVariation)
   private
     FVal, dx: double;
   public
     constructor Create;
 
     class function GetName: string; override;
-    class function GetInstance: TBaseVariation; override;
+    class function GetInstance: TVariation; override;
 
     function GetNrVariables: integer; override;
     function GetVariableNameAt(const Index: integer): string; override;
@@ -96,7 +96,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-class function TVariationRings2.GetInstance: TBaseVariation;
+class function TVariationRings2.GetInstance: TVariation;
 begin
   Result := TVariationRings2.Create;
 end;
@@ -145,5 +145,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationRings2), false, false);
+  RegisterVariation(TIntegratedVariationLoader.Create(TVariationRings2), false, false);
 end.

@@ -26,7 +26,7 @@ unit varJuliaScope;
 interface
 
 uses
-  BaseVariation, XFormMan;
+  Variation, XFormMan;
 
 const
   variation_name='juliascope';
@@ -39,7 +39,7 @@ const
 {$endif}
 
 type
-  TVariationJuliaScope = class(TBaseVariation)
+  TVariationJuliaScope = class(TVariation)
   private
     N: integer;
     c: double;
@@ -56,7 +56,7 @@ type
     constructor Create;
 
     class function GetName: string; override;
-    class function GetInstance: TBaseVariation; override;
+    class function GetInstance: TVariation; override;
 
     function GetNrVariables: integer; override;
     function GetVariableNameAt(const Index: integer): string; override;
@@ -67,7 +67,7 @@ type
 
     procedure Prepare; override;
     procedure CalcFunction; override;
-    procedure GetCalcFunction(var f: TCalcFunction); override;
+    procedure ObtainCalculateFunctionPtr(out f: TCalcFunction); override;
   end;
 
 implementation
@@ -91,7 +91,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-procedure TVariationJuliaScope.GetCalcFunction(var f: TCalcFunction);
+procedure TVariationJuliaScope.ObtainCalculateFunctionPtr(out f: TCalcFunction);
 begin
   if c = 1 then begin
     if N = 2 then f := CalcPower2
@@ -183,7 +183,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-class function TVariationJuliaScope.GetInstance: TBaseVariation;
+class function TVariationJuliaScope.GetInstance: TVariation;
 begin
   Result := TVariationJuliaScope.Create;
 end;
@@ -257,5 +257,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationJuliaScope), false, false);
+  RegisterVariation(TIntegratedVariationLoader.Create(TVariationJuliaScope), false, false);
 end.

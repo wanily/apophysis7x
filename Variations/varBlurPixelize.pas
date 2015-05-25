@@ -26,10 +26,10 @@ unit varBlurPixelize;
 interface
 
 uses
-  BaseVariation, XFormMan;
+  Variation, XFormMan;
 
 type
-  TVariationBlurPixelize = class(TBaseVariation)
+  TVariationBlurPixelize = class(TVariation)
   private
     blur_pixelize_size, blur_pixelize_scale: double;
     inv_size, v: double;
@@ -37,7 +37,7 @@ type
     constructor Create;
 
     class function GetName: string; override;
-    class function GetInstance: TBaseVariation; override;
+    class function GetInstance: TVariation; override;
 
     function GetNrVariables: integer; override;
     function GetVariableNameAt(const Index: integer): string; override;
@@ -83,7 +83,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-class function TVariationBlurPixelize.GetInstance: TBaseVariation;
+class function TVariationBlurPixelize.GetInstance: TVariation;
 begin
   Result := TVariationBlurPixelize.Create;
 end;
@@ -151,5 +151,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationBlurPixelize), false, false);
+  RegisterVariation(TIntegratedVariationLoader.Create(TVariationBlurPixelize), false, false);
 end.

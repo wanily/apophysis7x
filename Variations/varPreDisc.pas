@@ -26,17 +26,17 @@ unit varPreDisc;
 interface
 
 uses
-  BaseVariation, XFormMan;
+  Variation, XFormMan;
 
 type
-  TVariationPreDisc = class(TBaseVariation)
+  TVariationPreDisc = class(TVariation)
   private
     vvar_by_pi: double;
   public
     constructor Create;
 
     class function GetName: string; override;
-    class function GetInstance: TBaseVariation; override;
+    class function GetInstance: TVariation; override;
 
     function GetNrVariables: integer; override;
     function GetVariableNameAt(const Index: integer): string; override;
@@ -81,7 +81,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-class function TVariationPreDisc.GetInstance: TBaseVariation;
+class function TVariationPreDisc.GetInstance: TVariation;
 begin
   Result := TVariationPreDisc.Create;
 end;
@@ -118,5 +118,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationPreDisc), false, false);
+  RegisterVariation(TIntegratedVariationLoader.Create(TVariationPreDisc), false, false);
 end.

@@ -26,10 +26,10 @@ unit varBlurCircle;
 interface
 
 uses
-  BaseVariation, XFormMan;
+  Variation, XFormMan;
 
 type
-  TVariationBlurCircle = class(TBaseVariation)
+  TVariationBlurCircle = class(TVariation)
   private
     VVAR4_PI: double;
     PI_4: double; 
@@ -37,7 +37,7 @@ type
     constructor Create;
 
     class function GetName: string; override;
-    class function GetInstance: TBaseVariation; override;
+    class function GetInstance: TVariation; override;
 
     function GetNrVariables: integer; override;
     function GetVariableNameAt(const Index: integer): string; override;
@@ -102,7 +102,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-class function TVariationBlurCircle.GetInstance: TBaseVariation;
+class function TVariationBlurCircle.GetInstance: TVariation;
 begin
   Result := TVariationBlurCircle.Create;
 end;
@@ -139,5 +139,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationBlurCircle), false, false);
+  RegisterVariation(TIntegratedVariationLoader.Create(TVariationBlurCircle), false, false);
 end.

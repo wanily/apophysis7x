@@ -26,17 +26,17 @@ unit varLog;
 interface
 
 uses
-  BaseVariation, XFormMan;
+  Variation, XFormMan;
 
 type
-  TVariationLog = class(TBaseVariation)
+  TVariationLog = class(TVariation)
   private
     base, denom: double;
   public
     constructor Create;
 
     class function GetName: string; override;
-    class function GetInstance: TBaseVariation; override;
+    class function GetInstance: TVariation; override;
 
     function GetNrVariables: integer; override;
     function GetVariableNameAt(const Index: integer): string; override;
@@ -78,7 +78,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-class function TVariationLog.GetInstance: TBaseVariation;
+class function TVariationLog.GetInstance: TVariation;
 begin
   Result := TVariationLog.Create;
 end;
@@ -137,5 +137,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationLog), false, false);
+  RegisterVariation(TIntegratedVariationLoader.Create(TVariationLog), false, false);
 end.

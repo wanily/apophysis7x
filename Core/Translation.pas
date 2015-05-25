@@ -1,4 +1,5 @@
-﻿unit Translation;
+﻿// -x- deceprated
+unit Translation;
 
 interface
 
@@ -12,29 +13,32 @@ procedure LoadLanguage(path: string);
 procedure LoadEnglish();
 function TextByKey(key: string): string;
 
-type
-  TParser = class
-  public
-    constructor Create;
+type TParser = class
 
-    procedure ListXmlScannerStartTag(Sender: TObject; TagName: string;
-      Attributes: TAttrList);
-    procedure ListXmlScannerEndTag(Sender: TObject; TagName: string);
-    procedure ListXmlScannerEmptyTag(Sender: TObject; TagName: string;
-      Attributes: TAttrList);
-    procedure ListXmlScannerContent(Sender: TObject; Content: string);
-  private
-    currentTagname: string;
-    parentTagnames: TStringList;
+    public
+      constructor Create;
+
+      procedure ListXmlScannerStartTag(Sender: TObject; TagName: string; Attributes: TAttrList);
+      procedure ListXmlScannerEndTag(Sender: TObject; TagName: string);
+      procedure ListXmlScannerEmptyTag(Sender: TObject; TagName: string; Attributes: TAttrList);
+      procedure ListXmlScannerContent(Sender: TObject; Content: string);
+
+    private
+
+      currentTagname: string;
+      parentTagnames: TStringList;
+
   end;
 
-  TKeyValuePair = class
-  public
-    key: string;
-    value: string;
+type TKeyValuePair = record
+
+    public
+      key: string;
+      value: string;
+
   end;
 
-  TDictionary = array of TKeyValuePair;
+type TDictionary = array of TKeyValuePair;
 
 var
   language: TDictionary;
@@ -585,7 +589,6 @@ begin
   Inc(tokenCount);
   SetLength(language, tokenCount);
   SetLength(defaultlanguage, tokenCount);
-  entry := TKeyValuePair.Create;
   entry.key := key;
   entry.value := value;
   language[tokenCount - 1] := entry;
@@ -598,7 +601,6 @@ var
 begin
   Inc(tokenCount);
   SetLength(language, tokenCount);
-  entry := TKeyValuePair.Create;
   entry.key := key;
   entry.value := value;
   language[tokenCount - 1] := entry;

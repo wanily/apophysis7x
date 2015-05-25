@@ -26,15 +26,15 @@ unit varPreSinusoidal;
 interface
 
 uses
-  BaseVariation, XFormMan;
+  Variation, XFormMan;
 
 type
-  TVariationPreSinusoidal = class(TBaseVariation)
+  TVariationPreSinusoidal = class(TVariation)
   public
     constructor Create;
 
     class function GetName: string; override;
-    class function GetInstance: TBaseVariation; override;
+    class function GetInstance: TVariation; override;
 
     function GetNrVariables: integer; override;
     function GetVariableNameAt(const Index: integer): string; override;
@@ -68,7 +68,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-class function TVariationPreSinusoidal.GetInstance: TBaseVariation;
+class function TVariationPreSinusoidal.GetInstance: TVariation;
 begin
   Result := TVariationPreSinusoidal.Create;
 end;
@@ -105,5 +105,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationPreSinusoidal), false, false);
+  RegisterVariation(TIntegratedVariationLoader.Create(TVariationPreSinusoidal), false, false);
 end.

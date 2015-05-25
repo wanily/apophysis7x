@@ -5,20 +5,15 @@ unit varJuliaN;
 interface
 
 uses
-  BaseVariation, XFormMan;
+  Variation, XFormMan;
 
 const
   var_name = 'julian';
   var_n_name='julian_power';
   var_c_name='julian_dist';
 
-{$ifdef Apo7X64}
-{$else}
-  {$define _ASM_}
-{$endif}
-
 type
-  TVariationJulian = class(TBaseVariation)
+  TVariationJulian = class(TVariation)
   private
     N: integer;
     c: double;
@@ -35,7 +30,7 @@ type
     constructor Create;
 
     class function GetName: string; override;
-    class function GetInstance: TBaseVariation; override;
+    class function GetInstance: TVariation; override;
 
     function GetNrVariables: integer; override;
     function GetVariableNameAt(const Index: integer): string; override;
@@ -46,7 +41,7 @@ type
 
     procedure Prepare; override;
     procedure CalcFunction; override;
-    procedure GetCalcFunction(var f: TCalcFunction); override;
+    procedure ObtainCalculateFunctionPtr(out f: TCalcFunction); override;
   end;
 
 implementation
@@ -72,7 +67,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-procedure TVariationJulian.GetCalcFunction(var f: TCalcFunction);
+procedure TVariationJulian.ObtainCalculateFunctionPtr(out f: TCalcFunction);
 begin
   if c = 1 then begin
     if N = 2 then f := CalcPower2
@@ -165,7 +160,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-class function TVariationJulian.GetInstance: TBaseVariation;
+class function TVariationJulian.GetInstance: TVariation;
 begin
   Result := TVariationJulian.Create;
 end;
@@ -239,6 +234,6 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationJulian), false, false);
+  RegisterVariation(TIntegratedVariationLoader.Create(TVariationJulian), false, false);
 end.
 

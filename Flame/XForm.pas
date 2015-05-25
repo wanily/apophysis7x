@@ -4,7 +4,7 @@ unit XForm;
 interface
 
 uses
-  XFormMan, BaseVariation;
+  XFormMan, Variation;
 
 const
   MAX_WEIGHT = 1000.0;
@@ -86,7 +86,7 @@ type
     rx_sin, rx_cos, ry_sin, ry_cos: double;
     px_sin, px_cos, py_sin, py_cos: double;
 
-    FRegVariations: array of TBaseVariation;
+    FRegVariations: array of TVariation;
 
     procedure PrecalcAngle;
     procedure PrecalcSinCos;
@@ -287,7 +287,7 @@ begin
 
     FRegVariations[i].vvar := vars[i + NRLOCVAR];
     FRegVariations[i].Prepare;
-    FRegVariations[i].GetCalcFunction(FFunctionList[NRLOCVAR + i]);
+    FRegVariations[i].ObtainCalculateFunctionPtr(FFunctionList[NRLOCVAR + i]);
   end;
 
   SetLength(FCalcFunctionList, NrVar + 2);

@@ -26,10 +26,10 @@ unit varFan2;
 interface
 
 uses
-  BaseVariation, XFormMan;
+  Variation, XFormMan;
 
 type
-  TVariationFan2 = class(TBaseVariation)
+  TVariationFan2 = class(TVariation)
   private
     FX, FY: double;
     dy, dx, dx2: double;
@@ -37,7 +37,7 @@ type
     constructor Create;
 
     class function GetName: string; override;
-    class function GetInstance: TBaseVariation; override;
+    class function GetInstance: TVariation; override;
 
     function GetNrVariables: integer; override;
     function GetVariableNameAt(const Index: integer): string; override;
@@ -114,7 +114,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-class function TVariationFan2.GetInstance: TBaseVariation;
+class function TVariationFan2.GetInstance: TVariation;
 begin
   Result := TVariationFan2.Create;
 end;
@@ -170,5 +170,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationFan2), false, false);
+  RegisterVariation(TIntegratedVariationLoader.Create(TVariationFan2), false, false);
 end.

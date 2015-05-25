@@ -1,3 +1,4 @@
+// -x- procedural nightmare...refactor!
 unit Global;
 
 interface

@@ -26,17 +26,17 @@ unit varBlurZoom;
 interface
 
 uses
-  BaseVariation, XFormMan;
+  Variation, XFormMan;
 
 type
-  TVariationBlurZoom = class(TBaseVariation)
+  TVariationBlurZoom = class(TVariation)
   private
     blur_zoom_length, blur_zoom_x, blur_zoom_y: double; 
   public
     constructor Create;
 
     class function GetName: string; override;
-    class function GetInstance: TBaseVariation; override;
+    class function GetInstance: TVariation; override;
 
     function GetNrVariables: integer; override;
     function GetVariableNameAt(const Index: integer): string; override;
@@ -79,7 +79,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-class function TVariationBlurZoom.GetInstance: TBaseVariation;
+class function TVariationBlurZoom.GetInstance: TVariation;
 begin
   Result := TVariationBlurZoom.Create;
 end;
@@ -142,5 +142,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationBlurZoom), false, false);
+  RegisterVariation(TIntegratedVariationLoader.Create(TVariationBlurZoom), false, false);
 end.

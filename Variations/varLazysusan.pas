@@ -26,10 +26,10 @@ unit varLazysusan;
 interface
 
 uses
-  BaseVariation, XFormMan;
+  Variation, XFormMan;
 
 type
-  TVariationLazysusan = class(TBaseVariation)
+  TVariationLazysusan = class(TVariation)
   private
     lazysusan_spin, lazysusan_space, lazysusan_twist : double;
     lazysusan_x, lazysusan_y : double;
@@ -37,7 +37,7 @@ type
     constructor Create;
 
     class function GetName: string; override;
-    class function GetInstance: TBaseVariation; override;
+    class function GetInstance: TVariation; override;
 
     function GetNrVariables: integer; override;
     function GetVariableNameAt(const Index: integer): string; override;
@@ -95,7 +95,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-class function TVariationLazysusan.GetInstance: TBaseVariation;
+class function TVariationLazysusan.GetInstance: TVariation;
 begin
   Result := TVariationLazysusan.Create;
 end;
@@ -193,5 +193,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationLazysusan), false, false);
+  RegisterVariation(TIntegratedVariationLoader.Create(TVariationLazysusan), false, false);
 end.

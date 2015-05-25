@@ -26,7 +26,7 @@ unit varPostCurl3D;
 interface
 
 uses
-  BaseVariation, XFormMan;
+  Variation, XFormMan;
 
 const
   variation_name = 'post_curl3D';
@@ -36,7 +36,7 @@ const
   var_cz_name = 'post_curl3D_cz';
 
 type
-  TVariationPostCurl3D = class(TBaseVariation)
+  TVariationPostCurl3D = class(TVariation)
   private
     cx, cy, cz: double;
 
@@ -45,7 +45,7 @@ type
     c2x, c2y, c2z: double;
   public
     class function GetName: string; override;
-    class function GetInstance: TBaseVariation; override;
+    class function GetInstance: TVariation; override;
 
     function GetNrVariables: integer; override;
     function GetVariableNameAt(const Index: integer): string; override;
@@ -99,7 +99,7 @@ begin
   FPz^ := r * (z + _cz*r2);
 end;
 ///////////////////////////////////////////////////////////////////////////////
-class function TVariationPostCurl3D.GetInstance: TBaseVariation;
+class function TVariationPostCurl3D.GetInstance: TVariation;
 begin
   Result := TVariationPostCurl3D.Create;
 end;
@@ -183,5 +183,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationPostCurl3D), true, false);
+  RegisterVariation(TIntegratedVariationLoader.Create(TVariationPostCurl3D), true, false);
 end.

@@ -26,7 +26,7 @@ unit varRadialBlur;
 interface
 
 uses
-  BaseVariation, XFormMan;
+  Variation, XFormMan;
 
 const
   var_name = 'radial_blur';
@@ -38,7 +38,7 @@ const
 {$endif}
 
 type
-  TVariationRadialBlur = class(TBaseVariation)
+  TVariationRadialBlur = class(TVariation)
   private
     angle,
     spin_var, zoom_var: double;
@@ -53,7 +53,7 @@ type
     constructor Create;
 
     class function GetName: string; override;
-    class function GetInstance: TBaseVariation; override;
+    class function GetInstance: TVariation; override;
 
     function GetNrVariables: integer; override;
     function GetVariableNameAt(const Index: integer): string; override;
@@ -64,7 +64,7 @@ type
 
     procedure Prepare; override;
     procedure CalcFunction; override;
-    procedure GetCalcFunction(var f: TCalcFunction); override;
+    procedure ObtainCalculateFunctionPtr(out f: TCalcFunction); override;
   end;
 
 implementation
@@ -93,7 +93,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-procedure TVariationRadialBlur.GetCalcFunction(var f: TCalcFunction);
+procedure TVariationRadialBlur.ObtainCalculateFunctionPtr(out f: TCalcFunction);
 begin
   if IsZero(spin_var) then f := CalcZoom
   else if IsZero(zoom_var) then f := CalcSpin
@@ -155,7 +155,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-class function TVariationRadialBlur.GetInstance: TBaseVariation;
+class function TVariationRadialBlur.GetInstance: TVariation;
 begin
   Result := TVariationRadialBlur.Create;
 end;
@@ -213,5 +213,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationRadialBlur), false, false);
+  RegisterVariation(TIntegratedVariationLoader.Create(TVariationRadialBlur), false, false);
 end.

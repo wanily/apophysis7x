@@ -26,17 +26,17 @@ unit varLoonie;
 interface
 
 uses
-  BaseVariation, XFormMan;
+  Variation, XFormMan;
 
 type
-  TVariationLoonie = class(TBaseVariation)
+  TVariationLoonie = class(TVariation)
   private
     sqrvar: double;
   public
     constructor Create;
 
     class function GetName: string; override;
-    class function GetInstance: TBaseVariation; override;
+    class function GetInstance: TVariation; override;
 
     function GetNrVariables: integer; override;
     function GetVariableNameAt(const Index: integer): string; override;
@@ -87,7 +87,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-class function TVariationLoonie.GetInstance: TBaseVariation;
+class function TVariationLoonie.GetInstance: TVariation;
 begin
   Result := TVariationLoonie.Create;
 end;
@@ -129,5 +129,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationLoonie), false, false);
+  RegisterVariation(TIntegratedVariationLoader.Create(TVariationLoonie), false, false);
 end.

@@ -5,12 +5,12 @@ unit varEpispiral; // <-- JK Changed unit name to avoid clobbering original
 interface
 
 uses
-  BaseVariation, XFormMan;  // <-- JK Removed some (unnecessary?) units
+  Variation, XFormMan;  // <-- JK Removed some (unnecessary?) units
 
 const
   EPS: double = 1E-6;
 type
-  TVariationEpispiral = class(TBaseVariation)
+  TVariationEpispiral = class(TVariation)
   private
    n, thickness, holes : double;
 
@@ -18,7 +18,7 @@ type
     constructor Create;
 
     class function GetName: string; override;
-    class function GetInstance: TBaseVariation; override;
+    class function GetInstance: TVariation; override;
 
     function GetNrVariables: integer; override;
     function GetVariableNameAt(const Index: integer): string; override;
@@ -78,7 +78,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-class function TVariationEpispiral.GetInstance: TBaseVariation;
+class function TVariationEpispiral.GetInstance: TVariation;
 begin
   Result := TVariationEpispiral.Create;
 end;
@@ -160,6 +160,6 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationEpispiral), false, false);  // <-- JK Plugin manager does this
+  RegisterVariation(TIntegratedVariationLoader.Create(TVariationEpispiral), false, false);  // <-- JK Plugin manager does this
 end.
 

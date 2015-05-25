@@ -26,17 +26,17 @@ unit varPolar2;
 interface
 
 uses
-  BaseVariation, XFormMan;
+  Variation, XFormMan;
 
 type
-  TVariationPolar2 = class(TBaseVariation)
+  TVariationPolar2 = class(TVariation)
   private
     p2vv, p2vv2: double;
   public
     constructor Create;
 
     class function GetName: string; override;
-    class function GetInstance: TBaseVariation; override;
+    class function GetInstance: TVariation; override;
 
     function GetNrVariables: integer; override;
     function GetVariableNameAt(const Index: integer): string; override;
@@ -75,7 +75,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-class function TVariationPolar2.GetInstance: TBaseVariation;
+class function TVariationPolar2.GetInstance: TVariation;
 begin
   Result := TVariationPolar2.Create;
 end;
@@ -112,5 +112,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationPolar2), false, false);
+  RegisterVariation(TIntegratedVariationLoader.Create(TVariationPolar2), false, false);
 end.

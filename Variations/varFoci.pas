@@ -26,15 +26,15 @@ unit varFoci;
 interface
 
 uses
-  BaseVariation, XFormMan;
+  Variation, XFormMan;
 
 type
-  TVariationFoci = class(TBaseVariation)
+  TVariationFoci = class(TVariation)
   public
     constructor Create;
 
     class function GetName: string; override;
-    class function GetInstance: TBaseVariation; override;
+    class function GetInstance: TVariation; override;
 
     function GetNrVariables: integer; override;
     function GetVariableNameAt(const Index: integer): string; override;
@@ -79,7 +79,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-class function TVariationFoci.GetInstance: TBaseVariation;
+class function TVariationFoci.GetInstance: TVariation;
 begin
   Result := TVariationFoci.Create;
 end;
@@ -116,5 +116,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationFoci), false, false);
+  RegisterVariation(TIntegratedVariationLoader.Create(TVariationFoci), false, false);
 end.

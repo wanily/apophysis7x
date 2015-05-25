@@ -26,17 +26,17 @@ unit varSplits;
 interface
 
 uses
-  BaseVariation, XFormMan;
+  Variation, XFormMan;
 
 type
-  TVariationSplits = class(TBaseVariation)
+  TVariationSplits = class(TVariation)
   private
     splits_x, splits_y: double; 
   public
     constructor Create;
 
     class function GetName: string; override;
-    class function GetInstance: TBaseVariation; override;
+    class function GetInstance: TVariation; override;
 
     function GetNrVariables: integer; override;
     function GetVariableNameAt(const Index: integer): string; override;
@@ -83,7 +83,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-class function TVariationSplits.GetInstance: TBaseVariation;
+class function TVariationSplits.GetInstance: TVariation;
 begin
   Result := TVariationSplits.Create;
 end;
@@ -139,5 +139,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationSplits), false, false);
+  RegisterVariation(TIntegratedVariationLoader.Create(TVariationSplits), false, false);
 end.

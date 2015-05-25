@@ -241,7 +241,7 @@ implementation uses
   About,
   RndFlame,
   Tracer,
-  varGenericPlugin;
+  PluginVariation;
 
 {$R *.dfm}
 {$R 'System\UIRibbon.res'}

@@ -26,10 +26,10 @@ unit varNGon;
 interface
 
 uses
-  BaseVariation, XFormMan;
+  Variation, XFormMan;
 
 type
-  TVariationNGon = class(TBaseVariation)
+  TVariationNGon = class(TVariation)
   private
     ngon_sides : integer;
     ngon_power, ngon_circle, ngon_corners : double;
@@ -38,7 +38,7 @@ type
     constructor Create;
 
     class function GetName: string; override;
-    class function GetInstance: TBaseVariation; override;
+    class function GetInstance: TVariation; override;
 
     function GetNrVariables: integer; override;
     function GetVariableNameAt(const Index: integer): string; override;
@@ -96,7 +96,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-class function TVariationNGon.GetInstance: TBaseVariation;
+class function TVariationNGon.GetInstance: TVariation;
 begin
   Result := TVariationNGon.Create;
 end;
@@ -185,5 +185,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationNGon), false, false);
+  RegisterVariation(TIntegratedVariationLoader.Create(TVariationNGon), false, false);
 end.

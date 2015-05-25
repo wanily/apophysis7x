@@ -26,17 +26,17 @@ unit varMobius;
 interface
 
 uses
-  BaseVariation, XFormMan;
+  Variation, XFormMan;
 
 type
-  TVariationMobius = class(TBaseVariation)
+  TVariationMobius = class(TVariation)
   private
     Re_A, Im_A, Re_B, Im_B, Re_C, Im_C, Re_D, Im_D: double;
   public
     constructor Create;
 
     class function GetName: string; override;
-    class function GetInstance: TBaseVariation; override;
+    class function GetInstance: TVariation; override;
 
     function GetNrVariables: integer; override;
     function GetVariableNameAt(const Index: integer): string; override;
@@ -87,7 +87,7 @@ begin
 end;
 
 ///////////////////////////////////////////////////////////////////////////////
-class function TVariationMobius.GetInstance: TBaseVariation;
+class function TVariationMobius.GetInstance: TVariation;
 begin
   Result := TVariationMobius.Create;
 end;
@@ -214,5 +214,5 @@ end;
 
 ///////////////////////////////////////////////////////////////////////////////
 initialization
-  RegisterVariation(TVariationClassLoader.Create(TVariationMobius), false, false);
+  RegisterVariation(TIntegratedVariationLoader.Create(TVariationMobius), false, false);
 end.
