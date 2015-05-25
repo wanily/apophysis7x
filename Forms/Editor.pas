@@ -33,7 +33,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   ExtCtrls, StdCtrls, ComCtrls, Math, Menus, ToolWin, Registry,
   Grids, ValEdit, Buttons, ImgList, Types,  StrUtils,
-  ControlPoint, XForm, cmap, CustomDrawControl, TransformSelection,
+  ControlPoint, XForm, PaletteIO, CustomDrawControl, TransformSelection,
   RenderingInterface, Translation, RenderThread, System.ImageList,
   UiRibbonCommands;
 
@@ -752,7 +752,7 @@ begin
   // currently EditForm does not really know if we select another
   // flame in the Main Window - which is not good...
 
-  cp.copy(MainCp);
+  cp.copy(MainForm.FlameInWorkspace);
 
   if SelectedTriangle > LastTriangle{???} then
   begin
@@ -767,8 +767,8 @@ begin
 
   if PreviewOnly then exit;
 
-  cp.cmap := MainCp.cmap;
-  cmap := MainCp.cmap;
+  cp.cmap := MainForm.FlameInWorkspace.cmap;
+  cmap := MainForm.FlameInWorkspace.cmap;
 
   UpdateXformsList;
   UpdateColorBar;
@@ -811,7 +811,7 @@ begin
 }
   end;
 
-  cp.cmap := MainCp.cmap;
+  cp.cmap := MainForm.FlameInWorkspace.cmap;
   Render.SetCP(cp);
   Render.Render;
   PreviewImage.Picture.Bitmap.Assign(Render.GetImage);
@@ -1100,11 +1100,11 @@ begin
   if DrawMain then begin
     MainForm.StopPreviewRenderThread;
 
-    MainCp.Copy(cp, true);
+    MainForm.FlameInWorkspace.Copy(cp, true);
 
-    MainCp.cmap := cmap;
+    MainForm.FlameInWorkspace.cmap := cmap;
     if mnuResetLoc.checked then begin
-      MainCp.zoom := 0;
+      MainForm.FlameInWorkspace.zoom := 0;
       MainForm.CameraCenter[0] := cp.center[0];
       MainForm.CameraCenter[1] := cp.center[1];
     end;
@@ -1273,7 +1273,7 @@ begin
   if n = Transforms then Result := clWhite
   else
   if UseTransformColors then
-    Result := ColorValToColor(MainCp.cmap, cp.xform[n].color)
+    Result := ColorValToColor(MainForm.FlameInWorkspace.cmap, cp.xform[n].color)
   else Result := TrgColors[n mod 14];
 end;
 
@@ -3139,13 +3139,13 @@ begin
   //tbResetLoc.Down := reset;
   if reset then
   begin
-    cp.width := MainCp.width;
-    cp.height := MainCp.height;
-    cp.pixels_per_unit := MainCp.pixels_per_unit;
+    cp.width := MainForm.FlameInWorkspace.width;
+    cp.height := MainForm.FlameInWorkspace.height;
+    cp.pixels_per_unit := MainForm.FlameInWorkspace.pixels_per_unit;
     cp.AdjustScale(PreviewImage.width, PreviewImage.Height);
-    cp.zoom := MainCp.zoom;
-    cp.center[0] := MainCp.center[0];
-    cp.center[1] := MainCp.center[1];
+    cp.zoom := MainForm.FlameInWorkspace.zoom;
+    cp.center[0] := MainForm.FlameInWorkspace.center[0];
+    cp.center[1] := MainForm.FlameInWorkspace.center[1];
   end;
   DrawPreview;
 end;
@@ -3366,7 +3366,7 @@ begin
   if v <> cp.xform[SelectedTriangle].color then
   begin
     cp.xform[SelectedTriangle].color := v;
-    pnlXFormColor.color := ColorValToColor(MainCp.cmap, v);
+    pnlXFormColor.color := ColorValToColor(MainForm.FlameInWorkspace.cmap, v);
     shColor.Brush.Color := pnlXFormColor.Color;
     txtXFormColor.Text := Format('%1.3f', [v]);
     txtXFormColor.Refresh;
@@ -3942,9 +3942,9 @@ begin
     for i := 0 to 255 do
       with Row[i] do
       begin
-        rgbtRed   := MainCP.cmap[i][0];
-        rgbtGreen := MainCP.cmap[i][1];
-        rgbtBlue  := MainCP.cmap[i][2];
+        rgbtRed   := MainForm.FlameInWorkspace.cmap[i][0];
+        rgbtGreen := MainForm.FlameInWorkspace.cmap[i][1];
+        rgbtBlue  := MainForm.FlameInWorkspace.cmap[i][2];
       end;
 
     EditForm.ColorBarPicture.Picture.Graphic := Bitmap;

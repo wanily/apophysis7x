@@ -27,9 +27,7 @@ uses
   ParameterIO in 'IO\ParameterIO.pas',
   RndFlame in 'Flame\RndFlame.pas',
   ControlPoint in 'Flame\ControlPoint.pas',
-  cmapdata in 'ColorMap\cmapdata.pas',
-  cmap in 'ColorMap\cmap.pas',
-  GradientHlpr in 'ColorMap\GradientHlpr.pas',
+  PaletteIO in 'ColorMap\PaletteIO.pas',
   XFormMan in 'Core\XFormMan.pas',
   XForm in 'Flame\XForm.pas',
   BaseVariation in 'Core\BaseVariation.pas',
@@ -100,7 +98,8 @@ uses
   Save in 'Forms\Save.pas' {SaveForm},
   TransformSelection in 'Forms\TransformSelection.pas' {TransformSelectionForm},
   Vcl.Forms,
-  ApophysisCommandManager in 'Gui\ApophysisCommandManager.pas';
+  ApophysisCommandManager in 'Gui\ApophysisCommandManager.pas',
+  ThumbnailThread in 'Gui\ThumbnailThread.pas';
 
 begin
   Application.Initialize;

@@ -159,9 +159,7 @@
         <DCCReference Include="IO\ParameterIO.pas"/>
         <DCCReference Include="Flame\RndFlame.pas"/>
         <DCCReference Include="Flame\ControlPoint.pas"/>
-        <DCCReference Include="ColorMap\cmapdata.pas"/>
-        <DCCReference Include="ColorMap\cmap.pas"/>
-        <DCCReference Include="ColorMap\GradientHlpr.pas"/>
+        <DCCReference Include="ColorMap\PaletteIO.pas"/>
         <DCCReference Include="Core\XFormMan.pas"/>
         <DCCReference Include="Flame\XForm.pas"/>
         <DCCReference Include="Core\BaseVariation.pas"/>
@@ -256,6 +254,7 @@
             <Form>TransformSelectionForm</Form>
         </DCCReference>
         <DCCReference Include="Gui\ApophysisCommandManager.pas"/>
+        <DCCReference Include="Gui\ThumbnailThread.pas"/>
         <None Include="Apophysis7X.todo"/>
         <None Include="ModelSupport_Apophysis7X\default.txaPackage"/>
         <BuildConfiguration Include="Debug">
@@ -318,6 +317,12 @@
             </Platforms>
             <ModelSupport>True</ModelSupport>
             <Deployment Version="1">
+                <DeployFile LocalName="..\..\Out\x86\Apophysis7X.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>Apophysis7X.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="ModelSupport_Apophysis7X\default.txaPackage" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win64">
                         <RemoteDir>.\</RemoteDir>
@@ -330,15 +335,21 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\..\Out\x64\Apophysis7X.rsm" Configuration="Debug" Class="DebugSymbols">
-                    <Platform Name="Win64">
-                        <RemoteName>Apophysis7X.rsm</RemoteName>
+                <DeployFile LocalName="Apophysis7X.todo" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="..\..\Out\x64\Apophysis7X.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win64">
                         <RemoteName>Apophysis7X.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_Apophysis7X\default.txaPackage" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -718,13 +729,13 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
-                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
             </Deployment>
         </BorlandProject>
         <ProjectFileVersion>12</ProjectFileVersion>

@@ -27,7 +27,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, ExtCtrls, ComCtrls, Buttons, Menus, AppEvnts,
-  ControlPoint, Cmap, RenderingInterface, Translation, UiRibbonCommands;
+  ControlPoint, PaletteIO, RenderingInterface, Translation, UiRibbonCommands;
 
 const
   WM_UPDATE_PARAMS = WM_APP + 5439;
@@ -368,10 +368,9 @@ procedure HSVToRGB(H, S, V: real; var Rb, Gb, Bb: integer);
 
 implementation
 
-//uses Main, Global, Registry, Mutate, Editor, Save, Browser;
 uses
-  RndFlame, Main, cmapdata, Math, Browser, Editor, Global,
-  Save, ClipBrd, GradientHlpr, Registry;
+  RndFlame, Main, Math, Browser, Editor, Global,
+  Save, ClipBrd, Registry;
 
 {$R *.DFM}
 
@@ -380,7 +379,7 @@ var
   pw, ph: integer;
   r: double;
 begin
-  cp.copy(MainCp);
+  cp.copy(MainForm.FlameInWorkspace);
 
   pw := PrevPnl.Width -2;
   ph := PrevPnl.Height -2;
@@ -401,7 +400,7 @@ begin
   end;
   cp.AdjustScale(PreviewImage.Width, PreviewImage.Height);
 
-  cp.cmap := MainCp.cmap;
+  cp.cmap := MainForm.FlameInWorkspace.cmap;
 
   if not PreviewOnly then begin //***
 
@@ -457,7 +456,7 @@ begin
     MainForm.StopPreviewRenderThread;
 
   MainForm.PushWorkspaceToUndoStack;
-  MainCp.Copy(cp, true);
+  MainForm.FlameInWorkspace.Copy(cp, true);
 
   if EditForm.Visible then EditForm.UpdateDisplay;
 
@@ -1100,8 +1099,8 @@ begin
   MainForm.StopPreviewRenderThread;
   MainForm.PushWorkspaceToUndoStack;
 
-  MainCp.CmapIndex := cmbPalette.ItemIndex;
-  MainCp.cmap := Palette;
+  MainForm.FlameInWorkspace.CmapIndex := cmbPalette.ItemIndex;
+  MainForm.FlameInWorkspace.cmap := Palette;
 
   if EditForm.visible then EditForm.UpdateDisplay;
 
@@ -1310,7 +1309,7 @@ begin
   if Resetting then exit;
 
   i := cmbPalette.ItemIndex;
-  GetCmap(i, 1, Palette);
+  GetIntegratedPaletteByIndex(i, Palette);
   BackupPal := Palette;
   ScrollBar.Position := 0;
   //DrawPalette;
@@ -1581,7 +1580,7 @@ begin
   try
     SaveForm.SaveType := stSaveGradient;
     SaveForm.Filename := GradientFile;
-    SaveForm.Title := MainCp.name;
+    SaveForm.Title := MainForm.FlameInWorkspace.name;
     if SaveForm.ShowModal = mrOK then
     begin
       gradstr.add(CleanIdentifier(SaveForm.Title) + ' {');
@@ -1597,7 +1596,7 @@ end;
 
 procedure TAdjustForm.SaveasMapfile1Click(Sender: TObject);
 begin
-  SaveDialog.Filename := MainCp.name + '.map';
+  SaveDialog.Filename := MainForm.FlameInWorkspace.name + '.map';
   SaveDialog.Filter := Format('%s|*.map|%s|*.*', [
     TextByKey('common-filter-fractintfiles'),
     TextByKey('common-filter-allfiles')]);
@@ -1605,8 +1604,7 @@ begin
     SaveMap(SaveDialog.Filename);
 end;
 
-procedure TAdjustForm.cmbPaletteDrawItem(Control: TWinControl;
-  Index: Integer; Rect: TRect; State: TOwnerDrawState);
+procedure TAdjustForm.cmbPaletteDrawItem(Control: TWinControl; Index: Integer; Rect: TRect; State: TOwnerDrawState);
 var
   i, j: integer;
   Row: pRGBTripleArray;
@@ -1614,9 +1612,8 @@ var
   pal: TColorMap;
   PalName: string;
 begin
-{ Draw the preset palettes on the combo box items }
-  GetCMap(index, 1, pal);
-  GetCmapName(index, PalName);
+  GetIntegratedPaletteByIndex(index, pal);
+  GetIntegratedCmapNameByIndex(index, PalName);
 
   BitMap := TBitMap.create;
   Bitmap.PixelFormat := pf24bit;
@@ -1694,8 +1691,11 @@ begin
 end;
 
 procedure TAdjustForm.mnuRandomizeClick(Sender: TObject);
+var
+  cmap : TColorMap;
 begin
-  UpdateGradient(GradientHelper.RandomGradient);
+  GetIntegratedPaletteByIndex(RANDOMCMAP, cmap);
+  UpdateGradient(cmap);
   Apply;
 end;
 
@@ -1841,7 +1841,7 @@ begin
 
   MainForm.StopPreviewRenderThread;
   MainForm.PushWorkspaceToUndoStack;
-  MainCp.Copy(cp, true);
+  MainForm.FlameInWorkspace.Copy(cp, true);
 
   if EditForm.Visible then EditForm.UpdateDisplay;
 
@@ -1936,7 +1936,7 @@ procedure TAdjustForm.SetMainWindowSize;
 var
   l, t, w, h: integer;
 begin
-  MainCp.AdjustScale(ImageWidth, ImageHeight);
+  MainForm.FlameInWorkspace.AdjustScale(ImageWidth, ImageHeight);
   MainForm.FitPreviewImageSize; //?
 
   if chkResizeMain.Checked then begin
@@ -1962,8 +1962,8 @@ end;
 
 procedure TAdjustForm.GetMainWindowSize;
 begin
-  ImageWidth := MainCP.Width;
-  ImageHeight := MainCP.Height;
+  ImageWidth := MainForm.FlameInWorkspace.Width;
+  ImageHeight := MainForm.FlameInWorkspace.Height;
   txtWidth.text := IntToStr(ImageWidth);
   txtHeight.text := IntToStr(ImageHeight);
 end;

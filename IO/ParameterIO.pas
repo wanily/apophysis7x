@@ -2,7 +2,7 @@ unit ParameterIO;
 
 interface
 
-uses Global, SysUtils, StrUtils, ControlPoint, XForm, cmap,
+uses Global, SysUtils, StrUtils, ControlPoint, XForm, PaletteIO,
   XFormMan, RegularExpressionsCore, RegexHelper, Classes;
 
 type
@@ -667,7 +667,7 @@ begin
       if token_part <> '' then
       begin
         t := TStringList.Create;
-        GetTokens(token_part, t);
+        ParsePaletteTokenString(token_part, t);
         for i := 0 to t.count - 1 do
           xf.modWeights[i] := Abs(StrToFloat(t[i]));
         t.Destroy;

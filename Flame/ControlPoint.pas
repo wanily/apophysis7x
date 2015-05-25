@@ -3,7 +3,7 @@ unit ControlPoint;
 interface
 
 uses
-  Classes, Windows, Cmap, XForm, XFormMan,
+  Classes, Windows, PaletteIO, XForm, XFormMan,
   SysUtils, math, ZLib;
 
 const
@@ -159,7 +159,6 @@ type
     procedure SetVariation(vari: TVariation);
     procedure Clear;
 
-    procedure InterpolateX(cp1, cp2: TControlPoint; Tm: double);
     procedure IterateXY(NrPoints: integer; var Points: TPointsXYArray);
     procedure IterateXYC(NrPoints: integer; var Points: TPointsArray);
 
@@ -1115,7 +1114,7 @@ begin
 
     inc(ParsePos);
   end;
-  GetCmap(cmapindex, hue_rotation, Cmap);
+  GetIntegratedPaletteByIndex(cmapindex, Cmap);
 
   ParseValues.Free;
 
@@ -1188,7 +1187,7 @@ begin
   // hue_rotation := random;
   hue_rotation := 1;
   cmapindex := RANDOMCMAP;
-  GetCmap(cmapindex, hue_rotation, Cmap);
+  GetIntegratedPaletteByIndex(cmapindex, Cmap);
   time := 0.0;
 
   // nrXforms := xform_distrib[random(13)];
@@ -1541,167 +1540,6 @@ begin
       raise Exception.Create('CalcUPRMagn: ' + E.Message);
     end;
   end;
-end;
-
-procedure TControlPoint.InterpolateX(cp1, cp2: TControlPoint; Tm: double);
-var
-  Result: TControlPoint;
-  c0, c1: double;
-  i, j: integer;
-  R, s, t: array [0 .. 2] of double;
-  v1, v2: double;
-  // totvar: double;
-  { z,rhtime: double; }
-
-  nXforms1, nXforms2: integer;
-begin
-  if (cp2.time - cp1.time) > 1E-6 then
-  begin
-    c0 := (cp2.time - Tm) / (cp2.time - cp1.time);
-    c1 := 1 - c0;
-  end
-  else
-  begin
-    c0 := 1;
-    c1 := 0;
-  end;
-
-  Result := TControlPoint.Create;
-  Result.time := Tm;
-
-  if cp1.cmap_inter = 0 then
-    for i := 0 to 255 do
-    begin
-      R[0] := cp1.Cmap[i][0] / 255;
-      R[1] := cp1.Cmap[i][1] / 255;
-      R[2] := cp1.Cmap[i][2] / 255;
-      rgb2hsv(R, s);
-      R[0] := cp2.Cmap[i][0] / 255;
-      R[1] := cp2.Cmap[i][1] / 255;
-      R[2] := cp2.Cmap[i][2] / 255;
-      rgb2hsv(R, t);
-      t[0] := c0 * s[0] + c1 * t[0];
-      t[1] := c0 * s[1] + c1 * t[1];
-      t[2] := c0 * s[2] + c1 * t[2];
-      hsv2rgb(t, R);
-      Result.Cmap[i][0] := Round(255 * R[0]);
-      Result.Cmap[i][1] := Round(255 * R[1]);
-      Result.Cmap[i][2] := Round(255 * R[2]);
-    end;
-
-  Result.cmapindex := -1;
-
-  Result.Fbrightness := c0 * cp1.Fbrightness + c1 * cp2.Fbrightness;
-  Result.contrast := c0 * cp1.contrast + c1 * cp2.contrast;
-  Result.gamma := c0 * cp1.gamma + c1 * cp2.gamma;
-  Result.vibrancy := c0 * cp1.vibrancy + c1 * cp2.vibrancy;
-  Result.gamma_threshold := c0 * cp1.gamma_threshold + c1 * cp2.gamma_threshold;
-  Result.Width := cp1.Width;
-  Result.Height := cp1.Height;
-  Result.spatial_oversample := Round(c0 * cp1.spatial_oversample + c1 *
-    cp2.spatial_oversample);
-  Result.center[0] := c0 * cp1.center[0] + c1 * cp2.center[0];
-  Result.center[1] := c0 * cp1.center[1] + c1 * cp2.center[1];
-  Result.FAngle := c0 * cp1.FAngle + c1 * cp2.FAngle;
-  Result.pixels_per_unit := c0 * cp1.pixels_per_unit + c1 * cp2.pixels_per_unit;
-  Result.spatial_filter_radius := c0 * cp1.spatial_filter_radius + c1 *
-    cp2.spatial_filter_radius;
-  Result.sample_density := c0 * cp1.sample_density + c1 * cp2.sample_density;
-  Result.zoom := c0 * cp1.zoom + c1 * cp2.zoom;
-  Result.nbatches := Round(c0 * cp1.nbatches + c1 * cp2.nbatches);
-  Result.white_level := Round(c0 * cp1.white_level + c1 * cp2.white_level);
-
-  for i := 0 to 3 do
-  begin
-    Result.pulse[i div 2][i mod 2] := c0 * cp1.pulse[i div 2][i mod 2] + c1 *
-      cp2.pulse[i div 2][i mod 2];
-    Result.wiggle[i div 2][i mod 2] := c0 * cp1.wiggle[i div 2][i mod 2] + c1 *
-      cp2.wiggle[i div 2][i mod 2];
-  end;
-
-  // save finalxform from mut(il)ation ;)
-  nXforms1 := cp1.NumXForms;
-  if cp1.HasFinalXForm then
-  begin
-    if nXforms1 < NXFORMS then
-    begin
-      cp1.XForm[NXFORMS].Assign(cp1.XForm[nXforms1]);
-      cp1.XForm[nXforms1].Clear;
-    end;
-  end
-  else
-  begin
-    cp1.XForm[NXFORMS].Clear;
-    cp1.XForm[NXFORMS].symmetry := 1;
-  end;
-
-  nXforms2 := cp2.NumXForms;
-  if cp2.HasFinalXForm then
-  begin
-    if nXforms2 < NXFORMS then
-    begin
-      cp2.XForm[NXFORMS].Assign(cp2.XForm[nXforms2]);
-      cp2.XForm[nXforms2].Clear;
-    end;
-  end
-  else
-  begin
-    cp2.XForm[NXFORMS].Clear;
-    cp2.XForm[NXFORMS].symmetry := 1;
-  end;
-
-  for i := 0 to NXFORMS do
-  begin
-    Result.XForm[i].density := c0 * cp1.XForm[i].density + c1 *
-      cp2.XForm[i].density;
-    Result.XForm[i].color := c0 * cp1.XForm[i].color + c1 * cp2.XForm[i].color;
-    Result.XForm[i].symmetry := c0 * cp1.XForm[i].symmetry + c1 *
-      cp2.XForm[i].symmetry;
-
-    for j := 0 to NRVAR - 1 do
-      Result.XForm[i].SetVariation(j, c0 * cp1.XForm[i].GetVariation(j) + c1 *
-        cp2.XForm[i].GetVariation(j));
-    for j := 0 to GetNrVariableNames - 1 do
-    begin
-      cp1.XForm[i].GetVariable(GetVariableNameAt(j), v1);
-      cp2.XForm[i].GetVariable(GetVariableNameAt(j), v2);
-      v1 := c0 * v1 + c1 * v2;
-      Result.XForm[i].SetVariable(GetVariableNameAt(j), v1);
-    end;
-
-    // interpol matrix
-    for j := 0 to 2 do
-    begin
-      Result.XForm[i].c[j, 0] := c0 * cp1.XForm[i].c[j, 0] + c1 *
-        cp2.XForm[i].c[j, 0];
-      Result.XForm[i].c[j, 1] := c0 * cp1.XForm[i].c[j, 1] + c1 *
-        cp2.XForm[i].c[j, 1];
-    end;
-  end;
-
-  if Result.NumXForms < NXFORMS then
-  begin
-    Result.XForm[Result.NumXForms].Assign(cp1.XForm[NXFORMS]);
-    // result.xform[NXFORMS]);
-    Result.XForm[NXFORMS].Clear;
-  end;
-  Result.finalXformEnabled := cp1.finalXformEnabled;
-
-  // restore finalxforms in source CPs
-  if nXforms1 < NXFORMS then
-  begin
-    cp1.XForm[nXforms1].Assign(cp1.XForm[NXFORMS]);
-    cp1.XForm[NXFORMS].Clear;
-  end;
-  if nXforms2 < NXFORMS then
-  begin
-    cp2.XForm[nXforms2].Assign(cp2.XForm[NXFORMS]);
-    cp2.XForm[NXFORMS].Clear;
-  end;
-
-  Copy(Result);
-  Cmap := Result.Cmap;
-  Result.Free;
 end;
 
 procedure TControlPoint.SaveToFile(Filename: string);

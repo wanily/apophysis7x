@@ -27,7 +27,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   ExtCtrls, ComCtrls, ControlPoint, ToolWin, ImgList, StdCtrls,
-  Cmap, Menus, Global, Buttons, Translation,
+  PaletteIO, Menus, Global, Buttons, Translation,
   RenderingInterface, System.ImageList;
 
 const
@@ -205,7 +205,7 @@ begin
       Strings.Text := strng;
       if Pos('}', Strings.Text) = 0 then raise EFormatInvalid.Create('No closing brace');
       if Pos('{', Strings[0]) = 0 then raise EFormatInvalid.Create('No opening brace.');
-      GetTokens(ReplaceTabs(strings.text), tokens);
+      ParsePaletteTokenString(ReplaceTabs(strings.text), tokens);
       Tokens.Text := Trim(Tokens.text);
       i := 0;
       while (Pos('}', Tokens[i]) = 0) and (Pos('opacity:', Lowercase(Tokens[i])) = 0) do
@@ -488,8 +488,8 @@ procedure TGradientBrowser.Apply;
 begin
   MainForm.StopPreviewRenderThread;
   MainForm.PushWorkspaceToUndoStack;
-  MainCp.cmap := Palette;
-  MainCP.cmapindex := -1;
+  MainForm.FlameInWorkspace.cmap := Palette;
+  MainForm.FlameInWorkspace.cmapindex := -1;
   if EditForm.Visible then EditForm.UpdateDisplay;
   if AdjustForm.Visible then AdjustForm.UpdateDisplay;
   MainForm.PreviewRedrawDelayTimer.enabled := true;

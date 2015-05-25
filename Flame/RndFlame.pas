@@ -11,7 +11,7 @@ function RandomFlame(SourceCP: TControlPoint = nil; algorithm: integer = 0)
 implementation
 
 uses
-  SysUtils, Global, cmap, GradientHlpr, XFormMan, Classes;
+  SysUtils, Global, PaletteIO, XFormMan, Classes;
 
 procedure RGBBlend(a, b: integer; var Palette: TColorMap);
 var
@@ -66,10 +66,10 @@ begin
     try
       Strings.Text := strng;
       if Pos('}', Strings.Text) = 0 then
-        raise EFormatInvalid.Create('No closing brace');
+        raise Exception.Create('No closing brace');
       if Pos('{', Strings[0]) = 0 then
-        raise EFormatInvalid.Create('No opening brace.');
-      GetTokens(ReplaceTabs(Strings.Text), Tokens);
+        raise Exception.Create('No opening brace.');
+      ParsePaletteTokenString(ReplaceTabs(Strings.Text), Tokens);
       Tokens.Text := Trim(Tokens.Text);
       i := 0;
       while (Pos('}', Tokens[i]) = 0) and
@@ -88,7 +88,7 @@ begin
         Result[i][2] := 0;
       end;
       if Indices.Count = 0 then
-        raise EFormatInvalid.Create('No color info');
+        raise Exception.Create('No color info');
       for i := 0 to Indices.Count - 1 do
       begin
         try
@@ -119,7 +119,7 @@ begin
         RGBBlend(a, b, Result);
       end;
     except
-      on EFormatInvalid do
+      on Exception do
       begin
         // Result := False;
       end;
@@ -166,7 +166,7 @@ var
   tmpGrdList: TStringList;
 begin
   cmap_index := Random(NRCMAPS);
-  GetCMap(cmap_index, 1, DestCP.cmap);
+  GetIntegratedPaletteByIndex(cmap_index, DestCP.cmap);
   cmap_index := DestCP.cmapindex;
   DestCP.cmapindex := cmap_index;
 end;

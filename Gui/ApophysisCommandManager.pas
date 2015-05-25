@@ -9,7 +9,10 @@ uses
   UiRibbonCommands;
 
 type
-  TCursorMode = (cmPan, cmRotate, cmZoomIn, cmZoomOut);
+  TCursorMode = (
+    cmPan, cmRotate, cmZoomIn, cmZoomOut,
+    cmPanHot, cmRotateHot, cmZoomInHot, cmZoomOutHot
+  );
 
   ICommandImplementor = interface
     function AsComponent: TComponent;
@@ -601,6 +604,8 @@ var
 begin
   if not Assigned(args.Command) then exit;
 
+  value := 0;
+
   case args.Command.CommandId of
     ViewDensity5: value := 5.0;
     ViewDensity10: value := 10.0;
@@ -613,6 +618,8 @@ begin
     ViewDensity500: value := 500.0;
     ViewDensity1000: value := 1000.0;
   end;
+
+  if (value <= 0) then exit;
 
   Global.defSampleDensity := value;
   Implementor.SetPreviewSampleDensityAndUpdate(value);

@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Forms, ShellApi, SysUtils, Classes, SyncObjs, Controls, Graphics, Math,
-  cmap, ControlPoint, Xform, CommDlg;
+  PaletteIO, ControlPoint, Xform, CommDlg;
 
 type
   EFormatInvalid = class(Exception);

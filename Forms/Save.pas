@@ -57,7 +57,7 @@ var
 
 implementation
 
-uses Main, Global, cmap;
+uses Main, Global, PaletteIO;
 
 {$R *.DFM}
 

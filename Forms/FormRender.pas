@@ -27,7 +27,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, ComCtrls, Math, Buttons, Registry, ExtCtrls, MMSystem, Windows7, 
-  ControlPoint, RenderThread, cmap, RenderingCommon, RenderingInterface,
+  ControlPoint, RenderThread, PaletteIO, RenderingCommon, RenderingInterface,
   ShellAPI, Translation, ActiveX, ComObj, ParameterIo;
 
 type
@@ -623,9 +623,9 @@ begin
       //MainForm.ListView.Selected := iCurrFlame;
       cp.Free;
       cp := TControlPoint.Create;
-      cp.Copy(MainCP);
-      cp.cmap := maincp.cmap;
-      zoom := maincp.zoom;
+      cp.Copy(MainForm.FlameInWorkspace);
+      cp.cmap := MainForm.FlameInWorkspace.cmap;
+      zoom := MainForm.FlameInWorkspace.zoom;
       Center[0] := MainForm.CameraCenter[0];
       Center[1] := MainForm.CameraCenter[1];
       FileName := path + cp.name + ext;

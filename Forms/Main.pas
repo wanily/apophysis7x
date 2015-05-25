@@ -1,25 +1,40 @@
 unit Main;
 
-interface
-
-uses
-  Windows, Forms, Dialogs, Menus, Controls, ComCtrls, ToolWin, StdCtrls, Classes, Messages,
-  ExtCtrls, ImgList, Jpeg, SyncObjs, SysUtils, ClipBrd, Graphics, Math, ExtDlgs, AppEvnts,
-  ShellAPI, Registry, System.ImageList,
-
-  Global, Xform, XFormMan, ControlPoint, CMap, RenderThread, RenderingCommon, RenderingInterface,
-  PngImage, StrUtils, LoadTracker, Translation, UIRibbonForm, UIRibbon, UIRibbonCommands,
-  ApophysisRibbon, FlameListView, ParameterIO, ApophysisCommandManager;
+interface uses
+  Windows,
+  Forms,
+  Menus,
+  Controls,
+  ComCtrls,
+  Classes,
+  Messages,
+  ExtCtrls,
+  Jpeg,
+  SysUtils,
+  ClipBrd,
+  Graphics,
+  Math,
+  AppEvnts,
+  Registry,
+  Global,
+  ControlPoint,
+  PaletteIO,
+  RenderThread,
+  PngImage,
+  Translation,
+  UIRibbonForm,
+  UIRibbon,
+  UIRibbonCommands,
+  ApophysisRibbon,
+  FlameListView,
+  ParameterIO,
+  ApophysisCommandManager;
 
 const
   randFilename = 'Apophysis7X.rand';
   undoFilename = 'Apophysis7X.undo';
 
 type
-  TMouseMoveState =
-    (msUsual, msZoomWindow, msZoomOutWindow, msZoomWindowMove,
-     msZoomOutWindowMove, msDrag, msDragMove, msRotate,
-     msRotateMove, msPitchYaw, msHeight);
 
   TMainForm = class(TUIRibbonForm, ICommandImplementor)
    // Menus
@@ -118,12 +133,14 @@ type
   private
   
    // Fields
+    ApophysisVersion : string;
+
     PreviewThreadCount: integer;
     PreviewThreadChangingContext: boolean;
     TransparentPreviewImage: TPngObject;
 
     IsDrawingSelection: boolean;
-    CurrentCursorMode: TMouseMoveState;
+    CurrentCursorMode: TCursorMode;
     CursorCurrent: TRect;
     CursorStart: TRect;
     CursorCurrentAngle: double;
@@ -133,16 +150,13 @@ type
     ViewScale: double;
     ViewShiftState: TShiftState;
 
-    CameraDragMode, CameraWasDragged: boolean;
-    CameraDragPosition, OldCameraDragPosition: TPoint;
-    CameraDragOffsetX, CameraDragOffsetY: double;
-
   public
 
    // Public fields
     Renderer: TRenderThread;
     ListViewManager: TFlameListView;
     Batch: TBatch;
+    FlameInWorkspace: TControlPoint;
     CommandManager: TCommandManager;
 
     UndoIndex, UndoStackSize: integer;
@@ -214,22 +228,25 @@ type
     procedure UpdateBatchList(selectedIndex: integer);
   end;
 
-var
-  MainForm: TMainForm;
-  MainCp: TControlPoint;
-  ApophysisVersion:string;
+var MainForm: TMainForm;
 
-implementation
-
-{$Include 'delphiversion.pas'}
-
-uses
-  Editor, Options, Settings, FullScreen, FormRender, Adjust, Browser, Save,
-  About, CmapData, RndFlame, Tracer, Types, varGenericPlugin;
+implementation uses
+  Editor,
+  Options,
+  Settings,
+  FullScreen,
+  FormRender,
+  Adjust,
+  Browser,
+  About,
+  RndFlame,
+  Tracer,
+  varGenericPlugin;
 
 {$R *.dfm}
 {$R 'System\UIRibbon.res'}
 {$R 'Ribbon\ApophysisRibbon.res'}
+{$I 'delphiversion.pas'}
 
 procedure TMainForm.Trace1(const str: string);
 begin
@@ -258,8 +275,8 @@ procedure TMainForm.ResetControlPoint(var cp: TControlPoint);
 var
   i: integer;
 begin
-  if assigned(MainCP) then
-    cp := MainCP.Clone
+  if assigned(FlameInWorkspace) then
+    cp := FlameInWorkspace.Clone
   else
     cp := TControlPoint.Create;
 
@@ -287,8 +304,8 @@ var
 var
   sourceCP: TControlPoint;
 begin
-  if assigned(MainCP) then
-    sourceCP := MainCP.Clone
+  if assigned(FlameInWorkspace) then
+    sourceCP := FlameInWorkspace.Clone
   else
     SourceCP := nil;
 
@@ -499,13 +516,13 @@ begin
     Trunc((Remaining * 24 - Trunc(Remaining * 24)) * 60),
       Trunc((Remaining * 24 * 60 - Trunc(Remaining * 24 * 60)) * 60),
       Trunc((Remaining * 24 * 60 * 60 - Trunc(Remaining * 24 * 60 * 60)) * 100)]);
-  StatusBar.Panels[3].Text := MainCp.name;
+  StatusBar.Panels[3].Text := FlameInWorkspace.name;
   Application.ProcessMessages;
 end;
 
 procedure TMainForm.PushWorkspaceToUndoStack;
 begin
-  SaveUndoFlame(MainCp, Format('%.4d-', [UndoIndex]) + MainCp.name, GetEnvVarValue('APPDATA') + '\' + undoFilename);
+  SaveUndoFlame(FlameInWorkspace, Format('%.4d-', [UndoIndex]) + FlameInWorkspace.name, GetEnvVarValue('APPDATA') + '\' + undoFilename);
 
   Inc(UndoIndex);
   UndoStackSize := UndoIndex;
@@ -631,7 +648,7 @@ begin
       msRotateMove: FMouseMoveState := msRotate;
     end;
 }
-    if CurrentCursorMode in [msZoomWindowMove, msZoomOutWindowMove, msRotateMove] then
+    if CurrentCursorMode in [cmRotate, cmZoomIn, cmZoomOut] then
       IsDrawingSelection := false;
 
     Trace1(TimeToStr(Now) + ' : Render complete');
@@ -691,15 +708,15 @@ begin
     cmap_index := random(NRCMAPS);
     inc(MainSeed);
     RandSeed := MainSeed;
-    ResetControlPoint(MainCp);
+    ResetControlPoint(FlameInWorkspace);
     //MainCp.CalcBoundbox;
 
-    MainCp.name := RandomPrefix + RandomDate + '-' + IntToStr(RandomIndex);
+    FlameInWorkspace.name := RandomPrefix + RandomDate + '-' + IntToStr(RandomIndex);
     ci := Random(256); //Random(NRCMAPS);
-    GetCMap(ci, 1, MainCp.cmap);
-    MainCp.cmapIndex := ci;
+    GetIntegratedPaletteByIndex(ci, FlameInWorkspace.cmap);
+    FlameInWorkspace.cmapIndex := ci;
 
-    SaveCpToXmlCompatible(str, mainCp);
+    SaveCpToXmlCompatible(str, FlameInWorkspace);
     Write(F, str);
 
     Write(F, '</random_batch>');
@@ -708,7 +725,7 @@ begin
     on EInOutError do Application.MessageBox(PChar(TextByKey('main-status-batcherror')), PChar('Apophysis'), 16);
   end;
   RandFile := GetEnvVarValue('APPDATA') + '\' + randFilename;
-  MainCp.name := '';
+  FlameInWorkspace.name := '';
 end;
 
 procedure TMainForm.RandomBatch;
@@ -736,15 +753,15 @@ begin
       cmap_index := random(NRCMAPS);
       inc(MainSeed);
       RandSeed := MainSeed;
-      RandomizeControlPoint(MainCp);
-      MainCp.CalcBoundbox;
+      RandomizeControlPoint(FlameInWorkspace);
+      FlameInWorkspace.CalcBoundbox;
 
 (*     Title := RandomPrefix + RandomDate + '-' +
         IntToStr(RandomIndex);
   *)
-      MainCp.name := RandomPrefix + RandomDate + '-' + IntToStr(RandomIndex);
+      FlameInWorkspace.name := RandomPrefix + RandomDate + '-' + IntToStr(RandomIndex);
 
-      SaveCpToXmlCompatible(str, MainCp);
+      SaveCpToXmlCompatible(str, FlameInWorkspace);
       Write(F, str);
 //      Write(F, FlameToString(Title));
 //      WriteLn(F, ' ');
@@ -755,7 +772,7 @@ begin
     on EInOutError do Application.MessageBox(PChar(TextByKey('main-status-batcherror')), PChar('Apophysis'), 16);
   end;
   RandFile := GetEnvVarValue('APPDATA') + '\' + randFilename;
-  MainCp.name := '';
+  FlameInWorkspace.name := '';
 end;
 
 
@@ -811,7 +828,7 @@ begin
   else
     ListViewManager.SelectedIndex := selectedIndex;
 
-  StatusBar.Panels[3].Text := MainCp.name;
+  StatusBar.Panels[3].Text := FlameInWorkspace.name;
 end;
 
 function TMainForm.SaveWorkspaceFlameToBatchFile(const title, fileName: string): integer;
@@ -828,19 +845,19 @@ begin
   i := -1;
   for j := 0 to saveBatch.Count do
   begin
-    if Lowercase(saveBatch.GetFlameNameAt(j)) = Lowercase(MainCp.Name) then
+    if Lowercase(saveBatch.GetFlameNameAt(j)) = Lowercase(FlameInWorkspace.Name) then
     begin
       i := j;
       Break;
     end;
   end;
 
-  MainCp.name := title;
+  FlameInWorkspace.name := title;
 
   if i >= 0 then
-    saveBatch.StoreControlPoint(i, MainCp)
+    saveBatch.StoreControlPoint(i, FlameInWorkspace)
   else begin
-    saveBatch.AppendControlPoint(MainCp);
+    saveBatch.AppendControlPoint(FlameInWorkspace);
     i := saveBatch.Count - 1;
   end;
 
@@ -852,7 +869,7 @@ end;
 
 procedure TMainForm.SaveBatchToFile(const fileName: string);
 begin
-  Batch.StoreControlPoint(ListViewManager.SelectedIndex, MainCp);
+  Batch.StoreControlPoint(ListViewManager.SelectedIndex, FlameInWorkspace);
   Batch.SaveBatch(fileName);
 end;
 
@@ -860,7 +877,7 @@ procedure TMainForm.CopyWorkspaceFlameToClipboard;
 var
   txt: string;
 begin
-  SaveCpToXmlCompatible(txt, MainCp);
+  SaveCpToXmlCompatible(txt, FlameInWorkspace);
   Clipboard.SetTextBuf(PChar(txt));
   CommandManager.SetCanExecuteReplaceSelectedFlameWithClipboard(true);
 end;
@@ -883,7 +900,7 @@ var
 begin
   backupCp := TControlPoint.Create;
   newCp := TControlPoint.Create;
-  MainCp.Copy(backupCp);
+  FlameInWorkspace.Copy(backupCp);
 
   try
     PushWorkspaceToUndoStack;
@@ -902,7 +919,7 @@ begin
       PWideChar('Unable to read flame data. Most likely, the format is invalid.'),
       PWideChar('Apophysis'),
       MB_ICONERROR);
-    backupCp.Copy(MainCp);
+    backupCp.Copy(FlameInWorkspace);
   end;
 
   backupCp.Destroy;
@@ -1042,12 +1059,12 @@ begin
 
 
 
-  CurrentCursorMode := msDrag;
+  CurrentCursorMode := cmPan;
   LimitVibrancy := False;
   Favorites := TStringList.Create;
   Randomize;
   MainSeed := Random(123456789);
-  maincp := TControlPoint.Create;
+  FlameInWorkspace := TControlPoint.Create;
   Application.OnHint := OnFormDisplayHint;
   AppPath := ExtractFilePath(Application.ExeName);
   CanDrawOnResize := False;
@@ -1105,13 +1122,13 @@ begin
   index := 1;
   inc(MainSeed);
   RandSeed := MainSeed;
-  Maincp.brightness := defBrightness;
-  maincp.gamma := defGamma;
-  maincp.vibrancy := defVibrancy;
-  maincp.sample_density := defSampleDensity;
-  maincp.spatial_oversample := defOversample;
-  maincp.spatial_filter_radius := defFilterRadius;
-  maincp.gammaThreshRelative := defGammaThreshold;
+  FlameInWorkspace.brightness := defBrightness;
+  FlameInWorkspace.gamma := defGamma;
+  FlameInWorkspace.vibrancy := defVibrancy;
+  FlameInWorkspace.sample_density := defSampleDensity;
+  FlameInWorkspace.spatial_oversample := defOversample;
+  FlameInWorkspace.spatial_filter_radius := defFilterRadius;
+  FlameInWorkspace.gammaThreshRelative := defGammaThreshold;
   inc(MainSeed);
   RandSeed := MainSeed;
 
@@ -1125,13 +1142,13 @@ begin
   if FileExists(AppPath + 'default.map') then
   begin
     DefaultPalette := GradientBrowser.LoadFractintMap(AppPath + 'default.map');
-    maincp.cmap := DefaultPalette;
+    FlameInWorkspace.cmap := DefaultPalette;
   end
   else
   begin
     cmap_index := random(NRCMAPS);
-    GetCMap(cmap_index, 1, maincp.cmap);
-    DefaultPalette := maincp.cmap;
+    GetIntegratedPaletteByIndex(cmap_index, FlameInWorkspace.cmap);
+    DefaultPalette := FlameInWorkspace.cmap;
   end;
 
   if FileExists(GetEnvVarValue('APPDATA') + '\' + randFilename) then
@@ -1164,7 +1181,7 @@ begin
 
   //ListView.SetFocus;
   CanDrawOnResize := True;
-  Statusbar.Panels[3].Text := maincp.name;
+  Statusbar.Panels[3].Text := FlameInWorkspace.name;
 {
   gradientForm.cmbPalette.Items.clear;
   for i := 0 to NRCMAPS -1 do
@@ -1250,7 +1267,7 @@ begin
   if assigned(Renderer) then Renderer.Free;
   if assigned(TransparentPreviewImage) then TransparentPreviewImage.Free;
 
-  MainCP.free;
+  FlameInWorkspace.free;
   Favorites.Free;
 end;
 
@@ -1260,20 +1277,20 @@ var
 begin
   if Key = #27 then begin
     case CurrentCursorMode of
-      msZoomWindowMove:
-        CurrentCursorMode := msZoomWindow;
-      msZoomOutWindowMove:
-        CurrentCursorMode := msZoomOutWindow;
-      msDragMove:
+      cmZoomInHot:
+        CurrentCursorMode := cmZoomIn;
+      cmZoomOutHot:
+        CurrentCursorMode := cmZoomOut;
+      cmPanHot:
         begin
-          CurrentCursorMode := msDrag;
+          CurrentCursorMode := cmPan;
 
           scale := ViewScale * PreviewImage.Width / TransparentPreviewImage.Width;
           ViewPosition.X := ViewPosition.X - (CursorStart.Right - CursorStart.Left) / scale;
           ViewPosition.Y := ViewPosition.Y - (CursorStart.Bottom - CursorStart.Top) / scale;
         end;
-      msRotateMove:
-        CurrentCursorMode := msRotate;
+      cmRotateHot:
+        CurrentCursorMode := cmRotate;
     end;
     DrawImageView;
   end;
@@ -1299,19 +1316,19 @@ begin
   ph := PreviewPanel.Height - 2;
 
   begin
-    if MainCp = nil then
+    if FlameInWorkspace = nil then
       Exit;
 
-    if (MainCP.Width / MainCP.Height) > (pw / ph) then
+    if (FlameInWorkspace.Width / FlameInWorkspace.Height) > (pw / ph) then
     begin
       PreviewImage.Width := pw;
-      PreviewImage.Height := round(MainCP.Height / MainCP.Width * pw);
+      PreviewImage.Height := round(FlameInWorkspace.Height / FlameInWorkspace.Width * pw);
       PreviewImage.Left := 1;
       PreviewImage.Top := (ph - PreviewImage.Height) div 2;
     end
     else begin
       PreviewImage.Height := ph;
-      PreviewImage.Width := round(MainCP.Width / MainCP.Height * ph);
+      PreviewImage.Width := round(FlameInWorkspace.Width / FlameInWorkspace.Height * ph);
       PreviewImage.Top := 1;
       PreviewImage.Left := (pw - PreviewImage.Width) div 2;
     end;
@@ -1322,7 +1339,7 @@ procedure TMainForm.OnListViewSelectedItemChanged(index: integer);
 var
   cp: TControlPoint;
 begin
-  if (index >= 0) and (Trim(Batch.GetFlameNameAt(index)) <> Trim(maincp.name)) then
+  if (index >= 0) and (Trim(Batch.GetFlameNameAt(index)) <> Trim(FlameInWorkspace.name)) then
   begin
     StopPreviewRenderThread;
 
@@ -1390,29 +1407,29 @@ begin
       inc(i);
       for j := 0 to 255 do begin
         s := FStrings[i];
-        GetTokens(s, tokens);
+        ParsePaletteTokenString(s, tokens);
         Palette[j][0] := StrToInt(Tokens[0]);
         Palette[j][1] := StrToInt(Tokens[1]);
         Palette[j][2] := StrToInt(Tokens[2]);
         inc(i);
       end;
     end;
-    maincp.Clear;
+    FlameInWorkspace.Clear;
     FlameString := EntryStrings.Text;
-    maincp.zoom := 0;
-    maincp.center[0] := 0;
-    maincp.center[0] := 0;
-    maincp.ParseString(FlameString);
-    maincp.sample_density := defSampleDensity;
-    CameraCenter[0] := maincp.Center[0];
-    CameraCenter[1] := maincp.Center[1];
+    FlameInWorkspace.zoom := 0;
+    FlameInWorkspace.center[0] := 0;
+    FlameInWorkspace.center[0] := 0;
+    FlameInWorkspace.ParseString(FlameString);
+    FlameInWorkspace.sample_density := defSampleDensity;
+    CameraCenter[0] := FlameInWorkspace.Center[0];
+    CameraCenter[1] := FlameInWorkspace.Center[1];
 //    cp.CalcBoundbox;
 //    MainCP.NormalizeWeights;
-    Transforms := MainCp.TrianglesFromCP(MainTriangles);
+    Transforms := FlameInWorkspace.TrianglesFromCP(MainTriangles);
     // Trim undo index from title
-    maincp.name := Copy(Fstrings[0], 6, length(Fstrings[0]) - 7);
+    FlameInWorkspace.name := Copy(Fstrings[0], 6, length(Fstrings[0]) - 7);
 
-    if SavedPal then maincp.cmap := palette;
+    if SavedPal then FlameInWorkspace.cmap := palette;
     if AdjustForm.visible then AdjustForm.UpdateDisplay;
 
     PreviewRedrawDelayTimer.Enabled := True;
@@ -1498,7 +1515,7 @@ var
   Mem, ApproxMem: cardinal;
   bs: integer;
 begin
-  if CurrentCursorMode in [msZoomWindowMove, msZoomOutWindowMove, msDragMove, msRotateMove] then exit;
+  if CurrentCursorMode in [cmPanHot, cmRotateHot, cmZoomInHot, cmZoomOutHot] then exit;
 
   PreviewRedrawDelayTimer.enabled := False;
   if Assigned(Renderer) then begin
@@ -1515,11 +1532,11 @@ begin
 
   if not Assigned(Renderer) then
   begin
-    if EditForm.Visible and ((MainCP.Width / MainCP.Height) <> (EditForm.cp.Width / EditForm.cp.Height))
+    if EditForm.Visible and ((FlameInWorkspace.Width / FlameInWorkspace.Height) <> (EditForm.cp.Width / EditForm.cp.Height))
       then EditForm.UpdateDisplay(true); // preview only?
     if AdjustForm.Visible then AdjustForm.UpdateDisplay(true); // preview only!
 
-    RenderCP := MainCP.Clone;
+    RenderCP := FlameInWorkspace.Clone;
     RenderCp.AdjustScale(PreviewImage.width, PreviewImage.height);
     RenderCP.sample_density := defSampleDensity;
     RenderCP.spatial_oversample := 1;
@@ -1727,8 +1744,8 @@ begin
 
       StopPreviewRenderThread;
       PushWorkspaceToUndoStack;
-      maincp.cmap := Pal;
-      maincp.cmapindex := -1;
+      FlameInWorkspace.cmap := Pal;
+      FlameInWorkspace.cmapindex := -1;
       AdjustForm.UpdateDisplay;
 
       if EditForm.Visible then EditForm.UpdateDisplay;
@@ -1747,7 +1764,7 @@ procedure TMainForm.RevertLastAction;
 begin
   if UndoIndex = UndoStackSize then
   begin
-    SaveUndoFlame(maincp, Format('%.4d-', [UndoIndex]) + maincp.name, GetEnvVarValue('APPDATA') + '\' + undoFilename);
+    SaveUndoFlame(FlameInWorkspace, Format('%.4d-', [UndoIndex]) + FlameInWorkspace.name, GetEnvVarValue('APPDATA') + '\' + undoFilename);
   end;
 
   StopPreviewRenderThread;
@@ -1760,7 +1777,7 @@ begin
     CommandManager.SetCanExecuteUndo(false);
   end;
 
-  StatusBar.Panels[3].Text := maincp.name;
+  StatusBar.Panels[3].Text := FlameInWorkspace.name;
 end;
 
 procedure TMainForm.OnPreviewPanelMenuUndoClick(Sender: TObject);
@@ -1782,7 +1799,7 @@ begin
     CommandManager.SetCanExecuteRedo(false);
   end;
 
-  StatusBar.Panels[3].Text := maincp.name;
+  StatusBar.Panels[3].Text := FlameInWorkspace.name;
 end;
 
 procedure TMainForm.OnPreviewPanelMenuFullscreenClick(Sender: TObject);
@@ -1802,8 +1819,8 @@ begin
   FullScreenForm.Height := Screen.Height;
   FullScreenForm.Top := 0;
   FullScreenForm.Left := 0;
-  FullScreenForm.cp.Copy(maincp);
-  FullScreenForm.cp.cmap := maincp.cmap;
+  FullScreenForm.cp.Copy(FlameInWorkspace);
+  FullScreenForm.cp.cmap := FlameInWorkspace.cmap;
   FullScreenForm.center[0] := CameraCenter[0];
   FullScreenForm.center[1] := CameraCenter[1];
   FullScreenForm.Calculate := True;
@@ -1835,13 +1852,13 @@ begin
       3: Ext := '.jpg';
     end;
 
-    RenderForm.Filename := RenderPath + maincp.name + Ext;
-    RenderForm.SaveDialog.FileName := RenderPath + maincp.name + Ext;
+    RenderForm.Filename := RenderPath + FlameInWorkspace.name + Ext;
+    RenderForm.SaveDialog.FileName := RenderPath + FlameInWorkspace.name + Ext;
     RenderForm.txtFilename.Text := ChangeFileExt(RenderForm.SaveDialog.Filename, Ext);
 
-    RenderForm.cp.Copy(MainCP);
-    RenderForm.cp.cmap := maincp.cmap;
-    RenderForm.zoom := maincp.zoom;
+    RenderForm.cp.Copy(FlameInWorkspace);
+    RenderForm.cp.cmap := FlameInWorkspace.cmap;
+    RenderForm.zoom := FlameInWorkspace.zoom;
     RenderForm.Center[0] := CameraCenter[0];
     RenderForm.Center[1] := CameraCenter[1];
     if Assigned(RenderForm.Renderer) then RenderForm.Renderer.WaitFor;
@@ -1876,13 +1893,13 @@ begin
     end;
 
     RenderForm.bRenderAll := true;
-    RenderForm.Filename := RenderPath + maincp.name + Ext;
+    RenderForm.Filename := RenderPath + FlameInWorkspace.name + Ext;
     RenderForm.SaveDialog.FileName := RenderForm.Filename;
     RenderForm.txtFilename.Text := ChangeFileExt(RenderForm.SaveDialog.Filename, Ext);
 
-    RenderForm.cp.Copy(MainCP);
-    RenderForm.cp.cmap := maincp.cmap;
-    RenderForm.zoom := maincp.zoom;
+    RenderForm.cp.Copy(FlameInWorkspace);
+    RenderForm.cp.cmap := FlameInWorkspace.cmap;
+    RenderForm.zoom := FlameInWorkspace.zoom;
     RenderForm.Center[0] := CameraCenter[0];
     RenderForm.Center[1] := CameraCenter[1];
     if Assigned(RenderForm.Renderer) then RenderForm.Renderer.WaitFor;
@@ -1940,77 +1957,43 @@ begin
   WinShellOpen('http://media.xyrus-worx.org/fractal-flame-publication');
 end;
 
-///////////////////////////////////////////////////////////////////////////////
 procedure TMainForm.OnPreviewImageMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-  if button = mbMiddle then begin
-    //FMouseMoveState := msHeight;
-    exit;
-  end else if button = mbRight then begin
-  //FMouseMoveState := msPitchYaw;
-    CameraDragOffsetY := MainCP.cameraPitch * 180.0 / PI;
-    CameraDragOffsetX := MainCP.cameraYaw * 180.0 / PI;
+  if button <> mbLeft then exit;
 
-     CameraDragMode := true;
-     CameraDragPosition.x := 0;
-     CameraDragPosition.y := 0;
-     OldCameraDragPosition.x := x;
-     OldCameraDragPosition.y := y;
-     //SetCaptureControl(TControl(Sender));
-
-    //Screen.Cursor := crNone;
-    //GetCursorPos(mousepos); // hmmm
-    //mousePos := (Sender as TControl).ClientToScreen(Point(x, y));
-    CameraWasDragged := false;
-    exit;
-  end;
-  //if button <> mbLeft then exit;
   CursorStart.TopLeft := Point(x, y);
   CursorStart.BottomRight := CursorStart.TopLeft;
+
   case CurrentCursorMode of
-    msZoomWindow:
+    cmZoomIn:
       begin
         CursorCurrent.TopLeft := Point(x, y);
         CursorCurrent.BottomRight := Point(x, y);
         DrawZoomWindow;
-
-//        if ssAlt in Shift then
-//          FMouseMoveState := msZoomOutWindowMove
-//        else
-          CurrentCursorMode := msZoomWindowMove;
+        CurrentCursorMode := cmZoomInHot;
       end;
-    msZoomOutWindow:
+    cmZoomOut:
       begin
         CursorCurrent.TopLeft := Point(x, y);
         CursorCurrent.BottomRight := Point(x, y);
         DrawZoomWindow;
-
-//        if ssAlt in Shift then
-//          FMouseMoveState := msZoomWindowMove
-//        else
-          CurrentCursorMode := msZoomOutWindowMove;
+        CurrentCursorMode := cmZoomOutHot;
       end;
-    msDrag:
+    cmPan:
       begin
         if not assigned(TransparentPreviewImage) then exit;
-
-//        FSelectRect.TopLeft := Point(x, y);
-//        FSelectRect.BottomRight := Point(x, y);
-        CurrentCursorMode := msDragMove;
+        CurrentCursorMode := cmPanHot;
       end;
-    msRotate:
+    cmRotate:
       begin
         CursorStartAngle := arctan2(y-PreviewImage.Height/2, PreviewImage.Width/2-x);
-
         CursorCurrentAngle := 0;
-//        FSelectRect.Left := x;
         DrawRotateLines(CursorCurrentAngle);
-        CurrentCursorMode := msRotateMove;
+        CurrentCursorMode := cmRotateHot;
       end;
   end;
 end;
 
-///////////////////////////////////////////////////////////////////////////////
 procedure TMainForm.OnPreviewImageMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
 const
   snap_angle = 15*pi/180;
@@ -2019,21 +2002,13 @@ var
   sc, vx, vy, scale: double;
   q : Extended;
 begin
-{
-  case FMouseMoveState of
-    msRotate, msRotateMove:
-      Image.Cursor := crEditRotate;
-    msDrag, msDragMove:
-      Image.Cursor := crEditMove;
-    else
-      Image.Cursor := crEditArrow;
-  end;
-}
   case CurrentCursorMode of
-    msZoomWindowMove,
-    msZoomOutWindowMove:
+    cmZoomInHot,
+    cmZoomOutHot:
       begin
-        if IsDrawingSelection then DrawZoomWindow;
+        if IsDrawingSelection then
+          DrawZoomWindow;
+
         CursorStart.BottomRight := Point(x, y);
         dx := x - CursorStart.TopLeft.X;
         dy := y - CursorStart.TopLeft.Y;
@@ -2080,7 +2055,7 @@ begin
         DrawZoomWindow;
         IsDrawingSelection := true;
       end;
-    msDragMove:
+    cmPanHot:
       begin
         assert(assigned(TransparentPreviewImage));
         assert(ViewScale <> 0);
@@ -2088,57 +2063,24 @@ begin
         scale := ViewScale * PreviewImage.Width / TransparentPreviewImage.Width;
         ViewPosition.X := ViewPosition.X + (x - CursorStart.Right) / scale;
         ViewPosition.Y := ViewPosition.Y + (y - CursorStart.Bottom) / scale;
-        //FClickRect.BottomRight := Point(x, y);
 
 		    DrawImageView;
       end;
-    msPitchYaw:
-      begin
-          if CameraDragMode and ( (x <> OldCameraDragPosition.x) or (y <> OldCameraDragPosition.y) ) then
-          begin
-            Inc(CameraDragPosition.x, x - OldCameraDragPosition.x);
-            Inc(CameraDragPosition.y, y - OldCameraDragPosition.y);
-
-            vx := Round6(CameraDragOffsetX + CameraDragPosition.x / 10);
-            vy := Round6(CameraDragOffsetY - CameraDragPosition.y / 10);
-
-            MainCP.cameraPitch := vy * PI / 180.0;
-            MainCP.cameraYaw := vx * PI / 180.0;
-
-            vx := Round(vx);
-            vy := Round(vy);
-
-            CameraWasDragged := True;
-            //StatusBar.Panels.Items[1].Text := Format('Pitch: %f°, Yaw: %f°', [vx,vy]);
-          end;
-      end;
-    msRotateMove:
+    cmRotateHot:
       begin
         if IsDrawingSelection then DrawRotatelines(CursorCurrentAngle);
 
         CursorCurrentAngle := arctan2(y-PreviewImage.Height/2, PreviewImage.Width/2-x) - CursorStartAngle;
-        if ssShift in Shift then // angle snap
+        if ssShift in Shift then
           CursorCurrentAngle := Round(CursorCurrentAngle/snap_angle)*snap_angle;
-        //SelectRect.Left := x;
-
-//        pdjpointgen.Rotate(FRotateAngle);
-//        FRotateAngle := 0;
 
         DrawRotatelines(CursorCurrentAngle);
         IsDrawingSelection := true;
-{
-        Image.Refresh;
-if AdjustForm.Visible then begin
-MainCp.FAngle:=-FRotateAngle;
-AdjustForm.UpdateDisplay;
-end;
-}
       end;
   end;
   CursorStart.BottomRight := Point(x, y);
 end;
 
-///////////////////////////////////////////////////////////////////////////////
 procedure TMainForm.OnPreviewImageMouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 var
@@ -2146,17 +2088,17 @@ var
   rs: TSRect;
 begin
   case CurrentCursorMode of
-    msZoomWindowMove:
+    cmZoomInHot:
       begin
         DrawZoomWindow;
-        CurrentCursorMode := msZoomWindow;
+        CurrentCursorMode := cmZoomIn;
         if (abs(CursorCurrent.Left - CursorCurrent.Right) < 10) or
            (abs(CursorCurrent.Top - CursorCurrent.Bottom) < 10) then
-          Exit; // zoom to much or double clicked
+          Exit;
 
         StopPreviewRenderThread;
         PushWorkspaceToUndoStack;
-        MainCp.ZoomtoRect(ScaleRect(CursorCurrent, MainCP.Width / PreviewImage.Width));
+        FlameInWorkspace.ZoomtoRect(ScaleRect(CursorCurrent, FlameInWorkspace.Width / PreviewImage.Width));
 
         ViewScale := ViewScale * PreviewImage.Width / abs(CursorCurrent.Right - CursorCurrent.Left);
         ViewPosition.x := ViewPosition.x - ((CursorCurrent.Right + CursorCurrent.Left) - PreviewImage.Width)/2;
@@ -2166,17 +2108,17 @@ begin
         PreviewRedrawDelayTimer.Enabled := True;
         SendSelectedFlameToToolWindows;
       end;
-    msZoomOutWindowMove:
+    cmZoomOutHot:
       begin
         DrawZoomWindow;
-        CurrentCursorMode := msZoomOutWindow;
+        CurrentCursorMode := cmZoomOut;
         if (abs(CursorCurrent.Left - CursorCurrent.Right) < 10) or
            (abs(CursorCurrent.Top - CursorCurrent.Bottom) < 10) then
-          Exit; // zoom to much or double clicked
+          Exit;
 
         StopPreviewRenderThread;
         PushWorkspaceToUndoStack;
-        MainCp.ZoomOuttoRect(ScaleRect(CursorCurrent, MainCP.Width / PreviewImage.Width));
+        FlameInWorkspace.ZoomOuttoRect(ScaleRect(CursorCurrent, FlameInWorkspace.Width / PreviewImage.Width));
 
         scale := PreviewImage.Width / abs(CursorCurrent.Right - CursorCurrent.Left);
         ViewScale := ViewScale / scale;
@@ -2188,34 +2130,32 @@ begin
         PreviewRedrawDelayTimer.Enabled := True;
         SendSelectedFlameToToolWindows;
       end;
-    msDragMove:
+    cmPanHot:
       begin
         CursorStart.BottomRight := Point(x, y);
-        CurrentCursorMode := msDrag;
+        CurrentCursorMode := cmPan;
 
-        if ((x = 0) and (y = 0)) or // double clicked
-           ((CursorStart.left = CursorStart.right) and (CursorStart.top = CursorStart.bottom))
+        if ((x = 0) and (y = 0)) or ((CursorStart.left = CursorStart.right) and (CursorStart.top = CursorStart.bottom))
           then Exit;
 
         StopPreviewRenderThread;
         PushWorkspaceToUndoStack;
-        MainCp.MoveRect(ScaleRect(CursorStart, MainCP.Width / PreviewImage.Width));
+        FlameInWorkspace.MoveRect(ScaleRect(CursorStart, FlameInWorkspace.Width / PreviewImage.Width));
 
         PreviewRedrawDelayTimer.Enabled := True;
         SendSelectedFlameToToolWindows;
       end;
-    msRotateMove:
+    cmRotateHot:
       begin
         DrawRotatelines(CursorCurrentAngle);
+        CurrentCursorMode := cmRotate;
 
-        CurrentCursorMode := msRotate;
-
-        if (CursorCurrentAngle = 0) then Exit; // double clicked
+        if (CursorCurrentAngle = 0) then Exit;
 
         StopPreviewRenderThread;
         PushWorkspaceToUndoStack;
-        if MainForm_RotationMode = 0 then MainCp.Rotate(CursorCurrentAngle)
-        else MainCp.Rotate(-CursorCurrentAngle);
+        if MainForm_RotationMode = 0 then FlameInWorkspace.Rotate(CursorCurrentAngle)
+        else FlameInWorkspace.Rotate(-CursorCurrentAngle);
 
         if assigned(TransparentPreviewImage) then begin
           TransparentPreviewImage.Free;
@@ -2225,20 +2165,6 @@ begin
 
         PreviewRedrawDelayTimer.Enabled := True;
         SendSelectedFlameToToolWindows;
-      end;
-    msPitchYaw:
-      begin
-        CameraDragMode := false;
-        Screen.Cursor := crDefault;
-
-        if CameraWasDragged then
-        begin
-          CameraWasDragged := False;
-          PreviewRedrawDelayTimer.Enabled := True;
-          SendSelectedFlameToToolWindows;
-        end;
-
-
       end;
   end;
 end;
@@ -2251,25 +2177,22 @@ var
 begin
   PushWorkspaceToUndoStack;
 
-  scale := MainCP.pixels_per_unit / MainCP.Width * power(2, MainCP.zoom);
-  cdx := MainCP.center[0];
-  cdy := MainCP.center[1];
+  scale := FlameInWorkspace.pixels_per_unit / FlameInWorkspace.Width * power(2, FlameInWorkspace.zoom);
+  cdx := FlameInWorkspace.center[0];
+  cdy := FlameInWorkspace.center[1];
 
-  maincp.zoom := 0;
-  //maincp.FAngle := 0;
-  //maincp.Width := Image.Width;
-  //maincp.Height := Image.Height;
-  maincp.CalcBoundBox;
+  FlameInWorkspace.zoom := 0;
+  FlameInWorkspace.CalcBoundBox;
 
-  CameraCenter[0] := maincp.center[0];
-  CameraCenter[1] := maincp.center[1];
+  CameraCenter[0] := FlameInWorkspace.center[0];
+  CameraCenter[1] := FlameInWorkspace.center[1];
 
-  cdx := MainCP.center[0] - cdx;
-  cdy := MainCP.center[1] - cdy;
-  Sincos(MainCP.FAngle, sina, cosa);
+  cdx := FlameInWorkspace.center[0] - cdx;
+  cdy := FlameInWorkspace.center[1] - cdy;
+  Sincos(FlameInWorkspace.FAngle, sina, cosa);
   if IsZero(sina) then begin
-    dy := cdy*cosa {- cdx*sina};
-    dx := (cdx {+ dy*sina})/cosa;
+    dy := cdy*cosa;
+    dx := (cdx)/cosa;
   end
   else begin
     dx := cdy*sina + cdx*cosa;
@@ -2278,7 +2201,7 @@ begin
   ViewPosition.x := ViewPosition.x - dx * scale * PreviewImage.Width;
   ViewPosition.y := ViewPosition.y - dy * scale * PreviewImage.Width;
 
-  ViewScale := ViewScale * MainCP.pixels_per_unit / MainCP.Width * power(2, MainCP.zoom) / scale;
+  ViewScale := ViewScale * FlameInWorkspace.pixels_per_unit / FlameInWorkspace.Width * power(2, FlameInWorkspace.zoom) / scale;
 
   DrawImageView;
 
@@ -2286,7 +2209,6 @@ begin
   SendSelectedFlameToToolWindows;
 end;
 
-///////////////////////////////////////////////////////////////////////////////
 procedure TMainForm.DrawImageView;
 var
   i, j: integer;
@@ -2294,14 +2216,14 @@ var
   r: TRect;
   scale: double;
 const
-  msg = #54; // 'NO PREVIEW';
+  msg = #54;
 var
   ok: boolean;
-  GlobalMemoryInfo: TMemoryStatus; // holds the global memory status information
+  GlobalMemoryInfo: TMemoryStatus;
   area: int64;
   gridp: integer;
 begin
-  if mainCp = nil then
+  if FlameInWorkspace = nil then
     Exit;
 
   bm := TBitmap.Create;
@@ -2320,7 +2242,7 @@ begin
       end;
     end
     else begin
-      Brush.Color := MainCP.background[0] or (MainCP.background[1] shl 8) or (MainCP.background[2] shl 16);
+      Brush.Color := FlameInWorkspace.background[0] or (FlameInWorkspace.background[1] shl 8) or (FlameInWorkspace.background[2] shl 16);
       FillRect(Rect(0, 0, bm.Width, bm.Height));
     end;
   end;
@@ -2531,22 +2453,22 @@ end;
 
 procedure TMainForm.SetCursorModePan;
 begin
-  CurrentCursorMode := msDrag;
+  CurrentCursorMode := cmPan;
 end;
 
 procedure TMainForm.SetCursorModeRotate;
 begin
-  CurrentCursorMode := msRotate;
+  CurrentCursorMode := cmRotate;
 end;
 
 procedure TMainForm.SetCursorModeZoomIn;
 begin
-  CurrentCursorMode := msZoomWindow;
+  CurrentCursorMode := cmZoomIn;
 end;
 
 procedure TMainForm.SetCursorModeZoomOut;
 begin
-  CurrentCursorMode := msZoomOutWindow;
+  CurrentCursorMode := cmZoomOut;
 end;
 
 procedure TMainForm.OnCommandCanExecuteUpdated(const Command: TUICommand);
@@ -2584,10 +2506,10 @@ procedure TMainForm.LoadCpIntoWorkspace(newCp: TControlPoint);
 begin
   StopPreviewRenderThread;
 
-  MainCp.Copy(newCp);
-  Transforms := MainCp.TrianglesFromCP(MainTriangles);
+  FlameInWorkspace.Copy(newCp);
+  Transforms := FlameInWorkspace.TrianglesFromCP(MainTriangles);
 
-  Statusbar.Panels[3].Text := MainCp.name;
+  Statusbar.Panels[3].Text := FlameInWorkspace.name;
 
   FitPreviewImageSize;
   SendSelectedFlameToToolWindows;
@@ -2598,11 +2520,11 @@ end;
 
 procedure TMainForm.OnPreviewImageDoubleClick(Sender: TObject);
 begin
-  if CurrentCursorMode = msRotateMove then
+  if CurrentCursorMode = cmRotate then
   begin
     StopPreviewRenderThread;
     PushWorkspaceToUndoStack;
-    MainCp.FAngle := 0;
+    FlameInWorkspace.FAngle := 0;
     PreviewRedrawDelayTimer.Enabled := True;
     SendSelectedFlameToToolWindows;
   end
@@ -2621,14 +2543,14 @@ var
   MousePos: TPoint;
 begin
   if Shift <> ViewShiftState then begin
-    if CurrentCursorMode in [msZoomWindowMove, msZoomOutWindowMove, msRotateMove, msDragMove] then
+    if CurrentCursorMode in [cmPanHot, cmRotateHot, cmZoomInHot, cmZoomOutHot] then
     begin
       // -x- amazing what ideas people get to force a mouse move event...
       GetCursorPos(MousePos);
       SetCursorPos(MousePos.x, MousePos.y);
     end;
 
-    if (CurrentCursorMode in [msZoomWindowMove, msZoomOutWindowMove]) then
+    if (CurrentCursorMode in [cmZoomInHot, cmZoomOutHot]) then
     begin
       DrawZoomWindow;
       ViewShiftState := Shift;
@@ -2670,7 +2592,7 @@ begin
 
   ci := Random(256);
   cp.cmapIndex := ci;
-  GetCMap(ci, 1, MainCp.cmap);
+  GetIntegratedPaletteByIndex(ci, FlameInWorkspace.cmap);
 
   SaveCpToXmlCompatible(xml, cp);
   cp.Destroy;
@@ -2693,7 +2615,7 @@ begin
   erase := false;
   filename := AutoSavePath;
 
-  ident := maincp.name;
+  ident := FlameInWorkspace.name;
   for i := 1 to Length(ident) do
   begin
     if ident[i] = '*' then
@@ -2772,7 +2694,7 @@ begin
         end;
 
         cpp := TControlPoint.Create;
-        MainCp.Copy(cpp);
+        FlameInWorkspace.Copy(cpp);
         cpp.name := title;
         SaveCpToXmlCompatible(str, cpp);
         cpp.Destroy;
@@ -2797,7 +2719,7 @@ begin
       Writeln(IFile, '<flames name="' + Tag + '">');
 
       cpp := TControlPoint.Create;
-      MainCp.Copy(cpp);
+      FlameInWorkspace.Copy(cpp);
       cpp.name := title;
       SaveCpToXmlCompatible(str, cpp);
       cpp.Destroy;
