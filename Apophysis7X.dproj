@@ -162,7 +162,7 @@
         <DCCReference Include="IO\PaletteIO.pas"/>
         <DCCReference Include="Core\XFormMan.pas"/>
         <DCCReference Include="Flame\XForm.pas"/>
-        <DCCReference Include="Core\Variation.pas"/>
+        <DCCReference Include="Flame\Variation.pas"/>
         <DCCReference Include="Rendering\RenderingCommon.pas"/>
         <DCCReference Include="Rendering\RenderingInterface.pas"/>
         <DCCReference Include="Rendering\RenderingImplementation.pas"/>
@@ -216,7 +216,7 @@
         <DCCReference Include="Variations\varPostCurl3D.pas"/>
         <DCCReference Include="Variations\varPostCrop.pas"/>
         <DCCReference Include="Variations\varPostFalloff2.pas"/>
-        <DCCReference Include="Variations\PluginVariation.pas"/>
+        <DCCReference Include="Flame\PluginVariation.pas"/>
         <DCCReference Include="Forms\Main.pas">
             <Form>MainForm</Form>
         </DCCReference>
