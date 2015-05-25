@@ -28,9 +28,10 @@ uses
   RndFlame in 'Flame\RndFlame.pas',
   ControlPoint in 'Flame\ControlPoint.pas',
   PaletteIO in 'IO\PaletteIO.pas',
-  VariationPoolManager in 'Core\VariationPoolManager.pas',
-  XForm in 'Flame\XForm.pas',
+  CoreVariation in 'Flame\CoreVariation.pas',
   Variation in 'Flame\Variation.pas',
+  VariationPoolManager in 'Flame\VariationPoolManager.pas',
+  XForm in 'Flame\XForm.pas',
   RenderingCommon in 'Rendering\RenderingCommon.pas',
   RenderingInterface in 'Rendering\RenderingInterface.pas',
   RenderingImplementation in 'Rendering\RenderingImplementation.pas',
@@ -99,8 +100,7 @@ uses
   TransformSelection in 'Forms\TransformSelection.pas' {TransformSelectionForm},
   Vcl.Forms,
   ApophysisCommandManager in 'Gui\ApophysisCommandManager.pas',
-  ThumbnailThread in 'Gui\ThumbnailThread.pas',
-  CoreVariation in 'Flame\CoreVariation.pas';
+  ThumbnailThread in 'Gui\ThumbnailThread.pas';
 
 begin
   Application.Initialize;

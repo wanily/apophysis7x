@@ -160,9 +160,10 @@
         <DCCReference Include="Flame\RndFlame.pas"/>
         <DCCReference Include="Flame\ControlPoint.pas"/>
         <DCCReference Include="IO\PaletteIO.pas"/>
-        <DCCReference Include="Core\VariationPoolManager.pas"/>
-        <DCCReference Include="Flame\XForm.pas"/>
+        <DCCReference Include="Flame\CoreVariation.pas"/>
         <DCCReference Include="Flame\Variation.pas"/>
+        <DCCReference Include="Flame\VariationPoolManager.pas"/>
+        <DCCReference Include="Flame\XForm.pas"/>
         <DCCReference Include="Rendering\RenderingCommon.pas"/>
         <DCCReference Include="Rendering\RenderingInterface.pas"/>
         <DCCReference Include="Rendering\RenderingImplementation.pas"/>
@@ -255,7 +256,6 @@
         </DCCReference>
         <DCCReference Include="Gui\ApophysisCommandManager.pas"/>
         <DCCReference Include="Gui\ThumbnailThread.pas"/>
-        <DCCReference Include="Flame\CoreVariation.pas"/>
         <None Include="Apophysis7X.todo"/>
         <None Include="ModelSupport_Apophysis7X\default.txaPackage"/>
         <BuildConfiguration Include="Debug">
