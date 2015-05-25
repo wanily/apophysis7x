@@ -484,10 +484,18 @@ begin
   find_xforms.Subject := flame_content;
   found_xform := find_xforms.Match;
   xform_index := 0;
-  cp.finalXformEnabled := false;
 
   for i := 0 TO NXFORMS - 1 do
+  begin
+    cp.XForm[i].Clear;
+    cp.XForm[i].transOpacity := 1;
+    cp.XForm[i].symmetry := 1;
     cp.XForm[i].density := 0;
+  end;
+
+  // -x- why we need 3 flags to indicate whether there is a final xform is subject of the next episode of "Ancient Aliens"...
+  cp.finalXformEnabled := false;
+  cp.useFinalXform := false;
 
   while found_xform do
   begin
@@ -495,19 +503,20 @@ begin
     xform_attribs := find_xforms.Groups[2];
     if (lowercase(String(xform_type)) = 'xform') then
     begin
-      LoadXFormFromXmlCompatible(find_xforms.MatchedText, false,
-        cp.XForm[xform_index], cp.finalXformEnabled);
+      LoadXFormFromXmlCompatible(find_xforms.MatchedText, false, cp.XForm[xform_index], dummy);
       xform_index := xform_index + 1;
     end
     else
     begin
       cp.finalXform := TXForm.Create;
-      LoadXFormFromXmlCompatible(find_xforms.MatchedText, true,
-        cp.finalXform, dummy);
+      LoadXFormFromXmlCompatible(find_xforms.MatchedText, true, cp.finalXform, dummy);
       cp.finalXformEnabled := true;
       cp.useFinalXform := true;
       xform_index := xform_index + 1;
       cp.XForm[cp.NumXForms] := cp.finalXform;
+      cp.XForm[cp.NumXForms].symmetry := 1;
+      cp.XForm[cp.NumXForms].transOpacity := 1;
+      cp.XForm[cp.NumXForms].density := 0;
     end;
     found_xform := find_xforms.MatchAgain;
   end;

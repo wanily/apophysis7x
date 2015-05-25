@@ -348,6 +348,8 @@ begin
 
   finalXform := XForm[n];
   finalXform.Prepare;
+  finalXForm.symmetry := 1;
+
   useFinalXform := finalXformEnabled and HasFinalXForm;
   for i := 0 to n - 1 do
   begin
@@ -1881,6 +1883,7 @@ begin
 
   for i := 0 to NXFORMS do // was: NXFORMS-1
     XForm[i].Assign(cp1.XForm[i]);
+
   finalXformEnabled := cp1.finalXformEnabled;
 
   sl.Free;

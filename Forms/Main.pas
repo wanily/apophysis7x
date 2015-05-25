@@ -2584,7 +2584,7 @@ procedure TMainForm.LoadCpIntoWorkspace(newCp: TControlPoint);
 begin
   StopPreviewRenderThread;
 
-  newCp.Copy(MainCp);
+  MainCp.Copy(newCp);
   Transforms := MainCp.TrianglesFromCP(MainTriangles);
 
   Statusbar.Panels[3].Text := MainCp.name;

@@ -933,6 +933,7 @@ begin
       chkXformSolo.Enabled := true;
       txtOpacity.Enabled := true;
       txtDC.Enabled := true;
+      txtSymmetry.Enabled := true;
 
       if cp.soloXform >= 0 then begin
         chkXformSolo.Checked := true;
@@ -952,6 +953,7 @@ begin
       chkXformInvisible.Checked := false;
       txtOpacity.Enabled := false;
       chkXformSolo.Enabled := false;
+      txtSymmetry.Enabled := false;
     end;
     tbEnableFinalXform.Down := EnableFinalXform;
 
