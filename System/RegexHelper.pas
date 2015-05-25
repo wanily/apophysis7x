@@ -28,9 +28,9 @@ function GetStringPart(text, expression: string; group: integer; def: string): s
 var Regex: TPerlRegEx;
 begin
   Regex := TPerlRegEx.Create;
-  Regex.RegEx := Utf8String(expression);
+  Regex.RegEx := (expression);
   Regex.Options := [preSingleLine, preCaseless];
-  Regex.Subject := Utf8String(text);
+  Regex.Subject := (text);
 
   if Regex.Match and (Regex.GroupCount >= group) then
     Result := String(Regex.Groups[group])

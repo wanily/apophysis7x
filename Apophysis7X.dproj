@@ -159,7 +159,7 @@
         <DCCReference Include="IO\ParameterIO.pas"/>
         <DCCReference Include="Flame\RndFlame.pas"/>
         <DCCReference Include="Flame\ControlPoint.pas"/>
-        <DCCReference Include="ColorMap\PaletteIO.pas"/>
+        <DCCReference Include="IO\PaletteIO.pas"/>
         <DCCReference Include="Core\XFormMan.pas"/>
         <DCCReference Include="Flame\XForm.pas"/>
         <DCCReference Include="Core\BaseVariation.pas"/>
