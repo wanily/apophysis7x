@@ -685,13 +685,10 @@ begin
     else if (attrib_name = 'name') and (not isFinalXForm) then
       xf.TransformName := GetStringPart(String(attrib_match), re_attrib, 2, '')
     else if (attrib_name = 'plotmode') and (not isFinalXForm) then
-      xf.transOpacity :=
-        StrToFloat(IfThen(lowercase(GetStringPart(String(attrib_match),
-        re_attrib, 2, '')) = 'off', '0', '1'))
+      xf.transOpacity := StrToFloat(IfThen(lowercase(GetStringPart(String(attrib_match), re_attrib, 2, '')) = 'off', '0', '1'))
     else if (attrib_name = 'coefs') then
     begin
-      token_part := GetStringPart(String(attrib_match), re_attrib, 2,
-        '1 0 0 1 0 0');
+      token_part := GetStringPart(String(attrib_match), re_attrib, 2, '1 0 0 1 0 0');
       xf.c[0][0] := GetFloatPart(token_part, re_coefs, 1, 1);
       xf.c[0][1] := GetFloatPart(token_part, re_coefs, 2, 0);
       xf.c[1][0] := GetFloatPart(token_part, re_coefs, 3, 0);
@@ -701,8 +698,7 @@ begin
     end
     else if (attrib_name = 'post') then
     begin
-      token_part := GetStringPart(String(attrib_match), re_attrib, 2,
-        '1 0 0 1 0 0');
+      token_part := GetStringPart(String(attrib_match), re_attrib, 2, '1 0 0 1 0 0');
       xf.p[0][0] := GetFloatPart(token_part, re_coefs, 1, 1);
       xf.p[0][1] := GetFloatPart(token_part, re_coefs, 2, 0);
       xf.p[1][0] := GetFloatPart(token_part, re_coefs, 3, 0);
@@ -724,37 +720,24 @@ begin
       // LogWrite('WARNING|' +'Malformed attribute "xform.' + attrib_name + '" - ignoring', 'parser.log');
       attrib_success := false;
     end
-    else
+    else if (IsRegisteredVariation(String(attrib_name))) then
     begin
-      if (String(attrib_name) = 'linear3D') then
+      for i := 0 to GetTotalVariationCount - 1 do
       begin
-        xf.SetVariation(0, GetFloatPart(String(attrib_match), re_attrib, 2, 0));
-      end
-      else if (IsRegisteredVariation(String(attrib_name))) then
-      begin
-        for i := 0 to GetTotalVariationCount - 1 do
+        if lowercase(GetVariationNameByIndex(i)) = lowercase(String(attrib_name)) then
         begin
-          if lowercase(GetVariationNameByIndex(i)) = lowercase(String(attrib_name)) then
-          begin
-            xf.SetVariation(i, GetFloatPart(String(attrib_match),
-              re_attrib, 2, 0));
-            v_set := true;
-            break;
-          end;
+          xf.SetVariation(i, GetFloatPart(String(attrib_match), re_attrib, 2, 0));
+          v_set := true;
+          break;
         end;
-        if (IsRegisteredVariable(String(attrib_name))) then
-        begin
-          d := GetFloatPart(String(attrib_match), re_attrib, 2, 0);
-          xf.SetVariable(String(attrib_name), d);
-        end;
-      end
-      else if (IsRegisteredVariable(String(attrib_name))) then
-      begin
-        d := GetFloatPart(String(attrib_match), re_attrib, 2, 0);
-        xf.SetVariable(String(attrib_name), d);
       end;
-      attrib_success := false;
-    end;
+    end
+    else if (IsRegisteredVariable(String(attrib_name))) then
+    begin
+      d := GetFloatPart(String(attrib_match), re_attrib, 2, 0);
+      xf.SetVariable(String(attrib_name), d);
+    end
+    else attrib_success := false;
 
     found_attrib := find_attribs.MatchAgain;
   end;

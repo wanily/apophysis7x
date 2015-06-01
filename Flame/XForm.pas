@@ -319,7 +319,7 @@ begin
   begin
     if (vars[i] <> 0.0) then
     begin
-      if (GetVariationPriorityByIndex(i) = vpRegular) then
+      if (GetVariationPriorityByIndex(i) <> vpRegular) then
         continue;
 
       FCalcFunctionList[FNrFunctions] := FFunctionList[i];
