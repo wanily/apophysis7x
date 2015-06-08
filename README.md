@@ -1,10 +1,9 @@
 #Downloads
-
-|:-:|:-:|
-|**Stable**|[Milestone 16](https://sourceforge.net/projects/apophysis7x/files/Old%20versions/Apophysis.7X16.x86_amd64.zip/download)|
-|**Beta**|(none)|
+|Cycle|Download link|
+|---|---|
+|**Release**|[Milestone 16](https://sourceforge.net/projects/apophysis7x/files/Old%20versions/Apophysis.7X16.x86_amd64.zip/download)|
+|**In test**|n/a|
 |**Nightly**|[Milestone 17](http://build.xyrus-worx.org/xwoss-apomain/nightly/latest)|
-|:-:|:-:|
 
 #Welcome to the world of fractal flames!
 
