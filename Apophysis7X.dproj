@@ -28,6 +28,12 @@
         <CfgParent>Base</CfgParent>
         <Base>true</Base>
     </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win32)'!=''">
+        <Cfg_1_Win32>true</Cfg_1_Win32>
+        <CfgParent>Cfg_1</CfgParent>
+        <Cfg_1>true</Cfg_1>
+        <Base>true</Base>
+    </PropertyGroup>
     <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win64)'!=''">
         <Cfg_1_Win64>true</Cfg_1_Win64>
         <CfgParent>Cfg_1</CfgParent>
@@ -52,17 +58,18 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <SanitizedProjectName>Apophysis7X</SanitizedProjectName>
-        <VerInfo_Keys>CompanyName=XyrusWorx;FileDescription=Apophysis 7x;FileVersion=3.00.7621.0;InternalName=ApophysisXW;LegalCopyright=XyrusWorx;LegalTrademarks=;OriginalFilename=Apophysis7x.exe;ProductName=Apophysis 7x;ProductVersion=3.0.0.0</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=XyrusWorx;FileDescription=Apophysis 7x;FileVersion=3.0.17.1500;InternalName=ApophysisXW;LegalCopyright=XyrusWorx;LegalTrademarks=;OriginalFilename=Apophysis7x.exe;ProductName=Apophysis 7x;ProductVersion=3.0.0.0</VerInfo_Keys>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <DCC_IOChecking>false</DCC_IOChecking>
-        <VerInfo_Build>1325</VerInfo_Build>
+        <VerInfo_Build>1500</VerInfo_Build>
         <DCC_COMBINING_SIGNED_UNSIGNED>false</DCC_COMBINING_SIGNED_UNSIGNED>
         <DCC_UsePackage>vcl;rtl;dbrtl;adortl;vcldb;vclx;bdertl;vcldbx;dsnap;cds;bdecds;teeui;teedb;tee;dss;visualclx;visualdbclx;dsnapcrba;dsnapcon;VclSmp;vclie;xmlrtl;inet;inetdbbde;inetdbxpress;inetdb;nmfast;webdsnap;websnap;soaprtl;dbexpress;dbxcds;dclOffice2k;FlatStyle_D6;S303_R60;RzLPDB60;RzLPND60;vclshlctrls;B302vr60;VirtualTreesD6;o403_r60;ibxpress;CSP20I60;Rz30Ctls60;Rz30DBCtls60;indy;Indy60;vclactnband;$(DCC_UsePackage)</DCC_UsePackage>
         <DCC_ImageBase>00400000</DCC_ImageBase>
         <DCC_Hints>false</DCC_Hints>
         <DCC_COMPARING_SIGNED_UNSIGNED>false</DCC_COMPARING_SIGNED_UNSIGNED>
-        <VerInfo_MajorVer>2</VerInfo_MajorVer>
+        <VerInfo_MajorVer>3</VerInfo_MajorVer>
         <DCC_UNIT_DEPRECATED>false</DCC_UNIT_DEPRECATED>
         <DCC_Namespace>Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;System;Xml;Data;Datasnap;Web;Soap;Winapi;System.Win;$(DCC_Namespace)</DCC_Namespace>
         <DCC_SYMBOL_PLATFORM>false</DCC_SYMBOL_PLATFORM>
@@ -72,7 +79,7 @@
         <DCC_N>true</DCC_N>
         <DCC_K>false</DCC_K>
         <DCC_SYMBOL_DEPRECATED>false</DCC_SYMBOL_DEPRECATED>
-        <VerInfo_Release>9</VerInfo_Release>
+        <VerInfo_Release>17</VerInfo_Release>
         <DCC_UNIT_PLATFORM>false</DCC_UNIT_PLATFORM>
         <DCC_F>false</DCC_F>
         <DCC_DcuOutput>..\..\out\dcu</DCC_DcuOutput>
@@ -105,8 +112,19 @@
         <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
         <DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
     </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=2.0.9.1325;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0</VerInfo_Keys>
+        <DCC_ExeOutput>bin\x86</DCC_ExeOutput>
+        <DCC_DcuOutput>obj\x86</DCC_DcuOutput>
+    </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
-        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+        <VerInfo_Release>0</VerInfo_Release>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Build>0</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=XyrusWorx;FileDescription=Apophysis 7x;FileVersion=1.0.0.0;InternalName=ApophysisXW;LegalCopyright=XyrusWorx;LegalTrademarks=;OriginalFilename=Apophysis7x.exe;ProductName=Apophysis 7x;ProductVersion=3.0.0.0</VerInfo_Keys>
+        <VerInfo_MajorVer>1</VerInfo_MajorVer>
+        <DCC_DcuOutput>obj\x64</DCC_DcuOutput>
+        <DCC_ExeOutput>bin\x64</DCC_ExeOutput>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
