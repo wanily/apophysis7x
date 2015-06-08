@@ -1,3 +1,11 @@
+#Downloads
+
+|:-:|:-:|
+|**Stable**|[Milestone 16](https://sourceforge.net/projects/apophysis7x/files/Old%20versions/Apophysis.7X16.x86_amd64.zip/download)|
+|**Beta**|(none)|
+|**Nightly**|[Milestone 17](http://build.xyrus-worx.org/xwoss-apomain/nightly/latest)|
+|:-:|:-:|
+
 #Welcome to the world of fractal flames!
 
 Let's start at the very basics: what is a fractal? A fractal is a mathematical construct, first and foremost. But most people call the visual representation of said mathematical construct "fractal" as well. A fractal image is usually entirely computer generated and are the key to combine mathematics with art.
