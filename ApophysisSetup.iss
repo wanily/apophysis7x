@@ -19,11 +19,11 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
-LicenseFile=LICENSE
-InfoBeforeFile=ApophysisReadme.txt
+LicenseFile=Assets\ApophysisLicense.txr
+InfoBeforeFile=Assets\ApophysisReadme.txt
 OutputBaseFilename=ApophysisSetup
 OutputDir=..\..\Out\deploy\x86
-SetupIconFile=Apophysis7X_Icon.ico
+SetupIconFile=Assets\ApophysisIcon.ico
 Compression=lzma
 SolidCompression=yes
 

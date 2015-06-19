@@ -245,7 +245,7 @@ implementation uses
 
 {$R *.dfm}
 {$R 'System\UIRibbon.res'}
-{$R 'Ribbon\ApophysisRibbon.res'}
+{$R 'Assets\Ribbon\ApophysisRibbon.res'}
 {$I 'delphiversion.pas'}
 
 procedure TMainForm.Trace1(const str: string);
