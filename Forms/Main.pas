@@ -900,12 +900,12 @@ var
 begin
   backupCp := TControlPoint.Create;
   newCp := TControlPoint.Create;
-  FlameInWorkspace.Copy(backupCp);
+  backupCp.Copy(FlameInWorkspace);
 
   try
     PushWorkspaceToUndoStack;
 
-    if (ParameterIO.LoadCpFromXmlCompatible(Clipboard.AsText, newCp, status)) then
+    if (ParameterIO.LoadCpFromXmlCompatible(data, newCp, status)) then
     begin
       LoadCpIntoWorkspace(newCp);
     end
@@ -916,10 +916,10 @@ begin
 
   except
     Application.MessageBox(
-      PWideChar('Unable to read flame data. Most likely, the format is invalid.'),
+      PWideChar('Unable to read flame data. Most likely, the data has an invalid format.'),
       PWideChar('Apophysis'),
       MB_ICONERROR);
-    backupCp.Copy(FlameInWorkspace);
+    FlameInWorkspace.Copy(backupCp);
   end;
 
   backupCp.Destroy;
@@ -1154,33 +1154,6 @@ begin
   if FileExists(GetEnvVarValue('APPDATA') + '\' + randFilename) then
     DeleteFile(GetEnvVarValue('APPDATA') + '\' + randFilename);
 
-  openFile := '';
-
-  if ParamCount > 0 then
-    openFile := ParamStr(1)
-  else if RememberLastOpenFile then
-    openFile := LastOpenFile
-  else
-    openFile := defFlameFile;
-
-  if (openFile <> '') then
-  begin
-    if APP_BUILD = '' then
-      Caption := ApophysisVersion + ' - ' + openFile
-    else
-      Caption := ApophysisVersion + ' ' + APP_BUILD + ' - ' + openFile;
-
-    Batch := TBatch.LoadBatch(openFile);
-  end else begin
-    Batch := TBatch.CreateVolatileBatch;
-    CreateNewFlameInWorkspace;
-    StopPreviewRenderThread;
-    Batch.AppendControlPoint(FlameInWorkspace);
-  end;
-
-  ListViewManager.Batch := MainForm.Batch;
-  ListViewManager.SelectedIndex := 0;
-
   //ListView.SetFocus;
   CanDrawOnResize := True;
   Statusbar.Panels[3].Text := FlameInWorkspace.name;
@@ -1212,6 +1185,34 @@ begin
   PreviewThreadCount := Nrtreads;
   if not multithreadedPreview then
     PreviewThreadCount := 1;
+
+  openFile := '';
+
+  if ParamCount > 0 then
+    openFile := ParamStr(1)
+  else if RememberLastOpenFile then
+    openFile := LastOpenFile
+  else
+    openFile := defFlameFile;
+
+  if (openFile <> '') then
+  begin
+    if APP_BUILD = '' then
+      Caption := ApophysisVersion + ' - ' + openFile
+    else
+      Caption := ApophysisVersion + ' ' + APP_BUILD + ' - ' + openFile;
+
+    Batch := TBatch.LoadBatch(openFile);
+  end else begin
+    Batch := TBatch.CreateVolatileBatch;
+    CreateNewFlameInWorkspace;
+    StopPreviewRenderThread;
+    Batch.AppendControlPoint(FlameInWorkspace);
+  end;
+
+  ListViewManager.Batch := Batch;
+  ListViewManager.SelectedIndex := 0;
+  PreviewRedrawDelayTimerCallback(self);
 end;
 
 procedure TMainForm.OnFormClosed(Sender: TObject; var Action: TCloseAction);
@@ -2594,7 +2595,7 @@ begin
 
   ci := Random(256);
   cp.cmapIndex := ci;
-  GetIntegratedPaletteByIndex(ci, FlameInWorkspace.cmap);
+  GetIntegratedPaletteByIndex(ci, cp.cmap);
 
   SaveCpToXmlCompatible(xml, cp);
   cp.Destroy;
