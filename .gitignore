@@ -1,3 +1,6 @@
 /*.local
 /Forms/__history
 /*.identcache
+/Gui/__history
+/IO/__history
+/System/__history
