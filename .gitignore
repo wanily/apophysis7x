@@ -1,6 +1,6 @@
+# Ignore Delphi output
 /*.local
-/Forms/__history
 /*.identcache
-/Gui/__history
-/IO/__history
-/System/__history
+
+# Ignore local Delphi history
+/**/__history
