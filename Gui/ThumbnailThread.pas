@@ -5,6 +5,7 @@ interface uses
   Windows,
   Graphics,
   Controls,
+  RenderingInterface,
   ParameterIO;
 
 type TThumbnailThread = class(TThread)
@@ -19,6 +20,8 @@ type TThumbnailThread = class(TThread)
       procedure SetBatch(value: TBatch);
       procedure SetThumbnailSize(value: integer);
 
+      procedure UpdateAtCore(renderer: TRenderer; i: integer; append: boolean);
+
     protected
 
       procedure Execute; override;
@@ -29,6 +32,8 @@ type TThumbnailThread = class(TThread)
 
       constructor Create;
       destructor Destroy; override;
+
+      procedure UpdateAt(index: integer);
 
       property Batch: TBatch
         read mBatch
@@ -44,7 +49,6 @@ type TThumbnailThread = class(TThread)
 
 implementation uses
   SysUtils,
-  RenderingInterface,
   ControlPoint;
 
 function LoadThumbnailPlaceholder(ThumbnailSize: Integer): TBitmap;
@@ -110,79 +114,92 @@ begin
   mImages.Clear;
 end;
 
-procedure TThumbnailThread.Execute;
+procedure TThumbnailThread.UpdateAtCore(renderer: TRenderer; i: integer; append: boolean);
 var
-  Renderer : TRenderer;
   Flame : TControlPoint;
   Thumbnail : TBitmap;
 
   width, height, ratio : double;
   status: string;
-  i : integer;
 
   memstream : TMemoryStream;
+begin
+
+  Flame := TControlPoint.Create;
+
+  mBatch.LoadControlPoint(i, Flame);
+
+  width := Flame.Width;
+  height := Flame.Height;
+  ratio := width / height;
+
+  if (width < height) then begin
+    width := (*ratio * *)ThumbnailSize;
+    height := ThumbnailSize;
+  end else if (width > height) then begin
+    height := ThumbnailSize(* / ratio*);
+    width := ThumbnailSize;
+  end else begin
+    width := ThumbnailSize;
+    height := ThumbnailSize;
+  end;
+
+  Flame.AdjustScale(round(width), round(height));
+  Flame.Width := round(width);
+  Flame.Height := round(height);
+  Flame.spatial_oversample := 1;
+  Flame.spatial_filter_radius := 0.5;
+  Flame.sample_density := 3;
+
+  Renderer.SetCP(Flame);
+  Renderer.Render;
+
+  Thumbnail := TBitmap.Create;
+  Thumbnail.PixelFormat := pf32bit;
+  Thumbnail.HandleType := bmDIB;
+  Thumbnail.Width := ThumbnailSize;
+  Thumbnail.Height := ThumbnailSize;
+  //Thumbnail.Canvas.Brush.Color := GetSysColor(5);
+  Thumbnail.Canvas.FillRect(Rect(0, 0, ThumbnailSize, ThumbnailSize));
+  Thumbnail.Canvas.Draw(round(ThumbnailSize / 2 - width / 2), round(ThumbnailSize / 2 - height / 2), renderer.GetImage);
+
+  if append then
+    mImages.Add(Thumbnail, nil)
+  else
+    mImages.Replace(i, Thumbnail, nil);
+
+  if Assigned(ThumbnailCompleted) then
+    ThumbnailCompleted(i);
+
+  Thumbnail.Free;
+  Thumbnail := nil;
+
+  Flame.Destroy;
+  Flame := nil;
+end;
+
+procedure TThumbnailThread.UpdateAt(index: integer);
+var
+  Renderer : TRenderer;
+begin
+
+  Renderer := TRenderer.Create;
+  self.UpdateAtCore(renderer, index, false);
+  Renderer.Free;
+end;
+
+procedure TThumbnailThread.Execute;
+var
+  Renderer : TRenderer;
+  i : integer;
 begin
   Inherited;
 
   Renderer := TRenderer.Create;
-  Flame := TControlPoint.Create;
 
-  for i := 0 to mBatch.Count - 1 do begin
-    if Assigned(Flame) then
-    begin
-      Flame.Destroy;
-    end;
+  for i := 0 to mBatch.Count - 1 do
+    self.UpdateAtCore(renderer, i, true);
 
-    Flame := TControlPoint.Create;
-    mBatch.LoadControlPoint(i, Flame);
-
-    width := Flame.Width;
-    height := Flame.Height;
-    ratio := width / height;
-
-    if (width < height) then begin
-      width := (*ratio * *)ThumbnailSize;
-      height := ThumbnailSize;
-    end else if (width > height) then begin
-      height := ThumbnailSize(* / ratio*);
-      width := ThumbnailSize;
-    end else begin
-      width := ThumbnailSize;
-      height := ThumbnailSize;
-    end;
-
-    Flame.AdjustScale(round(width), round(height));
-    Flame.Width := round(width);
-    Flame.Height := round(height);
-    Flame.spatial_oversample := 1;
-    Flame.spatial_filter_radius := 0.5;
-    Flame.sample_density := 3;
-
-    Renderer.SetCP(Flame);
-    Renderer.Render;
-
-    Thumbnail := TBitmap.Create;
-    Thumbnail.PixelFormat := pf32bit;
-    Thumbnail.HandleType := bmDIB;
-    Thumbnail.Width := ThumbnailSize;
-    Thumbnail.Height := ThumbnailSize;
-    //Thumbnail.Canvas.Brush.Color := GetSysColor(5);
-    Thumbnail.Canvas.FillRect(Rect(0, 0, ThumbnailSize, ThumbnailSize));
-    Thumbnail.Canvas.Draw(round(ThumbnailSize / 2 - width / 2), round(ThumbnailSize / 2 - height / 2), renderer.GetImage);
-
-    mImages.Add(Thumbnail, nil);
-
-    if Assigned(ThumbnailCompleted) then
-      ThumbnailCompleted(i);
-
-    Thumbnail.Free;
-    Thumbnail := nil;
-
-    Flame.Destroy;
-    Flame := nil;
-  end;
-
-  Flame.Free;
   Renderer.Free;
 end;
 
@@ -197,8 +214,5 @@ begin
 
   inherited Destroy;
 end;
-
-
-
 
 end.

@@ -84,6 +84,7 @@ var
 begin
   SaveCpToXmlCompatible(xml, cp);
   mData[i] := xml;
+  mNames[i] := NameOf(xml);
 end;
 
 procedure TBatch.AppendControlPoint(cp: TControlPoint);

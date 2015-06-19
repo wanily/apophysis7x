@@ -5,6 +5,7 @@ interface uses
   Controls,
   ComCtrls,
   ThumbnailThread,
+  ControlPoint,
   ParameterIO;
 
 type TFlameListView = class
@@ -41,6 +42,7 @@ type TFlameListView = class
     procedure SelectIndex(i: integer);
 
     procedure Refresh(newSelection: integer);
+    procedure UpdateFlameAtSelectedIndex(cp: TControlPoint);
 
     property ThumbnailSize: integer
       read GetThumbnailSize
@@ -94,6 +96,9 @@ procedure TFlameListView.Refresh(newSelection: Integer);
 var
   i, oldSelection: integer;
 begin
+  if not Assigned(mBatch) then
+    Exit;
+
   oldSelection := SelectedIndex;
 
   mIsUpdating := true;
@@ -124,6 +129,23 @@ begin
   mList.LargeImages := mThumbnails.Images;
 
   mThumbnails.Start;
+end;
+
+procedure TFlameListView.UpdateFlameAtSelectedIndex(cp: TControlPoint);
+begin
+  if not Assigned(mBatch) or (SelectedIndex < 0) then
+    Exit;
+
+  mBatch.StoreControlPoint(SelectedIndex, cp);
+  mList.Items[SelectedIndex].Caption := mBatch.GetFlameNameAt(SelectedIndex);
+
+  if not Assigned(mThumbnails) then
+  begin
+    Refresh(SelectedIndex);
+    Exit;
+  end;
+
+  mThumbnails.UpdateAt(SelectedIndex);
 end;
 
 procedure TFlameListView.SetBatch(value: TBatch);

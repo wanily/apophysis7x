@@ -1366,6 +1366,8 @@ procedure TMainForm.SendSelectedFlameToToolWindows;
 begin
   if AdjustForm.visible then AdjustForm.UpdateDisplay;
   if EditForm.visible then EditForm.UpdateDisplay;
+
+  ListViewManager.UpdateFlameAtSelectedIndex(FlameInWorkspace);
 end;
 
 procedure TMainForm.LoadUndoFlame(index: integer; filename: string);
