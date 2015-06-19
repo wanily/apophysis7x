@@ -1,0 +1,36 @@
+<?xml encoding="utf" version="1.0"?>
+<settings>
+	<autosaveConfiguration isEnabled="1" frequency="60" path="%userprofile%\autosave.flame" />
+	<productionTargetConfiguration path="%userprofile%" fileFormat="png" isTransparencyEnabled="true" outputQuality="100" />
+	
+	<densityConfigurations>
+		<mainPreviewDensityConfiguration value="5" />
+		<productionDensityConfiguration value="1000" />
+		
+		<presetConfigurations>
+			<lowPresetConfiguration value="0.1" />
+			<mediumPresetConfiguration value="1" />
+			<highPresetConfiguration value="5" />
+		</presetConfigurations>
+	</densityConfigurations>
+	
+	<imagingConfigurations>
+		<antialiasingConfiguration size="1" filterRadius="0.7" />
+		<lightingConfiguration brightness="4" vibrancy="1" gamma="4" threshold="0.001" />
+	</imagingConfigurations>
+	
+	<canvasConfigurations>
+		<productionCanvasConfiguration sizeX="2000" sizeY="2000" lockAspectRatio="true" />
+		<mainPreviewCanvasConfiguration aspectRatio="1" />
+		
+		<presetConfigurations>
+			<presetConfiguration index="0" sizeX="400" sizeY="400" />
+			<presetConfiguration index="1" sizeX="400" sizeY="600" />
+			<presetConfiguration index="2" sizeX="600" sizeY="400" />
+		</presetConfigurations>
+	</canvasConfigurations>
+	
+	<windowConfigurations>
+		<adjustmentConfiguration density="medium" />
+	</windowConfigurations>
+</settings>
