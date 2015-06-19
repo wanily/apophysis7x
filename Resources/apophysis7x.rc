@@ -11,10 +11,10 @@ SCALE_WB           CURSOR         "SCALE_WB.cur"
 SCALE_WHITE        CURSOR         "SCALE_WHITE.cur"
 THUMB_PLACEHOLDER  BITMAP         "THUMB_PLACEHOLDER.bmp"
 
-MAINICON           ICON           "MAINICON.ico"
+MAINICON           ICON           "..\Apophysis7X_Icon.ico"
 1				   VERSIONINFO
-    FILEVERSION     2,1,0,1500
-    PRODUCTVERSION  2,1,0,1500
+    FILEVERSION     3,0,17,0
+    PRODUCTVERSION  3,0,0,0
     FILEOS          0x00000004
     FILETYPE        0x00000001
     FILESUBTYPE     0x00000000
@@ -25,14 +25,14 @@ MAINICON           ICON           "MAINICON.ico"
     {
         BLOCK "040904e4"
         {
-            VALUE "CompanyName", "Apophysis Developers Team"
-            VALUE "FileDescription", "Apophysis 7X"
-            VALUE "FileVersion", "2.1.0.1500"
-            VALUE "InternalName", "2.09.7x15-1500"
-            VALUE "LegalCopyright", "Copyright (c) 2005-2010 Apophysis Developers Team"
-            VALUE "OriginalFilename", "Apophysis7X.exe"
-            VALUE "ProductName", "Apophysis"
-            VALUE "ProductVersion", "2.1.0.1500"
+            VALUE "CompanyName", "XyrusWorx"
+            VALUE "FileDescription", "Apophysis 7x"
+            VALUE "FileVersion", "3.0.17.0"
+            VALUE "InternalName", "ApophysisXW"
+            VALUE "LegalCopyright", "XyrusWorx"
+            VALUE "OriginalFilename", "Apophysis7x.exe"
+            VALUE "ProductName", "Apophysis 7x"
+            VALUE "ProductVersion", "3.0.0.0"
         }
     }
     BLOCK "VarFileInfo"

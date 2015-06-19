@@ -20,7 +20,7 @@ uses
   UIRibbonCommands in 'System\UIRibbonCommands.pas',
   UIRibbonActions in 'System\UIRibbonActions.pas',
   WinApiEx in 'System\WinApiEx.pas',
-  FlameListView in 'System\FlameListView.pas' {-- CORE --},
+  FlameListView in 'System\FlameListView.pas',
   Global in 'Core\Global.pas',
   Settings in 'IO\Settings.pas',
   Translation in 'Core\Translation.pas',
