@@ -12,7 +12,7 @@ uses
   LibXmlParser in 'System\LibXmlParser.pas',
   Windows7 in 'System\Windows7.pas',
   RegexHelper in 'System\RegexHelper.pas',
-  ApophysisRibbon in 'Ribbon\ApophysisRibbon.pas',
+  ApophysisRibbon in 'Assets\Ribbon\ApophysisRibbon.pas',
   UIRibbon in 'System\UIRibbon.pas',
   UIRibbonForm in 'System\UIRibbonForm.pas',
   UIRibbonUtils in 'System\UIRibbonUtils.pas',
