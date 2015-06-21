@@ -42,7 +42,7 @@ if .%sftp-server% equ . goto usage
 
 if .%temp% equ . set temp=%temp%\
 
-set timestamp=%date:~-4%%date:~-10,2%%date:~-7,2%
+set timestamp=%date:~-4%%date:~-7,2%%date:~-10,2%
 set sftp-spath=sftp://%sftp-server%/
 
 if .%sftp-target% neq . set sftp-spath=%sftp-spath%%sftp-target%/
