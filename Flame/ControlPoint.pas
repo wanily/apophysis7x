@@ -51,10 +51,6 @@ type
   TPreviewPixArray = array [0 .. 159, 0 .. 119, 0 .. 3] of integer;
   TFileType = (ftIfs, ftFla, ftXML);
 
-type // ?
-  PLongintArray = ^TLongintArray;
-  TLongintArray = array [0 .. 8192] of Longint;
-
 type
   TVariation = (vLinear, vSinusoidal, vSpherical, vSwirl, vHorseshoe, vPolar,
     vHandkerchief, vHeart, vDisc, vSpiral, vHyperbolic, vSquare, vEx, vJulia,
